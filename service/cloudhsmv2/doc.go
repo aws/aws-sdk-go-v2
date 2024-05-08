@@ -3,7 +3,8 @@
 // Package cloudhsmv2 provides the API client, operations, and parameter types for
 // AWS CloudHSM V2.
 //
-// For more information about AWS CloudHSM, see AWS CloudHSM (http://aws.amazon.com/cloudhsm/)
-// and the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/)
-// .
+// For more information about AWS CloudHSM, see [AWS CloudHSM] and the [AWS CloudHSM User Guide].
+//
+// [AWS CloudHSM User Guide]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+// [AWS CloudHSM]: http://aws.amazon.com/cloudhsm/
 package cloudhsmv2

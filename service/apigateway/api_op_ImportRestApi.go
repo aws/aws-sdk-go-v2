@@ -46,12 +46,17 @@ type ImportRestApiInput struct {
 
 	// A key-value map of context-specific query string parameters specifying the
 	// behavior of different API importing operations. The following shows
-	// operation-specific parameters and their supported values. To exclude
-	// DocumentationParts from the import, set parameters as ignore=documentation . To
-	// configure the endpoint type, set parameters as endpointConfigurationTypes=EDGE ,
-	// endpointConfigurationTypes=REGIONAL , or endpointConfigurationTypes=PRIVATE .
-	// The default endpoint type is EDGE . To handle imported basepath , set parameters
-	// as basepath=ignore , basepath=prepend or basepath=split .
+	// operation-specific parameters and their supported values.
+	//
+	// To exclude DocumentationParts from the import, set parameters as
+	// ignore=documentation .
+	//
+	// To configure the endpoint type, set parameters as
+	// endpointConfigurationTypes=EDGE , endpointConfigurationTypes=REGIONAL , or
+	// endpointConfigurationTypes=PRIVATE . The default endpoint type is EDGE .
+	//
+	// To handle imported basepath , set parameters as basepath=ignore ,
+	// basepath=prepend or basepath=split .
 	Parameters map[string]string
 
 	noSmithyDocumentSerde

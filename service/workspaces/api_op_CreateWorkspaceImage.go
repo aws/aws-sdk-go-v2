@@ -75,8 +75,9 @@ type CreateWorkspaceImageOutput struct {
 
 	// Specifies whether the image is running on dedicated hardware. When Bring Your
 	// Own License (BYOL) is enabled, this value is set to DEDICATED. For more
-	// information, see Bring Your Own Windows Desktop Images. (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.htm)
-	// .
+	// information, see [Bring Your Own Windows Desktop Images.].
+	//
+	// [Bring Your Own Windows Desktop Images.]: https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.htm
 	RequiredTenancy types.WorkspaceImageRequiredTenancy
 
 	// The availability status of the image.

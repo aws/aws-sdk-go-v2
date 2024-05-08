@@ -11,6 +11,7 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
+//
 // Updates the maximum number of contacts allowed in a queue before it is
 // considered full.
 func (c *Client) UpdateQueueMaxContacts(ctx context.Context, params *UpdateQueueMaxContactsInput, optFns ...func(*Options)) (*UpdateQueueMaxContactsOutput, error) {
@@ -30,8 +31,10 @@ func (c *Client) UpdateQueueMaxContacts(ctx context.Context, params *UpdateQueue
 
 type UpdateQueueMaxContactsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

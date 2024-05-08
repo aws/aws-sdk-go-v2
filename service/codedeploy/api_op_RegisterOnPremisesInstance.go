@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers an on-premises instance. Only one IAM ARN (an IAM session ARN or IAM
-// user ARN) is supported in the request. You cannot use both.
+// Registers an on-premises instance.
+//
+// Only one IAM ARN (an IAM session ARN or IAM user ARN) is supported in the
+// request. You cannot use both.
 func (c *Client) RegisterOnPremisesInstance(ctx context.Context, params *RegisterOnPremisesInstanceInput, optFns ...func(*Options)) (*RegisterOnPremisesInstanceOutput, error) {
 	if params == nil {
 		params = &RegisterOnPremisesInstanceInput{}

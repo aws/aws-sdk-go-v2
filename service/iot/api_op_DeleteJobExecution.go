@@ -10,8 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a job execution. Requires permission to access the DeleteJobExecution (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Deletes a job execution.
+//
+// Requires permission to access the [DeleteJobExecution] action.
+//
+// [DeleteJobExecution]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DeleteJobExecution(ctx context.Context, params *DeleteJobExecutionInput, optFns ...func(*Options)) (*DeleteJobExecutionOutput, error) {
 	if params == nil {
 		params = &DeleteJobExecutionInput{}
@@ -30,9 +33,10 @@ func (c *Client) DeleteJobExecution(ctx context.Context, params *DeleteJobExecut
 type DeleteJobExecutionInput struct {
 
 	// The ID of the job execution to be deleted. The executionNumber refers to the
-	// execution of a particular job on a particular device. Note that once a job
-	// execution is deleted, the executionNumber may be reused by IoT, so be sure you
-	// get and use the correct value here.
+	// execution of a particular job on a particular device.
+	//
+	// Note that once a job execution is deleted, the executionNumber may be reused by
+	// IoT, so be sure you get and use the correct value here.
 	//
 	// This member is required.
 	ExecutionNumber *int64
@@ -50,18 +54,25 @@ type DeleteJobExecutionInput struct {
 	// (Optional) When true, you can delete a job execution which is "IN_PROGRESS".
 	// Otherwise, you can only delete a job execution which is in a terminal state
 	// ("SUCCEEDED", "FAILED", "REJECTED", "REMOVED" or "CANCELED") or an exception
-	// will occur. The default is false. Deleting a job execution which is
-	// "IN_PROGRESS", will cause the device to be unable to access job information or
-	// update the job execution status. Use caution and ensure that the device is able
-	// to recover to a valid state.
+	// will occur. The default is false.
+	//
+	// Deleting a job execution which is "IN_PROGRESS", will cause the device to be
+	// unable to access job information or update the job execution status. Use caution
+	// and ensure that the device is able to recover to a valid state.
 	Force bool
 
-	// The namespace used to indicate that a job is a customer-managed job. When you
-	// specify a value for this parameter, Amazon Web Services IoT Core sends jobs
-	// notifications to MQTT topics that contain the value in the following format.
-	// $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/ The
-	// namespaceId feature is only supported by IoT Greengrass at this time. For more
-	// information, see Setting up IoT Greengrass core devices. (https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html)
+	// The namespace used to indicate that a job is a customer-managed job.
+	//
+	// When you specify a value for this parameter, Amazon Web Services IoT Core sends
+	// jobs notifications to MQTT topics that contain the value in the following
+	// format.
+	//
+	//     $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/
+	//
+	// The namespaceId feature is only supported by IoT Greengrass at this time. For
+	// more information, see [Setting up IoT Greengrass core devices.]
+	//
+	// [Setting up IoT Greengrass core devices.]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
 	NamespaceId *string
 
 	noSmithyDocumentSerde

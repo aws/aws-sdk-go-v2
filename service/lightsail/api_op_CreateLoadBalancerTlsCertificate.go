@@ -11,12 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an SSL/TLS certificate for an Amazon Lightsail load balancer. TLS is
-// just an updated, more secure version of Secure Socket Layer (SSL). The
-// CreateLoadBalancerTlsCertificate operation supports tag-based access control via
-// resource tags applied to the resource identified by load balancer name . For
-// more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
-// .
+// Creates an SSL/TLS certificate for an Amazon Lightsail load balancer.
+//
+// TLS is just an updated, more secure version of Secure Socket Layer (SSL).
+//
+// The CreateLoadBalancerTlsCertificate operation supports tag-based access
+// control via resource tags applied to the resource identified by load balancer
+// name . For more information, see the [Amazon Lightsail Developer Guide].
+//
+// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
 func (c *Client) CreateLoadBalancerTlsCertificate(ctx context.Context, params *CreateLoadBalancerTlsCertificateInput, optFns ...func(*Options)) (*CreateLoadBalancerTlsCertificateOutput, error) {
 	if params == nil {
 		params = &CreateLoadBalancerTlsCertificateInput{}
@@ -39,11 +42,14 @@ type CreateLoadBalancerTlsCertificateInput struct {
 	// This member is required.
 	CertificateDomainName *string
 
-	// The SSL/TLS certificate name. You can have up to 10 certificates in your
-	// account at one time. Each Lightsail load balancer can have up to 2 certificates
-	// associated with it at one time. There is also an overall limit to the number of
-	// certificates that can be issue in a 365-day period. For more information, see
-	// Limits (http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html) .
+	// The SSL/TLS certificate name.
+	//
+	// You can have up to 10 certificates in your account at one time. Each Lightsail
+	// load balancer can have up to 2 certificates associated with it at one time.
+	// There is also an overall limit to the number of certificates that can be issue
+	// in a 365-day period. For more information, see [Limits].
+	//
+	// [Limits]: http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html
 	//
 	// This member is required.
 	CertificateName *string
@@ -59,8 +65,9 @@ type CreateLoadBalancerTlsCertificateInput struct {
 	// wildcards ( *.example.com ).
 	CertificateAlternativeNames []string
 
-	// The tag keys and optional values to add to the resource during create. Use the
-	// TagResource action to tag a resource after it's created.
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// Use the TagResource action to tag a resource after it's created.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

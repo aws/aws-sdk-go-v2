@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a version of an Lambda layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
-// , with a link to download the layer archive that's valid for 10 minutes.
+// Returns information about a version of an [Lambda layer], with a link to download the layer
+// archive that's valid for 10 minutes.
+//
+// [Lambda layer]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 func (c *Client) GetLayerVersion(ctx context.Context, params *GetLayerVersionInput, optFns ...func(*Options)) (*GetLayerVersionOutput, error) {
 	if params == nil {
 		params = &GetLayerVersionInput{}
@@ -45,20 +47,24 @@ type GetLayerVersionInput struct {
 
 type GetLayerVersionOutput struct {
 
-	// A list of compatible instruction set architectures (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)
-	// .
+	// A list of compatible [instruction set architectures].
+	//
+	// [instruction set architectures]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
 	CompatibleArchitectures []types.Architecture
 
-	// The layer's compatible runtimes. The following list includes deprecated
-	// runtimes. For more information, see Runtime deprecation policy (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy)
-	// .
+	// The layer's compatible runtimes.
+	//
+	// The following list includes deprecated runtimes. For more information, see [Runtime deprecation policy].
+	//
+	// [Runtime deprecation policy]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
 	CompatibleRuntimes []types.Runtime
 
 	// Details about the layer version.
 	Content *types.LayerVersionContentOutput
 
-	// The date that the layer version was created, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
-	// (YYYY-MM-DDThh:mm:ss.sTZD).
+	// The date that the layer version was created, in [ISO-8601 format] (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
 	CreatedDate *string
 
 	// The description of the version.

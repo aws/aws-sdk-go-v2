@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListQualificationTypes operation returns a list of Qualification types,
+//	The ListQualificationTypes operation returns a list of Qualification types,
+//
 // filtered by an optional search term.
 func (c *Client) ListQualificationTypes(ctx context.Context, params *ListQualificationTypesInput, optFns ...func(*Options)) (*ListQualificationTypesOutput, error) {
 	if params == nil {
@@ -40,10 +41,10 @@ type ListQualificationTypesInput struct {
 	// This member is required.
 	MustBeRequestable *bool
 
-	// The maximum number of results to return in a single call.
+	//  The maximum number of results to return in a single call.
 	MaxResults *int32
 
-	// Specifies that only Qualification types that the Requester created are
+	//  Specifies that only Qualification types that the Requester created are
 	// returned. If false, the operation returns all Qualification types.
 	MustBeOwnedByCaller *bool
 
@@ -52,7 +53,7 @@ type ListQualificationTypesInput struct {
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
 
-	// A text query against all of the searchable attributes of Qualification types.
+	//  A text query against all of the searchable attributes of Qualification types.
 	Query *string
 
 	noSmithyDocumentSerde
@@ -65,11 +66,11 @@ type ListQualificationTypesOutput struct {
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
 
-	// The number of Qualification types on this page in the filtered results list,
+	//  The number of Qualification types on this page in the filtered results list,
 	// equivalent to the number of types this operation returns.
 	NumResults *int32
 
-	// The list of QualificationType elements returned by the query.
+	//  The list of QualificationType elements returned by the query.
 	QualificationTypes []types.QualificationType
 
 	// Metadata pertaining to the operation's result.
@@ -168,7 +169,7 @@ var _ ListQualificationTypesAPIClient = (*Client)(nil)
 // ListQualificationTypesPaginatorOptions is the paginator options for
 // ListQualificationTypes
 type ListQualificationTypesPaginatorOptions struct {
-	// The maximum number of results to return in a single call.
+	//  The maximum number of results to return in a single call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

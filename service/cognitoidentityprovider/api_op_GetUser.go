@@ -11,15 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the user attributes and metadata for a user. Authorize this action with a
-// signed-in user's access token. It must include the scope
-// aws.cognito.signin.user.admin . Amazon Cognito doesn't evaluate Identity and
-// Access Management (IAM) policies in requests for this API operation. For this
-// operation, you can't use IAM credentials to authorize requests, and you can't
-// grant IAM permissions in policies. For more information about authorization
-// models in Amazon Cognito, see Using the Amazon Cognito user pools API and user
-// pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-// .
+// Gets the user attributes and metadata for a user.
+//
+// Authorize this action with a signed-in user's access token. It must include the
+// scope aws.cognito.signin.user.admin .
+//
+// Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
+// in requests for this API operation. For this operation, you can't use IAM
+// credentials to authorize requests, and you can't grant IAM permissions in
+// policies. For more information about authorization models in Amazon Cognito, see
+// [Using the Amazon Cognito user pools API and user pool endpoints].
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 func (c *Client) GetUser(ctx context.Context, params *GetUserInput, optFns ...func(*Options)) (*GetUserOutput, error) {
 	if params == nil {
 		params = &GetUserInput{}
@@ -50,8 +53,10 @@ type GetUserInput struct {
 // about the user.
 type GetUserOutput struct {
 
-	// An array of name-value pairs representing user attributes. For custom
-	// attributes, you must prepend the custom: prefix to the attribute name.
+	// An array of name-value pairs representing user attributes.
+	//
+	// For custom attributes, you must prepend the custom: prefix to the attribute
+	// name.
 	//
 	// This member is required.
 	UserAttributes []types.AttributeType
@@ -61,7 +66,7 @@ type GetUserOutput struct {
 	// This member is required.
 	Username *string
 
-	// This response parameter is no longer supported. It provides information only
+	//  This response parameter is no longer supported. It provides information only
 	// about SMS MFA configurations. It doesn't provide information about time-based
 	// one-time password (TOTP) software token MFA configurations. To look up
 	// information about either type of MFA configuration, use UserMFASettingList

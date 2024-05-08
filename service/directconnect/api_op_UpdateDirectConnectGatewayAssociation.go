@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified attributes of the Direct Connect gateway association. Add
-// or remove prefixes from the association.
+// Updates the specified attributes of the Direct Connect gateway association.
+//
+// Add or remove prefixes from the association.
 func (c *Client) UpdateDirectConnectGatewayAssociation(ctx context.Context, params *UpdateDirectConnectGatewayAssociationInput, optFns ...func(*Options)) (*UpdateDirectConnectGatewayAssociationOutput, error) {
 	if params == nil {
 		params = &UpdateDirectConnectGatewayAssociationInput{}

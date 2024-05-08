@@ -15,9 +15,11 @@ import (
 // version is automatically set as the default version of the customer managed
 // permission. New resource shares automatically use the default permission.
 // Existing resource shares continue to use their original permission versions, but
-// you can use ReplacePermissionAssociations to update them. If the specified
-// customer managed permission already has the maximum of 5 versions, then you must
-// delete one of the existing versions before you can create a new one.
+// you can use ReplacePermissionAssociationsto update them.
+//
+// If the specified customer managed permission already has the maximum of 5
+// versions, then you must delete one of the existing versions before you can
+// create a new one.
 func (c *Client) CreatePermissionVersion(ctx context.Context, params *CreatePermissionVersionInput, optFns ...func(*Options)) (*CreatePermissionVersionOutput, error) {
 	if params == nil {
 		params = &CreatePermissionVersionInput{}
@@ -35,30 +37,37 @@ func (c *Client) CreatePermissionVersion(ctx context.Context, params *CreatePerm
 
 type CreatePermissionVersionInput struct {
 
-	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the customer managed permission you're creating a new version for.
+	// Specifies the [Amazon Resource Name (ARN)] of the customer managed permission you're creating a new version
+	// for.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	PermissionArn *string
 
 	// A string in JSON format string that contains the following elements of a
 	// resource-based policy:
+	//
 	//   - Effect: must be set to ALLOW .
+	//
 	//   - Action: specifies the actions that are allowed by this customer managed
 	//   permission. The list must contain only actions that are supported by the
 	//   specified resource type. For a list of all actions supported by each resource
-	//   type, see Actions, resources, and condition keys for Amazon Web Services
-	//   services (https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)
-	//   in the Identity and Access Management User Guide.
+	//   type, see [Actions, resources, and condition keys for Amazon Web Services services]in the Identity and Access Management User Guide.
+	//
 	//   - Condition: (optional) specifies conditional parameters that must evaluate
 	//   to true when a user attempts an action for that action to be allowed. For more
-	//   information about the Condition element, see IAM policies: Condition element (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html)
-	//   in the Identity and Access Management User Guide.
+	//   information about the Condition element, see [IAM policies: Condition element]in the Identity and Access
+	//   Management User Guide.
+	//
 	// This template can't include either the Resource or Principal elements. Those
 	// are both filled in by RAM when it instantiates the resource-based policy on each
 	// resource shared using this managed permission. The Resource comes from the ARN
 	// of the specific resource that you are sharing. The Principal comes from the
 	// list of identities added to the resource share.
+	//
+	// [IAM policies: Condition element]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
+	// [Actions, resources, and condition keys for Amazon Web Services services]: https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html
 	//
 	// This member is required.
 	PolicyTemplate *string
@@ -67,10 +76,15 @@ type CreatePermissionVersionInput struct {
 	// idempotency of the request. This lets you safely retry the request without
 	// accidentally performing the same operation a second time. Passing the same value
 	// to a later call to an operation requires that you also pass the same value for
-	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
-	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you. If you retry the operation with the same ClientToken , but with
-	// different parameters, the retry fails with an IdempotentParameterMismatch error.
+	// all other parameters. We recommend that you use a [UUID type of value.].
+	//
+	// If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
+	//
+	// If you retry the operation with the same ClientToken , but with different
+	// parameters, the retry fails with an IdempotentParameterMismatch error.
+	//
+	// [UUID type of value.]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientToken *string
 
 	noSmithyDocumentSerde

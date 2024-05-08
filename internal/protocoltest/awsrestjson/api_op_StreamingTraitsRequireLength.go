@@ -12,8 +12,10 @@ import (
 )
 
 // This examples serializes a streaming blob shape with a required content length
-// in the request body. In this example, no JSON document is synthesized because
-// the payload is not a structure or a union type.
+// in the request body.
+//
+// In this example, no JSON document is synthesized because the payload is not a
+// structure or a union type.
 func (c *Client) StreamingTraitsRequireLength(ctx context.Context, params *StreamingTraitsRequireLengthInput, optFns ...func(*Options)) (*StreamingTraitsRequireLengthOutput, error) {
 	if params == nil {
 		params = &StreamingTraitsRequireLengthInput{}

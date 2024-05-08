@@ -14,15 +14,21 @@ import (
 // Detects unsafe content in a specified JPEG or PNG format image. Use
 // DetectModerationLabels to moderate images depending on your requirements. For
 // example, you might want to filter images that contain nudity, but not images
-// containing suggestive content. To filter images, use the labels returned by
-// DetectModerationLabels to determine which types of content are appropriate. For
-// information about moderation labels, see Detecting Unsafe Content in the Amazon
-// Rekognition Developer Guide. You pass the input image either as base64-encoded
-// image bytes or as a reference to an image in an Amazon S3 bucket. If you use the
-// AWS CLI to call Amazon Rekognition operations, passing image bytes is not
-// supported. The image must be either a PNG or JPEG formatted file. You can
-// specify an adapter to use when retrieving label predictions by providing a
-// ProjectVersionArn to the ProjectVersion argument.
+// containing suggestive content.
+//
+// To filter images, use the labels returned by DetectModerationLabels to
+// determine which types of content are appropriate.
+//
+// For information about moderation labels, see Detecting Unsafe Content in the
+// Amazon Rekognition Developer Guide.
+//
+// You pass the input image either as base64-encoded image bytes or as a reference
+// to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon
+// Rekognition operations, passing image bytes is not supported. The image must be
+// either a PNG or JPEG formatted file.
+//
+// You can specify an adapter to use when retrieving label predictions by
+// providing a ProjectVersionArn to the ProjectVersion argument.
 func (c *Client) DetectModerationLabels(ctx context.Context, params *DetectModerationLabelsInput, optFns ...func(*Options)) (*DetectModerationLabelsOutput, error) {
 	if params == nil {
 		params = &DetectModerationLabelsInput{}
@@ -42,9 +48,11 @@ type DetectModerationLabelsInput struct {
 
 	// The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI
 	// to call Amazon Rekognition operations, passing base64-encoded image bytes is not
-	// supported. If you are using an AWS SDK to call Amazon Rekognition, you might not
-	// need to base64-encode image bytes passed using the Bytes field. For more
-	// information, see Images in the Amazon Rekognition developer guide.
+	// supported.
+	//
+	// If you are using an AWS SDK to call Amazon Rekognition, you might not need to
+	// base64-encode image bytes passed using the Bytes field. For more information,
+	// see Images in the Amazon Rekognition developer guide.
 	//
 	// This member is required.
 	Image *types.Image
@@ -55,8 +63,10 @@ type DetectModerationLabelsInput struct {
 
 	// Specifies the minimum confidence level for the labels to return. Amazon
 	// Rekognition doesn't return any labels with a confidence level lower than this
-	// specified value. If you don't specify MinConfidence , the operation returns
-	// labels with confidence values greater than or equal to 50 percent.
+	// specified value.
+	//
+	// If you don't specify MinConfidence , the operation returns labels with
+	// confidence values greater than or equal to 50 percent.
 	MinConfidence *float32
 
 	// Identifier for the custom adapter. Expects the ProjectVersionArn as a value.

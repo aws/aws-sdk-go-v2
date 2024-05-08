@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a custom action target from Security Hub. Deleting a custom action
-// target does not affect any findings or insights that were already sent to Amazon
-// CloudWatch Events using the custom action.
+// Deletes a custom action target from Security Hub.
+//
+// Deleting a custom action target does not affect any findings or insights that
+// were already sent to Amazon CloudWatch Events using the custom action.
 func (c *Client) DeleteActionTarget(ctx context.Context, params *DeleteActionTargetInput, optFns ...func(*Options)) (*DeleteActionTargetOutput, error) {
 	if params == nil {
 		params = &DeleteActionTargetInput{}

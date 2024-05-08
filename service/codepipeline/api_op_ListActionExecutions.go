@@ -29,7 +29,7 @@ func (c *Client) ListActionExecutions(ctx context.Context, params *ListActionExe
 
 type ListActionExecutionsInput struct {
 
-	// The name of the pipeline for which you want to list action execution history.
+	//  The name of the pipeline for which you want to list action execution history.
 	//
 	// This member is required.
 	PipelineName *string
@@ -40,8 +40,10 @@ type ListActionExecutionsInput struct {
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value. Action
 	// execution history is retained for up to 12 months, based on action execution
-	// start times. Default value is 100. Detailed execution history is available for
-	// executions run on or after February 21, 2019.
+	// start times. Default value is 100.
+	//
+	// Detailed execution history is available for executions run on or after February
+	// 21, 2019.
 	MaxResults *int32
 
 	// The token that was returned from the previous ListActionExecutions call, which
@@ -160,8 +162,10 @@ type ListActionExecutionsPaginatorOptions struct {
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value. Action
 	// execution history is retained for up to 12 months, based on action execution
-	// start times. Default value is 100. Detailed execution history is available for
-	// executions run on or after February 21, 2019.
+	// start times. Default value is 100.
+	//
+	// Detailed execution history is available for executions run on or after February
+	// 21, 2019.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListTables API allows you to retrieve a list of all the tables in a
+//	The ListTables API allows you to retrieve a list of all the tables in a
+//
 // workbook.
 func (c *Client) ListTables(ctx context.Context, params *ListTablesInput, optFns ...func(*Options)) (*ListTablesOutput, error) {
 	if params == nil {
@@ -30,8 +31,10 @@ func (c *Client) ListTables(ctx context.Context, params *ListTablesInput, optFns
 
 type ListTablesInput struct {
 
-	// The ID of the workbook whose tables are being retrieved. If a workbook with the
-	// specified id could not be found, this API throws ResourceNotFoundException.
+	// The ID of the workbook whose tables are being retrieved.
+	//
+	// If a workbook with the specified id could not be found, this API throws
+	// ResourceNotFoundException.
 	//
 	// This member is required.
 	WorkbookId *string
@@ -39,10 +42,11 @@ type ListTablesInput struct {
 	// The maximum number of tables to return in each page of the results.
 	MaxResults *int32
 
-	// This parameter is optional. If a nextToken is not specified, the API returns
-	// the first page of data. Pagination tokens expire after 1 hour. If you use a
-	// token that was returned more than an hour back, the API will throw
-	// ValidationException.
+	//  This parameter is optional. If a nextToken is not specified, the API returns
+	// the first page of data.
+	//
+	// Pagination tokens expire after 1 hour. If you use a token that was returned
+	// more than an hour back, the API will throw ValidationException.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -50,19 +54,19 @@ type ListTablesInput struct {
 
 type ListTablesOutput struct {
 
-	// The list of tables in the workbook.
+	//  The list of tables in the workbook.
 	//
 	// This member is required.
 	Tables []types.Table
 
-	// Provides the pagination token to load the next page if there are more results
+	//  Provides the pagination token to load the next page if there are more results
 	// matching the request. If a pagination token is not present in the response, it
 	// means that all data matching the request has been loaded.
 	NextToken *string
 
-	// Indicates the cursor of the workbook at which the data returned by this request
-	// is read. Workbook cursor keeps increasing with every update and the increments
-	// are not sequential.
+	//  Indicates the cursor of the workbook at which the data returned by this
+	// request is read. Workbook cursor keeps increasing with every update and the
+	// increments are not sequential.
 	WorkbookCursor int64
 
 	// Metadata pertaining to the operation's result.

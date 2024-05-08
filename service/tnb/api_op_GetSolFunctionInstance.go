@@ -13,7 +13,9 @@ import (
 
 // Gets the details of a network function instance, including the instantation
 // state and metadata from the function package descriptor in the network function
-// package. A network function instance is a function in a function package .
+// package.
+//
+// A network function instance is a function in a function package .
 func (c *Client) GetSolFunctionInstance(ctx context.Context, params *GetSolFunctionInstanceInput, optFns ...func(*Options)) (*GetSolFunctionInstanceOutput, error) {
 	if params == nil {
 		params = &GetSolFunctionInstanceInput{}
@@ -56,8 +58,9 @@ type GetSolFunctionInstanceOutput struct {
 	// This member is required.
 	InstantiationState types.VnfInstantiationState
 
-	// The metadata of a network function instance. A network function instance is a
-	// function in a function package .
+	// The metadata of a network function instance.
+	//
+	// A network function instance is a function in a function package .
 	//
 	// This member is required.
 	Metadata *types.GetSolFunctionInstanceMetadata
@@ -77,8 +80,9 @@ type GetSolFunctionInstanceOutput struct {
 	// This member is required.
 	VnfdId *string
 
-	// Information about the network function. A network function instance is a
-	// function in a function package .
+	// Information about the network function.
+	//
+	// A network function instance is a function in a function package .
 	InstantiatedVnfInfo *types.GetSolVnfInfo
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag

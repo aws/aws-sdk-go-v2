@@ -12,11 +12,14 @@ import (
 )
 
 // Checks whether new access is allowed for an updated policy when compared to the
-// existing policy. You can find examples for reference policies and learn how to
-// set up and run a custom policy check for new access in the IAM Access Analyzer
-// custom policy checks samples (https://github.com/aws-samples/iam-access-analyzer-custom-policy-check-samples)
-// repository on GitHub. The reference policies in this repository are meant to be
-// passed to the existingPolicyDocument request parameter.
+// existing policy.
+//
+// You can find examples for reference policies and learn how to set up and run a
+// custom policy check for new access in the [IAM Access Analyzer custom policy checks samples]repository on GitHub. The reference
+// policies in this repository are meant to be passed to the existingPolicyDocument
+// request parameter.
+//
+// [IAM Access Analyzer custom policy checks samples]: https://github.com/aws-samples/iam-access-analyzer-custom-policy-check-samples
 func (c *Client) CheckNoNewAccess(ctx context.Context, params *CheckNoNewAccessInput, optFns ...func(*Options)) (*CheckNoNewAccessOutput, error) {
 	if params == nil {
 		params = &CheckNoNewAccessInput{}
@@ -46,11 +49,12 @@ type CheckNoNewAccessInput struct {
 
 	// The type of policy to compare. Identity policies grant permissions to IAM
 	// principals. Identity policies include managed and inline policies for IAM roles,
-	// users, and groups. Resource policies grant permissions on Amazon Web Services
-	// resources. Resource policies include trust policies for IAM roles and bucket
-	// policies for Amazon S3 buckets. You can provide a generic input such as identity
-	// policy or resource policy or a specific input such as managed policy or Amazon
-	// S3 bucket policy.
+	// users, and groups.
+	//
+	// Resource policies grant permissions on Amazon Web Services resources. Resource
+	// policies include trust policies for IAM roles and bucket policies for Amazon S3
+	// buckets. You can provide a generic input such as identity policy or resource
+	// policy or a specific input such as managed policy or Amazon S3 bucket policy.
 	//
 	// This member is required.
 	PolicyType types.AccessCheckPolicyType

@@ -14,13 +14,17 @@ import (
 // Shows usage limits on a cluster. Results are filtered based on the combination
 // of input usage limit identifier, cluster identifier, and feature type
 // parameters:
+//
 //   - If usage limit identifier, cluster identifier, and feature type are not
 //     provided, then all usage limit objects for the current account in the current
 //     region are returned.
+//
 //   - If usage limit identifier is provided, then the corresponding usage limit
 //     object is returned.
+//
 //   - If cluster identifier is provided, then all usage limit objects for the
 //     specified cluster are returned.
+//
 //   - If cluster identifier and feature type are provided, then all usage limit
 //     objects for the combination of cluster and feature are returned.
 func (c *Client) DescribeUsageLimits(ctx context.Context, params *DescribeUsageLimitsInput, optFns ...func(*Options)) (*DescribeUsageLimitsOutput, error) {
@@ -47,17 +51,19 @@ type DescribeUsageLimitsInput struct {
 	FeatureType types.UsageLimitFeatureType
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeUsageLimits request exceed the
-	// value specified in MaxRecords , Amazon Web Services returns a value in the
-	// Marker field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// response records. When the results of a DescribeUsageLimitsrequest exceed the value specified in
+	// MaxRecords , Amazon Web Services returns a value in the Marker field of the
+	// response. You can retrieve the next set of response records by providing the
+	// returned marker value in the Marker parameter and retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -191,7 +197,10 @@ type DescribeUsageLimitsPaginatorOptions struct {
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 

@@ -12,8 +12,9 @@ import (
 )
 
 // Lists the recommendations present in your Amazon SES account in the current
-// Amazon Web Services Region. You can execute this operation no more than once per
-// second.
+// Amazon Web Services Region.
+//
+// You can execute this operation no more than once per second.
 func (c *Client) ListRecommendations(ctx context.Context, params *ListRecommendationsInput, optFns ...func(*Options)) (*ListRecommendationsOutput, error) {
 	if params == nil {
 		params = &ListRecommendationsInput{}
@@ -43,8 +44,9 @@ type ListRecommendationsInput struct {
 	// The number of results to show in a single call to ListRecommendations . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
-	// additional results. The value you specify has to be at least 1, and can be no
-	// more than 100.
+	// additional results.
+	//
+	// The value you specify has to be at least 1, and can be no more than 100.
 	PageSize *int32
 
 	noSmithyDocumentSerde
@@ -159,8 +161,9 @@ type ListRecommendationsPaginatorOptions struct {
 	// The number of results to show in a single call to ListRecommendations . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
-	// additional results. The value you specify has to be at least 1, and can be no
-	// more than 100.
+	// additional results.
+	//
+	// The value you specify has to be at least 1, and can be no more than 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

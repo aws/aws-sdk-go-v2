@@ -12,11 +12,10 @@ import (
 )
 
 // Submits calculations for execution within a session. You can supply the code to
-// run as an inline code block within the request. The request syntax requires the
-// StartCalculationExecutionRequest$CodeBlock parameter or the
-// CalculationConfiguration$CodeBlock parameter, but not both. Because
-// CalculationConfiguration$CodeBlock is deprecated, use the
-// StartCalculationExecutionRequest$CodeBlock parameter instead.
+// run as an inline code block within the request.
+//
+// The request syntax requires the StartCalculationExecutionRequest$CodeBlock parameter or the CalculationConfiguration$CodeBlock parameter, but not both.
+// Because CalculationConfiguration$CodeBlockis deprecated, use the StartCalculationExecutionRequest$CodeBlock parameter instead.
 func (c *Client) StartCalculationExecution(ctx context.Context, params *StartCalculationExecutionInput, optFns ...func(*Options)) (*StartCalculationExecutionOutput, error) {
 	if params == nil {
 		params = &StartCalculationExecutionInput{}
@@ -48,14 +47,16 @@ type StartCalculationExecutionInput struct {
 	// calculation is idempotent (executes only once). If another
 	// StartCalculationExecutionRequest is received, the same response is returned and
 	// another calculation is not created. If a parameter has changed, an error is
-	// returned. This token is listed as not required because Amazon Web Services SDKs
-	// (for example the Amazon Web Services SDK for Java) auto-generate the token for
-	// users. If you are not using the Amazon Web Services SDK or the Amazon Web
-	// Services CLI, you must provide this token or the action will fail.
+	// returned.
+	//
+	// This token is listed as not required because Amazon Web Services SDKs (for
+	// example the Amazon Web Services SDK for Java) auto-generate the token for users.
+	// If you are not using the Amazon Web Services SDK or the Amazon Web Services CLI,
+	// you must provide this token or the action will fail.
 	ClientRequestToken *string
 
 	// A string that contains the code of the calculation. Use this parameter instead
-	// of CalculationConfiguration$CodeBlock , which is deprecated.
+	// of CalculationConfiguration$CodeBlock, which is deprecated.
 	CodeBlock *string
 
 	// A description of the calculation.
@@ -69,13 +70,23 @@ type StartCalculationExecutionOutput struct {
 	// The calculation execution UUID.
 	CalculationExecutionId *string
 
-	// CREATING - The calculation is in the process of being created. CREATED - The
-	// calculation has been created and is ready to run. QUEUED - The calculation has
-	// been queued for processing. RUNNING - The calculation is running. CANCELING - A
-	// request to cancel the calculation has been received and the system is working to
-	// stop it. CANCELED - The calculation is no longer running as the result of a
-	// cancel request. COMPLETED - The calculation has completed without error. FAILED
-	// - The calculation failed and is no longer running.
+	// CREATING - The calculation is in the process of being created.
+	//
+	// CREATED - The calculation has been created and is ready to run.
+	//
+	// QUEUED - The calculation has been queued for processing.
+	//
+	// RUNNING - The calculation is running.
+	//
+	// CANCELING - A request to cancel the calculation has been received and the
+	// system is working to stop it.
+	//
+	// CANCELED - The calculation is no longer running as the result of a cancel
+	// request.
+	//
+	// COMPLETED - The calculation has completed without error.
+	//
+	// FAILED - The calculation failed and is no longer running.
 	State types.CalculationExecutionState
 
 	// Metadata pertaining to the operation's result.

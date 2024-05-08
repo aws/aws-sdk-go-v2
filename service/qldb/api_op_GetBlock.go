@@ -13,12 +13,20 @@ import (
 
 // Returns a block object at a specified address in a journal. Also returns a
 // proof of the specified block for verification if DigestTipAddress is provided.
-// For information about the data contents in a block, see Journal contents (https://docs.aws.amazon.com/qldb/latest/developerguide/journal-contents.html)
-// in the Amazon QLDB Developer Guide. If the specified ledger doesn't exist or is
-// in DELETING status, then throws ResourceNotFoundException . If the specified
-// ledger is in CREATING status, then throws ResourcePreconditionNotMetException .
+//
+// For information about the data contents in a block, see [Journal contents] in the Amazon QLDB
+// Developer Guide.
+//
+// If the specified ledger doesn't exist or is in DELETING status, then throws
+// ResourceNotFoundException .
+//
+// If the specified ledger is in CREATING status, then throws
+// ResourcePreconditionNotMetException .
+//
 // If no block exists with the specified address, then throws
 // InvalidParameterException .
+//
+// [Journal contents]: https://docs.aws.amazon.com/qldb/latest/developerguide/journal-contents.html
 func (c *Client) GetBlock(ctx context.Context, params *GetBlockInput, optFns ...func(*Options)) (*GetBlockOutput, error) {
 	if params == nil {
 		params = &GetBlockInput{}
@@ -37,8 +45,9 @@ func (c *Client) GetBlock(ctx context.Context, params *GetBlockInput, optFns ...
 type GetBlockInput struct {
 
 	// The location of the block that you want to request. An address is an Amazon Ion
-	// structure that has two fields: strandId and sequenceNo . For example:
-	// {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14} .
+	// structure that has two fields: strandId and sequenceNo .
+	//
+	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14} .
 	//
 	// This member is required.
 	BlockAddress *types.ValueHolder
@@ -50,7 +59,9 @@ type GetBlockInput struct {
 
 	// The latest block location covered by the digest for which to request a proof.
 	// An address is an Amazon Ion structure that has two fields: strandId and
-	// sequenceNo . For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49} .
+	// sequenceNo .
+	//
+	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49} .
 	DigestTipAddress *types.ValueHolder
 
 	noSmithyDocumentSerde

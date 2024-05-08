@@ -90,10 +90,13 @@ type GetRouteOutput struct {
 	// A mapping of Amazon API Gateway path resources to resource IDs.
 	PathResourceToId map[string]string
 
-	// The unique identifier of the route. DEFAULT: All traffic that does not match
-	// another route is forwarded to the default route. Applications must have a
-	// default route before any other routes can be created. URI_PATH: A route that is
-	// based on a URI path.
+	// The unique identifier of the route.
+	//
+	// DEFAULT: All traffic that does not match another route is forwarded to the
+	// default route. Applications must have a default route before any other routes
+	// can be created.
+	//
+	// URI_PATH: A route that is based on a URI path.
 	RouteId *string
 
 	// The type of route.

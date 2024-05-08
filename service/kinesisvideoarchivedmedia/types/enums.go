@@ -12,6 +12,7 @@ const (
 
 // Values returns all known values for ClipFragmentSelectorType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ClipFragmentSelectorType) Values() []ClipFragmentSelectorType {
 	return []ClipFragmentSelectorType{
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for ContainerFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContainerFormat) Values() []ContainerFormat {
 	return []ContainerFormat{
 		"FRAGMENTED_MP4",
@@ -48,6 +50,7 @@ const (
 
 // Values returns all known values for DASHDisplayFragmentNumber. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DASHDisplayFragmentNumber) Values() []DASHDisplayFragmentNumber {
 	return []DASHDisplayFragmentNumber{
@@ -66,8 +69,9 @@ const (
 
 // Values returns all known values for DASHDisplayFragmentTimestamp. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DASHDisplayFragmentTimestamp) Values() []DASHDisplayFragmentTimestamp {
 	return []DASHDisplayFragmentTimestamp{
 		"ALWAYS",
@@ -85,6 +89,7 @@ const (
 
 // Values returns all known values for DASHFragmentSelectorType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DASHFragmentSelectorType) Values() []DASHFragmentSelectorType {
 	return []DASHFragmentSelectorType{
@@ -103,8 +108,9 @@ const (
 )
 
 // Values returns all known values for DASHPlaybackMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DASHPlaybackMode) Values() []DASHPlaybackMode {
 	return []DASHPlaybackMode{
 		"LIVE",
@@ -122,8 +128,9 @@ const (
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Format) Values() []Format {
 	return []Format{
 		"JPEG",
@@ -139,8 +146,9 @@ const (
 )
 
 // Values returns all known values for FormatConfigKey. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FormatConfigKey) Values() []FormatConfigKey {
 	return []FormatConfigKey{
 		"JPEGQuality",
@@ -156,8 +164,9 @@ const (
 )
 
 // Values returns all known values for FragmentSelectorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FragmentSelectorType) Values() []FragmentSelectorType {
 	return []FragmentSelectorType{
 		"PRODUCER_TIMESTAMP",
@@ -175,8 +184,9 @@ const (
 )
 
 // Values returns all known values for HLSDiscontinuityMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HLSDiscontinuityMode) Values() []HLSDiscontinuityMode {
 	return []HLSDiscontinuityMode{
 		"ALWAYS",
@@ -195,6 +205,7 @@ const (
 
 // Values returns all known values for HLSDisplayFragmentTimestamp. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (HLSDisplayFragmentTimestamp) Values() []HLSDisplayFragmentTimestamp {
 	return []HLSDisplayFragmentTimestamp{
@@ -212,8 +223,9 @@ const (
 )
 
 // Values returns all known values for HLSFragmentSelectorType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HLSFragmentSelectorType) Values() []HLSFragmentSelectorType {
 	return []HLSFragmentSelectorType{
 		"PRODUCER_TIMESTAMP",
@@ -231,8 +243,9 @@ const (
 )
 
 // Values returns all known values for HLSPlaybackMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HLSPlaybackMode) Values() []HLSPlaybackMode {
 	return []HLSPlaybackMode{
 		"LIVE",
@@ -250,8 +263,9 @@ const (
 )
 
 // Values returns all known values for ImageError. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageError) Values() []ImageError {
 	return []ImageError{
 		"NO_MEDIA",
@@ -268,8 +282,9 @@ const (
 )
 
 // Values returns all known values for ImageSelectorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageSelectorType) Values() []ImageSelectorType {
 	return []ImageSelectorType{
 		"PRODUCER_TIMESTAMP",

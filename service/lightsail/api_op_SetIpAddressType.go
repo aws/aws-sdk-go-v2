@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the IP address type for an Amazon Lightsail resource. Use this action to
-// enable dual-stack for a resource, which enables IPv4 and IPv6 for the specified
-// resource. Alternately, you can use this action to disable dual-stack, and enable
-// IPv4 only.
+// Sets the IP address type for an Amazon Lightsail resource.
+//
+// Use this action to enable dual-stack for a resource, which enables IPv4 and
+// IPv6 for the specified resource. Alternately, you can use this action to disable
+// dual-stack, and enable IPv4 only.
 func (c *Client) SetIpAddressType(ctx context.Context, params *SetIpAddressTypeInput, optFns ...func(*Options)) (*SetIpAddressTypeOutput, error) {
 	if params == nil {
 		params = &SetIpAddressTypeInput{}
@@ -32,8 +33,9 @@ func (c *Client) SetIpAddressType(ctx context.Context, params *SetIpAddressTypeI
 
 type SetIpAddressTypeInput struct {
 
-	// The IP address type to set for the specified resource. The possible values are
-	// ipv4 for IPv4 only, and dualstack for IPv4 and IPv6.
+	// The IP address type to set for the specified resource.
+	//
+	// The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6.
 	//
 	// This member is required.
 	IpAddressType types.IpAddressType
@@ -43,10 +45,13 @@ type SetIpAddressTypeInput struct {
 	// This member is required.
 	ResourceName *string
 
-	// The resource type. The resource values are Distribution , Instance , and
-	// LoadBalancer . Distribution-related APIs are available only in the N. Virginia (
-	// us-east-1 ) Amazon Web Services Region. Set your Amazon Web Services Region
-	// configuration to us-east-1 to create, view, or edit distributions.
+	// The resource type.
+	//
+	// The resource values are Distribution , Instance , and LoadBalancer .
+	//
+	// Distribution-related APIs are available only in the N. Virginia ( us-east-1 )
+	// Amazon Web Services Region. Set your Amazon Web Services Region configuration to
+	// us-east-1 to create, view, or edit distributions.
 	//
 	// This member is required.
 	ResourceType types.ResourceType

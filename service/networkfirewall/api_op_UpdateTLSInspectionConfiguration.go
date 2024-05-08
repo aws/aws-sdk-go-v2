@@ -15,10 +15,11 @@ import (
 // inspection configuration. You use a TLS inspection configuration by referencing
 // it in one or more firewall policies. When you modify a TLS inspection
 // configuration, you modify all firewall policies that use the TLS inspection
-// configuration. To update a TLS inspection configuration, first call
-// DescribeTLSInspectionConfiguration to retrieve the current
-// TLSInspectionConfiguration object, update the object as needed, and then provide
-// the updated object to this call.
+// configuration.
+//
+// To update a TLS inspection configuration, first call DescribeTLSInspectionConfiguration to retrieve the current TLSInspectionConfiguration
+// object, update the object as needed, and then provide the updated object to this
+// call.
 func (c *Client) UpdateTLSInspectionConfiguration(ctx context.Context, params *UpdateTLSInspectionConfigurationInput, optFns ...func(*Options)) (*UpdateTLSInspectionConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateTLSInspectionConfigurationInput{}
@@ -36,29 +37,32 @@ func (c *Client) UpdateTLSInspectionConfiguration(ctx context.Context, params *U
 
 type UpdateTLSInspectionConfigurationInput struct {
 
-	// The object that defines a TLS inspection configuration. This, along with
-	// TLSInspectionConfigurationResponse , define the TLS inspection configuration.
-	// You can retrieve all objects for a TLS inspection configuration by calling
-	// DescribeTLSInspectionConfiguration . Network Firewall uses a TLS inspection
-	// configuration to decrypt traffic. Network Firewall re-encrypts the traffic
-	// before sending it to its destination. To use a TLS inspection configuration, you
-	// add it to a new Network Firewall firewall policy, then you apply the firewall
-	// policy to a firewall. Network Firewall acts as a proxy service to decrypt and
-	// inspect the traffic traveling through your firewalls. You can reference a TLS
-	// inspection configuration from more than one firewall policy, and you can use a
-	// firewall policy in more than one firewall. For more information about using TLS
-	// inspection configurations, see Inspecting SSL/TLS traffic with TLS inspection
-	// configurations (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html)
-	// in the Network Firewall Developer Guide.
+	// The object that defines a TLS inspection configuration. This, along with TLSInspectionConfigurationResponse,
+	// define the TLS inspection configuration. You can retrieve all objects for a TLS
+	// inspection configuration by calling DescribeTLSInspectionConfiguration.
+	//
+	// Network Firewall uses a TLS inspection configuration to decrypt traffic.
+	// Network Firewall re-encrypts the traffic before sending it to its destination.
+	//
+	// To use a TLS inspection configuration, you add it to a new Network Firewall
+	// firewall policy, then you apply the firewall policy to a firewall. Network
+	// Firewall acts as a proxy service to decrypt and inspect the traffic traveling
+	// through your firewalls. You can reference a TLS inspection configuration from
+	// more than one firewall policy, and you can use a firewall policy in more than
+	// one firewall. For more information about using TLS inspection configurations,
+	// see [Inspecting SSL/TLS traffic with TLS inspection configurations]in the Network Firewall Developer Guide.
+	//
+	// [Inspecting SSL/TLS traffic with TLS inspection configurations]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html
 	//
 	// This member is required.
 	TLSInspectionConfiguration *types.TLSInspectionConfiguration
 
 	// A token used for optimistic locking. Network Firewall returns a token to your
 	// requests that access the TLS inspection configuration. The token marks the state
-	// of the TLS inspection configuration resource at the time of the request. To make
-	// changes to the TLS inspection configuration, you provide the token in your
-	// request. Network Firewall uses the token to ensure that the TLS inspection
+	// of the TLS inspection configuration resource at the time of the request.
+	//
+	// To make changes to the TLS inspection configuration, you provide the token in
+	// your request. Network Firewall uses the token to ensure that the TLS inspection
 	// configuration hasn't changed since you last retrieved it. If it has changed, the
 	// operation fails with an InvalidTokenException . If this happens, retrieve the
 	// TLS inspection configuration again to get a current copy of it with a current
@@ -88,18 +92,18 @@ type UpdateTLSInspectionConfigurationInput struct {
 type UpdateTLSInspectionConfigurationOutput struct {
 
 	// The high-level properties of a TLS inspection configuration. This, along with
-	// the TLSInspectionConfiguration , define the TLS inspection configuration. You
-	// can retrieve all objects for a TLS inspection configuration by calling
-	// DescribeTLSInspectionConfiguration .
+	// the TLSInspectionConfiguration, define the TLS inspection configuration. You can retrieve all objects for
+	// a TLS inspection configuration by calling DescribeTLSInspectionConfiguration.
 	//
 	// This member is required.
 	TLSInspectionConfigurationResponse *types.TLSInspectionConfigurationResponse
 
 	// A token used for optimistic locking. Network Firewall returns a token to your
 	// requests that access the TLS inspection configuration. The token marks the state
-	// of the TLS inspection configuration resource at the time of the request. To make
-	// changes to the TLS inspection configuration, you provide the token in your
-	// request. Network Firewall uses the token to ensure that the TLS inspection
+	// of the TLS inspection configuration resource at the time of the request.
+	//
+	// To make changes to the TLS inspection configuration, you provide the token in
+	// your request. Network Firewall uses the token to ensure that the TLS inspection
 	// configuration hasn't changed since you last retrieved it. If it has changed, the
 	// operation fails with an InvalidTokenException . If this happens, retrieve the
 	// TLS inspection configuration again to get a current copy of it with a current

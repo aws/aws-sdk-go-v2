@@ -29,7 +29,7 @@ func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, op
 
 type ListChannelsInput struct {
 
-	// The maximum number of CloudTrail channels to display on a single page.
+	//  The maximum number of CloudTrail channels to display on a single page.
 	MaxResults *int32
 
 	// The token to use to get the next page of results after a previous API call.
@@ -44,7 +44,7 @@ type ListChannelsInput struct {
 
 type ListChannelsOutput struct {
 
-	// The list of channels in the account.
+	//  The list of channels in the account.
 	Channels []types.Channel
 
 	// The token to use to get the next page of results after a previous API call.
@@ -141,7 +141,7 @@ var _ ListChannelsAPIClient = (*Client)(nil)
 
 // ListChannelsPaginatorOptions is the paginator options for ListChannels
 type ListChannelsPaginatorOptions struct {
-	// The maximum number of CloudTrail channels to display on a single page.
+	//  The maximum number of CloudTrail channels to display on a single page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a scheduled audit that is run at a specified time interval. Requires
-// permission to access the CreateScheduledAudit (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Creates a scheduled audit that is run at a specified time interval.
+//
+// Requires permission to access the [CreateScheduledAudit] action.
+//
+// [CreateScheduledAudit]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreateScheduledAudit(ctx context.Context, params *CreateScheduledAuditInput, optFns ...func(*Options)) (*CreateScheduledAuditOutput, error) {
 	if params == nil {
 		params = &CreateScheduledAuditInput{}

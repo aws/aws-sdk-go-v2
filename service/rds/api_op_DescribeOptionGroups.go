@@ -30,19 +30,33 @@ func (c *Client) DescribeOptionGroups(ctx context.Context, params *DescribeOptio
 type DescribeOptionGroupsInput struct {
 
 	// A filter to only include option groups associated with this database engine.
+	//
 	// Valid Values:
+	//
 	//   - db2-ae
+	//
 	//   - db2-se
+	//
 	//   - mariadb
+	//
 	//   - mysql
+	//
 	//   - oracle-ee
+	//
 	//   - oracle-ee-cdb
+	//
 	//   - oracle-se2
+	//
 	//   - oracle-se2-cdb
+	//
 	//   - postgres
+	//
 	//   - sqlserver-ee
+	//
 	//   - sqlserver-se
+	//
 	//   - sqlserver-ex
+	//
 	//   - sqlserver-web
 	EngineName *string
 
@@ -62,7 +76,10 @@ type DescribeOptionGroupsInput struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The name of the option group to describe. Can't be supplied together with
@@ -182,7 +199,10 @@ type DescribeOptionGroupsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

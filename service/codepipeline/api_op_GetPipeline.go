@@ -13,7 +13,7 @@ import (
 
 // Returns the metadata, structure, stages, and actions of a pipeline. Can be used
 // to return the entire structure of a pipeline in JSON format, which can then be
-// modified and used to update the pipeline structure with UpdatePipeline .
+// modified and used to update the pipeline structure with UpdatePipeline.
 func (c *Client) GetPipeline(ctx context.Context, params *GetPipelineInput, optFns ...func(*Options)) (*GetPipelineOutput, error) {
 	if params == nil {
 		params = &GetPipelineInput{}

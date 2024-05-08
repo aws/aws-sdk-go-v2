@@ -11,8 +11,8 @@ import (
 )
 
 // Tells the search domain to start indexing its documents using the latest
-// indexing options. This operation must be invoked to activate options whose
-// OptionStatus is RequiresIndexDocuments .
+// indexing options. This operation must be invoked to activate options whose OptionStatusis
+// RequiresIndexDocuments .
 func (c *Client) IndexDocuments(ctx context.Context, params *IndexDocumentsInput, optFns ...func(*Options)) (*IndexDocumentsOutput, error) {
 	if params == nil {
 		params = &IndexDocumentsInput{}
@@ -28,8 +28,8 @@ func (c *Client) IndexDocuments(ctx context.Context, params *IndexDocumentsInput
 	return out, nil
 }
 
-// Container for the parameters to the IndexDocuments operation. Specifies the
-// name of the domain you want to re-index.
+// Container for the parameters to the IndexDocuments operation. Specifies the name of the
+// domain you want to re-index.
 type IndexDocumentsInput struct {
 
 	// A string that represents the name of a domain. Domain names are unique across

@@ -12,8 +12,10 @@ import (
 )
 
 // This operation returns all of the tags that are associated with the specified
-// domain. All tag operations are eventually consistent; subsequent operations
-// might not immediately represent all issued operations.
+// domain.
+//
+// All tag operations are eventually consistent; subsequent operations might not
+// immediately represent all issued operations.
 func (c *Client) ListTagsForDomain(ctx context.Context, params *ListTagsForDomainInput, optFns ...func(*Options)) (*ListTagsForDomainOutput, error) {
 	if params == nil {
 		params = &ListTagsForDomainInput{}

@@ -13,10 +13,13 @@ import (
 
 // Creates a new custom model that replicates a source custom model that you
 // import. The source model can be in your Amazon Web Services account or another
-// one. If the source model is in another Amazon Web Services account, then it must
-// have a resource-based policy that authorizes you to import it. The source model
-// must be in the same Amazon Web Services Region that you're using when you
-// import. You can't import a model that's in a different Region.
+// one.
+//
+// If the source model is in another Amazon Web Services account, then it must
+// have a resource-based policy that authorizes you to import it.
+//
+// The source model must be in the same Amazon Web Services Region that you're
+// using when you import. You can't import a model that's in a different Region.
 func (c *Client) ImportModel(ctx context.Context, params *ImportModelInput, optFns ...func(*Options)) (*ImportModelOutput, error) {
 	if params == nil {
 		params = &ImportModelInput{}
@@ -46,7 +49,9 @@ type ImportModelInput struct {
 
 	// ID for the KMS key that Amazon Comprehend uses to encrypt trained custom
 	// models. The ModelKmsKeyId can be either of the following formats:
+	//
 	//   - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
 	//   - Amazon Resource Name (ARN) of a KMS Key:
 	//   "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	ModelKmsKeyId *string

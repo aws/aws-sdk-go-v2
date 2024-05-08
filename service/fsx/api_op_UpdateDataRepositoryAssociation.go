@@ -45,9 +45,10 @@ type UpdateDataRepositoryAssociationInput struct {
 	// For files imported from a data repository, this value determines the stripe
 	// count and maximum amount of data per file (in MiB) stored on a single physical
 	// disk. The maximum number of disks that a single file can be striped across is
-	// limited by the total number of disks that make up the file system. The default
-	// chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB).
-	// Amazon S3 objects have a maximum size of 5 TB.
+	// limited by the total number of disks that make up the file system.
+	//
+	// The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB
+	// (500 GiB). Amazon S3 objects have a maximum size of 5 TB.
 	ImportedFileChunkSize *int32
 
 	// The configuration for an Amazon S3 data repository linked to an Amazon FSx

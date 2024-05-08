@@ -61,36 +61,44 @@ type DescribeEndpointOutput struct {
 	EndpointName *string
 
 	// The status of the endpoint.
+	//
 	//   - OutOfService : Endpoint is not available to take incoming requests.
-	//   - Creating : CreateEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html)
-	//   is executing.
-	//   - Updating : UpdateEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpoint.html)
-	//   or UpdateEndpointWeightsAndCapacities (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html)
-	//   is executing.
+	//
+	//   - Creating : [CreateEndpoint]is executing.
+	//
+	//   - Updating : [UpdateEndpoint]or [UpdateEndpointWeightsAndCapacities]is executing.
+	//
 	//   - SystemUpdating : Endpoint is undergoing maintenance and cannot be updated or
 	//   deleted or re-scaled until it has completed. This maintenance operation does not
 	//   change any customer-specified values such as VPC config, KMS encryption, model,
 	//   instance type, or instance count.
+	//
 	//   - RollingBack : Endpoint fails to scale up or down or change its variant
 	//   weight and is in the process of rolling back to its previous configuration. Once
 	//   the rollback completes, endpoint returns to an InService status. This
 	//   transitional status only applies to an endpoint that has autoscaling enabled and
-	//   is undergoing variant weight or capacity changes as part of an
-	//   UpdateEndpointWeightsAndCapacities (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html)
-	//   call or when the UpdateEndpointWeightsAndCapacities (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html)
-	//   operation is called explicitly.
+	//   is undergoing variant weight or capacity changes as part of an [UpdateEndpointWeightsAndCapacities]call or when
+	//   the [UpdateEndpointWeightsAndCapacities]operation is called explicitly.
+	//
 	//   - InService : Endpoint is available to process incoming requests.
-	//   - Deleting : DeleteEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteEndpoint.html)
-	//   is executing.
+	//
+	//   - Deleting : [DeleteEndpoint]is executing.
+	//
 	//   - Failed : Endpoint could not be created, updated, or re-scaled. Use the
-	//   FailureReason value returned by DescribeEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html)
-	//   for information about the failure. DeleteEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteEndpoint.html)
-	//   is the only operation that can be performed on a failed endpoint.
+	//   FailureReason value returned by [DescribeEndpoint]for information about the failure. [DeleteEndpoint]is the
+	//   only operation that can be performed on a failed endpoint.
+	//
 	//   - UpdateRollbackFailed : Both the rolling deployment and auto-rollback failed.
 	//   Your endpoint is in service with a mix of the old and new endpoint
 	//   configurations. For information about how to remedy this issue and restore the
-	//   endpoint's status to InService , see Rolling Deployments (https://docs.aws.amazon.com/sagemaker/latest/dg/deployment-guardrails-rolling.html)
-	//   .
+	//   endpoint's status to InService , see [Rolling Deployments].
+	//
+	// [DescribeEndpoint]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html
+	// [UpdateEndpoint]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpoint.html
+	// [Rolling Deployments]: https://docs.aws.amazon.com/sagemaker/latest/dg/deployment-guardrails-rolling.html
+	// [UpdateEndpointWeightsAndCapacities]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html
+	// [CreateEndpoint]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html
+	// [DeleteEndpoint]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteEndpoint.html
 	//
 	// This member is required.
 	EndpointStatus types.EndpointStatus
@@ -100,9 +108,10 @@ type DescribeEndpointOutput struct {
 	// This member is required.
 	LastModifiedTime *time.Time
 
-	// Returns the description of an endpoint configuration created using the
-	// CreateEndpointConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html)
-	// API.
+	// Returns the description of an endpoint configuration created using the [CreateEndpointConfig]
+	// CreateEndpointConfig API.
+	//
+	// [CreateEndpointConfig]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html
 	AsyncInferenceConfig *types.AsyncInferenceConfig
 
 	// The currently active data capture configuration used by your Endpoint.
@@ -124,14 +133,16 @@ type DescribeEndpointOutput struct {
 	// when the endpoint is creating or updating with a new endpoint configuration.
 	PendingDeploymentSummary *types.PendingDeploymentSummary
 
-	// An array of ProductionVariantSummary (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ProductionVariantSummary.html)
-	// objects, one for each model hosted behind this endpoint.
+	// An array of [ProductionVariantSummary] objects, one for each model hosted behind this endpoint.
+	//
+	// [ProductionVariantSummary]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ProductionVariantSummary.html
 	ProductionVariants []types.ProductionVariantSummary
 
-	// An array of ProductionVariantSummary (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ProductionVariantSummary.html)
-	// objects, one for each model that you want to host at this endpoint in shadow
-	// mode with production traffic replicated from the model specified on
+	// An array of [ProductionVariantSummary] objects, one for each model that you want to host at this endpoint
+	// in shadow mode with production traffic replicated from the model specified on
 	// ProductionVariants .
+	//
+	// [ProductionVariantSummary]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ProductionVariantSummary.html
 	ShadowProductionVariants []types.ProductionVariantSummary
 
 	// Metadata pertaining to the operation's result.
@@ -259,12 +270,13 @@ type EndpointDeletedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeEndpointInput, *DescribeEndpointOutput, error) (bool, error)
 }
 
@@ -443,12 +455,13 @@ type EndpointInServiceWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeEndpointInput, *DescribeEndpointOutput, error) (bool, error)
 }
 

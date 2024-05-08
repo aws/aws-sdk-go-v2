@@ -15,10 +15,11 @@ import (
 // Gets information that Amazon CloudWatch Internet Monitor has generated about an
 // internet event. Internet Monitor displays information about recent global health
 // events, called internet events, on a global outages map that is available to all
-// Amazon Web Services customers. The information returned here includes the
-// impacted location, when the event started and (if the event is over) ended, the
-// type of event ( PERFORMANCE or AVAILABILITY ), and the status ( ACTIVE or
-// RESOLVED ).
+// Amazon Web Services customers.
+//
+// The information returned here includes the impacted location, when the event
+// started and (if the event is over) ended, the type of event ( PERFORMANCE or
+// AVAILABILITY ), and the status ( ACTIVE or RESOLVED ).
 func (c *Client) GetInternetEvent(ctx context.Context, params *GetInternetEventInput, optFns ...func(*Options)) (*GetInternetEventOutput, error) {
 	if params == nil {
 		params = &GetInternetEventInput{}

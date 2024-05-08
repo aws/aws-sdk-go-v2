@@ -13,8 +13,10 @@ import (
 
 // Returns metadata about transactions and their status. To prevent the response
 // from growing indefinitely, only uncommitted transactions and those available for
-// time-travel queries are returned. This operation can help you identify
-// uncommitted transactions or to get information about transactions.
+// time-travel queries are returned.
+//
+// This operation can help you identify uncommitted transactions or to get
+// information about transactions.
 func (c *Client) ListTransactions(ctx context.Context, params *ListTransactionsInput, optFns ...func(*Options)) (*ListTransactionsOutput, error) {
 	if params == nil {
 		params = &ListTransactionsInput{}
@@ -42,7 +44,7 @@ type ListTransactionsInput struct {
 	// A continuation token if this is not the first call to retrieve transactions.
 	NextToken *string
 
-	// A filter indicating the status of transactions to return. Options are ALL |
+	//  A filter indicating the status of transactions to return. Options are ALL |
 	// COMPLETED | COMMITTED | ABORTED | ACTIVE. The default is ALL .
 	StatusFilter types.TransactionStatusFilter
 

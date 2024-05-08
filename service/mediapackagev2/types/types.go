@@ -109,9 +109,9 @@ type CreateDashManifestConfiguration struct {
 	// Elemental MediaPackage must create periods in the output manifest that
 	// correspond to SCTE-35 ad markers in the input source. Leave this value empty to
 	// indicate that the manifest is contained all in one period. For more information
-	// about periods in the DASH manifest, see Multi-period DASH in AWS Elemental
-	// MediaPackage (https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html)
-	// .
+	// about periods in the DASH manifest, see [Multi-period DASH in AWS Elemental MediaPackage].
+	//
+	// [Multi-period DASH in AWS Elemental MediaPackage]: https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html
 	PeriodTriggers []DashPeriodTrigger
 
 	// The SCTE configuration.
@@ -119,7 +119,10 @@ type CreateDashManifestConfiguration struct {
 
 	// Determines the type of variable used in the media URL of the SegmentTemplate
 	// tag in the manifest. Also specifies if segment timeline information is included
-	// in SegmentTimeline or SegmentTemplate . Value description:
+	// in SegmentTimeline or SegmentTemplate .
+	//
+	// Value description:
+	//
 	//   - NUMBER_WITH_TIMELINE - The $Number$ variable is used in the media URL. The
 	//   value of this variable is the sequential number of the segment. A full
 	//   SegmentTimeline object is presented in each SegmentTemplate .
@@ -169,8 +172,10 @@ type CreateHlsManifestConfiguration struct {
 	// aren't included in the manifest. The tags sync the stream to the wall clock so
 	// that viewers can seek to a specific time in the playback timeline on the player.
 	// ID3Timed metadata messages generate every 5 seconds whenever the content is
-	// ingested. Irrespective of this parameter, if any ID3Timed metadata is in the HLS
-	// input, it is passed through to the HLS output.
+	// ingested.
+	//
+	// Irrespective of this parameter, if any ID3Timed metadata is in the HLS input,
+	// it is passed through to the HLS output.
 	ProgramDateTimeIntervalSeconds *int32
 
 	// The SCTE configuration.
@@ -212,8 +217,10 @@ type CreateLowLatencyHlsManifestConfiguration struct {
 	// aren't included in the manifest. The tags sync the stream to the wall clock so
 	// that viewers can seek to a specific time in the playback timeline on the player.
 	// ID3Timed metadata messages generate every 5 seconds whenever the content is
-	// ingested. Irrespective of this parameter, if any ID3Timed metadata is in the HLS
-	// input, it is passed through to the HLS output.
+	// ingested.
+	//
+	// Irrespective of this parameter, if any ID3Timed metadata is in the HLS input,
+	// it is passed through to the HLS output.
 	ProgramDateTimeIntervalSeconds *int32
 
 	// The SCTE configuration.
@@ -259,8 +266,10 @@ type Encryption struct {
 	// content begins streaming, and then retrieves them as needed over the lifetime of
 	// the workflow. By default, key rotation is set to 300 seconds (5 minutes), the
 	// minimum rotation interval, which is equivalent to setting it to 300. If you
-	// don't enter an interval, content keys aren't rotated. The following example
-	// setting causes the service to rotate keys every thirty minutes: 1800
+	// don't enter an interval, content keys aren't rotated.
+	//
+	// The following example setting causes the service to rotate keys every thirty
+	// minutes: 1800
 	KeyRotationIntervalSeconds *int32
 
 	noSmithyDocumentSerde
@@ -272,48 +281,67 @@ type Encryption struct {
 // contract, specify which audio and video encryption presets to use.
 type EncryptionContractConfiguration struct {
 
-	// A collection of audio encryption presets. Value description:
+	// A collection of audio encryption presets.
+	//
+	// Value description:
+	//
 	//   - PRESET-AUDIO-1 - Use one content key to encrypt all of the audio tracks in
 	//   your stream.
+	//
 	//   - PRESET-AUDIO-2 - Use one content key to encrypt all of the stereo audio
 	//   tracks and one content key to encrypt all of the multichannel audio tracks.
+	//
 	//   - PRESET-AUDIO-3 - Use one content key to encrypt all of the stereo audio
 	//   tracks, one content key to encrypt all of the multichannel audio tracks with 3
 	//   to 6 channels, and one content key to encrypt all of the multichannel audio
 	//   tracks with more than 6 channels.
+	//
 	//   - SHARED - Use the same content key for all of the audio and video tracks in
 	//   your stream.
+	//
 	//   - UNENCRYPTED - Don't encrypt any of the audio tracks in your stream.
 	//
 	// This member is required.
 	PresetSpeke20Audio PresetSpeke20Audio
 
-	// A collection of video encryption presets. Value description:
+	// A collection of video encryption presets.
+	//
+	// Value description:
+	//
 	//   - PRESET-VIDEO-1 - Use one content key to encrypt all of the video tracks in
 	//   your stream.
+	//
 	//   - PRESET-VIDEO-2 - Use one content key to encrypt all of the SD video tracks
 	//   and one content key for all HD and higher resolutions video tracks.
+	//
 	//   - PRESET-VIDEO-3 - Use one content key to encrypt all of the SD video tracks,
 	//   one content key for HD video tracks and one content key for all UHD video
 	//   tracks.
+	//
 	//   - PRESET-VIDEO-4 - Use one content key to encrypt all of the SD video tracks,
 	//   one content key for HD video tracks, one content key for all UHD1 video tracks
 	//   and one content key for all UHD2 video tracks.
+	//
 	//   - PRESET-VIDEO-5 - Use one content key to encrypt all of the SD video tracks,
 	//   one content key for HD1 video tracks, one content key for HD2 video tracks, one
 	//   content key for all UHD1 video tracks and one content key for all UHD2 video
 	//   tracks.
+	//
 	//   - PRESET-VIDEO-6 - Use one content key to encrypt all of the SD video tracks,
 	//   one content key for HD1 video tracks, one content key for HD2 video tracks and
 	//   one content key for all UHD video tracks.
+	//
 	//   - PRESET-VIDEO-7 - Use one content key to encrypt all of the SD+HD1 video
 	//   tracks, one content key for HD2 video tracks and one content key for all UHD
 	//   video tracks.
+	//
 	//   - PRESET-VIDEO-8 - Use one content key to encrypt all of the SD+HD1 video
 	//   tracks, one content key for HD2 video tracks, one content key for all UHD1 video
 	//   tracks and one content key for all UHD2 video tracks.
+	//
 	//   - SHARED - Use the same content key for all of the video and audio tracks in
 	//   your stream.
+	//
 	//   - UNENCRYPTED - Don't encrypt any of the video tracks in your stream.
 	//
 	// This member is required.
@@ -400,9 +428,9 @@ type GetDashManifestConfiguration struct {
 	// A list of triggers that controls when AWS Elemental MediaPackage separates the
 	// MPEG-DASH manifest into multiple periods. Leave this value empty to indicate
 	// that the manifest is contained all in one period. For more information about
-	// periods in the DASH manifest, see Multi-period DASH in AWS Elemental
-	// MediaPackage (https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html)
-	// .
+	// periods in the DASH manifest, see [Multi-period DASH in AWS Elemental MediaPackage].
+	//
+	// [Multi-period DASH in AWS Elemental MediaPackage]: https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html
 	PeriodTriggers []DashPeriodTrigger
 
 	// The SCTE configuration.
@@ -410,7 +438,10 @@ type GetDashManifestConfiguration struct {
 
 	// Determines the type of variable used in the media URL of the SegmentTemplate
 	// tag in the manifest. Also specifies if segment timeline information is included
-	// in SegmentTimeline or SegmentTemplate . Value description:
+	// in SegmentTimeline or SegmentTemplate .
+	//
+	// Value description:
+	//
 	//   - NUMBER_WITH_TIMELINE - The $Number$ variable is used in the media URL. The
 	//   value of this variable is the sequential number of the segment. A full
 	//   SegmentTimeline object is presented in each SegmentTemplate .
@@ -465,8 +496,10 @@ type GetHlsManifestConfiguration struct {
 	// aren't included in the manifest. The tags sync the stream to the wall clock so
 	// that viewers can seek to a specific time in the playback timeline on the player.
 	// ID3Timed metadata messages generate every 5 seconds whenever the content is
-	// ingested. Irrespective of this parameter, if any ID3Timed metadata is in the HLS
-	// input, it is passed through to the HLS output.
+	// ingested.
+	//
+	// Irrespective of this parameter, if any ID3Timed metadata is in the HLS input,
+	// it is passed through to the HLS output.
 	ProgramDateTimeIntervalSeconds *int32
 
 	// The SCTE configuration.
@@ -513,8 +546,10 @@ type GetLowLatencyHlsManifestConfiguration struct {
 	// aren't included in the manifest. The tags sync the stream to the wall clock so
 	// that viewers can seek to a specific time in the playback timeline on the player.
 	// ID3Timed metadata messages generate every 5 seconds whenever the content is
-	// ingested. Irrespective of this parameter, if any ID3Timed metadata is in the HLS
-	// input, it is passed through to the HLS output.
+	// ingested.
+	//
+	// Irrespective of this parameter, if any ID3Timed metadata is in the HLS input,
+	// it is passed through to the HLS output.
 	ProgramDateTimeIntervalSeconds *int32
 
 	// The SCTE configuration.
@@ -675,9 +710,13 @@ type ScteDash struct {
 
 	// Choose how ad markers are included in the packaged content. If you include ad
 	// markers in the content stream in your upstream encoders, then you need to inform
-	// MediaPackage what to do with the ad markers in the output. Value description:
+	// MediaPackage what to do with the ad markers in the output.
+	//
+	// Value description:
+	//
 	//   - Binary - The SCTE-35 marker is expressed as a hex-string (Base64 string)
 	//   rather than full XML.
+	//
 	//   - XML - The SCTE marker is expressed fully in XML.
 	AdMarkerDash AdMarkerDash
 
@@ -690,12 +729,16 @@ type ScteHls struct {
 	// Ad markers indicate when ads should be inserted during playback. If you include
 	// ad markers in the content stream in your upstream encoders, then you need to
 	// inform MediaPackage what to do with the ad markers in the output. Choose what
-	// you want MediaPackage to do with the ad markers. Value description:
+	// you want MediaPackage to do with the ad markers.
+	//
+	// Value description:
+	//
 	//   - DATERANGE - Insert EXT-X-DATERANGE tags to signal ad and program transition
 	//   events in TS and CMAF manifests. If you use DATERANGE, you must set a
 	//   programDateTimeIntervalSeconds value of 1 or higher. To learn more about
-	//   DATERANGE, see SCTE-35 Ad Marker EXT-X-DATERANGE (http://docs.aws.amazon.com/mediapackage/latest/ug/scte-35-ad-marker-ext-x-daterange.html)
-	//   .
+	//   DATERANGE, see [SCTE-35 Ad Marker EXT-X-DATERANGE].
+	//
+	// [SCTE-35 Ad Marker EXT-X-DATERANGE]: http://docs.aws.amazon.com/mediapackage/latest/ug/scte-35-ad-marker-ext-x-daterange.html
 	AdMarkerHls AdMarkerHls
 
 	noSmithyDocumentSerde
@@ -763,8 +806,9 @@ type SpekeKeyProvider struct {
 	// to identify the current endpoint. How unique you make this depends on how
 	// fine-grained you want access controls to be. The service does not permit you to
 	// use the same ID for two simultaneous encryption processes. The resource ID is
-	// also known as the content ID. The following example shows a resource ID:
-	// MovieNight20171126093045
+	// also known as the content ID.
+	//
+	// The following example shows a resource ID: MovieNight20171126093045
 	//
 	// This member is required.
 	ResourceId *string
@@ -773,15 +817,19 @@ type SpekeKeyProvider struct {
 	// the key provider API. This role must have a trust policy that allows
 	// MediaPackage to assume the role, and it must have a sufficient permissions
 	// policy to allow access to the specific key retrieval URL. Get this from your DRM
-	// solution provider. Valid format: arn:aws:iam::{accountID}:role/{name} . The
-	// following example shows a role ARN: arn:aws:iam::444455556666:role/SpekeAccess
+	// solution provider.
+	//
+	// Valid format: arn:aws:iam::{accountID}:role/{name} . The following example shows
+	// a role ARN: arn:aws:iam::444455556666:role/SpekeAccess
 	//
 	// This member is required.
 	RoleArn *string
 
 	// The URL of the API Gateway proxy that you set up to talk to your key server.
 	// The API Gateway proxy must reside in the same AWS Region as MediaPackage and
-	// must start with https://. The following example shows a URL:
+	// must start with https://.
+	//
+	// The following example shows a URL:
 	// https://1wm2dx1f33.execute-api.us-west-2.amazonaws.com/SpekeSample/copyProtection
 	//
 	// This member is required.

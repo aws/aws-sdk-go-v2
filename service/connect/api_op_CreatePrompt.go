@@ -11,8 +11,9 @@ import (
 )
 
 // Creates a prompt. For more information about prompts, such as supported file
-// types and maximum length, see Create prompts (https://docs.aws.amazon.com/connect/latest/adminguide/prompts.html)
-// in the Amazon Connect Administrator's Guide.
+// types and maximum length, see [Create prompts]in the Amazon Connect Administrator's Guide.
+//
+// [Create prompts]: https://docs.aws.amazon.com/connect/latest/adminguide/prompts.html
 func (c *Client) CreatePrompt(ctx context.Context, params *CreatePromptInput, optFns ...func(*Options)) (*CreatePromptOutput, error) {
 	if params == nil {
 		params = &CreatePromptInput{}
@@ -30,8 +31,10 @@ func (c *Client) CreatePrompt(ctx context.Context, params *CreatePromptInput, op
 
 type CreatePromptInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -42,8 +45,9 @@ type CreatePromptInput struct {
 	Name *string
 
 	// The URI for the S3 bucket where the prompt is stored. You can provide S3
-	// pre-signed URLs returned by the GetPromptFile (https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html)
-	// API instead of providing S3 URIs.
+	// pre-signed URLs returned by the [GetPromptFile]API instead of providing S3 URIs.
+	//
+	// [GetPromptFile]: https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html
 	//
 	// This member is required.
 	S3Uri *string

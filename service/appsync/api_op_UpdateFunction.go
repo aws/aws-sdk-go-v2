@@ -77,8 +77,10 @@ type UpdateFunctionInput struct {
 	// specified.
 	Runtime *types.AppSyncRuntime
 
-	// Describes a Sync configuration for a resolver. Specifies which Conflict
-	// Detection strategy and Resolution strategy to use when the resolver is invoked.
+	// Describes a Sync configuration for a resolver.
+	//
+	// Specifies which Conflict Detection strategy and Resolution strategy to use when
+	// the resolver is invoked.
 	SyncConfig *types.SyncConfig
 
 	noSmithyDocumentSerde

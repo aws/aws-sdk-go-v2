@@ -15,8 +15,9 @@ import (
 // expands an Amazon CloudSearch domain to an additional Availability Zone in the
 // same Region to increase fault tolerance in the event of a service disruption.
 // Changes to the Multi-AZ option can take about half an hour to become active. For
-// more information, see Configuring Availability Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html)
-// in the Amazon CloudSearch Developer Guide.
+// more information, see [Configuring Availability Options]in the Amazon CloudSearch Developer Guide.
+//
+// [Configuring Availability Options]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html
 func (c *Client) UpdateAvailabilityOptions(ctx context.Context, params *UpdateAvailabilityOptionsInput, optFns ...func(*Options)) (*UpdateAvailabilityOptionsOutput, error) {
 	if params == nil {
 		params = &UpdateAvailabilityOptionsInput{}
@@ -32,9 +33,8 @@ func (c *Client) UpdateAvailabilityOptions(ctx context.Context, params *UpdateAv
 	return out, nil
 }
 
-// Container for the parameters to the UpdateAvailabilityOptions operation.
-// Specifies the name of the domain you want to update and the Multi-AZ
-// availability option.
+// Container for the parameters to the UpdateAvailabilityOptions operation. Specifies the name of the
+// domain you want to update and the Multi-AZ availability option.
 type UpdateAvailabilityOptionsInput struct {
 
 	// A string that represents the name of a domain. Domain names are unique across

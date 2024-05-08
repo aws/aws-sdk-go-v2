@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all customer managed policies attached to a specified PermissionSet .
+// Lists all customer managed policies attached to a specified PermissionSet.
 func (c *Client) ListCustomerManagedPolicyReferencesInPermissionSet(ctx context.Context, params *ListCustomerManagedPolicyReferencesInPermissionSetInput, optFns ...func(*Options)) (*ListCustomerManagedPolicyReferencesInPermissionSetOutput, error) {
 	if params == nil {
 		params = &ListCustomerManagedPolicyReferencesInPermissionSetInput{}

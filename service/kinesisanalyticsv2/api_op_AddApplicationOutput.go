@@ -12,17 +12,22 @@ import (
 )
 
 // Adds an external destination to your SQL-based Kinesis Data Analytics
-// application. If you want Kinesis Data Analytics to deliver data from an
-// in-application stream within your application to an external destination (such
-// as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an Amazon
-// Lambda function), you add the relevant configuration to your application using
-// this operation. You can configure one or more outputs for your application. Each
+// application.
+//
+// If you want Kinesis Data Analytics to deliver data from an in-application
+// stream within your application to an external destination (such as an Kinesis
+// data stream, a Kinesis Data Firehose delivery stream, or an Amazon Lambda
+// function), you add the relevant configuration to your application using this
+// operation. You can configure one or more outputs for your application. Each
 // output configuration maps an in-application stream and an external destination.
+//
 // You can use one of the output configurations to deliver data from your
 // in-application error stream to an external destination so that you can analyze
-// the errors. Any configuration update, including adding a streaming source using
-// this operation, results in a new version of the application. You can use the
-// DescribeApplication operation to find the current application version.
+// the errors.
+//
+// Any configuration update, including adding a streaming source using this
+// operation, results in a new version of the application. You can use the DescribeApplication
+// operation to find the current application version.
 func (c *Client) AddApplicationOutput(ctx context.Context, params *AddApplicationOutputInput, optFns ...func(*Options)) (*AddApplicationOutputOutput, error) {
 	if params == nil {
 		params = &AddApplicationOutputInput{}
@@ -46,8 +51,8 @@ type AddApplicationOutputInput struct {
 	ApplicationName *string
 
 	// The version of the application to which you want to add the output
-	// configuration. You can use the DescribeApplication operation to get the current
-	// application version. If the version specified is not the current version, the
+	// configuration. You can use the DescribeApplicationoperation to get the current application
+	// version. If the version specified is not the current version, the
 	// ConcurrentModificationException is returned.
 	//
 	// This member is required.
@@ -74,9 +79,9 @@ type AddApplicationOutputOutput struct {
 	// when the application is updated.
 	ApplicationVersionId *int64
 
-	// Describes the application output configuration. For more information, see
-	// Configuring Application Output (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html)
-	// .
+	// Describes the application output configuration. For more information, see [Configuring Application Output].
+	//
+	// [Configuring Application Output]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html
 	OutputDescriptions []types.OutputDescription
 
 	// Metadata pertaining to the operation's result.

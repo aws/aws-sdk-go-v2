@@ -45,10 +45,12 @@ type ListRuleGroupsNamespacesInput struct {
 
 	// The token for the next set of items to return. You receive this token from a
 	// previous call, and use it to get the next page of results. The other parameters
-	// must be the same as the initial call. For example, if your initial request has
-	// maxResults of 10, and there are 12 rule groups namespaces to return, then your
-	// initial request will return 10 and a nextToken . Using the next token in a
-	// subsequent call will return the remaining 2 namespaces.
+	// must be the same as the initial call.
+	//
+	// For example, if your initial request has maxResults of 10, and there are 12
+	// rule groups namespaces to return, then your initial request will return 10 and a
+	// nextToken . Using the next token in a subsequent call will return the remaining
+	// 2 namespaces.
 	NextToken *string
 
 	noSmithyDocumentSerde

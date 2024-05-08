@@ -12,9 +12,9 @@ import (
 )
 
 // Provides a detailed description of a specified version of the application. To
-// see a list of all the versions of an application, invoke the
-// ListApplicationVersions operation. This operation is supported only for Managed
-// Service for Apache Flink.
+// see a list of all the versions of an application, invoke the ListApplicationVersionsoperation.
+//
+// This operation is supported only for Managed Service for Apache Flink.
 func (c *Client) DescribeApplicationVersion(ctx context.Context, params *DescribeApplicationVersionInput, optFns ...func(*Options)) (*DescribeApplicationVersionOutput, error) {
 	if params == nil {
 		params = &DescribeApplicationVersionInput{}

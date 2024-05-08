@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Provides information about a stream processor created by CreateStreamProcessor .
-// You can get information about the input and output streams, the input parameters
-// for the face recognition being performed, and the current status of the stream
+// Provides information about a stream processor created by CreateStreamProcessor. You can get
+// information about the input and output streams, the input parameters for the
+// face recognition being performed, and the current status of the stream
 // processor.
 func (c *Client) DescribeStreamProcessor(ctx context.Context, params *DescribeStreamProcessorInput, optFns ...func(*Options)) (*DescribeStreamProcessorOutput, error) {
 	if params == nil {
@@ -46,7 +46,7 @@ type DescribeStreamProcessorOutput struct {
 	// Date and time the stream processor was created
 	CreationTimestamp *time.Time
 
-	// Shows whether you are sharing data with Rekognition to improve model
+	//  Shows whether you are sharing data with Rekognition to improve model
 	// performance. You can choose this option at the account level or on a per-stream
 	// basis. Note that if you opt out at the account level this setting is ignored on
 	// individual streams.
@@ -55,7 +55,7 @@ type DescribeStreamProcessorOutput struct {
 	// Kinesis video stream that provides the source streaming video.
 	Input *types.StreamProcessorInput
 
-	// The identifier for your AWS Key Management Service key (AWS KMS key). This is
+	//  The identifier for your AWS Key Management Service key (AWS KMS key). This is
 	// an optional parameter for label detection stream processors.
 	KmsKeyId *string
 
@@ -69,19 +69,22 @@ type DescribeStreamProcessorOutput struct {
 
 	// The Amazon Simple Notification Service topic to which Amazon Rekognition
 	// publishes the object detection results and completion status of a video analysis
-	// operation. Amazon Rekognition publishes a notification the first time an object
-	// of interest or a person is detected in the video stream. For example, if Amazon
+	// operation.
+	//
+	// Amazon Rekognition publishes a notification the first time an object of
+	// interest or a person is detected in the video stream. For example, if Amazon
 	// Rekognition detects a person at second 2, a pet at second 4, and a person again
 	// at second 5, Amazon Rekognition sends 2 object class detected notifications, one
-	// for a person at second 2 and one for a pet at second 4. Amazon Rekognition also
-	// publishes an an end-of-session notification with a summary when the stream
-	// processing session is complete.
+	// for a person at second 2 and one for a pet at second 4.
+	//
+	// Amazon Rekognition also publishes an an end-of-session notification with a
+	// summary when the stream processing session is complete.
 	NotificationChannel *types.StreamProcessorNotificationChannel
 
 	// Kinesis data stream to which Amazon Rekognition Video puts the analysis results.
 	Output *types.StreamProcessorOutput
 
-	// Specifies locations in the frames where Amazon Rekognition checks for objects
+	//  Specifies locations in the frames where Amazon Rekognition checks for objects
 	// or people. This is an optional parameter for label detection stream processors.
 	RegionsOfInterest []types.RegionOfInterest
 

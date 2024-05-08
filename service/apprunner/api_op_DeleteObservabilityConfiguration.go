@@ -32,9 +32,11 @@ func (c *Client) DeleteObservabilityConfiguration(ctx context.Context, params *D
 type DeleteObservabilityConfigurationInput struct {
 
 	// The Amazon Resource Name (ARN) of the App Runner observability configuration
-	// that you want to delete. The ARN can be a full observability configuration ARN,
-	// or a partial ARN ending with either .../name  or .../name/revision . If a
-	// revision isn't specified, the latest active revision is deleted.
+	// that you want to delete.
+	//
+	// The ARN can be a full observability configuration ARN, or a partial ARN ending
+	// with either .../name  or .../name/revision . If a revision isn't specified, the
+	// latest active revision is deleted.
 	//
 	// This member is required.
 	ObservabilityConfigurationArn *string

@@ -100,10 +100,11 @@ type LoggingConfigurationSummary struct {
 	State LoggingConfigurationState
 
 	// Tags to attach to the resource. Array of maps, each of the form string:string
-	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for details, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS Chat has no constraints on tags beyond what is
-	// documented there.
+	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
+	// "Tag naming limits and requirements"; Amazon IVS Chat has no constraints on tags
+	// beyond what is documented there.
+	//
+	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	// Time of the logging configuration’s last update. This is an ISO 8601 timestamp;
@@ -118,10 +119,11 @@ type MessageReviewHandler struct {
 
 	// Specifies the fallback behavior (whether the message is allowed or denied) if
 	// the handler does not return a valid response, encounters an error, or times out.
-	// (For the timeout period, see Service Quotas (https://docs.aws.amazon.com/ivs/latest/userguide/service-quotas.html)
-	// .) If allowed, the message is delivered with returned content to all users
-	// connected to the room. If denied, the message is not delivered to any user.
-	// Default: ALLOW .
+	// (For the timeout period, see [Service Quotas].) If allowed, the message is delivered with
+	// returned content to all users connected to the room. If denied, the message is
+	// not delivered to any user. Default: ALLOW .
+	//
+	// [Service Quotas]: https://docs.aws.amazon.com/ivs/latest/userguide/service-quotas.html
 	FallbackResult FallbackResult
 
 	// Identifier of the message review handler. Currently this must be an ARN of a
@@ -155,10 +157,11 @@ type RoomSummary struct {
 	Name *string
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for details, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS Chat has no constraints beyond what is documented
-	// there.
+	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
+	// "Tag naming limits and requirements"; Amazon IVS Chat has no constraints beyond
+	// what is documented there.
+	//
+	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	// Time of the room’s last update. This is an ISO 8601 timestamp; note that this

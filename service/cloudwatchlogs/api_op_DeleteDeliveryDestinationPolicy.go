@@ -11,8 +11,9 @@ import (
 )
 
 // Deletes a delivery destination policy. For more information about these
-// policies, see PutDeliveryDestinationPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html)
-// .
+// policies, see [PutDeliveryDestinationPolicy].
+//
+// [PutDeliveryDestinationPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html
 func (c *Client) DeleteDeliveryDestinationPolicy(ctx context.Context, params *DeleteDeliveryDestinationPolicyInput, optFns ...func(*Options)) (*DeleteDeliveryDestinationPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteDeliveryDestinationPolicyInput{}

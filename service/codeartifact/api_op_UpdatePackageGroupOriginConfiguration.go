@@ -11,13 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the package origin configuration for a package group. The package
-// origin configuration determines how new versions of a package can be added to a
-// repository. You can allow or block direct publishing of new package versions, or
-// ingestion and retaining of new package versions from an external connection or
-// upstream source. For more information about package group origin controls and
-// configuration, see Package group origin controls (https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-origin-controls.html)
-// in the CodeArtifact User Guide.
+// Updates the package origin configuration for a package group.
+//
+// The package origin configuration determines how new versions of a package can
+// be added to a repository. You can allow or block direct publishing of new
+// package versions, or ingestion and retaining of new package versions from an
+// external connection or upstream source. For more information about package group
+// origin controls and configuration, see [Package group origin controls]in the CodeArtifact User Guide.
+//
+// [Package group origin controls]: https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-origin-controls.html
 func (c *Client) UpdatePackageGroupOriginConfiguration(ctx context.Context, params *UpdatePackageGroupOriginConfigurationInput, optFns ...func(*Options)) (*UpdatePackageGroupOriginConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdatePackageGroupOriginConfigurationInput{}
@@ -35,13 +37,13 @@ func (c *Client) UpdatePackageGroupOriginConfiguration(ctx context.Context, para
 
 type UpdatePackageGroupOriginConfigurationInput struct {
 
-	// The name of the domain which contains the package group for which to update the
-	// origin configuration.
+	//  The name of the domain which contains the package group for which to update
+	// the origin configuration.
 	//
 	// This member is required.
 	Domain *string
 
-	// The pattern of the package group for which to update the origin configuration.
+	//  The pattern of the package group for which to update the origin configuration.
 	//
 	// This member is required.
 	PackageGroup *string
@@ -50,7 +52,7 @@ type UpdatePackageGroupOriginConfigurationInput struct {
 	// the specified package group.
 	AddAllowedRepositories []types.PackageGroupAllowedRepository
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
@@ -58,8 +60,8 @@ type UpdatePackageGroupOriginConfigurationInput struct {
 	// of the specified package group.
 	RemoveAllowedRepositories []types.PackageGroupAllowedRepository
 
-	// The origin configuration settings that determine how package versions can enter
-	// repositories.
+	//  The origin configuration settings that determine how package versions can
+	// enter repositories.
 	Restrictions map[string]types.PackageGroupOriginRestrictionMode
 
 	noSmithyDocumentSerde
@@ -70,7 +72,7 @@ type UpdatePackageGroupOriginConfigurationOutput struct {
 	// Information about the updated allowed repositories after processing the request.
 	AllowedRepositoryUpdates map[string]map[string][]string
 
-	// The package group and information about it after processing the request.
+	//  The package group and information about it after processing the request.
 	PackageGroup *types.PackageGroupDescription
 
 	// Metadata pertaining to the operation's result.

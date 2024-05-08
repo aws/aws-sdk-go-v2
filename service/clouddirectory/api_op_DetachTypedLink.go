@@ -12,8 +12,9 @@ import (
 )
 
 // Detaches a typed link from a specified source and target object. For more
-// information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
-// .
+// information, see [Typed Links].
+//
+// [Typed Links]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
 func (c *Client) DetachTypedLink(ctx context.Context, params *DetachTypedLinkInput, optFns ...func(*Options)) (*DetachTypedLinkOutput, error) {
 	if params == nil {
 		params = &DetachTypedLinkInput{}

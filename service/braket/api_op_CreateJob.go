@@ -88,7 +88,7 @@ type CreateJobInput struct {
 	// is located.
 	InputDataConfig []types.InputFileConfig
 
-	// The user-defined criteria that specifies when a job stops running.
+	//  The user-defined criteria that specifies when a job stops running.
 	StoppingCondition *types.JobStoppingCondition
 
 	// A tag object that consists of a key and an optional value, used to manage

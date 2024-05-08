@@ -11,12 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation applies only to Amazon Rekognition Custom Labels. Lists the
-// labels in a dataset. Amazon Rekognition Custom Labels uses labels to describe
-// images. For more information, see Labeling images (https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-labeling-images.html)
-// . Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to
+// This operation applies only to Amazon Rekognition Custom Labels.
+//
+// Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to
+// describe images. For more information, see [Labeling images].
+//
+// Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to
 // describe images. For more information, see Labeling images in the Amazon
 // Rekognition Custom Labels Developer Guide.
+//
+// [Labeling images]: https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-labeling-images.html
 func (c *Client) ListDatasetLabels(ctx context.Context, params *ListDatasetLabelsInput, optFns ...func(*Options)) (*ListDatasetLabelsOutput, error) {
 	if params == nil {
 		params = &ListDatasetLabelsInput{}
@@ -34,7 +38,7 @@ func (c *Client) ListDatasetLabels(ctx context.Context, params *ListDatasetLabel
 
 type ListDatasetLabelsInput struct {
 
-	// The Amazon Resource Name (ARN) of the dataset that you want to use.
+	//  The Amazon Resource Name (ARN) of the dataset that you want to use.
 	//
 	// This member is required.
 	DatasetArn *string
@@ -54,7 +58,7 @@ type ListDatasetLabelsInput struct {
 
 type ListDatasetLabelsOutput struct {
 
-	// A list of the labels in the dataset.
+	//  A list of the labels in the dataset.
 	DatasetLabelDescriptions []types.DatasetLabelDescription
 
 	// If the previous response was incomplete (because there is more results to

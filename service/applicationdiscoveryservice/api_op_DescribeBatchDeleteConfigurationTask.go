@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Takes a unique deletion task identifier as input and returns metadata about a
+//	Takes a unique deletion task identifier as input and returns metadata about a
+//
 // configuration deletion task.
 func (c *Client) DescribeBatchDeleteConfigurationTask(ctx context.Context, params *DescribeBatchDeleteConfigurationTaskInput, optFns ...func(*Options)) (*DescribeBatchDeleteConfigurationTaskOutput, error) {
 	if params == nil {
@@ -30,7 +31,7 @@ func (c *Client) DescribeBatchDeleteConfigurationTask(ctx context.Context, param
 
 type DescribeBatchDeleteConfigurationTaskInput struct {
 
-	// The ID of the task to delete.
+	//  The ID of the task to delete.
 	//
 	// This member is required.
 	TaskId *string
@@ -40,7 +41,7 @@ type DescribeBatchDeleteConfigurationTaskInput struct {
 
 type DescribeBatchDeleteConfigurationTaskOutput struct {
 
-	// The BatchDeleteConfigurationTask that represents the deletion task being
+	//  The BatchDeleteConfigurationTask that represents the deletion task being
 	// executed.
 	Task *types.BatchDeleteConfigurationTask
 

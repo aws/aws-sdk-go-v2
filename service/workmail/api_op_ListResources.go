@@ -50,7 +50,7 @@ type ListResourcesInput struct {
 
 type ListResourcesOutput struct {
 
-	// The token used to paginate through all the organization's resources. While
+	//  The token used to paginate through all the organization's resources. While
 	// results are still available, it has an associated value. When the last page is
 	// reached, the token is empty.
 	NextToken *string

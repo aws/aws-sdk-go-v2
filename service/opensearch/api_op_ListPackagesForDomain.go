@@ -12,8 +12,9 @@ import (
 )
 
 // Lists all packages associated with an Amazon OpenSearch Service domain. For
-// more information, see Custom packages for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html)
-// .
+// more information, see [Custom packages for Amazon OpenSearch Service].
+//
+// [Custom packages for Amazon OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html
 func (c *Client) ListPackagesForDomain(ctx context.Context, params *ListPackagesForDomainInput, optFns ...func(*Options)) (*ListPackagesForDomainOutput, error) {
 	if params == nil {
 		params = &ListPackagesForDomainInput{}

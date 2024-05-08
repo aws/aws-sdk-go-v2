@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified retention policy. Log events do not expire if they belong
-// to log groups without a retention policy.
+// Deletes the specified retention policy.
+//
+// Log events do not expire if they belong to log groups without a retention
+// policy.
 func (c *Client) DeleteRetentionPolicy(ctx context.Context, params *DeleteRetentionPolicyInput, optFns ...func(*Options)) (*DeleteRetentionPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteRetentionPolicyInput{}

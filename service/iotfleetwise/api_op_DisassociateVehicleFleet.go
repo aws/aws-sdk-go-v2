@@ -11,9 +11,10 @@ import (
 )
 
 // Removes, or disassociates, a vehicle from a fleet. Disassociating a vehicle
-// from a fleet doesn't delete the vehicle. If the vehicle is successfully
-// dissociated from a fleet, Amazon Web Services IoT FleetWise sends back an HTTP
-// 200 response with an empty body.
+// from a fleet doesn't delete the vehicle.
+//
+// If the vehicle is successfully dissociated from a fleet, Amazon Web Services
+// IoT FleetWise sends back an HTTP 200 response with an empty body.
 func (c *Client) DisassociateVehicleFleet(ctx context.Context, params *DisassociateVehicleFleetInput, optFns ...func(*Options)) (*DisassociateVehicleFleetOutput, error) {
 	if params == nil {
 		params = &DisassociateVehicleFleetInput{}
@@ -31,12 +32,12 @@ func (c *Client) DisassociateVehicleFleet(ctx context.Context, params *Disassoci
 
 type DisassociateVehicleFleetInput struct {
 
-	// The unique ID of a fleet.
+	//  The unique ID of a fleet.
 	//
 	// This member is required.
 	FleetId *string
 
-	// The unique ID of the vehicle to disassociate from the fleet.
+	//  The unique ID of the vehicle to disassociate from the fleet.
 	//
 	// This member is required.
 	VehicleName *string

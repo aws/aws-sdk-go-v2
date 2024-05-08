@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ContainerLevelMetrics. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContainerLevelMetrics) Values() []ContainerLevelMetrics {
 	return []ContainerLevelMetrics{
 		"ENABLED",
@@ -30,8 +31,9 @@ const (
 )
 
 // Values returns all known values for ContainerStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContainerStatus) Values() []ContainerStatus {
 	return []ContainerStatus{
 		"ACTIVE",
@@ -51,8 +53,9 @@ const (
 )
 
 // Values returns all known values for MethodName. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MethodName) Values() []MethodName {
 	return []MethodName{
 		"PUT",

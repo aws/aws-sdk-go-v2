@@ -12,7 +12,9 @@ import (
 	"time"
 )
 
-// List the contents of a hub. Hub APIs are only callable through SageMaker Studio.
+// List the contents of a hub.
+//
+// Hub APIs are only callable through SageMaker Studio.
 func (c *Client) ListHubContents(ctx context.Context, params *ListHubContentsInput, optFns ...func(*Options)) (*ListHubContentsOutput, error) {
 	if params == nil {
 		params = &ListHubContentsInput{}

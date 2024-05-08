@@ -12,6 +12,7 @@ import (
 )
 
 // Resets the custom notification setting to IAM Roles Anywhere default setting.
+//
 // Required permissions: rolesanywhere:ResetNotificationSettings .
 func (c *Client) ResetNotificationSettings(ctx context.Context, params *ResetNotificationSettingsInput, optFns ...func(*Options)) (*ResetNotificationSettingsOutput, error) {
 	if params == nil {

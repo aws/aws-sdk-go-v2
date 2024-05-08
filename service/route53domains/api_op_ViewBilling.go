@@ -43,11 +43,15 @@ type ViewBillingInput struct {
 	// specified for MaxItems , you can use Marker to return additional billing
 	// records. Get the value of NextPageMarker from the previous response, and submit
 	// another request that includes the value of NextPageMarker in the Marker
-	// element. Constraints: The marker must match the value of NextPageMarker that
-	// was returned in the previous response.
+	// element.
+	//
+	// Constraints: The marker must match the value of NextPageMarker that was
+	// returned in the previous response.
 	Marker *string
 
-	// The number of billing records to be returned. Default: 20
+	// The number of billing records to be returned.
+	//
+	// Default: 20
 	MaxItems *int32
 
 	// The beginning date and time for the time period for which you want a list of
@@ -160,7 +164,9 @@ var _ ViewBillingAPIClient = (*Client)(nil)
 
 // ViewBillingPaginatorOptions is the paginator options for ViewBilling
 type ViewBillingPaginatorOptions struct {
-	// The number of billing records to be returned. Default: 20
+	// The number of billing records to be returned.
+	//
+	// Default: 20
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

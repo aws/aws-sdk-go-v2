@@ -31,7 +31,7 @@ func (c *Client) GetFirewallRuleGroupAssociation(ctx context.Context, params *Ge
 
 type GetFirewallRuleGroupAssociationInput struct {
 
-	// The identifier of the FirewallRuleGroupAssociation .
+	// The identifier of the FirewallRuleGroupAssociation.
 	//
 	// This member is required.
 	FirewallRuleGroupAssociationId *string

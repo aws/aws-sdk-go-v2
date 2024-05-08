@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of security standards controls. For each control, the results
-// include information about whether it is currently enabled, the severity, and a
-// link to remediation information.
+// Returns a list of security standards controls.
+//
+// For each control, the results include information about whether it is currently
+// enabled, the severity, and a link to remediation information.
 func (c *Client) DescribeStandardsControls(ctx context.Context, params *DescribeStandardsControlsInput, optFns ...func(*Options)) (*DescribeStandardsControlsOutput, error) {
 	if params == nil {
 		params = &DescribeStandardsControlsInput{}
@@ -43,6 +44,7 @@ type DescribeStandardsControlsInput struct {
 
 	// The token that is required for pagination. On your first call to the
 	// DescribeStandardsControls operation, set the value of this parameter to NULL .
+	//
 	// For subsequent calls to the operation, to continue listing data, set the value
 	// of this parameter to the value returned from the previous response.
 	NextToken *string

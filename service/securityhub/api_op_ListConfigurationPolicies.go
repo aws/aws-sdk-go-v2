@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the configuration policies that the Security Hub delegated administrator
+//	Lists the configuration policies that the Security Hub delegated administrator
+//
 // has created for your organization. Only the delegated administrator can invoke
 // this operation from the home Region.
 func (c *Client) ListConfigurationPolicies(ctx context.Context, params *ListConfigurationPoliciesInput, optFns ...func(*Options)) (*ListConfigurationPoliciesOutput, error) {
@@ -31,7 +32,7 @@ func (c *Client) ListConfigurationPolicies(ctx context.Context, params *ListConf
 
 type ListConfigurationPoliciesInput struct {
 
-	// The maximum number of results that's returned by ListConfigurationPolicies in
+	//  The maximum number of results that's returned by ListConfigurationPolicies in
 	// each page of the response. When this parameter is used,
 	// ListConfigurationPolicies returns the specified number of results in a single
 	// page and a NextToken response element. You can see the remaining results of the
@@ -39,7 +40,7 @@ type ListConfigurationPoliciesInput struct {
 	// returned NextToken value. A valid range for MaxResults is between 1 and 100.
 	MaxResults *int32
 
-	// The NextToken value that's returned from a previous paginated
+	//  The NextToken value that's returned from a previous paginated
 	// ListConfigurationPolicies request where MaxResults was used but the results
 	// exceeded the value of that parameter. Pagination continues from the MaxResults
 	// was used but the results exceeded the value of that parameter. Pagination
@@ -52,10 +53,10 @@ type ListConfigurationPoliciesInput struct {
 
 type ListConfigurationPoliciesOutput struct {
 
-	// Provides metadata for each of your configuration policies.
+	//  Provides metadata for each of your configuration policies.
 	ConfigurationPolicySummaries []types.ConfigurationPolicySummary
 
-	// The NextToken value to include in the next ListConfigurationPolicies request.
+	//  The NextToken value to include in the next ListConfigurationPolicies request.
 	// When the results of a ListConfigurationPolicies request exceed MaxResults , this
 	// value can be used to retrieve the next page of results. This value is null when
 	// there are no more results to return.
@@ -154,7 +155,7 @@ var _ ListConfigurationPoliciesAPIClient = (*Client)(nil)
 // ListConfigurationPoliciesPaginatorOptions is the paginator options for
 // ListConfigurationPolicies
 type ListConfigurationPoliciesPaginatorOptions struct {
-	// The maximum number of results that's returned by ListConfigurationPolicies in
+	//  The maximum number of results that's returned by ListConfigurationPolicies in
 	// each page of the response. When this parameter is used,
 	// ListConfigurationPolicies returns the specified number of results in a single
 	// page and a NextToken response element. You can see the remaining results of the

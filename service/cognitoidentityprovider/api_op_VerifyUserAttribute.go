@@ -10,18 +10,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Verifies the specified user attributes in the user pool. If your user pool
-// requires verification before Amazon Cognito updates the attribute value,
-// VerifyUserAttribute updates the affected attribute to its pending value. For
-// more information, see UserAttributeUpdateSettingsType (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UserAttributeUpdateSettingsType.html)
-// . Authorize this action with a signed-in user's access token. It must include
-// the scope aws.cognito.signin.user.admin . Amazon Cognito doesn't evaluate
-// Identity and Access Management (IAM) policies in requests for this API
-// operation. For this operation, you can't use IAM credentials to authorize
-// requests, and you can't grant IAM permissions in policies. For more information
-// about authorization models in Amazon Cognito, see Using the Amazon Cognito user
-// pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-// .
+// Verifies the specified user attributes in the user pool.
+//
+// If your user pool requires verification before Amazon Cognito updates the
+// attribute value, VerifyUserAttribute updates the affected attribute to its
+// pending value. For more information, see [UserAttributeUpdateSettingsType].
+//
+// Authorize this action with a signed-in user's access token. It must include the
+// scope aws.cognito.signin.user.admin .
+//
+// Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
+// in requests for this API operation. For this operation, you can't use IAM
+// credentials to authorize requests, and you can't grant IAM permissions in
+// policies. For more information about authorization models in Amazon Cognito, see
+// [Using the Amazon Cognito user pools API and user pool endpoints].
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [UserAttributeUpdateSettingsType]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UserAttributeUpdateSettingsType.html
 func (c *Client) VerifyUserAttribute(ctx context.Context, params *VerifyUserAttributeInput, optFns ...func(*Options)) (*VerifyUserAttributeOutput, error) {
 	if params == nil {
 		params = &VerifyUserAttributeInput{}

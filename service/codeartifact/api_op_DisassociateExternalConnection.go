@@ -45,7 +45,7 @@ type DisassociateExternalConnectionInput struct {
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
@@ -54,7 +54,7 @@ type DisassociateExternalConnectionInput struct {
 
 type DisassociateExternalConnectionOutput struct {
 
-	// The repository associated with the removed external connection.
+	//  The repository associated with the removed external connection.
 	Repository *types.RepositoryDescription
 
 	// Metadata pertaining to the operation's result.

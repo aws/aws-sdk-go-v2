@@ -11,9 +11,11 @@ import (
 )
 
 // Attaches the specified principal to the specified thing. A principal can be
-// X.509 certificates, Amazon Cognito identities or federated identities. Requires
-// permission to access the AttachThingPrincipal (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// X.509 certificates, Amazon Cognito identities or federated identities.
+//
+// Requires permission to access the [AttachThingPrincipal] action.
+//
+// [AttachThingPrincipal]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) AttachThingPrincipal(ctx context.Context, params *AttachThingPrincipalInput, optFns ...func(*Options)) (*AttachThingPrincipalOutput, error) {
 	if params == nil {
 		params = &AttachThingPrincipalInput{}

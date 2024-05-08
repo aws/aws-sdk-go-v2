@@ -40,9 +40,10 @@ type SearchEntitiesInput struct {
 	// Optional filter to apply to the search. Valid filters are NAME NAMESPACE ,
 	// SEMANTIC_TYPE_PATH and REFERENCED_ENTITY_ID . REFERENCED_ENTITY_ID filters on
 	// entities that are used by the entity in the result set. For example, you can
-	// filter on the ID of a property that is used in a state. Multiple filters
-	// function as OR criteria in the query. Multiple values passed inside the filter
-	// function as AND criteria.
+	// filter on the ID of a property that is used in a state.
+	//
+	// Multiple filters function as OR criteria in the query. Multiple values passed
+	// inside the filter function as AND criteria.
 	Filters []types.EntityFilter
 
 	// The maximum number of results to return in the response.

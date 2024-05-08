@@ -13,13 +13,15 @@ import (
 
 // Provides the feedback for an authentication event, whether it was from a valid
 // user or not. This feedback is used for improving the risk evaluation decision
-// for the user pool as part of Amazon Cognito advanced security. Amazon Cognito
-// doesn't evaluate Identity and Access Management (IAM) policies in requests for
-// this API operation. For this operation, you can't use IAM credentials to
-// authorize requests, and you can't grant IAM permissions in policies. For more
-// information about authorization models in Amazon Cognito, see Using the Amazon
-// Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-// .
+// for the user pool as part of Amazon Cognito advanced security.
+//
+// Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
+// in requests for this API operation. For this operation, you can't use IAM
+// credentials to authorize requests, and you can't grant IAM permissions in
+// policies. For more information about authorization models in Amazon Cognito, see
+// [Using the Amazon Cognito user pools API and user pool endpoints].
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 func (c *Client) UpdateAuthEventFeedback(ctx context.Context, params *UpdateAuthEventFeedbackInput, optFns ...func(*Options)) (*UpdateAuthEventFeedbackOutput, error) {
 	if params == nil {
 		params = &UpdateAuthEventFeedbackInput{}

@@ -29,7 +29,7 @@ func (c *Client) BatchDeleteAutomationRules(ctx context.Context, params *BatchDe
 
 type BatchDeleteAutomationRulesInput struct {
 
-	// A list of Amazon Resource Names (ARNs) for the rules that are to be deleted.
+	//  A list of Amazon Resource Names (ARNs) for the rules that are to be deleted.
 	//
 	// This member is required.
 	AutomationRulesArns []string
@@ -39,10 +39,10 @@ type BatchDeleteAutomationRulesInput struct {
 
 type BatchDeleteAutomationRulesOutput struct {
 
-	// A list of properly processed rule ARNs.
+	//  A list of properly processed rule ARNs.
 	ProcessedAutomationRules []string
 
-	// A list of objects containing RuleArn , ErrorCode , and ErrorMessage . This
+	//  A list of objects containing RuleArn , ErrorCode , and ErrorMessage . This
 	// parameter tells you which automation rules the request didn't delete and why.
 	UnprocessedAutomationRules []types.UnprocessedAutomationRule
 

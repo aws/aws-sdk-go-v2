@@ -14,8 +14,10 @@ import (
 // Returns the count of compliant and noncompliant conformance packs across all
 // Amazon Web Services accounts and Amazon Web Services Regions in an aggregator.
 // You can filter based on Amazon Web Services account ID or Amazon Web Services
-// Region. The results can return an empty result page, but if you have a
-// nextToken, the results are displayed on the next page.
+// Region.
+//
+// The results can return an empty result page, but if you have a nextToken, the
+// results are displayed on the next page.
 func (c *Client) GetAggregateConformancePackComplianceSummary(ctx context.Context, params *GetAggregateConformancePackComplianceSummaryInput, optFns ...func(*Options)) (*GetAggregateConformancePackComplianceSummaryOutput, error) {
 	if params == nil {
 		params = &GetAggregateConformancePackComplianceSummaryInput{}

@@ -12,13 +12,14 @@ import (
 )
 
 // Creates a Microsoft AD directory in the Amazon Web Services Cloud. For more
-// information, see Managed Microsoft AD (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html)
-// in the Directory Service Admin Guide. Before you call CreateMicrosoftAD, ensure
-// that all of the required permissions have been explicitly granted through a
-// policy. For details about what permissions are required to run the
-// CreateMicrosoftAD operation, see Directory Service API Permissions: Actions,
-// Resources, and Conditions Reference (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html)
-// .
+// information, see [Managed Microsoft AD]in the Directory Service Admin Guide.
+//
+// Before you call CreateMicrosoftAD, ensure that all of the required permissions
+// have been explicitly granted through a policy. For details about what
+// permissions are required to run the CreateMicrosoftAD operation, see [Directory Service API Permissions: Actions, Resources, and Conditions Reference].
+//
+// [Managed Microsoft AD]: https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html
+// [Directory Service API Permissions: Actions, Resources, and Conditions Reference]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
 func (c *Client) CreateMicrosoftAD(ctx context.Context, params *CreateMicrosoftADInput, optFns ...func(*Options)) (*CreateMicrosoftADOutput, error) {
 	if params == nil {
 		params = &CreateMicrosoftADInput{}
@@ -44,9 +45,10 @@ type CreateMicrosoftADInput struct {
 	// This member is required.
 	Name *string
 
-	// The password for the default administrative user named Admin . If you need to
-	// change the password for the administrator account, you can use the
-	// ResetUserPassword API call.
+	// The password for the default administrative user named Admin .
+	//
+	// If you need to change the password for the administrator account, you can use
+	// the ResetUserPasswordAPI call.
 	//
 	// This member is required.
 	Password *string

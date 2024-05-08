@@ -35,11 +35,12 @@ type SearchRasterDataCollectionInput struct {
 	// This member is required.
 	Arn *string
 
-	// RasterDataCollectionQuery consisting of AreaOfInterest(AOI) (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_AreaOfInterest.html)
-	// , PropertyFilters (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_PropertyFilter.html)
-	// and TimeRangeFilterInput (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_TimeRangeFilterInput.html)
-	// used in SearchRasterDataCollection (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_SearchRasterDataCollection.html)
-	// .
+	// RasterDataCollectionQuery consisting of [AreaOfInterest(AOI)], [PropertyFilters] and [TimeRangeFilterInput] used in [SearchRasterDataCollection].
+	//
+	// [PropertyFilters]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_PropertyFilter.html
+	// [TimeRangeFilterInput]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_TimeRangeFilterInput.html
+	// [AreaOfInterest(AOI)]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_AreaOfInterest.html
+	// [SearchRasterDataCollection]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_SearchRasterDataCollection.html
 	//
 	// This member is required.
 	RasterDataCollectionQuery *types.RasterDataCollectionQueryWithBandFilterInput

@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Outpost. You can specify either an Availability one or an AZ ID.
+// Creates an Outpost.
+//
+// You can specify either an Availability one or an AZ ID.
 func (c *Client) CreateOutpost(ctx context.Context, params *CreateOutpostInput, optFns ...func(*Options)) (*CreateOutpostOutput, error) {
 	if params == nil {
 		params = &CreateOutpostInput{}
@@ -34,7 +36,7 @@ type CreateOutpostInput struct {
 	// This member is required.
 	Name *string
 
-	// The ID or the Amazon Resource Name (ARN) of the site.
+	//  The ID or the Amazon Resource Name (ARN) of the site.
 	//
 	// This member is required.
 	SiteId *string
@@ -48,7 +50,7 @@ type CreateOutpostInput struct {
 	// The description of the Outpost.
 	Description *string
 
-	// The type of hardware for this Outpost.
+	//  The type of hardware for this Outpost.
 	SupportedHardwareType types.SupportedHardwareType
 
 	// The tags to apply to the Outpost.

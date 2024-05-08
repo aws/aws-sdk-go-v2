@@ -12,8 +12,9 @@ import (
 	"time"
 )
 
-// Starts a job to create a one-time copy of the specified resource. Does not
-// support continuous backups.
+// Starts a job to create a one-time copy of the specified resource.
+//
+// Does not support continuous backups.
 func (c *Client) StartCopyJob(ctx context.Context, params *StartCopyJobInput, optFns ...func(*Options)) (*StartCopyJobOutput, error) {
 	if params == nil {
 		params = &StartCopyJobInput{}
@@ -65,14 +66,19 @@ type StartCopyJobInput struct {
 	IdempotencyToken *string
 
 	// Contains an array of Transition objects specifying how long in days before a
-	// recovery point transitions to cold storage or is deleted. Backups transitioned
-	// to cold storage must be stored in cold storage for a minimum of 90 days.
-	// Therefore, on the console, the “retention” setting must be 90 days greater than
-	// the “transition to cold after days” setting. The “transition to cold after days”
-	// setting cannot be changed after a backup has been transitioned to cold. Resource
-	// types that are able to be transitioned to cold storage are listed in the
-	// "Lifecycle to cold storage" section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
-	// table. Backup ignores this expression for other resource types.
+	// recovery point transitions to cold storage or is deleted.
+	//
+	// Backups transitioned to cold storage must be stored in cold storage for a
+	// minimum of 90 days. Therefore, on the console, the “retention” setting must be
+	// 90 days greater than the “transition to cold after days” setting. The
+	// “transition to cold after days” setting cannot be changed after a backup has
+	// been transitioned to cold.
+	//
+	// Resource types that are able to be transitioned to cold storage are listed in
+	// the "Lifecycle to cold storage" section of the [Feature availability by resource]table. Backup ignores this
+	// expression for other resource types.
+	//
+	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
 	Lifecycle *types.Lifecycle
 
 	noSmithyDocumentSerde

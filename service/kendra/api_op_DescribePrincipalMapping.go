@@ -16,6 +16,7 @@ import (
 // or yet to be processed, when actions were last updated, when actions were
 // received by Amazon Kendra, the latest action that should process and apply after
 // other actions, and useful error messages if an action could not be processed.
+//
 // DescribePrincipalMapping is currently not supported in the Amazon Web Services
 // GovCloud (US-West) region.
 func (c *Client) DescribePrincipalMapping(ctx context.Context, params *DescribePrincipalMappingInput, optFns ...func(*Options)) (*DescribePrincipalMappingOutput, error) {
@@ -66,12 +67,17 @@ type DescribePrincipalMappingOutput struct {
 
 	// Shows the following information on the processing of PUT and DELETE actions for
 	// mapping users to their groups:
+	//
 	//   - Status—the status can be either PROCESSING , SUCCEEDED , DELETING , DELETED
 	//   , or FAILED .
+	//
 	//   - Last updated—the last date-time an action was updated.
+	//
 	//   - Received—the last date-time an action was received or submitted.
+	//
 	//   - Ordering ID—the latest action that should process and apply after other
 	//   actions.
+	//
 	//   - Failure reason—the reason an action could not be processed.
 	GroupOrderingIdSummaries []types.GroupOrderingIdSummary
 

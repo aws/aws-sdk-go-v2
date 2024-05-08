@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified dataview. Before deleting a dataview, make sure that it
+//	Deletes the specified dataview. Before deleting a dataview, make sure that it
+//
 // is not in use by any cluster.
 func (c *Client) DeleteKxDataview(ctx context.Context, params *DeleteKxDataviewInput, optFns ...func(*Options)) (*DeleteKxDataviewOutput, error) {
 	if params == nil {

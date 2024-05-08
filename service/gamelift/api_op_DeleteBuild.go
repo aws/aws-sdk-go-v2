@@ -13,9 +13,18 @@ import (
 // Deletes a build. This operation permanently deletes the build resource and any
 // uploaded build files. Deleting a build does not affect the status of any active
 // fleets using the build, but you can no longer create new fleets with the deleted
-// build. To delete a build, specify the build ID. Learn more Upload a Custom
-// Server Build (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
-// All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// build.
+//
+// To delete a build, specify the build ID.
+//
+// # Learn more
+//
+// [Upload a Custom Server Build]
+//
+// [All APIs by task]
+//
+// [Upload a Custom Server Build]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html
+// [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 func (c *Client) DeleteBuild(ctx context.Context, params *DeleteBuildInput, optFns ...func(*Options)) (*DeleteBuildOutput, error) {
 	if params == nil {
 		params = &DeleteBuildInput{}

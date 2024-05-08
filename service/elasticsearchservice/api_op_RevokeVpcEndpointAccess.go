@@ -44,8 +44,8 @@ type RevokeVpcEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response parameters to the RevokeVpcEndpointAccess operation. The
-// response body for this operation is empty.
+// Container for response parameters to the RevokeVpcEndpointAccess operation. The response body for this
+// operation is empty.
 type RevokeVpcEndpointAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

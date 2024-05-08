@@ -33,10 +33,15 @@ type SwitchoverGlobalClusterInput struct {
 	// The identifier of the Amazon DocumentDB global database cluster to switch over.
 	// The identifier is the unique key assigned by the user when the cluster is
 	// created. In other words, it's the name of the global cluster. This parameter
-	// isn’t case-sensitive. Constraints:
+	// isn’t case-sensitive.
+	//
+	// Constraints:
+	//
 	//   - Must match the identifier of an existing global cluster (Amazon DocumentDB
 	//   global database).
+	//
 	//   - Minimum length of 1. Maximum length of 255.
+	//
 	// Pattern: [A-Za-z][0-9A-Za-z-:._]*
 	//
 	// This member is required.
@@ -45,9 +50,14 @@ type SwitchoverGlobalClusterInput struct {
 	// The identifier of the secondary Amazon DocumentDB cluster to promote to the new
 	// primary for the global database cluster. Use the Amazon Resource Name (ARN) for
 	// the identifier so that Amazon DocumentDB can locate the cluster in its Amazon
-	// Web Services region. Constraints:
+	// Web Services region.
+	//
+	// Constraints:
+	//
 	//   - Must match the identifier of an existing secondary cluster.
+	//
 	//   - Minimum length of 1. Maximum length of 255.
+	//
 	// Pattern: [A-Za-z][0-9A-Za-z-:._]*
 	//
 	// This member is required.

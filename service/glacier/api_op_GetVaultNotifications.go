@@ -13,20 +13,23 @@ import (
 )
 
 // This operation retrieves the notification-configuration subresource of the
-// specified vault. For information about setting a notification configuration on a
-// vault, see SetVaultNotifications . If a notification configuration for a vault
-// is not set, the operation returns a 404 Not Found error. For more information
-// about vault notifications, see Configuring Vault Notifications in Amazon S3
-// Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html)
-// . An AWS account has full permission to perform all operations (actions).
+// specified vault.
+//
+// For information about setting a notification configuration on a vault, see SetVaultNotifications. If
+// a notification configuration for a vault is not set, the operation returns a
+// 404 Not Found error. For more information about vault notifications, see [Configuring Vault Notifications in Amazon S3 Glacier].
+//
+// An AWS account has full permission to perform all operations (actions).
 // However, AWS Identity and Access Management (IAM) users don't have any
 // permissions by default. You must grant them explicit permission to perform
-// specific actions. For more information, see Access Control Using AWS Identity
-// and Access Management (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html)
-// . For conceptual information and underlying REST API, see Configuring Vault
-// Notifications in Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html)
-// and Get Vault Notification Configuration  (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-get.html)
-// in the Amazon Glacier Developer Guide.
+// specific actions. For more information, see [Access Control Using AWS Identity and Access Management (IAM)].
+//
+// For conceptual information and underlying REST API, see [Configuring Vault Notifications in Amazon S3 Glacier] and [Get Vault Notification Configuration] in the Amazon
+// Glacier Developer Guide.
+//
+// [Configuring Vault Notifications in Amazon S3 Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html
+// [Access Control Using AWS Identity and Access Management (IAM)]: https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
+// [Get Vault Notification Configuration]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-get.html
 func (c *Client) GetVaultNotifications(ctx context.Context, params *GetVaultNotificationsInput, optFns ...func(*Options)) (*GetVaultNotificationsOutput, error) {
 	if params == nil {
 		params = &GetVaultNotificationsInput{}

@@ -12,7 +12,9 @@ import (
 
 // Deletes the specified application along with all associated versions and
 // configurations. The application versions will not be deleted from your Amazon S3
-// bucket. You cannot delete an application that has a running environment.
+// bucket.
+//
+// You cannot delete an application that has a running environment.
 func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicationInput, optFns ...func(*Options)) (*DeleteApplicationOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationInput{}

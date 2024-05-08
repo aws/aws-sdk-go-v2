@@ -11,26 +11,41 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates the participant's connection. ParticipantToken is used for invoking
-// this API instead of ConnectionToken . The participant token is valid for the
-// lifetime of the participant – until they are part of a contact. The response URL
-// for WEBSOCKET Type has a connect expiry timeout of 100s. Clients must manually
-// connect to the returned websocket URL and subscribe to the desired topic. For
-// chat, you need to publish the following on the established websocket connection:
-// {"topic":"aws/subscribe","content":{"topics":["aws/chat"]}} Upon websocket URL
-// expiry, as specified in the response ConnectionExpiry parameter, clients need to
-// call this API again to obtain a new websocket URL and perform the same steps as
-// before. Message streaming support: This API can also be used together with the
-// StartContactStreaming (https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html)
-// API to create a participant connection for chat contacts that are not using a
-// websocket. For more information about message streaming, Enable real-time chat
-// message streaming (https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html)
-// in the Amazon Connect Administrator Guide. Feature specifications: For
-// information about feature specifications, such as the allowed number of open
-// websocket connections per participant, see Feature specifications (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits)
-// in the Amazon Connect Administrator Guide. The Amazon Connect Participant
-// Service APIs do not use Signature Version 4 authentication (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
-// .
+// Creates the participant's connection.
+//
+// ParticipantToken is used for invoking this API instead of ConnectionToken .
+//
+// The participant token is valid for the lifetime of the participant – until they
+// are part of a contact.
+//
+// The response URL for WEBSOCKET Type has a connect expiry timeout of 100s.
+// Clients must manually connect to the returned websocket URL and subscribe to the
+// desired topic.
+//
+// For chat, you need to publish the following on the established websocket
+// connection:
+//
+//	{"topic":"aws/subscribe","content":{"topics":["aws/chat"]}}
+//
+// Upon websocket URL expiry, as specified in the response ConnectionExpiry
+// parameter, clients need to call this API again to obtain a new websocket URL and
+// perform the same steps as before.
+//
+// Message streaming support: This API can also be used together with the [StartContactStreaming] API to
+// create a participant connection for chat contacts that are not using a
+// websocket. For more information about message streaming, [Enable real-time chat message streaming]in the Amazon Connect
+// Administrator Guide.
+//
+// Feature specifications: For information about feature specifications, such as
+// the allowed number of open websocket connections per participant, see [Feature specifications]in the
+// Amazon Connect Administrator Guide.
+//
+// The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication].
+//
+// [Feature specifications]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits
+// [StartContactStreaming]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html
+// [Enable real-time chat message streaming]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html
+// [Signature Version 4 authentication]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 func (c *Client) CreateParticipantConnection(ctx context.Context, params *CreateParticipantConnectionInput, optFns ...func(*Options)) (*CreateParticipantConnectionOutput, error) {
 	if params == nil {
 		params = &CreateParticipantConnectionInput{}
@@ -48,9 +63,11 @@ func (c *Client) CreateParticipantConnection(ctx context.Context, params *Create
 
 type CreateParticipantConnectionInput struct {
 
-	// This is a header parameter. The ParticipantToken as obtained from
-	// StartChatContact (https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html)
-	// API response.
+	// This is a header parameter.
+	//
+	// The ParticipantToken as obtained from [StartChatContact] API response.
+	//
+	// [StartChatContact]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html
 	//
 	// This member is required.
 	ParticipantToken *string

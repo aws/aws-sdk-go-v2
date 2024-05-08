@@ -30,7 +30,9 @@ func (c *Client) SearchProductsAsAdmin(ctx context.Context, params *SearchProduc
 type SearchProductsAsAdminInput struct {
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

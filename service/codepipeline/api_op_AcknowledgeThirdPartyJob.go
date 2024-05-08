@@ -44,7 +44,7 @@ type AcknowledgeThirdPartyJobInput struct {
 
 	// A system-generated random number that CodePipeline uses to ensure that the job
 	// is being worked on by only one job worker. Get this number from the response to
-	// a GetThirdPartyJobDetails request.
+	// a GetThirdPartyJobDetailsrequest.
 	//
 	// This member is required.
 	Nonce *string

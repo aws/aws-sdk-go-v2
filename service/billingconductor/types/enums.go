@@ -15,8 +15,9 @@ const (
 
 // Values returns all known values for AssociateResourceErrorReason. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssociateResourceErrorReason) Values() []AssociateResourceErrorReason {
 	return []AssociateResourceErrorReason{
 		"INVALID_ARN",
@@ -36,8 +37,9 @@ const (
 )
 
 // Values returns all known values for BillingGroupStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BillingGroupStatus) Values() []BillingGroupStatus {
 	return []BillingGroupStatus{
 		"ACTIVE",
@@ -57,8 +59,9 @@ const (
 )
 
 // Values returns all known values for ConflictExceptionReason. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 	return []ConflictExceptionReason{
 		"RESOURCE_NAME_CONFLICT",
@@ -78,8 +81,9 @@ const (
 )
 
 // Values returns all known values for CurrencyCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CurrencyCode) Values() []CurrencyCode {
 	return []CurrencyCode{
 		"USD",
@@ -97,6 +101,7 @@ const (
 
 // Values returns all known values for CustomLineItemRelationship. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomLineItemRelationship) Values() []CustomLineItemRelationship {
 	return []CustomLineItemRelationship{
@@ -114,8 +119,9 @@ const (
 )
 
 // Values returns all known values for CustomLineItemType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomLineItemType) Values() []CustomLineItemType {
 	return []CustomLineItemType{
 		"CREDIT",
@@ -132,8 +138,9 @@ const (
 )
 
 // Values returns all known values for GroupByAttributeName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GroupByAttributeName) Values() []GroupByAttributeName {
 	return []GroupByAttributeName{
 		"PRODUCT_NAME",
@@ -150,6 +157,7 @@ const (
 
 // Values returns all known values for LineItemFilterAttributeName. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LineItemFilterAttributeName) Values() []LineItemFilterAttributeName {
 	return []LineItemFilterAttributeName{
@@ -165,8 +173,9 @@ const (
 )
 
 // Values returns all known values for LineItemFilterValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LineItemFilterValue) Values() []LineItemFilterValue {
 	return []LineItemFilterValue{
 		"SAVINGS_PLAN_NEGATION",
@@ -181,8 +190,9 @@ const (
 )
 
 // Values returns all known values for MatchOption. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MatchOption) Values() []MatchOption {
 	return []MatchOption{
 		"NOT_EQUAL",
@@ -200,8 +210,9 @@ const (
 )
 
 // Values returns all known values for PricingRuleScope. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PricingRuleScope) Values() []PricingRuleScope {
 	return []PricingRuleScope{
 		"GLOBAL",
@@ -221,8 +232,9 @@ const (
 )
 
 // Values returns all known values for PricingRuleType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PricingRuleType) Values() []PricingRuleType {
 	return []PricingRuleType{
 		"MARKUP",
@@ -299,6 +311,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

@@ -13,12 +13,21 @@ import (
 )
 
 // Gets the specified user by user name in a user pool as an administrator. Works
-// on any user. Amazon Cognito evaluates Identity and Access Management (IAM)
-// policies in requests for this API operation. For this operation, you must use
-// IAM credentials to authorize requests, and you must grant yourself the
-// corresponding IAM permission in a policy. Learn more
-//   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
-//   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+// on any user.
+//
+// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+// requests for this API operation. For this operation, you must use IAM
+// credentials to authorize requests, and you must grant yourself the corresponding
+// IAM permission in a policy.
+//
+// # Learn more
+//
+// [Signing Amazon Web Services API Requests]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) AdminGetUser(ctx context.Context, params *AdminGetUserInput, optFns ...func(*Options)) (*AdminGetUserOutput, error) {
 	if params == nil {
 		params = &AdminGetUserInput{}
@@ -67,7 +76,7 @@ type AdminGetUserOutput struct {
 	// Indicates that the status is enabled .
 	Enabled bool
 
-	// This response parameter is no longer supported. It provides information only
+	//  This response parameter is no longer supported. It provides information only
 	// about SMS MFA configurations. It doesn't provide information about time-based
 	// one-time password (TOTP) software token MFA configurations. To look up
 	// information about either type of MFA configuration, use UserMFASettingList
@@ -93,11 +102,16 @@ type AdminGetUserOutput struct {
 	UserMFASettingList []string
 
 	// The user status. Can be one of the following:
+	//
 	//   - UNCONFIRMED - User has been created but not confirmed.
+	//
 	//   - CONFIRMED - User has been confirmed.
+	//
 	//   - UNKNOWN - User status isn't known.
+	//
 	//   - RESET_REQUIRED - User is confirmed, but the user must request a code and
 	//   reset their password before they can sign in.
+	//
 	//   - FORCE_CHANGE_PASSWORD - The user is confirmed and the user can sign in
 	//   using a temporary password, but on first sign-in, the user must change their
 	//   password to a new value before doing anything else.

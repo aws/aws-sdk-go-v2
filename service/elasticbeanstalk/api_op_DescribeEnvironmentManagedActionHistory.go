@@ -51,8 +51,7 @@ type DescribeEnvironmentManagedActionHistoryOutput struct {
 	// A list of completed and failed managed actions.
 	ManagedActionHistoryItems []types.ManagedActionHistoryItem
 
-	// A pagination token that you pass to DescribeEnvironmentManagedActionHistory to
-	// get the next page of results.
+	// A pagination token that you pass to DescribeEnvironmentManagedActionHistory to get the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

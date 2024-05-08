@@ -50,9 +50,10 @@ type DescribeAlarmModelOutput struct {
 	// Contains information about one or more alarm actions.
 	AlarmEventActions *types.AlarmEventActions
 
-	// The ARN of the alarm model. For more information, see Amazon Resource Names
-	// (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
+	// The ARN of the alarm model. For more information, see [Amazon Resource Names (ARNs)] in the AWS General
+	// Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	AlarmModelArn *string
 
 	// The description of the alarm model.
@@ -73,33 +74,39 @@ type DescribeAlarmModelOutput struct {
 	// The time the alarm model was created, in the Unix epoch format.
 	CreationTime *time.Time
 
-	// An input attribute used as a key to create an alarm. AWS IoT Events routes
-	// inputs (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Input.html)
+	// An input attribute used as a key to create an alarm. AWS IoT Events routes [inputs]
 	// associated with this key to the alarm.
+	//
+	// [inputs]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_Input.html
 	Key *string
 
 	// The time the alarm model was last updated, in the Unix epoch format.
 	LastUpdateTime *time.Time
 
 	// The ARN of the IAM role that allows the alarm to perform actions and access AWS
-	// resources. For more information, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
+	// resources. For more information, see [Amazon Resource Names (ARNs)]in the AWS General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	RoleArn *string
 
 	// A non-negative integer that reflects the severity level of the alarm.
 	Severity *int32
 
 	// The status of the alarm model. The status can be one of the following values:
+	//
 	//   - ACTIVE - The alarm model is active and it's ready to evaluate data.
+	//
 	//   - ACTIVATING - AWS IoT Events is activating your alarm model. Activating an
 	//   alarm model can take up to a few minutes.
+	//
 	//   - INACTIVE - The alarm model is inactive, so it isn't ready to evaluate data.
 	//   Check your alarm model information and update the alarm model.
+	//
 	//   - FAILED - You couldn't create or update the alarm model. Check your alarm
 	//   model information and try again.
 	Status types.AlarmModelVersionStatus
 
-	// Contains information about the status of the alarm model.
+	//  Contains information about the status of the alarm model.
 	StatusMessage *string
 
 	// Metadata pertaining to the operation's result.

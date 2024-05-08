@@ -35,10 +35,16 @@ type CopyClusterSnapshotInput struct {
 	SnapshotArn *string
 
 	// The identifier of the new elastic cluster snapshot to create from the source
-	// cluster snapshot. This parameter is not case sensitive. Constraints:
+	// cluster snapshot. This parameter is not case sensitive.
+	//
+	// Constraints:
+	//
 	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//
 	//   - The first character must be a letter.
+	//
 	//   - Cannot end with a hyphen or contain two consecutive hyphens.
+	//
 	// Example: elastic-cluster-snapshot-5
 	//
 	// This member is required.
@@ -51,19 +57,23 @@ type CopyClusterSnapshotInput struct {
 	// The Amazon Web Services KMS key ID for an encrypted elastic cluster snapshot.
 	// The Amazon Web Services KMS key ID is the Amazon Resource Name (ARN), Amazon Web
 	// Services KMS key identifier, or the Amazon Web Services KMS key alias for the
-	// Amazon Web Services KMS encryption key. If you copy an encrypted elastic cluster
-	// snapshot from your Amazon Web Services account, you can specify a value for
-	// KmsKeyId to encrypt the copy with a new Amazon Web ServicesS KMS encryption key.
-	// If you don't specify a value for KmsKeyId , then the copy of the elastic cluster
-	// snapshot is encrypted with the same AWS KMS key as the source elastic cluster
-	// snapshot. To copy an encrypted elastic cluster snapshot to another Amazon Web
-	// Services region, set KmsKeyId to the Amazon Web Services KMS key ID that you
-	// want to use to encrypt the copy of the elastic cluster snapshot in the
-	// destination region. Amazon Web Services KMS encryption keys are specific to the
-	// Amazon Web Services region that they are created in, and you can't use
-	// encryption keys from one Amazon Web Services region in another Amazon Web
-	// Services region. If you copy an unencrypted elastic cluster snapshot and specify
-	// a value for the KmsKeyId parameter, an error is returned.
+	// Amazon Web Services KMS encryption key.
+	//
+	// If you copy an encrypted elastic cluster snapshot from your Amazon Web Services
+	// account, you can specify a value for KmsKeyId to encrypt the copy with a new
+	// Amazon Web ServicesS KMS encryption key. If you don't specify a value for
+	// KmsKeyId , then the copy of the elastic cluster snapshot is encrypted with the
+	// same AWS KMS key as the source elastic cluster snapshot.
+	//
+	// To copy an encrypted elastic cluster snapshot to another Amazon Web Services
+	// region, set KmsKeyId to the Amazon Web Services KMS key ID that you want to use
+	// to encrypt the copy of the elastic cluster snapshot in the destination region.
+	// Amazon Web Services KMS encryption keys are specific to the Amazon Web Services
+	// region that they are created in, and you can't use encryption keys from one
+	// Amazon Web Services region in another Amazon Web Services region.
+	//
+	// If you copy an unencrypted elastic cluster snapshot and specify a value for the
+	// KmsKeyId parameter, an error is returned.
 	KmsKeyId *string
 
 	// The tags to be assigned to the elastic cluster snapshot.

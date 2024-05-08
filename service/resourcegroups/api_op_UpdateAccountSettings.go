@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Turns on or turns off optional features in Resource Groups. The preceding
-// example shows that the request to turn on group lifecycle events is IN_PROGRESS
-// . You can call the GetAccountSettings operation to check for completion by
-// looking for GroupLifecycleEventsStatus to change to ACTIVE .
+// Turns on or turns off optional features in Resource Groups.
+//
+// The preceding example shows that the request to turn on group lifecycle events
+// is IN_PROGRESS . You can call the GetAccountSettings operation to check for completion by looking
+// for GroupLifecycleEventsStatus to change to ACTIVE .
 func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccountSettingsInput, optFns ...func(*Options)) (*UpdateAccountSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateAccountSettingsInput{}
@@ -32,8 +33,9 @@ func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccoun
 
 type UpdateAccountSettingsInput struct {
 
-	// Specifies whether you want to turn group lifecycle events (https://docs.aws.amazon.com/ARG/latest/userguide/monitor-groups.html)
-	// on or off.
+	// Specifies whether you want to turn [group lifecycle events] on or off.
+	//
+	// [group lifecycle events]: https://docs.aws.amazon.com/ARG/latest/userguide/monitor-groups.html
 	GroupLifecycleEventsDesiredStatus types.GroupLifecycleEventsDesiredStatus
 
 	noSmithyDocumentSerde

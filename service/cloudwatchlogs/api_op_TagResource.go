@@ -12,16 +12,22 @@ import (
 
 // Assigns one or more tags (key-value pairs) to the specified CloudWatch Logs
 // resource. Currently, the only CloudWatch Logs resources that can be tagged are
-// log groups and destinations. Tags can help you organize and categorize your
-// resources. You can also use them to scope user permissions by granting a user
-// permission to access or change only resources with certain tag values. Tags
-// don't have any semantic meaning to Amazon Web Services and are interpreted
-// strictly as strings of characters. You can use the TagResource action with a
-// resource that already has tags. If you specify a new tag key for the alarm, this
-// tag is appended to the list of tags associated with the alarm. If you specify a
-// tag key that is already associated with the alarm, the new tag value that you
-// specify replaces the previous value for that tag. You can associate as many as
-// 50 tags with a CloudWatch Logs resource.
+// log groups and destinations.
+//
+// Tags can help you organize and categorize your resources. You can also use them
+// to scope user permissions by granting a user permission to access or change only
+// resources with certain tag values.
+//
+// Tags don't have any semantic meaning to Amazon Web Services and are interpreted
+// strictly as strings of characters.
+//
+// You can use the TagResource action with a resource that already has tags. If
+// you specify a new tag key for the alarm, this tag is appended to the list of
+// tags associated with the alarm. If you specify a tag key that is already
+// associated with the alarm, the new tag value that you specify replaces the
+// previous value for that tag.
+//
+// You can associate as many as 50 tags with a CloudWatch Logs resource.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -39,12 +45,17 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The ARN of the resource that you're adding tags to. The ARN format of a log
-	// group is arn:aws:logs:Region:account-id:log-group:log-group-name  The ARN
-	// format of a destination is
-	// arn:aws:logs:Region:account-id:destination:destination-name For more
-	// information about ARN format, see CloudWatch Logs resources and operations (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html)
-	// .
+	// The ARN of the resource that you're adding tags to.
+	//
+	// The ARN format of a log group is
+	// arn:aws:logs:Region:account-id:log-group:log-group-name
+	//
+	// The ARN format of a destination is
+	// arn:aws:logs:Region:account-id:destination:destination-name
+	//
+	// For more information about ARN format, see [CloudWatch Logs resources and operations].
+	//
+	// [CloudWatch Logs resources and operations]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html
 	//
 	// This member is required.
 	ResourceArn *string

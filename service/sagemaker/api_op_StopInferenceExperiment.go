@@ -29,10 +29,13 @@ func (c *Client) StopInferenceExperiment(ctx context.Context, params *StopInfere
 
 type StopInferenceExperimentInput struct {
 
-	// Array of key-value pairs, with names of variants mapped to actions. The
+	//  Array of key-value pairs, with names of variants mapped to actions. The
 	// possible actions are the following:
+	//
 	//   - Promote - Promote the shadow variant to a production variant
+	//
 	//   - Remove - Delete the variant
+	//
 	//   - Retain - Keep the variant as it is
 	//
 	// This member is required.
@@ -43,15 +46,17 @@ type StopInferenceExperimentInput struct {
 	// This member is required.
 	Name *string
 
-	// An array of ModelVariantConfig objects. There is one for each variant that you
+	//  An array of ModelVariantConfig objects. There is one for each variant that you
 	// want to deploy after the inference experiment stops. Each ModelVariantConfig
 	// describes the infrastructure configuration for deploying the corresponding
 	// variant.
 	DesiredModelVariants []types.ModelVariantConfig
 
-	// The desired state of the experiment after stopping. The possible states are the
-	// following:
+	//  The desired state of the experiment after stopping. The possible states are
+	// the following:
+	//
 	//   - Completed : The experiment completed successfully
+	//
 	//   - Cancelled : The experiment was canceled
 	DesiredState types.InferenceExperimentStopDesiredState
 

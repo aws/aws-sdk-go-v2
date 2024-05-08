@@ -65,7 +65,7 @@ type ListModelsOutput struct {
 	// This member is required.
 	Models []types.ModelSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the
+	//  If the response is truncated, SageMaker returns this token. To retrieve the
 	// next set of models, use it in the subsequent request.
 	NextToken *string
 

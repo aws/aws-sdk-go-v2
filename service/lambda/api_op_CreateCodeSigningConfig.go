@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a code signing configuration. A code signing configuration (https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html)
-// defines a list of allowed signing profiles and defines the code-signing
-// validation policy (action to be taken if deployment validation checks fail).
+// Creates a code signing configuration. A [code signing configuration] defines a list of allowed signing
+// profiles and defines the code-signing validation policy (action to be taken if
+// deployment validation checks fail).
+//
+// [code signing configuration]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
 func (c *Client) CreateCodeSigningConfig(ctx context.Context, params *CreateCodeSigningConfigInput, optFns ...func(*Options)) (*CreateCodeSigningConfigOutput, error) {
 	if params == nil {
 		params = &CreateCodeSigningConfigInput{}

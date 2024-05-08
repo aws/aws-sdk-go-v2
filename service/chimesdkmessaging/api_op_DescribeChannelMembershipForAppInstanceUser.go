@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the details of a channel based on the membership of the specified
-// AppInstanceUser or AppInstanceBot . The x-amz-chime-bearer request header is
-// mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the
-// API call as the value in the header.
+//	Returns the details of a channel based on the membership of the specified
+//
+// AppInstanceUser or AppInstanceBot .
+//
+// The x-amz-chime-bearer request header is mandatory. Use the ARN of the
+// AppInstanceUser or AppInstanceBot that makes the API call as the value in the
+// header.
 func (c *Client) DescribeChannelMembershipForAppInstanceUser(ctx context.Context, params *DescribeChannelMembershipForAppInstanceUserInput, optFns ...func(*Options)) (*DescribeChannelMembershipForAppInstanceUserOutput, error) {
 	if params == nil {
 		params = &DescribeChannelMembershipForAppInstanceUserInput{}

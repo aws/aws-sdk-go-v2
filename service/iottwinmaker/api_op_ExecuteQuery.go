@@ -12,10 +12,12 @@ import (
 )
 
 // Run queries to access information from your knowledge graph of entities within
-// individual workspaces. The ExecuteQuery action only works with Amazon Web
-// Services Java SDK2 (https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/home.html)
-// . ExecuteQuery will not work with any Amazon Web Services Java SDK version <
-// 2.x.
+// individual workspaces.
+//
+// The ExecuteQuery action only works with [Amazon Web Services Java SDK2]. ExecuteQuery will not work with any
+// Amazon Web Services Java SDK version < 2.x.
+//
+// [Amazon Web Services Java SDK2]: https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/home.html
 func (c *Client) ExecuteQuery(ctx context.Context, params *ExecuteQueryInput, optFns ...func(*Options)) (*ExecuteQueryOutput, error) {
 	if params == nil {
 		params = &ExecuteQueryInput{}

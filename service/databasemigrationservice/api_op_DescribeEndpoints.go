@@ -34,19 +34,23 @@ func (c *Client) DescribeEndpoints(ctx context.Context, params *DescribeEndpoint
 
 type DescribeEndpointsInput struct {
 
-	// Filters applied to the endpoints. Valid filter names: endpoint-arn |
-	// endpoint-type | endpoint-id | engine-name
+	// Filters applied to the endpoints.
+	//
+	// Valid filter names: endpoint-arn | endpoint-type | endpoint-id | engine-name
 	Filters []types.Filter
 
-	// An optional pagination token provided by a previous request. If this parameter
+	//  An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -57,7 +61,7 @@ type DescribeEndpointsOutput struct {
 	// Endpoint description.
 	Endpoints []types.Endpoint
 
-	// An optional pagination token provided by a previous request. If this parameter
+	//  An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
@@ -157,10 +161,13 @@ var _ DescribeEndpointsAPIClient = (*Client)(nil)
 
 // DescribeEndpointsPaginatorOptions is the paginator options for DescribeEndpoints
 type DescribeEndpointsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -272,12 +279,13 @@ type EndpointDeletedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeEndpointsInput, *DescribeEndpointsOutput, error) (bool, error)
 }
 

@@ -14,12 +14,15 @@ import (
 // Describes Amazon ECS clusters that are registered with a stack. If you specify
 // only a stack ID, you can use the MaxResults and NextToken parameters to
 // paginate the response. However, AWS OpsWorks Stacks currently supports only one
-// cluster per layer, so the result set has a maximum of one element. Required
-// Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage
-// permissions level for the stack or an attached policy that explicitly grants
-// permission. For more information about user permissions, see Managing User
-// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// . This call accepts only one resource-identifying parameter.
+// cluster per layer, so the result set has a maximum of one element.
+//
+// Required Permissions: To use this action, an IAM user must have a Show, Deploy,
+// or Manage permissions level for the stack or an attached policy that explicitly
+// grants permission. For more information about user permissions, see [Managing User Permissions].
+//
+// This call accepts only one resource-identifying parameter.
+//
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeEcsClusters(ctx context.Context, params *DescribeEcsClustersInput, optFns ...func(*Options)) (*DescribeEcsClustersOutput, error) {
 	if params == nil {
 		params = &DescribeEcsClustersInput{}

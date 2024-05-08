@@ -12,9 +12,11 @@ import (
 )
 
 // Returns the content of a comment made on a change, file, or commit in a
-// repository. Reaction counts might include numbers from user identities who were
-// deleted after the reaction was made. For a count of reactions from active
-// identities, use GetCommentReactions.
+// repository.
+//
+// Reaction counts might include numbers from user identities who were deleted
+// after the reaction was made. For a count of reactions from active identities,
+// use GetCommentReactions.
 func (c *Client) GetComment(ctx context.Context, params *GetCommentInput, optFns ...func(*Options)) (*GetCommentOutput, error) {
 	if params == nil {
 		params = &GetCommentInput{}
@@ -32,8 +34,7 @@ func (c *Client) GetComment(ctx context.Context, params *GetCommentInput, optFns
 
 type GetCommentInput struct {
 
-	// The unique, system-generated ID of the comment. To get this ID, use
-	// GetCommentsForComparedCommit or GetCommentsForPullRequest .
+	// The unique, system-generated ID of the comment. To get this ID, use GetCommentsForComparedCommit or GetCommentsForPullRequest.
 	//
 	// This member is required.
 	CommentId *string

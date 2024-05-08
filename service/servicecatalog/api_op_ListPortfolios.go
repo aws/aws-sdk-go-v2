@@ -30,7 +30,9 @@ func (c *Client) ListPortfolios(ctx context.Context, params *ListPortfoliosInput
 type ListPortfoliosInput struct {
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

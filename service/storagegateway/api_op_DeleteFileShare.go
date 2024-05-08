@@ -39,7 +39,9 @@ type DeleteFileShareInput struct {
 	// and aborts all data uploads to Amazon Web Services. Otherwise, the file share is
 	// not deleted until all data is uploaded to Amazon Web Services. This process
 	// aborts the data upload process, and the file share enters the FORCE_DELETING
-	// status. Valid Values: true | false
+	// status.
+	//
+	// Valid Values: true | false
 	ForceDelete bool
 
 	noSmithyDocumentSerde

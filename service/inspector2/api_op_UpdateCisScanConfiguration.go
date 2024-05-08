@@ -40,8 +40,8 @@ type UpdateCisScanConfigurationInput struct {
 	// The schedule for the CIS scan configuration.
 	Schedule types.Schedule
 
-	// The security level for the CIS scan configuration. Security level refers to the
-	// Benchmark levels that CIS assigns to a profile.
+	//  The security level for the CIS scan configuration. Security level refers to
+	// the Benchmark levels that CIS assigns to a profile.
 	SecurityLevel types.CisSecurityLevel
 
 	// The targets for the CIS scan configuration.

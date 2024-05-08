@@ -12,14 +12,18 @@ import (
 
 // Cancels a job in an Batch job queue. Jobs that are in the SUBMITTED or PENDING
 // are canceled. A job in RUNNABLE remains in RUNNABLE until it reaches the head
-// of the job queue. Then the job status is updated to FAILED . A PENDING job is
-// canceled after all dependency jobs are completed. Therefore, it may take longer
-// than expected to cancel a job in PENDING status. When you try to cancel an
-// array parent job in PENDING , Batch attempts to cancel all child jobs. The array
-// parent job is canceled when all child jobs are completed. Jobs that progressed
-// to the STARTING or RUNNING state aren't canceled. However, the API operation
-// still succeeds, even if no job is canceled. These jobs must be terminated with
-// the TerminateJob operation.
+// of the job queue. Then the job status is updated to FAILED .
+//
+// A PENDING job is canceled after all dependency jobs are completed. Therefore,
+// it may take longer than expected to cancel a job in PENDING status.
+//
+// When you try to cancel an array parent job in PENDING , Batch attempts to cancel
+// all child jobs. The array parent job is canceled when all child jobs are
+// completed.
+//
+// Jobs that progressed to the STARTING or RUNNING state aren't canceled. However,
+// the API operation still succeeds, even if no job is canceled. These jobs must be
+// terminated with the TerminateJoboperation.
 func (c *Client) CancelJob(ctx context.Context, params *CancelJobInput, optFns ...func(*Options)) (*CancelJobOutput, error) {
 	if params == nil {
 		params = &CancelJobInput{}
@@ -44,8 +48,8 @@ type CancelJobInput struct {
 	JobId *string
 
 	// A message to attach to the job that explains the reason for canceling it. This
-	// message is returned by future DescribeJobs operations on the job. This message
-	// is also recorded in the Batch activity logs.
+	// message is returned by future DescribeJobsoperations on the job. This message is also
+	// recorded in the Batch activity logs.
 	//
 	// This member is required.
 	Reason *string

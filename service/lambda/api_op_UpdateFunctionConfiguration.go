@@ -11,19 +11,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modify the version-specific settings of a Lambda function. When you update a
-// function, Lambda provisions an instance of the function and its supporting
-// resources. If your function connects to a VPC, this process can take a minute.
-// During this time, you can't modify the function, but you can still invoke it.
-// The LastUpdateStatus , LastUpdateStatusReason , and LastUpdateStatusReasonCode
-// fields in the response from GetFunctionConfiguration indicate when the update
-// is complete and the function is processing events with the new configuration.
-// For more information, see Lambda function states (https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html)
-// . These settings can vary between versions of a function and are locked when you
+// Modify the version-specific settings of a Lambda function.
+//
+// When you update a function, Lambda provisions an instance of the function and
+// its supporting resources. If your function connects to a VPC, this process can
+// take a minute. During this time, you can't modify the function, but you can
+// still invoke it. The LastUpdateStatus , LastUpdateStatusReason , and
+// LastUpdateStatusReasonCode fields in the response from GetFunctionConfiguration indicate when the
+// update is complete and the function is processing events with the new
+// configuration. For more information, see [Lambda function states].
+//
+// These settings can vary between versions of a function and are locked when you
 // publish a version. You can't modify the configuration of a published version,
-// only the unpublished version. To configure function concurrency, use
-// PutFunctionConcurrency . To grant invoke permissions to an Amazon Web Services
-// account or Amazon Web Service, use AddPermission .
+// only the unpublished version.
+//
+// To configure function concurrency, use PutFunctionConcurrency. To grant invoke permissions to an
+// Amazon Web Services account or Amazon Web Service, use AddPermission.
+//
+// [Lambda function states]: https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html
 func (c *Client) UpdateFunctionConfiguration(ctx context.Context, params *UpdateFunctionConfigurationInput, optFns ...func(*Options)) (*UpdateFunctionConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateFunctionConfigurationInput{}
@@ -41,10 +46,16 @@ func (c *Client) UpdateFunctionConfiguration(ctx context.Context, params *Update
 
 type UpdateFunctionConfigurationInput struct {
 
-	// The name or ARN of the Lambda function. Name formats
+	// The name or ARN of the Lambda function.
+	//
+	// Name formats
+	//
 	//   - Function name – my-function .
+	//
 	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//
 	//   - Partial ARN – 123456789012:function:my-function .
+	//
 	// The length constraint applies only to the full ARN. If you specify only the
 	// function name, it is limited to 64 characters in length.
 	//
@@ -53,8 +64,9 @@ type UpdateFunctionConfigurationInput struct {
 
 	// A dead-letter queue configuration that specifies the queue or topic where
 	// Lambda sends asynchronous events when they fail processing. For more
-	// information, see Dead-letter queues (https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-dlq)
-	// .
+	// information, see [Dead-letter queues].
+	//
+	// [Dead-letter queues]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-dlq
 	DeadLetterConfig *types.DeadLetterConfig
 
 	// A description of the function.
@@ -64,9 +76,9 @@ type UpdateFunctionConfigurationInput struct {
 	Environment *types.Environment
 
 	// The size of the function's /tmp directory in MB. The default value is 512, but
-	// can be any whole number between 512 and 10,240 MB. For more information, see
-	// Configuring ephemeral storage (console) (https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage)
-	// .
+	// can be any whole number between 512 and 10,240 MB. For more information, see [Configuring ephemeral storage (console)].
+	//
+	// [Configuring ephemeral storage (console)]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
 	EphemeralStorage *types.EphemeralStorage
 
 	// Connection settings for an Amazon EFS file system.
@@ -75,36 +87,42 @@ type UpdateFunctionConfigurationInput struct {
 	// The name of the method within your code that Lambda calls to run your function.
 	// Handler is required if the deployment package is a .zip file archive. The format
 	// includes the file name. It can also include namespaces and other qualifiers,
-	// depending on the runtime. For more information, see Lambda programming model (https://docs.aws.amazon.com/lambda/latest/dg/foundation-progmodel.html)
-	// .
+	// depending on the runtime. For more information, see [Lambda programming model].
+	//
+	// [Lambda programming model]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-progmodel.html
 	Handler *string
 
-	// Container image configuration values (https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms)
-	// that override the values in the container image Docker file.
+	// [Container image configuration values] that override the values in the container image Docker file.
+	//
+	// [Container image configuration values]: https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms
 	ImageConfig *types.ImageConfig
 
 	// The ARN of the Key Management Service (KMS) customer managed key that's used to
-	// encrypt your function's environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption)
-	// . When Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html)
-	// is activated, Lambda also uses this key is to encrypt your function's snapshot.
-	// If you deploy your function using a container image, Lambda also uses this key
-	// to encrypt your function when it's deployed. Note that this is not the same key
-	// that's used to protect your container image in the Amazon Elastic Container
-	// Registry (Amazon ECR). If you don't provide a customer managed key, Lambda uses
-	// a default service key.
+	// encrypt your function's [environment variables]. When [Lambda SnapStart] is activated, Lambda also uses this key is to
+	// encrypt your function's snapshot. If you deploy your function using a container
+	// image, Lambda also uses this key to encrypt your function when it's deployed.
+	// Note that this is not the same key that's used to protect your container image
+	// in the Amazon Elastic Container Registry (Amazon ECR). If you don't provide a
+	// customer managed key, Lambda uses a default service key.
+	//
+	// [Lambda SnapStart]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html
+	// [environment variables]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption
 	KMSKeyArn *string
 
-	// A list of function layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
-	// to add to the function's execution environment. Specify each layer by its ARN,
-	// including the version.
+	// A list of [function layers] to add to the function's execution environment. Specify each layer
+	// by its ARN, including the version.
+	//
+	// [function layers]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 	Layers []string
 
 	// The function's Amazon CloudWatch Logs configuration settings.
 	LoggingConfig *types.LoggingConfig
 
-	// The amount of memory available to the function (https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-memory-console)
-	// at runtime. Increasing the function memory also increases its CPU allocation.
-	// The default value is 128 MB. The value can be any multiple of 1 MB.
+	// The amount of [memory available to the function] at runtime. Increasing the function memory also increases its
+	// CPU allocation. The default value is 128 MB. The value can be any multiple of 1
+	// MB.
+	//
+	// [memory available to the function]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-memory-console
 	MemorySize *int32
 
 	// Update the function only if the revision ID matches the ID that's specified.
@@ -115,32 +133,38 @@ type UpdateFunctionConfigurationInput struct {
 	// The Amazon Resource Name (ARN) of the function's execution role.
 	Role *string
 
-	// The identifier of the function's runtime (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
-	// . Runtime is required if the deployment package is a .zip file archive. The
-	// following list includes deprecated runtimes. For more information, see Runtime
-	// deprecation policy (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy)
-	// .
+	// The identifier of the function's [runtime]. Runtime is required if the deployment
+	// package is a .zip file archive.
+	//
+	// The following list includes deprecated runtimes. For more information, see [Runtime deprecation policy].
+	//
+	// [runtime]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+	// [Runtime deprecation policy]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
 	Runtime types.Runtime
 
-	// The function's SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html)
-	// setting.
+	// The function's [SnapStart] setting.
+	//
+	// [SnapStart]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
 	SnapStart *types.SnapStart
 
 	// The amount of time (in seconds) that Lambda allows a function to run before
 	// stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
-	// For more information, see Lambda execution environment (https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html)
-	// .
+	// For more information, see [Lambda execution environment].
+	//
+	// [Lambda execution environment]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html
 	Timeout *int32
 
-	// Set Mode to Active to sample and trace a subset of incoming requests with X-Ray (https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html)
-	// .
+	// Set Mode to Active to sample and trace a subset of incoming requests with [X-Ray].
+	//
+	// [X-Ray]: https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html
 	TracingConfig *types.TracingConfig
 
 	// For network connectivity to Amazon Web Services resources in a VPC, specify a
 	// list of security groups and subnets in the VPC. When you connect a function to a
 	// VPC, it can access resources and the internet only through that VPC. For more
-	// information, see Configuring a Lambda function to access resources in a VPC (https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html)
-	// .
+	// information, see [Configuring a Lambda function to access resources in a VPC].
+	//
+	// [Configuring a Lambda function to access resources in a VPC]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde
@@ -166,18 +190,20 @@ type UpdateFunctionConfigurationOutput struct {
 	// The function's description.
 	Description *string
 
-	// The function's environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)
-	// . Omitted from CloudTrail logs.
+	// The function's [environment variables]. Omitted from CloudTrail logs.
+	//
+	// [environment variables]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html
 	Environment *types.EnvironmentResponse
 
 	// The size of the function's /tmp directory in MB. The default value is 512, but
-	// can be any whole number between 512 and 10,240 MB. For more information, see
-	// Configuring ephemeral storage (console) (https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage)
-	// .
+	// can be any whole number between 512 and 10,240 MB. For more information, see [Configuring ephemeral storage (console)].
+	//
+	// [Configuring ephemeral storage (console)]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
 	EphemeralStorage *types.EphemeralStorage
 
-	// Connection settings for an Amazon EFS file system (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)
-	// .
+	// Connection settings for an [Amazon EFS file system].
+	//
+	// [Amazon EFS file system]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html
 	FileSystemConfigs []types.FileSystemConfig
 
 	// The function's Amazon Resource Name (ARN).
@@ -192,14 +218,18 @@ type UpdateFunctionConfigurationOutput struct {
 	// The function's image configuration values.
 	ImageConfigResponse *types.ImageConfigResponse
 
-	// The KMS key that's used to encrypt the function's environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption)
-	// . When Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html)
-	// is activated, this key is also used to encrypt the function's snapshot. This key
-	// is returned only if you've configured a customer managed key.
+	// The KMS key that's used to encrypt the function's [environment variables]. When [Lambda SnapStart] is activated, this
+	// key is also used to encrypt the function's snapshot. This key is returned only
+	// if you've configured a customer managed key.
+	//
+	// [Lambda SnapStart]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html
+	// [environment variables]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption
 	KMSKeyArn *string
 
-	// The date and time that the function was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
+	// The date and time that the function was last updated, in [ISO-8601 format]
 	// (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
 	LastModified *string
 
 	// The status of the last update that was performed on the function. This is first
@@ -212,8 +242,9 @@ type UpdateFunctionConfigurationOutput struct {
 	// The reason code for the last update that was performed on the function.
 	LastUpdateStatusReasonCode types.LastUpdateStatusReasonCode
 
-	// The function's layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
-	// .
+	// The function's [layers].
+	//
+	// [layers]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 	Layers []types.Layer
 
 	// The function's Amazon CloudWatch Logs configuration settings.
@@ -235,11 +266,13 @@ type UpdateFunctionConfigurationOutput struct {
 	// The function's execution role.
 	Role *string
 
-	// The identifier of the function's runtime (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
-	// . Runtime is required if the deployment package is a .zip file archive. The
-	// following list includes deprecated runtimes. For more information, see Runtime
-	// deprecation policy (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy)
-	// .
+	// The identifier of the function's [runtime]. Runtime is required if the deployment
+	// package is a .zip file archive.
+	//
+	// The following list includes deprecated runtimes. For more information, see [Runtime deprecation policy].
+	//
+	// [runtime]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+	// [Runtime deprecation policy]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
 	Runtime types.Runtime
 
 	// The ARN of the runtime and any errors that occured.
@@ -253,8 +286,9 @@ type UpdateFunctionConfigurationOutput struct {
 
 	// Set ApplyOn to PublishedVersions to create a snapshot of the initialized
 	// execution environment when you publish a function version. For more information,
-	// see Improving startup performance with Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html)
-	// .
+	// see [Improving startup performance with Lambda SnapStart].
+	//
+	// [Improving startup performance with Lambda SnapStart]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
 	SnapStart *types.SnapStartResponse
 
 	// The current state of the function. When the state is Inactive , you can

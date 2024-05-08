@@ -37,11 +37,18 @@ type ListExecutorsInput struct {
 	SessionId *string
 
 	// A filter for a specific executor state. A description of each state follows.
-	// CREATING - The executor is being started, including acquiring resources. CREATED
-	// - The executor has been started. REGISTERED - The executor has been registered.
-	// TERMINATING - The executor is in the process of shutting down. TERMINATED - The
-	// executor is no longer running. FAILED - Due to a failure, the executor is no
-	// longer running.
+	//
+	// CREATING - The executor is being started, including acquiring resources.
+	//
+	// CREATED - The executor has been started.
+	//
+	// REGISTERED - The executor has been registered.
+	//
+	// TERMINATING - The executor is in the process of shutting down.
+	//
+	// TERMINATED - The executor is no longer running.
+	//
+	// FAILED - Due to a failure, the executor is no longer running.
 	ExecutorStateFilter types.ExecutorState
 
 	// The maximum number of executors to return.

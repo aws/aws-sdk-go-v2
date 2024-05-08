@@ -31,8 +31,9 @@ func (c *Client) DisableLogging(ctx context.Context, params *DisableLoggingInput
 
 type DisableLoggingInput struct {
 
-	// The identifier of the cluster on which logging is to be stopped. Example:
-	// examplecluster
+	// The identifier of the cluster on which logging is to be stopped.
+	//
+	// Example: examplecluster
 	//
 	// This member is required.
 	ClusterIdentifier *string

@@ -10,12 +10,14 @@
 // headset, and webcam. To maximize endpoint security, WorkSpaces Thin Client
 // devices do not allow local data storage or installation of unapproved
 // applications. The WorkSpaces Thin Client device ships preloaded with device
-// management software. You can use these APIs to complete WorkSpaces Thin Client
-// tasks, such as creating environments or viewing devices. For more information
-// about WorkSpaces Thin Client, including the required permissions to use the
-// service, see the Amazon WorkSpaces Thin Client Administrator Guide (https://docs.aws.amazon.com/workspaces-thin-client/latest/ag/)
-// . For more information about using the Command Line Interface (CLI) to manage
-// your WorkSpaces Thin Client resources, see the WorkSpaces Thin Client section
-// of the CLI Reference (https://docs.aws.amazon.com/cli/latest/reference/workspaces-thin-client/index.html)
-// .
+// management software.
+//
+// You can use these APIs to complete WorkSpaces Thin Client tasks, such as
+// creating environments or viewing devices. For more information about WorkSpaces
+// Thin Client, including the required permissions to use the service, see the [Amazon WorkSpaces Thin Client Administrator Guide].
+// For more information about using the Command Line Interface (CLI) to manage your
+// WorkSpaces Thin Client resources, see the [WorkSpaces Thin Client section of the CLI Reference].
+//
+// [Amazon WorkSpaces Thin Client Administrator Guide]: https://docs.aws.amazon.com/workspaces-thin-client/latest/ag/
+// [WorkSpaces Thin Client section of the CLI Reference]: https://docs.aws.amazon.com/cli/latest/reference/workspaces-thin-client/index.html
 package workspacesthinclient

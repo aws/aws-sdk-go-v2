@@ -41,16 +41,21 @@ type DeleteRegistrationAttachmentInput struct {
 type DeleteRegistrationAttachmentOutput struct {
 
 	// The status of the registration attachment.
+	//
 	//   - UPLOAD_IN_PROGRESS The attachment is being uploaded.
+	//
 	//   - UPLOAD_COMPLETE The attachment has been uploaded.
+	//
 	//   - UPLOAD_FAILED The attachment failed to uploaded.
+	//
 	//   - DELETED The attachment has been deleted..
 	//
 	// This member is required.
 	AttachmentStatus types.AttachmentStatus
 
-	// The time when the registration attachment was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the registration attachment was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	//
 	// This member is required.
 	CreatedTimestamp *time.Time

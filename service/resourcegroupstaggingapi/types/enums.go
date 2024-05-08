@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"InternalServiceException",
@@ -30,8 +31,9 @@ const (
 )
 
 // Values returns all known values for GroupByAttribute. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GroupByAttribute) Values() []GroupByAttribute {
 	return []GroupByAttribute{
 		"TARGET_ID",
@@ -50,8 +52,9 @@ const (
 )
 
 // Values returns all known values for TargetIdType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetIdType) Values() []TargetIdType {
 	return []TargetIdType{
 		"ACCOUNT",

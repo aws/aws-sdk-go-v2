@@ -15,8 +15,9 @@ import (
 // Resolver forwards all DNS queries for the domain name that is specified in the
 // rule and that originate in the VPC. The queries are forwarded to the IP
 // addresses for the DNS resolvers that are specified in the rule. For more
-// information about rules, see CreateResolverRule (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverRule.html)
-// .
+// information about rules, see [CreateResolverRule].
+//
+// [CreateResolverRule]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverRule.html
 func (c *Client) AssociateResolverRule(ctx context.Context, params *AssociateResolverRuleInput, optFns ...func(*Options)) (*AssociateResolverRuleOutput, error) {
 	if params == nil {
 		params = &AssociateResolverRuleInput{}
@@ -35,8 +36,9 @@ func (c *Client) AssociateResolverRule(ctx context.Context, params *AssociateRes
 type AssociateResolverRuleInput struct {
 
 	// The ID of the Resolver rule that you want to associate with the VPC. To list
-	// the existing Resolver rules, use ListResolverRules (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRules.html)
-	// .
+	// the existing Resolver rules, use [ListResolverRules].
+	//
+	// [ListResolverRules]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRules.html
 	//
 	// This member is required.
 	ResolverRuleId *string

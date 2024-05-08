@@ -12,13 +12,18 @@ import (
 )
 
 // Submits a request to perform the following operations:
+//
 //   - Update the TTL setting for existing DnsRecords configurations
-//   - Add, update, or delete HealthCheckConfig for a specified service You can't
-//     add, update, or delete a HealthCheckCustomConfig configuration.
+//
+//   - Add, update, or delete HealthCheckConfig for a specified service
+//
+// You can't add, update, or delete a HealthCheckCustomConfig configuration.
 //
 // For public and private DNS namespaces, note the following:
+//
 //   - If you omit any existing DnsRecords or HealthCheckConfig configurations from
 //     an UpdateService request, the configurations are deleted from the service.
+//
 //   - If you omit an existing HealthCheckCustomConfig configuration from an
 //     UpdateService request, the configuration isn't deleted from the service.
 //
@@ -58,8 +63,9 @@ type UpdateServiceInput struct {
 type UpdateServiceOutput struct {
 
 	// A value that you can use to determine whether the request completed
-	// successfully. To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html)
-	// .
+	// successfully. To get the status of the operation, see [GetOperation].
+	//
+	// [GetOperation]: https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

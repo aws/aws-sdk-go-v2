@@ -11,8 +11,9 @@ import (
 )
 
 // Removes the specified set of tags from an Amazon OpenSearch Service domain. For
-// more information, see Tagging Amazon OpenSearch Service domains (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains.html#managedomains-awsresorcetagging)
-// .
+// more information, see [Tagging Amazon OpenSearch Service domains].
+//
+// [Tagging Amazon OpenSearch Service domains]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains.html#managedomains-awsresorcetagging
 func (c *Client) RemoveTags(ctx context.Context, params *RemoveTagsInput, optFns ...func(*Options)) (*RemoveTagsOutput, error) {
 	if params == nil {
 		params = &RemoveTagsInput{}

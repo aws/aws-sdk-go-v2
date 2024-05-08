@@ -12,6 +12,7 @@ import (
 )
 
 // The CreatePreset operation creates a preset with settings that you specify.
+//
 // Elastic Transcoder checks the CreatePreset settings to ensure that they meet
 // Elastic Transcoder requirements and to determine whether they comply with H.264
 // standards. If your settings are not valid for Elastic Transcoder, Elastic
@@ -20,10 +21,12 @@ import (
 // strictly compliant with the H.264 standard, Elastic Transcoder creates the
 // preset and returns a warning message in the response. This helps you determine
 // whether your settings comply with the H.264 standard while giving you greater
-// flexibility with respect to the video that Elastic Transcoder produces. Elastic
-// Transcoder uses the H.264 video-compression format. For more information, see
-// the International Telecommunication Union publication Recommendation ITU-T
-// H.264: Advanced video coding for generic audiovisual services.
+// flexibility with respect to the video that Elastic Transcoder produces.
+//
+// Elastic Transcoder uses the H.264 video-compression format. For more
+// information, see the International Telecommunication Union publication
+// Recommendation ITU-T H.264: Advanced video coding for generic audiovisual
+// services.
 func (c *Client) CreatePreset(ctx context.Context, params *CreatePresetInput, optFns ...func(*Options)) (*CreatePresetOutput, error) {
 	if params == nil {
 		params = &CreatePresetInput{}

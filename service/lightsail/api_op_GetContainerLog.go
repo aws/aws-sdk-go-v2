@@ -13,12 +13,16 @@ import (
 )
 
 // Returns the log events of a container of your Amazon Lightsail container
-// service. If your container service has more than one node (i.e., a scale greater
-// than 1), then the log events that are returned for the specified container are
-// merged from all nodes on your container service. Container logs are retained for
-// a certain amount of time. For more information, see Amazon Lightsail endpoints
-// and quotas (https://docs.aws.amazon.com/general/latest/gr/lightsail.html) in the
-// Amazon Web Services General Reference.
+// service.
+//
+// If your container service has more than one node (i.e., a scale greater than
+// 1), then the log events that are returned for the specified container are merged
+// from all nodes on your container service.
+//
+// Container logs are retained for a certain amount of time. For more information,
+// see [Amazon Lightsail endpoints and quotas]in the Amazon Web Services General Reference.
+//
+// [Amazon Lightsail endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/lightsail.html
 func (c *Client) GetContainerLog(ctx context.Context, params *GetContainerLogInput, optFns ...func(*Options)) (*GetContainerLogOutput, error) {
 	if params == nil {
 		params = &GetContainerLogInput{}
@@ -47,39 +51,64 @@ type GetContainerLogInput struct {
 	// This member is required.
 	ServiceName *string
 
-	// The end of the time interval for which to get log data. Constraints:
+	// The end of the time interval for which to get log data.
+	//
+	// Constraints:
+	//
 	//   - Specified in Coordinated Universal Time (UTC).
-	//   - Specified in the Unix time format. For example, if you wish to use an end
-	//   time of October 1, 2018, at 9 PM UTC, specify 1538427600 as the end time.
+	//
+	//   - Specified in the Unix time format.
+	//
+	// For example, if you wish to use an end time of October 1, 2018, at 9 PM UTC,
+	//   specify 1538427600 as the end time.
+	//
 	// You can convert a human-friendly time to Unix time format using a converter
-	// like Epoch converter (https://www.epochconverter.com/) .
+	// like [Epoch converter].
+	//
+	// [Epoch converter]: https://www.epochconverter.com/
 	EndTime *time.Time
 
-	// The pattern to use to filter the returned log events to a specific term. The
-	// following are a few examples of filter patterns that you can specify:
+	// The pattern to use to filter the returned log events to a specific term.
+	//
+	// The following are a few examples of filter patterns that you can specify:
+	//
 	//   - To return all log events, specify a filter pattern of "" .
+	//
 	//   - To exclude log events that contain the ERROR term, and return all other log
 	//   events, specify a filter pattern of "-ERROR" .
+	//
 	//   - To return log events that contain the ERROR term, specify a filter pattern
 	//   of "ERROR" .
+	//
 	//   - To return log events that contain both the ERROR and Exception terms,
 	//   specify a filter pattern of "ERROR Exception" .
+	//
 	//   - To return log events that contain the ERROR or the Exception term, specify a
 	//   filter pattern of "?ERROR ?Exception" .
 	FilterPattern *string
 
-	// The token to advance to the next page of results from your request. To get a
-	// page token, perform an initial GetContainerLog request. If your results are
-	// paginated, the response will return a next page token that you can specify as
-	// the page token in a subsequent request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetContainerLog request. If your
+	// results are paginated, the response will return a next page token that you can
+	// specify as the page token in a subsequent request.
 	PageToken *string
 
-	// The start of the time interval for which to get log data. Constraints:
+	// The start of the time interval for which to get log data.
+	//
+	// Constraints:
+	//
 	//   - Specified in Coordinated Universal Time (UTC).
-	//   - Specified in the Unix time format. For example, if you wish to use a start
-	//   time of October 1, 2018, at 8 PM UTC, specify 1538424000 as the start time.
+	//
+	//   - Specified in the Unix time format.
+	//
+	// For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC,
+	//   specify 1538424000 as the start time.
+	//
 	// You can convert a human-friendly time to Unix time format using a converter
-	// like Epoch converter (https://www.epochconverter.com/) .
+	// like [Epoch converter].
+	//
+	// [Epoch converter]: https://www.epochconverter.com/
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -90,10 +119,12 @@ type GetContainerLogOutput struct {
 	// An array of objects that describe the log events of a container.
 	LogEvents []types.ContainerServiceLogEvent
 
-	// The token to advance to the next page of results from your request. A next page
-	// token is not returned if there are no more results to display. To get the next
-	// page of results, perform another GetContainerLog request and specify the next
-	// page token using the pageToken parameter.
+	// The token to advance to the next page of results from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetContainerLog request and
+	// specify the next page token using the pageToken parameter.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of RepositorySummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html)
-// objects. Each RepositorySummary contains information about a repository in the
-// specified domain and that matches the input parameters.
+//	Returns a list of [RepositorySummary] objects. Each RepositorySummary contains information about
+//
+// a repository in the specified domain and that matches the input parameters.
+//
+// [RepositorySummary]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html
 func (c *Client) ListRepositoriesInDomain(ctx context.Context, params *ListRepositoriesInDomainInput, optFns ...func(*Options)) (*ListRepositoriesInDomainOutput, error) {
 	if params == nil {
 		params = &ListRepositoriesInDomainInput{}
@@ -31,27 +33,27 @@ func (c *Client) ListRepositoriesInDomain(ctx context.Context, params *ListRepos
 
 type ListRepositoriesInDomainInput struct {
 
-	// The name of the domain that contains the returned list of repositories.
+	//  The name of the domain that contains the returned list of repositories.
 	//
 	// This member is required.
 	Domain *string
 
-	// Filter the list of repositories to only include those that are managed by the
+	//  Filter the list of repositories to only include those that are managed by the
 	// Amazon Web Services account ID.
 	AdministratorAccount *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	MaxResults *int32
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// A prefix used to filter returned repositories. Only repositories with names
+	//  A prefix used to filter returned repositories. Only repositories with names
 	// that start with repositoryPrefix are returned.
 	RepositoryPrefix *string
 
@@ -60,10 +62,11 @@ type ListRepositoriesInDomainInput struct {
 
 type ListRepositoriesInDomainOutput struct {
 
-	// If there are additional results, this is the token for the next set of results.
+	//  If there are additional results, this is the token for the next set of
+	// results.
 	NextToken *string
 
-	// The returned list of repositories.
+	//  The returned list of repositories.
 	Repositories []types.RepositorySummary
 
 	// Metadata pertaining to the operation's result.
@@ -162,7 +165,7 @@ var _ ListRepositoriesInDomainAPIClient = (*Client)(nil)
 // ListRepositoriesInDomainPaginatorOptions is the paginator options for
 // ListRepositoriesInDomain
 type ListRepositoriesInDomainPaginatorOptions struct {
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

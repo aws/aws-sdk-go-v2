@@ -45,14 +45,19 @@ type GetApplicationOutput struct {
 	// The application Amazon Resource Name (ARN).
 	ApplicationId *string
 
-	// The name of the author publishing the app.Minimum length=1. Maximum
-	// length=127.Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";
+	// The name of the author publishing the app.
+	//
+	// Minimum length=1. Maximum length=127.
+	//
+	// Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";
 	Author *string
 
 	// The date and time this resource was created.
 	CreationTime *string
 
-	// The description of the application.Minimum length=1. Maximum length=256
+	// The description of the application.
+	//
+	// Minimum length=1. Maximum length=256
 	Description *string
 
 	// A URL with more information about the application, for example the location of
@@ -65,20 +70,30 @@ type GetApplicationOutput struct {
 	// requester's identity is as claimed.
 	IsVerifiedAuthor *bool
 
-	// Labels to improve discovery of apps in search results.Minimum length=1. Maximum
-	// length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
+	// Labels to improve discovery of apps in search results.
+	//
+	// Minimum length=1. Maximum length=127. Maximum number of labels: 10
+	//
+	// Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
 	Labels []string
 
 	// A link to a license file of the app that matches the spdxLicenseID value of
-	// your application.Maximum size 5 MB
+	// your application.
+	//
+	// Maximum size 5 MB
 	LicenseUrl *string
 
-	// The name of the application.Minimum length=1. Maximum length=140Pattern:
-	// "[a-zA-Z0-9\\-]+";
+	// The name of the application.
+	//
+	// Minimum length=1. Maximum length=140
+	//
+	// Pattern: "[a-zA-Z0-9\\-]+";
 	Name *string
 
 	// A link to the readme file in Markdown language that contains a more detailed
-	// description of the application and how it works.Maximum size 5 MB
+	// description of the application and how it works.
+	//
+	// Maximum size 5 MB
 	ReadmeUrl *string
 
 	// A valid identifier from https://spdx.org/licenses/.

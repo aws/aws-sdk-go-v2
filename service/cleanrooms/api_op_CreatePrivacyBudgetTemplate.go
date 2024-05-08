@@ -13,8 +13,8 @@ import (
 
 // Creates a privacy budget template for a specified membership. Each membership
 // can have only one privacy budget template, but it can be deleted and recreated.
-// If you need to change the privacy budget template for a membership, use the
-// UpdatePrivacyBudgetTemplate operation.
+// If you need to change the privacy budget template for a membership, use the UpdatePrivacyBudgetTemplate
+// operation.
 func (c *Client) CreatePrivacyBudgetTemplate(ctx context.Context, params *CreatePrivacyBudgetTemplateInput, optFns ...func(*Options)) (*CreatePrivacyBudgetTemplateOutput, error) {
 	if params == nil {
 		params = &CreatePrivacyBudgetTemplateInput{}
@@ -32,12 +32,14 @@ func (c *Client) CreatePrivacyBudgetTemplate(ctx context.Context, params *Create
 
 type CreatePrivacyBudgetTemplateInput struct {
 
-	// How often the privacy budget refreshes. If you plan to regularly bring new data
-	// into the collaboration, you can use CALENDAR_MONTH to automatically get a new
-	// privacy budget for the collaboration every calendar month. Choosing this option
-	// allows arbitrary amounts of information to be revealed about rows of the data
-	// when repeatedly queries across refreshes. Avoid choosing this if the same rows
-	// will be repeatedly queried between privacy budget refreshes.
+	// How often the privacy budget refreshes.
+	//
+	// If you plan to regularly bring new data into the collaboration, you can use
+	// CALENDAR_MONTH to automatically get a new privacy budget for the collaboration
+	// every calendar month. Choosing this option allows arbitrary amounts of
+	// information to be revealed about rows of the data when repeatedly queries across
+	// refreshes. Avoid choosing this if the same rows will be repeatedly queried
+	// between privacy budget refreshes.
 	//
 	// This member is required.
 	AutoRefresh types.PrivacyBudgetTemplateAutoRefresh

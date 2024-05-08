@@ -12,8 +12,9 @@ const (
 
 // Values returns all known values for AmazonOpenSearchServerlessS3BackupMode.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AmazonOpenSearchServerlessS3BackupMode) Values() []AmazonOpenSearchServerlessS3BackupMode {
 	return []AmazonOpenSearchServerlessS3BackupMode{
 		"FailedDocumentsOnly",
@@ -34,8 +35,9 @@ const (
 
 // Values returns all known values for AmazonopensearchserviceIndexRotationPeriod.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AmazonopensearchserviceIndexRotationPeriod) Values() []AmazonopensearchserviceIndexRotationPeriod {
 	return []AmazonopensearchserviceIndexRotationPeriod{
 		"NoRotation",
@@ -56,8 +58,9 @@ const (
 
 // Values returns all known values for AmazonopensearchserviceS3BackupMode. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AmazonopensearchserviceS3BackupMode) Values() []AmazonopensearchserviceS3BackupMode {
 	return []AmazonopensearchserviceS3BackupMode{
 		"FailedDocumentsOnly",
@@ -77,8 +80,9 @@ const (
 )
 
 // Values returns all known values for CompressionFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CompressionFormat) Values() []CompressionFormat {
 	return []CompressionFormat{
 		"UNCOMPRESSED",
@@ -98,8 +102,9 @@ const (
 )
 
 // Values returns all known values for Connectivity. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Connectivity) Values() []Connectivity {
 	return []Connectivity{
 		"PUBLIC",
@@ -116,8 +121,9 @@ const (
 )
 
 // Values returns all known values for ContentEncoding. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContentEncoding) Values() []ContentEncoding {
 	return []ContentEncoding{
 		"NONE",
@@ -134,8 +140,9 @@ const (
 )
 
 // Values returns all known values for DefaultDocumentIdFormat. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DefaultDocumentIdFormat) Values() []DefaultDocumentIdFormat {
 	return []DefaultDocumentIdFormat{
 		"FIREHOSE_DEFAULT",
@@ -157,8 +164,9 @@ const (
 
 // Values returns all known values for DeliveryStreamEncryptionStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeliveryStreamEncryptionStatus) Values() []DeliveryStreamEncryptionStatus {
 	return []DeliveryStreamEncryptionStatus{
 		"ENABLED",
@@ -193,6 +201,7 @@ const (
 
 // Values returns all known values for DeliveryStreamFailureType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DeliveryStreamFailureType) Values() []DeliveryStreamFailureType {
 	return []DeliveryStreamFailureType{
@@ -226,8 +235,9 @@ const (
 )
 
 // Values returns all known values for DeliveryStreamStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeliveryStreamStatus) Values() []DeliveryStreamStatus {
 	return []DeliveryStreamStatus{
 		"CREATING",
@@ -248,8 +258,9 @@ const (
 )
 
 // Values returns all known values for DeliveryStreamType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeliveryStreamType) Values() []DeliveryStreamType {
 	return []DeliveryStreamType{
 		"DirectPut",
@@ -271,8 +282,9 @@ const (
 
 // Values returns all known values for ElasticsearchIndexRotationPeriod. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ElasticsearchIndexRotationPeriod) Values() []ElasticsearchIndexRotationPeriod {
 	return []ElasticsearchIndexRotationPeriod{
 		"NoRotation",
@@ -293,6 +305,7 @@ const (
 
 // Values returns all known values for ElasticsearchS3BackupMode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ElasticsearchS3BackupMode) Values() []ElasticsearchS3BackupMode {
 	return []ElasticsearchS3BackupMode{
@@ -310,8 +323,9 @@ const (
 )
 
 // Values returns all known values for HECEndpointType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HECEndpointType) Values() []HECEndpointType {
 	return []HECEndpointType{
 		"Raw",
@@ -329,6 +343,7 @@ const (
 
 // Values returns all known values for HttpEndpointS3BackupMode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (HttpEndpointS3BackupMode) Values() []HttpEndpointS3BackupMode {
 	return []HttpEndpointS3BackupMode{
@@ -346,8 +361,9 @@ const (
 )
 
 // Values returns all known values for KeyType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KeyType) Values() []KeyType {
 	return []KeyType{
 		"AWS_OWNED_CMK",
@@ -363,8 +379,9 @@ const (
 )
 
 // Values returns all known values for NoEncryptionConfig. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NoEncryptionConfig) Values() []NoEncryptionConfig {
 	return []NoEncryptionConfig{
 		"NoEncryption",
@@ -381,8 +398,9 @@ const (
 )
 
 // Values returns all known values for OrcCompression. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrcCompression) Values() []OrcCompression {
 	return []OrcCompression{
 		"NONE",
@@ -400,8 +418,9 @@ const (
 )
 
 // Values returns all known values for OrcFormatVersion. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrcFormatVersion) Values() []OrcFormatVersion {
 	return []OrcFormatVersion{
 		"V0_11",
@@ -419,8 +438,9 @@ const (
 )
 
 // Values returns all known values for ParquetCompression. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ParquetCompression) Values() []ParquetCompression {
 	return []ParquetCompression{
 		"UNCOMPRESSED",
@@ -438,8 +458,9 @@ const (
 )
 
 // Values returns all known values for ParquetWriterVersion. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ParquetWriterVersion) Values() []ParquetWriterVersion {
 	return []ParquetWriterVersion{
 		"V1",
@@ -465,8 +486,9 @@ const (
 )
 
 // Values returns all known values for ProcessorParameterName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProcessorParameterName) Values() []ProcessorParameterName {
 	return []ProcessorParameterName{
 		"LambdaArn",
@@ -496,8 +518,9 @@ const (
 )
 
 // Values returns all known values for ProcessorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProcessorType) Values() []ProcessorType {
 	return []ProcessorType{
 		"RecordDeAggregation",
@@ -518,8 +541,9 @@ const (
 )
 
 // Values returns all known values for RedshiftS3BackupMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RedshiftS3BackupMode) Values() []RedshiftS3BackupMode {
 	return []RedshiftS3BackupMode{
 		"Disabled",
@@ -536,8 +560,9 @@ const (
 )
 
 // Values returns all known values for S3BackupMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3BackupMode) Values() []S3BackupMode {
 	return []S3BackupMode{
 		"Disabled",
@@ -556,6 +581,7 @@ const (
 
 // Values returns all known values for SnowflakeDataLoadingOption. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SnowflakeDataLoadingOption) Values() []SnowflakeDataLoadingOption {
 	return []SnowflakeDataLoadingOption{
@@ -574,8 +600,9 @@ const (
 )
 
 // Values returns all known values for SnowflakeS3BackupMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SnowflakeS3BackupMode) Values() []SnowflakeS3BackupMode {
 	return []SnowflakeS3BackupMode{
 		"FailedDataOnly",
@@ -592,8 +619,9 @@ const (
 )
 
 // Values returns all known values for SplunkS3BackupMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SplunkS3BackupMode) Values() []SplunkS3BackupMode {
 	return []SplunkS3BackupMode{
 		"FailedEventsOnly",

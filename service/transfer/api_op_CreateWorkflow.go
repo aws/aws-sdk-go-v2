@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows you to create a workflow with specified steps and step details the
+//	Allows you to create a workflow with specified steps and step details the
+//
 // workflow invokes after file transfer completes. After creating a workflow, you
 // can associate the workflow created with any transfer servers by specifying the
 // workflow-details field in CreateServer and UpdateServer operations.
@@ -32,16 +33,24 @@ func (c *Client) CreateWorkflow(ctx context.Context, params *CreateWorkflowInput
 
 type CreateWorkflowInput struct {
 
-	// Specifies the details for the steps that are in the specified workflow. The TYPE
-	// specifies which of the following actions is being taken for this step.
+	// Specifies the details for the steps that are in the specified workflow.
+	//
+	// The TYPE specifies which of the following actions is being taken for this step.
+	//
 	//   - COPY - Copy the file to another location.
+	//
 	//   - CUSTOM - Perform a custom step with an Lambda function target.
+	//
 	//   - DECRYPT - Decrypt a file that was encrypted before it was uploaded.
+	//
 	//   - DELETE - Delete the file.
+	//
 	//   - TAG - Add a tag to the file.
-	// Currently, copying and tagging are supported only on S3. For file location, you
-	// specify either the Amazon S3 bucket and key, or the Amazon EFS file system ID
-	// and path.
+	//
+	// Currently, copying and tagging are supported only on S3.
+	//
+	// For file location, you specify either the Amazon S3 bucket and key, or the
+	// Amazon EFS file system ID and path.
 	//
 	// This member is required.
 	Steps []types.WorkflowStep
@@ -50,10 +59,11 @@ type CreateWorkflowInput struct {
 	Description *string
 
 	// Specifies the steps (actions) to take if errors are encountered during
-	// execution of the workflow. For custom steps, the Lambda function needs to send
-	// FAILURE to the call back API to kick off the exception steps. Additionally, if
-	// the Lambda does not send SUCCESS before it times out, the exception steps are
-	// executed.
+	// execution of the workflow.
+	//
+	// For custom steps, the Lambda function needs to send FAILURE to the call back
+	// API to kick off the exception steps. Additionally, if the Lambda does not send
+	// SUCCESS before it times out, the exception steps are executed.
 	OnExceptionSteps []types.WorkflowStep
 
 	// Key-value pairs that can be used to group and search for workflows. Tags are

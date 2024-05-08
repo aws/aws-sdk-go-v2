@@ -11,8 +11,9 @@ import (
 )
 
 // Disconnects all connections using a specified user ID from a room. This
-// replicates the DisconnectUser (https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-disconnectuser-publish.html)
-// WebSocket operation in the Amazon IVS Chat Messaging API.
+// replicates the [DisconnectUser]WebSocket operation in the Amazon IVS Chat Messaging API.
+//
+// [DisconnectUser]: https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-disconnectuser-publish.html
 func (c *Client) DisconnectUser(ctx context.Context, params *DisconnectUserInput, optFns ...func(*Options)) (*DisconnectUserOutput, error) {
 	if params == nil {
 		params = &DisconnectUserInput{}

@@ -29,11 +29,13 @@ func (c *Client) DescribeDBClusterParameterGroups(ctx context.Context, params *D
 	return out, nil
 }
 
-// Represents the input to DescribeDBClusterParameterGroups .
+// Represents the input to DescribeDBClusterParameterGroups.
 type DescribeDBClusterParameterGroupsInput struct {
 
 	// The name of a specific cluster parameter group to return details for.
+	//
 	// Constraints:
+	//
 	//   - If provided, must match the name of an existing DBClusterParameterGroup .
 	DBClusterParameterGroupName *string
 
@@ -45,16 +47,19 @@ type DescribeDBClusterParameterGroupsInput struct {
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of DBClusterParameterGroups .
+// Represents the output of DBClusterParameterGroups.
 type DescribeDBClusterParameterGroupsOutput struct {
 
 	// A list of cluster parameter groups.
@@ -161,9 +166,12 @@ var _ DescribeDBClusterParameterGroupsAPIClient = (*Client)(nil)
 // DescribeDBClusterParameterGroupsPaginatorOptions is the paginator options for
 // DescribeDBClusterParameterGroups
 type DescribeDBClusterParameterGroupsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 

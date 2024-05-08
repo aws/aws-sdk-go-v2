@@ -44,8 +44,9 @@ type GetAssessmentReportInput struct {
 
 	// Specifies the type of the assessment report that you want to generate. There
 	// are two types of assessment reports: a finding report and a full report. For
-	// more information, see Assessment Reports (https://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html)
-	// .
+	// more information, see [Assessment Reports].
+	//
+	// [Assessment Reports]: https://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html
 	//
 	// This member is required.
 	ReportType types.ReportType

@@ -44,20 +44,23 @@ type UpdateFindingsFilterInput struct {
 	ClientToken *string
 
 	// A custom description of the filter. The description can contain as many as 512
-	// characters. We strongly recommend that you avoid including any sensitive data in
-	// the description of a filter. Other users of your account might be able to see
-	// this description, depending on the actions that they're allowed to perform in
-	// Amazon Macie.
+	// characters.
+	//
+	// We strongly recommend that you avoid including any sensitive data in the
+	// description of a filter. Other users of your account might be able to see this
+	// description, depending on the actions that they're allowed to perform in Amazon
+	// Macie.
 	Description *string
 
 	// The criteria to use to filter findings.
 	FindingCriteria *types.FindingCriteria
 
 	// A custom name for the filter. The name must contain at least 3 characters and
-	// can contain as many as 64 characters. We strongly recommend that you avoid
-	// including any sensitive data in the name of a filter. Other users of your
-	// account might be able to see this name, depending on the actions that they're
-	// allowed to perform in Amazon Macie.
+	// can contain as many as 64 characters.
+	//
+	// We strongly recommend that you avoid including any sensitive data in the name
+	// of a filter. Other users of your account might be able to see this name,
+	// depending on the actions that they're allowed to perform in Amazon Macie.
 	Name *string
 
 	// The position of the filter in the list of saved filters on the Amazon Macie

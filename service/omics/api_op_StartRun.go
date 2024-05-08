@@ -13,16 +13,22 @@ import (
 )
 
 // Starts a workflow run. To duplicate a run, specify the run's ID and a role ARN.
-// The remaining parameters are copied from the previous run. StartRun will not
-// support re-run for a workflow that is shared with you. The total number of runs
-// in your account is subject to a quota per Region. To avoid needing to delete
-// runs manually, you can set the retention mode to REMOVE . Runs with this setting
-// are deleted automatically when the run quoata is exceeded. By default, the run
-// uses STATIC storage. For STATIC storage, set the storageCapacity field. You can
-// set the storage type to DYNAMIC. You do not set storageCapacity , because
-// HealthOmics dynamically scales the storage up or down as required. For more
-// information about static and dynamic storage, see Running workflows (https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html)
-// in the AWS HealthOmics User Guide.
+// The remaining parameters are copied from the previous run.
+//
+// StartRun will not support re-run for a workflow that is shared with you.
+//
+// The total number of runs in your account is subject to a quota per Region. To
+// avoid needing to delete runs manually, you can set the retention mode to REMOVE
+// . Runs with this setting are deleted automatically when the run quoata is
+// exceeded.
+//
+// By default, the run uses STATIC storage. For STATIC storage, set the
+// storageCapacity field. You can set the storage type to DYNAMIC. You do not set
+// storageCapacity , because HealthOmics dynamically scales the storage up or down
+// as required. For more information about static and dynamic storage, see [Running workflows]in the
+// AWS HealthOmics User Guide.
+//
+// [Running workflows]: https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html
 func (c *Client) StartRun(ctx context.Context, params *StartRunInput, optFns ...func(*Options)) (*StartRunOutput, error) {
 	if params == nil {
 		params = &StartRunInput{}

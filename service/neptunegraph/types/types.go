@@ -84,9 +84,11 @@ type GraphSnapshotSummary struct {
 	// This member is required.
 	Id *string
 
-	// The snapshot name. For example: my-snapshot-1 . The name must contain from 1 to
-	// 63 letters, numbers, or hyphens, and its first character must be a letter. It
-	// cannot end with a hyphen or contain two consecutive hyphens.
+	// The snapshot name. For example: my-snapshot-1 .
+	//
+	// The name must contain from 1 to 63 letters, numbers, or hyphens, and its first
+	// character must be a letter. It cannot end with a hyphen or contain two
+	// consecutive hyphens.
 	//
 	// This member is required.
 	Name *string
@@ -237,9 +239,10 @@ type ImportTaskSummary struct {
 	TaskId *string
 
 	// Specifies the format of S3 data to be imported. Valid values are CSV , which
-	// identifies the Gremlin CSV format (https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html)
-	// or OPENCYPHER , which identies the openCypher load format (https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html)
-	// .
+	// identifies the [Gremlin CSV format]or OPENCYPHER , which identies the [openCypher load format].
+	//
+	// [Gremlin CSV format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html
+	// [openCypher load format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html
 	Format Format
 
 	// The unique identifier of the Neptune Analytics graph.

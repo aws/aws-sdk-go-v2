@@ -11,9 +11,10 @@ import (
 )
 
 // Registers a new migration task which represents a server, database, etc., being
-// migrated to AWS by a migration tool. This API is a prerequisite to calling the
-// NotifyMigrationTaskState API as the migration tool must first register the
-// migration task with Migration Hub.
+// migrated to AWS by a migration tool.
+//
+// This API is a prerequisite to calling the NotifyMigrationTaskState API as the
+// migration tool must first register the migration task with Migration Hub.
 func (c *Client) ImportMigrationTask(ctx context.Context, params *ImportMigrationTaskInput, optFns ...func(*Options)) (*ImportMigrationTaskOutput, error) {
 	if params == nil {
 		params = &ImportMigrationTaskInput{}

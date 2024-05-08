@@ -12,10 +12,12 @@ import (
 )
 
 // Creates a core network Connect attachment from a specified core network
-// attachment. A core network Connect attachment is a GRE-based tunnel attachment
-// that you can use to establish a connection between a core network and an
-// appliance. A core network Connect attachment uses an existing VPC attachment as
-// the underlying transport mechanism.
+// attachment.
+//
+// A core network Connect attachment is a GRE-based tunnel attachment that you can
+// use to establish a connection between a core network and an appliance. A core
+// network Connect attachment uses an existing VPC attachment as the underlying
+// transport mechanism.
 func (c *Client) CreateConnectAttachment(ctx context.Context, params *CreateConnectAttachmentInput, optFns ...func(*Options)) (*CreateConnectAttachmentOutput, error) {
 	if params == nil {
 		params = &CreateConnectAttachmentInput{}

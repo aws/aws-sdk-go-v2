@@ -30,15 +30,17 @@ func (c *Client) GetDistributions(ctx context.Context, params *GetDistributionsI
 
 type GetDistributionsInput struct {
 
-	// The name of the distribution for which to return information. When omitted, the
-	// response includes all of your distributions in the Amazon Web Services Region
-	// where the request is made.
+	// The name of the distribution for which to return information.
+	//
+	// When omitted, the response includes all of your distributions in the Amazon Web
+	// Services Region where the request is made.
 	DistributionName *string
 
-	// The token to advance to the next page of results from your request. To get a
-	// page token, perform an initial GetDistributions request. If your results are
-	// paginated, the response will return a next page token that you can specify as
-	// the page token in a subsequent request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetDistributions request. If your
+	// results are paginated, the response will return a next page token that you can
+	// specify as the page token in a subsequent request.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -49,10 +51,12 @@ type GetDistributionsOutput struct {
 	// An array of objects that describe your distributions.
 	Distributions []types.LightsailDistribution
 
-	// The token to advance to the next page of results from your request. A next page
-	// token is not returned if there are no more results to display. To get the next
-	// page of results, perform another GetDistributions request and specify the next
-	// page token using the pageToken parameter.
+	// The token to advance to the next page of results from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetDistributions request and
+	// specify the next page token using the pageToken parameter.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

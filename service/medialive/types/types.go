@@ -26,6 +26,7 @@ type AacSettings struct {
 	// AD". Note that the input received by the encoder must contain pre-mixed audio;
 	// the encoder does not perform the mixing. The values in audioTypeControl and
 	// audioType (in AudioDescription) are ignored when set to broadcasterMixedAd.
+	//
 	// Leave set to "normal" when input does not contain pre-mixed audio + AD.
 	InputType AacInputType
 
@@ -381,22 +382,29 @@ type AudioOnlyHlsSettings struct {
 
 	// Optional. Specifies the .jpg or .png image to use as the cover art for an
 	// audio-only output. We recommend a low bit-size file because the image increases
-	// the output audio bandwidth. The image is attached to the audio as an ID3 tag,
-	// frame type APIC, picture type 0x10, as per the "ID3 tag version 2.4.0 - Native
-	// Frames" standard.
+	// the output audio bandwidth.
+	//
+	// The image is attached to the audio as an ID3 tag, frame type APIC, picture type
+	// 0x10, as per the "ID3 tag version 2.4.0 - Native Frames" standard.
 	AudioOnlyImage *InputLocation
 
-	// Four types of audio-only tracks are supported: Audio-Only Variant Stream The
-	// client can play back this audio-only stream instead of video in low-bandwidth
-	// scenarios. Represented as an EXT-X-STREAM-INF in the HLS manifest. Alternate
-	// Audio, Auto Select, Default Alternate rendition that the client should try to
-	// play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with
-	// DEFAULT=YES, AUTOSELECT=YES Alternate Audio, Auto Select, Not Default Alternate
-	// rendition that the client may try to play back by default. Represented as an
-	// EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=YES Alternate Audio,
-	// not Auto Select Alternate rendition that the client will not try to play back by
-	// default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO,
-	// AUTOSELECT=NO
+	// Four types of audio-only tracks are supported:
+	//
+	// Audio-Only Variant Stream The client can play back this audio-only stream
+	// instead of video in low-bandwidth scenarios. Represented as an EXT-X-STREAM-INF
+	// in the HLS manifest.
+	//
+	// Alternate Audio, Auto Select, Default Alternate rendition that the client
+	// should try to play back by default. Represented as an EXT-X-MEDIA in the HLS
+	// manifest with DEFAULT=YES, AUTOSELECT=YES
+	//
+	// Alternate Audio, Auto Select, Not Default Alternate rendition that the client
+	// may try to play back by default. Represented as an EXT-X-MEDIA in the HLS
+	// manifest with DEFAULT=NO, AUTOSELECT=YES
+	//
+	// Alternate Audio, not Auto Select Alternate rendition that the client will not
+	// try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest
+	// with DEFAULT=NO, AUTOSELECT=NO
 	AudioTrackType AudioOnlyHlsTrackType
 
 	// Specifies the segment type.
@@ -555,8 +563,10 @@ type AvailConfiguration struct {
 	// groups that use segmented outputs. Insertion of a SCTE 35 message typically
 	// results in a segment break, in addition to the regular cadence of breaks. The
 	// segment breaks appear in video outputs, audio outputs, and captions outputs (if
-	// any). ALL_OUTPUT_GROUPS: Default. Insert the segment break in in all output
-	// groups that have segmented outputs. This is the legacy behavior.
+	// any).
+	//
+	// ALL_OUTPUT_GROUPS: Default. Insert the segment break in in all output groups
+	// that have segmented outputs. This is the legacy behavior.
 	// SCTE35_ENABLED_OUTPUT_GROUPS: Insert the segment break only in output groups
 	// that have SCTE 35 passthrough enabled. This is the recommended value, because it
 	// reduces unnecessary segment breaks.
@@ -1665,6 +1675,7 @@ type EbuTtDDestinationSettings struct {
 	CopyrightHolder *string
 
 	// Specifies how to handle the gap between the lines (in multi-line captions).
+	//
 	//   - enabled: Fill with the captions background color (as specified in the input
 	//   captions).
 	//   - disabled: Leave the gap unfilled.
@@ -1673,10 +1684,12 @@ type EbuTtDDestinationSettings struct {
 	// Specifies the font family to include in the font data attached to the EBU-TT
 	// captions. Valid only if styleControl is set to include. If you leave this field
 	// empty, the font family is set to "monospaced". (If styleControl is set to
-	// exclude, the font family is always set to "monospaced".) You specify only the
-	// font family. All other style information (color, bold, position and so on) is
-	// copied from the input captions. The size is always set to 100% to allow the
-	// downstream player to choose the size.
+	// exclude, the font family is always set to "monospaced".)
+	//
+	// You specify only the font family. All other style information (color, bold,
+	// position and so on) is copied from the input captions. The size is always set to
+	// 100% to allow the downstream player to choose the size.
+	//
 	//   - Enter a list of font families, as a comma-separated list of font names, in
 	//   order of preference. The name can be a font family (such as “Arial”), or a
 	//   generic font family (such as “serif”), or “default” (to let the downstream
@@ -1686,6 +1699,7 @@ type EbuTtDDestinationSettings struct {
 
 	// Specifies the style information (font color, font position, and so on) to
 	// include in the font data that is attached to the EBU-TT captions.
+	//
 	//   - include: Take the style information (font color, font position, and so on)
 	//   from the source captions and include that information in the font data attached
 	//   to the EBU-TT captions. This option is valid only if the source captions are
@@ -2148,10 +2162,11 @@ type GlobalConfiguration struct {
 	// Settings for system actions when input is lost.
 	InputLossBehavior *InputLossBehavior
 
-	// Indicates how MediaLive pipelines are synchronized. PIPELINE_LOCKING -
-	// MediaLive will attempt to synchronize the output of each pipeline to the other.
-	// EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each
-	// pipeline to the Unix epoch.
+	// Indicates how MediaLive pipelines are synchronized.
+	//
+	// PIPELINE_LOCKING - MediaLive will attempt to synchronize the output of each
+	// pipeline to the other. EPOCH_LOCKING - MediaLive will attempt to synchronize the
+	// output of each pipeline to the Unix epoch.
 	OutputLockingMode GlobalConfigurationOutputLockingMode
 
 	// Advanced output locking settings
@@ -2303,8 +2318,10 @@ type H264Settings struct {
 	// while high can produce better quality for certain content.
 	LookAheadRateControl H264LookAheadRateControl
 
-	// For QVBR: See the tooltip for Quality level For VBR: Set the maximum bitrate in
-	// order to accommodate expected spikes in the complexity of the video.
+	// For QVBR: See the tooltip for Quality level
+	//
+	// For VBR: Set the maximum bitrate in order to accommodate expected spikes in the
+	// complexity of the video.
 	MaxBitrate *int32
 
 	// Only meaningful if sceneChangeDetect is set to enabled. Defaults to 5 if
@@ -2338,6 +2355,7 @@ type H264Settings struct {
 
 	// Leave as STANDARD_QUALITY or choose a different value (which might result in
 	// additional costs to run the channel).
+	//
 	//   - ENHANCED_QUALITY: Produces a slightly better video quality without an
 	//   increase in the bitrate. Has an effect only when the Rate control mode is QVBR
 	//   or CBR. If this channel is in a MediaLive multiplex, the value must be
@@ -2350,6 +2368,7 @@ type H264Settings struct {
 	// determine the best quality. To set a target quality, enter values in the QVBR
 	// quality level field and the Max bitrate field. Enter values that suit your most
 	// important viewing devices. Recommended values are:
+	//
 	//   - Primary screen: Quality level: 8 to 10. Max bitrate: 4M
 	//   - PC or tablet: Quality level: 7. Max bitrate: 1.5M to 3M
 	//   - Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M To let MediaLive
@@ -2358,22 +2377,29 @@ type H264Settings struct {
 	//   "Video - rate control mode" in the MediaLive user guide
 	QvbrQualityLevel *int32
 
-	// Rate control mode. QVBR: Quality will match the specified quality level except
-	// when it is constrained by the maximum bitrate. Recommended if you or your
-	// viewers pay for bandwidth. VBR: Quality and bitrate vary, depending on the video
-	// complexity. Recommended instead of QVBR if you want to maintain a specific
-	// average bitrate over the duration of the channel. CBR: Quality varies, depending
-	// on the video complexity. Recommended only if you distribute your assets to
-	// devices that cannot handle variable bitrates. Multiplex: This rate control mode
-	// is only supported (and is required) when the video is being delivered to a
-	// MediaLive Multiplex in which case the rate control configuration is controlled
-	// by the properties within the Multiplex Program.
+	// Rate control mode.
+	//
+	// QVBR: Quality will match the specified quality level except when it is
+	// constrained by the maximum bitrate. Recommended if you or your viewers pay for
+	// bandwidth.
+	//
+	// VBR: Quality and bitrate vary, depending on the video complexity. Recommended
+	// instead of QVBR if you want to maintain a specific average bitrate over the
+	// duration of the channel.
+	//
+	// CBR: Quality varies, depending on the video complexity. Recommended only if you
+	// distribute your assets to devices that cannot handle variable bitrates.
+	//
+	// Multiplex: This rate control mode is only supported (and is required) when the
+	// video is being delivered to a MediaLive Multiplex in which case the rate control
+	// configuration is controlled by the properties within the Multiplex Program.
 	RateControlMode H264RateControlMode
 
 	// Sets the scan type of the output to progressive or top-field-first interlaced.
 	ScanType H264ScanType
 
 	// Scene change detection.
+	//
 	//   - On: inserts I-frames when scene change is detected.
 	//   - Off: does not force an I-frame when scene change is detected.
 	SceneChangeDetect H264SceneChangeDetect
@@ -2424,6 +2450,7 @@ type H264Settings struct {
 	TimecodeBurninSettings *TimecodeBurninSettings
 
 	// Determines how timecodes should be inserted into the video elementary stream.
+	//
 	//   - 'disabled': Do not include timecodes
 	//   - 'picTimingSei': Pass through picture timing SEI messages from the source
 	//   specified in Timecode Config
@@ -2569,19 +2596,24 @@ type H265Settings struct {
 	// control mode is QVBR. Set values for the QVBR quality level field and Max
 	// bitrate field that suit your most important viewing devices. Recommended values
 	// are:
+	//
 	//   - Primary screen: Quality level: 8 to 10. Max bitrate: 4M
 	//   - PC or tablet: Quality level: 7. Max bitrate: 1.5M to 3M
 	//   - Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M
 	QvbrQualityLevel *int32
 
-	// Rate control mode. QVBR: Quality will match the specified quality level except
-	// when it is constrained by the maximum bitrate. Recommended if you or your
-	// viewers pay for bandwidth. CBR: Quality varies, depending on the video
-	// complexity. Recommended only if you distribute your assets to devices that
-	// cannot handle variable bitrates. Multiplex: This rate control mode is only
-	// supported (and is required) when the video is being delivered to a MediaLive
-	// Multiplex in which case the rate control configuration is controlled by the
-	// properties within the Multiplex Program.
+	// Rate control mode.
+	//
+	// QVBR: Quality will match the specified quality level except when it is
+	// constrained by the maximum bitrate. Recommended if you or your viewers pay for
+	// bandwidth.
+	//
+	// CBR: Quality varies, depending on the video complexity. Recommended only if you
+	// distribute your assets to devices that cannot handle variable bitrates.
+	//
+	// Multiplex: This rate control mode is only supported (and is required) when the
+	// video is being delivered to a MediaLive Multiplex in which case the rate control
+	// configuration is controlled by the properties within the Multiplex Program.
 	RateControlMode H265RateControlMode
 
 	// Sets the scan type of the output to progressive or top-field-first interlaced.
@@ -2622,6 +2654,7 @@ type H265Settings struct {
 	TimecodeBurninSettings *TimecodeBurninSettings
 
 	// Determines how timecodes should be inserted into the video elementary stream.
+	//
 	//   - 'disabled': Do not include timecodes
 	//   - 'picTimingSei': Pass through picture timing SEI messages from the source
 	//   specified in Timecode Config
@@ -2744,10 +2777,11 @@ type HlsGroupSettings struct {
 	// main .m3u8 file.
 	BaseUrlContent *string
 
-	// Optional. One value per output group. This field is required only if you are
-	// completing Base URL content A, and the downstream system has notified you that
-	// the media files for pipeline 1 of all outputs are in a location different from
-	// the media files for pipeline 0.
+	// Optional. One value per output group.
+	//
+	// This field is required only if you are completing Base URL content A, and the
+	// downstream system has notified you that the media files for pipeline 1 of all
+	// outputs are in a location different from the media files for pipeline 0.
 	BaseUrlContent1 *string
 
 	// A partial URI prefix that will be prepended to each output in the media .m3u8
@@ -2755,10 +2789,12 @@ type HlsGroupSettings struct {
 	// main .m3u8 file.
 	BaseUrlManifest *string
 
-	// Optional. One value per output group. Complete this field only if you are
-	// completing Base URL manifest A, and the downstream system has notified you that
-	// the child manifest files for pipeline 1 of all outputs are in a location
-	// different from the child manifest files for pipeline 0.
+	// Optional. One value per output group.
+	//
+	// Complete this field only if you are completing Base URL manifest A, and the
+	// downstream system has notified you that the child manifest files for pipeline 1
+	// of all outputs are in a location different from the child manifest files for
+	// pipeline 0.
 	BaseUrlManifest1 *string
 
 	// Mapping of up to 4 caption channels to caption languages. Is only meaningful if
@@ -2811,12 +2847,13 @@ type HlsGroupSettings struct {
 	HlsId3SegmentTagging HlsId3SegmentTaggingState
 
 	// DISABLED: Do not create an I-frame-only manifest, but do create the master and
-	// media manifests (according to the Output Selection field). STANDARD: Create an
-	// I-frame-only manifest for each output that contains video, as well as the other
-	// manifests (according to the Output Selection field). The I-frame manifest
-	// contains a #EXT-X-I-FRAMES-ONLY tag to indicate it is I-frame only, and one or
-	// more #EXT-X-BYTERANGE entries identifying the I-frame position. For example,
-	// #EXT-X-BYTERANGE:160364@1461888"
+	// media manifests (according to the Output Selection field).
+	//
+	// STANDARD: Create an I-frame-only manifest for each output that contains video,
+	// as well as the other manifests (according to the Output Selection field). The
+	// I-frame manifest contains a #EXT-X-I-FRAMES-ONLY tag to indicate it is I-frame
+	// only, and one or more #EXT-X-BYTERANGE entries identifying the I-frame position.
+	// For example, #EXT-X-BYTERANGE:160364@1461888"
 	IFrameOnlyPlaylists IFrameOnlyPlaylistType
 
 	// Specifies whether to include the final (incomplete) segment in the media output
@@ -2827,10 +2864,11 @@ type HlsGroupSettings struct {
 	// We recommend you choose Auto and let MediaLive control the behavior.
 	IncompleteSegmentBehavior HlsIncompleteSegmentBehavior
 
-	// Applies only if Mode field is LIVE. Specifies the maximum number of segments in
-	// the media manifest file. After this maximum, older segments are removed from the
-	// media manifest. This number must be smaller than the number in the Keep Segments
-	// field.
+	// Applies only if Mode field is LIVE.
+	//
+	// Specifies the maximum number of segments in the media manifest file. After this
+	// maximum, older segments are removed from the media manifest. This number must be
+	// smaller than the number in the Keep Segments field.
 	IndexNSegments *int32
 
 	// Parameter that control output group behavior on input loss.
@@ -2848,9 +2886,12 @@ type HlsGroupSettings struct {
 	// value.
 	IvSource HlsIvSource
 
-	// Applies only if Mode field is LIVE. Specifies the number of media segments to
-	// retain in the destination directory. This number should be bigger than
-	// indexNSegments (Num segments). We recommend (value = (2 x indexNsegments) + 1).
+	// Applies only if Mode field is LIVE.
+	//
+	// Specifies the number of media segments to retain in the destination directory.
+	// This number should be bigger than indexNSegments (Num segments). We recommend
+	// (value = (2 x indexNsegments) + 1).
+	//
 	// If this "keep segments" number is too low, the following might happen: the
 	// player is still reading a media manifest file that lists this segment, but that
 	// segment has been removed from the destination directory (as directed by
@@ -2884,14 +2925,18 @@ type HlsGroupSettings struct {
 	// If "vod", all segments are indexed and kept permanently in the destination and
 	// manifest. If "live", only the number segments specified in keepSegments and
 	// indexNSegments are kept; newer segments replace older segments, which may
-	// prevent players from rewinding all the way to the beginning of the event. VOD
-	// mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running,
+	// prevent players from rewinding all the way to the beginning of the event.
+	//
+	// VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running,
 	// converting it to a "VOD" type manifest on completion of the stream.
 	Mode HlsMode
 
 	// MANIFESTS_AND_SEGMENTS: Generates manifests (master manifest, if applicable,
-	// and media manifests) for this output group. VARIANT_MANIFESTS_AND_SEGMENTS:
-	// Generates media manifests for this output group, but not a master manifest.
+	// and media manifests) for this output group.
+	//
+	// VARIANT_MANIFESTS_AND_SEGMENTS: Generates media manifests for this output
+	// group, but not a master manifest.
+	//
 	// SEGMENTS_ONLY: Does not generate any manifests for this output group.
 	OutputSelection HlsOutputSelection
 
@@ -2900,12 +2945,16 @@ type HlsGroupSettings struct {
 	ProgramDateTime HlsProgramDateTime
 
 	// Specifies the algorithm used to drive the HLS EXT-X-PROGRAM-DATE-TIME clock.
-	// Options include: INITIALIZE_FROM_OUTPUT_TIMECODE: The PDT clock is initialized
-	// as a function of the first output timecode, then incremented by the EXTINF
-	// duration of each encoded segment. SYSTEM_CLOCK: The PDT clock is initialized as
-	// a function of the UTC wall clock, then incremented by the EXTINF duration of
-	// each encoded segment. If the PDT clock diverges from the wall clock by more than
-	// 500ms, it is resynchronized to the wall clock.
+	// Options include:
+	//
+	// INITIALIZE_FROM_OUTPUT_TIMECODE: The PDT clock is initialized as a function of
+	// the first output timecode, then incremented by the EXTINF duration of each
+	// encoded segment.
+	//
+	// SYSTEM_CLOCK: The PDT clock is initialized as a function of the UTC wall clock,
+	// then incremented by the EXTINF duration of each encoded segment. If the PDT
+	// clock diverges from the wall clock by more than 500ms, it is resynchronized to
+	// the wall clock.
 	ProgramDateTimeClock HlsProgramDateTimeClock
 
 	// Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.
@@ -2917,11 +2966,14 @@ type HlsGroupSettings struct {
 	// stale manifest detection to switch from one manifest to the other, when the
 	// current manifest seems to be stale. There are still two destinations and two
 	// master manifests, but both master manifests reference the media files from both
-	// pipelines. DISABLED: The master manifest (.m3u8 file) for each pipeline includes
-	// information about its own pipeline only. For an HLS output group with
-	// MediaPackage as the destination, the DISABLED behavior is always followed.
-	// MediaPackage regenerates the manifests it serves to players so a redundant
-	// manifest from MediaLive is irrelevant.
+	// pipelines.
+	//
+	// DISABLED: The master manifest (.m3u8 file) for each pipeline includes
+	// information about its own pipeline only.
+	//
+	// For an HLS output group with MediaPackage as the destination, the DISABLED
+	// behavior is always followed. MediaPackage regenerates the manifests it serves to
+	// players so a redundant manifest from MediaLive is irrelevant.
 	RedundantManifest HlsRedundantManifest
 
 	// Length of MPEG-2 Transport Stream segments to create in seconds. Note that
@@ -2952,11 +3004,13 @@ type HlsGroupSettings struct {
 	TimestampDeltaMilliseconds *int32
 
 	// SEGMENTED_FILES: Emit the program as segments - multiple .ts media files.
-	// SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts
-	// media file. The media manifest includes #EXT-X-BYTERANGE tags to index segments
-	// for playback. A typical use for this value is when sending the output to AWS
-	// Elemental MediaConvert, which can accept only a single media file. Playback
-	// while the channel is running is not guaranteed due to HTTP server caching.
+	//
+	// SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single
+	// .ts media file. The media manifest includes #EXT-X-BYTERANGE tags to index
+	// segments for playback. A typical use for this value is when sending the output
+	// to AWS Elemental MediaConvert, which can accept only a single media file.
+	// Playback while the channel is running is not guaranteed due to HTTP server
+	// caching.
 	TsFileMode HlsTsFileMode
 
 	noSmithyDocumentSerde
@@ -3710,6 +3764,7 @@ type InputSettings struct {
 
 	// Turns on the filter for this input. MPEG-2 inputs have the deblocking filter
 	// enabled by default.
+	//
 	//   - auto - filtering will be applied depending on input type/quality
 	//   - disabled - no filtering will be applied to the input
 	//   - forced - filtering will be applied regardless of input type
@@ -3725,6 +3780,7 @@ type InputSettings struct {
 	// Specifies whether to extract applicable ancillary data from a SMPTE-2038 source
 	// in this input. Applicable data types are captions, timecode, AFD, and SCTE-104
 	// messages.
+	//
 	//   - PREFER: Extract from SMPTE-2038 if present in this input, otherwise extract
 	//   from another source (if any).
 	//   - IGNORE: Never extract any ancillary data from SMPTE-2038.
@@ -4066,14 +4122,16 @@ type M2tsSettings struct {
 	// The segmentation style parameter controls how segmentation markers are inserted
 	// into the transport stream. With avails, it is possible that segments may be
 	// truncated, which can influence where future segmentation markers are inserted.
+	//
 	// When a segmentation style of "resetCadence" is selected and a segment is
 	// truncated due to an avail, we will reset the segmentation cadence. This means
-	// the subsequent segment will have a duration of $segmentationTime seconds. When
-	// a segmentation style of "maintainCadence" is selected and a segment is truncated
-	// due to an avail, we will not reset the segmentation cadence. This means the
-	// subsequent segment will likely be truncated as well. However, all segments after
-	// that will have a duration of $segmentationTime seconds. Note that EBP lookahead
-	// is a slight exception to this rule.
+	// the subsequent segment will have a duration of $segmentationTime seconds.
+	//
+	// When a segmentation style of "maintainCadence" is selected and a segment is
+	// truncated due to an avail, we will not reset the segmentation cadence. This
+	// means the subsequent segment will likely be truncated as well. However, all
+	// segments after that will have a duration of $segmentationTime seconds. Note
+	// that EBP lookahead is a slight exception to this rule.
 	SegmentationStyle M2tsSegmentationStyle
 
 	// The length in seconds of each segment. Required unless markers is set to none.
@@ -4529,13 +4587,17 @@ type MsSmoothGroupSettings struct {
 	// be be delivered to the IIS server once the connection is re-established.
 	ConnectionRetryInterval *int32
 
-	// MS Smooth event ID to be sent to the IIS server. Should only be specified if
-	// eventIdMode is set to useConfigured.
+	// MS Smooth event ID to be sent to the IIS server.
+	//
+	// Should only be specified if eventIdMode is set to useConfigured.
 	EventId *string
 
 	// Specifies whether or not to send an event ID to the IIS server. If no event ID
 	// is sent and the same Live Event is used without changing the publishing point,
-	// clients might see cached video from the previous run. Options:
+	// clients might see cached video from the previous run.
+	//
+	// Options:
+	//
 	//   - "useConfigured" - use the value provided in eventId
 	//   - "useTimestamp" - generate and send an event ID based on the current
 	//   timestamp
@@ -4570,6 +4632,7 @@ type MsSmoothGroupSettings struct {
 	SendDelayMs *int32
 
 	// Identifies the type of data to place in the sparse track:
+	//
 	//   - SCTE35: Insert SCTE-35 messages from the source content. With each message,
 	//   insert an IDR frame to start a new segment.
 	//   - SCTE35_WITHOUT_SEGMENTATION: Insert SCTE-35 messages from the source
@@ -4586,6 +4649,7 @@ type MsSmoothGroupSettings struct {
 	TimestampOffset *string
 
 	// Type of timestamp date offset to use.
+	//
 	//   - useEventStartDate: Use the date the event was started as the offset
 	//   - useConfiguredOffset: Use an explicitly configured date as the offset
 	TimestampOffsetMode SmoothGroupTimestampOffsetMode
@@ -5000,6 +5064,7 @@ type NielsenWatermarksSettings struct {
 	NielsenCbetSettings *NielsenCBET
 
 	// Choose the distribution types that you want to assign to the watermarks:
+	//
 	//   - PROGRAM_CONTENT
 	//   - FINAL_DISTRIBUTOR
 	NielsenDistributionType NielsenWatermarksDistributionTypes
@@ -5457,6 +5522,7 @@ type RtmpGroupSettings struct {
 	IncludeFillerNalUnits IncludeFillerNalUnits
 
 	// Controls the behavior of this RTMP group if input becomes unavailable.
+	//
 	//   - emitOutput: Emit a slate until input returns.
 	//   - pauseOutput: Stop transmitting data until input returns. This does not
 	//   close the underlying RTMP connection.
@@ -5621,6 +5687,7 @@ type Scte27SourceSettings struct {
 
 	// The pid field is used in conjunction with the caption selector languageCode
 	// field as follows:
+	//
 	//   - Specify PID and Language: Extracts captions from that PID; the language is
 	//   "informational".
 	//   - Specify PID and omit Language: Extracts the specified PID.
@@ -6137,6 +6204,7 @@ type TeletextSourceSettings struct {
 type TemporalFilterSettings struct {
 
 	// If you enable this filter, the results are the following:
+	//
 	//   - If the source content is noisy (it contains excessive digital artifacts),
 	//   the filter cleans up the source.
 	//   - If the source content is already clean, the filter tends to decrease the

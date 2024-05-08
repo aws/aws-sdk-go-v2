@@ -11,9 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of DomainSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html)
-// objects for all domains owned by the Amazon Web Services account that makes this
-// call. Each returned DomainSummary object contains information about a domain.
+//	Returns a list of [DomainSummary] objects for all domains owned by the Amazon Web Services
+//
+// account that makes this call. Each returned DomainSummary object contains
+// information about a domain.
+//
+// [DomainSummary]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html
 func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optFns ...func(*Options)) (*ListDomainsOutput, error) {
 	if params == nil {
 		params = &ListDomainsInput{}
@@ -31,10 +34,10 @@ func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optF
 
 type ListDomainsInput struct {
 
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	MaxResults *int32
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
@@ -43,11 +46,12 @@ type ListDomainsInput struct {
 
 type ListDomainsOutput struct {
 
-	// The returned list of DomainSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainSummary.html)
-	// objects.
+	//  The returned list of [DomainSummary] objects.
+	//
+	// [DomainSummary]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainSummary.html
 	Domains []types.DomainSummary
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
@@ -142,7 +146,7 @@ var _ ListDomainsAPIClient = (*Client)(nil)
 
 // ListDomainsPaginatorOptions is the paginator options for ListDomains
 type ListDomainsPaginatorOptions struct {
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

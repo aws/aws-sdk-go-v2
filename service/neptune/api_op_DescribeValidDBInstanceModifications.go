@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// You can call DescribeValidDBInstanceModifications to learn what modifications
-// you can make to your DB instance. You can use this information when you call
-// ModifyDBInstance .
+// You can call DescribeValidDBInstanceModifications to learn what modifications you can make to your DB instance. You
+// can use this information when you call ModifyDBInstance.
 func (c *Client) DescribeValidDBInstanceModifications(ctx context.Context, params *DescribeValidDBInstanceModificationsInput, optFns ...func(*Options)) (*DescribeValidDBInstanceModificationsOutput, error) {
 	if params == nil {
 		params = &DescribeValidDBInstanceModificationsInput{}
@@ -42,9 +41,8 @@ type DescribeValidDBInstanceModificationsInput struct {
 type DescribeValidDBInstanceModificationsOutput struct {
 
 	// Information about valid modifications that you can make to your DB instance.
-	// Contains the result of a successful call to the
-	// DescribeValidDBInstanceModifications action. You can use this information when
-	// you call ModifyDBInstance .
+	// Contains the result of a successful call to the DescribeValidDBInstanceModificationsaction. You can use this
+	// information when you call ModifyDBInstance.
 	ValidDBInstanceModificationsMessage *types.ValidDBInstanceModificationsMessage
 
 	// Metadata pertaining to the operation's result.

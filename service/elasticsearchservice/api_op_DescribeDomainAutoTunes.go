@@ -47,13 +47,15 @@ type DescribeDomainAutoTunesInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of DescribeDomainAutoTunes request. See the Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
-// for more information.
+// The result of DescribeDomainAutoTunes request. See the [Developer Guide] for more information.
+//
+// [Developer Guide]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
 type DescribeDomainAutoTunesOutput struct {
 
 	// Specifies the list of setting adjustments that Auto-Tune has made to the
-	// domain. See the Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
-	// for more information.
+	// domain. See the [Developer Guide]for more information.
+	//
+	// [Developer Guide]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
 	AutoTunes []types.AutoTune
 
 	// Specifies an identifier to allow retrieval of paginated results.

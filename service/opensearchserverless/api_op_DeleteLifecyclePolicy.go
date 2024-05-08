@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an OpenSearch Serverless lifecycle policy. For more information, see
-// Deleting data lifecycle policies (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-delete)
-// .
+// Deletes an OpenSearch Serverless lifecycle policy. For more information, see [Deleting data lifecycle policies].
+//
+// [Deleting data lifecycle policies]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-delete
 func (c *Client) DeleteLifecyclePolicy(ctx context.Context, params *DeleteLifecyclePolicyInput, optFns ...func(*Options)) (*DeleteLifecyclePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteLifecyclePolicyInput{}

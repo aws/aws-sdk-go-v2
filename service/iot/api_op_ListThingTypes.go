@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the existing thing types. Requires permission to access the ListThingTypes (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Lists the existing thing types.
+//
+// Requires permission to access the [ListThingTypes] action.
+//
+// [ListThingTypes]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListThingTypes(ctx context.Context, params *ListThingTypesInput, optFns ...func(*Options)) (*ListThingTypesOutput, error) {
 	if params == nil {
 		params = &ListThingTypesInput{}

@@ -12,10 +12,12 @@ import (
 	"time"
 )
 
-// Lists events for a given source identifier and source type. You can also
-// specify a start and end time. For more information on DMS events, see Working
-// with Events and Notifications (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html)
-// in the Database Migration Service User Guide.
+//	Lists events for a given source identifier and source type. You can also
+//
+// specify a start and end time. For more information on DMS events, see [Working with Events and Notifications]in the
+// Database Migration Service User Guide.
+//
+// [Working with Events and Notifications]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {
 	if params == nil {
 		params = &DescribeEventsInput{}
@@ -45,22 +47,26 @@ type DescribeEventsInput struct {
 	// Filters applied to events. The only valid filter is replication-instance-id .
 	Filters []types.Filter
 
-	// An optional pagination token provided by a previous request. If this parameter
+	//  An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
-	// The identifier of an event source.
+	//  The identifier of an event source.
 	SourceIdentifier *string
 
-	// The type of DMS resource that generates events. Valid values:
-	// replication-instance | replication-task
+	// The type of DMS resource that generates events.
+	//
+	// Valid values: replication-instance | replication-task
 	SourceType types.SourceType
 
 	// The start time for the events to be listed.
@@ -74,7 +80,7 @@ type DescribeEventsOutput struct {
 	// The events described.
 	Events []types.Event
 
-	// An optional pagination token provided by a previous request. If this parameter
+	//  An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
@@ -174,10 +180,13 @@ var _ DescribeEventsAPIClient = (*Client)(nil)
 
 // DescribeEventsPaginatorOptions is the paginator options for DescribeEvents
 type DescribeEventsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

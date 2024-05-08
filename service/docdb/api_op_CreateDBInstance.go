@@ -27,7 +27,7 @@ func (c *Client) CreateDBInstance(ctx context.Context, params *CreateDBInstanceI
 	return out, nil
 }
 
-// Represents the input to CreateDBInstance .
+// Represents the input to CreateDBInstance.
 type CreateDBInstanceInput struct {
 
 	// The identifier of the cluster that the instance will belong to.
@@ -41,33 +41,47 @@ type CreateDBInstanceInput struct {
 	DBInstanceClass *string
 
 	// The instance identifier. This parameter is stored as a lowercase string.
+	//
 	// Constraints:
+	//
 	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//
 	//   - The first character must be a letter.
+	//
 	//   - Cannot end with a hyphen or contain two consecutive hyphens.
+	//
 	// Example: mydbinstance
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// The name of the database engine to be used for this instance. Valid value: docdb
+	// The name of the database engine to be used for this instance.
+	//
+	// Valid value: docdb
 	//
 	// This member is required.
 	Engine *string
 
 	// This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does not
-	// perform minor version upgrades regardless of the value set. Default: false
+	// perform minor version upgrades regardless of the value set.
+	//
+	// Default: false
 	AutoMinorVersionUpgrade *bool
 
-	// The Amazon EC2 Availability Zone that the instance is created in. Default: A
-	// random, system-chosen Availability Zone in the endpoint's Amazon Web Services
-	// Region. Example: us-east-1d
+	// The Amazon EC2 Availability Zone that the instance is created in.
+	//
+	// Default: A random, system-chosen Availability Zone in the endpoint's Amazon Web
+	// Services Region.
+	//
+	// Example: us-east-1d
 	AvailabilityZone *string
 
 	// The CA certificate identifier to use for the DB instance's server certificate.
-	// For more information, see Updating Your Amazon DocumentDB TLS Certificates (https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html)
-	// and Encrypting Data in Transit (https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html)
-	// in the Amazon DocumentDB Developer Guide.
+	//
+	// For more information, see [Updating Your Amazon DocumentDB TLS Certificates] and [Encrypting Data in Transit] in the Amazon DocumentDB Developer Guide.
+	//
+	// [Updating Your Amazon DocumentDB TLS Certificates]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
+	// [Encrypting Data in Transit]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
 	CACertificateIdentifier *string
 
 	// A value that indicates whether to copy tags from the DB instance to snapshots
@@ -75,28 +89,42 @@ type CreateDBInstanceInput struct {
 	CopyTagsToSnapshot *bool
 
 	// A value that indicates whether to enable Performance Insights for the DB
-	// Instance. For more information, see Using Amazon Performance Insights (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html)
-	// .
+	// Instance. For more information, see [Using Amazon Performance Insights].
+	//
+	// [Using Amazon Performance Insights]: https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html
 	EnablePerformanceInsights *bool
 
-	// The KMS key identifier for encryption of Performance Insights data. The KMS key
-	// identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. If
-	// you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon
+	// The KMS key identifier for encryption of Performance Insights data.
+	//
+	// The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the
+	// KMS key.
+	//
+	// If you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon
 	// DocumentDB uses your default KMS key. There is a default KMS key for your Amazon
 	// Web Services account. Your Amazon Web Services account has a different default
 	// KMS key for each Amazon Web Services region.
 	PerformanceInsightsKMSKeyId *string
 
 	// The time range each week during which system maintenance can occur, in
-	// Universal Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default
-	// is a 30-minute window selected at random from an 8-hour block of time for each
-	// Amazon Web Services Region, occurring on a random day of the week. Valid days:
-	// Mon, Tue, Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
+	// Universal Coordinated Time (UTC).
+	//
+	// Format: ddd:hh24:mi-ddd:hh24:mi
+	//
+	// The default is a 30-minute window selected at random from an 8-hour block of
+	// time for each Amazon Web Services Region, occurring on a random day of the week.
+	//
+	// Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
+	//
+	// Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
 
 	// A value that specifies the order in which an Amazon DocumentDB replica is
 	// promoted to the primary instance after a failure of the existing primary
-	// instance. Default: 1 Valid values: 0-15
+	// instance.
+	//
+	// Default: 1
+	//
+	// Valid values: 0-15
 	PromotionTier *int32
 
 	// The tags to be assigned to the instance. You can assign up to 10 tags to an

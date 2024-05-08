@@ -29,9 +29,14 @@ func (c *Client) DeleteDBParameterGroup(ctx context.Context, params *DeleteDBPar
 
 type DeleteDBParameterGroupInput struct {
 
-	// The name of the DB parameter group. Constraints:
+	// The name of the DB parameter group.
+	//
+	// Constraints:
+	//
 	//   - Must be the name of an existing DB parameter group
+	//
 	//   - You can't delete a default DB parameter group
+	//
 	//   - Can't be associated with any DB instances
 	//
 	// This member is required.

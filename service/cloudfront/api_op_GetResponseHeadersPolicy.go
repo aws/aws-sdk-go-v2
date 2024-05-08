@@ -12,12 +12,13 @@ import (
 )
 
 // Gets a response headers policy, including metadata (the policy's identifier and
-// the date and time when the policy was last modified). To get a response headers
-// policy, you must provide the policy's identifier. If the response headers policy
-// is attached to a distribution's cache behavior, you can get the policy's
-// identifier using ListDistributions or GetDistribution . If the response headers
-// policy is not attached to a cache behavior, you can get the identifier using
-// ListResponseHeadersPolicies .
+// the date and time when the policy was last modified).
+//
+// To get a response headers policy, you must provide the policy's identifier. If
+// the response headers policy is attached to a distribution's cache behavior, you
+// can get the policy's identifier using ListDistributions or GetDistribution . If
+// the response headers policy is not attached to a cache behavior, you can get the
+// identifier using ListResponseHeadersPolicies .
 func (c *Client) GetResponseHeadersPolicy(ctx context.Context, params *GetResponseHeadersPolicyInput, optFns ...func(*Options)) (*GetResponseHeadersPolicyOutput, error) {
 	if params == nil {
 		params = &GetResponseHeadersPolicyInput{}
@@ -35,11 +36,12 @@ func (c *Client) GetResponseHeadersPolicy(ctx context.Context, params *GetRespon
 
 type GetResponseHeadersPolicyInput struct {
 
-	// The identifier for the response headers policy. If the response headers policy
-	// is attached to a distribution's cache behavior, you can get the policy's
-	// identifier using ListDistributions or GetDistribution . If the response headers
-	// policy is not attached to a cache behavior, you can get the identifier using
-	// ListResponseHeadersPolicies .
+	// The identifier for the response headers policy.
+	//
+	// If the response headers policy is attached to a distribution's cache behavior,
+	// you can get the policy's identifier using ListDistributions or GetDistribution .
+	// If the response headers policy is not attached to a cache behavior, you can get
+	// the identifier using ListResponseHeadersPolicies .
 	//
 	// This member is required.
 	Id *string

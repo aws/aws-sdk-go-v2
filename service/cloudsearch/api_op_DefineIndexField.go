@@ -11,14 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Configures an IndexField for the search domain. Used to create new fields and
-// modify existing ones. You must specify the name of the domain you are
-// configuring and an index field configuration. The index field configuration
-// specifies a unique name, the index field type, and the options you want to
-// configure for the field. The options you can specify depend on the
-// IndexFieldType . If the field exists, the new configuration replaces the old
-// one. For more information, see Configuring Index Fields (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html)
-// in the Amazon CloudSearch Developer Guide.
+// Configures an IndexField for the search domain. Used to create new fields and modify
+// existing ones. You must specify the name of the domain you are configuring and
+// an index field configuration. The index field configuration specifies a unique
+// name, the index field type, and the options you want to configure for the field.
+// The options you can specify depend on the IndexFieldType. If the field exists, the new
+// configuration replaces the old one. For more information, see [Configuring Index Fields]in the Amazon
+// CloudSearch Developer Guide.
+//
+// [Configuring Index Fields]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html
 func (c *Client) DefineIndexField(ctx context.Context, params *DefineIndexFieldInput, optFns ...func(*Options)) (*DefineIndexFieldOutput, error) {
 	if params == nil {
 		params = &DefineIndexFieldInput{}
@@ -34,8 +35,8 @@ func (c *Client) DefineIndexField(ctx context.Context, params *DefineIndexFieldI
 	return out, nil
 }
 
-// Container for the parameters to the DefineIndexField operation. Specifies the
-// name of the domain you want to update and the index field configuration.
+// Container for the parameters to the DefineIndexField operation. Specifies the name of the
+// domain you want to update and the index field configuration.
 type DefineIndexFieldInput struct {
 
 	// A string that represents the name of a domain. Domain names are unique across
@@ -54,8 +55,8 @@ type DefineIndexFieldInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a DefineIndexField request. Contains the status of the
-// newly-configured index field.
+// The result of a DefineIndexField request. Contains the status of the newly-configured index
+// field.
 type DefineIndexFieldOutput struct {
 
 	// The value of an IndexField and its current status.

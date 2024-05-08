@@ -48,54 +48,70 @@ type GetKxScalingGroupOutput struct {
 	// The identifier of the availability zones.
 	AvailabilityZoneId *string
 
-	// The list of Managed kdb clusters that are currently active in the given scaling
-	// group.
+	//  The list of Managed kdb clusters that are currently active in the given
+	// scaling group.
 	Clusters []string
 
-	// The timestamp at which the scaling group was created in FinSpace. The value is
+	//  The timestamp at which the scaling group was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	CreatedTimestamp *time.Time
 
-	// The memory and CPU capabilities of the scaling group host on which FinSpace
-	// Managed kdb clusters will be placed. It can have one of the following values:
+	//  The memory and CPU capabilities of the scaling group host on which FinSpace
+	// Managed kdb clusters will be placed.
+	//
+	// It can have one of the following values:
+	//
 	//   - kx.sg.4xlarge – The host type with a configuration of 108 GiB memory and 16
 	//   vCPUs.
+	//
 	//   - kx.sg.8xlarge – The host type with a configuration of 216 GiB memory and 32
 	//   vCPUs.
+	//
 	//   - kx.sg.16xlarge – The host type with a configuration of 432 GiB memory and 64
 	//   vCPUs.
+	//
 	//   - kx.sg.32xlarge – The host type with a configuration of 864 GiB memory and
 	//   128 vCPUs.
+	//
 	//   - kx.sg1.16xlarge – The host type with a configuration of 1949 GiB memory and
 	//   64 vCPUs.
+	//
 	//   - kx.sg1.24xlarge – The host type with a configuration of 2948 GiB memory and
 	//   96 vCPUs.
 	HostType *string
 
-	// The last time that the scaling group was updated in FinSpace. The value is
+	//  The last time that the scaling group was updated in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	LastModifiedTimestamp *time.Time
 
-	// The ARN identifier for the scaling group.
+	//  The ARN identifier for the scaling group.
 	ScalingGroupArn *string
 
 	// A unique identifier for the kdb scaling group.
 	ScalingGroupName *string
 
 	// The status of scaling group.
+	//
 	//   - CREATING – The scaling group creation is in progress.
+	//
 	//   - CREATE_FAILED – The scaling group creation has failed.
+	//
 	//   - ACTIVE – The scaling group is active.
+	//
 	//   - UPDATING – The scaling group is in the process of being updated.
+	//
 	//   - UPDATE_FAILED – The update action failed.
+	//
 	//   - DELETING – The scaling group is in the process of being deleted.
+	//
 	//   - DELETE_FAILED – The system failed to delete the scaling group.
+	//
 	//   - DELETED – The scaling group is successfully deleted.
 	Status types.KxScalingGroupStatus
 
-	// The error message when a failed state occurs.
+	//  The error message when a failed state occurs.
 	StatusReason *string
 
 	// Metadata pertaining to the operation's result.

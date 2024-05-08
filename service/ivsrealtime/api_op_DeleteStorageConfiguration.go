@@ -10,11 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the storage configuration for the specified ARN. If you try to delete a
-// storage configuration that is used by a Composition, you will get an error (409
-// ConflictException). To avoid this, for all Compositions that reference the
-// storage configuration, first use StopComposition and wait for it to complete,
-// then use DeleteStorageConfiguration.
+// Deletes the storage configuration for the specified ARN.
+//
+// If you try to delete a storage configuration that is used by a Composition, you
+// will get an error (409 ConflictException). To avoid this, for all Compositions
+// that reference the storage configuration, first use StopCompositionand wait for it to
+// complete, then use DeleteStorageConfiguration.
 func (c *Client) DeleteStorageConfiguration(ctx context.Context, params *DeleteStorageConfigurationInput, optFns ...func(*Options)) (*DeleteStorageConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteStorageConfigurationInput{}

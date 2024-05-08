@@ -12,10 +12,13 @@ import (
 )
 
 // Provides summary information about the routing profiles for the specified
-// Amazon Connect instance. For more information about routing profiles, see
-// Routing Profiles (https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing.html)
-// and Create a Routing Profile (https://docs.aws.amazon.com/connect/latest/adminguide/routing-profiles.html)
-// in the Amazon Connect Administrator Guide.
+// Amazon Connect instance.
+//
+// For more information about routing profiles, see [Routing Profiles] and [Create a Routing Profile] in the Amazon Connect
+// Administrator Guide.
+//
+// [Create a Routing Profile]: https://docs.aws.amazon.com/connect/latest/adminguide/routing-profiles.html
+// [Routing Profiles]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing.html
 func (c *Client) ListRoutingProfiles(ctx context.Context, params *ListRoutingProfilesInput, optFns ...func(*Options)) (*ListRoutingProfilesOutput, error) {
 	if params == nil {
 		params = &ListRoutingProfilesInput{}
@@ -33,8 +36,10 @@ func (c *Client) ListRoutingProfiles(ctx context.Context, params *ListRoutingPro
 
 type ListRoutingProfilesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

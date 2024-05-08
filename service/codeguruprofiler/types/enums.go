@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ActionGroup. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionGroup) Values() []ActionGroup {
 	return []ActionGroup{
 		"agentPermissions",
@@ -37,8 +38,9 @@ const (
 )
 
 // Values returns all known values for AgentParameterField. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AgentParameterField) Values() []AgentParameterField {
 	return []AgentParameterField{
 		"SamplingIntervalInMilliseconds",
@@ -62,8 +64,9 @@ const (
 )
 
 // Values returns all known values for AggregationPeriod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AggregationPeriod) Values() []AggregationPeriod {
 	return []AggregationPeriod{
 		"PT5M",
@@ -84,8 +87,9 @@ const (
 )
 
 // Values returns all known values for ComputePlatform. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComputePlatform) Values() []ComputePlatform {
 	return []ComputePlatform{
 		"Default",
@@ -102,8 +106,9 @@ const (
 )
 
 // Values returns all known values for EventPublisher. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventPublisher) Values() []EventPublisher {
 	return []EventPublisher{
 		"AnomalyDetection",
@@ -121,8 +126,9 @@ const (
 )
 
 // Values returns all known values for FeedbackType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FeedbackType) Values() []FeedbackType {
 	return []FeedbackType{
 		"Positive",
@@ -155,8 +161,9 @@ const (
 )
 
 // Values returns all known values for MetadataField. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MetadataField) Values() []MetadataField {
 	return []MetadataField{
 		"ComputePlatform",
@@ -181,8 +188,9 @@ const (
 )
 
 // Values returns all known values for MetricType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MetricType) Values() []MetricType {
 	return []MetricType{
 		"AggregatedRelativeTotalTime",
@@ -200,8 +208,9 @@ const (
 )
 
 // Values returns all known values for OrderBy. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrderBy) Values() []OrderBy {
 	return []OrderBy{
 		"TimestampDescending",

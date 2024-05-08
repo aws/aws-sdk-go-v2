@@ -17,8 +17,10 @@ import (
 )
 
 // Retrieves the details of a particular location registered in your S3 Access
-// Grants instance. Permissions You must have the s3:GetAccessGrantsLocation
-// permission to use this operation.
+// Grants instance.
+//
+// Permissions You must have the s3:GetAccessGrantsLocation permission to use this
+// operation.
 func (c *Client) GetAccessGrantsLocation(ctx context.Context, params *GetAccessGrantsLocationInput, optFns ...func(*Options)) (*GetAccessGrantsLocationOutput, error) {
 	if params == nil {
 		params = &GetAccessGrantsLocationInput{}

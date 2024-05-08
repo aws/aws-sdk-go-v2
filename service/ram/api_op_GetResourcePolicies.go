@@ -29,8 +29,9 @@ func (c *Client) GetResourcePolicies(ctx context.Context, params *GetResourcePol
 
 type GetResourcePoliciesInput struct {
 
-	// Specifies the Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the resources whose policies you want to retrieve.
+	// Specifies the [Amazon Resource Names (ARNs)] of the resources whose policies you want to retrieve.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	ResourceArns []string

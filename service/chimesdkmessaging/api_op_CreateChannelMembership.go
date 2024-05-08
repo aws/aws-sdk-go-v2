@@ -13,15 +13,22 @@ import (
 
 // Adds a member to a channel. The InvitedBy field in ChannelMembership is derived
 // from the request header. A channel member can:
+//
 //   - List messages
+//
 //   - Send messages
+//
 //   - Receive messages
+//
 //   - Edit their own messages
+//
 //   - Leave the channel
 //
 // Privacy settings impact this action as follows:
+//
 //   - Public Channels: You do not need to be a member to list messages, but you
 //     must be a member to send messages.
+//
 //   - Private Channels: You must be a member to list or send messages.
 //
 // The x-amz-chime-bearer request header is mandatory. Use the ARN of the
@@ -67,8 +74,10 @@ type CreateChannelMembershipInput struct {
 	// This member is required.
 	Type types.ChannelMembershipType
 
-	// The ID of the SubChannel in the request. Only required when creating membership
-	// in a SubChannel for a moderator in an elastic channel.
+	// The ID of the SubChannel in the request.
+	//
+	// Only required when creating membership in a SubChannel for a moderator in an
+	// elastic channel.
 	SubChannelId *string
 
 	noSmithyDocumentSerde

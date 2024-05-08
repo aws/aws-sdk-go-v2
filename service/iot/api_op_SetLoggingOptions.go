@@ -11,9 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the logging options. NOTE: use of this command is not recommended. Use
-// SetV2LoggingOptions instead. Requires permission to access the SetLoggingOptions (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Sets the logging options.
+//
+// NOTE: use of this command is not recommended. Use SetV2LoggingOptions instead.
+//
+// Requires permission to access the [SetLoggingOptions] action.
+//
+// [SetLoggingOptions]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) SetLoggingOptions(ctx context.Context, params *SetLoggingOptionsInput, optFns ...func(*Options)) (*SetLoggingOptionsOutput, error) {
 	if params == nil {
 		params = &SetLoggingOptionsInput{}

@@ -87,16 +87,18 @@ type DescribeContactOutput struct {
 	// Tags assigned to a contact.
 	Tags map[string]string
 
-	// Projected time in UTC your satellite will set below the receive mask (https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html)
-	// . This time is based on the satellite's current active ephemeris for future
-	// contacts and the ephemeris that was active during contact execution for
-	// completed contacts.
+	//  Projected time in UTC your satellite will set below the [receive mask]. This time is based
+	// on the satellite's current active ephemeris for future contacts and the
+	// ephemeris that was active during contact execution for completed contacts.
+	//
+	// [receive mask]: https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html
 	VisibilityEndTime *time.Time
 
-	// Projected time in UTC your satellite will rise above the receive mask (https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html)
-	// . This time is based on the satellite's current active ephemeris for future
-	// contacts and the ephemeris that was active during contact execution for
-	// completed contacts.
+	//  Projected time in UTC your satellite will rise above the [receive mask]. This time is based
+	// on the satellite's current active ephemeris for future contacts and the
+	// ephemeris that was active during contact execution for completed contacts.
+	//
+	// [receive mask]: https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html
 	VisibilityStartTime *time.Time
 
 	// Metadata pertaining to the operation's result.
@@ -224,12 +226,13 @@ type ContactScheduledWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeContactInput, *DescribeContactOutput, error) (bool, error)
 }
 

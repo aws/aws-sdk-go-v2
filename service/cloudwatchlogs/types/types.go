@@ -15,8 +15,9 @@ type AccountPolicy struct {
 	// The date and time that this policy was most recently updated.
 	LastUpdatedTime *int64
 
-	// The policy document for this account policy. The JSON specified in
-	// policyDocument can be up to 30,720 characters.
+	// The policy document for this account policy.
+	//
+	// The JSON specified in policyDocument can be up to 30,720 characters.
 	PolicyDocument *string
 
 	// The name of the account policy.
@@ -35,9 +36,11 @@ type AccountPolicy struct {
 }
 
 // This structure represents one anomaly that has been found by a logs anomaly
-// detector. For more information about patterns and anomalies, see
-// CreateLogAnomalyDetector (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogAnomalyDetector.html)
-// .
+// detector.
+//
+// For more information about patterns and anomalies, see [CreateLogAnomalyDetector].
+//
+// [CreateLogAnomalyDetector]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogAnomalyDetector.html
 type Anomaly struct {
 
 	// Specifies whether this anomaly is still ongoing.
@@ -112,10 +115,11 @@ type Anomaly struct {
 	PatternTokens []PatternToken
 
 	// Indicates the current state of this anomaly. If it is still being treated as an
-	// anomaly, the value is Active . If you have suppressed this anomaly by using the
-	// UpdateAnomaly (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateAnomaly.html)
+	// anomaly, the value is Active . If you have suppressed this anomaly by using the [UpdateAnomaly]
 	// operation, the value is Suppressed . If this behavior is now considered to be
 	// normal, the value is Baseline .
+	//
+	// [UpdateAnomaly]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateAnomaly.html
 	//
 	// This member is required.
 	State State
@@ -134,8 +138,9 @@ type Anomaly struct {
 	Priority *string
 
 	// Indicates whether this anomaly is currently suppressed. To suppress an anomaly,
-	// use UpdateAnomaly (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateAnomaly.html)
-	// .
+	// use [UpdateAnomaly].
+	//
+	// [UpdateAnomaly]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateAnomaly.html
 	Suppressed *bool
 
 	// If the anomaly is suppressed, this indicates when it was suppressed.
@@ -156,8 +161,9 @@ type AnomalyDetector struct {
 	AnomalyDetectorArn *string
 
 	// Specifies the current status of the anomaly detector. To pause an anomaly
-	// detector, use the enabled parameter in the UpdateLogAnomalyDetector (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateLogAnomalyDetector.html)
-	// operation.
+	// detector, use the enabled parameter in the [UpdateLogAnomalyDetector] operation.
+	//
+	// [UpdateLogAnomalyDetector]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateLogAnomalyDetector.html
 	AnomalyDetectorStatus AnomalyDetectorStatus
 
 	// The number of days used as the life cycle of anomalies. After this time,
@@ -192,11 +198,17 @@ type AnomalyDetector struct {
 	noSmithyDocumentSerde
 }
 
-// This structure contains information about one delivery in your account. A
-// delivery is a connection between a logical delivery source and a logical
-// delivery destination. For more information, see CreateDelivery (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html)
-// . You can't update an existing delivery. You can only create and delete
+// This structure contains information about one delivery in your account.
+//
+// A delivery is a connection between a logical delivery source and a logical
+// delivery destination.
+//
+// For more information, see [CreateDelivery].
+//
+// You can't update an existing delivery. You can only create and delete
 // deliveries.
+//
+// [CreateDelivery]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
 type Delivery struct {
 
 	// The Amazon Resource Name (ARN) that uniquely identifies this delivery.
@@ -224,27 +236,32 @@ type Delivery struct {
 // This structure contains information about one delivery destination in your
 // account. A delivery destination is an Amazon Web Services resource that
 // represents an Amazon Web Services service that logs can be sent to. CloudWatch
-// Logs, Amazon S3, are supported as Firehose delivery destinations. To configure
-// logs delivery between a supported Amazon Web Services service and a destination,
-// you must do the following:
+// Logs, Amazon S3, are supported as Firehose delivery destinations.
+//
+// To configure logs delivery between a supported Amazon Web Services service and
+// a destination, you must do the following:
+//
 //   - Create a delivery source, which is a logical object that represents the
-//     resource that is actually sending the logs. For more information, see
-//     PutDeliverySource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html)
-//     .
+//     resource that is actually sending the logs. For more information, see [PutDeliverySource].
+//
 //   - Create a delivery destination, which is a logical object that represents
 //     the actual delivery destination.
-//   - If you are delivering logs cross-account, you must use
-//     PutDeliveryDestinationPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html)
-//     in the destination account to assign an IAM policy to the destination. This
-//     policy allows delivery to that destination.
+//
+//   - If you are delivering logs cross-account, you must use [PutDeliveryDestinationPolicy]in the destination
+//     account to assign an IAM policy to the destination. This policy allows delivery
+//     to that destination.
+//
 //   - Create a delivery by pairing exactly one delivery source and one delivery
-//     destination. For more information, see CreateDelivery (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html)
-//     .
+//     destination. For more information, see [CreateDelivery].
 //
 // You can configure a single delivery source to send logs to multiple
 // destinations by creating multiple deliveries. You can also create multiple
 // deliveries to configure multiple delivery sources to send logs to the same
 // delivery destination.
+//
+// [PutDeliverySource]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
+// [CreateDelivery]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+// [PutDeliveryDestinationPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html
 type DeliveryDestination struct {
 
 	// The Amazon Resource Name (ARN) that uniquely identifies this delivery
@@ -287,31 +304,37 @@ type DeliveryDestinationConfiguration struct {
 // This structure contains information about one delivery source in your account.
 // A delivery source is an Amazon Web Services resource that sends logs to an
 // Amazon Web Services destination. The destination can be CloudWatch Logs, Amazon
-// S3, or Firehose. Only some Amazon Web Services services support being configured
-// as a delivery source. These services are listed as Supported [V2 Permissions] in
-// the table at Enabling logging from Amazon Web Services services. (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html)
-// To configure logs delivery between a supported Amazon Web Services service and a
-// destination, you must do the following:
+// S3, or Firehose.
+//
+// Only some Amazon Web Services services support being configured as a delivery
+// source. These services are listed as Supported [V2 Permissions] in the table at [Enabling logging from Amazon Web Services services.]
+//
+// To configure logs delivery between a supported Amazon Web Services service and
+// a destination, you must do the following:
+//
 //   - Create a delivery source, which is a logical object that represents the
-//     resource that is actually sending the logs. For more information, see
-//     PutDeliverySource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html)
-//     .
+//     resource that is actually sending the logs. For more information, see [PutDeliverySource].
+//
 //   - Create a delivery destination, which is a logical object that represents
-//     the actual delivery destination. For more information, see
-//     PutDeliveryDestination (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html)
-//     .
-//   - If you are delivering logs cross-account, you must use
-//     PutDeliveryDestinationPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html)
-//     in the destination account to assign an IAM policy to the destination. This
-//     policy allows delivery to that destination.
+//     the actual delivery destination. For more information, see [PutDeliveryDestination].
+//
+//   - If you are delivering logs cross-account, you must use [PutDeliveryDestinationPolicy]in the destination
+//     account to assign an IAM policy to the destination. This policy allows delivery
+//     to that destination.
+//
 //   - Create a delivery by pairing exactly one delivery source and one delivery
-//     destination. For more information, see CreateDelivery (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html)
-//     .
+//     destination. For more information, see [CreateDelivery].
 //
 // You can configure a single delivery source to send logs to multiple
 // destinations by creating multiple deliveries. You can also create multiple
 // deliveries to configure multiple delivery sources to send logs to the same
 // delivery destination.
+//
+// [PutDeliveryDestination]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html
+// [PutDeliverySource]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
+// [Enabling logging from Amazon Web Services services.]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html
+// [CreateDelivery]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+// [PutDeliveryDestinationPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html
 type DeliverySource struct {
 
 	// The Amazon Resource Name (ARN) that uniquely identifies this delivery source.
@@ -497,8 +520,9 @@ type LiveTailSessionLogEvent struct {
 type LiveTailSessionMetadata struct {
 
 	// If this is true , then more than 500 log events matched the request for this
-	// update, and the sessionResults includes a sample of 500 of those events. If
-	// this is false , then 500 or fewer log events matched the request for this
+	// update, and the sessionResults includes a sample of 500 of those events.
+	//
+	// If this is false , then 500 or fewer log events matched the request for this
 	// update, so no sampling was necessary. In this case, the sessionResults array
 	// includes all log events that matched your request during this time.
 	Sampled bool
@@ -512,9 +536,11 @@ type LiveTailSessionStart struct {
 
 	// An optional pattern to filter the results to include only log events that match
 	// the pattern. For example, a filter pattern of error 404 displays only log
-	// events that include both error and 404 . For more information about filter
-	// pattern syntax, see Filter and Pattern Syntax (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html)
-	// .
+	// events that include both error and 404 .
+	//
+	// For more information about filter pattern syntax, see [Filter and Pattern Syntax].
+	//
+	// [Filter and Pattern Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
 	LogEventFilterPattern *string
 
 	// An array of the names and ARNs of the log groups included in this Live Tail
@@ -548,10 +574,11 @@ type LiveTailSessionUpdate struct {
 	SessionMetadata *LiveTailSessionMetadata
 
 	// An array, where each member of the array includes the information for one log
-	// event in the Live Tail session. A sessionResults array can include as many as
-	// 500 log events. If the number of log events matching the request exceeds 500 per
-	// second, the log events are sampled down to 500 log events to be included in each
-	// sessionUpdate structure.
+	// event in the Live Tail session.
+	//
+	// A sessionResults array can include as many as 500 log events. If the number of
+	// log events matching the request exceeds 500 per second, the log events are
+	// sampled down to 500 log events to be included in each sessionUpdate structure.
 	SessionResults []LiveTailSessionLogEvent
 
 	noSmithyDocumentSerde
@@ -574,13 +601,16 @@ type LogEvent struct {
 type LogGroup struct {
 
 	// The Amazon Resource Name (ARN) of the log group. This version of the ARN
-	// includes a trailing :* after the log group name. Use this version to refer to
-	// the ARN in IAM policies when specifying permissions for most API actions. The
-	// exception is when specifying permissions for TagResource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html)
-	// , UntagResource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html)
-	// , and ListTagsForResource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html)
-	// . The permissions for those three actions require the ARN version that doesn't
-	// include a trailing :* .
+	// includes a trailing :* after the log group name.
+	//
+	// Use this version to refer to the ARN in IAM policies when specifying
+	// permissions for most API actions. The exception is when specifying permissions
+	// for [TagResource], [UntagResource], and [ListTagsForResource]. The permissions for those three actions require the ARN version
+	// that doesn't include a trailing :* .
+	//
+	// [TagResource]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html
+	// [UntagResource]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html
+	// [ListTagsForResource]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html
 	Arn *string
 
 	// The creation time of the log group, expressed as the number of milliseconds
@@ -588,8 +618,9 @@ type LogGroup struct {
 	CreationTime *int64
 
 	// Displays whether this log group has a protection policy, or whether it had one
-	// in the past. For more information, see PutDataProtectionPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html)
-	// .
+	// in the past. For more information, see [PutDataProtectionPolicy].
+	//
+	// [PutDataProtectionPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html
 	DataProtectionStatus DataProtectionStatus
 
 	// Displays all the properties that this log group has inherited from
@@ -600,21 +631,31 @@ type LogGroup struct {
 	KmsKeyId *string
 
 	// The Amazon Resource Name (ARN) of the log group. This version of the ARN
-	// doesn't include a trailing :* after the log group name. Use this version to
-	// refer to the ARN in the following situations:
+	// doesn't include a trailing :* after the log group name.
+	//
+	// Use this version to refer to the ARN in the following situations:
+	//
 	//   - In the logGroupIdentifier input field in many CloudWatch Logs APIs.
+	//
 	//   - In the resourceArn field in tagging APIs
-	//   - In IAM policies, when specifying permissions for TagResource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html)
-	//   , UntagResource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html)
-	//   , and ListTagsForResource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html)
-	//   .
+	//
+	//   - In IAM policies, when specifying permissions for [TagResource], [UntagResource], and [ListTagsForResource].
+	//
+	// [TagResource]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html
+	// [UntagResource]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html
+	// [ListTagsForResource]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html
 	LogGroupArn *string
 
 	// This specifies the log group class for this log group. There are two classes:
+	//
 	//   - The Standard log class supports all CloudWatch Logs features.
+	//
 	//   - The Infrequent Access log class supports a subset of CloudWatch Logs
 	//   features and incurs lower costs.
-	// For details about the features supported by each class, see Log classes (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html)
+	//
+	// For details about the features supported by each class, see [Log classes]
+	//
+	// [Log classes]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html
 	LogGroupClass LogGroupClass
 
 	// The name of the log group.
@@ -625,9 +666,11 @@ type LogGroup struct {
 
 	// The number of days to retain the log events in the specified log group.
 	// Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545,
-	// 731, 1096, 1827, 2192, 2557, 2922, 3288, and 3653. To set a log group so that
-	// its log events do not expire, use DeleteRetentionPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html)
-	// .
+	// 731, 1096, 1827, 2192, 2557, 2922, 3288, and 3653.
+	//
+	// To set a log group so that its log events do not expire, use [DeleteRetentionPolicy].
+	//
+	// [DeleteRetentionPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html
 	RetentionInDays *int32
 
 	// The number of bytes stored.
@@ -680,20 +723,22 @@ type LogStream struct {
 	// The name of the log stream.
 	LogStreamName *string
 
-	// The number of bytes stored. Important: As of June 17, 2019, this parameter is
-	// no longer supported for log streams, and is always reported as zero. This change
-	// applies only to log streams. The storedBytes parameter for log groups is not
-	// affected.
+	// The number of bytes stored.
+	//
+	// Important: As of June 17, 2019, this parameter is no longer supported for log
+	// streams, and is always reported as zero. This change applies only to log
+	// streams. The storedBytes parameter for log groups is not affected.
 	//
 	// Deprecated: Starting on June 17, 2019, this parameter will be deprecated for
 	// log streams, and will be reported as zero. This change applies only to log
 	// streams. The storedBytes parameter for log groups is not affected.
 	StoredBytes *int64
 
-	// The sequence token. The sequence token is now ignored in PutLogEvents actions.
-	// PutLogEvents actions are always accepted regardless of receiving an invalid
-	// sequence token. You don't need to obtain uploadSequenceToken to use a
-	// PutLogEvents action.
+	// The sequence token.
+	//
+	// The sequence token is now ignored in PutLogEvents actions. PutLogEvents actions
+	// are always accepted regardless of receiving an invalid sequence token. You don't
+	// need to obtain uploadSequenceToken to use a PutLogEvents action.
 	UploadSequenceToken *string
 
 	noSmithyDocumentSerde
@@ -751,8 +796,9 @@ type MetricTransformation struct {
 	MetricName *string
 
 	// A custom namespace to contain your metric in CloudWatch. Use namespaces to
-	// group together metrics that are similar. For more information, see Namespaces (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace)
-	// .
+	// group together metrics that are similar. For more information, see [Namespaces].
+	//
+	// [Namespaces]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace
 	//
 	// This member is required.
 	MetricNamespace *string
@@ -768,17 +814,22 @@ type MetricTransformation struct {
 	DefaultValue *float64
 
 	// The fields to use as dimensions for the metric. One metric filter can include
-	// as many as three dimensions. Metrics extracted from log events are charged as
-	// custom metrics. To prevent unexpected high charges, do not specify
-	// high-cardinality fields such as IPAddress or requestID as dimensions. Each
-	// different value found for a dimension is treated as a separate metric and
-	// accrues charges as a separate custom metric. CloudWatch Logs disables a metric
-	// filter if it generates 1000 different name/value pairs for your specified
-	// dimensions within a certain amount of time. This helps to prevent accidental
-	// high charges. You can also set up a billing alarm to alert you if your charges
-	// are higher than expected. For more information, see Creating a Billing Alarm to
-	// Monitor Your Estimated Amazon Web Services Charges (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html)
-	// .
+	// as many as three dimensions.
+	//
+	// Metrics extracted from log events are charged as custom metrics. To prevent
+	// unexpected high charges, do not specify high-cardinality fields such as
+	// IPAddress or requestID as dimensions. Each different value found for a
+	// dimension is treated as a separate metric and accrues charges as a separate
+	// custom metric.
+	//
+	// CloudWatch Logs disables a metric filter if it generates 1000 different
+	// name/value pairs for your specified dimensions within a certain amount of time.
+	// This helps to prevent accidental high charges.
+	//
+	// You can also set up a billing alarm to alert you if your charges are higher
+	// than expected. For more information, see [Creating a Billing Alarm to Monitor Your Estimated Amazon Web Services Charges].
+	//
+	// [Creating a Billing Alarm to Monitor Your Estimated Amazon Web Services Charges]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html
 	Dimensions map[string]string
 
 	// The unit to assign to the metric. If you omit this, the unit is set as None .
@@ -805,9 +856,11 @@ type OutputLogEvent struct {
 }
 
 // A tructures that contains information about one pattern token related to an
-// anomaly. For more information about patterns and tokens, see
-// CreateLogAnomalyDetector (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogAnomalyDetector.html)
-// .
+// anomaly.
+//
+// For more information about patterns and tokens, see [CreateLogAnomalyDetector].
+//
+// [CreateLogAnomalyDetector]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogAnomalyDetector.html
 type PatternToken struct {
 
 	// For a dynamic token, this indicates where in the pattern that this token
@@ -879,9 +932,9 @@ type QueryDefinition struct {
 	// The unique ID of the query definition.
 	QueryDefinitionId *string
 
-	// The query string to use for this definition. For more information, see
-	// CloudWatch Logs Insights Query Syntax (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html)
-	// .
+	// The query string to use for this definition. For more information, see [CloudWatch Logs Insights Query Syntax].
+	//
+	// [CloudWatch Logs Insights Query Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
 	QueryString *string
 
 	noSmithyDocumentSerde
@@ -960,9 +1013,12 @@ type ResourcePolicy struct {
 }
 
 // Contains one field from one log event returned by a CloudWatch Logs Insights
-// query, along with the value of that field. For more information about the fields
-// that are generated by CloudWatch logs, see Supported Logs and Discovered Fields (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData-discoverable-fields.html)
-// .
+// query, along with the value of that field.
+//
+// For more information about the fields that are generated by CloudWatch logs,
+// see [Supported Logs and Discovered Fields].
+//
+// [Supported Logs and Discovered Fields]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData-discoverable-fields.html
 type ResultField struct {
 
 	// The log event field.
@@ -986,13 +1042,14 @@ type SearchedLogStream struct {
 	noSmithyDocumentSerde
 }
 
-// This object includes the stream returned by your StartLiveTail (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartLiveTail.html)
-// request.
+// This object includes the stream returned by your [StartLiveTail] request.
 //
 // The following types satisfy this interface:
 //
 //	StartLiveTailResponseStreamMemberSessionStart
 //	StartLiveTailResponseStreamMemberSessionUpdate
+//
+// [StartLiveTail]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartLiveTail.html
 type StartLiveTailResponseStream interface {
 	isStartLiveTailResponseStream()
 }

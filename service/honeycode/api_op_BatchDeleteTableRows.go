@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The BatchDeleteTableRows API allows you to delete one or more rows from a table
-// in a workbook. You need to specify the ids of the rows that you want to delete
-// from the table.
+//	The BatchDeleteTableRows API allows you to delete one or more rows from a
+//
+// table in a workbook. You need to specify the ids of the rows that you want to
+// delete from the table.
 func (c *Client) BatchDeleteTableRows(ctx context.Context, params *BatchDeleteTableRowsInput, optFns ...func(*Options)) (*BatchDeleteTableRowsOutput, error) {
 	if params == nil {
 		params = &BatchDeleteTableRowsInput{}
@@ -31,32 +32,39 @@ func (c *Client) BatchDeleteTableRows(ctx context.Context, params *BatchDeleteTa
 
 type BatchDeleteTableRowsInput struct {
 
-	// The list of row ids to delete from the table. You need to specify at least one
-	// row id in this list. Note that if one of the row ids provided in the request
-	// does not exist in the table, then the request fails and no rows are deleted from
-	// the table.
+	//  The list of row ids to delete from the table. You need to specify at least one
+	// row id in this list.
+	//
+	// Note that if one of the row ids provided in the request does not exist in the
+	// table, then the request fails and no rows are deleted from the table.
 	//
 	// This member is required.
 	RowIds []string
 
-	// The ID of the table where the rows are being deleted. If a table with the
-	// specified id could not be found, this API throws ResourceNotFoundException.
+	// The ID of the table where the rows are being deleted.
+	//
+	// If a table with the specified id could not be found, this API throws
+	// ResourceNotFoundException.
 	//
 	// This member is required.
 	TableId *string
 
-	// The ID of the workbook where the rows are being deleted. If a workbook with the
-	// specified id could not be found, this API throws ResourceNotFoundException.
+	// The ID of the workbook where the rows are being deleted.
+	//
+	// If a workbook with the specified id could not be found, this API throws
+	// ResourceNotFoundException.
 	//
 	// This member is required.
 	WorkbookId *string
 
-	// The request token for performing the delete action. Request tokens help to
+	//  The request token for performing the delete action. Request tokens help to
 	// identify duplicate requests. If a call times out or fails due to a transient
 	// error like a failed network connection, you can retry the call with the same
 	// request token. The service ensures that if the first call using that request
 	// token is successfully performed, the second call will not perform the action
-	// again. Note that request tokens are valid only for a few minutes. You cannot use
+	// again.
+	//
+	// Note that request tokens are valid only for a few minutes. You cannot use
 	// request tokens to dedupe requests spanning hours or days.
 	ClientRequestToken *string
 
@@ -70,7 +78,7 @@ type BatchDeleteTableRowsOutput struct {
 	// This member is required.
 	WorkbookCursor int64
 
-	// The list of row ids in the request that could not be deleted from the table.
+	//  The list of row ids in the request that could not be deleted from the table.
 	// Each element in this list contains one row id from the request that could not be
 	// deleted along with the reason why that item could not be deleted.
 	FailedBatchItems []types.FailedBatchItem

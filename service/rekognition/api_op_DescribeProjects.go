@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about your Rekognition projects. This operation requires
-// permissions to perform the rekognition:DescribeProjects action.
+// Gets information about your Rekognition projects.
+//
+// This operation requires permissions to perform the rekognition:DescribeProjects
+// action.
 func (c *Client) DescribeProjects(ctx context.Context, params *DescribeProjectsInput, optFns ...func(*Options)) (*DescribeProjectsOutput, error) {
 	if params == nil {
 		params = &DescribeProjectsInput{}

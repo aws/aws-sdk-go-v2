@@ -14,8 +14,9 @@ import (
 // Availability monitoring in your host environment. This request only initiates
 // the test and that a successful response only indicates that the test was
 // started. It doesn't indicate that the test passed. For the status of the test,
-// invoke the DescribeAvailabilityMonitorTest API. Starting this test will cause
-// your gateway to go offline for a brief period.
+// invoke the DescribeAvailabilityMonitorTest API.
+//
+// Starting this test will cause your gateway to go offline for a brief period.
 func (c *Client) StartAvailabilityMonitorTest(ctx context.Context, params *StartAvailabilityMonitorTestInput, optFns ...func(*Options)) (*StartAvailabilityMonitorTestOutput, error) {
 	if params == nil {
 		params = &StartAvailabilityMonitorTestInput{}
@@ -33,8 +34,8 @@ func (c *Client) StartAvailabilityMonitorTest(ctx context.Context, params *Start
 
 type StartAvailabilityMonitorTestInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -44,8 +45,8 @@ type StartAvailabilityMonitorTestInput struct {
 
 type StartAvailabilityMonitorTestOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

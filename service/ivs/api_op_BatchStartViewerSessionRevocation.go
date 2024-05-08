@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Performs StartViewerSessionRevocation on multiple channel ARN and viewer ID
-// pairs simultaneously.
+// Performs StartViewerSessionRevocation on multiple channel ARN and viewer ID pairs simultaneously.
 func (c *Client) BatchStartViewerSessionRevocation(ctx context.Context, params *BatchStartViewerSessionRevocationInput, optFns ...func(*Options)) (*BatchStartViewerSessionRevocationOutput, error) {
 	if params == nil {
 		params = &BatchStartViewerSessionRevocationInput{}

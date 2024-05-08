@@ -16,13 +16,17 @@ import (
 // you can use an identity to send email with Amazon Pinpoint, you first have to
 // verify it. By verifying an address, you demonstrate that you're the owner of the
 // address, and that you've given Amazon Pinpoint permission to send email from the
-// address. When you verify an email address, Amazon Pinpoint sends an email to the
+// address.
+//
+// When you verify an email address, Amazon Pinpoint sends an email to the
 // address. Your email address is verified as soon as you follow the link in the
-// verification email. When you verify a domain, this operation provides a set of
-// DKIM tokens, which you can convert into CNAME tokens. You add these CNAME tokens
-// to the DNS configuration for your domain. Your domain is verified when Amazon
-// Pinpoint detects these records in the DNS configuration for your domain. It
-// usually takes around 72 hours to complete the domain verification process.
+// verification email.
+//
+// When you verify a domain, this operation provides a set of DKIM tokens, which
+// you can convert into CNAME tokens. You add these CNAME tokens to the DNS
+// configuration for your domain. Your domain is verified when Amazon Pinpoint
+// detects these records in the DNS configuration for your domain. It usually takes
+// around 72 hours to complete the domain verification process.
 func (c *Client) CreateEmailIdentity(ctx context.Context, params *CreateEmailIdentityInput, optFns ...func(*Options)) (*CreateEmailIdentityOutput, error) {
 	if params == nil {
 		params = &CreateEmailIdentityInput{}
@@ -56,8 +60,9 @@ type CreateEmailIdentityInput struct {
 
 // If the email identity is a domain, this object contains tokens that you can use
 // to create a set of CNAME records. To sucessfully verify your domain, you have to
-// add these records to the DNS configuration for your domain. If the email
-// identity is an email address, this object is empty.
+// add these records to the DNS configuration for your domain.
+//
+// If the email identity is an email address, this object is empty.
 type CreateEmailIdentityOutput struct {
 
 	// An object that contains information about the DKIM attributes for the identity.
@@ -70,8 +75,9 @@ type CreateEmailIdentityOutput struct {
 
 	// Specifies whether or not the identity is verified. In Amazon Pinpoint, you can
 	// only send email from verified email addresses or domains. For more information
-	// about verifying identities, see the Amazon Pinpoint User Guide (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html)
-	// .
+	// about verifying identities, see the [Amazon Pinpoint User Guide].
+	//
+	// [Amazon Pinpoint User Guide]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html
 	VerifiedForSendingStatus bool
 
 	// Metadata pertaining to the operation's result.

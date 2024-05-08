@@ -11,13 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the description of an existing project. To create a new project, use
-// CreateProject (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateProject.html)
-// . Don't use this operation to update the data storage options of a project.
-// Instead, use UpdateProjectDataDelivery (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateProjectDataDelivery.html)
-// . Don't use this operation to update the tags of a project. Instead, use
-// TagResource (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html)
-// .
+// Updates the description of an existing project.
+//
+// To create a new project, use [CreateProject].
+//
+// Don't use this operation to update the data storage options of a project.
+// Instead, use [UpdateProjectDataDelivery].
+//
+// Don't use this operation to update the tags of a project. Instead, use [TagResource].
+//
+// [TagResource]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html
+// [CreateProject]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateProject.html
+// [UpdateProjectDataDelivery]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateProjectDataDelivery.html
 func (c *Client) UpdateProject(ctx context.Context, params *UpdateProjectInput, optFns ...func(*Options)) (*UpdateProjectOutput, error) {
 	if params == nil {
 		params = &UpdateProjectInput{}
@@ -42,10 +47,13 @@ type UpdateProjectInput struct {
 
 	// Use this parameter if the project will use client-side evaluation powered by
 	// AppConfig. Client-side evaluation allows your application to assign variations
-	// to user sessions locally instead of by calling the EvaluateFeature (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html)
-	// operation. This mitigates the latency and availability risks that come with an
-	// API call. allows you to This parameter is a structure that contains information
-	// about the AppConfig application that will be used for client-side evaluation.
+	// to user sessions locally instead of by calling the [EvaluateFeature]operation. This mitigates
+	// the latency and availability risks that come with an API call. allows you to
+	//
+	// This parameter is a structure that contains information about the AppConfig
+	// application that will be used for client-side evaluation.
+	//
+	// [EvaluateFeature]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html
 	AppConfigResource *types.ProjectAppConfigResourceConfig
 
 	// An optional description of the project.

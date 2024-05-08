@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ApplicationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationStatus) Values() []ApplicationStatus {
 	return []ApplicationStatus{
 		"ENABLED",
@@ -38,8 +39,9 @@ const (
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComparisonOperator) Values() []ComparisonOperator {
 	return []ComparisonOperator{
 		"EQ",
@@ -71,8 +73,9 @@ const (
 )
 
 // Values returns all known values for DataLakeResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataLakeResourceType) Values() []DataLakeResourceType {
 	return []DataLakeResourceType{
 		"CATALOG",
@@ -95,8 +98,9 @@ const (
 )
 
 // Values returns all known values for EnableStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnableStatus) Values() []EnableStatus {
 	return []EnableStatus{
 		"ENABLED",
@@ -114,8 +118,9 @@ const (
 )
 
 // Values returns all known values for FieldNameString. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FieldNameString) Values() []FieldNameString {
 	return []FieldNameString{
 		"RESOURCE_ARN",
@@ -134,8 +139,9 @@ const (
 )
 
 // Values returns all known values for OptimizerType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OptimizerType) Values() []OptimizerType {
 	return []OptimizerType{
 		"COMPACTION",
@@ -164,8 +170,9 @@ const (
 )
 
 // Values returns all known values for Permission. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Permission) Values() []Permission {
 	return []Permission{
 		"ALL",
@@ -195,8 +202,9 @@ const (
 )
 
 // Values returns all known values for PermissionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PermissionType) Values() []PermissionType {
 	return []PermissionType{
 		"COLUMN_PERMISSION",
@@ -218,8 +226,9 @@ const (
 )
 
 // Values returns all known values for QueryStateString. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QueryStateString) Values() []QueryStateString {
 	return []QueryStateString{
 		"PENDING",
@@ -239,8 +248,9 @@ const (
 )
 
 // Values returns all known values for ResourceShareType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceShareType) Values() []ResourceShareType {
 	return []ResourceShareType{
 		"FOREIGN",
@@ -257,8 +267,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"DATABASE",
@@ -277,8 +288,9 @@ const (
 )
 
 // Values returns all known values for TransactionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransactionStatus) Values() []TransactionStatus {
 	return []TransactionStatus{
 		"ACTIVE",
@@ -300,8 +312,9 @@ const (
 )
 
 // Values returns all known values for TransactionStatusFilter. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransactionStatusFilter) Values() []TransactionStatusFilter {
 	return []TransactionStatusFilter{
 		"ALL",
@@ -321,8 +334,9 @@ const (
 )
 
 // Values returns all known values for TransactionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransactionType) Values() []TransactionType {
 	return []TransactionType{
 		"READ_AND_WRITE",

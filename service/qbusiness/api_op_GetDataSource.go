@@ -73,9 +73,11 @@ type GetDataSourceOutput struct {
 	DisplayName *string
 
 	// Provides the configuration information for altering document metadata and
-	// content during the document ingestion process. For more information, see Custom
-	// document enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
-	// .
+	// content during the document ingestion process.
+	//
+	// For more information, see [Custom document enrichment].
+	//
+	// [Custom document enrichment]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
 	DocumentEnrichmentConfiguration *types.DocumentEnrichmentConfiguration
 
 	// When the Status field value is FAILED , the ErrorMessage field contains a

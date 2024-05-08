@@ -29,8 +29,9 @@ func (c *Client) UpdateDashboard(ctx context.Context, params *UpdateDashboardInp
 type UpdateDashboardInput struct {
 
 	// The new dashboard definition, as specified in a JSON literal. For detailed
-	// information, see Creating dashboards (CLI) (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html)
-	// in the IoT SiteWise User Guide.
+	// information, see [Creating dashboards (CLI)]in the IoT SiteWise User Guide.
+	//
+	// [Creating dashboards (CLI)]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html
 	//
 	// This member is required.
 	DashboardDefinition *string

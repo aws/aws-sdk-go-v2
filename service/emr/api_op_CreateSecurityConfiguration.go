@@ -36,8 +36,9 @@ type CreateSecurityConfigurationInput struct {
 	Name *string
 
 	// The security configuration details in JSON format. For JSON parameters and
-	// examples, see Use Security Configurations to Set Up Cluster Security (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html)
-	// in the Amazon EMR Management Guide.
+	// examples, see [Use Security Configurations to Set Up Cluster Security]in the Amazon EMR Management Guide.
+	//
+	// [Use Security Configurations to Set Up Cluster Security]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html
 	//
 	// This member is required.
 	SecurityConfiguration *string

@@ -12,13 +12,17 @@ import (
 )
 
 // Invites other Amazon Web Services accounts to become member accounts for the
-// Security Hub administrator account that the invitation is sent from. This
-// operation is only used to invite accounts that do not belong to an organization.
-// Organization accounts do not receive invitations. Before you can use this action
-// to invite a member, you must first use the CreateMembers action to create the
-// member account in Security Hub. When the account owner enables Security Hub and
-// accepts the invitation to become a member account, the administrator account can
-// view the findings generated from the member account.
+// Security Hub administrator account that the invitation is sent from.
+//
+// This operation is only used to invite accounts that do not belong to an
+// organization. Organization accounts do not receive invitations.
+//
+// Before you can use this action to invite a member, you must first use the
+// CreateMembers action to create the member account in Security Hub.
+//
+// When the account owner enables Security Hub and accepts the invitation to
+// become a member account, the administrator account can view the findings
+// generated from the member account.
 func (c *Client) InviteMembers(ctx context.Context, params *InviteMembersInput, optFns ...func(*Options)) (*InviteMembersOutput, error) {
 	if params == nil {
 		params = &InviteMembersInput{}

@@ -16,17 +16,26 @@ import (
 // server processes in the fleet. Game server processes that are running in the
 // fleet must use a port that falls within this range. To connect to game server
 // processes on a container fleet, the port settings should include one or more of
-// the fleet's connection ports. Use this operation in the following ways:
+// the fleet's connection ports.
+//
+// Use this operation in the following ways:
+//
 //   - To retrieve the port settings for a fleet, identify the fleet's unique
 //     identifier.
+//
 //   - To check the status of recent updates to a fleet remote location, specify
 //     the fleet ID and a location. Port setting updates can take time to propagate
 //     across all locations.
 //
 // If successful, a set of IpPermission objects is returned for the requested
 // fleet ID. When specifying a location, this operation returns a pending status.
-// If the requested fleet has been deleted, the result set is empty. Learn more
-// Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// If the requested fleet has been deleted, the result set is empty.
+//
+// # Learn more
+//
+// [Setting up Amazon GameLift fleets]
+//
+// [Setting up Amazon GameLift fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) DescribeFleetPortSettings(ctx context.Context, params *DescribeFleetPortSettingsInput, optFns ...func(*Options)) (*DescribeFleetPortSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeFleetPortSettingsInput{}
@@ -59,10 +68,11 @@ type DescribeFleetPortSettingsInput struct {
 
 type DescribeFleetPortSettingsOutput struct {
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
-	// it. ARNs are unique across all Regions. Format is
-	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift fleet
+	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
+	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	FleetArn *string
 
 	// A unique identifier for the fleet that was requested.

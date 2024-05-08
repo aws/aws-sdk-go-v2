@@ -36,11 +36,15 @@ type DescribeResourceInput struct {
 	// This member is required.
 	OrganizationId *string
 
-	// The identifier of the resource to be described. The identifier can accept
-	// ResourceId, Resourcename, or email. The following identity formats are
-	// available:
+	// The identifier of the resource to be described.
+	//
+	// The identifier can accept ResourceId, Resourcename, or email. The following
+	// identity formats are available:
+	//
 	//   - Resource ID: r-0123456789a0123456789b0123456789
+	//
 	//   - Email address: resource@domain.tld
+	//
 	//   - Resource name: resource
 	//
 	// This member is required.

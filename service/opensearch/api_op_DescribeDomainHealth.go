@@ -52,10 +52,13 @@ type DescribeDomainHealthOutput struct {
 	AvailabilityZoneCount *string
 
 	// The current health status of your cluster.
+	//
 	//   - Red - At least one primary shard is not allocated to any node.
-	//   - Yellow - All primary shards are allocated to nodes, but some replicas
-	//   aren’t.
+	//
+	//   - Yellow - All primary shards are allocated to nodes, but some replicas aren’t.
+	//
 	//   - Green - All primary shards and their replicas are allocated to nodes.
+	//
 	//   - NotAvailable - Unable to retrieve cluster health.
 	ClusterHealth types.DomainHealth
 
@@ -67,7 +70,9 @@ type DescribeDomainHealthOutput struct {
 	DedicatedMaster *bool
 
 	// The current state of the domain.
+	//
 	//   - Processing - The domain has updates in progress.
+	//
 	//   - Active - Requested changes have been processed and deployed to the domain.
 	DomainState types.DomainState
 
@@ -81,7 +86,9 @@ type DescribeDomainHealthOutput struct {
 	MasterEligibleNodeCount *string
 
 	// Indicates whether the domain has an elected master node.
+	//
 	//   - Available - The domain has an elected master node.
+	//
 	//   - UnAvailable - The master node hasn't yet been elected, and a quorum to
 	//   elect a new master node hasn't been reached.
 	MasterNode types.MasterNodeStatus

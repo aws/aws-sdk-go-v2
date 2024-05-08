@@ -40,7 +40,9 @@ type UpdateUserInput struct {
 	// The option to indicate whether the user can use the
 	// GetProgrammaticAccessCredentials API to obtain credentials that can then be used
 	// to access other FinSpace Data API operations.
+	//
 	//   - ENABLED – The user has permissions to use the APIs.
+	//
 	//   - DISABLED – The user does not have permissions to use any APIs.
 	ApiAccess types.ApiAccess
 
@@ -59,8 +61,10 @@ type UpdateUserInput struct {
 	LastName *string
 
 	// The option to indicate the type of user.
+	//
 	//   - SUPER_USER – A user with permission to all the functionality and data in
 	//   FinSpace.
+	//
 	//   - APP_USER – A user with specific permissions in FinSpace. The users are
 	//   assigned permissions by adding them to a permission group.
 	Type types.UserType

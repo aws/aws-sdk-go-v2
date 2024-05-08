@@ -30,10 +30,11 @@ func (c *Client) GetDiskSnapshots(ctx context.Context, params *GetDiskSnapshotsI
 
 type GetDiskSnapshotsInput struct {
 
-	// The token to advance to the next page of results from your request. To get a
-	// page token, perform an initial GetDiskSnapshots request. If your results are
-	// paginated, the response will return a next page token that you can specify as
-	// the page token in a subsequent request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetDiskSnapshots request. If your
+	// results are paginated, the response will return a next page token that you can
+	// specify as the page token in a subsequent request.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -45,10 +46,12 @@ type GetDiskSnapshotsOutput struct {
 	// snapshots.
 	DiskSnapshots []types.DiskSnapshot
 
-	// The token to advance to the next page of results from your request. A next page
-	// token is not returned if there are no more results to display. To get the next
-	// page of results, perform another GetDiskSnapshots request and specify the next
-	// page token using the pageToken parameter.
+	// The token to advance to the next page of results from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetDiskSnapshots request and
+	// specify the next page token using the pageToken parameter.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

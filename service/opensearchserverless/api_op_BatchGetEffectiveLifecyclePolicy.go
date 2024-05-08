@@ -12,8 +12,9 @@ import (
 )
 
 // Returns a list of successful and failed retrievals for the OpenSearch
-// Serverless indexes. For more information, see Viewing data lifecycle policies (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-list)
-// .
+// Serverless indexes. For more information, see [Viewing data lifecycle policies].
+//
+// [Viewing data lifecycle policies]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-list
 func (c *Client) BatchGetEffectiveLifecyclePolicy(ctx context.Context, params *BatchGetEffectiveLifecyclePolicyInput, optFns ...func(*Options)) (*BatchGetEffectiveLifecyclePolicyOutput, error) {
 	if params == nil {
 		params = &BatchGetEffectiveLifecyclePolicyInput{}

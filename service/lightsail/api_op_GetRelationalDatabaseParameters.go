@@ -12,10 +12,12 @@ import (
 )
 
 // Returns all of the runtime parameters offered by the underlying database
-// software, or engine, for a specific database in Amazon Lightsail. In addition to
-// the parameter names and values, this operation returns other information about
-// each parameter. This information includes whether changes require a reboot,
-// whether the parameter is modifiable, the allowed values, and the data types.
+// software, or engine, for a specific database in Amazon Lightsail.
+//
+// In addition to the parameter names and values, this operation returns other
+// information about each parameter. This information includes whether changes
+// require a reboot, whether the parameter is modifiable, the allowed values, and
+// the data types.
 func (c *Client) GetRelationalDatabaseParameters(ctx context.Context, params *GetRelationalDatabaseParametersInput, optFns ...func(*Options)) (*GetRelationalDatabaseParametersOutput, error) {
 	if params == nil {
 		params = &GetRelationalDatabaseParametersInput{}
@@ -38,10 +40,11 @@ type GetRelationalDatabaseParametersInput struct {
 	// This member is required.
 	RelationalDatabaseName *string
 
-	// The token to advance to the next page of results from your request. To get a
-	// page token, perform an initial GetRelationalDatabaseParameters request. If your
-	// results are paginated, the response will return a next page token that you can
-	// specify as the page token in a subsequent request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetRelationalDatabaseParameters
+	// request. If your results are paginated, the response will return a next page
+	// token that you can specify as the page token in a subsequent request.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -49,10 +52,12 @@ type GetRelationalDatabaseParametersInput struct {
 
 type GetRelationalDatabaseParametersOutput struct {
 
-	// The token to advance to the next page of results from your request. A next page
-	// token is not returned if there are no more results to display. To get the next
-	// page of results, perform another GetRelationalDatabaseParameters request and
-	// specify the next page token using the pageToken parameter.
+	// The token to advance to the next page of results from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetRelationalDatabaseParameters
+	// request and specify the next page token using the pageToken parameter.
 	NextPageToken *string
 
 	// An object describing the result of your get relational database parameters

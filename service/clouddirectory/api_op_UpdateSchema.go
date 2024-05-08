@@ -35,7 +35,7 @@ type UpdateSchemaInput struct {
 	Name *string
 
 	// The Amazon Resource Name (ARN) of the development schema. For more information,
-	// see arns .
+	// see arns.
 	//
 	// This member is required.
 	SchemaArn *string
@@ -45,8 +45,7 @@ type UpdateSchemaInput struct {
 
 type UpdateSchemaOutput struct {
 
-	// The ARN that is associated with the updated schema. For more information, see
-	// arns .
+	// The ARN that is associated with the updated schema. For more information, see arns.
 	SchemaArn *string
 
 	// Metadata pertaining to the operation's result.

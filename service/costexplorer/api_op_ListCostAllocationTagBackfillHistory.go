@@ -29,12 +29,12 @@ func (c *Client) ListCostAllocationTagBackfillHistory(ctx context.Context, param
 
 type ListCostAllocationTagBackfillHistoryInput struct {
 
-	// The maximum number of objects that are returned for this request.
+	//  The maximum number of objects that are returned for this request.
 	MaxResults *int32
 
-	// The token to retrieve the next set of results. Amazon Web Services provides the
-	// token when the response from a previous call has more results than the maximum
-	// page size.
+	//  The token to retrieve the next set of results. Amazon Web Services provides
+	// the token when the response from a previous call has more results than the
+	// maximum page size.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -42,12 +42,12 @@ type ListCostAllocationTagBackfillHistoryInput struct {
 
 type ListCostAllocationTagBackfillHistoryOutput struct {
 
-	// The list of historical cost allocation tag backfill requests.
+	//  The list of historical cost allocation tag backfill requests.
 	BackfillRequests []types.CostAllocationTagBackfillRequest
 
-	// The token to retrieve the next set of results. Amazon Web Services provides the
-	// token when the response from a previous call has more results than the maximum
-	// page size.
+	//  The token to retrieve the next set of results. Amazon Web Services provides
+	// the token when the response from a previous call has more results than the
+	// maximum page size.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -143,7 +143,7 @@ var _ ListCostAllocationTagBackfillHistoryAPIClient = (*Client)(nil)
 // ListCostAllocationTagBackfillHistoryPaginatorOptions is the paginator options
 // for ListCostAllocationTagBackfillHistory
 type ListCostAllocationTagBackfillHistoryPaginatorOptions struct {
-	// The maximum number of objects that are returned for this request.
+	//  The maximum number of objects that are returned for this request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -10,18 +10,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the termination settings for the specified Amazon Chime Voice
-// Connector. If emergency calling is configured for the Amazon Chime Voice
-// Connector, it must be deleted prior to deleting the termination settings. This
-// API is is no longer supported and will not be updated. We recommend using the
-// latest version, DeleteVoiceConnectorTermination (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnectorTermination.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// Deletes the termination settings for the specified Amazon Chime Voice Connector.
+//
+// If emergency calling is configured for the Amazon Chime Voice Connector, it
+// must be deleted prior to deleting the termination settings.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [DeleteVoiceConnectorTermination], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by DeleteVoiceConnectorTermination in the Amazon Chime SDK
 // Voice Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [DeleteVoiceConnectorTermination]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnectorTermination.html
 func (c *Client) DeleteVoiceConnectorTermination(ctx context.Context, params *DeleteVoiceConnectorTerminationInput, optFns ...func(*Options)) (*DeleteVoiceConnectorTerminationOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceConnectorTerminationInput{}

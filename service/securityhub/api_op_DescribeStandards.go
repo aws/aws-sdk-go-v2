@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the available standards in Security Hub. For each standard,
-// the results include the standard ARN, the name, and a description.
+// Returns a list of the available standards in Security Hub.
+//
+// For each standard, the results include the standard ARN, the name, and a
+// description.
 func (c *Client) DescribeStandards(ctx context.Context, params *DescribeStandardsInput, optFns ...func(*Options)) (*DescribeStandardsOutput, error) {
 	if params == nil {
 		params = &DescribeStandardsInput{}
@@ -34,9 +36,10 @@ type DescribeStandardsInput struct {
 	MaxResults *int32
 
 	// The token that is required for pagination. On your first call to the
-	// DescribeStandards operation, set the value of this parameter to NULL . For
-	// subsequent calls to the operation, to continue listing data, set the value of
-	// this parameter to the value returned from the previous response.
+	// DescribeStandards operation, set the value of this parameter to NULL .
+	//
+	// For subsequent calls to the operation, to continue listing data, set the value
+	// of this parameter to the value returned from the previous response.
 	NextToken *string
 
 	noSmithyDocumentSerde

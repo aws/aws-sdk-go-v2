@@ -12,7 +12,9 @@ import (
 )
 
 // Returns a paginated list of objectives from the Amazon Web Services Control
-// Catalog. You can apply an optional filter to see the objectives that belong to a
+// Catalog.
+//
+// You can apply an optional filter to see the objectives that belong to a
 // specific domain. If you don’t provide a filter, the operation returns all
 // objectives.
 func (c *Client) ListObjectives(ctx context.Context, params *ListObjectivesInput, optFns ...func(*Options)) (*ListObjectivesOutput, error) {
@@ -38,9 +40,10 @@ type ListObjectivesInput struct {
 	// The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
-	// An optional filter that narrows the results to a specific domain. This filter
-	// allows you to specify one domain ARN at a time. Passing multiple ARNs in the
-	// ObjectiveFilter isn’t currently supported.
+	// An optional filter that narrows the results to a specific domain.
+	//
+	// This filter allows you to specify one domain ARN at a time. Passing multiple
+	// ARNs in the ObjectiveFilter isn’t currently supported.
 	ObjectiveFilter *types.ObjectiveFilter
 
 	noSmithyDocumentSerde

@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a speaker search task. Before starting any speaker search tasks, you
-// must provide all notices and obtain all consents from the speaker as required
-// under applicable privacy and biometrics laws, and as required under the AWS
-// service terms (https://aws.amazon.com/service-terms/) for the Amazon Chime SDK.
+// Starts a speaker search task.
+//
+// Before starting any speaker search tasks, you must provide all notices and
+// obtain all consents from the speaker as required under applicable privacy and
+// biometrics laws, and as required under the [AWS service terms]for the Amazon Chime SDK.
+//
+// [AWS service terms]: https://aws.amazon.com/service-terms/
 func (c *Client) StartSpeakerSearchTask(ctx context.Context, params *StartSpeakerSearchTaskInput, optFns ...func(*Options)) (*StartSpeakerSearchTaskOutput, error) {
 	if params == nil {
 		params = &StartSpeakerSearchTaskInput{}

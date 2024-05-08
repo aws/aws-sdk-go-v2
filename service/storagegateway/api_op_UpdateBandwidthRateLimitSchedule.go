@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the bandwidth rate limit schedule for a specified gateway. By default,
+//	Updates the bandwidth rate limit schedule for a specified gateway. By default,
+//
 // gateways do not have bandwidth rate limit schedules, which means no bandwidth
 // rate limiting is in effect. Use this to initiate or update a gateway's bandwidth
 // rate limit schedule. This operation is supported for volume, tape, and S3 file
@@ -34,14 +35,14 @@ func (c *Client) UpdateBandwidthRateLimitSchedule(ctx context.Context, params *U
 
 type UpdateBandwidthRateLimitScheduleInput struct {
 
-	// An array containing bandwidth rate limit schedule intervals for a gateway. When
-	// no bandwidth rate limit intervals have been scheduled, the array is empty.
+	//  An array containing bandwidth rate limit schedule intervals for a gateway.
+	// When no bandwidth rate limit intervals have been scheduled, the array is empty.
 	//
 	// This member is required.
 	BandwidthRateLimitIntervals []types.BandwidthRateLimitInterval
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -51,8 +52,8 @@ type UpdateBandwidthRateLimitScheduleInput struct {
 
 type UpdateBandwidthRateLimitScheduleOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

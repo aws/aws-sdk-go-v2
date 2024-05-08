@@ -29,7 +29,7 @@ func (c *Client) ListSecurityControlDefinitions(ctx context.Context, params *Lis
 
 type ListSecurityControlDefinitionsInput struct {
 
-	// An optional parameter that limits the total results of the API response to the
+	//  An optional parameter that limits the total results of the API response to the
 	// specified number. If this parameter isn't provided in the request, the results
 	// include the first 25 security controls that apply to the specified standard. The
 	// results also include a NextToken parameter that you can use in a subsequent API
@@ -37,10 +37,10 @@ type ListSecurityControlDefinitionsInput struct {
 	// standard are returned.
 	MaxResults *int32
 
-	// Optional pagination parameter.
+	//  Optional pagination parameter.
 	NextToken *string
 
-	// The Amazon Resource Name (ARN) of the standard that you want to view controls
+	//  The Amazon Resource Name (ARN) of the standard that you want to view controls
 	// for.
 	StandardsArn *string
 
@@ -49,12 +49,12 @@ type ListSecurityControlDefinitionsInput struct {
 
 type ListSecurityControlDefinitionsOutput struct {
 
-	// An array of controls that apply to the specified standard.
+	//  An array of controls that apply to the specified standard.
 	//
 	// This member is required.
 	SecurityControlDefinitions []types.SecurityControlDefinition
 
-	// A pagination parameter that's included in the response only if it was included
+	//  A pagination parameter that's included in the response only if it was included
 	// in the request.
 	NextToken *string
 
@@ -151,7 +151,7 @@ var _ ListSecurityControlDefinitionsAPIClient = (*Client)(nil)
 // ListSecurityControlDefinitionsPaginatorOptions is the paginator options for
 // ListSecurityControlDefinitions
 type ListSecurityControlDefinitionsPaginatorOptions struct {
-	// An optional parameter that limits the total results of the API response to the
+	//  An optional parameter that limits the total results of the API response to the
 	// specified number. If this parameter isn't provided in the request, the results
 	// include the first 25 security controls that apply to the specified standard. The
 	// results also include a NextToken parameter that you can use in a subsequent API

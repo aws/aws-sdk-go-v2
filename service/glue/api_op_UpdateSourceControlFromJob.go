@@ -13,8 +13,9 @@ import (
 
 // Synchronizes a job to the source control repository. This operation takes the
 // job artifacts from the Glue internal stores and makes a commit to the remote
-// repository that is configured on the job. This API supports optional parameters
-// which take in the repository information.
+// repository that is configured on the job.
+//
+// This API supports optional parameters which take in the repository information.
 func (c *Client) UpdateSourceControlFromJob(ctx context.Context, params *UpdateSourceControlFromJobInput, optFns ...func(*Options)) (*UpdateSourceControlFromJobOutput, error) {
 	if params == nil {
 		params = &UpdateSourceControlFromJobInput{}
@@ -51,7 +52,7 @@ type UpdateSourceControlFromJobInput struct {
 	// The name of the Glue job to be synchronized to or from the remote repository.
 	JobName *string
 
-	// The provider for the remote repository. Possible values: GITHUB,
+	//  The provider for the remote repository. Possible values: GITHUB,
 	// AWS_CODE_COMMIT, GITLAB, BITBUCKET.
 	Provider types.SourceControlProvider
 

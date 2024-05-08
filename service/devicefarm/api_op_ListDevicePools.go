@@ -39,8 +39,12 @@ type ListDevicePoolsInput struct {
 	// can be used to return the next set of items in the list.
 	NextToken *string
 
-	// The device pools' type. Allowed values include:
+	// The device pools' type.
+	//
+	// Allowed values include:
+	//
 	//   - CURATED: A device pool that is created and managed by AWS Device Farm.
+	//
 	//   - PRIVATE: A device pool that is created and managed by the device pool
 	//   developer.
 	Type types.DevicePoolType

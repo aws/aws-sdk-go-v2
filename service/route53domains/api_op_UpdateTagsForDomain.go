@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation adds or updates tags for a specified domain. All tag operations
-// are eventually consistent; subsequent operations might not immediately represent
-// all issued operations.
+// This operation adds or updates tags for a specified domain.
+//
+// All tag operations are eventually consistent; subsequent operations might not
+// immediately represent all issued operations.
 func (c *Client) UpdateTagsForDomain(ctx context.Context, params *UpdateTagsForDomainInput, optFns ...func(*Options)) (*UpdateTagsForDomainOutput, error) {
 	if params == nil {
 		params = &UpdateTagsForDomainInput{}

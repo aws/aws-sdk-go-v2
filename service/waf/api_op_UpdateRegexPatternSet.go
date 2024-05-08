@@ -11,34 +11,47 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
-// in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
-// . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Inserts or deletes RegexPatternString objects in a
-// RegexPatternSet . For each RegexPatternString object, you specify the following
-// values:
+// This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
+// developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the [AWS WAF Developer Guide]. With the
+// latest version, AWS WAF has a single set of endpoints for regional and global
+// use.
+//
+// Inserts or deletes RegexPatternString objects in a RegexPatternSet. For each RegexPatternString
+// object, you specify the following values:
+//
 //   - Whether to insert or delete the RegexPatternString .
+//
 //   - The regular expression pattern that you want to insert or delete. For more
-//     information, see RegexPatternSet .
+//     information, see RegexPatternSet.
 //
 // For example, you can create a RegexPatternString such as B[a@]dB[o0]t . AWS WAF
 // will match this RegexPatternString to:
+//
 //   - BadBot
+//
 //   - BadB0t
+//
 //   - B@dBot
+//
 //   - B@dB0t
 //
 // To create and configure a RegexPatternSet , perform the following steps:
-//   - Create a RegexPatternSet. For more information, see CreateRegexPatternSet .
-//   - Use GetChangeToken to get the change token that you provide in the
-//     ChangeToken parameter of an UpdateRegexPatternSet request.
+//
+//   - Create a RegexPatternSet. For more information, see CreateRegexPatternSet.
+//
+//   - Use GetChangeTokento get the change token that you provide in the ChangeToken parameter of
+//     an UpdateRegexPatternSet request.
+//
 //   - Submit an UpdateRegexPatternSet request to specify the regular expression
 //     pattern that you want AWS WAF to watch for.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/)
-// .
+// requests, see the [AWS WAF Developer Guide].
+//
+// [AWS WAF Classic]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+// [AWS WAF Developer Guide]: https://docs.aws.amazon.com/waf/latest/developerguide/
 func (c *Client) UpdateRegexPatternSet(ctx context.Context, params *UpdateRegexPatternSetInput, optFns ...func(*Options)) (*UpdateRegexPatternSetOutput, error) {
 	if params == nil {
 		params = &UpdateRegexPatternSetInput{}
@@ -56,20 +69,19 @@ func (c *Client) UpdateRegexPatternSet(ctx context.Context, params *UpdateRegexP
 
 type UpdateRegexPatternSetInput struct {
 
-	// The value returned by the most recent call to GetChangeToken .
+	// The value returned by the most recent call to GetChangeToken.
 	//
 	// This member is required.
 	ChangeToken *string
 
-	// The RegexPatternSetId of the RegexPatternSet that you want to update.
-	// RegexPatternSetId is returned by CreateRegexPatternSet and by
-	// ListRegexPatternSets .
+	// The RegexPatternSetId of the RegexPatternSet that you want to update. RegexPatternSetId is
+	// returned by CreateRegexPatternSetand by ListRegexPatternSets.
 	//
 	// This member is required.
 	RegexPatternSetId *string
 
 	// An array of RegexPatternSetUpdate objects that you want to insert into or
-	// delete from a RegexPatternSet .
+	// delete from a RegexPatternSet.
 	//
 	// This member is required.
 	Updates []types.RegexPatternSetUpdate
@@ -81,7 +93,7 @@ type UpdateRegexPatternSetOutput struct {
 
 	// The ChangeToken that you used to submit the UpdateRegexPatternSet request. You
 	// can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus .
+	// information, see GetChangeTokenStatus.
 	ChangeToken *string
 
 	// Metadata pertaining to the operation's result.

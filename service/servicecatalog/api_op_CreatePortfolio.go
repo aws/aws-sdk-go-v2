@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a portfolio. A delegated admin is authorized to invoke this command.
+// Creates a portfolio.
+//
+// A delegated admin is authorized to invoke this command.
 func (c *Client) CreatePortfolio(ctx context.Context, params *CreatePortfolioInput, optFns ...func(*Options)) (*CreatePortfolioOutput, error) {
 	if params == nil {
 		params = &CreatePortfolioInput{}
@@ -47,7 +49,9 @@ type CreatePortfolioInput struct {
 	ProviderName *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

@@ -29,9 +29,8 @@ func (c *Client) UpdatePermissionSet(ctx context.Context, params *UpdatePermissi
 type UpdatePermissionSetInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// Amazon Web Services Service Namespaces in the Amazon Web Services General
-	// Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespacesin the Amazon Web Services
+	// General Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -41,7 +40,7 @@ type UpdatePermissionSetInput struct {
 	// This member is required.
 	PermissionSetArn *string
 
-	// The description of the PermissionSet .
+	// The description of the PermissionSet.
 	Description *string
 
 	// Used to redirect users within the application during the federation

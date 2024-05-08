@@ -13,9 +13,12 @@ import (
 
 // Returns descriptions of the available Amazon Redshift cluster versions. You can
 // call this operation even before creating any clusters to learn more about the
-// Amazon Redshift versions. For more information about managing clusters, go to
-// Amazon Redshift Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
-// in the Amazon Redshift Cluster Management Guide.
+// Amazon Redshift versions.
+//
+// For more information about managing clusters, go to [Amazon Redshift Clusters] in the Amazon Redshift
+// Cluster Management Guide.
+//
+// [Amazon Redshift Clusters]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
 func (c *Client) DescribeClusterVersions(ctx context.Context, params *DescribeClusterVersionsInput, optFns ...func(*Options)) (*DescribeClusterVersionsOutput, error) {
 	if params == nil {
 		params = &DescribeClusterVersionsInput{}
@@ -34,27 +37,35 @@ func (c *Client) DescribeClusterVersions(ctx context.Context, params *DescribeCl
 type DescribeClusterVersionsInput struct {
 
 	// The name of a specific cluster parameter group family to return details for.
+	//
 	// Constraints:
+	//
 	//   - Must be 1 to 255 alphanumeric characters
+	//
 	//   - First character must be a letter
+	//
 	//   - Cannot end with a hyphen or contain two consecutive hyphens
 	ClusterParameterGroupFamily *string
 
-	// The specific cluster version to return. Example: 1.0
+	// The specific cluster version to return.
+	//
+	// Example: 1.0
 	ClusterVersion *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterVersions request exceed
-	// the value specified in MaxRecords , Amazon Web Services returns a value in the
-	// Marker field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// response records. When the results of a DescribeClusterVersionsrequest exceed the value specified in
+	// MaxRecords , Amazon Web Services returns a value in the Marker field of the
+	// response. You can retrieve the next set of response records by providing the
+	// returned marker value in the Marker parameter and retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -170,7 +181,10 @@ type DescribeClusterVersionsPaginatorOptions struct {
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 

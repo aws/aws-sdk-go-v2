@@ -46,9 +46,10 @@ type CreatePullRequestInput struct {
 	// A unique, client-generated idempotency token that, when provided in a request,
 	// ensures the request cannot be repeated with a changed parameter. If a request is
 	// received with the same parameters and a token is included, the request returns
-	// information about the initial request that used that token. The Amazon Web
-	// ServicesSDKs prepopulate client request tokens. If you are using an Amazon Web
-	// ServicesSDK, an idempotency token is created for you.
+	// information about the initial request that used that token.
+	//
+	// The Amazon Web ServicesSDKs prepopulate client request tokens. If you are using
+	// an Amazon Web ServicesSDK, an idempotency token is created for you.
 	ClientRequestToken *string
 
 	// A description of the pull request.

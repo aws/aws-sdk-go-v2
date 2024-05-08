@@ -13,7 +13,9 @@ import (
 
 // Creates an Amazon Chime SDK messaging AppInstance under an AWS account. Only
 // SDK messaging customers use this API. CreateAppInstance supports idempotency
-// behavior as described in the AWS API Standard. identity
+// behavior as described in the AWS API Standard.
+//
+// identity
 func (c *Client) CreateAppInstance(ctx context.Context, params *CreateAppInstanceInput, optFns ...func(*Options)) (*CreateAppInstanceOutput, error) {
 	if params == nil {
 		params = &CreateAppInstanceInput{}

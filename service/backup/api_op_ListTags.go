@@ -11,10 +11,13 @@ import (
 )
 
 // Returns a list of key-value pairs assigned to a target recovery point, backup
-// plan, or backup vault. ListTags only works for resource types that support full
-// Backup management of their backups. Those resource types are listed in the "Full
-// Backup management" section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
-// table.
+// plan, or backup vault.
+//
+// ListTags only works for resource types that support full Backup management of
+// their backups. Those resource types are listed in the "Full Backup management"
+// section of the [Feature availability by resource]table.
+//
+// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
 		params = &ListTagsInput{}

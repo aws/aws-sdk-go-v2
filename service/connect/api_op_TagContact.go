@@ -11,9 +11,9 @@ import (
 )
 
 // Adds the specified tags to the contact resource. For more information about
-// this API is used, see Set up granular billing for a detailed view of your
-// Amazon Connect usage (https://docs.aws.amazon.com/connect/latest/adminguide/granular-billing.html)
-// .
+// this API is used, see [Set up granular billing for a detailed view of your Amazon Connect usage].
+//
+// [Set up granular billing for a detailed view of your Amazon Connect usage]: https://docs.aws.amazon.com/connect/latest/adminguide/granular-billing.html
 func (c *Client) TagContact(ctx context.Context, params *TagContactInput, optFns ...func(*Options)) (*TagContactOutput, error) {
 	if params == nil {
 		params = &TagContactInput{}
@@ -36,15 +36,18 @@ type TagContactInput struct {
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
 
 	// The tags to be assigned to the contact resource. For example, { "Tags":
-	// {"key1":"value1", "key2":"value2"} }. Authorization is not supported by this
-	// tag.
+	// {"key1":"value1", "key2":"value2"} }.
+	//
+	// Authorization is not supported by this tag.
 	//
 	// This member is required.
 	Tags map[string]string

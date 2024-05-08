@@ -12,11 +12,14 @@ import (
 
 // Informs Amazon ECR that the image layer upload is complete for a specified
 // public registry, repository name, and upload ID. You can optionally provide a
-// sha256 digest of the image layer for data validation purposes. When an image is
-// pushed, the CompleteLayerUpload API is called once for each new image layer to
-// verify that the upload is complete. This operation is used by the Amazon ECR
-// proxy and is not generally used by customers for pulling and pushing images. In
-// most cases, you should use the docker CLI to pull, tag, and push images.
+// sha256 digest of the image layer for data validation purposes.
+//
+// When an image is pushed, the CompleteLayerUpload API is called once for each
+// new image layer to verify that the upload is complete.
+//
+// This operation is used by the Amazon ECR proxy and is not generally used by
+// customers for pulling and pushing images. In most cases, you should use the
+// docker CLI to pull, tag, and push images.
 func (c *Client) CompleteLayerUpload(ctx context.Context, params *CompleteLayerUploadInput, optFns ...func(*Options)) (*CompleteLayerUploadOutput, error) {
 	if params == nil {
 		params = &CompleteLayerUploadInput{}
@@ -45,8 +48,7 @@ type CompleteLayerUploadInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The upload ID from a previous InitiateLayerUpload operation to associate with
-	// the image layer.
+	// The upload ID from a previous InitiateLayerUpload operation to associate with the image layer.
 	//
 	// This member is required.
 	UploadId *string

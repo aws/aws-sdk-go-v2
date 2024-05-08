@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a billing group that resembles a consolidated billing family that
+//	Creates a billing group that resembles a consolidated billing family that
+//
 // Amazon Web Services charges, based off of the predefined pricing plan
 // computation.
 func (c *Client) CreateBillingGroup(ctx context.Context, params *CreateBillingGroupInput, optFns ...func(*Options)) (*CreateBillingGroupOutput, error) {
@@ -31,34 +32,34 @@ func (c *Client) CreateBillingGroup(ctx context.Context, params *CreateBillingGr
 
 type CreateBillingGroupInput struct {
 
-	// The set of accounts that will be under the billing group. The set of accounts
+	//  The set of accounts that will be under the billing group. The set of accounts
 	// resemble the linked accounts in a consolidated billing family.
 	//
 	// This member is required.
 	AccountGrouping *types.AccountGrouping
 
-	// The preferences and settings that will be used to compute the Amazon Web
+	//  The preferences and settings that will be used to compute the Amazon Web
 	// Services charges for a billing group.
 	//
 	// This member is required.
 	ComputationPreference *types.ComputationPreference
 
-	// The billing group name. The names must be unique.
+	//  The billing group name. The names must be unique.
 	//
 	// This member is required.
 	Name *string
 
-	// The token that is needed to support idempotency. Idempotency isn't currently
+	//  The token that is needed to support idempotency. Idempotency isn't currently
 	// supported, but will be implemented in a future update.
 	ClientToken *string
 
 	// The description of the billing group.
 	Description *string
 
-	// The account ID that serves as the main account in a billing group.
+	//  The account ID that serves as the main account in a billing group.
 	PrimaryAccountId *string
 
-	// A map that contains tag keys and tag values that are attached to a billing
+	//  A map that contains tag keys and tag values that are attached to a billing
 	// group. This feature isn't available during the beta.
 	Tags map[string]string
 

@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Clears the default authorizer. Requires permission to access the
-// ClearDefaultAuthorizer (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Clears the default authorizer.
+//
+// Requires permission to access the [ClearDefaultAuthorizer] action.
+//
+// [ClearDefaultAuthorizer]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ClearDefaultAuthorizer(ctx context.Context, params *ClearDefaultAuthorizerInput, optFns ...func(*Options)) (*ClearDefaultAuthorizerOutput, error) {
 	if params == nil {
 		params = &ClearDefaultAuthorizerInput{}

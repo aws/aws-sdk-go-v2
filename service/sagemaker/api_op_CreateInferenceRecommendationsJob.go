@@ -72,9 +72,10 @@ type CreateInferenceRecommendationsJobInput struct {
 
 	// The metadata that you apply to Amazon Web Services resources to help you
 	// categorize and organize them. Each tag consists of a key and a value, both of
-	// which you define. For more information, see Tagging Amazon Web Services
-	// Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in
-	// the Amazon Web Services General Reference.
+	// which you define. For more information, see [Tagging Amazon Web Services Resources]in the Amazon Web Services General
+	// Reference.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

@@ -15,8 +15,9 @@ const (
 )
 
 // Values returns all known values for ActionType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionType) Values() []ActionType {
 	return []ActionType{
 		"Rightsize",
@@ -37,8 +38,9 @@ const (
 )
 
 // Values returns all known values for EnrollmentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnrollmentStatus) Values() []EnrollmentStatus {
 	return []EnrollmentStatus{
 		"Active",
@@ -58,8 +60,9 @@ const (
 )
 
 // Values returns all known values for ImplementationEffort. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImplementationEffort) Values() []ImplementationEffort {
 	return []ImplementationEffort{
 		"VeryLow",
@@ -80,8 +83,9 @@ const (
 
 // Values returns all known values for MemberAccountDiscountVisibility. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MemberAccountDiscountVisibility) Values() []MemberAccountDiscountVisibility {
 	return []MemberAccountDiscountVisibility{
 		"All",
@@ -98,8 +102,9 @@ const (
 )
 
 // Values returns all known values for Order. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Order) Values() []Order {
 	return []Order{
 		"Asc",
@@ -127,8 +132,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"Ec2Instance",
@@ -156,8 +162,9 @@ const (
 )
 
 // Values returns all known values for SavingsEstimationMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SavingsEstimationMode) Values() []SavingsEstimationMode {
 	return []SavingsEstimationMode{
 		"BeforeDiscounts",
@@ -174,8 +181,9 @@ const (
 )
 
 // Values returns all known values for Source. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Source) Values() []Source {
 	return []Source{
 		"ComputeOptimizer",
@@ -193,6 +201,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

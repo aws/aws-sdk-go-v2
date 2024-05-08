@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about the specified thing type. Requires permission to access
-// the DescribeThingType (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Gets information about the specified thing type.
+//
+// Requires permission to access the [DescribeThingType] action.
+//
+// [DescribeThingType]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DescribeThingType(ctx context.Context, params *DescribeThingTypeInput, optFns ...func(*Options)) (*DescribeThingTypeOutput, error) {
 	if params == nil {
 		params = &DescribeThingTypeInput{}

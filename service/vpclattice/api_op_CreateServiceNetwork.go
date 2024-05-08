@@ -13,8 +13,11 @@ import (
 
 // Creates a service network. A service network is a logical boundary for a
 // collection of services. You can associate services and VPCs with a service
-// network. For more information, see Service networks (https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html)
-// in the Amazon VPC Lattice User Guide.
+// network.
+//
+// For more information, see [Service networks] in the Amazon VPC Lattice User Guide.
+//
+// [Service networks]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html
 func (c *Client) CreateServiceNetwork(ctx context.Context, params *CreateServiceNetworkInput, optFns ...func(*Options)) (*CreateServiceNetworkOutput, error) {
 	if params == nil {
 		params = &CreateServiceNetworkInput{}
@@ -40,7 +43,9 @@ type CreateServiceNetworkInput struct {
 	Name *string
 
 	// The type of IAM policy.
+	//
 	//   - NONE : The resource does not use an IAM policy. This is the default.
+	//
 	//   - AWS_IAM : The resource uses an IAM policy. When this type is used, auth is
 	//   enabled and an auth policy is required.
 	AuthType types.AuthType

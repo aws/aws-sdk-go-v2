@@ -12,9 +12,11 @@ import (
 )
 
 // Starts the analysis of your source database to provide recommendations of
-// target engines. You can create recommendations for multiple source databases
-// using BatchStartRecommendations (https://docs.aws.amazon.com/dms/latest/APIReference/API_BatchStartRecommendations.html)
-// .
+// target engines.
+//
+// You can create recommendations for multiple source databases using [BatchStartRecommendations].
+//
+// [BatchStartRecommendations]: https://docs.aws.amazon.com/dms/latest/APIReference/API_BatchStartRecommendations.html
 func (c *Client) StartRecommendations(ctx context.Context, params *StartRecommendationsInput, optFns ...func(*Options)) (*StartRecommendationsOutput, error) {
 	if params == nil {
 		params = &StartRecommendationsInput{}

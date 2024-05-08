@@ -16,11 +16,13 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Indicates whether the
-// specified access point currently has a policy that allows public access. For
-// more information about public access through access points, see Managing Data
-// Access with Amazon S3 access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html)
-// in the Amazon S3 User Guide.
+// This operation is not supported by directory buckets.
+//
+// Indicates whether the specified access point currently has a policy that allows
+// public access. For more information about public access through access points,
+// see [Managing Data Access with Amazon S3 access points]in the Amazon S3 User Guide.
+//
+// [Managing Data Access with Amazon S3 access points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
 func (c *Client) GetAccessPointPolicyStatus(ctx context.Context, params *GetAccessPointPolicyStatusInput, optFns ...func(*Options)) (*GetAccessPointPolicyStatusOutput, error) {
 	if params == nil {
 		params = &GetAccessPointPolicyStatusInput{}

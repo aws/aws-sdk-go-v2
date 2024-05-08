@@ -79,10 +79,14 @@ type CreateDbInstanceInput struct {
 	DbParameterGroupIdentifier *string
 
 	// The Timestream for InfluxDB DB storage type to read and write InfluxDB data.
+	//
 	// You can choose between 3 different types of provisioned Influx IOPS included
 	// storage according to your workloads requirements:
+	//
 	//   - Influx IO Included 3000 IOPS
+	//
 	//   - Influx IO Included 12000 IOPS
+	//
 	//   - Influx IO Included 16000 IOPS
 	DbStorageType types.DbStorageType
 

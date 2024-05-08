@@ -41,7 +41,9 @@ type ListMeshesInput struct {
 	// The nextToken value returned from a previous paginated ListMeshes request where
 	// limit was used and the results exceeded the value of that parameter. Pagination
 	// continues from the end of the previous results that returned the nextToken
-	// value. This token should be treated as an opaque identifier that is used only to
+	// value.
+	//
+	// This token should be treated as an opaque identifier that is used only to
 	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 

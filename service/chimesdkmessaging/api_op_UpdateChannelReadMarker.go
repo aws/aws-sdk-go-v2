@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The details of the time when a user last read messages in a channel. The
-// x-amz-chime-bearer request header is mandatory. Use the ARN of the
+// The details of the time when a user last read messages in a channel.
+//
+// The x-amz-chime-bearer request header is mandatory. Use the ARN of the
 // AppInstanceUser or AppInstanceBot that makes the API call as the value in the
 // header.
 func (c *Client) UpdateChannelReadMarker(ctx context.Context, params *UpdateChannelReadMarkerInput, optFns ...func(*Options)) (*UpdateChannelReadMarkerOutput, error) {

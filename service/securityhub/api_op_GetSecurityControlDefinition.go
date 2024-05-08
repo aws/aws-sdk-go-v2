@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the definition of a security control. The definition includes the
+//	Retrieves the definition of a security control. The definition includes the
+//
 // control title, description, Region availability, parameter definitions, and
 // other details.
 func (c *Client) GetSecurityControlDefinition(ctx context.Context, params *GetSecurityControlDefinitionInput, optFns ...func(*Options)) (*GetSecurityControlDefinitionOutput, error) {
@@ -31,7 +32,7 @@ func (c *Client) GetSecurityControlDefinition(ctx context.Context, params *GetSe
 
 type GetSecurityControlDefinitionInput struct {
 
-	// The ID of the security control to retrieve the definition for. This field
+	//  The ID of the security control to retrieve the definition for. This field
 	// doesn’t accept an Amazon Resource Name (ARN).
 	//
 	// This member is required.
@@ -42,7 +43,7 @@ type GetSecurityControlDefinitionInput struct {
 
 type GetSecurityControlDefinitionOutput struct {
 
-	// Provides metadata for a security control, including its unique
+	//  Provides metadata for a security control, including its unique
 	// standard-agnostic identifier, title, description, severity, availability in
 	// Amazon Web Services Regions, and a link to remediation steps.
 	//

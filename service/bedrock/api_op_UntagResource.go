@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Remove one or more tags from a resource. For more information, see Tagging
-// resources (https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html) in
-// the Amazon Bedrock User Guide.
+// Remove one or more tags from a resource. For more information, see [Tagging resources] in the
+// Amazon Bedrock User Guide.
+//
+// [Tagging resources]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

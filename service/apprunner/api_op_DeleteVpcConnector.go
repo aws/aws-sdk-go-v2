@@ -31,7 +31,9 @@ func (c *Client) DeleteVpcConnector(ctx context.Context, params *DeleteVpcConnec
 type DeleteVpcConnectorInput struct {
 
 	// The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to
-	// delete. The ARN must be a full VPC connector ARN.
+	// delete.
+	//
+	// The ARN must be a full VPC connector ARN.
 	//
 	// This member is required.
 	VpcConnectorArn *string

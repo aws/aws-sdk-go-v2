@@ -19,8 +19,9 @@ const (
 )
 
 // Values returns all known values for ActionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionStatus) Values() []ActionStatus {
 	return []ActionStatus{
 		"STANDBY",
@@ -45,8 +46,9 @@ const (
 )
 
 // Values returns all known values for ActionSubType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionSubType) Values() []ActionSubType {
 	return []ActionSubType{
 		"STOP_EC2_INSTANCES",
@@ -64,8 +66,9 @@ const (
 )
 
 // Values returns all known values for ActionType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionType) Values() []ActionType {
 	return []ActionType{
 		"APPLY_IAM_POLICY",
@@ -83,8 +86,9 @@ const (
 )
 
 // Values returns all known values for ApprovalModel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApprovalModel) Values() []ApprovalModel {
 	return []ApprovalModel{
 		"AUTOMATIC",
@@ -101,8 +105,9 @@ const (
 )
 
 // Values returns all known values for AutoAdjustType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AutoAdjustType) Values() []AutoAdjustType {
 	return []AutoAdjustType{
 		"HISTORICAL",
@@ -123,8 +128,9 @@ const (
 )
 
 // Values returns all known values for BudgetType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BudgetType) Values() []BudgetType {
 	return []BudgetType{
 		"USAGE",
@@ -146,8 +152,9 @@ const (
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComparisonOperator) Values() []ComparisonOperator {
 	return []ComparisonOperator{
 		"GREATER_THAN",
@@ -168,8 +175,9 @@ const (
 )
 
 // Values returns all known values for EventType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"SYSTEM",
@@ -191,8 +199,9 @@ const (
 )
 
 // Values returns all known values for ExecutionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExecutionType) Values() []ExecutionType {
 	return []ExecutionType{
 		"APPROVE_BUDGET_ACTION",
@@ -211,8 +220,9 @@ const (
 )
 
 // Values returns all known values for NotificationState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationState) Values() []NotificationState {
 	return []NotificationState{
 		"OK",
@@ -229,8 +239,9 @@ const (
 )
 
 // Values returns all known values for NotificationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationType) Values() []NotificationType {
 	return []NotificationType{
 		"ACTUAL",
@@ -247,8 +258,9 @@ const (
 )
 
 // Values returns all known values for SubscriptionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SubscriptionType) Values() []SubscriptionType {
 	return []SubscriptionType{
 		"SNS",
@@ -265,8 +277,9 @@ const (
 )
 
 // Values returns all known values for ThresholdType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ThresholdType) Values() []ThresholdType {
 	return []ThresholdType{
 		"PERCENTAGE",
@@ -285,8 +298,9 @@ const (
 )
 
 // Values returns all known values for TimeUnit. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TimeUnit) Values() []TimeUnit {
 	return []TimeUnit{
 		"DAILY",

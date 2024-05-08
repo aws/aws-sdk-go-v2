@@ -32,13 +32,13 @@ type PutPortfolioPreferencesInput struct {
 	// The classification for application component types.
 	ApplicationMode types.ApplicationMode
 
-	// The transformation preferences for non-database applications.
+	//  The transformation preferences for non-database applications.
 	ApplicationPreferences *types.ApplicationPreferences
 
-	// The transformation preferences for database applications.
+	//  The transformation preferences for database applications.
 	DatabasePreferences *types.DatabasePreferences
 
-	// The rank of the business goals based on priority.
+	//  The rank of the business goals based on priority.
 	PrioritizeBusinessGoals *types.PrioritizeBusinessGoals
 
 	noSmithyDocumentSerde

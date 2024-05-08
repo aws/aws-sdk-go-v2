@@ -15,20 +15,24 @@ import (
 // Region. Currently, you can add a custom default theme by using the
 // CreateAccountCustomization or UpdateAccountCustomization API operation. To
 // further customize Amazon QuickSight by removing Amazon QuickSight sample assets
-// and videos for all new users, see Customizing Amazon QuickSight (https://docs.aws.amazon.com/quicksight/latest/user/customizing-quicksight.html)
-// in the Amazon QuickSight User Guide. You can create customizations for your
-// Amazon Web Services account or, if you specify a namespace, for a QuickSight
-// namespace instead. Customizations that apply to a namespace always override
-// customizations that apply to an Amazon Web Services account. To find out which
-// customizations apply, use the DescribeAccountCustomization API operation.
+// and videos for all new users, see [Customizing Amazon QuickSight]in the Amazon QuickSight User Guide.
+//
+// You can create customizations for your Amazon Web Services account or, if you
+// specify a namespace, for a QuickSight namespace instead. Customizations that
+// apply to a namespace always override customizations that apply to an Amazon Web
+// Services account. To find out which customizations apply, use the
+// DescribeAccountCustomization API operation.
+//
 // Before you use the CreateAccountCustomization API operation to add a theme as
 // the namespace default, make sure that you first share the theme with the
 // namespace. If you don't share it with the namespace, the theme isn't visible to
 // your users even if you make it the default theme. To check if the theme is
-// shared, view the current permissions by using the DescribeThemePermissions (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeThemePermissions.html)
-// API operation. To share the theme, grant permissions by using the
-// UpdateThemePermissions (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateThemePermissions.html)
-// API operation.
+// shared, view the current permissions by using the [DescribeThemePermissions]API operation. To share the
+// theme, grant permissions by using the [UpdateThemePermissions]API operation.
+//
+// [UpdateThemePermissions]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateThemePermissions.html
+// [DescribeThemePermissions]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeThemePermissions.html
+// [Customizing Amazon QuickSight]: https://docs.aws.amazon.com/quicksight/latest/user/customizing-quicksight.html
 func (c *Client) CreateAccountCustomization(ctx context.Context, params *CreateAccountCustomizationInput, optFns ...func(*Options)) (*CreateAccountCustomizationOutput, error) {
 	if params == nil {
 		params = &CreateAccountCustomizationInput{}
@@ -48,10 +52,12 @@ type CreateAccountCustomizationInput struct {
 
 	// The Amazon QuickSight customizations you're adding in the current Amazon Web
 	// Services Region. You can add these to an Amazon Web Services account and a
-	// QuickSight namespace. For example, you can add a default theme by setting
-	// AccountCustomization to the midnight theme: "AccountCustomization": {
-	// "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" } . Or, you can add a
-	// custom theme by specifying "AccountCustomization": { "DefaultTheme":
+	// QuickSight namespace.
+	//
+	// For example, you can add a default theme by setting AccountCustomization to the
+	// midnight theme: "AccountCustomization": { "DefaultTheme":
+	// "arn:aws:quicksight::aws:theme/MIDNIGHT" } . Or, you can add a custom theme by
+	// specifying "AccountCustomization": { "DefaultTheme":
 	// "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"
 	// } .
 	//

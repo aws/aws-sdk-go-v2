@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a report generator. After you make changes to a report generator, it
-// starts generating new reports within 60 minutes of being updated.
+// Updates a report generator.
+//
+// After you make changes to a report generator, it starts generating new reports
+// within 60 minutes of being updated.
 func (c *Client) UpdateLicenseManagerReportGenerator(ctx context.Context, params *UpdateLicenseManagerReportGeneratorInput, optFns ...func(*Options)) (*UpdateLicenseManagerReportGeneratorOutput, error) {
 	if params == nil {
 		params = &UpdateLicenseManagerReportGeneratorInput{}
@@ -57,8 +59,10 @@ type UpdateLicenseManagerReportGeneratorInput struct {
 	ReportGeneratorName *string
 
 	// Type of reports to generate. The following report types are supported:
+	//
 	//   - License configuration report - Reports the number and details of consumed
 	//   licenses for a license configuration.
+	//
 	//   - Resource report - Reports the tracked licenses and resource consumption for
 	//   a license configuration.
 	//

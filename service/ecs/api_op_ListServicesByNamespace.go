@@ -14,8 +14,10 @@ import (
 // namespace. This list might include services in different clusters. In contrast,
 // ListServices can only list services in one cluster at a time. If you need to
 // filter the list of services in a single cluster by various parameters, use
-// ListServices . For more information, see Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
-// in the Amazon Elastic Container Service Developer Guide.
+// ListServices . For more information, see [Service Connect] in the Amazon Elastic Container
+// Service Developer Guide.
+//
+// [Service Connect]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
 func (c *Client) ListServicesByNamespace(ctx context.Context, params *ListServicesByNamespaceInput, optFns ...func(*Options)) (*ListServicesByNamespaceOutput, error) {
 	if params == nil {
 		params = &ListServicesByNamespaceInput{}
@@ -34,13 +36,16 @@ func (c *Client) ListServicesByNamespace(ctx context.Context, params *ListServic
 type ListServicesByNamespaceInput struct {
 
 	// The namespace name or full Amazon Resource Name (ARN) of the Cloud Map
-	// namespace to list the services in. Tasks that run in a namespace can use short
-	// names to connect to services in the namespace. Tasks can connect to services
-	// across all of the clusters in the namespace. Tasks connect through a managed
-	// proxy container that collects logs and metrics for increased visibility. Only
-	// the tasks that Amazon ECS services create are supported with Service Connect.
-	// For more information, see Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
-	// in the Amazon Elastic Container Service Developer Guide.
+	// namespace to list the services in.
+	//
+	// Tasks that run in a namespace can use short names to connect to services in the
+	// namespace. Tasks can connect to services across all of the clusters in the
+	// namespace. Tasks connect through a managed proxy container that collects logs
+	// and metrics for increased visibility. Only the tasks that Amazon ECS services
+	// create are supported with Service Connect. For more information, see [Service Connect]in the
+	// Amazon Elastic Container Service Developer Guide.
+	//
+	// [Service Connect]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
 	//
 	// This member is required.
 	Namespace *string

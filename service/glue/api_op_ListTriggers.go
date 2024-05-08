@@ -12,10 +12,11 @@ import (
 
 // Retrieves the names of all trigger resources in this Amazon Web Services
 // account, or the resources with the specified tag. This operation allows you to
-// see which resources are available in your account, and their names. This
-// operation takes the optional Tags field, which you can use as a filter on the
-// response so that tagged resources can be retrieved as a group. If you choose to
-// use tags filtering, only resources with the tag are retrieved.
+// see which resources are available in your account, and their names.
+//
+// This operation takes the optional Tags field, which you can use as a filter on
+// the response so that tagged resources can be retrieved as a group. If you choose
+// to use tags filtering, only resources with the tag are retrieved.
 func (c *Client) ListTriggers(ctx context.Context, params *ListTriggersInput, optFns ...func(*Options)) (*ListTriggersOutput, error) {
 	if params == nil {
 		params = &ListTriggersInput{}
@@ -33,7 +34,7 @@ func (c *Client) ListTriggers(ctx context.Context, params *ListTriggersInput, op
 
 type ListTriggersInput struct {
 
-	// The name of the job for which to retrieve triggers. The trigger that can start
+	//  The name of the job for which to retrieve triggers. The trigger that can start
 	// this job is returned. If there is no such trigger, all triggers are returned.
 	DependentJobName *string
 

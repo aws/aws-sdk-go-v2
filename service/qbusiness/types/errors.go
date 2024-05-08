@@ -7,7 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You don't have access to perform this action. Make sure you have the required
+//	You don't have access to perform this action. Make sure you have the required
+//
 // permission policies and user accounts and try again.
 type AccessDeniedException struct {
 	Message *string
@@ -65,8 +66,9 @@ func (e *ConflictException) ErrorCode() string {
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An issue occurred with the internal server used for your Amazon Q Business
-// service. Wait some minutes and try again, or contact Support (http://aws.amazon.com/contact-us/)
-// for help.
+// service. Wait some minutes and try again, or contact [Support]for help.
+//
+// [Support]: http://aws.amazon.com/contact-us/
 type InternalServerException struct {
 	Message *string
 

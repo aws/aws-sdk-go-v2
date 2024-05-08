@@ -17,6 +17,7 @@ import (
 )
 
 // Returns a list of the locations registered in your S3 Access Grants instance.
+//
 // Permissions You must have the s3:ListAccessGrantsLocations permission to use
 // this operation.
 func (c *Client) ListAccessGrantsLocations(ctx context.Context, params *ListAccessGrantsLocationsInput, optFns ...func(*Options)) (*ListAccessGrantsLocationsOutput, error) {

@@ -18,9 +18,10 @@ import (
 )
 
 // Returns the inputs for the change set and a list of changes that CloudFormation
-// will make if you execute the change set. For more information, see Updating
-// Stacks Using Change Sets (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html)
-// in the CloudFormation User Guide.
+// will make if you execute the change set. For more information, see [Updating Stacks Using Change Sets]in the
+// CloudFormation User Guide.
+//
+// [Updating Stacks Using Change Sets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html
 func (c *Client) DescribeChangeSet(ctx context.Context, params *DescribeChangeSetInput, optFns ...func(*Options)) (*DescribeChangeSetOutput, error) {
 	if params == nil {
 		params = &DescribeChangeSetInput{}
@@ -48,8 +49,8 @@ type DescribeChangeSetInput struct {
 	// If true , the returned changes include detailed changes in the property values.
 	IncludePropertyValues *bool
 
-	// A string (provided by the DescribeChangeSet response output) that identifies
-	// the next page of information that you want to retrieve.
+	// A string (provided by the DescribeChangeSet response output) that identifies the next page of
+	// information that you want to retrieve.
 	NextToken *string
 
 	// If you specified the name of a change set, specify the stack name or ID (ARN)
@@ -88,11 +89,14 @@ type DescribeChangeSetOutput struct {
 	// creating it or in an OBSOLETE state because the stack was already updated.
 	ExecutionStatus types.ExecutionStatus
 
-	// Indicates if the change set imports resources that already exist. This
-	// parameter can only import resources that have custom names (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html)
-	// in templates. To import resources that do not accept custom names, such as EC2
-	// instances, use the resource import (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import.html)
+	// Indicates if the change set imports resources that already exist.
+	//
+	// This parameter can only import resources that have [custom names] in templates. To import
+	// resources that do not accept custom names, such as EC2 instances, use the [resource import]
 	// feature instead.
+	//
+	// [custom names]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html
+	// [resource import]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import.html
 	ImportExistingResources *bool
 
 	// Verifies if IncludeNestedStacks is set to True .
@@ -107,23 +111,27 @@ type DescribeChangeSetOutput struct {
 	NotificationARNs []string
 
 	// Determines what action will be taken if stack creation fails. When this
-	// parameter is specified, the DisableRollback parameter to the ExecuteChangeSet (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html)
-	// API operation must not be specified. This must be one of these values:
+	// parameter is specified, the DisableRollback parameter to the [ExecuteChangeSet] API operation
+	// must not be specified. This must be one of these values:
+	//
 	//   - DELETE - Deletes the change set if the stack creation fails. This is only
 	//   valid when the ChangeSetType parameter is set to CREATE . If the deletion of
 	//   the stack fails, the status of the stack is DELETE_FAILED .
+	//
 	//   - DO_NOTHING - if the stack creation fails, do nothing. This is equivalent to
-	//   specifying true for the DisableRollback parameter to the ExecuteChangeSet (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html)
-	//   API operation.
+	//   specifying true for the DisableRollback parameter to the [ExecuteChangeSet]API operation.
+	//
 	//   - ROLLBACK - if the stack creation fails, roll back the stack. This is
-	//   equivalent to specifying false for the DisableRollback parameter to the
-	//   ExecuteChangeSet (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html)
-	//   API operation.
+	//   equivalent to specifying false for the DisableRollback parameter to the [ExecuteChangeSet]API
+	//   operation.
+	//
+	// [ExecuteChangeSet]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html
 	OnStackFailure types.OnStackFailure
 
 	// A list of Parameter structures that describes the input parameters and their
-	// values used to create the change set. For more information, see the Parameter (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
-	// data type.
+	// values used to create the change set. For more information, see the [Parameter]data type.
+	//
+	// [Parameter]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
 	Parameters []types.Parameter
 
 	// Specifies the change set ID of the parent change set in the current nested
@@ -283,12 +291,13 @@ type ChangeSetCreateCompleteWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeChangeSetInput, *DescribeChangeSetOutput, error) (bool, error)
 }
 

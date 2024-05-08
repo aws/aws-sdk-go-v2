@@ -41,9 +41,9 @@ type CreateAgentAliasInput struct {
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
-	// ignores the request, but does not return an error. For more information, see
-	// Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// .
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	// A description of the alias of the agent.

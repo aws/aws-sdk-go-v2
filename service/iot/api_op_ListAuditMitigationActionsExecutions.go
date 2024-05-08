@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the status of audit mitigation action tasks that were executed. Requires
-// permission to access the ListAuditMitigationActionsExecutions (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Gets the status of audit mitigation action tasks that were executed.
+//
+// Requires permission to access the [ListAuditMitigationActionsExecutions] action.
+//
+// [ListAuditMitigationActionsExecutions]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListAuditMitigationActionsExecutions(ctx context.Context, params *ListAuditMitigationActionsExecutionsInput, optFns ...func(*Options)) (*ListAuditMitigationActionsExecutionsOutput, error) {
 	if params == nil {
 		params = &ListAuditMitigationActionsExecutionsInput{}

@@ -28,7 +28,7 @@ func (c *Client) StopSNOMEDCTInferenceJob(ctx context.Context, params *StopSNOME
 
 type StopSNOMEDCTInferenceJobInput struct {
 
-	// The job id of the asynchronous InferSNOMEDCT job to be stopped.
+	//  The job id of the asynchronous InferSNOMEDCT job to be stopped.
 	//
 	// This member is required.
 	JobId *string
@@ -38,7 +38,7 @@ type StopSNOMEDCTInferenceJobInput struct {
 
 type StopSNOMEDCTInferenceJobOutput struct {
 
-	// The identifier generated for the job. To get the status of job, use this
+	//  The identifier generated for the job. To get the status of job, use this
 	// identifier with the DescribeSNOMEDCTInferenceJob operation.
 	JobId *string
 

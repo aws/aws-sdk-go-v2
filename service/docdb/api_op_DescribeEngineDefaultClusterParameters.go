@@ -28,7 +28,7 @@ func (c *Client) DescribeEngineDefaultClusterParameters(ctx context.Context, par
 	return out, nil
 }
 
-// Represents the input to DescribeEngineDefaultClusterParameters .
+// Represents the input to DescribeEngineDefaultClusterParameters.
 type DescribeEngineDefaultClusterParametersInput struct {
 
 	// The name of the cluster parameter group family to return the engine parameter
@@ -45,9 +45,12 @@ type DescribeEngineDefaultClusterParametersInput struct {
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 

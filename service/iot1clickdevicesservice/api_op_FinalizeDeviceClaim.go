@@ -11,6 +11,7 @@ import (
 )
 
 // Given a device ID, finalizes the claim request for the associated device.
+//
 // Claiming a device consists of initiating a claim, then publishing a device
 // event, and finalizing the claim. For a device of type button, a device event can
 // be published by simply clicking the device.
@@ -37,9 +38,9 @@ type FinalizeDeviceClaimInput struct {
 	DeviceId *string
 
 	// A collection of key/value pairs defining the resource tags. For example, {
-	// "tags": {"key1": "value1", "key2": "value2"} }. For more information, see AWS
-	// Tagging Strategies (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
-	// .
+	// "tags": {"key1": "value1", "key2": "value2"} }. For more information, see [AWS Tagging Strategies].
+	//
+	// [AWS Tagging Strategies]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
 	Tags map[string]string
 
 	noSmithyDocumentSerde

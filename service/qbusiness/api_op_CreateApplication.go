@@ -11,12 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Q Business application. There are new tiers for Amazon Q
-// Business. Not all features in Amazon Q Business Pro are also available in Amazon
-// Q Business Lite. For information on what's included in Amazon Q Business Lite
-// and what's included in Amazon Q Business Pro, see Amazon Q Business tiers (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/what-is.html#tiers)
-// . You must use the Amazon Q Business console to assign subscription tiers to
-// users.
+// Creates an Amazon Q Business application.
+//
+// There are new tiers for Amazon Q Business. Not all features in Amazon Q
+// Business Pro are also available in Amazon Q Business Lite. For information on
+// what's included in Amazon Q Business Lite and what's included in Amazon Q
+// Business Pro, see [Amazon Q Business tiers]. You must use the Amazon Q Business console to assign
+// subscription tiers to users.
+//
+// [Amazon Q Business tiers]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/what-is.html#tiers
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}
@@ -53,11 +56,11 @@ type CreateApplicationInput struct {
 	// Business doesn't support asymmetric keys.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
-	// The Amazon Resource Name (ARN) of the IAM Identity Center instance you are
+	//  The Amazon Resource Name (ARN) of the IAM Identity Center instance you are
 	// either creating for—or connecting to—your Amazon Q Business application.
 	IdentityCenterInstanceArn *string
 
-	// The Amazon Resource Name (ARN) of an IAM role with permissions to access your
+	//  The Amazon Resource Name (ARN) of an IAM role with permissions to access your
 	// Amazon CloudWatch logs and metrics.
 	RoleArn *string
 
@@ -72,7 +75,7 @@ type CreateApplicationInput struct {
 
 type CreateApplicationOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Q Business application.
+	//  The Amazon Resource Name (ARN) of the Amazon Q Business application.
 	ApplicationArn *string
 
 	// The identifier of the Amazon Q Business application.

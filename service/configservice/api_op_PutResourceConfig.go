@@ -10,15 +10,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Records the configuration state for the resource provided in the request. The
-// configuration state of a resource is represented in Config as Configuration
+// Records the configuration state for the resource provided in the request.
+//
+// The configuration state of a resource is represented in Config as Configuration
 // Items. Once this API records the configuration item, you can retrieve the list
 // of configuration items for the custom resource type using existing Config APIs.
+//
 // The custom resource type must be registered with CloudFormation. This API
-// accepts the configuration item registered with CloudFormation. When you call
-// this API, Config only stores configuration state of the resource provided in the
-// request. This API does not change or remediate the configuration of the
-// resource. Write-only schema properites are not recorded as part of the published
+// accepts the configuration item registered with CloudFormation.
+//
+// When you call this API, Config only stores configuration state of the resource
+// provided in the request. This API does not change or remediate the configuration
+// of the resource.
+//
+// Write-only schema properites are not recorded as part of the published
 // configuration item.
 func (c *Client) PutResourceConfig(ctx context.Context, params *PutResourceConfigInput, optFns ...func(*Options)) (*PutResourceConfigOutput, error) {
 	if params == nil {
@@ -38,8 +43,9 @@ func (c *Client) PutResourceConfig(ctx context.Context, params *PutResourceConfi
 type PutResourceConfigInput struct {
 
 	// The configuration object of the resource in valid JSON format. It must match
-	// the schema registered with CloudFormation. The configuration JSON must not
-	// exceed 64 KB.
+	// the schema registered with CloudFormation.
+	//
+	// The configuration JSON must not exceed 64 KB.
 	//
 	// This member is required.
 	Configuration *string
@@ -50,9 +56,11 @@ type PutResourceConfigInput struct {
 	ResourceId *string
 
 	// The type of the resource. The custom resource type must be registered with
-	// CloudFormation. You cannot use the organization names “amzn”, “amazon”, “alexa”,
-	// “custom” with custom resource types. It is the first part of the ResourceType up
-	// to the first ::.
+	// CloudFormation.
+	//
+	// You cannot use the organization names “amzn”, “amazon”, “alexa”, “custom” with
+	// custom resource types. It is the first part of the ResourceType up to the first
+	// ::.
 	//
 	// This member is required.
 	ResourceType *string
@@ -65,10 +73,11 @@ type PutResourceConfigInput struct {
 	// Name of the resource.
 	ResourceName *string
 
-	// Tags associated with the resource. This field is not to be confused with the
-	// Amazon Web Services-wide tag feature for Amazon Web Services resources. Tags for
-	// PutResourceConfig are tags that you supply for the configuration items of your
-	// custom resources.
+	// Tags associated with the resource.
+	//
+	// This field is not to be confused with the Amazon Web Services-wide tag feature
+	// for Amazon Web Services resources. Tags for PutResourceConfig are tags that you
+	// supply for the configuration items of your custom resources.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

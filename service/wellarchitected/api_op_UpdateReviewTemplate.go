@@ -44,8 +44,10 @@ type UpdateReviewTemplateInput struct {
 	// wellarchitected lens cannot be unapplied.
 	LensesToDisassociate []string
 
-	// The notes associated with the workload. For a review template, these are the
-	// notes that will be associated with the workload when the template is applied.
+	// The notes associated with the workload.
+	//
+	// For a review template, these are the notes that will be associated with the
+	// workload when the template is applied.
 	Notes *string
 
 	// The review template name.

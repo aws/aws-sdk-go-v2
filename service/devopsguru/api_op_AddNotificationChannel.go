@@ -11,18 +11,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a notification channel to DevOps Guru. A notification channel is used to
+//	Adds a notification channel to DevOps Guru. A notification channel is used to
+//
 // notify you about important DevOps Guru events, such as when an insight is
-// generated. If you use an Amazon SNS topic in another account, you must attach a
-// policy to it that grants DevOps Guru permission to send it notifications. DevOps
-// Guru adds the required policy on your behalf to send notifications using Amazon
-// SNS in your account. DevOps Guru only supports standard SNS topics. For more
-// information, see Permissions for Amazon SNS topics (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html)
-// . If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key
+// generated.
+//
+// If you use an Amazon SNS topic in another account, you must attach a policy to
+// it that grants DevOps Guru permission to send it notifications. DevOps Guru adds
+// the required policy on your behalf to send notifications using Amazon SNS in
+// your account. DevOps Guru only supports standard SNS topics. For more
+// information, see [Permissions for Amazon SNS topics].
+//
+// If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key
 // Management Service customer-managed key (CMK), then you must add permissions to
-// the CMK. For more information, see Permissions for Amazon Web Services
-// KMS–encrypted Amazon SNS topics (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html)
-// .
+// the CMK. For more information, see [Permissions for Amazon Web Services KMS–encrypted Amazon SNS topics].
+//
+// [Permissions for Amazon SNS topics]: https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html
+// [Permissions for Amazon Web Services KMS–encrypted Amazon SNS topics]: https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html
 func (c *Client) AddNotificationChannel(ctx context.Context, params *AddNotificationChannelInput, optFns ...func(*Options)) (*AddNotificationChannelOutput, error) {
 	if params == nil {
 		params = &AddNotificationChannelInput{}
@@ -40,7 +45,7 @@ func (c *Client) AddNotificationChannel(ctx context.Context, params *AddNotifica
 
 type AddNotificationChannelInput struct {
 
-	// A NotificationChannelConfig object that specifies what type of notification
+	//  A NotificationChannelConfig object that specifies what type of notification
 	// channel to add. The one supported notification channel is Amazon Simple
 	// Notification Service (Amazon SNS).
 	//
@@ -52,7 +57,7 @@ type AddNotificationChannelInput struct {
 
 type AddNotificationChannelOutput struct {
 
-	// The ID of the added notification channel.
+	//  The ID of the added notification channel.
 	//
 	// This member is required.
 	Id *string

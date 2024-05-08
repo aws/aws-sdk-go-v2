@@ -12,8 +12,11 @@ import (
 )
 
 // Notify Proton of status changes to a provisioned resource when you use
-// self-managed provisioning. For more information, see Self-managed provisioning (https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self)
-// in the Proton User Guide.
+// self-managed provisioning.
+//
+// For more information, see [Self-managed provisioning] in the Proton User Guide.
+//
+// [Self-managed provisioning]: https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self
 func (c *Client) NotifyResourceDeploymentStatusChange(ctx context.Context, params *NotifyResourceDeploymentStatusChangeInput, optFns ...func(*Options)) (*NotifyResourceDeploymentStatusChangeOutput, error) {
 	if params == nil {
 		params = &NotifyResourceDeploymentStatusChangeInput{}

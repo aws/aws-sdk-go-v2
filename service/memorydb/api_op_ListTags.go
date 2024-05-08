@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all tags currently on a named resource. A tag is a key-value pair where
-// the key and value are case-sensitive. You can use tags to categorize and track
-// your MemoryDB resources. For more information, see Tagging your MemoryDB
-// resources (https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html)
+// Lists all tags currently on a named resource.
+//
+// A tag is a key-value pair where the key and value are case-sensitive. You can
+// use tags to categorize and track your MemoryDB resources. For more information,
+// see [Tagging your MemoryDB resources]
+//
+// [Tagging your MemoryDB resources]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
 		params = &ListTagsInput{}

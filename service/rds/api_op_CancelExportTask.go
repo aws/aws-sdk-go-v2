@@ -40,14 +40,21 @@ type CancelExportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the details of a snapshot or cluster export to Amazon S3. This data
-// type is used as a response element in the DescribeExportTasks operation.
+// Contains the details of a snapshot or cluster export to Amazon S3.
+//
+// This data type is used as a response element in the DescribeExportTasks
+// operation.
 type CancelExportTaskOutput struct {
 
-	// The data exported from the snapshot or cluster. Valid Values:
+	// The data exported from the snapshot or cluster.
+	//
+	// Valid Values:
+	//
 	//   - database - Export all the data from a specified database.
+	//
 	//   - database.table table-name - Export a table of the snapshot or cluster. This
 	//   format is valid only for RDS for MySQL, RDS for MariaDB, and Aurora MySQL.
+	//
 	//   - database.schema schema-name - Export a database schema of the snapshot or
 	//   cluster. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.
 	//
@@ -91,11 +98,17 @@ type CancelExportTaskOutput struct {
 	SourceType types.ExportSourceType
 
 	// The progress status of the export task. The status can be one of the following:
+	//
 	//   - CANCELED
+	//
 	//   - CANCELING
+	//
 	//   - COMPLETE
+	//
 	//   - FAILED
+	//
 	//   - IN_PROGRESS
+	//
 	//   - STARTING
 	Status *string
 

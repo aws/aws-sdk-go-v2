@@ -11,16 +11,26 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the tags for an Amazon Web Services resource. This is a paginated
-// operation, which means that each response might contain only a subset of all the
-// tags. When the response contains only a subset of tags, it includes a NextToken
-// value. Use this value in a subsequent ListTagsForResource request to get more
-// tags. When you receive a response with no NextToken (or an empty or null value),
-// that means there are no more tags to get. Cross-account use: This operation
-// can't be used across different Amazon Web Services accounts. Related operations:
+// Lists the tags for an Amazon Web Services resource.
 //
-//   - TagResource (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html)
-//   - UntagResource (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UntagResource.html)
+// This is a paginated operation, which means that each response might contain
+// only a subset of all the tags. When the response contains only a subset of tags,
+// it includes a NextToken value. Use this value in a subsequent
+// ListTagsForResource request to get more tags. When you receive a response with
+// no NextToken (or an empty or null value), that means there are no more tags to
+// get.
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
+//
+// Related operations:
+//
+// [TagResource]
+//
+// [UntagResource]
+//
+// [TagResource]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html
+// [UntagResource]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UntagResource.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -45,9 +55,10 @@ type ListTagsForResourceInput struct {
 
 	// Use this parameter to specify the maximum number of items to return. When this
 	// value is present, Amazon Web Services Payment Cryptography does not return more
-	// than the specified number of items, but it might return fewer. This value is
-	// optional. If you include a value, it must be between 1 and 100, inclusive. If
-	// you do not include a value, it defaults to 50.
+	// than the specified number of items, but it might return fewer.
+	//
+	// This value is optional. If you include a value, it must be between 1 and 100,
+	// inclusive. If you do not include a value, it defaults to 50.
 	MaxResults *int32
 
 	// Use this parameter in a subsequent request after you receive a response with
@@ -168,9 +179,10 @@ var _ ListTagsForResourceAPIClient = (*Client)(nil)
 type ListTagsForResourcePaginatorOptions struct {
 	// Use this parameter to specify the maximum number of items to return. When this
 	// value is present, Amazon Web Services Payment Cryptography does not return more
-	// than the specified number of items, but it might return fewer. This value is
-	// optional. If you include a value, it must be between 1 and 100, inclusive. If
-	// you do not include a value, it defaults to 50.
+	// than the specified number of items, but it might return fewer.
+	//
+	// This value is optional. If you include a value, it must be between 1 and 100,
+	// inclusive. If you do not include a value, it defaults to 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

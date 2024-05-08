@@ -13,14 +13,17 @@ import (
 
 // Returns information about the specified Amazon Redshift HSM configuration. If
 // no configuration ID is specified, returns information about all the HSM
-// configurations owned by your Amazon Web Services account. If you specify both
-// tag keys and tag values in the same request, Amazon Redshift returns all HSM
-// connections that match any combination of the specified keys and values. For
-// example, if you have owner and environment for tag keys, and admin and test for
-// tag values, all HSM connections that have any combination of those values are
-// returned. If both tag keys and values are omitted from the request, HSM
-// connections are returned regardless of whether they have tag keys or values
-// associated with them.
+// configurations owned by your Amazon Web Services account.
+//
+// If you specify both tag keys and tag values in the same request, Amazon
+// Redshift returns all HSM connections that match any combination of the specified
+// keys and values. For example, if you have owner and environment for tag keys,
+// and admin and test for tag values, all HSM connections that have any
+// combination of those values are returned.
+//
+// If both tag keys and values are omitted from the request, HSM connections are
+// returned regardless of whether they have tag keys or values associated with
+// them.
 func (c *Client) DescribeHsmConfigurations(ctx context.Context, params *DescribeHsmConfigurationsInput, optFns ...func(*Options)) (*DescribeHsmConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeHsmConfigurationsInput{}
@@ -44,17 +47,19 @@ type DescribeHsmConfigurationsInput struct {
 	HsmConfigurationIdentifier *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeHsmConfigurations request
-	// exceed the value specified in MaxRecords , Amazon Web Services returns a value
-	// in the Marker field of the response. You can retrieve the next set of response
-	// records by providing the returned marker value in the Marker parameter and
-	// retrying the request.
+	// response records. When the results of a DescribeHsmConfigurationsrequest exceed the value specified in
+	// MaxRecords , Amazon Web Services returns a value in the Marker field of the
+	// response. You can retrieve the next set of response records by providing the
+	// returned marker value in the Marker parameter and retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -185,7 +190,10 @@ type DescribeHsmConfigurationsPaginatorOptions struct {
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 

@@ -7,36 +7,45 @@ import (
 	"time"
 )
 
-// The response of ConfigureAgent (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html)
-// that specifies if an agent profiles or not and for how long to return profiling
-// data.
+//	The response of [ConfigureAgent]ConfigureAgent that specifies if an agent profiles or not and
+//
+// for how long to return profiling data.
+//
+// [ConfigureAgent]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html
 type AgentConfiguration struct {
 
-	// How long a profiling agent should send profiling data using ConfigureAgent (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html)
-	// . For example, if this is set to 300, the profiling agent calls ConfigureAgent (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html)
+	//  How long a profiling agent should send profiling data using [ConfigureAgent]ConfigureAgent .
+	// For example, if this is set to 300, the profiling agent calls [ConfigureAgent]ConfigureAgent
 	// every 5 minutes to submit the profiled data collected during that period.
+	//
+	// [ConfigureAgent]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html
 	//
 	// This member is required.
 	PeriodInSeconds *int32
 
-	// A Boolean that specifies whether the profiling agent collects profiling data or
-	// not. Set to true to enable profiling.
+	//  A Boolean that specifies whether the profiling agent collects profiling data
+	// or not. Set to true to enable profiling.
 	//
 	// This member is required.
 	ShouldProfile *bool
 
-	// Parameters used by the profiler. The valid parameters are:
+	//  Parameters used by the profiler. The valid parameters are:
+	//
 	//   - MaxStackDepth - The maximum depth of the stacks in the code that is
 	//   represented in the profile. For example, if CodeGuru Profiler finds a method A
 	//   , which calls method B , which calls method C , which calls method D , then
 	//   the depth is 4. If the maxDepth is set to 2, then the profiler evaluates A and
 	//   B .
+	//
 	//   - MemoryUsageLimitPercent - The percentage of memory that is used by the
 	//   profiler.
+	//
 	//   - MinimumTimeForReportingInMilliseconds - The minimum time in milliseconds
 	//   between sending reports.
+	//
 	//   - ReportingIntervalInMilliseconds - The reporting interval in milliseconds
 	//   used to report profiles.
+	//
 	//   - SamplingIntervalInMilliseconds - The sampling interval in milliseconds that
 	//   is used to profile samples.
 	AgentParameters map[string]string
@@ -44,13 +53,15 @@ type AgentConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies whether profiling is enabled or disabled for a profiling group. It is
-// used by ConfigureAgent (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html)
-// to enable or disable profiling for a profiling group.
+//	Specifies whether profiling is enabled or disabled for a profiling group. It
+//
+// is used by [ConfigureAgent]ConfigureAgent to enable or disable profiling for a profiling group.
+//
+// [ConfigureAgent]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html
 type AgentOrchestrationConfig struct {
 
-	// A Boolean that specifies whether the profiling agent collects profiling data or
-	// not. Set to true to enable profiling.
+	//  A Boolean that specifies whether the profiling agent collects profiling data
+	// or not. Set to true to enable profiling.
 	//
 	// This member is required.
 	ProfilingEnabled *bool
@@ -58,41 +69,47 @@ type AgentOrchestrationConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the aggregation period and aggregation start time for an aggregated
+//	Specifies the aggregation period and aggregation start time for an aggregated
+//
 // profile. An aggregated profile is used to collect posted agent profiles during
 // an aggregation period. There are three possible aggregation periods (1 day, 1
 // hour, or 5 minutes).
 type AggregatedProfileTime struct {
 
-	// The aggregation period. This indicates the period during which an aggregation
+	//  The aggregation period. This indicates the period during which an aggregation
 	// profile collects posted agent profiles for a profiling group. Use one of three
 	// valid durations that are specified using the ISO 8601 format.
+	//
 	//   - P1D — 1 day
+	//
 	//   - PT1H — 1 hour
+	//
 	//   - PT5M — 5 minutes
 	Period AggregationPeriod
 
-	// The time that aggregation of posted agent profiles for a profiling group
+	//  The time that aggregation of posted agent profiles for a profiling group
 	// starts. The aggregation profile contains profiles posted by the agent starting
 	// at this time for an aggregation period specified by the period property of the
-	// AggregatedProfileTime object. Specify start using the ISO 8601 format. For
-	// example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020
-	// 1:15:02 PM UTC.
+	// AggregatedProfileTime object.
+	//
+	// Specify start using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z
+	// represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
 	Start *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Details about an anomaly in a specific metric of application profile. The
+//	Details about an anomaly in a specific metric of application profile. The
+//
 // anomaly is detected using analysis of the metric data over a period of time.
 type Anomaly struct {
 
-	// A list of the instances of the detected anomalies during the requested period.
+	//  A list of the instances of the detected anomalies during the requested period.
 	//
 	// This member is required.
 	Instances []AnomalyInstance
 
-	// Details about the metric that the analysis used when it detected the anomaly.
+	//  Details about the metric that the analysis used when it detected the anomaly.
 	// The metric includes the name of the frame that was analyzed with the type and
 	// thread states used to derive the metric value for that frame.
 	//
@@ -110,13 +127,13 @@ type Anomaly struct {
 // The specific duration in which the metric is flagged as anomalous.
 type AnomalyInstance struct {
 
-	// The universally unique identifier (UUID) of an instance of an anomaly in a
+	//  The universally unique identifier (UUID) of an instance of an anomaly in a
 	// metric.
 	//
 	// This member is required.
 	Id *string
 
-	// The start time of the period during which the metric is flagged as anomalous.
+	//  The start time of the period during which the metric is flagged as anomalous.
 	// This is specified using the ISO 8601 format. For example,
 	// 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM
 	// UTC.
@@ -124,7 +141,7 @@ type AnomalyInstance struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// The end time of the period during which the metric is flagged as anomalous.
+	//  The end time of the period during which the metric is flagged as anomalous.
 	// This is specified using the ISO 8601 format. For example,
 	// 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM
 	// UTC.
@@ -161,14 +178,15 @@ type Channel struct {
 	noSmithyDocumentSerde
 }
 
-// Information about potential recommendations that might be created from the
+//	Information about potential recommendations that might be created from the
+//
 // analysis of profiling data.
 type FindingsReportSummary struct {
 
 	// The universally unique identifier (UUID) of the recommendation report.
 	Id *string
 
-	// The end time of the period during which the metric is flagged as anomalous.
+	//  The end time of the period during which the metric is flagged as anomalous.
 	// This is specified using the ISO 8601 format. For example,
 	// 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM
 	// UTC.
@@ -188,11 +206,12 @@ type FindingsReportSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The frame name, metric type, and thread states. These are used to derive the
+//	The frame name, metric type, and thread states. These are used to derive the
+//
 // value of the metric for the frame.
 type FrameMetric struct {
 
-	// Name of the method common across the multiple occurrences of a frame in an
+	//  Name of the method common across the multiple occurrences of a frame in an
 	// application profile.
 	//
 	// This member is required.
@@ -204,7 +223,7 @@ type FrameMetric struct {
 	// This member is required.
 	ThreadStates []string
 
-	// A type of aggregation that specifies how a metric for a frame is analyzed. The
+	//  A type of aggregation that specifies how a metric for a frame is analyzed. The
 	// supported value AggregatedRelativeTotalTime is an aggregation of the metric
 	// value for one frame that is calculated across the occurrences of all frames in a
 	// profile.
@@ -218,13 +237,13 @@ type FrameMetric struct {
 // Information about a frame metric and its values.
 type FrameMetricDatum struct {
 
-	// The frame name, metric type, and thread states. These are used to derive the
+	//  The frame name, metric type, and thread states. These are used to derive the
 	// value of the metric for the frame.
 	//
 	// This member is required.
 	FrameMetric *FrameMetric
 
-	// A list of values that are associated with a frame metric.
+	//  A list of values that are associated with a frame metric.
 	//
 	// This member is required.
 	Values []float64
@@ -248,26 +267,27 @@ type Match struct {
 	noSmithyDocumentSerde
 }
 
-// Details about the metric that the analysis used when it detected the anomaly.
+//	Details about the metric that the analysis used when it detected the anomaly.
+//
 // The metric what is analyzed to create recommendations. It includes the name of
 // the frame that was analyzed and the type and thread states used to derive the
 // metric value for that frame.
 type Metric struct {
 
-	// The name of the method that appears as a frame in any stack in a profile.
+	//  The name of the method that appears as a frame in any stack in a profile.
 	//
 	// This member is required.
 	FrameName *string
 
-	// The list of application runtime thread states that is used to calculate the
+	//  The list of application runtime thread states that is used to calculate the
 	// metric value for the frame.
 	//
 	// This member is required.
 	ThreadStates []string
 
-	// A type that specifies how a metric for a frame is analyzed. The supported value
-	// AggregatedRelativeTotalTime is an aggregation of the metric value for one frame
-	// that is calculated across the occurences of all frames in a profile.
+	//  A type that specifies how a metric for a frame is analyzed. The supported
+	// value AggregatedRelativeTotalTime is an aggregation of the metric value for one
+	// frame that is calculated across the occurences of all frames in a profile.
 	//
 	// This member is required.
 	Type MetricType
@@ -290,7 +310,7 @@ type NotificationConfiguration struct {
 // A set of rules used to make a recommendation during an analysis.
 type Pattern struct {
 
-	// A list of the different counters used to determine if there is a match.
+	//  A list of the different counters used to determine if there is a match.
 	CountersToAggregate []string
 
 	// The description of the recommendation. This explains a potential inefficiency
@@ -303,7 +323,7 @@ type Pattern struct {
 	// The name for this pattern.
 	Name *string
 
-	// A string that contains the steps recommended to address the potential
+	//  A string that contains the steps recommended to address the potential
 	// inefficiency.
 	ResolutionSteps *string
 
@@ -311,7 +331,7 @@ type Pattern struct {
 	// recommendation.
 	TargetFrames [][]string
 
-	// The percentage of time an application spends in one method that triggers a
+	//  The percentage of time an application spends in one method that triggers a
 	// recommendation. The percentage of time is the same as the percentage of the
 	// total gathered sample counts during analysis.
 	ThresholdPercent float64
@@ -333,14 +353,16 @@ type ProfileTime struct {
 // Contains information about a profiling group.
 type ProfilingGroupDescription struct {
 
-	// An AgentOrchestrationConfig (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AgentOrchestrationConfig.html)
-	// object that indicates if the profiling group is enabled for profiled or not.
+	//  An [AgentOrchestrationConfig]AgentOrchestrationConfig object that indicates if the profiling group is
+	// enabled for profiled or not.
+	//
+	// [AgentOrchestrationConfig]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AgentOrchestrationConfig.html
 	AgentOrchestrationConfig *AgentOrchestrationConfig
 
 	// The Amazon Resource Name (ARN) identifying the profiling group resource.
 	Arn *string
 
-	// The compute platform of the profiling group. If it is set to AWSLambda , then
+	//  The compute platform of the profiling group. If it is set to AWSLambda , then
 	// the profiled application runs on AWS Lambda. If it is set to Default , then the
 	// profiled application runs on a compute platform that is not AWS Lambda, such an
 	// Amazon EC2 instance, an on-premises server, or a different platform. The default
@@ -355,16 +377,17 @@ type ProfilingGroupDescription struct {
 	// The name of the profiling group.
 	Name *string
 
-	// A ProfilingStatus (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingStatus.html)
-	// object that includes information about the last time a profile agent pinged
-	// back, the last time a profile was received, and the aggregation period and start
-	// time for the most recent aggregated profile.
+	//  A [ProfilingStatus]ProfilingStatus object that includes information about the last time a
+	// profile agent pinged back, the last time a profile was received, and the
+	// aggregation period and start time for the most recent aggregated profile.
+	//
+	// [ProfilingStatus]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingStatus.html
 	ProfilingStatus *ProfilingStatus
 
-	// A list of the tags that belong to this profiling group.
+	//  A list of the tags that belong to this profiling group.
 	Tags map[string]string
 
-	// The date and time when the profiling group was last updated. Specify using the
+	//  The date and time when the profiling group was last updated. Specify using the
 	// ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond
 	// past June 1, 2020 1:15:02 PM UTC.
 	UpdatedAt *time.Time
@@ -372,7 +395,8 @@ type ProfilingGroupDescription struct {
 	noSmithyDocumentSerde
 }
 
-// Profiling status includes information about the last time a profile agent
+//	Profiling status includes information about the last time a profile agent
+//
 // pinged back, the last time a profile was received, and the aggregation period
 // and start time for the most recent aggregated profile.
 type ProfilingStatus struct {
@@ -387,9 +411,10 @@ type ProfilingStatus struct {
 	// past June 1, 2020 1:15:02 PM UTC.
 	LatestAgentProfileReportedAt *time.Time
 
-	// An AggregatedProfileTime (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AggregatedProfileTime.html)
-	// object that contains the aggregation period and start time for an aggregated
-	// profile.
+	//  An [AggregatedProfileTime]AggregatedProfileTime object that contains the aggregation period and start
+	// time for an aggregated profile.
+	//
+	// [AggregatedProfileTime]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AggregatedProfileTime.html
 	LatestAggregatedProfile *AggregatedProfileTime
 
 	noSmithyDocumentSerde
@@ -435,12 +460,13 @@ type Recommendation struct {
 	noSmithyDocumentSerde
 }
 
-// A data type that contains a Timestamp object. This is specified using the ISO
+//	A data type that contains a Timestamp object. This is specified using the ISO
+//
 // 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past
 // June 1, 2020 1:15:02 PM UTC.
 type TimestampStructure struct {
 
-	// A Timestamp . This is specified using the ISO 8601 format. For example,
+	//  A Timestamp . This is specified using the ISO 8601 format. For example,
 	// 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM
 	// UTC.
 	//

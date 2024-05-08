@@ -12,21 +12,28 @@ import (
 )
 
 // Lists all Channels created under a single Chime App as a paginated list. You
-// can specify filters to narrow results. Functionality & restrictions
+// can specify filters to narrow results.
+//
+// Functionality & restrictions
+//
 //   - Use privacy = PUBLIC to retrieve all public channels in the account.
+//
 //   - Only an AppInstanceAdmin can set privacy = PRIVATE to list the private
 //     channels in an account.
 //
 // The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn
-// of the user that makes the API call as the value in the header. This API is is
-// no longer supported and will not be updated. We recommend using the latest
-// version, ListChannels (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannels.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// of the user that makes the API call as the value in the header.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [ListChannels], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by ListChannels in the Amazon Chime SDK Messaging Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [ListChannels]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannels.html
 func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, optFns ...func(*Options)) (*ListChannelsOutput, error) {
 	if params == nil {
 		params = &ListChannelsInput{}

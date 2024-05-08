@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Accepts the account link invitation. There's currently no unlinking capability
-// after you accept the account linking invitation.
+// Accepts the account link invitation.
+//
+// There's currently no unlinking capability after you accept the account linking
+// invitation.
 func (c *Client) AcceptAccountLinkInvitation(ctx context.Context, params *AcceptAccountLinkInvitationInput, optFns ...func(*Options)) (*AcceptAccountLinkInvitationOutput, error) {
 	if params == nil {
 		params = &AcceptAccountLinkInvitationInput{}

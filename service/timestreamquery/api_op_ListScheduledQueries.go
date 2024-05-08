@@ -37,7 +37,7 @@ type ListScheduledQueriesInput struct {
 	// to the subsequent call to ListScheduledQueriesRequest .
 	MaxResults *int32
 
-	// A pagination token to resume pagination.
+	//  A pagination token to resume pagination.
 	NextToken *string
 
 	noSmithyDocumentSerde

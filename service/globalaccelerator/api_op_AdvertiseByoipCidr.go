@@ -14,10 +14,14 @@ import (
 // Advertises an IPv4 address range that is provisioned for use with your Amazon
 // Web Services resources through bring your own IP addresses (BYOIP). It can take
 // a few minutes before traffic to the specified addresses starts routing to Amazon
-// Web Services because of propagation delays. To stop advertising the BYOIP
-// address range, use WithdrawByoipCidr (https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html)
-// . For more information, see Bring your own IP addresses (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
-// in the Global Accelerator Developer Guide.
+// Web Services because of propagation delays.
+//
+// To stop advertising the BYOIP address range, use [WithdrawByoipCidr].
+//
+// For more information, see [Bring your own IP addresses (BYOIP)] in the Global Accelerator Developer Guide.
+//
+// [Bring your own IP addresses (BYOIP)]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+// [WithdrawByoipCidr]: https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html
 func (c *Client) AdvertiseByoipCidr(ctx context.Context, params *AdvertiseByoipCidrInput, optFns ...func(*Options)) (*AdvertiseByoipCidrOutput, error) {
 	if params == nil {
 		params = &AdvertiseByoipCidrInput{}
@@ -36,9 +40,11 @@ func (c *Client) AdvertiseByoipCidr(ctx context.Context, params *AdvertiseByoipC
 type AdvertiseByoipCidrInput struct {
 
 	// The address range, in CIDR notation. This must be the exact range that you
-	// provisioned. You can't advertise only a portion of the provisioned range. For
-	// more information, see Bring your own IP addresses (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
-	// in the Global Accelerator Developer Guide.
+	// provisioned. You can't advertise only a portion of the provisioned range.
+	//
+	// For more information, see [Bring your own IP addresses (BYOIP)] in the Global Accelerator Developer Guide.
+	//
+	// [Bring your own IP addresses (BYOIP)]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
 	//
 	// This member is required.
 	Cidr *string

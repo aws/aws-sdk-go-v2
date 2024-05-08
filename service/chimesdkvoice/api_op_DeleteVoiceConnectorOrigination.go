@@ -11,8 +11,10 @@ import (
 )
 
 // Deletes the origination settings for the specified Amazon Chime SDK Voice
-// Connector. If emergency calling is configured for the Voice Connector, it must
-// be deleted prior to deleting the origination settings.
+// Connector.
+//
+// If emergency calling is configured for the Voice Connector, it must be deleted
+// prior to deleting the origination settings.
 func (c *Client) DeleteVoiceConnectorOrigination(ctx context.Context, params *DeleteVoiceConnectorOriginationInput, optFns ...func(*Options)) (*DeleteVoiceConnectorOriginationOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceConnectorOriginationInput{}

@@ -13,8 +13,10 @@ import (
 
 // Provides a list of medical transcription jobs that match the specified
 // criteria. If no criteria are specified, all medical transcription jobs are
-// returned. To get detailed information about a specific medical transcription
-// job, use the operation.
+// returned.
+//
+// To get detailed information about a specific medical transcription job, use the
+// operation.
 func (c *Client) ListMedicalTranscriptionJobs(ctx context.Context, params *ListMedicalTranscriptionJobsInput, optFns ...func(*Options)) (*ListMedicalTranscriptionJobsOutput, error) {
 	if params == nil {
 		params = &ListMedicalTranscriptionJobsInput{}

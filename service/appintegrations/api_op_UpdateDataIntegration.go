@@ -10,11 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the description of a DataIntegration. You cannot create a
-// DataIntegration association for a DataIntegration that has been previously
-// associated. Use a different DataIntegration, or recreate the DataIntegration
-// using the CreateDataIntegration (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html)
-// API.
+// Updates the description of a DataIntegration.
+//
+// You cannot create a DataIntegration association for a DataIntegration that has
+// been previously associated. Use a different DataIntegration, or recreate the
+// DataIntegration using the [CreateDataIntegration]API.
+//
+// [CreateDataIntegration]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html
 func (c *Client) UpdateDataIntegration(ctx context.Context, params *UpdateDataIntegrationInput, optFns ...func(*Options)) (*UpdateDataIntegrationOutput, error) {
 	if params == nil {
 		params = &UpdateDataIntegrationInput{}

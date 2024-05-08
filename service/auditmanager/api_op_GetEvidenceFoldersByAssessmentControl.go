@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of evidence folders that are associated with a specified control in
-// an Audit Manager assessment.
+//	Gets a list of evidence folders that are associated with a specified control
+//
+// in an Audit Manager assessment.
 func (c *Client) GetEvidenceFoldersByAssessmentControl(ctx context.Context, params *GetEvidenceFoldersByAssessmentControlInput, optFns ...func(*Options)) (*GetEvidenceFoldersByAssessmentControlOutput, error) {
 	if params == nil {
 		params = &GetEvidenceFoldersByAssessmentControlInput{}
@@ -30,25 +31,25 @@ func (c *Client) GetEvidenceFoldersByAssessmentControl(ctx context.Context, para
 
 type GetEvidenceFoldersByAssessmentControlInput struct {
 
-	// The identifier for the assessment.
+	//  The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifier for the control.
+	//  The identifier for the control.
 	//
 	// This member is required.
 	ControlId *string
 
-	// The identifier for the control set.
+	//  The identifier for the control set.
 	//
 	// This member is required.
 	ControlSetId *string
 
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	MaxResults *int32
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -56,11 +57,11 @@ type GetEvidenceFoldersByAssessmentControlInput struct {
 
 type GetEvidenceFoldersByAssessmentControlOutput struct {
 
-	// The list of evidence folders that the GetEvidenceFoldersByAssessmentControl API
-	// returned.
+	//  The list of evidence folders that the GetEvidenceFoldersByAssessmentControl
+	// API returned.
 	EvidenceFolders []types.AssessmentEvidenceFolder
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -159,7 +160,7 @@ var _ GetEvidenceFoldersByAssessmentControlAPIClient = (*Client)(nil)
 // GetEvidenceFoldersByAssessmentControlPaginatorOptions is the paginator options
 // for GetEvidenceFoldersByAssessmentControl
 type GetEvidenceFoldersByAssessmentControlPaginatorOptions struct {
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

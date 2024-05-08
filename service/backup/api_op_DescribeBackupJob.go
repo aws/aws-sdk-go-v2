@@ -108,10 +108,12 @@ type DescribeBackupJobOutput struct {
 	// This returns the boolean value that a backup job is a parent (composite) job.
 	IsParent bool
 
-	// This is the job count for the specified message category. Example strings may
-	// include AccessDenied , SUCCESS , AGGREGATE_ALL , and INVALIDPARAMETERS . View
-	// Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
-	// for a list of accepted MessageCategory strings.
+	// This is the job count for the specified message category.
+	//
+	// Example strings may include AccessDenied , SUCCESS , AGGREGATE_ALL , and
+	// INVALIDPARAMETERS . View [Monitoring] for a list of accepted MessageCategory strings.
+	//
+	// [Monitoring]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
 	MessageCategory *string
 
 	// This returns the number of child (nested) backup jobs.

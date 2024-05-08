@@ -44,8 +44,9 @@ type DescribeLocationAzureBlobOutput struct {
 
 	// The access tier that you want your objects or files transferred into. This only
 	// applies when using the location as a transfer destination. For more information,
-	// see Access tiers (https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access-tiers)
-	// .
+	// see [Access tiers].
+	//
+	// [Access tiers]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access-tiers
 	AccessTier types.AzureAccessTier
 
 	// The ARNs of the DataSync agents that can connect with your Azure Blob Storage
@@ -58,9 +59,9 @@ type DescribeLocationAzureBlobOutput struct {
 
 	// The type of blob that you want your objects or files to be when transferring
 	// them into Azure Blob Storage. Currently, DataSync only supports moving data into
-	// Azure Blob Storage as block blobs. For more information on blob types, see the
-	// Azure Blob Storage documentation (https://learn.microsoft.com/en-us/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs)
-	// .
+	// Azure Blob Storage as block blobs. For more information on blob types, see the [Azure Blob Storage documentation].
+	//
+	// [Azure Blob Storage documentation]: https://learn.microsoft.com/en-us/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs
 	BlobType types.AzureBlobType
 
 	// The time that your Azure Blob Storage transfer location was created.

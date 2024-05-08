@@ -44,11 +44,12 @@ type StartSessionInput struct {
 	// A unique case-sensitive string used to ensure the request to create the session
 	// is idempotent (executes only once). If another StartSessionRequest is received,
 	// the same response is returned and another session is not created. If a parameter
-	// has changed, an error is returned. This token is listed as not required because
-	// Amazon Web Services SDKs (for example the Amazon Web Services SDK for Java)
-	// auto-generate the token for users. If you are not using the Amazon Web Services
-	// SDK or the Amazon Web Services CLI, you must provide this token or the action
-	// will fail.
+	// has changed, an error is returned.
+	//
+	// This token is listed as not required because Amazon Web Services SDKs (for
+	// example the Amazon Web Services SDK for Java) auto-generate the token for users.
+	// If you are not using the Amazon Web Services SDK or the Amazon Web Services CLI,
+	// you must provide this token or the action will fail.
 	ClientRequestToken *string
 
 	// The session description.
@@ -58,7 +59,7 @@ type StartSessionInput struct {
 	// sessions in the Athena console and is not required for programmatic session
 	// access. The only valid notebook version is Athena notebook version 1 . If you
 	// specify a value for NotebookVersion , you must also specify a value for
-	// NotebookId . See EngineConfiguration$AdditionalConfigs .
+	// NotebookId . See EngineConfiguration$AdditionalConfigs.
 	NotebookVersion *string
 
 	// The idle timeout in minutes for the session.
@@ -72,14 +73,24 @@ type StartSessionOutput struct {
 	// The session ID.
 	SessionId *string
 
-	// The state of the session. A description of each state follows. CREATING - The
-	// session is being started, including acquiring resources. CREATED - The session
-	// has been started. IDLE - The session is able to accept a calculation. BUSY -
-	// The session is processing another task and is unable to accept a calculation.
-	// TERMINATING - The session is in the process of shutting down. TERMINATED - The
-	// session and its resources are no longer running. DEGRADED - The session has no
-	// healthy coordinators. FAILED - Due to a failure, the session and its resources
-	// are no longer running.
+	// The state of the session. A description of each state follows.
+	//
+	// CREATING - The session is being started, including acquiring resources.
+	//
+	// CREATED - The session has been started.
+	//
+	// IDLE - The session is able to accept a calculation.
+	//
+	// BUSY - The session is processing another task and is unable to accept a
+	// calculation.
+	//
+	// TERMINATING - The session is in the process of shutting down.
+	//
+	// TERMINATED - The session and its resources are no longer running.
+	//
+	// DEGRADED - The session has no healthy coordinators.
+	//
+	// FAILED - Due to a failure, the session and its resources are no longer running.
 	State types.SessionState
 
 	// Metadata pertaining to the operation's result.

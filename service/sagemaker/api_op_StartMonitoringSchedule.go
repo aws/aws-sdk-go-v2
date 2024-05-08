@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a previously stopped monitoring schedule. By default, when you
-// successfully create a new schedule, the status of a monitoring schedule is
-// scheduled .
+// Starts a previously stopped monitoring schedule.
+//
+// By default, when you successfully create a new schedule, the status of a
+// monitoring schedule is scheduled .
 func (c *Client) StartMonitoringSchedule(ctx context.Context, params *StartMonitoringScheduleInput, optFns ...func(*Options)) (*StartMonitoringScheduleOutput, error) {
 	if params == nil {
 		params = &StartMonitoringScheduleInput{}

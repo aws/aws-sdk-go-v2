@@ -29,15 +29,15 @@ func (c *Client) ListInputRoutings(ctx context.Context, params *ListInputRouting
 
 type ListInputRoutingsInput struct {
 
-	// The identifer of the routed input.
+	//  The identifer of the routed input.
 	//
 	// This member is required.
 	InputIdentifier *types.InputIdentifier
 
-	// The maximum number of results to be returned per request.
+	//  The maximum number of results to be returned per request.
 	MaxResults *int32
 
-	// The token that you can use to return the next set of results.
+	//  The token that you can use to return the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,11 +45,11 @@ type ListInputRoutingsInput struct {
 
 type ListInputRoutingsOutput struct {
 
-	// The token that you can use to return the next set of results, or null if there
+	//  The token that you can use to return the next set of results, or null if there
 	// are no more results.
 	NextToken *string
 
-	// Summary information about the routed resources.
+	//  Summary information about the routed resources.
 	RoutedResources []types.RoutedResource
 
 	// Metadata pertaining to the operation's result.

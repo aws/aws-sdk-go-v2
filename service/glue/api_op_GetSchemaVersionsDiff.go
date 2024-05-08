@@ -12,9 +12,10 @@ import (
 )
 
 // Fetches the schema version difference in the specified difference type between
-// two stored schema versions in the Schema Registry. This API allows you to
-// compare two schema versions between two schema definitions under the same
-// schema.
+// two stored schema versions in the Schema Registry.
+//
+// This API allows you to compare two schema versions between two schema
+// definitions under the same schema.
 func (c *Client) GetSchemaVersionsDiff(ctx context.Context, params *GetSchemaVersionsDiffInput, optFns ...func(*Options)) (*GetSchemaVersionsDiffOutput, error) {
 	if params == nil {
 		params = &GetSchemaVersionsDiffInput{}
@@ -44,8 +45,10 @@ type GetSchemaVersionsDiffInput struct {
 
 	// This is a wrapper structure to contain schema identity fields. The structure
 	// contains:
+	//
 	//   - SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. One of
 	//   SchemaArn or SchemaName has to be provided.
+	//
 	//   - SchemaId$SchemaName: The name of the schema. One of SchemaArn or SchemaName
 	//   has to be provided.
 	//

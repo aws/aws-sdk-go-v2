@@ -31,9 +31,11 @@ func (c *Client) GetComplianceDetailsByResource(ctx context.Context, params *Get
 
 type GetComplianceDetailsByResourceInput struct {
 
-	// Filters the results by compliance. INSUFFICIENT_DATA is a valid ComplianceType
-	// that is returned when an Config rule cannot be evaluated. However,
-	// INSUFFICIENT_DATA cannot be used as a ComplianceType for filtering results.
+	// Filters the results by compliance.
+	//
+	// INSUFFICIENT_DATA is a valid ComplianceType that is returned when an Config
+	// rule cannot be evaluated. However, INSUFFICIENT_DATA cannot be used as a
+	// ComplianceType for filtering results.
 	ComplianceTypes []types.ComplianceType
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -41,8 +43,10 @@ type GetComplianceDetailsByResourceInput struct {
 	NextToken *string
 
 	// The unique ID of Amazon Web Services resource execution for which you want to
-	// retrieve evaluation results. You need to only provide either a
-	// ResourceEvaluationID or a ResourceID and ResourceType .
+	// retrieve evaluation results.
+	//
+	// You need to only provide either a ResourceEvaluationID or a ResourceID and
+	// ResourceType .
 	ResourceEvaluationId *string
 
 	// The ID of the Amazon Web Services resource for which you want compliance

@@ -33,7 +33,7 @@ type ListProblemsInput struct {
 	// The AWS account ID for the resource group owner.
 	AccountId *string
 
-	// The name of the component.
+	//  The name of the component.
 	ComponentName *string
 
 	// The time when the problem ended, in epoch seconds. If not specified, problems
@@ -73,7 +73,7 @@ type ListProblemsOutput struct {
 	// The list of problems.
 	ProblemList []types.Problem
 
-	// The name of the resource group.
+	//  The name of the resource group.
 	ResourceGroupName *string
 
 	// Metadata pertaining to the operation's result.

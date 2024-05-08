@@ -29,12 +29,12 @@ func (c *Client) AssociatePricingRules(ctx context.Context, params *AssociatePri
 
 type AssociatePricingRulesInput struct {
 
-	// The PricingPlanArn that the PricingRuleArns are associated with.
+	//  The PricingPlanArn that the PricingRuleArns are associated with.
 	//
 	// This member is required.
 	Arn *string
 
-	// The PricingRuleArns that are associated with the Pricing Plan.
+	//  The PricingRuleArns that are associated with the Pricing Plan.
 	//
 	// This member is required.
 	PricingRuleArns []string
@@ -44,7 +44,7 @@ type AssociatePricingRulesInput struct {
 
 type AssociatePricingRulesOutput struct {
 
-	// The PricingPlanArn that the PricingRuleArns are associated with.
+	//  The PricingPlanArn that the PricingRuleArns are associated with.
 	Arn *string
 
 	// Metadata pertaining to the operation's result.

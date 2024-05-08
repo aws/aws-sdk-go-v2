@@ -32,8 +32,10 @@ type UpdateAllowListInput struct {
 	// The criteria that specify the text or text pattern to ignore. The criteria can
 	// be the location and name of an S3 object that lists specific text to ignore
 	// (s3WordsList), or a regular expression that defines a text pattern to ignore
-	// (regex). You can change a list's underlying criteria, such as the name of the S3
-	// object or the regular expression to use. However, you can't change the type from
+	// (regex).
+	//
+	// You can change a list's underlying criteria, such as the name of the S3 object
+	// or the regular expression to use. However, you can't change the type from
 	// s3WordsList to regex or the other way around.
 	//
 	// This member is required.

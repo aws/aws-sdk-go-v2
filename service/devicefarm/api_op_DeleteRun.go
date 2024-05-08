@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the run, given the run ARN. Deleting this resource does not stop an
-// in-progress run.
+// Deletes the run, given the run ARN.
+//
+// Deleting this resource does not stop an in-progress run.
 func (c *Client) DeleteRun(ctx context.Context, params *DeleteRunInput, optFns ...func(*Options)) (*DeleteRunOutput, error) {
 	if params == nil {
 		params = &DeleteRunInput{}

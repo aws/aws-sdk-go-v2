@@ -29,8 +29,9 @@ type DeploymentData struct {
 	ResourceGroup *string
 
 	// The specifications of the deployment. For more information on specifications
-	// for each deployment, see Workload specifications (https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications.html)
-	// .
+	// for each deployment, see [Workload specifications].
+	//
+	// [Workload specifications]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications.html
 	Specifications map[string]string
 
 	// The status of the deployment.

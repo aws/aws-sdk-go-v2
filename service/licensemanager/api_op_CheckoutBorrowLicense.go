@@ -36,8 +36,9 @@ type CheckoutBorrowLicenseInput struct {
 	ClientToken *string
 
 	// Digital signature method. The possible value is JSON Web Signature (JWS)
-	// algorithm PS384. For more information, see RFC 7518 Digital Signature with
-	// RSASSA-PSS (https://tools.ietf.org/html/rfc7518#section-3.5) .
+	// algorithm PS384. For more information, see [RFC 7518 Digital Signature with RSASSA-PSS].
+	//
+	// [RFC 7518 Digital Signature with RSASSA-PSS]: https://tools.ietf.org/html/rfc7518#section-3.5
 	//
 	// This member is required.
 	DigitalSignatureMethod types.DigitalSignatureMethod

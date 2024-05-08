@@ -52,9 +52,12 @@ type UpdateReportPlanInput struct {
 	ReportPlanDescription *string
 
 	// Identifies the report template for the report. Reports are built using a report
-	// template. The report templates are: RESOURCE_COMPLIANCE_REPORT |
-	// CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT |
-	// RESTORE_JOB_REPORT If the report template is RESOURCE_COMPLIANCE_REPORT or
+	// template. The report templates are:
+	//
+	//     RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT |
+	//     COPY_JOB_REPORT | RESTORE_JOB_REPORT
+	//
+	// If the report template is RESOURCE_COMPLIANCE_REPORT or
 	// CONTROL_COMPLIANCE_REPORT , this API resource also describes the report coverage
 	// by Amazon Web Services Regions and frameworks.
 	ReportSetting *types.ReportSetting

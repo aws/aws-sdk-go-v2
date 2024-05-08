@@ -13,18 +13,24 @@ import (
 
 // Updates a composite model and all of the assets that were created from the
 // model. Each asset created from the model inherits the updated asset model's
-// property and hierarchy definitions. For more information, see Updating assets
-// and models (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html)
-// in the IoT SiteWise User Guide. If you remove a property from a composite asset
-// model, IoT SiteWise deletes all previous data for that property. You can’t
-// change the type or data type of an existing property. To replace an existing
-// composite asset model property with a new one with the same name , do the
-// following:
+// property and hierarchy definitions. For more information, see [Updating assets and models]in the IoT
+// SiteWise User Guide.
+//
+// If you remove a property from a composite asset model, IoT SiteWise deletes all
+// previous data for that property. You can’t change the type or data type of an
+// existing property.
+//
+// To replace an existing composite asset model property with a new one with the
+// same name , do the following:
+//
 //   - Submit an UpdateAssetModelCompositeModel request with the entire existing
 //     property removed.
+//
 //   - Submit a second UpdateAssetModelCompositeModel request that includes the new
 //     property. The new asset property will have the same name as the previous one
 //     and IoT SiteWise will generate a new unique id .
+//
+// [Updating assets and models]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html
 func (c *Client) UpdateAssetModelCompositeModel(ctx context.Context, params *UpdateAssetModelCompositeModelInput, optFns ...func(*Options)) (*UpdateAssetModelCompositeModelOutput, error) {
 	if params == nil {
 		params = &UpdateAssetModelCompositeModelInput{}
@@ -66,9 +72,11 @@ type UpdateAssetModelCompositeModelInput struct {
 	AssetModelCompositeModelExternalId *string
 
 	// The property definitions of the composite model. For more information, see .
+	//
 	// You can specify up to 200 properties per composite model. For more information,
-	// see Quotas (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html)
-	// in the IoT SiteWise User Guide.
+	// see [Quotas]in the IoT SiteWise User Guide.
+	//
+	// [Quotas]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
 	AssetModelCompositeModelProperties []types.AssetModelProperty
 
 	// A unique case-sensitive identifier that you can provide to ensure the
@@ -87,8 +95,9 @@ type UpdateAssetModelCompositeModelOutput struct {
 	AssetModelCompositeModelPath []types.AssetModelCompositeModelPathSegment
 
 	// Contains current status information for an asset model. For more information,
-	// see Asset and model states (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html)
-	// in the IoT SiteWise User Guide.
+	// see [Asset and model states]in the IoT SiteWise User Guide.
+	//
+	// [Asset and model states]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html
 	//
 	// This member is required.
 	AssetModelStatus *types.AssetModelStatus

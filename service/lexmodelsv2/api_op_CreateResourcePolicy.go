@@ -31,8 +31,11 @@ type CreateResourcePolicyInput struct {
 	// A resource policy to add to the resource. The policy is a JSON structure that
 	// contains one or more statements that define the policy. The policy must follow
 	// the IAM syntax. For more information about the contents of a JSON policy
-	// document, see IAM JSON policy reference  (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html)
-	// . If the policy isn't valid, Amazon Lex returns a validation exception.
+	// document, see [IAM JSON policy reference].
+	//
+	// If the policy isn't valid, Amazon Lex returns a validation exception.
+	//
+	// [IAM JSON policy reference]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
 	//
 	// This member is required.
 	Policy *string

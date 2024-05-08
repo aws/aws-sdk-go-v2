@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the data protection policy from the specified log group. For more
-// information about data protection policies, see PutDataProtectionPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html)
-// .
+// Deletes the data protection policy from the specified log group.
+//
+// For more information about data protection policies, see [PutDataProtectionPolicy].
+//
+// [PutDataProtectionPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html
 func (c *Client) DeleteDataProtectionPolicy(ctx context.Context, params *DeleteDataProtectionPolicyInput, optFns ...func(*Options)) (*DeleteDataProtectionPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteDataProtectionPolicyInput{}

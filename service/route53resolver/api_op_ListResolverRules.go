@@ -31,8 +31,9 @@ func (c *Client) ListResolverRules(ctx context.Context, params *ListResolverRule
 type ListResolverRulesInput struct {
 
 	// An optional specification to return a subset of Resolver rules, such as all
-	// Resolver rules that are associated with the same Resolver endpoint. If you
-	// submit a second or subsequent ListResolverRules request and specify the
+	// Resolver rules that are associated with the same Resolver endpoint.
+	//
+	// If you submit a second or subsequent ListResolverRules request and specify the
 	// NextToken parameter, you must use the same values for Filters , if any, as in
 	// the previous request.
 	Filters []types.Filter
@@ -42,10 +43,11 @@ type ListResolverRulesInput struct {
 	// Resolver returns up to 100 Resolver rules.
 	MaxResults *int32
 
-	// For the first ListResolverRules request, omit this value. If you have more than
-	// MaxResults Resolver rules, you can submit another ListResolverRules request to
-	// get the next group of Resolver rules. In the next request, specify the value of
-	// NextToken from the previous response.
+	// For the first ListResolverRules request, omit this value.
+	//
+	// If you have more than MaxResults Resolver rules, you can submit another
+	// ListResolverRules request to get the next group of Resolver rules. In the next
+	// request, specify the value of NextToken from the previous response.
 	NextToken *string
 
 	noSmithyDocumentSerde

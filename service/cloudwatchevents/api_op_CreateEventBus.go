@@ -31,11 +31,14 @@ func (c *Client) CreateEventBus(ctx context.Context, params *CreateEventBusInput
 
 type CreateEventBusInput struct {
 
-	// The name of the new event bus. Event bus names cannot contain the / character.
-	// You can't use the name default for a custom event bus, as this name is already
-	// used for your account's default event bus. If this is a partner event bus, the
-	// name must exactly match the name of the partner event source that this event bus
-	// is matched to.
+	// The name of the new event bus.
+	//
+	// Event bus names cannot contain the / character. You can't use the name default
+	// for a custom event bus, as this name is already used for your account's default
+	// event bus.
+	//
+	// If this is a partner event bus, the name must exactly match the name of the
+	// partner event source that this event bus is matched to.
 	//
 	// This member is required.
 	Name *string

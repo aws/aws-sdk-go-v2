@@ -37,9 +37,10 @@ type CreatePerformanceAnalysisReportInput struct {
 	EndTime *time.Time
 
 	// An immutable, Amazon Web Services Region-unique identifier for a data source.
-	// Performance Insights gathers metrics from this data source. To use an Amazon RDS
-	// instance as a data source, you specify its DbiResourceId value. For example,
-	// specify db-ADECBTYHKTSAUMUZQYPDS2GW4A .
+	// Performance Insights gathers metrics from this data source.
+	//
+	// To use an Amazon RDS instance as a data source, you specify its DbiResourceId
+	// value. For example, specify db-ADECBTYHKTSAUMUZQYPDS2GW4A .
 	//
 	// This member is required.
 	Identifier *string

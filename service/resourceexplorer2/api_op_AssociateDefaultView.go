@@ -11,12 +11,14 @@ import (
 )
 
 // Sets the specified view as the default for the Amazon Web Services Region in
-// which you call this operation. When a user performs a Search that doesn't
-// explicitly specify which view to use, then Amazon Web Services Resource Explorer
+// which you call this operation. When a user performs a Searchthat doesn't explicitly
+// specify which view to use, then Amazon Web Services Resource Explorer
 // automatically chooses this default view for searches performed in this Amazon
-// Web Services Region. If an Amazon Web Services Region doesn't have a default
-// view configured, then users must explicitly specify a view with every Search
-// operation performed in that Region.
+// Web Services Region.
+//
+// If an Amazon Web Services Region doesn't have a default view configured, then
+// users must explicitly specify a view with every Search operation performed in
+// that Region.
 func (c *Client) AssociateDefaultView(ctx context.Context, params *AssociateDefaultViewInput, optFns ...func(*Options)) (*AssociateDefaultViewOutput, error) {
 	if params == nil {
 		params = &AssociateDefaultViewInput{}
@@ -34,10 +36,11 @@ func (c *Client) AssociateDefaultView(ctx context.Context, params *AssociateDefa
 
 type AssociateDefaultViewInput struct {
 
-	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the view to set as the default for the Amazon Web Services Region and Amazon
-	// Web Services account in which you call this operation. The specified view must
-	// already exist in the called Region.
+	// The [Amazon resource name (ARN)] of the view to set as the default for the Amazon Web Services Region and
+	// Amazon Web Services account in which you call this operation. The specified view
+	// must already exist in the called Region.
+	//
+	// [Amazon resource name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	ViewArn *string
@@ -47,10 +50,11 @@ type AssociateDefaultViewInput struct {
 
 type AssociateDefaultViewOutput struct {
 
-	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the view that the operation set as the default for queries made in the Amazon
-	// Web Services Region and Amazon Web Services account in which you called this
-	// operation.
+	// The [Amazon resource name (ARN)] of the view that the operation set as the default for queries made in the
+	// Amazon Web Services Region and Amazon Web Services account in which you called
+	// this operation.
+	//
+	// [Amazon resource name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ViewArn *string
 
 	// Metadata pertaining to the operation's result.

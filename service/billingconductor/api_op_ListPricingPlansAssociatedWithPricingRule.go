@@ -28,19 +28,19 @@ func (c *Client) ListPricingPlansAssociatedWithPricingRule(ctx context.Context, 
 
 type ListPricingPlansAssociatedWithPricingRuleInput struct {
 
-	// The pricing rule Amazon Resource Name (ARN) for which associations will be
+	//  The pricing rule Amazon Resource Name (ARN) for which associations will be
 	// listed.
 	//
 	// This member is required.
 	PricingRuleArn *string
 
-	// The pricing plan billing period for which associations will be listed.
+	//  The pricing plan billing period for which associations will be listed.
 	BillingPeriod *string
 
-	// The optional maximum number of pricing rule associations to retrieve.
+	//  The optional maximum number of pricing rule associations to retrieve.
 	MaxResults *int32
 
-	// The optional pagination token returned by a previous call.
+	//  The optional pagination token returned by a previous call.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -48,17 +48,17 @@ type ListPricingPlansAssociatedWithPricingRuleInput struct {
 
 type ListPricingPlansAssociatedWithPricingRuleOutput struct {
 
-	// The pricing plan billing period for which associations will be listed.
+	//  The pricing plan billing period for which associations will be listed.
 	BillingPeriod *string
 
-	// The pagination token to be used on subsequent calls.
+	//  The pagination token to be used on subsequent calls.
 	NextToken *string
 
-	// The list containing pricing plans that are associated with the requested
+	//  The list containing pricing plans that are associated with the requested
 	// pricing rule.
 	PricingPlanArns []string
 
-	// The pricing rule Amazon Resource Name (ARN) for which associations will be
+	//  The pricing rule Amazon Resource Name (ARN) for which associations will be
 	// listed.
 	PricingRuleArn *string
 
@@ -158,7 +158,7 @@ var _ ListPricingPlansAssociatedWithPricingRuleAPIClient = (*Client)(nil)
 // ListPricingPlansAssociatedWithPricingRulePaginatorOptions is the paginator
 // options for ListPricingPlansAssociatedWithPricingRule
 type ListPricingPlansAssociatedWithPricingRulePaginatorOptions struct {
-	// The optional maximum number of pricing rule associations to retrieve.
+	//  The optional maximum number of pricing rule associations to retrieve.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

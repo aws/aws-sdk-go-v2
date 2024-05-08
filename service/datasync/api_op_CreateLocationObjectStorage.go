@@ -12,9 +12,12 @@ import (
 )
 
 // Creates a transfer location for an object storage system. DataSync can use this
-// location as a source or destination for transferring data. Before you begin,
-// make sure that you understand the prerequisites (https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html#create-object-location-prerequisites)
-// for DataSync to work with object storage systems.
+// location as a source or destination for transferring data.
+//
+// Before you begin, make sure that you understand the [prerequisites] for DataSync to work with
+// object storage systems.
+//
+// [prerequisites]: https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html#create-object-location-prerequisites
 func (c *Client) CreateLocationObjectStorage(ctx context.Context, params *CreateLocationObjectStorageInput, optFns ...func(*Options)) (*CreateLocationObjectStorageOutput, error) {
 	if params == nil {
 		params = &CreateLocationObjectStorageInput{}
@@ -62,17 +65,24 @@ type CreateLocationObjectStorageInput struct {
 	// Specifies a certificate chain for DataSync to authenticate with your object
 	// storage system if the system uses a private or self-signed certificate authority
 	// (CA). You must specify a single .pem file with a full certificate chain (for
-	// example, file:///home/user/.ssh/object_storage_certificates.pem ). The
-	// certificate chain might include:
+	// example, file:///home/user/.ssh/object_storage_certificates.pem ).
+	//
+	// The certificate chain might include:
+	//
 	//   - The object storage system's certificate
+	//
 	//   - All intermediate certificates (if there are any)
+	//
 	//   - The root certificate of the signing CA
+	//
 	// You can concatenate your certificates into a .pem file (which can be up to
 	// 32768 bytes before base64 encoding). The following example cat command creates
-	// an object_storage_certificates.pem file that includes three certificates: cat
-	// object_server_certificate.pem intermediate_certificate.pem
-	// ca_root_certificate.pem > object_storage_certificates.pem To use this parameter,
-	// configure ServerProtocol to HTTPS .
+	// an object_storage_certificates.pem file that includes three certificates:
+	//
+	//     cat object_server_certificate.pem intermediate_certificate.pem
+	//     ca_root_certificate.pem > object_storage_certificates.pem
+	//
+	// To use this parameter, configure ServerProtocol to HTTPS .
 	ServerCertificate []byte
 
 	// Specifies the port that your object storage server accepts inbound network

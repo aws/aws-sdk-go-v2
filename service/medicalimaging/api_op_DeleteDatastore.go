@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a data store. Before a data store can be deleted, you must first delete
-// all image sets within it.
+// Delete a data store.
+//
+// Before a data store can be deleted, you must first delete all image sets within
+// it.
 func (c *Client) DeleteDatastore(ctx context.Context, params *DeleteDatastoreInput, optFns ...func(*Options)) (*DeleteDatastoreOutput, error) {
 	if params == nil {
 		params = &DeleteDatastoreInput{}

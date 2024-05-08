@@ -42,8 +42,9 @@ type StartBatchJobInput struct {
 	BatchJobIdentifier types.BatchJobIdentifier
 
 	// The collection of batch job parameters. For details about limits for keys and
-	// values, see Coding variables in JCL (https://www.ibm.com/docs/en/workload-automation/9.3.0?topic=zos-coding-variables-in-jcl)
-	// .
+	// values, see [Coding variables in JCL].
+	//
+	// [Coding variables in JCL]: https://www.ibm.com/docs/en/workload-automation/9.3.0?topic=zos-coding-variables-in-jcl
 	JobParams map[string]string
 
 	noSmithyDocumentSerde

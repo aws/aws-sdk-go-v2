@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A paginated call to get a list of all custom line items (FFLIs) for the given
+//	A paginated call to get a list of all custom line items (FFLIs) for the given
+//
 // billing period. If you don't provide a billing period, the current billing
 // period is used.
 func (c *Client) ListCustomLineItems(ctx context.Context, params *ListCustomLineItemsInput, optFns ...func(*Options)) (*ListCustomLineItemsOutput, error) {
@@ -31,17 +32,17 @@ func (c *Client) ListCustomLineItems(ctx context.Context, params *ListCustomLine
 
 type ListCustomLineItemsInput struct {
 
-	// The preferred billing period to get custom line items (FFLIs).
+	//  The preferred billing period to get custom line items (FFLIs).
 	BillingPeriod *string
 
 	// A ListCustomLineItemsFilter that specifies the custom line item names and/or
 	// billing group Amazon Resource Names (ARNs) to retrieve FFLI information.
 	Filters *types.ListCustomLineItemsFilter
 
-	// The maximum number of billing groups to retrieve.
+	//  The maximum number of billing groups to retrieve.
 	MaxResults *int32
 
-	// The pagination token that's used on subsequent calls to get custom line items
+	//  The pagination token that's used on subsequent calls to get custom line items
 	// (FFLIs).
 	NextToken *string
 
@@ -50,10 +51,10 @@ type ListCustomLineItemsInput struct {
 
 type ListCustomLineItemsOutput struct {
 
-	// A list of FreeFormLineItemListElements received.
+	//  A list of FreeFormLineItemListElements received.
 	CustomLineItems []types.CustomLineItemListElement
 
-	// The pagination token that's used on subsequent calls to get custom line items
+	//  The pagination token that's used on subsequent calls to get custom line items
 	// (FFLIs).
 	NextToken *string
 
@@ -150,7 +151,7 @@ var _ ListCustomLineItemsAPIClient = (*Client)(nil)
 // ListCustomLineItemsPaginatorOptions is the paginator options for
 // ListCustomLineItems
 type ListCustomLineItemsPaginatorOptions struct {
-	// The maximum number of billing groups to retrieve.
+	//  The maximum number of billing groups to retrieve.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

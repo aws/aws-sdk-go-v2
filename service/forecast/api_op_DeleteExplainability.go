@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Explainability resource. You can delete only predictor that have a
-// status of ACTIVE or CREATE_FAILED . To get the status, use the
-// DescribeExplainability operation.
+// Deletes an Explainability resource.
+//
+// You can delete only predictor that have a status of ACTIVE or CREATE_FAILED . To
+// get the status, use the DescribeExplainabilityoperation.
 func (c *Client) DeleteExplainability(ctx context.Context, params *DeleteExplainabilityInput, optFns ...func(*Options)) (*DeleteExplainabilityOutput, error) {
 	if params == nil {
 		params = &DeleteExplainabilityInput{}

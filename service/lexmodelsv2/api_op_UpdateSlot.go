@@ -46,8 +46,9 @@ type UpdateSlotInput struct {
 	IntentId *string
 
 	// The identifier of the language and locale that contains the slot. The string
-	// must match one of the supported locales. For more information, see Supported
-	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html) .
+	// must match one of the supported locales. For more information, see [Supported languages].
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string
@@ -73,8 +74,9 @@ type UpdateSlotInput struct {
 
 	// Determines whether the slot accepts multiple values in one response. Multiple
 	// value slots are only available in the en-US locale. If you set this value to
-	// true in any other locale, Amazon Lex throws a ValidationException . If the
-	// multipleValuesSetting is not set, the default value is false .
+	// true in any other locale, Amazon Lex throws a ValidationException .
+	//
+	// If the multipleValuesSetting is not set, the default value is false .
 	MultipleValuesSetting *types.MultipleValuesSetting
 
 	// New settings that determine how slot values are formatted in Amazon CloudWatch

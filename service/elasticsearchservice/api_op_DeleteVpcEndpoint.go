@@ -38,8 +38,8 @@ type DeleteVpcEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response parameters to the DeleteVpcEndpoint operation. Contains
-// the summarized detail of the VPC Endpoint being deleted.
+// Container for response parameters to the DeleteVpcEndpoint operation. Contains the summarized
+// detail of the VPC Endpoint being deleted.
 type DeleteVpcEndpointOutput struct {
 
 	// Information about the deleted endpoint, including its current status ( DELETING

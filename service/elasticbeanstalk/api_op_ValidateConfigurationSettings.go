@@ -12,9 +12,10 @@ import (
 )
 
 // Takes a set of configuration settings and either a configuration template or
-// environment, and determines whether those values are valid. This action returns
-// a list of messages indicating any errors or warnings associated with the
-// selection of option values.
+// environment, and determines whether those values are valid.
+//
+// This action returns a list of messages indicating any errors or warnings
+// associated with the selection of option values.
 func (c *Client) ValidateConfigurationSettings(ctx context.Context, params *ValidateConfigurationSettingsInput, optFns ...func(*Options)) (*ValidateConfigurationSettingsOutput, error) {
 	if params == nil {
 		params = &ValidateConfigurationSettingsInput{}
@@ -44,11 +45,13 @@ type ValidateConfigurationSettingsInput struct {
 	// This member is required.
 	OptionSettings []types.ConfigurationOptionSetting
 
-	// The name of the environment to validate the settings against. Condition: You
-	// cannot specify both this and a configuration template name.
+	// The name of the environment to validate the settings against.
+	//
+	// Condition: You cannot specify both this and a configuration template name.
 	EnvironmentName *string
 
 	// The name of the configuration template to validate the settings against.
+	//
 	// Condition: You cannot specify both this and an environment name.
 	TemplateName *string
 
@@ -58,7 +61,7 @@ type ValidateConfigurationSettingsInput struct {
 // Provides a list of validation messages.
 type ValidateConfigurationSettingsOutput struct {
 
-	// A list of ValidationMessage .
+	//  A list of ValidationMessage.
 	Messages []types.ValidationMessage
 
 	// Metadata pertaining to the operation's result.

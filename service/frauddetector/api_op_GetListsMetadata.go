@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the metadata of either all the lists under the account or the specified
+//	Gets the metadata of either all the lists under the account or the specified
+//
 // list.
 func (c *Client) GetListsMetadata(ctx context.Context, params *GetListsMetadataInput, optFns ...func(*Options)) (*GetListsMetadataOutput, error) {
 	if params == nil {
@@ -30,13 +31,13 @@ func (c *Client) GetListsMetadata(ctx context.Context, params *GetListsMetadataI
 
 type GetListsMetadataInput struct {
 
-	// The maximum number of objects to return for the request.
+	//  The maximum number of objects to return for the request.
 	MaxResults *int32
 
-	// The name of the list.
+	//  The name of the list.
 	Name *string
 
-	// The next token for the subsequent request.
+	//  The next token for the subsequent request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -44,10 +45,10 @@ type GetListsMetadataInput struct {
 
 type GetListsMetadataOutput struct {
 
-	// The metadata of the specified list or all lists under the account.
+	//  The metadata of the specified list or all lists under the account.
 	Lists []types.AllowDenyList
 
-	// The next page token.
+	//  The next page token.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -142,7 +143,7 @@ var _ GetListsMetadataAPIClient = (*Client)(nil)
 
 // GetListsMetadataPaginatorOptions is the paginator options for GetListsMetadata
 type GetListsMetadataPaginatorOptions struct {
-	// The maximum number of objects to return for the request.
+	//  The maximum number of objects to return for the request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

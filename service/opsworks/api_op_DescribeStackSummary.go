@@ -12,11 +12,13 @@ import (
 )
 
 // Describes the number of layers and apps in a specified stack, and the number of
-// instances in each state, such as running_setup or online . Required Permissions:
-// To use this action, an IAM user must have a Show, Deploy, or Manage permissions
-// level for the stack, or an attached policy that explicitly grants permissions.
-// For more information about user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// instances in each state, such as running_setup or online .
+//
+// Required Permissions: To use this action, an IAM user must have a Show, Deploy,
+// or Manage permissions level for the stack, or an attached policy that explicitly
+// grants permissions. For more information about user permissions, see [Managing User Permissions].
+//
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeStackSummary(ctx context.Context, params *DescribeStackSummaryInput, optFns ...func(*Options)) (*DescribeStackSummaryOutput, error) {
 	if params == nil {
 		params = &DescribeStackSummaryInput{}

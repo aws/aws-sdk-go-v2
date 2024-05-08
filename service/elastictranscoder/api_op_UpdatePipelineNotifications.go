@@ -12,9 +12,10 @@ import (
 )
 
 // With the UpdatePipelineNotifications operation, you can update Amazon Simple
-// Notification Service (Amazon SNS) notifications for a pipeline. When you update
-// notifications for a pipeline, Elastic Transcoder returns the values that you
-// specified in the request.
+// Notification Service (Amazon SNS) notifications for a pipeline.
+//
+// When you update notifications for a pipeline, Elastic Transcoder returns the
+// values that you specified in the request.
 func (c *Client) UpdatePipelineNotifications(ctx context.Context, params *UpdatePipelineNotificationsInput, optFns ...func(*Options)) (*UpdatePipelineNotificationsOutput, error) {
 	if params == nil {
 		params = &UpdatePipelineNotificationsInput{}
@@ -40,18 +41,24 @@ type UpdatePipelineNotificationsInput struct {
 	Id *string
 
 	// The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic
-	// that you want to notify to report job status. To receive notifications, you must
-	// also subscribe to the new topic in the Amazon SNS console.
+	// that you want to notify to report job status.
+	//
+	// To receive notifications, you must also subscribe to the new topic in the
+	// Amazon SNS console.
+	//
 	//   - Progressing: The topic ARN for the Amazon Simple Notification Service
 	//   (Amazon SNS) topic that you want to notify when Elastic Transcoder has started
 	//   to process jobs that are added to this pipeline. This is the ARN that Amazon SNS
 	//   returned when you created the topic.
+	//
 	//   - Complete: The topic ARN for the Amazon SNS topic that you want to notify
 	//   when Elastic Transcoder has finished processing a job. This is the ARN that
 	//   Amazon SNS returned when you created the topic.
+	//
 	//   - Warning: The topic ARN for the Amazon SNS topic that you want to notify
 	//   when Elastic Transcoder encounters a warning condition. This is the ARN that
 	//   Amazon SNS returned when you created the topic.
+	//
 	//   - Error: The topic ARN for the Amazon SNS topic that you want to notify when
 	//   Elastic Transcoder encounters an error condition. This is the ARN that Amazon
 	//   SNS returned when you created the topic.

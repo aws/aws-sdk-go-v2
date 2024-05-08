@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Unshares an application from an AWS Organization.This operation can be called
-// only from the organization's master account.
+// Unshares an application from an AWS Organization.
+//
+// This operation can be called only from the organization's master account.
 func (c *Client) UnshareApplication(ctx context.Context, params *UnshareApplicationInput, optFns ...func(*Options)) (*UnshareApplicationOutput, error) {
 	if params == nil {
 		params = &UnshareApplicationInput{}

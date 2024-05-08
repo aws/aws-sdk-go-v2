@@ -74,11 +74,15 @@ type DescribeBackupVaultOutput struct {
 	EncryptionKeyArn *string
 
 	// The date and time when Backup Vault Lock configuration cannot be changed or
-	// deleted. If you applied Vault Lock to your vault without specifying a lock date,
-	// you can change any of your Vault Lock settings, or delete Vault Lock from the
-	// vault entirely, at any time. This value is in Unix format, Coordinated Universal
-	// Time (UTC), and accurate to milliseconds. For example, the value 1516925490.087
-	// represents Friday, January 26, 2018 12:11:30.087 AM.
+	// deleted.
+	//
+	// If you applied Vault Lock to your vault without specifying a lock date, you can
+	// change any of your Vault Lock settings, or delete Vault Lock from the vault
+	// entirely, at any time.
+	//
+	// This value is in Unix format, Coordinated Universal Time (UTC), and accurate to
+	// milliseconds. For example, the value 1516925490.087 represents Friday, January
+	// 26, 2018 12:11:30.087 AM.
 	LockDate *time.Time
 
 	// A Boolean that indicates whether Backup Vault Lock is currently protecting the
@@ -89,24 +93,26 @@ type DescribeBackupVaultOutput struct {
 	// The Backup Vault Lock setting that specifies the maximum retention period that
 	// the vault retains its recovery points. If this parameter is not specified, Vault
 	// Lock does not enforce a maximum retention period on the recovery points in the
-	// vault (allowing indefinite storage). If specified, any backup or copy job to the
-	// vault must have a lifecycle policy with a retention period equal to or shorter
-	// than the maximum retention period. If the job's retention period is longer than
-	// that maximum retention period, then the vault fails the backup or copy job, and
-	// you should either modify your lifecycle settings or use a different vault.
-	// Recovery points already stored in the vault prior to Vault Lock are not
-	// affected.
+	// vault (allowing indefinite storage).
+	//
+	// If specified, any backup or copy job to the vault must have a lifecycle policy
+	// with a retention period equal to or shorter than the maximum retention period.
+	// If the job's retention period is longer than that maximum retention period, then
+	// the vault fails the backup or copy job, and you should either modify your
+	// lifecycle settings or use a different vault. Recovery points already stored in
+	// the vault prior to Vault Lock are not affected.
 	MaxRetentionDays *int64
 
 	// The Backup Vault Lock setting that specifies the minimum retention period that
 	// the vault retains its recovery points. If this parameter is not specified, Vault
-	// Lock does not enforce a minimum retention period. If specified, any backup or
-	// copy job to the vault must have a lifecycle policy with a retention period equal
-	// to or longer than the minimum retention period. If the job's retention period is
-	// shorter than that minimum retention period, then the vault fails the backup or
-	// copy job, and you should either modify your lifecycle settings or use a
-	// different vault. Recovery points already stored in the vault prior to Vault Lock
-	// are not affected.
+	// Lock does not enforce a minimum retention period.
+	//
+	// If specified, any backup or copy job to the vault must have a lifecycle policy
+	// with a retention period equal to or longer than the minimum retention period. If
+	// the job's retention period is shorter than that minimum retention period, then
+	// the vault fails the backup or copy job, and you should either modify your
+	// lifecycle settings or use a different vault. Recovery points already stored in
+	// the vault prior to Vault Lock are not affected.
 	MinRetentionDays *int64
 
 	// The number of recovery points that are stored in a backup vault.

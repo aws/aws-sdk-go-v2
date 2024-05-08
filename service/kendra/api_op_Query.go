@@ -11,20 +11,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches an index given an input query. If you are working with large language
-// models (LLMs) or implementing retrieval augmented generation (RAG) systems, you
-// can use Amazon Kendra's Retrieve (https://docs.aws.amazon.com/kendra/latest/APIReference/API_Retrieve.html)
-// API, which can return longer semantically relevant passages. We recommend using
-// the Retrieve API instead of filing a service limit increase to increase the
-// Query API document excerpt length. You can configure boosting or relevance
-// tuning at the query level to override boosting at the index level, filter based
-// on document fields/attributes and faceted search, and filter based on the user
-// or their group access to documents. You can also include certain fields in the
-// response that might provide useful additional information. A query response
-// contains three types of results.
+// Searches an index given an input query.
+//
+// If you are working with large language models (LLMs) or implementing retrieval
+// augmented generation (RAG) systems, you can use Amazon Kendra's [Retrieve]API, which can
+// return longer semantically relevant passages. We recommend using the Retrieve
+// API instead of filing a service limit increase to increase the Query API
+// document excerpt length.
+//
+// You can configure boosting or relevance tuning at the query level to override
+// boosting at the index level, filter based on document fields/attributes and
+// faceted search, and filter based on the user or their group access to documents.
+// You can also include certain fields in the response that might provide useful
+// additional information.
+//
+// A query response contains three types of results.
+//
 //   - Relevant suggested answers. The answers can be either a text excerpt or
 //     table excerpt. The answer can be highlighted in the excerpt.
+//
 //   - Matching FAQs or questions-answer from your FAQ file.
+//
 //   - Relevant documents. This result type includes an excerpt of the document
 //     with the document title. The searched terms can be highlighted in the excerpt.
 //
@@ -33,6 +40,8 @@ import (
 // results. If you filter result type to only question-answers, a maximum of four
 // results are returned. If you filter result type to only answers, a maximum of
 // three results are returned.
+//
+// [Retrieve]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_Retrieve.html
 func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*Options)) (*QueryOutput, error) {
 	if params == nil {
 		params = &QueryInput{}
@@ -57,9 +66,10 @@ type QueryInput struct {
 
 	// Filters search results by document fields/attributes. You can only provide one
 	// attribute filter; however, the AndAllFilters , NotFilter , and OrAllFilters
-	// parameters contain a list of other filters. The AttributeFilter parameter means
-	// you can create a set of filtering rules that a document must satisfy to be
-	// included in the query results.
+	// parameters contain a list of other filters.
+	//
+	// The AttributeFilter parameter means you can create a set of filtering rules
+	// that a document must satisfy to be included in the query results.
 	AttributeFilter *types.AttributeFilter
 
 	// Provides configuration to determine how to group results by document attribute
@@ -68,12 +78,15 @@ type QueryInput struct {
 	CollapseConfiguration *types.CollapseConfiguration
 
 	// Overrides relevance tuning configurations of fields/attributes set at the index
-	// level. If you use this API to override the relevance tuning configured at the
-	// index level, but there is no relevance tuning configured at the index level,
-	// then Amazon Kendra does not apply any relevance tuning. If there is relevance
-	// tuning configured for fields at the index level, and you use this API to
-	// override only some of these fields, then for the fields you did not override,
-	// the importance is set to 1.
+	// level.
+	//
+	// If you use this API to override the relevance tuning configured at the index
+	// level, but there is no relevance tuning configured at the index level, then
+	// Amazon Kendra does not apply any relevance tuning.
+	//
+	// If there is relevance tuning configured for fields at the index level, and you
+	// use this API to override only some of these fields, then for the fields you did
+	// not override, the importance is set to 1.
 	DocumentRelevanceOverrideConfigurations []types.DocumentRelevanceConfiguration
 
 	// An array of documents fields/attributes for faceted search. Amazon Kendra
@@ -99,8 +112,9 @@ type QueryInput struct {
 	// token words, which excludes punctuation and stop words. Truncation still applies
 	// if you use Boolean or more advanced, complex queries. For example, Timeoff AND
 	// October AND Category:HR is counted as 3 tokens: timeoff , october , hr . For
-	// more information, see Searching with advanced query syntax (https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html#searching-index-query-syntax)
-	// in the Amazon Kendra Developer Guide.
+	// more information, see [Searching with advanced query syntax]in the Amazon Kendra Developer Guide.
+	//
+	// [Searching with advanced query syntax]: https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html#searching-index-query-syntax
 	QueryText *string
 
 	// An array of document fields/attributes to include in the response. You can
@@ -111,18 +125,22 @@ type QueryInput struct {
 	// Provides information that determines how the results of the query are sorted.
 	// You can set the field that Amazon Kendra should sort the results on, and specify
 	// whether the results should be sorted in ascending or descending order. In the
-	// case of ties in sorting the results, the results are sorted by relevance. If you
-	// don't provide sorting configuration, the results are sorted by the relevance
-	// that Amazon Kendra determines for the result.
+	// case of ties in sorting the results, the results are sorted by relevance.
+	//
+	// If you don't provide sorting configuration, the results are sorted by the
+	// relevance that Amazon Kendra determines for the result.
 	SortingConfiguration *types.SortingConfiguration
 
 	// Provides configuration information to determine how the results of a query are
-	// sorted. You can set upto 3 fields that Amazon Kendra should sort the results on,
-	// and specify whether the results should be sorted in ascending or descending
-	// order. The sort field quota can be increased. If you don't provide a sorting
-	// configuration, the results are sorted by the relevance that Amazon Kendra
-	// determines for the result. In the case of ties in sorting the results, the
-	// results are sorted by relevance.
+	// sorted.
+	//
+	// You can set upto 3 fields that Amazon Kendra should sort the results on, and
+	// specify whether the results should be sorted in ascending or descending order.
+	// The sort field quota can be increased.
+	//
+	// If you don't provide a sorting configuration, the results are sorted by the
+	// relevance that Amazon Kendra determines for the result. In the case of ties in
+	// sorting the results, the results are sorted by relevance.
 	SortingConfigurations []types.SortingConfiguration
 
 	// Enables suggested spell corrections for queries.
@@ -152,8 +170,9 @@ type QueryOutput struct {
 	FeaturedResultsItems []types.FeaturedResultsItem
 
 	// The identifier for the search. You also use QueryId to identify the search when
-	// using the SubmitFeedback (https://docs.aws.amazon.com/kendra/latest/APIReference/API_SubmitFeedback.html)
-	// API.
+	// using the [SubmitFeedback]API.
+	//
+	// [SubmitFeedback]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_SubmitFeedback.html
 	QueryId *string
 
 	// The results of the search.
@@ -167,11 +186,12 @@ type QueryOutput struct {
 	// retrieve the first 100 of the items.
 	TotalNumberOfResults *int32
 
-	// A list of warning codes and their messages on problems with your query. Amazon
-	// Kendra currently only supports one type of warning, which is a warning on
-	// invalid syntax used in the query. For examples of invalid query syntax, see
-	// Searching with advanced query syntax (https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html#searching-index-query-syntax)
-	// .
+	// A list of warning codes and their messages on problems with your query.
+	//
+	// Amazon Kendra currently only supports one type of warning, which is a warning
+	// on invalid syntax used in the query. For examples of invalid query syntax, see [Searching with advanced query syntax].
+	//
+	// [Searching with advanced query syntax]: https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html#searching-index-query-syntax
 	Warnings []types.Warning
 
 	// Metadata pertaining to the operation's result.

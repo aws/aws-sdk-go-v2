@@ -12,10 +12,12 @@ import (
 )
 
 // Creates a new image with the latest Windows operating system updates, driver
-// updates, and AppStream 2.0 agent software. For more information, see the "Update
-// an Image by Using Managed AppStream 2.0 Image Updates" section in Administer
-// Your AppStream 2.0 Images (https://docs.aws.amazon.com/appstream2/latest/developerguide/administer-images.html)
-// , in the Amazon AppStream 2.0 Administration Guide.
+// updates, and AppStream 2.0 agent software.
+//
+// For more information, see the "Update an Image by Using Managed AppStream 2.0
+// Image Updates" section in [Administer Your AppStream 2.0 Images], in the Amazon AppStream 2.0 Administration Guide.
+//
+// [Administer Your AppStream 2.0 Images]: https://docs.aws.amazon.com/appstream2/latest/developerguide/administer-images.html
 func (c *Client) CreateUpdatedImage(ctx context.Context, params *CreateUpdatedImageInput, optFns ...func(*Options)) (*CreateUpdatedImageOutput, error) {
 	if params == nil {
 		params = &CreateUpdatedImageInput{}
@@ -60,11 +62,19 @@ type CreateUpdatedImageInput struct {
 
 	// The tags to associate with the new image. A tag is a key-value pair, and the
 	// value is optional. For example, Environment=Test. If you do not specify a value,
-	// Environment=. Generally allowed characters are: letters, numbers, and spaces
-	// representable in UTF-8, and the following special characters: _ . : / = + \ - @
-	// If you do not specify a value, the value is set to an empty string. For more
-	// information about tags, see Tagging Your Resources (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
-	// in the Amazon AppStream 2.0 Administration Guide.
+	// Environment=.
+	//
+	// Generally allowed characters are: letters, numbers, and spaces representable in
+	// UTF-8, and the following special characters:
+	//
+	// _ . : / = + \ - @
+	//
+	// If you do not specify a value, the value is set to an empty string.
+	//
+	// For more information about tags, see [Tagging Your Resources] in the Amazon AppStream 2.0
+	// Administration Guide.
+	//
+	// [Tagging Your Resources]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
 	NewImageTags map[string]string
 
 	noSmithyDocumentSerde

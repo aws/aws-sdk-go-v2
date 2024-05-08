@@ -53,7 +53,7 @@ type CreateAnnotationStoreInput struct {
 	// Tags for the store.
 	Tags map[string]string
 
-	// The name given to an annotation store version to distinguish it from other
+	//  The name given to an annotation store version to distinguish it from other
 	// versions.
 	VersionName *string
 
@@ -82,7 +82,7 @@ type CreateAnnotationStoreOutput struct {
 	// This member is required.
 	Status types.StoreStatus
 
-	// The name given to an annotation store version to distinguish it from other
+	//  The name given to an annotation store version to distinguish it from other
 	// versions.
 	//
 	// This member is required.

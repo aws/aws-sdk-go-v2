@@ -11,9 +11,10 @@ import (
 )
 
 // Deletes a specified authorization key pair. This invalidates future viewer
-// tokens generated using the key pair’s privateKey . For more information, see
-// Setting Up Private Channels (https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html)
+// tokens generated using the key pair’s privateKey . For more information, see [Setting Up Private Channels]
 // in the Amazon IVS User Guide.
+//
+// [Setting Up Private Channels]: https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html
 func (c *Client) DeletePlaybackKeyPair(ctx context.Context, params *DeletePlaybackKeyPairInput, optFns ...func(*Options)) (*DeletePlaybackKeyPairOutput, error) {
 	if params == nil {
 		params = &DeletePlaybackKeyPairInput{}

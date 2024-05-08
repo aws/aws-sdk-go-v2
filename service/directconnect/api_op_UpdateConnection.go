@@ -12,9 +12,12 @@ import (
 	"time"
 )
 
-// Updates the Direct Connect dedicated connection configuration. You can update
-// the following parameters for a connection:
+// Updates the Direct Connect dedicated connection configuration.
+//
+// You can update the following parameters for a connection:
+//
 //   - The connection name
+//
 //   - The connection's MAC Security (MACsec) encryption mode.
 func (c *Client) UpdateConnection(ctx context.Context, params *UpdateConnectionInput, optFns ...func(*Options)) (*UpdateConnectionOutput, error) {
 	if params == nil {
@@ -33,8 +36,9 @@ func (c *Client) UpdateConnection(ctx context.Context, params *UpdateConnectionI
 
 type UpdateConnectionInput struct {
 
-	// The ID of the dedicated connection. You can use DescribeConnections to retrieve
-	// the connection ID.
+	// The ID of the dedicated connection.
+	//
+	// You can use DescribeConnections to retrieve the connection ID.
 	//
 	// This member is required.
 	ConnectionId *string
@@ -42,8 +46,9 @@ type UpdateConnectionInput struct {
 	// The name of the connection.
 	ConnectionName *string
 
-	// The connection MAC Security (MACsec) encryption mode. The valid values are
-	// no_encrypt , should_encrypt , and must_encrypt .
+	// The connection MAC Security (MACsec) encryption mode.
+	//
+	// The valid values are no_encrypt , should_encrypt , and must_encrypt .
 	EncryptionMode *string
 
 	noSmithyDocumentSerde
@@ -74,24 +79,34 @@ type UpdateConnectionOutput struct {
 	ConnectionName *string
 
 	// The state of the connection. The following are the possible values:
+	//
 	//   - ordering : The initial state of a hosted connection provisioned on an
 	//   interconnect. The connection stays in the ordering state until the owner of the
 	//   hosted connection confirms or declines the connection order.
+	//
 	//   - requested : The initial state of a standard connection. The connection stays
 	//   in the requested state until the Letter of Authorization (LOA) is sent to the
 	//   customer.
+	//
 	//   - pending : The connection has been approved and is being initialized.
+	//
 	//   - available : The network link is up and the connection is ready for use.
+	//
 	//   - down : The network link is down.
+	//
 	//   - deleting : The connection is being deleted.
+	//
 	//   - deleted : The connection has been deleted.
+	//
 	//   - rejected : A hosted connection in the ordering state enters the rejected
 	//   state if it is deleted by the customer.
+	//
 	//   - unknown : The state of the connection is not available.
 	ConnectionState types.ConnectionState
 
-	// The MAC Security (MACsec) connection encryption mode. The valid values are
-	// no_encrypt , should_encrypt , and must_encrypt .
+	// The MAC Security (MACsec) connection encryption mode.
+	//
+	// The valid values are no_encrypt , should_encrypt , and must_encrypt .
 	EncryptionMode *string
 
 	// Indicates whether the connection supports a secondary BGP peer in the same
@@ -122,9 +137,10 @@ type UpdateConnectionOutput struct {
 	// The name of the Direct Connect service provider associated with the connection.
 	PartnerName *string
 
-	// The MAC Security (MACsec) port link status of the connection. The valid values
-	// are Encryption Up , which means that there is an active Connection Key Name, or
-	// Encryption Down .
+	// The MAC Security (MACsec) port link status of the connection.
+	//
+	// The valid values are Encryption Up , which means that there is an active
+	// Connection Key Name, or Encryption Down .
 	PortEncryptionStatus *string
 
 	// The name of the service provider associated with the connection.

@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for Action. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Action) Values() []Action {
 	return []Action{
 		"initiateDatabaseReset",
@@ -28,8 +29,9 @@ const (
 )
 
 // Values returns all known values for Encoding. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Encoding) Values() []Encoding {
 	return []Encoding{
 		"gzip",
@@ -49,8 +51,9 @@ const (
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Format) Values() []Format {
 	return []Format{
 		"csv",
@@ -71,8 +74,9 @@ const (
 )
 
 // Values returns all known values for GraphSummaryType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GraphSummaryType) Values() []GraphSummaryType {
 	return []GraphSummaryType{
 		"basic",
@@ -91,8 +95,9 @@ const (
 )
 
 // Values returns all known values for IteratorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IteratorType) Values() []IteratorType {
 	return []IteratorType{
 		"AT_SEQUENCE_NUMBER",
@@ -112,8 +117,9 @@ const (
 )
 
 // Values returns all known values for Mode. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Mode) Values() []Mode {
 	return []Mode{
 		"RESUME",
@@ -132,8 +138,9 @@ const (
 )
 
 // Values returns all known values for OpenCypherExplainMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OpenCypherExplainMode) Values() []OpenCypherExplainMode {
 	return []OpenCypherExplainMode{
 		"static",
@@ -153,8 +160,9 @@ const (
 )
 
 // Values returns all known values for Parallelism. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Parallelism) Values() []Parallelism {
 	return []Parallelism{
 		"LOW",
@@ -194,8 +202,9 @@ const (
 )
 
 // Values returns all known values for S3BucketRegion. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3BucketRegion) Values() []S3BucketRegion {
 	return []S3BucketRegion{
 		"us-east-1",
@@ -235,8 +244,9 @@ const (
 
 // Values returns all known values for StatisticsAutoGenerationMode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StatisticsAutoGenerationMode) Values() []StatisticsAutoGenerationMode {
 	return []StatisticsAutoGenerationMode{
 		"disableAutoCompute",

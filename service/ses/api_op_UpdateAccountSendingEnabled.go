@@ -14,8 +14,9 @@ import (
 // current Amazon Web Services Region. You can use this operation in conjunction
 // with Amazon CloudWatch alarms to temporarily pause email sending across your
 // Amazon SES account in a given Amazon Web Services Region when reputation metrics
-// (such as your bounce or complaint rates) reach certain thresholds. You can
-// execute this operation no more than once per second.
+// (such as your bounce or complaint rates) reach certain thresholds.
+//
+// You can execute this operation no more than once per second.
 func (c *Client) UpdateAccountSendingEnabled(ctx context.Context, params *UpdateAccountSendingEnabledInput, optFns ...func(*Options)) (*UpdateAccountSendingEnabledOutput, error) {
 	if params == nil {
 		params = &UpdateAccountSendingEnabledInput{}

@@ -14,9 +14,10 @@ import (
 
 // Returns information about the database, including the database name, time that
 // the database was created, and the total number of tables found within the
-// database. Service quotas apply (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html)
-// . See code sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.describe-db.html)
-// for details.
+// database. [Service quotas apply]. See [code sample] for details.
+//
+// [Service quotas apply]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html
+// [code sample]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.describe-db.html
 func (c *Client) DescribeDatabase(ctx context.Context, params *DescribeDatabaseInput, optFns ...func(*Options)) (*DescribeDatabaseOutput, error) {
 	if params == nil {
 		params = &DescribeDatabaseInput{}

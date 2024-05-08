@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deactivates the existing flow. For on-demand flows, this operation returns an
+//	Deactivates the existing flow. For on-demand flows, this operation returns an
+//
 // unsupportedOperationException error message. For schedule and event-triggered
 // flows, this operation deactivates the flow.
 func (c *Client) StopFlow(ctx context.Context, params *StopFlowInput, optFns ...func(*Options)) (*StopFlowOutput, error) {
@@ -31,7 +32,7 @@ func (c *Client) StopFlow(ctx context.Context, params *StopFlowInput, optFns ...
 
 type StopFlowInput struct {
 
-	// The specified name of the flow. Spaces are not allowed. Use underscores (_) or
+	//  The specified name of the flow. Spaces are not allowed. Use underscores (_) or
 	// hyphens (-) only.
 	//
 	// This member is required.
@@ -42,10 +43,10 @@ type StopFlowInput struct {
 
 type StopFlowOutput struct {
 
-	// The flow's Amazon Resource Name (ARN).
+	//  The flow's Amazon Resource Name (ARN).
 	FlowArn *string
 
-	// Indicates the current status of the flow.
+	//  Indicates the current status of the flow.
 	FlowStatus types.FlowStatus
 
 	// Metadata pertaining to the operation's result.

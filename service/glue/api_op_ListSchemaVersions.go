@@ -34,8 +34,10 @@ type ListSchemaVersionsInput struct {
 
 	// This is a wrapper structure to contain schema identity fields. The structure
 	// contains:
+	//
 	//   - SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. Either
 	//   SchemaArn or SchemaName and RegistryName has to be provided.
+	//
 	//   - SchemaId$SchemaName: The name of the schema. Either SchemaArn or SchemaName
 	//   and RegistryName has to be provided.
 	//

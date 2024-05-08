@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a predictor created using the DescribePredictor or CreatePredictor
-// operations. You can delete only predictor that have a status of ACTIVE or
-// CREATE_FAILED . To get the status, use the DescribePredictor operation.
+// Deletes a predictor created using the DescribePredictor or CreatePredictor operations. You can delete only
+// predictor that have a status of ACTIVE or CREATE_FAILED . To get the status, use
+// the DescribePredictoroperation.
 func (c *Client) DeletePredictor(ctx context.Context, params *DeletePredictorInput, optFns ...func(*Options)) (*DeletePredictorOutput, error) {
 	if params == nil {
 		params = &DeletePredictorInput{}

@@ -13,15 +13,21 @@ import (
 
 // Creates a delivery channel object to deliver configuration information and
 // other compliance information to an Amazon S3 bucket and Amazon SNS topic. For
-// more information, see Notifications that Config Sends to an Amazon SNS topic (https://docs.aws.amazon.com/config/latest/developerguide/notifications-for-AWS-Config.html)
-// . Before you can create a delivery channel, you must create a configuration
-// recorder. You can use this action to change the Amazon S3 bucket or an Amazon
-// SNS topic of the existing delivery channel. To change the Amazon S3 bucket or an
-// Amazon SNS topic, call this action and specify the changed values for the S3
-// bucket and the SNS topic. If you specify a different value for either the S3
-// bucket or the SNS topic, this action will keep the existing value for the
-// parameter that is not changed. You can have only one delivery channel per region
-// in your account.
+// more information, see [Notifications that Config Sends to an Amazon SNS topic].
+//
+// Before you can create a delivery channel, you must create a configuration
+// recorder.
+//
+// You can use this action to change the Amazon S3 bucket or an Amazon SNS topic
+// of the existing delivery channel. To change the Amazon S3 bucket or an Amazon
+// SNS topic, call this action and specify the changed values for the S3 bucket and
+// the SNS topic. If you specify a different value for either the S3 bucket or the
+// SNS topic, this action will keep the existing value for the parameter that is
+// not changed.
+//
+// You can have only one delivery channel per region in your account.
+//
+// [Notifications that Config Sends to an Amazon SNS topic]: https://docs.aws.amazon.com/config/latest/developerguide/notifications-for-AWS-Config.html
 func (c *Client) PutDeliveryChannel(ctx context.Context, params *PutDeliveryChannelInput, optFns ...func(*Options)) (*PutDeliveryChannelOutput, error) {
 	if params == nil {
 		params = &PutDeliveryChannelInput{}

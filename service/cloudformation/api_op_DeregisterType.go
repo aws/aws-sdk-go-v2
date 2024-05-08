@@ -13,16 +13,21 @@ import (
 
 // Marks an extension or extension version as DEPRECATED in the CloudFormation
 // registry, removing it from active use. Deprecated extensions or extension
-// versions cannot be used in CloudFormation operations. To deregister an entire
-// extension, you must individually deregister all active versions of that
-// extension. If an extension has only a single active version, deregistering that
-// version results in the extension itself being deregistered and marked as
-// deprecated in the registry. You can't deregister the default version of an
-// extension if there are other active version of that extension. If you do
-// deregister the default version of an extension, the extension type itself is
-// deregistered as well and marked as deprecated. To view the deprecation status of
-// an extension or extension version, use DescribeType (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html)
-// .
+// versions cannot be used in CloudFormation operations.
+//
+// To deregister an entire extension, you must individually deregister all active
+// versions of that extension. If an extension has only a single active version,
+// deregistering that version results in the extension itself being deregistered
+// and marked as deprecated in the registry.
+//
+// You can't deregister the default version of an extension if there are other
+// active version of that extension. If you do deregister the default version of an
+// extension, the extension type itself is deregistered as well and marked as
+// deprecated.
+//
+// To view the deprecation status of an extension or extension version, use [DescribeType].
+//
+// [DescribeType]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
 func (c *Client) DeregisterType(ctx context.Context, params *DeregisterTypeInput, optFns ...func(*Options)) (*DeregisterTypeOutput, error) {
 	if params == nil {
 		params = &DeregisterTypeInput{}
@@ -40,16 +45,19 @@ func (c *Client) DeregisterType(ctx context.Context, params *DeregisterTypeInput
 
 type DeregisterTypeInput struct {
 
-	// The Amazon Resource Name (ARN) of the extension. Conditional: You must specify
-	// either TypeName and Type , or Arn .
+	// The Amazon Resource Name (ARN) of the extension.
+	//
+	// Conditional: You must specify either TypeName and Type , or Arn .
 	Arn *string
 
-	// The kind of extension. Conditional: You must specify either TypeName and Type ,
-	// or Arn .
+	// The kind of extension.
+	//
+	// Conditional: You must specify either TypeName and Type , or Arn .
 	Type types.RegistryType
 
-	// The name of the extension. Conditional: You must specify either TypeName and
-	// Type , or Arn .
+	// The name of the extension.
+	//
+	// Conditional: You must specify either TypeName and Type , or Arn .
 	TypeName *string
 
 	// The ID of a specific version of the extension. The version ID is the value at

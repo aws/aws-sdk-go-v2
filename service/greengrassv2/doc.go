@@ -10,10 +10,14 @@
 // devices can also communicate securely with Amazon Web Services IoT Core and
 // export IoT data to the Amazon Web Services Cloud. IoT Greengrass developers can
 // use Lambda functions and components to create and deploy applications to fleets
-// of edge devices for local operation. IoT Greengrass Version 2 provides a new
-// major version of the IoT Greengrass Core software, new APIs, and a new console.
-// Use this API reference to learn how to use the IoT Greengrass V2 API operations
-// to manage components, manage deployments, and core devices. For more
-// information, see What is IoT Greengrass? (https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html)
-// in the IoT Greengrass V2 Developer Guide.
+// of edge devices for local operation.
+//
+// IoT Greengrass Version 2 provides a new major version of the IoT Greengrass
+// Core software, new APIs, and a new console. Use this API reference to learn how
+// to use the IoT Greengrass V2 API operations to manage components, manage
+// deployments, and core devices.
+//
+// For more information, see [What is IoT Greengrass?] in the IoT Greengrass V2 Developer Guide.
+//
+// [What is IoT Greengrass?]: https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html
 package greengrassv2

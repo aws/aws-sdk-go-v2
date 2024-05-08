@@ -12,17 +12,19 @@ import (
 )
 
 // Applies one or more tags to the specified resources. Note the following:
+//
 //   - Not all resources can have tags. For a list of services with resources that
-//     support tagging using this operation, see Services that support the Resource
-//     Groups Tagging API (https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html)
-//     . If the resource doesn't yet support this operation, the resource's service
-//     might support tagging using its own API operations. For more information, refer
-//     to the documentation for that service.
-//   - Each resource can have up to 50 tags. For other limits, see Tag Naming and
-//     Usage Conventions (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions)
-//     in the Amazon Web Services General Reference.
+//     support tagging using this operation, see [Services that support the Resource Groups Tagging API]. If the resource doesn't yet
+//     support this operation, the resource's service might support tagging using its
+//     own API operations. For more information, refer to the documentation for that
+//     service.
+//
+//   - Each resource can have up to 50 tags. For other limits, see [Tag Naming and Usage Conventions]in the Amazon
+//     Web Services General Reference.
+//
 //   - You can only tag resources that are located in the specified Amazon Web
 //     Services Region for the Amazon Web Services account.
+//
 //   - To add tags to a resource, you need the necessary permissions for the
 //     service that the resource belongs to as well as permissions for adding tags. For
 //     more information, see the documentation for each service.
@@ -30,13 +32,21 @@ import (
 // Do not store personally identifiable information (PII) or other confidential or
 // sensitive information in tags. We use tags to provide you with billing and
 // administration services. Tags are not intended to be used for private or
-// sensitive data. Minimum permissions In addition to the tag:TagResources
-// permission required by this operation, you must also have the tagging permission
-// defined by the service that created the resource. For example, to tag an Amazon
-// EC2 instance using the TagResources operation, you must have both of the
-// following permissions:
+// sensitive data.
+//
+// # Minimum permissions
+//
+// In addition to the tag:TagResources permission required by this operation, you
+// must also have the tagging permission defined by the service that created the
+// resource. For example, to tag an Amazon EC2 instance using the TagResources
+// operation, you must have both of the following permissions:
+//
 //   - tag:TagResource
+//
 //   - ec2:CreateTags
+//
+// [Services that support the Resource Groups Tagging API]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html
+// [Tag Naming and Usage Conventions]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions
 func (c *Client) TagResources(ctx context.Context, params *TagResourcesInput, optFns ...func(*Options)) (*TagResourcesOutput, error) {
 	if params == nil {
 		params = &TagResourcesInput{}
@@ -54,10 +64,12 @@ func (c *Client) TagResources(ctx context.Context, params *TagResourcesInput, op
 
 type TagResourcesInput struct {
 
-	// Specifies the list of ARNs of the resources that you want to apply tags to. An
-	// ARN (Amazon Resource Name) uniquely identifies a resource. For more information,
-	// see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// Specifies the list of ARNs of the resources that you want to apply tags to.
+	//
+	// An ARN (Amazon Resource Name) uniquely identifies a resource. For more
+	// information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	ResourceARNList []string

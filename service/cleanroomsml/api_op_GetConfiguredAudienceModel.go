@@ -83,11 +83,10 @@ type GetConfiguredAudienceModelOutput struct {
 	UpdateTime *time.Time
 
 	// The list of output sizes of audiences that can be created using this configured
-	// audience model. A request to StartAudienceGenerationJob that uses this
-	// configured audience model must have an audienceSize selected from this list.
-	// You can use the ABSOLUTE AudienceSize to configure out audience sizes using the
-	// count of identifiers in the output. You can use the Percentage AudienceSize to
-	// configure sizes in the range 1-100 percent.
+	// audience model. A request to StartAudienceGenerationJobthat uses this configured audience model must have
+	// an audienceSize selected from this list. You can use the ABSOLUTEAudienceSize to configure
+	// out audience sizes using the count of identifiers in the output. You can use the
+	// PercentageAudienceSize to configure sizes in the range 1-100 percent.
 	AudienceSizeConfig *types.AudienceSizeConfig
 
 	// Provides the childResourceTagOnCreatePolicy that was used for this configured

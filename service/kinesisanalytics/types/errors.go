@@ -196,8 +196,9 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 
 // Discovery failed to get a record from the streaming source because of the
 // Amazon Kinesis Streams ProvisionedThroughputExceededException. For more
-// information, see GetRecords (https://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetRecords.html)
-// in the Amazon Kinesis Streams API Reference.
+// information, see [GetRecords]in the Amazon Kinesis Streams API Reference.
+//
+// [GetRecords]: https://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetRecords.html
 type ResourceProvisionedThroughputExceededException struct {
 	Message *string
 

@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Return a list of operations that occurred on an App Runner service. The
-// resulting list of OperationSummary objects is sorted in reverse chronological
-// order. The first object on the list represents the last started operation.
+// Return a list of operations that occurred on an App Runner service.
+//
+// The resulting list of OperationSummary objects is sorted in reverse chronological order. The
+// first object on the list represents the last started operation.
 func (c *Client) ListOperations(ctx context.Context, params *ListOperationsInput, optFns ...func(*Options)) (*ListOperationsOutput, error) {
 	if params == nil {
 		params = &ListOperationsInput{}
@@ -38,14 +39,17 @@ type ListOperationsInput struct {
 	ServiceArn *string
 
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults , the request
-	// retrieves all available results in a single response.
+	// used for a paginated request.
+	//
+	// If you don't specify MaxResults , the request retrieves all available results in
+	// a single response.
 	MaxResults *int32
 
 	// A token from a previous result page. It's used for a paginated request. The
 	// request retrieves the next result page. All other parameter values must be
-	// identical to the ones specified in the initial request. If you don't specify
-	// NextToken , the request retrieves the first result page.
+	// identical to the ones specified in the initial request.
+	//
+	// If you don't specify NextToken , the request retrieves the first result page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -157,8 +161,10 @@ var _ ListOperationsAPIClient = (*Client)(nil)
 // ListOperationsPaginatorOptions is the paginator options for ListOperations
 type ListOperationsPaginatorOptions struct {
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults , the request
-	// retrieves all available results in a single response.
+	// used for a paginated request.
+	//
+	// If you don't specify MaxResults , the request retrieves all available results in
+	// a single response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

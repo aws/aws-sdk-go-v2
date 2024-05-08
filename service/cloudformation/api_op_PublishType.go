@@ -13,12 +13,14 @@ import (
 
 // Publishes the specified extension to the CloudFormation registry as a public
 // extension in this Region. Public extensions are available for use by all
-// CloudFormation users. For more information about publishing extensions, see
-// Publishing extensions to make them available for public use (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html)
-// in the CloudFormation CLI User Guide. To publish an extension, you must be
-// registered as a publisher with CloudFormation. For more information, see
-// RegisterPublisher (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html)
-// .
+// CloudFormation users. For more information about publishing extensions, see [Publishing extensions to make them available for public use]in
+// the CloudFormation CLI User Guide.
+//
+// To publish an extension, you must be registered as a publisher with
+// CloudFormation. For more information, see [RegisterPublisher].
+//
+// [Publishing extensions to make them available for public use]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html
+// [RegisterPublisher]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html
 func (c *Client) PublishType(ctx context.Context, params *PublishTypeInput, optFns ...func(*Options)) (*PublishTypeOutput, error) {
 	if params == nil {
 		params = &PublishTypeInput{}
@@ -36,25 +38,37 @@ func (c *Client) PublishType(ctx context.Context, params *PublishTypeInput, optF
 
 type PublishTypeInput struct {
 
-	// The Amazon Resource Name (ARN) of the extension. Conditional: You must specify
-	// Arn , or TypeName and Type .
+	// The Amazon Resource Name (ARN) of the extension.
+	//
+	// Conditional: You must specify Arn , or TypeName and Type .
 	Arn *string
 
-	// The version number to assign to this version of the extension. Use the
-	// following format, and adhere to semantic versioning when assigning a version
-	// number to your extension: MAJOR.MINOR.PATCH For more information, see Semantic
-	// Versioning 2.0.0 (https://semver.org/) . If you don't specify a version number,
-	// CloudFormation increments the version number by one minor version release. You
-	// cannot specify a version number the first time you publish a type.
+	// The version number to assign to this version of the extension.
+	//
+	// Use the following format, and adhere to semantic versioning when assigning a
+	// version number to your extension:
+	//
+	//     MAJOR.MINOR.PATCH
+	//
+	// For more information, see [Semantic Versioning 2.0.0].
+	//
+	// If you don't specify a version number, CloudFormation increments the version
+	// number by one minor version release.
+	//
+	// You cannot specify a version number the first time you publish a type.
 	// CloudFormation automatically sets the first version number to be 1.0.0 .
+	//
+	// [Semantic Versioning 2.0.0]: https://semver.org/
 	PublicVersionNumber *string
 
-	// The type of the extension. Conditional: You must specify Arn , or TypeName and
-	// Type .
+	// The type of the extension.
+	//
+	// Conditional: You must specify Arn , or TypeName and Type .
 	Type types.ThirdPartyType
 
-	// The name of the extension. Conditional: You must specify Arn , or TypeName and
-	// Type .
+	// The name of the extension.
+	//
+	// Conditional: You must specify Arn , or TypeName and Type .
 	TypeName *string
 
 	noSmithyDocumentSerde

@@ -43,7 +43,9 @@ type GetGeneratedTemplateInput struct {
 
 	// The language to use to retrieve for the generated template. Supported values
 	// are:
+	//
 	//   - JSON
+	//
 	//   - YAML
 	Format types.TemplateFormat
 
@@ -53,13 +55,21 @@ type GetGeneratedTemplateInput struct {
 type GetGeneratedTemplateOutput struct {
 
 	// The status of the template generation. Supported values are:
+	//
 	//   - CreatePending - the creation of the template is pending.
+	//
 	//   - CreateInProgress - the creation of the template is in progress.
+	//
 	//   - DeletePending - the deletion of the template is pending.
+	//
 	//   - DeleteInProgress - the deletion of the template is in progress.
+	//
 	//   - UpdatePending - the update of the template is pending.
+	//
 	//   - UpdateInProgress - the update of the template is in progress.
+	//
 	//   - Failed - the template operation failed.
+	//
 	//   - Complete - the template operation is complete.
 	Status types.GeneratedTemplateStatus
 

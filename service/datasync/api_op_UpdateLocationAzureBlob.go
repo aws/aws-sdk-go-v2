@@ -38,14 +38,17 @@ type UpdateLocationAzureBlobInput struct {
 
 	// Specifies the access tier that you want your objects or files transferred into.
 	// This only applies when using the location as a transfer destination. For more
-	// information, see Access tiers (https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access-tiers)
-	// .
+	// information, see [Access tiers].
+	//
+	// [Access tiers]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access-tiers
 	AccessTier types.AzureAccessTier
 
 	// Specifies the Amazon Resource Name (ARN) of the DataSync agent that can connect
-	// with your Azure Blob Storage container. You can specify more than one agent. For
-	// more information, see Using multiple agents for your transfer (https://docs.aws.amazon.com/datasync/latest/userguide/multiple-agents.html)
-	// .
+	// with your Azure Blob Storage container.
+	//
+	// You can specify more than one agent. For more information, see [Using multiple agents for your transfer].
+	//
+	// [Using multiple agents for your transfer]: https://docs.aws.amazon.com/datasync/latest/userguide/multiple-agents.html
 	AgentArns []string
 
 	// Specifies the authentication method DataSync uses to access your Azure Blob
@@ -55,8 +58,9 @@ type UpdateLocationAzureBlobInput struct {
 	// Specifies the type of blob that you want your objects or files to be when
 	// transferring them into Azure Blob Storage. Currently, DataSync only supports
 	// moving data into Azure Blob Storage as block blobs. For more information on blob
-	// types, see the Azure Blob Storage documentation (https://learn.microsoft.com/en-us/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs)
-	// .
+	// types, see the [Azure Blob Storage documentation].
+	//
+	// [Azure Blob Storage documentation]: https://learn.microsoft.com/en-us/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs
 	BlobType types.AzureBlobType
 
 	// Specifies the SAS configuration that allows DataSync to access your Azure Blob

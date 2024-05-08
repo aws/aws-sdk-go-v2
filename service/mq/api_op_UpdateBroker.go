@@ -50,14 +50,15 @@ type UpdateBrokerInput struct {
 	// Defines whether this broker is a part of a data replication pair.
 	DataReplicationMode types.DataReplicationMode
 
-	// The broker engine version. For a list of supported engine versions, see
-	// Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
-	// .
+	// The broker engine version. For a list of supported engine versions, see [Supported engines].
+	//
+	// [Supported engines]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
 	EngineVersion *string
 
 	// The broker's host instance type to upgrade to. For a list of supported instance
-	// types, see Broker instance types (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types)
-	// .
+	// types, see [Broker instance types].
+	//
+	// [Broker instance types]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types
 	HostInstanceType *string
 
 	// Optional. The metadata of the LDAP server used to authenticate and authorize
@@ -102,13 +103,15 @@ type UpdateBrokerOutput struct {
 	DataReplicationMode types.DataReplicationMode
 
 	// The broker engine version to upgrade to. For a list of supported engine
-	// versions, see Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
-	// .
+	// versions, see [Supported engines].
+	//
+	// [Supported engines]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
 	EngineVersion *string
 
 	// The broker's host instance type to upgrade to. For a list of supported instance
-	// types, see Broker instance types (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types)
-	// .
+	// types, see [Broker instance types].
+	//
+	// [Broker instance types]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types
 	HostInstanceType *string
 
 	// Optional. The metadata of the LDAP server used to authenticate and authorize

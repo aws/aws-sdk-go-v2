@@ -29,21 +29,22 @@ func (c *Client) UpdateDirectorySetup(ctx context.Context, params *UpdateDirecto
 
 type UpdateDirectorySetupInput struct {
 
-	// The identifier of the directory on which you want to perform the update.
+	//  The identifier of the directory on which you want to perform the update.
 	//
 	// This member is required.
 	DirectoryId *string
 
-	// The type of update that needs to be performed on the directory. For example, OS.
+	//  The type of update that needs to be performed on the directory. For example,
+	// OS.
 	//
 	// This member is required.
 	UpdateType types.UpdateType
 
-	// The boolean that specifies if a snapshot for the directory needs to be taken
+	//  The boolean that specifies if a snapshot for the directory needs to be taken
 	// before updating the directory.
 	CreateSnapshotBeforeUpdate *bool
 
-	// The settings for the OS update that needs to be performed on the directory.
+	//  The settings for the OS update that needs to be performed on the directory.
 	OSUpdateSettings *types.OSUpdateSettings
 
 	noSmithyDocumentSerde

@@ -29,11 +29,11 @@ func (c *Client) ListCollectors(ctx context.Context, params *ListCollectorsInput
 
 type ListCollectorsInput struct {
 
-	// The maximum number of items to include in the response. The maximum value is
+	//  The maximum number of items to include in the response. The maximum value is
 	// 100.
 	MaxResults *int32
 
-	// The token from a previous call that you use to retrieve the next set of
+	//  The token from a previous call that you use to retrieve the next set of
 	// results. For example, if a previous call to this action returned 100 items, but
 	// you set maxResults to 10. You'll receive a set of 10 results along with a
 	// token. You then use the returned token to retrieve the next set of 10.
@@ -44,10 +44,10 @@ type ListCollectorsInput struct {
 
 type ListCollectorsOutput struct {
 
-	// The list of all the installed collectors.
+	//  The list of all the installed collectors.
 	Collectors []types.Collector
 
-	// The token you use to retrieve the next set of results, or null if there are no
+	//  The token you use to retrieve the next set of results, or null if there are no
 	// more results.
 	NextToken *string
 
@@ -143,7 +143,7 @@ var _ ListCollectorsAPIClient = (*Client)(nil)
 
 // ListCollectorsPaginatorOptions is the paginator options for ListCollectors
 type ListCollectorsPaginatorOptions struct {
-	// The maximum number of items to include in the response. The maximum value is
+	//  The maximum number of items to include in the response. The maximum value is
 	// 100.
 	Limit int32
 

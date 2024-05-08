@@ -13,9 +13,10 @@ import (
 
 // This operation returns a paginated list of your saved CloudWatch Logs Insights
 // query definitions. You can retrieve query definitions from the current account
-// or from a source account that is linked to the current account. You can use the
-// queryDefinitionNamePrefix parameter to limit the results to only the query
-// definitions that have names that start with a certain string.
+// or from a source account that is linked to the current account.
+//
+// You can use the queryDefinitionNamePrefix parameter to limit the results to
+// only the query definitions that have names that start with a certain string.
 func (c *Client) DescribeQueryDefinitions(ctx context.Context, params *DescribeQueryDefinitionsInput, optFns ...func(*Options)) (*DescribeQueryDefinitionsOutput, error) {
 	if params == nil {
 		params = &DescribeQueryDefinitionsInput{}

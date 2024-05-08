@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists network function instances. A network function instance is a function in
-// a function package .
+// Lists network function instances.
+//
+// A network function instance is a function in a function package .
 func (c *Client) ListSolFunctionInstances(ctx context.Context, params *ListSolFunctionInstancesInput, optFns ...func(*Options)) (*ListSolFunctionInstancesOutput, error) {
 	if params == nil {
 		params = &ListSolFunctionInstancesInput{}

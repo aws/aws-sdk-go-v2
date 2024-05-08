@@ -12,10 +12,12 @@ import (
 
 // Deletes the specified version of the specified policy. You cannot delete the
 // default version of a policy using this action. To delete the default version of
-// a policy, use DeletePolicy . To find out which version of a policy is marked as
-// the default version, use ListPolicyVersions. Requires permission to access the
-// DeletePolicyVersion (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// a policy, use DeletePolicy. To find out which version of a policy is marked as the default
+// version, use ListPolicyVersions.
+//
+// Requires permission to access the [DeletePolicyVersion] action.
+//
+// [DeletePolicyVersion]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DeletePolicyVersion(ctx context.Context, params *DeletePolicyVersionInput, optFns ...func(*Options)) (*DeletePolicyVersionOutput, error) {
 	if params == nil {
 		params = &DeletePolicyVersionInput{}

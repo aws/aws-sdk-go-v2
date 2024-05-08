@@ -13,10 +13,12 @@ import (
 // Deletes a replication configuration. Deleting a replication configuration ends
 // the replication process. After a replication configuration is deleted, the
 // destination file system becomes Writeable and its replication overwrite
-// protection is re-enabled. For more information, see Delete a replication
-// configuration (https://docs.aws.amazon.com/efs/latest/ug/delete-replications.html)
-// . This operation requires permissions for the
+// protection is re-enabled. For more information, see [Delete a replication configuration].
+//
+// This operation requires permissions for the
 // elasticfilesystem:DeleteReplicationConfiguration action.
+//
+// [Delete a replication configuration]: https://docs.aws.amazon.com/efs/latest/ug/delete-replications.html
 func (c *Client) DeleteReplicationConfiguration(ctx context.Context, params *DeleteReplicationConfigurationInput, optFns ...func(*Options)) (*DeleteReplicationConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteReplicationConfigurationInput{}

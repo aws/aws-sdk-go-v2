@@ -13,9 +13,11 @@ import (
 
 // Returns the count, average, sum, minimum, maximum, sum of squares, variance,
 // and standard deviation for the specified aggregated field. If the aggregation
-// field is of type String , only the count statistic is returned. Requires
-// permission to access the GetStatistics (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// field is of type String , only the count statistic is returned.
+//
+// Requires permission to access the [GetStatistics] action.
+//
+// [GetStatistics]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) GetStatistics(ctx context.Context, params *GetStatisticsInput, optFns ...func(*Options)) (*GetStatisticsOutput, error) {
 	if params == nil {
 		params = &GetStatisticsInput{}

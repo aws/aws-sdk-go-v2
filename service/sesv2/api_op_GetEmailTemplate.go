@@ -12,8 +12,9 @@ import (
 )
 
 // Displays the template object (which includes the subject line, HTML part and
-// text part) for the template you specify. You can execute this operation no more
-// than once per second.
+// text part) for the template you specify.
+//
+// You can execute this operation no more than once per second.
 func (c *Client) GetEmailTemplate(ctx context.Context, params *GetEmailTemplateInput, optFns ...func(*Options)) (*GetEmailTemplateOutput, error) {
 	if params == nil {
 		params = &GetEmailTemplateInput{}

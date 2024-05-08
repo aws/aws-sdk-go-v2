@@ -15,9 +15,10 @@ import (
 // for AppStream 2.0, if the names for these objects are provided. Otherwise, all
 // Directory Config objects in the account are described. These objects include the
 // configuration information required to join fleets and image builders to
-// Microsoft Active Directory domains. Although the response syntax in this topic
-// includes the account password, this password is not returned in the actual
-// response.
+// Microsoft Active Directory domains.
+//
+// Although the response syntax in this topic includes the account password, this
+// password is not returned in the actual response.
 func (c *Client) DescribeDirectoryConfigs(ctx context.Context, params *DescribeDirectoryConfigsInput, optFns ...func(*Options)) (*DescribeDirectoryConfigsOutput, error) {
 	if params == nil {
 		params = &DescribeDirectoryConfigsInput{}

@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an app block builder. If the app block builder is in the STARTING or
-// STOPPING state, you can't update it. If the app block builder is in the RUNNING
-// state, you can only update the DisplayName and Description. If the app block
-// builder is in the STOPPED state, you can update any attribute except the Name.
+// Updates an app block builder.
+//
+// If the app block builder is in the STARTING or STOPPING state, you can't update
+// it. If the app block builder is in the RUNNING state, you can only update the
+// DisplayName and Description. If the app block builder is in the STOPPED state,
+// you can update any attribute except the Name.
 func (c *Client) UpdateAppBlockBuilder(ctx context.Context, params *UpdateAppBlockBuilderInput, optFns ...func(*Options)) (*UpdateAppBlockBuilderOutput, error) {
 	if params == nil {
 		params = &UpdateAppBlockBuilderInput{}
@@ -58,27 +60,36 @@ type UpdateAppBlockBuilderInput struct {
 	// Service (STS) AssumeRole API operation and passes the ARN of the role to use.
 	// The operation creates a new session with temporary credentials. AppStream 2.0
 	// retrieves the temporary credentials and creates the appstream_machine_role
-	// credential profile on the instance. For more information, see Using an IAM Role
-	// to Grant Permissions to Applications and Scripts Running on AppStream 2.0
-	// Streaming Instances (https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html)
-	// in the Amazon AppStream 2.0 Administration Guide.
+	// credential profile on the instance.
+	//
+	// For more information, see [Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances] in the Amazon AppStream 2.0 Administration Guide.
+	//
+	// [Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
 	IamRoleArn *string
 
 	// The instance type to use when launching the app block builder. The following
 	// instance types are available:
+	//
 	//   - stream.standard.small
+	//
 	//   - stream.standard.medium
+	//
 	//   - stream.standard.large
+	//
 	//   - stream.standard.xlarge
+	//
 	//   - stream.standard.2xlarge
 	InstanceType *string
 
-	// The platform of the app block builder. WINDOWS_SERVER_2019 is the only valid
-	// value.
+	// The platform of the app block builder.
+	//
+	// WINDOWS_SERVER_2019 is the only valid value.
 	Platform types.PlatformType
 
-	// The VPC configuration for the app block builder. App block builders require
-	// that you specify at least two subnets in different availability zones.
+	// The VPC configuration for the app block builder.
+	//
+	// App block builders require that you specify at least two subnets in different
+	// availability zones.
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde

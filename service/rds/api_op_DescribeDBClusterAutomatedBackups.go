@@ -14,8 +14,9 @@ import (
 // Displays backups for both current and deleted DB clusters. For example, use
 // this operation to find details about automated backups for previously deleted
 // clusters. Current clusters are returned for both the
-// DescribeDBClusterAutomatedBackups and DescribeDBClusters operations. All
-// parameters are optional.
+// DescribeDBClusterAutomatedBackups and DescribeDBClusters operations.
+//
+// All parameters are optional.
 func (c *Client) DescribeDBClusterAutomatedBackups(ctx context.Context, params *DescribeDBClusterAutomatedBackupsInput, optFns ...func(*Options)) (*DescribeDBClusterAutomatedBackupsOutput, error) {
 	if params == nil {
 		params = &DescribeDBClusterAutomatedBackupsInput{}
@@ -43,17 +44,23 @@ type DescribeDBClusterAutomatedBackupsInput struct {
 	// This parameter isn't case-sensitive.
 	DbClusterResourceId *string
 
-	// A filter that specifies which resources to return based on status. Supported
-	// filters are the following:
+	// A filter that specifies which resources to return based on status.
+	//
+	// Supported filters are the following:
+	//
 	//   - status
+	//
 	//   - retained - Automated backups for deleted clusters and after backup
 	//   replication is stopped.
+	//
 	//   - db-cluster-id - Accepts DB cluster identifiers and Amazon Resource Names
 	//   (ARNs). The results list includes only information about the DB cluster
 	//   automated backups identified by these ARNs.
+	//
 	//   - db-cluster-resource-id - Accepts DB resource identifiers and Amazon Resource
 	//   Names (ARNs). The results list includes only information about the DB cluster
 	//   resources identified by these ARNs.
+	//
 	// Returns all resources by default. The status for each resource is specified in
 	// the response.
 	Filters []types.Filter

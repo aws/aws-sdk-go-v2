@@ -10,11 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a specified stack. Required Permissions: To use this action, an IAM user
-// must have a Manage permissions level for the stack, or an attached policy that
-// explicitly grants permissions. For more information on user permissions, see
-// Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// Stops a specified stack.
+//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see [Managing User Permissions].
+//
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) StopStack(ctx context.Context, params *StopStackInput, optFns ...func(*Options)) (*StopStackOutput, error) {
 	if params == nil {
 		params = &StopStackInput{}

@@ -25,8 +25,9 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// Usage allocations allow you to split usage into buckets by tags. Each
-// UsageAllocation indicates the usage quantity for a specific set of tags.
+// Usage allocations allow you to split usage into buckets by tags.
+//
+// Each UsageAllocation indicates the usage quantity for a specific set of tags.
 type UsageAllocation struct {
 
 	// The total quantity allocated to this bucket of usage.
@@ -42,8 +43,10 @@ type UsageAllocation struct {
 }
 
 // A UsageRecord indicates a quantity of usage for a given product, customer,
-// dimension and time. Multiple requests with the same UsageRecords as input will
-// be de-duplicated to prevent double charges.
+// dimension and time.
+//
+// Multiple requests with the same UsageRecords as input will be de-duplicated to
+// prevent double charges.
 type UsageRecord struct {
 
 	// The CustomerIdentifier is obtained through the ResolveCustomer operation and
@@ -58,9 +61,10 @@ type UsageRecord struct {
 	// This member is required.
 	Dimension *string
 
-	// Timestamp, in UTC, for which the usage is being reported. Your application can
-	// meter usage for up to one hour in the past. Make sure the timestamp value is
-	// not before the start of the software usage.
+	// Timestamp, in UTC, for which the usage is being reported.
+	//
+	// Your application can meter usage for up to one hour in the past. Make sure the
+	// timestamp value is not before the start of the software usage.
 	//
 	// This member is required.
 	Timestamp *time.Time
@@ -85,15 +89,21 @@ type UsageRecordResult struct {
 
 	// The UsageRecordResult Status indicates the status of an individual UsageRecord
 	// processed by BatchMeterUsage .
+	//
 	//   - Success- The UsageRecord was accepted and honored by BatchMeterUsage .
+	//
 	//   - CustomerNotSubscribed- The CustomerIdentifier specified is not able to use
 	//   your product. The UsageRecord was not honored. There are three causes for this
 	//   result:
+	//
 	//   - The customer identifier is invalid.
+	//
 	//   - The customer identifier provided in the metering record does not have an
 	//   active agreement or subscription with this product. Future UsageRecords for
 	//   this customer will fail until the customer subscribes to your product.
+	//
 	//   - The customer's AWS account was suspended.
+	//
 	//   - DuplicateRecord- Indicates that the UsageRecord was invalid and not honored.
 	//   A previously metered UsageRecord had the same customer, dimension, and time,
 	//   but a different quantity.

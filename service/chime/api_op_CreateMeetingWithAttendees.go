@@ -11,21 +11,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Amazon Chime SDK meeting in the specified media Region, with
-// attendees. For more information about specifying media Regions, see Amazon
-// Chime SDK Media Regions (https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html)
-// in the Amazon Chime SDK Developer Guide . For more information about the Amazon
-// Chime SDK, see Using the Amazon Chime SDK (https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html)
-// in the Amazon Chime SDK Developer Guide . This API is is no longer supported and
-// will not be updated. We recommend using the latest version,
-// CreateMeetingWithAttendees (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeetingWithAttendees.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+//	Creates a new Amazon Chime SDK meeting in the specified media Region, with
+//
+// attendees. For more information about specifying media Regions, see [Amazon Chime SDK Media Regions]in the
+// Amazon Chime SDK Developer Guide . For more information about the Amazon Chime
+// SDK, see [Using the Amazon Chime SDK]in the Amazon Chime SDK Developer Guide .
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [CreateMeetingWithAttendees], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by CreateMeetingWithAttendees in the Amazon Chime SDK
 // Meetings Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [Amazon Chime SDK Media Regions]: https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html
+// [Using the Amazon Chime SDK]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
+// [CreateMeetingWithAttendees]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeetingWithAttendees.html
 func (c *Client) CreateMeetingWithAttendees(ctx context.Context, params *CreateMeetingWithAttendeesInput, optFns ...func(*Options)) (*CreateMeetingWithAttendeesOutput, error) {
 	if params == nil {
 		params = &CreateMeetingWithAttendeesInput{}
@@ -55,8 +59,9 @@ type CreateMeetingWithAttendeesInput struct {
 	// The external meeting ID.
 	ExternalMeetingId *string
 
-	// The Region in which to create the meeting. Default: us-east-1 . Available
-	// values: af-south-1 , ap-northeast-1 , ap-northeast-2 , ap-south-1 ,
+	//  The Region in which to create the meeting. Default: us-east-1 .
+	//
+	// Available values: af-south-1 , ap-northeast-1 , ap-northeast-2 , ap-south-1 ,
 	// ap-southeast-1 , ap-southeast-2 , ca-central-1 , eu-central-1 , eu-north-1 ,
 	// eu-south-1 , eu-west-1 , eu-west-2 , eu-west-3 , sa-east-1 , us-east-1 ,
 	// us-east-2 , us-west-1 , us-west-2 .

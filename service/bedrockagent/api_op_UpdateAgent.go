@@ -57,9 +57,11 @@ type UpdateAgentInput struct {
 	Description *string
 
 	// The number of seconds for which Amazon Bedrock keeps information about a user's
-	// conversation with the agent. A user interaction remains active for the amount of
-	// time specified. If no conversation occurs during this time, the session expires
-	// and Amazon Bedrock deletes any data provided before the timeout.
+	// conversation with the agent.
+	//
+	// A user interaction remains active for the amount of time specified. If no
+	// conversation occurs during this time, the session expires and Amazon Bedrock
+	// deletes any data provided before the timeout.
 	IdleSessionTTLInSeconds *int32
 
 	// Specifies new instructions that tell the agent what it should do and how it
@@ -67,8 +69,9 @@ type UpdateAgentInput struct {
 	Instruction *string
 
 	// Contains configurations to override prompts in different parts of an agent
-	// sequence. For more information, see Advanced prompts (https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html)
-	// .
+	// sequence. For more information, see [Advanced prompts].
+	//
+	// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 	PromptOverrideConfiguration *types.PromptOverrideConfiguration
 
 	noSmithyDocumentSerde

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists statistics about the data collected for each of the sensors that have
+//	Lists statistics about the data collected for each of the sensors that have
+//
 // been successfully ingested in the particular dataset. Can also be used to
 // retreive Sensor Statistics for a previous ingestion job.
 func (c *Client) ListSensorStatistics(ctx context.Context, params *ListSensorStatisticsInput, optFns ...func(*Options)) (*ListSensorStatisticsOutput, error) {
@@ -31,12 +32,12 @@ func (c *Client) ListSensorStatistics(ctx context.Context, params *ListSensorSta
 
 type ListSensorStatisticsInput struct {
 
-	// The name of the dataset associated with the list of Sensor Statistics.
+	//  The name of the dataset associated with the list of Sensor Statistics.
 	//
 	// This member is required.
 	DatasetName *string
 
-	// The ingestion job id associated with the list of Sensor Statistics. To get
+	//  The ingestion job id associated with the list of Sensor Statistics. To get
 	// sensor statistics for a particular ingestion job id, both dataset name and
 	// ingestion job id must be submitted as inputs.
 	IngestionJobId *string

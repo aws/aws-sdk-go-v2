@@ -50,9 +50,11 @@ type DescribeManagedJobTemplateOutput struct {
 	Document *string
 
 	// A map of key-value pairs that you can use as guidance to specify the inputs for
-	// creating a job from a managed template. documentParameters can only be used
-	// when creating jobs from Amazon Web Services managed templates. This parameter
-	// can't be used with custom job templates or to create jobs from them.
+	// creating a job from a managed template.
+	//
+	// documentParameters can only be used when creating jobs from Amazon Web Services
+	// managed templates. This parameter can't be used with custom job templates or to
+	// create jobs from them.
 	DocumentParameters []types.DocumentParameter
 
 	// A list of environments that are supported with the managed job template.

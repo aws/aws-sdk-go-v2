@@ -57,7 +57,7 @@ type BatchDeleteUniqueIdOutput struct {
 	// This member is required.
 	DisconnectedUniqueIds []string
 
-	// The errors from deleting multiple unique IDs.
+	//  The errors from deleting multiple unique IDs.
 	//
 	// This member is required.
 	Errors []types.DeleteUniqueIdError

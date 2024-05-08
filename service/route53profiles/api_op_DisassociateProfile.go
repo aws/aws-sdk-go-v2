@@ -29,12 +29,12 @@ func (c *Client) DisassociateProfile(ctx context.Context, params *DisassociatePr
 
 type DisassociateProfileInput struct {
 
-	// ID of the Profile.
+	//  ID of the Profile.
 	//
 	// This member is required.
 	ProfileId *string
 
-	// The ID of the VPC.
+	//  The ID of the VPC.
 	//
 	// This member is required.
 	ResourceId *string
@@ -44,7 +44,7 @@ type DisassociateProfileInput struct {
 
 type DisassociateProfileOutput struct {
 
-	// Information about the DisassociateProfile request.
+	//  Information about the DisassociateProfile request.
 	ProfileAssociation *types.ProfileAssociation
 
 	// Metadata pertaining to the operation's result.

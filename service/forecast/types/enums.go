@@ -14,8 +14,9 @@ const (
 )
 
 // Values returns all known values for AttributeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AttributeType) Values() []AttributeType {
 	return []AttributeType{
 		"string",
@@ -35,8 +36,9 @@ const (
 )
 
 // Values returns all known values for AutoMLOverrideStrategy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AutoMLOverrideStrategy) Values() []AutoMLOverrideStrategy {
 	return []AutoMLOverrideStrategy{
 		"LatencyOptimized",
@@ -55,8 +57,9 @@ const (
 )
 
 // Values returns all known values for Condition. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Condition) Values() []Condition {
 	return []Condition{
 		"EQUALS",
@@ -76,8 +79,9 @@ const (
 )
 
 // Values returns all known values for DatasetType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatasetType) Values() []DatasetType {
 	return []DatasetType{
 		"TARGET_TIME_SERIES",
@@ -100,8 +104,9 @@ const (
 )
 
 // Values returns all known values for DayOfWeek. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DayOfWeek) Values() []DayOfWeek {
 	return []DayOfWeek{
 		"MONDAY",
@@ -128,8 +133,9 @@ const (
 )
 
 // Values returns all known values for Domain. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Domain) Values() []Domain {
 	return []Domain{
 		"RETAIL",
@@ -151,8 +157,9 @@ const (
 )
 
 // Values returns all known values for EvaluationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EvaluationType) Values() []EvaluationType {
 	return []EvaluationType{
 		"SUMMARY",
@@ -168,8 +175,9 @@ const (
 )
 
 // Values returns all known values for FeaturizationMethodName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FeaturizationMethodName) Values() []FeaturizationMethodName {
 	return []FeaturizationMethodName{
 		"filling",
@@ -185,8 +193,9 @@ const (
 )
 
 // Values returns all known values for FilterConditionString. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FilterConditionString) Values() []FilterConditionString {
 	return []FilterConditionString{
 		"IS",
@@ -203,8 +212,9 @@ const (
 )
 
 // Values returns all known values for ImportMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImportMode) Values() []ImportMode {
 	return []ImportMode{
 		"FULL",
@@ -231,8 +241,9 @@ const (
 )
 
 // Values returns all known values for Month. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Month) Values() []Month {
 	return []Month{
 		"JANUARY",
@@ -261,8 +272,9 @@ const (
 )
 
 // Values returns all known values for Operation. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Operation) Values() []Operation {
 	return []Operation{
 		"ADD",
@@ -284,8 +296,9 @@ const (
 )
 
 // Values returns all known values for OptimizationMetric. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OptimizationMetric) Values() []OptimizationMetric {
 	return []OptimizationMetric{
 		"WAPE",
@@ -307,8 +320,9 @@ const (
 )
 
 // Values returns all known values for ScalingType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScalingType) Values() []ScalingType {
 	return []ScalingType{
 		"Auto",
@@ -327,8 +341,9 @@ const (
 )
 
 // Values returns all known values for State. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (State) Values() []State {
 	return []State{
 		"Active",
@@ -345,8 +360,9 @@ const (
 )
 
 // Values returns all known values for TimePointGranularity. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TimePointGranularity) Values() []TimePointGranularity {
 	return []TimePointGranularity{
 		"ALL",
@@ -363,8 +379,9 @@ const (
 )
 
 // Values returns all known values for TimeSeriesGranularity. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TimeSeriesGranularity) Values() []TimeSeriesGranularity {
 	return []TimeSeriesGranularity{
 		"ALL",

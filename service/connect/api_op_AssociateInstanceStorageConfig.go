@@ -12,13 +12,15 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
+//
 // Associates a storage resource type for the first time. You can only associate
 // one type of storage configuration in a single call. This means, for example,
 // that you can't define an instance with multiple S3 buckets for storing chat
-// transcripts. This API does not create a resource that doesn't exist. It only
-// associates it to the instance. Ensure that the resource being specified in the
-// storage configuration, like an S3 bucket, exists when being used for
-// association.
+// transcripts.
+//
+// This API does not create a resource that doesn't exist. It only associates it
+// to the instance. Ensure that the resource being specified in the storage
+// configuration, like an S3 bucket, exists when being used for association.
 func (c *Client) AssociateInstanceStorageConfig(ctx context.Context, params *AssociateInstanceStorageConfigInput, optFns ...func(*Options)) (*AssociateInstanceStorageConfigOutput, error) {
 	if params == nil {
 		params = &AssociateInstanceStorageConfigInput{}
@@ -36,22 +38,29 @@ func (c *Client) AssociateInstanceStorageConfig(ctx context.Context, params *Ass
 
 type AssociateInstanceStorageConfigInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
 
-	// A valid resource type. To enable streaming for real-time analysis of contacts (https://docs.aws.amazon.com/connect/latest/adminguide/enable-contact-analysis-segment-streams.html)
-	// , use the following types:
+	// A valid resource type. To [enable streaming for real-time analysis of contacts], use the following types:
+	//
 	//   - For chat contacts, use REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS .
+	//
 	//   - For voice contacts, use REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS .
+	//
 	// REAL_TIME_CONTACT_ANALYSIS_SEGMENTS is deprecated, but it is still supported
 	// and will apply only to VOICE channel contacts. Use
-	// REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS for voice contacts moving forward. If
-	// you have previously associated a stream with REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
-	// , no action is needed to update the stream to
-	// REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS .
+	// REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS for voice contacts moving forward.
+	//
+	// If you have previously associated a stream with
+	// REAL_TIME_CONTACT_ANALYSIS_SEGMENTS , no action is needed to update the stream
+	// to REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS .
+	//
+	// [enable streaming for real-time analysis of contacts]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-contact-analysis-segment-streams.html
 	//
 	// This member is required.
 	ResourceType types.InstanceStorageResourceType

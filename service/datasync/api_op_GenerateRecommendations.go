@@ -14,10 +14,12 @@ import (
 // Creates recommendations about where to migrate your data to in Amazon Web
 // Services. Recommendations are generated based on information that DataSync
 // Discovery collects about your on-premises storage system's resources. For more
-// information, see Recommendations provided by DataSync Discovery (https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html)
-// . Once generated, you can view your recommendations by using the
-// DescribeStorageSystemResources (https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeStorageSystemResources.html)
-// operation.
+// information, see [Recommendations provided by DataSync Discovery].
+//
+// Once generated, you can view your recommendations by using the [DescribeStorageSystemResources] operation.
+//
+// [DescribeStorageSystemResources]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeStorageSystemResources.html
+// [Recommendations provided by DataSync Discovery]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html
 func (c *Client) GenerateRecommendations(ctx context.Context, params *GenerateRecommendationsInput, optFns ...func(*Options)) (*GenerateRecommendationsOutput, error) {
 	if params == nil {
 		params = &GenerateRecommendationsInput{}

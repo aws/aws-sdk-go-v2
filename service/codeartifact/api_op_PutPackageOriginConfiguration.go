@@ -11,20 +11,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the package origin configuration for a package. The package origin
-// configuration determines how new versions of a package can be added to a
-// repository. You can allow or block direct publishing of new package versions, or
-// ingestion and retaining of new package versions from an external connection or
-// upstream source. For more information about package origin controls and
-// configuration, see Editing package origin controls (https://docs.aws.amazon.com/codeartifact/latest/ug/package-origin-controls.html)
-// in the CodeArtifact User Guide. PutPackageOriginConfiguration can be called on
-// a package that doesn't yet exist in the repository. When called on a package
-// that does not exist, a package is created in the repository with no versions and
-// the requested restrictions are set on the package. This can be used to
-// preemptively block ingesting or retaining any versions from external connections
-// or upstream repositories, or to block publishing any versions of the package
-// into the repository before connecting any package managers or publishers to the
-// repository.
+// Sets the package origin configuration for a package.
+//
+// The package origin configuration determines how new versions of a package can
+// be added to a repository. You can allow or block direct publishing of new
+// package versions, or ingestion and retaining of new package versions from an
+// external connection or upstream source. For more information about package
+// origin controls and configuration, see [Editing package origin controls]in the CodeArtifact User Guide.
+//
+// PutPackageOriginConfiguration can be called on a package that doesn't yet exist
+// in the repository. When called on a package that does not exist, a package is
+// created in the repository with no versions and the requested restrictions are
+// set on the package. This can be used to preemptively block ingesting or
+// retaining any versions from external connections or upstream repositories, or to
+// block publishing any versions of the package into the repository before
+// connecting any package managers or publishers to the repository.
+//
+// [Editing package origin controls]: https://docs.aws.amazon.com/codeartifact/latest/ug/package-origin-controls.html
 func (c *Client) PutPackageOriginConfiguration(ctx context.Context, params *PutPackageOriginConfigurationInput, optFns ...func(*Options)) (*PutPackageOriginConfigurationOutput, error) {
 	if params == nil {
 		params = &PutPackageOriginConfigurationInput{}
@@ -62,26 +65,32 @@ type PutPackageOriginConfigurationInput struct {
 	// This member is required.
 	Repository *string
 
-	// A PackageOriginRestrictions (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html)
-	// object that contains information about the upstream and publish package origin
-	// restrictions. The upstream restriction determines if new package versions can
-	// be ingested or retained from external connections or upstream repositories. The
-	// publish restriction determines if new package versions can be published directly
-	// to the repository. You must include both the desired upstream and publish
-	// restrictions.
+	// A [PackageOriginRestrictions] object that contains information about the upstream and publish package
+	// origin restrictions. The upstream restriction determines if new package
+	// versions can be ingested or retained from external connections or upstream
+	// repositories. The publish restriction determines if new package versions can be
+	// published directly to the repository.
+	//
+	// You must include both the desired upstream and publish restrictions.
+	//
+	// [PackageOriginRestrictions]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html
 	//
 	// This member is required.
 	Restrictions *types.PackageOriginRestrictions
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	// The namespace of the package to be updated. The package component that
 	// specifies its namespace depends on its type. For example:
+	//
 	//   - The namespace of a Maven package version is its groupId .
+	//
 	//   - The namespace of an npm or Swift package version is its scope .
+	//
 	//   - The namespace of a generic package is its namespace .
+	//
 	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
 	//   component, package versions of those formats do not have a namespace.
 	Namespace *string
@@ -91,11 +100,12 @@ type PutPackageOriginConfigurationInput struct {
 
 type PutPackageOriginConfigurationOutput struct {
 
-	// A PackageOriginConfiguration (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginConfiguration.html)
-	// object that describes the origin configuration set for the package. It contains
-	// a PackageOriginRestrictions (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html)
-	// object that describes how new versions of the package can be introduced to the
-	// repository.
+	// A [PackageOriginConfiguration] object that describes the origin configuration set for the package. It
+	// contains a [PackageOriginRestrictions]object that describes how new versions of the package can be
+	// introduced to the repository.
+	//
+	// [PackageOriginRestrictions]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html
+	// [PackageOriginConfiguration]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginConfiguration.html
 	OriginConfiguration *types.PackageOriginConfiguration
 
 	// Metadata pertaining to the operation's result.

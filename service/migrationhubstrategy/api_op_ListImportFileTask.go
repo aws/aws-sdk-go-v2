@@ -29,10 +29,10 @@ func (c *Client) ListImportFileTask(ctx context.Context, params *ListImportFileT
 
 type ListImportFileTaskInput struct {
 
-	// The total number of items to return. The maximum value is 100.
+	//  The total number of items to return. The maximum value is 100.
 	MaxResults *int32
 
-	// The token from a previous call that you use to retrieve the next set of
+	//  The token from a previous call that you use to retrieve the next set of
 	// results. For example, if a previous call to this action returned 100 items, but
 	// you set maxResults to 10. You'll receive a set of 10 results along with a
 	// token. You then use the returned token to retrieve the next set of 10.
@@ -43,11 +43,11 @@ type ListImportFileTaskInput struct {
 
 type ListImportFileTaskOutput struct {
 
-	// The token you use to retrieve the next set of results, or null if there are no
+	//  The token you use to retrieve the next set of results, or null if there are no
 	// more results.
 	NextToken *string
 
-	// Lists information about the files you import.
+	//  Lists information about the files you import.
 	TaskInfos []types.ImportFileTaskInformation
 
 	// Metadata pertaining to the operation's result.
@@ -143,7 +143,7 @@ var _ ListImportFileTaskAPIClient = (*Client)(nil)
 // ListImportFileTaskPaginatorOptions is the paginator options for
 // ListImportFileTask
 type ListImportFileTaskPaginatorOptions struct {
-	// The total number of items to return. The maximum value is 100.
+	//  The total number of items to return. The maximum value is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

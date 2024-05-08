@@ -29,7 +29,7 @@ func (c *Client) DescribeLabelGroup(ctx context.Context, params *DescribeLabelGr
 
 type DescribeLabelGroupInput struct {
 
-	// Returns the name of the label group.
+	//  Returns the name of the label group.
 	//
 	// This member is required.
 	LabelGroupName *string
@@ -39,20 +39,20 @@ type DescribeLabelGroupInput struct {
 
 type DescribeLabelGroupOutput struct {
 
-	// The time at which the label group was created.
+	//  The time at which the label group was created.
 	CreatedAt *time.Time
 
-	// Codes indicating the type of anomaly associated with the labels in the lagbel
+	//  Codes indicating the type of anomaly associated with the labels in the lagbel
 	// group.
 	FaultCodes []string
 
-	// The Amazon Resource Name (ARN) of the label group.
+	//  The Amazon Resource Name (ARN) of the label group.
 	LabelGroupArn *string
 
-	// The name of the label group.
+	//  The name of the label group.
 	LabelGroupName *string
 
-	// The time at which the label group was updated.
+	//  The time at which the label group was updated.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

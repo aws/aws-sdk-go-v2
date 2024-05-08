@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a product. A delegated admin is authorized to invoke this command. The
-// user or role that performs this operation must have the
+// Creates a product.
+//
+// A delegated admin is authorized to invoke this command.
+//
+// The user or role that performs this operation must have the
 // cloudformation:GetTemplate IAM policy permission. This policy permission is
 // required when using the ImportFromPhysicalId template source in the information
 // data section.
@@ -56,7 +59,9 @@ type CreateProductInput struct {
 	ProductType types.ProductType
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
@@ -73,7 +78,9 @@ type CreateProductInput struct {
 	// the connection source artifact. This automatically manages the product's
 	// artifacts based on changes to the source. The SourceConnection parameter
 	// consists of the following sub-fields.
+	//
 	//   - Type
+	//
 	//   - ConnectionParamters
 	SourceConnection *types.SourceConnection
 
@@ -83,8 +90,9 @@ type CreateProductInput struct {
 	// The contact email for product support.
 	SupportEmail *string
 
-	// The contact URL for product support. ^https?:\/\// / is the pattern used to
-	// validate SupportUrl.
+	// The contact URL for product support.
+	//
+	// ^https?:\/\// / is the pattern used to validate SupportUrl.
 	SupportUrl *string
 
 	// One or more tags.

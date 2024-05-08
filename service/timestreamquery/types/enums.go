@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for DimensionValueType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DimensionValueType) Values() []DimensionValueType {
 	return []DimensionValueType{
 		"VARCHAR",
@@ -30,8 +31,9 @@ const (
 )
 
 // Values returns all known values for MeasureValueType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MeasureValueType) Values() []MeasureValueType {
 	return []MeasureValueType{
 		"BIGINT",
@@ -51,8 +53,9 @@ const (
 )
 
 // Values returns all known values for QueryPricingModel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QueryPricingModel) Values() []QueryPricingModel {
 	return []QueryPricingModel{
 		"BYTES_SCANNED",
@@ -69,8 +72,9 @@ const (
 )
 
 // Values returns all known values for S3EncryptionOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3EncryptionOption) Values() []S3EncryptionOption {
 	return []S3EncryptionOption{
 		"SSE_S3",
@@ -90,8 +94,9 @@ const (
 )
 
 // Values returns all known values for ScalarMeasureValueType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScalarMeasureValueType) Values() []ScalarMeasureValueType {
 	return []ScalarMeasureValueType{
 		"BIGINT",
@@ -120,8 +125,9 @@ const (
 )
 
 // Values returns all known values for ScalarType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScalarType) Values() []ScalarType {
 	return []ScalarType{
 		"VARCHAR",
@@ -149,8 +155,9 @@ const (
 )
 
 // Values returns all known values for ScheduledQueryRunStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScheduledQueryRunStatus) Values() []ScheduledQueryRunStatus {
 	return []ScheduledQueryRunStatus{
 		"AUTO_TRIGGER_SUCCESS",
@@ -169,8 +176,9 @@ const (
 )
 
 // Values returns all known values for ScheduledQueryState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScheduledQueryState) Values() []ScheduledQueryState {
 	return []ScheduledQueryState{
 		"ENABLED",

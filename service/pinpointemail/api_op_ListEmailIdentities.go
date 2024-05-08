@@ -43,8 +43,9 @@ type ListEmailIdentitiesInput struct {
 	// The number of results to show in a single call to ListEmailIdentities . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
-	// additional results. The value you specify has to be at least 0, and can be no
-	// more than 1000.
+	// additional results.
+	//
+	// The value you specify has to be at least 0, and can be no more than 1000.
 	PageSize *int32
 
 	noSmithyDocumentSerde
@@ -160,8 +161,9 @@ type ListEmailIdentitiesPaginatorOptions struct {
 	// The number of results to show in a single call to ListEmailIdentities . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
-	// additional results. The value you specify has to be at least 0, and can be no
-	// more than 1000.
+	// additional results.
+	//
+	// The value you specify has to be at least 0, and can be no more than 1000.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

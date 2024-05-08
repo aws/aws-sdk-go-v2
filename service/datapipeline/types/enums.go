@@ -14,8 +14,9 @@ const (
 )
 
 // Values returns all known values for OperatorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OperatorType) Values() []OperatorType {
 	return []OperatorType{
 		"EQ",
@@ -36,8 +37,9 @@ const (
 )
 
 // Values returns all known values for TaskStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TaskStatus) Values() []TaskStatus {
 	return []TaskStatus{
 		"FINISHED",

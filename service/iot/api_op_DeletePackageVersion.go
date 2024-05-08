@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a specific version from a software package. Note: If a package version
-// is designated as default, you must remove the designation from the software
-// package using the UpdatePackage action.
+// Deletes a specific version from a software package.
+//
+// Note: If a package version is designated as default, you must remove the
+// designation from the software package using the UpdatePackageaction.
 func (c *Client) DeletePackageVersion(ctx context.Context, params *DeletePackageVersionInput, optFns ...func(*Options)) (*DeletePackageVersionOutput, error) {
 	if params == nil {
 		params = &DeletePackageVersionInput{}

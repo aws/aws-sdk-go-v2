@@ -12,8 +12,10 @@ import (
 )
 
 // Deletes an existing opt-out list. All opted out phone numbers in the opt-out
-// list are deleted. If the specified opt-out list name doesn't exist or is in-use
-// by an origination phone number or pool, an error is returned.
+// list are deleted.
+//
+// If the specified opt-out list name doesn't exist or is in-use by an origination
+// phone number or pool, an error is returned.
 func (c *Client) DeleteOptOutList(ctx context.Context, params *DeleteOptOutListInput, optFns ...func(*Options)) (*DeleteOptOutListOutput, error) {
 	if params == nil {
 		params = &DeleteOptOutListInput{}
@@ -31,8 +33,8 @@ func (c *Client) DeleteOptOutList(ctx context.Context, params *DeleteOptOutListI
 
 type DeleteOptOutListInput struct {
 
-	// The OptOutListName or OptOutListArn of the OptOutList to delete. You can use
-	// DescribeOptOutLists to find the values for OptOutListName and OptOutListArn.
+	// The OptOutListName or OptOutListArn of the OptOutList to delete. You can use DescribeOptOutLists
+	// to find the values for OptOutListName and OptOutListArn.
 	//
 	// This member is required.
 	OptOutListName *string
@@ -42,8 +44,9 @@ type DeleteOptOutListInput struct {
 
 type DeleteOptOutListOutput struct {
 
-	// The time when the OptOutList was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the OptOutList was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	CreatedTimestamp *time.Time
 
 	// The Amazon Resource Name (ARN) of the OptOutList that was removed.

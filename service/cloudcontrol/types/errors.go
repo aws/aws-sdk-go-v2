@@ -34,6 +34,7 @@ func (e *AlreadyExistsException) ErrorCode() string {
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified client token has already been used in another resource request.
+//
 // It's best practice for client tokens to be unique for each resource operation
 // request. However, client token expire after 36 hours.
 type ClientTokenConflictException struct {

@@ -13,16 +13,19 @@ import (
 
 // Adds a logging configuration for the specified Amazon Chime Voice Connector.
 // The logging configuration specifies whether SIP message logs are enabled for
-// sending to Amazon CloudWatch Logs. This API is is no longer supported and will
-// not be updated. We recommend using the latest version,
-// PutVoiceConnectorLoggingConfiguration (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorLoggingConfiguration.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// sending to Amazon CloudWatch Logs.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [PutVoiceConnectorLoggingConfiguration], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by PutVoiceConnectorLoggingConfiguration in the Amazon
 // Chime SDK Voice Namespace
+//
+// [PutVoiceConnectorLoggingConfiguration]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorLoggingConfiguration.html
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
 func (c *Client) PutVoiceConnectorLoggingConfiguration(ctx context.Context, params *PutVoiceConnectorLoggingConfigurationInput, optFns ...func(*Options)) (*PutVoiceConnectorLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &PutVoiceConnectorLoggingConfigurationInput{}

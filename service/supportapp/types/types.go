@@ -26,9 +26,10 @@ type SlackChannelConfiguration struct {
 	ChannelName *string
 
 	// The Amazon Resource Name (ARN) of an IAM role that you want to use to perform
-	// operations on Amazon Web Services. For more information, see Managing access to
-	// the Amazon Web Services Support App (https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html)
-	// in the Amazon Web Services Support User Guide.
+	// operations on Amazon Web Services. For more information, see [Managing access to the Amazon Web Services Support App]in the Amazon Web
+	// Services Support User Guide.
+	//
+	// [Managing access to the Amazon Web Services Support App]: https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html
 	ChannelRoleArn *string
 
 	// Whether you want to get notified when a support case has a new correspondence.

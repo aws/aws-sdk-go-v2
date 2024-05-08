@@ -38,12 +38,17 @@ type DescribeDataSourcesInput struct {
 	EQ *string
 
 	// Use one of the following variables to filter a list of DataSource :
+	//
 	//   - CreatedAt - Sets the search criteria to DataSource creation dates.
+	//
 	//   - Status - Sets the search criteria to DataSource statuses.
+	//
 	//   - Name - Sets the search criteria to the contents of DataSource Name .
+	//
 	//   - DataUri - Sets the search criteria to the URI of data files used to create
 	//   the DataSource . The URI can identify either a file or an Amazon Simple
 	//   Storage Service (Amazon S3) bucket or directory.
+	//
 	//   - IAMUser - Sets the search criteria to the user account that invoked the
 	//   DataSource creation.
 	FilterVariable types.DataSourceFilterVariable
@@ -66,7 +71,7 @@ type DescribeDataSourcesInput struct {
 	// that are less than the value specified with LT .
 	LT *string
 
-	// The maximum number of DataSource to include in the result.
+	//  The maximum number of DataSource to include in the result.
 	Limit *int32
 
 	// The not equal to operator. The DataSource results will have FilterVariable
@@ -76,27 +81,34 @@ type DescribeDataSourcesInput struct {
 	// The ID of the page in the paginated results.
 	NextToken *string
 
-	// A string that is found at the beginning of a variable, such as Name or Id . For
-	// example, a DataSource could have the Name 2014-09-09-HolidayGiftMailer . To
+	// A string that is found at the beginning of a variable, such as Name or Id .
+	//
+	// For example, a DataSource could have the Name 2014-09-09-HolidayGiftMailer . To
 	// search for this DataSource , select Name for the FilterVariable and any of the
 	// following strings for the Prefix :
+	//
 	//   - 2014-09
+	//
 	//   - 2014-09-09
+	//
 	//   - 2014-09-09-Holiday
 	Prefix *string
 
 	// A two-value parameter that determines the sequence of the resulting list of
 	// DataSource .
+	//
 	//   - asc - Arranges the list in ascending order (A-Z, 0-9).
+	//
 	//   - dsc - Arranges the list in descending order (Z-A, 9-0).
+	//
 	// Results are sorted by FilterVariable .
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
 }
 
-// Represents the query results from a DescribeDataSources operation. The content
-// is essentially a list of DataSource .
+// Represents the query results from a DescribeDataSources operation. The content is essentially a
+// list of DataSource .
 type DescribeDataSourcesOutput struct {
 
 	// An ID of the next page in the paginated results that indicates at least one
@@ -199,7 +211,7 @@ var _ DescribeDataSourcesAPIClient = (*Client)(nil)
 // DescribeDataSourcesPaginatorOptions is the paginator options for
 // DescribeDataSources
 type DescribeDataSourcesPaginatorOptions struct {
-	// The maximum number of DataSource to include in the result.
+	//  The maximum number of DataSource to include in the result.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -313,12 +325,13 @@ type DataSourceAvailableWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeDataSourcesInput, *DescribeDataSourcesOutput, error) (bool, error)
 }
 

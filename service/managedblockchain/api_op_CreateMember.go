@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a member within a Managed Blockchain network. Applies only to
-// Hyperledger Fabric.
+// Creates a member within a Managed Blockchain network.
+//
+// Applies only to Hyperledger Fabric.
 func (c *Client) CreateMember(ctx context.Context, params *CreateMemberInput, optFns ...func(*Options)) (*CreateMemberOutput, error) {
 	if params == nil {
 		params = &CreateMemberInput{}

@@ -12,13 +12,18 @@ import (
 )
 
 // Retrieves the specified pools or all pools associated with your Amazon Web
-// Services account. If you specify pool IDs, the output includes information for
-// only the specified pools. If you specify filters, the output includes
-// information for only those pools that meet the filter criteria. If you don't
-// specify pool IDs or filters, the output includes information for all pools. If
-// you specify a pool ID that isn't valid, an error is returned. A pool is a
-// collection of phone numbers and SenderIds. A pool can include one or more phone
-// numbers and SenderIds that are associated with your Amazon Web Services account.
+// Services account.
+//
+// If you specify pool IDs, the output includes information for only the specified
+// pools. If you specify filters, the output includes information for only those
+// pools that meet the filter criteria. If you don't specify pool IDs or filters,
+// the output includes information for all pools.
+//
+// If you specify a pool ID that isn't valid, an error is returned.
+//
+// A pool is a collection of phone numbers and SenderIds. A pool can include one
+// or more phone numbers and SenderIds that are associated with your Amazon Web
+// Services account.
 func (c *Client) DescribePools(ctx context.Context, params *DescribePoolsInput, optFns ...func(*Options)) (*DescribePoolsOutput, error) {
 	if params == nil {
 		params = &DescribePoolsInput{}

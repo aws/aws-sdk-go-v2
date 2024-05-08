@@ -12,12 +12,14 @@ import (
 )
 
 // Retrieves the list of all policies in an organization of a specified type.
+//
 // Always check the NextToken response parameter for a null value when calling a
 // List* operation. These operations can occasionally return an empty set of
 // results even when there are more results available. The NextToken response
-// parameter value is null only when there are no more results to display. This
-// operation can be called only from the organization's management account or by a
-// member account that is a delegated administrator for an Amazon Web Services
+// parameter value is null only when there are no more results to display.
+//
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an Amazon Web Services
 // service.
 func (c *Client) ListPolicies(ctx context.Context, params *ListPoliciesInput, optFns ...func(*Options)) (*ListPoliciesOutput, error) {
 	if params == nil {
@@ -38,10 +40,19 @@ type ListPoliciesInput struct {
 
 	// Specifies the type of policy that you want to include in the response. You must
 	// specify one of the following values:
-	//   - AISERVICES_OPT_OUT_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
-	//   - BACKUP_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
-	//   - SERVICE_CONTROL_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
-	//   - TAG_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
+	//
+	// [AISERVICES_OPT_OUT_POLICY]
+	//
+	// [BACKUP_POLICY]
+	//
+	// [SERVICE_CONTROL_POLICY]
+	//
+	// [TAG_POLICY]
+	//
+	// [AISERVICES_OPT_OUT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+	// [BACKUP_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+	// [SERVICE_CONTROL_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+	// [TAG_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
 	//
 	// This member is required.
 	Filter types.PolicyType
@@ -75,8 +86,7 @@ type ListPoliciesOutput struct {
 	NextToken *string
 
 	// A list of policies that match the filter criteria in the request. The output
-	// list doesn't include the policy contents. To see the content for a policy, see
-	// DescribePolicy .
+	// list doesn't include the policy contents. To see the content for a policy, see DescribePolicy.
 	Policies []types.PolicySummary
 
 	// Metadata pertaining to the operation's result.

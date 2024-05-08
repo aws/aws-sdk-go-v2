@@ -12,8 +12,9 @@ import (
 )
 
 // Creates a SIP media application. For more information about SIP media
-// applications, see Managing SIP media applications and rules (https://docs.aws.amazon.com/chime-sdk/latest/ag/manage-sip-applications.html)
-// in the Amazon Chime SDK Administrator Guide.
+// applications, see [Managing SIP media applications and rules]in the Amazon Chime SDK Administrator Guide.
+//
+// [Managing SIP media applications and rules]: https://docs.aws.amazon.com/chime-sdk/latest/ag/manage-sip-applications.html
 func (c *Client) CreateSipMediaApplication(ctx context.Context, params *CreateSipMediaApplicationInput, optFns ...func(*Options)) (*CreateSipMediaApplicationOutput, error) {
 	if params == nil {
 		params = &CreateSipMediaApplicationInput{}

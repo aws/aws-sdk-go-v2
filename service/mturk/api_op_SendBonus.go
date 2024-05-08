@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The SendBonus operation issues a payment of money from your account to a
+//	The SendBonus operation issues a payment of money from your account to a
+//
 // Worker. This payment happens separately from the reward you pay to the Worker
 // when you approve the Worker's assignment. The SendBonus operation requires the
 // Worker's ID and the assignment ID as parameters to initiate payment of the
@@ -41,7 +42,7 @@ type SendBonusInput struct {
 	// This member is required.
 	AssignmentId *string
 
-	// The Bonus amount is a US Dollar amount specified using a string (for example,
+	//  The Bonus amount is a US Dollar amount specified using a string (for example,
 	// "5" represents $5.00 USD and "101.42" represents $101.42 USD). Do not include
 	// currency symbols or currency codes.
 	//

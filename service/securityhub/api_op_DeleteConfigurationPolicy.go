@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a configuration policy. Only the Security Hub delegated administrator
+//	Deletes a configuration policy. Only the Security Hub delegated administrator
+//
 // can invoke this operation from the home Region. For the deletion to succeed, you
 // must first disassociate a configuration policy from target accounts,
 // organizational units, or the root by invoking the
@@ -32,7 +33,7 @@ func (c *Client) DeleteConfigurationPolicy(ctx context.Context, params *DeleteCo
 
 type DeleteConfigurationPolicyInput struct {
 
-	// The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the
+	//  The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the
 	// configuration policy.
 	//
 	// This member is required.

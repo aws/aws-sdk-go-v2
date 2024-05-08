@@ -12,6 +12,7 @@ import (
 )
 
 // Creates a fleet, a logical group of robots running the same robot application.
+//
 // This API is no longer supported and will throw an error if used.
 //
 // Deprecated: AWS RoboMaker is unable to process this request as the support for

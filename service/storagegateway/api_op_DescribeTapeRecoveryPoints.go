@@ -12,10 +12,12 @@ import (
 )
 
 // Returns a list of virtual tape recovery points that are available for the
-// specified tape gateway. A recovery point is a point-in-time view of a virtual
-// tape at which all the data on the virtual tape is consistent. If your gateway
-// crashes, virtual tapes that have recovery points can be recovered to a new
-// gateway. This operation is only supported in the tape gateway type.
+// specified tape gateway.
+//
+// A recovery point is a point-in-time view of a virtual tape at which all the
+// data on the virtual tape is consistent. If your gateway crashes, virtual tapes
+// that have recovery points can be recovered to a new gateway. This operation is
+// only supported in the tape gateway type.
 func (c *Client) DescribeTapeRecoveryPoints(ctx context.Context, params *DescribeTapeRecoveryPointsInput, optFns ...func(*Options)) (*DescribeTapeRecoveryPointsOutput, error) {
 	if params == nil {
 		params = &DescribeTapeRecoveryPointsInput{}
@@ -34,8 +36,8 @@ func (c *Client) DescribeTapeRecoveryPoints(ctx context.Context, params *Describ
 // DescribeTapeRecoveryPointsInput
 type DescribeTapeRecoveryPointsInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -54,15 +56,16 @@ type DescribeTapeRecoveryPointsInput struct {
 // DescribeTapeRecoveryPointsOutput
 type DescribeTapeRecoveryPointsOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// An opaque string that indicates the position at which the virtual tape recovery
-	// points that were listed for description ended. Use this marker in your next
-	// request to list the next set of virtual tape recovery points in the list. If
-	// there are no more recovery points to describe, this field does not appear in the
-	// response.
+	// points that were listed for description ended.
+	//
+	// Use this marker in your next request to list the next set of virtual tape
+	// recovery points in the list. If there are no more recovery points to describe,
+	// this field does not appear in the response.
 	Marker *string
 
 	// An array of TapeRecoveryPointInfos that are available for the specified gateway.

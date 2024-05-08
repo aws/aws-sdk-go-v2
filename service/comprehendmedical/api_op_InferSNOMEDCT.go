@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// InferSNOMEDCT detects possible medical concepts as entities and links them to
+//	InferSNOMEDCT detects possible medical concepts as entities and links them to
+//
 // codes from the Systematized Nomenclature of Medicine, Clinical Terms (SNOMED-CT)
 // ontology
 func (c *Client) InferSNOMEDCT(ctx context.Context, params *InferSNOMEDCTInput, optFns ...func(*Options)) (*InferSNOMEDCTOutput, error) {
@@ -41,7 +42,7 @@ type InferSNOMEDCTInput struct {
 
 type InferSNOMEDCTOutput struct {
 
-	// The collection of medical concept entities extracted from the input text and
+	//  The collection of medical concept entities extracted from the input text and
 	// their associated information. For each entity, the response provides the entity
 	// text, the entity category, where the entity text begins and ends, and the level
 	// of confidence that Amazon Comprehend Medical has in the detection and analysis.
@@ -50,19 +51,19 @@ type InferSNOMEDCTOutput struct {
 	// This member is required.
 	Entities []types.SNOMEDCTEntity
 
-	// The number of characters in the input request documentation.
+	//  The number of characters in the input request documentation.
 	Characters *types.Characters
 
-	// The version of the model used to analyze the documents, in the format n.n.n You
-	// can use this information to track the model used for a particular batch of
+	//  The version of the model used to analyze the documents, in the format n.n.n
+	// You can use this information to track the model used for a particular batch of
 	// documents.
 	ModelVersion *string
 
-	// If the result of the request is truncated, the pagination token can be used to
+	//  If the result of the request is truncated, the pagination token can be used to
 	// fetch the next page of entities.
 	PaginationToken *string
 
-	// The details of the SNOMED-CT revision, including the edition, language, and
+	//  The details of the SNOMED-CT revision, including the edition, language, and
 	// version date.
 	SNOMEDCTDetails *types.SNOMEDCTDetails
 

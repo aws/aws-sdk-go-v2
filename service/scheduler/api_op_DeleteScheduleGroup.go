@@ -16,7 +16,9 @@ import (
 // schedules are deleted. Schedules associated with the group that are set to run
 // while the schedule group is in the process of being deleted might continue to
 // invoke their targets until the schedule group and its associated schedules are
-// deleted. This operation is eventually consistent.
+// deleted.
+//
+// This operation is eventually consistent.
 func (c *Client) DeleteScheduleGroup(ctx context.Context, params *DeleteScheduleGroupInput, optFns ...func(*Options)) (*DeleteScheduleGroupOutput, error) {
 	if params == nil {
 		params = &DeleteScheduleGroupInput{}
@@ -39,7 +41,7 @@ type DeleteScheduleGroupInput struct {
 	// This member is required.
 	Name *string
 
-	// Unique, case-sensitive identifier you provide to ensure the idempotency of the
+	//  Unique, case-sensitive identifier you provide to ensure the idempotency of the
 	// request. If you do not specify a client token, EventBridge Scheduler uses a
 	// randomly generated token for the request to ensure idempotency.
 	ClientToken *string

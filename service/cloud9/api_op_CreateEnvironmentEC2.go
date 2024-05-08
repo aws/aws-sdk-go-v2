@@ -33,24 +33,39 @@ type CreateEnvironmentEC2Input struct {
 
 	// The identifier for the Amazon Machine Image (AMI) that's used to create the EC2
 	// instance. To choose an AMI for the instance, you must specify a valid AMI alias
-	// or a valid Amazon EC2 Systems Manager (SSM) path. From December 04, 2023, you
-	// will be required to include the imageId parameter for the CreateEnvironmentEC2
-	// action. This change will be reflected across all direct methods of communicating
-	// with the API, such as Amazon Web Services SDK, Amazon Web Services CLI and
-	// Amazon Web Services CloudFormation. This change will only affect direct API
-	// consumers, and not Cloud9 console users. We recommend using Amazon Linux 2023 as
-	// the AMI to create your environment as it is fully supported. Since Ubuntu 18.04
-	// has ended standard support as of May 31, 2023, we recommend you choose Ubuntu
-	// 22.04. AMI aliases
+	// or a valid Amazon EC2 Systems Manager (SSM) path.
+	//
+	// From December 04, 2023, you will be required to include the imageId parameter
+	// for the CreateEnvironmentEC2 action. This change will be reflected across all
+	// direct methods of communicating with the API, such as Amazon Web Services SDK,
+	// Amazon Web Services CLI and Amazon Web Services CloudFormation. This change will
+	// only affect direct API consumers, and not Cloud9 console users.
+	//
+	// We recommend using Amazon Linux 2023 as the AMI to create your environment as
+	// it is fully supported.
+	//
+	// Since Ubuntu 18.04 has ended standard support as of May 31, 2023, we recommend
+	// you choose Ubuntu 22.04.
+	//
+	// AMI aliases
+	//
 	//   - Amazon Linux 2: amazonlinux-2-x86_64
+	//
 	//   - Amazon Linux 2023 (recommended): amazonlinux-2023-x86_64
+	//
 	//   - Ubuntu 18.04: ubuntu-18.04-x86_64
+	//
 	//   - Ubuntu 22.04: ubuntu-22.04-x86_64
+	//
 	// SSM paths
+	//
 	//   - Amazon Linux 2: resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64
+	//
 	//   - Amazon Linux 2023 (recommended):
 	//   resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2023-x86_64
+	//
 	//   - Ubuntu 18.04: resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64
+	//
 	//   - Ubuntu 22.04: resolve:ssm:/aws/service/cloud9/amis/ubuntu-22.04-x86_64
 	//
 	// This member is required.
@@ -61,8 +76,9 @@ type CreateEnvironmentEC2Input struct {
 	// This member is required.
 	InstanceType *string
 
-	// The name of the environment to create. This name is visible to other IAM users
-	// in the same Amazon Web Services account.
+	// The name of the environment to create.
+	//
+	// This name is visible to other IAM users in the same Amazon Web Services account.
 	//
 	// This member is required.
 	Name *string
@@ -72,15 +88,20 @@ type CreateEnvironmentEC2Input struct {
 	AutomaticStopTimeMinutes *int32
 
 	// A unique, case-sensitive string that helps Cloud9 to ensure this operation
-	// completes no more than one time. For more information, see Client Tokens (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// in the Amazon EC2 API Reference.
+	// completes no more than one time.
+	//
+	// For more information, see [Client Tokens] in the Amazon EC2 API Reference.
+	//
+	// [Client Tokens]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientRequestToken *string
 
 	// The connection type used for connecting to an Amazon EC2 environment. Valid
 	// values are CONNECT_SSH (default) and CONNECT_SSM (connected through Amazon EC2
-	// Systems Manager). For more information, see Accessing no-ingress EC2 instances
-	// with Amazon EC2 Systems Manager (https://docs.aws.amazon.com/cloud9/latest/user-guide/ec2-ssm.html)
-	// in the Cloud9 User Guide.
+	// Systems Manager).
+	//
+	// For more information, see [Accessing no-ingress EC2 instances with Amazon EC2 Systems Manager] in the Cloud9 User Guide.
+	//
+	// [Accessing no-ingress EC2 instances with Amazon EC2 Systems Manager]: https://docs.aws.amazon.com/cloud9/latest/user-guide/ec2-ssm.html
 	ConnectionType types.ConnectionType
 
 	// The description of the environment to create.

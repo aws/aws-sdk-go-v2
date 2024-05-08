@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing virtual router. You must delete any routes associated with
-// the virtual router before you can delete the router itself.
+// Deletes an existing virtual router.
+//
+// You must delete any routes associated with the virtual router before you can
+// delete the router itself.
 func (c *Client) DeleteVirtualRouter(ctx context.Context, params *DeleteVirtualRouterInput, optFns ...func(*Options)) (*DeleteVirtualRouterOutput, error) {
 	if params == nil {
 		params = &DeleteVirtualRouterInput{}
@@ -42,9 +44,9 @@ type DeleteVirtualRouterInput struct {
 
 	// The Amazon Web Services IAM account ID of the service mesh owner. If the
 	// account ID is not your own, then it's the ID of the account that shared the mesh
-	// with your account. For more information about mesh sharing, see Working with
-	// shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
-	// .
+	// with your account. For more information about mesh sharing, see [Working with shared meshes].
+	//
+	// [Working with shared meshes]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
 	MeshOwner *string
 
 	noSmithyDocumentSerde

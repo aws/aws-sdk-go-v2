@@ -31,25 +31,25 @@ func (c *Client) CreateDomainAssociation(ctx context.Context, params *CreateDoma
 // The request structure for the create domain association request.
 type CreateDomainAssociationInput struct {
 
-	// The unique ID for an Amplify app.
+	//  The unique ID for an Amplify app.
 	//
 	// This member is required.
 	AppId *string
 
-	// The domain name for the domain association.
+	//  The domain name for the domain association.
 	//
 	// This member is required.
 	DomainName *string
 
-	// The setting for the subdomain.
+	//  The setting for the subdomain.
 	//
 	// This member is required.
 	SubDomainSettings []types.SubDomainSetting
 
-	// Sets the branch patterns for automatic subdomain creation.
+	//  Sets the branch patterns for automatic subdomain creation.
 	AutoSubDomainCreationPatterns []string
 
-	// The required AWS Identity and Access Management (IAM) service role for the
+	//  The required AWS Identity and Access Management (IAM) service role for the
 	// Amazon Resource Name (ARN) for automatically creating subdomains.
 	AutoSubDomainIAMRole *string
 
@@ -58,7 +58,7 @@ type CreateDomainAssociationInput struct {
 	// provisions and manages for you.
 	CertificateSettings *types.CertificateSettings
 
-	// Enables the automated creation of subdomains for branches.
+	//  Enables the automated creation of subdomains for branches.
 	EnableAutoSubDomain *bool
 
 	noSmithyDocumentSerde
@@ -67,7 +67,7 @@ type CreateDomainAssociationInput struct {
 // The result structure for the create domain association request.
 type CreateDomainAssociationOutput struct {
 
-	// Describes the structure of a domain association, which associates a custom
+	//  Describes the structure of a domain association, which associates a custom
 	// domain with an Amplify app.
 	//
 	// This member is required.

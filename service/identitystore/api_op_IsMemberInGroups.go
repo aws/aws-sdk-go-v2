@@ -12,10 +12,12 @@ import (
 )
 
 // Checks the user's membership in all requested groups and returns if the member
-// exists in all queried groups. If you have administrator access to a member
-// account, you can use this API from the member account. Read about member
-// accounts (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html)
-// in the Organizations User Guide.
+// exists in all queried groups.
+//
+// If you have administrator access to a member account, you can use this API from
+// the member account. Read about [member accounts]in the Organizations User Guide.
+//
+// [member accounts]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html
 func (c *Client) IsMemberInGroups(ctx context.Context, params *IsMemberInGroupsInput, optFns ...func(*Options)) (*IsMemberInGroupsOutput, error) {
 	if params == nil {
 		params = &IsMemberInGroupsInput{}

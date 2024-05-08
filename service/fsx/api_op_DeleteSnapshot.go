@@ -13,9 +13,10 @@ import (
 
 // Deletes an Amazon FSx for OpenZFS snapshot. After deletion, the snapshot no
 // longer exists, and its data is gone. Deleting a snapshot doesn't affect
-// snapshots stored in a file system backup. The DeleteSnapshot operation returns
-// instantly. The snapshot appears with the lifecycle status of DELETING until the
-// deletion is complete.
+// snapshots stored in a file system backup.
+//
+// The DeleteSnapshot operation returns instantly. The snapshot appears with the
+// lifecycle status of DELETING until the deletion is complete.
 func (c *Client) DeleteSnapshot(ctx context.Context, params *DeleteSnapshotInput, optFns ...func(*Options)) (*DeleteSnapshotOutput, error) {
 	if params == nil {
 		params = &DeleteSnapshotInput{}

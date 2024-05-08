@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a CLI token for the Airflow CLI. To learn more, see Creating an Apache
-// Airflow CLI token (https://docs.aws.amazon.com/mwaa/latest/userguide/call-mwaa-apis-cli.html)
-// .
+// Creates a CLI token for the Airflow CLI. To learn more, see [Creating an Apache Airflow CLI token].
+//
+// [Creating an Apache Airflow CLI token]: https://docs.aws.amazon.com/mwaa/latest/userguide/call-mwaa-apis-cli.html
 func (c *Client) CreateCliToken(ctx context.Context, params *CreateCliTokenInput, optFns ...func(*Options)) (*CreateCliTokenOutput, error) {
 	if params == nil {
 		params = &CreateCliTokenInput{}

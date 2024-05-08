@@ -13,8 +13,10 @@ import (
 )
 
 // Retrieves the properties associated with a model-customization job, including
-// the status of the job. For more information, see Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
-// in the Amazon Bedrock User Guide.
+// the status of the job. For more information, see [Custom models]in the Amazon Bedrock User
+// Guide.
+//
+// [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
 func (c *Client) GetModelCustomizationJob(ctx context.Context, params *GetModelCustomizationJobInput, optFns ...func(*Options)) (*GetModelCustomizationJobOutput, error) {
 	if params == nil {
 		params = &GetModelCustomizationJobInput{}
@@ -53,8 +55,9 @@ type GetModelCustomizationJobOutput struct {
 	CreationTime *time.Time
 
 	// The hyperparameter values for the job. For details on the format for different
-	// models, see Custom model hyperparameters (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models-hp.html)
-	// .
+	// models, see [Custom model hyperparameters].
+	//
+	// [Custom model hyperparameters]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models-hp.html
 	//
 	// This member is required.
 	HyperParameters map[string]string

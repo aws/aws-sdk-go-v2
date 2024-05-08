@@ -11,9 +11,17 @@ import (
 )
 
 // Attempts to retrieve a fleet ID that is associated with an alias. Specify a
-// unique alias identifier. If the alias has a SIMPLE routing strategy, Amazon
-// GameLift returns a fleet ID. If the alias has a TERMINAL routing strategy, the
-// result is a TerminalRoutingStrategyException . Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// unique alias identifier.
+//
+// If the alias has a SIMPLE routing strategy, Amazon GameLift returns a fleet ID.
+// If the alias has a TERMINAL routing strategy, the result is a
+// TerminalRoutingStrategyException .
+//
+// # Related actions
+//
+// [All APIs by task]
+//
+// [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 func (c *Client) ResolveAlias(ctx context.Context, params *ResolveAliasInput, optFns ...func(*Options)) (*ResolveAliasOutput, error) {
 	if params == nil {
 		params = &ResolveAliasInput{}
@@ -42,8 +50,10 @@ type ResolveAliasInput struct {
 
 type ResolveAliasOutput struct {
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) associated with the GameLift fleet resource that this alias points to.
+	//  The Amazon Resource Name ([ARN] ) associated with the GameLift fleet resource that
+	// this alias points to.
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	FleetArn *string
 
 	// The fleet identifier that the alias is pointing to.

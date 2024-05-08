@@ -12,11 +12,13 @@ import (
 	"time"
 )
 
-// Lists model compilation jobs that satisfy various filters. To create a model
-// compilation job, use CreateCompilationJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateCompilationJob.html)
-// . To get information about a particular model compilation job you have created,
-// use DescribeCompilationJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeCompilationJob.html)
-// .
+// Lists model compilation jobs that satisfy various filters.
+//
+// To create a model compilation job, use [CreateCompilationJob]. To get information about a particular
+// model compilation job you have created, use [DescribeCompilationJob].
+//
+// [DescribeCompilationJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeCompilationJob.html
+// [CreateCompilationJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateCompilationJob.html
 func (c *Client) ListCompilationJobs(ctx context.Context, params *ListCompilationJobsInput, optFns ...func(*Options)) (*ListCompilationJobsOutput, error) {
 	if params == nil {
 		params = &ListCompilationJobsInput{}
@@ -77,8 +79,9 @@ type ListCompilationJobsInput struct {
 
 type ListCompilationJobsOutput struct {
 
-	// An array of CompilationJobSummary (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CompilationJobSummary.html)
-	// objects, each describing a model compilation job.
+	// An array of [CompilationJobSummary] objects, each describing a model compilation job.
+	//
+	// [CompilationJobSummary]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CompilationJobSummary.html
 	//
 	// This member is required.
 	CompilationJobSummaries []types.CompilationJobSummary

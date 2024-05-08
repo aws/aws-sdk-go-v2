@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete an App Runner service. This is an asynchronous operation. On a
-// successful call, you can use the returned OperationId and the ListOperations
-// call to track the operation's progress. Make sure that you don't have any active
-// VPCIngressConnections associated with the service you want to delete.
+// Delete an App Runner service.
+//
+// This is an asynchronous operation. On a successful call, you can use the
+// returned OperationId and the ListOperations call to track the operation's progress.
+//
+// Make sure that you don't have any active VPCIngressConnections associated with
+// the service you want to delete.
 func (c *Client) DeleteService(ctx context.Context, params *DeleteServiceInput, optFns ...func(*Options)) (*DeleteServiceOutput, error) {
 	if params == nil {
 		params = &DeleteServiceInput{}
@@ -44,7 +47,7 @@ type DeleteServiceInput struct {
 type DeleteServiceOutput struct {
 
 	// The unique ID of the asynchronous operation that this request started. You can
-	// use it combined with the ListOperations call to track the operation's progress.
+	// use it combined with the ListOperationscall to track the operation's progress.
 	//
 	// This member is required.
 	OperationId *string

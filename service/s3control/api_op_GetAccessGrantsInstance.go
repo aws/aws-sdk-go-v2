@@ -17,6 +17,7 @@ import (
 )
 
 // Retrieves the S3 Access Grants instance for a Region in your account.
+//
 // Permissions You must have the s3:GetAccessGrantsInstance permission to use this
 // operation.
 func (c *Client) GetAccessGrantsInstance(ctx context.Context, params *GetAccessGrantsInstanceInput, optFns ...func(*Options)) (*GetAccessGrantsInstanceOutput, error) {

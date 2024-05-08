@@ -29,7 +29,7 @@ func (c *Client) DisassociateResourceFromProfile(ctx context.Context, params *Di
 
 type DisassociateResourceFromProfileInput struct {
 
-	// The ID of the Profile.
+	//  The ID of the Profile.
 	//
 	// This member is required.
 	ProfileId *string
@@ -44,7 +44,7 @@ type DisassociateResourceFromProfileInput struct {
 
 type DisassociateResourceFromProfileOutput struct {
 
-	// Information about the DisassociateResourceFromProfile request, including the
+	//  Information about the DisassociateResourceFromProfile request, including the
 	// status of the request.
 	ProfileResourceAssociation *types.ProfileResourceAssociation
 

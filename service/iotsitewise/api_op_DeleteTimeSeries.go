@@ -12,13 +12,18 @@ import (
 
 // Deletes a time series (data stream). If you delete a time series that's
 // associated with an asset property, the asset property still exists, but the time
-// series will no longer be associated with this asset property. To identify a time
-// series, do one of the following:
+// series will no longer be associated with this asset property.
+//
+// To identify a time series, do one of the following:
+//
 //   - If the time series isn't associated with an asset property, specify the
 //     alias of the time series.
+//
 //   - If the time series is associated with an asset property, specify one of the
 //     following:
+//
 //   - The alias of the time series.
+//
 //   - The assetId and propertyId that identifies the asset property.
 func (c *Client) DeleteTimeSeries(ctx context.Context, params *DeleteTimeSeriesInput, optFns ...func(*Options)) (*DeleteTimeSeriesOutput, error) {
 	if params == nil {
@@ -42,8 +47,9 @@ type DeleteTimeSeriesInput struct {
 
 	// The ID of the asset in which the asset property was created. This can be either
 	// the actual ID in UUID format, or else externalId: followed by the external ID,
-	// if it has one. For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// if it has one. For more information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	AssetId *string
 
 	// A unique case-sensitive identifier that you can provide to ensure the
@@ -53,8 +59,9 @@ type DeleteTimeSeriesInput struct {
 
 	// The ID of the asset property. This can be either the actual ID in UUID format,
 	// or else externalId: followed by the external ID, if it has one. For more
-	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	PropertyId *string
 
 	noSmithyDocumentSerde

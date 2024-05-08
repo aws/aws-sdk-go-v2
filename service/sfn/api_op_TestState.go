@@ -14,33 +14,53 @@ import (
 // Accepts the definition of a single state and executes it. You can test a state
 // without creating a state machine or updating an existing state machine. Using
 // this API, you can test the following:
-//   - A state's input and output processing (https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-input-output-dataflow)
-//     data flow
-//   - An Amazon Web Services service integration (https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-services.html)
-//     request and response
-//   - An HTTP Task (https://docs.aws.amazon.com/step-functions/latest/dg/connect-third-party-apis.html)
-//     request and response
+//
+//   - A state's [input and output processing]data flow
+//
+//   - An [Amazon Web Services service integration]request and response
+//
+//   - An [HTTP Task]request and response
 //
 // You can call this API on only one state at a time. The states that you can test
 // include the following:
-//   - All Task types (https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-task-state.html#task-types)
-//     except Activity (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-activities.html)
-//   - Pass (https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-pass-state.html)
-//   - Wait (https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-wait-state.html)
-//   - Choice (https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-choice-state.html)
-//   - Succeed (https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-succeed-state.html)
-//   - Fail (https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-fail-state.html)
+//
+// [All Task types]
+//   - except [Activity]
+//
+// [Pass]
+//
+// [Wait]
+//
+// [Choice]
+//
+// [Succeed]
+//
+// [Fail]
 //
 // The TestState API assumes an IAM role which must contain the required IAM
 // permissions for the resources your state is accessing. For information about the
-// permissions a state might need, see IAM permissions to test a state (https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions)
-// . The TestState API can run for up to five minutes. If the execution of a state
-// exceeds this duration, it fails with the States.Timeout error. TestState
-// doesn't support Activity tasks (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-activities.html)
-// , .sync or .waitForTaskToken service integration patterns (https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html)
-// , Parallel (https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-parallel-state.html)
-// , or Map (https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-map-state.html)
-// states.
+// permissions a state might need, see [IAM permissions to test a state].
+//
+// The TestState API can run for up to five minutes. If the execution of a state
+// exceeds this duration, it fails with the States.Timeout error.
+//
+// TestState doesn't support [Activity tasks], .sync or .waitForTaskToken[service integration patterns] , [Parallel], or [Map] states.
+//
+// [Amazon Web Services service integration]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-services.html
+// [All Task types]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-task-state.html#task-types
+// [Choice]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-choice-state.html
+// [Activity tasks]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-activities.html
+// [HTTP Task]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-third-party-apis.html
+// [input and output processing]: https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-input-output-dataflow
+// [Activity]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-activities.html
+// [Parallel]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-parallel-state.html
+// [Succeed]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-succeed-state.html
+// [service integration patterns]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html
+// [Pass]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-pass-state.html
+// [IAM permissions to test a state]: https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions
+// [Wait]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-wait-state.html
+// [Map]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-map-state.html
+// [Fail]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-fail-state.html
 func (c *Client) TestState(ctx context.Context, params *TestStateInput, optFns ...func(*Options)) (*TestStateOutput, error) {
 	if params == nil {
 		params = &TestStateInput{}
@@ -58,8 +78,9 @@ func (c *Client) TestState(ctx context.Context, params *TestStateInput, optFns .
 
 type TestStateInput struct {
 
-	// The Amazon States Language (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html)
-	// (ASL) definition of the state.
+	// The [Amazon States Language] (ASL) definition of the state.
+	//
+	// [Amazon States Language]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
 	//
 	// This member is required.
 	Definition *string
@@ -75,13 +96,17 @@ type TestStateInput struct {
 
 	// Determines the values to return when a state is tested. You can specify one of
 	// the following types:
+	//
 	//   - INFO : Shows the final state output. By default, Step Functions sets
 	//   inspectionLevel to INFO if you don't specify a level.
+	//
 	//   - DEBUG : Shows the final state output along with the input and output data
 	//   processing result.
+	//
 	//   - TRACE : Shows the HTTP request and response for an HTTP Task. This level
 	//   also shows the final state output along with the input and output data
 	//   processing result.
+	//
 	// Each of these levels also provide information about the status of the state
 	// execution and the next state to transition to.
 	InspectionLevel types.InspectionLevel
@@ -90,12 +115,16 @@ type TestStateInput struct {
 	// HTTP Tasks, a secret includes the data that an EventBridge connection adds to
 	// modify the HTTP request headers, query parameters, and body. Step Functions
 	// doesn't omit any information included in the state definition or the HTTP
-	// response. If you set revealSecrets to true , you must make sure that the IAM
-	// user that calls the TestState API has permission for the states:RevealSecrets
-	// action. For an example of IAM policy that sets the states:RevealSecrets
-	// permission, see IAM permissions to test a state (https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions)
-	// . Without this permission, Step Functions throws an access denied error. By
-	// default, revealSecrets is set to false .
+	// response.
+	//
+	// If you set revealSecrets to true , you must make sure that the IAM user that
+	// calls the TestState API has permission for the states:RevealSecrets action. For
+	// an example of IAM policy that sets the states:RevealSecrets permission, see [IAM permissions to test a state].
+	// Without this permission, Step Functions throws an access denied error.
+	//
+	// By default, revealSecrets is set to false .
+	//
+	// [IAM permissions to test a state]: https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions
 	RevealSecrets bool
 
 	noSmithyDocumentSerde

@@ -56,27 +56,37 @@ type CreateDeploymentStrategyInput struct {
 	// after the configuration has been deployed to 100% of its targets, before
 	// considering the deployment to be complete. If an alarm is triggered during this
 	// time, AppConfig rolls back the deployment. You must configure permissions for
-	// AppConfig to roll back based on CloudWatch alarms. For more information, see
-	// Configuring permissions for rollback based on Amazon CloudWatch alarms (https://docs.aws.amazon.com/appconfig/latest/userguide/getting-started-with-appconfig-cloudwatch-alarms-permissions.html)
-	// in the AppConfig User Guide.
+	// AppConfig to roll back based on CloudWatch alarms. For more information, see [Configuring permissions for rollback based on Amazon CloudWatch alarms]in
+	// the AppConfig User Guide.
+	//
+	// [Configuring permissions for rollback based on Amazon CloudWatch alarms]: https://docs.aws.amazon.com/appconfig/latest/userguide/getting-started-with-appconfig-cloudwatch-alarms-permissions.html
 	FinalBakeTimeInMinutes int32
 
 	// The algorithm used to define how percentage grows over time. AppConfig supports
-	// the following growth types: Linear: For this type, AppConfig processes the
-	// deployment by dividing the total number of targets by the value specified for
-	// Step percentage . For example, a linear deployment that uses a Step percentage
-	// of 10 deploys the configuration to 10 percent of the hosts. After those
-	// deployments are complete, the system deploys the configuration to the next 10
-	// percent. This continues until 100% of the targets have successfully received the
-	// configuration. Exponential: For this type, AppConfig processes the deployment
-	// exponentially using the following formula: G*(2^N) . In this formula, G is the
-	// growth factor specified by the user and N is the number of steps until the
-	// configuration is deployed to all targets. For example, if you specify a growth
-	// factor of 2, then the system rolls out the configuration as follows: 2*(2^0)
+	// the following growth types:
+	//
+	// Linear: For this type, AppConfig processes the deployment by dividing the total
+	// number of targets by the value specified for Step percentage . For example, a
+	// linear deployment that uses a Step percentage of 10 deploys the configuration
+	// to 10 percent of the hosts. After those deployments are complete, the system
+	// deploys the configuration to the next 10 percent. This continues until 100% of
+	// the targets have successfully received the configuration.
+	//
+	// Exponential: For this type, AppConfig processes the deployment exponentially
+	// using the following formula: G*(2^N) . In this formula, G is the growth factor
+	// specified by the user and N is the number of steps until the configuration is
+	// deployed to all targets. For example, if you specify a growth factor of 2, then
+	// the system rolls out the configuration as follows:
+	//
+	//     2*(2^0)
+	//
 	//     2*(2^1)
-	// 2*(2^2) Expressed numerically, the deployment rolls out as follows: 2% of the
-	// targets, 4% of the targets, 8% of the targets, and continues until the
-	// configuration has been deployed to all targets.
+	//
+	//     2*(2^2)
+	//
+	// Expressed numerically, the deployment rolls out as follows: 2% of the targets,
+	// 4% of the targets, 8% of the targets, and continues until the configuration has
+	// been deployed to all targets.
 	GrowthType types.GrowthType
 
 	// Save the deployment strategy to a Systems Manager (SSM) document.

@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified IP access control group. You cannot delete an IP access
-// control group that is associated with a directory.
+// Deletes the specified IP access control group.
+//
+// You cannot delete an IP access control group that is associated with a
+// directory.
 func (c *Client) DeleteIpGroup(ctx context.Context, params *DeleteIpGroupInput, optFns ...func(*Options)) (*DeleteIpGroupOutput, error) {
 	if params == nil {
 		params = &DeleteIpGroupInput{}

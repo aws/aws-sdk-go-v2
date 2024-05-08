@@ -40,16 +40,22 @@ type CreateDeviceInput struct {
 	// on-premises device, you can omit this parameter.
 	AWSLocation *types.AWSLocation
 
-	// A description of the device. Constraints: Maximum length of 256 characters.
+	// A description of the device.
+	//
+	// Constraints: Maximum length of 256 characters.
 	Description *string
 
 	// The location of the device.
 	Location *types.Location
 
-	// The model of the device. Constraints: Maximum length of 128 characters.
+	// The model of the device.
+	//
+	// Constraints: Maximum length of 128 characters.
 	Model *string
 
-	// The serial number of the device. Constraints: Maximum length of 128 characters.
+	// The serial number of the device.
+	//
+	// Constraints: Maximum length of 128 characters.
 	SerialNumber *string
 
 	// The ID of the site.
@@ -61,7 +67,9 @@ type CreateDeviceInput struct {
 	// The type of the device.
 	Type *string
 
-	// The vendor of the device. Constraints: Maximum length of 128 characters.
+	// The vendor of the device.
+	//
+	// Constraints: Maximum length of 128 characters.
 	Vendor *string
 
 	noSmithyDocumentSerde

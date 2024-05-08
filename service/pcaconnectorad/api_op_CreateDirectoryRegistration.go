@@ -29,7 +29,7 @@ func (c *Client) CreateDirectoryRegistration(ctx context.Context, params *Create
 
 type CreateDirectoryRegistrationInput struct {
 
-	// The identifier of the Active Directory.
+	//  The identifier of the Active Directory.
 	//
 	// This member is required.
 	DirectoryId *string
@@ -45,9 +45,9 @@ type CreateDirectoryRegistrationInput struct {
 
 type CreateDirectoryRegistrationOutput struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called
-	// CreateDirectoryRegistration (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html)
-	// .
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration].
+	//
+	// [CreateDirectoryRegistration]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html
 	DirectoryRegistrationArn *string
 
 	// Metadata pertaining to the operation's result.

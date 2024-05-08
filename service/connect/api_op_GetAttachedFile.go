@@ -32,8 +32,12 @@ func (c *Client) GetAttachedFile(ctx context.Context, params *GetAttachedFileInp
 // Request to GetAttachedFile API.
 type GetAttachedFileInput struct {
 
-	// The resource to which the attached file is (being) uploaded to. Cases (https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html)
-	// are the only current supported resource. This value must be a valid ARN.
+	// The resource to which the attached file is (being) uploaded to. [Cases] are the only
+	// current supported resource.
+	//
+	// This value must be a valid ARN.
+	//
+	// [Cases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
 	//
 	// This member is required.
 	AssociatedResourceArn *string
@@ -62,8 +66,12 @@ type GetAttachedFileOutput struct {
 	// This member is required.
 	FileSizeInBytes *int64
 
-	// The resource to which the attached file is (being) uploaded to. Cases (https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html)
-	// are the only current supported resource. This value must be a valid ARN.
+	// The resource to which the attached file is (being) uploaded to. [Cases] are the only
+	// current supported resource.
+	//
+	// This value must be a valid ARN.
+	//
+	// [Cases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
 	AssociatedResourceArn *string
 
 	// Represents the identity that created the file.

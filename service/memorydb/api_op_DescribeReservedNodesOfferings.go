@@ -44,9 +44,9 @@ type DescribeReservedNodesOfferingsInput struct {
 	// MaxRecords.
 	NextToken *string
 
-	// The node type for the reserved nodes. For more information, see Supported node
-	// types (https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported)
-	// .
+	// The node type for the reserved nodes. For more information, see [Supported node types].
+	//
+	// [Supported node types]: https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported
 	NodeType *string
 
 	// The offering type filter value. Use this parameter to show only the available

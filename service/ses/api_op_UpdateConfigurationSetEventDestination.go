@@ -15,12 +15,15 @@ import (
 // associated with configuration sets, which enable you to publish email sending
 // events to Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple
 // Notification Service (Amazon SNS). For information about using configuration
-// sets, see Monitoring Your Amazon SES Sending Activity (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)
-// in the Amazon SES Developer Guide. When you create or update an event
-// destination, you must provide one, and only one, destination. The destination
-// can be Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification
-// Service (Amazon SNS). You can execute this operation no more than once per
-// second.
+// sets, see [Monitoring Your Amazon SES Sending Activity]in the Amazon SES Developer Guide.
+//
+// When you create or update an event destination, you must provide one, and only
+// one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis
+// Firehose, or Amazon Simple Notification Service (Amazon SNS).
+//
+// You can execute this operation no more than once per second.
+//
+// [Monitoring Your Amazon SES Sending Activity]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
 func (c *Client) UpdateConfigurationSetEventDestination(ctx context.Context, params *UpdateConfigurationSetEventDestinationInput, optFns ...func(*Options)) (*UpdateConfigurationSetEventDestinationOutput, error) {
 	if params == nil {
 		params = &UpdateConfigurationSetEventDestinationInput{}
@@ -38,8 +41,9 @@ func (c *Client) UpdateConfigurationSetEventDestination(ctx context.Context, par
 
 // Represents a request to update the event destination of a configuration set.
 // Configuration sets enable you to publish email sending events. For information
-// about using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)
-// .
+// about using configuration sets, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
 type UpdateConfigurationSetEventDestinationInput struct {
 
 	// The name of the configuration set that contains the event destination.

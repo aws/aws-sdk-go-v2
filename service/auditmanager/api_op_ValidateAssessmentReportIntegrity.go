@@ -28,7 +28,7 @@ func (c *Client) ValidateAssessmentReportIntegrity(ctx context.Context, params *
 
 type ValidateAssessmentReportIntegrityInput struct {
 
-	// The relative path of the Amazon S3 bucket that the assessment report is stored
+	//  The relative path of the Amazon S3 bucket that the assessment report is stored
 	// in.
 	//
 	// This member is required.
@@ -39,20 +39,20 @@ type ValidateAssessmentReportIntegrityInput struct {
 
 type ValidateAssessmentReportIntegrityOutput struct {
 
-	// The signature algorithm that's used to code sign the assessment report file.
+	//  The signature algorithm that's used to code sign the assessment report file.
 	SignatureAlgorithm *string
 
-	// The date and time signature that specifies when the assessment report was
+	//  The date and time signature that specifies when the assessment report was
 	// created.
 	SignatureDateTime *string
 
-	// The unique identifier for the validation signature key.
+	//  The unique identifier for the validation signature key.
 	SignatureKeyId *string
 
-	// Specifies whether the signature key is valid.
+	//  Specifies whether the signature key is valid.
 	SignatureValid *bool
 
-	// Represents any errors that occurred when validating the assessment report.
+	//  Represents any errors that occurred when validating the assessment report.
 	ValidationErrors []string
 
 	// Metadata pertaining to the operation's result.

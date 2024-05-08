@@ -11,9 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new IP address filter. For information about setting up IP address
-// filters, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html)
-// . You can execute this operation no more than once per second.
+// Creates a new IP address filter.
+//
+// For information about setting up IP address filters, see the [Amazon SES Developer Guide].
+//
+// You can execute this operation no more than once per second.
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html
 func (c *Client) CreateReceiptFilter(ctx context.Context, params *CreateReceiptFilterInput, optFns ...func(*Options)) (*CreateReceiptFilterOutput, error) {
 	if params == nil {
 		params = &CreateReceiptFilterInput{}
@@ -30,9 +34,9 @@ func (c *Client) CreateReceiptFilter(ctx context.Context, params *CreateReceiptF
 }
 
 // Represents a request to create a new IP address filter. You use IP address
-// filters when you receive email with Amazon SES. For more information, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html)
-// .
+// filters when you receive email with Amazon SES. For more information, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
 type CreateReceiptFilterInput struct {
 
 	// A data structure that describes the IP address filter to create, which consists

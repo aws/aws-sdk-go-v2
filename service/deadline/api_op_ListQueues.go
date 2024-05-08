@@ -46,8 +46,11 @@ type ListQueuesInput struct {
 	PrincipalId *string
 
 	// The status of the queues listed.
+	//
 	//   - ACTIVE –The queues are active.
+	//
 	//   - SCHEDULING –The queues are scheduling.
+	//
 	//   - SCHEDULING_BLOCKED –The queue scheduling is blocked for these queues.
 	Status types.QueueStatus
 

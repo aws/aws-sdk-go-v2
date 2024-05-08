@@ -11,21 +11,26 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates the specified principal ARN with the specified portfolio. If you
-// share the portfolio with principal name sharing enabled, the PrincipalARN
-// association is included in the share. The PortfolioID , PrincipalARN , and
-// PrincipalType parameters are required. You can associate a maximum of 10
-// Principals with a portfolio using PrincipalType as IAM_PATTERN . When you
-// associate a principal with portfolio, a potential privilege escalation path may
-// occur when that portfolio is then shared with other accounts. For a user in a
-// recipient account who is not an Service Catalog Admin, but still has the ability
-// to create Principals (Users/Groups/Roles), that user could create a role that
-// matches a principal name association for the portfolio. Although this user may
-// not know which principal names are associated through Service Catalog, they may
-// be able to guess the user. If this potential escalation path is a concern, then
-// Service Catalog recommends using PrincipalType as IAM . With this configuration,
-// the PrincipalARN must already exist in the recipient account before it can be
-// associated.
+// Associates the specified principal ARN with the specified portfolio.
+//
+// If you share the portfolio with principal name sharing enabled, the PrincipalARN
+// association is included in the share.
+//
+// The PortfolioID , PrincipalARN , and PrincipalType parameters are required.
+//
+// You can associate a maximum of 10 Principals with a portfolio using
+// PrincipalType as IAM_PATTERN .
+//
+// When you associate a principal with portfolio, a potential privilege escalation
+// path may occur when that portfolio is then shared with other accounts. For a
+// user in a recipient account who is not an Service Catalog Admin, but still has
+// the ability to create Principals (Users/Groups/Roles), that user could create a
+// role that matches a principal name association for the portfolio. Although this
+// user may not know which principal names are associated through Service Catalog,
+// they may be able to guess the user. If this potential escalation path is a
+// concern, then Service Catalog recommends using PrincipalType as IAM . With this
+// configuration, the PrincipalARN must already exist in the recipient account
+// before it can be associated.
 func (c *Client) AssociatePrincipalWithPortfolio(ctx context.Context, params *AssociatePrincipalWithPortfolioInput, optFns ...func(*Options)) (*AssociatePrincipalWithPortfolioOutput, error) {
 	if params == nil {
 		params = &AssociatePrincipalWithPortfolioInput{}
@@ -49,37 +54,53 @@ type AssociatePrincipalWithPortfolioInput struct {
 	PortfolioId *string
 
 	// The ARN of the principal (user, role, or group). If the PrincipalType is IAM ,
-	// the supported value is a fully defined IAM Amazon Resource Name (ARN) (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns)
-	// . If the PrincipalType is IAM_PATTERN , the supported value is an IAM ARN
-	// without an AccountID in the following format:
-	// arn:partition:iam:::resource-type/resource-id The ARN resource-id can be either:
+	// the supported value is a fully defined [IAM Amazon Resource Name (ARN)]. If the PrincipalType is IAM_PATTERN ,
+	// the supported value is an IAM ARN without an AccountID in the following format:
+	//
+	// arn:partition:iam:::resource-type/resource-id
+	//
+	// The ARN resource-id can be either:
 	//
 	//   - A fully formed resource-id. For example, arn:aws:iam:::role/resource-name
 	//   or arn:aws:iam:::role/resource-path/resource-name
+	//
 	//   - A wildcard ARN. The wildcard ARN accepts IAM_PATTERN values with a "*" or
 	//   "?" in the resource-id segment of the ARN. For example
 	//   arn:partition:service:::resource-type/resource-path/resource-name. The new
 	//   symbols are exclusive to the resource-path and resource-name and cannot replace
-	//   the resource-type or other ARN values. The ARN path and principal name allow
-	//   unlimited wildcard characters.
+	//   the resource-type or other ARN values.
+	//
+	// The ARN path and principal name allow unlimited wildcard characters.
+	//
 	// Examples of an acceptable wildcard ARN:
+	//
 	//   - arn:aws:iam:::role/ResourceName_*
+	//
 	//   - arn:aws:iam:::role/*/ResourceName_?
+	//
 	// Examples of an unacceptable wildcard ARN:
+	//
 	//   - arn:aws:iam:::*/ResourceName
+	//
 	// You can associate multiple IAM_PATTERN s even if the account has no principal
-	// with that name. The "?" wildcard character matches zero or one of any character.
-	// This is similar to ".?" in regular regex context. The "*" wildcard character
-	// matches any number of any characters. This is similar to ".*" in regular regex
-	// context. In the IAM Principal ARN format
+	// with that name.
+	//
+	// The "?" wildcard character matches zero or one of any character. This is
+	// similar to ".?" in regular regex context. The "*" wildcard character matches any
+	// number of any characters. This is similar to ".*" in regular regex context.
+	//
+	// In the IAM Principal ARN format
 	// (arn:partition:iam:::resource-type/resource-path/resource-name), valid
 	// resource-type values include user/, group/, or role/. The "?" and "*" characters
 	// are allowed only after the resource-type in the resource-id segment. You can use
-	// special characters anywhere within the resource-id. The "*" character also
-	// matches the "/" character, allowing paths to be formed within the resource-id.
-	// For example, arn:aws:iam:::role/*/ResourceName_? matches both
-	// arn:aws:iam:::role/pathA/pathB/ResourceName_1 and
+	// special characters anywhere within the resource-id.
+	//
+	// The "*" character also matches the "/" character, allowing paths to be formed
+	// within the resource-id. For example, arn:aws:iam:::role/*/ResourceName_? matches
+	// both arn:aws:iam:::role/pathA/pathB/ResourceName_1 and
 	// arn:aws:iam:::role/pathA/ResourceName_1.
+	//
+	// [IAM Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
 	//
 	// This member is required.
 	PrincipalARN *string
@@ -92,7 +113,9 @@ type AssociatePrincipalWithPortfolioInput struct {
 	PrincipalType types.PrincipalType
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

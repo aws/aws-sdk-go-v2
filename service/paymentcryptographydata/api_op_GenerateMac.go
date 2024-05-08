@@ -12,23 +12,33 @@ import (
 )
 
 // Generates a Message Authentication Code (MAC) cryptogram within Amazon Web
-// Services Payment Cryptography. You can use this operation to authenticate
-// card-related data by using known data values to generate MAC for data validation
-// between the sending and receiving parties. This operation uses message data, a
-// secret encryption key and MAC algorithm to generate a unique MAC value for
-// transmission. The receiving party of the MAC must use the same message data,
-// secret encryption key and MAC algorithm to reproduce another MAC value for
-// comparision. You can use this operation to generate a DUPKT, CMAC, HMAC or EMV
-// MAC by setting generation attributes and algorithm to the associated values. The
-// MAC generation encryption key must have valid values for KeyUsage such as
+// Services Payment Cryptography.
+//
+// You can use this operation to authenticate card-related data by using known
+// data values to generate MAC for data validation between the sending and
+// receiving parties. This operation uses message data, a secret encryption key and
+// MAC algorithm to generate a unique MAC value for transmission. The receiving
+// party of the MAC must use the same message data, secret encryption key and MAC
+// algorithm to reproduce another MAC value for comparision.
+//
+// You can use this operation to generate a DUPKT, CMAC, HMAC or EMV MAC by
+// setting generation attributes and algorithm to the associated values. The MAC
+// generation encryption key must have valid values for KeyUsage such as
 // TR31_M7_HMAC_KEY for HMAC generation, and they key must have KeyModesOfUse set
-// to Generate and Verify . For information about valid keys for this operation,
-// see Understanding key attributes (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html)
-// and Key types for specific data operations (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html)
-// in the Amazon Web Services Payment Cryptography User Guide. Cross-account use:
-// This operation can't be used across different Amazon Web Services accounts.
+// to Generate and Verify .
+//
+// For information about valid keys for this operation, see [Understanding key attributes] and [Key types for specific data operations] in the Amazon
+// Web Services Payment Cryptography User Guide.
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
+//
 // Related operations:
-//   - VerifyMac
+//
+// # VerifyMac
+//
+// [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+// [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
 func (c *Client) GenerateMac(ctx context.Context, params *GenerateMacInput, optFns ...func(*Options)) (*GenerateMacOutput, error) {
 	if params == nil {
 		params = &GenerateMacInput{}
@@ -78,8 +88,10 @@ type GenerateMacOutput struct {
 
 	// The key check value (KCV) of the encryption key. The KCV is used to check if
 	// all parties holding a given key have the same key or to detect that a key has
-	// changed. Amazon Web Services Payment Cryptography computes the KCV according to
-	// the CMAC specification.
+	// changed.
+	//
+	// Amazon Web Services Payment Cryptography computes the KCV according to the CMAC
+	// specification.
 	//
 	// This member is required.
 	KeyCheckValue *string

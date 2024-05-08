@@ -42,8 +42,10 @@ type PutFileInput struct {
 	FileContent []byte
 
 	// The name of the file you want to add or update, including the relative path to
-	// the file in the repository. If the path does not currently exist in the
-	// repository, the path is created as part of adding the file.
+	// the file in the repository.
+	//
+	// If the path does not currently exist in the repository, the path is created as
+	// part of adding the file.
 	//
 	// This member is required.
 	FilePath *string
@@ -70,9 +72,10 @@ type PutFileInput struct {
 
 	// The full commit ID of the head commit in the branch where you want to add or
 	// update the file. If this is an empty repository, no commit ID is required. If
-	// this is not an empty repository, a commit ID is required. The commit ID must
-	// match the ID of the head commit at the time of the operation. Otherwise, an
-	// error occurs, and the file is not added or updated.
+	// this is not an empty repository, a commit ID is required.
+	//
+	// The commit ID must match the ID of the head commit at the time of the
+	// operation. Otherwise, an error occurs, and the file is not added or updated.
 	ParentCommitId *string
 
 	noSmithyDocumentSerde

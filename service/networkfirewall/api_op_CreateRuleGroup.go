@@ -12,8 +12,10 @@ import (
 )
 
 // Creates the specified stateless or stateful rule group, which includes the
-// rules for network traffic inspection, a capacity setting, and tags. You provide
-// your rule group specification in your request using either RuleGroup or Rules .
+// rules for network traffic inspection, a capacity setting, and tags.
+//
+// You provide your rule group specification in your request using either RuleGroup
+// or Rules .
 func (c *Client) CreateRuleGroup(ctx context.Context, params *CreateRuleGroupInput, optFns ...func(*Options)) (*CreateRuleGroupOutput, error) {
 	if params == nil {
 		params = &CreateRuleGroupInput{}
@@ -34,29 +36,42 @@ type CreateRuleGroupInput struct {
 	// The maximum operating resources that this rule group can use. Rule group
 	// capacity is fixed at creation. When you update a rule group, you are limited to
 	// this capacity. When you reference a rule group from a firewall policy, Network
-	// Firewall reserves this capacity for the rule group. You can retrieve the
-	// capacity that would be required for a rule group before you create the rule
-	// group by calling CreateRuleGroup with DryRun set to TRUE . You can't change or
-	// exceed this capacity when you update the rule group, so leave room for your rule
-	// group to grow. Capacity for a stateless rule group For a stateless rule group,
-	// the capacity required is the sum of the capacity requirements of the individual
-	// rules that you expect to have in the rule group. To calculate the capacity
-	// requirement of a single rule, multiply the capacity requirement values of each
-	// of the rule's match settings:
+	// Firewall reserves this capacity for the rule group.
+	//
+	// You can retrieve the capacity that would be required for a rule group before
+	// you create the rule group by calling CreateRuleGroupwith DryRun set to TRUE .
+	//
+	// You can't change or exceed this capacity when you update the rule group, so
+	// leave room for your rule group to grow.
+	//
+	// Capacity for a stateless rule group
+	//
+	// For a stateless rule group, the capacity required is the sum of the capacity
+	// requirements of the individual rules that you expect to have in the rule group.
+	//
+	// To calculate the capacity requirement of a single rule, multiply the capacity
+	// requirement values of each of the rule's match settings:
+	//
 	//   - A match setting with no criteria specified has a value of 1.
+	//
 	//   - A match setting with Any specified has a value of 1.
+	//
 	//   - All other match settings have a value equal to the number of elements
 	//   provided in the setting. For example, a protocol setting ["UDP"] and a source
 	//   setting ["10.0.0.0/24"] each have a value of 1. A protocol setting ["UDP","TCP"]
 	//   has a value of 2. A source setting ["10.0.0.0/24","10.0.0.1/24","10.0.0.2/24"]
 	//   has a value of 3.
+	//
 	// A rule with no criteria specified in any of its match settings has a capacity
 	// requirement of 1. A rule with protocol setting ["UDP","TCP"], source setting
 	// ["10.0.0.0/24","10.0.0.1/24","10.0.0.2/24"], and a single specification or no
 	// specification for each of the other match settings has a capacity requirement of
-	// 6. Capacity for a stateful rule group For a stateful rule group, the minimum
-	// capacity required is the number of individual rules that you expect to have in
-	// the rule group.
+	// 6.
+	//
+	// Capacity for a stateful rule group
+	//
+	// For a stateful rule group, the minimum capacity required is the number of
+	// individual rules that you expect to have in the rule group.
 	//
 	// This member is required.
 	Capacity *int32
@@ -85,30 +100,39 @@ type CreateRuleGroupInput struct {
 	Description *string
 
 	// Indicates whether you want Network Firewall to just check the validity of the
-	// request, rather than run the request. If set to TRUE , Network Firewall checks
-	// whether the request can run successfully, but doesn't actually make the
-	// requested changes. The call returns the value that the request would return if
-	// you ran it with dry run set to FALSE , but doesn't make additions or changes to
-	// your resources. This option allows you to make sure that you have the required
-	// permissions to run the request and that your request parameters are valid. If
-	// set to FALSE , Network Firewall makes the requested changes to your resources.
+	// request, rather than run the request.
+	//
+	// If set to TRUE , Network Firewall checks whether the request can run
+	// successfully, but doesn't actually make the requested changes. The call returns
+	// the value that the request would return if you ran it with dry run set to FALSE
+	// , but doesn't make additions or changes to your resources. This option allows
+	// you to make sure that you have the required permissions to run the request and
+	// that your request parameters are valid.
+	//
+	// If set to FALSE , Network Firewall makes the requested changes to your
+	// resources.
 	DryRun bool
 
 	// A complex type that contains settings for encryption of your rule group
 	// resources.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
-	// An object that defines the rule group rules. You must provide either this rule
-	// group setting or a Rules setting, but not both.
+	// An object that defines the rule group rules.
+	//
+	// You must provide either this rule group setting or a Rules setting, but not
+	// both.
 	RuleGroup *types.RuleGroup
 
 	// A string containing stateful rule group rules specifications in Suricata flat
 	// format, with one rule per line. Use this to import your existing Suricata
-	// compatible rule groups. You must provide either this rules setting or a
-	// populated RuleGroup setting, but not both. You can provide your rule group
-	// specification in Suricata flat format through this setting when you create or
-	// update your rule group. The call response returns a RuleGroup object that
-	// Network Firewall has populated from your string.
+	// compatible rule groups.
+	//
+	// You must provide either this rules setting or a populated RuleGroup setting,
+	// but not both.
+	//
+	// You can provide your rule group specification in Suricata flat format through
+	// this setting when you create or update your rule group. The call response
+	// returns a RuleGroupobject that Network Firewall has populated from your string.
 	Rules *string
 
 	// A complex type that contains metadata about the rule group that your own rule
@@ -124,22 +148,22 @@ type CreateRuleGroupInput struct {
 
 type CreateRuleGroupOutput struct {
 
-	// The high-level properties of a rule group. This, along with the RuleGroup ,
-	// define the rule group. You can retrieve all objects for a rule group by calling
-	// DescribeRuleGroup .
+	// The high-level properties of a rule group. This, along with the RuleGroup, define the
+	// rule group. You can retrieve all objects for a rule group by calling DescribeRuleGroup.
 	//
 	// This member is required.
 	RuleGroupResponse *types.RuleGroupResponse
 
 	// A token used for optimistic locking. Network Firewall returns a token to your
 	// requests that access the rule group. The token marks the state of the rule group
-	// resource at the time of the request. To make changes to the rule group, you
-	// provide the token in your request. Network Firewall uses the token to ensure
-	// that the rule group hasn't changed since you last retrieved it. If it has
-	// changed, the operation fails with an InvalidTokenException . If this happens,
-	// retrieve the rule group again to get a current copy of it with a current token.
-	// Reapply your changes as needed, then try the operation again using the new
-	// token.
+	// resource at the time of the request.
+	//
+	// To make changes to the rule group, you provide the token in your request.
+	// Network Firewall uses the token to ensure that the rule group hasn't changed
+	// since you last retrieved it. If it has changed, the operation fails with an
+	// InvalidTokenException . If this happens, retrieve the rule group again to get a
+	// current copy of it with a current token. Reapply your changes as needed, then
+	// try the operation again using the new token.
 	//
 	// This member is required.
 	UpdateToken *string

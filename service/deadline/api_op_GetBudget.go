@@ -81,7 +81,9 @@ type GetBudgetOutput struct {
 	Schedule types.BudgetSchedule
 
 	// The status of the budget.
+	//
 	//   - ACTIVE –Get a budget being evaluated.
+	//
 	//   - INACTIVE –Get an inactive budget. This can include expired, canceled, or
 	//   deleted statuses.
 	//

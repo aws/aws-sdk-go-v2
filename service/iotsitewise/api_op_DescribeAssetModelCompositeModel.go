@@ -12,9 +12,10 @@ import (
 )
 
 // Retrieves information about an asset model composite model (also known as an
-// asset model component). For more information, see Custom composite models
-// (Components) (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/custom-composite-models.html)
-// in the IoT SiteWise User Guide.
+// asset model component). For more information, see [Custom composite models (Components)]in the IoT SiteWise User
+// Guide.
+//
+// [Custom composite models (Components)]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/custom-composite-models.html
 func (c *Client) DescribeAssetModelCompositeModel(ctx context.Context, params *DescribeAssetModelCompositeModelInput, optFns ...func(*Options)) (*DescribeAssetModelCompositeModelOutput, error) {
 	if params == nil {
 		params = &DescribeAssetModelCompositeModelInput{}
@@ -34,16 +35,18 @@ type DescribeAssetModelCompositeModelInput struct {
 
 	// The ID of a composite model on this asset model. This can be either the actual
 	// ID in UUID format, or else externalId: followed by the external ID, if it has
-	// one. For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// one. For more information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetModelCompositeModelId *string
 
 	// The ID of the asset model. This can be either the actual ID in UUID format, or
 	// else externalId: followed by the external ID, if it has one. For more
-	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetModelId *string
@@ -101,9 +104,10 @@ type DescribeAssetModelCompositeModelOutput struct {
 	AssetModelCompositeModelExternalId *string
 
 	// Metadata for the composition relationship established by using
-	// composedAssetModelId in CreateAssetModelCompositeModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html)
-	// . For instance, an array detailing the path of the composition relationship for
-	// this composite model.
+	// composedAssetModelId in [CreateAssetModelCompositeModel]CreateAssetModelCompositeModel . For instance, an array
+	// detailing the path of the composition relationship for this composite model.
+	//
+	// [CreateAssetModelCompositeModel]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html
 	CompositionDetails *types.CompositionDetails
 
 	// Metadata pertaining to the operation's result.

@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AccessScopeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessScopeType) Values() []AccessScopeType {
 	return []AccessScopeType{
 		"cluster",
@@ -35,8 +36,9 @@ const (
 )
 
 // Values returns all known values for AddonIssueCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AddonIssueCode) Values() []AddonIssueCode {
 	return []AddonIssueCode{
 		"AccessDenied",
@@ -65,8 +67,9 @@ const (
 )
 
 // Values returns all known values for AddonStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AddonStatus) Values() []AddonStatus {
 	return []AddonStatus{
 		"CREATING",
@@ -101,8 +104,9 @@ const (
 )
 
 // Values returns all known values for AMITypes. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AMITypes) Values() []AMITypes {
 	return []AMITypes{
 		"AL2_x86_64",
@@ -132,8 +136,9 @@ const (
 )
 
 // Values returns all known values for AuthenticationMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthenticationMode) Values() []AuthenticationMode {
 	return []AuthenticationMode{
 		"API",
@@ -151,8 +156,9 @@ const (
 )
 
 // Values returns all known values for CapacityTypes. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CapacityTypes) Values() []CapacityTypes {
 	return []CapacityTypes{
 		"ON_DEMAND",
@@ -168,8 +174,9 @@ const (
 )
 
 // Values returns all known values for Category. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Category) Values() []Category {
 	return []Category{
 		"UPGRADE_READINESS",
@@ -202,8 +209,9 @@ const (
 )
 
 // Values returns all known values for ClusterIssueCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClusterIssueCode) Values() []ClusterIssueCode {
 	return []ClusterIssueCode{
 		"AccessDenied",
@@ -241,8 +249,9 @@ const (
 )
 
 // Values returns all known values for ClusterStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClusterStatus) Values() []ClusterStatus {
 	return []ClusterStatus{
 		"CREATING",
@@ -264,8 +273,9 @@ const (
 )
 
 // Values returns all known values for ConfigStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigStatus) Values() []ConfigStatus {
 	return []ConfigStatus{
 		"CREATING",
@@ -290,8 +300,9 @@ const (
 )
 
 // Values returns all known values for ConnectorConfigProvider. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectorConfigProvider) Values() []ConnectorConfigProvider {
 	return []ConnectorConfigProvider{
 		"EKS_ANYWHERE",
@@ -315,8 +326,9 @@ const (
 
 // Values returns all known values for EksAnywhereSubscriptionLicenseType. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EksAnywhereSubscriptionLicenseType) Values() []EksAnywhereSubscriptionLicenseType {
 	return []EksAnywhereSubscriptionLicenseType{
 		"Cluster",
@@ -337,8 +349,9 @@ const (
 
 // Values returns all known values for EksAnywhereSubscriptionStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EksAnywhereSubscriptionStatus) Values() []EksAnywhereSubscriptionStatus {
 	return []EksAnywhereSubscriptionStatus{
 		"CREATING",
@@ -359,8 +372,9 @@ const (
 
 // Values returns all known values for EksAnywhereSubscriptionTermUnit. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EksAnywhereSubscriptionTermUnit) Values() []EksAnywhereSubscriptionTermUnit {
 	return []EksAnywhereSubscriptionTermUnit{
 		"MONTHS",
@@ -391,8 +405,9 @@ const (
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"SubnetNotFound",
@@ -427,8 +442,9 @@ const (
 )
 
 // Values returns all known values for FargateProfileStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FargateProfileStatus) Values() []FargateProfileStatus {
 	return []FargateProfileStatus{
 		"CREATING",
@@ -450,8 +466,9 @@ const (
 )
 
 // Values returns all known values for InsightStatusValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InsightStatusValue) Values() []InsightStatusValue {
 	return []InsightStatusValue{
 		"PASSING",
@@ -470,8 +487,9 @@ const (
 )
 
 // Values returns all known values for IpFamily. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpFamily) Values() []IpFamily {
 	return []IpFamily{
 		"ipv4",
@@ -491,8 +509,9 @@ const (
 )
 
 // Values returns all known values for LogType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LogType) Values() []LogType {
 	return []LogType{
 		"api",
@@ -545,8 +564,9 @@ const (
 )
 
 // Values returns all known values for NodegroupIssueCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NodegroupIssueCode) Values() []NodegroupIssueCode {
 	return []NodegroupIssueCode{
 		"AutoScalingGroupNotFound",
@@ -601,8 +621,9 @@ const (
 )
 
 // Values returns all known values for NodegroupStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NodegroupStatus) Values() []NodegroupStatus {
 	return []NodegroupStatus{
 		"CREATING",
@@ -625,8 +646,9 @@ const (
 )
 
 // Values returns all known values for ResolveConflicts. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolveConflicts) Values() []ResolveConflicts {
 	return []ResolveConflicts{
 		"OVERWRITE",
@@ -645,8 +667,9 @@ const (
 )
 
 // Values returns all known values for TaintEffect. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TaintEffect) Values() []TaintEffect {
 	return []TaintEffect{
 		"NO_SCHEDULE",
@@ -689,8 +712,9 @@ const (
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateParamType) Values() []UpdateParamType {
 	return []UpdateParamType{
 		"Version",
@@ -734,8 +758,9 @@ const (
 )
 
 // Values returns all known values for UpdateStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateStatus) Values() []UpdateStatus {
 	return []UpdateStatus{
 		"InProgress",
@@ -762,8 +787,9 @@ const (
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateType) Values() []UpdateType {
 	return []UpdateType{
 		"VersionUpdate",

@@ -11,6 +11,7 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
+//
 // Updates routing priority and age on the contact (QueuePriority and
 // QueueTimeAdjustmentInSeconds). These properties can be used to change a
 // customer's position in the queue. For example, you can move a contact to the
@@ -20,8 +21,9 @@ import (
 // higher up in the first-in-first-out routing order. Note that adjusting the
 // routing age of a contact affects only its position in queue, and not its actual
 // queue wait time as reported through metrics. These properties can also be
-// updated by using the Set routing priority / age flow block (https://docs.aws.amazon.com/connect/latest/adminguide/change-routing-priority.html)
-// .
+// updated by using [the Set routing priority / age flow block].
+//
+// [the Set routing priority / age flow block]: https://docs.aws.amazon.com/connect/latest/adminguide/change-routing-priority.html
 func (c *Client) UpdateContactRoutingData(ctx context.Context, params *UpdateContactRoutingDataInput, optFns ...func(*Options)) (*UpdateContactRoutingDataOutput, error) {
 	if params == nil {
 		params = &UpdateContactRoutingDataInput{}
@@ -44,8 +46,10 @@ type UpdateContactRoutingDataInput struct {
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

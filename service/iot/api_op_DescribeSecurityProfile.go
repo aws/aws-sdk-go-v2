@@ -12,9 +12,11 @@ import (
 	"time"
 )
 
-// Gets information about a Device Defender security profile. Requires permission
-// to access the DescribeSecurityProfile (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Gets information about a Device Defender security profile.
+//
+// Requires permission to access the [DescribeSecurityProfile] action.
+//
+// [DescribeSecurityProfile]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DescribeSecurityProfile(ctx context.Context, params *DescribeSecurityProfileInput, optFns ...func(*Options)) (*DescribeSecurityProfileOutput, error) {
 	if params == nil {
 		params = &DescribeSecurityProfileInput{}
@@ -42,7 +44,8 @@ type DescribeSecurityProfileInput struct {
 
 type DescribeSecurityProfileOutput struct {
 
-	// Please use DescribeSecurityProfileResponse$additionalMetricsToRetainV2 instead.
+	//  Please use DescribeSecurityProfileResponse$additionalMetricsToRetainV2 instead.
+	//
 	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors , but it is also retained for any
 	// metric specified here.

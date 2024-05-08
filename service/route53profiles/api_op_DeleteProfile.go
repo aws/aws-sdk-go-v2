@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified Route 53 Profile. Before you can delete a profile, you
+//	Deletes the specified Route 53 Profile. Before you can delete a profile, you
+//
 // must first disassociate it from all VPCs.
 func (c *Client) DeleteProfile(ctx context.Context, params *DeleteProfileInput, optFns ...func(*Options)) (*DeleteProfileOutput, error) {
 	if params == nil {
@@ -30,7 +31,7 @@ func (c *Client) DeleteProfile(ctx context.Context, params *DeleteProfileInput, 
 
 type DeleteProfileInput struct {
 
-	// The ID of the Profile that you want to delete.
+	//  The ID of the Profile that you want to delete.
 	//
 	// This member is required.
 	ProfileId *string
@@ -40,7 +41,7 @@ type DeleteProfileInput struct {
 
 type DeleteProfileOutput struct {
 
-	// Information about the DeleteProfile request, including the status of the
+	//  Information about the DeleteProfile request, including the status of the
 	// request.
 	Profile *types.Profile
 

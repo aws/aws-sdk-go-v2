@@ -34,13 +34,13 @@ type ListModelsInput struct {
 	// listed.
 	DatasetNameBeginsWith *string
 
-	// Specifies the maximum number of machine learning models to list.
+	//  Specifies the maximum number of machine learning models to list.
 	MaxResults *int32
 
 	// The beginning of the name of the machine learning models being listed.
 	ModelNameBeginsWith *string
 
-	// An opaque pagination token indicating where to continue the listing of machine
+	//  An opaque pagination token indicating where to continue the listing of machine
 	// learning models.
 	NextToken *string
 
@@ -56,7 +56,7 @@ type ListModelsOutput struct {
 	// dataset ARNs, and status.
 	ModelSummaries []types.ModelSummary
 
-	// An opaque pagination token indicating where to continue the listing of machine
+	//  An opaque pagination token indicating where to continue the listing of machine
 	// learning models.
 	NextToken *string
 
@@ -151,7 +151,7 @@ var _ ListModelsAPIClient = (*Client)(nil)
 
 // ListModelsPaginatorOptions is the paginator options for ListModels
 type ListModelsPaginatorOptions struct {
-	// Specifies the maximum number of machine learning models to list.
+	//  Specifies the maximum number of machine learning models to list.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -37,8 +37,12 @@ type CreateTenantDatabaseInput struct {
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// The password for the master user in your tenant database. Constraints:
+	// The password for the master user in your tenant database.
+	//
+	// Constraints:
+	//
 	//   - Must be 8 to 30 characters.
+	//
 	//   - Can include any printable ASCII character except forward slash ( / ), double
 	//   quote ( " ), at symbol ( @ ), ampersand ( & ), or single quote ( ' ).
 	//
@@ -47,9 +51,14 @@ type CreateTenantDatabaseInput struct {
 
 	// The name for the master user account in your tenant database. RDS creates this
 	// user account in the tenant database and grants privileges to the master user.
-	// This parameter is case-sensitive. Constraints:
+	// This parameter is case-sensitive.
+	//
+	// Constraints:
+	//
 	//   - Must be 1 to 16 letters, numbers, or underscores.
+	//
 	//   - First character must be a letter.
+	//
 	//   - Can't be a reserved word for the chosen database engine.
 	//
 	// This member is required.
@@ -69,8 +78,9 @@ type CreateTenantDatabaseInput struct {
 	// The NCHAR value for the tenant database.
 	NcharCharacterSetName *string
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
-	// in the Amazon RDS User Guide.
+	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	//
+	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

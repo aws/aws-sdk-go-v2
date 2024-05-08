@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a Studio resource. Currently, this operation only supports updating the
-// displayName of your studio.
+// Update a Studio resource.
+//
+// Currently, this operation only supports updating the displayName of your studio.
 func (c *Client) UpdateStudio(ctx context.Context, params *UpdateStudioInput, optFns ...func(*Options)) (*UpdateStudioOutput, error) {
 	if params == nil {
 		params = &UpdateStudioInput{}

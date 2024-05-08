@@ -13,8 +13,9 @@ import (
 
 // Creates an Amazon Chime account under the administrator's AWS account. Only Team
 // account types are currently supported for this action. For more information
-// about different account types, see Managing Your Amazon Chime Accounts (https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html)
-// in the Amazon Chime Administration Guide.
+// about different account types, see [Managing Your Amazon Chime Accounts]in the Amazon Chime Administration Guide.
+//
+// [Managing Your Amazon Chime Accounts]: https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html
 func (c *Client) CreateAccount(ctx context.Context, params *CreateAccountInput, optFns ...func(*Options)) (*CreateAccountOutput, error) {
 	if params == nil {
 		params = &CreateAccountInput{}

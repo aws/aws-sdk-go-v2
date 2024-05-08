@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about the specified software package's configuration. Requires
-// permission to access the GetPackageConfiguration (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Gets information about the specified software package's configuration.
+//
+// Requires permission to access the [GetPackageConfiguration] action.
+//
+// [GetPackageConfiguration]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) GetPackageConfiguration(ctx context.Context, params *GetPackageConfigurationInput, optFns ...func(*Options)) (*GetPackageConfigurationOutput, error) {
 	if params == nil {
 		params = &GetPackageConfigurationInput{}

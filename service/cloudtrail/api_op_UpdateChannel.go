@@ -38,7 +38,7 @@ type UpdateChannelInput struct {
 	// channel.
 	Destinations []types.Destination
 
-	// Changes the name of the channel.
+	//  Changes the name of the channel.
 	Name *string
 
 	noSmithyDocumentSerde

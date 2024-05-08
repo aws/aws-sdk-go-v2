@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a Route 53 Profile association for a VPC. A VPC can have only one
+//	Retrieves a Route 53 Profile association for a VPC. A VPC can have only one
+//
 // Profile association, but a Profile can be associated with up to 5000 VPCs.
 func (c *Client) GetProfileAssociation(ctx context.Context, params *GetProfileAssociationInput, optFns ...func(*Options)) (*GetProfileAssociationOutput, error) {
 	if params == nil {
@@ -30,7 +31,7 @@ func (c *Client) GetProfileAssociation(ctx context.Context, params *GetProfileAs
 
 type GetProfileAssociationInput struct {
 
-	// The identifier of the association you want to get information about.
+	//  The identifier of the association you want to get information about.
 	//
 	// This member is required.
 	ProfileAssociationId *string
@@ -40,7 +41,7 @@ type GetProfileAssociationInput struct {
 
 type GetProfileAssociationOutput struct {
 
-	// Information about the Profile association that you specified in a
+	//  Information about the Profile association that you specified in a
 	// GetProfileAssociation request.
 	ProfileAssociation *types.ProfileAssociation
 

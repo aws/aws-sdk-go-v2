@@ -122,26 +122,39 @@ type IdpMetadataMemberXml struct {
 
 func (*IdpMetadataMemberXml) isIdpMetadata() {}
 
-// The configuration settings for in-bound network access to your workspace. When
-// this is configured, only listed IP addresses and VPC endpoints will be able to
-// access your workspace. Standard Grafana authentication and authorization are
-// still required. Access is granted to a caller that is in either the IP address
-// list or the VPC endpoint list - they do not need to be in both. If this is not
-// configured, or is removed, then all IP addresses and VPC endpoints are allowed.
-// Standard Grafana authentication and authorization are still required. While both
-// prefixListIds and vpceIds are required, you can pass in an empty array of
-// strings for either parameter if you do not want to allow any of that type. If
-// both are passed as empty arrays, no traffic is allowed to the workspace, because
-// only explicitly allowed connections are accepted.
+// The configuration settings for in-bound network access to your workspace.
+//
+// When this is configured, only listed IP addresses and VPC endpoints will be
+// able to access your workspace. Standard Grafana authentication and authorization
+// are still required.
+//
+// Access is granted to a caller that is in either the IP address list or the VPC
+// endpoint list - they do not need to be in both.
+//
+// If this is not configured, or is removed, then all IP addresses and VPC
+// endpoints are allowed. Standard Grafana authentication and authorization are
+// still required.
+//
+// While both prefixListIds and vpceIds are required, you can pass in an empty
+// array of strings for either parameter if you do not want to allow any of that
+// type.
+//
+// If both are passed as empty arrays, no traffic is allowed to the workspace,
+// because only explicitly allowed connections are accepted.
 type NetworkAccessConfiguration struct {
 
 	// An array of prefix list IDs. A prefix list is a list of CIDR ranges of IP
 	// addresses. The IP addresses specified are allowed to access your workspace. If
 	// the list is not included in the configuration (passed an empty array) then no IP
 	// addresses are allowed to access the workspace. You create a prefix list using
-	// the Amazon VPC console. Prefix list IDs have the format pl-1a2b3c4d . For more
-	// information about prefix lists, see Group CIDR blocks using managed prefix lists (https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html)
-	// in the Amazon Virtual Private Cloud User Guide.
+	// the Amazon VPC console.
+	//
+	// Prefix list IDs have the format pl-1a2b3c4d .
+	//
+	// For more information about prefix lists, see [Group CIDR blocks using managed prefix lists]in the Amazon Virtual Private
+	// Cloud User Guide.
+	//
+	// [Group CIDR blocks using managed prefix lists]: https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html
 	//
 	// This member is required.
 	PrefixListIds []string
@@ -150,13 +163,18 @@ type NetworkAccessConfiguration struct {
 	// endpoints to your Amazon Managed Grafana workspace for access from within a VPC.
 	// If a NetworkAccessConfiguration is specified then only VPC endpoints specified
 	// here are allowed to access the workspace. If you pass in an empty array of
-	// strings, then no VPCs are allowed to access the workspace. VPC endpoint IDs have
-	// the format vpce-1a2b3c4d . For more information about creating an interface VPC
-	// endpoint, see Interface VPC endpoints (https://docs.aws.amazon.com/grafana/latest/userguide/VPC-endpoints)
-	// in the Amazon Managed Grafana User Guide. The only VPC endpoints that can be
-	// specified here are interface VPC endpoints for Grafana workspaces (using the
-	// com.amazonaws.[region].grafana-workspace service endpoint). Other VPC endpoints
-	// are ignored.
+	// strings, then no VPCs are allowed to access the workspace.
+	//
+	// VPC endpoint IDs have the format vpce-1a2b3c4d .
+	//
+	// For more information about creating an interface VPC endpoint, see [Interface VPC endpoints] in the
+	// Amazon Managed Grafana User Guide.
+	//
+	// The only VPC endpoints that can be specified here are interface VPC endpoints
+	// for Grafana workspaces (using the com.amazonaws.[region].grafana-workspace
+	// service endpoint). Other VPC endpoints are ignored.
+	//
+	// [Interface VPC endpoints]: https://docs.aws.amazon.com/grafana/latest/userguide/VPC-endpoints
 	//
 	// This member is required.
 	VpceIds []string
@@ -243,8 +261,9 @@ type SamlConfiguration struct {
 }
 
 // A structure containing information about one error encountered while performing
-// an UpdatePermissions (https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html)
-// operation.
+// an [UpdatePermissions]operation.
+//
+// [UpdatePermissions]: https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html
 type UpdateError struct {
 
 	// Specifies which permission update caused the error.
@@ -265,9 +284,10 @@ type UpdateError struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the instructions for one Grafana role permission update in a
-// UpdatePermissions (https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html)
+// Contains the instructions for one Grafana role permission update in a [UpdatePermissions]
 // operation.
+//
+// [UpdatePermissions]: https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html
 type UpdateInstruction struct {
 
 	// Specifies whether this update is to add or revoke role permissions.
@@ -291,7 +311,9 @@ type UpdateInstruction struct {
 // A structure that specifies one user or group in the workspace.
 type User struct {
 
-	// The ID of the user or group. Pattern:
+	// The ID of the user or group.
+	//
+	// Pattern:
 	// ^([0-9a-fA-F]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$
 	//
 	// This member is required.
@@ -323,9 +345,12 @@ type ValidationExceptionField struct {
 }
 
 // The configuration settings for an Amazon VPC that contains data sources for
-// your Grafana workspace to connect to. Provided securityGroupIds and subnetIds
-// must be part of the same VPC. Connecting to a private VPC is not yet available
-// in the Asia Pacific (Seoul) Region (ap-northeast-2).
+// your Grafana workspace to connect to.
+//
+// Provided securityGroupIds and subnetIds must be part of the same VPC.
+//
+// Connecting to a private VPC is not yet available in the Asia Pacific (Seoul)
+// Region (ap-northeast-2).
 type VpcConfiguration struct {
 
 	// The list of Amazon EC2 security group IDs attached to the Amazon VPC for your
@@ -360,9 +385,10 @@ type WorkspaceDescription struct {
 
 	// Specifies the Amazon Web Services data sources that have been configured to
 	// have IAM roles and permissions created to allow Amazon Managed Grafana to read
-	// data from these sources. This list is only used when the workspace was created
-	// through the Amazon Web Services console, and the permissionType is
-	// SERVICE_MANAGED .
+	// data from these sources.
+	//
+	// This list is only used when the workspace was created through the Amazon Web
+	// Services console, and the permissionType is SERVICE_MANAGED .
 	//
 	// This member is required.
 	DataSources []DataSourceType
@@ -403,18 +429,23 @@ type WorkspaceDescription struct {
 	Description *string
 
 	// Specifies whether this workspace has already fully used its free trial for
-	// Grafana Enterprise. Amazon Managed Grafana workspaces no longer support Grafana
-	// Enterprise free trials.
+	// Grafana Enterprise.
+	//
+	// Amazon Managed Grafana workspaces no longer support Grafana Enterprise free
+	// trials.
 	FreeTrialConsumed *bool
 
 	// If this workspace is currently in the free trial period for Grafana Enterprise,
-	// this value specifies when that free trial ends. Amazon Managed Grafana
-	// workspaces no longer support Grafana Enterprise free trials.
+	// this value specifies when that free trial ends.
+	//
+	// Amazon Managed Grafana workspaces no longer support Grafana Enterprise free
+	// trials.
 	FreeTrialExpiration *time.Time
 
 	// The token that ties this workspace to a Grafana Labs account. For more
-	// information, see Register with Grafana Labs (https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise)
-	// .
+	// information, see [Register with Grafana Labs].
+	//
+	// [Register with Grafana Labs]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
 	GrafanaToken *string
 
 	// If this workspace has a full Grafana Enterprise license purchased through
@@ -424,8 +455,10 @@ type WorkspaceDescription struct {
 	// removed.
 	LicenseExpiration *time.Time
 
-	// Specifies whether this workspace has a full Grafana Enterprise license. Amazon
-	// Managed Grafana workspaces no longer support Grafana Enterprise free trials.
+	// Specifies whether this workspace has a full Grafana Enterprise license.
+	//
+	// Amazon Managed Grafana workspaces no longer support Grafana Enterprise free
+	// trials.
 	LicenseType LicenseType
 
 	// The name of the workspace.
@@ -450,17 +483,22 @@ type WorkspaceDescription struct {
 	// If this is SERVICE_MANAGED , and the workplace was created through the Amazon
 	// Managed Grafana console, then Amazon Managed Grafana automatically creates the
 	// IAM roles and provisions the permissions that the workspace needs to use Amazon
-	// Web Services data sources and notification channels. If this is CUSTOMER_MANAGED
-	// , you must manage those roles and permissions yourself. If you are working with
-	// a workspace in a member account of an organization and that account is not a
-	// delegated administrator account, and you want the workspace to access data
-	// sources in other Amazon Web Services accounts in the organization, this
-	// parameter must be set to CUSTOMER_MANAGED . For more information about
-	// converting between customer and service managed, see Managing permissions for
-	// data sources and notification channels (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html)
+	// Web Services data sources and notification channels.
+	//
+	// If this is CUSTOMER_MANAGED , you must manage those roles and permissions
+	// yourself.
+	//
+	// If you are working with a workspace in a member account of an organization and
+	// that account is not a delegated administrator account, and you want the
+	// workspace to access data sources in other Amazon Web Services accounts in the
+	// organization, this parameter must be set to CUSTOMER_MANAGED .
+	//
+	// For more information about converting between customer and service managed, see [Managing permissions for data sources and notification channels]
 	// . For more information about the roles and permissions that must be managed for
-	// customer managed workspaces, see Amazon Managed Grafana permissions and
-	// policies for Amazon Web Services data sources and notification channels (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html)
+	// customer managed workspaces, see [Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels]
+	//
+	// [Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html
+	// [Managing permissions for data sources and notification channels]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html
 	PermissionType PermissionType
 
 	// The name of the CloudFormation stack set that is used to generate IAM roles to
@@ -524,12 +562,15 @@ type WorkspaceSummary struct {
 	Description *string
 
 	// The token that ties this workspace to a Grafana Labs account. For more
-	// information, see Register with Grafana Labs (https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise)
-	// .
+	// information, see [Register with Grafana Labs].
+	//
+	// [Register with Grafana Labs]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
 	GrafanaToken *string
 
-	// Specifies whether this workspace has a full Grafana Enterprise license. Amazon
-	// Managed Grafana workspaces no longer support Grafana Enterprise free trials.
+	// Specifies whether this workspace has a full Grafana Enterprise license.
+	//
+	// Amazon Managed Grafana workspaces no longer support Grafana Enterprise free
+	// trials.
 	LicenseType LicenseType
 
 	// The name of the workspace.

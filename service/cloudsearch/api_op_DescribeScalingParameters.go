@@ -13,8 +13,9 @@ import (
 
 // Gets the scaling parameters configured for a domain. A domain's scaling
 // parameters specify the desired search instance type and replication count. For
-// more information, see Configuring Scaling Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html)
-// in the Amazon CloudSearch Developer Guide.
+// more information, see [Configuring Scaling Options]in the Amazon CloudSearch Developer Guide.
+//
+// [Configuring Scaling Options]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html
 func (c *Client) DescribeScalingParameters(ctx context.Context, params *DescribeScalingParametersInput, optFns ...func(*Options)) (*DescribeScalingParametersOutput, error) {
 	if params == nil {
 		params = &DescribeScalingParametersInput{}
@@ -30,8 +31,8 @@ func (c *Client) DescribeScalingParameters(ctx context.Context, params *Describe
 	return out, nil
 }
 
-// Container for the parameters to the DescribeScalingParameters operation.
-// Specifies the name of the domain you want to describe.
+// Container for the parameters to the DescribeScalingParameters operation. Specifies the name of the
+// domain you want to describe.
 type DescribeScalingParametersInput struct {
 
 	// A string that represents the name of a domain. Domain names are unique across

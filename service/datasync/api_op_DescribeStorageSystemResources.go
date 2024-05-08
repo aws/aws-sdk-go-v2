@@ -68,10 +68,12 @@ type DescribeStorageSystemResourcesOutput struct {
 	NextToken *string
 
 	// The information collected about your storage system's resources. A response can
-	// also include Amazon Web Services storage service recommendations. For more
-	// information, see storage resource information (https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-findings.html)
-	// collected by and recommendations (https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html)
-	// provided by DataSync Discovery.
+	// also include Amazon Web Services storage service recommendations.
+	//
+	// For more information, see [storage resource information] collected by and [recommendations] provided by DataSync Discovery.
+	//
+	// [storage resource information]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-findings.html
+	// [recommendations]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html
 	ResourceDetails *types.ResourceDetails
 
 	// Metadata pertaining to the operation's result.

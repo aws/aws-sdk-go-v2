@@ -42,16 +42,20 @@ type PutGeofenceInput struct {
 	GeofenceId *string
 
 	// Contains the details to specify the position of the geofence. Can be either a
-	// polygon or a circle. Including both will return a validation error. Each
-	// geofence polygon (https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html)
-	// can have a maximum of 1,000 vertices.
+	// polygon or a circle. Including both will return a validation error.
+	//
+	// Each [geofence polygon] can have a maximum of 1,000 vertices.
+	//
+	// [geofence polygon]: https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html
 	//
 	// This member is required.
 	Geometry *types.GeofenceGeometry
 
 	// Associates one of more properties with the geofence. A property is a key-value
 	// pair stored with the geofence and added to any geofence event triggered with
-	// that geofence. Format: "key" : "value"
+	// that geofence.
+	//
+	// Format: "key" : "value"
 	GeofenceProperties map[string]string
 
 	noSmithyDocumentSerde
@@ -59,8 +63,10 @@ type PutGeofenceInput struct {
 
 type PutGeofenceOutput struct {
 
-	// The timestamp for when the geofence was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp for when the geofence was created in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -70,8 +76,10 @@ type PutGeofenceOutput struct {
 	// This member is required.
 	GeofenceId *string
 
-	// The timestamp for when the geofence was last updated in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp for when the geofence was last updated in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time

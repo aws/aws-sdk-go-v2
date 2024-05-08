@@ -185,8 +185,10 @@ type BatchJobExecutionSummary struct {
 	JobType BatchJobType
 
 	// The batch job return code from either the Blu Age or Micro Focus runtime
-	// engines. For more information, see Batch return codes (https://www.ibm.com/docs/en/was/8.5.5?topic=model-batch-return-codes)
-	// in the IBM WebSphere Application Server documentation.
+	// engines. For more information, see [Batch return codes]in the IBM WebSphere Application Server
+	// documentation.
+	//
+	// [Batch return codes]: https://www.ibm.com/docs/en/was/8.5.5?topic=model-batch-return-codes
 	ReturnCode *string
 
 	noSmithyDocumentSerde
@@ -322,8 +324,7 @@ type DatasetDetailOrgAttributesMemberVsam struct {
 
 func (*DatasetDetailOrgAttributesMemberVsam) isDatasetDetailOrgAttributes() {}
 
-// Identifies one or more data sets you want to import with the
-// CreateDataSetImportTask operation.
+// Identifies one or more data sets you want to import with the CreateDataSetImportTask operation.
 //
 // The following types satisfy this interface:
 //
@@ -730,9 +731,9 @@ type FsxStorageConfiguration struct {
 // The required attributes for a generation data group data set. A generation data
 // set is one of a collection of successive, historically related, catalogued data
 // sets that together are known as a generation data group (GDG). Use this
-// structure when you want to import a GDG. For more information on GDG, see
-// Generation data sets (https://www.ibm.com/docs/en/zos/2.3.0?topic=guide-generation-data-sets)
-// .
+// structure when you want to import a GDG. For more information on GDG, see [Generation data sets].
+//
+// [Generation data sets]: https://www.ibm.com/docs/en/zos/2.3.0?topic=guide-generation-data-sets
 type GdgAttributes struct {
 
 	// The maximum number of generation data sets, up to 255, in a GDG.
@@ -747,9 +748,9 @@ type GdgAttributes struct {
 // The required attributes for a generation data group data set. A generation data
 // set is one of a collection of successive, historically related, catalogued data
 // sets that together are known as a generation data group (GDG). Use this
-// structure when you want to import a GDG. For more information on GDG, see
-// Generation data sets (https://www.ibm.com/docs/en/zos/2.3.0?topic=guide-generation-data-sets)
-// .
+// structure when you want to import a GDG. For more information on GDG, see [Generation data sets].
+//
+// [Generation data sets]: https://www.ibm.com/docs/en/zos/2.3.0?topic=guide-generation-data-sets
 type GdgDetailAttributes struct {
 
 	// The maximum number of generation data sets, up to 255, in a GDG.

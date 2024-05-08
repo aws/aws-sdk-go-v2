@@ -11,9 +11,11 @@ import (
 )
 
 // Removes tags from the specified delivery stream. Removed tags are deleted, and
-// you can't recover them after this operation successfully completes. If you
-// specify a tag that doesn't exist, the operation ignores it. This operation has a
-// limit of five transactions per second per account.
+// you can't recover them after this operation successfully completes.
+//
+// If you specify a tag that doesn't exist, the operation ignores it.
+//
+// This operation has a limit of five transactions per second per account.
 func (c *Client) UntagDeliveryStream(ctx context.Context, params *UntagDeliveryStreamInput, optFns ...func(*Options)) (*UntagDeliveryStreamOutput, error) {
 	if params == nil {
 		params = &UntagDeliveryStreamInput{}

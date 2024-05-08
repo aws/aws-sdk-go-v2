@@ -42,20 +42,24 @@ type ListTypeRegistrationsInput struct {
 	// response object's NextToken parameter is set to null .
 	NextToken *string
 
-	// The current status of the extension registration request. The default is
-	// IN_PROGRESS .
+	// The current status of the extension registration request.
+	//
+	// The default is IN_PROGRESS .
 	RegistrationStatusFilter types.RegistrationStatus
 
-	// The kind of extension. Conditional: You must specify either TypeName and Type ,
-	// or Arn .
+	// The kind of extension.
+	//
+	// Conditional: You must specify either TypeName and Type , or Arn .
 	Type types.RegistryType
 
-	// The Amazon Resource Name (ARN) of the extension. Conditional: You must specify
-	// either TypeName and Type , or Arn .
+	// The Amazon Resource Name (ARN) of the extension.
+	//
+	// Conditional: You must specify either TypeName and Type , or Arn .
 	TypeArn *string
 
-	// The name of the extension. Conditional: You must specify either TypeName and
-	// Type , or Arn .
+	// The name of the extension.
+	//
+	// Conditional: You must specify either TypeName and Type , or Arn .
 	TypeName *string
 
 	noSmithyDocumentSerde
@@ -69,8 +73,9 @@ type ListTypeRegistrationsOutput struct {
 	// all results, NextToken is set to null .
 	NextToken *string
 
-	// A list of extension registration tokens. Use DescribeTypeRegistration to return
-	// detailed information about a type registration request.
+	// A list of extension registration tokens.
+	//
+	// Use DescribeTypeRegistration to return detailed information about a type registration request.
 	RegistrationTokenList []string
 
 	// Metadata pertaining to the operation's result.

@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for BatchLoadDataFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BatchLoadDataFormat) Values() []BatchLoadDataFormat {
 	return []BatchLoadDataFormat{
 		"CSV",
@@ -31,8 +32,9 @@ const (
 )
 
 // Values returns all known values for BatchLoadStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BatchLoadStatus) Values() []BatchLoadStatus {
 	return []BatchLoadStatus{
 		"CREATED",
@@ -52,8 +54,9 @@ const (
 )
 
 // Values returns all known values for DimensionValueType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DimensionValueType) Values() []DimensionValueType {
 	return []DimensionValueType{
 		"VARCHAR",
@@ -73,8 +76,9 @@ const (
 )
 
 // Values returns all known values for MeasureValueType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MeasureValueType) Values() []MeasureValueType {
 	return []MeasureValueType{
 		"DOUBLE",
@@ -96,8 +100,9 @@ const (
 
 // Values returns all known values for PartitionKeyEnforcementLevel. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PartitionKeyEnforcementLevel) Values() []PartitionKeyEnforcementLevel {
 	return []PartitionKeyEnforcementLevel{
 		"REQUIRED",
@@ -114,8 +119,9 @@ const (
 )
 
 // Values returns all known values for PartitionKeyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PartitionKeyType) Values() []PartitionKeyType {
 	return []PartitionKeyType{
 		"DIMENSION",
@@ -132,8 +138,9 @@ const (
 )
 
 // Values returns all known values for S3EncryptionOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3EncryptionOption) Values() []S3EncryptionOption {
 	return []S3EncryptionOption{
 		"SSE_S3",
@@ -153,8 +160,9 @@ const (
 )
 
 // Values returns all known values for ScalarMeasureValueType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScalarMeasureValueType) Values() []ScalarMeasureValueType {
 	return []ScalarMeasureValueType{
 		"DOUBLE",
@@ -175,8 +183,9 @@ const (
 )
 
 // Values returns all known values for TableStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TableStatus) Values() []TableStatus {
 	return []TableStatus{
 		"ACTIVE",
@@ -196,8 +205,9 @@ const (
 )
 
 // Values returns all known values for TimeUnit. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TimeUnit) Values() []TimeUnit {
 	return []TimeUnit{
 		"MILLISECONDS",

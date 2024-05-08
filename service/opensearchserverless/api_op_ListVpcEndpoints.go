@@ -12,9 +12,9 @@ import (
 )
 
 // Returns the OpenSearch Serverless-managed interface VPC endpoints associated
-// with the current account. For more information, see Access Amazon OpenSearch
-// Serverless using an interface endpoint (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html)
-// .
+// with the current account. For more information, see [Access Amazon OpenSearch Serverless using an interface endpoint].
+//
+// [Access Amazon OpenSearch Serverless using an interface endpoint]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html
 func (c *Client) ListVpcEndpoints(ctx context.Context, params *ListVpcEndpointsInput, optFns ...func(*Options)) (*ListVpcEndpointsOutput, error) {
 	if params == nil {
 		params = &ListVpcEndpointsInput{}

@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the list, provided it is not used in a rule. When you delete a list,
-// Amazon Fraud Detector permanently deletes that list and the elements in the
-// list.
+//	Deletes the list, provided it is not used in a rule.
+//
+// When you delete a list, Amazon Fraud Detector permanently deletes that list and
+// the elements in the list.
 func (c *Client) DeleteList(ctx context.Context, params *DeleteListInput, optFns ...func(*Options)) (*DeleteListOutput, error) {
 	if params == nil {
 		params = &DeleteListInput{}
@@ -30,7 +31,7 @@ func (c *Client) DeleteList(ctx context.Context, params *DeleteListInput, optFns
 
 type DeleteListInput struct {
 
-	// The name of the list to delete.
+	//  The name of the list to delete.
 	//
 	// This member is required.
 	Name *string

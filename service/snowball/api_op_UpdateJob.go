@@ -63,15 +63,19 @@ type UpdateJobInput struct {
 	Resources *types.JobResource
 
 	// The new role Amazon Resource Name (ARN) that you want to associate with this
-	// job. To create a role ARN, use the CreateRole (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
-	// Identity and Access Management (IAM) API action.
+	// job. To create a role ARN, use the [CreateRole]Identity and Access Management (IAM) API
+	// action.
+	//
+	// [CreateRole]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
 	RoleARN *string
 
 	// The updated shipping option value of this job's ShippingDetails object.
 	ShippingOption types.ShippingOption
 
-	// The updated SnowballCapacityPreference of this job's JobMetadata object. The 50
-	// TB Snowballs are only available in the US regions. For more information, see
+	// The updated SnowballCapacityPreference of this job's JobMetadata object. The 50 TB
+	// Snowballs are only available in the US regions.
+	//
+	// For more information, see
 	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
 	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
 	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"

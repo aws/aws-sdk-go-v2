@@ -16,9 +16,10 @@ import (
 // Developers, in turn, select the service template from Proton. If the selected
 // service template includes a service pipeline definition, they provide a link to
 // their source code repository. Proton then deploys and manages the infrastructure
-// defined by the selected service template. For more information, see Proton
-// templates (https://docs.aws.amazon.com/proton/latest/userguide/ag-templates.html)
-// in the Proton User Guide.
+// defined by the selected service template. For more information, see [Proton templates]in the
+// Proton User Guide.
+//
+// [Proton templates]: https://docs.aws.amazon.com/proton/latest/userguide/ag-templates.html
 func (c *Client) CreateServiceTemplate(ctx context.Context, params *CreateServiceTemplateInput, optFns ...func(*Options)) (*CreateServiceTemplateOutput, error) {
 	if params == nil {
 		params = &CreateServiceTemplateInput{}
@@ -53,14 +54,17 @@ type CreateServiceTemplateInput struct {
 	// By default, Proton provides a service pipeline for your service. When this
 	// parameter is included, it indicates that an Proton service pipeline isn't
 	// provided for your service. After it's included, it can't be changed. For more
-	// information, see Template bundles (https://docs.aws.amazon.com/proton/latest/userguide/ag-template-authoring.html#ag-template-bundles)
-	// in the Proton User Guide.
+	// information, see [Template bundles]in the Proton User Guide.
+	//
+	// [Template bundles]: https://docs.aws.amazon.com/proton/latest/userguide/ag-template-authoring.html#ag-template-bundles
 	PipelineProvisioning types.Provisioning
 
 	// An optional list of metadata items that you can associate with the Proton
-	// service template. A tag is a key-value pair. For more information, see Proton
-	// resources and tagging (https://docs.aws.amazon.com/proton/latest/userguide/resources.html)
-	// in the Proton User Guide.
+	// service template. A tag is a key-value pair.
+	//
+	// For more information, see [Proton resources and tagging] in the Proton User Guide.
+	//
+	// [Proton resources and tagging]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

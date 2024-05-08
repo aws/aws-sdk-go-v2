@@ -31,8 +31,8 @@ func (c *Client) DescribeTextTranslationJob(ctx context.Context, params *Describ
 
 type DescribeTextTranslationJobInput struct {
 
-	// The identifier that Amazon Translate generated for the job. The
-	// StartTextTranslationJob operation returns this identifier in its response.
+	// The identifier that Amazon Translate generated for the job. The StartTextTranslationJob operation
+	// returns this identifier in its response.
 	//
 	// This member is required.
 	JobId *string

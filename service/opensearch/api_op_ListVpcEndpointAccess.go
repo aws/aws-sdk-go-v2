@@ -46,8 +46,9 @@ type ListVpcEndpointAccessInput struct {
 
 type ListVpcEndpointAccessOutput struct {
 
-	// A list of IAM principals (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html)
-	// that can currently access the domain.
+	// A list of [IAM principals] that can currently access the domain.
+	//
+	// [IAM principals]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html
 	//
 	// This member is required.
 	AuthorizedPrincipalList []types.AuthorizedPrincipal

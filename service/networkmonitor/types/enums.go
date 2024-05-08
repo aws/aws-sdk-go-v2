@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AddressFamily. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AddressFamily) Values() []AddressFamily {
 	return []AddressFamily{
 		"IPV4",
@@ -32,8 +33,9 @@ const (
 )
 
 // Values returns all known values for MonitorState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MonitorState) Values() []MonitorState {
 	return []MonitorState{
 		"PENDING",
@@ -57,8 +59,9 @@ const (
 )
 
 // Values returns all known values for ProbeState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProbeState) Values() []ProbeState {
 	return []ProbeState{
 		"PENDING",
@@ -79,8 +82,9 @@ const (
 )
 
 // Values returns all known values for Protocol. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Protocol) Values() []Protocol {
 	return []Protocol{
 		"TCP",

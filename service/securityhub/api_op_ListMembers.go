@@ -12,8 +12,10 @@ import (
 )
 
 // Lists details about all member accounts for the current Security Hub
-// administrator account. The results include both member accounts that belong to
-// an organization and member accounts that were invited manually.
+// administrator account.
+//
+// The results include both member accounts that belong to an organization and
+// member accounts that were invited manually.
 func (c *Client) ListMembers(ctx context.Context, params *ListMembersInput, optFns ...func(*Options)) (*ListMembersOutput, error) {
 	if params == nil {
 		params = &ListMembersInput{}
@@ -35,16 +37,19 @@ type ListMembersInput struct {
 	MaxResults *int32
 
 	// The token that is required for pagination. On your first call to the ListMembers
-	// operation, set the value of this parameter to NULL . For subsequent calls to the
-	// operation, to continue listing data, set the value of this parameter to the
-	// value returned from the previous response.
+	// operation, set the value of this parameter to NULL .
+	//
+	// For subsequent calls to the operation, to continue listing data, set the value
+	// of this parameter to the value returned from the previous response.
 	NextToken *string
 
 	// Specifies which member accounts to include in the response based on their
 	// relationship status with the administrator account. The default value is TRUE .
+	//
 	// If OnlyAssociated is set to TRUE , the response includes member accounts whose
-	// relationship status with the administrator account is set to ENABLED . If
-	// OnlyAssociated is set to FALSE , the response includes all existing member
+	// relationship status with the administrator account is set to ENABLED .
+	//
+	// If OnlyAssociated is set to FALSE , the response includes all existing member
 	// accounts.
 	OnlyAssociated *bool
 

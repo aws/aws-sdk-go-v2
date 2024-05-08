@@ -12,11 +12,14 @@ import (
 )
 
 // Starts the analysis of up to 20 source databases to recommend target engines
-// for each source database. This is a batch version of StartRecommendations (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartRecommendations.html)
-// . The result of analysis of each source database is reported individually in the
+// for each source database. This is a batch version of [StartRecommendations].
+//
+// The result of analysis of each source database is reported individually in the
 // response. Because the batch request can result in a combination of successful
 // and unsuccessful actions, you should check for batch errors even when the call
 // returns an HTTP status code of 200 .
+//
+// [StartRecommendations]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartRecommendations.html
 func (c *Client) BatchStartRecommendations(ctx context.Context, params *BatchStartRecommendationsInput, optFns ...func(*Options)) (*BatchStartRecommendationsOutput, error) {
 	if params == nil {
 		params = &BatchStartRecommendationsInput{}

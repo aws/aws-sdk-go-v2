@@ -47,8 +47,10 @@ type ExportApiInput struct {
 	// version by default. Currently, the only supported version is 1.0.
 	ExportVersion *string
 
-	// Specifies whether to include API Gateway extensions (https://docs.aws.amazon.com//apigateway/latest/developerguide/api-gateway-swagger-extensions.html)
-	// in the exported API definition. API Gateway extensions are included by default.
+	// Specifies whether to include [API Gateway extensions] in the exported API definition. API Gateway
+	// extensions are included by default.
+	//
+	// [API Gateway extensions]: https://docs.aws.amazon.com//apigateway/latest/developerguide/api-gateway-swagger-extensions.html
 	IncludeExtensions *bool
 
 	// The name of the API stage to export. If you don't specify this property, a

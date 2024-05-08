@@ -64,8 +64,9 @@ func (e *DisabledOperationException) ErrorCode() string {
 func (e *DisabledOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal error occurred while processing the request. If this problem
-// persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/)
-// .
+// persists, report an issue from the [Service Health Dashboard].
+//
+// [Service Health Dashboard]: http://status.aws.amazon.com/
 type InternalException struct {
 	Message *string
 

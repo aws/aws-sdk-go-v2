@@ -10,14 +10,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation applies only to Amazon Rekognition Custom Labels. Deletes an
-// existing Amazon Rekognition Custom Labels dataset. Deleting a dataset might take
-// while. Use DescribeDataset to check the current status. The dataset is still
+// This operation applies only to Amazon Rekognition Custom Labels.
+//
+// Deletes an existing Amazon Rekognition Custom Labels dataset. Deleting a
+// dataset might take while. Use DescribeDatasetto check the current status. The dataset is still
 // deleting if the value of Status is DELETE_IN_PROGRESS . If you try to access the
-// dataset after it is deleted, you get a ResourceNotFoundException exception. You
-// can't delete a dataset while it is creating ( Status = CREATE_IN_PROGRESS ) or
-// if the dataset is updating ( Status = UPDATE_IN_PROGRESS ). This operation
-// requires permissions to perform the rekognition:DeleteDataset action.
+// dataset after it is deleted, you get a ResourceNotFoundException exception.
+//
+// You can't delete a dataset while it is creating ( Status = CREATE_IN_PROGRESS )
+// or if the dataset is updating ( Status = UPDATE_IN_PROGRESS ).
+//
+// This operation requires permissions to perform the rekognition:DeleteDataset
+// action.
 func (c *Client) DeleteDataset(ctx context.Context, params *DeleteDatasetInput, optFns ...func(*Options)) (*DeleteDatasetOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetInput{}
@@ -35,7 +39,8 @@ func (c *Client) DeleteDataset(ctx context.Context, params *DeleteDatasetInput, 
 
 type DeleteDatasetInput struct {
 
-	// The ARN of the Amazon Rekognition Custom Labels dataset that you want to delete.
+	//  The ARN of the Amazon Rekognition Custom Labels dataset that you want to
+	// delete.
 	//
 	// This member is required.
 	DatasetArn *string

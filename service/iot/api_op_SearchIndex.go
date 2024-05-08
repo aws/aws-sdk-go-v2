@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The query search index. Requires permission to access the SearchIndex (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// The query search index.
+//
+// Requires permission to access the [SearchIndex] action.
+//
+// [SearchIndex]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) SearchIndex(ctx context.Context, params *SearchIndexInput, optFns ...func(*Options)) (*SearchIndexOutput, error) {
 	if params == nil {
 		params = &SearchIndexInput{}
@@ -31,8 +34,9 @@ func (c *Client) SearchIndex(ctx context.Context, params *SearchIndexInput, optF
 type SearchIndexInput struct {
 
 	// The search query string. For more information about the search query syntax,
-	// see Query syntax (https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html)
-	// .
+	// see [Query syntax].
+	//
+	// [Query syntax]: https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html
 	//
 	// This member is required.
 	QueryString *string
@@ -42,8 +46,10 @@ type SearchIndexInput struct {
 
 	// The maximum number of results to return per page at one time. This maximum
 	// number cannot exceed 100. The response might contain fewer results but will
-	// never contain more. You can use nextToken (https://docs.aws.amazon.com/iot/latest/apireference/API_SearchIndex.html#iot-SearchIndex-request-nextToken)
-	// to retrieve the next set of results until nextToken returns NULL .
+	// never contain more. You can use [nextToken]nextToken to retrieve the next set of results
+	// until nextToken returns NULL .
+	//
+	// [nextToken]: https://docs.aws.amazon.com/iot/latest/apireference/API_SearchIndex.html#iot-SearchIndex-request-nextToken
 	MaxResults *int32
 
 	// The token used to get the next set of results, or null if there are no

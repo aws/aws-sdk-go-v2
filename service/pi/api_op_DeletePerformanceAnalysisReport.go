@@ -37,9 +37,10 @@ type DeletePerformanceAnalysisReportInput struct {
 	// An immutable identifier for a data source that is unique for an Amazon Web
 	// Services Region. Performance Insights gathers metrics from this data source. In
 	// the console, the identifier is shown as ResourceID. When you call
-	// DescribeDBInstances , the identifier is returned as DbiResourceId . To use a DB
-	// instance as a data source, specify its DbiResourceId value. For example,
-	// specify db-ABCDEFGHIJKLMNOPQRSTU1VW2X .
+	// DescribeDBInstances , the identifier is returned as DbiResourceId .
+	//
+	// To use a DB instance as a data source, specify its DbiResourceId value. For
+	// example, specify db-ABCDEFGHIJKLMNOPQRSTU1VW2X .
 	//
 	// This member is required.
 	Identifier *string

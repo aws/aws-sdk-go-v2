@@ -64,7 +64,9 @@ type GetDatasetOutput struct {
 	DatasetTitle *string
 
 	// The format in which Dataset data is structured.
+	//
 	//   - TABULAR – Data is structured in a tabular format.
+	//
 	//   - NON_TABULAR – Data is structured in a non-tabular format.
 	Kind types.DatasetKind
 
@@ -77,9 +79,13 @@ type GetDatasetOutput struct {
 	SchemaDefinition *types.SchemaUnion
 
 	// Status of the Dataset creation.
+	//
 	//   - PENDING – Dataset is pending creation.
+	//
 	//   - FAILED – Dataset creation has failed.
+	//
 	//   - SUCCESS – Dataset creation has succeeded.
+	//
 	//   - RUNNING – Dataset creation is running.
 	Status types.DatasetStatus
 

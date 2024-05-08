@@ -172,7 +172,7 @@ type ActionReviewPayloadField struct {
 	// field.
 	DisplayDescription *string
 
-	// The name of the field.
+	//  The name of the field.
 	DisplayName *string
 
 	// The display order of fields in a payload.
@@ -204,14 +204,16 @@ type ActionReviewPayloadFieldAllowedValue struct {
 }
 
 // Contains details about the OpenAPI schema for a custom plugin. For more
-// information, see custom plugin OpenAPI schemas (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/custom-plugin.html#plugins-api-schema)
-// . You can either include the schema directly in the payload field or you can
-// upload it to an S3 bucket and specify the S3 bucket location in the s3 field.
+// information, see [custom plugin OpenAPI schemas]. You can either include the schema directly in the payload
+// field or you can upload it to an S3 bucket and specify the S3 bucket location in
+// the s3 field.
 //
 // The following types satisfy this interface:
 //
 //	APISchemaMemberPayload
 //	APISchemaMemberS3
+//
+// [custom plugin OpenAPI schemas]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/custom-plugin.html#plugins-api-schema
 type APISchema interface {
 	isAPISchema()
 }
@@ -271,13 +273,15 @@ type AppliedAttachmentsConfiguration struct {
 
 // The creator mode specific admin controls configured for an Amazon Q Business
 // application. Determines whether an end user can generate LLM-only responses when
-// they use the web experience. For more information, see Admin controls and
-// guardrails (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html)
-// and Conversation settings (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope)
-// .
+// they use the web experience.
+//
+// For more information, see [Admin controls and guardrails] and [Conversation settings].
+//
+// [Conversation settings]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+// [Admin controls and guardrails]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
 type AppliedCreatorModeConfiguration struct {
 
-	// Information about whether creator mode is enabled or disabled for an Amazon Q
+	//  Information about whether creator mode is enabled or disabled for an Amazon Q
 	// Business application.
 	//
 	// This member is required.
@@ -346,44 +350,53 @@ type AttributeFilter struct {
 	AndAllFilters []AttributeFilter
 
 	// Returns true when a document contains all the specified document attributes or
-	// metadata fields. Supported for the following document attribute value types (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html)
-	// : stringListValue .
+	// metadata fields. Supported for the following [document attribute value types]: stringListValue .
+	//
+	// [document attribute value types]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
 	ContainsAll *DocumentAttribute
 
 	// Returns true when a document contains any of the specified document attributes
-	// or metadata fields. Supported for the following document attribute value types (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html)
-	// : dateValue , longValue , stringListValue and stringValue .
+	// or metadata fields. Supported for the following [document attribute value types]: dateValue , longValue ,
+	// stringListValue and stringValue .
+	//
+	// [document attribute value types]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
 	ContainsAny *DocumentAttribute
 
 	// Performs an equals operation on two document attributes or metadata fields.
-	// Supported for the following document attribute value types (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html)
-	// : dateValue , longValue , stringListValue and stringValue .
+	// Supported for the following [document attribute value types]: dateValue , longValue , stringListValue and
+	// stringValue .
+	//
+	// [document attribute value types]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
 	EqualsTo *DocumentAttribute
 
 	// Performs a greater than operation on two document attributes or metadata
-	// fields. Supported for the following document attribute value types (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html)
-	// : dateValue and longValue .
+	// fields. Supported for the following [document attribute value types]: dateValue and longValue .
+	//
+	// [document attribute value types]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
 	GreaterThan *DocumentAttribute
 
 	// Performs a greater or equals than operation on two document attributes or
-	// metadata fields. Supported for the following document attribute value types (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html)
-	// : dateValue and longValue .
+	// metadata fields. Supported for the following [document attribute value types]: dateValue and longValue .
+	//
+	// [document attribute value types]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
 	GreaterThanOrEquals *DocumentAttribute
 
 	// Performs a less than operation on two document attributes or metadata fields.
-	// Supported for the following document attribute value types (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html)
-	// : dateValue and longValue .
+	// Supported for the following [document attribute value types]: dateValue and longValue .
+	//
+	// [document attribute value types]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
 	LessThan *DocumentAttribute
 
 	// Performs a less than or equals operation on two document attributes or metadata
-	// fields.Supported for the following document attribute value type (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html)
-	// : dateValue and longValue .
+	// fields.Supported for the following [document attribute value type]: dateValue and longValue .
+	//
+	// [document attribute value type]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
 	LessThanOrEquals *DocumentAttribute
 
 	// Performs a logical NOT operation on all supplied filters.
 	NotFilter *AttributeFilter
 
-	// Performs a logical OR operation on all supplied filters.
+	//  Performs a logical OR operation on all supplied filters.
 	OrAllFilters []AttributeFilter
 
 	noSmithyDocumentSerde
@@ -561,14 +574,16 @@ type ChatInputStreamMemberTextEvent struct {
 
 func (*ChatInputStreamMemberTextEvent) isChatInputStream() {}
 
-// Configuration information for Amazon Q Business conversation modes. For more
-// information, see Admin controls and guardrails (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html)
-// and Conversation settings (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope)
-// .
+// Configuration information for Amazon Q Business conversation modes.
+//
+// For more information, see [Admin controls and guardrails] and [Conversation settings].
 //
 // The following types satisfy this interface:
 //
 //	ChatModeConfigurationMemberPluginConfiguration
+//
+// [Conversation settings]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+// [Admin controls and guardrails]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
 type ChatModeConfiguration interface {
 	isChatModeConfiguration()
 }
@@ -652,24 +667,31 @@ type ConfigurationEvent struct {
 	AttributeFilter *AttributeFilter
 
 	// The chat modes available to an Amazon Q Business end user.
+	//
 	//   - RETRIEVAL_MODE - The default chat mode for an Amazon Q Business application.
 	//   When this mode is enabled, Amazon Q Business generates responses only from data
 	//   sources connected to an Amazon Q Business application.
+	//
 	//   - CREATOR_MODE - By selecting this mode, users can choose to generate
 	//   responses only from the LLM knowledge, without consulting connected data
 	//   sources, for a chat request.
+	//
 	//   - PLUGIN_MODE - By selecting this mode, users can choose to use plugins in
 	//   chat.
-	// For more information, see Admin controls and guardrails (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html)
-	// , Plugins (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/plugins.html)
-	// , and Conversation settings (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope)
-	// .
+	//
+	// For more information, see [Admin controls and guardrails], [Plugins], and [Conversation settings].
+	//
+	// [Conversation settings]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+	// [Admin controls and guardrails]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
+	// [Plugins]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/plugins.html
 	ChatMode ChatMode
 
-	// Configuration information for Amazon Q Business conversation modes. For more
-	// information, see Admin controls and guardrails (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html)
-	// and Conversation settings (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope)
-	// .
+	// Configuration information for Amazon Q Business conversation modes.
+	//
+	// For more information, see [Admin controls and guardrails] and [Conversation settings].
+	//
+	// [Conversation settings]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+	// [Admin controls and guardrails]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
 	ChatModeConfiguration ChatModeConfiguration
 
 	noSmithyDocumentSerde
@@ -714,10 +736,12 @@ type Conversation struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration information required to invoke chat in CREATOR_MODE . For more
-// information, see Admin controls and guardrails (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html)
-// and Conversation settings (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope)
-// .
+// Configuration information required to invoke chat in CREATOR_MODE .
+//
+// For more information, see [Admin controls and guardrails] and [Conversation settings].
+//
+// [Conversation settings]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+// [Admin controls and guardrails]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
 type CreatorModeConfiguration struct {
 
 	// Status information about whether CREATOR_MODE has been enabled or disabled. The
@@ -856,10 +880,12 @@ type DataSourceVpcConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information on boosting DATE type document attributes. For more
-// information on how boosting document attributes work in Amazon Q Business, see
-// Boosting using document attributes (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html)
-// .
+// Provides information on boosting DATE type document attributes.
+//
+// For more information on how boosting document attributes work in Amazon Q
+// Business, see [Boosting using document attributes].
+//
+// [Boosting using document attributes]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
 type DateAttributeBoostingConfiguration struct {
 
 	// Specifies how much a document attribute is boosted.
@@ -903,9 +929,11 @@ type Document struct {
 	// The contents of the document.
 	Content DocumentContent
 
-	// The file type of the document in the Blob field. If you want to index snippets
-	// or subsets of HTML documents instead of the entirety of the HTML documents, you
-	// add the HTML start and closing tags ( <HTML>content</HTML> ) around the content.
+	// The file type of the document in the Blob field.
+	//
+	// If you want to index snippets or subsets of HTML documents instead of the
+	// entirety of the HTML documents, you add the HTML start and closing tags (
+	// <HTML>content</HTML> ) around the content.
 	ContentType ContentType
 
 	// The configuration information for altering document metadata and content during
@@ -937,15 +965,15 @@ type DocumentAttribute struct {
 // Provides information on boosting supported Amazon Q Business document attribute
 // types. When an end user chat query matches document attributes that have been
 // boosted, Amazon Q Business prioritizes generating responses from content that
-// matches the boosted document attributes. For STRING and STRING_LIST type
-// document attributes to be used for boosting on the console and the API, they
-// must be enabled for search using the DocumentAttributeConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html)
-// object of the UpdateIndex (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html)
-// API. If you haven't enabled searching on these attributes, you can't boost
-// attributes of these data types on either the console or the API. For more
-// information on how boosting document attributes work in Amazon Q Business, see
-// Boosting using document attributes (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html)
-// .
+// matches the boosted document attributes.
+//
+// For STRING and STRING_LIST type document attributes to be used for boosting on
+// the console and the API, they must be enabled for search using the [DocumentAttributeConfiguration]object of
+// the [UpdateIndex]API. If you haven't enabled searching on these attributes, you can't boost
+// attributes of these data types on either the console or the API.
+//
+// For more information on how boosting document attributes work in Amazon Q
+// Business, see [Boosting using document attributes].
 //
 // The following types satisfy this interface:
 //
@@ -953,6 +981,10 @@ type DocumentAttribute struct {
 //	DocumentAttributeBoostingConfigurationMemberNumberConfiguration
 //	DocumentAttributeBoostingConfigurationMemberStringConfiguration
 //	DocumentAttributeBoostingConfigurationMemberStringListConfiguration
+//
+// [Boosting using document attributes]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
+// [DocumentAttributeConfiguration]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html
+// [UpdateIndex]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html
 type DocumentAttributeBoostingConfiguration interface {
 	isDocumentAttributeBoostingConfiguration()
 }
@@ -998,31 +1030,41 @@ func (*DocumentAttributeBoostingConfigurationMemberStringListConfiguration) isDo
 }
 
 // The condition used for the target document attribute or metadata field when
-// ingesting documents into Amazon Q Business. You use this with
-// DocumentAttributeTarget (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html)
-// to apply the condition. For example, you can create the 'Department' target
-// field and have it prefill department names associated with the documents based
-// on information in the 'Source_URI' field. Set the condition that if the
-// 'Source_URI' field contains 'financial' in its URI value, then prefill the
-// target field 'Department' with the target value 'Finance' for the document.
-// Amazon Q Business can't create a target field if it has not already been created
-// as an index field. After you create your index field, you can create a document
-// metadata field using DocumentAttributeTarget . Amazon Q Business then will map
-// your newly created metadata field to your index field.
+// ingesting documents into Amazon Q Business. You use this with [DocumentAttributeTarget]
+// DocumentAttributeTarget to apply the condition.
+//
+// For example, you can create the 'Department' target field and have it prefill
+// department names associated with the documents based on information in the
+// 'Source_URI' field. Set the condition that if the 'Source_URI' field contains
+// 'financial' in its URI value, then prefill the target field 'Department' with
+// the target value 'Finance' for the document.
+//
+// Amazon Q Business can't create a target field if it has not already been
+// created as an index field. After you create your index field, you can create a
+// document metadata field using DocumentAttributeTarget . Amazon Q Business then
+// will map your newly created metadata field to your index field.
+//
+// [DocumentAttributeTarget]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html
 type DocumentAttributeCondition struct {
 
-	// The identifier of the document attribute used for the condition. For example,
-	// 'Source_URI' could be an identifier for the attribute or metadata field that
-	// contains source URIs associated with the documents. Amazon Q Business currently
-	// doesn't support _document_body as an attribute key used for the condition.
+	// The identifier of the document attribute used for the condition.
+	//
+	// For example, 'Source_URI' could be an identifier for the attribute or metadata
+	// field that contains source URIs associated with the documents.
+	//
+	// Amazon Q Business currently doesn't support _document_body as an attribute key
+	// used for the condition.
 	//
 	// This member is required.
 	Key *string
 
-	// The identifier of the document attribute used for the condition. For example,
-	// 'Source_URI' could be an identifier for the attribute or metadata field that
-	// contains source URIs associated with the documents. Amazon Q Business currently
-	// does not support _document_body as an attribute key used for the condition.
+	// The identifier of the document attribute used for the condition.
+	//
+	// For example, 'Source_URI' could be an identifier for the attribute or metadata
+	// field that contains source URIs associated with the documents.
+	//
+	// Amazon Q Business currently does not support _document_body as an attribute key
+	// used for the condition.
 	//
 	// This member is required.
 	Operator DocumentEnrichmentConditionOperator
@@ -1036,9 +1078,11 @@ type DocumentAttributeCondition struct {
 
 // Configuration information for document attributes. Document attributes are
 // metadata or fields associated with your documents. For example, the company
-// department name associated with each document. For more information, see
-// Understanding document attributes (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/doc-attributes.html)
-// .
+// department name associated with each document.
+//
+// For more information, see [Understanding document attributes].
+//
+// [Understanding document attributes]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/doc-attributes.html
 type DocumentAttributeConfiguration struct {
 
 	// The name of the document attribute.
@@ -1055,18 +1099,23 @@ type DocumentAttributeConfiguration struct {
 }
 
 // The target document attribute or metadata field you want to alter when
-// ingesting documents into Amazon Q Business. For example, you can delete all
-// customer identification numbers associated with the documents, stored in the
-// document metadata field called 'Customer_ID' by setting the target key as
-// 'Customer_ID' and the deletion flag to TRUE . This removes all customer ID
-// values in the field 'Customer_ID'. This would scrub personally identifiable
-// information from each document's metadata. Amazon Q Business can't create a
-// target field if it has not already been created as an index field. After you
-// create your index field, you can create a document metadata field using
-// DocumentAttributeTarget (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html)
-// . Amazon Q Business will then map your newly created document attribute to your
-// index field. You can also use this with DocumentAttributeCondition (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeCondition.html)
-// .
+// ingesting documents into Amazon Q Business.
+//
+// For example, you can delete all customer identification numbers associated with
+// the documents, stored in the document metadata field called 'Customer_ID' by
+// setting the target key as 'Customer_ID' and the deletion flag to TRUE . This
+// removes all customer ID values in the field 'Customer_ID'. This would scrub
+// personally identifiable information from each document's metadata.
+//
+// Amazon Q Business can't create a target field if it has not already been
+// created as an index field. After you create your index field, you can create a
+// document metadata field using [DocumentAttributeTarget]DocumentAttributeTarget . Amazon Q Business will
+// then map your newly created document attribute to your index field.
+//
+// You can also use this with [DocumentAttributeCondition]DocumentAttributeCondition .
+//
+// [DocumentAttributeTarget]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html
+// [DocumentAttributeCondition]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeCondition.html
 type DocumentAttributeTarget struct {
 
 	// The identifier of the target document attribute or metadata field. For example,
@@ -1100,10 +1149,11 @@ type DocumentAttributeValue interface {
 	isDocumentAttributeValue()
 }
 
-// A date expressed as an ISO 8601 string. It's important for the time zone to be
-// included in the ISO 8601 date-time format. For example,
-// 2012-03-25T12:30:10+01:00 is the ISO 8601 date-time format for March 25th 2012
-// at 12:30PM (plus 10 seconds) in Central European Time.
+// A date expressed as an ISO 8601 string.
+//
+// It's important for the time zone to be included in the ISO 8601 date-time
+// format. For example, 2012-03-25T12:30:10+01:00 is the ISO 8601 date-time format
+// for March 25th 2012 at 12:30PM (plus 10 seconds) in Central European Time.
 type DocumentAttributeValueMemberDateValue struct {
 	Value time.Time
 
@@ -1193,9 +1243,11 @@ type DocumentDetails struct {
 }
 
 // Provides the configuration information for altering document metadata and
-// content during the document ingestion process. For more information, see Custom
-// document enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
-// .
+// content during the document ingestion process.
+//
+// For more information, see [Custom document enrichment].
+//
+// [Custom document enrichment]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
 type DocumentEnrichmentConfiguration struct {
 
 	// Configuration information to alter document attributes or metadata fields and
@@ -1204,26 +1256,42 @@ type DocumentEnrichmentConfiguration struct {
 
 	// Provides the configuration information for invoking a Lambda function in Lambda
 	// to alter document metadata and content when ingesting documents into Amazon Q
-	// Business. You can configure your Lambda function using the
-	// PreExtractionHookConfiguration parameter if you want to apply advanced
-	// alterations on the original or raw documents. If you want to apply advanced
-	// alterations on the Amazon Q Business structured documents, you must configure
-	// your Lambda function using PostExtractionHookConfiguration . You can only invoke
-	// one Lambda function. However, this function can invoke other functions it
-	// requires. For more information, see Custom document enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
-	// .
+	// Business.
+	//
+	// You can configure your Lambda function using the PreExtractionHookConfiguration
+	// parameter if you want to apply advanced alterations on the original or raw
+	// documents.
+	//
+	// If you want to apply advanced alterations on the Amazon Q Business structured
+	// documents, you must configure your Lambda function using
+	// PostExtractionHookConfiguration .
+	//
+	// You can only invoke one Lambda function. However, this function can invoke
+	// other functions it requires.
+	//
+	// For more information, see [Custom document enrichment].
+	//
+	// [Custom document enrichment]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
 	PostExtractionHookConfiguration *HookConfiguration
 
 	// Provides the configuration information for invoking a Lambda function in Lambda
 	// to alter document metadata and content when ingesting documents into Amazon Q
-	// Business. You can configure your Lambda function using the
-	// PreExtractionHookConfiguration parameter if you want to apply advanced
-	// alterations on the original or raw documents. If you want to apply advanced
-	// alterations on the Amazon Q Business structured documents, you must configure
-	// your Lambda function using PostExtractionHookConfiguration . You can only invoke
-	// one Lambda function. However, this function can invoke other functions it
-	// requires. For more information, see Custom document enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
-	// .
+	// Business.
+	//
+	// You can configure your Lambda function using the PreExtractionHookConfiguration
+	// parameter if you want to apply advanced alterations on the original or raw
+	// documents.
+	//
+	// If you want to apply advanced alterations on the Amazon Q Business structured
+	// documents, you must configure your Lambda function using
+	// PostExtractionHookConfiguration .
+	//
+	// You can only invoke one Lambda function. However, this function can invoke
+	// other functions it requires.
+	//
+	// For more information, see [Custom document enrichment].
+	//
+	// [Custom document enrichment]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
 	PreExtractionHookConfiguration *HookConfiguration
 
 	noSmithyDocumentSerde
@@ -1276,7 +1344,7 @@ type FailedAttachmentEvent struct {
 	// The details of a file uploaded during chat.
 	Attachment *AttachmentOutput
 
-	// The identifier of the conversation associated with the failed file upload.
+	//  The identifier of the conversation associated with the failed file upload.
 	ConversationId *string
 
 	// The identifier of the AI-generated message associated with the file upload.
@@ -1349,25 +1417,35 @@ type GroupSummary struct {
 
 // Provides the configuration information for invoking a Lambda function in Lambda
 // to alter document metadata and content when ingesting documents into Amazon Q
-// Business. You can configure your Lambda function using the
-// PreExtractionHookConfiguration parameter if you want to apply advanced
-// alterations on the original or raw documents. If you want to apply advanced
-// alterations on the Amazon Q Business structured documents, you must configure
-// your Lambda function using PostExtractionHookConfiguration . You can only invoke
-// one Lambda function. However, this function can invoke other functions it
-// requires. For more information, see Custom document enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
-// .
+// Business.
+//
+// You can configure your Lambda function using the PreExtractionHookConfiguration
+// parameter if you want to apply advanced alterations on the original or raw
+// documents.
+//
+// If you want to apply advanced alterations on the Amazon Q Business structured
+// documents, you must configure your Lambda function using
+// PostExtractionHookConfiguration .
+//
+// You can only invoke one Lambda function. However, this function can invoke
+// other functions it requires.
+//
+// For more information, see [Custom document enrichment].
+//
+// [Custom document enrichment]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
 type HookConfiguration struct {
 
-	// The condition used for when a Lambda function should be invoked. For example,
-	// you can specify a condition that if there are empty date-time values, then
-	// Amazon Q Business should invoke a function that inserts the current date-time.
+	// The condition used for when a Lambda function should be invoked.
+	//
+	// For example, you can specify a condition that if there are empty date-time
+	// values, then Amazon Q Business should invoke a function that inserts the current
+	// date-time.
 	InvocationCondition *DocumentAttributeCondition
 
 	// The Amazon Resource Name (ARN) of a role with permission to run a Lambda
-	// function during ingestion. For more information, see IAM roles for Custom
-	// Document Enrichment (CDE) (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/iam-roles.html#cde-iam-role)
-	// .
+	// function during ingestion. For more information, see [IAM roles for Custom Document Enrichment (CDE)].
+	//
+	// [IAM roles for Custom Document Enrichment (CDE)]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/iam-roles.html#cde-iam-role
 	LambdaArn *string
 
 	// The Amazon Resource Name (ARN) of a role with permission to run
@@ -1376,9 +1454,9 @@ type HookConfiguration struct {
 	RoleArn *string
 
 	// Stores the original, raw documents or the structured, parsed documents before
-	// and after altering them. For more information, see Data contracts for Lambda
-	// functions (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/cde-lambda-operations.html#cde-lambda-operations-data-contracts)
-	// .
+	// and after altering them. For more information, see [Data contracts for Lambda functions].
+	//
+	// [Data contracts for Lambda functions]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/cde-lambda-operations.html#cde-lambda-operations-data-contracts
 	S3BucketName *string
 
 	noSmithyDocumentSerde
@@ -1425,42 +1503,55 @@ type IndexStatistics struct {
 
 // Provides the configuration information for applying basic logic to alter
 // document metadata and content when ingesting documents into Amazon Q Business.
-// To apply advanced logic, to go beyond what you can do with basic logic, see
-// HookConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_HookConfiguration.html)
-// . For more information, see Custom document enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
-// .
+//
+// To apply advanced logic, to go beyond what you can do with basic logic, see [HookConfiguration]
+// HookConfiguration .
+//
+// For more information, see [Custom document enrichment].
+//
+// [Custom document enrichment]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
+// [HookConfiguration]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_HookConfiguration.html
 type InlineDocumentEnrichmentConfiguration struct {
 
 	// The condition used for the target document attribute or metadata field when
-	// ingesting documents into Amazon Q Business. You use this with
-	// DocumentAttributeTarget (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html)
-	// to apply the condition. For example, you can create the 'Department' target
-	// field and have it prefill department names associated with the documents based
-	// on information in the 'Source_URI' field. Set the condition that if the
-	// 'Source_URI' field contains 'financial' in its URI value, then prefill the
-	// target field 'Department' with the target value 'Finance' for the document.
-	// Amazon Q Business can't create a target field if it has not already been created
-	// as an index field. After you create your index field, you can create a document
-	// metadata field using DocumentAttributeTarget . Amazon Q Business then will map
-	// your newly created metadata field to your index field.
+	// ingesting documents into Amazon Q Business. You use this with [DocumentAttributeTarget]
+	// DocumentAttributeTarget to apply the condition.
+	//
+	// For example, you can create the 'Department' target field and have it prefill
+	// department names associated with the documents based on information in the
+	// 'Source_URI' field. Set the condition that if the 'Source_URI' field contains
+	// 'financial' in its URI value, then prefill the target field 'Department' with
+	// the target value 'Finance' for the document.
+	//
+	// Amazon Q Business can't create a target field if it has not already been
+	// created as an index field. After you create your index field, you can create a
+	// document metadata field using DocumentAttributeTarget . Amazon Q Business then
+	// will map your newly created metadata field to your index field.
+	//
+	// [DocumentAttributeTarget]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html
 	Condition *DocumentAttributeCondition
 
 	// TRUE to delete content if the condition used for the target attribute is met.
 	DocumentContentOperator DocumentContentOperator
 
 	// The target document attribute or metadata field you want to alter when
-	// ingesting documents into Amazon Q Business. For example, you can delete all
-	// customer identification numbers associated with the documents, stored in the
-	// document metadata field called 'Customer_ID' by setting the target key as
-	// 'Customer_ID' and the deletion flag to TRUE . This removes all customer ID
-	// values in the field 'Customer_ID'. This would scrub personally identifiable
-	// information from each document's metadata. Amazon Q Business can't create a
-	// target field if it has not already been created as an index field. After you
-	// create your index field, you can create a document metadata field using
-	// DocumentAttributeTarget (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html)
-	// . Amazon Q Business will then map your newly created document attribute to your
-	// index field. You can also use this with DocumentAttributeCondition (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeCondition.html)
-	// .
+	// ingesting documents into Amazon Q Business.
+	//
+	// For example, you can delete all customer identification numbers associated with
+	// the documents, stored in the document metadata field called 'Customer_ID' by
+	// setting the target key as 'Customer_ID' and the deletion flag to TRUE . This
+	// removes all customer ID values in the field 'Customer_ID'. This would scrub
+	// personally identifiable information from each document's metadata.
+	//
+	// Amazon Q Business can't create a target field if it has not already been
+	// created as an index field. After you create your index field, you can create a
+	// document metadata field using [DocumentAttributeTarget]DocumentAttributeTarget . Amazon Q Business will
+	// then map your newly created document attribute to your index field.
+	//
+	// You can also use this with [DocumentAttributeCondition]DocumentAttributeCondition .
+	//
+	// [DocumentAttributeTarget]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html
+	// [DocumentAttributeCondition]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeCondition.html
 	Target *DocumentAttributeTarget
 
 	noSmithyDocumentSerde
@@ -1608,10 +1699,12 @@ type NoAuthConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information on boosting NUMBER type document attributes. For more
-// information on how boosting document attributes work in Amazon Q Business, see
-// Boosting using document attributes (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html)
-// .
+// Provides information on boosting NUMBER type document attributes.
+//
+// For more information on how boosting document attributes work in Amazon Q
+// Business, see [Boosting using document attributes].
+//
+// [Boosting using document attributes]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
 type NumberAttributeBoostingConfiguration struct {
 
 	// Specifies the duration, in seconds, of a boost applies to a NUMBER type
@@ -1716,14 +1809,16 @@ type PluginAuthConfigurationMemberOAuth2ClientCredentialConfiguration struct {
 func (*PluginAuthConfigurationMemberOAuth2ClientCredentialConfiguration) isPluginAuthConfiguration() {
 }
 
-// Configuration information required to invoke chat in PLUGIN_MODE . For more
-// information, see Admin controls and guardrails (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html)
-// , Plugins (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/plugins.html)
-// , and Conversation settings (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope)
-// .
+// Configuration information required to invoke chat in PLUGIN_MODE .
+//
+// For more information, see [Admin controls and guardrails], [Plugins], and [Conversation settings].
+//
+// [Conversation settings]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+// [Admin controls and guardrails]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
+// [Plugins]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/plugins.html
 type PluginConfiguration struct {
 
-	// The identifier of the plugin you want to use.
+	//  The identifier of the plugin you want to use.
 	//
 	// This member is required.
 	PluginId *string
@@ -1785,7 +1880,7 @@ type PrincipalUser struct {
 	// This member is required.
 	Access ReadAccessType
 
-	// The identifier of the user.
+	//  The identifier of the user.
 	Id *string
 
 	// The type of group.
@@ -1980,16 +2075,19 @@ type SourceAttribution struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information on boosting STRING type document attributes. For STRING
-// and STRING_LIST type document attributes to be used for boosting on the console
-// and the API, they must be enabled for search using the
-// DocumentAttributeConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html)
-// object of the UpdateIndex (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html)
-// API. If you haven't enabled searching on these attributes, you can't boost
-// attributes of these data types on either the console or the API. For more
-// information on how boosting document attributes work in Amazon Q Business, see
-// Boosting using document attributes (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html)
-// .
+// Provides information on boosting STRING type document attributes.
+//
+// For STRING and STRING_LIST type document attributes to be used for boosting on
+// the console and the API, they must be enabled for search using the [DocumentAttributeConfiguration]object of
+// the [UpdateIndex]API. If you haven't enabled searching on these attributes, you can't boost
+// attributes of these data types on either the console or the API.
+//
+// For more information on how boosting document attributes work in Amazon Q
+// Business, see [Boosting using document attributes].
+//
+// [Boosting using document attributes]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
+// [DocumentAttributeConfiguration]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html
+// [UpdateIndex]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html
 type StringAttributeBoostingConfiguration struct {
 
 	// Specifies how much a document attribute is boosted.
@@ -2003,16 +2101,19 @@ type StringAttributeBoostingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information on boosting STRING_LIST type document attributes. For
-// STRING and STRING_LIST type document attributes to be used for boosting on the
-// console and the API, they must be enabled for search using the
-// DocumentAttributeConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html)
-// object of the UpdateIndex (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html)
-// API. If you haven't enabled searching on these attributes, you can't boost
-// attributes of these data types on either the console or the API. For more
-// information on how boosting document attributes work in Amazon Q Business, see
-// Boosting using document attributes (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html)
-// .
+// Provides information on boosting STRING_LIST type document attributes.
+//
+// For STRING and STRING_LIST type document attributes to be used for boosting on
+// the console and the API, they must be enabled for search using the [DocumentAttributeConfiguration]object of
+// the [UpdateIndex]API. If you haven't enabled searching on these attributes, you can't boost
+// attributes of these data types on either the console or the API.
+//
+// For more information on how boosting document attributes work in Amazon Q
+// Business, see [Boosting using document attributes].
+//
+// [Boosting using document attributes]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
+// [DocumentAttributeConfiguration]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html
+// [UpdateIndex]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html
 type StringListAttributeBoostingConfiguration struct {
 
 	// Specifies how much a document attribute is boosted.
@@ -2028,7 +2129,7 @@ type StringListAttributeBoostingConfiguration struct {
 // following symbols: _ . : / = + - @.
 type Tag struct {
 
-	// The key for the tag. Keys are not case sensitive and must be unique for the
+	//  The key for the tag. Keys are not case sensitive and must be unique for the
 	// Amazon Q Business application or data source.
 	//
 	// This member is required.

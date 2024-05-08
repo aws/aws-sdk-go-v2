@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for BackupPolicy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BackupPolicy) Values() []BackupPolicy {
 	return []BackupPolicy{
 		"DEFAULT",
@@ -26,8 +27,9 @@ const (
 )
 
 // Values returns all known values for BackupRetentionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BackupRetentionType) Values() []BackupRetentionType {
 	return []BackupRetentionType{
 		"DAYS",
@@ -45,8 +47,9 @@ const (
 )
 
 // Values returns all known values for BackupState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BackupState) Values() []BackupState {
 	return []BackupState{
 		"CREATE_IN_PROGRESS",
@@ -72,8 +75,9 @@ const (
 )
 
 // Values returns all known values for ClusterState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClusterState) Values() []ClusterState {
 	return []ClusterState{
 		"CREATE_IN_PROGRESS",
@@ -100,8 +104,9 @@ const (
 )
 
 // Values returns all known values for HsmState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HsmState) Values() []HsmState {
 	return []HsmState{
 		"CREATE_IN_PROGRESS",

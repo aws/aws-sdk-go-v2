@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes an Amazon Lookout for Vision model packaging job. This operation
-// requires permissions to perform the lookoutvision:DescribeModelPackagingJob
-// operation. For more information, see Using your Amazon Lookout for Vision model
-// on an edge device in the Amazon Lookout for Vision Developer Guide.
+// Describes an Amazon Lookout for Vision model packaging job.
+//
+// This operation requires permissions to perform the
+// lookoutvision:DescribeModelPackagingJob operation.
+//
+// For more information, see Using your Amazon Lookout for Vision model on an edge
+// device in the Amazon Lookout for Vision Developer Guide.
 func (c *Client) DescribeModelPackagingJob(ctx context.Context, params *DescribeModelPackagingJobInput, optFns ...func(*Options)) (*DescribeModelPackagingJobOutput, error) {
 	if params == nil {
 		params = &DescribeModelPackagingJobInput{}

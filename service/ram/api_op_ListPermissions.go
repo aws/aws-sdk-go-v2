@@ -48,17 +48,22 @@ type ListPermissionsInput struct {
 	NextToken *string
 
 	// Specifies that you want to list only permissions of this type:
+	//
 	//   - AWS – returns only Amazon Web Services managed permissions.
+	//
 	//   - LOCAL – returns only customer managed permissions
+	//
 	//   - ALL – returns both Amazon Web Services managed permissions and customer
 	//   managed permissions.
+	//
 	// If you don't specify this parameter, the default is All .
 	PermissionType types.PermissionTypeFilter
 
 	// Specifies that you want to list only those permissions that apply to the
-	// specified resource type. This parameter is not case sensitive. For example, to
-	// list only permissions that apply to Amazon EC2 subnets, specify ec2:subnet . You
-	// can use the ListResourceTypes operation to get the specific string required.
+	// specified resource type. This parameter is not case sensitive.
+	//
+	// For example, to list only permissions that apply to Amazon EC2 subnets, specify
+	// ec2:subnet . You can use the ListResourceTypes operation to get the specific string required.
 	ResourceType *string
 
 	noSmithyDocumentSerde

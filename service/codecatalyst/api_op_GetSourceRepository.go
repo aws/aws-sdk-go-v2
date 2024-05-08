@@ -50,15 +50,17 @@ type GetSourceRepositoryInput struct {
 type GetSourceRepositoryOutput struct {
 
 	// The time the source repository was created, in coordinated universal time (UTC)
-	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// .
+	// timestamp format as specified in [RFC 3339].
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	CreatedTime *time.Time
 
 	// The time the source repository was last updated, in coordinated universal time
-	// (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// .
+	// (UTC) timestamp format as specified in [RFC 3339].
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	LastUpdatedTime *time.Time

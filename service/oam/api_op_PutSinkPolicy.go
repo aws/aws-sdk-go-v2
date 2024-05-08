@@ -13,11 +13,17 @@ import (
 // Creates or updates the resource policy that grants permissions to source
 // accounts to link to the monitoring account sink. When you create a sink policy,
 // you can grant permissions to all accounts in an organization or to individual
-// accounts. You can also use a sink policy to limit the types of data that is
-// shared. The three types that you can allow or deny are:
+// accounts.
+//
+// You can also use a sink policy to limit the types of data that is shared. The
+// three types that you can allow or deny are:
+//
 //   - Metrics - Specify with AWS::CloudWatch::Metric
+//
 //   - Log groups - Specify with AWS::Logs::LogGroup
+//
 //   - Traces - Specify with AWS::XRay::Trace
+//
 //   - Application Insights - Applications - Specify with
 //     AWS::ApplicationInsights::Application
 //
@@ -41,9 +47,13 @@ func (c *Client) PutSinkPolicy(ctx context.Context, params *PutSinkPolicyInput, 
 type PutSinkPolicyInput struct {
 
 	// The JSON policy to use. If you are updating an existing policy, the entire
-	// existing policy is replaced by what you specify here. The policy must be in JSON
-	// string format with quotation marks escaped and no newlines. For examples of
-	// different types of policies, see the Examples section on this page.
+	// existing policy is replaced by what you specify here.
+	//
+	// The policy must be in JSON string format with quotation marks escaped and no
+	// newlines.
+	//
+	// For examples of different types of policies, see the Examples section on this
+	// page.
 	//
 	// This member is required.
 	Policy *string

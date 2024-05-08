@@ -32,7 +32,10 @@ func (c *Client) SwitchoverReadReplica(ctx context.Context, params *SwitchoverRe
 type SwitchoverReadReplicaInput struct {
 
 	// The DB instance identifier of the current standby database. This value is
-	// stored as a lowercase string. Constraints:
+	// stored as a lowercase string.
+	//
+	// Constraints:
+	//
 	//   - Must match the identiﬁer of an existing Oracle read replica DB instance.
 	//
 	// This member is required.
@@ -43,9 +46,10 @@ type SwitchoverReadReplicaInput struct {
 
 type SwitchoverReadReplicaOutput struct {
 
-	// Contains the details of an Amazon RDS DB instance. This data type is used as a
-	// response element in the operations CreateDBInstance ,
-	// CreateDBInstanceReadReplica , DeleteDBInstance , DescribeDBInstances ,
+	// Contains the details of an Amazon RDS DB instance.
+	//
+	// This data type is used as a response element in the operations CreateDBInstance
+	// , CreateDBInstanceReadReplica , DeleteDBInstance , DescribeDBInstances ,
 	// ModifyDBInstance , PromoteReadReplica , RebootDBInstance ,
 	// RestoreDBInstanceFromDBSnapshot , RestoreDBInstanceFromS3 ,
 	// RestoreDBInstanceToPointInTime , StartDBInstance , and StopDBInstance .

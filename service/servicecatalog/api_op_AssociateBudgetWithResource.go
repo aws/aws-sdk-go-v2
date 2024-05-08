@@ -33,7 +33,7 @@ type AssociateBudgetWithResourceInput struct {
 	// This member is required.
 	BudgetName *string
 
-	// The resource identifier. Either a portfolio-id or a product-id.
+	//  The resource identifier. Either a portfolio-id or a product-id.
 	//
 	// This member is required.
 	ResourceId *string

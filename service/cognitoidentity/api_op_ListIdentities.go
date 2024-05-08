@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the identities in an identity pool. You must use AWS Developer
-// credentials to call this API.
+// Lists the identities in an identity pool.
+//
+// You must use AWS Developer credentials to call this API.
 func (c *Client) ListIdentities(ctx context.Context, params *ListIdentitiesInput, optFns ...func(*Options)) (*ListIdentitiesOutput, error) {
 	if params == nil {
 		params = &ListIdentitiesInput{}

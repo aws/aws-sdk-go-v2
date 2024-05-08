@@ -87,8 +87,10 @@ type GetBatchJobExecutionOutput struct {
 	JobUser *string
 
 	// The batch job return code from either the Blu Age or Micro Focus runtime
-	// engines. For more information, see Batch return codes (https://www.ibm.com/docs/en/was/8.5.5?topic=model-batch-return-codes)
-	// in the IBM WebSphere Application Server documentation.
+	// engines. For more information, see [Batch return codes]in the IBM WebSphere Application Server
+	// documentation.
+	//
+	// [Batch return codes]: https://www.ibm.com/docs/en/was/8.5.5?topic=model-batch-return-codes
 	ReturnCode *string
 
 	// The reason for the reported status.

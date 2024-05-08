@@ -14,8 +14,9 @@ const (
 )
 
 // Values returns all known values for FooEnum. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FooEnum) Values() []FooEnum {
 	return []FooEnum{
 		"Foo",

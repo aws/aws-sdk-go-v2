@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For use by AWS Ground Station Agent and shouldn't be called directly. Update
-// the status of the agent.
+//	For use by AWS Ground Station Agent and shouldn't be called directly.
+//
+// Update the status of the agent.
 func (c *Client) UpdateAgentStatus(ctx context.Context, params *UpdateAgentStatusInput, optFns ...func(*Options)) (*UpdateAgentStatusOutput, error) {
 	if params == nil {
 		params = &UpdateAgentStatusInput{}

@@ -12,15 +12,19 @@ import (
 
 // Deletes the specified Amazon Chime Voice Connector. Any phone numbers
 // associated with the Amazon Chime Voice Connector must be disassociated from it
-// before it can be deleted. This API is is no longer supported and will not be
-// updated. We recommend using the latest version, DeleteVoiceConnector (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnector.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// before it can be deleted.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [DeleteVoiceConnector], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by DeleteVoiceConnector in the Amazon Chime SDK Voice
 // Namespace
+//
+// [DeleteVoiceConnector]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnector.html
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
 func (c *Client) DeleteVoiceConnector(ctx context.Context, params *DeleteVoiceConnectorInput, optFns ...func(*Options)) (*DeleteVoiceConnectorOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceConnectorInput{}

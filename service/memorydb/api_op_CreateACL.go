@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Access Control List. For more information, see Authenticating users
-// with Access Contol Lists (ACLs) (https://docs.aws.amazon.com/MemoryDB/latest/devguide/clusters.acls.html)
-// .
+// Creates an Access Control List. For more information, see [Authenticating users with Access Contol Lists (ACLs)].
+//
+// [Authenticating users with Access Contol Lists (ACLs)]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/clusters.acls.html
 func (c *Client) CreateACL(ctx context.Context, params *CreateACLInput, optFns ...func(*Options)) (*CreateACLOutput, error) {
 	if params == nil {
 		params = &CreateACLInput{}

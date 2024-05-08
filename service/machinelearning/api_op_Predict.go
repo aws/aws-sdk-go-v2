@@ -13,9 +13,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates a prediction for the observation using the specified ML Model . Note:
-// Not all response parameters will be populated. Whether a response parameter is
-// populated depends on the type of model requested.
+// Generates a prediction for the observation using the specified ML Model .
+//
+// Note: Not all response parameters will be populated. Whether a response
+// parameter is populated depends on the type of model requested.
 func (c *Client) Predict(ctx context.Context, params *PredictInput, optFns ...func(*Options)) (*PredictOutput, error) {
 	if params == nil {
 		params = &PredictInput{}
@@ -52,12 +53,16 @@ type PredictInput struct {
 type PredictOutput struct {
 
 	// The output from a Predict operation:
+	//
 	//   - Details - Contains the following attributes:
 	//   DetailsAttributes.PREDICTIVE_MODEL_TYPE - REGRESSION | BINARY | MULTICLASS
 	//   DetailsAttributes.ALGORITHM - SGD
+	//
 	//   - PredictedLabel - Present for either a BINARY or MULTICLASS MLModel request.
+	//
 	//   - PredictedScores - Contains the raw classification score corresponding to
 	//   each label.
+	//
 	//   - PredictedValue - Present for a REGRESSION MLModel request.
 	Prediction *types.Prediction
 

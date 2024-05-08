@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the transaction events for an address on the blockchain. This
-// operation is only supported on the Bitcoin networks.
+// Lists all the transaction events for an address on the blockchain.
+//
+// This operation is only supported on the Bitcoin networks.
 func (c *Client) ListFilteredTransactionEvents(ctx context.Context, params *ListFilteredTransactionEventsInput, optFns ...func(*Options)) (*ListFilteredTransactionEventsOutput, error) {
 	if params == nil {
 		params = &ListFilteredTransactionEventsInput{}
@@ -36,21 +37,29 @@ type ListFilteredTransactionEventsInput struct {
 	// This member is required.
 	AddressIdentifierFilter *types.AddressIdentifierFilter
 
-	// The blockchain network where the transaction occurred. Valid Values:
-	// BITCOIN_MAINNET | BITCOIN_TESTNET
+	// The blockchain network where the transaction occurred.
+	//
+	// Valid Values: BITCOIN_MAINNET | BITCOIN_TESTNET
 	//
 	// This member is required.
 	Network *string
 
-	// The container for the ConfirmationStatusFilter that filters for the  finality  (https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality)
-	// of the results.
+	// The container for the ConfirmationStatusFilter that filters for the [finality] of the
+	// results.
+	//
+	// [finality]: https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality
 	ConfirmationStatusFilter *types.ConfirmationStatusFilter
 
-	// The maximum number of transaction events to list. Default: 100 Even if
-	// additional results can be retrieved, the request can return less results than
-	// maxResults or an empty array of results. To retrieve the next set of results,
-	// make another request with the returned nextToken value. The value of nextToken
-	// is null when there are no more results to return
+	// The maximum number of transaction events to list.
+	//
+	// Default: 100
+	//
+	// Even if additional results can be retrieved, the request can return less
+	// results than maxResults or an empty array of results.
+	//
+	// To retrieve the next set of results, make another request with the returned
+	// nextToken value. The value of nextToken is null when there are no more results
+	// to return
 	MaxResults *int32
 
 	// The pagination token that indicates the next set of results to retrieve.
@@ -176,11 +185,16 @@ var _ ListFilteredTransactionEventsAPIClient = (*Client)(nil)
 // ListFilteredTransactionEventsPaginatorOptions is the paginator options for
 // ListFilteredTransactionEvents
 type ListFilteredTransactionEventsPaginatorOptions struct {
-	// The maximum number of transaction events to list. Default: 100 Even if
-	// additional results can be retrieved, the request can return less results than
-	// maxResults or an empty array of results. To retrieve the next set of results,
-	// make another request with the returned nextToken value. The value of nextToken
-	// is null when there are no more results to return
+	// The maximum number of transaction events to list.
+	//
+	// Default: 100
+	//
+	// Even if additional results can be retrieved, the request can return less
+	// results than maxResults or an empty array of results.
+	//
+	// To retrieve the next set of results, make another request with the returned
+	// nextToken value. The value of nextToken is null when there are no more results
+	// to return
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

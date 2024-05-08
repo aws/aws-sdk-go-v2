@@ -29,17 +29,17 @@ func (c *Client) BatchDisassociateAssessmentReportEvidence(ctx context.Context, 
 
 type BatchDisassociateAssessmentReportEvidenceInput struct {
 
-	// The identifier for the assessment.
+	//  The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifier for the folder that the evidence is stored in.
+	//  The identifier for the folder that the evidence is stored in.
 	//
 	// This member is required.
 	EvidenceFolderId *string
 
-	// The list of evidence identifiers.
+	//  The list of evidence identifiers.
 	//
 	// This member is required.
 	EvidenceIds []string
@@ -49,11 +49,11 @@ type BatchDisassociateAssessmentReportEvidenceInput struct {
 
 type BatchDisassociateAssessmentReportEvidenceOutput struct {
 
-	// A list of errors that the BatchDisassociateAssessmentReportEvidence API
+	//  A list of errors that the BatchDisassociateAssessmentReportEvidence API
 	// returned.
 	Errors []types.AssessmentReportEvidenceError
 
-	// The identifier for the evidence.
+	//  The identifier for the evidence.
 	EvidenceIds []string
 
 	// Metadata pertaining to the operation's result.

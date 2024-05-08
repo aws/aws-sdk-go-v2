@@ -66,8 +66,9 @@ type DescribeStorageSystemOutput struct {
 	Name *string
 
 	// The ARN of the secret that stores your on-premises storage system's
-	// credentials. DataSync Discovery stores these credentials in Secrets Manager (https://docs.aws.amazon.com/datasync/latest/userguide/discovery-configure-storage.html#discovery-add-storage)
-	// .
+	// credentials. DataSync Discovery stores these credentials in [Secrets Manager].
+	//
+	// [Secrets Manager]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-configure-storage.html#discovery-add-storage
 	SecretsManagerArn *string
 
 	// The server name and network port required to connect with your on-premises
@@ -77,9 +78,10 @@ type DescribeStorageSystemOutput struct {
 	// The ARN of the on-premises storage system that the discovery job looked at.
 	StorageSystemArn *string
 
-	// The type of on-premises storage system. DataSync Discovery currently only
-	// supports NetApp Fabric-Attached Storage (FAS) and All Flash FAS (AFF) systems
-	// running ONTAP 9.7 or later.
+	// The type of on-premises storage system.
+	//
+	// DataSync Discovery currently only supports NetApp Fabric-Attached Storage (FAS)
+	// and All Flash FAS (AFF) systems running ONTAP 9.7 or later.
 	SystemType types.DiscoverySystemType
 
 	// Metadata pertaining to the operation's result.

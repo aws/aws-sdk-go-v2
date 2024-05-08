@@ -13,8 +13,9 @@ const (
 )
 
 // Values returns all known values for CampaignStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CampaignStatus) Values() []CampaignStatus {
 	return []CampaignStatus{
 		"CREATING",
@@ -33,8 +34,9 @@ const (
 )
 
 // Values returns all known values for Compression. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Compression) Values() []Compression {
 	return []Compression{
 		"OFF",
@@ -51,8 +53,9 @@ const (
 )
 
 // Values returns all known values for DataFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataFormat) Values() []DataFormat {
 	return []DataFormat{
 		"JSON",
@@ -69,8 +72,9 @@ const (
 )
 
 // Values returns all known values for DiagnosticsMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DiagnosticsMode) Values() []DiagnosticsMode {
 	return []DiagnosticsMode{
 		"OFF",
@@ -88,8 +92,9 @@ const (
 )
 
 // Values returns all known values for EncryptionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncryptionStatus) Values() []EncryptionStatus {
 	return []EncryptionStatus{
 		"PENDING",
@@ -107,8 +112,9 @@ const (
 )
 
 // Values returns all known values for EncryptionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncryptionType) Values() []EncryptionType {
 	return []EncryptionType{
 		"KMS_BASED_ENCRYPTION",
@@ -125,8 +131,9 @@ const (
 )
 
 // Values returns all known values for LogType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LogType) Values() []LogType {
 	return []LogType{
 		"OFF",
@@ -145,8 +152,9 @@ const (
 )
 
 // Values returns all known values for ManifestStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ManifestStatus) Values() []ManifestStatus {
 	return []ManifestStatus{
 		"ACTIVE",
@@ -171,8 +179,9 @@ const (
 
 // Values returns all known values for NetworkInterfaceFailureReason. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkInterfaceFailureReason) Values() []NetworkInterfaceFailureReason {
 	return []NetworkInterfaceFailureReason{
 		"DUPLICATE_NETWORK_INTERFACE",
@@ -195,8 +204,9 @@ const (
 )
 
 // Values returns all known values for NetworkInterfaceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkInterfaceType) Values() []NetworkInterfaceType {
 	return []NetworkInterfaceType{
 		"CAN_INTERFACE",
@@ -214,8 +224,9 @@ const (
 )
 
 // Values returns all known values for NodeDataEncoding. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NodeDataEncoding) Values() []NodeDataEncoding {
 	return []NodeDataEncoding{
 		"BINARY",
@@ -259,8 +270,9 @@ const (
 )
 
 // Values returns all known values for NodeDataType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NodeDataType) Values() []NodeDataType {
 	return []NodeDataType{
 		"INT8",
@@ -305,8 +317,9 @@ const (
 )
 
 // Values returns all known values for RegistrationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RegistrationStatus) Values() []RegistrationStatus {
 	return []RegistrationStatus{
 		"REGISTRATION_PENDING",
@@ -337,8 +350,9 @@ const (
 )
 
 // Values returns all known values for ROS2PrimitiveType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ROS2PrimitiveType) Values() []ROS2PrimitiveType {
 	return []ROS2PrimitiveType{
 		"BOOL",
@@ -382,6 +396,7 @@ const (
 
 // Values returns all known values for SignalDecoderFailureReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SignalDecoderFailureReason) Values() []SignalDecoderFailureReason {
 	return []SignalDecoderFailureReason{
@@ -413,8 +428,9 @@ const (
 )
 
 // Values returns all known values for SignalDecoderType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SignalDecoderType) Values() []SignalDecoderType {
 	return []SignalDecoderType{
 		"CAN_SIGNAL",
@@ -436,8 +452,9 @@ const (
 )
 
 // Values returns all known values for SignalNodeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SignalNodeType) Values() []SignalNodeType {
 	return []SignalNodeType{
 		"SENSOR",
@@ -458,8 +475,9 @@ const (
 )
 
 // Values returns all known values for SpoolingMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SpoolingMode) Values() []SpoolingMode {
 	return []SpoolingMode{
 		"OFF",
@@ -477,6 +495,7 @@ const (
 
 // Values returns all known values for StorageCompressionFormat. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (StorageCompressionFormat) Values() []StorageCompressionFormat {
 	return []StorageCompressionFormat{
@@ -496,6 +515,7 @@ const (
 
 // Values returns all known values for StructuredMessageListType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (StructuredMessageListType) Values() []StructuredMessageListType {
 	return []StructuredMessageListType{
@@ -514,8 +534,9 @@ const (
 )
 
 // Values returns all known values for TriggerMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TriggerMode) Values() []TriggerMode {
 	return []TriggerMode{
 		"ALWAYS",
@@ -534,8 +555,9 @@ const (
 )
 
 // Values returns all known values for UpdateCampaignAction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateCampaignAction) Values() []UpdateCampaignAction {
 	return []UpdateCampaignAction{
 		"APPROVE",
@@ -554,8 +576,9 @@ const (
 )
 
 // Values returns all known values for UpdateMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateMode) Values() []UpdateMode {
 	return []UpdateMode{
 		"Overwrite",
@@ -575,6 +598,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{
@@ -595,6 +619,7 @@ const (
 
 // Values returns all known values for VehicleAssociationBehavior. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (VehicleAssociationBehavior) Values() []VehicleAssociationBehavior {
 	return []VehicleAssociationBehavior{
@@ -612,6 +637,7 @@ const (
 
 // Values returns all known values for VehicleMiddlewareProtocol. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (VehicleMiddlewareProtocol) Values() []VehicleMiddlewareProtocol {
 	return []VehicleMiddlewareProtocol{
@@ -631,8 +657,9 @@ const (
 )
 
 // Values returns all known values for VehicleState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VehicleState) Values() []VehicleState {
 	return []VehicleState{
 		"CREATED",

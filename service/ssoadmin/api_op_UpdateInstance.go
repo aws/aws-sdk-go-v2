@@ -30,8 +30,7 @@ func (c *Client) UpdateInstance(ctx context.Context, params *UpdateInstanceInput
 type UpdateInstanceInput struct {
 
 	// The ARN of the instance of IAM Identity Center under which the operation will
-	// run. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// run. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespacesin the Amazon Web Services General
 	// Reference.
 	//
 	// This member is required.

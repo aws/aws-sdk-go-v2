@@ -44,7 +44,7 @@ type UpgradeElasticsearchDomainInput struct {
 	// This member is required.
 	TargetVersion *string
 
-	// This flag, when set to True, indicates that an Upgrade Eligibility Check needs
+	//  This flag, when set to True, indicates that an Upgrade Eligibility Check needs
 	// to be performed. This will not actually perform the Upgrade.
 	PerformCheckOnly *bool
 
@@ -63,7 +63,7 @@ type UpgradeElasticsearchDomainOutput struct {
 	// (hyphen).
 	DomainName *string
 
-	// This flag, when set to True, indicates that an Upgrade Eligibility Check needs
+	//  This flag, when set to True, indicates that an Upgrade Eligibility Check needs
 	// to be performed. This will not actually perform the Upgrade.
 	PerformCheckOnly *bool
 

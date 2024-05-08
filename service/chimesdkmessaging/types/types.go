@@ -251,15 +251,17 @@ type ChannelMessage struct {
 
 	// The content of the channel message. For Amazon Lex V2 bot responses, this field
 	// holds a list of messages originating from the bot. For more information, refer
-	// to Processing responses from an AppInstanceBot (https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html)
-	// in the Amazon Chime SDK Messaging Developer Guide.
+	// to [Processing responses from an AppInstanceBot]in the Amazon Chime SDK Messaging Developer Guide.
+	//
+	// [Processing responses from an AppInstanceBot]: https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html
 	Content *string
 
 	// The content type of the channel message. For Amazon Lex V2 bot responses, the
 	// content type is application/amz-chime-lex-msgs for success responses and
 	// application/amz-chime-lex-error for failure responses. For more information,
-	// refer to Processing responses from an AppInstanceBot (https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html)
-	// in the Amazon Chime SDK Messaging Developer Guide.
+	// refer to [Processing responses from an AppInstanceBot]in the Amazon Chime SDK Messaging Developer Guide.
+	//
+	// [Processing responses from an AppInstanceBot]: https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html
 	ContentType *string
 
 	// The time at which the message was created.
@@ -273,8 +275,9 @@ type ChannelMessage struct {
 
 	// The attributes for the channel message. For Amazon Lex V2 bot responses, the
 	// attributes are mapped to specific fields from the bot. For more information,
-	// refer to Processing responses from an AppInstanceBot (https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html)
-	// in the Amazon Chime SDK Messaging Developer Guide.
+	// refer to [Processing responses from an AppInstanceBot]in the Amazon Chime SDK Messaging Developer Guide.
+	//
+	// [Processing responses from an AppInstanceBot]: https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html
 	MessageAttributes map[string]MessageAttributeValue
 
 	// The ID of a message.
@@ -319,22 +322,25 @@ type ChannelMessageCallback struct {
 	MessageId *string
 
 	// The message content. For Amazon Lex V2 bot responses, this field holds a list
-	// of messages originating from the bot. For more information, refer to Processing
-	// responses from an AppInstanceBot (https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html)
-	// in the Amazon Chime SDK Messaging Developer Guide.
+	// of messages originating from the bot. For more information, refer to [Processing responses from an AppInstanceBot]in the
+	// Amazon Chime SDK Messaging Developer Guide.
+	//
+	// [Processing responses from an AppInstanceBot]: https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html
 	Content *string
 
 	// The content type of the call-back message. For Amazon Lex V2 bot responses, the
 	// content type is application/amz-chime-lex-msgs for success responses and
 	// application/amz-chime-lex-error for failure responses. For more information,
-	// refer to Processing responses from an AppInstanceBot (https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html)
-	// in the Amazon Chime SDK Messaging Developer Guide.
+	// refer to [Processing responses from an AppInstanceBot]in the Amazon Chime SDK Messaging Developer Guide.
+	//
+	// [Processing responses from an AppInstanceBot]: https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html
 	ContentType *string
 
 	// The attributes for the channel message. For Amazon Lex V2 bot responses, the
 	// attributes are mapped to specific fields from the bot. For more information,
-	// refer to Processing responses from an AppInstanceBot (https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html)
-	// in the Amazon Chime SDK Messaging Developer Guide.
+	// refer to [Processing responses from an AppInstanceBot]in the Amazon Chime SDK Messaging Developer Guide.
+	//
+	// [Processing responses from an AppInstanceBot]: https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html
 	MessageAttributes map[string]MessageAttributeValue
 
 	// The message metadata.
@@ -366,15 +372,18 @@ type ChannelMessageSummary struct {
 
 	// The content of the channel message. For Amazon Lex V2 bot responses, this field
 	// holds a list of messages originating from the bot. For more information, refer
-	// to Processing responses from an AppInstanceBot (https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html)
-	// in the Amazon Chime SDK Messaging Developer Guide.
+	// to [Processing responses from an AppInstanceBot]in the Amazon Chime SDK Messaging Developer Guide.
+	//
+	// [Processing responses from an AppInstanceBot]: https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html
 	Content *string
 
 	// The content type of the channel message listed in the summary. For Amazon Lex
 	// V2 bot responses, the content type is application/amz-chime-lex-msgs for
 	// success responses and application/amz-chime-lex-error for failure responses.
-	// For more information, refer to Processing responses from an AppInstanceBot (https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html)
-	// in the Amazon Chime SDK Messaging Developer Guide.
+	// For more information, refer to [Processing responses from an AppInstanceBot]in the Amazon Chime SDK Messaging Developer
+	// Guide.
+	//
+	// [Processing responses from an AppInstanceBot]: https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html
 	ContentType *string
 
 	// The time at which the message summary was created.
@@ -388,8 +397,9 @@ type ChannelMessageSummary struct {
 
 	// The attributes for the channel message. For Amazon Lex V2 bot responses, the
 	// attributes are mapped to specific fields from the bot. For more information,
-	// refer to Processing responses from an AppInstanceBot (https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html)
-	// in the Amazon Chime SDK Messaging Developer Guide.
+	// refer to [Processing responses from an AppInstanceBot]in the Amazon Chime SDK Messaging Developer Guide.
+	//
+	// [Processing responses from an AppInstanceBot]: https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html
 	MessageAttributes map[string]MessageAttributeValue
 
 	// The ID of the message.
@@ -668,8 +678,10 @@ type SearchField struct {
 	Operator SearchFieldOperator
 
 	// The values that you want to search for, a list of strings. The values must be
-	// AppInstanceUserArns specified as a list of strings. This operation isn't
-	// supported for AppInstanceUsers with large number of memberships.
+	// AppInstanceUserArns specified as a list of strings.
+	//
+	// This operation isn't supported for AppInstanceUsers with large number of
+	// memberships.
 	//
 	// This member is required.
 	Values []string

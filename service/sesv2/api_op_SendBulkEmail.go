@@ -28,8 +28,9 @@ func (c *Client) SendBulkEmail(ctx context.Context, params *SendBulkEmailInput, 
 }
 
 // Represents a request to send email messages to multiple destinations using
-// Amazon SES. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
-// .
+// Amazon SES. For more information, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
 type SendBulkEmailInput struct {
 
 	// The list of bulk email entry objects.
@@ -57,14 +58,18 @@ type SendBulkEmailInput struct {
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
 	// you to use the email address specified in the FeedbackForwardingEmailAddress
-	// parameter. For example, if the owner of example.com (which has ARN
+	// parameter.
+	//
+	// For example, if the owner of example.com (which has ARN
 	// arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it
 	// that authorizes you to use feedback@example.com, then you would specify the
 	// FeedbackForwardingEmailAddressIdentityArn to be
 	// arn:aws:ses:us-east-1:123456789012:identity/example.com, and the
-	// FeedbackForwardingEmailAddress to be feedback@example.com. For more information
-	// about sending authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
-	// .
+	// FeedbackForwardingEmailAddress to be feedback@example.com.
+	//
+	// For more information about sending authorization, see the [Amazon SES Developer Guide].
+	//
+	// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
 	FeedbackForwardingEmailAddressIdentityArn *string
 
 	// The email address to use as the "From" address for the email. The address that
@@ -73,15 +78,18 @@ type SendBulkEmailInput struct {
 
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
-	// you to use the email address specified in the FromEmailAddress parameter. For
-	// example, if the owner of example.com (which has ARN
+	// you to use the email address specified in the FromEmailAddress parameter.
+	//
+	// For example, if the owner of example.com (which has ARN
 	// arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it
 	// that authorizes you to use sender@example.com, then you would specify the
 	// FromEmailAddressIdentityArn to be
 	// arn:aws:ses:us-east-1:123456789012:identity/example.com, and the
-	// FromEmailAddress to be sender@example.com. For more information about sending
-	// authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
-	// .
+	// FromEmailAddress to be sender@example.com.
+	//
+	// For more information about sending authorization, see the [Amazon SES Developer Guide].
+	//
+	// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
 	FromEmailAddressIdentityArn *string
 
 	// The "Reply-to" email addresses for the message. When the recipient replies to

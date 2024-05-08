@@ -10,13 +10,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon Forecast dataset that was created using the CreateDataset (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html)
-// operation. You can only delete datasets that have a status of ACTIVE or
-// CREATE_FAILED . To get the status use the DescribeDataset (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDataset.html)
-// operation. Forecast does not automatically update any dataset groups that
-// contain the deleted dataset. In order to update the dataset group, use the
-// UpdateDatasetGroup (https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html)
-// operation, omitting the deleted dataset's ARN.
+// Deletes an Amazon Forecast dataset that was created using the [CreateDataset] operation. You
+// can only delete datasets that have a status of ACTIVE or CREATE_FAILED . To get
+// the status use the [DescribeDataset]operation.
+//
+// Forecast does not automatically update any dataset groups that contain the
+// deleted dataset. In order to update the dataset group, use the [UpdateDatasetGroup]operation,
+// omitting the deleted dataset's ARN.
+//
+// [CreateDataset]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html
+// [UpdateDatasetGroup]: https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html
+// [DescribeDataset]: https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDataset.html
 func (c *Client) DeleteDataset(ctx context.Context, params *DeleteDatasetInput, optFns ...func(*Options)) (*DeleteDatasetOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetInput{}

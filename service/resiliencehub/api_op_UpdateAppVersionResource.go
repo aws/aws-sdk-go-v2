@@ -12,10 +12,13 @@ import (
 )
 
 // Updates the resource details in the Resilience Hub application.
+//
 //   - This action has no effect outside Resilience Hub.
+//
 //   - This API updates the Resilience Hub application draft version. To use this
 //     resource for running resiliency assessments, you must publish the Resilience Hub
 //     application using the PublishAppVersion API.
+//
 //   - To update application version with new physicalResourceID , you must call
 //     ResolveAppVersionResources API.
 func (c *Client) UpdateAppVersionResource(ctx context.Context, params *UpdateAppVersionResourceInput, optFns ...func(*Options)) (*UpdateAppVersionResourceOutput, error) {
@@ -37,8 +40,10 @@ type UpdateAppVersionResourceInput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
+	// guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AppArn *string
@@ -56,8 +61,9 @@ type UpdateAppVersionResourceInput struct {
 	// Amazon Web Services region that owns the physical resource.
 	AwsRegion *string
 
-	// Indicates if a resource is excluded from an Resilience Hub application. You can
-	// exclude only imported resources from an Resilience Hub application.
+	// Indicates if a resource is excluded from an Resilience Hub application.
+	//
+	// You can exclude only imported resources from an Resilience Hub application.
 	Excluded *bool
 
 	// Logical identifier of the resource.
@@ -79,8 +85,10 @@ type UpdateAppVersionResourceOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
+	// guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AppArn *string

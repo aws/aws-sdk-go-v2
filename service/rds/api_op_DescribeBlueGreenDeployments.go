@@ -11,11 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes one or more blue/green deployments. For more information, see Using
-// Amazon RDS Blue/Green Deployments for database updates (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
-// in the Amazon RDS User Guide and Using Amazon RDS Blue/Green Deployments for
-// database updates (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
-// in the Amazon Aurora User Guide.
+// Describes one or more blue/green deployments.
+//
+// For more information, see [Using Amazon RDS Blue/Green Deployments for database updates] in the Amazon RDS User Guide and [Using Amazon RDS Blue/Green Deployments for database updates] in the Amazon
+// Aurora User Guide.
+//
+// [Using Amazon RDS Blue/Green Deployments for database updates]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
 func (c *Client) DescribeBlueGreenDeployments(ctx context.Context, params *DescribeBlueGreenDeploymentsInput, optFns ...func(*Options)) (*DescribeBlueGreenDeploymentsOutput, error) {
 	if params == nil {
 		params = &DescribeBlueGreenDeploymentsInput{}
@@ -35,21 +36,29 @@ type DescribeBlueGreenDeploymentsInput struct {
 
 	// The blue/green deployment identifier. If you specify this parameter, the
 	// response only includes information about the specific blue/green deployment.
-	// This parameter isn't case-sensitive. Constraints:
+	// This parameter isn't case-sensitive.
+	//
+	// Constraints:
+	//
 	//   - Must match an existing blue/green deployment identifier.
 	BlueGreenDeploymentIdentifier *string
 
-	// A filter that specifies one or more blue/green deployments to describe. Valid
-	// Values:
+	// A filter that specifies one or more blue/green deployments to describe.
+	//
+	// Valid Values:
+	//
 	//   - blue-green-deployment-identifier - Accepts system-generated identifiers for
 	//   blue/green deployments. The results list only includes information about the
 	//   blue/green deployments with the specified identifiers.
+	//
 	//   - blue-green-deployment-name - Accepts user-supplied names for blue/green
 	//   deployments. The results list only includes information about the blue/green
 	//   deployments with the specified names.
+	//
 	//   - source - Accepts source databases for a blue/green deployment. The results
 	//   list only includes information about the blue/green deployments with the
 	//   specified source databases.
+	//
 	//   - target - Accepts target databases for a blue/green deployment. The results
 	//   list only includes information about the blue/green deployments with the
 	//   specified target databases.
@@ -62,9 +71,14 @@ type DescribeBlueGreenDeploymentsInput struct {
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
+	// included in the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints:
+	//
 	//   - Must be a minimum of 20.
+	//
 	//   - Can't exceed 100.
 	MaxRecords *int32
 
@@ -179,9 +193,14 @@ var _ DescribeBlueGreenDeploymentsAPIClient = (*Client)(nil)
 type DescribeBlueGreenDeploymentsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
+	// included in the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints:
+	//
 	//   - Must be a minimum of 20.
+	//
 	//   - Can't exceed 100.
 	Limit int32
 

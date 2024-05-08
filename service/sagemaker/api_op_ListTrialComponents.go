@@ -16,8 +16,11 @@ import (
 // component name or creation time. You can filter the list to show only components
 // that were created in a specific time range. You can also filter on one of the
 // following:
+//
 //   - ExperimentName
+//
 //   - SourceArn
+//
 //   - TrialName
 func (c *Client) ListTrialComponents(ctx context.Context, params *ListTrialComponentsInput, optFns ...func(*Options)) (*ListTrialComponentsOutput, error) {
 	if params == nil {

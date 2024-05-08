@@ -13,7 +13,7 @@ import (
 )
 
 // Returns details about an event source mapping. You can get the identifier of a
-// mapping from the output of ListEventSourceMappings .
+// mapping from the output of ListEventSourceMappings.
 func (c *Client) GetEventSourceMapping(ctx context.Context, params *GetEventSourceMappingInput, optFns ...func(*Options)) (*GetEventSourceMappingOutput, error) {
 	if params == nil {
 		params = &GetEventSourceMappingInput{}
@@ -40,7 +40,7 @@ type GetEventSourceMappingInput struct {
 }
 
 // A mapping between an Amazon Web Services resource and a Lambda function. For
-// details, see CreateEventSourceMapping .
+// details, see CreateEventSourceMapping.
 type GetEventSourceMappingOutput struct {
 
 	// Specific configuration settings for an Amazon Managed Streaming for Apache
@@ -50,10 +50,13 @@ type GetEventSourceMappingOutput struct {
 	// The maximum number of records in each batch that Lambda pulls from your stream
 	// or queue and sends to your function. Lambda passes all of the records in the
 	// batch to the function in a single call, up to the payload limit for synchronous
-	// invocation (6 MB). Default value: Varies by service. For Amazon SQS, the default
-	// is 10. For all other services, the default is 100. Related setting: When you set
-	// BatchSize to a value greater than 10, you must set
-	// MaximumBatchingWindowInSeconds to at least 1.
+	// invocation (6 MB).
+	//
+	// Default value: Varies by service. For Amazon SQS, the default is 10. For all
+	// other services, the default is 100.
+	//
+	// Related setting: When you set BatchSize to a value greater than 10, you must
+	// set MaximumBatchingWindowInSeconds to at least 1.
 	BatchSize *int32
 
 	// (Kinesis and DynamoDB Streams only) If the function returns an error, split the
@@ -72,8 +75,9 @@ type GetEventSourceMappingOutput struct {
 	EventSourceArn *string
 
 	// An object that defines the filter criteria that determine whether Lambda should
-	// process an event. For more information, see Lambda event filtering (https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html)
-	// .
+	// process an event. For more information, see [Lambda event filtering].
+	//
+	// [Lambda event filtering]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html
 	FilterCriteria *types.FilterCriteria
 
 	// The ARN of the Lambda function.
@@ -92,23 +96,27 @@ type GetEventSourceMappingOutput struct {
 
 	// The maximum amount of time, in seconds, that Lambda spends gathering records
 	// before invoking the function. You can configure MaximumBatchingWindowInSeconds
-	// to any value from 0 seconds to 300 seconds in increments of seconds. For streams
-	// and Amazon SQS event sources, the default batching window is 0 seconds. For
-	// Amazon MSK, Self-managed Apache Kafka, Amazon MQ, and DocumentDB event sources,
-	// the default batching window is 500 ms. Note that because you can only change
-	// MaximumBatchingWindowInSeconds in increments of seconds, you cannot revert back
-	// to the 500 ms default batching window after you have changed it. To restore the
-	// default batching window, you must create a new event source mapping. Related
-	// setting: For streams and Amazon SQS event sources, when you set BatchSize to a
-	// value greater than 10, you must set MaximumBatchingWindowInSeconds to at least
-	// 1.
+	// to any value from 0 seconds to 300 seconds in increments of seconds.
+	//
+	// For streams and Amazon SQS event sources, the default batching window is 0
+	// seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ, and DocumentDB
+	// event sources, the default batching window is 500 ms. Note that because you can
+	// only change MaximumBatchingWindowInSeconds in increments of seconds, you cannot
+	// revert back to the 500 ms default batching window after you have changed it. To
+	// restore the default batching window, you must create a new event source mapping.
+	//
+	// Related setting: For streams and Amazon SQS event sources, when you set
+	// BatchSize to a value greater than 10, you must set
+	// MaximumBatchingWindowInSeconds to at least 1.
 	MaximumBatchingWindowInSeconds *int32
 
 	// (Kinesis and DynamoDB Streams only) Discard records older than the specified
 	// age. The default value is -1, which sets the maximum age to infinite. When the
-	// value is set to infinite, Lambda never discards old records. The minimum valid
-	// value for maximum record age is 60s. Although values less than 60 and greater
-	// than -1 fall within the parameter's absolute range, they are not allowed
+	// value is set to infinite, Lambda never discards old records.
+	//
+	// The minimum valid value for maximum record age is 60s. Although values less
+	// than 60 and greater than -1 fall within the parameter's absolute range, they are
+	// not allowed
 	MaximumRecordAgeInSeconds *int32
 
 	// (Kinesis and DynamoDB Streams only) Discard records after the specified number
@@ -121,12 +129,13 @@ type GetEventSourceMappingOutput struct {
 	// concurrently from each shard. The default value is 1.
 	ParallelizationFactor *int32
 
-	// (Amazon MQ) The name of the Amazon MQ broker destination queue to consume.
+	//  (Amazon MQ) The name of the Amazon MQ broker destination queue to consume.
 	Queues []string
 
 	// (Amazon SQS only) The scaling configuration for the event source. For more
-	// information, see Configuring maximum concurrency for Amazon SQS event sources (https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency)
-	// .
+	// information, see [Configuring maximum concurrency for Amazon SQS event sources].
+	//
+	// [Configuring maximum concurrency for Amazon SQS event sources]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency
 	ScalingConfig *types.ScalingConfig
 
 	// The self-managed Apache Kafka cluster for your event source.

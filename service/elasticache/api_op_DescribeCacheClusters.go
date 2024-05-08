@@ -19,18 +19,26 @@ import (
 
 // Returns information about all provisioned clusters if no cluster identifier is
 // specified, or about a specific cache cluster if a cluster identifier is
-// supplied. By default, abbreviated information about the clusters is returned.
-// You can use the optional ShowCacheNodeInfo flag to retrieve detailed information
-// about the cache nodes associated with the clusters. These details include the
-// DNS address and port for the cache node endpoint. If the cluster is in the
-// creating state, only cluster-level information is displayed until all of the
-// nodes are successfully provisioned. If the cluster is in the deleting state,
-// only cluster-level information is displayed. If cache nodes are currently being
-// added to the cluster, node endpoint information and creation time for the
-// additional nodes are not displayed until they are completely provisioned. When
-// the cluster state is available, the cluster is ready for use. If cache nodes are
-// currently being removed from the cluster, no endpoint information for the
-// removed nodes is displayed.
+// supplied.
+//
+// By default, abbreviated information about the clusters is returned. You can use
+// the optional ShowCacheNodeInfo flag to retrieve detailed information about the
+// cache nodes associated with the clusters. These details include the DNS address
+// and port for the cache node endpoint.
+//
+// If the cluster is in the creating state, only cluster-level information is
+// displayed until all of the nodes are successfully provisioned.
+//
+// If the cluster is in the deleting state, only cluster-level information is
+// displayed.
+//
+// If cache nodes are currently being added to the cluster, node endpoint
+// information and creation time for the additional nodes are not displayed until
+// they are completely provisioned. When the cluster state is available, the
+// cluster is ready for use.
+//
+// If cache nodes are currently being removed from the cluster, no endpoint
+// information for the removed nodes is displayed.
 func (c *Client) DescribeCacheClusters(ctx context.Context, params *DescribeCacheClustersInput, optFns ...func(*Options)) (*DescribeCacheClustersOutput, error) {
 	if params == nil {
 		params = &DescribeCacheClustersInput{}
@@ -62,8 +70,11 @@ type DescribeCacheClustersInput struct {
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: minimum 20; maximum 100.
 	MaxRecords *int32
 
 	// An optional flag that can be included in the DescribeCacheCluster request to
@@ -183,8 +194,11 @@ var _ DescribeCacheClustersAPIClient = (*Client)(nil)
 type DescribeCacheClustersPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: minimum 20; maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -298,12 +312,13 @@ type CacheClusterAvailableWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeCacheClustersInput, *DescribeCacheClustersOutput, error) (bool, error)
 }
 
@@ -583,12 +598,13 @@ type CacheClusterDeletedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeCacheClustersInput, *DescribeCacheClustersOutput, error) (bool, error)
 }
 

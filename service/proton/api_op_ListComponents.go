@@ -12,9 +12,11 @@ import (
 )
 
 // List components with summary data. You can filter the result list by
-// environment, service, or a single service instance. For more information about
-// components, see Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
-// in the Proton User Guide.
+// environment, service, or a single service instance.
+//
+// For more information about components, see [Proton components] in the Proton User Guide.
+//
+// [Proton components]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
 func (c *Client) ListComponents(ctx context.Context, params *ListComponentsInput, optFns ...func(*Options)) (*ListComponentsOutput, error) {
 	if params == nil {
 		params = &ListComponentsInput{}

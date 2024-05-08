@@ -11,12 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get the import job properties to learn more about the job or job progress. The
-// jobStatus refers to the execution of the import job. Therefore, an import job
-// can return a jobStatus as COMPLETED even if validation issues are discovered
-// during the import process. If a jobStatus returns as COMPLETED , we still
-// recommend you review the output manifests written to S3, as they provide details
-// on the success or failure of individual P10 object imports.
+// Get the import job properties to learn more about the job or job progress.
+//
+// The jobStatus refers to the execution of the import job. Therefore, an import
+// job can return a jobStatus as COMPLETED even if validation issues are
+// discovered during the import process. If a jobStatus returns as COMPLETED , we
+// still recommend you review the output manifests written to S3, as they provide
+// details on the success or failure of individual P10 object imports.
 func (c *Client) GetDICOMImportJob(ctx context.Context, params *GetDICOMImportJobInput, optFns ...func(*Options)) (*GetDICOMImportJobOutput, error) {
 	if params == nil {
 		params = &GetDICOMImportJobInput{}

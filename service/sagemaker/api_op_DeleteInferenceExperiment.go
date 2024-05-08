@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an inference experiment. This operation does not delete your endpoint,
-// variants, or any underlying resources. This operation only deletes the metadata
-// of your experiment.
+// Deletes an inference experiment.
+//
+// This operation does not delete your endpoint, variants, or any underlying
+// resources. This operation only deletes the metadata of your experiment.
 func (c *Client) DeleteInferenceExperiment(ctx context.Context, params *DeleteInferenceExperimentInput, optFns ...func(*Options)) (*DeleteInferenceExperimentOutput, error) {
 	if params == nil {
 		params = &DeleteInferenceExperimentInput{}

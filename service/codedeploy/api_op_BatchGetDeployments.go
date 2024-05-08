@@ -31,8 +31,8 @@ func (c *Client) BatchGetDeployments(ctx context.Context, params *BatchGetDeploy
 // Represents the input of a BatchGetDeployments operation.
 type BatchGetDeploymentsInput struct {
 
-	// A list of deployment IDs, separated by spaces. The maximum number of deployment
-	// IDs you can specify is 25.
+	//  A list of deployment IDs, separated by spaces. The maximum number of
+	// deployment IDs you can specify is 25.
 	//
 	// This member is required.
 	DeploymentIds []string
@@ -43,7 +43,7 @@ type BatchGetDeploymentsInput struct {
 // Represents the output of a BatchGetDeployments operation.
 type BatchGetDeploymentsOutput struct {
 
-	// Information about the deployments.
+	//  Information about the deployments.
 	DeploymentsInfo []types.DeploymentInfo
 
 	// Metadata pertaining to the operation's result.

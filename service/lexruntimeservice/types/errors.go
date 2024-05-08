@@ -34,7 +34,8 @@ func (e *BadGatewayException) ErrorCode() string {
 }
 func (e *BadGatewayException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Request validation failed, there is no usable message in the context, or the
+//	Request validation failed, there is no usable message in the context, or the
+//
 // bot build failed, is still in progress, or contains unbuilt changes.
 type BadRequestException struct {
 	Message *string
@@ -87,11 +88,15 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// One of the dependencies, such as AWS Lambda or Amazon Polly, threw an
+//	One of the dependencies, such as AWS Lambda or Amazon Polly, threw an
+//
 // exception. For example,
+//
 //   - If Amazon Lex does not have sufficient permissions to call a Lambda
 //     function.
+//
 //   - If a Lambda function takes longer than 30 seconds to execute.
+//
 //   - If a fulfillment Lambda function returns a Delegate dialog action without
 //     removing any slot values.
 type DependencyFailedException struct {

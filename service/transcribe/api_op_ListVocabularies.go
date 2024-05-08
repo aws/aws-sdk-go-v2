@@ -12,8 +12,10 @@ import (
 )
 
 // Provides a list of custom vocabularies that match the specified criteria. If no
-// criteria are specified, all custom vocabularies are returned. To get detailed
-// information about a specific custom vocabulary, use the operation.
+// criteria are specified, all custom vocabularies are returned.
+//
+// To get detailed information about a specific custom vocabulary, use the
+// operation.
 func (c *Client) ListVocabularies(ctx context.Context, params *ListVocabulariesInput, optFns ...func(*Options)) (*ListVocabulariesOutput, error) {
 	if params == nil {
 		params = &ListVocabulariesInput{}

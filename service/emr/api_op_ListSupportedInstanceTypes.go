@@ -30,13 +30,13 @@ func (c *Client) ListSupportedInstanceTypes(ctx context.Context, params *ListSup
 
 type ListSupportedInstanceTypesInput struct {
 
-	// The Amazon EMR release label determines the versions of open-source application
-	// packages (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-app-versions-6.x.html)
-	// that Amazon EMR has installed on the cluster. Release labels are in the format
-	// emr-x.x.x , where x.x.x is an Amazon EMR release number such as emr-6.10.0 . For
-	// more information about Amazon EMR releases and their included application
-	// versions and features, see the Amazon EMR Release Guide (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-components.html)
-	// .
+	// The Amazon EMR release label determines the [versions of open-source application packages] that Amazon EMR has installed on
+	// the cluster. Release labels are in the format emr-x.x.x , where x.x.x is an
+	// Amazon EMR release number such as emr-6.10.0 . For more information about Amazon
+	// EMR releases and their included application versions and features, see the [Amazon EMR Release Guide].
+	//
+	// [Amazon EMR Release Guide]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-components.html
+	// [versions of open-source application packages]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-app-versions-6.x.html
 	//
 	// This member is required.
 	ReleaseLabel *string

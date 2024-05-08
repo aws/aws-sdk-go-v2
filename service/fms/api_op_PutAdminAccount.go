@@ -12,16 +12,16 @@ import (
 )
 
 // Creates or updates an Firewall Manager administrator account. The account must
-// be a member of the organization that was onboarded to Firewall Manager by
-// AssociateAdminAccount . Only the organization's management account can create an
-// Firewall Manager administrator account. When you create an Firewall Manager
-// administrator account, the service checks to see if the account is already a
-// delegated administrator within Organizations. If the account isn't a delegated
+// be a member of the organization that was onboarded to Firewall Manager by AssociateAdminAccount.
+// Only the organization's management account can create an Firewall Manager
+// administrator account. When you create an Firewall Manager administrator
+// account, the service checks to see if the account is already a delegated
+// administrator within Organizations. If the account isn't a delegated
 // administrator, Firewall Manager calls Organizations to delegate the account
 // within Organizations. For more information about administrator accounts within
-// Organizations, see Managing the Amazon Web Services Accounts in Your
-// Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html)
-// .
+// Organizations, see [Managing the Amazon Web Services Accounts in Your Organization].
+//
+// [Managing the Amazon Web Services Accounts in Your Organization]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html
 func (c *Client) PutAdminAccount(ctx context.Context, params *PutAdminAccountInput, optFns ...func(*Options)) (*PutAdminAccountOutput, error) {
 	if params == nil {
 		params = &PutAdminAccountInput{}
@@ -41,10 +41,9 @@ type PutAdminAccountInput struct {
 
 	// The Amazon Web Services account ID to add as an Firewall Manager administrator
 	// account. The account must be a member of the organization that was onboarded to
-	// Firewall Manager by AssociateAdminAccount . For more information about
-	// Organizations, see Managing the Amazon Web Services Accounts in Your
-	// Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html)
-	// .
+	// Firewall Manager by AssociateAdminAccount. For more information about Organizations, see [Managing the Amazon Web Services Accounts in Your Organization].
+	//
+	// [Managing the Amazon Web Services Accounts in Your Organization]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html
 	//
 	// This member is required.
 	AdminAccount *string

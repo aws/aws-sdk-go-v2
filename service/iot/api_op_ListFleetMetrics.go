@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all your fleet metrics. Requires permission to access the ListFleetMetrics (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Lists all your fleet metrics.
+//
+// Requires permission to access the [ListFleetMetrics] action.
+//
+// [ListFleetMetrics]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListFleetMetrics(ctx context.Context, params *ListFleetMetricsInput, optFns ...func(*Options)) (*ListFleetMetricsOutput, error) {
 	if params == nil {
 		params = &ListFleetMetricsInput{}

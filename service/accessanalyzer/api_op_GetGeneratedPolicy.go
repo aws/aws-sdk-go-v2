@@ -38,15 +38,17 @@ type GetGeneratedPolicyInput struct {
 
 	// The level of detail that you want to generate. You can specify whether to
 	// generate policies with placeholders for resource ARNs for actions that support
-	// resource level granularity in policies. For example, in the resource section of
-	// a policy, you can receive a placeholder such as
-	// "Resource":"arn:aws:s3:::${BucketName}" instead of "*" .
+	// resource level granularity in policies.
+	//
+	// For example, in the resource section of a policy, you can receive a placeholder
+	// such as "Resource":"arn:aws:s3:::${BucketName}" instead of "*" .
 	IncludeResourcePlaceholders *bool
 
 	// The level of detail that you want to generate. You can specify whether to
-	// generate service-level policies. IAM Access Analyzer uses
-	// iam:servicelastaccessed to identify services that have been used recently to
-	// create this service-level template.
+	// generate service-level policies.
+	//
+	// IAM Access Analyzer uses iam:servicelastaccessed to identify services that have
+	// been used recently to create this service-level template.
 	IncludeServiceLevelTemplate *bool
 
 	noSmithyDocumentSerde

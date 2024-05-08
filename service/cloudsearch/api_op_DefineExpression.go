@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Configures an Expression for the search domain. Used to create new expressions
-// and modify existing ones. If the expression exists, the new configuration
-// replaces the old one. For more information, see Configuring Expressions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
-// in the Amazon CloudSearch Developer Guide.
+// Configures an Expression for the search domain. Used to create new expressions and modify
+// existing ones. If the expression exists, the new configuration replaces the old
+// one. For more information, see [Configuring Expressions]in the Amazon CloudSearch Developer Guide.
+//
+// [Configuring Expressions]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html
 func (c *Client) DefineExpression(ctx context.Context, params *DefineExpressionInput, optFns ...func(*Options)) (*DefineExpressionOutput, error) {
 	if params == nil {
 		params = &DefineExpressionInput{}
@@ -30,8 +31,8 @@ func (c *Client) DefineExpression(ctx context.Context, params *DefineExpressionI
 	return out, nil
 }
 
-// Container for the parameters to the DefineExpression operation. Specifies the
-// name of the domain you want to update and the expression you want to configure.
+// Container for the parameters to the DefineExpression operation. Specifies the name of the
+// domain you want to update and the expression you want to configure.
 type DefineExpressionInput struct {
 
 	// A string that represents the name of a domain. Domain names are unique across

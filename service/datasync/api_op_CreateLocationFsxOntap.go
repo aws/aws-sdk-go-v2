@@ -13,9 +13,10 @@ import (
 
 // Creates a transfer location for an Amazon FSx for NetApp ONTAP file system.
 // DataSync can use this location as a source or destination for transferring data.
-// Before you begin, make sure that you understand how DataSync accesses FSx for
-// ONTAP file systems (https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access)
-// .
+//
+// Before you begin, make sure that you understand how DataSync [accesses FSx for ONTAP file systems].
+//
+// [accesses FSx for ONTAP file systems]: https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access
 func (c *Client) CreateLocationFsxOntap(ctx context.Context, params *CreateLocationFsxOntapInput, optFns ...func(*Options)) (*CreateLocationFsxOntapOutput, error) {
 	if params == nil {
 		params = &CreateLocationFsxOntapInput{}
@@ -40,10 +41,15 @@ type CreateLocationFsxOntapInput struct {
 	Protocol *types.FsxProtocol
 
 	// Specifies the Amazon EC2 security groups that provide access to your file
-	// system's preferred subnet. The security groups must allow outbound traffic on
-	// the following ports (depending on the protocol you use):
+	// system's preferred subnet.
+	//
+	// The security groups must allow outbound traffic on the following ports
+	// (depending on the protocol you use):
+	//
 	//   - Network File System (NFS): TCP ports 111, 635, and 2049
+	//
 	//   - Server Message Block (SMB): TCP port 445
+	//
 	// Your file system's security groups must also allow inbound traffic on the same
 	// ports.
 	//
@@ -56,13 +62,16 @@ type CreateLocationFsxOntapInput struct {
 	// This member is required.
 	StorageVirtualMachineArn *string
 
-	// Specifies a path to the file share in the SVM where you'll copy your data. You
-	// can specify a junction path (also known as a mount point), qtree path (for NFS
-	// file shares), or share name (for SMB file shares). For example, your mount path
-	// might be /vol1 , /vol1/tree1 , or /share1 . Don't specify a junction path in the
-	// SVM's root volume. For more information, see Managing FSx for ONTAP storage
-	// virtual machines (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html)
-	// in the Amazon FSx for NetApp ONTAP User Guide.
+	// Specifies a path to the file share in the SVM where you'll copy your data.
+	//
+	// You can specify a junction path (also known as a mount point), qtree path (for
+	// NFS file shares), or share name (for SMB file shares). For example, your mount
+	// path might be /vol1 , /vol1/tree1 , or /share1 .
+	//
+	// Don't specify a junction path in the SVM's root volume. For more information,
+	// see [Managing FSx for ONTAP storage virtual machines]in the Amazon FSx for NetApp ONTAP User Guide.
+	//
+	// [Managing FSx for ONTAP storage virtual machines]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html
 	Subdirectory *string
 
 	// Specifies labels that help you categorize, filter, and search for your Amazon

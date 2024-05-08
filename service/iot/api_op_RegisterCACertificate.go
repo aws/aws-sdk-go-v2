@@ -14,9 +14,11 @@ import (
 // Registers a CA certificate with Amazon Web Services IoT Core. There is no limit
 // to the number of CA certificates you can register in your Amazon Web Services
 // account. You can register up to 10 CA certificates with the same CA subject
-// field per Amazon Web Services account. Requires permission to access the
-// RegisterCACertificate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// field per Amazon Web Services account.
+//
+// Requires permission to access the [RegisterCACertificate] action.
+//
+// [RegisterCACertificate]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) RegisterCACertificate(ctx context.Context, params *RegisterCACertificateInput, optFns ...func(*Options)) (*RegisterCACertificateOutput, error) {
 	if params == nil {
 		params = &RegisterCACertificateInput{}
@@ -50,22 +52,27 @@ type RegisterCACertificateInput struct {
 	// provided, set certificateMode to be DEFAULT . When certificateMode is not
 	// provided, it defaults to DEFAULT . All the device certificates that are
 	// registered using this CA will be registered in the same certificate mode as the
-	// CA. For more information about certificate mode for device certificates, see
-	// certificate mode (https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode)
-	// .
+	// CA. For more information about certificate mode for device certificates, see [certificate mode].
+	//
+	// [certificate mode]: https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode
 	CertificateMode types.CertificateMode
 
 	// Information about the registration configuration.
 	RegistrationConfig *types.RegistrationConfig
 
-	// A boolean value that specifies if the CA certificate is set to active. Valid
-	// values: ACTIVE | INACTIVE
+	// A boolean value that specifies if the CA certificate is set to active.
+	//
+	// Valid values: ACTIVE | INACTIVE
 	SetAsActive bool
 
-	// Metadata which can be used to manage the CA certificate. For URI Request
-	// parameters use format: ...key1=value1&key2=value2... For the CLI command-line
-	// parameter use format: &&tags "key1=value1&key2=value2..." For the cli-input-json
-	// file use format: "tags": "key1=value1&key2=value2..."
+	// Metadata which can be used to manage the CA certificate.
+	//
+	// For URI Request parameters use format: ...key1=value1&key2=value2...
+	//
+	// For the CLI command-line parameter use format: &&tags
+	// "key1=value1&key2=value2..."
+	//
+	// For the cli-input-json file use format: "tags": "key1=value1&key2=value2..."
 	Tags []types.Tag
 
 	// The private key verification certificate. If certificateMode is SNI_ONLY , the

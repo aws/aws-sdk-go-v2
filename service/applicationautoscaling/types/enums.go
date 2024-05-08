@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for AdjustmentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AdjustmentType) Values() []AdjustmentType {
 	return []AdjustmentType{
 		"ChangeInCapacity",
@@ -32,8 +33,9 @@ const (
 )
 
 // Values returns all known values for MetricAggregationType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MetricAggregationType) Values() []MetricAggregationType {
 	return []MetricAggregationType{
 		"Average",
@@ -54,8 +56,9 @@ const (
 )
 
 // Values returns all known values for MetricStatistic. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MetricStatistic) Values() []MetricStatistic {
 	return []MetricStatistic{
 		"Average",
@@ -97,8 +100,9 @@ const (
 )
 
 // Values returns all known values for MetricType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MetricType) Values() []MetricType {
 	return []MetricType{
 		"DynamoDBReadCapacityUtilization",
@@ -137,8 +141,9 @@ const (
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PolicyType) Values() []PolicyType {
 	return []PolicyType{
 		"StepScaling",
@@ -175,8 +180,9 @@ const (
 )
 
 // Values returns all known values for ScalableDimension. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScalableDimension) Values() []ScalableDimension {
 	return []ScalableDimension{
 		"ecs:service:DesiredCount",
@@ -218,6 +224,7 @@ const (
 
 // Values returns all known values for ScalingActivityStatusCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ScalingActivityStatusCode) Values() []ScalingActivityStatusCode {
 	return []ScalingActivityStatusCode{
@@ -251,8 +258,9 @@ const (
 )
 
 // Values returns all known values for ServiceNamespace. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceNamespace) Values() []ServiceNamespace {
 	return []ServiceNamespace{
 		"ecs",

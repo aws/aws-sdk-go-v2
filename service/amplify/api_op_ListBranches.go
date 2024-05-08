@@ -35,7 +35,7 @@ type ListBranchesInput struct {
 	// This member is required.
 	AppId *string
 
-	// The maximum number of records to list in a single response.
+	//  The maximum number of records to list in a single response.
 	MaxResults int32
 
 	// A pagination token. Set to null to start listing branches from the start. If a
@@ -49,12 +49,12 @@ type ListBranchesInput struct {
 // The result structure for the list branches request.
 type ListBranchesOutput struct {
 
-	// A list of branches for an Amplify app.
+	//  A list of branches for an Amplify app.
 	//
 	// This member is required.
 	Branches []types.Branch
 
-	// A pagination token. If a non-null pagination token is returned in a result,
+	//  A pagination token. If a non-null pagination token is returned in a result,
 	// pass its value in another request to retrieve more entries.
 	NextToken *string
 
@@ -152,7 +152,7 @@ var _ ListBranchesAPIClient = (*Client)(nil)
 
 // ListBranchesPaginatorOptions is the paginator options for ListBranches
 type ListBranchesPaginatorOptions struct {
-	// The maximum number of records to list in a single response.
+	//  The maximum number of records to list in a single response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

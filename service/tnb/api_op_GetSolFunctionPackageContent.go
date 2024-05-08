@@ -11,11 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the contents of a function package. A function package is a .zip file in
-// CSAR (Cloud Service Archive) format that contains a network function (an ETSI
-// standard telecommunication application) and function package descriptor that
-// uses the TOSCA standard to describe how the network functions should run on your
-// network.
+// Gets the contents of a function package.
+//
+// A function package is a .zip file in CSAR (Cloud Service Archive) format that
+// contains a network function (an ETSI standard telecommunication application) and
+// function package descriptor that uses the TOSCA standard to describe how the
+// network functions should run on your network.
 func (c *Client) GetSolFunctionPackageContent(ctx context.Context, params *GetSolFunctionPackageContentInput, optFns ...func(*Options)) (*GetSolFunctionPackageContentOutput, error) {
 	if params == nil {
 		params = &GetSolFunctionPackageContentInput{}

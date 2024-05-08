@@ -11,16 +11,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified key pair by removing the public key from Amazon
-// Lightsail. You can delete key pairs that were created using the ImportKeyPair (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_ImportKeyPair.html)
-// and CreateKeyPair (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateKeyPair.html)
-// actions, as well as the Lightsail default key pair. A new default key pair will
-// not be created unless you launch an instance without specifying a custom key
-// pair, or you call the DownloadDefaultKeyPair (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_DownloadDefaultKeyPair.html)
-// API. The delete key pair operation supports tag-based access control via
-// resource tags applied to the resource identified by key pair name . For more
-// information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
-// .
+// Deletes the specified key pair by removing the public key from Amazon Lightsail.
+//
+// You can delete key pairs that were created using the [ImportKeyPair] and [CreateKeyPair] actions, as well as
+// the Lightsail default key pair. A new default key pair will not be created
+// unless you launch an instance without specifying a custom key pair, or you call
+// the [DownloadDefaultKeyPair]API.
+//
+// The delete key pair operation supports tag-based access control via resource
+// tags applied to the resource identified by key pair name . For more information,
+// see the [Amazon Lightsail Developer Guide].
+//
+// [ImportKeyPair]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_ImportKeyPair.html
+// [CreateKeyPair]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateKeyPair.html
+// [DownloadDefaultKeyPair]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_DownloadDefaultKeyPair.html
+// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
 func (c *Client) DeleteKeyPair(ctx context.Context, params *DeleteKeyPairInput, optFns ...func(*Options)) (*DeleteKeyPairOutput, error) {
 	if params == nil {
 		params = &DeleteKeyPairInput{}
@@ -43,8 +48,9 @@ type DeleteKeyPairInput struct {
 	// This member is required.
 	KeyPairName *string
 
-	// The RSA fingerprint of the Lightsail default key pair to delete. The
-	// expectedFingerprint parameter is required only when specifying to delete a
+	// The RSA fingerprint of the Lightsail default key pair to delete.
+	//
+	// The expectedFingerprint parameter is required only when specifying to delete a
 	// Lightsail default key pair.
 	ExpectedFingerprint *string
 

@@ -31,7 +31,7 @@ type Action struct {
 	// This member is required.
 	ApprovalModel ApprovalModel
 
-	// A string that represents the budget name. The ":" and "\" characters, and the
+	//  A string that represents the budget name. The ":" and "\" characters, and the
 	// "/action/" substring, aren't allowed.
 	//
 	// This member is required.
@@ -48,7 +48,7 @@ type Action struct {
 	// This member is required.
 	ExecutionRoleArn *string
 
-	// The type of a notification. It must be ACTUAL or FORECASTED.
+	//  The type of a notification. It must be ACTUAL or FORECASTED.
 	//
 	// This member is required.
 	NotificationType NotificationType
@@ -58,7 +58,7 @@ type Action struct {
 	// This member is required.
 	Status ActionStatus
 
-	// A list of subscribers.
+	//  A list of subscribers.
 	//
 	// This member is required.
 	Subscribers []Subscriber
@@ -85,7 +85,7 @@ type ActionHistory struct {
 	// This member is required.
 	Status ActionStatus
 
-	// A generic time stamp. In Java, it's transformed to a Date object.
+	//  A generic time stamp. In Java, it's transformed to a Date object.
 	//
 	// This member is required.
 	Timestamp *time.Time
@@ -101,7 +101,7 @@ type ActionHistoryDetails struct {
 	// This member is required.
 	Action *Action
 
-	// A generic string.
+	//  A generic string.
 	//
 	// This member is required.
 	Message *string
@@ -112,12 +112,12 @@ type ActionHistoryDetails struct {
 // The trigger threshold of the action.
 type ActionThreshold struct {
 
-	// The type of threshold for a notification.
+	//  The type of threshold for a notification.
 	//
 	// This member is required.
 	ActionThresholdType ThresholdType
 
-	// The threshold of a notification.
+	//  The threshold of a notification.
 	//
 	// This member is required.
 	ActionThresholdValue float64
@@ -146,8 +146,11 @@ type AutoAdjustData struct {
 
 // Represents the output of the CreateBudget operation. The content consists of
 // the detailed metadata and data file information, and the current status of the
-// budget object. This is the Amazon Resource Name (ARN) pattern for a budget:
-// arn:aws:budgets::AccountId:budget/budgetName
+// budget object.
+//
+// This is the Amazon Resource Name (ARN) pattern for a budget:
+//
+//	arn:aws:budgets::AccountId:budget/budgetName
 type Budget struct {
 
 	// The name of a budget. The name must be unique within an account. The : and \
@@ -172,6 +175,7 @@ type Budget struct {
 
 	// The total amount of cost, usage, RI utilization, RI coverage, Savings Plans
 	// utilization, or Savings Plans coverage that you want to track with your budget.
+	//
 	// BudgetLimit is required for cost or usage budgets, but optional for RI or
 	// Savings Plans utilization or coverage budgets. RI and Savings Plans utilization
 	// or coverage budgets default to 100 . This is the only valid value for RI or
@@ -183,38 +187,56 @@ type Budget struct {
 	CalculatedSpend *CalculatedSpend
 
 	// The cost filters, such as Region , Service , LinkedAccount , Tag , or
-	// CostCategory , that are applied to a budget. Amazon Web Services Budgets
-	// supports the following services as a Service filter for RI budgets:
+	// CostCategory , that are applied to a budget.
+	//
+	// Amazon Web Services Budgets supports the following services as a Service filter
+	// for RI budgets:
+	//
 	//   - Amazon EC2
+	//
 	//   - Amazon Redshift
+	//
 	//   - Amazon Relational Database Service
+	//
 	//   - Amazon ElastiCache
+	//
 	//   - Amazon OpenSearch Service
 	CostFilters map[string][]string
 
-	// The types of costs that are included in this COST budget. USAGE , RI_UTILIZATION
-	// , RI_COVERAGE , SAVINGS_PLANS_UTILIZATION , and SAVINGS_PLANS_COVERAGE budgets
-	// do not have CostTypes .
+	// The types of costs that are included in this COST budget.
+	//
+	// USAGE , RI_UTILIZATION , RI_COVERAGE , SAVINGS_PLANS_UTILIZATION , and
+	// SAVINGS_PLANS_COVERAGE budgets do not have CostTypes .
 	CostTypes *CostTypes
 
 	// The last time that you updated this budget.
 	LastUpdatedTime *time.Time
 
 	// A map containing multiple BudgetLimit , including current or future limits.
+	//
 	// PlannedBudgetLimits is available for cost or usage budget and supports both
-	// monthly and quarterly TimeUnit . For monthly budgets, provide 12 months of
-	// PlannedBudgetLimits values. This must start from the current month and include
-	// the next 11 months. The key is the start of the month, UTC in epoch seconds.
+	// monthly and quarterly TimeUnit .
+	//
+	// For monthly budgets, provide 12 months of PlannedBudgetLimits values. This must
+	// start from the current month and include the next 11 months. The key is the
+	// start of the month, UTC in epoch seconds.
+	//
 	// For quarterly budgets, provide four quarters of PlannedBudgetLimits value
 	// entries in standard calendar quarter increments. This must start from the
 	// current quarter and include the next three quarters. The key is the start of
-	// the quarter, UTC in epoch seconds. If the planned budget expires before 12
-	// months for monthly or four quarters for quarterly, provide the
-	// PlannedBudgetLimits values only for the remaining periods. If the budget begins
-	// at a date in the future, provide PlannedBudgetLimits values from the start date
-	// of the budget. After all of the BudgetLimit values in PlannedBudgetLimits are
-	// used, the budget continues to use the last limit as the BudgetLimit . At that
-	// point, the planned budget provides the same experience as a fixed budget.
+	// the quarter, UTC in epoch seconds.
+	//
+	// If the planned budget expires before 12 months for monthly or four quarters for
+	// quarterly, provide the PlannedBudgetLimits values only for the remaining
+	// periods.
+	//
+	// If the budget begins at a date in the future, provide PlannedBudgetLimits
+	// values from the start date of the budget.
+	//
+	// After all of the BudgetLimit values in PlannedBudgetLimits are used, the budget
+	// continues to use the last limit as the BudgetLimit . At that point, the planned
+	// budget provides the same experience as a fixed budget.
+	//
 	// DescribeBudget and DescribeBudgets response along with PlannedBudgetLimits also
 	// contain BudgetLimit representing the current month or quarter limit present in
 	// PlannedBudgetLimits . This only applies to budgets that are created with
@@ -224,17 +246,21 @@ type Budget struct {
 
 	// The period of time that's covered by a budget. You setthe start date and end
 	// date. The start date must come before the end date. The end date must come
-	// before 06/15/87 00:00 UTC . If you create your budget and don't specify a start
-	// date, Amazon Web Services defaults to the start of your chosen time period
-	// (DAILY, MONTHLY, QUARTERLY, or ANNUALLY). For example, if you created your
-	// budget on January 24, 2018, chose DAILY , and didn't set a start date, Amazon
-	// Web Services set your start date to 01/24/18 00:00 UTC . If you chose MONTHLY ,
-	// Amazon Web Services set your start date to 01/01/18 00:00 UTC . If you didn't
-	// specify an end date, Amazon Web Services set your end date to 06/15/87 00:00 UTC
-	// . The defaults are the same for the Billing and Cost Management console and the
-	// API. You can change either date with the UpdateBudget operation. After the end
-	// date, Amazon Web Services deletes the budget and all the associated
-	// notifications and subscribers.
+	// before 06/15/87 00:00 UTC .
+	//
+	// If you create your budget and don't specify a start date, Amazon Web Services
+	// defaults to the start of your chosen time period (DAILY, MONTHLY, QUARTERLY, or
+	// ANNUALLY). For example, if you created your budget on January 24, 2018, chose
+	// DAILY , and didn't set a start date, Amazon Web Services set your start date to
+	// 01/24/18 00:00 UTC . If you chose MONTHLY , Amazon Web Services set your start
+	// date to 01/01/18 00:00 UTC . If you didn't specify an end date, Amazon Web
+	// Services set your end date to 06/15/87 00:00 UTC . The defaults are the same for
+	// the Billing and Cost Management console and the API.
+	//
+	// You can change either date with the UpdateBudget operation.
+	//
+	// After the end date, Amazon Web Services deletes the budget and all the
+	// associated notifications and subscribers.
 	TimePeriod *TimePeriod
 
 	noSmithyDocumentSerde
@@ -259,11 +285,11 @@ type BudgetedAndActualAmounts struct {
 // The budget name and associated notifications for an account.
 type BudgetNotificationsForAccount struct {
 
-	// A string that represents the budget name. The ":" and "\" characters, and the
+	//  A string that represents the budget name. The ":" and "\" characters, and the
 	// "/action/" substring, aren't allowed.
 	BudgetName *string
 
-	// A list of notifications.
+	//  A list of notifications.
 	Notifications []Notification
 
 	noSmithyDocumentSerde
@@ -273,12 +299,13 @@ type BudgetNotificationsForAccount struct {
 // period.
 type BudgetPerformanceHistory struct {
 
-	// A string that represents the budget name. The ":" and "\" characters, and the
+	//  A string that represents the budget name. The ":" and "\" characters, and the
 	// "/action/" substring, aren't allowed.
 	BudgetName *string
 
-	// The type of a budget. It must be one of the following types: COST , USAGE ,
-	// RI_UTILIZATION , RI_COVERAGE , SAVINGS_PLANS_UTILIZATION , or
+	//  The type of a budget. It must be one of the following types:
+	//
+	// COST , USAGE , RI_UTILIZATION , RI_COVERAGE , SAVINGS_PLANS_UTILIZATION , or
 	// SAVINGS_PLANS_COVERAGE .
 	BudgetType BudgetType
 
@@ -292,7 +319,7 @@ type BudgetPerformanceHistory struct {
 	// The history of the cost types for a budget during the specified time period.
 	CostTypes *CostTypes
 
-	// The time unit of the budget, such as MONTHLY or QUARTERLY.
+	//  The time unit of the budget, such as MONTHLY or QUARTERLY.
 	TimeUnit TimeUnit
 
 	noSmithyDocumentSerde
@@ -301,9 +328,10 @@ type BudgetPerformanceHistory struct {
 // The spend objects that are associated with this budget. The actualSpend tracks
 // how much you've used, cost, usage, RI units, or Savings Plans units and the
 // forecastedSpend tracks how much that you're predicted to spend based on your
-// historical usage profile. For example, if it's the 20th of the month and you
-// have spent 50 dollars on Amazon EC2, your actualSpend is 50 USD , and your
-// forecastedSpend is 75 USD .
+// historical usage profile.
+//
+// For example, if it's the 20th of the month and you have spent 50 dollars on
+// Amazon EC2, your actualSpend is 50 USD , and your forecastedSpend is 75 USD .
 type CalculatedSpend struct {
 
 	// The amount of cost, usage, RI units, or Savings Plans units that you used.
@@ -319,44 +347,65 @@ type CalculatedSpend struct {
 }
 
 // The types of cost that are included in a COST budget, such as tax and
-// subscriptions. USAGE , RI_UTILIZATION , RI_COVERAGE , SAVINGS_PLANS_UTILIZATION
-// , and SAVINGS_PLANS_COVERAGE budgets don't have CostTypes .
+// subscriptions.
+//
+// USAGE , RI_UTILIZATION , RI_COVERAGE , SAVINGS_PLANS_UTILIZATION , and
+// SAVINGS_PLANS_COVERAGE budgets don't have CostTypes .
 type CostTypes struct {
 
-	// Specifies whether a budget includes credits. The default value is true .
+	// Specifies whether a budget includes credits.
+	//
+	// The default value is true .
 	IncludeCredit *bool
 
-	// Specifies whether a budget includes discounts. The default value is true .
+	// Specifies whether a budget includes discounts.
+	//
+	// The default value is true .
 	IncludeDiscount *bool
 
-	// Specifies whether a budget includes non-RI subscription costs. The default
-	// value is true .
+	// Specifies whether a budget includes non-RI subscription costs.
+	//
+	// The default value is true .
 	IncludeOtherSubscription *bool
 
-	// Specifies whether a budget includes recurring fees such as monthly RI fees. The
-	// default value is true .
+	// Specifies whether a budget includes recurring fees such as monthly RI fees.
+	//
+	// The default value is true .
 	IncludeRecurring *bool
 
-	// Specifies whether a budget includes refunds. The default value is true .
+	// Specifies whether a budget includes refunds.
+	//
+	// The default value is true .
 	IncludeRefund *bool
 
-	// Specifies whether a budget includes subscriptions. The default value is true .
+	// Specifies whether a budget includes subscriptions.
+	//
+	// The default value is true .
 	IncludeSubscription *bool
 
-	// Specifies whether a budget includes support subscription fees. The default
-	// value is true .
+	// Specifies whether a budget includes support subscription fees.
+	//
+	// The default value is true .
 	IncludeSupport *bool
 
-	// Specifies whether a budget includes taxes. The default value is true .
+	// Specifies whether a budget includes taxes.
+	//
+	// The default value is true .
 	IncludeTax *bool
 
-	// Specifies whether a budget includes upfront RI costs. The default value is true .
+	// Specifies whether a budget includes upfront RI costs.
+	//
+	// The default value is true .
 	IncludeUpfront *bool
 
-	// Specifies whether a budget uses the amortized rate. The default value is false .
+	// Specifies whether a budget uses the amortized rate.
+	//
+	// The default value is false .
 	UseAmortized *bool
 
-	// Specifies whether a budget uses a blended rate. The default value is false .
+	// Specifies whether a budget uses a blended rate.
+	//
+	// The default value is false .
 	UseBlended *bool
 
 	noSmithyDocumentSerde
@@ -384,9 +433,13 @@ type HistoricalOptions struct {
 	// The number of budget periods included in the moving-average calculation that
 	// determines your auto-adjusted budget amount. The maximum value depends on the
 	// TimeUnit granularity of the budget:
+	//
 	//   - For the DAILY granularity, the maximum value is 60 .
+	//
 	//   - For the MONTHLY granularity, the maximum value is 12 .
+	//
 	//   - For the QUARTERLY granularity, the maximum value is 4 .
+	//
 	//   - For the ANNUALLY granularity, the maximum value is 1 .
 	//
 	// This member is required.
@@ -396,12 +449,15 @@ type HistoricalOptions struct {
 	// BudgetAdjustmentPeriod are included in the calculation of your current
 	// BudgetLimit . If the first budget period in your BudgetAdjustmentPeriod has no
 	// cost data, then that budget period isn’t included in the average that determines
-	// your budget limit. For example, if you set BudgetAdjustmentPeriod as 4
-	// quarters, but your account had no cost data in the first quarter, then only the
-	// last three quarters are included in the calculation. In this scenario,
-	// LookBackAvailablePeriods returns 3 . You can’t set your own
-	// LookBackAvailablePeriods . The value is automatically calculated from the
-	// BudgetAdjustmentPeriod and your historical cost data.
+	// your budget limit.
+	//
+	// For example, if you set BudgetAdjustmentPeriod as 4 quarters, but your account
+	// had no cost data in the first quarter, then only the last three quarters are
+	// included in the calculation. In this scenario, LookBackAvailablePeriods returns
+	// 3 .
+	//
+	// You can’t set your own LookBackAvailablePeriods . The value is automatically
+	// calculated from the BudgetAdjustmentPeriod and your historical cost data.
 	LookBackAvailablePeriods *int32
 
 	noSmithyDocumentSerde
@@ -428,14 +484,22 @@ type IamActionDefinition struct {
 }
 
 // A notification that's associated with a budget. A budget can have up to ten
-// notifications. Each notification must have at least one subscriber. A
-// notification can have one SNS subscriber and up to 10 email subscribers, for a
-// total of 11 subscribers. For example, if you have a budget for 200 dollars and
-// you want to be notified when you go over 160 dollars, create a notification with
-// the following parameters:
+// notifications.
+//
+// Each notification must have at least one subscriber. A notification can have
+// one SNS subscriber and up to 10 email subscribers, for a total of 11
+// subscribers.
+//
+// For example, if you have a budget for 200 dollars and you want to be notified
+// when you go over 160 dollars, create a notification with the following
+// parameters:
+//
 //   - A notificationType of ACTUAL
+//
 //   - A thresholdType of PERCENTAGE
+//
 //   - A comparisonOperator of GREATER_THAN
+//
 //   - A notification threshold of 80
 type Notification struct {
 
@@ -523,13 +587,18 @@ type ScpActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// The amount of cost or usage that's measured for a budget. Cost example: A Spend
-// for 3 USD of costs has the following parameters:
+// The amount of cost or usage that's measured for a budget.
+//
+// Cost example: A Spend for 3 USD of costs has the following parameters:
+//
 //   - An Amount of 3
+//
 //   - A Unit of USD
 //
 // Usage example: A Spend for 3 GB of S3 usage has the following parameters:
+//
 //   - An Amount of 3
+//
 //   - A Unit of GB
 type Spend struct {
 
@@ -570,15 +639,19 @@ type SsmActionDefinition struct {
 }
 
 // The subscriber to a budget notification. The subscriber consists of a
-// subscription type and either an Amazon SNS topic or an email address. For
-// example, an email subscriber has the following parameters:
+// subscription type and either an Amazon SNS topic or an email address.
+//
+// For example, an email subscriber has the following parameters:
+//
 //   - A subscriptionType of EMAIL
+//
 //   - An address of example@example.com
 type Subscriber struct {
 
 	// The address that Amazon Web Services sends budget notifications to, either an
-	// SNS topic or an email. When you create a subscriber, the value of Address can't
-	// contain line breaks.
+	// SNS topic or an email.
+	//
+	// When you create a subscriber, the value of Address can't contain line breaks.
 	//
 	// This member is required.
 	Address *string
@@ -598,9 +671,11 @@ type TimePeriod struct {
 
 	// The end date for a budget. If you didn't specify an end date, Amazon Web
 	// Services set your end date to 06/15/87 00:00 UTC . The defaults are the same for
-	// the Billing and Cost Management console and the API. After the end date, Amazon
-	// Web Services deletes the budget and all the associated notifications and
-	// subscribers. You can change your end date with the UpdateBudget operation.
+	// the Billing and Cost Management console and the API.
+	//
+	// After the end date, Amazon Web Services deletes the budget and all the
+	// associated notifications and subscribers. You can change your end date with the
+	// UpdateBudget operation.
 	End *time.Time
 
 	// The start date for a budget. If you created your budget and didn't specify a
@@ -609,8 +684,9 @@ type TimePeriod struct {
 	// budget on January 24, 2018, chose DAILY , and didn't set a start date, Amazon
 	// Web Services set your start date to 01/24/18 00:00 UTC . If you chose MONTHLY ,
 	// Amazon Web Services set your start date to 01/01/18 00:00 UTC . The defaults are
-	// the same for the Billing and Cost Management console and the API. You can change
-	// your start date with the UpdateBudget operation.
+	// the same for the Billing and Cost Management console and the API.
+	//
+	// You can change your start date with the UpdateBudget operation.
 	Start *time.Time
 
 	noSmithyDocumentSerde

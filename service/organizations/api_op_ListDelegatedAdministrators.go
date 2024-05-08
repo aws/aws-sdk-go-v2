@@ -12,9 +12,11 @@ import (
 )
 
 // Lists the Amazon Web Services accounts that are designated as delegated
-// administrators in this organization. This operation can be called only from the
-// organization's management account or by a member account that is a delegated
-// administrator for an Amazon Web Services service.
+// administrators in this organization.
+//
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an Amazon Web Services
+// service.
 func (c *Client) ListDelegatedAdministrators(ctx context.Context, params *ListDelegatedAdministratorsInput, optFns ...func(*Options)) (*ListDelegatedAdministratorsOutput, error) {
 	if params == nil {
 		params = &ListDelegatedAdministratorsInput{}
@@ -50,9 +52,10 @@ type ListDelegatedAdministratorsInput struct {
 	NextToken *string
 
 	// Specifies a service principal name. If specified, then the operation lists the
-	// delegated administrators only for the specified service. If you don't specify a
-	// service principal, the operation lists all delegated administrators for all
-	// services in your organization.
+	// delegated administrators only for the specified service.
+	//
+	// If you don't specify a service principal, the operation lists all delegated
+	// administrators for all services in your organization.
 	ServicePrincipal *string
 
 	noSmithyDocumentSerde

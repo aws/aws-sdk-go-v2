@@ -12,10 +12,15 @@ import (
 	"time"
 )
 
-// Modifies the specified replication task. You can't modify the task endpoints.
-// The task must be stopped before you can modify it. For more information about
-// DMS tasks, see Working with Migration Tasks (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html)
-// in the Database Migration Service User Guide.
+// Modifies the specified replication task.
+//
+// You can't modify the task endpoints. The task must be stopped before you can
+// modify it.
+//
+// For more information about DMS tasks, see [Working with Migration Tasks] in the Database Migration Service
+// User Guide.
+//
+// [Working with Migration Tasks]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html
 func (c *Client) ModifyReplicationTask(ctx context.Context, params *ModifyReplicationTaskInput, optFns ...func(*Options)) (*ModifyReplicationTaskOutput, error) {
 	if params == nil {
 		params = &ModifyReplicationTaskInput{}
@@ -40,37 +45,52 @@ type ModifyReplicationTaskInput struct {
 
 	// Indicates when you want a change data capture (CDC) operation to start. Use
 	// either CdcStartPosition or CdcStartTime to specify when you want a CDC operation
-	// to start. Specifying both values results in an error. The value can be in date,
-	// checkpoint, or LSN/SCN format. Date Example: --cdc-start-position
-	// “2018-03-08T12:12:12” Checkpoint Example: --cdc-start-position
+	// to start. Specifying both values results in an error.
+	//
+	// The value can be in date, checkpoint, or LSN/SCN format.
+	//
+	// Date Example: --cdc-start-position “2018-03-08T12:12:12”
+	//
+	// Checkpoint Example: --cdc-start-position
 	// "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"
-	// LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373” When you use
-	// this task setting with a source PostgreSQL database, a logical replication slot
-	// should already be created and associated with the source endpoint. You can
-	// verify this by setting the slotName extra connection attribute to the name of
-	// this logical replication slot. For more information, see Extra Connection
-	// Attributes When Using PostgreSQL as a Source for DMS (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib)
-	// .
+	//
+	// LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+	//
+	// When you use this task setting with a source PostgreSQL database, a logical
+	// replication slot should already be created and associated with the source
+	// endpoint. You can verify this by setting the slotName extra connection
+	// attribute to the name of this logical replication slot. For more information,
+	// see [Extra Connection Attributes When Using PostgreSQL as a Source for DMS].
+	//
+	// [Extra Connection Attributes When Using PostgreSQL as a Source for DMS]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib
 	CdcStartPosition *string
 
 	// Indicates the start time for a change data capture (CDC) operation. Use either
 	// CdcStartTime or CdcStartPosition to specify when you want a CDC operation to
-	// start. Specifying both values results in an error. Timestamp Example:
-	// --cdc-start-time “2018-03-08T12:12:12”
+	// start. Specifying both values results in an error.
+	//
+	// Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”
 	CdcStartTime *time.Time
 
 	// Indicates when you want a change data capture (CDC) operation to stop. The
-	// value can be either server time or commit time. Server time example:
-	// --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example:
-	// --cdc-stop-position “commit_time:2018-02-09T12:12:12“
+	// value can be either server time or commit time.
+	//
+	// Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12”
+	//
+	// Commit time example: --cdc-stop-position “commit_time:2018-02-09T12:12:12“
 	CdcStopPosition *string
 
 	// The migration type. Valid values: full-load | cdc | full-load-and-cdc
 	MigrationType types.MigrationTypeValue
 
-	// The replication task identifier. Constraints:
+	// The replication task identifier.
+	//
+	// Constraints:
+	//
 	//   - Must contain 1-255 alphanumeric characters or hyphens.
+	//
 	//   - First character must be a letter.
+	//
 	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	ReplicationTaskIdentifier *string
 
@@ -84,9 +104,10 @@ type ModifyReplicationTaskInput struct {
 	TableMappings *string
 
 	// Supplemental information that the task requires to migrate the data for certain
-	// source and target endpoints. For more information, see Specifying Supplemental
-	// Data for Task Settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html)
-	// in the Database Migration Service User Guide.
+	// source and target endpoints. For more information, see [Specifying Supplemental Data for Task Settings]in the Database
+	// Migration Service User Guide.
+	//
+	// [Specifying Supplemental Data for Task Settings]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html
 	TaskData *string
 
 	noSmithyDocumentSerde

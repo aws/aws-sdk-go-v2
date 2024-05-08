@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a notification. Deleting a notification also deletes the subscribers
-// that are associated with the notification.
+// Deletes a notification.
+//
+// Deleting a notification also deletes the subscribers that are associated with
+// the notification.
 func (c *Client) DeleteNotification(ctx context.Context, params *DeleteNotificationInput, optFns ...func(*Options)) (*DeleteNotificationOutput, error) {
 	if params == nil {
 		params = &DeleteNotificationInput{}

@@ -19,8 +19,9 @@ const (
 )
 
 // Values returns all known values for DatasetStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatasetStatus) Values() []DatasetStatus {
 	return []DatasetStatus{
 		"CREATE_IN_PROGRESS",
@@ -48,8 +49,9 @@ const (
 )
 
 // Values returns all known values for ModelHostingStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelHostingStatus) Values() []ModelHostingStatus {
 	return []ModelHostingStatus{
 		"STARTING_HOSTING",
@@ -71,8 +73,9 @@ const (
 )
 
 // Values returns all known values for ModelPackagingJobStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelPackagingJobStatus) Values() []ModelPackagingJobStatus {
 	return []ModelPackagingJobStatus{
 		"CREATED",
@@ -98,8 +101,9 @@ const (
 )
 
 // Values returns all known values for ModelStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelStatus) Values() []ModelStatus {
 	return []ModelStatus{
 		"TRAINING",
@@ -126,8 +130,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"PROJECT",
@@ -146,8 +151,9 @@ const (
 )
 
 // Values returns all known values for TargetDevice. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetDevice) Values() []TargetDevice {
 	return []TargetDevice{
 		"jetson_xavier",
@@ -163,6 +169,7 @@ const (
 
 // Values returns all known values for TargetPlatformAccelerator. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetPlatformAccelerator) Values() []TargetPlatformAccelerator {
 	return []TargetPlatformAccelerator{
@@ -179,8 +186,9 @@ const (
 )
 
 // Values returns all known values for TargetPlatformArch. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetPlatformArch) Values() []TargetPlatformArch {
 	return []TargetPlatformArch{
 		"ARM64",
@@ -196,8 +204,9 @@ const (
 )
 
 // Values returns all known values for TargetPlatformOs. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetPlatformOs) Values() []TargetPlatformOs {
 	return []TargetPlatformOs{
 		"LINUX",

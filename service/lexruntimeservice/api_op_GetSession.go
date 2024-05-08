@@ -46,8 +46,10 @@ type GetSessionInput struct {
 	UserId *string
 
 	// A string used to filter the intents returned in the recentIntentSummaryView
-	// structure. When you specify a filter, only intents with their checkpointLabel
-	// field set to that string are returned.
+	// structure.
+	//
+	// When you specify a filter, only intents with their checkpointLabel field set to
+	// that string are returned.
 	CheckpointLabelFilter *string
 
 	noSmithyDocumentSerde
@@ -56,9 +58,10 @@ type GetSessionInput struct {
 type GetSessionOutput struct {
 
 	// A list of active contexts for the session. A context can be set when an intent
-	// is fulfilled or by calling the PostContent , PostText , or PutSession
-	// operation. You can use a context to control the intents that can follow up an
-	// intent, or to modify the operation of your application.
+	// is fulfilled or by calling the PostContent , PostText , or PutSession operation.
+	//
+	// You can use a context to control the intents that can follow up an intent, or
+	// to modify the operation of your application.
 	ActiveContexts []types.ActiveContext
 
 	// Describes the current state of the bot.
@@ -67,8 +70,10 @@ type GetSessionOutput struct {
 	// An array of information about the intents used in the session. The array can
 	// contain a maximum of three summaries. If more than three intents are used in the
 	// session, the recentIntentSummaryView operation contains information about the
-	// last three intents used. If you set the checkpointLabelFilter parameter in the
-	// request, the array contains only the intents with the specified label.
+	// last three intents used.
+	//
+	// If you set the checkpointLabelFilter parameter in the request, the array
+	// contains only the intents with the specified label.
 	RecentIntentSummaryView []types.IntentSummary
 
 	// Map of key/value pairs representing the session-specific context information.

@@ -12,11 +12,13 @@ import (
 )
 
 // Creates recommendations that help you save cost by identifying idle and
-// underutilized Amazon EC2 instances. Recommendations are generated to either
-// downsize or terminate instances, along with providing savings detail and
-// metrics. For more information about calculation and function, see Optimizing
-// Your Cost with Rightsizing Recommendations (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-rightsizing.html)
-// in the Billing and Cost Management User Guide.
+// underutilized Amazon EC2 instances.
+//
+// Recommendations are generated to either downsize or terminate instances, along
+// with providing savings detail and metrics. For more information about
+// calculation and function, see [Optimizing Your Cost with Rightsizing Recommendations]in the Billing and Cost Management User Guide.
+//
+// [Optimizing Your Cost with Rightsizing Recommendations]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-rightsizing.html
 func (c *Client) GetRightsizingRecommendation(ctx context.Context, params *GetRightsizingRecommendationInput, optFns ...func(*Options)) (*GetRightsizingRecommendationOutput, error) {
 	if params == nil {
 		params = &GetRightsizingRecommendationInput{}
@@ -47,57 +49,81 @@ type GetRightsizingRecommendationInput struct {
 	// existing Savings Plans or RI benefits, or neither.
 	Configuration *types.RightsizingRecommendationConfiguration
 
-	// Use Expression to filter in various Cost Explorer APIs. Not all Expression
-	// types are supported in each API. Refer to the documentation for each specific
-	// API to see what is supported. There are two patterns:
+	// Use Expression to filter in various Cost Explorer APIs.
+	//
+	// Not all Expression types are supported in each API. Refer to the documentation
+	// for each specific API to see what is supported.
+	//
+	// There are two patterns:
+	//
 	//   - Simple dimension values.
+	//
 	//   - There are three types of simple dimension values: CostCategories , Tags ,
 	//   and Dimensions .
+	//
 	//   - Specify the CostCategories field to define a filter that acts on Cost
 	//   Categories.
+	//
 	//   - Specify the Tags field to define a filter that acts on Cost Allocation Tags.
-	//   - Specify the Dimensions field to define a filter that acts on the
-	//   DimensionValues (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html)
-	//   .
+	//
+	//   - Specify the Dimensions field to define a filter that acts on the [DimensionValues]
+	//   DimensionValues .
+	//
 	//   - For each filter type, you can set the dimension name and values for the
 	//   filters that you plan to use.
+	//
 	//   - For example, you can filter for REGION==us-east-1 OR REGION==us-west-1 . For
 	//   GetRightsizingRecommendation , the Region is a full name (for example,
 	//   REGION==US East (N. Virginia) .
+	//
 	//   - The corresponding Expression for this example is as follows: {
 	//   "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] } }
+	//
 	//   - As shown in the previous example, lists of dimension values are combined
 	//   with OR when applying the filter.
+	//
 	//   - You can also set different match options to further control how the filter
 	//   behaves. Not all APIs support match options. Refer to the documentation for each
 	//   specific API to see what is supported.
+	//
 	//   - For example, you can filter for linked account names that start with "a".
+	//
 	//   - The corresponding Expression for this example is as follows: {
 	//   "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions": [ "STARTS_WITH" ],
 	//   "Values": [ "a" ] } }
+	//
 	//   - Compound Expression types with logical operations.
+	//
 	//   - You can use multiple Expression types and the logical operators AND/OR/NOT
 	//   to create a list of one or more Expression objects. By doing this, you can
 	//   filter by more advanced options.
+	//
 	//   - For example, you can filter by ((REGION == us-east-1 OR REGION ==
 	//   us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer) .
+	//
 	//   - The corresponding Expression for this example is as follows: { "And": [
 	//   {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1"
 	//   ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not":
 	//   {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] }
-	//   Because each Expression can have only one operator, the service returns an
-	//   error if more than one is specified. The following example shows an Expression
+	//
+	// Because each Expression can have only one operator, the service returns an error
+	//   if more than one is specified. The following example shows an Expression
 	//   object that creates an error: { "And": [ ... ], "Dimensions": { "Key":
-	//   "USAGE_TYPE", "Values": [ "DataTransfer" ] } } The following is an example of
-	//   the corresponding error message: "Expression has more than one roots. Only
-	//   one root operator is allowed for each expression: And, Or, Not, Dimensions,
-	//   Tags, CostCategories"
+	//   "USAGE_TYPE", "Values": [ "DataTransfer" ] } }
+	//
+	// The following is an example of the corresponding error message: "Expression has
+	//   more than one roots. Only one root operator is allowed for each expression: And,
+	//   Or, Not, Dimensions, Tags, CostCategories"
+	//
 	// For the GetRightsizingRecommendation action, a combination of OR and NOT isn't
 	// supported. OR isn't supported between different dimensions, or dimensions and
 	// tags. NOT operators aren't supported. Dimensions are also limited to
-	// LINKED_ACCOUNT , REGION , or RIGHTSIZING_TYPE . For the
-	// GetReservationPurchaseRecommendation action, only NOT is supported. AND and OR
-	// aren't supported. Dimensions are limited to LINKED_ACCOUNT .
+	// LINKED_ACCOUNT , REGION , or RIGHTSIZING_TYPE .
+	//
+	// For the GetReservationPurchaseRecommendation action, only NOT is supported. AND
+	// and OR aren't supported. Dimensions are limited to LINKED_ACCOUNT .
+	//
+	// [DimensionValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
 	Filter *types.Expression
 
 	// The pagination token that indicates the next set of results that you want to

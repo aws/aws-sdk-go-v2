@@ -13,6 +13,7 @@ import (
 
 // Creates a profile, a list of the roles that Roles Anywhere service is trusted
 // to assume. You use profiles to intersect permissions with IAM managed policies.
+//
 // Required permissions: rolesanywhere:CreateProfile .
 func (c *Client) CreateProfile(ctx context.Context, params *CreateProfileInput, optFns ...func(*Options)) (*CreateProfileOutput, error) {
 	if params == nil {
@@ -42,10 +43,11 @@ type CreateProfileInput struct {
 	// This member is required.
 	RoleArns []string
 
-	// Used to determine how long sessions vended using this profile are valid for.
-	// See the Expiration section of the CreateSession API documentation (https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object)
-	// page for more details. In requests, if this value is not provided, the default
-	// value will be 3600.
+	//  Used to determine how long sessions vended using this profile are valid for.
+	// See the Expiration section of the [CreateSession API documentation] page for more details. In requests, if this
+	// value is not provided, the default value will be 3600.
+	//
+	// [CreateSession API documentation]: https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object
 	DurationSeconds *int32
 
 	// Specifies whether the profile is enabled.

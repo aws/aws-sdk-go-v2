@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about a resource policy. This operation can be called
-// only from the organization's management account or by a member account that is a
-// delegated administrator for an Amazon Web Services service.
+// Retrieves information about a resource policy.
+//
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an Amazon Web Services
+// service.
 func (c *Client) DescribeResourcePolicy(ctx context.Context, params *DescribeResourcePolicyInput, optFns ...func(*Options)) (*DescribeResourcePolicyOutput, error) {
 	if params == nil {
 		params = &DescribeResourcePolicyInput{}

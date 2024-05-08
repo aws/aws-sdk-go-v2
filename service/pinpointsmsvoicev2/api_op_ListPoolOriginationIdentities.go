@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all associated origination identities in your pool. If you specify
-// filters, the output includes information for only those origination identities
-// that meet the filter criteria.
+// Lists all associated origination identities in your pool.
+//
+// If you specify filters, the output includes information for only those
+// origination identities that meet the filter criteria.
 func (c *Client) ListPoolOriginationIdentities(ctx context.Context, params *ListPoolOriginationIdentitiesInput, optFns ...func(*Options)) (*ListPoolOriginationIdentitiesOutput, error) {
 	if params == nil {
 		params = &ListPoolOriginationIdentitiesInput{}

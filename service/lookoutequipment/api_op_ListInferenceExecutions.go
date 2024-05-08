@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Lists all inference executions that have been performed by the specified
+//	Lists all inference executions that have been performed by the specified
+//
 // inference scheduler.
 func (c *Client) ListInferenceExecutions(ctx context.Context, params *ListInferenceExecutionsInput, optFns ...func(*Options)) (*ListInferenceExecutionsOutput, error) {
 	if params == nil {
@@ -61,13 +62,14 @@ type ListInferenceExecutionsOutput struct {
 
 	// Provides an array of information about the individual inference executions
 	// returned from the ListInferenceExecutions operation, including model used,
-	// inference scheduler, data configuration, and so on. If you don't supply the
-	// InferenceSchedulerName request parameter, or if you supply the name of an
-	// inference scheduler that doesn't exist, ListInferenceExecutions returns an
-	// empty array in InferenceExecutionSummaries .
+	// inference scheduler, data configuration, and so on.
+	//
+	// If you don't supply the InferenceSchedulerName request parameter, or if you
+	// supply the name of an inference scheduler that doesn't exist,
+	// ListInferenceExecutions returns an empty array in InferenceExecutionSummaries .
 	InferenceExecutionSummaries []types.InferenceExecutionSummary
 
-	// An opaque pagination token indicating where to continue the listing of
+	//  An opaque pagination token indicating where to continue the listing of
 	// inference executions.
 	NextToken *string
 

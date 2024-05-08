@@ -19,13 +19,16 @@ import (
 // match the bandwidth for the LAG. You can re-associate a connection that's
 // currently associated with a different LAG; however, if removing the connection
 // would cause the original LAG to fall below its setting for minimum number of
-// operational connections, the request fails. Any virtual interfaces that are
-// directly associated with the connection are automatically re-associated with the
-// LAG. If the connection was originally associated with a different LAG, the
-// virtual interfaces remain associated with the original LAG. For interconnects,
-// any hosted connections are automatically re-associated with the LAG. If the
-// interconnect was originally associated with a different LAG, the hosted
-// connections remain associated with the original LAG.
+// operational connections, the request fails.
+//
+// Any virtual interfaces that are directly associated with the connection are
+// automatically re-associated with the LAG. If the connection was originally
+// associated with a different LAG, the virtual interfaces remain associated with
+// the original LAG.
+//
+// For interconnects, any hosted connections are automatically re-associated with
+// the LAG. If the interconnect was originally associated with a different LAG, the
+// hosted connections remain associated with the original LAG.
 func (c *Client) AssociateConnectionWithLag(ctx context.Context, params *AssociateConnectionWithLagInput, optFns ...func(*Options)) (*AssociateConnectionWithLagOutput, error) {
 	if params == nil {
 		params = &AssociateConnectionWithLagInput{}
@@ -81,24 +84,34 @@ type AssociateConnectionWithLagOutput struct {
 	ConnectionName *string
 
 	// The state of the connection. The following are the possible values:
+	//
 	//   - ordering : The initial state of a hosted connection provisioned on an
 	//   interconnect. The connection stays in the ordering state until the owner of the
 	//   hosted connection confirms or declines the connection order.
+	//
 	//   - requested : The initial state of a standard connection. The connection stays
 	//   in the requested state until the Letter of Authorization (LOA) is sent to the
 	//   customer.
+	//
 	//   - pending : The connection has been approved and is being initialized.
+	//
 	//   - available : The network link is up and the connection is ready for use.
+	//
 	//   - down : The network link is down.
+	//
 	//   - deleting : The connection is being deleted.
+	//
 	//   - deleted : The connection has been deleted.
+	//
 	//   - rejected : A hosted connection in the ordering state enters the rejected
 	//   state if it is deleted by the customer.
+	//
 	//   - unknown : The state of the connection is not available.
 	ConnectionState types.ConnectionState
 
-	// The MAC Security (MACsec) connection encryption mode. The valid values are
-	// no_encrypt , should_encrypt , and must_encrypt .
+	// The MAC Security (MACsec) connection encryption mode.
+	//
+	// The valid values are no_encrypt , should_encrypt , and must_encrypt .
 	EncryptionMode *string
 
 	// Indicates whether the connection supports a secondary BGP peer in the same
@@ -129,9 +142,10 @@ type AssociateConnectionWithLagOutput struct {
 	// The name of the Direct Connect service provider associated with the connection.
 	PartnerName *string
 
-	// The MAC Security (MACsec) port link status of the connection. The valid values
-	// are Encryption Up , which means that there is an active Connection Key Name, or
-	// Encryption Down .
+	// The MAC Security (MACsec) port link status of the connection.
+	//
+	// The valid values are Encryption Up , which means that there is an active
+	// Connection Key Name, or Encryption Down .
 	PortEncryptionStatus *string
 
 	// The name of the service provider associated with the connection.

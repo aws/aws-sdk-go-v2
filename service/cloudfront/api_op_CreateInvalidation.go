@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new invalidation. For more information, see Invalidating files (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html)
-// in the Amazon CloudFront Developer Guide.
+// Create a new invalidation. For more information, see [Invalidating files] in the Amazon CloudFront
+// Developer Guide.
+//
+// [Invalidating files]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html
 func (c *Client) CreateInvalidation(ctx context.Context, params *CreateInvalidationInput, optFns ...func(*Options)) (*CreateInvalidationOutput, error) {
 	if params == nil {
 		params = &CreateInvalidationInput{}

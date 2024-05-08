@@ -12,8 +12,10 @@ import (
 )
 
 // Deletes a tenant database from your DB instance. This command only applies to
-// RDS for Oracle container database (CDB) instances. You can't delete a tenant
-// database when it is the only tenant in the DB instance.
+// RDS for Oracle container database (CDB) instances.
+//
+// You can't delete a tenant database when it is the only tenant in the DB
+// instance.
 func (c *Client) DeleteTenantDatabase(ctx context.Context, params *DeleteTenantDatabaseInput, optFns ...func(*Options)) (*DeleteTenantDatabaseOutput, error) {
 	if params == nil {
 		params = &DeleteTenantDatabaseInput{}
@@ -45,8 +47,10 @@ type DeleteTenantDatabaseInput struct {
 	TenantDBName *string
 
 	// The DBSnapshotIdentifier of the new DBSnapshot created when the
-	// SkipFinalSnapshot parameter is disabled. If you enable this parameter and also
-	// enable SkipFinalShapshot , the command results in an error.
+	// SkipFinalSnapshot parameter is disabled.
+	//
+	// If you enable this parameter and also enable SkipFinalShapshot , the command
+	// results in an error.
 	FinalDBSnapshotIdentifier *string
 
 	// Specifies whether to skip the creation of a final DB snapshot before removing

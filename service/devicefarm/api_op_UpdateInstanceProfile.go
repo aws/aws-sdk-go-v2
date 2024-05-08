@@ -38,8 +38,9 @@ type UpdateInstanceProfileInput struct {
 	Description *string
 
 	// An array of strings that specifies the list of app packages that should not be
-	// cleaned up from the device after a test run is over. The list of packages is
-	// only considered if you set packageCleanup to true .
+	// cleaned up from the device after a test run is over.
+	//
+	// The list of packages is only considered if you set packageCleanup to true .
 	ExcludeAppPackagesFromCleanup []string
 
 	// The updated name for your instance profile.

@@ -61,9 +61,10 @@ type CreateCollaborationInput struct {
 	QueryLogStatus types.CollaborationQueryLogStatus
 
 	// The collaboration creator's payment responsibilities set by the collaboration
-	// creator. If the collaboration creator hasn't specified anyone as the member
-	// paying for query compute costs, then the member who can query is the default
-	// payer.
+	// creator.
+	//
+	// If the collaboration creator hasn't specified anyone as the member paying for
+	// query compute costs, then the member who can query is the default payer.
 	CreatorPaymentConfiguration *types.PaymentConfiguration
 
 	// The settings for client-side encryption with Cryptographic Computing for Clean

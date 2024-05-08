@@ -30,9 +30,10 @@ func (c *Client) ListSimulationApplications(ctx context.Context, params *ListSim
 
 type ListSimulationApplicationsInput struct {
 
-	// Optional list of filters to limit results. The filter name name is supported.
-	// When filtering, you must use the complete value of the filtered item. You can
-	// use up to three filters.
+	// Optional list of filters to limit results.
+	//
+	// The filter name name is supported. When filtering, you must use the complete
+	// value of the filtered item. You can use up to three filters.
 	Filters []types.Filter
 
 	// When this parameter is used, ListSimulationApplications only returns maxResults

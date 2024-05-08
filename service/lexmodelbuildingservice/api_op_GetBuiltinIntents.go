@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of built-in intents that meet the specified criteria. This
-// operation requires permission for the lex:GetBuiltinIntents action.
+// Gets a list of built-in intents that meet the specified criteria.
+//
+// This operation requires permission for the lex:GetBuiltinIntents action.
 func (c *Client) GetBuiltinIntents(ctx context.Context, params *GetBuiltinIntentsInput, optFns ...func(*Options)) (*GetBuiltinIntentsOutput, error) {
 	if params == nil {
 		params = &GetBuiltinIntentsInput{}
@@ -43,9 +44,10 @@ type GetBuiltinIntentsInput struct {
 
 	// Substring to match in built-in intent signatures. An intent will be returned if
 	// any part of its signature matches the substring. For example, "xyz" matches both
-	// "xyzabc" and "abcxyz." To find the signature for an intent, see Standard
-	// Built-in Intents (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
-	// in the Alexa Skills Kit.
+	// "xyzabc" and "abcxyz." To find the signature for an intent, see [Standard Built-in Intents]in the Alexa
+	// Skills Kit.
+	//
+	// [Standard Built-in Intents]: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents
 	SignatureContains *string
 
 	noSmithyDocumentSerde

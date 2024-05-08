@@ -14,10 +14,11 @@ import (
 
 // Creates a new Timestream database. If the KMS key is not specified, the
 // database will be encrypted with a Timestream managed KMS key located in your
-// account. For more information, see Amazon Web Services managed keys (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk)
-// . Service quotas apply (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html)
-// . For details, see code sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-db.html)
-// .
+// account. For more information, see [Amazon Web Services managed keys]. [Service quotas apply]. For details, see [code sample].
+//
+// [Service quotas apply]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html
+// [code sample]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-db.html
+// [Amazon Web Services managed keys]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
 func (c *Client) CreateDatabase(ctx context.Context, params *CreateDatabaseInput, optFns ...func(*Options)) (*CreateDatabaseOutput, error) {
 	if params == nil {
 		params = &CreateDatabaseInput{}
@@ -42,11 +43,12 @@ type CreateDatabaseInput struct {
 
 	// The KMS key for the database. If the KMS key is not specified, the database
 	// will be encrypted with a Timestream managed KMS key located in your account. For
-	// more information, see Amazon Web Services managed keys (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk)
-	// .
+	// more information, see [Amazon Web Services managed keys].
+	//
+	// [Amazon Web Services managed keys]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
 	KmsKeyId *string
 
-	// A list of key-value pairs to label the table.
+	//  A list of key-value pairs to label the table.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

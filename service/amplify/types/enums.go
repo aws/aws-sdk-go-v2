@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for CertificateType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CertificateType) Values() []CertificateType {
 	return []CertificateType{
 		"AMPLIFY_MANAGED",
@@ -37,8 +38,9 @@ const (
 )
 
 // Values returns all known values for DomainStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DomainStatus) Values() []DomainStatus {
 	return []DomainStatus{
 		"PENDING_VERIFICATION",
@@ -68,8 +70,9 @@ const (
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"PENDING",
@@ -93,8 +96,9 @@ const (
 )
 
 // Values returns all known values for JobType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobType) Values() []JobType {
 	return []JobType{
 		"RELEASE",
@@ -114,8 +118,9 @@ const (
 )
 
 // Values returns all known values for Platform. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Platform) Values() []Platform {
 	return []Platform{
 		"WEB",
@@ -134,8 +139,9 @@ const (
 )
 
 // Values returns all known values for RepositoryCloneMethod. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RepositoryCloneMethod) Values() []RepositoryCloneMethod {
 	return []RepositoryCloneMethod{
 		"SSH",
@@ -156,8 +162,9 @@ const (
 )
 
 // Values returns all known values for Stage. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Stage) Values() []Stage {
 	return []Stage{
 		"PRODUCTION",
@@ -182,8 +189,9 @@ const (
 )
 
 // Values returns all known values for UpdateStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateStatus) Values() []UpdateStatus {
 	return []UpdateStatus{
 		"REQUESTING_CERTIFICATE",

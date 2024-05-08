@@ -30,12 +30,12 @@ func (c *Client) StopDeployment(ctx context.Context, params *StopDeploymentInput
 // Represents the input of a StopDeployment operation.
 type StopDeploymentInput struct {
 
-	// The unique ID of a deployment.
+	//  The unique ID of a deployment.
 	//
 	// This member is required.
 	DeploymentId *string
 
-	// Indicates, when a deployment is stopped, whether instances that have been
+	//  Indicates, when a deployment is stopped, whether instances that have been
 	// updated should be rolled back to the previous version of the application
 	// revision.
 	AutoRollbackEnabled *bool
@@ -47,7 +47,9 @@ type StopDeploymentInput struct {
 type StopDeploymentOutput struct {
 
 	// The status of the stop deployment operation:
+	//
 	//   - Pending: The stop operation is pending.
+	//
 	//   - Succeeded: The stop operation was successful.
 	Status types.StopStatus
 

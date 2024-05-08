@@ -10,11 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds one or more key-value tags to an Amazon Rekognition collection, stream
-// processor, or Custom Labels model. For more information, see Tagging AWS
-// Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) .
+//	Adds one or more key-value tags to an Amazon Rekognition collection, stream
+//
+// processor, or Custom Labels model. For more information, see [Tagging AWS Resources].
+//
 // This operation requires permissions to perform the rekognition:TagResource
 // action.
+//
+// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -32,13 +35,13 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// Amazon Resource Name (ARN) of the model, collection, or stream processor that
+	//  Amazon Resource Name (ARN) of the model, collection, or stream processor that
 	// you want to assign the tags to.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// The key-value tags to assign to the resource.
+	//  The key-value tags to assign to the resource.
 	//
 	// This member is required.
 	Tags map[string]string

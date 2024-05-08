@@ -12,7 +12,9 @@ import (
 )
 
 // Disables a profile. When disabled, temporary credential requests with this
-// profile fail. Required permissions: rolesanywhere:DisableProfile .
+// profile fail.
+//
+// Required permissions: rolesanywhere:DisableProfile .
 func (c *Client) DisableProfile(ctx context.Context, params *DisableProfileInput, optFns ...func(*Options)) (*DisableProfileOutput, error) {
 	if params == nil {
 		params = &DisableProfileInput{}

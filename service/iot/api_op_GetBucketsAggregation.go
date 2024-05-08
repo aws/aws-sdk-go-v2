@@ -12,8 +12,10 @@ import (
 )
 
 // Aggregates on indexed data with search queries pertaining to particular fields.
-// Requires permission to access the GetBucketsAggregation (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//
+// Requires permission to access the [GetBucketsAggregation] action.
+//
+// [GetBucketsAggregation]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) GetBucketsAggregation(ctx context.Context, params *GetBucketsAggregationInput, optFns ...func(*Options)) (*GetBucketsAggregationOutput, error) {
 	if params == nil {
 		params = &GetBucketsAggregationInput{}
@@ -59,8 +61,11 @@ type GetBucketsAggregationInput struct {
 type GetBucketsAggregationOutput struct {
 
 	// The main part of the response with a list of buckets. Each bucket contains a
-	// keyValue and a count . keyValue : The aggregation field value counted for the
-	// particular bucket. count : The number of documents that have that value.
+	// keyValue and a count .
+	//
+	// keyValue : The aggregation field value counted for the particular bucket.
+	//
+	// count : The number of documents that have that value.
 	Buckets []types.Bucket
 
 	// The total number of things that fit the query string criteria.

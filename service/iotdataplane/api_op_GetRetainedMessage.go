@@ -10,13 +10,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the details of a single retained message for the specified topic. This
-// action returns the message payload of the retained message, which can incur
-// messaging costs. To list only the topic names of the retained messages, call
-// ListRetainedMessages (https://docs.aws.amazon.com/iot/latest/apireference/API_iotdata_ListRetainedMessages.html)
-// . Requires permission to access the GetRetainedMessage (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions)
-// action. For more information about messaging costs, see Amazon Web Services IoT
-// Core pricing - Messaging (http://aws.amazon.com/iot-core/pricing/#Messaging) .
+// Gets the details of a single retained message for the specified topic.
+//
+// This action returns the message payload of the retained message, which can
+// incur messaging costs. To list only the topic names of the retained messages,
+// call [ListRetainedMessages].
+//
+// Requires permission to access the [GetRetainedMessage] action.
+//
+// For more information about messaging costs, see [Amazon Web Services IoT Core pricing - Messaging].
+//
+// [GetRetainedMessage]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions
+// [Amazon Web Services IoT Core pricing - Messaging]: http://aws.amazon.com/iot-core/pricing/#Messaging
+// [ListRetainedMessages]: https://docs.aws.amazon.com/iot/latest/apireference/API_iotdata_ListRetainedMessages.html
 func (c *Client) GetRetainedMessage(ctx context.Context, params *GetRetainedMessageInput, optFns ...func(*Options)) (*GetRetainedMessageOutput, error) {
 	if params == nil {
 		params = &GetRetainedMessageInput{}
@@ -60,10 +66,12 @@ type GetRetainedMessageOutput struct {
 	Topic *string
 
 	// A base64-encoded JSON string that includes an array of JSON objects, or null if
-	// the retained message doesn't include any user properties. The following example
-	// userProperties parameter is a JSON string that represents two user properties.
-	// Note that it will be base64-encoded: [{"deviceName": "alpha"}, {"deviceCnt":
-	// "45"}]
+	// the retained message doesn't include any user properties.
+	//
+	// The following example userProperties parameter is a JSON string that represents
+	// two user properties. Note that it will be base64-encoded:
+	//
+	//     [{"deviceName": "alpha"}, {"deviceCnt": "45"}]
 	UserProperties []byte
 
 	// Metadata pertaining to the operation's result.

@@ -41,13 +41,14 @@ type CreateApiInput struct {
 	// This member is required.
 	ProtocolType types.ProtocolType
 
-	// An API key selection expression. Supported only for WebSocket APIs. See API Key
-	// Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
-	// .
+	// An API key selection expression. Supported only for WebSocket APIs. See [API Key Selection Expressions].
+	//
+	// [API Key Selection Expressions]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
 	ApiKeySelectionExpression *string
 
-	// A CORS configuration. Supported only for HTTP APIs. See Configuring CORS (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html)
-	// for more information.
+	// A CORS configuration. Supported only for HTTP APIs. See [Configuring CORS] for more information.
+	//
+	// [Configuring CORS]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html
 	CorsConfiguration *types.Cors
 
 	// This property is part of quick create. It specifies the credentials required
@@ -118,9 +119,9 @@ type CreateApiOutput struct {
 	// The API ID.
 	ApiId *string
 
-	// An API key selection expression. Supported only for WebSocket APIs. See API Key
-	// Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
-	// .
+	// An API key selection expression. Supported only for WebSocket APIs. See [API Key Selection Expressions].
+	//
+	// [API Key Selection Expressions]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
 	ApiKeySelectionExpression *string
 
 	// A CORS configuration. Supported only for HTTP APIs.

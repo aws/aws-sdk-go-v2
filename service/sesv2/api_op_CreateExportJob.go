@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an export job for a data source and destination. You can execute this
-// operation no more than once per second.
+// Creates an export job for a data source and destination.
+//
+// You can execute this operation no more than once per second.
 func (c *Client) CreateExportJob(ctx context.Context, params *CreateExportJobInput, optFns ...func(*Options)) (*CreateExportJobOutput, error) {
 	if params == nil {
 		params = &CreateExportJobInput{}

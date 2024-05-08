@@ -12,8 +12,9 @@ import (
 	"time"
 )
 
-// Creates a robot. This API is no longer supported and will throw an error if
-// used.
+// Creates a robot.
+//
+// This API is no longer supported and will throw an error if used.
 //
 // Deprecated: AWS RoboMaker is unable to process this request as the support for
 // the AWS RoboMaker application deployment feature has ended. For additional

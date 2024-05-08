@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of summaries of all vehicles associated with a fleet. This API
-// operation uses pagination. Specify the nextToken parameter in the request to
-// return more results.
+//	Retrieves a list of summaries of all vehicles associated with a fleet.
+//
+// This API operation uses pagination. Specify the nextToken parameter in the
+// request to return more results.
 func (c *Client) ListVehiclesInFleet(ctx context.Context, params *ListVehiclesInFleetInput, optFns ...func(*Options)) (*ListVehiclesInFleetOutput, error) {
 	if params == nil {
 		params = &ListVehiclesInFleetInput{}
@@ -30,19 +31,21 @@ func (c *Client) ListVehiclesInFleet(ctx context.Context, params *ListVehiclesIn
 
 type ListVehiclesInFleetInput struct {
 
-	// The ID of a fleet.
+	//  The ID of a fleet.
 	//
 	// This member is required.
 	FleetId *string
 
-	// The maximum number of items to return, between 1 and 100, inclusive.
+	//  The maximum number of items to return, between 1 and 100, inclusive.
 	MaxResults *int32
 
-	// A pagination token for the next set of results. If the results of a search are
-	// large, only a portion of the results are returned, and a nextToken pagination
-	// token is returned in the response. To retrieve the next set of results, reissue
-	// the search request and include the returned token. When all results have been
-	// returned, the response does not contain a pagination token value.
+	// A pagination token for the next set of results.
+	//
+	// If the results of a search are large, only a portion of the results are
+	// returned, and a nextToken pagination token is returned in the response. To
+	// retrieve the next set of results, reissue the search request and include the
+	// returned token. When all results have been returned, the response does not
+	// contain a pagination token value.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -50,11 +53,11 @@ type ListVehiclesInFleetInput struct {
 
 type ListVehiclesInFleetOutput struct {
 
-	// The token to retrieve the next set of results, or null if there are no more
+	//  The token to retrieve the next set of results, or null if there are no more
 	// results.
 	NextToken *string
 
-	// A list of vehicles associated with the fleet.
+	//  A list of vehicles associated with the fleet.
 	Vehicles []string
 
 	// Metadata pertaining to the operation's result.
@@ -153,7 +156,7 @@ var _ ListVehiclesInFleetAPIClient = (*Client)(nil)
 // ListVehiclesInFleetPaginatorOptions is the paginator options for
 // ListVehiclesInFleet
 type ListVehiclesInFleetPaginatorOptions struct {
-	// The maximum number of items to return, between 1 and 100, inclusive.
+	//  The maximum number of items to return, between 1 and 100, inclusive.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

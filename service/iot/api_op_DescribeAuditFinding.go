@@ -13,9 +13,11 @@ import (
 
 // Gets information about a single audit finding. Properties include the reason
 // for noncompliance, the severity of the issue, and the start time when the audit
-// that returned the finding. Requires permission to access the
-// DescribeAuditFinding (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// that returned the finding.
+//
+// Requires permission to access the [DescribeAuditFinding] action.
+//
+// [DescribeAuditFinding]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DescribeAuditFinding(ctx context.Context, params *DescribeAuditFindingInput, optFns ...func(*Options)) (*DescribeAuditFindingOutput, error) {
 	if params == nil {
 		params = &DescribeAuditFindingInput{}

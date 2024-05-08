@@ -30,7 +30,7 @@ func (c *Client) ListResourceScans(ctx context.Context, params *ListResourceScan
 
 type ListResourceScansInput struct {
 
-	// If the number of available results exceeds this maximum, the response includes
+	//  If the number of available results exceeds this maximum, the response includes
 	// a NextToken value that you can use for the NextToken parameter to get the next
 	// set of results. The default value is 10. The maximum value is 100.
 	MaxResults *int32
@@ -144,7 +144,7 @@ var _ ListResourceScansAPIClient = (*Client)(nil)
 
 // ListResourceScansPaginatorOptions is the paginator options for ListResourceScans
 type ListResourceScansPaginatorOptions struct {
-	// If the number of available results exceeds this maximum, the response includes
+	//  If the number of available results exceeds this maximum, the response includes
 	// a NextToken value that you can use for the NextToken parameter to get the next
 	// set of results. The default value is 10. The maximum value is 100.
 	Limit int32

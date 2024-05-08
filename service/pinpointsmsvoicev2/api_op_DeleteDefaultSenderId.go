@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing default sender ID on a configuration set. A default sender
-// ID is the identity that appears on recipients' devices when they receive SMS
-// messages. Support for sender ID capabilities varies by country or region.
+// Deletes an existing default sender ID on a configuration set.
+//
+// A default sender ID is the identity that appears on recipients' devices when
+// they receive SMS messages. Support for sender ID capabilities varies by country
+// or region.
 func (c *Client) DeleteDefaultSenderId(ctx context.Context, params *DeleteDefaultSenderIdInput, optFns ...func(*Options)) (*DeleteDefaultSenderIdOutput, error) {
 	if params == nil {
 		params = &DeleteDefaultSenderIdInput{}
@@ -32,7 +34,7 @@ type DeleteDefaultSenderIdInput struct {
 
 	// The name of the configuration set or the configuration set Amazon Resource Name
 	// (ARN) to delete the default sender ID from. The ConfigurationSetName and
-	// ConfigurationSetArn can be found using the DescribeConfigurationSets action.
+	// ConfigurationSetArn can be found using the DescribeConfigurationSetsaction.
 	//
 	// This member is required.
 	ConfigurationSetName *string

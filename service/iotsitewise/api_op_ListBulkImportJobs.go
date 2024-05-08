@@ -12,8 +12,9 @@ import (
 )
 
 // Retrieves a paginated list of bulk import job requests. For more information,
-// see List bulk import jobs (CLI) (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ListBulkImportJobs.html)
-// in the IoT SiteWise User Guide.
+// see [List bulk import jobs (CLI)]in the IoT SiteWise User Guide.
+//
+// [List bulk import jobs (CLI)]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ListBulkImportJobs.html
 func (c *Client) ListBulkImportJobs(ctx context.Context, params *ListBulkImportJobsInput, optFns ...func(*Options)) (*ListBulkImportJobsOutput, error) {
 	if params == nil {
 		params = &ListBulkImportJobsInput{}

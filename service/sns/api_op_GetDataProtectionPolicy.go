@@ -29,9 +29,12 @@ func (c *Client) GetDataProtectionPolicy(ctx context.Context, params *GetDataPro
 
 type GetDataProtectionPolicyInput struct {
 
-	// The ARN of the topic whose DataProtectionPolicy you want to get. For more
-	// information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// The ARN of the topic whose DataProtectionPolicy you want to get.
+	//
+	// For more information about ARNs, see [Amazon Resource Names (ARNs)] in the Amazon Web Services General
+	// Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	ResourceArn *string

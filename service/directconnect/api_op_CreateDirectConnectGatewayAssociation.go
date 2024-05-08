@@ -36,10 +36,14 @@ type CreateDirectConnectGatewayAssociationInput struct {
 	// This member is required.
 	DirectConnectGatewayId *string
 
-	// The Amazon VPC prefixes to advertise to the Direct Connect gateway This
-	// parameter is required when you create an association to a transit gateway. For
-	// information about how to set the prefixes, see Allowed Prefixes (https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes)
-	// in the Direct Connect User Guide.
+	// The Amazon VPC prefixes to advertise to the Direct Connect gateway
+	//
+	// This parameter is required when you create an association to a transit gateway.
+	//
+	// For information about how to set the prefixes, see [Allowed Prefixes] in the Direct Connect User
+	// Guide.
+	//
+	// [Allowed Prefixes]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes
 	AddAllowedPrefixesToDirectConnectGateway []types.RouteFilterPrefix
 
 	// The ID of the virtual private gateway or transit gateway.

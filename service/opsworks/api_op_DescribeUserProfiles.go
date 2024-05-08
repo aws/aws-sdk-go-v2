@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe specified users. Required Permissions: To use this action, an IAM user
-// must have an attached policy that explicitly grants permissions. For more
-// information about user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// Describe specified users.
+//
+// Required Permissions: To use this action, an IAM user must have an attached
+// policy that explicitly grants permissions. For more information about user
+// permissions, see [Managing User Permissions].
+//
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeUserProfiles(ctx context.Context, params *DescribeUserProfilesInput, optFns ...func(*Options)) (*DescribeUserProfilesOutput, error) {
 	if params == nil {
 		params = &DescribeUserProfilesInput{}

@@ -411,8 +411,9 @@ func (e *TooManyTagsException) ErrorCode() string {
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Amazon Comprehend can't process the language of the input text. For a list of
-// supported languages, Supported languages (https://docs.aws.amazon.com/comprehend/latest/dg/supported-languages.html)
-// in the Comprehend Developer Guide.
+// supported languages, [Supported languages]in the Comprehend Developer Guide.
+//
+// [Supported languages]: https://docs.aws.amazon.com/comprehend/latest/dg/supported-languages.html
 type UnsupportedLanguageException struct {
 	Message *string
 

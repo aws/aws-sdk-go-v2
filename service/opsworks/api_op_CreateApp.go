@@ -11,12 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an app for a specified stack. For more information, see Creating Apps (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html)
-// . Required Permissions: To use this action, an IAM user must have a Manage
+// Creates an app for a specified stack. For more information, see [Creating Apps].
+//
+// Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// permissions. For more information on user permissions, see [Managing User Permissions].
+//
+// [Creating Apps]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) CreateApp(ctx context.Context, params *CreateAppInput, optFns ...func(*Options)) (*CreateAppOutput, error) {
 	if params == nil {
 		params = &CreateAppInput{}
@@ -74,15 +76,18 @@ type CreateAppInput struct {
 
 	// An array of EnvironmentVariable objects that specify environment variables to
 	// be associated with the app. After you deploy the app, these variables are
-	// defined on the associated app server instance. For more information, see
-	// Environment Variables (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment)
-	// . There is no specific limit on the number of environment variables. However,
-	// the size of the associated data structure - which includes the variables' names,
+	// defined on the associated app server instance. For more information, see [Environment Variables].
+	//
+	// There is no specific limit on the number of environment variables. However, the
+	// size of the associated data structure - which includes the variables' names,
 	// values, and protected flag values - cannot exceed 20 KB. This limit should
 	// accommodate most if not all use cases. Exceeding it will cause an exception with
-	// the message, "Environment: is too large (maximum is 20KB)." If you have
-	// specified one or more environment variables, you cannot modify the stack's Chef
-	// version.
+	// the message, "Environment: is too large (maximum is 20KB)."
+	//
+	// If you have specified one or more environment variables, you cannot modify the
+	// stack's Chef version.
+	//
+	// [Environment Variables]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
 	Environment []types.EnvironmentVariable
 
 	// The app's short name.

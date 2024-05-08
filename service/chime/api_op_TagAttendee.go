@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Applies the specified tags to the specified Amazon Chime attendee. TagAttendee
-// is not supported in the Amazon Chime SDK Meetings Namespace. Update your
-// application to remove calls to this API.
+// Applies the specified tags to the specified Amazon Chime attendee.
+//
+// TagAttendee is not supported in the Amazon Chime SDK Meetings Namespace. Update
+// your application to remove calls to this API.
 //
 // Deprecated: Attendee Tags are not supported in the Amazon Chime SDK Meetings
 // Namespace. Update your application to remove calls to this API.

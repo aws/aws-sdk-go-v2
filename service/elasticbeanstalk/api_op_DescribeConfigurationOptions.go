@@ -61,7 +61,7 @@ type DescribeConfigurationOptionsInput struct {
 // Describes the settings for a specified configuration set.
 type DescribeConfigurationOptionsOutput struct {
 
-	// A list of ConfigurationOptionDescription .
+	//  A list of ConfigurationOptionDescription.
 	Options []types.ConfigurationOptionDescription
 
 	// The ARN of the platform version.

@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified license configuration. You cannot delete a license
-// configuration that is in use.
+// Deletes the specified license configuration.
+//
+// You cannot delete a license configuration that is in use.
 func (c *Client) DeleteLicenseConfiguration(ctx context.Context, params *DeleteLicenseConfigurationInput, optFns ...func(*Options)) (*DeleteLicenseConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteLicenseConfigurationInput{}

@@ -14,8 +14,9 @@ const (
 
 // Values returns all known values for AccountTakeoverEventActionType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccountTakeoverEventActionType) Values() []AccountTakeoverEventActionType {
 	return []AccountTakeoverEventActionType{
 		"BLOCK",
@@ -36,6 +37,7 @@ const (
 
 // Values returns all known values for AdvancedSecurityModeType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AdvancedSecurityModeType) Values() []AdvancedSecurityModeType {
 	return []AdvancedSecurityModeType{
@@ -55,8 +57,9 @@ const (
 )
 
 // Values returns all known values for AliasAttributeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AliasAttributeType) Values() []AliasAttributeType {
 	return []AliasAttributeType{
 		"phone_number",
@@ -76,8 +79,9 @@ const (
 )
 
 // Values returns all known values for AttributeDataType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AttributeDataType) Values() []AttributeDataType {
 	return []AttributeDataType{
 		"String",
@@ -101,8 +105,9 @@ const (
 )
 
 // Values returns all known values for AuthFlowType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthFlowType) Values() []AuthFlowType {
 	return []AuthFlowType{
 		"USER_SRP_AUTH",
@@ -124,8 +129,9 @@ const (
 )
 
 // Values returns all known values for ChallengeName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChallengeName) Values() []ChallengeName {
 	return []ChallengeName{
 		"Password",
@@ -150,8 +156,9 @@ const (
 )
 
 // Values returns all known values for ChallengeNameType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChallengeNameType) Values() []ChallengeNameType {
 	return []ChallengeNameType{
 		"SMS_MFA",
@@ -176,8 +183,9 @@ const (
 )
 
 // Values returns all known values for ChallengeResponse. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChallengeResponse) Values() []ChallengeResponse {
 	return []ChallengeResponse{
 		"Success",
@@ -195,8 +203,9 @@ const (
 
 // Values returns all known values for CompromisedCredentialsEventActionType. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CompromisedCredentialsEventActionType) Values() []CompromisedCredentialsEventActionType {
 	return []CompromisedCredentialsEventActionType{
 		"BLOCK",
@@ -213,8 +222,9 @@ const (
 
 // Values returns all known values for CustomEmailSenderLambdaVersionType. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomEmailSenderLambdaVersionType) Values() []CustomEmailSenderLambdaVersionType {
 	return []CustomEmailSenderLambdaVersionType{
 		"V1_0",
@@ -230,8 +240,9 @@ const (
 
 // Values returns all known values for CustomSMSSenderLambdaVersionType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomSMSSenderLambdaVersionType) Values() []CustomSMSSenderLambdaVersionType {
 	return []CustomSMSSenderLambdaVersionType{
 		"V1_0",
@@ -247,8 +258,9 @@ const (
 )
 
 // Values returns all known values for DefaultEmailOptionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DefaultEmailOptionType) Values() []DefaultEmailOptionType {
 	return []DefaultEmailOptionType{
 		"CONFIRM_WITH_LINK",
@@ -265,8 +277,9 @@ const (
 )
 
 // Values returns all known values for DeletionProtectionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeletionProtectionType) Values() []DeletionProtectionType {
 	return []DeletionProtectionType{
 		"ACTIVE",
@@ -283,8 +296,9 @@ const (
 )
 
 // Values returns all known values for DeliveryMediumType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeliveryMediumType) Values() []DeliveryMediumType {
 	return []DeliveryMediumType{
 		"SMS",
@@ -302,6 +316,7 @@ const (
 
 // Values returns all known values for DeviceRememberedStatusType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DeviceRememberedStatusType) Values() []DeviceRememberedStatusType {
 	return []DeviceRememberedStatusType{
@@ -322,8 +337,9 @@ const (
 )
 
 // Values returns all known values for DomainStatusType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DomainStatusType) Values() []DomainStatusType {
 	return []DomainStatusType{
 		"CREATING",
@@ -343,8 +359,9 @@ const (
 )
 
 // Values returns all known values for EmailSendingAccountType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EmailSendingAccountType) Values() []EmailSendingAccountType {
 	return []EmailSendingAccountType{
 		"COGNITO_DEFAULT",
@@ -362,8 +379,9 @@ const (
 )
 
 // Values returns all known values for EventFilterType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventFilterType) Values() []EventFilterType {
 	return []EventFilterType{
 		"SIGN_IN",
@@ -382,8 +400,9 @@ const (
 )
 
 // Values returns all known values for EventResponseType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventResponseType) Values() []EventResponseType {
 	return []EventResponseType{
 		"Pass",
@@ -400,8 +419,9 @@ const (
 )
 
 // Values returns all known values for EventSourceName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventSourceName) Values() []EventSourceName {
 	return []EventSourceName{
 		"userNotification",
@@ -420,8 +440,9 @@ const (
 )
 
 // Values returns all known values for EventType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"SignIn",
@@ -447,8 +468,9 @@ const (
 )
 
 // Values returns all known values for ExplicitAuthFlowsType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExplicitAuthFlowsType) Values() []ExplicitAuthFlowsType {
 	return []ExplicitAuthFlowsType{
 		"ADMIN_NO_SRP_AUTH",
@@ -471,8 +493,9 @@ const (
 )
 
 // Values returns all known values for FeedbackValueType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FeedbackValueType) Values() []FeedbackValueType {
 	return []FeedbackValueType{
 		"Valid",
@@ -494,6 +517,7 @@ const (
 
 // Values returns all known values for IdentityProviderTypeType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (IdentityProviderTypeType) Values() []IdentityProviderTypeType {
 	return []IdentityProviderTypeType{
@@ -514,8 +538,9 @@ const (
 )
 
 // Values returns all known values for LogLevel. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LogLevel) Values() []LogLevel {
 	return []LogLevel{
 		"ERROR",
@@ -531,8 +556,9 @@ const (
 )
 
 // Values returns all known values for MessageActionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MessageActionType) Values() []MessageActionType {
 	return []MessageActionType{
 		"RESEND",
@@ -550,8 +576,9 @@ const (
 )
 
 // Values returns all known values for OAuthFlowType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OAuthFlowType) Values() []OAuthFlowType {
 	return []OAuthFlowType{
 		"code",
@@ -570,8 +597,9 @@ const (
 
 // Values returns all known values for PreTokenGenerationLambdaVersionType. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PreTokenGenerationLambdaVersionType) Values() []PreTokenGenerationLambdaVersionType {
 	return []PreTokenGenerationLambdaVersionType{
 		"V1_0",
@@ -589,8 +617,9 @@ const (
 
 // Values returns all known values for PreventUserExistenceErrorTypes. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PreventUserExistenceErrorTypes) Values() []PreventUserExistenceErrorTypes {
 	return []PreventUserExistenceErrorTypes{
 		"LEGACY",
@@ -608,8 +637,9 @@ const (
 )
 
 // Values returns all known values for RecoveryOptionNameType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecoveryOptionNameType) Values() []RecoveryOptionNameType {
 	return []RecoveryOptionNameType{
 		"verified_email",
@@ -628,8 +658,9 @@ const (
 )
 
 // Values returns all known values for RiskDecisionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RiskDecisionType) Values() []RiskDecisionType {
 	return []RiskDecisionType{
 		"NoRisk",
@@ -648,8 +679,9 @@ const (
 )
 
 // Values returns all known values for RiskLevelType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RiskLevelType) Values() []RiskLevelType {
 	return []RiskLevelType{
 		"Low",
@@ -667,8 +699,9 @@ const (
 )
 
 // Values returns all known values for StatusType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StatusType) Values() []StatusType {
 	return []StatusType{
 		"Enabled",
@@ -687,8 +720,9 @@ const (
 )
 
 // Values returns all known values for TimeUnitsType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TimeUnitsType) Values() []TimeUnitsType {
 	return []TimeUnitsType{
 		"seconds",
@@ -713,8 +747,9 @@ const (
 )
 
 // Values returns all known values for UserImportJobStatusType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UserImportJobStatusType) Values() []UserImportJobStatusType {
 	return []UserImportJobStatusType{
 		"Created",
@@ -737,8 +772,9 @@ const (
 )
 
 // Values returns all known values for UsernameAttributeType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UsernameAttributeType) Values() []UsernameAttributeType {
 	return []UsernameAttributeType{
 		"phone_number",
@@ -756,8 +792,9 @@ const (
 )
 
 // Values returns all known values for UserPoolMfaType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UserPoolMfaType) Values() []UserPoolMfaType {
 	return []UserPoolMfaType{
 		"OFF",
@@ -780,8 +817,9 @@ const (
 )
 
 // Values returns all known values for UserStatusType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UserStatusType) Values() []UserStatusType {
 	return []UserStatusType{
 		"UNCONFIRMED",
@@ -803,8 +841,9 @@ const (
 )
 
 // Values returns all known values for VerifiedAttributeType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VerifiedAttributeType) Values() []VerifiedAttributeType {
 	return []VerifiedAttributeType{
 		"phone_number",
@@ -822,8 +861,9 @@ const (
 
 // Values returns all known values for VerifySoftwareTokenResponseType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VerifySoftwareTokenResponseType) Values() []VerifySoftwareTokenResponseType {
 	return []VerifySoftwareTokenResponseType{
 		"SUCCESS",

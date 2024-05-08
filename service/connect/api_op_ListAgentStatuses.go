@@ -12,6 +12,7 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
+//
 // Lists agent statuses.
 func (c *Client) ListAgentStatuses(ctx context.Context, params *ListAgentStatusesInput, optFns ...func(*Options)) (*ListAgentStatusesOutput, error) {
 	if params == nil {
@@ -30,8 +31,10 @@ func (c *Client) ListAgentStatuses(ctx context.Context, params *ListAgentStatuse
 
 type ListAgentStatusesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

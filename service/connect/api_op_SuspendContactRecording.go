@@ -15,9 +15,12 @@ import (
 // recording or only screen recording is enabled, then it would be suspended. For
 // example, you might suspend the screen recording while collecting sensitive
 // information, such as a credit card number. Then use ResumeContactRecording to
-// restart recording the screen. The period of time that the recording is suspended
-// is filled with silence in the final recording. Voice and screen recordings are
-// supported.
+// restart recording the screen.
+//
+// The period of time that the recording is suspended is filled with silence in
+// the final recording.
+//
+// Voice and screen recordings are supported.
 func (c *Client) SuspendContactRecording(ctx context.Context, params *SuspendContactRecordingInput, optFns ...func(*Options)) (*SuspendContactRecordingOutput, error) {
 	if params == nil {
 		params = &SuspendContactRecordingInput{}
@@ -46,8 +49,10 @@ type SuspendContactRecordingInput struct {
 	// This member is required.
 	InitialContactId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

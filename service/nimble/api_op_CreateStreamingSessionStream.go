@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a streaming session stream for a streaming session. After invoking this
-// API, invoke GetStreamingSessionStream with the returned streamId to poll the
-// resource until it is in the READY state.
+// Creates a streaming session stream for a streaming session.
+//
+// After invoking this API, invoke GetStreamingSessionStream with the returned
+// streamId to poll the resource until it is in the READY state.
 func (c *Client) CreateStreamingSessionStream(ctx context.Context, params *CreateStreamingSessionStreamInput, optFns ...func(*Options)) (*CreateStreamingSessionStreamOutput, error) {
 	if params == nil {
 		params = &CreateStreamingSessionStreamInput{}

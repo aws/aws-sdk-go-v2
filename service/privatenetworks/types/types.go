@@ -59,23 +59,33 @@ type Address struct {
 }
 
 // Determines the duration and renewal status of the commitment period for a radio
-// unit. For pricing, see Amazon Web Services Private 5G Pricing (http://aws.amazon.com/private5g/pricing)
-// .
+// unit.
+//
+// For pricing, see [Amazon Web Services Private 5G Pricing].
+//
+// [Amazon Web Services Private 5G Pricing]: http://aws.amazon.com/private5g/pricing
 type CommitmentConfiguration struct {
 
 	// Determines whether the commitment period for a radio unit is set to
 	// automatically renew for an additional 1 year after your current commitment
-	// period expires. Set to True , if you want your commitment period to
-	// automatically renew. Set to False if you do not want your commitment to
-	// automatically renew. You can do the following:
+	// period expires.
+	//
+	// Set to True , if you want your commitment period to automatically renew. Set to
+	// False if you do not want your commitment to automatically renew.
+	//
+	// You can do the following:
+	//
 	//   - Set a 1-year commitment to automatically renew for an additional 1 year.
 	//   The hourly rate for the additional year will continue to be the same as your
 	//   existing 1-year rate.
+	//
 	//   - Set a 3-year commitment to automatically renew for an additional 1 year.
 	//   The hourly rate for the additional year will continue to be the same as your
 	//   existing 3-year rate.
+	//
 	//   - Turn off a previously-enabled automatic renewal on a 1-year or 3-year
 	//   commitment.
+	//
 	// You cannot use the automatic-renewal option for a 60-day commitment.
 	//
 	// This member is required.
@@ -294,10 +304,10 @@ type NetworkSite struct {
 	// This member is required.
 	Status NetworkSiteStatus
 
-	// The parent Availability Zone for the network site.
+	//  The parent Availability Zone for the network site.
 	AvailabilityZone *string
 
-	// The parent Availability Zone ID for the network site.
+	//  The parent Availability Zone ID for the network site.
 	AvailabilityZoneId *string
 
 	// The creation time of the network site.
@@ -404,8 +414,9 @@ type ReturnInformation struct {
 
 	// The URL of the shipping label. The shipping label is available for download
 	// only if the status of the network resource is PENDING_RETURN . For more
-	// information, see Return a radio unit (https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit)
-	// .
+	// information, see [Return a radio unit].
+	//
+	// [Return a radio unit]: https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit
 	ShippingLabel *string
 
 	noSmithyDocumentSerde

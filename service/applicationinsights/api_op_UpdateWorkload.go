@@ -29,7 +29,7 @@ func (c *Client) UpdateWorkload(ctx context.Context, params *UpdateWorkloadInput
 
 type UpdateWorkloadInput struct {
 
-	// The name of the component.
+	//  The name of the component.
 	//
 	// This member is required.
 	ComponentName *string

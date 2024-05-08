@@ -45,8 +45,10 @@ type DescribeMapOutput struct {
 	// This member is required.
 	Configuration *types.MapConfiguration
 
-	// The timestamp for when the map resource was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp for when the map resource was created in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -63,6 +65,7 @@ type DescribeMapOutput struct {
 
 	// The Amazon Resource Name (ARN) for the map resource. Used to specify a resource
 	// across all Amazon Web Services.
+	//
 	//   - Format example: arn:aws:geo:region:account-id:map/ExampleMap
 	//
 	// This member is required.
@@ -73,8 +76,10 @@ type DescribeMapOutput struct {
 	// This member is required.
 	MapName *string
 
-	// The timestamp for when the map resource was last update in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp for when the map resource was last update in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time

@@ -13,8 +13,9 @@ import (
 )
 
 // Retrieves the configuration for asynchronous invocation for a function,
-// version, or alias. To configure options for asynchronous invocation, use
-// PutFunctionEventInvokeConfig .
+// version, or alias.
+//
+// To configure options for asynchronous invocation, use PutFunctionEventInvokeConfig.
 func (c *Client) GetFunctionEventInvokeConfig(ctx context.Context, params *GetFunctionEventInvokeConfigInput, optFns ...func(*Options)) (*GetFunctionEventInvokeConfigOutput, error) {
 	if params == nil {
 		params = &GetFunctionEventInvokeConfigInput{}
@@ -32,10 +33,16 @@ func (c *Client) GetFunctionEventInvokeConfig(ctx context.Context, params *GetFu
 
 type GetFunctionEventInvokeConfigInput struct {
 
-	// The name or ARN of the Lambda function, version, or alias. Name formats
+	// The name or ARN of the Lambda function, version, or alias.
+	//
+	// Name formats
+	//
 	//   - Function name - my-function (name-only), my-function:v1 (with alias).
+	//
 	//   - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//
 	//   - Partial ARN - 123456789012:function:my-function .
+	//
 	// You can append a version number or alias to any of the formats. The length
 	// constraint applies only to the full ARN. If you specify only the function name,
 	// it is limited to 64 characters in length.
@@ -51,11 +58,16 @@ type GetFunctionEventInvokeConfigInput struct {
 
 type GetFunctionEventInvokeConfigOutput struct {
 
-	// A destination for events after they have been sent to a function for
-	// processing. Destinations
+	// A destination for events after they have been sent to a function for processing.
+	//
+	// Destinations
+	//
 	//   - Function - The Amazon Resource Name (ARN) of a Lambda function.
+	//
 	//   - Queue - The ARN of a standard SQS queue.
+	//
 	//   - Topic - The ARN of a standard SNS topic.
+	//
 	//   - Event Bus - The ARN of an Amazon EventBridge event bus.
 	DestinationConfig *types.DestinationConfig
 

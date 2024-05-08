@@ -11,9 +11,12 @@ import (
 )
 
 // Deletes a saved CloudWatch Logs Insights query definition. A query definition
-// contains details about a saved CloudWatch Logs Insights query. Each
-// DeleteQueryDefinition operation can delete one query definition. You must have
-// the logs:DeleteQueryDefinition permission to be able to perform this operation.
+// contains details about a saved CloudWatch Logs Insights query.
+//
+// Each DeleteQueryDefinition operation can delete one query definition.
+//
+// You must have the logs:DeleteQueryDefinition permission to be able to perform
+// this operation.
 func (c *Client) DeleteQueryDefinition(ctx context.Context, params *DeleteQueryDefinitionInput, optFns ...func(*Options)) (*DeleteQueryDefinitionOutput, error) {
 	if params == nil {
 		params = &DeleteQueryDefinitionInput{}
@@ -31,9 +34,10 @@ func (c *Client) DeleteQueryDefinition(ctx context.Context, params *DeleteQueryD
 
 type DeleteQueryDefinitionInput struct {
 
-	// The ID of the query definition that you want to delete. You can use
-	// DescribeQueryDefinitions (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html)
-	// to retrieve the IDs of your saved query definitions.
+	// The ID of the query definition that you want to delete. You can use [DescribeQueryDefinitions] to
+	// retrieve the IDs of your saved query definitions.
+	//
+	// [DescribeQueryDefinitions]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html
 	//
 	// This member is required.
 	QueryDefinitionId *string

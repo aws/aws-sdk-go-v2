@@ -34,17 +34,20 @@ func (c *Client) DeleteAutoScalingConfiguration(ctx context.Context, params *Del
 type DeleteAutoScalingConfigurationInput struct {
 
 	// The Amazon Resource Name (ARN) of the App Runner auto scaling configuration
-	// that you want to delete. The ARN can be a full auto scaling configuration ARN,
-	// or a partial ARN ending with either .../name  or .../name/revision . If a
-	// revision isn't specified, the latest active revision is deleted.
+	// that you want to delete.
+	//
+	// The ARN can be a full auto scaling configuration ARN, or a partial ARN ending
+	// with either .../name  or .../name/revision . If a revision isn't specified, the
+	// latest active revision is deleted.
 	//
 	// This member is required.
 	AutoScalingConfigurationArn *string
 
 	// Set to true to delete all of the revisions associated with the
-	// AutoScalingConfigurationArn parameter value. When DeleteAllRevisions is set to
-	// true , the only valid value for the Amazon Resource Name (ARN) is a partial ARN
-	// ending with: .../name .
+	// AutoScalingConfigurationArn parameter value.
+	//
+	// When DeleteAllRevisions is set to true , the only valid value for the Amazon
+	// Resource Name (ARN) is a partial ARN ending with: .../name .
 	DeleteAllRevisions bool
 
 	noSmithyDocumentSerde

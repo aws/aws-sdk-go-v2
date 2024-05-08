@@ -12,6 +12,7 @@ import (
 )
 
 // Lists all profiles in the authenticated account and Amazon Web Services Region.
+//
 // Required permissions: rolesanywhere:ListProfiles .
 func (c *Client) ListProfiles(ctx context.Context, params *ListProfilesInput, optFns ...func(*Options)) (*ListProfilesOutput, error) {
 	if params == nil {

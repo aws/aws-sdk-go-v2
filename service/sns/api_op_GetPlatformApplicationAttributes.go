@@ -12,8 +12,9 @@ import (
 
 // Retrieves the attributes of the platform application object for the supported
 // push notification services, such as APNS and GCM (Firebase Cloud Messaging). For
-// more information, see Using Amazon SNS Mobile Push Notifications (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html)
-// .
+// more information, see [Using Amazon SNS Mobile Push Notifications].
+//
+// [Using Amazon SNS Mobile Push Notifications]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
 func (c *Client) GetPlatformApplicationAttributes(ctx context.Context, params *GetPlatformApplicationAttributesInput, optFns ...func(*Options)) (*GetPlatformApplicationAttributesOutput, error) {
 	if params == nil {
 		params = &GetPlatformApplicationAttributesInput{}
@@ -44,22 +45,32 @@ type GetPlatformApplicationAttributesInput struct {
 type GetPlatformApplicationAttributesOutput struct {
 
 	// Attributes include the following:
+	//
 	//   - AppleCertificateExpiryDate – The expiry date of the SSL certificate used to
 	//   configure certificate-based authentication.
+	//
 	//   - ApplePlatformTeamID – The Apple developer account ID used to configure
 	//   token-based authentication.
+	//
 	//   - ApplePlatformBundleID – The app identifier used to configure token-based
 	//   authentication.
+	//
 	//   - AuthenticationMethod – Returns the credential type used when sending push
 	//   notifications from application to APNS/APNS_Sandbox, or application to GCM.
+	//
 	//   - APNS – Returns the token or certificate.
+	//
 	//   - GCM – Returns the token or key.
+	//
 	//   - EventEndpointCreated – Topic ARN to which EndpointCreated event
 	//   notifications should be sent.
+	//
 	//   - EventEndpointDeleted – Topic ARN to which EndpointDeleted event
 	//   notifications should be sent.
+	//
 	//   - EventEndpointUpdated – Topic ARN to which EndpointUpdate event notifications
 	//   should be sent.
+	//
 	//   - EventDeliveryFailure – Topic ARN to which DeliveryFailure event
 	//   notifications should be sent upon Direct Publish delivery failure (permanent) to
 	//   one of the application's endpoints.

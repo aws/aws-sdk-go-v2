@@ -40,8 +40,7 @@ type AddRoleToDBClusterInput struct {
 	RoleArn *string
 
 	// The name of the feature for the DB cluster that the IAM role is to be
-	// associated with. For information about supported feature names, see
-	// DBEngineVersion .
+	// associated with. For information about supported feature names, see DBEngineVersion.
 	FeatureName *string
 
 	noSmithyDocumentSerde

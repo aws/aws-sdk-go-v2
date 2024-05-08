@@ -12,15 +12,20 @@ import (
 )
 
 // Gets media for a list of fragments (specified by fragment number) from the
-// archived data in an Amazon Kinesis video stream. You must first call the
-// GetDataEndpoint API to get an endpoint. Then send the GetMediaForFragmentList
-// requests to this endpoint using the --endpoint-url parameter (https://docs.aws.amazon.com/cli/latest/reference/)
-// . For limits, see Kinesis Video Streams Limits (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html)
-// . If an error is thrown after invoking a Kinesis Video Streams archived media
+// archived data in an Amazon Kinesis video stream.
+//
+// You must first call the GetDataEndpoint API to get an endpoint. Then send the
+// GetMediaForFragmentList requests to this endpoint using the [--endpoint-url parameter].
+//
+// For limits, see [Kinesis Video Streams Limits].
+//
+// If an error is thrown after invoking a Kinesis Video Streams archived media
 // API, in addition to the HTTP status code and the response body, it includes the
 // following pieces of information:
+//
 //   - x-amz-ErrorType HTTP header – contains a more specific error type in
 //     addition to what the HTTP status code provides.
+//
 //   - x-amz-RequestId HTTP header – if you want to report an issue to Amazon Web
 //     Services, the support team can better diagnose the problem if given the Request
 //     Id.
@@ -28,9 +33,14 @@ import (
 // Both the HTTP status code and the ErrorType header can be utilized to make
 // programmatic decisions about whether errors are retry-able and under what
 // conditions, as well as provide information on what actions the client programmer
-// might need to take in order to successfully try again. For more information, see
-// the Errors section at the bottom of this topic, as well as Common Errors (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html)
-// .
+// might need to take in order to successfully try again.
+//
+// For more information, see the Errors section at the bottom of this topic, as
+// well as [Common Errors].
+//
+// [--endpoint-url parameter]: https://docs.aws.amazon.com/cli/latest/reference/
+// [Common Errors]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html
+// [Kinesis Video Streams Limits]: http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html
 func (c *Client) GetMediaForFragmentList(ctx context.Context, params *GetMediaForFragmentListInput, optFns ...func(*Options)) (*GetMediaForFragmentListOutput, error) {
 	if params == nil {
 		params = &GetMediaForFragmentListInput{}
@@ -49,7 +59,7 @@ func (c *Client) GetMediaForFragmentList(ctx context.Context, params *GetMediaFo
 type GetMediaForFragmentListInput struct {
 
 	// A list of the numbers of fragments for which to retrieve media. You retrieve
-	// these values with ListFragments .
+	// these values with ListFragments.
 	//
 	// This member is required.
 	Fragments []string
@@ -71,19 +81,28 @@ type GetMediaForFragmentListOutput struct {
 	ContentType *string
 
 	// The payload that Kinesis Video Streams returns is a sequence of chunks from the
-	// specified stream. For information about the chunks, see PutMedia (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_dataplane_PutMedia.html)
-	// . The chunks that Kinesis Video Streams returns in the GetMediaForFragmentList
-	// call also include the following additional Matroska (MKV) tags:
+	// specified stream. For information about the chunks, see [PutMedia]. The chunks that
+	// Kinesis Video Streams returns in the GetMediaForFragmentList call also include
+	// the following additional Matroska (MKV) tags:
+	//
 	//   - AWS_KINESISVIDEO_FRAGMENT_NUMBER - Fragment number returned in the chunk.
+	//
 	//   - AWS_KINESISVIDEO_SERVER_SIDE_TIMESTAMP - Server-side timestamp of the
 	//   fragment.
+	//
 	//   - AWS_KINESISVIDEO_PRODUCER_SIDE_TIMESTAMP - Producer-side timestamp of the
 	//   fragment.
+	//
 	// The following tags will be included if an exception occurs:
+	//
 	//   - AWS_KINESISVIDEO_FRAGMENT_NUMBER - The number of the fragment that threw
 	//   the exception
+	//
 	//   - AWS_KINESISVIDEO_EXCEPTION_ERROR_CODE - The integer code of the
+	//
 	//   - AWS_KINESISVIDEO_EXCEPTION_MESSAGE - A text description of the exception
+	//
+	// [PutMedia]: http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_dataplane_PutMedia.html
 	Payload io.ReadCloser
 
 	// Metadata pertaining to the operation's result.

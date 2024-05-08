@@ -13,19 +13,23 @@ import (
 
 // Defines the versions of your managed rule set that you are offering to the
 // customers. Customers see your offerings as managed rule groups with versioning.
+//
 // This is intended for use only by vendors of managed rule sets. Vendors are
-// Amazon Web Services and Amazon Web Services Marketplace sellers. Vendors, you
-// can use the managed rule set APIs to provide controlled rollout of your
-// versioned managed rule group offerings for your customers. The APIs are
+// Amazon Web Services and Amazon Web Services Marketplace sellers.
+//
+// Vendors, you can use the managed rule set APIs to provide controlled rollout of
+// your versioned managed rule group offerings for your customers. The APIs are
 // ListManagedRuleSets , GetManagedRuleSet , PutManagedRuleSetVersions , and
-// UpdateManagedRuleSetVersionExpiryDate . Customers retrieve their managed rule
-// group list by calling ListAvailableManagedRuleGroups . The name that you provide
-// here for your managed rule set is the name the customer sees for the
+// UpdateManagedRuleSetVersionExpiryDate .
+//
+// Customers retrieve their managed rule group list by calling ListAvailableManagedRuleGroups. The name that you
+// provide here for your managed rule set is the name the customer sees for the
 // corresponding managed rule group. Customers can retrieve the available versions
-// for a managed rule group by calling ListAvailableManagedRuleGroupVersions . You
-// provide a rule group specification for each version. For each managed rule set,
-// you must specify a version that you recommend using. To initiate the expiration
-// of a managed rule group version, use UpdateManagedRuleSetVersionExpiryDate .
+// for a managed rule group by calling ListAvailableManagedRuleGroupVersions. You provide a rule group specification
+// for each version. For each managed rule set, you must specify a version that you
+// recommend using.
+//
+// To initiate the expiration of a managed rule group version, use UpdateManagedRuleSetVersionExpiryDate.
 func (c *Client) PutManagedRuleSetVersions(ctx context.Context, params *PutManagedRuleSetVersionsInput, optFns ...func(*Options)) (*PutManagedRuleSetVersionsOutput, error) {
 	if params == nil {
 		params = &PutManagedRuleSetVersionsInput{}
@@ -62,8 +66,10 @@ type PutManagedRuleSetVersionsInput struct {
 	LockToken *string
 
 	// The name of the managed rule set. You use this, along with the rule set ID, to
-	// identify the rule set. This name is assigned to the corresponding managed rule
-	// group, which your customers can access and use.
+	// identify the rule set.
+	//
+	// This name is assigned to the corresponding managed rule group, which your
+	// customers can access and use.
 	//
 	// This member is required.
 	Name *string
@@ -72,10 +78,14 @@ type PutManagedRuleSetVersionsInput struct {
 	// regional application. A regional application can be an Application Load Balancer
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito
 	// user pool, an App Runner service, or an Amazon Web Services Verified Access
-	// instance. To work with CloudFront, you must also specify the Region US East (N.
-	// Virginia) as follows:
+	// instance.
+	//
+	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
+	// as follows:
+	//
 	//   - CLI - Specify the Region when you use the CloudFront scope:
 	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//
 	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.

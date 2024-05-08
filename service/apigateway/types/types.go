@@ -508,9 +508,10 @@ type Integration struct {
 
 	// Specifies how to handle request payload content type conversions. Supported
 	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT , with the following behaviors:
-	// If this property is not defined, the request payload will be passed through from
-	// the method request to integration request without modification, provided that
-	// the passthroughBehavior is configured to support payload pass-through.
+	//
+	// If this property is not defined, the request payload will be passed through
+	// from the method request to integration request without modification, provided
+	// that the passthroughBehavior is configured to support payload pass-through.
 	ContentHandling ContentHandlingStrategy
 
 	// Specifies the credentials required for the integration, if any. For AWS
@@ -571,15 +572,18 @@ type Integration struct {
 	TlsConfig *TlsConfig
 
 	// Specifies an API method integration type. The valid value is one of the
-	// following: For the HTTP and HTTP proxy integrations, each integration can
-	// specify a protocol ( http/https ), port and path. Standard 80 and 443 ports are
-	// supported as well as custom ports above 1024. An HTTP or HTTP proxy integration
-	// with a connectionType of VPC_LINK is referred to as a private integration and
-	// uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
+	// following:
+	//
+	// For the HTTP and HTTP proxy integrations, each integration can specify a
+	// protocol ( http/https ), port and path. Standard 80 and 443 ports are supported
+	// as well as custom ports above 1024. An HTTP or HTTP proxy integration with a
+	// connectionType of VPC_LINK is referred to as a private integration and uses a
+	// VpcLink to connect API Gateway to a network load balancer of a VPC.
 	Type IntegrationType
 
-	// Specifies Uniform Resource Identifier (URI) of the integration endpoint. For
-	// HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded
+	// Specifies Uniform Resource Identifier (URI) of the integration endpoint.
+	//
+	// For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded
 	// HTTP(S) URL according to the RFC-3986 specification for standard integrations.
 	// If connectionType is VPC_LINK specify the Network Load Balancer DNS name. For
 	// AWS or AWS_PROXY integrations, the URI is of the form
@@ -609,6 +613,7 @@ type IntegrationResponse struct {
 
 	// Specifies how to handle response payload content type conversions. Supported
 	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT , with the following behaviors:
+	//
 	// If this property is not defined, the response payload will be passed through
 	// from the integration response to the method response without modification.
 	ContentHandling ContentHandlingStrategy
@@ -648,7 +653,8 @@ type IntegrationResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a client-facing interface by which the client calls the API to
+//	Represents a client-facing interface by which the client calls the API to
+//
 // access back-end resources. A Method resource is integrated with an Integration
 // resource. Both consist of a request and one or more responses. The method
 // request takes the client input that is passed to the back end through the
@@ -880,8 +886,9 @@ type MutualTlsAuthenticationInput struct {
 	noSmithyDocumentSerde
 }
 
-// For more information about supported patch operations, see Patch Operations (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html)
-// .
+// For more information about supported patch operations, see [Patch Operations].
+//
+// [Patch Operations]: https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html
 type PatchOperation struct {
 
 	// The copy update operation's source as identified by a JSON-Pointer value
@@ -1092,8 +1099,9 @@ type Stage struct {
 	CacheClusterEnabled bool
 
 	// The stage's cache capacity in GB. For more information about choosing a cache
-	// size, see Enabling API caching to enhance responsiveness (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html)
-	// .
+	// size, see [Enabling API caching to enhance responsiveness].
+	//
+	// [Enabling API caching to enhance responsiveness]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html
 	CacheClusterSize CacheClusterSize
 
 	// The status of the cache cluster for the stage, if enabled.
@@ -1184,6 +1192,7 @@ type TlsConfig struct {
 	// enabled, API Gateway still performs basic certificate validation, which includes
 	// checking the certificate's expiration date, hostname, and presence of a root
 	// certificate authority. Supported only for HTTP and HTTP_PROXY integrations.
+	//
 	// Enabling insecureSkipVerification isn't recommended, especially for
 	// integrations with public HTTPS endpoints. If you enable insecureSkipVerification
 	// , you increase the risk of man-in-the-middle attacks.
@@ -1195,9 +1204,10 @@ type TlsConfig struct {
 // Represents a usage plan used to specify who can assess associated API stages.
 // Optionally, target request rate and quota limits can be set. In some cases
 // clients can exceed the targets that you set. Don’t rely on usage plans to
-// control costs. Consider using Amazon Web Services Budgets (https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html)
-// to monitor costs and WAF (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
-// to manage API requests.
+// control costs. Consider using [Amazon Web Services Budgets]to monitor costs and [WAF] to manage API requests.
+//
+// [Amazon Web Services Budgets]: https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html
+// [WAF]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
 type UsagePlan struct {
 
 	// The associated API stages of a usage plan.

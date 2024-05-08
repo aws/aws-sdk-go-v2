@@ -17,8 +17,9 @@ import (
 // access CodeCatalyst from resources that include integrated development
 // environments (IDEs) and Git-based source repositories. PATs represent you in
 // Amazon CodeCatalyst and you can manage them in your user settings.For more
-// information, see Managing personal access tokens in Amazon CodeCatalyst (https://docs.aws.amazon.com/codecatalyst/latest/userguide/ipa-tokens-keys.html)
-// .
+// information, see [Managing personal access tokens in Amazon CodeCatalyst].
+//
+// [Managing personal access tokens in Amazon CodeCatalyst]: https://docs.aws.amazon.com/codecatalyst/latest/userguide/ipa-tokens-keys.html
 func (c *Client) CreateAccessToken(ctx context.Context, params *CreateAccessTokenInput, optFns ...func(*Options)) (*CreateAccessTokenOutput, error) {
 	if params == nil {
 		params = &CreateAccessTokenInput{}
@@ -42,8 +43,9 @@ type CreateAccessTokenInput struct {
 	Name *string
 
 	// The date and time the personal access token expires, in coordinated universal
-	// time (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// .
+	// time (UTC) timestamp format as specified in [RFC 3339].
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	ExpiresTime *time.Time
 
 	noSmithyDocumentSerde
@@ -57,8 +59,10 @@ type CreateAccessTokenOutput struct {
 	AccessTokenId *string
 
 	// The date and time the personal access token expires, in coordinated universal
-	// time (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// . If not specified, the default is one year from creation.
+	// time (UTC) timestamp format as specified in [RFC 3339]. If not specified, the default is
+	// one year from creation.
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	ExpiresTime *time.Time

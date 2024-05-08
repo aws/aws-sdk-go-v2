@@ -30,7 +30,7 @@ func (c *Client) CreateProfilingGroup(ctx context.Context, params *CreateProfili
 // The structure representing the createProfiliingGroupRequest.
 type CreateProfilingGroupInput struct {
 
-	// Amazon CodeGuru Profiler uses this universally unique identifier (UUID) to
+	//  Amazon CodeGuru Profiler uses this universally unique identifier (UUID) to
 	// prevent the accidental creation of duplicate profiling groups if there are
 	// failures and retries.
 	//
@@ -42,17 +42,17 @@ type CreateProfilingGroupInput struct {
 	// This member is required.
 	ProfilingGroupName *string
 
-	// Specifies whether profiling is enabled or disabled for the created profiling
+	//  Specifies whether profiling is enabled or disabled for the created profiling
 	// group.
 	AgentOrchestrationConfig *types.AgentOrchestrationConfig
 
-	// The compute platform of the profiling group. Use AWSLambda if your application
+	//  The compute platform of the profiling group. Use AWSLambda if your application
 	// runs on AWS Lambda. Use Default if your application runs on a compute platform
 	// that is not AWS Lambda, such an Amazon EC2 instance, an on-premises server, or a
 	// different platform. If not specified, Default is used.
 	ComputePlatform types.ComputePlatform
 
-	// A list of tags to add to the created profiling group.
+	//  A list of tags to add to the created profiling group.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -61,8 +61,10 @@ type CreateProfilingGroupInput struct {
 // The structure representing the createProfilingGroupResponse.
 type CreateProfilingGroupOutput struct {
 
-	// The returned ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
-	// object that contains information about the created profiling group.
+	//  The returned [ProfilingGroupDescription]ProfilingGroupDescription object that contains information about
+	// the created profiling group.
+	//
+	// [ProfilingGroupDescription]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html
 	//
 	// This member is required.
 	ProfilingGroup *types.ProfilingGroupDescription

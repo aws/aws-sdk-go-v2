@@ -36,9 +36,9 @@ type TagResourceInput struct {
 	ResourceArn *string
 
 	// The key-value tag pairs you want to associate to your environment. For example,
-	// "Environment": "Staging" . For more information, see Tagging Amazon Web
-	// Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// .
+	// "Environment": "Staging" . For more information, see [Tagging Amazon Web Services resources].
+	//
+	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	//
 	// This member is required.
 	Tags map[string]string

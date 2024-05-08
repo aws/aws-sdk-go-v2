@@ -29,8 +29,7 @@ func (c *Client) DescribePullRequestEvents(ctx context.Context, params *Describe
 
 type DescribePullRequestEventsInput struct {
 
-	// The system-generated ID of the pull request. To get this ID, use
-	// ListPullRequests .
+	// The system-generated ID of the pull request. To get this ID, use ListPullRequests.
 	//
 	// This member is required.
 	PullRequestId *string

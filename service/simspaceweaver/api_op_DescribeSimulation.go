@@ -41,8 +41,9 @@ type DescribeSimulationInput struct {
 type DescribeSimulationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the simulation. For more information about
-	// ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// The time when the simulation was created, expressed as the number of seconds
@@ -74,10 +75,11 @@ type DescribeSimulationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// that the simulation assumes to perform actions. For more information about ARNs,
-	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference. For more information about IAM
-	// roles, see IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
-	// in the Identity and Access Management User Guide.
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference. For more information about
+	// IAM roles, see [IAM roles]in the Identity and Access Management User Guide.
+	//
+	// [IAM roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	RoleArn *string
 
 	// An error message that SimSpace Weaver returns only if there is a problem with
@@ -87,15 +89,16 @@ type DescribeSimulationOutput struct {
 	SchemaError *string
 
 	// The location of the simulation schema in Amazon Simple Storage Service (Amazon
-	// S3). For more information about Amazon S3, see the Amazon Simple Storage
-	// Service User Guide  (https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
-	// .
+	// S3). For more information about Amazon S3, see the [Amazon Simple Storage Service User Guide].
+	//
+	// [Amazon Simple Storage Service User Guide]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
 	SchemaS3Location *types.S3Location
 
 	// A location in Amazon Simple Storage Service (Amazon S3) where SimSpace Weaver
 	// stores simulation data, such as your app .zip files and schema file. For more
-	// information about Amazon S3, see the Amazon Simple Storage Service User Guide  (https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
-	// .
+	// information about Amazon S3, see the [Amazon Simple Storage Service User Guide].
+	//
+	// [Amazon Simple Storage Service User Guide]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
 	SnapshotS3Location *types.S3Location
 
 	// An error message that SimSpace Weaver returns only if a problem occurs when the

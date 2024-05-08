@@ -52,8 +52,9 @@ type UpdateIndexInput struct {
 	// Configuration information for document metadata or fields. Document metadata
 	// are fields or attributes associated with your documents. For example, the
 	// company department name associated with each document. For more information, see
-	// Understanding document attributes (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/doc-attributes-types.html#doc-attributes)
-	// .
+	// [Understanding document attributes].
+	//
+	// [Understanding document attributes]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/doc-attributes-types.html#doc-attributes
 	DocumentAttributeConfigurations []types.DocumentAttributeConfiguration
 
 	noSmithyDocumentSerde

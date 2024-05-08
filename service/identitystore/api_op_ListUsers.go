@@ -13,10 +13,12 @@ import (
 
 // Lists all users in the identity store. Returns a paginated list of complete User
 // objects. Filtering for a User by the UserName attribute is deprecated. Instead,
-// use the GetUserId API action. If you have administrator access to a member
-// account, you can use this API from the member account. Read about member
-// accounts (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html)
-// in the Organizations User Guide.
+// use the GetUserId API action.
+//
+// If you have administrator access to a member account, you can use this API from
+// the member account. Read about [member accounts]in the Organizations User Guide.
+//
+// [member accounts]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html
 func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns ...func(*Options)) (*ListUsersOutput, error) {
 	if params == nil {
 		params = &ListUsersInput{}

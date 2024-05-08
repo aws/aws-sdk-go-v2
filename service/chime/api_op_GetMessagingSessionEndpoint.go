@@ -11,16 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The details of the endpoint for the messaging session. This API is is no longer
-// supported and will not be updated. We recommend using the latest version,
-// GetMessagingSessionEndpoint (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_GetMessagingSessionEndpoint.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// The details of the endpoint for the messaging session.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [GetMessagingSessionEndpoint], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by GetMessagingSessionEndpoint in the Amazon Chime SDK
 // Messaging Namespace
+//
+// [GetMessagingSessionEndpoint]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_GetMessagingSessionEndpoint.html
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
 func (c *Client) GetMessagingSessionEndpoint(ctx context.Context, params *GetMessagingSessionEndpointInput, optFns ...func(*Options)) (*GetMessagingSessionEndpointOutput, error) {
 	if params == nil {
 		params = &GetMessagingSessionEndpointInput{}

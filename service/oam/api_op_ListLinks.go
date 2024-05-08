@@ -12,9 +12,12 @@ import (
 )
 
 // Use this operation in a source account to return a list of links to monitoring
-// account sinks that this source account has. To find a list of links for one
-// monitoring account sink, use ListAttachedLinks (https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListAttachedLinks.html)
-// from within the monitoring account.
+// account sinks that this source account has.
+//
+// To find a list of links for one monitoring account sink, use [ListAttachedLinks] from within the
+// monitoring account.
+//
+// [ListAttachedLinks]: https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListAttachedLinks.html
 func (c *Client) ListLinks(ctx context.Context, params *ListLinksInput, optFns ...func(*Options)) (*ListLinksOutput, error) {
 	if params == nil {
 		params = &ListLinksInput{}

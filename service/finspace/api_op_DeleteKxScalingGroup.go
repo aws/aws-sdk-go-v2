@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified scaling group. This action is irreversible. You cannot
+//	Deletes the specified scaling group. This action is irreversible. You cannot
+//
 // delete a scaling group until all the clusters running on it have been deleted.
 func (c *Client) DeleteKxScalingGroup(ctx context.Context, params *DeleteKxScalingGroupInput, optFns ...func(*Options)) (*DeleteKxScalingGroupOutput, error) {
 	if params == nil {

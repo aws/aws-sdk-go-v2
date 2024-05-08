@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the permissions for a specified stack. Required Permissions: To use
-// this action, an IAM user must have a Manage permissions level for the stack, or
-// an attached policy that explicitly grants permissions. For more information on
-// user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// Describes the permissions for a specified stack.
+//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see [Managing User Permissions].
+//
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribePermissions(ctx context.Context, params *DescribePermissionsInput, optFns ...func(*Options)) (*DescribePermissionsOutput, error) {
 	if params == nil {
 		params = &DescribePermissionsInput{}
@@ -34,8 +36,9 @@ func (c *Client) DescribePermissions(ctx context.Context, params *DescribePermis
 type DescribePermissionsInput struct {
 
 	// The user's IAM ARN. This can also be a federated user's ARN. For more
-	// information about IAM ARNs, see Using Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
-	// .
+	// information about IAM ARNs, see [Using Identifiers].
+	//
+	// [Using Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
 	IamUserArn *string
 
 	// The stack ID.
@@ -48,10 +51,13 @@ type DescribePermissionsInput struct {
 type DescribePermissionsOutput struct {
 
 	// An array of Permission objects that describe the stack permissions.
+	//
 	//   - If the request object contains only a stack ID, the array contains a
 	//   Permission object with permissions for each of the stack IAM ARNs.
+	//
 	//   - If the request object contains only an IAM ARN, the array contains a
 	//   Permission object with permissions for each of the user's stack IDs.
+	//
 	//   - If the request contains a stack ID and an IAM ARN, the array contains a
 	//   single Permission object with permissions for the specified stack and IAM ARN.
 	Permissions []types.Permission

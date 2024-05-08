@@ -14,8 +14,9 @@ import (
 
 // This operation initiates a job of the specified type, which can be a select, an
 // archival retrieval, or a vault retrieval. For more information about using this
-// operation, see the documentation for the underlying REST API Initiate a Job (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html)
-// .
+// operation, see the documentation for the underlying REST API [Initiate a Job].
+//
+// [Initiate a Job]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html
 func (c *Client) InitiateJob(ctx context.Context, params *InitiateJobInput, optFns ...func(*Options)) (*InitiateJobOutput, error) {
 	if params == nil {
 		params = &InitiateJobInput{}

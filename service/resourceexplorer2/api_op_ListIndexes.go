@@ -36,10 +36,11 @@ type ListIndexesInput struct {
 	// appropriate to the operation. If additional items exist beyond those included in
 	// the current response, the NextToken response element is present and has a value
 	// (is not null). Include that value as the NextToken request parameter in the
-	// next call to the operation to get the next part of the results. An API operation
-	// can return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that you
-	// receive all of the results.
+	// next call to the operation to get the next part of the results.
+	//
+	// An API operation can return fewer results than the maximum even when there are
+	// more results available. You should check NextToken after every operation to
+	// ensure that you receive all of the results.
 	MaxResults *int32
 
 	// The parameter for receiving additional results if you receive a NextToken
@@ -54,8 +55,9 @@ type ListIndexesInput struct {
 	Regions []string
 
 	// If specified, limits the output to only indexes of the specified Type, either
-	// LOCAL or AGGREGATOR . Use this option to discover the aggregator index for your
-	// account.
+	// LOCAL or AGGREGATOR .
+	//
+	// Use this option to discover the aggregator index for your account.
 	Type types.IndexType
 
 	noSmithyDocumentSerde
@@ -169,10 +171,11 @@ type ListIndexesPaginatorOptions struct {
 	// appropriate to the operation. If additional items exist beyond those included in
 	// the current response, the NextToken response element is present and has a value
 	// (is not null). Include that value as the NextToken request parameter in the
-	// next call to the operation to get the next part of the results. An API operation
-	// can return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that you
-	// receive all of the results.
+	// next call to the operation to get the next part of the results.
+	//
+	// An API operation can return fewer results than the maximum even when there are
+	// more results available. You should check NextToken after every operation to
+	// ensure that you receive all of the results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

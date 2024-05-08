@@ -12,8 +12,9 @@ import (
 )
 
 // Disables a trust anchor. When disabled, temporary credential requests
-// specifying this trust anchor are unauthorized. Required permissions:
-// rolesanywhere:DisableTrustAnchor .
+// specifying this trust anchor are unauthorized.
+//
+// Required permissions: rolesanywhere:DisableTrustAnchor .
 func (c *Client) DisableTrustAnchor(ctx context.Context, params *DisableTrustAnchorInput, optFns ...func(*Options)) (*DisableTrustAnchorOutput, error) {
 	if params == nil {
 		params = &DisableTrustAnchorInput{}

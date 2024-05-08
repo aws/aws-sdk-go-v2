@@ -35,14 +35,16 @@ type UpdatePlaybackRestrictionPolicyInput struct {
 	Arn *string
 
 	// A list of country codes that control geoblocking restriction. Allowed values
-	// are the officially assigned ISO 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-	// codes. Default: All countries (an empty array).
+	// are the officially assigned [ISO 3166-1 alpha-2]codes. Default: All countries (an empty array).
+	//
+	// [ISO 3166-1 alpha-2]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 	AllowedCountries []string
 
 	// A list of origin sites that control CORS restriction. Allowed values are the
-	// same as valid values of the Origin header defined at
-	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin)
-	// . Default: All origins (an empty array).
+	// same as valid values of the Origin header defined at [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin]. Default: All origins (an
+	// empty array).
+	//
+	// [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin
 	AllowedOrigins []string
 
 	// Whether channel playback is constrained by origin site. Default: false .

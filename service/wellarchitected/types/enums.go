@@ -12,8 +12,9 @@ const (
 
 // Values returns all known values for AccountJiraIssueManagementStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccountJiraIssueManagementStatus) Values() []AccountJiraIssueManagementStatus {
 	return []AccountJiraIssueManagementStatus{
 		"ENABLED",
@@ -30,8 +31,9 @@ const (
 )
 
 // Values returns all known values for AdditionalResourceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AdditionalResourceType) Values() []AdditionalResourceType {
 	return []AdditionalResourceType{
 		"HELPFUL_RESOURCE",
@@ -51,8 +53,9 @@ const (
 )
 
 // Values returns all known values for AnswerReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnswerReason) Values() []AnswerReason {
 	return []AnswerReason{
 		"OUT_OF_SCOPE",
@@ -74,8 +77,9 @@ const (
 )
 
 // Values returns all known values for CheckFailureReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CheckFailureReason) Values() []CheckFailureReason {
 	return []CheckFailureReason{
 		"ASSUME_ROLE_ERROR",
@@ -93,8 +97,9 @@ const (
 )
 
 // Values returns all known values for CheckProvider. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CheckProvider) Values() []CheckProvider {
 	return []CheckProvider{
 		"TRUSTED_ADVISOR",
@@ -113,8 +118,9 @@ const (
 )
 
 // Values returns all known values for CheckStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CheckStatus) Values() []CheckStatus {
 	return []CheckStatus{
 		"OKAY",
@@ -137,8 +143,9 @@ const (
 )
 
 // Values returns all known values for ChoiceReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChoiceReason) Values() []ChoiceReason {
 	return []ChoiceReason{
 		"OUT_OF_SCOPE",
@@ -159,8 +166,9 @@ const (
 )
 
 // Values returns all known values for ChoiceStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChoiceStatus) Values() []ChoiceStatus {
 	return []ChoiceStatus{
 		"SELECTED",
@@ -178,8 +186,9 @@ const (
 )
 
 // Values returns all known values for DefinitionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DefinitionType) Values() []DefinitionType {
 	return []DefinitionType{
 		"WORKLOAD_METADATA",
@@ -197,8 +206,9 @@ const (
 )
 
 // Values returns all known values for DifferenceStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DifferenceStatus) Values() []DifferenceStatus {
 	return []DifferenceStatus{
 		"UPDATED",
@@ -217,6 +227,7 @@ const (
 
 // Values returns all known values for DiscoveryIntegrationStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DiscoveryIntegrationStatus) Values() []DiscoveryIntegrationStatus {
 	return []DiscoveryIntegrationStatus{
@@ -235,8 +246,9 @@ const (
 )
 
 // Values returns all known values for ImportLensStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImportLensStatus) Values() []ImportLensStatus {
 	return []ImportLensStatus{
 		"IN_PROGRESS",
@@ -253,8 +265,9 @@ const (
 )
 
 // Values returns all known values for IntegratingService. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IntegratingService) Values() []IntegratingService {
 	return []IntegratingService{
 		"JIRA",
@@ -270,8 +283,9 @@ const (
 )
 
 // Values returns all known values for IntegrationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IntegrationStatus) Values() []IntegrationStatus {
 	return []IntegrationStatus{
 		"CONFIGURED",
@@ -287,8 +301,9 @@ const (
 )
 
 // Values returns all known values for IntegrationStatusInput. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IntegrationStatusInput) Values() []IntegrationStatusInput {
 	return []IntegrationStatusInput{
 		"NOT_CONFIGURED",
@@ -304,8 +319,9 @@ const (
 )
 
 // Values returns all known values for IssueManagementType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IssueManagementType) Values() []IssueManagementType {
 	return []IssueManagementType{
 		"AUTO",
@@ -325,8 +341,9 @@ const (
 )
 
 // Values returns all known values for LensStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LensStatus) Values() []LensStatus {
 	return []LensStatus{
 		"CURRENT",
@@ -347,8 +364,9 @@ const (
 )
 
 // Values returns all known values for LensStatusType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LensStatusType) Values() []LensStatusType {
 	return []LensStatusType{
 		"ALL",
@@ -367,8 +385,9 @@ const (
 )
 
 // Values returns all known values for LensType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LensType) Values() []LensType {
 	return []LensType{
 		"AWS_OFFICIAL",
@@ -385,8 +404,9 @@ const (
 )
 
 // Values returns all known values for MetricType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MetricType) Values() []MetricType {
 	return []MetricType{
 		"WORKLOAD",
@@ -402,8 +422,9 @@ const (
 )
 
 // Values returns all known values for NotificationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationType) Values() []NotificationType {
 	return []NotificationType{
 		"LENS_VERSION_UPGRADED",
@@ -421,6 +442,7 @@ const (
 
 // Values returns all known values for OrganizationSharingStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (OrganizationSharingStatus) Values() []OrganizationSharingStatus {
 	return []OrganizationSharingStatus{
@@ -438,8 +460,9 @@ const (
 )
 
 // Values returns all known values for PermissionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PermissionType) Values() []PermissionType {
 	return []PermissionType{
 		"READONLY",
@@ -456,8 +479,9 @@ const (
 )
 
 // Values returns all known values for ProfileNotificationType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProfileNotificationType) Values() []ProfileNotificationType {
 	return []ProfileNotificationType{
 		"PROFILE_ANSWERS_UPDATED",
@@ -474,8 +498,9 @@ const (
 )
 
 // Values returns all known values for ProfileOwnerType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProfileOwnerType) Values() []ProfileOwnerType {
 	return []ProfileOwnerType{
 		"SELF",
@@ -492,8 +517,9 @@ const (
 )
 
 // Values returns all known values for Question. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Question) Values() []Question {
 	return []Question{
 		"UNANSWERED",
@@ -510,8 +536,9 @@ const (
 )
 
 // Values returns all known values for QuestionPriority. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QuestionPriority) Values() []QuestionPriority {
 	return []QuestionPriority{
 		"PRIORITIZED",
@@ -528,8 +555,9 @@ const (
 )
 
 // Values returns all known values for QuestionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QuestionType) Values() []QuestionType {
 	return []QuestionType{
 		"PRIORITIZED",
@@ -546,8 +574,9 @@ const (
 )
 
 // Values returns all known values for ReportFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReportFormat) Values() []ReportFormat {
 	return []ReportFormat{
 		"PDF",
@@ -565,6 +594,7 @@ const (
 
 // Values returns all known values for ReviewTemplateAnswerStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ReviewTemplateAnswerStatus) Values() []ReviewTemplateAnswerStatus {
 	return []ReviewTemplateAnswerStatus{
@@ -583,6 +613,7 @@ const (
 
 // Values returns all known values for ReviewTemplateUpdateStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ReviewTemplateUpdateStatus) Values() []ReviewTemplateUpdateStatus {
 	return []ReviewTemplateUpdateStatus{
@@ -603,8 +634,9 @@ const (
 )
 
 // Values returns all known values for Risk. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Risk) Values() []Risk {
 	return []Risk{
 		"UNANSWERED",
@@ -624,8 +656,9 @@ const (
 )
 
 // Values returns all known values for ShareInvitationAction. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ShareInvitationAction) Values() []ShareInvitationAction {
 	return []ShareInvitationAction{
 		"ACCEPT",
@@ -644,8 +677,9 @@ const (
 )
 
 // Values returns all known values for ShareResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ShareResourceType) Values() []ShareResourceType {
 	return []ShareResourceType{
 		"WORKLOAD",
@@ -670,8 +704,9 @@ const (
 )
 
 // Values returns all known values for ShareStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ShareStatus) Values() []ShareStatus {
 	return []ShareStatus{
 		"ACCEPTED",
@@ -695,8 +730,9 @@ const (
 
 // Values returns all known values for TrustedAdvisorIntegrationStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TrustedAdvisorIntegrationStatus) Values() []TrustedAdvisorIntegrationStatus {
 	return []TrustedAdvisorIntegrationStatus{
 		"ENABLED",
@@ -716,6 +752,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{
@@ -735,8 +772,9 @@ const (
 )
 
 // Values returns all known values for WorkloadEnvironment. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkloadEnvironment) Values() []WorkloadEnvironment {
 	return []WorkloadEnvironment{
 		"PRODUCTION",
@@ -757,6 +795,7 @@ const (
 
 // Values returns all known values for WorkloadImprovementStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkloadImprovementStatus) Values() []WorkloadImprovementStatus {
 	return []WorkloadImprovementStatus{
@@ -779,8 +818,9 @@ const (
 
 // Values returns all known values for WorkloadIssueManagementStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkloadIssueManagementStatus) Values() []WorkloadIssueManagementStatus {
 	return []WorkloadIssueManagementStatus{
 		"ENABLED",

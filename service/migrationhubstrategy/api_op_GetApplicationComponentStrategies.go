@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of all the recommended strategies and tools for an application
-// component running on a server.
+//	Retrieves a list of all the recommended strategies and tools for an
+//
+// application component running on a server.
 func (c *Client) GetApplicationComponentStrategies(ctx context.Context, params *GetApplicationComponentStrategiesInput, optFns ...func(*Options)) (*GetApplicationComponentStrategiesOutput, error) {
 	if params == nil {
 		params = &GetApplicationComponentStrategiesInput{}
@@ -30,7 +31,7 @@ func (c *Client) GetApplicationComponentStrategies(ctx context.Context, params *
 
 type GetApplicationComponentStrategiesInput struct {
 
-	// The ID of the application component. The ID is unique within an AWS account.
+	//  The ID of the application component. The ID is unique within an AWS account.
 	//
 	// This member is required.
 	ApplicationComponentId *string
@@ -40,7 +41,7 @@ type GetApplicationComponentStrategiesInput struct {
 
 type GetApplicationComponentStrategiesOutput struct {
 
-	// A list of application component strategy recommendations.
+	//  A list of application component strategy recommendations.
 	ApplicationComponentStrategies []types.ApplicationComponentStrategy
 
 	// Metadata pertaining to the operation's result.

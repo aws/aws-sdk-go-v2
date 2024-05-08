@@ -30,8 +30,9 @@ func (c *Client) GetTemplate(ctx context.Context, params *GetTemplateInput, optF
 
 type GetTemplateInput struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called CreateTemplate (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html)
-	// .
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate].
+	//
+	// [CreateTemplate]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html
 	//
 	// This member is required.
 	TemplateArn *string

@@ -16,15 +16,24 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Indicates whether the
-// specified Multi-Region Access Point has an access control policy that allows
-// public access. This action will always be routed to the US West (Oregon) Region.
-// For more information about the restrictions around working with Multi-Region
-// Access Points, see Multi-Region Access Point restrictions and limitations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPointRestrictions.html)
-// in the Amazon S3 User Guide. The following actions are related to
-// GetMultiRegionAccessPointPolicyStatus :
-//   - GetMultiRegionAccessPointPolicy (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html)
-//   - PutMultiRegionAccessPointPolicy (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html)
+// This operation is not supported by directory buckets.
+//
+// Indicates whether the specified Multi-Region Access Point has an access control
+// policy that allows public access.
+//
+// This action will always be routed to the US West (Oregon) Region. For more
+// information about the restrictions around working with Multi-Region Access
+// Points, see [Multi-Region Access Point restrictions and limitations]in the Amazon S3 User Guide.
+//
+// The following actions are related to GetMultiRegionAccessPointPolicyStatus :
+//
+// [GetMultiRegionAccessPointPolicy]
+//
+// [PutMultiRegionAccessPointPolicy]
+//
+// [PutMultiRegionAccessPointPolicy]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html
+// [GetMultiRegionAccessPointPolicy]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html
+// [Multi-Region Access Point restrictions and limitations]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPointRestrictions.html
 func (c *Client) GetMultiRegionAccessPointPolicyStatus(ctx context.Context, params *GetMultiRegionAccessPointPolicyStatusInput, optFns ...func(*Options)) (*GetMultiRegionAccessPointPolicyStatusOutput, error) {
 	if params == nil {
 		params = &GetMultiRegionAccessPointPolicyStatusInput{}
@@ -50,9 +59,10 @@ type GetMultiRegionAccessPointPolicyStatusInput struct {
 
 	// Specifies the Multi-Region Access Point. The name of the Multi-Region Access
 	// Point is different from the alias. For more information about the distinction
-	// between the name and the alias of an Multi-Region Access Point, see Rules for
-	// naming Amazon S3 Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming)
-	// in the Amazon S3 User Guide.
+	// between the name and the alias of an Multi-Region Access Point, see [Rules for naming Amazon S3 Multi-Region Access Points]in the
+	// Amazon S3 User Guide.
+	//
+	// [Rules for naming Amazon S3 Multi-Region Access Points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming
 	//
 	// This member is required.
 	Name *string
@@ -69,8 +79,9 @@ type GetMultiRegionAccessPointPolicyStatusOutput struct {
 
 	// Indicates whether this access point policy is public. For more information
 	// about how Amazon S3 evaluates policies to determine whether they are public, see
-	// The Meaning of "Public" (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
-	// in the Amazon S3 User Guide.
+	// [The Meaning of "Public"]in the Amazon S3 User Guide.
+	//
+	// [The Meaning of "Public"]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
 	Established *types.PolicyStatus
 
 	// Metadata pertaining to the operation's result.

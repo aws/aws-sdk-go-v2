@@ -12,23 +12,28 @@ import (
 )
 
 // Registers instances that were created outside of AWS OpsWorks Stacks with a
-// specified stack. We do not recommend using this action to register instances.
-// The complete registration operation includes two tasks: installing the AWS
-// OpsWorks Stacks agent on the instance, and registering the instance with the
-// stack. RegisterInstance handles only the second step. You should instead use
-// the AWS CLI register command, which performs the entire registration operation.
-// For more information, see Registering an Instance with an AWS OpsWorks Stacks
-// Stack (https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register.html)
-// . Registered instances have the same requirements as instances that are created
-// by using the CreateInstance API. For example, registered instances must be
-// running a supported Linux-based operating system, and they must have a supported
-// instance type. For more information about requirements for instances that you
-// want to register, see Preparing the Instance (https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register-registering-preparer.html)
-// . Required Permissions: To use this action, an IAM user must have a Manage
+// specified stack.
+//
+// We do not recommend using this action to register instances. The complete
+// registration operation includes two tasks: installing the AWS OpsWorks Stacks
+// agent on the instance, and registering the instance with the stack.
+// RegisterInstance handles only the second step. You should instead use the AWS
+// CLI register command, which performs the entire registration operation. For
+// more information, see [Registering an Instance with an AWS OpsWorks Stacks Stack].
+//
+// Registered instances have the same requirements as instances that are created
+// by using the CreateInstanceAPI. For example, registered instances must be running a supported
+// Linux-based operating system, and they must have a supported instance type. For
+// more information about requirements for instances that you want to register, see
+// [Preparing the Instance].
+//
+// Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// permissions. For more information on user permissions, see [Managing User Permissions].
+//
+// [Preparing the Instance]: https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register-registering-preparer.html
+// [Registering an Instance with an AWS OpsWorks Stacks Stack]: https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register.html
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) RegisterInstance(ctx context.Context, params *RegisterInstanceInput, optFns ...func(*Options)) (*RegisterInstanceOutput, error) {
 	if params == nil {
 		params = &RegisterInstanceInput{}

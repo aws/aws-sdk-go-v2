@@ -11,21 +11,28 @@ import (
 	"time"
 )
 
-// Creates a version (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html)
-// from the current revision of a state machine. Use versions to create immutable
-// snapshots of your state machine. You can start executions from versions either
-// directly or with an alias. To create an alias, use CreateStateMachineAlias . You
-// can publish up to 1000 versions for each state machine. You must manually delete
-// unused versions using the DeleteStateMachineVersion API action.
+// Creates a [version] from the current revision of a state machine. Use versions to create
+// immutable snapshots of your state machine. You can start executions from
+// versions either directly or with an alias. To create an alias, use CreateStateMachineAlias.
+//
+// You can publish up to 1000 versions for each state machine. You must manually
+// delete unused versions using the DeleteStateMachineVersionAPI action.
+//
 // PublishStateMachineVersion is an idempotent API. It doesn't create a duplicate
 // state machine version if it already exists for the current revision. Step
 // Functions bases PublishStateMachineVersion 's idempotency check on the
 // stateMachineArn , name , and revisionId parameters. Requests with the same
 // parameters return a successful idempotent response. If you don't specify a
 // revisionId , Step Functions checks for a previously published version of the
-// state machine's current revision. Related operations:
-//   - DeleteStateMachineVersion
-//   - ListStateMachineVersions
+// state machine's current revision.
+//
+// Related operations:
+//
+// # DeleteStateMachineVersion
+//
+// # ListStateMachineVersions
+//
+// [version]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html
 func (c *Client) PublishStateMachineVersion(ctx context.Context, params *PublishStateMachineVersionInput, optFns ...func(*Options)) (*PublishStateMachineVersionOutput, error) {
 	if params == nil {
 		params = &PublishStateMachineVersionInput{}
@@ -52,13 +59,16 @@ type PublishStateMachineVersionInput struct {
 	Description *string
 
 	// Only publish the state machine version if the current state machine's revision
-	// ID matches the specified ID. Use this option to avoid publishing a version if
-	// the state machine changed since you last updated it. If the specified revision
-	// ID doesn't match the state machine's current revision ID, the API returns
-	// ConflictException . To specify an initial revision ID for a state machine with
-	// no revision ID assigned, specify the string INITIAL for the revisionId
-	// parameter. For example, you can specify a revisionID of INITIAL when you create
-	// a state machine using the CreateStateMachine API action.
+	// ID matches the specified ID.
+	//
+	// Use this option to avoid publishing a version if the state machine changed
+	// since you last updated it. If the specified revision ID doesn't match the state
+	// machine's current revision ID, the API returns ConflictException .
+	//
+	// To specify an initial revision ID for a state machine with no revision ID
+	// assigned, specify the string INITIAL for the revisionId parameter. For example,
+	// you can specify a revisionID of INITIAL when you create a state machine using
+	// the CreateStateMachineAPI action.
 	RevisionId *string
 
 	noSmithyDocumentSerde

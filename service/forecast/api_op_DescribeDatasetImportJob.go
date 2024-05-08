@@ -12,16 +12,24 @@ import (
 	"time"
 )
 
-// Describes a dataset import job created using the CreateDatasetImportJob (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html)
-// operation. In addition to listing the parameters provided in the
-// CreateDatasetImportJob request, this operation includes the following
-// properties:
+// Describes a dataset import job created using the [CreateDatasetImportJob] operation.
+//
+// In addition to listing the parameters provided in the CreateDatasetImportJob
+// request, this operation includes the following properties:
+//
 //   - CreationTime
+//
 //   - LastModificationTime
+//
 //   - DataSize
+//
 //   - FieldStatistics
+//
 //   - Status
+//
 //   - Message - If an error occurred, information about the error.
+//
+// [CreateDatasetImportJob]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html
 func (c *Client) DescribeDatasetImportJob(ctx context.Context, params *DescribeDatasetImportJobInput, optFns ...func(*Options)) (*DescribeDatasetImportJobOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetImportJobInput{}
@@ -56,8 +64,9 @@ type DescribeDatasetImportJobOutput struct {
 	DataSize *float64
 
 	// The location of the training data to import and an Identity and Access
-	// Management (IAM) role that Amazon Forecast can assume to access the data. If
-	// encryption is used, DataSource includes an Key Management Service (KMS) key.
+	// Management (IAM) role that Amazon Forecast can assume to access the data.
+	//
+	// If encryption is used, DataSource includes an Key Management Service (KMS) key.
 	DataSource *types.DataSource
 
 	// The Amazon Resource Name (ARN) of the dataset that the training data was
@@ -88,10 +97,15 @@ type DescribeDatasetImportJobOutput struct {
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
+	//
 	//   - CREATE_PENDING - The CreationTime .
+	//
 	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//
 	//   - CREATE_STOPPING - The current timestamp.
+	//
 	//   - CREATE_STOPPED - When the job stopped.
+	//
 	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
@@ -99,9 +113,13 @@ type DescribeDatasetImportJobOutput struct {
 	Message *string
 
 	// The status of the dataset import job. States include:
+	//
 	//   - ACTIVE
+	//
 	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//
 	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//
 	//   - CREATE_STOPPING , CREATE_STOPPED
 	Status *string
 
@@ -111,9 +129,15 @@ type DescribeDatasetImportJobOutput struct {
 	// The format of timestamps in the dataset. The format that you specify depends on
 	// the DataFrequency specified when the dataset was created. The following formats
 	// are supported
-	//   - "yyyy-MM-dd" For the following data frequencies: Y, M, W, and D
-	//   - "yyyy-MM-dd HH:mm:ss" For the following data frequencies: H, 30min, 15min,
-	//   and 1min; and optionally, for: Y, M, W, and D
+	//
+	//   - "yyyy-MM-dd"
+	//
+	// For the following data frequencies: Y, M, W, and D
+	//
+	//   - "yyyy-MM-dd HH:mm:ss"
+	//
+	// For the following data frequencies: H, 30min, 15min, and 1min; and optionally,
+	//   for: Y, M, W, and D
 	TimestampFormat *string
 
 	// Whether TimeZone is automatically derived from the geolocation attribute.

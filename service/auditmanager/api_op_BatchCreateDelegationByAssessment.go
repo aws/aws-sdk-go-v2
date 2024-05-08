@@ -29,12 +29,12 @@ func (c *Client) BatchCreateDelegationByAssessment(ctx context.Context, params *
 
 type BatchCreateDelegationByAssessmentInput struct {
 
-	// The identifier for the assessment.
+	//  The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The API request to batch create delegations in Audit Manager.
+	//  The API request to batch create delegations in Audit Manager.
 	//
 	// This member is required.
 	CreateDelegationRequests []types.CreateDelegationRequest
@@ -44,10 +44,10 @@ type BatchCreateDelegationByAssessmentInput struct {
 
 type BatchCreateDelegationByAssessmentOutput struct {
 
-	// The delegations that are associated with the assessment.
+	//  The delegations that are associated with the assessment.
 	Delegations []types.Delegation
 
-	// A list of errors that the BatchCreateDelegationByAssessment API returned.
+	//  A list of errors that the BatchCreateDelegationByAssessment API returned.
 	Errors []types.BatchCreateDelegationByAssessmentError
 
 	// Metadata pertaining to the operation's result.

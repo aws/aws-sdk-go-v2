@@ -29,7 +29,7 @@ func (c *Client) CreateModelExplainabilityJobDefinition(ctx context.Context, par
 
 type CreateModelExplainabilityJobDefinitionInput struct {
 
-	// The name of the model explainability job definition. The name must be unique
+	//  The name of the model explainability job definition. The name must be unique
 	// within an Amazon Web Services Region in the Amazon Web Services account.
 	//
 	// This member is required.
@@ -71,9 +71,10 @@ type CreateModelExplainabilityJobDefinitionInput struct {
 	// A time limit for how long the monitoring job is allowed to run before stopping.
 	StoppingCondition *types.MonitoringStoppingCondition
 
-	// (Optional) An array of key-value pairs. For more information, see  Using Cost
-	// Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
-	// in the Amazon Web Services Billing and Cost Management User Guide.
+	// (Optional) An array of key-value pairs. For more information, see [Using Cost Allocation Tags] in the
+	// Amazon Web Services Billing and Cost Management User Guide.
+	//
+	// [Using Cost Allocation Tags]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

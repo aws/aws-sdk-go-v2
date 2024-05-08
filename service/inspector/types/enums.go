@@ -17,8 +17,9 @@ const (
 )
 
 // Values returns all known values for AccessDeniedErrorCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessDeniedErrorCode) Values() []AccessDeniedErrorCode {
 	return []AccessDeniedErrorCode{
 		"ACCESS_DENIED_TO_ASSESSMENT_TARGET",
@@ -42,8 +43,9 @@ const (
 )
 
 // Values returns all known values for AgentHealth. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AgentHealth) Values() []AgentHealth {
 	return []AgentHealth{
 		"HEALTHY",
@@ -65,8 +67,9 @@ const (
 )
 
 // Values returns all known values for AgentHealthCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AgentHealthCode) Values() []AgentHealthCode {
 	return []AgentHealthCode{
 		"IDLE",
@@ -90,8 +93,9 @@ const (
 
 // Values returns all known values for AssessmentRunNotificationSnsStatusCode.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssessmentRunNotificationSnsStatusCode) Values() []AssessmentRunNotificationSnsStatusCode {
 	return []AssessmentRunNotificationSnsStatusCode{
 		"SUCCESS",
@@ -121,8 +125,9 @@ const (
 )
 
 // Values returns all known values for AssessmentRunState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssessmentRunState) Values() []AssessmentRunState {
 	return []AssessmentRunState{
 		"CREATED",
@@ -149,8 +154,9 @@ const (
 )
 
 // Values returns all known values for AssetType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssetType) Values() []AssetType {
 	return []AssetType{
 		"ec2-instance",
@@ -170,8 +176,9 @@ const (
 )
 
 // Values returns all known values for FailedItemErrorCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FailedItemErrorCode) Values() []FailedItemErrorCode {
 	return []FailedItemErrorCode{
 		"INVALID_ARN",
@@ -195,8 +202,9 @@ const (
 )
 
 // Values returns all known values for InspectorEvent. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InspectorEvent) Values() []InspectorEvent {
 	return []InspectorEvent{
 		"ASSESSMENT_RUN_STARTED",
@@ -217,8 +225,9 @@ const (
 
 // Values returns all known values for InvalidCrossAccountRoleErrorCode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InvalidCrossAccountRoleErrorCode) Values() []InvalidCrossAccountRoleErrorCode {
 	return []InvalidCrossAccountRoleErrorCode{
 		"ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP",
@@ -287,8 +296,9 @@ const (
 )
 
 // Values returns all known values for InvalidInputErrorCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InvalidInputErrorCode) Values() []InvalidInputErrorCode {
 	return []InvalidInputErrorCode{
 		"INVALID_ASSESSMENT_TARGET_ARN",
@@ -360,8 +370,9 @@ const (
 )
 
 // Values returns all known values for LimitExceededErrorCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LimitExceededErrorCode) Values() []LimitExceededErrorCode {
 	return []LimitExceededErrorCode{
 		"ASSESSMENT_TARGET_LIMIT_EXCEEDED",
@@ -380,8 +391,9 @@ const (
 )
 
 // Values returns all known values for Locale. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Locale) Values() []Locale {
 	return []Locale{
 		"EN_US",
@@ -403,8 +415,9 @@ const (
 )
 
 // Values returns all known values for NoSuchEntityErrorCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NoSuchEntityErrorCode) Values() []NoSuchEntityErrorCode {
 	return []NoSuchEntityErrorCode{
 		"ASSESSMENT_TARGET_DOES_NOT_EXIST",
@@ -427,8 +440,9 @@ const (
 )
 
 // Values returns all known values for PreviewStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PreviewStatus) Values() []PreviewStatus {
 	return []PreviewStatus{
 		"WORK_IN_PROGRESS",
@@ -445,8 +459,9 @@ const (
 )
 
 // Values returns all known values for ReportFileFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReportFileFormat) Values() []ReportFileFormat {
 	return []ReportFileFormat{
 		"HTML",
@@ -464,8 +479,9 @@ const (
 )
 
 // Values returns all known values for ReportStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReportStatus) Values() []ReportStatus {
 	return []ReportStatus{
 		"WORK_IN_PROGRESS",
@@ -483,8 +499,9 @@ const (
 )
 
 // Values returns all known values for ReportType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReportType) Values() []ReportType {
 	return []ReportType{
 		"FINDING",
@@ -501,8 +518,9 @@ const (
 )
 
 // Values returns all known values for ScopeType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScopeType) Values() []ScopeType {
 	return []ScopeType{
 		"INSTANCE_ID",
@@ -522,8 +540,9 @@ const (
 )
 
 // Values returns all known values for Severity. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Severity) Values() []Severity {
 	return []Severity{
 		"Low",
@@ -543,8 +562,9 @@ const (
 )
 
 // Values returns all known values for StopAction. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StopAction) Values() []StopAction {
 	return []StopAction{
 		"START_EVALUATION",

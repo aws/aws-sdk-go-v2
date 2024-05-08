@@ -11,16 +11,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation has been expanded to use with the Amazon GameLift containers
-// feature, which is currently in public preview. Retrieves properties for a
-// compute resource in an Amazon GameLift fleet. To get a list of all computes in a
-// fleet, call ListCompute . To request information on a specific compute, provide
-// the fleet ID and compute name. If successful, this operation returns details for
-// the requested compute resource. Depending on the fleet's compute type, the
-// result includes the following information:
+//	This operation has been expanded to use with the Amazon GameLift containers
+//
+// feature, which is currently in public preview.
+//
+// Retrieves properties for a compute resource in an Amazon GameLift fleet. To get
+// a list of all computes in a fleet, call ListCompute.
+//
+// To request information on a specific compute, provide the fleet ID and compute
+// name.
+//
+// If successful, this operation returns details for the requested compute
+// resource. Depending on the fleet's compute type, the result includes the
+// following information:
+//
 //   - For EC2 fleets, this operation returns information about the EC2 instance.
+//
 //   - For ANYWHERE fleets, this operation returns information about the registered
 //     compute.
+//
 //   - For CONTAINER fleets, this operation returns information about the container
 //     that's registered as a compute, and the instance it's running on. The compute
 //     name is the container name.

@@ -64,13 +64,13 @@ type StartTestSetGenerationInput struct {
 
 type StartTestSetGenerationOutput struct {
 
-	// The creation date and time for the test set generation.
+	//  The creation date and time for the test set generation.
 	CreationDateTime *time.Time
 
 	// The description used for the test set generation.
 	Description *string
 
-	// The data source for the test set generation.
+	//  The data source for the test set generation.
 	GenerationDataSource *types.TestSetGenerationDataSource
 
 	// The roleARN used for any operation in the test set to access resources in the
@@ -83,7 +83,7 @@ type StartTestSetGenerationOutput struct {
 	// The unique identifier of the test set generation to describe.
 	TestSetGenerationId *string
 
-	// The status for the test set generation.
+	//  The status for the test set generation.
 	TestSetGenerationStatus types.TestSetGenerationStatus
 
 	// The test set name used for the test set generation.

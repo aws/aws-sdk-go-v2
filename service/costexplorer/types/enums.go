@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AccountScope. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccountScope) Values() []AccountScope {
 	return []AccountScope{
 		"PAYER",
@@ -30,8 +31,9 @@ const (
 )
 
 // Values returns all known values for AnomalyFeedbackType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnomalyFeedbackType) Values() []AnomalyFeedbackType {
 	return []AnomalyFeedbackType{
 		"YES",
@@ -51,8 +53,9 @@ const (
 
 // Values returns all known values for AnomalySubscriptionFrequency. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnomalySubscriptionFrequency) Values() []AnomalySubscriptionFrequency {
 	return []AnomalySubscriptionFrequency{
 		"DAILY",
@@ -70,8 +73,9 @@ const (
 )
 
 // Values returns all known values for ApproximationDimension. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApproximationDimension) Values() []ApproximationDimension {
 	return []ApproximationDimension{
 		"SERVICE",
@@ -89,8 +93,9 @@ const (
 )
 
 // Values returns all known values for Context. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Context) Values() []Context {
 	return []Context{
 		"COST_AND_USAGE",
@@ -110,8 +115,9 @@ const (
 
 // Values returns all known values for CostAllocationTagBackfillStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CostAllocationTagBackfillStatus) Values() []CostAllocationTagBackfillStatus {
 	return []CostAllocationTagBackfillStatus{
 		"SUCCEEDED",
@@ -129,8 +135,9 @@ const (
 )
 
 // Values returns all known values for CostAllocationTagStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CostAllocationTagStatus) Values() []CostAllocationTagStatus {
 	return []CostAllocationTagStatus{
 		"Active",
@@ -147,8 +154,9 @@ const (
 )
 
 // Values returns all known values for CostAllocationTagType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CostAllocationTagType) Values() []CostAllocationTagType {
 	return []CostAllocationTagType{
 		"AWSGenerated",
@@ -166,8 +174,9 @@ const (
 
 // Values returns all known values for CostCategoryInheritedValueDimensionName.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CostCategoryInheritedValueDimensionName) Values() []CostCategoryInheritedValueDimensionName {
 	return []CostCategoryInheritedValueDimensionName{
 		"LINKED_ACCOUNT_NAME",
@@ -184,8 +193,9 @@ const (
 )
 
 // Values returns all known values for CostCategoryRuleType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CostCategoryRuleType) Values() []CostCategoryRuleType {
 	return []CostCategoryRuleType{
 		"REGULAR",
@@ -201,8 +211,9 @@ const (
 )
 
 // Values returns all known values for CostCategoryRuleVersion. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CostCategoryRuleVersion) Values() []CostCategoryRuleVersion {
 	return []CostCategoryRuleVersion{
 		"CostCategoryExpression.v1",
@@ -220,8 +231,9 @@ const (
 
 // Values returns all known values for CostCategorySplitChargeMethod. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CostCategorySplitChargeMethod) Values() []CostCategorySplitChargeMethod {
 	return []CostCategorySplitChargeMethod{
 		"FIXED",
@@ -239,8 +251,9 @@ const (
 
 // Values returns all known values for CostCategorySplitChargeRuleParameterType.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CostCategorySplitChargeRuleParameterType) Values() []CostCategorySplitChargeRuleParameterType {
 	return []CostCategorySplitChargeRuleParameterType{
 		"ALLOCATION_PERCENTAGES",
@@ -256,8 +269,9 @@ const (
 )
 
 // Values returns all known values for CostCategoryStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CostCategoryStatus) Values() []CostCategoryStatus {
 	return []CostCategoryStatus{
 		"PROCESSING",
@@ -274,6 +288,7 @@ const (
 
 // Values returns all known values for CostCategoryStatusComponent. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CostCategoryStatusComponent) Values() []CostCategoryStatusComponent {
 	return []CostCategoryStatusComponent{
@@ -322,8 +337,9 @@ const (
 )
 
 // Values returns all known values for Dimension. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Dimension) Values() []Dimension {
 	return []Dimension{
 		"AZ",
@@ -386,8 +402,9 @@ const (
 )
 
 // Values returns all known values for FindingReasonCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FindingReasonCode) Values() []FindingReasonCode {
 	return []FindingReasonCode{
 		"CPU_OVER_PROVISIONED",
@@ -419,8 +436,9 @@ const (
 )
 
 // Values returns all known values for GenerationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GenerationStatus) Values() []GenerationStatus {
 	return []GenerationStatus{
 		"SUCCEEDED",
@@ -439,8 +457,9 @@ const (
 )
 
 // Values returns all known values for Granularity. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Granularity) Values() []Granularity {
 	return []Granularity{
 		"DAILY",
@@ -459,8 +478,9 @@ const (
 )
 
 // Values returns all known values for GroupDefinitionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GroupDefinitionType) Values() []GroupDefinitionType {
 	return []GroupDefinitionType{
 		"DIMENSION",
@@ -479,8 +499,9 @@ const (
 )
 
 // Values returns all known values for LookbackPeriodInDays. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LookbackPeriodInDays) Values() []LookbackPeriodInDays {
 	return []LookbackPeriodInDays{
 		"SEVEN_DAYS",
@@ -504,8 +525,9 @@ const (
 )
 
 // Values returns all known values for MatchOption. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MatchOption) Values() []MatchOption {
 	return []MatchOption{
 		"EQUALS",
@@ -533,8 +555,9 @@ const (
 )
 
 // Values returns all known values for Metric. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Metric) Values() []Metric {
 	return []Metric{
 		"BLENDED_COST",
@@ -555,8 +578,9 @@ const (
 )
 
 // Values returns all known values for MonitorDimension. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MonitorDimension) Values() []MonitorDimension {
 	return []MonitorDimension{
 		"SERVICE",
@@ -572,8 +596,9 @@ const (
 )
 
 // Values returns all known values for MonitorType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MonitorType) Values() []MonitorType {
 	return []MonitorType{
 		"DIMENSIONAL",
@@ -594,8 +619,9 @@ const (
 )
 
 // Values returns all known values for NumericOperator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NumericOperator) Values() []NumericOperator {
 	return []NumericOperator{
 		"EQUAL",
@@ -616,8 +642,9 @@ const (
 )
 
 // Values returns all known values for OfferingClass. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OfferingClass) Values() []OfferingClass {
 	return []OfferingClass{
 		"STANDARD",
@@ -638,8 +665,9 @@ const (
 )
 
 // Values returns all known values for PaymentOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PaymentOption) Values() []PaymentOption {
 	return []PaymentOption{
 		"NO_UPFRONT",
@@ -663,8 +691,9 @@ const (
 )
 
 // Values returns all known values for PlatformDifference. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PlatformDifference) Values() []PlatformDifference {
 	return []PlatformDifference{
 		"HYPERVISOR",
@@ -684,8 +713,9 @@ const (
 )
 
 // Values returns all known values for RecommendationTarget. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationTarget) Values() []RecommendationTarget {
 	return []RecommendationTarget{
 		"SAME_INSTANCE_FAMILY",
@@ -702,8 +732,9 @@ const (
 )
 
 // Values returns all known values for RightsizingType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RightsizingType) Values() []RightsizingType {
 	return []RightsizingType{
 		"TERMINATE",
@@ -722,8 +753,9 @@ const (
 )
 
 // Values returns all known values for SavingsPlansDataType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SavingsPlansDataType) Values() []SavingsPlansDataType {
 	return []SavingsPlansDataType{
 		"ATTRIBUTES",
@@ -742,8 +774,9 @@ const (
 )
 
 // Values returns all known values for SortOrder. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
@@ -760,8 +793,9 @@ const (
 )
 
 // Values returns all known values for SubscriberStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SubscriberStatus) Values() []SubscriberStatus {
 	return []SubscriberStatus{
 		"CONFIRMED",
@@ -778,8 +812,9 @@ const (
 )
 
 // Values returns all known values for SubscriberType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SubscriberType) Values() []SubscriberType {
 	return []SubscriberType{
 		"EMAIL",
@@ -798,6 +833,7 @@ const (
 
 // Values returns all known values for SupportedSavingsPlansType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SupportedSavingsPlansType) Values() []SupportedSavingsPlansType {
 	return []SupportedSavingsPlansType{
@@ -816,8 +852,9 @@ const (
 )
 
 // Values returns all known values for TermInYears. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TermInYears) Values() []TermInYears {
 	return []TermInYears{
 		"ONE_YEAR",

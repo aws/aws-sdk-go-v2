@@ -13,9 +13,9 @@ import (
 
 // API operation for creating and managing Amazon Bedrock automatic model
 // evaluation jobs and model evaluation jobs that use human workers. To learn more
-// about the requirements for creating a model evaluation job see, Model
-// evaluations (https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html)
-// .
+// about the requirements for creating a model evaluation job see, [Model evaluations].
+//
+// [Model evaluations]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html
 func (c *Client) CreateEvaluationJob(ctx context.Context, params *CreateEvaluationJobInput, optFns ...func(*Options)) (*CreateEvaluationJobOutput, error) {
 	if params == nil {
 		params = &CreateEvaluationJobInput{}
@@ -62,17 +62,18 @@ type CreateEvaluationJobInput struct {
 	// Bedrock as the service principal, and provide access to any Amazon S3 buckets
 	// specified in the EvaluationConfig object. To pass this role to Amazon Bedrock,
 	// the caller of this API must have the iam:PassRole permission. To learn more
-	// about the required permissions, see Required permissions (https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-security.html)
-	// .
+	// about the required permissions, see [Required permissions].
+	//
+	// [Required permissions]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-security.html
 	//
 	// This member is required.
 	RoleArn *string
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
-	// ignores the request, but does not return an error. For more information, see
-	// Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// .
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientRequestToken *string
 
 	// Specify your customer managed key ARN that will be used to encrypt your model

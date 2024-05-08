@@ -12,9 +12,9 @@ import (
 )
 
 // Describes the available Amazon OpenSearch Service Reserved Instance offerings
-// for a given Region. For more information, see Reserved Instances in Amazon
-// OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ri.html)
-// .
+// for a given Region. For more information, see [Reserved Instances in Amazon OpenSearch Service].
+//
+// [Reserved Instances in Amazon OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ri.html
 func (c *Client) DescribeReservedInstanceOfferings(ctx context.Context, params *DescribeReservedInstanceOfferingsInput, optFns ...func(*Options)) (*DescribeReservedInstanceOfferingsOutput, error) {
 	if params == nil {
 		params = &DescribeReservedInstanceOfferingsInput{}

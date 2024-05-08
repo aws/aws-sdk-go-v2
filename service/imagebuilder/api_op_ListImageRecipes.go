@@ -30,8 +30,11 @@ func (c *Client) ListImageRecipes(ctx context.Context, params *ListImageRecipesI
 type ListImageRecipesInput struct {
 
 	// Use the following filters to streamline results:
+	//
 	//   - name
+	//
 	//   - parentImage
+	//
 	//   - platform
 	Filters []types.Filter
 

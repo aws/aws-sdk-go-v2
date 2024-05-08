@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Fetches the queries that are suggested to your users. GetQuerySuggestions is
-// currently not supported in the Amazon Web Services GovCloud (US-West) region.
+// Fetches the queries that are suggested to your users.
+//
+// GetQuerySuggestions is currently not supported in the Amazon Web Services
+// GovCloud (US-West) region.
 func (c *Client) GetQuerySuggestions(ctx context.Context, params *GetQuerySuggestionsInput, optFns ...func(*Options)) (*GetQuerySuggestionsOutput, error) {
 	if params == nil {
 		params = &GetQuerySuggestionsInput{}
@@ -35,11 +37,14 @@ type GetQuerySuggestionsInput struct {
 	// This member is required.
 	IndexId *string
 
-	// The text of a user's query to generate query suggestions. A query is suggested
-	// if the query prefix matches what a user starts to type as their query. Amazon
-	// Kendra does not show any suggestions if a user types fewer than two characters
-	// or more than 60 characters. A query must also have at least one search result
-	// and contain at least one word of more than four characters.
+	// The text of a user's query to generate query suggestions.
+	//
+	// A query is suggested if the query prefix matches what a user starts to type as
+	// their query.
+	//
+	// Amazon Kendra does not show any suggestions if a user types fewer than two
+	// characters or more than 60 characters. A query must also have at least one
+	// search result and contain at least one word of more than four characters.
 	//
 	// This member is required.
 	QueryText *string
@@ -53,9 +58,11 @@ type GetQuerySuggestionsInput struct {
 
 	// The suggestions type to base query suggestions on. The suggestion types are
 	// query history or document fields/attributes. You can set one type or the other.
+	//
 	// If you set query history as your suggestions type, Amazon Kendra suggests
-	// queries relevant to your users based on popular queries in the query history. If
-	// you set document fields/attributes as your suggestions type, Amazon Kendra
+	// queries relevant to your users based on popular queries in the query history.
+	//
+	// If you set document fields/attributes as your suggestions type, Amazon Kendra
 	// suggests queries relevant to your users based on the contents of document
 	// fields.
 	SuggestionTypes []types.SuggestionType

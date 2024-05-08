@@ -30,7 +30,7 @@ func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourc
 	return out, nil
 }
 
-// Represents the input to AddTagsToResource .
+// Represents the input to AddTagsToResource.
 type AddTagsToResourceInput struct {
 
 	// The Amazon DocumentDB resource that the tags are added to. This value is an

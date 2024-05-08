@@ -30,9 +30,13 @@ func (c *Client) ListContainerRecipes(ctx context.Context, params *ListContainer
 type ListContainerRecipesInput struct {
 
 	// Use the following filters to streamline results:
+	//
 	//   - containerType
+	//
 	//   - name
+	//
 	//   - parentImage
+	//
 	//   - platform
 	Filters []types.Filter
 

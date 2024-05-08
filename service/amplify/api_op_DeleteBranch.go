@@ -30,7 +30,7 @@ func (c *Client) DeleteBranch(ctx context.Context, params *DeleteBranchInput, op
 // The request structure for the delete branch request.
 type DeleteBranchInput struct {
 
-	// The unique ID for an Amplify app.
+	//  The unique ID for an Amplify app.
 	//
 	// This member is required.
 	AppId *string

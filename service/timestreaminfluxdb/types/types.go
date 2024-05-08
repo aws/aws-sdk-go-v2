@@ -73,29 +73,42 @@ type DbParameterGroupSummary struct {
 // All the customer-modifiable InfluxDB v2 parameters in Timestream for InfluxDB.
 type InfluxDBv2Parameters struct {
 
-	// Include option to show detailed logs for Flux queries. Default: false
+	// Include option to show detailed logs for Flux queries.
+	//
+	// Default: false
 	FluxLogEnabled *bool
 
 	// Log output level. InfluxDB outputs log entries with severity levels greater
-	// than or equal to the level specified. Default: info
+	// than or equal to the level specified.
+	//
+	// Default: info
 	LogLevel LogLevel
 
-	// Disable the HTTP /metrics endpoint which exposes internal InfluxDB metrics (https://docs.influxdata.com/influxdb/v2/reference/internals/metrics/)
-	// . Default: false
+	// Disable the HTTP /metrics endpoint which exposes [internal InfluxDB metrics].
+	//
+	// Default: false
+	//
+	// [internal InfluxDB metrics]: https://docs.influxdata.com/influxdb/v2/reference/internals/metrics/
 	MetricsDisabled *bool
 
 	// Disable the task scheduler. If problematic tasks prevent InfluxDB from
 	// starting, use this option to start InfluxDB without scheduling or executing
-	// tasks. Default: false
+	// tasks.
+	//
+	// Default: false
 	NoTasks *bool
 
 	// Number of queries allowed to execute concurrently. Setting to 0 allows an
-	// unlimited number of concurrent queries. Default: 0
+	// unlimited number of concurrent queries.
+	//
+	// Default: 0
 	QueryConcurrency *int32
 
 	// Maximum number of queries allowed in execution queue. When queue limit is
 	// reached, new queries are rejected. Setting to 0 allows an unlimited number of
-	// queries in the queue. Default: 0
+	// queries in the queue.
+	//
+	// Default: 0
 	QueryQueueSize *int32
 
 	// Enable tracing in InfluxDB and specifies the tracing type. Tracing is disabled

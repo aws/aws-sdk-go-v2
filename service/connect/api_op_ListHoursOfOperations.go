@@ -12,9 +12,12 @@ import (
 )
 
 // Provides information about the hours of operation for the specified Amazon
-// Connect instance. For more information about hours of operation, see Set the
-// Hours of Operation for a Queue (https://docs.aws.amazon.com/connect/latest/adminguide/set-hours-operation.html)
-// in the Amazon Connect Administrator Guide.
+// Connect instance.
+//
+// For more information about hours of operation, see [Set the Hours of Operation for a Queue] in the Amazon Connect
+// Administrator Guide.
+//
+// [Set the Hours of Operation for a Queue]: https://docs.aws.amazon.com/connect/latest/adminguide/set-hours-operation.html
 func (c *Client) ListHoursOfOperations(ctx context.Context, params *ListHoursOfOperationsInput, optFns ...func(*Options)) (*ListHoursOfOperationsOutput, error) {
 	if params == nil {
 		params = &ListHoursOfOperationsInput{}
@@ -32,8 +35,10 @@ func (c *Client) ListHoursOfOperations(ctx context.Context, params *ListHoursOfO
 
 type ListHoursOfOperationsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

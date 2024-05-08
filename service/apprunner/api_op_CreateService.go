@@ -12,9 +12,12 @@ import (
 )
 
 // Create an App Runner service. After the service is created, the action also
-// automatically starts a deployment. This is an asynchronous operation. On a
-// successful call, you can use the returned OperationId and the ListOperations (https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html)
-// call to track the operation's progress.
+// automatically starts a deployment.
+//
+// This is an asynchronous operation. On a successful call, you can use the
+// returned OperationId and the [ListOperations] call to track the operation's progress.
+//
+// [ListOperations]: https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html
 func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, optFns ...func(*Options)) (*CreateServiceOutput, error) {
 	if params == nil {
 		params = &CreateServiceInput{}
@@ -48,9 +51,11 @@ type CreateServiceInput struct {
 	// The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration
 	// resource that you want to associate with your service. If not provided, App
 	// Runner associates the latest revision of a default auto scaling configuration.
-	// Specify an ARN with a name and a revision number to associate that revision. For
-	// example:
+	//
+	// Specify an ARN with a name and a revision number to associate that revision.
+	// For example:
 	// arn:aws:apprunner:us-east-1:123456789012:autoscalingconfiguration/high-availability/3
+	//
 	// Specify just the name to associate the latest revision. For example:
 	// arn:aws:apprunner:us-east-1:123456789012:autoscalingconfiguration/high-availability
 	AutoScalingConfigurationArn *string
@@ -84,8 +89,9 @@ type CreateServiceInput struct {
 type CreateServiceOutput struct {
 
 	// The unique ID of the asynchronous operation that this request started. You can
-	// use it combined with the ListOperations (https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html)
-	// call to track the operation's progress.
+	// use it combined with the [ListOperations]call to track the operation's progress.
+	//
+	// [ListOperations]: https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html
 	//
 	// This member is required.
 	OperationId *string

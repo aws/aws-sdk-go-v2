@@ -13,8 +13,10 @@ import (
 
 // Lists the JSON Lines within a dataset. An Amazon Lookout for Vision JSON Line
 // contains the anomaly information for a single image, including the image
-// location and the assigned label. This operation requires permissions to perform
-// the lookoutvision:ListDatasetEntries operation.
+// location and the assigned label.
+//
+// This operation requires permissions to perform the
+// lookoutvision:ListDatasetEntries operation.
 func (c *Client) ListDatasetEntries(ctx context.Context, params *ListDatasetEntriesInput, optFns ...func(*Options)) (*ListDatasetEntriesOutput, error) {
 	if params == nil {
 		params = &ListDatasetEntriesInput{}

@@ -41,9 +41,11 @@ type ListPolicyTemplatesInput struct {
 	// NextToken request parameter in the next call to the operation to get the next
 	// set of results. Note that the service might return fewer results than the
 	// maximum even when there are more results available. You should check NextToken
-	// after every operation to ensure that you receive all of the results. If you do
-	// not specify this parameter, the operation defaults to 10 policy templates per
-	// response. You can specify a maximum of 50 policy templates per response.
+	// after every operation to ensure that you receive all of the results.
+	//
+	// If you do not specify this parameter, the operation defaults to 10 policy
+	// templates per response. You can specify a maximum of 50 policy templates per
+	// response.
 	MaxResults *int32
 
 	// Specifies that you want to receive the next page of results. Valid only if you
@@ -171,9 +173,11 @@ type ListPolicyTemplatesPaginatorOptions struct {
 	// NextToken request parameter in the next call to the operation to get the next
 	// set of results. Note that the service might return fewer results than the
 	// maximum even when there are more results available. You should check NextToken
-	// after every operation to ensure that you receive all of the results. If you do
-	// not specify this parameter, the operation defaults to 10 policy templates per
-	// response. You can specify a maximum of 50 policy templates per response.
+	// after every operation to ensure that you receive all of the results.
+	//
+	// If you do not specify this parameter, the operation defaults to 10 policy
+	// templates per response. You can specify a maximum of 50 policy templates per
+	// response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

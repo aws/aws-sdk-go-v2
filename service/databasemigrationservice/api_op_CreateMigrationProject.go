@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates the migration project using the specified parameters. You can run this
-// action only after you create an instance profile and data providers using
-// CreateInstanceProfile (https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateInstanceProfile.html)
-// and CreateDataProvider (https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateDataProvider.html)
-// .
+// Creates the migration project using the specified parameters.
+//
+// You can run this action only after you create an instance profile and data
+// providers using [CreateInstanceProfile]and [CreateDataProvider].
+//
+// [CreateDataProvider]: https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateDataProvider.html
+// [CreateInstanceProfile]: https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateInstanceProfile.html
 func (c *Client) CreateMigrationProject(ctx context.Context, params *CreateMigrationProjectInput, optFns ...func(*Options)) (*CreateMigrationProjectOutput, error) {
 	if params == nil {
 		params = &CreateMigrationProjectInput{}

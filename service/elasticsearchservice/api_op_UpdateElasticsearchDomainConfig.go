@@ -28,8 +28,8 @@ func (c *Client) UpdateElasticsearchDomainConfig(ctx context.Context, params *Up
 	return out, nil
 }
 
-// Container for the parameters to the UpdateElasticsearchDomain operation.
-// Specifies the type and number of instances in the domain cluster.
+// Container for the parameters to the UpdateElasticsearchDomain operation. Specifies the type and number
+// of instances in the domain cluster.
 type UpdateElasticsearchDomainConfigInput struct {
 
 	// The name of the Elasticsearch domain that you are updating.
@@ -42,8 +42,9 @@ type UpdateElasticsearchDomainConfigInput struct {
 
 	// Modifies the advanced option to allow references to indices in an HTTP request
 	// body. Must be false when configuring access to individual sub-resources. By
-	// default, the value is true . See Configuration Advanced Options (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options)
-	// for more information.
+	// default, the value is true . See [Configuration Advanced Options] for more information.
+	//
+	// [Configuration Advanced Options]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options
 	AdvancedOptions map[string]string
 
 	// Specifies advanced security options.
@@ -53,15 +54,15 @@ type UpdateElasticsearchDomainConfigInput struct {
 	AutoTuneOptions *types.AutoTuneOptions
 
 	// Options to specify the Cognito user and identity pools for Kibana
-	// authentication. For more information, see Amazon Cognito Authentication for
-	// Kibana (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html)
-	// .
+	// authentication. For more information, see [Amazon Cognito Authentication for Kibana].
+	//
+	// [Amazon Cognito Authentication for Kibana]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html
 	CognitoOptions *types.CognitoOptions
 
 	// Options to specify configuration that will be applied to the domain endpoint.
 	DomainEndpointOptions *types.DomainEndpointOptions
 
-	// This flag, when set to True, specifies whether the UpdateElasticsearchDomain
+	//  This flag, when set to True, specifies whether the UpdateElasticsearchDomain
 	// request should return the results of validation checks without actually applying
 	// the change. This flag, when set to True, specifies the deployment mechanism
 	// through which the update shall be applied on the domain. This will not actually
@@ -89,8 +90,9 @@ type UpdateElasticsearchDomainConfigInput struct {
 	SnapshotOptions *types.SnapshotOptions
 
 	// Options to specify the subnets and security groups for VPC endpoint. For more
-	// information, see Creating a VPC (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc)
-	// in VPC Endpoints for Amazon Elasticsearch Service Domains
+	// information, see [Creating a VPC]in VPC Endpoints for Amazon Elasticsearch Service Domains
+	//
+	// [Creating a VPC]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc
 	VPCOptions *types.VPCOptions
 
 	noSmithyDocumentSerde

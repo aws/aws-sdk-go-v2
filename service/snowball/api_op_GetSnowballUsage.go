@@ -11,9 +11,11 @@ import (
 )
 
 // Returns information about the Snow Family service limit for your account, and
-// also the number of Snow devices your account has in use. The default service
-// limit for the number of Snow devices that you can have at one time is 1. If you
-// want to increase your service limit, contact Amazon Web Services Support.
+// also the number of Snow devices your account has in use.
+//
+// The default service limit for the number of Snow devices that you can have at
+// one time is 1. If you want to increase your service limit, contact Amazon Web
+// Services Support.
 func (c *Client) GetSnowballUsage(ctx context.Context, params *GetSnowballUsageInput, optFns ...func(*Options)) (*GetSnowballUsageOutput, error) {
 	if params == nil {
 		params = &GetSnowballUsageInput{}

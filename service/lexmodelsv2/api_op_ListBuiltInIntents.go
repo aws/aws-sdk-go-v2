@@ -12,10 +12,13 @@ import (
 )
 
 // Gets a list of built-in intents provided by Amazon Lex that you can use in your
-// bot. To use a built-in intent as a the base for your own intent, include the
+// bot.
+//
+// To use a built-in intent as a the base for your own intent, include the
 // built-in intent signature in the parentIntentSignature parameter when you call
-// the CreateIntent operation. For more information, see CreateIntent (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateIntent.html)
-// .
+// the CreateIntent operation. For more information, see [CreateIntent].
+//
+// [CreateIntent]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateIntent.html
 func (c *Client) ListBuiltInIntents(ctx context.Context, params *ListBuiltInIntentsInput, optFns ...func(*Options)) (*ListBuiltInIntentsOutput, error) {
 	if params == nil {
 		params = &ListBuiltInIntentsInput{}
@@ -34,8 +37,9 @@ func (c *Client) ListBuiltInIntents(ctx context.Context, params *ListBuiltInInte
 type ListBuiltInIntentsInput struct {
 
 	// The identifier of the language and locale of the intents to list. The string
-	// must match one of the supported locales. For more information, see Supported
-	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html) .
+	// must match one of the supported locales. For more information, see [Supported languages].
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string

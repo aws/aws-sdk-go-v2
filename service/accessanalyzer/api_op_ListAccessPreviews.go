@@ -29,8 +29,9 @@ func (c *Client) ListAccessPreviews(ctx context.Context, params *ListAccessPrevi
 
 type ListAccessPreviewsInput struct {
 
-	// The ARN of the analyzer (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
-	// used to generate the access preview.
+	// The [ARN of the analyzer] used to generate the access preview.
+	//
+	// [ARN of the analyzer]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
 	//
 	// This member is required.
 	AnalyzerArn *string

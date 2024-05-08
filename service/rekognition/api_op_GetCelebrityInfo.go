@@ -14,9 +14,13 @@ import (
 // Gets the name and additional information about a celebrity based on their
 // Amazon Rekognition ID. The additional information is returned as an array of
 // URLs. If there is no additional information about the celebrity, this list is
-// empty. For more information, see Getting information about a celebrity in the
-// Amazon Rekognition Developer Guide. This operation requires permissions to
-// perform the rekognition:GetCelebrityInfo action.
+// empty.
+//
+// For more information, see Getting information about a celebrity in the Amazon
+// Rekognition Developer Guide.
+//
+// This operation requires permissions to perform the rekognition:GetCelebrityInfo
+// action.
 func (c *Client) GetCelebrityInfo(ctx context.Context, params *GetCelebrityInfoInput, optFns ...func(*Options)) (*GetCelebrityInfoOutput, error) {
 	if params == nil {
 		params = &GetCelebrityInfoInput{}
@@ -34,8 +38,8 @@ func (c *Client) GetCelebrityInfo(ctx context.Context, params *GetCelebrityInfoI
 
 type GetCelebrityInfoInput struct {
 
-	// The ID for the celebrity. You get the celebrity ID from a call to the
-	// RecognizeCelebrities operation, which recognizes celebrities in an image.
+	// The ID for the celebrity. You get the celebrity ID from a call to the RecognizeCelebrities
+	// operation, which recognizes celebrities in an image.
 	//
 	// This member is required.
 	Id *string

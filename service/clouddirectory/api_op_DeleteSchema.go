@@ -30,7 +30,7 @@ func (c *Client) DeleteSchema(ctx context.Context, params *DeleteSchemaInput, op
 type DeleteSchemaInput struct {
 
 	// The Amazon Resource Name (ARN) of the development schema. For more information,
-	// see arns .
+	// see arns.
 	//
 	// This member is required.
 	SchemaArn *string
@@ -41,7 +41,7 @@ type DeleteSchemaInput struct {
 type DeleteSchemaOutput struct {
 
 	// The input ARN that is returned as part of the response. For more information,
-	// see arns .
+	// see arns.
 	SchemaArn *string
 
 	// Metadata pertaining to the operation's result.

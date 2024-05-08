@@ -91,8 +91,10 @@ type AuditEventFieldValueUnionMemberDoubleValue struct {
 func (*AuditEventFieldValueUnionMemberDoubleValue) isAuditEventFieldValueUnion() {}
 
 // An empty value. You cannot set EmptyFieldValue on a field that is required on a
-// case template. This structure will never have any data members. It signifies an
-// empty value on a case field.
+// case template.
+//
+// This structure will never have any data members. It signifies an empty value on
+// a case field.
 type AuditEventFieldValueUnionMemberEmptyValue struct {
 	Value EmptyFieldValue
 
@@ -310,8 +312,10 @@ type DomainSummary struct {
 }
 
 // An empty value. You cannot set EmptyFieldValue on a field that is required on a
-// case template. This structure will never have any data members. It signifies an
-// empty value on a case field.
+// case template.
+//
+// This structure will never have any data members. It signifies an empty value on
+// a case field.
 type EmptyFieldValue struct {
 	noSmithyDocumentSerde
 }
@@ -558,8 +562,10 @@ type FieldValue struct {
 	noSmithyDocumentSerde
 }
 
-// Object to store union of Field values. The Summary system field accepts 1500
-// characters while all other fields accept 500 characters.
+// Object to store union of Field values.
+//
+// The Summary system field accepts 1500 characters while all other fields accept
+// 500 characters.
 //
 // The following types satisfy this interface:
 //
@@ -689,7 +695,7 @@ type GetFieldResponse struct {
 // Object to store configuration of layouts associated to the template.
 type LayoutConfiguration struct {
 
-	// Unique identifier of a layout.
+	//  Unique identifier of a layout.
 	DefaultLayout *string
 
 	noSmithyDocumentSerde

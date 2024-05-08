@@ -19,14 +19,16 @@ import (
 // command, the command will update the Region if you provide new configuration
 // parameters. If you have not already enabled Security Lake in the Region when you
 // call this API, it will set up the data lake in the Region with the specified
-// configurations. When you enable Security Lake, it starts ingesting security data
-// after the CreateAwsLogSource call. This includes ingesting security data from
-// sources, storing data, and making data accessible to subscribers. Security Lake
-// also enables all the existing settings and resources that it stores or maintains
-// for your Amazon Web Services account in the current Region, including security
-// log and event data. For more information, see the Amazon Security Lake User
-// Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html)
-// .
+// configurations.
+//
+// When you enable Security Lake, it starts ingesting security data after the
+// CreateAwsLogSource call. This includes ingesting security data from sources,
+// storing data, and making data accessible to subscribers. Security Lake also
+// enables all the existing settings and resources that it stores or maintains for
+// your Amazon Web Services account in the current Region, including security log
+// and event data. For more information, see the [Amazon Security Lake User Guide].
+//
+// [Amazon Security Lake User Guide]: https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html
 func (c *Client) CreateDataLake(ctx context.Context, params *CreateDataLakeInput, optFns ...func(*Options)) (*CreateDataLakeOutput, error) {
 	if params == nil {
 		params = &CreateDataLakeInput{}

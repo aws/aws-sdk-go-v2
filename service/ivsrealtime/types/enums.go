@@ -14,8 +14,9 @@ const (
 )
 
 // Values returns all known values for CompositionState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CompositionState) Values() []CompositionState {
 	return []CompositionState{
 		"STARTING",
@@ -39,8 +40,9 @@ const (
 )
 
 // Values returns all known values for DestinationState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DestinationState) Values() []DestinationState {
 	return []DestinationState{
 		"STARTING",
@@ -62,8 +64,9 @@ const (
 )
 
 // Values returns all known values for EventErrorCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventErrorCode) Values() []EventErrorCode {
 	return []EventErrorCode{
 		"INSUFFICIENT_CAPABILITIES",
@@ -88,8 +91,9 @@ const (
 )
 
 // Values returns all known values for EventName. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventName) Values() []EventName {
 	return []EventName{
 		"JOINED",
@@ -113,8 +117,9 @@ const (
 )
 
 // Values returns all known values for ParticipantState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ParticipantState) Values() []ParticipantState {
 	return []ParticipantState{
 		"CONNECTED",
@@ -132,6 +137,7 @@ const (
 
 // Values returns all known values for ParticipantTokenCapability. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ParticipantTokenCapability) Values() []ParticipantTokenCapability {
 	return []ParticipantTokenCapability{
@@ -149,8 +155,9 @@ const (
 )
 
 // Values returns all known values for PipBehavior. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PipBehavior) Values() []PipBehavior {
 	return []PipBehavior{
 		"STATIC",
@@ -169,8 +176,9 @@ const (
 )
 
 // Values returns all known values for PipPosition. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PipPosition) Values() []PipPosition {
 	return []PipPosition{
 		"TOP_LEFT",
@@ -189,8 +197,9 @@ const (
 
 // Values returns all known values for RecordingConfigurationFormat. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecordingConfigurationFormat) Values() []RecordingConfigurationFormat {
 	return []RecordingConfigurationFormat{
 		"HLS",
@@ -208,8 +217,9 @@ const (
 )
 
 // Values returns all known values for VideoAspectRatio. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VideoAspectRatio) Values() []VideoAspectRatio {
 	return []VideoAspectRatio{
 		"AUTO",
@@ -229,8 +239,9 @@ const (
 )
 
 // Values returns all known values for VideoFillMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VideoFillMode) Values() []VideoFillMode {
 	return []VideoFillMode{
 		"FILL",

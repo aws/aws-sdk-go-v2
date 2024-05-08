@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the permissions on a dataset. The permissions resource is
+// Updates the permissions on a dataset.
+//
+// The permissions resource is
 // arn:aws:quicksight:region:aws-account-id:dataset/data-set-id .
 func (c *Client) UpdateDataSetPermissions(ctx context.Context, params *UpdateDataSetPermissionsInput, optFns ...func(*Options)) (*UpdateDataSetPermissionsOutput, error) {
 	if params == nil {

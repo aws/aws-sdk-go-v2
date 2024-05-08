@@ -11,13 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a real-time log configuration. When you update a real-time log
-// configuration, all the parameters are updated with the values provided in the
-// request. You cannot update some parameters independent of others. To update a
-// real-time log configuration:
+// Updates a real-time log configuration.
+//
+// When you update a real-time log configuration, all the parameters are updated
+// with the values provided in the request. You cannot update some parameters
+// independent of others. To update a real-time log configuration:
+//
 //   - Call GetRealtimeLogConfig to get the current real-time log configuration.
+//
 //   - Locally modify the parameters in the real-time log configuration that you
 //     want to update.
+//
 //   - Call this API ( UpdateRealtimeLogConfig ) by providing the entire real-time
 //     log configuration, including the parameters that you modified and those that you
 //     didn't.
@@ -47,9 +51,12 @@ type UpdateRealtimeLogConfigInput struct {
 	// real-time log data.
 	EndPoints []types.EndPoint
 
-	// A list of fields to include in each real-time log record. For more information
-	// about fields, see Real-time log configuration fields (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields)
-	// in the Amazon CloudFront Developer Guide.
+	// A list of fields to include in each real-time log record.
+	//
+	// For more information about fields, see [Real-time log configuration fields] in the Amazon CloudFront Developer
+	// Guide.
+	//
+	// [Real-time log configuration fields]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields
 	Fields []string
 
 	// The name for this real-time log configuration.

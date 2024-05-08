@@ -17,14 +17,19 @@ import (
 )
 
 // This action gets an Amazon S3 on Outposts bucket's tags. To get an S3 bucket
-// tags, see GetBucketTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html)
-// in the Amazon S3 API Reference. Returns the tag set associated with the Outposts
-// bucket. For more information, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
-// in the Amazon S3 User Guide. To use this action, you must have permission to
-// perform the GetBucketTagging action. By default, the bucket owner has this
-// permission and can grant this permission to others. GetBucketTagging has the
-// following special error:
+// tags, see [GetBucketTagging]in the Amazon S3 API Reference.
+//
+// Returns the tag set associated with the Outposts bucket. For more information,
+// see [Using Amazon S3 on Outposts]in the Amazon S3 User Guide.
+//
+// To use this action, you must have permission to perform the GetBucketTagging
+// action. By default, the bucket owner has this permission and can grant this
+// permission to others.
+//
+// GetBucketTagging has the following special error:
+//
 //   - Error code: NoSuchTagSetError
+//
 //   - Description: There is no tag set associated with the bucket.
 //
 // All Amazon S3 on Outposts REST API requests for this action require an
@@ -32,10 +37,19 @@ import (
 // addition, you must use an S3 on Outposts endpoint hostname prefix instead of
 // s3-control . For an example of the request syntax for Amazon S3 on Outposts that
 // uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id
-// derived by using the access point ARN, see the Examples (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html#API_control_GetBucketTagging_Examples)
-// section. The following actions are related to GetBucketTagging :
-//   - PutBucketTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html)
-//   - DeleteBucketTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html)
+// derived by using the access point ARN, see the [Examples]section.
+//
+// The following actions are related to GetBucketTagging :
+//
+// [PutBucketTagging]
+//
+// [DeleteBucketTagging]
+//
+// [GetBucketTagging]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html
+// [PutBucketTagging]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html
+// [DeleteBucketTagging]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html
+// [Using Amazon S3 on Outposts]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
+// [Examples]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html#API_control_GetBucketTagging_Examples
 func (c *Client) GetBucketTagging(ctx context.Context, params *GetBucketTaggingInput, optFns ...func(*Options)) (*GetBucketTaggingOutput, error) {
 	if params == nil {
 		params = &GetBucketTaggingInput{}
@@ -58,10 +72,13 @@ type GetBucketTaggingInput struct {
 	// This member is required.
 	AccountId *string
 
-	// Specifies the bucket. For using this parameter with Amazon S3 on Outposts with
-	// the REST API, you must specify the name and the x-amz-outpost-id as well. For
-	// using this parameter with S3 on Outposts with the Amazon Web Services SDK and
-	// CLI, you must specify the ARN of the bucket accessed in the format
+	// Specifies the bucket.
+	//
+	// For using this parameter with Amazon S3 on Outposts with the REST API, you must
+	// specify the name and the x-amz-outpost-id as well.
+	//
+	// For using this parameter with S3 on Outposts with the Amazon Web Services SDK
+	// and CLI, you must specify the ARN of the bucket accessed in the format
 	// arn:aws:s3-outposts:::outpost//bucket/ . For example, to access the bucket
 	// reports through Outpost my-outpost owned by account 123456789012 in Region
 	// us-west-2 , use the URL encoding of

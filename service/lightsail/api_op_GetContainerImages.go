@@ -12,10 +12,12 @@ import (
 )
 
 // Returns the container images that are registered to your Amazon Lightsail
-// container service. If you created a deployment on your Lightsail container
-// service that uses container images from a public registry like Docker Hub, those
-// images are not returned as part of this action. Those images are not registered
-// to your Lightsail container service.
+// container service.
+//
+// If you created a deployment on your Lightsail container service that uses
+// container images from a public registry like Docker Hub, those images are not
+// returned as part of this action. Those images are not registered to your
+// Lightsail container service.
 func (c *Client) GetContainerImages(ctx context.Context, params *GetContainerImagesInput, optFns ...func(*Options)) (*GetContainerImagesOutput, error) {
 	if params == nil {
 		params = &GetContainerImagesInput{}

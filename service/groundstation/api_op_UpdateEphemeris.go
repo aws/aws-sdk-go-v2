@@ -44,8 +44,12 @@ type UpdateEphemerisInput struct {
 	Name *string
 
 	// Customer-provided priority score to establish the order in which overlapping
-	// ephemerides should be used. The default for customer-provided ephemeris priority
-	// is 1, and higher numbers take precedence. Priority must be 1 or greater
+	// ephemerides should be used.
+	//
+	// The default for customer-provided ephemeris priority is 1, and higher numbers
+	// take precedence.
+	//
+	// Priority must be 1 or greater
 	Priority *int32
 
 	noSmithyDocumentSerde

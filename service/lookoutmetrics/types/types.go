@@ -99,8 +99,9 @@ type AlertSummary struct {
 	// The time at which the alert was last modified.
 	LastModificationTime *time.Time
 
-	// The alert's tags (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html)
-	// .
+	// The alert's [tags].
+	//
+	// [tags]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -159,8 +160,9 @@ type AnomalyDetectorSummary struct {
 	// The status of detector.
 	Status AnomalyDetectorStatus
 
-	// The detector's tags (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html)
-	// .
+	// The detector's [tags].
+	//
+	// [tags]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -264,7 +266,7 @@ type AnomalyGroupTimeSeriesFeedback struct {
 // Details about an Amazon AppFlow flow datasource.
 type AppFlowConfig struct {
 
-	// name of the flow.
+	//  name of the flow.
 	FlowName *string
 
 	// An IAM role that gives Amazon Lookout for Metrics permission to access the flow.
@@ -758,8 +760,9 @@ type MetricSetSummary struct {
 	// The name of the dataset.
 	MetricSetName *string
 
-	// The dataset's tags (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html)
-	// .
+	// The dataset's [tags].
+	//
+	// [tags]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -909,10 +912,13 @@ type SNSConfiguration struct {
 	SnsTopicArn *string
 
 	// The format of the SNS topic.
+	//
 	//   - JSON – Send JSON alerts with an anomaly ID and a link to the anomaly detail
 	//   page. This is the default.
+	//
 	//   - LONG_TEXT – Send human-readable alerts with information about the impacted
 	//   timeseries and a link to the anomaly detail page. We recommend this for email.
+	//
 	//   - SHORT_TEXT – Send human-readable alerts with a link to the anomaly detail
 	//   page. We recommend this for SMS.
 	SnsFormat SnsFormat

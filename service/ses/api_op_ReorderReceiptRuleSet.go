@@ -10,11 +10,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Reorders the receipt rules within a receipt rule set. All of the rules in the
-// rule set must be represented in this request. That is, it is error if the
-// reorder request doesn't explicitly position all of the rules. For information
-// about managing receipt rule sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html)
-// . You can execute this operation no more than once per second.
+// Reorders the receipt rules within a receipt rule set.
+//
+// All of the rules in the rule set must be represented in this request. That is,
+// it is error if the reorder request doesn't explicitly position all of the rules.
+//
+// For information about managing receipt rule sets, see the [Amazon SES Developer Guide].
+//
+// You can execute this operation no more than once per second.
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html
 func (c *Client) ReorderReceiptRuleSet(ctx context.Context, params *ReorderReceiptRuleSetInput, optFns ...func(*Options)) (*ReorderReceiptRuleSetOutput, error) {
 	if params == nil {
 		params = &ReorderReceiptRuleSetInput{}
@@ -32,8 +37,9 @@ func (c *Client) ReorderReceiptRuleSet(ctx context.Context, params *ReorderRecei
 
 // Represents a request to reorder the receipt rules within a receipt rule set.
 // You use receipt rule sets to receive email with Amazon SES. For more
-// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html)
-// .
+// information, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
 type ReorderReceiptRuleSetInput struct {
 
 	// The specified receipt rule set's receipt rules, in order.

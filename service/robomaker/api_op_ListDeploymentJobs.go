@@ -12,9 +12,10 @@ import (
 )
 
 // Returns a list of deployment jobs for a fleet. You can optionally provide
-// filters to retrieve specific deployment jobs. This API will no longer be
-// supported as of May 2, 2022. Use it to remove resources that were created for
-// Deployment Service.
+// filters to retrieve specific deployment jobs.
+//
+// This API will no longer be supported as of May 2, 2022. Use it to remove
+// resources that were created for Deployment Service.
 //
 // Deprecated: Support for the AWS RoboMaker application deployment feature has
 // ended. For additional information, see
@@ -36,11 +37,12 @@ func (c *Client) ListDeploymentJobs(ctx context.Context, params *ListDeploymentJ
 
 type ListDeploymentJobsInput struct {
 
-	// Optional filters to limit results. The filter names status and fleetName are
-	// supported. When filtering, you must use the complete value of the filtered item.
-	// You can use up to three filters, but they must be for the same named item. For
-	// example, if you are looking for items with the status InProgress or the status
-	// Pending .
+	// Optional filters to limit results.
+	//
+	// The filter names status and fleetName are supported. When filtering, you must
+	// use the complete value of the filtered item. You can use up to three filters,
+	// but they must be for the same named item. For example, if you are looking for
+	// items with the status InProgress or the status Pending .
 	Filters []types.Filter
 
 	// When this parameter is used, ListDeploymentJobs only returns maxResults results

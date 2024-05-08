@@ -37,9 +37,10 @@ type CreateGuardrailVersionInput struct {
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than once. If this token matches a previous request, Amazon Bedrock ignores
-	// the request, but does not return an error. For more information, see Ensuring
-	// idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// in the Amazon S3 User Guide.
+	// the request, but does not return an error. For more information, see [Ensuring idempotency]in the
+	// Amazon S3 User Guide.
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientRequestToken *string
 
 	// A description of the guardrail version.

@@ -58,8 +58,10 @@ type CreateUserProfileInput struct {
 	SingleSignOnUserValue *string
 
 	// Each tag consists of a key and an optional value. Tag keys must be unique per
-	// resource. Tags that you specify for the User Profile are also added to all Apps
-	// that the User Profile launches.
+	// resource.
+	//
+	// Tags that you specify for the User Profile are also added to all Apps that the
+	// User Profile launches.
 	Tags []types.Tag
 
 	// A collection of settings.

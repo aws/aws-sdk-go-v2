@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The DescribeTableDataImportJob API allows you to retrieve the status and
+//	The DescribeTableDataImportJob API allows you to retrieve the status and
+//
 // details of a table data import job.
 func (c *Client) DescribeTableDataImportJob(ctx context.Context, params *DescribeTableDataImportJobInput, optFns ...func(*Options)) (*DescribeTableDataImportJobOutput, error) {
 	if params == nil {
@@ -30,21 +31,26 @@ func (c *Client) DescribeTableDataImportJob(ctx context.Context, params *Describ
 
 type DescribeTableDataImportJobInput struct {
 
-	// The ID of the job that was returned by the StartTableDataImportJob request. If
-	// a job with the specified id could not be found, this API throws
+	// The ID of the job that was returned by the StartTableDataImportJob request.
+	//
+	// If a job with the specified id could not be found, this API throws
 	// ResourceNotFoundException.
 	//
 	// This member is required.
 	JobId *string
 
-	// The ID of the table into which data was imported. If a table with the specified
-	// id could not be found, this API throws ResourceNotFoundException.
+	// The ID of the table into which data was imported.
+	//
+	// If a table with the specified id could not be found, this API throws
+	// ResourceNotFoundException.
 	//
 	// This member is required.
 	TableId *string
 
-	// The ID of the workbook into which data was imported. If a workbook with the
-	// specified id could not be found, this API throws ResourceNotFoundException.
+	// The ID of the workbook into which data was imported.
+	//
+	// If a workbook with the specified id could not be found, this API throws
+	// ResourceNotFoundException.
 	//
 	// This member is required.
 	WorkbookId *string
@@ -54,22 +60,22 @@ type DescribeTableDataImportJobInput struct {
 
 type DescribeTableDataImportJobOutput struct {
 
-	// The metadata about the job that was submitted for import.
+	//  The metadata about the job that was submitted for import.
 	//
 	// This member is required.
 	JobMetadata *types.TableDataImportJobMetadata
 
-	// The current status of the import job.
+	//  The current status of the import job.
 	//
 	// This member is required.
 	JobStatus types.TableDataImportJobStatus
 
-	// A message providing more details about the current status of the import job.
+	//  A message providing more details about the current status of the import job.
 	//
 	// This member is required.
 	Message *string
 
-	// If job status is failed, error code to understand reason for the failure.
+	//  If job status is failed, error code to understand reason for the failure.
 	ErrorCode types.ErrorCode
 
 	// Metadata pertaining to the operation's result.

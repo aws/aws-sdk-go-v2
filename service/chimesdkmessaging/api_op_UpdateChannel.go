@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a channel's attributes. Restriction: You can't change a channel's
-// privacy. The x-amz-chime-bearer request header is mandatory. Use the ARN of the
+// Update a channel's attributes.
+//
+// Restriction: You can't change a channel's privacy.
+//
+// The x-amz-chime-bearer request header is mandatory. Use the ARN of the
 // AppInstanceUser or AppInstanceBot that makes the API call as the value in the
 // header.
 func (c *Client) UpdateChannel(ctx context.Context, params *UpdateChannelInput, optFns ...func(*Options)) (*UpdateChannelOutput, error) {

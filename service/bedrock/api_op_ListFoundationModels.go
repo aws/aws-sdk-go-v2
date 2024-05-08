@@ -12,8 +12,10 @@ import (
 )
 
 // Lists Amazon Bedrock foundation models that you can use. You can filter the
-// results with the request parameters. For more information, see Foundation models (https://docs.aws.amazon.com/bedrock/latest/userguide/foundation-models.html)
-// in the Amazon Bedrock User Guide.
+// results with the request parameters. For more information, see [Foundation models]in the Amazon
+// Bedrock User Guide.
+//
+// [Foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/foundation-models.html
 func (c *Client) ListFoundationModels(ctx context.Context, params *ListFoundationModelsInput, optFns ...func(*Options)) (*ListFoundationModelsOutput, error) {
 	if params == nil {
 		params = &ListFoundationModelsInput{}
@@ -32,13 +34,15 @@ func (c *Client) ListFoundationModels(ctx context.Context, params *ListFoundatio
 type ListFoundationModelsInput struct {
 
 	// Return models that support the customization type that you specify. For more
-	// information, see Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
-	// in the Amazon Bedrock User Guide.
+	// information, see [Custom models]in the Amazon Bedrock User Guide.
+	//
+	// [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
 	ByCustomizationType types.ModelCustomization
 
 	// Return models that support the inference type that you specify. For more
-	// information, see Provisioned Throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html)
-	// in the Amazon Bedrock User Guide.
+	// information, see [Provisioned Throughput]in the Amazon Bedrock User Guide.
+	//
+	// [Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
 	ByInferenceType types.InferenceType
 
 	// Return models that support the output modality that you specify.

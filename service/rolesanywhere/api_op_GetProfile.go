@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a profile. Required permissions: rolesanywhere:GetProfile .
+// Gets a profile.
+//
+// Required permissions: rolesanywhere:GetProfile .
 func (c *Client) GetProfile(ctx context.Context, params *GetProfileInput, optFns ...func(*Options)) (*GetProfileOutput, error) {
 	if params == nil {
 		params = &GetProfileInput{}

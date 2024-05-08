@@ -11,8 +11,9 @@ import (
 )
 
 // Retrieves the access policy for the specified container. For information about
-// the data that is included in an access policy, see the AWS Identity and Access
-// Management User Guide (https://aws.amazon.com/documentation/iam/) .
+// the data that is included in an access policy, see the [AWS Identity and Access Management User Guide].
+//
+// [AWS Identity and Access Management User Guide]: https://aws.amazon.com/documentation/iam/
 func (c *Client) GetContainerPolicy(ctx context.Context, params *GetContainerPolicyInput, optFns ...func(*Options)) (*GetContainerPolicyOutput, error) {
 	if params == nil {
 		params = &GetContainerPolicyInput{}

@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ApiGatewayEndpointType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApiGatewayEndpointType) Values() []ApiGatewayEndpointType {
 	return []ApiGatewayEndpointType{
 		"REGIONAL",
@@ -32,8 +33,9 @@ const (
 )
 
 // Values returns all known values for ApplicationState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationState) Values() []ApplicationState {
 	return []ApplicationState{
 		"CREATING",
@@ -55,8 +57,9 @@ const (
 )
 
 // Values returns all known values for EnvironmentState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnvironmentState) Values() []EnvironmentState {
 	return []EnvironmentState{
 		"CREATING",
@@ -85,8 +88,9 @@ const (
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"INVALID_RESOURCE_STATE",
@@ -130,8 +134,9 @@ const (
 )
 
 // Values returns all known values for ErrorResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ErrorResourceType) Values() []ErrorResourceType {
 	return []ErrorResourceType{
 		"ENVIRONMENT",
@@ -170,8 +175,9 @@ const (
 )
 
 // Values returns all known values for HttpMethod. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HttpMethod) Values() []HttpMethod {
 	return []HttpMethod{
 		"DELETE",
@@ -193,8 +199,9 @@ const (
 )
 
 // Values returns all known values for NetworkFabricType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkFabricType) Values() []NetworkFabricType {
 	return []NetworkFabricType{
 		"TRANSIT_GATEWAY",
@@ -210,8 +217,9 @@ const (
 )
 
 // Values returns all known values for ProxyType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProxyType) Values() []ProxyType {
 	return []ProxyType{
 		"API_GATEWAY",
@@ -227,8 +235,9 @@ const (
 )
 
 // Values returns all known values for RouteActivationState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RouteActivationState) Values() []RouteActivationState {
 	return []RouteActivationState{
 		"ACTIVE",
@@ -249,8 +258,9 @@ const (
 )
 
 // Values returns all known values for RouteState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RouteState) Values() []RouteState {
 	return []RouteState{
 		"CREATING",
@@ -271,8 +281,9 @@ const (
 )
 
 // Values returns all known values for RouteType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RouteType) Values() []RouteType {
 	return []RouteType{
 		"DEFAULT",
@@ -289,8 +300,9 @@ const (
 )
 
 // Values returns all known values for ServiceEndpointType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceEndpointType) Values() []ServiceEndpointType {
 	return []ServiceEndpointType{
 		"LAMBDA",
@@ -309,8 +321,9 @@ const (
 )
 
 // Values returns all known values for ServiceState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceState) Values() []ServiceState {
 	return []ServiceState{
 		"CREATING",

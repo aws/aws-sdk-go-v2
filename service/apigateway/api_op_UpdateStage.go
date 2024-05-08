@@ -41,8 +41,9 @@ type UpdateStageInput struct {
 	// This member is required.
 	StageName *string
 
-	// For more information about supported patch operations, see Patch Operations (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html)
-	// .
+	// For more information about supported patch operations, see [Patch Operations].
+	//
+	// [Patch Operations]: https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
@@ -60,8 +61,9 @@ type UpdateStageOutput struct {
 	CacheClusterEnabled bool
 
 	// The stage's cache capacity in GB. For more information about choosing a cache
-	// size, see Enabling API caching to enhance responsiveness (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html)
-	// .
+	// size, see [Enabling API caching to enhance responsiveness].
+	//
+	// [Enabling API caching to enhance responsiveness]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html
 	CacheClusterSize types.CacheClusterSize
 
 	// The status of the cache cluster for the stage, if enabled.

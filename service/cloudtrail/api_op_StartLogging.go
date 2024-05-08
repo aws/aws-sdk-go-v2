@@ -36,7 +36,8 @@ type StartLoggingInput struct {
 
 	// Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs
 	// Amazon Web Services API calls. The following is the format of a trail ARN.
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+	//
+	//     arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 	//
 	// This member is required.
 	Name *string

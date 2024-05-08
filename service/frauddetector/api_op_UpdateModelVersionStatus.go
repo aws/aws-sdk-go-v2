@@ -11,10 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the status of a model version. You can perform the following status
-// updates:
+// Updates the status of a model version.
+//
+// You can perform the following status updates:
+//
 //   - Change the TRAINING_IN_PROGRESS status to TRAINING_CANCELLED .
+//
 //   - Change the TRAINING_COMPLETE status to ACTIVE .
+//
 //   - Change ACTIVE to INACTIVE .
 func (c *Client) UpdateModelVersionStatus(ctx context.Context, params *UpdateModelVersionStatusInput, optFns ...func(*Options)) (*UpdateModelVersionStatusOutput, error) {
 	if params == nil {

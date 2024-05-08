@@ -12,8 +12,9 @@ import (
 )
 
 // Deletes a DB cluster snapshot. If the snapshot is being copied, the copy
-// operation is terminated. The DB cluster snapshot must be in the available state
-// to be deleted.
+// operation is terminated.
+//
+// The DB cluster snapshot must be in the available state to be deleted.
 func (c *Client) DeleteDBClusterSnapshot(ctx context.Context, params *DeleteDBClusterSnapshotInput, optFns ...func(*Options)) (*DeleteDBClusterSnapshotOutput, error) {
 	if params == nil {
 		params = &DeleteDBClusterSnapshotInput{}
@@ -31,8 +32,10 @@ func (c *Client) DeleteDBClusterSnapshot(ctx context.Context, params *DeleteDBCl
 
 type DeleteDBClusterSnapshotInput struct {
 
-	// The identifier of the DB cluster snapshot to delete. Constraints: Must be the
-	// name of an existing DB cluster snapshot in the available state.
+	// The identifier of the DB cluster snapshot to delete.
+	//
+	// Constraints: Must be the name of an existing DB cluster snapshot in the
+	// available state.
 	//
 	// This member is required.
 	DBClusterSnapshotIdentifier *string
@@ -42,8 +45,9 @@ type DeleteDBClusterSnapshotInput struct {
 
 type DeleteDBClusterSnapshotOutput struct {
 
-	// Contains the details for an Amazon Neptune DB cluster snapshot This data type
-	// is used as a response element in the DescribeDBClusterSnapshots action.
+	// Contains the details for an Amazon Neptune DB cluster snapshot
+	//
+	// This data type is used as a response element in the DescribeDBClusterSnapshots action.
 	DBClusterSnapshot *types.DBClusterSnapshot
 
 	// Metadata pertaining to the operation's result.

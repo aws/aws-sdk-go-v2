@@ -44,7 +44,7 @@ type UpdateApprovalRuleTemplateContentInput struct {
 	NewRuleContent *string
 
 	// The SHA-256 hash signature for the content of the approval rule. You can
-	// retrieve this information by using GetPullRequest .
+	// retrieve this information by using GetPullRequest.
 	ExistingRuleContentSha256 *string
 
 	noSmithyDocumentSerde

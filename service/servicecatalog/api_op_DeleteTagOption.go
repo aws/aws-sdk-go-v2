@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified TagOption. You cannot delete a TagOption if it is
-// associated with a product or portfolio.
+// Deletes the specified TagOption.
+//
+// You cannot delete a TagOption if it is associated with a product or portfolio.
 func (c *Client) DeleteTagOption(ctx context.Context, params *DeleteTagOptionInput, optFns ...func(*Options)) (*DeleteTagOptionOutput, error) {
 	if params == nil {
 		params = &DeleteTagOptionInput{}

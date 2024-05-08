@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the description of an existing fleet. If the fleet is successfully
-// updated, Amazon Web Services IoT FleetWise sends back an HTTP 200 response with
-// an empty HTTP body.
+//	Updates the description of an existing fleet.
+//
+// If the fleet is successfully updated, Amazon Web Services IoT FleetWise sends
+// back an HTTP 200 response with an empty HTTP body.
 func (c *Client) UpdateFleet(ctx context.Context, params *UpdateFleetInput, optFns ...func(*Options)) (*UpdateFleetOutput, error) {
 	if params == nil {
 		params = &UpdateFleetInput{}
@@ -30,12 +31,12 @@ func (c *Client) UpdateFleet(ctx context.Context, params *UpdateFleetInput, optF
 
 type UpdateFleetInput struct {
 
-	// The ID of the fleet to update.
+	//  The ID of the fleet to update.
 	//
 	// This member is required.
 	FleetId *string
 
-	// An updated description of the fleet.
+	//  An updated description of the fleet.
 	Description *string
 
 	noSmithyDocumentSerde

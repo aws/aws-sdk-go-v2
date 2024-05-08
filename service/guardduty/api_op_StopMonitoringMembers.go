@@ -12,10 +12,11 @@ import (
 )
 
 // Stops GuardDuty monitoring for the specified member accounts. Use the
-// StartMonitoringMembers operation to restart monitoring for those accounts. With
-// autoEnableOrganizationMembers configuration for your organization set to ALL ,
-// you'll receive an error if you attempt to stop monitoring the member accounts in
-// your organization.
+// StartMonitoringMembers operation to restart monitoring for those accounts.
+//
+// With autoEnableOrganizationMembers configuration for your organization set to
+// ALL , you'll receive an error if you attempt to stop monitoring the member
+// accounts in your organization.
 func (c *Client) StopMonitoringMembers(ctx context.Context, params *StopMonitoringMembersInput, optFns ...func(*Options)) (*StopMonitoringMembersOutput, error) {
 	if params == nil {
 		params = &StopMonitoringMembersInput{}

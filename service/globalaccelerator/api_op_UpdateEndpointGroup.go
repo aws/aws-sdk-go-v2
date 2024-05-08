@@ -61,8 +61,11 @@ type UpdateEndpointGroupInput struct {
 	// part of this endpoint group. For example, you can create a port override in
 	// which the listener receives user traffic on ports 80 and 443, but your
 	// accelerator routes that traffic to ports 1080 and 1443, respectively, on the
-	// endpoints. For more information, see Overriding listener ports (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html)
-	// in the Global Accelerator Developer Guide.
+	// endpoints.
+	//
+	// For more information, see [Overriding listener ports] in the Global Accelerator Developer Guide.
+	//
+	// [Overriding listener ports]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html
 	PortOverrides []types.PortOverride
 
 	// The number of consecutive health checks required to set the state of a healthy
@@ -71,10 +74,13 @@ type UpdateEndpointGroupInput struct {
 	ThresholdCount *int32
 
 	// The percentage of traffic to send to an Amazon Web Services Region. Additional
-	// traffic is distributed to other endpoint groups for this listener. Use this
-	// action to increase (dial up) or decrease (dial down) traffic to a specific
-	// Region. The percentage is applied to the traffic that would otherwise have been
-	// routed to the Region based on optimal routing. The default value is 100.
+	// traffic is distributed to other endpoint groups for this listener.
+	//
+	// Use this action to increase (dial up) or decrease (dial down) traffic to a
+	// specific Region. The percentage is applied to the traffic that would otherwise
+	// have been routed to the Region based on optimal routing.
+	//
+	// The default value is 100.
 	TrafficDialPercentage *float32
 
 	noSmithyDocumentSerde

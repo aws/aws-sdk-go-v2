@@ -13,14 +13,18 @@ import (
 )
 
 // Modifies the status of a custom engine version (CEV). You can find CEVs to
-// modify by calling DescribeDBEngineVersions . The MediaImport service that
-// imports files from Amazon S3 to create CEVs isn't integrated with Amazon Web
-// Services CloudTrail. If you turn on data logging for Amazon RDS in CloudTrail,
-// calls to the ModifyCustomDbEngineVersion event aren't logged. However, you
-// might see calls from the API gateway that accesses your Amazon S3 bucket. These
-// calls originate from the MediaImport service for the ModifyCustomDbEngineVersion
-// event. For more information, see Modifying CEV status (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.modify)
-// in the Amazon RDS User Guide.
+// modify by calling DescribeDBEngineVersions .
+//
+// The MediaImport service that imports files from Amazon S3 to create CEVs isn't
+// integrated with Amazon Web Services CloudTrail. If you turn on data logging for
+// Amazon RDS in CloudTrail, calls to the ModifyCustomDbEngineVersion event aren't
+// logged. However, you might see calls from the API gateway that accesses your
+// Amazon S3 bucket. These calls originate from the MediaImport service for the
+// ModifyCustomDbEngineVersion event.
+//
+// For more information, see [Modifying CEV status] in the Amazon RDS User Guide.
+//
+// [Modifying CEV status]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.modify
 func (c *Client) ModifyCustomDBEngineVersion(ctx context.Context, params *ModifyCustomDBEngineVersionInput, optFns ...func(*Options)) (*ModifyCustomDBEngineVersionOutput, error) {
 	if params == nil {
 		params = &ModifyCustomDBEngineVersionInput{}
@@ -39,9 +43,13 @@ func (c *Client) ModifyCustomDBEngineVersion(ctx context.Context, params *Modify
 type ModifyCustomDBEngineVersionInput struct {
 
 	// The database engine. RDS Custom for Oracle supports the following values:
+	//
 	//   - custom-oracle-ee
+	//
 	//   - custom-oracle-ee-cdb
+	//
 	//   - custom-oracle-se2
+	//
 	//   - custom-oracle-se2-cdb
 	//
 	// This member is required.
@@ -59,15 +67,18 @@ type ModifyCustomDBEngineVersionInput struct {
 	Description *string
 
 	// The availability status to be assigned to the CEV. Valid values are as follows:
-	// available You can use this CEV to create a new RDS Custom DB instance. inactive
-	// You can create a new RDS Custom instance by restoring a DB snapshot with this
-	// CEV. You can't patch or create new instances with this CEV. You can change any
-	// status to any status. A typical reason to change status is to prevent the
-	// accidental use of a CEV, or to make a deprecated CEV eligible for use again. For
-	// example, you might change the status of your CEV from available to inactive ,
-	// and from inactive back to available . To change the availability status of the
-	// CEV, it must not currently be in use by an RDS Custom instance, snapshot, or
-	// automated backup.
+	//
+	// available You can use this CEV to create a new RDS Custom DB instance.
+	//
+	// inactive You can create a new RDS Custom instance by restoring a DB snapshot
+	// with this CEV. You can't patch or create new instances with this CEV.
+	//
+	// You can change any status to any status. A typical reason to change status is
+	// to prevent the accidental use of a CEV, or to make a deprecated CEV eligible for
+	// use again. For example, you might change the status of your CEV from available
+	// to inactive , and from inactive back to available . To change the availability
+	// status of the CEV, it must not currently be in use by an RDS Custom instance,
+	// snapshot, or automated backup.
 	Status types.CustomEngineVersionStatus
 
 	noSmithyDocumentSerde
@@ -84,8 +95,9 @@ type ModifyCustomDBEngineVersionOutput struct {
 	// uses to create a custom engine version (CEV). RDS Custom applies the patches in
 	// the order in which they're listed in the manifest. You can set the Oracle home,
 	// Oracle base, and UNIX/Linux user and group using the installation parameters.
-	// For more information, see JSON fields in the CEV manifest (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html#custom-cev.preparing.manifest.fields)
-	// in the Amazon RDS User Guide.
+	// For more information, see [JSON fields in the CEV manifest]in the Amazon RDS User Guide.
+	//
+	// [JSON fields in the CEV manifest]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html#custom-cev.preparing.manifest.fields
 	CustomDBEngineVersionManifest *string
 
 	// The description of the database engine.
@@ -138,11 +150,13 @@ type ModifyCustomDBEngineVersionOutput struct {
 	// The status of the DB engine version, either available or deprecated .
 	Status *string
 
-	// A list of the supported CA certificate identifiers. For more information, see
-	// Using SSL/TLS to encrypt a connection to a DB instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
-	// in the Amazon RDS User Guide and Using SSL/TLS to encrypt a connection to a DB
-	// cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
-	// in the Amazon Aurora User Guide.
+	// A list of the supported CA certificate identifiers.
+	//
+	// For more information, see [Using SSL/TLS to encrypt a connection to a DB instance] in the Amazon RDS User Guide and [Using SSL/TLS to encrypt a connection to a DB cluster] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Using SSL/TLS to encrypt a connection to a DB cluster]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+	// [Using SSL/TLS to encrypt a connection to a DB instance]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
 	SupportedCACertificateIdentifiers []string
 
 	// A list of the character sets supported by this engine for the CharacterSetName
@@ -152,14 +166,21 @@ type ModifyCustomDBEngineVersionOutput struct {
 	// A list of the supported DB engine modes.
 	SupportedEngineModes []string
 
-	// A list of features supported by the DB engine. The supported features vary by
-	// DB engine and DB engine version. To determine the supported features for a
-	// specific DB engine and DB engine version using the CLI, use the following
-	// command: aws rds describe-db-engine-versions --engine --engine-version  For
-	// example, to determine the supported features for RDS for PostgreSQL version 13.3
-	// using the CLI, use the following command: aws rds describe-db-engine-versions
-	// --engine postgres --engine-version 13.3 The supported features are listed under
-	// SupportedFeatureNames in the output.
+	// A list of features supported by the DB engine.
+	//
+	// The supported features vary by DB engine and DB engine version.
+	//
+	// To determine the supported features for a specific DB engine and DB engine
+	// version using the CLI, use the following command:
+	//
+	//     aws rds describe-db-engine-versions --engine --engine-version
+	//
+	// For example, to determine the supported features for RDS for PostgreSQL version
+	// 13.3 using the CLI, use the following command:
+	//
+	//     aws rds describe-db-engine-versions --engine postgres --engine-version 13.3
+	//
+	// The supported features are listed under SupportedFeatureNames in the output.
 	SupportedFeatureNames []string
 
 	// A list of the character sets supported by the Oracle DB engine for the
@@ -190,8 +211,9 @@ type ModifyCustomDBEngineVersionOutput struct {
 
 	// Indicates whether the DB engine version supports forwarding write operations
 	// from reader DB instances to the writer DB instance in the DB cluster. By
-	// default, write operations aren't allowed on reader DB instances. Valid for:
-	// Aurora DB clusters only
+	// default, write operations aren't allowed on reader DB instances.
+	//
+	// Valid for: Aurora DB clusters only
 	SupportsLocalWriteForwarding *bool
 
 	// Indicates whether the engine version supports exporting the log types specified
@@ -205,8 +227,9 @@ type ModifyCustomDBEngineVersionOutput struct {
 	// Indicates whether the database engine version supports read replicas.
 	SupportsReadReplica *bool
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
-	// in the Amazon RDS User Guide.
+	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	//
+	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
 	TagList []types.Tag
 
 	// A list of engine versions that this database engine version can be upgraded to.

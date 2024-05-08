@@ -13,9 +13,11 @@ import (
 )
 
 // Returns both the current and recommended resource configuration and the
-// estimated cost impact for a recommendation. The recommendationId is only valid
-// for up to a maximum of 24 hours as recommendations are refreshed daily. To
-// retrieve the recommendationId , use the ListRecommendations API.
+// estimated cost impact for a recommendation.
+//
+// The recommendationId is only valid for up to a maximum of 24 hours as
+// recommendations are refreshed daily. To retrieve the recommendationId , use the
+// ListRecommendations API.
 func (c *Client) GetRecommendation(ctx context.Context, params *GetRecommendationInput, optFns ...func(*Options)) (*GetRecommendationOutput, error) {
 	if params == nil {
 		params = &GetRecommendationInput{}

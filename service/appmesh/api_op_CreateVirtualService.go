@@ -11,13 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a virtual service within a service mesh. A virtual service is an
-// abstraction of a real service that is provided by a virtual node directly or
-// indirectly by means of a virtual router. Dependent services call your virtual
-// service by its virtualServiceName , and those requests are routed to the virtual
-// node or virtual router that is specified as the provider for the virtual
-// service. For more information about virtual services, see Virtual services (https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_services.html)
-// .
+// Creates a virtual service within a service mesh.
+//
+// A virtual service is an abstraction of a real service that is provided by a
+// virtual node directly or indirectly by means of a virtual router. Dependent
+// services call your virtual service by its virtualServiceName , and those
+// requests are routed to the virtual node or virtual router that is specified as
+// the provider for the virtual service.
+//
+// For more information about virtual services, see [Virtual services].
+//
+// [Virtual services]: https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_services.html
 func (c *Client) CreateVirtualService(ctx context.Context, params *CreateVirtualServiceInput, optFns ...func(*Options)) (*CreateVirtualServiceOutput, error) {
 	if params == nil {
 		params = &CreateVirtualServiceInput{}
@@ -57,8 +61,9 @@ type CreateVirtualServiceInput struct {
 	// The Amazon Web Services IAM account ID of the service mesh owner. If the
 	// account ID is not your own, then the account that you specify must share the
 	// mesh with your account before you can create the resource in the service mesh.
-	// For more information about mesh sharing, see Working with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
-	// .
+	// For more information about mesh sharing, see [Working with shared meshes].
+	//
+	// [Working with shared meshes]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
 	MeshOwner *string
 
 	// Optional metadata that you can apply to the virtual service to assist with

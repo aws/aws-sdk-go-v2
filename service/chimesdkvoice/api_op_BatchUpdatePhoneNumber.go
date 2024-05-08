@@ -13,8 +13,9 @@ import (
 
 // Updates phone number product types, calling names, or phone number names. You
 // can update one attribute at a time for each UpdatePhoneNumberRequestItem . For
-// example, you can update the product type, the calling name, or phone name. You
-// cannot have a duplicate phoneNumberId in a request.
+// example, you can update the product type, the calling name, or phone name.
+//
+// You cannot have a duplicate phoneNumberId in a request.
 func (c *Client) BatchUpdatePhoneNumber(ctx context.Context, params *BatchUpdatePhoneNumberInput, optFns ...func(*Options)) (*BatchUpdatePhoneNumberOutput, error) {
 	if params == nil {
 		params = &BatchUpdatePhoneNumberInput{}

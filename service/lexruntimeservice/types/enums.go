@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for ConfirmationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfirmationStatus) Values() []ConfirmationStatus {
 	return []ConfirmationStatus{
 		"None",
@@ -30,8 +31,9 @@ const (
 )
 
 // Values returns all known values for ContentType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContentType) Values() []ContentType {
 	return []ContentType{
 		"application/vnd.amazonaws.card.generic",
@@ -50,8 +52,9 @@ const (
 )
 
 // Values returns all known values for DialogActionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DialogActionType) Values() []DialogActionType {
 	return []DialogActionType{
 		"ElicitIntent",
@@ -75,8 +78,9 @@ const (
 )
 
 // Values returns all known values for DialogState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DialogState) Values() []DialogState {
 	return []DialogState{
 		"ElicitIntent",
@@ -98,8 +102,9 @@ const (
 )
 
 // Values returns all known values for FulfillmentState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FulfillmentState) Values() []FulfillmentState {
 	return []FulfillmentState{
 		"Fulfilled",
@@ -119,8 +124,9 @@ const (
 )
 
 // Values returns all known values for MessageFormatType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MessageFormatType) Values() []MessageFormatType {
 	return []MessageFormatType{
 		"PlainText",

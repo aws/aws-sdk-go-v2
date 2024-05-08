@@ -11,15 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a paginated list of asset summaries. You can use this operation to do
-// the following:
+// Retrieves a paginated list of asset summaries.
+//
+// You can use this operation to do the following:
+//
 //   - List assets based on a specific asset model.
+//
 //   - List top-level assets.
 //
 // You can't use this operation to list all assets. To retrieve summaries for all
-// of your assets, use ListAssetModels (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_ListAssetModels.html)
-// to get all of your asset model IDs. Then, use ListAssets to get all assets for
-// each asset model.
+// of your assets, use [ListAssetModels]to get all of your asset model IDs. Then, use ListAssets to
+// get all assets for each asset model.
+//
+// [ListAssetModels]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_ListAssetModels.html
 func (c *Client) ListAssets(ctx context.Context, params *ListAssetsInput, optFns ...func(*Options)) (*ListAssetsOutput, error) {
 	if params == nil {
 		params = &ListAssetsInput{}
@@ -40,20 +44,26 @@ type ListAssetsInput struct {
 	// The ID of the asset model by which to filter the list of assets. This parameter
 	// is required if you choose ALL for filter . This can be either the actual ID in
 	// UUID format, or else externalId: followed by the external ID, if it has one.
-	// For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// For more information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	AssetModelId *string
 
 	// The filter for the requested list of assets. Choose one of the following
 	// options:
+	//
 	//   - ALL – The list includes all assets for a given asset model ID. The
 	//   assetModelId parameter is required if you filter by ALL .
+	//
 	//   - TOP_LEVEL – The list includes only top-level assets in the asset hierarchy
 	//   tree.
+	//
 	// Default: ALL
 	Filter types.ListAssetsFilter
 
-	// The maximum number of results to return for each paginated request. Default: 50
+	// The maximum number of results to return for each paginated request.
+	//
+	// Default: 50
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
@@ -194,7 +204,9 @@ var _ ListAssetsAPIClient = (*Client)(nil)
 
 // ListAssetsPaginatorOptions is the paginator options for ListAssets
 type ListAssetsPaginatorOptions struct {
-	// The maximum number of results to return for each paginated request. Default: 50
+	// The maximum number of results to return for each paginated request.
+	//
+	// Default: 50
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -11,12 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a license configuration. A license configuration is an abstraction of a
-// customer license agreement that can be consumed and enforced by License Manager.
-// Components include specifications for the license type (licensing by instance,
-// socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance,
-// Dedicated Host, or all of these), license affinity to host (how long a license
-// must be associated with a host), and the number of licenses purchased and used.
+// Creates a license configuration.
+//
+// A license configuration is an abstraction of a customer license agreement that
+// can be consumed and enforced by License Manager. Components include
+// specifications for the license type (licensing by instance, socket, CPU, or
+// vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or
+// all of these), license affinity to host (how long a license must be associated
+// with a host), and the number of licenses purchased and used.
 func (c *Client) CreateLicenseConfiguration(ctx context.Context, params *CreateLicenseConfigurationInput, optFns ...func(*Options)) (*CreateLicenseConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateLicenseConfigurationInput{}
@@ -60,14 +62,19 @@ type CreateLicenseConfigurationInput struct {
 	// License rules. The syntax is #name=value (for example,
 	// #allowedTenancy=EC2-DedicatedHost). The available rules vary by dimension, as
 	// follows.
+	//
 	//   - Cores dimension: allowedTenancy | licenseAffinityToHost | maximumCores |
 	//   minimumCores
+	//
 	//   - Instances dimension: allowedTenancy | maximumCores | minimumCores |
 	//   maximumSockets | minimumSockets | maximumVcpus | minimumVcpus
+	//
 	//   - Sockets dimension: allowedTenancy | licenseAffinityToHost | maximumSockets |
 	//   minimumSockets
+	//
 	//   - vCPUs dimension: allowedTenancy | honorVcpuOptimization | maximumVcpus |
 	//   minimumVcpus
+	//
 	// The unit for licenseAffinityToHost is days and the range is 1 to 180. The
 	// possible values for allowedTenancy are EC2-Default , EC2-DedicatedHost , and
 	// EC2-DedicatedInstance . The possible values for honorVcpuOptimization are True

@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a custom model that you created earlier. For more information, see
-// Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
-// in the Amazon Bedrock User Guide.
+// Deletes a custom model that you created earlier. For more information, see [Custom models] in
+// the Amazon Bedrock User Guide.
+//
+// [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
 func (c *Client) DeleteCustomModel(ctx context.Context, params *DeleteCustomModelInput, optFns ...func(*Options)) (*DeleteCustomModelOutput, error) {
 	if params == nil {
 		params = &DeleteCustomModelInput{}

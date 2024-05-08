@@ -11,6 +11,7 @@ const (
 
 // Values returns all known values for ClientSideTimestampsStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ClientSideTimestampsStatus) Values() []ClientSideTimestampsStatus {
 	return []ClientSideTimestampsStatus{
@@ -27,8 +28,9 @@ const (
 )
 
 // Values returns all known values for EncryptionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncryptionType) Values() []EncryptionType {
 	return []EncryptionType{
 		"CUSTOMER_MANAGED_KMS_KEY",
@@ -46,6 +48,7 @@ const (
 
 // Values returns all known values for PointInTimeRecoveryStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (PointInTimeRecoveryStatus) Values() []PointInTimeRecoveryStatus {
 	return []PointInTimeRecoveryStatus{
@@ -63,8 +66,9 @@ const (
 )
 
 // Values returns all known values for Rs. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Rs) Values() []Rs {
 	return []Rs{
 		"SINGLE_REGION",
@@ -81,8 +85,9 @@ const (
 )
 
 // Values returns all known values for SortOrder. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASC",
@@ -104,8 +109,9 @@ const (
 )
 
 // Values returns all known values for TableStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TableStatus) Values() []TableStatus {
 	return []TableStatus{
 		"ACTIVE",
@@ -127,8 +133,9 @@ const (
 )
 
 // Values returns all known values for ThroughputMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ThroughputMode) Values() []ThroughputMode {
 	return []ThroughputMode{
 		"PAY_PER_REQUEST",
@@ -144,8 +151,9 @@ const (
 )
 
 // Values returns all known values for TimeToLiveStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TimeToLiveStatus) Values() []TimeToLiveStatus {
 	return []TimeToLiveStatus{
 		"ENABLED",

@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the versions of an Lambda layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
-// . Versions that have been deleted aren't listed. Specify a runtime identifier (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
-// to list only versions that indicate that they're compatible with that runtime.
-// Specify a compatible architecture to include only layer versions that are
-// compatible with that architecture.
+// Lists the versions of an [Lambda layer]. Versions that have been deleted aren't listed.
+// Specify a [runtime identifier]to list only versions that indicate that they're compatible with that
+// runtime. Specify a compatible architecture to include only layer versions that
+// are compatible with that architecture.
+//
+// [Lambda layer]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+// [runtime identifier]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
 func (c *Client) ListLayerVersions(ctx context.Context, params *ListLayerVersionsInput, optFns ...func(*Options)) (*ListLayerVersionsOutput, error) {
 	if params == nil {
 		params = &ListLayerVersionsInput{}
@@ -38,13 +40,16 @@ type ListLayerVersionsInput struct {
 	// This member is required.
 	LayerName *string
 
-	// The compatible instruction set architecture (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)
-	// .
+	// The compatible [instruction set architecture].
+	//
+	// [instruction set architecture]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
 	CompatibleArchitecture types.Architecture
 
-	// A runtime identifier. For example, java21 . The following list includes
-	// deprecated runtimes. For more information, see Runtime deprecation policy (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy)
-	// .
+	// A runtime identifier. For example, java21 .
+	//
+	// The following list includes deprecated runtimes. For more information, see [Runtime deprecation policy].
+	//
+	// [Runtime deprecation policy]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
 	CompatibleRuntime types.Runtime
 
 	// A pagination token returned by a previous call.

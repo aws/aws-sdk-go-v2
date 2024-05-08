@@ -12,11 +12,13 @@ import (
 )
 
 // Describes the current Amazon Pinpoint monthly spend limits for sending voice
-// and text messages. When you establish an Amazon Web Services account, the
-// account has initial monthly spend limit in a given Region. For more information
-// on increasing your monthly spend limit, see Requesting increases to your
-// monthly SMS spending quota for Amazon Pinpoint  (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-spend-threshold.html)
-// in the Amazon Pinpoint User Guide.
+// and text messages.
+//
+// When you establish an Amazon Web Services account, the account has initial
+// monthly spend limit in a given Region. For more information on increasing your
+// monthly spend limit, see [Requesting increases to your monthly SMS spending quota for Amazon Pinpoint]in the Amazon Pinpoint User Guide.
+//
+// [Requesting increases to your monthly SMS spending quota for Amazon Pinpoint]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-spend-threshold.html
 func (c *Client) DescribeSpendLimits(ctx context.Context, params *DescribeSpendLimitsInput, optFns ...func(*Options)) (*DescribeSpendLimitsOutput, error) {
 	if params == nil {
 		params = &DescribeSpendLimitsInput{}

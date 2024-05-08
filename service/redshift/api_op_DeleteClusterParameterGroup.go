@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a specified Amazon Redshift parameter group. You cannot delete a
-// parameter group if it is associated with a cluster.
+// Deletes a specified Amazon Redshift parameter group.
+//
+// You cannot delete a parameter group if it is associated with a cluster.
 func (c *Client) DeleteClusterParameterGroup(ctx context.Context, params *DeleteClusterParameterGroupInput, optFns ...func(*Options)) (*DeleteClusterParameterGroupOutput, error) {
 	if params == nil {
 		params = &DeleteClusterParameterGroupInput{}
@@ -29,8 +30,12 @@ func (c *Client) DeleteClusterParameterGroup(ctx context.Context, params *Delete
 
 type DeleteClusterParameterGroupInput struct {
 
-	// The name of the parameter group to be deleted. Constraints:
+	// The name of the parameter group to be deleted.
+	//
+	// Constraints:
+	//
 	//   - Must be the name of an existing cluster parameter group.
+	//
 	//   - Cannot delete a default cluster parameter group.
 	//
 	// This member is required.

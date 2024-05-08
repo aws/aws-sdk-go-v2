@@ -30,7 +30,7 @@ func (c *Client) DescribeBundle(ctx context.Context, params *DescribeBundleInput
 // Request structure to request the details of a specific bundle.
 type DescribeBundleInput struct {
 
-	// Unique bundle identifier.
+	//  Unique bundle identifier.
 	//
 	// This member is required.
 	BundleId *string
@@ -41,7 +41,7 @@ type DescribeBundleInput struct {
 // Result structure contains the details of the bundle.
 type DescribeBundleOutput struct {
 
-	// The details of the bundle.
+	//  The details of the bundle.
 	Details *types.BundleDetails
 
 	// Metadata pertaining to the operation's result.

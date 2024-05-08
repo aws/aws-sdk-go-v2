@@ -65,12 +65,15 @@ type StartSpeechSynthesisTaskInput struct {
 
 	// Optional language code for the Speech Synthesis request. This is only necessary
 	// if using a bilingual voice, such as Aditi, which can be used for either Indian
-	// English (en-IN) or Hindi (hi-IN). If a bilingual voice is used and no language
-	// code is specified, Amazon Polly uses the default language of the bilingual
-	// voice. The default language for any voice is the one returned by the
-	// DescribeVoices (https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html)
-	// operation for the LanguageCode parameter. For example, if no language code is
-	// specified, Aditi will use Indian English rather than Hindi.
+	// English (en-IN) or Hindi (hi-IN).
+	//
+	// If a bilingual voice is used and no language code is specified, Amazon Polly
+	// uses the default language of the bilingual voice. The default language for any
+	// voice is the one returned by the [DescribeVoices]operation for the LanguageCode parameter. For
+	// example, if no language code is specified, Aditi will use Indian English rather
+	// than Hindi.
+	//
+	// [DescribeVoices]: https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
 	LanguageCode types.LanguageCode
 
 	// List of one or more pronunciation lexicon names you want the service to apply
@@ -81,11 +84,13 @@ type StartSpeechSynthesisTaskInput struct {
 	// The Amazon S3 key prefix for the output speech file.
 	OutputS3KeyPrefix *string
 
-	// The audio frequency specified in Hz. The valid values for mp3 and ogg_vorbis
-	// are "8000", "16000", "22050", and "24000". The default value for standard voices
-	// is "22050". The default value for neural voices is "24000". The default value
-	// for long-form voices is "24000". Valid values for pcm are "8000" and "16000" The
-	// default value is "16000".
+	// The audio frequency specified in Hz.
+	//
+	// The valid values for mp3 and ogg_vorbis are "8000", "16000", "22050", and
+	// "24000". The default value for standard voices is "22050". The default value for
+	// neural voices is "24000". The default value for long-form voices is "24000".
+	//
+	// Valid values for pcm are "8000" and "16000" The default value is "16000".
 	SampleRate *string
 
 	// ARN for the SNS topic optionally used for providing status notification for a

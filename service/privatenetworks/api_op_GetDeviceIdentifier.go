@@ -42,7 +42,7 @@ type GetDeviceIdentifierOutput struct {
 	// Information about the device identifier.
 	DeviceIdentifier *types.DeviceIdentifier
 
-	// The device identifier tags.
+	//  The device identifier tags.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

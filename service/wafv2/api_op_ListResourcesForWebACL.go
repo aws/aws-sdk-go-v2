@@ -12,14 +12,19 @@ import (
 )
 
 // Retrieves an array of the Amazon Resource Names (ARNs) for the regional
-// resources that are associated with the specified web ACL. For Amazon CloudFront,
-// don't use this call. Instead, use the CloudFront call
-// ListDistributionsByWebACLId . For information, see ListDistributionsByWebACLId (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html)
-// in the Amazon CloudFront API Reference. Required permissions for
-// customer-managed IAM policies This call requires permissions that are specific
-// to the protected resource type. For details, see Permissions for
-// ListResourcesForWebACL (https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-ListResourcesForWebACL)
-// in the WAF Developer Guide.
+// resources that are associated with the specified web ACL.
+//
+// For Amazon CloudFront, don't use this call. Instead, use the CloudFront call
+// ListDistributionsByWebACLId . For information, see [ListDistributionsByWebACLId] in the Amazon CloudFront
+// API Reference.
+//
+// # Required permissions for customer-managed IAM policies
+//
+// This call requires permissions that are specific to the protected resource
+// type. For details, see [Permissions for ListResourcesForWebACL]in the WAF Developer Guide.
+//
+// [Permissions for ListResourcesForWebACL]: https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-ListResourcesForWebACL
+// [ListDistributionsByWebACLId]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html
 func (c *Client) ListResourcesForWebACL(ctx context.Context, params *ListResourcesForWebACLInput, optFns ...func(*Options)) (*ListResourcesForWebACLOutput, error) {
 	if params == nil {
 		params = &ListResourcesForWebACLInput{}
@@ -45,9 +50,12 @@ type ListResourcesForWebACLInput struct {
 	// Used for web ACLs that are scoped for regional applications. A regional
 	// application can be an Application Load Balancer (ALB), an Amazon API Gateway
 	// REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner
-	// service, or an Amazon Web Services Verified Access instance. If you don't
-	// provide a resource type, the call uses the resource type
-	// APPLICATION_LOAD_BALANCER . Default: APPLICATION_LOAD_BALANCER
+	// service, or an Amazon Web Services Verified Access instance.
+	//
+	// If you don't provide a resource type, the call uses the resource type
+	// APPLICATION_LOAD_BALANCER .
+	//
+	// Default: APPLICATION_LOAD_BALANCER
 	ResourceType types.ResourceType
 
 	noSmithyDocumentSerde

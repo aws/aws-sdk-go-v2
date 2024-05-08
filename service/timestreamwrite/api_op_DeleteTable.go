@@ -13,10 +13,14 @@ import (
 
 // Deletes a given Timestream table. This is an irreversible operation. After a
 // Timestream database table is deleted, the time-series data stored in the table
-// cannot be recovered. Due to the nature of distributed retries, the operation can
-// return either success or a ResourceNotFoundException. Clients should consider
-// them equivalent. See code sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.delete-table.html)
-// for details.
+// cannot be recovered.
+//
+// Due to the nature of distributed retries, the operation can return either
+// success or a ResourceNotFoundException. Clients should consider them equivalent.
+//
+// See [code sample] for details.
+//
+// [code sample]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.delete-table.html
 func (c *Client) DeleteTable(ctx context.Context, params *DeleteTableInput, optFns ...func(*Options)) (*DeleteTableOutput, error) {
 	if params == nil {
 		params = &DeleteTableInput{}

@@ -16,8 +16,9 @@ type BillingRecord struct {
 	// The name of the domain that the billing record applies to. If the domain name
 	// contains characters other than a-z, 0-9, and - (hyphen), such as an
 	// internationalized domain name, then this value is in Punycode. For more
-	// information, see DNS Domain Name Format (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html)
-	// in the Amazon Route 53 Developer Guide.
+	// information, see [DNS Domain Name Format]in the Amazon Route 53 Developer Guide.
+	//
+	// [DNS Domain Name Format]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html
 	DomainName *string
 
 	// The ID of the invoice that is associated with the billing record.
@@ -26,8 +27,9 @@ type BillingRecord struct {
 	// The operation that you were charged for.
 	Operation OperationType
 
-	// The price that you were charged for the operation, in US dollars. Example
-	// value: 12.0
+	// The price that you were charged for the operation, in US dollars.
+	//
+	// Example value: 12.0
 	Price float64
 
 	noSmithyDocumentSerde
@@ -36,12 +38,12 @@ type BillingRecord struct {
 // Customer's consent for the owner change request.
 type Consent struct {
 
-	// Currency for the MaxPrice .
+	//  Currency for the MaxPrice .
 	//
 	// This member is required.
 	Currency *string
 
-	// Maximum amount the customer agreed to accept.
+	//  Maximum amount the customer agreed to accept.
 	//
 	// This member is required.
 	MaxPrice float64
@@ -63,14 +65,18 @@ type ContactDetail struct {
 
 	// Indicates whether the contact is a person, company, association, or public
 	// organization. Note the following:
+	//
 	//   - If you specify a value other than PERSON , you must also specify a value for
 	//   OrganizationName .
+	//
 	//   - For some TLDs, the privacy protection available depends on the value that
 	//   you specify for Contact Type . For the privacy protection settings for your
-	//   TLD, see Domains that You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
-	//   in the Amazon Route 53 Developer Guide
+	//   TLD, see [Domains that You Can Register with Amazon Route 53]in the Amazon Route 53 Developer Guide
+	//
 	//   - For .es domains, the value of ContactType must be PERSON for all three
 	//   contacts.
+	//
+	// [Domains that You Can Register with Amazon Route 53]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
 	ContactType ContactType
 
 	// Code for the country of the contact's address.
@@ -82,9 +88,11 @@ type ContactDetail struct {
 	// A list of name-value pairs for parameters required by certain top-level domains.
 	ExtraParams []ExtraParam
 
-	// Fax number of the contact. Constraints: Phone number must be specified in the
-	// format "+[country dialing code].[number including any area code]". For example,
-	// a US phone number might appear as "+1.1234567890" .
+	// Fax number of the contact.
+	//
+	// Constraints: Phone number must be specified in the format "+[country dialing
+	// code].[number including any area code]". For example, a US phone number might
+	// appear as "+1.1234567890" .
 	Fax *string
 
 	// First name of contact.
@@ -96,9 +104,11 @@ type ContactDetail struct {
 	// Name of the organization for contact types other than PERSON .
 	OrganizationName *string
 
-	// The phone number of the contact. Constraints: Phone number must be specified in
-	// the format "+[country dialing code].[number including any area code>]". For
-	// example, a US phone number might appear as "+1.1234567890" .
+	// The phone number of the contact.
+	//
+	// Constraints: Phone number must be specified in the format "+[country dialing
+	// code].[number including any area code>]". For example, a US phone number might
+	// appear as "+1.1234567890" .
 	PhoneNumber *string
 
 	// The state or province of the contact's city.
@@ -110,40 +120,54 @@ type ContactDetail struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the DNSSEC key. You get this from your DNS provider and then
-// give it to Route 53 (by using AssociateDelegationSignerToDomain (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AssociateDelegationSignerToDomain.html)
-// ) to pass it to the registry to establish the chain of trust.
+// Information about the DNSSEC key.
+//
+// You get this from your DNS provider and then give it to Route 53 (by using [AssociateDelegationSignerToDomain]) to
+// pass it to the registry to establish the chain of trust.
+//
+// [AssociateDelegationSignerToDomain]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AssociateDelegationSignerToDomain.html
 type DnssecKey struct {
 
-	// The number of the public key’s cryptographic algorithm according to an IANA (https://www.iana.org/assignments/dns-sec-alg-numbers/dns-sec-alg-numbers.xml)
-	// assignment. If Route 53 is your DNS service, set this to 13. For more
-	// information about enabling DNSSEC signing, see Enabling DNSSEC signing and
-	// establishing a chain of trust (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring-dnssec-enable-signing.html)
-	// .
+	// The number of the public key’s cryptographic algorithm according to an [IANA]
+	// assignment.
+	//
+	// If Route 53 is your DNS service, set this to 13.
+	//
+	// For more information about enabling DNSSEC signing, see [Enabling DNSSEC signing and establishing a chain of trust].
+	//
+	// [Enabling DNSSEC signing and establishing a chain of trust]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring-dnssec-enable-signing.html
+	// [IANA]: https://www.iana.org/assignments/dns-sec-alg-numbers/dns-sec-alg-numbers.xml
 	Algorithm *int32
 
-	// The delegation signer digest. Digest is calculated from the public key provided
-	// using specified digest algorithm and this digest is the actual value returned
-	// from the registry nameservers as the value of DS records.
+	//  The delegation signer digest.
+	//
+	// Digest is calculated from the public key provided using specified digest
+	// algorithm and this digest is the actual value returned from the registry
+	// nameservers as the value of DS records.
 	Digest *string
 
-	// The number of the DS digest algorithm according to an IANA assignment. For more
-	// information, see IANA (https://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml)
-	// for DNSSEC Delegation Signer (DS) Resource Record (RR) Type Digest Algorithms.
+	//  The number of the DS digest algorithm according to an IANA assignment.
+	//
+	// For more information, see [IANA] for DNSSEC Delegation Signer (DS) Resource Record
+	// (RR) Type Digest Algorithms.
+	//
+	// [IANA]: https://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml
 	DigestType *int32
 
 	// Defines the type of key. It can be either a KSK (key-signing-key, value 257) or
 	// ZSK (zone-signing-key, value 256). Using KSK is always encouraged. Only use ZSK
-	// if your DNS provider isn't Route 53 and you don’t have KSK available. If you
-	// have KSK and ZSK keys, always use KSK to create a delegations signer (DS)
-	// record. If you have ZSK keys only – use ZSK to create a DS record.
+	// if your DNS provider isn't Route 53 and you don’t have KSK available.
+	//
+	// If you have KSK and ZSK keys, always use KSK to create a delegations signer
+	// (DS) record. If you have ZSK keys only – use ZSK to create a DS record.
 	Flags *int32
 
-	// An ID assigned to each DS record created by AssociateDelegationSignerToDomain (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AssociateDelegationSignerToDomain.html)
-	// .
+	//  An ID assigned to each DS record created by [AssociateDelegationSignerToDomain].
+	//
+	// [AssociateDelegationSignerToDomain]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AssociateDelegationSignerToDomain.html
 	Id *string
 
-	// A numeric identification of the DNSKEY record referred to by this DS record.
+	//  A numeric identification of the DNSKEY record referred to by this DS record.
 	KeyTag *int32
 
 	// The base64-encoded public key part of the key pair that is passed to the
@@ -154,21 +178,23 @@ type DnssecKey struct {
 }
 
 // Information about a delegation signer (DS) record that was created in the
-// registry by AssociateDelegationSignerToDomain (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AssociateDelegationSignerToDomain.html)
-// .
+// registry by [AssociateDelegationSignerToDomain].
+//
+// [AssociateDelegationSignerToDomain]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AssociateDelegationSignerToDomain.html
 type DnssecSigningAttributes struct {
 
-	// Algorithm which was used to generate the digest from the public key.
+	//  Algorithm which was used to generate the digest from the public key.
 	Algorithm *int32
 
 	// Defines the type of key. It can be either a KSK (key-signing-key, value 257) or
 	// ZSK (zone-signing-key, value 256). Using KSK is always encouraged. Only use ZSK
-	// if your DNS provider isn't Route 53 and you don’t have KSK available. If you
-	// have KSK and ZSK keys, always use KSK to create a delegations signer (DS)
-	// record. If you have ZSK keys only – use ZSK to create a DS record.
+	// if your DNS provider isn't Route 53 and you don’t have KSK available.
+	//
+	// If you have KSK and ZSK keys, always use KSK to create a delegations signer
+	// (DS) record. If you have ZSK keys only – use ZSK to create a DS record.
 	Flags *int32
 
-	// The base64-encoded public key part of the key pair that is passed to the
+	//  The base64-encoded public key part of the key pair that is passed to the
 	// registry.
 	PublicKey *string
 
@@ -202,19 +228,33 @@ type DomainPrice struct {
 // Information about one suggested domain name.
 type DomainSuggestion struct {
 
-	// Whether the domain name is available for registering. You can register only the
-	// domains that are designated as AVAILABLE . Valid values: AVAILABLE The domain
-	// name is available. AVAILABLE_RESERVED The domain name is reserved under specific
-	// conditions. AVAILABLE_PREORDER The domain name is available and can be
-	// preordered. DONT_KNOW The TLD registry didn't reply with a definitive answer
-	// about whether the domain name is available. Route 53 can return this response
-	// for a variety of reasons, for example, the registry is performing maintenance.
-	// Try again later. PENDING The TLD registry didn't return a response in the
-	// expected amount of time. When the response is delayed, it usually takes just a
-	// few extra seconds. You can resubmit the request immediately. RESERVED The domain
-	// name has been reserved for another person or organization. UNAVAILABLE The
-	// domain name is not available. UNAVAILABLE_PREMIUM The domain name is not
-	// available. UNAVAILABLE_RESTRICTED The domain name is forbidden.
+	// Whether the domain name is available for registering.
+	//
+	// You can register only the domains that are designated as AVAILABLE .
+	//
+	// Valid values:
+	//
+	// AVAILABLE The domain name is available.
+	//
+	// AVAILABLE_RESERVED The domain name is reserved under specific conditions.
+	//
+	// AVAILABLE_PREORDER The domain name is available and can be preordered.
+	//
+	// DONT_KNOW The TLD registry didn't reply with a definitive answer about whether
+	// the domain name is available. Route 53 can return this response for a variety of
+	// reasons, for example, the registry is performing maintenance. Try again later.
+	//
+	// PENDING The TLD registry didn't return a response in the expected amount of
+	// time. When the response is delayed, it usually takes just a few extra seconds.
+	// You can resubmit the request immediately.
+	//
+	// RESERVED The domain name has been reserved for another person or organization.
+	//
+	// UNAVAILABLE The domain name is not available.
+	//
+	// UNAVAILABLE_PREMIUM The domain name is not available.
+	//
+	// UNAVAILABLE_RESTRICTED The domain name is forbidden.
 	Availability *string
 
 	// A suggested domain name.
@@ -247,13 +287,25 @@ type DomainSummary struct {
 // be transferred to Route 53.
 type DomainTransferability struct {
 
-	// Whether the domain name can be transferred to Route 53. You can transfer only
-	// domains that have a value of TRANSFERABLE or Transferable . Valid values:
-	// TRANSFERABLE The domain name can be transferred to Route 53. UNTRANSFERRABLE The
-	// domain name can't be transferred to Route 53. DONT_KNOW Reserved for future use.
+	// Whether the domain name can be transferred to Route 53.
+	//
+	// You can transfer only domains that have a value of TRANSFERABLE or Transferable .
+	//
+	// Valid values:
+	//
+	// TRANSFERABLE The domain name can be transferred to Route 53.
+	//
+	// UNTRANSFERRABLE The domain name can't be transferred to Route 53.
+	//
+	// DONT_KNOW Reserved for future use.
+	//
 	// DOMAIN_IN_OWN_ACCOUNT The domain already exists in the current Amazon Web
-	// Services account. DOMAIN_IN_ANOTHER_ACCOUNT The domain exists in another Amazon
-	// Web Services account. PREMIUM_DOMAIN Premium domain transfer is not supported.
+	// Services account.
+	//
+	// DOMAIN_IN_ANOTHER_ACCOUNT  The domain exists in another Amazon Web Services
+	// account.
+	//
+	// PREMIUM_DOMAIN Premium domain transfer is not supported.
 	Transferable Transferable
 
 	noSmithyDocumentSerde
@@ -264,177 +316,355 @@ type ExtraParam struct {
 
 	// The name of an additional parameter that is required by a top-level domain.
 	// Here are the top-level domains that require additional parameters and the names
-	// of the parameters that they require: .com.au and .net.au
+	// of the parameters that they require:
+	//
+	// .com.au and .net.au
 	//   - AU_ID_NUMBER
-	//   - AU_ID_TYPE Valid values include the following:
+	//
+	//   - AU_ID_TYPE
+	//
+	// Valid values include the following:
+	//
 	//   - ABN (Australian business number)
+	//
 	//   - ACN (Australian company number)
+	//
 	//   - TM (Trademark number)
+	//
 	// .ca
 	//   - BRAND_NUMBER
-	//   - CA_BUSINESS_ENTITY_TYPE Valid values include the following:
+	//
+	//   - CA_BUSINESS_ENTITY_TYPE
+	//
+	// Valid values include the following:
+	//
 	//   - BANK (Bank)
+	//
 	//   - COMMERCIAL_COMPANY (Commercial company)
+	//
 	//   - COMPANY (Company)
+	//
 	//   - COOPERATION (Cooperation)
+	//
 	//   - COOPERATIVE (Cooperative)
+	//
 	//   - COOPRIX (Cooprix)
+	//
 	//   - CORP (Corporation)
+	//
 	//   - CREDIT_UNION (Credit union)
+	//
 	//   - FOMIA (Federation of mutual insurance associations)
+	//
 	//   - INC (Incorporated)
+	//
 	//   - LTD (Limited)
+	//
 	//   - LTEE (Limitée)
+	//
 	//   - LLC (Limited liability corporation)
+	//
 	//   - LLP (Limited liability partnership)
+	//
 	//   - LTE (Lte.)
+	//
 	//   - MBA (Mutual benefit association)
+	//
 	//   - MIC (Mutual insurance company)
+	//
 	//   - NFP (Not-for-profit corporation)
+	//
 	//   - SA (S.A.)
+	//
 	//   - SAVINGS_COMPANY (Savings company)
+	//
 	//   - SAVINGS_UNION (Savings union)
+	//
 	//   - SARL (Société à responsabilité limitée)
+	//
 	//   - TRUST (Trust)
+	//
 	//   - ULC (Unlimited liability corporation)
-	//   - CA_LEGAL_TYPE When ContactType is PERSON , valid values include the
-	//   following:
+	//
+	//   - CA_LEGAL_TYPE
+	//
+	// When ContactType is PERSON , valid values include the following:
+	//
 	//   - ABO (Aboriginal Peoples indigenous to Canada)
+	//
 	//   - CCT (Canadian citizen)
+	//
 	//   - LGR (Legal Representative of a Canadian Citizen or Permanent Resident)
-	//   - RES (Permanent resident of Canada) When ContactType is a value other than
-	//   PERSON , valid values include the following:
+	//
+	//   - RES (Permanent resident of Canada)
+	//
+	// When ContactType is a value other than PERSON , valid values include the
+	//   following:
+	//
 	//   - ASS (Canadian unincorporated association)
+	//
 	//   - CCO (Canadian corporation)
+	//
 	//   - EDU (Canadian educational institution)
+	//
 	//   - GOV (Government or government entity in Canada)
+	//
 	//   - HOP (Canadian Hospital)
+	//
 	//   - INB (Indian Band recognized by the Indian Act of Canada)
+	//
 	//   - LAM (Canadian Library, Archive, or Museum)
+	//
 	//   - MAJ (Her/His Majesty the Queen/King)
+	//
 	//   - OMK (Official mark registered in Canada)
+	//
 	//   - PLT (Canadian Political Party)
+	//
 	//   - PRT (Partnership Registered in Canada)
+	//
 	//   - TDM (Trademark registered in Canada)
+	//
 	//   - TRD (Canadian Trade Union)
+	//
 	//   - TRS (Trust established in Canada)
+	//
 	// .es
-	//   - ES_IDENTIFICATION The value of ES_IDENTIFICATION depends on the following
-	//   values:
+	//   - ES_IDENTIFICATION
+	//
+	// The value of ES_IDENTIFICATION depends on the following values:
+	//
 	//   - The value of ES_LEGAL_FORM
-	//   - The value of ES_IDENTIFICATION_TYPE If ES_LEGAL_FORM is any value other than
-	//   INDIVIDUAL :
+	//
+	//   - The value of ES_IDENTIFICATION_TYPE
+	//
+	// If ES_LEGAL_FORM is any value other than INDIVIDUAL :
+	//
 	//   - Specify 1 letter + 8 numbers (CIF [Certificado de Identificación Fiscal])
-	//   - Example: B12345678 If ES_LEGAL_FORM is INDIVIDUAL , the value that you
-	//   specify for ES_IDENTIFICATION depends on the value of ES_IDENTIFICATION_TYPE :
+	//
+	//   - Example: B12345678
+	//
+	// If ES_LEGAL_FORM is INDIVIDUAL , the value that you specify for
+	//   ES_IDENTIFICATION depends on the value of ES_IDENTIFICATION_TYPE :
+	//
 	//   - If ES_IDENTIFICATION_TYPE is DNI_AND_NIF (for Spanish contacts):
+	//
 	//   - Specify 8 numbers + 1 letter (DNI [Documento Nacional de Identidad], NIF
 	//   [Número de Identificación Fiscal])
+	//
 	//   - Example: 12345678M
+	//
 	//   - If ES_IDENTIFICATION_TYPE is NIE (for foreigners with legal residence):
+	//
 	//   - Specify 1 letter + 7 numbers + 1 letter ( NIE [Número de Identidad de
 	//   Extranjero])
+	//
 	//   - Example: Y1234567X
+	//
 	//   - If ES_IDENTIFICATION_TYPE is OTHER (for contacts outside of Spain):
+	//
 	//   - Specify a passport number, drivers license number, or national identity
 	//   card number
-	//   - ES_IDENTIFICATION_TYPE Valid values include the following:
+	//
+	//   - ES_IDENTIFICATION_TYPE
+	//
+	// Valid values include the following:
+	//
 	//   - DNI_AND_NIF (For Spanish contacts)
+	//
 	//   - NIE (For foreigners with legal residence)
+	//
 	//   - OTHER (For contacts outside of Spain)
-	//   - ES_LEGAL_FORM Valid values include the following:
+	//
+	//   - ES_LEGAL_FORM
+	//
+	// Valid values include the following:
+	//
 	//   - ASSOCIATION
+	//
 	//   - CENTRAL_GOVERNMENT_BODY
+	//
 	//   - CIVIL_SOCIETY
+	//
 	//   - COMMUNITY_OF_OWNERS
+	//
 	//   - COMMUNITY_PROPERTY
+	//
 	//   - CONSULATE
+	//
 	//   - COOPERATIVE
+	//
 	//   - DESIGNATION_OF_ORIGIN_SUPERVISORY_COUNCIL
+	//
 	//   - ECONOMIC_INTEREST_GROUP
+	//
 	//   - EMBASSY
+	//
 	//   - ENTITY_MANAGING_NATURAL_AREAS
+	//
 	//   - FARM_PARTNERSHIP
+	//
 	//   - FOUNDATION
+	//
 	//   - GENERAL_AND_LIMITED_PARTNERSHIP
+	//
 	//   - GENERAL_PARTNERSHIP
+	//
 	//   - INDIVIDUAL
+	//
 	//   - LIMITED_COMPANY
+	//
 	//   - LOCAL_AUTHORITY
+	//
 	//   - LOCAL_PUBLIC_ENTITY
+	//
 	//   - MUTUAL_INSURANCE_COMPANY
+	//
 	//   - NATIONAL_PUBLIC_ENTITY
+	//
 	//   - ORDER_OR_RELIGIOUS_INSTITUTION
+	//
 	//   - OTHERS (Only for contacts outside of Spain)
+	//
 	//   - POLITICAL_PARTY
+	//
 	//   - PROFESSIONAL_ASSOCIATION
+	//
 	//   - PUBLIC_LAW_ASSOCIATION
+	//
 	//   - PUBLIC_LIMITED_COMPANY
+	//
 	//   - REGIONAL_GOVERNMENT_BODY
+	//
 	//   - REGIONAL_PUBLIC_ENTITY
+	//
 	//   - SAVINGS_BANK
+	//
 	//   - SPANISH_OFFICE
+	//
 	//   - SPORTS_ASSOCIATION
+	//
 	//   - SPORTS_FEDERATION
+	//
 	//   - SPORTS_LIMITED_COMPANY
+	//
 	//   - TEMPORARY_ALLIANCE_OF_ENTERPRISES
+	//
 	//   - TRADE_UNION
+	//
 	//   - WORKER_OWNED_COMPANY
+	//
 	//   - WORKER_OWNED_LIMITED_COMPANY
+	//
 	// .eu
 	//   - EU_COUNTRY_OF_CITIZENSHIP
+	//
 	// .fi
 	//   - BIRTH_DATE_IN_YYYY_MM_DD
+	//
 	//   - FI_BUSINESS_NUMBER
+	//
 	//   - FI_ID_NUMBER
-	//   - FI_NATIONALITY Valid values include the following:
+	//
+	//   - FI_NATIONALITY
+	//
+	// Valid values include the following:
+	//
 	//   - FINNISH
+	//
 	//   - NOT_FINNISH
-	//   - FI_ORGANIZATION_TYPE Valid values include the following:
+	//
+	//   - FI_ORGANIZATION_TYPE
+	//
+	// Valid values include the following:
+	//
 	//   - COMPANY
+	//
 	//   - CORPORATION
+	//
 	//   - GOVERNMENT
+	//
 	//   - INSTITUTION
+	//
 	//   - POLITICAL_PARTY
+	//
 	//   - PUBLIC_COMMUNITY
+	//
 	//   - TOWNSHIP
+	//
 	// .it
 	//   - IT_NATIONALITY
+	//
 	//   - IT_PIN
-	//   - IT_REGISTRANT_ENTITY_TYPE Valid values include the following:
+	//
+	//   - IT_REGISTRANT_ENTITY_TYPE
+	//
+	// Valid values include the following:
+	//
 	//   - FOREIGNERS
+	//
 	//   - FREELANCE_WORKERS (Freelance workers and professionals)
+	//
 	//   - ITALIAN_COMPANIES (Italian companies and one-person companies)
+	//
 	//   - NON_PROFIT_ORGANIZATIONS
+	//
 	//   - OTHER_SUBJECTS
+	//
 	//   - PUBLIC_ORGANIZATIONS
+	//
 	// .ru
 	//   - BIRTH_DATE_IN_YYYY_MM_DD
+	//
 	//   - RU_PASSPORT_DATA
+	//
 	// .se
 	//   - BIRTH_COUNTRY
+	//
 	//   - SE_ID_NUMBER
+	//
 	// .sg
 	//   - SG_ID_NUMBER
+	//
 	// .uk, .co.uk, .me.uk, and .org.uk
-	//   - UK_CONTACT_TYPE Valid values include the following:
+	//   - UK_CONTACT_TYPE
+	//
+	// Valid values include the following:
+	//
 	//   - CRC (UK Corporation by Royal Charter)
+	//
 	//   - FCORP (Non-UK Corporation)
+	//
 	//   - FIND (Non-UK Individual, representing self)
+	//
 	//   - FOTHER (Non-UK Entity that does not fit into any other category)
+	//
 	//   - GOV (UK Government Body)
+	//
 	//   - IND (UK Individual (representing self))
+	//
 	//   - IP (UK Industrial/Provident Registered Company)
+	//
 	//   - LLP (UK Limited Liability Partnership)
+	//
 	//   - LTD (UK Limited Company)
+	//
 	//   - OTHER (UK Entity that does not fit into any other category)
+	//
 	//   - PLC (UK Public Limited Company)
+	//
 	//   - PTNR (UK Partnership)
+	//
 	//   - RCHAR (UK Registered Charity)
+	//
 	//   - SCH (UK School)
+	//
 	//   - STAT (UK Statutory Body)
+	//
 	//   - STRA (UK Sole Trader)
+	//
 	//   - UK_COMPANY_NUMBER
+	//
 	// In addition, many TLDs require a VAT_NUMBER .
 	//
 	// This member is required.
@@ -448,8 +678,9 @@ type ExtraParam struct {
 	noSmithyDocumentSerde
 }
 
-// Information for the filtering of a list of domains returned by ListDomains (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains__ListDomains.html)
-// .
+// Information for the filtering of a list of domains returned by [ListDomains].
+//
+// [ListDomains]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains__ListDomains.html
 type FilterCondition struct {
 
 	// Name of the field which should be used for filtering the list of domains.
@@ -458,14 +689,17 @@ type FilterCondition struct {
 	Name ListDomainsAttributeName
 
 	// The operator values for filtering domain names. The values can be:
+	//
 	//   - LE : Less than, or equal to
+	//
 	//   - GE : Greater than, or equal to
+	//
 	//   - BEGINS_WITH : Begins with
 	//
 	// This member is required.
 	Operator Operator
 
-	// An array of strings presenting values to compare. Only 1 item in the list is
+	//  An array of strings presenting values to compare. Only 1 item in the list is
 	// currently supported.
 	//
 	// This member is required.
@@ -477,8 +711,9 @@ type FilterCondition struct {
 // Name server includes the following elements.
 type Nameserver struct {
 
-	// The fully qualified host name of the name server. Constraint: Maximum 255
-	// characters
+	// The fully qualified host name of the name server.
+	//
+	// Constraint: Maximum 255 characters
 	//
 	// This member is required.
 	Name *string
@@ -486,8 +721,9 @@ type Nameserver struct {
 	// Glue IP address of a name server entry. Glue IP addresses are required only
 	// when the name of the name server is a subdomain of the domain. For example, if
 	// your domain is example.com and the name server for the domain is ns.example.com,
-	// you need to specify the IP address for ns.example.com. Constraints: The list can
-	// contain only one IPv4 and one IPv6 address.
+	// you need to specify the IP address for ns.example.com.
+	//
+	// Constraints: The list can contain only one IPv4 and one IPv6 address.
 	GlueIps []string
 
 	noSmithyDocumentSerde
@@ -496,14 +732,14 @@ type Nameserver struct {
 // OperationSummary includes the following elements.
 type OperationSummary struct {
 
-	// Name of the domain.
+	//  Name of the domain.
 	DomainName *string
 
-	// The date when the last change was made in Unix time format and Coordinated
+	//  The date when the last change was made in Unix time format and Coordinated
 	// Universal Time (UTC).
 	LastUpdatedDate *time.Time
 
-	// Message about the operation.
+	//  Message about the operation.
 	Message *string
 
 	// Identifier returned to track the requested action.
@@ -512,19 +748,27 @@ type OperationSummary struct {
 	// The current status of the requested operation in the system.
 	Status OperationStatus
 
-	// Automatically checks whether there are no outstanding operations on domains
-	// that need customer attention. Valid values are:
+	//  Automatically checks whether there are no outstanding operations on domains
+	// that need customer attention.
+	//
+	// Valid values are:
+	//
 	//   - PENDING_ACCEPTANCE : The operation is waiting for acceptance from the
 	//   account that is receiving the domain.
+	//
 	//   - PENDING_CUSTOMER_ACTION : The operation is waiting for customer action, for
 	//   example, returning an email.
+	//
 	//   - PENDING_AUTHORIZATION : The operation is waiting for the form of
-	//   authorization. For more information, see ResendOperationAuthorization (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ResendOperationAuthorization.html)
-	//   .
+	//   authorization. For more information, see [ResendOperationAuthorization].
+	//
 	//   - PENDING_PAYMENT_VERIFICATION : The operation is waiting for the payment
 	//   method to validate.
+	//
 	//   - PENDING_SUPPORT_CASE : The operation includes a support case and is waiting
 	//   for its resolution.
+	//
+	// [ResendOperationAuthorization]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ResendOperationAuthorization.html
 	StatusFlag StatusFlag
 
 	// The date when the request was submitted.
@@ -556,10 +800,11 @@ type PriceWithCurrency struct {
 type SortCondition struct {
 
 	// Field to be used for sorting the list of domains. It can be either the name or
-	// the expiration for a domain. Note that if filterCondition is used in the same
-	// ListDomains (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains__ListDomains.html)
+	// the expiration for a domain. Note that if filterCondition is used in the same [ListDomains]
 	// call, the field used for sorting has to be the same as the field used for
 	// filtering.
+	//
+	// [ListDomains]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains__ListDomains.html
 	//
 	// This member is required.
 	Name ListDomainsAttributeName
@@ -576,12 +821,18 @@ type SortCondition struct {
 // Each tag includes the following elements.
 type Tag struct {
 
-	// The key (name) of a tag. Valid values: A-Z, a-z, 0-9, space, ".:/=+\-@"
+	// The key (name) of a tag.
+	//
+	// Valid values: A-Z, a-z, 0-9, space, ".:/=+\-@"
+	//
 	// Constraints: Each key can be 1-128 characters long.
 	Key *string
 
-	// The value of a tag. Valid values: A-Z, a-z, 0-9, space, ".:/=+\-@" Constraints:
-	// Each value can be 0-256 characters long.
+	// The value of a tag.
+	//
+	// Valid values: A-Z, a-z, 0-9, space, ".:/=+\-@"
+	//
+	// Constraints: Each value can be 0-256 characters long.
 	Value *string
 
 	noSmithyDocumentSerde

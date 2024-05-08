@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Selenium testing project. Projects are used to track TestGridSession
-// instances.
+// Creates a Selenium testing project. Projects are used to track TestGridSession instances.
 func (c *Client) CreateTestGridProject(ctx context.Context, params *CreateTestGridProjectInput, optFns ...func(*Options)) (*CreateTestGridProjectOutput, error) {
 	if params == nil {
 		params = &CreateTestGridProjectInput{}

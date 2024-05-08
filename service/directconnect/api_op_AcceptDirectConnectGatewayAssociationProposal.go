@@ -46,9 +46,12 @@ type AcceptDirectConnectGatewayAssociationProposalInput struct {
 	// This member is required.
 	ProposalId *string
 
-	// Overrides the Amazon VPC prefixes advertised to the Direct Connect gateway. For
-	// information about how to set the prefixes, see Allowed Prefixes (https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes)
-	// in the Direct Connect User Guide.
+	// Overrides the Amazon VPC prefixes advertised to the Direct Connect gateway.
+	//
+	// For information about how to set the prefixes, see [Allowed Prefixes] in the Direct Connect User
+	// Guide.
+	//
+	// [Allowed Prefixes]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes
 	OverrideAllowedPrefixesToDirectConnectGateway []types.RouteFilterPrefix
 
 	noSmithyDocumentSerde

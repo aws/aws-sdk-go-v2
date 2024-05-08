@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the resource policy attached to the specified domain. The policy is a
-// resource-based policy, not an identity-based policy. For more information, see
-// Identity-based policies and resource-based policies  (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html)
-// in the IAM User Guide.
+//	Returns the resource policy attached to the specified domain.
+//
+// The policy is a resource-based policy, not an identity-based policy. For more
+// information, see [Identity-based policies and resource-based policies]in the IAM User Guide.
+//
+// [Identity-based policies and resource-based policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html
 func (c *Client) GetDomainPermissionsPolicy(ctx context.Context, params *GetDomainPermissionsPolicyInput, optFns ...func(*Options)) (*GetDomainPermissionsPolicyOutput, error) {
 	if params == nil {
 		params = &GetDomainPermissionsPolicyInput{}
@@ -32,12 +34,12 @@ func (c *Client) GetDomainPermissionsPolicy(ctx context.Context, params *GetDoma
 
 type GetDomainPermissionsPolicyInput struct {
 
-	// The name of the domain to which the resource policy is attached.
+	//  The name of the domain to which the resource policy is attached.
 	//
 	// This member is required.
 	Domain *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
@@ -46,7 +48,7 @@ type GetDomainPermissionsPolicyInput struct {
 
 type GetDomainPermissionsPolicyOutput struct {
 
-	// The returned resource policy.
+	//  The returned resource policy.
 	Policy *types.ResourcePolicy
 
 	// Metadata pertaining to the operation's result.

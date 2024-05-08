@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a mission profile. Updating a mission profile will not update the
-// execution parameters for existing future contacts.
+// Updates a mission profile.
+//
+// Updating a mission profile will not update the execution parameters for
+// existing future contacts.
 func (c *Client) UpdateMissionProfile(ctx context.Context, params *UpdateMissionProfileInput, optFns ...func(*Options)) (*UpdateMissionProfileOutput, error) {
 	if params == nil {
 		params = &UpdateMissionProfileInput{}

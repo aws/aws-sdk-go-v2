@@ -37,8 +37,10 @@ type BatchDisassociateApprovalRuleTemplateFromRepositoriesInput struct {
 	ApprovalRuleTemplateName *string
 
 	// The repository names that you want to disassociate from the approval rule
-	// template. The length constraint limit is for each string in the array. The array
-	// itself can be empty.
+	// template.
+	//
+	// The length constraint limit is for each string in the array. The array itself
+	// can be empty.
 	//
 	// This member is required.
 	RepositoryNames []string

@@ -12,9 +12,11 @@ import (
 	"time"
 )
 
-// Describes event configurations. Requires permission to access the
-// DescribeEventConfigurations (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Describes event configurations.
+//
+// Requires permission to access the [DescribeEventConfigurations] action.
+//
+// [DescribeEventConfigurations]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DescribeEventConfigurations(ctx context.Context, params *DescribeEventConfigurationsInput, optFns ...func(*Options)) (*DescribeEventConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeEventConfigurationsInput{}

@@ -40,7 +40,7 @@ type GetProfileResourceAssociationInput struct {
 
 type GetProfileResourceAssociationOutput struct {
 
-	// Information about the Profile resource association that you specified in a
+	//  Information about the Profile resource association that you specified in a
 	// GetProfileResourceAssociation request.
 	ProfileResourceAssociation *types.ProfileResourceAssociation
 

@@ -11,11 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Publishes an MQTT message. Requires permission to access the Publish (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action. For more information about MQTT messages, see MQTT Protocol (http://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html)
-// in the IoT Developer Guide. For more information about messaging costs, see
-// Amazon Web Services IoT Core pricing - Messaging (http://aws.amazon.com/iot-core/pricing/#Messaging)
-// .
+// Publishes an MQTT message.
+//
+// Requires permission to access the [Publish] action.
+//
+// For more information about MQTT messages, see [MQTT Protocol] in the IoT Developer Guide.
+//
+// For more information about messaging costs, see [Amazon Web Services IoT Core pricing - Messaging].
+//
+// [MQTT Protocol]: http://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html
+// [Amazon Web Services IoT Core pricing - Messaging]: http://aws.amazon.com/iot-core/pricing/#Messaging
+// [Publish]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) Publish(ctx context.Context, params *PublishInput, optFns ...func(*Options)) (*PublishOutput, error) {
 	if params == nil {
 		params = &PublishInput{}
@@ -49,12 +55,13 @@ type PublishInput struct {
 
 	// A user-defined integer value that represents the message expiry interval in
 	// seconds. If absent, the message doesn't expire. For more information about the
-	// limits of messageExpiry , see Amazon Web Services IoT Core message broker and
-	// protocol limits and quotas  (https://docs.aws.amazon.com/general/latest/gr/iot-core.html#message-broker-limits)
-	// from the Amazon Web Services Reference Guide.
+	// limits of messageExpiry , see [Amazon Web Services IoT Core message broker and protocol limits and quotas] from the Amazon Web Services Reference Guide.
+	//
+	// [Amazon Web Services IoT Core message broker and protocol limits and quotas]: https://docs.aws.amazon.com/general/latest/gr/iot-core.html#message-broker-limits
 	MessageExpiry int64
 
 	// The message body. MQTT accepts text, binary, and empty (null) message payloads.
+	//
 	// Publishing an empty (null) payload with retain = true deletes the retained
 	// message identified by topic from Amazon Web Services IoT Core.
 	Payload []byte
@@ -73,16 +80,24 @@ type PublishInput struct {
 	ResponseTopic *string
 
 	// A Boolean value that determines whether to set the RETAIN flag when the message
-	// is published. Setting the RETAIN flag causes the message to be retained and sent
-	// to new subscribers to the topic. Valid values: true | false Default value: false
+	// is published.
+	//
+	// Setting the RETAIN flag causes the message to be retained and sent to new
+	// subscribers to the topic.
+	//
+	// Valid values: true | false
+	//
+	// Default value: false
 	Retain bool
 
 	// A JSON string that contains an array of JSON objects. If you don’t use Amazon
 	// Web Services SDK or CLI, you must encode the JSON string to base64 format before
-	// adding it to the HTTP header. userProperties is an HTTP header value in the
-	// API. The following example userProperties parameter is a JSON string which
+	// adding it to the HTTP header. userProperties is an HTTP header value in the API.
+	//
+	// The following example userProperties parameter is a JSON string which
 	// represents two User Properties. Note that it needs to be base64-encoded:
-	// [{"deviceName": "alpha"}, {"deviceCnt": "45"}]
+	//
+	//     [{"deviceName": "alpha"}, {"deviceCnt": "45"}]
 	//
 	// This value conforms to the media type: application/json
 	UserProperties *string

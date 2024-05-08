@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates an identity provider configuration from a cluster. If you
-// disassociate an identity provider from your cluster, users included in the
-// provider can no longer access the cluster. However, you can still access the
+// Disassociates an identity provider configuration from a cluster.
+//
+// If you disassociate an identity provider from your cluster, users included in
+// the provider can no longer access the cluster. However, you can still access the
 // cluster with IAM principals.
 func (c *Client) DisassociateIdentityProviderConfig(ctx context.Context, params *DisassociateIdentityProviderConfigInput, optFns ...func(*Options)) (*DisassociateIdentityProviderConfigOutput, error) {
 	if params == nil {

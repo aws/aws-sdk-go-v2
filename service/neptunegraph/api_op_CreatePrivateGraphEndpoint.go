@@ -13,8 +13,9 @@ import (
 )
 
 // Create a private graph endpoint to allow private access from to the graph from
-// within a VPC. You can attach security groups to the private graph endpoint. VPC
-// endpoint charges apply.
+// within a VPC. You can attach security groups to the private graph endpoint.
+//
+// VPC endpoint charges apply.
 func (c *Client) CreatePrivateGraphEndpoint(ctx context.Context, params *CreatePrivateGraphEndpointInput, optFns ...func(*Options)) (*CreatePrivateGraphEndpointOutput, error) {
 	if params == nil {
 		params = &CreatePrivateGraphEndpointInput{}
@@ -40,7 +41,7 @@ type CreatePrivateGraphEndpointInput struct {
 	// Subnets in which private graph endpoint ENIs are created.
 	SubnetIds []string
 
-	// The VPC in which the private graph endpoint needs to be created.
+	//  The VPC in which the private graph endpoint needs to be created.
 	VpcId *string
 
 	// Security groups to be attached to the private graph endpoint..

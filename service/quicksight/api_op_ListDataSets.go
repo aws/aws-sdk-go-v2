@@ -12,8 +12,9 @@ import (
 )
 
 // Lists all of the datasets belonging to the current Amazon Web Services account
-// in an Amazon Web Services Region. The permissions resource is
-// arn:aws:quicksight:region:aws-account-id:dataset/* .
+// in an Amazon Web Services Region.
+//
+// The permissions resource is arn:aws:quicksight:region:aws-account-id:dataset/* .
 func (c *Client) ListDataSets(ctx context.Context, params *ListDataSetsInput, optFns ...func(*Options)) (*ListDataSetsOutput, error) {
 	if params == nil {
 		params = &ListDataSetsInput{}

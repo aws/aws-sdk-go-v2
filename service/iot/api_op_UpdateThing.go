@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the data for a thing. Requires permission to access the UpdateThing (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Updates the data for a thing.
+//
+// Requires permission to access the [UpdateThing] action.
+//
+// [UpdateThing]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdateThing(ctx context.Context, params *UpdateThingInput, optFns ...func(*Options)) (*UpdateThingOutput, error) {
 	if params == nil {
 		params = &UpdateThingInput{}
@@ -31,16 +34,20 @@ func (c *Client) UpdateThing(ctx context.Context, params *UpdateThingInput, optF
 // The input for the UpdateThing operation.
 type UpdateThingInput struct {
 
-	// The name of the thing to update. You can't change a thing's name. To change a
-	// thing's name, you must create a new thing, give it the new name, and then delete
-	// the old thing.
+	// The name of the thing to update.
+	//
+	// You can't change a thing's name. To change a thing's name, you must create a
+	// new thing, give it the new name, and then delete the old thing.
 	//
 	// This member is required.
 	ThingName *string
 
 	// A list of thing attributes, a JSON string containing name-value pairs. For
-	// example: {\"attributes\":{\"name1\":\"value2\"}} This data is used to add new
-	// attributes or update existing attributes.
+	// example:
+	//
+	//     {\"attributes\":{\"name1\":\"value2\"}}
+	//
+	// This data is used to add new attributes or update existing attributes.
 	AttributePayload *types.AttributePayload
 
 	// The expected version of the thing record in the registry. If the version of the

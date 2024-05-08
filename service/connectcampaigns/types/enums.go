@@ -19,8 +19,9 @@ const (
 )
 
 // Values returns all known values for CampaignState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CampaignState) Values() []CampaignState {
 	return []CampaignState{
 		"Initialized",
@@ -39,8 +40,9 @@ const (
 )
 
 // Values returns all known values for EncryptionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncryptionType) Values() []EncryptionType {
 	return []EncryptionType{
 		"KMS",
@@ -60,8 +62,9 @@ const (
 )
 
 // Values returns all known values for FailureCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FailureCode) Values() []FailureCode {
 	return []FailureCode{
 		"InvalidInput",
@@ -82,8 +85,9 @@ const (
 
 // Values returns all known values for GetCampaignStateBatchFailureCode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GetCampaignStateBatchFailureCode) Values() []GetCampaignStateBatchFailureCode {
 	return []GetCampaignStateBatchFailureCode{
 		"ResourceNotFound",
@@ -101,6 +105,7 @@ const (
 
 // Values returns all known values for InstanceIdFilterOperator. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceIdFilterOperator) Values() []InstanceIdFilterOperator {
 	return []InstanceIdFilterOperator{
@@ -122,8 +127,9 @@ const (
 
 // Values returns all known values for InstanceOnboardingJobFailureCode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceOnboardingJobFailureCode) Values() []InstanceOnboardingJobFailureCode {
 	return []InstanceOnboardingJobFailureCode{
 		"EVENT_BRIDGE_ACCESS_DENIED",
@@ -146,8 +152,9 @@ const (
 
 // Values returns all known values for InstanceOnboardingJobStatusCode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceOnboardingJobStatusCode) Values() []InstanceOnboardingJobStatusCode {
 	return []InstanceOnboardingJobStatusCode{
 		"IN_PROGRESS",

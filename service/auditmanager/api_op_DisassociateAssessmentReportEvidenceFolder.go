@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates an evidence folder from the specified assessment report in Audit
+//	Disassociates an evidence folder from the specified assessment report in Audit
+//
 // Manager.
 func (c *Client) DisassociateAssessmentReportEvidenceFolder(ctx context.Context, params *DisassociateAssessmentReportEvidenceFolderInput, optFns ...func(*Options)) (*DisassociateAssessmentReportEvidenceFolderOutput, error) {
 	if params == nil {
@@ -29,12 +30,12 @@ func (c *Client) DisassociateAssessmentReportEvidenceFolder(ctx context.Context,
 
 type DisassociateAssessmentReportEvidenceFolderInput struct {
 
-	// The unique identifier for the assessment.
+	//  The unique identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The unique identifier for the folder that the evidence is stored in.
+	//  The unique identifier for the folder that the evidence is stored in.
 	//
 	// This member is required.
 	EvidenceFolderId *string

@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Used to convert a dedicated IP pool to a different scaling mode. MANAGED pools
-// cannot be converted to STANDARD scaling mode.
+// Used to convert a dedicated IP pool to a different scaling mode.
+//
+// MANAGED pools cannot be converted to STANDARD scaling mode.
 func (c *Client) PutDedicatedIpPoolScalingAttributes(ctx context.Context, params *PutDedicatedIpPoolScalingAttributesInput, optFns ...func(*Options)) (*PutDedicatedIpPoolScalingAttributesOutput, error) {
 	if params == nil {
 		params = &PutDedicatedIpPoolScalingAttributesInput{}
@@ -36,8 +37,9 @@ type PutDedicatedIpPoolScalingAttributesInput struct {
 	// This member is required.
 	PoolName *string
 
-	// The scaling mode to apply to the dedicated IP pool. Changing the scaling mode
-	// from MANAGED to STANDARD is not supported.
+	// The scaling mode to apply to the dedicated IP pool.
+	//
+	// Changing the scaling mode from MANAGED to STANDARD is not supported.
 	//
 	// This member is required.
 	ScalingMode types.ScalingMode

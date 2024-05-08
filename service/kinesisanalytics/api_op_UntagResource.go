@@ -11,8 +11,9 @@ import (
 )
 
 // Removes one or more tags from a Kinesis Analytics application. For more
-// information, see Using Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html)
-// .
+// information, see [Using Tagging].
+//
+// [Using Tagging]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

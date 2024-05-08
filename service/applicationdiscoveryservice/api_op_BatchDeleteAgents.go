@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes one or more agents or collectors as specified by ID. Deleting an agent
+//	Deletes one or more agents or collectors as specified by ID. Deleting an agent
+//
 // or collector does not delete the previously discovered data. To delete the data
 // collected, use StartBatchDeleteConfigurationTask .
 func (c *Client) BatchDeleteAgents(ctx context.Context, params *BatchDeleteAgentsInput, optFns ...func(*Options)) (*BatchDeleteAgentsOutput, error) {
@@ -31,7 +32,7 @@ func (c *Client) BatchDeleteAgents(ctx context.Context, params *BatchDeleteAgent
 
 type BatchDeleteAgentsInput struct {
 
-	// The list of agents to delete.
+	//  The list of agents to delete.
 	//
 	// This member is required.
 	DeleteAgents []types.DeleteAgent
@@ -41,8 +42,8 @@ type BatchDeleteAgentsInput struct {
 
 type BatchDeleteAgentsOutput struct {
 
-	// A list of agent IDs that failed to delete during the deletion task, each paired
-	// with an error message.
+	//  A list of agent IDs that failed to delete during the deletion task, each
+	// paired with an error message.
 	Errors []types.BatchDeleteAgentError
 
 	// Metadata pertaining to the operation's result.

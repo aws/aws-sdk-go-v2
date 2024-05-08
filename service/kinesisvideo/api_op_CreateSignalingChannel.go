@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a signaling channel. CreateSignalingChannel is an asynchronous
-// operation.
+// Creates a signaling channel.
+//
+// CreateSignalingChannel is an asynchronous operation.
 func (c *Client) CreateSignalingChannel(ctx context.Context, params *CreateSignalingChannelInput, optFns ...func(*Options)) (*CreateSignalingChannelOutput, error) {
 	if params == nil {
 		params = &CreateSignalingChannelInput{}

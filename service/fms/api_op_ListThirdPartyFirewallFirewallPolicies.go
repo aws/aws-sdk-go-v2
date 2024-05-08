@@ -48,10 +48,11 @@ type ListThirdPartyFirewallFirewallPoliciesInput struct {
 	// If the previous response included a NextToken element, the specified
 	// third-party firewall vendor is associated with more third-party firewall
 	// policies. To get more third-party firewall policies, submit another
-	// ListThirdPartyFirewallFirewallPoliciesRequest request. For the value of
-	// NextToken , specify the value of NextToken from the previous response. If the
-	// previous response didn't include a NextToken element, there are no more
-	// third-party firewall policies to get.
+	// ListThirdPartyFirewallFirewallPoliciesRequest request.
+	//
+	// For the value of NextToken , specify the value of NextToken from the previous
+	// response. If the previous response didn't include a NextToken element, there
+	// are no more third-party firewall policies to get.
 	NextToken *string
 
 	noSmithyDocumentSerde

@@ -14,7 +14,7 @@ import (
 
 // Scans a provided CycloneDX 1.5 SBOM and reports on any vulnerabilities
 // discovered in that SBOM. You can generate compatible SBOMs for your resources
-// using the Amazon Inspector SBOM generator .
+// using the Amazon Inspector SBOM generator.
 func (c *Client) ScanSbom(ctx context.Context, params *ScanSbomInput, optFns ...func(*Options)) (*ScanSbomOutput, error) {
 	if params == nil {
 		params = &ScanSbomInput{}

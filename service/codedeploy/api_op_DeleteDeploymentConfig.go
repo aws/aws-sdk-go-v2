@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a deployment configuration. A deployment configuration cannot be
-// deleted if it is currently in use. Predefined configurations cannot be deleted.
+// Deletes a deployment configuration.
+//
+// A deployment configuration cannot be deleted if it is currently in use.
+// Predefined configurations cannot be deleted.
 func (c *Client) DeleteDeploymentConfig(ctx context.Context, params *DeleteDeploymentConfigInput, optFns ...func(*Options)) (*DeleteDeploymentConfigOutput, error) {
 	if params == nil {
 		params = &DeleteDeploymentConfigInput{}

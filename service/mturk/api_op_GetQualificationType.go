@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The GetQualificationType operation retrieves information about a Qualification
+//	The GetQualificationType operation retrieves information about a Qualification
+//
 // type using its ID.
 func (c *Client) GetQualificationType(ctx context.Context, params *GetQualificationTypeInput, optFns ...func(*Options)) (*GetQualificationTypeOutput, error) {
 	if params == nil {
@@ -40,7 +41,7 @@ type GetQualificationTypeInput struct {
 
 type GetQualificationTypeOutput struct {
 
-	// The returned Qualification Type
+	//  The returned Qualification Type
 	QualificationType *types.QualificationType
 
 	// Metadata pertaining to the operation's result.

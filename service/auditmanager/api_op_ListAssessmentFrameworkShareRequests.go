@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of sent or received share requests for custom frameworks in
+//	Returns a list of sent or received share requests for custom frameworks in
+//
 // Audit Manager.
 func (c *Client) ListAssessmentFrameworkShareRequests(ctx context.Context, params *ListAssessmentFrameworkShareRequestsInput, optFns ...func(*Options)) (*ListAssessmentFrameworkShareRequestsOutput, error) {
 	if params == nil {
@@ -30,15 +31,15 @@ func (c *Client) ListAssessmentFrameworkShareRequests(ctx context.Context, param
 
 type ListAssessmentFrameworkShareRequestsInput struct {
 
-	// Specifies whether the share request is a sent request or a received request.
+	//  Specifies whether the share request is a sent request or a received request.
 	//
 	// This member is required.
 	RequestType types.ShareRequestType
 
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	MaxResults *int32
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,11 +47,11 @@ type ListAssessmentFrameworkShareRequestsInput struct {
 
 type ListAssessmentFrameworkShareRequestsOutput struct {
 
-	// The list of share requests that the ListAssessmentFrameworkShareRequests API
+	//  The list of share requests that the ListAssessmentFrameworkShareRequests API
 	// returned.
 	AssessmentFrameworkShareRequests []types.AssessmentFrameworkShareRequest
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -149,7 +150,7 @@ var _ ListAssessmentFrameworkShareRequestsAPIClient = (*Client)(nil)
 // ListAssessmentFrameworkShareRequestsPaginatorOptions is the paginator options
 // for ListAssessmentFrameworkShareRequests
 type ListAssessmentFrameworkShareRequestsPaginatorOptions struct {
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

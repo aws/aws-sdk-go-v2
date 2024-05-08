@@ -28,9 +28,8 @@ func (c *Client) AuthorizeVpcEndpointAccess(ctx context.Context, params *Authori
 	return out, nil
 }
 
-// Container for request parameters to the AuthorizeVpcEndpointAccess operation.
-// Specifies the account to be permitted to manage VPC endpoints against the
-// domain.
+// Container for request parameters to the AuthorizeVpcEndpointAccess operation. Specifies the account to be
+// permitted to manage VPC endpoints against the domain.
 type AuthorizeVpcEndpointAccessInput struct {
 
 	// The account ID to grant access to.
@@ -46,9 +45,8 @@ type AuthorizeVpcEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response parameters to the AuthorizeVpcEndpointAccess operation.
-// Contains the account ID and the type of the account being authorized to access
-// the VPC endpoint.
+// Container for response parameters to the AuthorizeVpcEndpointAccess operation. Contains the account ID
+// and the type of the account being authorized to access the VPC endpoint.
 type AuthorizeVpcEndpointAccessOutput struct {
 
 	// Information about the account or service that was provided access to the domain.

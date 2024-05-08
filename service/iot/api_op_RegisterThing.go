@@ -11,12 +11,14 @@ import (
 )
 
 // Provisions a thing in the device registry. RegisterThing calls other IoT
-// control plane APIs. These calls might exceed your account level IoT Throttling
-// Limits (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_iot)
-// and cause throttle errors. Please contact Amazon Web Services Customer Support (https://console.aws.amazon.com/support/home)
-// to raise your throttling limits if necessary. Requires permission to access the
-// RegisterThing (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// control plane APIs. These calls might exceed your account level [IoT Throttling Limits]and cause
+// throttle errors. Please contact [Amazon Web Services Customer Support]to raise your throttling limits if necessary.
+//
+// Requires permission to access the [RegisterThing] action.
+//
+// [IoT Throttling Limits]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_iot
+// [RegisterThing]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+// [Amazon Web Services Customer Support]: https://console.aws.amazon.com/support/home
 func (c *Client) RegisterThing(ctx context.Context, params *RegisterThingInput, optFns ...func(*Options)) (*RegisterThingOutput, error) {
 	if params == nil {
 		params = &RegisterThingInput{}
@@ -34,15 +36,16 @@ func (c *Client) RegisterThing(ctx context.Context, params *RegisterThingInput, 
 
 type RegisterThingInput struct {
 
-	// The provisioning template. See Provisioning Devices That Have Device
-	// Certificates (https://docs.aws.amazon.com/iot/latest/developerguide/provision-w-cert.html)
-	// for more information.
+	// The provisioning template. See [Provisioning Devices That Have Device Certificates] for more information.
+	//
+	// [Provisioning Devices That Have Device Certificates]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-w-cert.html
 	//
 	// This member is required.
 	TemplateBody *string
 
-	// The parameters for provisioning a thing. See Provisioning Templates (https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html)
-	// for more information.
+	// The parameters for provisioning a thing. See [Provisioning Templates] for more information.
+	//
+	// [Provisioning Templates]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html
 	Parameters map[string]string
 
 	noSmithyDocumentSerde

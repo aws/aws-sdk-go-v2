@@ -56,13 +56,14 @@ type UpdateClusterInput struct {
 	// Snow Family device clusters support Amazon S3 and NFS (Network File System).
 	OnDeviceServiceConfiguration *types.OnDeviceServiceConfiguration
 
-	// The updated arrays of JobResource objects that can include updated S3Resource
-	// objects or LambdaResource objects.
+	// The updated arrays of JobResource objects that can include updated S3Resource objects or LambdaResource objects.
 	Resources *types.JobResource
 
 	// The new role Amazon Resource Name (ARN) that you want to associate with this
-	// cluster. To create a role ARN, use the CreateRole (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
-	// API action in Identity and Access Management (IAM).
+	// cluster. To create a role ARN, use the [CreateRole]API action in Identity and Access
+	// Management (IAM).
+	//
+	// [CreateRole]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
 	RoleARN *string
 
 	// The updated shipping option value of this cluster's ShippingDetails object.

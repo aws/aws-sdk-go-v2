@@ -12,8 +12,10 @@ import (
 )
 
 // Lists details for a network operation, including when the operation started and
-// the status of the operation. A network operation is any operation that is done
-// to your network, such as network instance instantiation or termination.
+// the status of the operation.
+//
+// A network operation is any operation that is done to your network, such as
+// network instance instantiation or termination.
 func (c *Client) ListSolNetworkOperations(ctx context.Context, params *ListSolNetworkOperationsInput, optFns ...func(*Options)) (*ListSolNetworkOperationsOutput, error) {
 	if params == nil {
 		params = &ListSolNetworkOperationsInput{}

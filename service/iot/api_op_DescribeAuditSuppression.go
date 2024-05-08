@@ -54,16 +54,16 @@ type DescribeAuditSuppressionOutput struct {
 	// are enabled.)
 	CheckName *string
 
-	// The description of the audit suppression.
+	//  The description of the audit suppression.
 	Description *string
 
-	// The epoch timestamp in seconds at which this suppression expires.
+	//  The epoch timestamp in seconds at which this suppression expires.
 	ExpirationDate *time.Time
 
 	// Information that identifies the noncompliant resource.
 	ResourceIdentifier *types.ResourceIdentifier
 
-	// Indicates whether a suppression should exist indefinitely or not.
+	//  Indicates whether a suppression should exist indefinitely or not.
 	SuppressIndefinitely *bool
 
 	// Metadata pertaining to the operation's result.

@@ -13,8 +13,9 @@ import (
 
 // Deletes a knowledge base. Before deleting a knowledge base, you should
 // disassociate the knowledge base from any agents that it is associated with by
-// making a DisassociateAgentKnowledgeBase (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_DisassociateAgentKnowledgeBase.html)
-// request.
+// making a [DisassociateAgentKnowledgeBase]request.
+//
+// [DisassociateAgentKnowledgeBase]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_DisassociateAgentKnowledgeBase.html
 func (c *Client) DeleteKnowledgeBase(ctx context.Context, params *DeleteKnowledgeBaseInput, optFns ...func(*Options)) (*DeleteKnowledgeBaseOutput, error) {
 	if params == nil {
 		params = &DeleteKnowledgeBaseInput{}

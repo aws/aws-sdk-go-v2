@@ -37,8 +37,9 @@ type ListRecipesInput struct {
 
 	// Return only those recipes with a version identifier of LATEST_WORKING or
 	// LATEST_PUBLISHED . If RecipeVersion is omitted, ListRecipes returns all of the
-	// LATEST_PUBLISHED recipe versions. Valid values: LATEST_WORKING |
-	// LATEST_PUBLISHED
+	// LATEST_PUBLISHED recipe versions.
+	//
+	// Valid values: LATEST_WORKING | LATEST_PUBLISHED
 	RecipeVersion *string
 
 	noSmithyDocumentSerde

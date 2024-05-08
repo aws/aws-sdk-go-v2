@@ -10,9 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes one or more tags from an Amazon Rekognition collection, stream
-// processor, or Custom Labels model. This operation requires permissions to
-// perform the rekognition:UntagResource action.
+//	Removes one or more tags from an Amazon Rekognition collection, stream
+//
+// processor, or Custom Labels model.
+//
+// This operation requires permissions to perform the rekognition:UntagResource
+// action.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -30,13 +33,13 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// Amazon Resource Name (ARN) of the model, collection, or stream processor that
+	//  Amazon Resource Name (ARN) of the model, collection, or stream processor that
 	// you want to remove the tags from.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// A list of the tags that you want to remove.
+	//  A list of the tags that you want to remove.
 	//
 	// This member is required.
 	TagKeys []string

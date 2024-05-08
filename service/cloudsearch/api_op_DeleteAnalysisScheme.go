@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an analysis scheme. For more information, see Configuring Analysis
-// Schemes (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html)
-// in the Amazon CloudSearch Developer Guide.
+// Deletes an analysis scheme. For more information, see [Configuring Analysis Schemes] in the Amazon
+// CloudSearch Developer Guide.
+//
+// [Configuring Analysis Schemes]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html
 func (c *Client) DeleteAnalysisScheme(ctx context.Context, params *DeleteAnalysisSchemeInput, optFns ...func(*Options)) (*DeleteAnalysisSchemeOutput, error) {
 	if params == nil {
 		params = &DeleteAnalysisSchemeInput{}
@@ -29,9 +30,8 @@ func (c *Client) DeleteAnalysisScheme(ctx context.Context, params *DeleteAnalysi
 	return out, nil
 }
 
-// Container for the parameters to the DeleteAnalysisScheme operation. Specifies
-// the name of the domain you want to update and the analysis scheme you want to
-// delete.
+// Container for the parameters to the DeleteAnalysisScheme operation. Specifies the name of the
+// domain you want to update and the analysis scheme you want to delete.
 type DeleteAnalysisSchemeInput struct {
 
 	// The name of the analysis scheme you want to delete.

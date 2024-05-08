@@ -12,29 +12,38 @@ import (
 )
 
 // Creates a new Amazon FSx for Lustre, Amazon FSx for Windows File Server, or
-// Amazon FSx for OpenZFS file system from an existing Amazon FSx backup. If a file
-// system with the specified client request token exists and the parameters match,
-// this operation returns the description of the file system. If a file system with
-// the specified client request token exists but the parameters don't match, this
-// call returns IncompatibleParameterError . If a file system with the specified
-// client request token doesn't exist, this operation does the following:
+// Amazon FSx for OpenZFS file system from an existing Amazon FSx backup.
+//
+// If a file system with the specified client request token exists and the
+// parameters match, this operation returns the description of the file system. If
+// a file system with the specified client request token exists but the parameters
+// don't match, this call returns IncompatibleParameterError . If a file system
+// with the specified client request token doesn't exist, this operation does the
+// following:
+//
 //   - Creates a new Amazon FSx file system from backup with an assigned ID, and
 //     an initial lifecycle state of CREATING .
+//
 //   - Returns the description of the file system.
 //
 // Parameters like the Active Directory, default share name, automatic backup, and
 // backup settings default to the parameters of the file system that was backed up,
-// unless overridden. You can explicitly supply other settings. By using the
-// idempotent operation, you can retry a CreateFileSystemFromBackup call without
-// the risk of creating an extra file system. This approach can be useful when an
-// initial call fails in a way that makes it unclear whether a file system was
-// created. Examples are if a transport level timeout occurred, or your connection
-// was reset. If you use the same client request token and the initial call created
-// a file system, the client receives a success message as long as the parameters
-// are the same. The CreateFileSystemFromBackup call returns while the file
-// system's lifecycle state is still CREATING . You can check the file-system
-// creation status by calling the DescribeFileSystems (https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html)
-// operation, which returns the file system state along with other information.
+// unless overridden. You can explicitly supply other settings.
+//
+// By using the idempotent operation, you can retry a CreateFileSystemFromBackup
+// call without the risk of creating an extra file system. This approach can be
+// useful when an initial call fails in a way that makes it unclear whether a file
+// system was created. Examples are if a transport level timeout occurred, or your
+// connection was reset. If you use the same client request token and the initial
+// call created a file system, the client receives a success message as long as the
+// parameters are the same.
+//
+// The CreateFileSystemFromBackup call returns while the file system's lifecycle
+// state is still CREATING . You can check the file-system creation status by
+// calling the [DescribeFileSystems]operation, which returns the file system state along with other
+// information.
+//
+// [DescribeFileSystems]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html
 func (c *Client) CreateFileSystemFromBackup(ctx context.Context, params *CreateFileSystemFromBackupInput, optFns ...func(*Options)) (*CreateFileSystemFromBackupOutput, error) {
 	if params == nil {
 		params = &CreateFileSystemFromBackupInput{}
@@ -62,10 +71,11 @@ type CreateFileSystemFromBackupInput struct {
 	// For Windows MULTI_AZ_1 file system deployment types, provide exactly two subnet
 	// IDs, one for the preferred file server and one for the standby file server. You
 	// specify one of these subnets as the preferred subnet using the
-	// WindowsConfiguration > PreferredSubnetID property. Windows SINGLE_AZ_1 and
-	// SINGLE_AZ_2 file system deployment types, Lustre file systems, and OpenZFS file
-	// systems provide exactly one subnet ID. The file server is launched in that
-	// subnet's Availability Zone.
+	// WindowsConfiguration > PreferredSubnetID property.
+	//
+	// Windows SINGLE_AZ_1 and SINGLE_AZ_2 file system deployment types, Lustre file
+	// systems, and OpenZFS file systems provide exactly one subnet ID. The file server
+	// is launched in that subnet's Availability Zone.
 	//
 	// This member is required.
 	SubnetIds []string
@@ -76,32 +86,45 @@ type CreateFileSystemFromBackupInput struct {
 	ClientRequestToken *string
 
 	// Sets the version for the Amazon FSx for Lustre file system that you're creating
-	// from a backup. Valid values are 2.10 , 2.12 , and 2.15 . You don't need to
-	// specify FileSystemTypeVersion because it will be applied using the backup's
-	// FileSystemTypeVersion setting. If you choose to specify FileSystemTypeVersion
-	// when creating from backup, the value must match the backup's
-	// FileSystemTypeVersion setting.
+	// from a backup. Valid values are 2.10 , 2.12 , and 2.15 .
+	//
+	// You don't need to specify FileSystemTypeVersion because it will be applied
+	// using the backup's FileSystemTypeVersion setting. If you choose to specify
+	// FileSystemTypeVersion when creating from backup, the value must match the
+	// backup's FileSystemTypeVersion setting.
 	FileSystemTypeVersion *string
 
 	// Specifies the ID of the Key Management Service (KMS) key to use for encrypting
 	// data on Amazon FSx file systems, as follows:
+	//
 	//   - Amazon FSx for Lustre PERSISTENT_1 and PERSISTENT_2 deployment types only.
-	//   SCRATCH_1 and SCRATCH_2 types are encrypted using the Amazon FSx service KMS
-	//   key for your account.
+	//
+	// SCRATCH_1 and SCRATCH_2 types are encrypted using the Amazon FSx service KMS key
+	//   for your account.
+	//
 	//   - Amazon FSx for NetApp ONTAP
+	//
 	//   - Amazon FSx for OpenZFS
+	//
 	//   - Amazon FSx for Windows File Server
+	//
 	// If a KmsKeyId isn't specified, the Amazon FSx-managed KMS key for your account
-	// is used. For more information, see Encrypt (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html)
-	// in the Key Management Service API Reference.
+	// is used. For more information, see [Encrypt]in the Key Management Service API Reference.
+	//
+	// [Encrypt]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
 	KmsKeyId *string
 
-	// The Lustre configuration for the file system being created. The following
-	// parameters are not supported for file systems with a data repository association
-	// created with .
+	// The Lustre configuration for the file system being created.
+	//
+	// The following parameters are not supported for file systems with a data
+	// repository association created with .
+	//
 	//   - AutoImportPolicy
+	//
 	//   - ExportPath
+	//
 	//   - ImportedFileChunkSize
+	//
 	//   - ImportPath
 	LustreConfiguration *types.CreateFileSystemLustreConfiguration
 
@@ -118,23 +141,29 @@ type CreateFileSystemFromBackupInput struct {
 	// a backup, in gibibytes (GiB). Valid values are from 64 GiB up to 524,288 GiB
 	// (512 TiB). However, the value that you specify must be equal to or greater than
 	// the backup's storage capacity value. If you don't use the StorageCapacity
-	// parameter, the default is the backup's StorageCapacity value. If used to create
-	// a file system other than OpenZFS, you must provide a value that matches the
-	// backup's StorageCapacity value. If you provide any other value, Amazon FSx
-	// responds with with an HTTP status code 400 Bad Request.
+	// parameter, the default is the backup's StorageCapacity value.
+	//
+	// If used to create a file system other than OpenZFS, you must provide a value
+	// that matches the backup's StorageCapacity value. If you provide any other
+	// value, Amazon FSx responds with with an HTTP status code 400 Bad Request.
 	StorageCapacity *int32
 
 	// Sets the storage type for the Windows or OpenZFS file system that you're
 	// creating from a backup. Valid values are SSD and HDD .
+	//
 	//   - Set to SSD to use solid state drive storage. SSD is supported on all Windows
 	//   and OpenZFS deployment types.
+	//
 	//   - Set to HDD to use hard disk drive storage. HDD is supported on SINGLE_AZ_2
 	//   and MULTI_AZ_1 FSx for Windows File Server file system deployment types.
-	// The default value is SSD . HDD and SSD storage types have different minimum
-	// storage capacity requirements. A restored file system's storage capacity is tied
-	// to the file system that was backed up. You can create a file system that uses
-	// HDD storage from a backup of a file system that used SSD storage if the original
-	// SSD file system had a storage capacity of at least 2000 GiB.
+	//
+	// The default value is SSD .
+	//
+	// HDD and SSD storage types have different minimum storage capacity requirements.
+	// A restored file system's storage capacity is tied to the file system that was
+	// backed up. You can create a file system that uses HDD storage from a backup of a
+	// file system that used SSD storage if the original SSD file system had a storage
+	// capacity of at least 2000 GiB.
 	StorageType types.StorageType
 
 	// The tags to be applied to the file system at file system creation. The key

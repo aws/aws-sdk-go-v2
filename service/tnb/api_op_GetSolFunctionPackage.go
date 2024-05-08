@@ -12,11 +12,12 @@ import (
 )
 
 // Gets the details of an individual function package, such as the operational
-// state and whether the package is in use. A function package is a .zip file in
-// CSAR (Cloud Service Archive) format that contains a network function (an ETSI
-// standard telecommunication application) and function package descriptor that
-// uses the TOSCA standard to describe how the network functions should run on your
-// network..
+// state and whether the package is in use.
+//
+// A function package is a .zip file in CSAR (Cloud Service Archive) format that
+// contains a network function (an ETSI standard telecommunication application) and
+// function package descriptor that uses the TOSCA standard to describe how the
+// network functions should run on your network..
 func (c *Client) GetSolFunctionPackage(ctx context.Context, params *GetSolFunctionPackageInput, optFns ...func(*Options)) (*GetSolFunctionPackageOutput, error) {
 	if params == nil {
 		params = &GetSolFunctionPackageInput{}
@@ -69,11 +70,12 @@ type GetSolFunctionPackageOutput struct {
 	// This member is required.
 	UsageState types.UsageState
 
-	// Metadata related to the function package. A function package is a .zip file in
-	// CSAR (Cloud Service Archive) format that contains a network function (an ETSI
-	// standard telecommunication application) and function package descriptor that
-	// uses the TOSCA standard to describe how the network functions should run on your
-	// network.
+	// Metadata related to the function package.
+	//
+	// A function package is a .zip file in CSAR (Cloud Service Archive) format that
+	// contains a network function (an ETSI standard telecommunication application) and
+	// function package descriptor that uses the TOSCA standard to describe how the
+	// network functions should run on your network.
 	Metadata *types.GetSolFunctionPackageMetadata
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag

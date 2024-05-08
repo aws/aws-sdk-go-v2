@@ -117,8 +117,8 @@ type BatchAttachObjectResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Attaches a policy object to a regular object inside a BatchRead operation. For
-// more information, see AttachPolicy and BatchReadRequest$Operations .
+// Attaches a policy object to a regular object inside a BatchRead operation. For more
+// information, see AttachPolicyand BatchReadRequest$Operations.
 type BatchAttachPolicy struct {
 
 	// The reference that identifies the object to which the policy will be attached.
@@ -139,9 +139,8 @@ type BatchAttachPolicyResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Attaches the specified object to the specified index inside a BatchRead
-// operation. For more information, see AttachToIndex and
-// BatchReadRequest$Operations .
+// Attaches the specified object to the specified index inside a BatchRead operation. For
+// more information, see AttachToIndexand BatchReadRequest$Operations.
 type BatchAttachToIndex struct {
 
 	// A reference to the index that you are attaching the object to.
@@ -167,8 +166,7 @@ type BatchAttachToIndexResponse struct {
 }
 
 // Attaches a typed link to a specified source and target object inside a BatchRead
-// operation. For more information, see AttachTypedLink and
-// BatchReadRequest$Operations .
+// operation. For more information, see AttachTypedLinkand BatchReadRequest$Operations.
 type BatchAttachTypedLink struct {
 
 	// A set of attributes that are associated with the typed link.
@@ -203,8 +201,7 @@ type BatchAttachTypedLinkResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Creates an index object inside of a BatchRead operation. For more information,
-// see CreateIndex and BatchReadRequest$Operations .
+// Creates an index object inside of a BatchRead operation. For more information, see CreateIndex and BatchReadRequest$Operations.
 type BatchCreateIndex struct {
 
 	// Indicates whether the attribute that is being indexed has unique values or not.
@@ -218,8 +215,9 @@ type BatchCreateIndex struct {
 	// This member is required.
 	OrderedIndexedAttributeList []AttributeKey
 
-	// The batch reference name. See Transaction Support (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html)
-	// for more information.
+	// The batch reference name. See [Transaction Support] for more information.
+	//
+	// [Transaction Support]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html
 	BatchReferenceName *string
 
 	// The name of the link between the parent object and the index object.
@@ -250,13 +248,14 @@ type BatchCreateObject struct {
 	ObjectAttributeList []AttributeKeyAndValue
 
 	// A list of FacetArns that will be associated with the object. For more
-	// information, see arns .
+	// information, see arns.
 	//
 	// This member is required.
 	SchemaFacet []SchemaFacet
 
-	// The batch reference name. See Transaction Support (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html)
-	// for more information.
+	// The batch reference name. See [Transaction Support] for more information.
+	//
+	// [Transaction Support]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html
 	BatchReferenceName *string
 
 	// The name of the link.
@@ -293,9 +292,8 @@ type BatchDeleteObjectResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Detaches the specified object from the specified index inside a BatchRead
-// operation. For more information, see DetachFromIndex and
-// BatchReadRequest$Operations .
+// Detaches the specified object from the specified index inside a BatchRead operation. For
+// more information, see DetachFromIndexand BatchReadRequest$Operations.
 type BatchDetachFromIndex struct {
 
 	// A reference to the index object.
@@ -333,8 +331,9 @@ type BatchDetachObject struct {
 	// This member is required.
 	ParentReference *ObjectReference
 
-	// The batch reference name. See Transaction Support (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html)
-	// for more information.
+	// The batch reference name. See [Transaction Support] for more information.
+	//
+	// [Transaction Support]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html
 	BatchReferenceName *string
 
 	noSmithyDocumentSerde
@@ -349,9 +348,8 @@ type BatchDetachObjectResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Detaches the specified policy from the specified directory inside a BatchWrite
-// operation. For more information, see DetachPolicy and
-// BatchWriteRequest$Operations .
+// Detaches the specified policy from the specified directory inside a BatchWrite operation.
+// For more information, see DetachPolicyand BatchWriteRequest$Operations.
 type BatchDetachPolicy struct {
 
 	// Reference that identifies the object whose policy object will be detached.
@@ -372,9 +370,8 @@ type BatchDetachPolicyResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Detaches a typed link from a specified source and target object inside a
-// BatchRead operation. For more information, see DetachTypedLink and
-// BatchReadRequest$Operations .
+// Detaches a typed link from a specified source and target object inside a BatchRead
+// operation. For more information, see DetachTypedLinkand BatchReadRequest$Operations.
 type BatchDetachTypedLink struct {
 
 	// Used to accept a typed link specifier as input.
@@ -390,9 +387,8 @@ type BatchDetachTypedLinkResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Retrieves attributes that are associated with a typed link inside a BatchRead
-// operation. For more information, see GetLinkAttributes and
-// BatchReadRequest$Operations .
+// Retrieves attributes that are associated with a typed link inside a BatchRead operation.
+// For more information, see GetLinkAttributesand BatchReadRequest$Operations.
 type BatchGetLinkAttributes struct {
 
 	// A list of attribute names whose values will be retrieved.
@@ -418,8 +414,7 @@ type BatchGetLinkAttributesResponse struct {
 }
 
 // Retrieves attributes within a facet that are associated with an object inside
-// an BatchRead operation. For more information, see GetObjectAttributes and
-// BatchReadRequest$Operations .
+// an BatchReadoperation. For more information, see GetObjectAttributes and BatchReadRequest$Operations.
 type BatchGetObjectAttributes struct {
 
 	// List of attribute names whose values will be retrieved.
@@ -432,8 +427,7 @@ type BatchGetObjectAttributes struct {
 	// This member is required.
 	ObjectReference *ObjectReference
 
-	// Identifier for the facet whose attributes will be retrieved. See SchemaFacet
-	// for details.
+	// Identifier for the facet whose attributes will be retrieved. See SchemaFacet for details.
 	//
 	// This member is required.
 	SchemaFacet *SchemaFacet
@@ -450,8 +444,8 @@ type BatchGetObjectAttributesResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Retrieves metadata about an object inside a BatchRead operation. For more
-// information, see GetObjectInformation and BatchReadRequest$Operations .
+// Retrieves metadata about an object inside a BatchRead operation. For more information,
+// see GetObjectInformationand BatchReadRequest$Operations.
 type BatchGetObjectInformation struct {
 
 	// A reference to the object.
@@ -474,8 +468,8 @@ type BatchGetObjectInformationResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Lists indices attached to an object inside a BatchRead operation. For more
-// information, see ListAttachedIndices and BatchReadRequest$Operations .
+// Lists indices attached to an object inside a BatchRead operation. For more information,
+// see ListAttachedIndicesand BatchReadRequest$Operations.
 type BatchListAttachedIndices struct {
 
 	// A reference to the object that has indices attached.
@@ -504,9 +498,8 @@ type BatchListAttachedIndicesResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Returns a paginated list of all the incoming TypedLinkSpecifier information for
-// an object inside a BatchRead operation. For more information, see
-// ListIncomingTypedLinks and BatchReadRequest$Operations .
+// Returns a paginated list of all the incoming TypedLinkSpecifier information for an object inside
+// a BatchReadoperation. For more information, see ListIncomingTypedLinks and BatchReadRequest$Operations.
 type BatchListIncomingTypedLinks struct {
 
 	// The reference that identifies the object whose attributes will be listed.
@@ -544,8 +537,8 @@ type BatchListIncomingTypedLinksResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Lists objects attached to the specified index inside a BatchRead operation. For
-// more information, see ListIndex and BatchReadRequest$Operations .
+// Lists objects attached to the specified index inside a BatchRead operation. For more
+// information, see ListIndexand BatchReadRequest$Operations.
 type BatchListIndex struct {
 
 	// The reference to the index to list.
@@ -644,8 +637,8 @@ type BatchListObjectChildrenResponse struct {
 }
 
 // Retrieves all available parent paths for any object type such as node, leaf
-// node, policy node, and index node objects inside a BatchRead operation. For
-// more information, see ListObjectParentPaths and BatchReadRequest$Operations .
+// node, policy node, and index node objects inside a BatchReadoperation. For more
+// information, see ListObjectParentPathsand BatchReadRequest$Operations.
 type BatchListObjectParentPaths struct {
 
 	// The reference that identifies the object whose attributes will be listed.
@@ -707,8 +700,7 @@ type BatchListObjectParentsResponse struct {
 }
 
 // Returns policies attached to an object in pagination fashion inside a BatchRead
-// operation. For more information, see ListObjectPolicies and
-// BatchReadRequest$Operations .
+// operation. For more information, see ListObjectPoliciesand BatchReadRequest$Operations.
 type BatchListObjectPolicies struct {
 
 	// The reference that identifies the object whose attributes will be listed.
@@ -737,9 +729,8 @@ type BatchListObjectPoliciesResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Returns a paginated list of all the outgoing TypedLinkSpecifier information for
-// an object inside a BatchRead operation. For more information, see
-// ListOutgoingTypedLinks and BatchReadRequest$Operations .
+// Returns a paginated list of all the outgoing TypedLinkSpecifier information for an object inside
+// a BatchReadoperation. For more information, see ListOutgoingTypedLinks and BatchReadRequest$Operations.
 type BatchListOutgoingTypedLinks struct {
 
 	// The reference that identifies the object whose attributes will be listed.
@@ -778,8 +769,7 @@ type BatchListOutgoingTypedLinksResponse struct {
 }
 
 // Returns all of the ObjectIdentifiers to which a given policy is attached inside
-// a BatchRead operation. For more information, see ListPolicyAttachments and
-// BatchReadRequest$Operations .
+// a BatchReadoperation. For more information, see ListPolicyAttachments and BatchReadRequest$Operations.
 type BatchListPolicyAttachments struct {
 
 	// The reference that identifies the policy object.
@@ -809,8 +799,7 @@ type BatchListPolicyAttachmentsResponse struct {
 }
 
 // Lists all policies from the root of the Directory to the object specified
-// inside a BatchRead operation. For more information, see LookupPolicy and
-// BatchReadRequest$Operations .
+// inside a BatchReadoperation. For more information, see LookupPolicy and BatchReadRequest$Operations.
 type BatchLookupPolicy struct {
 
 	// Reference that identifies the object whose policies will be looked up.
@@ -834,8 +823,9 @@ type BatchLookupPolicyResponse struct {
 	NextToken *string
 
 	// Provides list of path to policies. Policies contain PolicyId , ObjectIdentifier
-	// , and PolicyType . For more information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies)
-	// .
+	// , and PolicyType . For more information, see [Policies].
+	//
+	// [Policies]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies
 	PolicyToPathList []PolicyToPath
 
 	noSmithyDocumentSerde
@@ -869,10 +859,11 @@ type BatchReadOperation struct {
 	// Lists indices attached to an object.
 	ListAttachedIndices *BatchListAttachedIndices
 
-	// Returns a paginated list of all the incoming TypedLinkSpecifier information for
-	// an object. It also supports filtering by typed link facet and identity
-	// attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
-	// .
+	// Returns a paginated list of all the incoming TypedLinkSpecifier information for an object. It
+	// also supports filtering by typed link facet and identity attributes. For more
+	// information, see [Typed Links].
+	//
+	// [Typed Links]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
 	ListIncomingTypedLinks *BatchListIncomingTypedLinks
 
 	// Lists objects attached to the specified index.
@@ -887,8 +878,9 @@ type BatchReadOperation struct {
 
 	// Retrieves all available parent paths for any object type such as node, leaf
 	// node, policy node, and index node objects. For more information about objects,
-	// see Directory Structure (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html)
-	// .
+	// see [Directory Structure].
+	//
+	// [Directory Structure]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html
 	ListObjectParentPaths *BatchListObjectParentPaths
 
 	// Lists parent objects that are associated with a given object in pagination
@@ -898,22 +890,24 @@ type BatchReadOperation struct {
 	// Returns policies attached to an object in pagination fashion.
 	ListObjectPolicies *BatchListObjectPolicies
 
-	// Returns a paginated list of all the outgoing TypedLinkSpecifier information for
-	// an object. It also supports filtering by typed link facet and identity
-	// attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
-	// .
+	// Returns a paginated list of all the outgoing TypedLinkSpecifier information for an object. It
+	// also supports filtering by typed link facet and identity attributes. For more
+	// information, see [Typed Links].
+	//
+	// [Typed Links]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
 	ListOutgoingTypedLinks *BatchListOutgoingTypedLinks
 
 	// Returns all of the ObjectIdentifiers to which a given policy is attached.
 	ListPolicyAttachments *BatchListPolicyAttachments
 
-	// Lists all policies from the root of the Directory to the object specified. If
-	// there are no policies present, an empty list is returned. If policies are
-	// present, and if some objects don't have the policies attached, it returns the
-	// ObjectIdentifier for such objects. If policies are present, it returns
-	// ObjectIdentifier , policyId , and policyType . Paths that don't lead to the root
-	// from the target object are ignored. For more information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies)
-	// .
+	// Lists all policies from the root of the Directory to the object specified. If there are
+	// no policies present, an empty list is returned. If policies are present, and if
+	// some objects don't have the policies attached, it returns the ObjectIdentifier
+	// for such objects. If policies are present, it returns ObjectIdentifier ,
+	// policyId , and policyType . Paths that don't lead to the root from the target
+	// object are ignored. For more information, see [Policies].
+	//
+	// [Policies]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies
 	LookupPolicy *BatchLookupPolicy
 
 	noSmithyDocumentSerde
@@ -946,10 +940,11 @@ type BatchReadSuccessfulResponse struct {
 	// Lists indices attached to an object.
 	ListAttachedIndices *BatchListAttachedIndicesResponse
 
-	// Returns a paginated list of all the incoming TypedLinkSpecifier information for
-	// an object. It also supports filtering by typed link facet and identity
-	// attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
-	// .
+	// Returns a paginated list of all the incoming TypedLinkSpecifier information for an object. It
+	// also supports filtering by typed link facet and identity attributes. For more
+	// information, see [Typed Links].
+	//
+	// [Typed Links]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
 	ListIncomingTypedLinks *BatchListIncomingTypedLinksResponse
 
 	// Lists objects attached to the specified index.
@@ -964,8 +959,9 @@ type BatchReadSuccessfulResponse struct {
 
 	// Retrieves all available parent paths for any object type such as node, leaf
 	// node, policy node, and index node objects. For more information about objects,
-	// see Directory Structure (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html)
-	// .
+	// see [Directory Structure].
+	//
+	// [Directory Structure]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html
 	ListObjectParentPaths *BatchListObjectParentPathsResponse
 
 	// The list of parent objects to retrieve.
@@ -974,22 +970,24 @@ type BatchReadSuccessfulResponse struct {
 	// Returns policies attached to an object in pagination fashion.
 	ListObjectPolicies *BatchListObjectPoliciesResponse
 
-	// Returns a paginated list of all the outgoing TypedLinkSpecifier information for
-	// an object. It also supports filtering by typed link facet and identity
-	// attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
-	// .
+	// Returns a paginated list of all the outgoing TypedLinkSpecifier information for an object. It
+	// also supports filtering by typed link facet and identity attributes. For more
+	// information, see [Typed Links].
+	//
+	// [Typed Links]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
 	ListOutgoingTypedLinks *BatchListOutgoingTypedLinksResponse
 
 	// Returns all of the ObjectIdentifiers to which a given policy is attached.
 	ListPolicyAttachments *BatchListPolicyAttachmentsResponse
 
-	// Lists all policies from the root of the Directory to the object specified. If
-	// there are no policies present, an empty list is returned. If policies are
-	// present, and if some objects don't have the policies attached, it returns the
-	// ObjectIdentifier for such objects. If policies are present, it returns
-	// ObjectIdentifier , policyId , and policyType . Paths that don't lead to the root
-	// from the target object are ignored. For more information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies)
-	// .
+	// Lists all policies from the root of the Directory to the object specified. If there are
+	// no policies present, an empty list is returned. If policies are present, and if
+	// some objects don't have the policies attached, it returns the ObjectIdentifier
+	// for such objects. If policies are present, it returns ObjectIdentifier ,
+	// policyId , and policyType . Paths that don't lead to the root from the target
+	// object are ignored. For more information, see [Policies].
+	//
+	// [Policies]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies
 	LookupPolicy *BatchLookupPolicyResponse
 
 	noSmithyDocumentSerde
@@ -1016,10 +1014,9 @@ type BatchRemoveFacetFromObjectResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Updates a given typed link’s attributes inside a BatchRead operation.
-// Attributes to be updated must not contribute to the typed link’s identity, as
-// defined by its IdentityAttributeOrder . For more information, see
-// UpdateLinkAttributes and BatchReadRequest$Operations .
+// Updates a given typed link’s attributes inside a BatchRead operation. Attributes to be
+// updated must not contribute to the typed link’s identity, as defined by its
+// IdentityAttributeOrder . For more information, see UpdateLinkAttributes and BatchReadRequest$Operations.
 type BatchUpdateLinkAttributes struct {
 
 	// The attributes update structure.
@@ -1071,7 +1068,7 @@ type BatchWriteOperation struct {
 	// A batch operation that adds a facet to an object.
 	AddFacetToObject *BatchAddFacetToObject
 
-	// Attaches an object to a Directory .
+	// Attaches an object to a Directory.
 	AttachObject *BatchAttachObject
 
 	// Attaches a policy object to a regular object. An object can have a limited
@@ -1082,32 +1079,35 @@ type BatchWriteOperation struct {
 	AttachToIndex *BatchAttachToIndex
 
 	// Attaches a typed link to a specified source and target object. For more
-	// information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
-	// .
+	// information, see [Typed Links].
+	//
+	// [Typed Links]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
 	AttachTypedLink *BatchAttachTypedLink
 
-	// Creates an index object. See Indexing and search (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.htm)
-	// for more information.
+	// Creates an index object. See [Indexing and search] for more information.
+	//
+	// [Indexing and search]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.htm
 	CreateIndex *BatchCreateIndex
 
 	// Creates an object.
 	CreateObject *BatchCreateObject
 
-	// Deletes an object in a Directory .
+	// Deletes an object in a Directory.
 	DeleteObject *BatchDeleteObject
 
 	// Detaches the specified object from the specified index.
 	DetachFromIndex *BatchDetachFromIndex
 
-	// Detaches an object from a Directory .
+	// Detaches an object from a Directory.
 	DetachObject *BatchDetachObject
 
-	// Detaches a policy from a Directory .
+	// Detaches a policy from a Directory.
 	DetachPolicy *BatchDetachPolicy
 
 	// Detaches a typed link from a specified source and target object. For more
-	// information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
-	// .
+	// information, see [Typed Links].
+	//
+	// [Typed Links]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
 	DetachTypedLink *BatchDetachTypedLink
 
 	// A batch operation that removes a facet from an object.
@@ -1128,7 +1128,7 @@ type BatchWriteOperationResponse struct {
 	// The result of an add facet to object batch operation.
 	AddFacetToObject *BatchAddFacetToObjectResponse
 
-	// Attaches an object to a Directory .
+	// Attaches an object to a Directory.
 	AttachObject *BatchAttachObjectResponse
 
 	// Attaches a policy object to a regular object. An object can have a limited
@@ -1139,32 +1139,35 @@ type BatchWriteOperationResponse struct {
 	AttachToIndex *BatchAttachToIndexResponse
 
 	// Attaches a typed link to a specified source and target object. For more
-	// information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
-	// .
+	// information, see [Typed Links].
+	//
+	// [Typed Links]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
 	AttachTypedLink *BatchAttachTypedLinkResponse
 
-	// Creates an index object. See Indexing and search (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.htm)
-	// for more information.
+	// Creates an index object. See [Indexing and search] for more information.
+	//
+	// [Indexing and search]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.htm
 	CreateIndex *BatchCreateIndexResponse
 
-	// Creates an object in a Directory .
+	// Creates an object in a Directory.
 	CreateObject *BatchCreateObjectResponse
 
-	// Deletes an object in a Directory .
+	// Deletes an object in a Directory.
 	DeleteObject *BatchDeleteObjectResponse
 
 	// Detaches the specified object from the specified index.
 	DetachFromIndex *BatchDetachFromIndexResponse
 
-	// Detaches an object from a Directory .
+	// Detaches an object from a Directory.
 	DetachObject *BatchDetachObjectResponse
 
-	// Detaches a policy from a Directory .
+	// Detaches a policy from a Directory.
 	DetachPolicy *BatchDetachPolicyResponse
 
 	// Detaches a typed link from a specified source and target object. For more
-	// information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink)
-	// .
+	// information, see [Typed Links].
+	//
+	// [Typed Links]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
 	DetachTypedLink *BatchDetachTypedLinkResponse
 
 	// The result of a batch remove facet from object operation.
@@ -1186,7 +1189,7 @@ type Directory struct {
 	CreationDateTime *time.Time
 
 	// The Amazon Resource Name (ARN) that is associated with the directory. For more
-	// information, see arns .
+	// information, see arns.
 	DirectoryArn *string
 
 	// The name of the directory.
@@ -1198,9 +1201,10 @@ type Directory struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that contains Name , ARN , Attributes , Rule s , and ObjectTypes .
-// See Facets (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_whatarefacets.html)
+// A structure that contains Name , ARN , Attributes , Rules , and ObjectTypes . See [Facets]
 // for more information.
+//
+// [Facets]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_whatarefacets.html
 type Facet struct {
 
 	// There are two different styles that you can define on any given facet, Static
@@ -1208,17 +1212,16 @@ type Facet struct {
 	// For dynamic facets, attributes can be defined during data plane operations.
 	FacetStyle FacetStyle
 
-	// The name of the Facet .
+	// The name of the Facet.
 	Name *string
 
-	// The object type that is associated with the facet. See
-	// CreateFacetRequest$ObjectType for more details.
+	// The object type that is associated with the facet. See CreateFacetRequest$ObjectType for more details.
 	ObjectType ObjectType
 
 	noSmithyDocumentSerde
 }
 
-// An attribute that is associated with the Facet .
+// An attribute that is associated with the Facet.
 type FacetAttribute struct {
 
 	// The name of the facet attribute.
@@ -1227,13 +1230,15 @@ type FacetAttribute struct {
 	Name *string
 
 	// A facet attribute consists of either a definition or a reference. This
-	// structure contains the attribute definition. See Attribute References (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html)
-	// for more information.
+	// structure contains the attribute definition. See [Attribute References]for more information.
+	//
+	// [Attribute References]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html
 	AttributeDefinition *FacetAttributeDefinition
 
-	// An attribute reference that is associated with the attribute. See Attribute
-	// References (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html)
-	// for more information.
+	// An attribute reference that is associated with the attribute. See [Attribute References] for more
+	// information.
+	//
+	// [Attribute References]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html
 	AttributeReference *FacetAttributeReference
 
 	// The required behavior of the FacetAttribute .
@@ -1242,8 +1247,9 @@ type FacetAttribute struct {
 	noSmithyDocumentSerde
 }
 
-// A facet attribute definition. See Attribute References (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html)
-// for more information.
+// A facet attribute definition. See [Attribute References] for more information.
+//
+// [Attribute References]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html
 type FacetAttributeDefinition struct {
 
 	// The type of the attribute.
@@ -1267,16 +1273,18 @@ type FacetAttributeDefinition struct {
 // contains the attribute facet name and attribute name.
 type FacetAttributeReference struct {
 
-	// The target attribute name that is associated with the facet reference. See
-	// Attribute References (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html)
-	// for more information.
+	// The target attribute name that is associated with the facet reference. See [Attribute References] for
+	// more information.
+	//
+	// [Attribute References]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html
 	//
 	// This member is required.
 	TargetAttributeName *string
 
-	// The target facet name that is associated with the facet reference. See
-	// Attribute References (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html)
-	// for more information.
+	// The target facet name that is associated with the facet reference. See [Attribute References] for
+	// more information.
+	//
+	// [Attribute References]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html
 	//
 	// This member is required.
 	TargetFacetName *string
@@ -1302,10 +1310,10 @@ type IndexAttachment struct {
 	// The indexed attribute values.
 	IndexedAttributes []AttributeKeyAndValue
 
-	// In response to ListIndex , the ObjectIdentifier of the object attached to the
-	// index. In response to ListAttachedIndices , the ObjectIdentifier of the index
-	// attached to the object. This field will always contain the ObjectIdentifier of
-	// the object on the opposite side of the attachment specified in the query.
+	// In response to ListIndex, the ObjectIdentifier of the object attached to the index. In
+	// response to ListAttachedIndices, the ObjectIdentifier of the index attached to the object. This
+	// field will always contain the ObjectIdentifier of the object on the opposite
+	// side of the attachment specified in the query.
 	ObjectIdentifier *string
 
 	noSmithyDocumentSerde
@@ -1390,15 +1398,20 @@ type ObjectReference struct {
 	// A path selector supports easy selection of an object by the parent/child links
 	// leading to it from the directory root. Use the link names from each parent/child
 	// link to construct the path. Path selectors start with a slash (/) and link names
-	// are separated by slashes. For more information about paths, see Access Objects (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_access_objects.html)
-	// . You can identify an object in one of the following ways:
+	// are separated by slashes. For more information about paths, see [Access Objects]. You can
+	// identify an object in one of the following ways:
+	//
 	//   - $ObjectIdentifier - An object identifier is an opaque string provided by
 	//   Amazon Cloud Directory. When creating objects, the system will provide you with
 	//   the identifier of the created object. An object’s identifier is immutable and no
 	//   two objects will ever share the same object identifier. To identify an object
 	//   with ObjectIdentifier, the ObjectIdentifier must be wrapped in double quotes.
+	//
 	//   - /some/path - Identifies the object based on path
+	//
 	//   - #SomeBatchReference - Identifies the object in a batch call
+	//
+	// [Access Objects]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_access_objects.html
 	Selector *string
 
 	noSmithyDocumentSerde
@@ -1418,8 +1431,9 @@ type PathToObjectIdentifiers struct {
 }
 
 // Contains the PolicyType , PolicyId , and the ObjectIdentifier to which it is
-// attached. For more information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies)
-// .
+// attached. For more information, see [Policies].
+//
+// [Policies]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies
 type PolicyAttachment struct {
 
 	// The ObjectIdentifier that is associated with PolicyAttachment .
@@ -1434,8 +1448,8 @@ type PolicyAttachment struct {
 	noSmithyDocumentSerde
 }
 
-// Used when a regular object exists in a Directory and you want to find all of
-// the policies that are associated with that object and the parent to that object.
+// Used when a regular object exists in a Directory and you want to find all of the
+// policies that are associated with that object and the parent to that object.
 type PolicyToPath struct {
 
 	// The path that is referenced from the root.
@@ -1466,10 +1480,11 @@ type SchemaFacet struct {
 	// The name of the facet. If this value is set, SchemaArn must also be set.
 	FacetName *string
 
-	// The ARN of the schema that contains the facet with no minor component. See arns
-	// and In-Place Schema Upgrade (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_inplaceschemaupgrade.html)
+	// The ARN of the schema that contains the facet with no minor component. See arns and [In-Place Schema Upgrade]
 	// for a description of when to provide minor versions. If this value is set,
 	// FacetName must also be set.
+	//
+	// [In-Place Schema Upgrade]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_inplaceschemaupgrade.html
 	SchemaArn *string
 
 	noSmithyDocumentSerde
@@ -1547,8 +1562,9 @@ type TypedAttributeValueMemberStringValue struct {
 
 func (*TypedAttributeValueMemberStringValue) isTypedAttributeValue() {}
 
-// A range of attribute values. For more information, see Range Filters (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_range_filters.html)
-// .
+// A range of attribute values. For more information, see [Range Filters].
+//
+// [Range Filters]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_range_filters.html
 type TypedAttributeValueRange struct {
 
 	// The inclusive or exclusive range end.
@@ -1615,7 +1631,7 @@ type TypedLinkAttributeRange struct {
 }
 
 // Defines the typed links structure and its attributes. To create a typed link
-// facet, use the CreateTypedLinkFacet API.
+// facet, use the CreateTypedLinkFacetAPI.
 type TypedLinkFacet struct {
 
 	// A set of key-value pairs associated with the typed link. Typed link attributes
@@ -1628,8 +1644,7 @@ type TypedLinkFacet struct {
 
 	// The set of attributes that distinguish links made from this facet from each
 	// other, in the order of significance. Listing typed links can filter on the
-	// values of these attributes. See ListOutgoingTypedLinks and
-	// ListIncomingTypedLinks for details.
+	// values of these attributes. See ListOutgoingTypedLinksand ListIncomingTypedLinks for details.
 	//
 	// This member is required.
 	IdentityAttributeOrder []string
@@ -1663,7 +1678,7 @@ type TypedLinkFacetAttributeUpdate struct {
 type TypedLinkSchemaAndFacetName struct {
 
 	// The Amazon Resource Name (ARN) that is associated with the schema. For more
-	// information, see arns .
+	// information, see arns.
 	//
 	// This member is required.
 	SchemaArn *string
@@ -1678,10 +1693,9 @@ type TypedLinkSchemaAndFacetName struct {
 
 // Contains all the information that is used to uniquely identify a typed link.
 // The parameters discussed in this topic are used to uniquely specify the typed
-// link being operated on. The AttachTypedLink API returns a typed link specifier
-// while the DetachTypedLink API accepts one as input. Similarly, the
-// ListIncomingTypedLinks and ListOutgoingTypedLinks API operations provide typed
-// link specifiers as output. You can also construct a typed link specifier from
+// link being operated on. The AttachTypedLinkAPI returns a typed link specifier while the DetachTypedLink API
+// accepts one as input. Similarly, the ListIncomingTypedLinksand ListOutgoingTypedLinks API operations provide typed link
+// specifiers as output. You can also construct a typed link specifier from
 // scratch.
 type TypedLinkSpecifier struct {
 

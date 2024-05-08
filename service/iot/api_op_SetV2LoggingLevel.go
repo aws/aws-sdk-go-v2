@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the logging level. Requires permission to access the SetV2LoggingLevel (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Sets the logging level.
+//
+// Requires permission to access the [SetV2LoggingLevel] action.
+//
+// [SetV2LoggingLevel]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) SetV2LoggingLevel(ctx context.Context, params *SetV2LoggingLevelInput, optFns ...func(*Options)) (*SetV2LoggingLevelOutput, error) {
 	if params == nil {
 		params = &SetV2LoggingLevelInput{}

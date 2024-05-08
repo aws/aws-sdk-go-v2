@@ -12,6 +12,7 @@ const (
 
 // Values returns all known values for AccessDeniedExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessDeniedExceptionReason) Values() []AccessDeniedExceptionReason {
 	return []AccessDeniedExceptionReason{
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for AccountAttributeName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccountAttributeName) Values() []AccountAttributeName {
 	return []AccountAttributeName{
 		"ACCOUNT_TIER",
@@ -53,8 +55,9 @@ const (
 )
 
 // Values returns all known values for AccountLimitName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccountLimitName) Values() []AccountLimitName {
 	return []AccountLimitName{
 		"PHONE_NUMBERS",
@@ -79,8 +82,9 @@ const (
 )
 
 // Values returns all known values for AttachmentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AttachmentStatus) Values() []AttachmentStatus {
 	return []AttachmentStatus{
 		"UPLOAD_IN_PROGRESS",
@@ -99,6 +103,7 @@ const (
 
 // Values returns all known values for AttachmentUploadErrorReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AttachmentUploadErrorReason) Values() []AttachmentUploadErrorReason {
 	return []AttachmentUploadErrorReason{
@@ -119,6 +124,7 @@ const (
 
 // Values returns all known values for ConfigurationSetFilterName. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigurationSetFilterName) Values() []ConfigurationSetFilterName {
 	return []ConfigurationSetFilterName{
@@ -172,8 +178,9 @@ const (
 )
 
 // Values returns all known values for ConflictExceptionReason. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 	return []ConflictExceptionReason{
 		"CREATE_REGISTRATION_VERSION_NOT_ALLOWED",
@@ -224,8 +231,9 @@ const (
 
 // Values returns all known values for DestinationCountryParameterKey. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DestinationCountryParameterKey) Values() []DestinationCountryParameterKey {
 	return []DestinationCountryParameterKey{
 		"IN_TEMPLATE_ID",
@@ -282,8 +290,9 @@ const (
 )
 
 // Values returns all known values for EventType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"ALL",
@@ -341,8 +350,9 @@ const (
 )
 
 // Values returns all known values for FieldRequirement. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FieldRequirement) Values() []FieldRequirement {
 	return []FieldRequirement{
 		"REQUIRED",
@@ -361,8 +371,9 @@ const (
 )
 
 // Values returns all known values for FieldType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FieldType) Values() []FieldType {
 	return []FieldType{
 		"SELECT",
@@ -381,8 +392,9 @@ const (
 )
 
 // Values returns all known values for KeywordAction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KeywordAction) Values() []KeywordAction {
 	return []KeywordAction{
 		"AUTOMATIC_RESPONSE",
@@ -399,8 +411,9 @@ const (
 )
 
 // Values returns all known values for KeywordFilterName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KeywordFilterName) Values() []KeywordFilterName {
 	return []KeywordFilterName{
 		"keyword-action",
@@ -427,8 +440,9 @@ const (
 )
 
 // Values returns all known values for LanguageCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LanguageCode) Values() []LanguageCode {
 	return []LanguageCode{
 		"DE_DE",
@@ -456,8 +470,9 @@ const (
 )
 
 // Values returns all known values for MessageType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MessageType) Values() []MessageType {
 	return []MessageType{
 		"TRANSACTIONAL",
@@ -475,8 +490,9 @@ const (
 )
 
 // Values returns all known values for NumberCapability. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NumberCapability) Values() []NumberCapability {
 	return []NumberCapability{
 		"SMS",
@@ -497,8 +513,9 @@ const (
 )
 
 // Values returns all known values for NumberStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NumberStatus) Values() []NumberStatus {
 	return []NumberStatus{
 		"PENDING",
@@ -521,8 +538,9 @@ const (
 )
 
 // Values returns all known values for NumberType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NumberType) Values() []NumberType {
 	return []NumberType{
 		"SHORT_CODE",
@@ -541,8 +559,9 @@ const (
 )
 
 // Values returns all known values for OptedOutFilterName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OptedOutFilterName) Values() []OptedOutFilterName {
 	return []OptedOutFilterName{
 		"end-user-opted-out",
@@ -566,8 +585,9 @@ const (
 )
 
 // Values returns all known values for PhoneNumberFilterName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PhoneNumberFilterName) Values() []PhoneNumberFilterName {
 	return []PhoneNumberFilterName{
 		"status",
@@ -598,8 +618,9 @@ const (
 )
 
 // Values returns all known values for PoolFilterName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PoolFilterName) Values() []PoolFilterName {
 	return []PoolFilterName{
 		"status",
@@ -623,8 +644,9 @@ const (
 
 // Values returns all known values for PoolOriginationIdentitiesFilterName. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PoolOriginationIdentitiesFilterName) Values() []PoolOriginationIdentitiesFilterName {
 	return []PoolOriginationIdentitiesFilterName{
 		"iso-country-code",
@@ -642,8 +664,9 @@ const (
 )
 
 // Values returns all known values for PoolStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PoolStatus) Values() []PoolStatus {
 	return []PoolStatus{
 		"CREATING",
@@ -662,8 +685,9 @@ const (
 
 // Values returns all known values for ProtectConfigurationFilterName. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProtectConfigurationFilterName) Values() []ProtectConfigurationFilterName {
 	return []ProtectConfigurationFilterName{
 		"account-default",
@@ -680,8 +704,9 @@ const (
 )
 
 // Values returns all known values for ProtectStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProtectStatus) Values() []ProtectStatus {
 	return []ProtectStatus{
 		"ALLOW",
@@ -700,8 +725,9 @@ const (
 
 // Values returns all known values for RegistrationAssociationBehavior. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RegistrationAssociationBehavior) Values() []RegistrationAssociationBehavior {
 	return []RegistrationAssociationBehavior{
 		"ASSOCIATE_BEFORE_SUBMIT",
@@ -720,8 +746,9 @@ const (
 
 // Values returns all known values for RegistrationAssociationFilterName. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RegistrationAssociationFilterName) Values() []RegistrationAssociationFilterName {
 	return []RegistrationAssociationFilterName{
 		"resource-type",
@@ -738,8 +765,9 @@ const (
 
 // Values returns all known values for RegistrationAttachmentFilterName. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RegistrationAttachmentFilterName) Values() []RegistrationAttachmentFilterName {
 	return []RegistrationAttachmentFilterName{
 		"attachment-status",
@@ -757,8 +785,9 @@ const (
 
 // Values returns all known values for RegistrationDisassociationBehavior. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RegistrationDisassociationBehavior) Values() []RegistrationDisassociationBehavior {
 	return []RegistrationDisassociationBehavior{
 		"DISASSOCIATE_ALL_CLOSES_REGISTRATION",
@@ -776,8 +805,9 @@ const (
 )
 
 // Values returns all known values for RegistrationFilterName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RegistrationFilterName) Values() []RegistrationFilterName {
 	return []RegistrationFilterName{
 		"registration-type",
@@ -800,8 +830,9 @@ const (
 )
 
 // Values returns all known values for RegistrationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RegistrationStatus) Values() []RegistrationStatus {
 	return []RegistrationStatus{
 		"CREATED",
@@ -825,6 +856,7 @@ const (
 
 // Values returns all known values for RegistrationTypeFilterName. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (RegistrationTypeFilterName) Values() []RegistrationTypeFilterName {
 	return []RegistrationTypeFilterName{
@@ -842,8 +874,9 @@ const (
 
 // Values returns all known values for RegistrationVersionFilterName. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RegistrationVersionFilterName) Values() []RegistrationVersionFilterName {
 	return []RegistrationVersionFilterName{
 		"registration-version-status",
@@ -866,6 +899,7 @@ const (
 
 // Values returns all known values for RegistrationVersionStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (RegistrationVersionStatus) Values() []RegistrationVersionStatus {
 	return []RegistrationVersionStatus{
@@ -891,8 +925,9 @@ const (
 )
 
 // Values returns all known values for RequestableNumberType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RequestableNumberType) Values() []RequestableNumberType {
 	return []RequestableNumberType{
 		"LONG_CODE",
@@ -922,8 +957,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"account",
@@ -954,8 +990,9 @@ const (
 )
 
 // Values returns all known values for SenderIdFilterName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SenderIdFilterName) Values() []SenderIdFilterName {
 	return []SenderIdFilterName{
 		"sender-id",
@@ -997,8 +1034,9 @@ const (
 
 // Values returns all known values for ServiceQuotaExceededExceptionReason. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceQuotaExceededExceptionReason) Values() []ServiceQuotaExceededExceptionReason {
 	return []ServiceQuotaExceededExceptionReason{
 		"ASSOCIATIONS_PER_REGISTRATION",
@@ -1037,8 +1075,9 @@ const (
 )
 
 // Values returns all known values for SpendLimitName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SpendLimitName) Values() []SpendLimitName {
 	return []SpendLimitName{
 		"TEXT_MESSAGE_MONTHLY_SPEND_LIMIT",
@@ -1094,6 +1133,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{
@@ -1148,8 +1188,9 @@ const (
 )
 
 // Values returns all known values for VerificationChannel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VerificationChannel) Values() []VerificationChannel {
 	return []VerificationChannel{
 		"TEXT",
@@ -1166,8 +1207,9 @@ const (
 )
 
 // Values returns all known values for VerificationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VerificationStatus) Values() []VerificationStatus {
 	return []VerificationStatus{
 		"PENDING",
@@ -1184,8 +1226,9 @@ const (
 
 // Values returns all known values for VerifiedDestinationNumberFilterName. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VerifiedDestinationNumberFilterName) Values() []VerifiedDestinationNumberFilterName {
 	return []VerifiedDestinationNumberFilterName{
 		"status",
@@ -1258,8 +1301,9 @@ const (
 )
 
 // Values returns all known values for VoiceId. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VoiceId) Values() []VoiceId {
 	return []VoiceId{
 		"AMY",
@@ -1334,6 +1378,7 @@ const (
 
 // Values returns all known values for VoiceMessageBodyTextType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (VoiceMessageBodyTextType) Values() []VoiceMessageBodyTextType {
 	return []VoiceMessageBodyTextType{

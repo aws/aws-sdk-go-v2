@@ -12,8 +12,10 @@ import (
 )
 
 // Provides a list of transcription jobs that match the specified criteria. If no
-// criteria are specified, all transcription jobs are returned. To get detailed
-// information about a specific transcription job, use the operation.
+// criteria are specified, all transcription jobs are returned.
+//
+// To get detailed information about a specific transcription job, use the
+// operation.
 func (c *Client) ListTranscriptionJobs(ctx context.Context, params *ListTranscriptionJobsInput, optFns ...func(*Options)) (*ListTranscriptionJobsOutput, error) {
 	if params == nil {
 		params = &ListTranscriptionJobsInput{}

@@ -30,8 +30,9 @@ func (c *Client) DescribeComponent(ctx context.Context, params *DescribeComponen
 
 type DescribeComponentInput struct {
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the component version.
+	// The [ARN] of the component version.
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	Arn *string
@@ -41,8 +42,9 @@ type DescribeComponentInput struct {
 
 type DescribeComponentOutput struct {
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the component version.
+	// The [ARN] of the component version.
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// The name of the component.
@@ -68,8 +70,9 @@ type DescribeComponentOutput struct {
 	Status *types.CloudComponentStatus
 
 	// A list of key-value pairs that contain metadata for the resource. For more
-	// information, see Tag your resources (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html)
-	// in the IoT Greengrass V2 Developer Guide.
+	// information, see [Tag your resources]in the IoT Greengrass V2 Developer Guide.
+	//
+	// [Tag your resources]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

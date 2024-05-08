@@ -13,8 +13,12 @@ import (
 
 // Deletes the specified resource group. Deleting a resource group does not delete
 // any resources that are members of the group; it only deletes the group
-// structure. Minimum permissions To run this command, you must have the following
-// permissions:
+// structure.
+//
+// # Minimum permissions
+//
+// To run this command, you must have the following permissions:
+//
 //   - resource-groups:DeleteGroup
 func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optFns ...func(*Options)) (*DeleteGroupOutput, error) {
 	if params == nil {

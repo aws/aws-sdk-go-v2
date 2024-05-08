@@ -14,13 +14,16 @@ import (
 // Returns a list of CreateCaseOption types along with the corresponding supported
 // hours and language availability. You can specify the language categoryCode ,
 // issueType and serviceCode used to retrieve the CreateCaseOptions.
+//
 //   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to
 //     use the Amazon Web Services Support API.
+//
 //   - If you call the Amazon Web Services Support API from an account that
 //     doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
 //     SubscriptionRequiredException error message appears. For information about
-//     changing your support plan, see Amazon Web Services Support (http://aws.amazon.com/premiumsupport/)
-//     .
+//     changing your support plan, see [Amazon Web Services Support].
+//
+// [Amazon Web Services Support]: http://aws.amazon.com/premiumsupport/
 func (c *Client) DescribeCreateCaseOptions(ctx context.Context, params *DescribeCreateCaseOptionsInput, optFns ...func(*Options)) (*DescribeCreateCaseOptionsOutput, error) {
 	if params == nil {
 		params = &DescribeCreateCaseOptionsInput{}
@@ -38,9 +41,9 @@ func (c *Client) DescribeCreateCaseOptions(ctx context.Context, params *Describe
 
 type DescribeCreateCaseOptionsInput struct {
 
-	// The category of problem for the support case. You also use the DescribeServices
-	// operation to get the category code for a service. Each Amazon Web Services
-	// service defines its own set of category codes.
+	// The category of problem for the support case. You also use the DescribeServices operation to
+	// get the category code for a service. Each Amazon Web Services service defines
+	// its own set of category codes.
 	//
 	// This member is required.
 	CategoryCode *string
@@ -59,8 +62,8 @@ type DescribeCreateCaseOptionsInput struct {
 	// This member is required.
 	Language *string
 
-	// The code for the Amazon Web Services service. You can use the DescribeServices
-	// operation to get the possible serviceCode values.
+	// The code for the Amazon Web Services service. You can use the DescribeServices operation to get
+	// the possible serviceCode values.
 	//
 	// This member is required.
 	ServiceCode *string
@@ -70,13 +73,16 @@ type DescribeCreateCaseOptionsInput struct {
 
 type DescribeCreateCaseOptionsOutput struct {
 
-	// A JSON-formatted array that contains the available communication type options,
+	//  A JSON-formatted array that contains the available communication type options,
 	// along with the available support timeframes for the given inputs.
 	CommunicationTypes []types.CommunicationTypeOptions
 
 	// Language availability can be any of the following:
+	//
 	//   - available
+	//
 	//   - best_effort
+	//
 	//   - unavailable
 	LanguageAvailability *string
 

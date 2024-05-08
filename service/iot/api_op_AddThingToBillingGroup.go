@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a thing to a billing group. Requires permission to access the
-// AddThingToBillingGroup (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Adds a thing to a billing group.
+//
+// Requires permission to access the [AddThingToBillingGroup] action.
+//
+// [AddThingToBillingGroup]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) AddThingToBillingGroup(ctx context.Context, params *AddThingToBillingGroupInput, optFns ...func(*Options)) (*AddThingToBillingGroupOutput, error) {
 	if params == nil {
 		params = &AddThingToBillingGroupInput{}
@@ -33,8 +35,10 @@ type AddThingToBillingGroupInput struct {
 	// The ARN of the billing group.
 	BillingGroupArn *string
 
-	// The name of the billing group. This call is asynchronous. It might take several
-	// seconds for the detachment to propagate.
+	// The name of the billing group.
+	//
+	// This call is asynchronous. It might take several seconds for the detachment to
+	// propagate.
 	BillingGroupName *string
 
 	// The ARN of the thing to be added to the billing group.

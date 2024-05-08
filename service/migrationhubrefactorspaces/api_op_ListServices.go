@@ -55,7 +55,7 @@ type ListServicesOutput struct {
 	// The token for the next page of results.
 	NextToken *string
 
-	// The list of ServiceSummary objects.
+	//  The list of ServiceSummary objects.
 	ServiceSummaryList []types.ServiceSummary
 
 	// Metadata pertaining to the operation's result.

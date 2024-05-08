@@ -11,40 +11,44 @@ import (
 )
 
 // Closes an Amazon Web Services member account within an organization. You can
-// close an account when all features are enabled  (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
-// . You can't close the management account with this API. This is an asynchronous
-// request that Amazon Web Services performs in the background. Because
-// CloseAccount operates asynchronously, it can return a successful completion
-// message even though account closure might still be in progress. You need to wait
-// a few minutes before the account is fully closed. To check the status of the
-// request, do one of the following:
+// close an account when [all features are enabled]. You can't close the management account with this API.
+// This is an asynchronous request that Amazon Web Services performs in the
+// background. Because CloseAccount operates asynchronously, it can return a
+// successful completion message even though account closure might still be in
+// progress. You need to wait a few minutes before the account is fully closed. To
+// check the status of the request, do one of the following:
 //
 //   - Use the AccountId that you sent in the CloseAccount request to provide as a
-//     parameter to the DescribeAccount operation. While the close account request is
-//     in progress, Account status will indicate PENDING_CLOSURE. When the close
-//     account request completes, the status will change to SUSPENDED.
+//     parameter to the DescribeAccountoperation.
 //
-//   - Check the CloudTrail log for the CloseAccountResult event that gets
-//     published after the account closes successfully. For information on using
-//     CloudTrail with Organizations, see Logging and monitoring in Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration)
-//     in the Organizations User Guide.
+// While the close account request is in progress, Account status will indicate
 //
-//   - You can close only 10% of member accounts, between 10 and 1000, within a
-//     rolling 30 day period. This quota is not bound by a calendar month, but starts
-//     when you close an account. After you reach this limit, you can close additional
-//     accounts. For more information, see Closing a member account in your
-//     organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html)
-//     and Quotas for Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html)
-//     in the Organizations User Guide.
+//	PENDING_CLOSURE. When the close account request completes, the status will
+//	change to SUSPENDED.
 //
-//   - To reinstate a closed account, contact Amazon Web Services Support within
-//     the 90-day grace period while the account is in SUSPENDED status.
+//	- Check the CloudTrail log for the CloseAccountResult event that gets
+//	published after the account closes successfully. For information on using
+//	CloudTrail with Organizations, see [Logging and monitoring in Organizations]in the Organizations User Guide.
 //
-//   - If the Amazon Web Services account you attempt to close is linked to an
-//     Amazon Web Services GovCloud (US) account, the CloseAccount request will close
-//     both accounts. To learn important pre-closure details, see Closing an Amazon
-//     Web Services GovCloud (US) account (https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/Closing-govcloud-account.html)
-//     in the Amazon Web Services GovCloud User Guide.
+//	- You can close only 10% of member accounts, between 10 and 1000, within a
+//	rolling 30 day period. This quota is not bound by a calendar month, but starts
+//	when you close an account. After you reach this limit, you can close additional
+//	accounts. For more information, see [Closing a member account in your organization]and [Quotas for Organizations]in the Organizations User Guide.
+//
+//	- To reinstate a closed account, contact Amazon Web Services Support within
+//	the 90-day grace period while the account is in SUSPENDED status.
+//
+//	- If the Amazon Web Services account you attempt to close is linked to an
+//	Amazon Web Services GovCloud (US) account, the CloseAccount request will close
+//	both accounts. To learn important pre-closure details, see [Closing an Amazon Web Services GovCloud (US) account]in the Amazon Web
+//	Services GovCloud User Guide.
+//
+// [all features are enabled]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+//
+// [Quotas for Organizations]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html
+// [Logging and monitoring in Organizations]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration
+// [Closing an Amazon Web Services GovCloud (US) account]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/Closing-govcloud-account.html
+// [Closing a member account in your organization]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
 func (c *Client) CloseAccount(ctx context.Context, params *CloseAccountInput, optFns ...func(*Options)) (*CloseAccountOutput, error) {
 	if params == nil {
 		params = &CloseAccountInput{}

@@ -11,18 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds termination settings for the specified Amazon Chime Voice Connector. If
-// emergency calling is configured for the Amazon Chime Voice Connector, it must be
-// deleted prior to turning off termination settings. This API is is no longer
-// supported and will not be updated. We recommend using the latest version,
-// PutVoiceConnectorTermination (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorTermination.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// Adds termination settings for the specified Amazon Chime Voice Connector.
+//
+// If emergency calling is configured for the Amazon Chime Voice Connector, it
+// must be deleted prior to turning off termination settings.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [PutVoiceConnectorTermination], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by PutVoiceConnectorTermination in the Amazon Chime SDK
 // Voice Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [PutVoiceConnectorTermination]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorTermination.html
 func (c *Client) PutVoiceConnectorTermination(ctx context.Context, params *PutVoiceConnectorTerminationInput, optFns ...func(*Options)) (*PutVoiceConnectorTerminationOutput, error) {
 	if params == nil {
 		params = &PutVoiceConnectorTerminationInput{}

@@ -12,8 +12,9 @@ import (
 )
 
 // Retrieves the data streaming configuration for an AppInstance . For more
-// information, see Streaming messaging data (https://docs.aws.amazon.com/chime-sdk/latest/dg/streaming-export.html)
-// in the Amazon Chime SDK Developer Guide.
+// information, see [Streaming messaging data]in the Amazon Chime SDK Developer Guide.
+//
+// [Streaming messaging data]: https://docs.aws.amazon.com/chime-sdk/latest/dg/streaming-export.html
 func (c *Client) GetMessagingStreamingConfigurations(ctx context.Context, params *GetMessagingStreamingConfigurationsInput, optFns ...func(*Options)) (*GetMessagingStreamingConfigurationsOutput, error) {
 	if params == nil {
 		params = &GetMessagingStreamingConfigurationsInput{}

@@ -11,10 +11,11 @@ import (
 )
 
 // Deletes the specified provisioning artifact (also known as a version) for the
-// specified product. You cannot delete a provisioning artifact associated with a
-// product that was shared with you. You cannot delete the last provisioning
-// artifact for a product, because a product must have at least one provisioning
-// artifact.
+// specified product.
+//
+// You cannot delete a provisioning artifact associated with a product that was
+// shared with you. You cannot delete the last provisioning artifact for a product,
+// because a product must have at least one provisioning artifact.
 func (c *Client) DeleteProvisioningArtifact(ctx context.Context, params *DeleteProvisioningArtifactInput, optFns ...func(*Options)) (*DeleteProvisioningArtifactOutput, error) {
 	if params == nil {
 		params = &DeleteProvisioningArtifactInput{}
@@ -43,7 +44,9 @@ type DeleteProvisioningArtifactInput struct {
 	ProvisioningArtifactId *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

@@ -196,8 +196,10 @@ type Experiment struct {
 	// In thousandths of a percent, the amount of the available audience that is
 	// allocated to this experiment. The available audience is the total audience minus
 	// the audience that you have allocated to overrides or current launches of this
-	// feature. This is represented in thousandths of a percent, so a value of 10,000
-	// is 10% of the available audience.
+	// feature.
+	//
+	// This is represented in thousandths of a percent, so a value of 10,000 is 10% of
+	// the available audience.
 	SamplingRate int64
 
 	// A structure that contains the time and date that Evidently completed the
@@ -318,7 +320,9 @@ type Feature struct {
 	Status FeatureStatus
 
 	// Defines the type of value used to define the different feature variations. For
-	// more information, see Variation types (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-variationtypes.html)
+	// more information, see [Variation types]
+	//
+	// [Variation types]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-variationtypes.html
 	//
 	// This member is required.
 	ValueType VariationValueType
@@ -331,9 +335,12 @@ type Feature struct {
 
 	// The name of the variation that is used as the default variation. The default
 	// variation is served to users who are not allocated to any ongoing launches or
-	// experiments of this feature. This variation must also be listed in the
-	// variations structure. If you omit defaultVariation , the first variation listed
-	// in the variations structure is used as the default variation.
+	// experiments of this feature.
+	//
+	// This variation must also be listed in the variations structure.
+	//
+	// If you omit defaultVariation , the first variation listed in the variations
+	// structure is used as the default variation.
 	DefaultVariation *string
 
 	// The description of the feature.
@@ -342,9 +349,12 @@ type Feature struct {
 	// A set of key-value pairs that specify users who should always be served a
 	// specific variation of a feature. Each key specifies a user using their user ID,
 	// account ID, or some other identifier. The value specifies the name of the
-	// variation that the user is to be served. For the override to be successful, the
-	// value of the key must match the entityId used in the EvaluateFeature (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html)
-	// operation.
+	// variation that the user is to be served.
+	//
+	// For the override to be successful, the value of the key must match the entityId
+	// used in the [EvaluateFeature]operation.
+	//
+	// [EvaluateFeature]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html
 	EntityOverrides map[string]string
 
 	// An array of structures that define the evaluation rules for the feature.
@@ -547,10 +557,11 @@ type MetricDefinition struct {
 	// value to be recorded.
 	EntityIdKey *string
 
-	// The EventBridge event pattern that defines how the metric is recorded. For more
-	// information about EventBridge event patterns, see Amazon EventBridge event
-	// patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html)
-	// .
+	// The EventBridge event pattern that defines how the metric is recorded.
+	//
+	// For more information about EventBridge event patterns, see [Amazon EventBridge event patterns].
+	//
+	// [Amazon EventBridge event patterns]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html
 	//
 	// This value conforms to the media type: application/json
 	EventPattern *string
@@ -587,10 +598,11 @@ type MetricDefinitionConfig struct {
 	// This member is required.
 	ValueKey *string
 
-	// The EventBridge event pattern that defines how the metric is recorded. For more
-	// information about EventBridge event patterns, see Amazon EventBridge event
-	// patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html)
-	// .
+	// The EventBridge event pattern that defines how the metric is recorded.
+	//
+	// For more information about EventBridge event patterns, see [Amazon EventBridge event patterns].
+	//
+	// [Amazon EventBridge event patterns]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html
 	//
 	// This value conforms to the media type: application/json
 	EventPattern *string
@@ -611,8 +623,10 @@ type MetricGoal struct {
 	MetricDefinition *MetricDefinition
 
 	// INCREASE means that a variation with a higher number for this metric is
-	// performing better. DECREASE means that a variation with a lower number for this
-	// metric is performing better.
+	// performing better.
+	//
+	// DECREASE means that a variation with a lower number for this metric is
+	// performing better.
 	DesiredChange ChangeDirectionEnum
 
 	noSmithyDocumentSerde
@@ -628,8 +642,10 @@ type MetricGoalConfig struct {
 	MetricDefinition *MetricDefinitionConfig
 
 	// INCREASE means that a variation with a higher number for this metric is
-	// performing better. DECREASE means that a variation with a lower number for this
-	// metric is performing better.
+	// performing better.
+	//
+	// DECREASE means that a variation with a lower number for this metric is
+	// performing better.
 	DesiredChange ChangeDirectionEnum
 
 	noSmithyDocumentSerde
@@ -788,11 +804,13 @@ type ProjectAppConfigResource struct {
 
 // Use this parameter to configure client-side evaluation for your project.
 // Client-side evaluation allows your application to assign variations to user
-// sessions locally instead of by calling the EvaluateFeature (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html)
-// operation to assign the variations. This mitigates the latency and availability
-// risks that come with an API call. ProjectAppConfigResource is a structure that
-// defines the configuration of how your application integrates with AppConfig to
-// run client-side evaluation.
+// sessions locally instead of by calling the [EvaluateFeature]operation to assign the variations.
+// This mitigates the latency and availability risks that come with an API call.
+//
+// ProjectAppConfigResource is a structure that defines the configuration of how
+// your application integrates with AppConfig to run client-side evaluation.
+//
+// [EvaluateFeature]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html
 type ProjectAppConfigResourceConfig struct {
 
 	// The ID of the AppConfig application to use for client-side evaluation.
@@ -977,21 +995,26 @@ type ScheduledSplit struct {
 	// The traffic allocation percentages among the feature variations during one step
 	// of a launch. This is a set of key-value pairs. The keys are variation names. The
 	// values represent the percentage of traffic to allocate to that variation during
-	// this step. The values is expressed in thousandths of a percent, so assigning a
-	// weight of 50000 assigns 50% of traffic to that variation. If the sum of the
-	// weights for all the variations in a segment override does not add up to 100,000,
-	// then the remaining traffic that matches this segment is not assigned by this
-	// segment override, and instead moves on to the next segment override or the
-	// default traffic split.
+	// this step.
+	//
+	// The values is expressed in thousandths of a percent, so assigning a weight of
+	// 50000 assigns 50% of traffic to that variation.
+	//
+	// If the sum of the weights for all the variations in a segment override does not
+	// add up to 100,000, then the remaining traffic that matches this segment is not
+	// assigned by this segment override, and instead moves on to the next segment
+	// override or the default traffic split.
 	GroupWeights map[string]int64
 
 	// Use this parameter to specify different traffic splits for one or more audience
 	// segments. A segment is a portion of your audience that share one or more
 	// characteristics. Examples could be Chrome browser users, users in Europe, or
 	// Firefox browser users in Europe who also fit other criteria that your
-	// application collects, such as age. This parameter is an array of up to six
-	// segment override objects. Each of these objects specifies a segment that you
-	// have already created, and defines the traffic split for that segment.
+	// application collects, such as age.
+	//
+	// This parameter is an array of up to six segment override objects. Each of these
+	// objects specifies a segment that you have already created, and defines the
+	// traffic split for that segment.
 	SegmentOverrides []SegmentOverride
 
 	noSmithyDocumentSerde
@@ -1004,12 +1027,15 @@ type ScheduledSplitConfig struct {
 	// The traffic allocation percentages among the feature variations during one step
 	// of a launch. This is a set of key-value pairs. The keys are variation names. The
 	// values represent the percentage of traffic to allocate to that variation during
-	// this step. The values is expressed in thousandths of a percent, so assigning a
-	// weight of 50000 assigns 50% of traffic to that variation. If the sum of the
-	// weights for all the variations in a segment override does not add up to 100,000,
-	// then the remaining traffic that matches this segment is not assigned by this
-	// segment override, and instead moves on to the next segment override or the
-	// default traffic split.
+	// this step.
+	//
+	// The values is expressed in thousandths of a percent, so assigning a weight of
+	// 50000 assigns 50% of traffic to that variation.
+	//
+	// If the sum of the weights for all the variations in a segment override does not
+	// add up to 100,000, then the remaining traffic that matches this segment is not
+	// assigned by this segment override, and instead moves on to the next segment
+	// override or the default traffic split.
 	//
 	// This member is required.
 	GroupWeights map[string]int64
@@ -1023,9 +1049,11 @@ type ScheduledSplitConfig struct {
 	// segments. A segment is a portion of your audience that share one or more
 	// characteristics. Examples could be Chrome browser users, users in Europe, or
 	// Firefox browser users in Europe who also fit other criteria that your
-	// application collects, such as age. This parameter is an array of up to six
-	// segment override objects. Each of these objects specifies a segment that you
-	// have already created, and defines the traffic split for that segment.
+	// application collects, such as age.
+	//
+	// This parameter is an array of up to six segment override objects. Each of these
+	// objects specifies a segment that you have already created, and defines the
+	// traffic split for that segment.
 	SegmentOverrides []SegmentOverride
 
 	noSmithyDocumentSerde
@@ -1086,8 +1114,9 @@ type Segment struct {
 
 	// The pattern that defines the attributes to use to evalute whether a user
 	// session will be in the segment. For more information about the pattern syntax,
-	// see Segment rule pattern syntax (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html)
-	// .
+	// see [Segment rule pattern syntax].
+	//
+	// [Segment rule pattern syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html
 	//
 	// This value conforms to the media type: application/json
 	//

@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a dynamic thing group. Requires permission to access the
-// UpdateDynamicThingGroup (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Updates a dynamic thing group.
+//
+// Requires permission to access the [UpdateDynamicThingGroup] action.
+//
+// [UpdateDynamicThingGroup]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdateDynamicThingGroup(ctx context.Context, params *UpdateDynamicThingGroupInput, optFns ...func(*Options)) (*UpdateDynamicThingGroupOutput, error) {
 	if params == nil {
 		params = &UpdateDynamicThingGroupInput{}
@@ -44,16 +46,18 @@ type UpdateDynamicThingGroupInput struct {
 	// The expected version of the dynamic thing group to update.
 	ExpectedVersion *int64
 
-	// The dynamic thing group index to update. Currently one index is supported:
-	// AWS_Things .
+	// The dynamic thing group index to update.
+	//
+	// Currently one index is supported: AWS_Things .
 	IndexName *string
 
 	// The dynamic thing group search query string to update.
 	QueryString *string
 
-	// The dynamic thing group query version to update. Currently one query version is
-	// supported: "2017-09-30". If not specified, the query version defaults to this
-	// value.
+	// The dynamic thing group query version to update.
+	//
+	// Currently one query version is supported: "2017-09-30". If not specified, the
+	// query version defaults to this value.
 	QueryVersion *string
 
 	noSmithyDocumentSerde

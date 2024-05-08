@@ -30,8 +30,8 @@ func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceI
 
 type UpdateDataSourceInput struct {
 
-	// The identifier of the Amazon Q Business application the data source is attached
-	// to.
+	//  The identifier of the Amazon Q Business application the data source is
+	// attached to.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -56,9 +56,11 @@ type UpdateDataSourceInput struct {
 	DisplayName *string
 
 	// Provides the configuration information for altering document metadata and
-	// content during the document ingestion process. For more information, see Custom
-	// document enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
-	// .
+	// content during the document ingestion process.
+	//
+	// For more information, see [Custom document enrichment].
+	//
+	// [Custom document enrichment]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
 	DocumentEnrichmentConfiguration *types.DocumentEnrichmentConfiguration
 
 	// The Amazon Resource Name (ARN) of an IAM role with permission to access the

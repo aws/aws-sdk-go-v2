@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the JSON text of the resource-based policy document attached to the
+//	Retrieves the JSON text of the resource-based policy document attached to the
+//
 // CloudTrail channel.
 func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolicyInput, optFns ...func(*Options)) (*GetResourcePolicyOutput, error) {
 	if params == nil {
@@ -29,7 +30,7 @@ func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolic
 
 type GetResourcePolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the CloudTrail channel attached to the
+	//  The Amazon Resource Name (ARN) of the CloudTrail channel attached to the
 	// resource-based policy. The following is the format of a resource ARN:
 	// arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel .
 	//
@@ -41,12 +42,12 @@ type GetResourcePolicyInput struct {
 
 type GetResourcePolicyOutput struct {
 
-	// The Amazon Resource Name (ARN) of the CloudTrail channel attached to
+	//  The Amazon Resource Name (ARN) of the CloudTrail channel attached to
 	// resource-based policy.
 	ResourceArn *string
 
-	// A JSON-formatted string that contains the resource-based policy attached to the
-	// CloudTrail channel.
+	//  A JSON-formatted string that contains the resource-based policy attached to
+	// the CloudTrail channel.
 	ResourcePolicy *string
 
 	// Metadata pertaining to the operation's result.

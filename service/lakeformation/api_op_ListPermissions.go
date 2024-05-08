@@ -13,11 +13,13 @@ import (
 
 // Returns a list of the principal permissions on the resource, filtered by the
 // permissions of the caller. For example, if you are granted an ALTER permission,
-// you are able to see only the principal permissions for ALTER. This operation
-// returns only those permissions that have been explicitly granted. For
-// information about permissions, see Security and Access Control to Metadata and
-// Data (https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html)
-// .
+// you are able to see only the principal permissions for ALTER.
+//
+// This operation returns only those permissions that have been explicitly granted.
+//
+// For information about permissions, see [Security and Access Control to Metadata and Data].
+//
+// [Security and Access Control to Metadata and Data]: https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html
 func (c *Client) ListPermissions(ctx context.Context, params *ListPermissionsInput, optFns ...func(*Options)) (*ListPermissionsOutput, error) {
 	if params == nil {
 		params = &ListPermissionsInput{}
@@ -53,10 +55,11 @@ type ListPermissionsInput struct {
 	// Specifies a principal to filter the permissions returned.
 	Principal *types.DataLakePrincipal
 
-	// A resource where you will get a list of the principal permissions. This
-	// operation does not support getting privileges on a table with columns. Instead,
-	// call this operation on the table, and the operation returns the table and the
-	// table w columns.
+	// A resource where you will get a list of the principal permissions.
+	//
+	// This operation does not support getting privileges on a table with columns.
+	// Instead, call this operation on the table, and the operation returns the table
+	// and the table w columns.
 	Resource *types.Resource
 
 	// Specifies a resource type to filter the permissions returned.

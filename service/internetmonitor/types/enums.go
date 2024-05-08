@@ -13,8 +13,9 @@ const (
 )
 
 // Values returns all known values for HealthEventImpactType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HealthEventImpactType) Values() []HealthEventImpactType {
 	return []HealthEventImpactType{
 		"AVAILABILITY",
@@ -33,8 +34,9 @@ const (
 )
 
 // Values returns all known values for HealthEventStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HealthEventStatus) Values() []HealthEventStatus {
 	return []HealthEventStatus{
 		"ACTIVE",
@@ -51,8 +53,9 @@ const (
 )
 
 // Values returns all known values for InternetEventStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InternetEventStatus) Values() []InternetEventStatus {
 	return []InternetEventStatus{
 		"ACTIVE",
@@ -69,8 +72,9 @@ const (
 )
 
 // Values returns all known values for InternetEventType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InternetEventType) Values() []InternetEventType {
 	return []InternetEventType{
 		"AVAILABILITY",
@@ -88,8 +92,9 @@ const (
 
 // Values returns all known values for LocalHealthEventsConfigStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LocalHealthEventsConfigStatus) Values() []LocalHealthEventsConfigStatus {
 	return []LocalHealthEventsConfigStatus{
 		"ENABLED",
@@ -106,8 +111,9 @@ const (
 )
 
 // Values returns all known values for LogDeliveryStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LogDeliveryStatus) Values() []LogDeliveryStatus {
 	return []LogDeliveryStatus{
 		"ENABLED",
@@ -126,8 +132,9 @@ const (
 )
 
 // Values returns all known values for MonitorConfigState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MonitorConfigState) Values() []MonitorConfigState {
 	return []MonitorConfigState{
 		"PENDING",
@@ -151,6 +158,7 @@ const (
 
 // Values returns all known values for MonitorProcessingStatusCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (MonitorProcessingStatusCode) Values() []MonitorProcessingStatusCode {
 	return []MonitorProcessingStatusCode{
@@ -172,8 +180,9 @@ const (
 )
 
 // Values returns all known values for Operator. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Operator) Values() []Operator {
 	return []Operator{
 		"EQUALS",
@@ -193,8 +202,9 @@ const (
 )
 
 // Values returns all known values for QueryStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QueryStatus) Values() []QueryStatus {
 	return []QueryStatus{
 		"QUEUED",
@@ -215,8 +225,9 @@ const (
 )
 
 // Values returns all known values for QueryType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QueryType) Values() []QueryType {
 	return []QueryType{
 		"MEASUREMENTS",
@@ -234,8 +245,9 @@ const (
 )
 
 // Values returns all known values for TriangulationEventType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TriangulationEventType) Values() []TriangulationEventType {
 	return []TriangulationEventType{
 		"AWS",

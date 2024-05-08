@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for ChannelStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChannelStatus) Values() []ChannelStatus {
 	return []ChannelStatus{
 		"CREATING",
@@ -31,8 +32,9 @@ const (
 )
 
 // Values returns all known values for ComputeType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComputeType) Values() []ComputeType {
 	return []ComputeType{
 		"ACU_1",
@@ -49,8 +51,9 @@ const (
 )
 
 // Values returns all known values for DatasetActionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatasetActionType) Values() []DatasetActionType {
 	return []DatasetActionType{
 		"QUERY",
@@ -68,8 +71,9 @@ const (
 )
 
 // Values returns all known values for DatasetContentState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatasetContentState) Values() []DatasetContentState {
 	return []DatasetContentState{
 		"CREATING",
@@ -88,8 +92,9 @@ const (
 )
 
 // Values returns all known values for DatasetStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatasetStatus) Values() []DatasetStatus {
 	return []DatasetStatus{
 		"CREATING",
@@ -108,8 +113,9 @@ const (
 )
 
 // Values returns all known values for DatastoreStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatastoreStatus) Values() []DatastoreStatus {
 	return []DatastoreStatus{
 		"CREATING",
@@ -127,8 +133,9 @@ const (
 )
 
 // Values returns all known values for FileFormatType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FileFormatType) Values() []FileFormatType {
 	return []FileFormatType{
 		"JSON",
@@ -144,8 +151,9 @@ const (
 )
 
 // Values returns all known values for LoggingLevel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LoggingLevel) Values() []LoggingLevel {
 	return []LoggingLevel{
 		"ERROR",
@@ -163,8 +171,9 @@ const (
 )
 
 // Values returns all known values for ReprocessingStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReprocessingStatus) Values() []ReprocessingStatus {
 	return []ReprocessingStatus{
 		"RUNNING",

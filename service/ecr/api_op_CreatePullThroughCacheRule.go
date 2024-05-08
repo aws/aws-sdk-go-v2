@@ -14,8 +14,10 @@ import (
 
 // Creates a pull through cache rule. A pull through cache rule provides a way to
 // cache images from an upstream registry source in your Amazon ECR private
-// registry. For more information, see Using pull through cache rules (https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache.html)
-// in the Amazon Elastic Container Registry User Guide.
+// registry. For more information, see [Using pull through cache rules]in the Amazon Elastic Container Registry
+// User Guide.
+//
+// [Using pull through cache rules]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache.html
 func (c *Client) CreatePullThroughCacheRule(ctx context.Context, params *CreatePullThroughCacheRuleInput, optFns ...func(*Options)) (*CreatePullThroughCacheRuleOutput, error) {
 	if params == nil {
 		params = &CreatePullThroughCacheRuleInput{}
@@ -41,11 +43,17 @@ type CreatePullThroughCacheRuleInput struct {
 	// The registry URL of the upstream public registry to use as the source for the
 	// pull through cache rule. The following is the syntax to use for each supported
 	// upstream registry.
+	//
 	//   - Amazon ECR Public ( ecr-public ) - public.ecr.aws
+	//
 	//   - Docker Hub ( docker-hub ) - registry-1.docker.io
+	//
 	//   - Quay ( quay ) - quay.io
+	//
 	//   - Kubernetes ( k8s ) - registry.k8s.io
+	//
 	//   - GitHub Container Registry ( github-container-registry ) - ghcr.io
+	//
 	//   - Microsoft Azure Container Registry ( azure-container-registry ) -
 	//   .azurecr.io
 	//

@@ -36,11 +36,13 @@ type UntagResourceInput struct {
 	ResourceArn *string
 
 	// A list of tag key names to remove from the resource. You don't specify the
-	// value. Both the key and its associated value are removed. This parameter to the
-	// API requires a JSON text string argument. For information on how to format a
-	// JSON parameter for the various command line tool environments, see Using JSON
-	// for Parameters (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html#cli-using-param-json)
-	// in the AWS CLI User Guide.
+	// value. Both the key and its associated value are removed.
+	//
+	// This parameter to the API requires a JSON text string argument. For information
+	// on how to format a JSON parameter for the various command line tool
+	// environments, see [Using JSON for Parameters]in the AWS CLI User Guide.
+	//
+	// [Using JSON for Parameters]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html#cli-using-param-json
 	//
 	// This member is required.
 	TagKeys []string

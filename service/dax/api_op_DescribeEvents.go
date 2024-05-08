@@ -14,9 +14,10 @@ import (
 
 // Returns events related to DAX clusters and parameter groups. You can obtain
 // events specific to a particular DAX cluster or parameter group by providing the
-// name as a parameter. By default, only the events occurring within the last 24
-// hours are returned; however, you can retrieve up to 14 days' worth of events if
-// necessary.
+// name as a parameter.
+//
+// By default, only the events occurring within the last 24 hours are returned;
+// however, you can retrieve up to 14 days' worth of events if necessary.
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {
 	if params == nil {
 		params = &DescribeEventsInput{}
@@ -43,8 +44,9 @@ type DescribeEventsInput struct {
 
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so
-	// that the remaining results can be retrieved. The value for MaxResults must be
-	// between 20 and 100.
+	// that the remaining results can be retrieved.
+	//
+	// The value for MaxResults must be between 20 and 100.
 	MaxResults *int32
 
 	// An optional token returned from a prior request. Use this token for pagination

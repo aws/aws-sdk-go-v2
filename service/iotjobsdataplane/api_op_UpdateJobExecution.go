@@ -66,7 +66,7 @@ type UpdateJobExecutionInput struct {
 	// JobExecutionState data. The default is false.
 	IncludeJobExecutionState *bool
 
-	// Optional. A collection of name/value pairs that describe the status of the job
+	//  Optional. A collection of name/value pairs that describe the status of the job
 	// execution. If not specified, the statusDetails are unchanged.
 	StatusDetails map[string]string
 

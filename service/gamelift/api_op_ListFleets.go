@@ -10,25 +10,36 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation has been expanded to use with the Amazon GameLift containers
-// feature, which is currently in public preview. Retrieves a collection of fleet
-// resources in an Amazon Web Services Region. You can filter the result set to
-// find only those fleets that are deployed with a specific build or script. For
-// fleets that have multiple locations, this operation retrieves fleets based on
-// their home Region only. You can use operation in the following ways:
+//	This operation has been expanded to use with the Amazon GameLift containers
+//
+// feature, which is currently in public preview.
+//
+// Retrieves a collection of fleet resources in an Amazon Web Services Region. You
+// can filter the result set to find only those fleets that are deployed with a
+// specific build or script. For fleets that have multiple locations, this
+// operation retrieves fleets based on their home Region only.
+//
+// You can use operation in the following ways:
+//
 //   - To get a list of all fleets in a Region, don't provide a build or script
 //     identifier.
+//
 //   - To get a list of all fleets where a specific game build is deployed,
 //     provide the build ID.
+//
 //   - To get a list of all Realtime Servers fleets with a specific configuration
 //     script, provide the script ID.
+//
 //   - To get a list of all fleets with a specific container group definition,
 //     provide the ContainerGroupDefinition ID.
 //
 // Use the pagination parameters to retrieve results as a set of sequential pages.
-// If successful, this operation returns a list of fleet IDs that match the request
-// parameters. A NextToken value is also returned if there are more result pages to
-// retrieve. Fleet IDs are returned in no particular order.
+//
+// If successful, this operation returns a list of fleet IDs that match the
+// request parameters. A NextToken value is also returned if there are more result
+// pages to retrieve.
+//
+// Fleet IDs are returned in no particular order.
 func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns ...func(*Options)) (*ListFleetsOutput, error) {
 	if params == nil {
 		params = &ListFleetsInput{}

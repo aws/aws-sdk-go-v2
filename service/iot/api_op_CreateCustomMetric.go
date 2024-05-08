@@ -11,9 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use this API to define a Custom Metric published by your devices to Device
-// Defender. Requires permission to access the CreateCustomMetric (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//	Use this API to define a Custom Metric published by your devices to Device
+//
+// Defender.
+//
+// Requires permission to access the [CreateCustomMetric] action.
+//
+// [CreateCustomMetric]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreateCustomMetric(ctx context.Context, params *CreateCustomMetricInput, optFns ...func(*Options)) (*CreateCustomMetricOutput, error) {
 	if params == nil {
 		params = &CreateCustomMetricInput{}
@@ -39,26 +43,28 @@ type CreateCustomMetricInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// The name of the custom metric. This will be used in the metric report submitted
-	// from the device/thing. The name can't begin with aws: . You can't change the
-	// name after you define it.
+	//  The name of the custom metric. This will be used in the metric report
+	// submitted from the device/thing. The name can't begin with aws: . You can't
+	// change the name after you define it.
 	//
 	// This member is required.
 	MetricName *string
 
-	// The type of the custom metric. The type number only takes a single metric value
-	// as an input, but when you submit the metrics value in the DeviceMetrics report,
-	// you must pass it as an array with a single value.
+	//  The type of the custom metric.
+	//
+	// The type number only takes a single metric value as an input, but when you
+	// submit the metrics value in the DeviceMetrics report, you must pass it as an
+	// array with a single value.
 	//
 	// This member is required.
 	MetricType types.CustomMetricType
 
-	// The friendly name in the console for the custom metric. This name doesn't have
+	//  The friendly name in the console for the custom metric. This name doesn't have
 	// to be unique. Don't use this name as the metric identifier in the device metric
 	// report. You can update the friendly name after you define it.
 	DisplayName *string
 
-	// Metadata that can be used to manage the custom metric.
+	//  Metadata that can be used to manage the custom metric.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -66,11 +72,11 @@ type CreateCustomMetricInput struct {
 
 type CreateCustomMetricOutput struct {
 
-	// The Amazon Resource Number (ARN) of the custom metric. For example,
+	//  The Amazon Resource Number (ARN) of the custom metric. For example,
 	// arn:aws-partition:iot:region:accountId:custommetric/metricName
 	MetricArn *string
 
-	// The name of the custom metric to be used in the metric report.
+	//  The name of the custom metric to be used in the metric report.
 	MetricName *string
 
 	// Metadata pertaining to the operation's result.

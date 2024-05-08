@@ -11,13 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a streaming source to your SQL-based Kinesis Data Analytics application.
+//	Adds a streaming source to your SQL-based Kinesis Data Analytics application.
+//
 // You can add a streaming source when you create an application, or you can use
 // this operation to add a streaming source after you create an application. For
-// more information, see CreateApplication . Any configuration update, including
-// adding a streaming source using this operation, results in a new version of the
-// application. You can use the DescribeApplication operation to find the current
-// application version.
+// more information, see CreateApplication.
+//
+// Any configuration update, including adding a streaming source using this
+// operation, results in a new version of the application. You can use the DescribeApplication
+// operation to find the current application version.
 func (c *Client) AddApplicationInput(ctx context.Context, params *AddApplicationInputInput, optFns ...func(*Options)) (*AddApplicationInputOutput, error) {
 	if params == nil {
 		params = &AddApplicationInputInput{}
@@ -42,8 +44,8 @@ type AddApplicationInputInput struct {
 	ApplicationName *string
 
 	// The current version of your application. You must provide the
-	// ApplicationVersionID or the ConditionalToken .You can use the
-	// DescribeApplication operation to find the current application version.
+	// ApplicationVersionID or the ConditionalToken .You can use the DescribeApplication operation to
+	// find the current application version.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64

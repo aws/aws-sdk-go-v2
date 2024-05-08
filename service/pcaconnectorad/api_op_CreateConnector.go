@@ -30,7 +30,7 @@ func (c *Client) CreateConnector(ctx context.Context, params *CreateConnectorInp
 
 type CreateConnectorInput struct {
 
-	// The Amazon Resource Name (ARN) of the certificate authority being used.
+	//  The Amazon Resource Name (ARN) of the certificate authority being used.
 	//
 	// This member is required.
 	CertificateAuthorityArn *string

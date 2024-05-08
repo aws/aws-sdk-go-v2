@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a custom endpoint and removes it from an Amazon Aurora DB cluster. This
-// action only applies to Aurora DB clusters.
+// Deletes a custom endpoint and removes it from an Amazon Aurora DB cluster.
+//
+// This action only applies to Aurora DB clusters.
 func (c *Client) DeleteDBClusterEndpoint(ctx context.Context, params *DeleteDBClusterEndpointInput, optFns ...func(*Options)) (*DeleteDBClusterEndpointOutput, error) {
 	if params == nil {
 		params = &DeleteDBClusterEndpointInput{}
@@ -41,9 +42,13 @@ type DeleteDBClusterEndpointInput struct {
 // This data type represents the information you need to connect to an Amazon
 // Aurora DB cluster. This data type is used as a response element in the following
 // actions:
+//
 //   - CreateDBClusterEndpoint
+//
 //   - DescribeDBClusterEndpoints
+//
 //   - ModifyDBClusterEndpoint
+//
 //   - DeleteDBClusterEndpoint
 //
 // For the data structure that represents Amazon RDS DB instance endpoints, see

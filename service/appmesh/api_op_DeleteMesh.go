@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing service mesh. You must delete all resources (virtual
-// services, routes, virtual routers, and virtual nodes) in the service mesh before
-// you can delete the mesh itself.
+// Deletes an existing service mesh.
+//
+// You must delete all resources (virtual services, routes, virtual routers, and
+// virtual nodes) in the service mesh before you can delete the mesh itself.
 func (c *Client) DeleteMesh(ctx context.Context, params *DeleteMeshInput, optFns ...func(*Options)) (*DeleteMeshOutput, error) {
 	if params == nil {
 		params = &DeleteMeshInput{}

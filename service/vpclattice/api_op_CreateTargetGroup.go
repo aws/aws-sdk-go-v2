@@ -13,8 +13,11 @@ import (
 
 // Creates a target group. A target group is a collection of targets, or compute
 // resources, that run your application or service. A target group can only be used
-// by a single service. For more information, see Target groups (https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html)
-// in the Amazon VPC Lattice User Guide.
+// by a single service.
+//
+// For more information, see [Target groups] in the Amazon VPC Lattice User Guide.
+//
+// [Target groups]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html
 func (c *Client) CreateTargetGroup(ctx context.Context, params *CreateTargetGroupInput, optFns ...func(*Options)) (*CreateTargetGroupOutput, error) {
 	if params == nil {
 		params = &CreateTargetGroupInput{}

@@ -13,8 +13,9 @@ const (
 )
 
 // Values returns all known values for ActivityTaskTimeoutType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActivityTaskTimeoutType) Values() []ActivityTaskTimeoutType {
 	return []ActivityTaskTimeoutType{
 		"START_TO_CLOSE",
@@ -33,8 +34,9 @@ const (
 )
 
 // Values returns all known values for CancelTimerFailedCause. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CancelTimerFailedCause) Values() []CancelTimerFailedCause {
 	return []CancelTimerFailedCause{
 		"TIMER_ID_UNKNOWN",
@@ -52,8 +54,9 @@ const (
 
 // Values returns all known values for CancelWorkflowExecutionFailedCause. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CancelWorkflowExecutionFailedCause) Values() []CancelWorkflowExecutionFailedCause {
 	return []CancelWorkflowExecutionFailedCause{
 		"UNHANDLED_DECISION",
@@ -71,8 +74,9 @@ const (
 )
 
 // Values returns all known values for ChildPolicy. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChildPolicy) Values() []ChildPolicy {
 	return []ChildPolicy{
 		"TERMINATE",
@@ -94,8 +98,9 @@ const (
 )
 
 // Values returns all known values for CloseStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CloseStatus) Values() []CloseStatus {
 	return []CloseStatus{
 		"COMPLETED",
@@ -117,8 +122,9 @@ const (
 
 // Values returns all known values for CompleteWorkflowExecutionFailedCause. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CompleteWorkflowExecutionFailedCause) Values() []CompleteWorkflowExecutionFailedCause {
 	return []CompleteWorkflowExecutionFailedCause{
 		"UNHANDLED_DECISION",
@@ -143,8 +149,9 @@ const (
 
 // Values returns all known values for ContinueAsNewWorkflowExecutionFailedCause.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContinueAsNewWorkflowExecutionFailedCause) Values() []ContinueAsNewWorkflowExecutionFailedCause {
 	return []ContinueAsNewWorkflowExecutionFailedCause{
 		"UNHANDLED_DECISION",
@@ -168,8 +175,9 @@ const (
 )
 
 // Values returns all known values for DecisionTaskTimeoutType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DecisionTaskTimeoutType) Values() []DecisionTaskTimeoutType {
 	return []DecisionTaskTimeoutType{
 		"START_TO_CLOSE",
@@ -197,8 +205,9 @@ const (
 )
 
 // Values returns all known values for DecisionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DecisionType) Values() []DecisionType {
 	return []DecisionType{
 		"ScheduleActivityTask",
@@ -278,8 +287,9 @@ const (
 )
 
 // Values returns all known values for EventType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"WorkflowExecutionStarted",
@@ -348,8 +358,9 @@ const (
 )
 
 // Values returns all known values for ExecutionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExecutionStatus) Values() []ExecutionStatus {
 	return []ExecutionStatus{
 		"OPEN",
@@ -367,8 +378,9 @@ const (
 
 // Values returns all known values for FailWorkflowExecutionFailedCause. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FailWorkflowExecutionFailedCause) Values() []FailWorkflowExecutionFailedCause {
 	return []FailWorkflowExecutionFailedCause{
 		"UNHANDLED_DECISION",
@@ -385,6 +397,7 @@ const (
 
 // Values returns all known values for LambdaFunctionTimeoutType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LambdaFunctionTimeoutType) Values() []LambdaFunctionTimeoutType {
 	return []LambdaFunctionTimeoutType{
@@ -400,8 +413,9 @@ const (
 )
 
 // Values returns all known values for RecordMarkerFailedCause. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecordMarkerFailedCause) Values() []RecordMarkerFailedCause {
 	return []RecordMarkerFailedCause{
 		"OPERATION_NOT_PERMITTED",
@@ -417,8 +431,9 @@ const (
 )
 
 // Values returns all known values for RegistrationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RegistrationStatus) Values() []RegistrationStatus {
 	return []RegistrationStatus{
 		"REGISTERED",
@@ -436,8 +451,9 @@ const (
 
 // Values returns all known values for RequestCancelActivityTaskFailedCause. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RequestCancelActivityTaskFailedCause) Values() []RequestCancelActivityTaskFailedCause {
 	return []RequestCancelActivityTaskFailedCause{
 		"ACTIVITY_ID_UNKNOWN",
@@ -456,8 +472,9 @@ const (
 
 // Values returns all known values for
 // RequestCancelExternalWorkflowExecutionFailedCause. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RequestCancelExternalWorkflowExecutionFailedCause) Values() []RequestCancelExternalWorkflowExecutionFailedCause {
 	return []RequestCancelExternalWorkflowExecutionFailedCause{
 		"UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION",
@@ -485,8 +502,9 @@ const (
 
 // Values returns all known values for ScheduleActivityTaskFailedCause. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScheduleActivityTaskFailedCause) Values() []ScheduleActivityTaskFailedCause {
 	return []ScheduleActivityTaskFailedCause{
 		"ACTIVITY_TYPE_DEPRECATED",
@@ -515,8 +533,9 @@ const (
 
 // Values returns all known values for ScheduleLambdaFunctionFailedCause. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScheduleLambdaFunctionFailedCause) Values() []ScheduleLambdaFunctionFailedCause {
 	return []ScheduleLambdaFunctionFailedCause{
 		"ID_ALREADY_IN_USE",
@@ -537,8 +556,9 @@ const (
 
 // Values returns all known values for SignalExternalWorkflowExecutionFailedCause.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SignalExternalWorkflowExecutionFailedCause) Values() []SignalExternalWorkflowExecutionFailedCause {
 	return []SignalExternalWorkflowExecutionFailedCause{
 		"UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION",
@@ -566,8 +586,9 @@ const (
 
 // Values returns all known values for StartChildWorkflowExecutionFailedCause.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StartChildWorkflowExecutionFailedCause) Values() []StartChildWorkflowExecutionFailedCause {
 	return []StartChildWorkflowExecutionFailedCause{
 		"WORKFLOW_TYPE_DOES_NOT_EXIST",
@@ -593,8 +614,9 @@ const (
 
 // Values returns all known values for StartLambdaFunctionFailedCause. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StartLambdaFunctionFailedCause) Values() []StartLambdaFunctionFailedCause {
 	return []StartLambdaFunctionFailedCause{
 		"ASSUME_ROLE_FAILED",
@@ -612,8 +634,9 @@ const (
 )
 
 // Values returns all known values for StartTimerFailedCause. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StartTimerFailedCause) Values() []StartTimerFailedCause {
 	return []StartTimerFailedCause{
 		"TIMER_ID_ALREADY_IN_USE",
@@ -632,8 +655,9 @@ const (
 
 // Values returns all known values for WorkflowExecutionCancelRequestedCause. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkflowExecutionCancelRequestedCause) Values() []WorkflowExecutionCancelRequestedCause {
 	return []WorkflowExecutionCancelRequestedCause{
 		"CHILD_POLICY_APPLIED",
@@ -651,8 +675,9 @@ const (
 
 // Values returns all known values for WorkflowExecutionTerminatedCause. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkflowExecutionTerminatedCause) Values() []WorkflowExecutionTerminatedCause {
 	return []WorkflowExecutionTerminatedCause{
 		"CHILD_POLICY_APPLIED",
@@ -670,8 +695,9 @@ const (
 
 // Values returns all known values for WorkflowExecutionTimeoutType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkflowExecutionTimeoutType) Values() []WorkflowExecutionTimeoutType {
 	return []WorkflowExecutionTimeoutType{
 		"START_TO_CLOSE",

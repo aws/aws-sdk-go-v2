@@ -254,8 +254,11 @@ func (e *ResourceTypeNotSupportedException) ErrorFault() smithy.ErrorFault { ret
 
 // The specified S3 bucket does not belong to the S3 region in which the service
 // is running. The following regions are supported:
+//
 //   - IAD/us-east-1
+//
 //   - PDX/us-west-2
+//
 //   - DUB/eu-west-1
 type S3LocationNotInServiceRegionException struct {
 	Message *string
@@ -499,9 +502,10 @@ func (e *TooManyPlatformsException) ErrorCode() string {
 func (e *TooManyPlatformsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The number of tags in the resource would exceed the number of tags that each
-// resource can have. To calculate this, the operation considers both the number of
-// tags the resource already has and the tags this operation would add if it
-// succeeded.
+// resource can have.
+//
+// To calculate this, the operation considers both the number of tags the resource
+// already has and the tags this operation would add if it succeeded.
 type TooManyTagsException struct {
 	Message *string
 

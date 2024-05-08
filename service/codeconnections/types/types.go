@@ -8,13 +8,16 @@ import (
 )
 
 // A resource that is used to connect third-party source providers with services
-// like CodePipeline. Note: A connection created through CloudFormation, the CLI,
-// or the SDK is in `PENDING` status by default. You can make its status
-// `AVAILABLE` by updating the connection in the console.
+// like CodePipeline.
+//
+// Note: A connection created through CloudFormation, the CLI, or the SDK is in
+// `PENDING` status by default. You can make its status `AVAILABLE` by updating the
+// connection in the console.
 type Connection struct {
 
 	// The Amazon Resource Name (ARN) of the connection. The ARN is used as the
 	// connection reference when the connection is shared between Amazon Web Services.
+	//
 	// The ARN is never reused if the connection is deleted.
 	ConnectionArn *string
 
@@ -43,9 +46,10 @@ type Connection struct {
 // A resource that represents the infrastructure where a third-party provider is
 // installed. The host is used when you create connections to an installed
 // third-party provider type, such as GitHub Enterprise Server. You create one host
-// for all connections to that provider. A host created through the CLI or the SDK
-// is in `PENDING` status by default. You can make its status `AVAILABLE` by
-// setting up the host in the console.
+// for all connections to that provider.
+//
+// A host created through the CLI or the SDK is in `PENDING` status by default.
+// You can make its status `AVAILABLE` by setting up the host in the console.
 type Host struct {
 
 	// The Amazon Resource Name (ARN) of the host.
@@ -134,11 +138,16 @@ type RepositorySyncAttempt struct {
 	StartedAt *time.Time
 
 	// The status of a specific sync attempt. The following are valid statuses:
+	//
 	//   - INITIATED - A repository sync attempt has been created and will begin soon.
+	//
 	//   - IN_PROGRESS - A repository sync attempt has started and work is being done
 	//   to reconcile the branch.
+	//
 	//   - SUCCEEDED - The repository sync attempt has completed successfully.
+	//
 	//   - FAILED - The repository sync attempt has failed.
+	//
 	//   - QUEUED - The repository sync attempt didn't execute and was queued.
 	//
 	// This member is required.
@@ -219,10 +228,14 @@ type ResourceSyncAttempt struct {
 	StartedAt *time.Time
 
 	// The status for a resource sync attempt. The follow are valid statuses:
+	//
 	//   - SYNC-INITIATED - A resource sync attempt has been created and will begin
 	//   soon.
+	//
 	//   - SYNCING - Syncing has started and work is being done to reconcile state.
+	//
 	//   - SYNCED - Syncing has completed successfully.
+	//
 	//   - SYNC_FAILED - A resource sync attempt has failed.
 	//
 	// This member is required.
@@ -442,8 +455,9 @@ type SyncConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A tag is a key-value pair that is used to manage the resource. This tag is
-// available for use by Amazon Web Services services that support tags.
+// A tag is a key-value pair that is used to manage the resource.
+//
+// This tag is available for use by Amazon Web Services services that support tags.
 type Tag struct {
 
 	// The tag's key.

@@ -14,12 +14,16 @@ import (
 // Creates an EKS Pod Identity association between a service account in an Amazon
 // EKS cluster and an IAM role with EKS Pod Identity. Use EKS Pod Identity to give
 // temporary IAM credentials to pods and the credentials are rotated automatically.
+//
 // Amazon EKS Pod Identity associations provide the ability to manage credentials
 // for your applications, similar to the way that Amazon EC2 instance profiles
-// provide credentials to Amazon EC2 instances. If a pod uses a service account
-// that has an association, Amazon EKS sets environment variables in the containers
-// of the pod. The environment variables configure the Amazon Web Services SDKs,
-// including the Command Line Interface, to use the EKS Pod Identity credentials.
+// provide credentials to Amazon EC2 instances.
+//
+// If a pod uses a service account that has an association, Amazon EKS sets
+// environment variables in the containers of the pod. The environment variables
+// configure the Amazon Web Services SDKs, including the Command Line Interface, to
+// use the EKS Pod Identity credentials.
+//
 // Pod Identity is a simpler method than IAM roles for service accounts, as this
 // method doesn't use OIDC identity providers. Additionally, you can configure a
 // role for Pod Identity once, and reuse it across clusters.
@@ -71,18 +75,26 @@ type CreatePodIdentityAssociationInput struct {
 
 	// Metadata that assists with categorization and organization. Each tag consists
 	// of a key and an optional value. You define both. Tags don't propagate to any
-	// other cluster or Amazon Web Services resources. The following basic restrictions
-	// apply to tags:
+	// other cluster or Amazon Web Services resources.
+	//
+	// The following basic restrictions apply to tags:
+	//
 	//   - Maximum number of tags per resource – 50
+	//
 	//   - For each resource, each tag key must be unique, and each tag key can have
 	//   only one value.
+	//
 	//   - Maximum key length – 128 Unicode characters in UTF-8
+	//
 	//   - Maximum value length – 256 Unicode characters in UTF-8
+	//
 	//   - If your tagging schema is used across multiple services and resources,
 	//   remember that other services may have restrictions on allowed characters.
 	//   Generally allowed characters are: letters, numbers, and spaces representable in
 	//   UTF-8, and the following characters: + - = . _ : / @.
+	//
 	//   - Tag keys and values are case-sensitive.
+	//
 	//   - Do not use aws: , AWS: , or any upper or lowercase combination of such as a
 	//   prefix for either keys or values as it is reserved for Amazon Web Services use.
 	//   You cannot edit or delete tag keys or values with this prefix. Tags with this
@@ -94,9 +106,10 @@ type CreatePodIdentityAssociationInput struct {
 
 type CreatePodIdentityAssociationOutput struct {
 
-	// The full description of your new association. The description includes an ID
-	// for the association. Use the ID of the association in further actions to manage
-	// the association.
+	// The full description of your new association.
+	//
+	// The description includes an ID for the association. Use the ID of the
+	// association in further actions to manage the association.
 	Association *types.PodIdentityAssociation
 
 	// Metadata pertaining to the operation's result.

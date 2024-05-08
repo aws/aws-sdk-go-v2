@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListQualificationRequests operation retrieves requests for Qualifications
+//	The ListQualificationRequests operation retrieves requests for Qualifications
+//
 // of a particular Qualification type. The owner of the Qualification type calls
 // this operation to poll for pending requests, and accepts them using the
 // AcceptQualification operation.
@@ -32,7 +33,7 @@ func (c *Client) ListQualificationRequests(ctx context.Context, params *ListQual
 
 type ListQualificationRequestsInput struct {
 
-	// The maximum number of results to return in a single call.
+	//  The maximum number of results to return in a single call.
 	MaxResults *int32
 
 	// If the previous response was incomplete (because there is more data to
@@ -154,7 +155,7 @@ var _ ListQualificationRequestsAPIClient = (*Client)(nil)
 // ListQualificationRequestsPaginatorOptions is the paginator options for
 // ListQualificationRequests
 type ListQualificationRequestsPaginatorOptions struct {
-	// The maximum number of results to return in a single call.
+	//  The maximum number of results to return in a single call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

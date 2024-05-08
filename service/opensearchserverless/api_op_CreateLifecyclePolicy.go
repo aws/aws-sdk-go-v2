@@ -13,9 +13,9 @@ import (
 
 // Creates a lifecyle policy to be applied to OpenSearch Serverless indexes.
 // Lifecycle policies define the number of days or hours to retain the data on an
-// OpenSearch Serverless index. For more information, see Creating data lifecycle
-// policies (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-create)
-// .
+// OpenSearch Serverless index. For more information, see [Creating data lifecycle policies].
+//
+// [Creating data lifecycle policies]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-create
 func (c *Client) CreateLifecyclePolicy(ctx context.Context, params *CreateLifecyclePolicyInput, optFns ...func(*Options)) (*CreateLifecyclePolicyOutput, error) {
 	if params == nil {
 		params = &CreateLifecyclePolicyInput{}

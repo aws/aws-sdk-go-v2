@@ -30,23 +30,27 @@ func (c *Client) ListServicesForAutoScalingConfiguration(ctx context.Context, pa
 type ListServicesForAutoScalingConfigurationInput struct {
 
 	// The Amazon Resource Name (ARN) of the App Runner auto scaling configuration
-	// that you want to list the services for. The ARN can be a full auto scaling
-	// configuration ARN, or a partial ARN ending with either .../name  or
-	// .../name/revision . If a revision isn't specified, the latest active revision
-	// is used.
+	// that you want to list the services for.
+	//
+	// The ARN can be a full auto scaling configuration ARN, or a partial ARN ending
+	// with either .../name  or .../name/revision . If a revision isn't specified, the
+	// latest active revision is used.
 	//
 	// This member is required.
 	AutoScalingConfigurationArn *string
 
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults , the request
-	// retrieves all available results in a single response.
+	// used for a paginated request.
+	//
+	// If you don't specify MaxResults , the request retrieves all available results in
+	// a single response.
 	MaxResults *int32
 
 	// A token from a previous result page. It's used for a paginated request. The
 	// request retrieves the next result page. All other parameter values must be
-	// identical to the ones specified in the initial request. If you don't specify
-	// NextToken , the request retrieves the first result page.
+	// identical to the ones specified in the initial request.
+	//
+	// If you don't specify NextToken , the request retrieves the first result page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -161,8 +165,10 @@ var _ ListServicesForAutoScalingConfigurationAPIClient = (*Client)(nil)
 // options for ListServicesForAutoScalingConfiguration
 type ListServicesForAutoScalingConfigurationPaginatorOptions struct {
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults , the request
-	// retrieves all available results in a single response.
+	// used for a paginated request.
+	//
+	// If you don't specify MaxResults , the request retrieves all available results in
+	// a single response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

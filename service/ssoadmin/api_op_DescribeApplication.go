@@ -31,9 +31,8 @@ func (c *Client) DescribeApplication(ctx context.Context, params *DescribeApplic
 
 type DescribeApplicationInput struct {
 
-	// Specifies the ARN of the application. For more information about ARNs, see
-	// Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the
-	// Amazon Web Services General Reference.
+	// Specifies the ARN of the application. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in
+	// the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	ApplicationArn *string
@@ -59,8 +58,7 @@ type DescribeApplicationOutput struct {
 	Description *string
 
 	// The ARN of the IAM Identity Center application under which the operation will
-	// run. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// run. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespacesin the Amazon Web Services General
 	// Reference.
 	InstanceArn *string
 

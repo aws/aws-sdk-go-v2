@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListHITs operation returns all of a Requester's HITs. The operation returns
-// HITs of any status, except for HITs that have been deleted of with the DeleteHIT
-// operation or that have been auto-deleted.
+//	The ListHITs operation returns all of a Requester's HITs. The operation
+//
+// returns HITs of any status, except for HITs that have been deleted of with the
+// DeleteHIT operation or that have been auto-deleted.
 func (c *Client) ListHITs(ctx context.Context, params *ListHITsInput, optFns ...func(*Options)) (*ListHITsOutput, error) {
 	if params == nil {
 		params = &ListHITsInput{}
@@ -40,7 +41,7 @@ type ListHITsInput struct {
 
 type ListHITsOutput struct {
 
-	// The list of HIT elements returned by the query.
+	//  The list of HIT elements returned by the query.
 	HITs []types.HIT
 
 	// If the previous response was incomplete (because there is more data to

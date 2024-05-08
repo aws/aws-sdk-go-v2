@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified domain configuration. Requires permission to access the
-// DeleteDomainConfiguration (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Deletes the specified domain configuration.
+//
+// Requires permission to access the [DeleteDomainConfiguration] action.
+//
+// [DeleteDomainConfiguration]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DeleteDomainConfiguration(ctx context.Context, params *DeleteDomainConfigurationInput, optFns ...func(*Options)) (*DeleteDomainConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteDomainConfigurationInput{}

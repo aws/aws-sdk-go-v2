@@ -28,12 +28,12 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the flow that you want to tag.
+	//  The Amazon Resource Name (ARN) of the flow that you want to tag.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// The tags used to organize, track, or control access for your flow.
+	//  The tags used to organize, track, or control access for your flow.
 	//
 	// This member is required.
 	Tags map[string]string

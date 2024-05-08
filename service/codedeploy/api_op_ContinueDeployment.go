@@ -34,11 +34,11 @@ func (c *Client) ContinueDeployment(ctx context.Context, params *ContinueDeploym
 
 type ContinueDeploymentInput struct {
 
-	// The unique ID of a blue/green deployment for which you want to start rerouting
+	//  The unique ID of a blue/green deployment for which you want to start rerouting
 	// traffic to the replacement environment.
 	DeploymentId *string
 
-	// The status of the deployment's waiting period. READY_WAIT indicates that the
+	//  The status of the deployment's waiting period. READY_WAIT indicates that the
 	// deployment is ready to start shifting traffic. TERMINATION_WAIT indicates that
 	// the traffic is shifted, but the original target is not terminated.
 	DeploymentWaitType types.DeploymentWaitType

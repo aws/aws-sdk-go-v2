@@ -14,7 +14,13 @@ import (
 // Updates the configuration of a game session queue, which determines how the
 // queue processes new game session requests. To update settings, specify the queue
 // name to be updated and provide the new settings. When updating destinations,
-// provide a complete list of destinations. Learn more Using Multi-Region Queues (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-intro.html)
+// provide a complete list of destinations.
+//
+// # Learn more
+//
+// [Using Multi-Region Queues]
+//
+// [Using Multi-Region Queues]: https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-intro.html
 func (c *Client) UpdateGameSessionQueue(ctx context.Context, params *UpdateGameSessionQueueInput, optFns ...func(*Options)) (*UpdateGameSessionQueueOutput, error) {
 	if params == nil {
 		params = &UpdateGameSessionQueueInput{}
@@ -56,8 +62,9 @@ type UpdateGameSessionQueueInput struct {
 	FilterConfiguration *types.FilterConfiguration
 
 	// An SNS topic ARN that is set up to receive game session placement
-	// notifications. See Setting up notifications for game session placement (https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html)
-	// .
+	// notifications. See [Setting up notifications for game session placement].
+	//
+	// [Setting up notifications for game session placement]: https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html
 	NotificationTarget *string
 
 	// A set of policies that act as a sliding cap on player latency. FleetIQ works to

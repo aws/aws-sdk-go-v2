@@ -48,8 +48,9 @@ type ListMembersInput struct {
 	// Specifies whether to only return associated members or to return all members
 	// (including members who haven't been invited yet or have been disassociated).
 	// Member accounts must have been previously associated with the GuardDuty
-	// administrator account using Create Members (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html)
-	// .
+	// administrator account using [Create Members]Create Members .
+	//
+	// [Create Members]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html
 	OnlyAssociated *string
 
 	noSmithyDocumentSerde
@@ -57,8 +58,10 @@ type ListMembersInput struct {
 
 type ListMembersOutput struct {
 
-	// A list of members. The values for email and invitedAt are available only if the
-	// member accounts are added by invitation.
+	// A list of members.
+	//
+	// The values for email and invitedAt are available only if the member accounts
+	// are added by invitation.
 	Members []types.Member
 
 	// The pagination parameter to be used on the next list operation to retrieve more

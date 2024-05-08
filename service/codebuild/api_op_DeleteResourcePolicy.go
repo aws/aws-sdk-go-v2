@@ -28,7 +28,7 @@ func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourc
 
 type DeleteResourcePolicyInput struct {
 
-	// The ARN of the resource that is associated with the resource policy.
+	//  The ARN of the resource that is associated with the resource policy.
 	//
 	// This member is required.
 	ResourceArn *string

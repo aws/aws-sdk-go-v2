@@ -35,8 +35,8 @@ type DescribeRegionsInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// The DescribeRegionsResult.NextToken value from a previous call to
-	// DescribeRegions . Pass null if this is the first call.
+	// The DescribeRegionsResult.NextToken value from a previous call to DescribeRegions. Pass null
+	// if this is the first call.
 	NextToken *string
 
 	// The name of the Region. For example, us-east-1 .
@@ -48,8 +48,7 @@ type DescribeRegionsInput struct {
 type DescribeRegionsOutput struct {
 
 	// If not null, more results are available. Pass this value for the NextToken
-	// parameter in a subsequent call to DescribeRegions to retrieve the next set of
-	// items.
+	// parameter in a subsequent call to DescribeRegionsto retrieve the next set of items.
 	NextToken *string
 
 	// List of Region information related to the directory for each replicated Region.

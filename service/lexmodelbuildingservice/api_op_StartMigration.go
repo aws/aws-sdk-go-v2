@@ -13,9 +13,11 @@ import (
 )
 
 // Starts migrating a bot from Amazon Lex V1 to Amazon Lex V2. Migrate your bot
-// when you want to take advantage of the new features of Amazon Lex V2. For more
-// information, see Migrating a bot (https://docs.aws.amazon.com/lex/latest/dg/migrate.html)
-// in the Amazon Lex developer guide.
+// when you want to take advantage of the new features of Amazon Lex V2.
+//
+// For more information, see [Migrating a bot] in the Amazon Lex developer guide.
+//
+// [Migrating a bot]: https://docs.aws.amazon.com/lex/latest/dg/migrate.html
 func (c *Client) StartMigration(ctx context.Context, params *StartMigrationInput, optFns ...func(*Options)) (*StartMigrationOutput, error) {
 	if params == nil {
 		params = &StartMigrationInput{}
@@ -34,8 +36,10 @@ func (c *Client) StartMigration(ctx context.Context, params *StartMigrationInput
 type StartMigrationInput struct {
 
 	// The strategy used to conduct the migration.
+	//
 	//   - CREATE_NEW - Creates a new Amazon Lex V2 bot and migrates the Amazon Lex V1
 	//   bot to the new bot.
+	//
 	//   - UPDATE_EXISTING - Overwrites the existing Amazon Lex V2 bot metadata and the
 	//   locale being migrated. It doesn't change any other locales in the Amazon Lex V2
 	//   bot. If the locale doesn't exist, a new locale is created in the Amazon Lex V2
@@ -57,8 +61,10 @@ type StartMigrationInput struct {
 
 	// The name of the Amazon Lex V2 bot that you are migrating the Amazon Lex V1 bot
 	// to.
+	//
 	//   - If the Amazon Lex V2 bot doesn't exist, you must use the CREATE_NEW
 	//   migration strategy.
+	//
 	//   - If the Amazon Lex V2 bot exists, you must use the UPDATE_EXISTING migration
 	//   strategy to change the contents of the Amazon Lex V2 bot.
 	//

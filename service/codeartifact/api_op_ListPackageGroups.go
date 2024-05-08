@@ -29,23 +29,23 @@ func (c *Client) ListPackageGroups(ctx context.Context, params *ListPackageGroup
 
 type ListPackageGroupsInput struct {
 
-	// The domain for which you want to list package groups.
+	//  The domain for which you want to list package groups.
 	//
 	// This member is required.
 	Domain *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	MaxResults *int32
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// A prefix for which to search package groups. When included, ListPackageGroups
+	//  A prefix for which to search package groups. When included, ListPackageGroups
 	// will return only package groups with patterns that match the prefix.
 	Prefix *string
 
@@ -54,11 +54,11 @@ type ListPackageGroupsInput struct {
 
 type ListPackageGroupsOutput struct {
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// The list of package groups in the requested domain.
+	//  The list of package groups in the requested domain.
 	PackageGroups []types.PackageGroupSummary
 
 	// Metadata pertaining to the operation's result.
@@ -156,7 +156,7 @@ var _ ListPackageGroupsAPIClient = (*Client)(nil)
 
 // ListPackageGroupsPaginatorOptions is the paginator options for ListPackageGroups
 type ListPackageGroupsPaginatorOptions struct {
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

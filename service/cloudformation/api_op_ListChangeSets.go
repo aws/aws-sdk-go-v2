@@ -38,8 +38,8 @@ type ListChangeSetsInput struct {
 	// This member is required.
 	StackName *string
 
-	// A string (provided by the ListChangeSets response output) that identifies the
-	// next page of change sets that you want to retrieve.
+	// A string (provided by the ListChangeSets response output) that identifies the next page of
+	// change sets that you want to retrieve.
 	NextToken *string
 
 	noSmithyDocumentSerde

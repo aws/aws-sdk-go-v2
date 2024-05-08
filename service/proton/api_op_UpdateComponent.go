@@ -11,12 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a component. There are a few modes for updating a component. The
-// deploymentType field defines the mode. You can't update a component while its
-// deployment status, or the deployment status of a service instance attached to
-// it, is IN_PROGRESS . For more information about components, see Proton
-// components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
-// in the Proton User Guide.
+// Update a component.
+//
+// There are a few modes for updating a component. The deploymentType field
+// defines the mode.
+//
+// You can't update a component while its deployment status, or the deployment
+// status of a service instance attached to it, is IN_PROGRESS .
+//
+// For more information about components, see [Proton components] in the Proton User Guide.
+//
+// [Proton components]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
 func (c *Client) UpdateComponent(ctx context.Context, params *UpdateComponentInput, optFns ...func(*Options)) (*UpdateComponentOutput, error) {
 	if params == nil {
 		params = &UpdateComponentInput{}
@@ -35,11 +40,17 @@ func (c *Client) UpdateComponent(ctx context.Context, params *UpdateComponentInp
 type UpdateComponentInput struct {
 
 	// The deployment type. It defines the mode for updating a component, as follows:
-	// NONE In this mode, a deployment doesn't occur. Only the requested metadata
+	//
+	//     NONE
+	//
+	// In this mode, a deployment doesn't occur. Only the requested metadata
 	// parameters are updated. You can only specify description in this mode.
-	// CURRENT_VERSION In this mode, the component is deployed and updated with the new
-	// serviceSpec , templateSource , and/or type that you provide. Only requested
-	// parameters are updated.
+	//
+	//     CURRENT_VERSION
+	//
+	// In this mode, the component is deployed and updated with the new serviceSpec ,
+	// templateSource , and/or type that you provide. Only requested parameters are
+	// updated.
 	//
 	// This member is required.
 	DeploymentType types.ComponentDeploymentUpdateType
@@ -76,8 +87,10 @@ type UpdateComponentInput struct {
 	ServiceSpec *string
 
 	// A path to the Infrastructure as Code (IaC) file describing infrastructure that
-	// a custom component provisions. Components support a single IaC file, even if you
-	// use Terraform as your template language.
+	// a custom component provisions.
+	//
+	// Components support a single IaC file, even if you use Terraform as your
+	// template language.
 	//
 	// This value conforms to the media type: application/yaml
 	TemplateFile *string

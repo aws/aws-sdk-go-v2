@@ -15,10 +15,11 @@ import (
 	"time"
 )
 
-// Gets information about a deployment. The content property of the appSpecContent
-// object in the returned revision is always null. Use GetApplicationRevision and
-// the sha256 property of the returned appSpecContent object to get the content of
-// the deployment’s AppSpec file.
+// Gets information about a deployment.
+//
+// The content property of the appSpecContent object in the returned revision is
+// always null. Use GetApplicationRevision and the sha256 property of the returned
+// appSpecContent object to get the content of the deployment’s AppSpec file.
 func (c *Client) GetDeployment(ctx context.Context, params *GetDeploymentInput, optFns ...func(*Options)) (*GetDeploymentOutput, error) {
 	if params == nil {
 		params = &GetDeploymentInput{}
@@ -37,7 +38,7 @@ func (c *Client) GetDeployment(ctx context.Context, params *GetDeploymentInput, 
 // Represents the input of a GetDeployment operation.
 type GetDeploymentInput struct {
 
-	// The unique ID of a deployment associated with the user or Amazon Web Services
+	//  The unique ID of a deployment associated with the user or Amazon Web Services
 	// account.
 	//
 	// This member is required.
@@ -178,12 +179,13 @@ type DeploymentSuccessfulWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetDeploymentInput, *GetDeploymentOutput, error) (bool, error)
 }
 

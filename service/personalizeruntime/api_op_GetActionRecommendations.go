@@ -14,11 +14,13 @@ import (
 // Returns a list of recommended actions in sorted in descending order by
 // prediction score. Use the GetActionRecommendations API if you have a custom
 // campaign that deploys a solution version trained with a PERSONALIZED_ACTIONS
-// recipe. For more information about PERSONALIZED_ACTIONS recipes, see
-// PERSONALIZED_ACTIONS recipes (https://docs.aws.amazon.com/personalize/latest/dg/nexts-best-action-recipes.html)
-// . For more information about getting action recommendations, see Getting action
-// recommendations (https://docs.aws.amazon.com/personalize/latest/dg/get-action-recommendations.html)
-// .
+// recipe.
+//
+// For more information about PERSONALIZED_ACTIONS recipes, see [PERSONALIZED_ACTIONS recipes]. For more
+// information about getting action recommendations, see [Getting action recommendations].
+//
+// [Getting action recommendations]: https://docs.aws.amazon.com/personalize/latest/dg/get-action-recommendations.html
+// [PERSONALIZED_ACTIONS recipes]: https://docs.aws.amazon.com/personalize/latest/dg/nexts-best-action-recipes.html
 func (c *Client) GetActionRecommendations(ctx context.Context, params *GetActionRecommendationsInput, optFns ...func(*Options)) (*GetActionRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetActionRecommendationsInput{}
@@ -42,20 +44,27 @@ type GetActionRecommendationsInput struct {
 	CampaignArn *string
 
 	// The ARN of the filter to apply to the returned recommendations. For more
-	// information, see Filtering Recommendations (https://docs.aws.amazon.com/personalize/latest/dg/filter.html)
-	// . When using this parameter, be sure the filter resource is ACTIVE .
+	// information, see [Filtering Recommendations].
+	//
+	// When using this parameter, be sure the filter resource is ACTIVE .
+	//
+	// [Filtering Recommendations]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
 	FilterArn *string
 
 	// The values to use when filtering recommendations. For each placeholder
 	// parameter in your filter expression, provide the parameter name (in matching
 	// case) as a key and the filter value(s) as the corresponding value. Separate
-	// multiple values for one parameter with a comma. For filter expressions that use
-	// an INCLUDE element to include actions, you must provide values for all
-	// parameters that are defined in the expression. For filters with expressions that
-	// use an EXCLUDE element to exclude actions, you can omit the filter-values . In
-	// this case, Amazon Personalize doesn't use that portion of the expression to
-	// filter recommendations. For more information, see Filtering recommendations and
-	// user segments (https://docs.aws.amazon.com/personalize/latest/dg/filter.html) .
+	// multiple values for one parameter with a comma.
+	//
+	// For filter expressions that use an INCLUDE element to include actions, you must
+	// provide values for all parameters that are defined in the expression. For
+	// filters with expressions that use an EXCLUDE element to exclude actions, you
+	// can omit the filter-values . In this case, Amazon Personalize doesn't use that
+	// portion of the expression to filter recommendations.
+	//
+	// For more information, see [Filtering recommendations and user segments].
+	//
+	// [Filtering recommendations and user segments]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
 	FilterValues map[string]string
 
 	// The number of results to return. The default is 5. The maximum is 100.
@@ -71,8 +80,9 @@ type GetActionRecommendationsOutput struct {
 
 	// A list of action recommendations sorted in descending order by prediction
 	// score. There can be a maximum of 100 actions in the list. For information about
-	// action scores, see How action recommendation scoring works (https://docs.aws.amazon.com/personalize/latest/dg/how-action-recommendation-scoring-works.html)
-	// .
+	// action scores, see [How action recommendation scoring works].
+	//
+	// [How action recommendation scoring works]: https://docs.aws.amazon.com/personalize/latest/dg/how-action-recommendation-scoring-works.html
 	ActionList []types.PredictedAction
 
 	// The ID of the recommendation.

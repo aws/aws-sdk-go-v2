@@ -29,13 +29,15 @@ func (c *Client) DescribeFirewall(ctx context.Context, params *DescribeFirewallI
 
 type DescribeFirewallInput struct {
 
-	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or the
-	// name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the firewall.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	FirewallArn *string
 
 	// The descriptive name of the firewall. You can't change the name of a firewall
-	// after you create it. You must specify the ARN or the name, and you can specify
-	// both.
+	// after you create it.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	FirewallName *string
 
 	noSmithyDocumentSerde
@@ -47,21 +49,22 @@ type DescribeFirewallOutput struct {
 	// firewall policy and the subnets in your VPC to use for the firewall endpoints.
 	Firewall *types.Firewall
 
-	// Detailed information about the current status of a Firewall . You can retrieve
-	// this for a firewall by calling DescribeFirewall and providing the firewall name
-	// and ARN.
+	// Detailed information about the current status of a Firewall. You can retrieve this for
+	// a firewall by calling DescribeFirewalland providing the firewall name and ARN.
 	FirewallStatus *types.FirewallStatus
 
 	// An optional token that you can use for optimistic locking. Network Firewall
 	// returns a token to your requests that access the firewall. The token marks the
-	// state of the firewall resource at the time of the request. To make an
-	// unconditional change to the firewall, omit the token in your update request.
-	// Without the token, Network Firewall performs your updates regardless of whether
-	// the firewall has changed since you last retrieved it. To make a conditional
-	// change to the firewall, provide the token in your update request. Network
-	// Firewall uses the token to ensure that the firewall hasn't changed since you
-	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException . If this happens, retrieve the firewall again to get a
+	// state of the firewall resource at the time of the request.
+	//
+	// To make an unconditional change to the firewall, omit the token in your update
+	// request. Without the token, Network Firewall performs your updates regardless of
+	// whether the firewall has changed since you last retrieved it.
+	//
+	// To make a conditional change to the firewall, provide the token in your update
+	// request. Network Firewall uses the token to ensure that the firewall hasn't
+	// changed since you last retrieved it. If it has changed, the operation fails with
+	// an InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string

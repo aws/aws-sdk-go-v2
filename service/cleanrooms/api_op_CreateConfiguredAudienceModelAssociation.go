@@ -45,11 +45,12 @@ type CreateConfiguredAudienceModelAssociationInput struct {
 	// resource being associated is configured for Clean Rooms to manage permissions
 	// related to the given collaboration. When FALSE , indicates that the configured
 	// audience model resource owner will manage permissions related to the given
-	// collaboration. Setting this to TRUE requires you to have permissions to create,
-	// update, and delete the resource policy for the cleanrooms-ml resource when you
-	// call the DeleteConfiguredAudienceModelAssociation resource. In addition, if you
-	// are the collaboration creator and specify TRUE , you must have the same
-	// permissions when you call the DeleteMember and DeleteCollaboration APIs.
+	// collaboration.
+	//
+	// Setting this to TRUE requires you to have permissions to create, update, and
+	// delete the resource policy for the cleanrooms-ml resource when you call the DeleteConfiguredAudienceModelAssociation
+	// resource. In addition, if you are the collaboration creator and specify TRUE ,
+	// you must have the same permissions when you call the DeleteMemberand DeleteCollaboration APIs.
 	//
 	// This member is required.
 	ManageResourcePolicies *bool

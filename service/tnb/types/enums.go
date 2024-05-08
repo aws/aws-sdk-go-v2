@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for DescriptorContentType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DescriptorContentType) Values() []DescriptorContentType {
 	return []DescriptorContentType{
 		"text/plain",
@@ -28,8 +29,9 @@ const (
 )
 
 // Values returns all known values for LcmOperationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LcmOperationType) Values() []LcmOperationType {
 	return []LcmOperationType{
 		"INSTANTIATE",
@@ -48,8 +50,9 @@ const (
 )
 
 // Values returns all known values for NsdOnboardingState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NsdOnboardingState) Values() []NsdOnboardingState {
 	return []NsdOnboardingState{
 		"CREATED",
@@ -67,8 +70,9 @@ const (
 )
 
 // Values returns all known values for NsdOperationalState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NsdOperationalState) Values() []NsdOperationalState {
 	return []NsdOperationalState{
 		"ENABLED",
@@ -85,8 +89,9 @@ const (
 )
 
 // Values returns all known values for NsdUsageState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NsdUsageState) Values() []NsdUsageState {
 	return []NsdUsageState{
 		"IN_USE",
@@ -106,8 +111,9 @@ const (
 )
 
 // Values returns all known values for NsLcmOperationState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NsLcmOperationState) Values() []NsLcmOperationState {
 	return []NsLcmOperationState{
 		"PROCESSING",
@@ -133,8 +139,9 @@ const (
 )
 
 // Values returns all known values for NsState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NsState) Values() []NsState {
 	return []NsState{
 		"INSTANTIATED",
@@ -158,8 +165,9 @@ const (
 )
 
 // Values returns all known values for OnboardingState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OnboardingState) Values() []OnboardingState {
 	return []OnboardingState{
 		"CREATED",
@@ -177,8 +185,9 @@ const (
 )
 
 // Values returns all known values for OperationalState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OperationalState) Values() []OperationalState {
 	return []OperationalState{
 		"ENABLED",
@@ -194,8 +203,9 @@ const (
 )
 
 // Values returns all known values for PackageContentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PackageContentType) Values() []PackageContentType {
 	return []PackageContentType{
 		"application/zip",
@@ -216,8 +226,9 @@ const (
 )
 
 // Values returns all known values for TaskStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TaskStatus) Values() []TaskStatus {
 	return []TaskStatus{
 		"SCHEDULED",
@@ -238,8 +249,9 @@ const (
 )
 
 // Values returns all known values for UpdateSolNetworkType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateSolNetworkType) Values() []UpdateSolNetworkType {
 	return []UpdateSolNetworkType{
 		"MODIFY_VNF_INFORMATION",
@@ -255,8 +267,9 @@ const (
 )
 
 // Values returns all known values for UsageState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UsageState) Values() []UsageState {
 	return []UsageState{
 		"IN_USE",
@@ -273,8 +286,9 @@ const (
 )
 
 // Values returns all known values for VnfInstantiationState. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VnfInstantiationState) Values() []VnfInstantiationState {
 	return []VnfInstantiationState{
 		"INSTANTIATED",
@@ -291,8 +305,9 @@ const (
 )
 
 // Values returns all known values for VnfOperationalState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VnfOperationalState) Values() []VnfOperationalState {
 	return []VnfOperationalState{
 		"STARTED",

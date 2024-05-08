@@ -11,9 +11,11 @@ import (
 )
 
 // Deletes a finding aggregator. When you delete the finding aggregator, you stop
-// finding aggregation. When you stop finding aggregation, findings that were
-// already aggregated to the aggregation Region are still visible from the
-// aggregation Region. New findings and finding updates are not aggregated.
+// finding aggregation.
+//
+// When you stop finding aggregation, findings that were already aggregated to the
+// aggregation Region are still visible from the aggregation Region. New findings
+// and finding updates are not aggregated.
 func (c *Client) DeleteFindingAggregator(ctx context.Context, params *DeleteFindingAggregatorInput, optFns ...func(*Options)) (*DeleteFindingAggregatorOutput, error) {
 	if params == nil {
 		params = &DeleteFindingAggregatorInput{}

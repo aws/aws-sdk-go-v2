@@ -43,9 +43,10 @@ type DescribeRegistriesInput struct {
 	// request where maxResults was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
 	// returned the nextToken value. If there are no more results to return, this
-	// value is null . This token should be treated as an opaque identifier that is
-	// only used to retrieve the next items in a list and not for other programmatic
-	// purposes.
+	// value is null .
+	//
+	// This token should be treated as an opaque identifier that is only used to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	noSmithyDocumentSerde

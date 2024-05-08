@@ -14,32 +14,40 @@ import (
 // Creates a knowledge base that contains data sources from which information can
 // be queried and used by LLMs. To create a knowledge base, you must first set up
 // your data sources and configure a supported vector store. For more information,
-// see Set up your data for ingestion (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup.html)
-// . If you prefer to let Amazon Bedrock create and manage a vector store for you
-// in Amazon OpenSearch Service, use the console. For more information, see Create
-// a knowledge base (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create)
-// .
+// see [Set up your data for ingestion].
+//
+// If you prefer to let Amazon Bedrock create and manage a vector store for you in
+// Amazon OpenSearch Service, use the console. For more information, see [Create a knowledge base].
+//
 //   - Provide the name and an optional description .
+//
 //   - Provide the Amazon Resource Name (ARN) with permissions to create a
 //     knowledge base in the roleArn field.
+//
 //   - Provide the embedding model to use in the embeddingModelArn field in the
 //     knowledgeBaseConfiguration object.
+//
 //   - Provide the configuration for your vector store in the storageConfiguration
 //     object.
+//
 //   - For an Amazon OpenSearch Service database, use the
-//     opensearchServerlessConfiguration object. For more information, see Create a
-//     vector store in Amazon OpenSearch Service (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html)
-//     .
+//     opensearchServerlessConfiguration object. For more information, see [Create a vector store in Amazon OpenSearch Service].
+//
 //   - For an Amazon Aurora database, use the RdsConfiguration object. For more
-//     information, see Create a vector store in Amazon Aurora (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html)
-//     .
+//     information, see [Create a vector store in Amazon Aurora].
+//
 //   - For a Pinecone database, use the pineconeConfiguration object. For more
-//     information, see Create a vector store in Pinecone (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html)
-//     .
+//     information, see [Create a vector store in Pinecone].
+//
 //   - For a Redis Enterprise Cloud database, use the
-//     redisEnterpriseCloudConfiguration object. For more information, see Create a
-//     vector store in Redis Enterprise Cloud (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html)
-//     .
+//     redisEnterpriseCloudConfiguration object. For more information, see [Create a vector store in Redis Enterprise Cloud].
+//
+// [Set up your data for ingestion]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup.html
+// [Create a knowledge base]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create
+// [Create a vector store in Amazon OpenSearch Service]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html
+// [Create a vector store in Redis Enterprise Cloud]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html
+// [Create a vector store in Amazon Aurora]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html
+// [Create a vector store in Pinecone]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html
 func (c *Client) CreateKnowledgeBase(ctx context.Context, params *CreateKnowledgeBaseInput, optFns ...func(*Options)) (*CreateKnowledgeBaseOutput, error) {
 	if params == nil {
 		params = &CreateKnowledgeBaseInput{}
@@ -81,9 +89,9 @@ type CreateKnowledgeBaseInput struct {
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
-	// ignores the request, but does not return an error. For more information, see
-	// Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// .
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	// A description of the knowledge base.

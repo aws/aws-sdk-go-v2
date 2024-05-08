@@ -50,9 +50,10 @@ type UpdateDataSourceInput struct {
 	// The new Amazon DynamoDB configuration.
 	DynamodbConfig *types.DynamodbDataSourceConfig
 
-	// The new OpenSearch configuration. As of September 2021, Amazon Elasticsearch
-	// service is Amazon OpenSearch Service. This configuration is deprecated. Instead,
-	// use UpdateDataSourceRequest$openSearchServiceConfig to update an OpenSearch
+	// The new OpenSearch configuration.
+	//
+	// As of September 2021, Amazon Elasticsearch service is Amazon OpenSearch
+	// Service. This configuration is deprecated. Instead, use UpdateDataSourceRequest$openSearchServiceConfigto update an OpenSearch
 	// data source.
 	ElasticsearchConfig *types.ElasticsearchDataSourceConfig
 
@@ -69,8 +70,9 @@ type UpdateDataSourceInput struct {
 	// Note that metricsConfig won't be used unless the dataSourceLevelMetricsBehavior
 	// value is set to PER_DATA_SOURCE_METRICS . If the dataSourceLevelMetricsBehavior
 	// is set to FULL_REQUEST_DATA_SOURCE_METRICS instead, metricsConfig will be
-	// ignored. However, you can still set its value. metricsConfig can be ENABLED or
-	// DISABLED .
+	// ignored. However, you can still set its value.
+	//
+	// metricsConfig can be ENABLED or DISABLED .
 	MetricsConfig types.DataSourceLevelMetricsConfig
 
 	// The new OpenSearch configuration.

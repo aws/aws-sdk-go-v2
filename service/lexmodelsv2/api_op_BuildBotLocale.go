@@ -33,8 +33,9 @@ func (c *Client) BuildBotLocale(ctx context.Context, params *BuildBotLocaleInput
 type BuildBotLocaleInput struct {
 
 	// The identifier of the bot to build. The identifier is returned in the response
-	// from the CreateBot (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html)
-	// operation.
+	// from the [CreateBot]operation.
+	//
+	// [CreateBot]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html
 	//
 	// This member is required.
 	BotId *string
@@ -46,9 +47,9 @@ type BuildBotLocaleInput struct {
 
 	// The identifier of the language and locale that the bot will be used in. The
 	// string must match one of the supported locales. All of the intents, slot types,
-	// and slots used in the bot must have the same locale. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
-	// .
+	// and slots used in the bot must have the same locale. For more information, see [Supported languages].
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string

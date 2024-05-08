@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a FirewallRuleGroup from a VPC, to remove DNS filtering from the
-// VPC.
+// Disassociates a FirewallRuleGroup from a VPC, to remove DNS filtering from the VPC.
 func (c *Client) DisassociateFirewallRuleGroup(ctx context.Context, params *DisassociateFirewallRuleGroupInput, optFns ...func(*Options)) (*DisassociateFirewallRuleGroupOutput, error) {
 	if params == nil {
 		params = &DisassociateFirewallRuleGroupInput{}
@@ -30,7 +29,7 @@ func (c *Client) DisassociateFirewallRuleGroup(ctx context.Context, params *Disa
 
 type DisassociateFirewallRuleGroupInput struct {
 
-	// The identifier of the FirewallRuleGroupAssociation .
+	// The identifier of the FirewallRuleGroupAssociation.
 	//
 	// This member is required.
 	FirewallRuleGroupAssociationId *string

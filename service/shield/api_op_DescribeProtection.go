@@ -29,9 +29,9 @@ func (c *Client) DescribeProtection(ctx context.Context, params *DescribeProtect
 
 type DescribeProtectionInput struct {
 
-	// The unique identifier (ID) for the Protection object to describe. You must
-	// provide either the ResourceArn of the protected resource or the ProtectionID of
-	// the protection, but not both.
+	// The unique identifier (ID) for the Protection object to describe. You must provide either
+	// the ResourceArn of the protected resource or the ProtectionID of the
+	// protection, but not both.
 	ProtectionId *string
 
 	// The ARN (Amazon Resource Name) of the protected Amazon Web Services resource.

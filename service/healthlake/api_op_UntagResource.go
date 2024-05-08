@@ -34,7 +34,7 @@ type UntagResourceInput struct {
 	// This member is required.
 	ResourceARN *string
 
-	// The keys for the tags to be removed from the HealthLake data store.
+	//  The keys for the tags to be removed from the HealthLake data store.
 	//
 	// This member is required.
 	TagKeys []string

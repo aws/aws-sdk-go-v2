@@ -13,7 +13,9 @@ import (
 
 // Attaches a key-value pair to a resource, as identified by its Amazon Resource
 // Name (ARN). Resources are capability, partnership, profile, transformers and
-// other entities. There is no response returned from this call.
+// other entities.
+//
+// There is no response returned from this call.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

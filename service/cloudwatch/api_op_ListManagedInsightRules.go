@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list that contains the number of managed Contributor Insights rules
+//	Returns a list that contains the number of managed Contributor Insights rules
+//
 // in your account.
 func (c *Client) ListManagedInsightRules(ctx context.Context, params *ListManagedInsightRulesInput, optFns ...func(*Options)) (*ListManagedInsightRulesOutput, error) {
 	if params == nil {
@@ -30,17 +31,17 @@ func (c *Client) ListManagedInsightRules(ctx context.Context, params *ListManage
 
 type ListManagedInsightRulesInput struct {
 
-	// The ARN of an Amazon Web Services resource that has managed Contributor
+	//  The ARN of an Amazon Web Services resource that has managed Contributor
 	// Insights rules.
 	//
 	// This member is required.
 	ResourceARN *string
 
-	// The maximum number of results to return in one operation. If you omit this
+	//  The maximum number of results to return in one operation. If you omit this
 	// parameter, the default number is used. The default number is 100 .
 	MaxResults *int32
 
-	// Include this value to get the next set of rules if the value was returned by
+	//  Include this value to get the next set of rules if the value was returned by
 	// the previous operation.
 	NextToken *string
 
@@ -49,11 +50,11 @@ type ListManagedInsightRulesInput struct {
 
 type ListManagedInsightRulesOutput struct {
 
-	// The managed rules that are available for the specified Amazon Web Services
+	//  The managed rules that are available for the specified Amazon Web Services
 	// resource.
 	ManagedRules []types.ManagedRuleDescription
 
-	// Include this value to get the next set of rules if the value was returned by
+	//  Include this value to get the next set of rules if the value was returned by
 	// the previous operation.
 	NextToken *string
 
@@ -153,7 +154,7 @@ var _ ListManagedInsightRulesAPIClient = (*Client)(nil)
 // ListManagedInsightRulesPaginatorOptions is the paginator options for
 // ListManagedInsightRules
 type ListManagedInsightRulesPaginatorOptions struct {
-	// The maximum number of results to return in one operation. If you omit this
+	//  The maximum number of results to return in one operation. If you omit this
 	// parameter, the default number is used. The default number is 100 .
 	Limit int32
 

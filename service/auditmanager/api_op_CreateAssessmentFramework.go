@@ -29,24 +29,24 @@ func (c *Client) CreateAssessmentFramework(ctx context.Context, params *CreateAs
 
 type CreateAssessmentFrameworkInput struct {
 
-	// The control sets that are associated with the framework.
+	//  The control sets that are associated with the framework.
 	//
 	// This member is required.
 	ControlSets []types.CreateAssessmentFrameworkControlSet
 
-	// The name of the new custom framework.
+	//  The name of the new custom framework.
 	//
 	// This member is required.
 	Name *string
 
-	// The compliance type that the new custom framework supports, such as CIS or
+	//  The compliance type that the new custom framework supports, such as CIS or
 	// HIPAA.
 	ComplianceType *string
 
-	// An optional description for the new custom framework.
+	//  An optional description for the new custom framework.
 	Description *string
 
-	// The tags that are associated with the framework.
+	//  The tags that are associated with the framework.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -54,7 +54,7 @@ type CreateAssessmentFrameworkInput struct {
 
 type CreateAssessmentFrameworkOutput struct {
 
-	// The name of the new framework that the CreateAssessmentFramework API returned.
+	//  The name of the new framework that the CreateAssessmentFramework API returned.
 	Framework *types.Framework
 
 	// Metadata pertaining to the operation's result.

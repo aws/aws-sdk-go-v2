@@ -32,10 +32,15 @@ func (c *Client) ListReceivedGrants(ctx context.Context, params *ListReceivedGra
 type ListReceivedGrantsInput struct {
 
 	// Filters to scope the results. The following filters are supported:
+	//
 	//   - ProductSKU
+	//
 	//   - LicenseIssuerName
+	//
 	//   - LicenseArn
+	//
 	//   - GrantStatus
+	//
 	//   - GranterAccountId
 	Filters []types.Filter
 

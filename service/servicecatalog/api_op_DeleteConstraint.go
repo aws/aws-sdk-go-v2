@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified constraint. A delegated admin is authorized to invoke
-// this command.
+// Deletes the specified constraint.
+//
+// A delegated admin is authorized to invoke this command.
 func (c *Client) DeleteConstraint(ctx context.Context, params *DeleteConstraintInput, optFns ...func(*Options)) (*DeleteConstraintOutput, error) {
 	if params == nil {
 		params = &DeleteConstraintInput{}
@@ -35,7 +36,9 @@ type DeleteConstraintInput struct {
 	Id *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

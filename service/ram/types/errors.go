@@ -222,8 +222,9 @@ func (e *InvalidStateTransitionException) ErrorCode() string {
 }
 func (e *InvalidStateTransitionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation failed because the specified Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-// has a format that isn't valid.
+// The operation failed because the specified [Amazon Resource Name (ARN)] has a format that isn't valid.
+//
+// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 type MalformedArnException struct {
 	Message *string
 
@@ -356,8 +357,9 @@ func (e *PermissionAlreadyExistsException) ErrorFault() smithy.ErrorFault { retu
 
 // The operation failed because it would exceed the maximum number of permissions
 // you can create in each Amazon Web Services Region. To view the limits for your
-// Amazon Web Services account, see the RAM page in the Service Quotas console (https://console.aws.amazon.com/servicequotas/home/services/ram/quotas)
-// .
+// Amazon Web Services account, see the [RAM page in the Service Quotas console].
+//
+// [RAM page in the Service Quotas console]: https://console.aws.amazon.com/servicequotas/home/services/ram/quotas
 type PermissionLimitExceededException struct {
 	Message *string
 
@@ -385,8 +387,9 @@ func (e *PermissionLimitExceededException) ErrorFault() smithy.ErrorFault { retu
 
 // The operation failed because it would exceed the limit for the number of
 // versions you can have for a permission. To view the limits for your Amazon Web
-// Services account, see the RAM page in the Service Quotas console (https://console.aws.amazon.com/servicequotas/home/services/ram/quotas)
-// .
+// Services account, see the [RAM page in the Service Quotas console].
+//
+// [RAM page in the Service Quotas console]: https://console.aws.amazon.com/servicequotas/home/services/ram/quotas
 type PermissionVersionsLimitExceededException struct {
 	Message *string
 
@@ -414,8 +417,9 @@ func (e *PermissionVersionsLimitExceededException) ErrorFault() smithy.ErrorFaul
 	return smithy.FaultClient
 }
 
-// The operation failed because the specified Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-// was not found.
+// The operation failed because the specified [Amazon Resource Name (ARN)] was not found.
+//
+// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 type ResourceArnNotFoundException struct {
 	Message *string
 
@@ -497,8 +501,9 @@ func (e *ResourceShareInvitationAlreadyRejectedException) ErrorFault() smithy.Er
 	return smithy.FaultClient
 }
 
-// The operation failed because the specified Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-// for an invitation was not found.
+// The operation failed because the specified [Amazon Resource Name (ARN)] for an invitation was not found.
+//
+// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 type ResourceShareInvitationArnNotFoundException struct {
 	Message *string
 
@@ -556,9 +561,9 @@ func (e *ResourceShareInvitationExpiredException) ErrorFault() smithy.ErrorFault
 }
 
 // The operation failed because it would exceed the limit for resource shares for
-// your account. To view the limits for your Amazon Web Services account, see the
-// RAM page in the Service Quotas console (https://console.aws.amazon.com/servicequotas/home/services/ram/quotas)
-// .
+// your account. To view the limits for your Amazon Web Services account, see the [RAM page in the Service Quotas console].
+//
+// [RAM page in the Service Quotas console]: https://console.aws.amazon.com/servicequotas/home/services/ram/quotas
 type ResourceShareLimitExceededException struct {
 	Message *string
 
@@ -748,7 +753,7 @@ func (e *UnknownResourceException) ErrorFault() smithy.ErrorFault { return smith
 
 // There isn't an existing managed permission defined in RAM that has the same IAM
 // permissions as the resource-based policy attached to the resource. You should
-// first run PromotePermissionCreatedFromPolicy to create that managed permission.
+// first run PromotePermissionCreatedFromPolicyto create that managed permission.
 type UnmatchedPolicyPermissionException struct {
 	Message *string
 

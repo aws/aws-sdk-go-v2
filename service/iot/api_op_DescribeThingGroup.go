@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe a thing group. Requires permission to access the DescribeThingGroup (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Describe a thing group.
+//
+// Requires permission to access the [DescribeThingGroup] action.
+//
+// [DescribeThingGroup]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DescribeThingGroup(ctx context.Context, params *DescribeThingGroupInput, optFns ...func(*Options)) (*DescribeThingGroupOutput, error) {
 	if params == nil {
 		params = &DescribeThingGroupInput{}

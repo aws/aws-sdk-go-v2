@@ -40,8 +40,9 @@ type CreateFlowTemplateInput struct {
 	// This member is required.
 	Definition *types.DefinitionDocument
 
-	// The namespace version in which the workflow is to be created. If no value is
-	// specified, the latest version is used by default.
+	// The namespace version in which the workflow is to be created.
+	//
+	// If no value is specified, the latest version is used by default.
 	CompatibleNamespaceVersion *int64
 
 	noSmithyDocumentSerde

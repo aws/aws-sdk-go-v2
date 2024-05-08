@@ -13,7 +13,9 @@ import (
 
 // Deletes an existing snapshot. When you receive a successful response from this
 // operation, ElastiCache immediately begins deleting the snapshot; you cannot
-// cancel or revert this operation. This operation is valid for Redis only.
+// cancel or revert this operation.
+//
+// This operation is valid for Redis only.
 func (c *Client) DeleteSnapshot(ctx context.Context, params *DeleteSnapshotInput, optFns ...func(*Options)) (*DeleteSnapshotOutput, error) {
 	if params == nil {
 		params = &DeleteSnapshotInput{}

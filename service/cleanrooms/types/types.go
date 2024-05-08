@@ -409,9 +409,11 @@ type AnalysisTemplateSummary struct {
 // query structure. Validation is performed when analysis templates are created and
 // fetched. Because analysis templates are immutable by design, we recommend that
 // you create analysis templates after you associate the configured tables with
-// their analysis rule to your collaboration. For more information, see
-// https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy (https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy)
-// .
+// their analysis rule to your collaboration.
+//
+// For more information, see [https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy].
+//
+// [https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy]: https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy
 type AnalysisTemplateValidationStatusDetail struct {
 
 	// The status of the validation.
@@ -878,12 +880,14 @@ type CollaborationPrivacyBudgetTemplate struct {
 	// This member is required.
 	Arn *string
 
-	// How often the privacy budget refreshes. If you plan to regularly bring new data
-	// into the collaboration, use CALENDAR_MONTH to automatically get a new privacy
-	// budget for the collaboration every calendar month. Choosing this option allows
-	// arbitrary amounts of information to be revealed about rows of the data when
-	// repeatedly queried across refreshes. Avoid choosing this if the same rows will
-	// be repeatedly queried between privacy budget refreshes.
+	// How often the privacy budget refreshes.
+	//
+	// If you plan to regularly bring new data into the collaboration, use
+	// CALENDAR_MONTH to automatically get a new privacy budget for the collaboration
+	// every calendar month. Choosing this option allows arbitrary amounts of
+	// information to be revealed about rows of the data when repeatedly queried across
+	// refreshes. Avoid choosing this if the same rows will be repeatedly queried
+	// between privacy budget refreshes.
 	//
 	// This member is required.
 	AutoRefresh PrivacyBudgetTemplateAutoRefresh
@@ -1890,11 +1894,16 @@ type MembershipQueryComputePaymentConfig struct {
 
 	// Indicates whether the collaboration member has accepted to pay for query
 	// compute costs ( TRUE ) or has not accepted to pay for query compute costs ( FALSE
-	// ). If the collaboration creator has not specified anyone to pay for query
-	// compute costs, then the member who can query is the default payer. An error
-	// message is returned for the following reasons:
+	// ).
+	//
+	// If the collaboration creator has not specified anyone to pay for query compute
+	// costs, then the member who can query is the default payer.
+	//
+	// An error message is returned for the following reasons:
+	//
 	//   - If you set the value to FALSE but you are responsible to pay for query
 	//   compute costs.
+	//
 	//   - If you set the value to TRUE but you are not responsible to pay for query
 	//   compute costs.
 	//
@@ -1991,9 +2000,10 @@ type MemberSpecification struct {
 	MemberAbilities []MemberAbility
 
 	// The collaboration member's payment responsibilities set by the collaboration
-	// creator. If the collaboration creator hasn't speciﬁed anyone as the member
-	// paying for query compute costs, then the member who can query is the default
-	// payer.
+	// creator.
+	//
+	// If the collaboration creator hasn't speciﬁed anyone as the member paying for
+	// query compute costs, then the member who can query is the default payer.
 	PaymentConfiguration *PaymentConfiguration
 
 	noSmithyDocumentSerde
@@ -2174,12 +2184,14 @@ type PrivacyBudgetTemplate struct {
 	// This member is required.
 	Arn *string
 
-	// How often the privacy budget refreshes. If you plan to regularly bring new data
-	// into the collaboration, use CALENDAR_MONTH to automatically get a new privacy
-	// budget for the collaboration every calendar month. Choosing this option allows
-	// arbitrary amounts of information to be revealed about rows of the data when
-	// repeatedly queried across refreshes. Avoid choosing this if the same rows will
-	// be repeatedly queried between privacy budget refreshes.
+	// How often the privacy budget refreshes.
+	//
+	// If you plan to regularly bring new data into the collaboration, use
+	// CALENDAR_MONTH to automatically get a new privacy budget for the collaboration
+	// every calendar month. Choosing this option allows arbitrary amounts of
+	// information to be revealed about rows of the data when repeatedly queried across
+	// refreshes. Avoid choosing this if the same rows will be repeatedly queried
+	// between privacy budget refreshes.
 	//
 	// This member is required.
 	AutoRefresh PrivacyBudgetTemplateAutoRefresh
@@ -2605,13 +2617,16 @@ type QueryComputePaymentConfig struct {
 
 	// Indicates whether the collaboration creator has configured the collaboration
 	// member to pay for query compute costs ( TRUE ) or has not configured the
-	// collaboration member to pay for query compute costs ( FALSE ). Exactly one
-	// member can be configured to pay for query compute costs. An error is returned if
-	// the collaboration creator sets a TRUE value for more than one member in the
-	// collaboration. If the collaboration creator hasn't specified anyone as the
-	// member paying for query compute costs, then the member who can query is the
-	// default payer. An error is returned if the collaboration creator sets a FALSE
-	// value for the member who can query.
+	// collaboration member to pay for query compute costs ( FALSE ).
+	//
+	// Exactly one member can be configured to pay for query compute costs. An error
+	// is returned if the collaboration creator sets a TRUE value for more than one
+	// member in the collaboration.
+	//
+	// If the collaboration creator hasn't specified anyone as the member paying for
+	// query compute costs, then the member who can query is the default payer. An
+	// error is returned if the collaboration creator sets a FALSE value for the
+	// member who can query.
 	//
 	// This member is required.
 	IsResponsible *bool
@@ -2709,9 +2724,10 @@ type SchemaAnalysisRuleRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the schema status. A status of READY means that based on the
-// schema analysis rule, queries of the given analysis rule type are properly
-// configured to run queries on this schema.
+// Information about the schema status.
+//
+// A status of READY means that based on the schema analysis rule, queries of the
+// given analysis rule type are properly configured to run queries on this schema.
 type SchemaStatusDetail struct {
 
 	// The status of the schema.

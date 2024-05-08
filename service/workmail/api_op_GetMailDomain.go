@@ -55,7 +55,7 @@ type GetMailDomainOutput struct {
 	// domain.
 	IsTestDomain bool
 
-	// Indicates the status of the domain ownership verification.
+	//  Indicates the status of the domain ownership verification.
 	OwnershipVerificationStatus types.DnsRecordVerificationStatus
 
 	// A list of the DNS records that WorkMail recommends adding in your DNS provider

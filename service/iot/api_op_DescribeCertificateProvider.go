@@ -12,9 +12,11 @@ import (
 	"time"
 )
 
-// Describes a certificate provider. Requires permission to access the
-// DescribeCertificateProvider (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Describes a certificate provider.
+//
+// Requires permission to access the [DescribeCertificateProvider] action.
+//
+// [DescribeCertificateProvider]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DescribeCertificateProvider(ctx context.Context, params *DescribeCertificateProviderInput, optFns ...func(*Options)) (*DescribeCertificateProviderOutput, error) {
 	if params == nil {
 		params = &DescribeCertificateProviderInput{}

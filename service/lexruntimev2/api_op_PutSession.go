@@ -64,12 +64,15 @@ type PutSessionInput struct {
 	Messages []types.Message
 
 	// Request-specific information passed between Amazon Lex V2 and the client
-	// application. The namespace x-amz-lex: is reserved for special attributes. Don't
-	// create any request attributes with the prefix x-amz-lex: .
+	// application.
+	//
+	// The namespace x-amz-lex: is reserved for special attributes. Don't create any
+	// request attributes with the prefix x-amz-lex: .
 	RequestAttributes map[string]string
 
 	// The message that Amazon Lex V2 returns in the response can be either text or
 	// speech depending on the value of this parameter.
+	//
 	//   - If the value is text/plain; charset=utf-8 , Amazon Lex V2 returns text in
 	//   the response.
 	ResponseContentType *string

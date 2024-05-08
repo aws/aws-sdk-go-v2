@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns associations between an Security Hub configuration and a batch of
+//	Returns associations between an Security Hub configuration and a batch of
+//
 // target accounts, organizational units, or the root. Only the Security Hub
 // delegated administrator can invoke this operation from the home Region. A
 // configuration can refer to a configuration policy or to a self-managed
@@ -33,7 +34,7 @@ func (c *Client) BatchGetConfigurationPolicyAssociations(ctx context.Context, pa
 
 type BatchGetConfigurationPolicyAssociationsInput struct {
 
-	// Specifies one or more target account IDs, organizational unit (OU) IDs, or the
+	//  Specifies one or more target account IDs, organizational unit (OU) IDs, or the
 	// root ID to retrieve associations for.
 	//
 	// This member is required.
@@ -44,10 +45,10 @@ type BatchGetConfigurationPolicyAssociationsInput struct {
 
 type BatchGetConfigurationPolicyAssociationsOutput struct {
 
-	// Describes associations for the target accounts, OUs, or the root.
+	//  Describes associations for the target accounts, OUs, or the root.
 	ConfigurationPolicyAssociations []types.ConfigurationPolicyAssociationSummary
 
-	// An array of configuration policy associations, one for each configuration
+	//  An array of configuration policy associations, one for each configuration
 	// policy association identifier, that was specified in the request but couldn’t be
 	// processed due to an error.
 	UnprocessedConfigurationPolicyAssociations []types.UnprocessedConfigurationPolicyAssociation

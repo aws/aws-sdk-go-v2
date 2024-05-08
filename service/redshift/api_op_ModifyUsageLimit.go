@@ -35,11 +35,11 @@ type ModifyUsageLimitInput struct {
 	// This member is required.
 	UsageLimitId *string
 
-	// The new limit amount. For more information about this parameter, see UsageLimit .
+	// The new limit amount. For more information about this parameter, see UsageLimit.
 	Amount *int64
 
 	// The new action that Amazon Redshift takes when the limit is reached. For more
-	// information about this parameter, see UsageLimit .
+	// information about this parameter, see UsageLimit.
 	BreachAction types.UsageLimitBreachAction
 
 	noSmithyDocumentSerde
@@ -54,8 +54,11 @@ type ModifyUsageLimitOutput struct {
 
 	// The action that Amazon Redshift takes when the limit is reached. Possible
 	// values are:
+	//
 	//   - log - To log an event in a system table. The default is log.
+	//
 	//   - emit-metric - To emit CloudWatch metrics.
+	//
 	//   - disable - To disable the feature until the next usage period begins.
 	BreachAction types.UsageLimitBreachAction
 

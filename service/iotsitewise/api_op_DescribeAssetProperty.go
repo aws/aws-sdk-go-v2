@@ -11,13 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about an asset property. When you call this operation for
-// an attribute property, this response includes the default attribute value that
-// you define in the asset model. If you update the default value in the model,
-// this operation's response includes the new default value. This operation doesn't
-// return the value of the asset property. To get the value of an asset property,
-// use GetAssetPropertyValue (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_GetAssetPropertyValue.html)
-// .
+// Retrieves information about an asset property.
+//
+// When you call this operation for an attribute property, this response includes
+// the default attribute value that you define in the asset model. If you update
+// the default value in the model, this operation's response includes the new
+// default value.
+//
+// This operation doesn't return the value of the asset property. To get the value
+// of an asset property, use [GetAssetPropertyValue].
+//
+// [GetAssetPropertyValue]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_GetAssetPropertyValue.html
 func (c *Client) DescribeAssetProperty(ctx context.Context, params *DescribeAssetPropertyInput, optFns ...func(*Options)) (*DescribeAssetPropertyOutput, error) {
 	if params == nil {
 		params = &DescribeAssetPropertyInput{}
@@ -37,16 +41,18 @@ type DescribeAssetPropertyInput struct {
 
 	// The ID of the asset. This can be either the actual ID in UUID format, or else
 	// externalId: followed by the external ID, if it has one. For more information,
-	// see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetId *string
 
 	// The ID of the asset property. This can be either the actual ID in UUID format,
 	// or else externalId: followed by the external ID, if it has one. For more
-	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	PropertyId *string
@@ -71,14 +77,17 @@ type DescribeAssetPropertyOutput struct {
 	// This member is required.
 	AssetName *string
 
-	// The external ID of the asset. For more information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
-	// in the IoT SiteWise User Guide.
+	// The external ID of the asset. For more information, see [Using external IDs] in the IoT SiteWise
+	// User Guide.
+	//
+	// [Using external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
 	AssetExternalId *string
 
-	// The asset property's definition, alias, and notification state. This response
-	// includes this object for normal asset properties. If you describe an asset
-	// property in a composite model, this response includes the asset property
-	// information in compositeModel .
+	// The asset property's definition, alias, and notification state.
+	//
+	// This response includes this object for normal asset properties. If you describe
+	// an asset property in a composite model, this response includes the asset
+	// property information in compositeModel .
 	AssetProperty *types.Property
 
 	// The composite model that declares this asset property, if this asset property

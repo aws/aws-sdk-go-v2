@@ -12,12 +12,14 @@ import (
 )
 
 // Starts an Amazon RDS DB instance that was stopped using the Amazon Web Services
-// console, the stop-db-instance CLI command, or the StopDBInstance operation. For
-// more information, see Starting an Amazon RDS DB instance That Was Previously
-// Stopped (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html)
-// in the Amazon RDS User Guide. This command doesn't apply to RDS Custom, Aurora
-// MySQL, and Aurora PostgreSQL. For Aurora DB clusters, use StartDBCluster
-// instead.
+// console, the stop-db-instance CLI command, or the StopDBInstance operation.
+//
+// For more information, see [Starting an Amazon RDS DB instance That Was Previously Stopped] in the Amazon RDS User Guide.
+//
+// This command doesn't apply to RDS Custom, Aurora MySQL, and Aurora PostgreSQL.
+// For Aurora DB clusters, use StartDBCluster instead.
+//
+// [Starting an Amazon RDS DB instance That Was Previously Stopped]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html
 func (c *Client) StartDBInstance(ctx context.Context, params *StartDBInstanceInput, optFns ...func(*Options)) (*StartDBInstanceOutput, error) {
 	if params == nil {
 		params = &StartDBInstanceInput{}
@@ -45,9 +47,10 @@ type StartDBInstanceInput struct {
 
 type StartDBInstanceOutput struct {
 
-	// Contains the details of an Amazon RDS DB instance. This data type is used as a
-	// response element in the operations CreateDBInstance ,
-	// CreateDBInstanceReadReplica , DeleteDBInstance , DescribeDBInstances ,
+	// Contains the details of an Amazon RDS DB instance.
+	//
+	// This data type is used as a response element in the operations CreateDBInstance
+	// , CreateDBInstanceReadReplica , DeleteDBInstance , DescribeDBInstances ,
 	// ModifyDBInstance , PromoteReadReplica , RebootDBInstance ,
 	// RestoreDBInstanceFromDBSnapshot , RestoreDBInstanceFromS3 ,
 	// RestoreDBInstanceToPointInTime , StartDBInstance , and StopDBInstance .

@@ -12,10 +12,12 @@ import (
 )
 
 // Returns existing resource operation requests. This includes requests of all
-// status types. For more information, see Listing active resource operation
-// requests (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-list)
-// in the Amazon Web Services Cloud Control API User Guide. Resource operation
-// requests expire after 7 days.
+// status types. For more information, see [Listing active resource operation requests]in the Amazon Web Services Cloud
+// Control API User Guide.
+//
+// Resource operation requests expire after 7 days.
+//
+// [Listing active resource operation requests]: https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-list
 func (c *Client) ListResourceRequests(ctx context.Context, params *ListResourceRequestsInput, optFns ...func(*Options)) (*ListResourceRequestsOutput, error) {
 	if params == nil {
 		params = &ListResourceRequestsInput{}
@@ -36,7 +38,9 @@ type ListResourceRequestsInput struct {
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken
 	// value that you can assign to the NextToken request parameter to get the next
-	// set of results. The default is 20 .
+	// set of results.
+	//
+	// The default is 20 .
 	MaxResults *int32
 
 	// If the previous paginated request didn't return all of the remaining results,
@@ -159,7 +163,9 @@ type ListResourceRequestsPaginatorOptions struct {
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken
 	// value that you can assign to the NextToken request parameter to get the next
-	// set of results. The default is 20 .
+	// set of results.
+	//
+	// The default is 20 .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

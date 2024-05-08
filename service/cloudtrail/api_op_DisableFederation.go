@@ -11,12 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables Lake query federation on the specified event data store. When you
+//	Disables Lake query federation on the specified event data store. When you
+//
 // disable federation, CloudTrail disables the integration with Glue, Lake
 // Formation, and Amazon Athena. After disabling Lake query federation, you can no
-// longer query your event data in Amazon Athena. No CloudTrail Lake data is
-// deleted when you disable federation and you can continue to run queries in
-// CloudTrail Lake.
+// longer query your event data in Amazon Athena.
+//
+// No CloudTrail Lake data is deleted when you disable federation and you can
+// continue to run queries in CloudTrail Lake.
 func (c *Client) DisableFederation(ctx context.Context, params *DisableFederationInput, optFns ...func(*Options)) (*DisableFederationOutput, error) {
 	if params == nil {
 		params = &DisableFederationInput{}
@@ -34,8 +36,8 @@ func (c *Client) DisableFederation(ctx context.Context, params *DisableFederatio
 
 type DisableFederationInput struct {
 
-	// The ARN (or ID suffix of the ARN) of the event data store for which you want to
-	// disable Lake query federation.
+	//  The ARN (or ID suffix of the ARN) of the event data store for which you want
+	// to disable Lake query federation.
 	//
 	// This member is required.
 	EventDataStore *string
@@ -45,10 +47,10 @@ type DisableFederationInput struct {
 
 type DisableFederationOutput struct {
 
-	// The ARN of the event data store for which you disabled Lake query federation.
+	//  The ARN of the event data store for which you disabled Lake query federation.
 	EventDataStoreArn *string
 
-	// The federation status.
+	//  The federation status.
 	FederationStatus types.FederationStatus
 
 	// Metadata pertaining to the operation's result.

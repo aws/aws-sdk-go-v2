@@ -30,7 +30,7 @@ func (c *Client) GetWorkflow(ctx context.Context, params *GetWorkflowInput, optF
 
 type GetWorkflowInput struct {
 
-	// The ID of the workflow. To rerieve a list of workflow IDs, use ListWorkflows .
+	// The ID of the workflow. To rerieve a list of workflow IDs, use ListWorkflows.
 	//
 	// This member is required.
 	Id *string
@@ -51,7 +51,9 @@ type GetWorkflowInput struct {
 type GetWorkflowOutput struct {
 
 	// The date and time the workflow was created, in coordinated universal time (UTC)
-	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// timestamp format as specified in [RFC 3339]
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	CreatedTime *time.Time
@@ -67,7 +69,9 @@ type GetWorkflowOutput struct {
 	Id *string
 
 	// The date and time the workflow was last updated, in coordinated universal time
-	// (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// (UTC) timestamp format as specified in [RFC 3339]
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	LastUpdatedTime *time.Time
@@ -83,9 +87,9 @@ type GetWorkflowOutput struct {
 	ProjectName *string
 
 	// The behavior to use when multiple workflows occur at the same time. For more
-	// information, see
-	// https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflows-configure-runs.html (https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflows-configure-runs.html)
-	// in the Amazon CodeCatalyst User Guide.
+	// information, see [https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflows-configure-runs.html]in the Amazon CodeCatalyst User Guide.
+	//
+	// [https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflows-configure-runs.html]: https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflows-configure-runs.html
 	//
 	// This member is required.
 	RunMode types.WorkflowRunMode

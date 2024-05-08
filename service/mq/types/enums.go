@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AuthenticationStrategy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthenticationStrategy) Values() []AuthenticationStrategy {
 	return []AuthenticationStrategy{
 		"SIMPLE",
@@ -34,8 +35,9 @@ const (
 )
 
 // Values returns all known values for BrokerState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BrokerState) Values() []BrokerState {
 	return []BrokerState{
 		"CREATION_IN_PROGRESS",
@@ -57,8 +59,9 @@ const (
 )
 
 // Values returns all known values for BrokerStorageType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BrokerStorageType) Values() []BrokerStorageType {
 	return []BrokerStorageType{
 		"EBS",
@@ -76,8 +79,9 @@ const (
 )
 
 // Values returns all known values for ChangeType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeType) Values() []ChangeType {
 	return []ChangeType{
 		"CREATE",
@@ -95,8 +99,9 @@ const (
 )
 
 // Values returns all known values for DataReplicationMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataReplicationMode) Values() []DataReplicationMode {
 	return []DataReplicationMode{
 		"NONE",
@@ -118,8 +123,9 @@ const (
 )
 
 // Values returns all known values for DayOfWeek. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DayOfWeek) Values() []DayOfWeek {
 	return []DayOfWeek{
 		"MONDAY",
@@ -142,8 +148,9 @@ const (
 )
 
 // Values returns all known values for DeploymentMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentMode) Values() []DeploymentMode {
 	return []DeploymentMode{
 		"SINGLE_INSTANCE",
@@ -161,8 +168,9 @@ const (
 )
 
 // Values returns all known values for EngineType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EngineType) Values() []EngineType {
 	return []EngineType{
 		"ACTIVEMQ",
@@ -179,8 +187,9 @@ const (
 )
 
 // Values returns all known values for PromoteMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PromoteMode) Values() []PromoteMode {
 	return []PromoteMode{
 		"SWITCHOVER",
@@ -199,6 +208,7 @@ const (
 
 // Values returns all known values for SanitizationWarningReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SanitizationWarningReason) Values() []SanitizationWarningReason {
 	return []SanitizationWarningReason{

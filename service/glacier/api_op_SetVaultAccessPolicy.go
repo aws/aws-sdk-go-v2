@@ -17,8 +17,9 @@ import (
 // access-policy subresource of the vault. An access policy is specific to a vault
 // and is also called a vault subresource. You can set one access policy per vault
 // and the policy can be up to 20 KB in size. For more information about vault
-// access policies, see Amazon Glacier Access Control with Vault Access Policies (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html)
-// .
+// access policies, see [Amazon Glacier Access Control with Vault Access Policies].
+//
+// [Amazon Glacier Access Control with Vault Access Policies]: https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html
 func (c *Client) SetVaultAccessPolicy(ctx context.Context, params *SetVaultAccessPolicyInput, optFns ...func(*Options)) (*SetVaultAccessPolicyOutput, error) {
 	if params == nil {
 		params = &SetVaultAccessPolicyInput{}

@@ -17,11 +17,15 @@ import (
 // terminates the unhealthy core nodes. To use unhealthy node replacement and
 // retain unhealthy core nodes, use to turn on termination protection. In such
 // cases, Amazon EMR adds the unhealthy nodes to a denylist, reducing job
-// interruptions and failures. If unhealthy node replacement is on, Amazon EMR
-// notifies YARN and other applications on the cluster to stop scheduling tasks
-// with these nodes, moves the data, and then terminates the nodes. For more
-// information, see graceful node replacement (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-node-replacement.html)
-// in the Amazon EMR Management Guide.
+// interruptions and failures.
+//
+// If unhealthy node replacement is on, Amazon EMR notifies YARN and other
+// applications on the cluster to stop scheduling tasks with these nodes, moves the
+// data, and then terminates the nodes.
+//
+// For more information, see [graceful node replacement] in the Amazon EMR Management Guide.
+//
+// [graceful node replacement]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-node-replacement.html
 func (c *Client) SetUnhealthyNodeReplacement(ctx context.Context, params *SetUnhealthyNodeReplacementInput, optFns ...func(*Options)) (*SetUnhealthyNodeReplacementOutput, error) {
 	if params == nil {
 		params = &SetUnhealthyNodeReplacementInput{}
@@ -40,8 +44,8 @@ func (c *Client) SetUnhealthyNodeReplacement(ctx context.Context, params *SetUnh
 type SetUnhealthyNodeReplacementInput struct {
 
 	// The list of strings that uniquely identify the clusters for which to turn on
-	// unhealthy node replacement. You can get these identifiers by running the
-	// RunJobFlow or the DescribeJobFlows operations.
+	// unhealthy node replacement. You can get these identifiers by running the RunJobFlowor the DescribeJobFlows
+	// operations.
 	//
 	// This member is required.
 	JobFlowIds []string

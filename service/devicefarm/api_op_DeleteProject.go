@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an AWS Device Farm project, given the project ARN. Deleting this
-// resource does not stop an in-progress run.
+// Deletes an AWS Device Farm project, given the project ARN.
+//
+// Deleting this resource does not stop an in-progress run.
 func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, optFns ...func(*Options)) (*DeleteProjectOutput, error) {
 	if params == nil {
 		params = &DeleteProjectInput{}

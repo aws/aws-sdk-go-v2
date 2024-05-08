@@ -30,7 +30,7 @@ func (c *Client) GetSignalCatalog(ctx context.Context, params *GetSignalCatalogI
 
 type GetSignalCatalogInput struct {
 
-	// The name of the signal catalog to retrieve information about.
+	//  The name of the signal catalog to retrieve information about.
 	//
 	// This member is required.
 	Name *string
@@ -40,13 +40,13 @@ type GetSignalCatalogInput struct {
 
 type GetSignalCatalogOutput struct {
 
-	// The Amazon Resource Name (ARN) of the signal catalog.
+	//  The Amazon Resource Name (ARN) of the signal catalog.
 	//
 	// This member is required.
 	Arn *string
 
-	// The time the signal catalog was created in seconds since epoch (January 1, 1970
-	// at midnight UTC time).
+	//  The time the signal catalog was created in seconds since epoch (January 1,
+	// 1970 at midnight UTC time).
 	//
 	// This member is required.
 	CreationTime *time.Time
@@ -56,15 +56,15 @@ type GetSignalCatalogOutput struct {
 	// This member is required.
 	LastModificationTime *time.Time
 
-	// The name of the signal catalog.
+	//  The name of the signal catalog.
 	//
 	// This member is required.
 	Name *string
 
-	// A brief description of the signal catalog.
+	//  A brief description of the signal catalog.
 	Description *string
 
-	// The total number of network nodes specified in a signal catalog.
+	//  The total number of network nodes specified in a signal catalog.
 	NodeCounts *types.NodeCounts
 
 	// Metadata pertaining to the operation's result.

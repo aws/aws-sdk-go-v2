@@ -15,7 +15,9 @@ import (
 // operation to find details about automated backups for previously deleted
 // instances. Current instances with retention periods greater than zero (0) are
 // returned for both the DescribeDBInstanceAutomatedBackups and DescribeDBInstances
-// operations. All parameters are optional.
+// operations.
+//
+// All parameters are optional.
 func (c *Client) DescribeDBInstanceAutomatedBackups(ctx context.Context, params *DescribeDBInstanceAutomatedBackupsInput, optFns ...func(*Options)) (*DescribeDBInstanceAutomatedBackupsOutput, error) {
 	if params == nil {
 		params = &DescribeDBInstanceAutomatedBackupsInput{}
@@ -37,6 +39,7 @@ type DescribeDBInstanceAutomatedBackupsInput struct {
 	// The Amazon Resource Name (ARN) of the replicated automated backups, for
 	// example,
 	// arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE .
+	//
 	// This setting doesn't apply to RDS Custom.
 	DBInstanceAutomatedBackupsArn *string
 
@@ -50,20 +53,28 @@ type DescribeDBInstanceAutomatedBackupsInput struct {
 	// This parameter isn't case-sensitive.
 	DbiResourceId *string
 
-	// A filter that specifies which resources to return based on status. Supported
-	// filters are the following:
+	// A filter that specifies which resources to return based on status.
+	//
+	// Supported filters are the following:
+	//
 	//   - status
+	//
 	//   - active - Automated backups for current instances.
+	//
 	//   - creating - Automated backups that are waiting for the first automated
 	//   snapshot to be available.
+	//
 	//   - retained - Automated backups for deleted instances and after backup
 	//   replication is stopped.
+	//
 	//   - db-instance-id - Accepts DB instance identifiers and Amazon Resource Names
 	//   (ARNs). The results list includes only information about the DB instance
 	//   automated backups identified by these ARNs.
+	//
 	//   - dbi-resource-id - Accepts DB resource identifiers and Amazon Resource Names
 	//   (ARNs). The results list includes only information about the DB instance
 	//   resources identified by these ARNs.
+	//
 	// Returns all resources by default. The status for each resource is specified in
 	// the response.
 	Filters []types.Filter

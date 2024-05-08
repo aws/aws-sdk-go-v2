@@ -29,11 +29,13 @@ func (c *Client) ModifyDBInstance(ctx context.Context, params *ModifyDBInstanceI
 	return out, nil
 }
 
-// Represents the input to ModifyDBInstance .
+// Represents the input to ModifyDBInstance.
 type ModifyDBInstanceInput struct {
 
 	// The instance identifier. This value is stored as a lowercase string.
+	//
 	// Constraints:
+	//
 	//   - Must match the identifier of an existing DBInstance .
 	//
 	// This member is required.
@@ -41,9 +43,12 @@ type ModifyDBInstanceInput struct {
 
 	// Specifies whether the modifications in this request and any pending
 	// modifications are asynchronously applied as soon as possible, regardless of the
-	// PreferredMaintenanceWindow setting for the instance. If this parameter is set to
-	// false , changes to the instance are applied during the next maintenance window.
-	// Some parameter changes can cause an outage and are applied on the next reboot.
+	// PreferredMaintenanceWindow setting for the instance.
+	//
+	// If this parameter is set to false , changes to the instance are applied during
+	// the next maintenance window. Some parameter changes can cause an outage and are
+	// applied on the next reboot.
+	//
 	// Default: false
 	ApplyImmediately *bool
 
@@ -55,13 +60,19 @@ type ModifyDBInstanceInput struct {
 	CACertificateIdentifier *string
 
 	// Specifies whether the DB instance is restarted when you rotate your SSL/TLS
-	// certificate. By default, the DB instance is restarted when you rotate your
-	// SSL/TLS certificate. The certificate is not updated until the DB instance is
-	// restarted. Set this parameter only if you are not using SSL/TLS to connect to
-	// the DB instance. If you are using SSL/TLS to connect to the DB instance, see
-	// Updating Your Amazon DocumentDB TLS Certificates (https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html)
-	// and Encrypting Data in Transit (https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html)
-	// in the Amazon DocumentDB Developer Guide.
+	// certificate.
+	//
+	// By default, the DB instance is restarted when you rotate your SSL/TLS
+	// certificate. The certificate is not updated until the DB instance is restarted.
+	//
+	// Set this parameter only if you are not using SSL/TLS to connect to the DB
+	// instance.
+	//
+	// If you are using SSL/TLS to connect to the DB instance, see [Updating Your Amazon DocumentDB TLS Certificates] and [Encrypting Data in Transit] in the Amazon
+	// DocumentDB Developer Guide.
+	//
+	// [Updating Your Amazon DocumentDB TLS Certificates]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
+	// [Encrypting Data in Transit]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
 	CertificateRotationRestart *bool
 
 	// A value that indicates whether to copy all tags from the DB instance to
@@ -69,31 +80,43 @@ type ModifyDBInstanceInput struct {
 	CopyTagsToSnapshot *bool
 
 	// The new compute and memory capacity of the instance; for example, db.r5.large .
-	// Not all instance classes are available in all Amazon Web Services Regions. If
-	// you modify the instance class, an outage occurs during the change. The change is
-	// applied during the next maintenance window, unless ApplyImmediately is
-	// specified as true for this request. Default: Uses existing setting.
+	// Not all instance classes are available in all Amazon Web Services Regions.
+	//
+	// If you modify the instance class, an outage occurs during the change. The
+	// change is applied during the next maintenance window, unless ApplyImmediately
+	// is specified as true for this request.
+	//
+	// Default: Uses existing setting.
 	DBInstanceClass *string
 
 	// A value that indicates whether to enable Performance Insights for the DB
-	// Instance. For more information, see Using Amazon Performance Insights (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html)
-	// .
+	// Instance. For more information, see [Using Amazon Performance Insights].
+	//
+	// [Using Amazon Performance Insights]: https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html
 	EnablePerformanceInsights *bool
 
-	// The new instance identifier for the instance when renaming an instance. When
+	//  The new instance identifier for the instance when renaming an instance. When
 	// you change the instance identifier, an instance reboot occurs immediately if you
 	// set Apply Immediately to true . It occurs during the next maintenance window if
 	// you set Apply Immediately to false . This value is stored as a lowercase string.
+	//
 	// Constraints:
+	//
 	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//
 	//   - The first character must be a letter.
+	//
 	//   - Cannot end with a hyphen or contain two consecutive hyphens.
+	//
 	// Example: mydbinstance
 	NewDBInstanceIdentifier *string
 
-	// The KMS key identifier for encryption of Performance Insights data. The KMS key
-	// identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. If
-	// you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon
+	// The KMS key identifier for encryption of Performance Insights data.
+	//
+	// The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the
+	// KMS key.
+	//
+	// If you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon
 	// DocumentDB uses your default KMS key. There is a default KMS key for your Amazon
 	// Web Services account. Your Amazon Web Services account has a different default
 	// KMS key for each Amazon Web Services region.
@@ -106,14 +129,24 @@ type ModifyDBInstanceInput struct {
 	// maintenance window is changed to include the current time, changing this
 	// parameter causes a reboot of the instance. If you are moving this window to the
 	// current time, there must be at least 30 minutes between the current time and end
-	// of the window to ensure that pending changes are applied. Default: Uses existing
-	// setting. Format: ddd:hh24:mi-ddd:hh24:mi Valid days: Mon, Tue, Wed, Thu, Fri,
-	// Sat, Sun Constraints: Must be at least 30 minutes.
+	// of the window to ensure that pending changes are applied.
+	//
+	// Default: Uses existing setting.
+	//
+	// Format: ddd:hh24:mi-ddd:hh24:mi
+	//
+	// Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
+	//
+	// Constraints: Must be at least 30 minutes.
 	PreferredMaintenanceWindow *string
 
 	// A value that specifies the order in which an Amazon DocumentDB replica is
 	// promoted to the primary instance after a failure of the existing primary
-	// instance. Default: 1 Valid values: 0-15
+	// instance.
+	//
+	// Default: 1
+	//
+	// Valid values: 0-15
 	PromotionTier *int32
 
 	noSmithyDocumentSerde

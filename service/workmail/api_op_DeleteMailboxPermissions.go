@@ -28,24 +28,32 @@ func (c *Client) DeleteMailboxPermissions(ctx context.Context, params *DeleteMai
 
 type DeleteMailboxPermissionsInput struct {
 
-	// The identifier of the entity that owns the mailbox. The identifier can be
-	// UserId or Group Id, Username or Groupname, or email.
+	// The identifier of the entity that owns the mailbox.
+	//
+	// The identifier can be UserId or Group Id, Username or Groupname, or email.
+	//
 	//   - Entity ID: 12345678-1234-1234-1234-123456789012,
 	//   r-0123456789a0123456789b0123456789, or
 	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//
 	//   - Email address: entity@domain.tld
+	//
 	//   - Entity name: entity
 	//
 	// This member is required.
 	EntityId *string
 
-	// The identifier of the entity for which to delete granted permissions. The
-	// identifier can be UserId, ResourceID, or Group Id, Username or Groupname, or
-	// email.
+	// The identifier of the entity for which to delete granted permissions.
+	//
+	// The identifier can be UserId, ResourceID, or Group Id, Username or Groupname,
+	// or email.
+	//
 	//   - Grantee ID:
 	//   12345678-1234-1234-1234-123456789012,r-0123456789a0123456789b0123456789, or
 	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//
 	//   - Email address: grantee@domain.tld
+	//
 	//   - Grantee name: grantee
 	//
 	// This member is required.

@@ -11,26 +11,34 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
-// in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
-// . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Creates a RegexPatternSet . You then use UpdateRegexPatternSet
-// to specify the regular expression (regex) pattern that you want AWS WAF to
-// search for, such as B[a@]dB[o0]t . You can then configure AWS WAF to reject
-// those requests. To create and configure a RegexPatternSet , perform the
-// following steps:
-//   - Use GetChangeToken to get the change token that you provide in the
-//     ChangeToken parameter of a CreateRegexPatternSet request.
+// This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
+// developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the [AWS WAF Developer Guide]. With the
+// latest version, AWS WAF has a single set of endpoints for regional and global
+// use.
+//
+// Creates a RegexPatternSet . You then use UpdateRegexPatternSet to specify the regular expression
+// (regex) pattern that you want AWS WAF to search for, such as B[a@]dB[o0]t . You
+// can then configure AWS WAF to reject those requests.
+//
+// To create and configure a RegexPatternSet , perform the following steps:
+//
+//   - Use GetChangeTokento get the change token that you provide in the ChangeToken parameter of
+//     a CreateRegexPatternSet request.
+//
 //   - Submit a CreateRegexPatternSet request.
+//
 //   - Use GetChangeToken to get the change token that you provide in the
 //     ChangeToken parameter of an UpdateRegexPatternSet request.
-//   - Submit an UpdateRegexPatternSet request to specify the string that you want
-//     AWS WAF to watch for.
+//
+//   - Submit an UpdateRegexPatternSetrequest to specify the string that you want AWS WAF to watch for.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/)
-// .
+// requests, see the [AWS WAF Developer Guide].
+//
+// [AWS WAF Classic]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+// [AWS WAF Developer Guide]: https://docs.aws.amazon.com/waf/latest/developerguide/
 func (c *Client) CreateRegexPatternSet(ctx context.Context, params *CreateRegexPatternSetInput, optFns ...func(*Options)) (*CreateRegexPatternSetOutput, error) {
 	if params == nil {
 		params = &CreateRegexPatternSetInput{}
@@ -48,13 +56,13 @@ func (c *Client) CreateRegexPatternSet(ctx context.Context, params *CreateRegexP
 
 type CreateRegexPatternSetInput struct {
 
-	// The value returned by the most recent call to GetChangeToken .
+	// The value returned by the most recent call to GetChangeToken.
 	//
 	// This member is required.
 	ChangeToken *string
 
-	// A friendly name or description of the RegexPatternSet . You can't change Name
-	// after you create a RegexPatternSet .
+	// A friendly name or description of the RegexPatternSet. You can't change Name after you create
+	// a RegexPatternSet .
 	//
 	// This member is required.
 	Name *string
@@ -66,7 +74,7 @@ type CreateRegexPatternSetOutput struct {
 
 	// The ChangeToken that you used to submit the CreateRegexPatternSet request. You
 	// can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus .
+	// information, see GetChangeTokenStatus.
 	ChangeToken *string
 
 	// A RegexPatternSet that contains no objects.

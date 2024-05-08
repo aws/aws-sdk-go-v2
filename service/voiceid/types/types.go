@@ -143,7 +143,7 @@ type DomainSummary struct {
 // Contains configurations defining enrollment behavior for the batch job.
 type EnrollmentConfig struct {
 
-	// The action to take when the specified speaker is already enrolled in the
+	//  The action to take when the specified speaker is already enrolled in the
 	// specified domain. The default value is SKIP , which skips the enrollment for the
 	// existing speaker. Setting the value to OVERWRITE replaces the existing voice
 	// prints and enrollment audio stored for that speaker with new data generated from

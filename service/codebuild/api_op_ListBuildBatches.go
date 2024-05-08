@@ -41,8 +41,10 @@ type ListBuildBatchesInput struct {
 	NextToken *string
 
 	// Specifies the sort order of the returned items. Valid values include:
+	//
 	//   - ASCENDING : List the batch build identifiers in ascending order by
 	//   identifier.
+	//
 	//   - DESCENDING : List the batch build identifiers in descending order by
 	//   identifier.
 	SortOrder types.SortOrderType

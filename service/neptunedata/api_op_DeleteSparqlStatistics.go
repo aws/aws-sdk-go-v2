@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes SPARQL statistics When invoking this operation in a Neptune cluster
-// that has IAM authentication enabled, the IAM user or role making the request
-// must have a policy attached that allows the neptune-db:DeleteStatistics (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#deletestatistics)
-// IAM action in that cluster.
+// Deletes SPARQL statistics
+//
+// When invoking this operation in a Neptune cluster that has IAM authentication
+// enabled, the IAM user or role making the request must have a policy attached
+// that allows the [neptune-db:DeleteStatistics]IAM action in that cluster.
+//
+// [neptune-db:DeleteStatistics]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#deletestatistics
 func (c *Client) DeleteSparqlStatistics(ctx context.Context, params *DeleteSparqlStatisticsInput, optFns ...func(*Options)) (*DeleteSparqlStatisticsOutput, error) {
 	if params == nil {
 		params = &DeleteSparqlStatisticsInput{}

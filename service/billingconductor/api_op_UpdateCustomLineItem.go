@@ -29,7 +29,7 @@ func (c *Client) UpdateCustomLineItem(ctx context.Context, params *UpdateCustomL
 
 type UpdateCustomLineItemInput struct {
 
-	// The ARN of the custom line item to be updated.
+	//  The ARN of the custom line item to be updated.
 	//
 	// This member is required.
 	Arn *string
@@ -37,14 +37,14 @@ type UpdateCustomLineItemInput struct {
 	// The billing period range in which the custom line item request will be applied.
 	BillingPeriodRange *types.CustomLineItemBillingPeriodRange
 
-	// A ListCustomLineItemChargeDetails containing the new charge details for the
+	//  A ListCustomLineItemChargeDetails containing the new charge details for the
 	// custom line item.
 	ChargeDetails *types.UpdateCustomLineItemChargeDetails
 
-	// The new line item description of the custom line item.
+	//  The new line item description of the custom line item.
 	Description *string
 
-	// The new name for the custom line item.
+	//  The new name for the custom line item.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -52,26 +52,26 @@ type UpdateCustomLineItemInput struct {
 
 type UpdateCustomLineItemOutput struct {
 
-	// The ARN of the successfully updated custom line item.
+	//  The ARN of the successfully updated custom line item.
 	Arn *string
 
-	// The number of resources that are associated to the custom line item.
+	//  The number of resources that are associated to the custom line item.
 	AssociationSize int64
 
-	// The ARN of the billing group that the custom line item is applied to.
+	//  The ARN of the billing group that the custom line item is applied to.
 	BillingGroupArn *string
 
-	// A ListCustomLineItemChargeDetails containing the charge details of the
+	//  A ListCustomLineItemChargeDetails containing the charge details of the
 	// successfully updated custom line item.
 	ChargeDetails *types.ListCustomLineItemChargeDetails
 
-	// The description of the successfully updated custom line item.
+	//  The description of the successfully updated custom line item.
 	Description *string
 
-	// The most recent time when the custom line item was modified.
+	//  The most recent time when the custom line item was modified.
 	LastModifiedTime int64
 
-	// The name of the successfully updated custom line item.
+	//  The name of the successfully updated custom line item.
 	Name *string
 
 	// Metadata pertaining to the operation's result.

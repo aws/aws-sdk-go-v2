@@ -8,8 +8,9 @@ import (
 )
 
 // An internal error has occurred. Retry your request, but if the problem
-// persists, contact us with details by posting a question on re:Post (https://repost.aws/)
-// .
+// persists, contact us with details by posting a question on [re:Post].
+//
+// [re:Post]: https://repost.aws/
 type InternalServerException struct {
 	Message *string
 

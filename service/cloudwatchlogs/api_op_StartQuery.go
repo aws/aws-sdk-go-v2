@@ -11,24 +11,35 @@ import (
 )
 
 // Schedules a query of a log group using CloudWatch Logs Insights. You specify
-// the log group and time range to query and the query string to use. For more
-// information, see CloudWatch Logs Insights Query Syntax (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html)
-// . After you run a query using StartQuery , the query results are stored by
-// CloudWatch Logs. You can use GetQueryResults (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetQueryResults.html)
-// to retrieve the results of a query, using the queryId that StartQuery returns.
-// If you have associated a KMS key with the query results in this account, then
-// StartQuery (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html)
+// the log group and time range to query and the query string to use.
+//
+// For more information, see [CloudWatch Logs Insights Query Syntax].
+//
+// After you run a query using StartQuery , the query results are stored by
+// CloudWatch Logs. You can use [GetQueryResults]to retrieve the results of a query, using the
+// queryId that StartQuery returns.
+//
+// If you have associated a KMS key with the query results in this account, then [StartQuery]
 // uses that key to encrypt the results when it stores them. If no key is
 // associated with query results, the query results are encrypted with the default
-// CloudWatch Logs encryption method. Queries time out after 60 minutes of runtime.
-// If your queries are timing out, reduce the time range being searched or
-// partition your query into a number of queries. If you are using CloudWatch
-// cross-account observability, you can use this operation in a monitoring account
-// to start a query in a linked source account. For more information, see
-// CloudWatch cross-account observability (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html)
-// . For a cross-account StartQuery operation, the query definition must be
-// defined in the monitoring account. You can have up to 30 concurrent CloudWatch
-// Logs insights queries, including queries that have been added to dashboards.
+// CloudWatch Logs encryption method.
+//
+// Queries time out after 60 minutes of runtime. If your queries are timing out,
+// reduce the time range being searched or partition your query into a number of
+// queries.
+//
+// If you are using CloudWatch cross-account observability, you can use this
+// operation in a monitoring account to start a query in a linked source account.
+// For more information, see [CloudWatch cross-account observability]. For a cross-account StartQuery operation, the query
+// definition must be defined in the monitoring account.
+//
+// You can have up to 30 concurrent CloudWatch Logs insights queries, including
+// queries that have been added to dashboards.
+//
+// [CloudWatch Logs Insights Query Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
+// [CloudWatch cross-account observability]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
+// [GetQueryResults]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetQueryResults.html
+// [StartQuery]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html
 func (c *Client) StartQuery(ctx context.Context, params *StartQueryInput, optFns ...func(*Options)) (*StartQueryOutput, error) {
 	if params == nil {
 		params = &StartQueryInput{}
@@ -53,9 +64,9 @@ type StartQueryInput struct {
 	// This member is required.
 	EndTime *int64
 
-	// The query string to use. For more information, see CloudWatch Logs Insights
-	// Query Syntax (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html)
-	// .
+	// The query string to use. For more information, see [CloudWatch Logs Insights Query Syntax].
+	//
+	// [CloudWatch Logs Insights Query Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
 	//
 	// This member is required.
 	QueryString *string
@@ -72,22 +83,28 @@ type StartQueryInput struct {
 	// returned. The default is 1000.
 	Limit *int32
 
-	// The list of log groups to query. You can include up to 50 log groups. You can
-	// specify them by the log group name or ARN. If a log group that you're querying
-	// is in a source account and you're using a monitoring account, you must specify
-	// the ARN of the log group here. The query definition must also be defined in the
-	// monitoring account. If you specify an ARN, the ARN can't end with an asterisk
-	// (*). A StartQuery operation must include exactly one of the following
-	// parameters: logGroupName , logGroupNames , or logGroupIdentifiers .
+	// The list of log groups to query. You can include up to 50 log groups.
+	//
+	// You can specify them by the log group name or ARN. If a log group that you're
+	// querying is in a source account and you're using a monitoring account, you must
+	// specify the ARN of the log group here. The query definition must also be defined
+	// in the monitoring account.
+	//
+	// If you specify an ARN, the ARN can't end with an asterisk (*).
+	//
+	// A StartQuery operation must include exactly one of the following parameters:
+	// logGroupName , logGroupNames , or logGroupIdentifiers .
 	LogGroupIdentifiers []string
 
-	// The log group on which to perform the query. A StartQuery operation must
-	// include exactly one of the following parameters: logGroupName , logGroupNames ,
-	// or logGroupIdentifiers .
+	// The log group on which to perform the query.
+	//
+	// A StartQuery operation must include exactly one of the following parameters:
+	// logGroupName , logGroupNames , or logGroupIdentifiers .
 	LogGroupName *string
 
-	// The list of log groups to be queried. You can include up to 50 log groups. A
-	// StartQuery operation must include exactly one of the following parameters:
+	// The list of log groups to be queried. You can include up to 50 log groups.
+	//
+	// A StartQuery operation must include exactly one of the following parameters:
 	// logGroupName , logGroupNames , or logGroupIdentifiers .
 	LogGroupNames []string
 

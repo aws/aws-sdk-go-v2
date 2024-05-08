@@ -13,8 +13,9 @@ import (
 
 // Creates one or more virtual tapes. You write data to the virtual tapes and then
 // archive the tapes. This operation is only supported in the tape gateway type.
+//
 // Cache storage must be allocated to the gateway before you can create virtual
-// tapes. Use the AddCache operation to add cache storage to a gateway.
+// tapes. Use the AddCacheoperation to add cache storage to a gateway.
 func (c *Client) CreateTapes(ctx context.Context, params *CreateTapesInput, optFns ...func(*Options)) (*CreateTapesOutput, error) {
 	if params == nil {
 		params = &CreateTapesInput{}
@@ -34,15 +35,16 @@ func (c *Client) CreateTapes(ctx context.Context, params *CreateTapesInput, optF
 type CreateTapesInput struct {
 
 	// A unique identifier that you use to retry a request. If you retry a request,
-	// use the same ClientToken you specified in the initial request. Using the same
-	// ClientToken prevents creating the tape multiple times.
+	// use the same ClientToken you specified in the initial request.
+	//
+	// Using the same ClientToken prevents creating the tape multiple times.
 	//
 	// This member is required.
 	ClientToken *string
 
 	// The unique Amazon Resource Name (ARN) that represents the gateway to associate
-	// the virtual tapes with. Use the ListGateways operation to return a list of
-	// gateways for your account and Amazon Web Services Region.
+	// the virtual tapes with. Use the ListGatewaysoperation to return a list of gateways for your
+	// account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -53,20 +55,25 @@ type CreateTapesInput struct {
 	NumTapesToCreate *int32
 
 	// A prefix that you append to the barcode of the virtual tape you are creating.
-	// This prefix makes the barcode unique. The prefix must be 1-4 characters in
-	// length and must be one of the uppercase letters from A to Z.
+	// This prefix makes the barcode unique.
+	//
+	// The prefix must be 1-4 characters in length and must be one of the uppercase
+	// letters from A to Z.
 	//
 	// This member is required.
 	TapeBarcodePrefix *string
 
-	// The size, in bytes, of the virtual tapes that you want to create. The size must
-	// be aligned by gigabyte (1024*1024*1024 bytes).
+	// The size, in bytes, of the virtual tapes that you want to create.
+	//
+	// The size must be aligned by gigabyte (1024*1024*1024 bytes).
 	//
 	// This member is required.
 	TapeSizeInBytes *int64
 
 	// Set to true to use Amazon S3 server-side encryption with your own KMS key, or
-	// false to use a key managed by Amazon S3. Optional. Valid Values: true | false
+	// false to use a key managed by Amazon S3. Optional.
+	//
+	// Valid Values: true | false
 	KMSEncrypted *bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
@@ -82,10 +89,12 @@ type CreateTapesInput struct {
 	PoolId *string
 
 	// A list of up to 50 tags that can be assigned to a virtual tape. Each tag is a
-	// key-value pair. Valid characters for key and value are letters, spaces, and
-	// numbers representable in UTF-8 format, and the following special characters: + -
-	// = . _ : / @. The maximum length of a tag's key is 128 characters, and the
-	// maximum length for a tag's value is 256.
+	// key-value pair.
+	//
+	// Valid characters for key and value are letters, spaces, and numbers
+	// representable in UTF-8 format, and the following special characters: + - = . _ :
+	// / @. The maximum length of a tag's key is 128 characters, and the maximum length
+	// for a tag's value is 256.
 	Tags []types.Tag
 
 	// Set to TRUE if the tape you are creating is to be configured as a

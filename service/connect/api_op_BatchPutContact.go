@@ -12,13 +12,16 @@ import (
 )
 
 // Only the Amazon Connect outbound campaigns service principal is allowed to
-// assume a role in your account and call this API. Allows you to create a batch of
-// contacts in Amazon Connect. The outbound campaigns capability ingests dial
-// requests via the PutDialRequestBatch (https://docs.aws.amazon.com/connect-outbound/latest/APIReference/API_PutDialRequestBatch.html)
-// API. It then uses BatchPutContact to create contacts corresponding to those dial
-// requests. If agents are available, the dial requests are dialed out, which
-// results in a voice call. The resulting voice call uses the same contactId that
-// was created by BatchPutContact.
+// assume a role in your account and call this API.
+//
+// Allows you to create a batch of contacts in Amazon Connect. The outbound
+// campaigns capability ingests dial requests via the [PutDialRequestBatch]API. It then uses
+// BatchPutContact to create contacts corresponding to those dial requests. If
+// agents are available, the dial requests are dialed out, which results in a voice
+// call. The resulting voice call uses the same contactId that was created by
+// BatchPutContact.
+//
+// [PutDialRequestBatch]: https://docs.aws.amazon.com/connect-outbound/latest/APIReference/API_PutDialRequestBatch.html
 func (c *Client) BatchPutContact(ctx context.Context, params *BatchPutContactInput, optFns ...func(*Options)) (*BatchPutContactOutput, error) {
 	if params == nil {
 		params = &BatchPutContactInput{}
@@ -41,17 +44,19 @@ type BatchPutContactInput struct {
 	// This member is required.
 	ContactDataRequestList []types.ContactDataRequest
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	noSmithyDocumentSerde

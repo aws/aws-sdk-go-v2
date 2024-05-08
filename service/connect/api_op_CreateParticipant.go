@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a new participant into an on-going chat contact. For more information, see
-// Customize chat flow experiences by integrating custom participants (https://docs.aws.amazon.com/connect/latest/adminguide/chat-customize-flow.html)
+// Adds a new participant into an on-going chat contact. For more information, see [Customize chat flow experiences by integrating custom participants]
 // .
+//
+// [Customize chat flow experiences by integrating custom participants]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-customize-flow.html
 func (c *Client) CreateParticipant(ctx context.Context, params *CreateParticipantInput, optFns ...func(*Options)) (*CreateParticipantOutput, error) {
 	if params == nil {
 		params = &CreateParticipantInput{}
@@ -37,23 +38,28 @@ type CreateParticipantInput struct {
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
 
-	// Information identifying the participant. The only Valid value for
-	// ParticipantRole is CUSTOM_BOT . DisplayName is Required.
+	// Information identifying the participant.
+	//
+	// The only Valid value for ParticipantRole is CUSTOM_BOT .
+	//
+	// DisplayName is Required.
 	//
 	// This member is required.
 	ParticipantDetails *types.ParticipantDetailsToAdd
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	noSmithyDocumentSerde

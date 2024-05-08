@@ -10,11 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a stack's instances. Required Permissions: To use this action, an IAM
-// user must have a Manage permissions level for the stack, or an attached policy
-// that explicitly grants permissions. For more information on user permissions,
-// see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// Starts a stack's instances.
+//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see [Managing User Permissions].
+//
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) StartStack(ctx context.Context, params *StartStackInput, optFns ...func(*Options)) (*StartStackOutput, error) {
 	if params == nil {
 		params = &StartStackInput{}

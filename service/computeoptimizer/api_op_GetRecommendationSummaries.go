@@ -11,12 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the optimization findings for an account. It returns the number of:
+// Returns the optimization findings for an account.
+//
+// It returns the number of:
+//
 //   - Amazon EC2 instances in an account that are Underprovisioned ,
 //     Overprovisioned , or Optimized .
+//
 //   - Auto Scaling groups in an account that are NotOptimized , or Optimized .
+//
 //   - Amazon EBS volumes in an account that are NotOptimized , or Optimized .
+//
 //   - Lambda functions in an account that are NotOptimized , or Optimized .
+//
 //   - Amazon ECS services in an account that are Underprovisioned ,
 //     Overprovisioned , or Optimized .
 func (c *Client) GetRecommendationSummaries(ctx context.Context, params *GetRecommendationSummariesInput, optFns ...func(*Options)) (*GetRecommendationSummariesOutput, error) {
@@ -37,12 +44,17 @@ func (c *Client) GetRecommendationSummaries(ctx context.Context, params *GetReco
 type GetRecommendationSummariesInput struct {
 
 	// The ID of the Amazon Web Services account for which to return recommendation
-	// summaries. If your account is the management account of an organization, use
-	// this parameter to specify the member account for which you want to return
-	// recommendation summaries. Only one account ID can be specified per request.
+	// summaries.
+	//
+	// If your account is the management account of an organization, use this
+	// parameter to specify the member account for which you want to return
+	// recommendation summaries.
+	//
+	// Only one account ID can be specified per request.
 	AccountIds []string
 
 	// The maximum number of recommendation summaries to return with a single request.
+	//
 	// To retrieve the remaining results, make another request with the returned
 	// nextToken value.
 	MaxResults *int32
@@ -55,8 +67,9 @@ type GetRecommendationSummariesInput struct {
 
 type GetRecommendationSummariesOutput struct {
 
-	// The token to use to advance to the next page of recommendation summaries. This
-	// value is null when there are no more pages of recommendation summaries to
+	// The token to use to advance to the next page of recommendation summaries.
+	//
+	// This value is null when there are no more pages of recommendation summaries to
 	// return.
 	NextToken *string
 
@@ -157,6 +170,7 @@ var _ GetRecommendationSummariesAPIClient = (*Client)(nil)
 // GetRecommendationSummaries
 type GetRecommendationSummariesPaginatorOptions struct {
 	// The maximum number of recommendation summaries to return with a single request.
+	//
 	// To retrieve the remaining results, make another request with the returned
 	// nextToken value.
 	Limit int32

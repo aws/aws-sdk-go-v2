@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for ConflictExceptionReason. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 	return []ConflictExceptionReason{
 		"INVALID_RULE_STATE",
@@ -28,8 +29,9 @@ const (
 )
 
 // Values returns all known values for LockState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LockState) Values() []LockState {
 	return []LockState{
 		"locked",
@@ -47,8 +49,9 @@ const (
 
 // Values returns all known values for ResourceNotFoundExceptionReason. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceNotFoundExceptionReason) Values() []ResourceNotFoundExceptionReason {
 	return []ResourceNotFoundExceptionReason{
 		"RULE_NOT_FOUND",
@@ -64,8 +67,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"EBS_SNAPSHOT",
@@ -81,8 +85,9 @@ const (
 )
 
 // Values returns all known values for RetentionPeriodUnit. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RetentionPeriodUnit) Values() []RetentionPeriodUnit {
 	return []RetentionPeriodUnit{
 		"DAYS",
@@ -98,8 +103,9 @@ const (
 )
 
 // Values returns all known values for RuleStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RuleStatus) Values() []RuleStatus {
 	return []RuleStatus{
 		"pending",
@@ -116,8 +122,9 @@ const (
 
 // Values returns all known values for ServiceQuotaExceededExceptionReason. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceQuotaExceededExceptionReason) Values() []ServiceQuotaExceededExceptionReason {
 	return []ServiceQuotaExceededExceptionReason{
 		"SERVICE_QUOTA_EXCEEDED",
@@ -132,8 +139,9 @@ const (
 )
 
 // Values returns all known values for UnlockDelayUnit. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UnlockDelayUnit) Values() []UnlockDelayUnit {
 	return []UnlockDelayUnit{
 		"DAYS",
@@ -150,6 +158,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

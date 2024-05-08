@@ -41,7 +41,9 @@ type ListServiceActionsForProvisioningArtifactInput struct {
 	ProvisioningArtifactId *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

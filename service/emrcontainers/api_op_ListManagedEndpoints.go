@@ -37,7 +37,7 @@ type ListManagedEndpointsInput struct {
 	// This member is required.
 	VirtualClusterId *string
 
-	// The date and time after which the endpoints are created.
+	//  The date and time after which the endpoints are created.
 	CreatedAfter *time.Time
 
 	// The date and time before which the endpoints are created.
@@ -46,7 +46,7 @@ type ListManagedEndpointsInput struct {
 	// The maximum number of managed endpoints that can be listed.
 	MaxResults *int32
 
-	// The token for the next set of managed endpoints to return.
+	//  The token for the next set of managed endpoints to return.
 	NextToken *string
 
 	// The states of the managed endpoints.
@@ -63,7 +63,7 @@ type ListManagedEndpointsOutput struct {
 	// The managed endpoints to be listed.
 	Endpoints []types.Endpoint
 
-	// The token for the next set of endpoints to return.
+	//  The token for the next set of endpoints to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -33,9 +33,10 @@ type ListComponentsInput struct {
 	ApplicationId *string
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value. If you
-	// do not specify a value for MaxResults, the request returns 50 items per page by
-	// default.
+	// remaining results, make another call with the returned nextToken value.
+	//
+	// If you do not specify a value for MaxResults, the request returns 50 items per
+	// page by default.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -146,9 +147,10 @@ var _ ListComponentsAPIClient = (*Client)(nil)
 // ListComponentsPaginatorOptions is the paginator options for ListComponents
 type ListComponentsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value. If you
-	// do not specify a value for MaxResults, the request returns 50 items per page by
-	// default.
+	// remaining results, make another call with the returned nextToken value.
+	//
+	// If you do not specify a value for MaxResults, the request returns 50 items per
+	// page by default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -10,14 +10,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a quick connect. After calling DeleteUser (https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteUser.html)
-// , it's important to call DeleteQuickConnect to delete any records related to
-// the deleted users. This will help you:
+// Deletes a quick connect.
+//
+// After calling [DeleteUser], it's important to call DeleteQuickConnect to delete any records
+// related to the deleted users. This will help you:
+//
 //   - Avoid dangling resources that impact your service quotas.
+//
 //   - Remove deleted users so they don't appear to agents as transfer options.
+//
 //   - Avoid the disruption of other Amazon Connect processes, such as instance
-//     replication and syncing if you're using Amazon Connect Global Resiliency (https://docs.aws.amazon.com/connect/latest/adminguide/setup-connect-global-resiliency.html)
-//     .
+//     replication and syncing if you're using [Amazon Connect Global Resiliency].
+//
+// [Amazon Connect Global Resiliency]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-connect-global-resiliency.html
+// [DeleteUser]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteUser.html
 func (c *Client) DeleteQuickConnect(ctx context.Context, params *DeleteQuickConnectInput, optFns ...func(*Options)) (*DeleteQuickConnectOutput, error) {
 	if params == nil {
 		params = &DeleteQuickConnectInput{}
@@ -35,8 +41,10 @@ func (c *Client) DeleteQuickConnect(ctx context.Context, params *DeleteQuickConn
 
 type DeleteQuickConnectInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

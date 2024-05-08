@@ -12,9 +12,12 @@ import (
 )
 
 // This action returns the following for a given blockchain network:
+//
 //   - Lists all token balances owned by an address (either a contract address or
 //     a wallet address).
+//
 //   - Lists all token balances for all tokens created by a contract.
+//
 //   - Lists all token balances for a given token.
 //
 // You must always specify the network property of the tokenFilter when using this
@@ -38,17 +41,24 @@ type ListTokenBalancesInput struct {
 
 	// The contract address or a token identifier on the blockchain network by which
 	// to filter the request. You must specify the contractAddress property of this
-	// container when listing tokens minted by a contract. You must always specify the
-	// network property of this container when using this operation.
+	// container when listing tokens minted by a contract.
+	//
+	// You must always specify the network property of this container when using this
+	// operation.
 	//
 	// This member is required.
 	TokenFilter *types.TokenFilter
 
-	// The maximum number of token balances to return. Default: 100 Even if additional
-	// results can be retrieved, the request can return less results than maxResults
-	// or an empty array of results. To retrieve the next set of results, make another
-	// request with the returned nextToken value. The value of nextToken is null when
-	// there are no more results to return
+	// The maximum number of token balances to return.
+	//
+	// Default: 100
+	//
+	// Even if additional results can be retrieved, the request can return less
+	// results than maxResults or an empty array of results.
+	//
+	// To retrieve the next set of results, make another request with the returned
+	// nextToken value. The value of nextToken is null when there are no more results
+	// to return
 	MaxResults *int32
 
 	// The pagination token that indicates the next set of results to retrieve.
@@ -168,11 +178,16 @@ var _ ListTokenBalancesAPIClient = (*Client)(nil)
 
 // ListTokenBalancesPaginatorOptions is the paginator options for ListTokenBalances
 type ListTokenBalancesPaginatorOptions struct {
-	// The maximum number of token balances to return. Default: 100 Even if additional
-	// results can be retrieved, the request can return less results than maxResults
-	// or an empty array of results. To retrieve the next set of results, make another
-	// request with the returned nextToken value. The value of nextToken is null when
-	// there are no more results to return
+	// The maximum number of token balances to return.
+	//
+	// Default: 100
+	//
+	// Even if additional results can be retrieved, the request can return less
+	// results than maxResults or an empty array of results.
+	//
+	// To retrieve the next set of results, make another request with the returned
+	// nextToken value. The value of nextToken is null when there are no more results
+	// to return
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

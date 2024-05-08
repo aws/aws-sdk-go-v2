@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the configuration of PutApplicationAssignmentConfiguration .
+// Retrieves the configuration of PutApplicationAssignmentConfiguration.
 func (c *Client) GetApplicationAssignmentConfiguration(ctx context.Context, params *GetApplicationAssignmentConfigurationInput, optFns ...func(*Options)) (*GetApplicationAssignmentConfigurationOutput, error) {
 	if params == nil {
 		params = &GetApplicationAssignmentConfigurationInput{}
@@ -28,9 +28,8 @@ func (c *Client) GetApplicationAssignmentConfiguration(ctx context.Context, para
 
 type GetApplicationAssignmentConfigurationInput struct {
 
-	// Specifies the ARN of the application. For more information about ARNs, see
-	// Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the
-	// Amazon Web Services General Reference.
+	// Specifies the ARN of the application. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in
+	// the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	ApplicationArn *string
@@ -41,9 +40,10 @@ type GetApplicationAssignmentConfigurationInput struct {
 type GetApplicationAssignmentConfigurationOutput struct {
 
 	// If AssignmentsRequired is true (default value), users don’t have access to the
-	// application unless an assignment is created using the
-	// CreateApplicationAssignment API (https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html)
-	// . If false , all users have access to the application.
+	// application unless an assignment is created using the [CreateApplicationAssignment API]. If false , all users
+	// have access to the application.
+	//
+	// [CreateApplicationAssignment API]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html
 	//
 	// This member is required.
 	AssignmentRequired *bool

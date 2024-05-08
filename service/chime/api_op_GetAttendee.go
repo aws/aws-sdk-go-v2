@@ -11,17 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the Amazon Chime SDK attendee details for a specified meeting ID and
-// attendee ID. For more information about the Amazon Chime SDK, see Using the
-// Amazon Chime SDK (https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html)
-// in the Amazon Chime SDK Developer Guide. This API is is no longer supported and
-// will not be updated. We recommend using the latest version, GetAttendee (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_GetAttendee.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+//	Gets the Amazon Chime SDK attendee details for a specified meeting ID and
+//
+// attendee ID. For more information about the Amazon Chime SDK, see [Using the Amazon Chime SDK]in the Amazon
+// Chime SDK Developer Guide.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [GetAttendee], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by GetAttendee in the Amazon Chime SDK Meetings Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [Using the Amazon Chime SDK]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
+// [GetAttendee]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_GetAttendee.html
 func (c *Client) GetAttendee(ctx context.Context, params *GetAttendeeInput, optFns ...func(*Options)) (*GetAttendeeOutput, error) {
 	if params == nil {
 		params = &GetAttendeeInput{}

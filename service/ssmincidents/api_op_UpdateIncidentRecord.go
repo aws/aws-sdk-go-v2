@@ -13,8 +13,9 @@ import (
 
 // Update the details of an incident record. You can use this operation to update
 // an incident record from the defined chat channel. For more information about
-// using actions in chat channels, see Interacting through chat (https://docs.aws.amazon.com/incident-manager/latest/userguide/chat.html#chat-interact)
-// .
+// using actions in chat channels, see [Interacting through chat].
+//
+// [Interacting through chat]: https://docs.aws.amazon.com/incident-manager/latest/userguide/chat.html#chat-interact
 func (c *Client) UpdateIncidentRecord(ctx context.Context, params *UpdateIncidentRecordInput, optFns ...func(*Options)) (*UpdateIncidentRecordOutput, error) {
 	if params == nil {
 		params = &UpdateIncidentRecordInput{}
@@ -46,17 +47,26 @@ type UpdateIncidentRecordInput struct {
 
 	// Defines the impact of the incident to customers and applications. If you
 	// provide an impact for an incident, it overwrites the impact provided by the
-	// response plan. Supported impact codes
+	// response plan.
+	//
+	// Supported impact codes
+	//
 	//   - 1 - Critical
+	//
 	//   - 2 - High
+	//
 	//   - 3 - Medium
+	//
 	//   - 4 - Low
+	//
 	//   - 5 - No Impact
 	Impact *int32
 
 	// The Amazon SNS targets that Incident Manager notifies when a client updates an
-	// incident. Using multiple SNS topics creates redundancy in the event that a
-	// Region is down during the incident.
+	// incident.
+	//
+	// Using multiple SNS topics creates redundancy in the event that a Region is down
+	// during the incident.
 	NotificationTargets []types.NotificationTargetItem
 
 	// The status of the incident. Possible statuses are Open or Resolved .

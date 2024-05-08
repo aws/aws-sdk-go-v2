@@ -37,8 +37,10 @@ type ListPermissionAssociationsInput struct {
 
 	// When true , specifies that you want to list only those associations with
 	// resource shares that use the default version of the specified managed
-	// permission. When false (the default value), lists associations with resource
-	// shares that use any version of the specified managed permission.
+	// permission.
+	//
+	// When false (the default value), lists associations with resource shares that
+	// use any version of the specified managed permission.
 	DefaultVersion *bool
 
 	// Specifies that you want to list only those associations with resource shares
@@ -62,8 +64,9 @@ type ListPermissionAssociationsInput struct {
 	// previous call's NextToken response to request the next page of results.
 	NextToken *string
 
-	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the managed permission.
+	// Specifies the [Amazon Resource Name (ARN)] of the managed permission.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	PermissionArn *string
 
 	// Specifies that you want to list only those associations with resource shares

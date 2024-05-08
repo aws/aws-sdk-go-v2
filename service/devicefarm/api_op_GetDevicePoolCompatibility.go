@@ -44,26 +44,45 @@ type GetDevicePoolCompatibilityInput struct {
 	// Information about the uploaded test to be run against the device pool.
 	Test *types.ScheduleRunTest
 
-	// The test type for the specified device pool. Allowed values include the
-	// following:
+	// The test type for the specified device pool.
+	//
+	// Allowed values include the following:
+	//
 	//   - BUILTIN_FUZZ.
+	//
 	//   - BUILTIN_EXPLORER. For Android, an app explorer that traverses an Android
 	//   app, interacting with it and capturing screenshots at the same time.
+	//
 	//   - APPIUM_JAVA_JUNIT.
+	//
 	//   - APPIUM_JAVA_TESTNG.
+	//
 	//   - APPIUM_PYTHON.
+	//
 	//   - APPIUM_NODE.
+	//
 	//   - APPIUM_RUBY.
+	//
 	//   - APPIUM_WEB_JAVA_JUNIT.
+	//
 	//   - APPIUM_WEB_JAVA_TESTNG.
+	//
 	//   - APPIUM_WEB_PYTHON.
+	//
 	//   - APPIUM_WEB_NODE.
+	//
 	//   - APPIUM_WEB_RUBY.
+	//
 	//   - CALABASH.
+	//
 	//   - INSTRUMENTATION.
+	//
 	//   - UIAUTOMATION.
+	//
 	//   - UIAUTOMATOR.
+	//
 	//   - XCTEST.
+	//
 	//   - XCTEST_UI.
 	TestType types.TestType
 

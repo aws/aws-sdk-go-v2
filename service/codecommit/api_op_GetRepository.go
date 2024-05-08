@@ -11,12 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a repository. The description field for a repository
-// accepts all HTML characters and all valid Unicode characters. Applications that
-// do not HTML-encode the description and display it in a webpage can expose users
-// to potentially malicious code. Make sure that you HTML-encode the description
-// field in any application that uses this API to display the repository
-// description on a webpage.
+// Returns information about a repository.
+//
+// The description field for a repository accepts all HTML characters and all
+// valid Unicode characters. Applications that do not HTML-encode the description
+// and display it in a webpage can expose users to potentially malicious code. Make
+// sure that you HTML-encode the description field in any application that uses
+// this API to display the repository description on a webpage.
 func (c *Client) GetRepository(ctx context.Context, params *GetRepositoryInput, optFns ...func(*Options)) (*GetRepositoryOutput, error) {
 	if params == nil {
 		params = &GetRepositoryInput{}

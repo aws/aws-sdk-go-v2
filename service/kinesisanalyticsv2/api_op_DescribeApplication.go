@@ -12,8 +12,10 @@ import (
 )
 
 // Returns information about a specific Managed Service for Apache Flink
-// application. If you want to retrieve a list of all applications in your account,
-// use the ListApplications operation.
+// application.
+//
+// If you want to retrieve a list of all applications in your account, use the ListApplications
+// operation.
 func (c *Client) DescribeApplication(ctx context.Context, params *DescribeApplicationInput, optFns ...func(*Options)) (*DescribeApplicationOutput, error) {
 	if params == nil {
 		params = &DescribeApplicationInput{}

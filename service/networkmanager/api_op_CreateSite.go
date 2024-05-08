@@ -34,14 +34,19 @@ type CreateSiteInput struct {
 	// This member is required.
 	GlobalNetworkId *string
 
-	// A description of your site. Constraints: Maximum length of 256 characters.
+	// A description of your site.
+	//
+	// Constraints: Maximum length of 256 characters.
 	Description *string
 
 	// The site location. This information is used for visualization in the Network
 	// Manager console. If you specify the address, the latitude and longitude are
 	// automatically calculated.
+	//
 	//   - Address : The physical address of the site.
+	//
 	//   - Latitude : The latitude of the site.
+	//
 	//   - Longitude : The longitude of the site.
 	Location *types.Location
 

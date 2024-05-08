@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the list of available connector entities supported by Amazon AppFlow.
+//	Returns the list of available connector entities supported by Amazon AppFlow.
+//
 // For example, you can query Salesforce for Account and Opportunity entities, or
 // query ServiceNow for the Incident entity.
 func (c *Client) ListConnectorEntities(ctx context.Context, params *ListConnectorEntitiesInput, optFns ...func(*Options)) (*ListConnectorEntitiesOutput, error) {
@@ -34,15 +35,15 @@ type ListConnectorEntitiesInput struct {
 	// The version of the API that's used by the connector.
 	ApiVersion *string
 
-	// The name of the connector profile. The name is unique for each ConnectorProfile
+	//  The name of the connector profile. The name is unique for each ConnectorProfile
 	// in the Amazon Web Services account, and is used to query the downstream
 	// connector.
 	ConnectorProfileName *string
 
-	// The type of connector, such as Salesforce, Amplitude, and so on.
+	//  The type of connector, such as Salesforce, Amplitude, and so on.
 	ConnectorType types.ConnectorType
 
-	// This optional parameter is specific to connector implementation. Some
+	//  This optional parameter is specific to connector implementation. Some
 	// connectors support multiple levels or categories of entities. You can find out
 	// the list of roots for such providers by sending a request without the
 	// entitiesPath parameter. If the connector supports entities at different roots,
@@ -63,7 +64,7 @@ type ListConnectorEntitiesInput struct {
 
 type ListConnectorEntitiesOutput struct {
 
-	// The response of ListConnectorEntities lists entities grouped by category. This
+	//  The response of ListConnectorEntities lists entities grouped by category. This
 	// map's key represents the group name, and its value contains the list of entities
 	// belonging to that group.
 	//

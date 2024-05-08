@@ -13,8 +13,9 @@ import (
 )
 
 // Creates a report plan. A report plan is a document that contains information
-// about the contents of the report and where Backup will deliver it. If you call
-// CreateReportPlan with a plan that already exists, you receive an
+// about the contents of the report and where Backup will deliver it.
+//
+// If you call CreateReportPlan with a plan that already exists, you receive an
 // AlreadyExistsException exception.
 func (c *Client) CreateReportPlan(ctx context.Context, params *CreateReportPlanInput, optFns ...func(*Options)) (*CreateReportPlanOutput, error) {
 	if params == nil {
@@ -48,9 +49,12 @@ type CreateReportPlanInput struct {
 	ReportPlanName *string
 
 	// Identifies the report template for the report. Reports are built using a report
-	// template. The report templates are: RESOURCE_COMPLIANCE_REPORT |
-	// CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT |
-	// RESTORE_JOB_REPORT If the report template is RESOURCE_COMPLIANCE_REPORT or
+	// template. The report templates are:
+	//
+	//     RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT |
+	//     COPY_JOB_REPORT | RESTORE_JOB_REPORT
+	//
+	// If the report template is RESOURCE_COMPLIANCE_REPORT or
 	// CONTROL_COMPLIANCE_REPORT , this API resource also describes the report coverage
 	// by Amazon Web Services Regions and frameworks.
 	//

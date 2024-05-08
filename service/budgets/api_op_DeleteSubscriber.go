@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a subscriber. Deleting the last subscriber to a notification also
-// deletes the notification.
+// Deletes a subscriber.
+//
+// Deleting the last subscriber to a notification also deletes the notification.
 func (c *Client) DeleteSubscriber(ctx context.Context, params *DeleteSubscriberInput, optFns ...func(*Options)) (*DeleteSubscriberOutput, error) {
 	if params == nil {
 		params = &DeleteSubscriberInput{}

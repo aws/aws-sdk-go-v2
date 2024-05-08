@@ -31,8 +31,12 @@ func (c *Client) ModifyDBSubnetGroup(ctx context.Context, params *ModifyDBSubnet
 type ModifyDBSubnetGroupInput struct {
 
 	// The name for the DB subnet group. This value is stored as a lowercase string.
-	// You can't modify the default subnet group. Constraints: Must match the name of
-	// an existing DBSubnetGroup. Must not be default. Example: mySubnetgroup
+	// You can't modify the default subnet group.
+	//
+	// Constraints: Must match the name of an existing DBSubnetGroup. Must not be
+	// default.
+	//
+	// Example: mySubnetgroup
 	//
 	// This member is required.
 	DBSubnetGroupName *string
@@ -50,8 +54,9 @@ type ModifyDBSubnetGroupInput struct {
 
 type ModifyDBSubnetGroupOutput struct {
 
-	// Contains the details of an Amazon Neptune DB subnet group. This data type is
-	// used as a response element in the DescribeDBSubnetGroups action.
+	// Contains the details of an Amazon Neptune DB subnet group.
+	//
+	// This data type is used as a response element in the DescribeDBSubnetGroups action.
 	DBSubnetGroup *types.DBSubnetGroup
 
 	// Metadata pertaining to the operation's result.

@@ -12,9 +12,11 @@ import (
 	"time"
 )
 
-// Gets information about the specified fleet metric. Requires permission to
-// access the DescribeFleetMetric (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Gets information about the specified fleet metric.
+//
+// Requires permission to access the [DescribeFleetMetric] action.
+//
+// [DescribeFleetMetric]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DescribeFleetMetric(ctx context.Context, params *DescribeFleetMetricInput, optFns ...func(*Options)) (*DescribeFleetMetricOutput, error) {
 	if params == nil {
 		params = &DescribeFleetMetricInput{}
@@ -77,8 +79,9 @@ type DescribeFleetMetricOutput struct {
 	QueryVersion *string
 
 	// Used to support unit transformation such as milliseconds to seconds. The unit
-	// must be supported by CW metric (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html)
-	// .
+	// must be supported by [CW metric].
+	//
+	// [CW metric]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
 	Unit types.FleetMetricUnit
 
 	// The version of the fleet metric.

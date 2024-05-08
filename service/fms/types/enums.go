@@ -14,8 +14,9 @@ const (
 )
 
 // Values returns all known values for AccountRoleStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccountRoleStatus) Values() []AccountRoleStatus {
 	return []AccountRoleStatus{
 		"READY",
@@ -36,6 +37,7 @@ const (
 
 // Values returns all known values for CustomerPolicyScopeIdType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomerPolicyScopeIdType) Values() []CustomerPolicyScopeIdType {
 	return []CustomerPolicyScopeIdType{
@@ -53,8 +55,9 @@ const (
 )
 
 // Values returns all known values for CustomerPolicyStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomerPolicyStatus) Values() []CustomerPolicyStatus {
 	return []CustomerPolicyStatus{
 		"ACTIVE",
@@ -73,8 +76,9 @@ const (
 )
 
 // Values returns all known values for DependentServiceName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DependentServiceName) Values() []DependentServiceName {
 	return []DependentServiceName{
 		"AWSCONFIG",
@@ -94,8 +98,9 @@ const (
 )
 
 // Values returns all known values for DestinationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DestinationType) Values() []DestinationType {
 	return []DestinationType{
 		"IPV4",
@@ -114,8 +119,9 @@ const (
 )
 
 // Values returns all known values for EntryType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EntryType) Values() []EntryType {
 	return []EntryType{
 		"FMS_MANAGED_FIRST_ENTRY",
@@ -134,8 +140,9 @@ const (
 )
 
 // Values returns all known values for EntryViolationReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EntryViolationReason) Values() []EntryViolationReason {
 	return []EntryViolationReason{
 		"MISSING_EXPECTED_ENTRY",
@@ -157,8 +164,9 @@ const (
 )
 
 // Values returns all known values for FailedItemReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FailedItemReason) Values() []FailedItemReason {
 	return []FailedItemReason{
 		"NOT_VALID_ARN",
@@ -179,8 +187,9 @@ const (
 )
 
 // Values returns all known values for FirewallDeploymentModel. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FirewallDeploymentModel) Values() []FirewallDeploymentModel {
 	return []FirewallDeploymentModel{
 		"CENTRALIZED",
@@ -199,8 +208,9 @@ const (
 
 // Values returns all known values for MarketplaceSubscriptionOnboardingStatus.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MarketplaceSubscriptionOnboardingStatus) Values() []MarketplaceSubscriptionOnboardingStatus {
 	return []MarketplaceSubscriptionOnboardingStatus{
 		"NO_SUBSCRIPTION",
@@ -218,8 +228,9 @@ const (
 )
 
 // Values returns all known values for NetworkAclRuleAction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkAclRuleAction) Values() []NetworkAclRuleAction {
 	return []NetworkAclRuleAction{
 		"allow",
@@ -236,8 +247,9 @@ const (
 
 // Values returns all known values for NetworkFirewallOverrideAction. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkFirewallOverrideAction) Values() []NetworkFirewallOverrideAction {
 	return []NetworkFirewallOverrideAction{
 		"DROP_TO_ALERT",
@@ -255,8 +267,9 @@ const (
 )
 
 // Values returns all known values for OrganizationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrganizationStatus) Values() []OrganizationStatus {
 	return []OrganizationStatus{
 		"ONBOARDING",
@@ -276,6 +289,7 @@ const (
 
 // Values returns all known values for PolicyComplianceStatusType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (PolicyComplianceStatusType) Values() []PolicyComplianceStatusType {
 	return []PolicyComplianceStatusType{
@@ -293,8 +307,9 @@ const (
 )
 
 // Values returns all known values for RemediationActionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RemediationActionType) Values() []RemediationActionType {
 	return []RemediationActionType{
 		"REMOVE",
@@ -311,8 +326,9 @@ const (
 )
 
 // Values returns all known values for ResourceSetStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceSetStatus) Values() []ResourceSetStatus {
 	return []ResourceSetStatus{
 		"ACTIVE",
@@ -329,8 +345,9 @@ const (
 )
 
 // Values returns all known values for RuleOrder. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RuleOrder) Values() []RuleOrder {
 	return []RuleOrder{
 		"STRICT_ORDER",
@@ -356,8 +373,9 @@ const (
 )
 
 // Values returns all known values for SecurityServiceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SecurityServiceType) Values() []SecurityServiceType {
 	return []SecurityServiceType{
 		"WAF",
@@ -385,8 +403,9 @@ const (
 )
 
 // Values returns all known values for StreamExceptionPolicy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamExceptionPolicy) Values() []StreamExceptionPolicy {
 	return []StreamExceptionPolicy{
 		"DROP",
@@ -413,8 +432,9 @@ const (
 )
 
 // Values returns all known values for TargetType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetType) Values() []TargetType {
 	return []TargetType{
 		"GATEWAY",
@@ -439,8 +459,9 @@ const (
 )
 
 // Values returns all known values for ThirdPartyFirewall. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ThirdPartyFirewall) Values() []ThirdPartyFirewall {
 	return []ThirdPartyFirewall{
 		"PALO_ALTO_NETWORKS_CLOUD_NGFW",
@@ -461,8 +482,9 @@ const (
 
 // Values returns all known values for ThirdPartyFirewallAssociationStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ThirdPartyFirewallAssociationStatus) Values() []ThirdPartyFirewallAssociationStatus {
 	return []ThirdPartyFirewallAssociationStatus{
 		"ONBOARDING",
@@ -509,8 +531,9 @@ const (
 )
 
 // Values returns all known values for ViolationReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ViolationReason) Values() []ViolationReason {
 	return []ViolationReason{
 		"WEB_ACL_MISSING_RULE_GROUP",

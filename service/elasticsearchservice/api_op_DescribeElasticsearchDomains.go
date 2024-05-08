@@ -28,8 +28,8 @@ func (c *Client) DescribeElasticsearchDomains(ctx context.Context, params *Descr
 	return out, nil
 }
 
-// Container for the parameters to the DescribeElasticsearchDomains operation. By
-// default, the API returns the status of all Elasticsearch domains.
+// Container for the parameters to the DescribeElasticsearchDomains operation. By default, the API returns the
+// status of all Elasticsearch domains.
 type DescribeElasticsearchDomainsInput struct {
 
 	// The Elasticsearch domains for which you want information.

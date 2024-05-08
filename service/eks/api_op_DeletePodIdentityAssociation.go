@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a EKS Pod Identity association. The temporary Amazon Web Services
-// credentials from the previous IAM role session might still be valid until the
-// session expiry. If you need to immediately revoke the temporary session
-// credentials, then go to the role in the IAM console.
+// Deletes a EKS Pod Identity association.
+//
+// The temporary Amazon Web Services credentials from the previous IAM role
+// session might still be valid until the session expiry. If you need to
+// immediately revoke the temporary session credentials, then go to the role in the
+// IAM console.
 func (c *Client) DeletePodIdentityAssociation(ctx context.Context, params *DeletePodIdentityAssociationInput, optFns ...func(*Options)) (*DeletePodIdentityAssociationOutput, error) {
 	if params == nil {
 		params = &DeletePodIdentityAssociationInput{}

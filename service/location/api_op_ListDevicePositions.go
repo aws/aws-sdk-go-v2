@@ -37,13 +37,15 @@ type ListDevicePositionsInput struct {
 	// The geometry used to filter device positions.
 	FilterGeometry *types.TrackingFilterGeometry
 
-	// An optional limit for the number of entries returned in a single call. Default
-	// value: 100
+	// An optional limit for the number of entries returned in a single call.
+	//
+	// Default value: 100
 	MaxResults *int32
 
 	// The pagination token specifying which page of results to return in the
-	// response. If no token is provided, the default page is the first page. Default
-	// value: null
+	// response. If no token is provided, the default page is the first page.
+	//
+	// Default value: null
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -186,8 +188,9 @@ var _ ListDevicePositionsAPIClient = (*Client)(nil)
 // ListDevicePositionsPaginatorOptions is the paginator options for
 // ListDevicePositions
 type ListDevicePositionsPaginatorOptions struct {
-	// An optional limit for the number of entries returned in a single call. Default
-	// value: 100
+	// An optional limit for the number of entries returned in a single call.
+	//
+	// Default value: 100
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

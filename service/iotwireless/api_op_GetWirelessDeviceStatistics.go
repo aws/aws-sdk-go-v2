@@ -39,8 +39,9 @@ type GetWirelessDeviceStatisticsInput struct {
 
 type GetWirelessDeviceStatisticsOutput struct {
 
-	// The date and time when the most recent uplink was received. This value is only
-	// valid for 3 months.
+	// The date and time when the most recent uplink was received.
+	//
+	// This value is only valid for 3 months.
 	LastUplinkReceivedAt *string
 
 	// Information about the wireless device's operations.

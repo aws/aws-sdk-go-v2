@@ -10,9 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a wireless gateway. When deleting a wireless gateway, you might run
-// into duplication errors for the following reasons.
+// Deletes a wireless gateway.
+//
+// When deleting a wireless gateway, you might run into duplication errors for the
+// following reasons.
+//
 //   - If you specify a GatewayEui value that already exists.
+//
 //   - If you used a ClientRequestToken with the same parameters within the last 10
 //     minutes.
 //

@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an existing trigger. See Triggering Jobs (https://docs.aws.amazon.com/glue/latest/dg/trigger-job.html)
-// for information about how different types of trigger are started.
+// Starts an existing trigger. See [Triggering Jobs] for information about how different types of
+// trigger are started.
+//
+// [Triggering Jobs]: https://docs.aws.amazon.com/glue/latest/dg/trigger-job.html
 func (c *Client) StartTrigger(ctx context.Context, params *StartTriggerInput, optFns ...func(*Options)) (*StartTriggerOutput, error) {
 	if params == nil {
 		params = &StartTriggerInput{}

@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified data provider. All migration projects associated with the
-// data provider must be deleted or modified before you can delete the data
-// provider.
+// Deletes the specified data provider.
+//
+// All migration projects associated with the data provider must be deleted or
+// modified before you can delete the data provider.
 func (c *Client) DeleteDataProvider(ctx context.Context, params *DeleteDataProviderInput, optFns ...func(*Options)) (*DeleteDataProviderOutput, error) {
 	if params == nil {
 		params = &DeleteDataProviderInput{}

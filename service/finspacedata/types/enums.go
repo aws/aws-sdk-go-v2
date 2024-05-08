@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ApiAccess. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApiAccess) Values() []ApiAccess {
 	return []ApiAccess{
 		"ENABLED",
@@ -34,8 +35,9 @@ const (
 )
 
 // Values returns all known values for ApplicationPermission. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationPermission) Values() []ApplicationPermission {
 	return []ApplicationPermission{
 		"CreateDataset",
@@ -58,8 +60,9 @@ const (
 )
 
 // Values returns all known values for ChangeType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeType) Values() []ChangeType {
 	return []ChangeType{
 		"REPLACE",
@@ -87,8 +90,9 @@ const (
 )
 
 // Values returns all known values for ColumnDataType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ColumnDataType) Values() []ColumnDataType {
 	return []ColumnDataType{
 		"STRING",
@@ -115,8 +119,9 @@ const (
 )
 
 // Values returns all known values for DatasetKind. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatasetKind) Values() []DatasetKind {
 	return []DatasetKind{
 		"TABULAR",
@@ -135,8 +140,9 @@ const (
 )
 
 // Values returns all known values for DatasetStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatasetStatus) Values() []DatasetStatus {
 	return []DatasetStatus{
 		"PENDING",
@@ -161,8 +167,9 @@ const (
 )
 
 // Values returns all known values for DataViewStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataViewStatus) Values() []DataViewStatus {
 	return []DataViewStatus{
 		"RUNNING",
@@ -191,8 +198,9 @@ const (
 )
 
 // Values returns all known values for ErrorCategory. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ErrorCategory) Values() []ErrorCategory {
 	return []ErrorCategory{
 		"VALIDATION",
@@ -215,8 +223,9 @@ const (
 )
 
 // Values returns all known values for ExportFileFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExportFileFormat) Values() []ExportFileFormat {
 	return []ExportFileFormat{
 		"PARQUET",
@@ -236,8 +245,9 @@ const (
 )
 
 // Values returns all known values for IngestionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IngestionStatus) Values() []IngestionStatus {
 	return []IngestionStatus{
 		"PENDING",
@@ -257,8 +267,9 @@ const (
 )
 
 // Values returns all known values for LocationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LocationType) Values() []LocationType {
 	return []LocationType{
 		"INGESTION",
@@ -277,8 +288,9 @@ const (
 
 // Values returns all known values for PermissionGroupMembershipStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PermissionGroupMembershipStatus) Values() []PermissionGroupMembershipStatus {
 	return []PermissionGroupMembershipStatus{
 		"ADDITION_IN_PROGRESS",
@@ -297,8 +309,9 @@ const (
 )
 
 // Values returns all known values for UserStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UserStatus) Values() []UserStatus {
 	return []UserStatus{
 		"CREATING",
@@ -316,8 +329,9 @@ const (
 )
 
 // Values returns all known values for UserType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UserType) Values() []UserType {
 	return []UserType{
 		"SUPER_USER",

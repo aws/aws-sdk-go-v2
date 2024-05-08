@@ -13,7 +13,9 @@ import (
 
 // Returns the landing zone ARN for the landing zone deployed in your managed
 // account. This API also creates an ARN for existing accounts that do not yet have
-// a landing zone ARN. Returns one landing zone ARN.
+// a landing zone ARN.
+//
+// Returns one landing zone ARN.
 func (c *Client) ListLandingZones(ctx context.Context, params *ListLandingZonesInput, optFns ...func(*Options)) (*ListLandingZonesOutput, error) {
 	if params == nil {
 		params = &ListLandingZonesInput{}

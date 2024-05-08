@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a decoder manifest using your existing CAN DBC file from your local
+//	Creates a decoder manifest using your existing CAN DBC file from your local
+//
 // device.
 func (c *Client) ImportDecoderManifest(ctx context.Context, params *ImportDecoderManifestInput, optFns ...func(*Options)) (*ImportDecoderManifestOutput, error) {
 	if params == nil {
@@ -30,12 +31,12 @@ func (c *Client) ImportDecoderManifest(ctx context.Context, params *ImportDecode
 
 type ImportDecoderManifestInput struct {
 
-	// The name of the decoder manifest to import.
+	//  The name of the decoder manifest to import.
 	//
 	// This member is required.
 	Name *string
 
-	// The file to load into an Amazon Web Services account.
+	//  The file to load into an Amazon Web Services account.
 	//
 	// This member is required.
 	NetworkFileDefinitions []types.NetworkFileDefinition
@@ -45,12 +46,12 @@ type ImportDecoderManifestInput struct {
 
 type ImportDecoderManifestOutput struct {
 
-	// The Amazon Resource Name (ARN) of the decoder manifest that was imported.
+	//  The Amazon Resource Name (ARN) of the decoder manifest that was imported.
 	//
 	// This member is required.
 	Arn *string
 
-	// The name of the imported decoder manifest.
+	//  The name of the imported decoder manifest.
 	//
 	// This member is required.
 	Name *string

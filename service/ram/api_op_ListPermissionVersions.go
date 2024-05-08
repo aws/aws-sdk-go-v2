@@ -29,10 +29,11 @@ func (c *Client) ListPermissionVersions(ctx context.Context, params *ListPermiss
 
 type ListPermissionVersionsInput struct {
 
-	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the RAM permission whose versions you want to list. You can use the
-	// permissionVersion parameter on the AssociateResourceSharePermission operation
-	// to specify a non-default version to attach.
+	// Specifies the [Amazon Resource Name (ARN)] of the RAM permission whose versions you want to list. You can
+	// use the permissionVersion parameter on the AssociateResourceSharePermission operation to specify a non-default
+	// version to attach.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	PermissionArn *string

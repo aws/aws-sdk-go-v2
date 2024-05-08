@@ -11,6 +11,7 @@ import (
 )
 
 // Generates a pre-signed URL and request headers used to upload a code resource.
+//
 // You can upload your code resource to the URL and add the request headers using
 // any HTTP client.
 func (c *Client) CreateUploadUrl(ctx context.Context, params *CreateUploadUrlInput, optFns ...func(*Options)) (*CreateUploadUrlOutput, error) {

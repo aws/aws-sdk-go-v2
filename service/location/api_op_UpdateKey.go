@@ -38,13 +38,20 @@ type UpdateKeyInput struct {
 	// Updates the description for the API key resource.
 	Description *string
 
-	// Updates the timestamp for when the API key resource will expire in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// Updates the timestamp for when the API key resource will expire in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	ExpireTime *time.Time
 
-	// The boolean flag to be included for updating ExpireTime or Restrictions
-	// details. Must be set to true to update an API key resource that has been used
-	// in the past 7 days. False if force update is not preferred Default value: False
+	// The boolean flag to be included for updating ExpireTime or Restrictions details.
+	//
+	// Must be set to true to update an API key resource that has been used in the
+	// past 7 days.
+	//
+	// False if force update is not preferred
+	//
+	// Default value: False
 	ForceUpdate *bool
 
 	// Whether the API key should expire. Set to true to set the API key to have no
@@ -61,6 +68,7 @@ type UpdateKeyOutput struct {
 
 	// The Amazon Resource Name (ARN) for the API key resource. Used when you need to
 	// specify a resource across all Amazon Web Services.
+	//
 	//   - Format example: arn:aws:geo:region:account-id:key/ExampleKey
 	//
 	// This member is required.
@@ -71,8 +79,10 @@ type UpdateKeyOutput struct {
 	// This member is required.
 	KeyName *string
 
-	// The timestamp for when the API key resource was last updated in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp for when the API key resource was last updated in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time

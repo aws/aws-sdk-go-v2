@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns Amazon EC2 instance recommendations. Compute Optimizer generates
-// recommendations for Amazon Elastic Compute Cloud (Amazon EC2) instances that
-// meet a specific set of requirements. For more information, see the Supported
-// resources and requirements (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html)
-// in the Compute Optimizer User Guide.
+// Returns Amazon EC2 instance recommendations.
+//
+// Compute Optimizer generates recommendations for Amazon Elastic Compute Cloud
+// (Amazon EC2) instances that meet a specific set of requirements. For more
+// information, see the [Supported resources and requirements]in the Compute Optimizer User Guide.
+//
+// [Supported resources and requirements]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
 func (c *Client) GetEC2InstanceRecommendations(ctx context.Context, params *GetEC2InstanceRecommendationsInput, optFns ...func(*Options)) (*GetEC2InstanceRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetEC2InstanceRecommendationsInput{}
@@ -34,9 +36,13 @@ func (c *Client) GetEC2InstanceRecommendations(ctx context.Context, params *GetE
 type GetEC2InstanceRecommendationsInput struct {
 
 	// The ID of the Amazon Web Services account for which to return instance
-	// recommendations. If your account is the management account of an organization,
-	// use this parameter to specify the member account for which you want to return
-	// instance recommendations. Only one account ID can be specified per request.
+	// recommendations.
+	//
+	// If your account is the management account of an organization, use this
+	// parameter to specify the member account for which you want to return instance
+	// recommendations.
+	//
+	// Only one account ID can be specified per request.
 	AccountIds []string
 
 	// An array of objects to specify a filter that returns a more specific list of
@@ -48,6 +54,7 @@ type GetEC2InstanceRecommendationsInput struct {
 	InstanceArns []string
 
 	// The maximum number of instance recommendations to return with a single request.
+	//
 	// To retrieve the remaining results, make another request with the returned
 	// nextToken value.
 	MaxResults *int32
@@ -64,16 +71,18 @@ type GetEC2InstanceRecommendationsInput struct {
 
 type GetEC2InstanceRecommendationsOutput struct {
 
-	// An array of objects that describe errors of the request. For example, an error
-	// is returned if you request recommendations for an instance of an unsupported
-	// instance family.
+	// An array of objects that describe errors of the request.
+	//
+	// For example, an error is returned if you request recommendations for an
+	// instance of an unsupported instance family.
 	Errors []types.GetRecommendationError
 
 	// An array of objects that describe instance recommendations.
 	InstanceRecommendations []types.InstanceRecommendation
 
-	// The token to use to advance to the next page of instance recommendations. This
-	// value is null when there are no more pages of instance recommendations to
+	// The token to use to advance to the next page of instance recommendations.
+	//
+	// This value is null when there are no more pages of instance recommendations to
 	// return.
 	NextToken *string
 

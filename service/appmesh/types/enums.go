@@ -12,6 +12,7 @@ const (
 
 // Values returns all known values for DefaultGatewayRouteRewrite. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DefaultGatewayRouteRewrite) Values() []DefaultGatewayRouteRewrite {
 	return []DefaultGatewayRouteRewrite{
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for DnsResponseType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DnsResponseType) Values() []DnsResponseType {
 	return []DnsResponseType{
 		"LOADBALANCER",
@@ -47,8 +49,9 @@ const (
 )
 
 // Values returns all known values for DurationUnit. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DurationUnit) Values() []DurationUnit {
 	return []DurationUnit{
 		"s",
@@ -65,8 +68,9 @@ const (
 )
 
 // Values returns all known values for EgressFilterType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EgressFilterType) Values() []EgressFilterType {
 	return []EgressFilterType{
 		"ALLOW_ALL",
@@ -84,8 +88,9 @@ const (
 )
 
 // Values returns all known values for GatewayRouteStatusCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GatewayRouteStatusCode) Values() []GatewayRouteStatusCode {
 	return []GatewayRouteStatusCode{
 		"ACTIVE",
@@ -106,8 +111,9 @@ const (
 )
 
 // Values returns all known values for GrpcRetryPolicyEvent. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GrpcRetryPolicyEvent) Values() []GrpcRetryPolicyEvent {
 	return []GrpcRetryPolicyEvent{
 		"cancelled",
@@ -134,8 +140,9 @@ const (
 )
 
 // Values returns all known values for HttpMethod. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HttpMethod) Values() []HttpMethod {
 	return []HttpMethod{
 		"GET",
@@ -159,8 +166,9 @@ const (
 )
 
 // Values returns all known values for HttpScheme. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HttpScheme) Values() []HttpScheme {
 	return []HttpScheme{
 		"http",
@@ -179,8 +187,9 @@ const (
 )
 
 // Values returns all known values for IpPreference. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpPreference) Values() []IpPreference {
 	return []IpPreference{
 		"IPv6_PREFERRED",
@@ -200,8 +209,9 @@ const (
 )
 
 // Values returns all known values for ListenerTlsMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ListenerTlsMode) Values() []ListenerTlsMode {
 	return []ListenerTlsMode{
 		"STRICT",
@@ -220,8 +230,9 @@ const (
 )
 
 // Values returns all known values for MeshStatusCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MeshStatusCode) Values() []MeshStatusCode {
 	return []MeshStatusCode{
 		"ACTIVE",
@@ -241,8 +252,9 @@ const (
 )
 
 // Values returns all known values for PortProtocol. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PortProtocol) Values() []PortProtocol {
 	return []PortProtocol{
 		"http",
@@ -262,8 +274,9 @@ const (
 )
 
 // Values returns all known values for RouteStatusCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RouteStatusCode) Values() []RouteStatusCode {
 	return []RouteStatusCode{
 		"ACTIVE",
@@ -280,8 +293,9 @@ const (
 )
 
 // Values returns all known values for TcpRetryPolicyEvent. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TcpRetryPolicyEvent) Values() []TcpRetryPolicyEvent {
 	return []TcpRetryPolicyEvent{
 		"connection-error",
@@ -299,8 +313,9 @@ const (
 
 // Values returns all known values for VirtualGatewayListenerTlsMode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VirtualGatewayListenerTlsMode) Values() []VirtualGatewayListenerTlsMode {
 	return []VirtualGatewayListenerTlsMode{
 		"STRICT",
@@ -320,6 +335,7 @@ const (
 
 // Values returns all known values for VirtualGatewayPortProtocol. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (VirtualGatewayPortProtocol) Values() []VirtualGatewayPortProtocol {
 	return []VirtualGatewayPortProtocol{
@@ -340,6 +356,7 @@ const (
 
 // Values returns all known values for VirtualGatewayStatusCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (VirtualGatewayStatusCode) Values() []VirtualGatewayStatusCode {
 	return []VirtualGatewayStatusCode{
@@ -359,8 +376,9 @@ const (
 )
 
 // Values returns all known values for VirtualNodeStatusCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VirtualNodeStatusCode) Values() []VirtualNodeStatusCode {
 	return []VirtualNodeStatusCode{
 		"ACTIVE",
@@ -379,8 +397,9 @@ const (
 )
 
 // Values returns all known values for VirtualRouterStatusCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VirtualRouterStatusCode) Values() []VirtualRouterStatusCode {
 	return []VirtualRouterStatusCode{
 		"ACTIVE",
@@ -400,6 +419,7 @@ const (
 
 // Values returns all known values for VirtualServiceStatusCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (VirtualServiceStatusCode) Values() []VirtualServiceStatusCode {
 	return []VirtualServiceStatusCode{

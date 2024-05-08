@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the channel configuration for the specified channel ARN. See also
-// BatchGetChannel .
+// Gets the channel configuration for the specified channel ARN. See also BatchGetChannel.
 func (c *Client) GetChannel(ctx context.Context, params *GetChannelInput, optFns ...func(*Options)) (*GetChannelOutput, error) {
 	if params == nil {
 		params = &GetChannelInput{}

@@ -33,7 +33,8 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The input text was not in valid UTF-8 character encoding. Check your text then
+//	The input text was not in valid UTF-8 character encoding. Check your text then
+//
 // retry your request.
 type InvalidEncodingException struct {
 	Message *string
@@ -60,7 +61,8 @@ func (e *InvalidEncodingException) ErrorCode() string {
 }
 func (e *InvalidEncodingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request that you made is invalid. Check your request to determine why it's
+//	The request that you made is invalid. Check your request to determine why it's
+//
 // invalid and then retry the request.
 type InvalidRequestException struct {
 	Message *string
@@ -114,7 +116,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Amazon Comprehend Medical service is temporarily unavailable. Please wait
+//	The Amazon Comprehend Medical service is temporarily unavailable. Please wait
+//
 // and then retry your request.
 type ServiceUnavailableException struct {
 	Message *string
@@ -141,7 +144,8 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The size of the text you submitted exceeds the size limit. Reduce the size of
+//	The size of the text you submitted exceeds the size limit. Reduce the size of
+//
 // the text or use a smaller document and then retry your request.
 type TextSizeLimitExceededException struct {
 	Message *string
@@ -168,8 +172,9 @@ func (e *TextSizeLimitExceededException) ErrorCode() string {
 }
 func (e *TextSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have made too many requests within a short period of time. Wait for a short
-// time and then try your request again. Contact customer support for more
+//	You have made too many requests within a short period of time. Wait for a
+//
+// short time and then try your request again. Contact customer support for more
 // information about a service limit increase.
 type TooManyRequestsException struct {
 	Message *string

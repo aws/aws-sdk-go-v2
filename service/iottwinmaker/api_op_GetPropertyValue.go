@@ -12,6 +12,7 @@ import (
 )
 
 // Gets the property values for a component, component type, entity, or workspace.
+//
 // You must specify a value for either componentName , componentTypeId , entityId ,
 // or workspaceId .
 func (c *Client) GetPropertyValue(ctx context.Context, params *GetPropertyValueInput, optFns ...func(*Options)) (*GetPropertyValueOutput, error) {
@@ -54,8 +55,9 @@ type GetPropertyValueInput struct {
 	// The ID of the entity whose property values the operation returns.
 	EntityId *string
 
-	// The maximum number of results to return at one time. The default is 25. Valid
-	// Range: Minimum value of 1. Maximum value of 250.
+	// The maximum number of results to return at one time. The default is 25.
+	//
+	// Valid Range: Minimum value of 1. Maximum value of 250.
 	MaxResults *int32
 
 	// The string that specifies the next page of results.
@@ -207,8 +209,9 @@ var _ GetPropertyValueAPIClient = (*Client)(nil)
 
 // GetPropertyValuePaginatorOptions is the paginator options for GetPropertyValue
 type GetPropertyValuePaginatorOptions struct {
-	// The maximum number of results to return at one time. The default is 25. Valid
-	// Range: Minimum value of 1. Maximum value of 250.
+	// The maximum number of results to return at one time. The default is 25.
+	//
+	// Valid Range: Minimum value of 1. Maximum value of 250.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

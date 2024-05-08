@@ -31,25 +31,25 @@ func (c *Client) CreateCustomLineItem(ctx context.Context, params *CreateCustomL
 
 type CreateCustomLineItemInput struct {
 
-	// The Amazon Resource Name (ARN) that references the billing group where the
+	//  The Amazon Resource Name (ARN) that references the billing group where the
 	// custom line item applies to.
 	//
 	// This member is required.
 	BillingGroupArn *string
 
-	// A CustomLineItemChargeDetails that describes the charge details for a custom
+	//  A CustomLineItemChargeDetails that describes the charge details for a custom
 	// line item.
 	//
 	// This member is required.
 	ChargeDetails *types.CustomLineItemChargeDetails
 
-	// The description of the custom line item. This is shown on the Bills page in
+	//  The description of the custom line item. This is shown on the Bills page in
 	// association with the charge value.
 	//
 	// This member is required.
 	Description *string
 
-	// The name of the custom line item.
+	//  The name of the custom line item.
 	//
 	// This member is required.
 	Name *string
@@ -58,14 +58,14 @@ type CreateCustomLineItemInput struct {
 	// to.
 	AccountId *string
 
-	// A time range for which the custom line item is effective.
+	//  A time range for which the custom line item is effective.
 	BillingPeriodRange *types.CustomLineItemBillingPeriodRange
 
-	// The token that is needed to support idempotency. Idempotency isn't currently
+	//  The token that is needed to support idempotency. Idempotency isn't currently
 	// supported, but will be implemented in a future update.
 	ClientToken *string
 
-	// A map that contains tag keys and tag values that are attached to a custom line
+	//  A map that contains tag keys and tag values that are attached to a custom line
 	// item.
 	Tags map[string]string
 
@@ -74,7 +74,7 @@ type CreateCustomLineItemInput struct {
 
 type CreateCustomLineItemOutput struct {
 
-	// The Amazon Resource Name (ARN) of the created custom line item.
+	//  The Amazon Resource Name (ARN) of the created custom line item.
 	Arn *string
 
 	// Metadata pertaining to the operation's result.

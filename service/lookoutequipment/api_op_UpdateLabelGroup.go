@@ -28,14 +28,15 @@ func (c *Client) UpdateLabelGroup(ctx context.Context, params *UpdateLabelGroupI
 
 type UpdateLabelGroupInput struct {
 
-	// The name of the label group to be updated.
+	//  The name of the label group to be updated.
 	//
 	// This member is required.
 	LabelGroupName *string
 
-	// Updates the code indicating the type of anomaly associated with the label. Data
-	// in this field will be retained for service usage. Follow best practices for the
-	// security of your data.
+	//  Updates the code indicating the type of anomaly associated with the label.
+	//
+	// Data in this field will be retained for service usage. Follow best practices
+	// for the security of your data.
 	FaultCodes []string
 
 	noSmithyDocumentSerde

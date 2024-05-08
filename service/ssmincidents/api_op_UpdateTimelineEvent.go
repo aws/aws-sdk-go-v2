@@ -53,10 +53,11 @@ type UpdateTimelineEventInput struct {
 	// reference, enter its Amazon Resource Name (ARN). You can also specify a related
 	// item associated with that resource. For example, to specify an Amazon DynamoDB
 	// (DynamoDB) table as a resource, use its ARN. You can also specify an Amazon
-	// CloudWatch metric associated with the DynamoDB table as a related item. This
-	// update action overrides all existing references. If you want to keep existing
-	// references, you must specify them in the call. If you don't, this action removes
-	// any existing references and enters only new references.
+	// CloudWatch metric associated with the DynamoDB table as a related item.
+	//
+	// This update action overrides all existing references. If you want to keep
+	// existing references, you must specify them in the call. If you don't, this
+	// action removes any existing references and enters only new references.
 	EventReferences []types.EventReference
 
 	// The timestamp for when the event occurred.

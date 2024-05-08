@@ -11,8 +11,9 @@ import (
 )
 
 // The example tests how requests and responses are serialized when there's no
-// request payload or response members. While this should be rare, code generators
-// must support this.
+// request payload or response members.
+//
+// While this should be rare, code generators must support this.
 func (c *Client) NoInputAndOutput(ctx context.Context, params *NoInputAndOutputInput, optFns ...func(*Options)) (*NoInputAndOutputOutput, error) {
 	if params == nil {
 		params = &NoInputAndOutputInput{}

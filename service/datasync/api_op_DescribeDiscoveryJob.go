@@ -53,9 +53,9 @@ type DescribeDiscoveryJobOutput struct {
 	// The time when the discovery job started.
 	JobStartTime *time.Time
 
-	// Indicates the status of a discovery job. For more information, see Discovery
-	// job statuses (https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#discovery-job-statuses-table)
-	// .
+	// Indicates the status of a discovery job. For more information, see [Discovery job statuses].
+	//
+	// [Discovery job statuses]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#discovery-job-statuses-table
 	Status types.DiscoveryJobStatus
 
 	// The ARN of the on-premises storage system you're running the discovery job on.

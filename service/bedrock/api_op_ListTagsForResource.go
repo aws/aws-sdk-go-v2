@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the tags associated with the specified resource. For more information, see
-// Tagging resources (https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html)
-// in the Amazon Bedrock User Guide.
+// List the tags associated with the specified resource.
+//
+// For more information, see [Tagging resources] in the Amazon Bedrock User Guide.
+//
+// [Tagging resources]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

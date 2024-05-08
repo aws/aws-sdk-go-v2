@@ -29,29 +29,39 @@ func (c *Client) GetMapGlyphs(ctx context.Context, params *GetMapGlyphsInput, op
 type GetMapGlyphsInput struct {
 
 	// A comma-separated list of fonts to load glyphs from in order of preference. For
-	// example, Noto Sans Regular, Arial Unicode . Valid font stacks for Esri (https://docs.aws.amazon.com/location/latest/developerguide/esri.html)
-	// styles:
+	// example, Noto Sans Regular, Arial Unicode .
+	//
+	// Valid font stacks for [Esri] styles:
+	//
 	//   - VectorEsriDarkGrayCanvas – Ubuntu Medium Italic | Ubuntu Medium | Ubuntu
 	//   Italic | Ubuntu Regular | Ubuntu Bold
+	//
 	//   - VectorEsriLightGrayCanvas – Ubuntu Italic | Ubuntu Regular | Ubuntu Light |
 	//   Ubuntu Bold
+	//
 	//   - VectorEsriTopographic – Noto Sans Italic | Noto Sans Regular | Noto Sans
 	//   Bold | Noto Serif Regular | Roboto Condensed Light Italic
+	//
 	//   - VectorEsriStreets – Arial Regular | Arial Italic | Arial Bold
+	//
 	//   - VectorEsriNavigation – Arial Regular | Arial Italic | Arial Bold | Arial
 	//   Unicode MS Bold | Arial Unicode MS Regular
-	// Valid font stacks for HERE Technologies (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)
-	// styles:
+	//
+	// Valid font stacks for [HERE Technologies] styles:
+	//
 	//   - VectorHereContrast – Fira GO Regular | Fira GO Bold
+	//
 	//   - VectorHereExplore, VectorHereExploreTruck, HybridHereExploreSatellite –
 	//   Fira GO Italic | Fira GO Map | Fira GO Map Bold | Noto Sans CJK JP Bold |
 	//   Noto Sans CJK JP Light | Noto Sans CJK JP Regular
-	// Valid font stacks for GrabMaps (https://docs.aws.amazon.com/location/latest/developerguide/grab.html)
-	// styles:
+	//
+	// Valid font stacks for [GrabMaps] styles:
+	//
 	//   - VectorGrabStandardLight, VectorGrabStandardDark – Noto Sans Regular | Noto
 	//   Sans Medium | Noto Sans Bold
-	// Valid font stacks for Open Data (https://docs.aws.amazon.com/location/latest/developerguide/open-data.html)
-	// styles:
+	//
+	// Valid font stacks for [Open Data] styles:
+	//
 	//   - VectorOpenDataStandardLight, VectorOpenDataStandardDark,
 	//   VectorOpenDataVisualizationLight, VectorOpenDataVisualizationDark – Amazon
 	//   Ember Regular,Noto Sans Regular | Amazon Ember Bold,Noto Sans Bold | Amazon
@@ -63,8 +73,14 @@ type GetMapGlyphsInput struct {
 	//   | Amazon Ember Regular Italic,Noto Sans Italic,Noto Sans Arabic Regular |
 	//   Amazon Ember Condensed RC Regular,Noto Sans Regular,Noto Sans Arabic Condensed
 	//   Regular | Amazon Ember Medium,Noto Sans Medium,Noto Sans Arabic Medium
+	//
 	// The fonts used by the Open Data map styles are combined fonts that use Amazon
 	// Ember for most glyphs but Noto Sans for glyphs unsupported by Amazon Ember .
+	//
+	// [Esri]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
+	// [HERE Technologies]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
+	// [Open Data]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
 	//
 	// This member is required.
 	FontStack *string
@@ -81,8 +97,9 @@ type GetMapGlyphsInput struct {
 	// This member is required.
 	MapName *string
 
-	// The optional API key (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-	// to authorize the request.
+	// The optional [API key] to authorize the request.
+	//
+	// [API key]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
 	Key *string
 
 	noSmithyDocumentSerde

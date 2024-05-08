@@ -13,9 +13,10 @@ import (
 
 // Deletes one version of a customer managed permission. The version you specify
 // must not be attached to any resource share and must not be the default version
-// for the permission. If a customer managed permission has the maximum of 5
-// versions, then you must delete at least one version before you can create
-// another.
+// for the permission.
+//
+// If a customer managed permission has the maximum of 5 versions, then you must
+// delete at least one version before you can create another.
 func (c *Client) DeletePermissionVersion(ctx context.Context, params *DeletePermissionVersionInput, optFns ...func(*Options)) (*DeletePermissionVersionOutput, error) {
 	if params == nil {
 		params = &DeletePermissionVersionInput{}
@@ -33,20 +34,24 @@ func (c *Client) DeletePermissionVersion(ctx context.Context, params *DeletePerm
 
 type DeletePermissionVersionInput struct {
 
-	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the permission with the version you want to delete.
+	// Specifies the [Amazon Resource Name (ARN)] of the permission with the version you want to delete.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	PermissionArn *string
 
-	// Specifies the version number to delete. You can't delete the default version
-	// for a customer managed permission. You can't delete a version if it's the only
-	// version of the permission. You must either first create another version, or
-	// delete the permission completely. You can't delete a version if it is attached
-	// to any resource shares. If the version is the default, you must first use
-	// SetDefaultPermissionVersion to set a different version as the default for the
-	// customer managed permission, and then use AssociateResourceSharePermission to
-	// update your resource shares to use the new default version.
+	// Specifies the version number to delete.
+	//
+	// You can't delete the default version for a customer managed permission.
+	//
+	// You can't delete a version if it's the only version of the permission. You must
+	// either first create another version, or delete the permission completely.
+	//
+	// You can't delete a version if it is attached to any resource shares. If the
+	// version is the default, you must first use SetDefaultPermissionVersionto set a different version as the
+	// default for the customer managed permission, and then use AssociateResourceSharePermissionto update your
+	// resource shares to use the new default version.
 	//
 	// This member is required.
 	PermissionVersion *int32
@@ -55,10 +60,15 @@ type DeletePermissionVersionInput struct {
 	// idempotency of the request. This lets you safely retry the request without
 	// accidentally performing the same operation a second time. Passing the same value
 	// to a later call to an operation requires that you also pass the same value for
-	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
-	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you. If you retry the operation with the same ClientToken , but with
-	// different parameters, the retry fails with an IdempotentParameterMismatch error.
+	// all other parameters. We recommend that you use a [UUID type of value.].
+	//
+	// If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
+	//
+	// If you retry the operation with the same ClientToken , but with different
+	// parameters, the retry fails with an IdempotentParameterMismatch error.
+	//
+	// [UUID type of value.]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientToken *string
 
 	noSmithyDocumentSerde

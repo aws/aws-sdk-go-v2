@@ -30,12 +30,12 @@ func (c *Client) DescribeProject(ctx context.Context, params *DescribeProjectInp
 // Request structure used to request details about a project.
 type DescribeProjectInput struct {
 
-	// Unique project identifier.
+	//  Unique project identifier.
 	//
 	// This member is required.
 	ProjectId *string
 
-	// If set to true, causes AWS Mobile Hub to synchronize information from other
+	//  If set to true, causes AWS Mobile Hub to synchronize information from other
 	// services, e.g., update state of AWS CloudFormation stacks in the AWS Mobile Hub
 	// project.
 	SyncFromResources bool
@@ -46,7 +46,7 @@ type DescribeProjectInput struct {
 // Result structure used for requests of project details.
 type DescribeProjectOutput struct {
 
-	// Detailed information about an AWS Mobile Hub project.
+	//  Detailed information about an AWS Mobile Hub project.
 	Details *types.ProjectDetails
 
 	// Metadata pertaining to the operation's result.

@@ -23,8 +23,9 @@ const (
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"ACCESS_DENIED",
@@ -63,8 +64,9 @@ const (
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Format) Values() []Format {
 	return []Format{
 		"AUTO",
@@ -96,6 +98,7 @@ const (
 
 // Values returns all known values for ImportDataCharacterEncoding. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ImportDataCharacterEncoding) Values() []ImportDataCharacterEncoding {
 	return []ImportDataCharacterEncoding{
@@ -116,8 +119,9 @@ const (
 )
 
 // Values returns all known values for ImportSourceDataFormat. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImportSourceDataFormat) Values() []ImportSourceDataFormat {
 	return []ImportSourceDataFormat{
 		"DELIMITED_TEXT",
@@ -136,6 +140,7 @@ const (
 
 // Values returns all known values for TableDataImportJobStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (TableDataImportJobStatus) Values() []TableDataImportJobStatus {
 	return []TableDataImportJobStatus{
@@ -155,8 +160,9 @@ const (
 )
 
 // Values returns all known values for UpsertAction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpsertAction) Values() []UpsertAction {
 	return []UpsertAction{
 		"UPDATED",

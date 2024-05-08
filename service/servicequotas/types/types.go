@@ -11,12 +11,16 @@ import (
 type ErrorReason struct {
 
 	// Service Quotas returns the following error values:
+	//
 	//   - DEPENDENCY_ACCESS_DENIED_ERROR - The caller does not have the required
 	//   permissions to complete the action. To resolve the error, you must have
 	//   permission to access the Amazon Web Service or quota.
+	//
 	//   - DEPENDENCY_THROTTLING_ERROR - The Amazon Web Service is throttling Service
 	//   Quotas.
+	//
 	//   - DEPENDENCY_SERVICE_ERROR - The Amazon Web Service is not available.
+	//
 	//   - SERVICE_QUOTA_NOT_AVAILABLE_ERROR - There was an error in Service Quotas.
 	ErrorCode ErrorCode
 
@@ -103,8 +107,8 @@ type RequestedServiceQuotaChange struct {
 	QuotaArn *string
 
 	// Specifies the quota identifier. To find the quota code for a specific quota,
-	// use the ListServiceQuotas operation, and look for the QuotaCode response in the
-	// output for the quota you want.
+	// use the ListServiceQuotasoperation, and look for the QuotaCode response in the output for the
+	// quota you want.
 	QuotaCode *string
 
 	// The context for this service quota.
@@ -121,7 +125,7 @@ type RequestedServiceQuotaChange struct {
 	Requester *string
 
 	// Specifies the service identifier. To find the service code value for an Amazon
-	// Web Services service, use the ListServices operation.
+	// Web Services service, use the ListServicesoperation.
 	ServiceCode *string
 
 	// Specifies the service name.
@@ -140,7 +144,7 @@ type RequestedServiceQuotaChange struct {
 type ServiceInfo struct {
 
 	// Specifies the service identifier. To find the service code value for an Amazon
-	// Web Services service, use the ListServices operation.
+	// Web Services service, use the ListServicesoperation.
 	ServiceCode *string
 
 	// Specifies the service name.
@@ -171,8 +175,8 @@ type ServiceQuota struct {
 	QuotaArn *string
 
 	// Specifies the quota identifier. To find the quota code for a specific quota,
-	// use the ListServiceQuotas operation, and look for the QuotaCode response in the
-	// output for the quota you want.
+	// use the ListServiceQuotasoperation, and look for the QuotaCode response in the output for the
+	// quota you want.
 	QuotaCode *string
 
 	// The context for this service quota.
@@ -182,7 +186,7 @@ type ServiceQuota struct {
 	QuotaName *string
 
 	// Specifies the service identifier. To find the service code value for an Amazon
-	// Web Services service, use the ListServices operation.
+	// Web Services service, use the ListServicesoperation.
 	ServiceCode *string
 
 	// Specifies the service name.
@@ -213,15 +217,15 @@ type ServiceQuotaIncreaseRequestInTemplate struct {
 	GlobalQuota bool
 
 	// Specifies the quota identifier. To find the quota code for a specific quota,
-	// use the ListServiceQuotas operation, and look for the QuotaCode response in the
-	// output for the quota you want.
+	// use the ListServiceQuotasoperation, and look for the QuotaCode response in the output for the
+	// quota you want.
 	QuotaCode *string
 
 	// Specifies the quota name.
 	QuotaName *string
 
 	// Specifies the service identifier. To find the service code value for an Amazon
-	// Web Services service, use the ListServices operation.
+	// Web Services service, use the ListServicesoperation.
 	ServiceCode *string
 
 	// Specifies the service name.

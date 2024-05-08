@@ -14,10 +14,14 @@ import (
 // Stops an Amazon RDS DB instance. When you stop a DB instance, Amazon RDS
 // retains the DB instance's metadata, including its endpoint, DB parameter group,
 // and option group membership. Amazon RDS also retains the transaction logs so you
-// can do a point-in-time restore if necessary. For more information, see Stopping
-// an Amazon RDS DB Instance Temporarily (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StopInstance.html)
-// in the Amazon RDS User Guide. This command doesn't apply to RDS Custom, Aurora
-// MySQL, and Aurora PostgreSQL. For Aurora clusters, use StopDBCluster instead.
+// can do a point-in-time restore if necessary.
+//
+// For more information, see [Stopping an Amazon RDS DB Instance Temporarily] in the Amazon RDS User Guide.
+//
+// This command doesn't apply to RDS Custom, Aurora MySQL, and Aurora PostgreSQL.
+// For Aurora clusters, use StopDBCluster instead.
+//
+// [Stopping an Amazon RDS DB Instance Temporarily]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StopInstance.html
 func (c *Client) StopDBInstance(ctx context.Context, params *StopDBInstanceInput, optFns ...func(*Options)) (*StopDBInstanceOutput, error) {
 	if params == nil {
 		params = &StopDBInstanceInput{}
@@ -49,9 +53,10 @@ type StopDBInstanceInput struct {
 
 type StopDBInstanceOutput struct {
 
-	// Contains the details of an Amazon RDS DB instance. This data type is used as a
-	// response element in the operations CreateDBInstance ,
-	// CreateDBInstanceReadReplica , DeleteDBInstance , DescribeDBInstances ,
+	// Contains the details of an Amazon RDS DB instance.
+	//
+	// This data type is used as a response element in the operations CreateDBInstance
+	// , CreateDBInstanceReadReplica , DeleteDBInstance , DescribeDBInstances ,
 	// ModifyDBInstance , PromoteReadReplica , RebootDBInstance ,
 	// RestoreDBInstanceFromDBSnapshot , RestoreDBInstanceFromS3 ,
 	// RestoreDBInstanceToPointInTime , StartDBInstance , and StopDBInstance .

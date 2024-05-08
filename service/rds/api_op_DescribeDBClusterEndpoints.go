@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about endpoints for an Amazon Aurora DB cluster. This
-// action only applies to Aurora DB clusters.
+// Returns information about endpoints for an Amazon Aurora DB cluster.
+//
+// This action only applies to Aurora DB clusters.
 func (c *Client) DescribeDBClusterEndpoints(ctx context.Context, params *DescribeDBClusterEndpointsInput, optFns ...func(*Options)) (*DescribeDBClusterEndpointsOutput, error) {
 	if params == nil {
 		params = &DescribeDBClusterEndpointsInput{}
@@ -56,7 +57,10 @@ type DescribeDBClusterEndpointsInput struct {
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
+	// included in the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -172,7 +176,10 @@ var _ DescribeDBClusterEndpointsAPIClient = (*Client)(nil)
 type DescribeDBClusterEndpointsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
+	// included in the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 

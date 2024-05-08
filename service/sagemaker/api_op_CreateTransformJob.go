@@ -13,25 +13,32 @@ import (
 
 // Starts a transform job. A transform job uses a trained model to get inferences
 // on a dataset and saves these results to an Amazon S3 location that you specify.
+//
 // To perform batch transformations, you create a transform job and use the data
-// that you have readily available. In the request body, you provide the following:
+// that you have readily available.
+//
+// In the request body, you provide the following:
 //
 //   - TransformJobName - Identifies the transform job. The name must be unique
 //     within an Amazon Web Services Region in an Amazon Web Services account.
+//
 //   - ModelName - Identifies the model to use. ModelName must be the name of an
 //     existing Amazon SageMaker model in the same Amazon Web Services Region and
-//     Amazon Web Services account. For information on creating a model, see
-//     CreateModel (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html)
-//     .
+//     Amazon Web Services account. For information on creating a model, see [CreateModel].
+//
 //   - TransformInput - Describes the dataset to be transformed and the Amazon S3
 //     location where it is stored.
+//
 //   - TransformOutput - Identifies the Amazon S3 location where you want Amazon
 //     SageMaker to save the results from the transform job.
+//
 //   - TransformResources - Identifies the ML compute instances for the transform
 //     job.
 //
-// For more information about how batch transformation works, see Batch Transform (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html)
-// .
+// For more information about how batch transformation works, see [Batch Transform].
+//
+// [CreateModel]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html
+// [Batch Transform]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html
 func (c *Client) CreateTransformJob(ctx context.Context, params *CreateTransformJobInput, optFns ...func(*Options)) (*CreateTransformJobOutput, error) {
 	if params == nil {
 		params = &CreateTransformJobInput{}
@@ -80,12 +87,16 @@ type CreateTransformJobInput struct {
 
 	// Specifies the number of records to include in a mini-batch for an HTTP
 	// inference request. A record is a single unit of input data that inference can be
-	// made on. For example, a single line in a CSV file is a record. To enable the
-	// batch strategy, you must set the SplitType property to Line , RecordIO , or
-	// TFRecord . To use only one record when making an HTTP invocation request to a
-	// container, set BatchStrategy to SingleRecord and SplitType to Line . To fit as
-	// many records in a mini-batch as can fit within the MaxPayloadInMB limit, set
-	// BatchStrategy to MultiRecord and SplitType to Line .
+	// made on. For example, a single line in a CSV file is a record.
+	//
+	// To enable the batch strategy, you must set the SplitType property to Line ,
+	// RecordIO , or TFRecord .
+	//
+	// To use only one record when making an HTTP invocation request to a container,
+	// set BatchStrategy to SingleRecord and SplitType to Line .
+	//
+	// To fit as many records in a mini-batch as can fit within the MaxPayloadInMB
+	// limit, set BatchStrategy to MultiRecord and SplitType to Line .
 	BatchStrategy types.BatchStrategy
 
 	// Configuration to control how SageMaker captures inference data.
@@ -96,9 +107,9 @@ type CreateTransformJobInput struct {
 	// results in the output. The input filter provided allows you to exclude input
 	// data that is not needed for inference in a batch transform job. The output
 	// filter provided allows you to include input data relevant to interpreting the
-	// predictions in the output from the job. For more information, see Associate
-	// Prediction Results with their Corresponding Input Records (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html)
-	// .
+	// predictions in the output from the job. For more information, see [Associate Prediction Results with their Corresponding Input Records].
+	//
+	// [Associate Prediction Results with their Corresponding Input Records]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html
 	DataProcessing *types.DataProcessing
 
 	// The environment variables to set in the Docker container. We support up to 16
@@ -107,19 +118,26 @@ type CreateTransformJobInput struct {
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
-	//   - CreateProcessingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html)
-	//   - CreateTrainingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
-	//   - CreateTransformJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html)
+	//
+	// [CreateProcessingJob]
+	//
+	// [CreateTrainingJob]
+	//
+	// [CreateTransformJob]
+	//
+	// [CreateTransformJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html
+	// [CreateTrainingJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html
+	// [CreateProcessingJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html
 	ExperimentConfig *types.ExperimentConfig
 
 	// The maximum number of parallel requests that can be sent to each instance in a
 	// transform job. If MaxConcurrentTransforms is set to 0 or left unset, Amazon
 	// SageMaker checks the optional execution-parameters to determine the settings for
 	// your chosen algorithm. If the execution-parameters endpoint is not enabled, the
-	// default value is 1 . For more information on execution-parameters, see How
-	// Containers Serve Requests (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-batch-code.html#your-algorithms-batch-code-how-containe-serves-requests)
-	// . For built-in algorithms, you don't need to set a value for
-	// MaxConcurrentTransforms .
+	// default value is 1 . For more information on execution-parameters, see [How Containers Serve Requests]. For
+	// built-in algorithms, you don't need to set a value for MaxConcurrentTransforms .
+	//
+	// [How Containers Serve Requests]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-batch-code.html#your-algorithms-batch-code-how-containe-serves-requests
 	MaxConcurrentTransforms *int32
 
 	// The maximum allowed size of the payload, in MB. A payload is the data portion
@@ -127,9 +145,12 @@ type CreateTransformJobInput struct {
 	// than, or equal to, the size of a single record. To estimate the size of a record
 	// in MB, divide the size of your dataset by the number of records. To ensure that
 	// the records fit within the maximum payload size, we recommend using a slightly
-	// larger value. The default value is 6 MB. The value of MaxPayloadInMB cannot be
-	// greater than 100 MB. If you specify the MaxConcurrentTransforms parameter, the
-	// value of (MaxConcurrentTransforms * MaxPayloadInMB) also cannot exceed 100 MB.
+	// larger value. The default value is 6 MB.
+	//
+	// The value of MaxPayloadInMB cannot be greater than 100 MB. If you specify the
+	// MaxConcurrentTransforms parameter, the value of (MaxConcurrentTransforms *
+	// MaxPayloadInMB) also cannot exceed 100 MB.
+	//
 	// For cases where the payload might be arbitrarily large and is transmitted using
 	// HTTP chunked encoding, set the value to 0 . This feature works only in supported
 	// algorithms. Currently, Amazon SageMaker built-in algorithms do not support HTTP
@@ -140,9 +161,10 @@ type CreateTransformJobInput struct {
 	// job invocation.
 	ModelClientConfig *types.ModelClientConfig
 
-	// (Optional) An array of key-value pairs. For more information, see Using Cost
-	// Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
-	// in the Amazon Web Services Billing and Cost Management User Guide.
+	// (Optional) An array of key-value pairs. For more information, see [Using Cost Allocation Tags] in the
+	// Amazon Web Services Billing and Cost Management User Guide.
+	//
+	// [Using Cost Allocation Tags]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

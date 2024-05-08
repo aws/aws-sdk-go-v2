@@ -12,11 +12,12 @@ import (
 )
 
 // Lists the recovery points for a specified gateway. This operation is only
-// supported in the cached volume gateway type. Each cache volume has one recovery
-// point. A volume recovery point is a point in time at which all data of the
-// volume is consistent and from which you can create a snapshot or clone a new
-// cached volume from a source volume. To create a snapshot from a volume recovery
-// point use the CreateSnapshotFromVolumeRecoveryPoint operation.
+// supported in the cached volume gateway type.
+//
+// Each cache volume has one recovery point. A volume recovery point is a point in
+// time at which all data of the volume is consistent and from which you can create
+// a snapshot or clone a new cached volume from a source volume. To create a
+// snapshot from a volume recovery point use the CreateSnapshotFromVolumeRecoveryPointoperation.
 func (c *Client) ListVolumeRecoveryPoints(ctx context.Context, params *ListVolumeRecoveryPointsInput, optFns ...func(*Options)) (*ListVolumeRecoveryPointsOutput, error) {
 	if params == nil {
 		params = &ListVolumeRecoveryPointsInput{}
@@ -34,8 +35,8 @@ func (c *Client) ListVolumeRecoveryPoints(ctx context.Context, params *ListVolum
 
 type ListVolumeRecoveryPointsInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -45,8 +46,8 @@ type ListVolumeRecoveryPointsInput struct {
 
 type ListVolumeRecoveryPointsOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// An array of VolumeRecoveryPointInfo objects.

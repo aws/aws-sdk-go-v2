@@ -35,8 +35,10 @@ func (e *AuthorizationAlreadyExistsFault) ErrorCode() string {
 func (e *AuthorizationAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified CIDR IP range or Amazon EC2 security group might not be
-// authorized for the specified DB security group. Or, RDS might not be authorized
-// to perform necessary actions using IAM on your behalf.
+// authorized for the specified DB security group.
+//
+// Or, RDS might not be authorized to perform necessary actions using IAM on your
+// behalf.
 type AuthorizationNotFoundFault struct {
 	Message *string
 

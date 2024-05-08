@@ -14,8 +14,7 @@ import (
 // Retrieves a direct assignment of a user or group to an application. If the user
 // doesn’t have a direct assignment to the application, the user may still have
 // access to the application through a group. Therefore, don’t use this API to test
-// access to an application for a user. Instead use
-// ListApplicationAssignmentsForPrincipal .
+// access to an application for a user. Instead use ListApplicationAssignmentsForPrincipal.
 func (c *Client) DescribeApplicationAssignment(ctx context.Context, params *DescribeApplicationAssignmentInput, optFns ...func(*Options)) (*DescribeApplicationAssignmentOutput, error) {
 	if params == nil {
 		params = &DescribeApplicationAssignmentInput{}
@@ -33,17 +32,15 @@ func (c *Client) DescribeApplicationAssignment(ctx context.Context, params *Desc
 
 type DescribeApplicationAssignmentInput struct {
 
-	// Specifies the ARN of the application. For more information about ARNs, see
-	// Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the
-	// Amazon Web Services General Reference.
+	// Specifies the ARN of the application. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in
+	// the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	ApplicationArn *string
 
 	// An identifier for an object in IAM Identity Center, such as a user or group.
 	// PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For
-	// more information about PrincipalIds in IAM Identity Center, see the IAM
-	// Identity Center Identity Store API Reference .
+	// more information about PrincipalIds in IAM Identity Center, see the IAM Identity Center Identity Store API Reference.
 	//
 	// This member is required.
 	PrincipalId *string
@@ -58,15 +55,13 @@ type DescribeApplicationAssignmentInput struct {
 
 type DescribeApplicationAssignmentOutput struct {
 
-	// Specifies the ARN of the application. For more information about ARNs, see
-	// Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the
-	// Amazon Web Services General Reference.
+	// Specifies the ARN of the application. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in
+	// the Amazon Web Services General Reference.
 	ApplicationArn *string
 
 	// An identifier for an object in IAM Identity Center, such as a user or group.
 	// PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For
-	// more information about PrincipalIds in IAM Identity Center, see the IAM
-	// Identity Center Identity Store API Reference .
+	// more information about PrincipalIds in IAM Identity Center, see the IAM Identity Center Identity Store API Reference.
 	PrincipalId *string
 
 	// The entity type for which the assignment will be created.

@@ -15,12 +15,20 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Removes the
-// PublicAccessBlock configuration for an Amazon Web Services account. For more
-// information, see Using Amazon S3 block public access (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
-// . Related actions include:
-//   - GetPublicAccessBlock (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html)
-//   - PutPublicAccessBlock (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html)
+// This operation is not supported by directory buckets.
+//
+// Removes the PublicAccessBlock configuration for an Amazon Web Services account.
+// For more information, see [Using Amazon S3 block public access].
+//
+// Related actions include:
+//
+// [GetPublicAccessBlock]
+//
+// [PutPublicAccessBlock]
+//
+// [GetPublicAccessBlock]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html
+// [PutPublicAccessBlock]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html
+// [Using Amazon S3 block public access]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html
 func (c *Client) DeletePublicAccessBlock(ctx context.Context, params *DeletePublicAccessBlockInput, optFns ...func(*Options)) (*DeletePublicAccessBlockOutput, error) {
 	if params == nil {
 		params = &DeletePublicAccessBlockInput{}

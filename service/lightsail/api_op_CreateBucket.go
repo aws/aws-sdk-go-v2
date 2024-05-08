@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Lightsail bucket. A bucket is a cloud storage resource
-// available in the Lightsail object storage service. Use buckets to store objects
-// such as data and its descriptive metadata. For more information about buckets,
-// see Buckets in Amazon Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/buckets-in-amazon-lightsail)
-// in the Amazon Lightsail Developer Guide.
+// Creates an Amazon Lightsail bucket.
+//
+// A bucket is a cloud storage resource available in the Lightsail object storage
+// service. Use buckets to store objects such as data and its descriptive metadata.
+// For more information about buckets, see [Buckets in Amazon Lightsail]in the Amazon Lightsail Developer Guide.
+//
+// [Buckets in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/buckets-in-amazon-lightsail
 func (c *Client) CreateBucket(ctx context.Context, params *CreateBucketInput, optFns ...func(*Options)) (*CreateBucketOutput, error) {
 	if params == nil {
 		params = &CreateBucketInput{}
@@ -33,32 +35,45 @@ func (c *Client) CreateBucket(ctx context.Context, params *CreateBucketInput, op
 
 type CreateBucketInput struct {
 
-	// The name for the bucket. For more information about bucket names, see Bucket
-	// naming rules in Amazon Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/bucket-naming-rules-in-amazon-lightsail)
-	// in the Amazon Lightsail Developer Guide.
+	// The name for the bucket.
+	//
+	// For more information about bucket names, see [Bucket naming rules in Amazon Lightsail] in the Amazon Lightsail Developer
+	// Guide.
+	//
+	// [Bucket naming rules in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/bucket-naming-rules-in-amazon-lightsail
 	//
 	// This member is required.
 	BucketName *string
 
-	// The ID of the bundle to use for the bucket. A bucket bundle specifies the
-	// monthly cost, storage space, and data transfer quota for a bucket. Use the
-	// GetBucketBundles (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketBundles.html)
-	// action to get a list of bundle IDs that you can specify. Use the
-	// UpdateBucketBundle (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html)
-	// action to change the bundle after the bucket is created.
+	// The ID of the bundle to use for the bucket.
+	//
+	// A bucket bundle specifies the monthly cost, storage space, and data transfer
+	// quota for a bucket.
+	//
+	// Use the [GetBucketBundles] action to get a list of bundle IDs that you can specify.
+	//
+	// Use the [UpdateBucketBundle] action to change the bundle after the bucket is created.
+	//
+	// [UpdateBucketBundle]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html
+	// [GetBucketBundles]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketBundles.html
 	//
 	// This member is required.
 	BundleId *string
 
 	// A Boolean value that indicates whether to enable versioning of objects in the
-	// bucket. For more information about versioning, see Enabling and suspending
-	// object versioning in a bucket in Amazon Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-managing-bucket-object-versioning)
-	// in the Amazon Lightsail Developer Guide.
+	// bucket.
+	//
+	// For more information about versioning, see [Enabling and suspending object versioning in a bucket in Amazon Lightsail] in the Amazon Lightsail Developer
+	// Guide.
+	//
+	// [Enabling and suspending object versioning in a bucket in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-managing-bucket-object-versioning
 	EnableObjectVersioning *bool
 
-	// The tag keys and optional values to add to the bucket during creation. Use the
-	// TagResource (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_TagResource.html)
-	// action to tag the bucket after it's created.
+	// The tag keys and optional values to add to the bucket during creation.
+	//
+	// Use the [TagResource] action to tag the bucket after it's created.
+	//
+	// [TagResource]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_TagResource.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

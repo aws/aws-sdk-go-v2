@@ -14,9 +14,10 @@ import (
 // Adds one or more tags to a signaling channel. A tag is a key-value pair (the
 // value is optional) that you can define and assign to Amazon Web Services
 // resources. If you specify a tag that already exists, the tag value is replaced
-// with the value that you specify in the request. For more information, see Using
-// Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-// in the Billing and Cost Management and Cost Management User Guide.
+// with the value that you specify in the request. For more information, see [Using Cost Allocation Tags]in
+// the Billing and Cost Management and Cost Management User Guide.
+//
+// [Using Cost Allocation Tags]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

@@ -10,12 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The GetFileUploadURL operation generates and returns a temporary URL. You use
+//	The GetFileUploadURL operation generates and returns a temporary URL. You use
+//
 // the temporary URL to retrieve a file uploaded by a Worker as an answer to a
 // FileUploadAnswer question for a HIT. The temporary URL is generated the instant
 // the GetFileUploadURL operation is called, and is valid for 60 seconds. You can
 // get a temporary file upload URL any time until the HIT is disposed. After the
 // HIT is disposed, any uploaded files are deleted, and cannot be retrieved.
+//
 // Pending Deprecation on December 12, 2017. The Answer Specification
 //
 // structure will no longer support the FileUploadAnswer element to be used for
@@ -54,7 +56,7 @@ type GetFileUploadURLInput struct {
 
 type GetFileUploadURLOutput struct {
 
-	// A temporary URL for the file that the Worker uploaded for the answer.
+	//  A temporary URL for the file that the Worker uploaded for the answer.
 	FileUploadURL *string
 
 	// Metadata pertaining to the operation's result.

@@ -41,8 +41,7 @@ type GetSnapshotLimitsInput struct {
 // Contains the results of the GetSnapshotLimits operation.
 type GetSnapshotLimitsOutput struct {
 
-	// A SnapshotLimits object that contains the manual snapshot limits for the
-	// specified directory.
+	// A SnapshotLimits object that contains the manual snapshot limits for the specified directory.
 	SnapshotLimits *types.SnapshotLimits
 
 	// Metadata pertaining to the operation's result.

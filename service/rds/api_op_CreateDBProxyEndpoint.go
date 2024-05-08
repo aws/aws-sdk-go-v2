@@ -48,8 +48,9 @@ type CreateDBProxyEndpointInput struct {
 	// This member is required.
 	VpcSubnetIds []string
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
-	// in the Amazon RDS User Guide.
+	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	//
+	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
 	Tags []types.Tag
 
 	// The role of the DB proxy endpoint. The role determines whether the endpoint can

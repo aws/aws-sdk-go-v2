@@ -12,8 +12,9 @@ import (
 	"time"
 )
 
-// This returns restore jobs that contain the specified protected resource. You
-// must include ResourceArn . You can optionally include NextToken , ByStatus ,
+// This returns restore jobs that contain the specified protected resource.
+//
+// You must include ResourceArn . You can optionally include NextToken , ByStatus ,
 // MaxResults , ByRecoveryPointCreationDateAfter , and
 // ByRecoveryPointCreationDateBefore .
 func (c *Client) ListRestoreJobsByProtectedResource(ctx context.Context, params *ListRestoreJobsByProtectedResourceInput, optFns ...func(*Options)) (*ListRestoreJobsByProtectedResourceOutput, error) {

@@ -14,15 +14,20 @@ import (
 // Lists the handshakes that are associated with the organization that the
 // requesting user is part of. The ListHandshakesForOrganization operation returns
 // a list of handshake structures. Each structure contains details and status about
-// a handshake. Handshakes that are ACCEPTED , DECLINED , CANCELED , or EXPIRED
-// appear in the results of this API for only 30 days after changing to that state.
-// After that, they're deleted and no longer accessible. Always check the NextToken
-// response parameter for a null value when calling a List* operation. These
-// operations can occasionally return an empty set of results even when there are
-// more results available. The NextToken response parameter value is null only
-// when there are no more results to display. This operation can be called only
-// from the organization's management account or by a member account that is a
-// delegated administrator for an Amazon Web Services service.
+// a handshake.
+//
+// Handshakes that are ACCEPTED , DECLINED , CANCELED , or EXPIRED appear in the
+// results of this API for only 30 days after changing to that state. After that,
+// they're deleted and no longer accessible.
+//
+// Always check the NextToken response parameter for a null value when calling a
+// List* operation. These operations can occasionally return an empty set of
+// results even when there are more results available. The NextToken response
+// parameter value is null only when there are no more results to display.
+//
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an Amazon Web Services
+// service.
 func (c *Client) ListHandshakesForOrganization(ctx context.Context, params *ListHandshakesForOrganizationInput, optFns ...func(*Options)) (*ListHandshakesForOrganizationOutput, error) {
 	if params == nil {
 		params = &ListHandshakesForOrganizationInput{}

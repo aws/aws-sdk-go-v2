@@ -14,17 +14,22 @@ import (
 // Creates a multiplayer game session for players in a specific fleet location.
 // This operation prompts an available server process to start a game session and
 // retrieves connection information for the new game session. As an alternative,
-// consider using the Amazon GameLift game session placement feature with
-// StartGameSessionPlacement (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html)
-// , which uses the FleetIQ algorithm and queues to optimize the placement process.
-// When creating a game session, you specify exactly where you want to place it and
-// provide a set of game session configuration settings. The target fleet must be
-// in ACTIVE status. You can use this operation in the following ways:
+// consider using the Amazon GameLift game session placement feature with [StartGameSessionPlacement], which
+// uses the FleetIQ algorithm and queues to optimize the placement process.
+//
+// When creating a game session, you specify exactly where you want to place it
+// and provide a set of game session configuration settings. The target fleet must
+// be in ACTIVE status.
+//
+// You can use this operation in the following ways:
+//
 //   - To create a game session on an instance in a fleet's home Region, provide a
 //     fleet or alias ID along with your game session configuration.
+//
 //   - To create a game session on an instance in a fleet's remote location,
 //     provide a fleet or alias ID and a location name, along with your game session
 //     configuration.
+//
 //   - To create a game session on an instance in an Anywhere fleet, specify the
 //     fleet's custom location.
 //
@@ -33,13 +38,24 @@ import (
 // status. When the game session status is ACTIVE , it is updated with connection
 // information and you can create player sessions for the game session. By default,
 // newly created game sessions are open to new players. You can restrict new player
-// access by using UpdateGameSession (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html)
-// to change the game session's player session creation policy. Amazon GameLift
-// retains logs for active for 14 days. To access the logs, call
-// GetGameSessionLogUrl (https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetGameSessionLogUrl.html)
-// to download the log files. Available in Amazon GameLift Local. Learn more Start
-// a game session (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)
-// All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// access by using [UpdateGameSession]to change the game session's player session creation policy.
+//
+// Amazon GameLift retains logs for active for 14 days. To access the logs, call [GetGameSessionLogUrl]
+// to download the log files.
+//
+// Available in Amazon GameLift Local.
+//
+// # Learn more
+//
+// [Start a game session]
+//
+// [All APIs by task]
+//
+// [Start a game session]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+// [GetGameSessionLogUrl]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetGameSessionLogUrl.html
+// [StartGameSessionPlacement]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html
+// [UpdateGameSession]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html
+// [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 func (c *Client) CreateGameSession(ctx context.Context, params *CreateGameSessionInput, optFns ...func(*Options)) (*CreateGameSessionOutput, error) {
 	if params == nil {
 		params = &CreateGameSessionInput{}
@@ -68,15 +84,18 @@ type CreateGameSessionInput struct {
 	// reference either a fleet ID or alias ID, but not both.
 	AliasId *string
 
-	// A unique identifier for a player or entity creating the game session. If you
-	// add a resource creation limit policy to a fleet, the CreateGameSession
+	// A unique identifier for a player or entity creating the game session.
+	//
+	// If you add a resource creation limit policy to a fleet, the CreateGameSession
 	// operation requires a CreatorId . Amazon GameLift limits the number of game
 	// session creation requests with the same CreatorId in a specified time period.
+	//
 	// If you your fleet doesn't have a resource creation limit policy and you provide
 	// a CreatorId in your CreateGameSession requests, Amazon GameLift limits requests
-	// to one request per CreatorId per second. To not limit CreateGameSession
-	// requests with the same CreatorId , don't provide a CreatorId in your
-	// CreateGameSession request.
+	// to one request per CreatorId per second.
+	//
+	// To not limit CreateGameSession requests with the same CreatorId , don't provide
+	// a CreatorId in your CreateGameSession request.
 	CreatorId *string
 
 	// A unique identifier for the fleet to create a game session in. You can use
@@ -85,20 +104,23 @@ type CreateGameSessionInput struct {
 	FleetId *string
 
 	// A set of key-value pairs that can store custom data in a game session. For
-	// example: {"Key": "difficulty", "Value": "novice"} . For an example, see Create
-	// a game session with custom properties (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-create)
-	// .
+	// example: {"Key": "difficulty", "Value": "novice"} . For an example, see [Create a game session with custom properties].
+	//
+	// [Create a game session with custom properties]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-create
 	GameProperties []types.GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
 	// This data is passed to a game server process with a request to start a new game
-	// session (see Start a Game Session (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)
-	// ).
+	// session (see [Start a Game Session]).
+	//
+	// [Start a Game Session]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
 	GameSessionData *string
 
-	// This parameter is deprecated. Use IdempotencyToken instead. Custom string that
-	// uniquely identifies a request for a new game session. Maximum token length is 48
-	// characters. If provided, this string is included in the new game session's ID.
+	//  This parameter is deprecated. Use IdempotencyToken instead.
+	//
+	// Custom string that uniquely identifies a request for a new game session.
+	// Maximum token length is 48 characters. If provided, this string is included in
+	// the new game session's ID.
 	GameSessionId *string
 
 	// Custom string that uniquely identifies the new game session request. This is

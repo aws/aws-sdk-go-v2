@@ -56,6 +56,7 @@ type UpdateGeofenceCollectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated geofence collection. Used to
 	// specify a resource across Amazon Web Services.
+	//
 	//   - Format example:
 	//   arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection
 	//
@@ -67,8 +68,10 @@ type UpdateGeofenceCollectionOutput struct {
 	// This member is required.
 	CollectionName *string
 
-	// The time when the geofence collection was last updated in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ
+	// The time when the geofence collection was last updated in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time

@@ -11,14 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the endpoint of a repository for a specific package format. A
+//	Returns the endpoint of a repository for a specific package format. A
+//
 // repository has one endpoint for each package format:
+//
 //   - generic
+//
 //   - maven
+//
 //   - npm
+//
 //   - nuget
+//
 //   - pypi
+//
 //   - ruby
+//
 //   - swift
 func (c *Client) GetRepositoryEndpoint(ctx context.Context, params *GetRepositoryEndpointInput, optFns ...func(*Options)) (*GetRepositoryEndpointOutput, error) {
 	if params == nil {
@@ -37,23 +45,23 @@ func (c *Client) GetRepositoryEndpoint(ctx context.Context, params *GetRepositor
 
 type GetRepositoryEndpointInput struct {
 
-	// The name of the domain that contains the repository.
+	//  The name of the domain that contains the repository.
 	//
 	// This member is required.
 	Domain *string
 
-	// Returns which endpoint of a repository to return. A repository has one endpoint
-	// for each package format.
+	//  Returns which endpoint of a repository to return. A repository has one
+	// endpoint for each package format.
 	//
 	// This member is required.
 	Format types.PackageFormat
 
-	// The name of the repository.
+	//  The name of the repository.
 	//
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain that contains the repository. It does not include dashes or spaces.
 	DomainOwner *string
 
@@ -62,7 +70,7 @@ type GetRepositoryEndpointInput struct {
 
 type GetRepositoryEndpointOutput struct {
 
-	// A string that specifies the URL of the returned endpoint.
+	//  A string that specifies the URL of the returned endpoint.
 	RepositoryEndpoint *string
 
 	// Metadata pertaining to the operation's result.

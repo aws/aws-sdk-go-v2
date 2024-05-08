@@ -12,9 +12,10 @@ import (
 	"time"
 )
 
-// Returns a list of shifts based on rotation configuration parameters. The
-// Incident Manager primarily uses this operation to populate the Preview calendar.
-// It is not typically run by end users.
+// Returns a list of shifts based on rotation configuration parameters.
+//
+// The Incident Manager primarily uses this operation to populate the Preview
+// calendar. It is not typically run by end users.
 func (c *Client) ListPreviewRotationShifts(ctx context.Context, params *ListPreviewRotationShiftsInput, optFns ...func(*Options)) (*ListPreviewRotationShiftsOutput, error) {
 	if params == nil {
 		params = &ListPreviewRotationShiftsInput{}

@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels the execution of a job for a given thing. Requires permission to access
-// the CancelJobExecution (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Cancels the execution of a job for a given thing.
+//
+// Requires permission to access the [CancelJobExecution] action.
+//
+// [CancelJobExecution]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CancelJobExecution(ctx context.Context, params *CancelJobExecutionInput, optFns ...func(*Options)) (*CancelJobExecutionOutput, error) {
 	if params == nil {
 		params = &CancelJobExecutionInput{}
@@ -53,10 +55,11 @@ type CancelJobExecutionInput struct {
 	// IN_PROGRESS or QUEUED, otherwise the job execution will be canceled only if it
 	// has status QUEUED. If you attempt to cancel a job execution that is IN_PROGRESS,
 	// and you do not set force to true , then an InvalidStateTransitionException will
-	// be thrown. The default is false . Canceling a job execution which is
-	// "IN_PROGRESS", will cause the device to be unable to update the job execution
-	// status. Use caution and ensure that the device is able to recover to a valid
-	// state.
+	// be thrown. The default is false .
+	//
+	// Canceling a job execution which is "IN_PROGRESS", will cause the device to be
+	// unable to update the job execution status. Use caution and ensure that the
+	// device is able to recover to a valid state.
 	Force bool
 
 	// A collection of name/value pairs that describe the status of the job execution.

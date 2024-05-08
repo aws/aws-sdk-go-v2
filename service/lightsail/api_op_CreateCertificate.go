@@ -12,15 +12,18 @@ import (
 )
 
 // Creates an SSL/TLS certificate for an Amazon Lightsail content delivery network
-// (CDN) distribution and a container service. After the certificate is valid, use
-// the AttachCertificateToDistribution action to use the certificate and its
-// domains with your distribution. Or use the UpdateContainerService action to use
-// the certificate and its domains with your container service. Only certificates
-// created in the us-east-1 Amazon Web Services Region can be attached to
-// Lightsail distributions. Lightsail distributions are global resources that can
-// reference an origin in any Amazon Web Services Region, and distribute its
-// content globally. However, all distributions are located in the us-east-1
-// Region.
+// (CDN) distribution and a container service.
+//
+// After the certificate is valid, use the AttachCertificateToDistribution action
+// to use the certificate and its domains with your distribution. Or use the
+// UpdateContainerService action to use the certificate and its domains with your
+// container service.
+//
+// Only certificates created in the us-east-1 Amazon Web Services Region can be
+// attached to Lightsail distributions. Lightsail distributions are global
+// resources that can reference an origin in any Amazon Web Services Region, and
+// distribute its content globally. However, all distributions are located in the
+// us-east-1 Region.
 func (c *Client) CreateCertificate(ctx context.Context, params *CreateCertificateInput, optFns ...func(*Options)) (*CreateCertificateOutput, error) {
 	if params == nil {
 		params = &CreateCertificateInput{}
@@ -49,13 +52,17 @@ type CreateCertificateInput struct {
 	DomainName *string
 
 	// An array of strings that specify the alternate domains ( example2.com ) and
-	// subdomains ( blog.example.com ) for the certificate. You can specify a maximum
-	// of nine alternate domains (in addition to the primary domain name). Wildcard
-	// domain entries ( *.example.com ) are not supported.
+	// subdomains ( blog.example.com ) for the certificate.
+	//
+	// You can specify a maximum of nine alternate domains (in addition to the primary
+	// domain name).
+	//
+	// Wildcard domain entries ( *.example.com ) are not supported.
 	SubjectAlternativeNames []string
 
-	// The tag keys and optional values to add to the certificate during create. Use
-	// the TagResource action to tag a resource after it's created.
+	// The tag keys and optional values to add to the certificate during create.
+	//
+	// Use the TagResource action to tag a resource after it's created.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

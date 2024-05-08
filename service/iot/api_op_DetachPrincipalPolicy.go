@@ -10,13 +10,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified policy from the specified certificate. Note: This action
-// is deprecated and works as expected for backward compatibility, but we won't add
-// enhancements. Use DetachPolicy instead. Requires permission to access the
-// DetachPrincipalPolicy (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Removes the specified policy from the specified certificate.
+//
+// Note: This action is deprecated and works as expected for backward
+// compatibility, but we won't add enhancements. Use DetachPolicyinstead.
+//
+// Requires permission to access the [DetachPrincipalPolicy] action.
 //
 // Deprecated: This operation has been deprecated.
+//
+// [DetachPrincipalPolicy]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DetachPrincipalPolicy(ctx context.Context, params *DetachPrincipalPolicyInput, optFns ...func(*Options)) (*DetachPrincipalPolicyOutput, error) {
 	if params == nil {
 		params = &DetachPrincipalPolicyInput{}
@@ -40,7 +43,9 @@ type DetachPrincipalPolicyInput struct {
 	// This member is required.
 	PolicyName *string
 
-	// The principal. Valid principals are CertificateArn
+	// The principal.
+	//
+	// Valid principals are CertificateArn
 	// (arn:aws:iot:region:accountId:cert/certificateId), thingGroupArn
 	// (arn:aws:iot:region:accountId:thinggroup/groupName) and CognitoId (region:id).
 	//

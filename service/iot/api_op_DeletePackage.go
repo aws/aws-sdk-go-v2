@@ -10,10 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a specific version from a software package. Note: All package versions
-// must be deleted before deleting the software package. Requires permission to
-// access the DeletePackageVersion (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Deletes a specific version from a software package.
+//
+// Note: All package versions must be deleted before deleting the software package.
+//
+// Requires permission to access the [DeletePackageVersion] action.
+//
+// [DeletePackageVersion]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DeletePackage(ctx context.Context, params *DeletePackageInput, optFns ...func(*Options)) (*DeletePackageOutput, error) {
 	if params == nil {
 		params = &DeletePackageInput{}

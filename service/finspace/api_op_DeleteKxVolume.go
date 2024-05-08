@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a volume. You can only delete a volume if it's not attached to a
+//	Deletes a volume. You can only delete a volume if it's not attached to a
+//
 // cluster or a dataview. When a volume is deleted, any data on the volume is lost.
 // This action is irreversible.
 func (c *Client) DeleteKxVolume(ctx context.Context, params *DeleteKxVolumeInput, optFns ...func(*Options)) (*DeleteKxVolumeOutput, error) {
@@ -36,7 +37,7 @@ type DeleteKxVolumeInput struct {
 	// This member is required.
 	EnvironmentId *string
 
-	// The name of the volume that you want to delete.
+	//  The name of the volume that you want to delete.
 	//
 	// This member is required.
 	VolumeName *string

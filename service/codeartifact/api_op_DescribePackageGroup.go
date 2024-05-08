@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a PackageGroupDescription (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageGroupDescription.html)
-// object that contains information about the requested package group.
+// Returns a [PackageGroupDescription] object that contains information about the requested package group.
+//
+// [PackageGroupDescription]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageGroupDescription.html
 func (c *Client) DescribePackageGroup(ctx context.Context, params *DescribePackageGroupInput, optFns ...func(*Options)) (*DescribePackageGroupOutput, error) {
 	if params == nil {
 		params = &DescribePackageGroupInput{}
@@ -30,7 +31,7 @@ func (c *Client) DescribePackageGroup(ctx context.Context, params *DescribePacka
 
 type DescribePackageGroupInput struct {
 
-	// The name of the domain that contains the package group.
+	//  The name of the domain that contains the package group.
 	//
 	// This member is required.
 	Domain *string
@@ -40,7 +41,7 @@ type DescribePackageGroupInput struct {
 	// This member is required.
 	PackageGroup *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
@@ -49,8 +50,9 @@ type DescribePackageGroupInput struct {
 
 type DescribePackageGroupOutput struct {
 
-	// A PackageGroupDescription (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageGroupDescription.html)
-	// object that contains information about the requested package group.
+	// A [PackageGroupDescription] object that contains information about the requested package group.
+	//
+	// [PackageGroupDescription]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageGroupDescription.html
 	PackageGroup *types.PackageGroupDescription
 
 	// Metadata pertaining to the operation's result.

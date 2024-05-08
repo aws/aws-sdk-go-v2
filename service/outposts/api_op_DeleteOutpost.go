@@ -28,7 +28,7 @@ func (c *Client) DeleteOutpost(ctx context.Context, params *DeleteOutpostInput, 
 
 type DeleteOutpostInput struct {
 
-	// The ID or ARN of the Outpost.
+	//  The ID or ARN of the Outpost.
 	//
 	// This member is required.
 	OutpostId *string

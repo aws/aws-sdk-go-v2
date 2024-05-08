@@ -29,7 +29,7 @@ func (c *Client) GetApplicationComponentDetails(ctx context.Context, params *Get
 
 type GetApplicationComponentDetailsInput struct {
 
-	// The ID of the application component. The ID is unique within an AWS account.
+	//  The ID of the application component. The ID is unique within an AWS account.
 	//
 	// This member is required.
 	ApplicationComponentId *string
@@ -39,17 +39,18 @@ type GetApplicationComponentDetailsInput struct {
 
 type GetApplicationComponentDetailsOutput struct {
 
-	// Detailed information about an application component.
+	//  Detailed information about an application component.
 	ApplicationComponentDetail *types.ApplicationComponentDetail
 
-	// The associated application group as defined in AWS Application Discovery
+	//  The associated application group as defined in AWS Application Discovery
 	// Service.
 	AssociatedApplications []types.AssociatedApplication
 
-	// A list of the IDs of the servers on which the application component is running.
+	//  A list of the IDs of the servers on which the application component is
+	// running.
 	AssociatedServerIds []string
 
-	// Set to true if the application component belongs to more than one application
+	//  Set to true if the application component belongs to more than one application
 	// group.
 	MoreApplicationResource *bool
 

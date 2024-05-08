@@ -57,7 +57,7 @@ type ReportDefinition struct {
 	// A list of manifests that you want Amazon Web Services to create for this report.
 	AdditionalArtifacts []AdditionalArtifact
 
-	// The Amazon resource name of the billing view. The BillingViewArn is needed to
+	//  The Amazon resource name of the billing view. The BillingViewArn is needed to
 	// create Amazon Web Services Cost and Usage Report for each billing group
 	// maintained in the Amazon Web Services Billing Conductor service. The
 	// BillingViewArn for a billing group can be constructed as:

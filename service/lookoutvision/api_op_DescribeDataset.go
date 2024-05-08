@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe an Amazon Lookout for Vision dataset. This operation requires
-// permissions to perform the lookoutvision:DescribeDataset operation.
+// Describe an Amazon Lookout for Vision dataset.
+//
+// This operation requires permissions to perform the lookoutvision:DescribeDataset
+// operation.
 func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInput, optFns ...func(*Options)) (*DescribeDatasetOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetInput{}

@@ -12,11 +12,12 @@ import (
 )
 
 // Lists the Outpost sites for your Amazon Web Services account. Use filters to
-// return specific results. Use filters to return specific results. If you specify
-// multiple filters, the results include only the resources that match all of the
-// specified filters. For a filter where you can specify multiple values, the
-// results include items that match any of the values that you specify for the
-// filter.
+// return specific results.
+//
+// Use filters to return specific results. If you specify multiple filters, the
+// results include only the resources that match all of the specified filters. For
+// a filter where you can specify multiple values, the results include items that
+// match any of the values that you specify for the filter.
 func (c *Client) ListSites(ctx context.Context, params *ListSitesInput, optFns ...func(*Options)) (*ListSitesOutput, error) {
 	if params == nil {
 		params = &ListSitesInput{}

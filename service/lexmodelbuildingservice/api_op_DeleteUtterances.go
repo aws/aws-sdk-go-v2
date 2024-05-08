@@ -10,15 +10,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes stored utterances. Amazon Lex stores the utterances that users send to
-// your bot. Utterances are stored for 15 days for use with the GetUtterancesView
-// operation, and then stored indefinitely for use in improving the ability of your
-// bot to respond to user input. Use the DeleteUtterances operation to manually
-// delete stored utterances for a specific user. When you use the DeleteUtterances
-// operation, utterances stored for improving your bot's ability to respond to user
-// input are deleted immediately. Utterances stored for use with the
-// GetUtterancesView operation are deleted after 15 days. This operation requires
-// permissions for the lex:DeleteUtterances action.
+// Deletes stored utterances.
+//
+// Amazon Lex stores the utterances that users send to your bot. Utterances are
+// stored for 15 days for use with the GetUtterancesViewoperation, and then stored indefinitely for
+// use in improving the ability of your bot to respond to user input.
+//
+// Use the DeleteUtterances operation to manually delete stored utterances for a
+// specific user. When you use the DeleteUtterances operation, utterances stored
+// for improving your bot's ability to respond to user input are deleted
+// immediately. Utterances stored for use with the GetUtterancesView operation are
+// deleted after 15 days.
+//
+// This operation requires permissions for the lex:DeleteUtterances action.
 func (c *Client) DeleteUtterances(ctx context.Context, params *DeleteUtterancesInput, optFns ...func(*Options)) (*DeleteUtterancesOutput, error) {
 	if params == nil {
 		params = &DeleteUtterancesInput{}
@@ -41,10 +45,11 @@ type DeleteUtterancesInput struct {
 	// This member is required.
 	BotName *string
 
-	// The unique identifier for the user that made the utterances. This is the user
-	// ID that was sent in the PostContent (http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html)
-	// or PostText (http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html)
-	// operation request that contained the utterance.
+	//  The unique identifier for the user that made the utterances. This is the user
+	// ID that was sent in the [PostContent]or [PostText] operation request that contained the utterance.
+	//
+	// [PostText]: http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html
+	// [PostContent]: http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html
 	//
 	// This member is required.
 	UserId *string

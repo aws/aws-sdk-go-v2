@@ -17,9 +17,10 @@ import (
 	"time"
 )
 
-// Returns information about provisioned instances, and supports pagination. This
-// operation can also return information for Amazon RDS instances and Amazon DocDB
-// instances.
+// Returns information about provisioned instances, and supports pagination.
+//
+// This operation can also return information for Amazon RDS instances and Amazon
+// DocDB instances.
 func (c *Client) DescribeDBInstances(ctx context.Context, params *DescribeDBInstancesInput, optFns ...func(*Options)) (*DescribeDBInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeDBInstancesInput{}
@@ -39,30 +40,40 @@ type DescribeDBInstancesInput struct {
 
 	// The user-supplied instance identifier. If this parameter is specified,
 	// information from only the specific DB instance is returned. This parameter isn't
-	// case-sensitive. Constraints:
+	// case-sensitive.
+	//
+	// Constraints:
+	//
 	//   - If supplied, must match the identifier of an existing DBInstance.
 	DBInstanceIdentifier *string
 
-	// A filter that specifies one or more DB instances to describe. Supported
-	// filters:
+	// A filter that specifies one or more DB instances to describe.
+	//
+	// Supported filters:
+	//
 	//   - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
 	//   Resource Names (ARNs). The results list will only include information about the
 	//   DB instances associated with the DB clusters identified by these ARNs.
+	//
 	//   - engine - Accepts an engine name (such as neptune ), and restricts the
 	//   results list to DB instances created by that engine.
+	//
 	// For example, to invoke this API from the Amazon CLI and filter so that only
 	// Neptune DB instances are returned, you could use the following command:
 	Filters []types.Filter
 
-	// An optional pagination token provided by a previous DescribeDBInstances
+	//  An optional pagination token provided by a previous DescribeDBInstances
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -70,10 +81,10 @@ type DescribeDBInstancesInput struct {
 
 type DescribeDBInstancesOutput struct {
 
-	// A list of DBInstance instances.
+	//  A list of DBInstance instances.
 	DBInstances []types.DBInstance
 
-	// An optional pagination token provided by a previous request. If this parameter
+	//  An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
@@ -174,10 +185,13 @@ var _ DescribeDBInstancesAPIClient = (*Client)(nil)
 // DescribeDBInstancesPaginatorOptions is the paginator options for
 // DescribeDBInstances
 type DescribeDBInstancesPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -291,12 +305,13 @@ type DBInstanceAvailableWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeDBInstancesInput, *DescribeDBInstancesOutput, error) (bool, error)
 }
 
@@ -598,12 +613,13 @@ type DBInstanceDeletedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeDBInstancesInput, *DescribeDBInstancesOutput, error) (bool, error)
 }
 

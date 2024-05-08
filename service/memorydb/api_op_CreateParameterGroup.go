@@ -13,8 +13,9 @@ import (
 
 // Creates a new MemoryDB parameter group. A parameter group is a collection of
 // parameters and their values that are applied to all of the nodes in any cluster.
-// For more information, see Configuring engine parameters using parameter groups (https://docs.aws.amazon.com/MemoryDB/latest/devguide/parametergroups.html)
-// .
+// For more information, see [Configuring engine parameters using parameter groups].
+//
+// [Configuring engine parameters using parameter groups]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/parametergroups.html
 func (c *Client) CreateParameterGroup(ctx context.Context, params *CreateParameterGroupInput, optFns ...func(*Options)) (*CreateParameterGroupOutput, error) {
 	if params == nil {
 		params = &CreateParameterGroupInput{}

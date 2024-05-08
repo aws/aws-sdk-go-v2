@@ -63,8 +63,9 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // The confidence that Amazon Comprehend accurately detected the source language
 // is low. If a low confidence level is acceptable for your application, you can
 // use the language in the exception to call Amazon Translate again. For more
-// information, see the DetectDominantLanguage (https://docs.aws.amazon.com/comprehend/latest/dg/API_DetectDominantLanguage.html)
-// operation in the Amazon Comprehend Developer Guide.
+// information, see the [DetectDominantLanguage]operation in the Amazon Comprehend Developer Guide.
+//
+// [DetectDominantLanguage]: https://docs.aws.amazon.com/comprehend/latest/dg/API_DetectDominantLanguage.html
 type DetectedLanguageLowConfidenceException struct {
 	Message *string
 
@@ -173,7 +174,8 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request that you made is not valid. Check your request to determine why
+//	The request that you made is not valid. Check your request to determine why
+//
 // it's not valid and then retry the request.
 type InvalidRequestException struct {
 	Message *string
@@ -282,7 +284,8 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The size of the text you submitted exceeds the size limit. Reduce the size of
+//	The size of the text you submitted exceeds the size limit. Reduce the size of
+//
 // the text or use a smaller document and then retry your request.
 type TextSizeLimitExceededException struct {
 	Message *string
@@ -309,8 +312,9 @@ func (e *TextSizeLimitExceededException) ErrorCode() string {
 }
 func (e *TextSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have made too many requests within a short period of time. Wait for a short
-// time and then try your request again.
+//	You have made too many requests within a short period of time. Wait for a
+//
+// short time and then try your request again.
 type TooManyRequestsException struct {
 	Message *string
 
@@ -395,9 +399,9 @@ func (e *UnsupportedDisplayLanguageCodeException) ErrorFault() smithy.ErrorFault
 }
 
 // Amazon Translate does not support translation from the language of the source
-// text into the requested target language. For more information, see Supported
-// languages (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html)
-// .
+// text into the requested target language. For more information, see [Supported languages].
+//
+// [Supported languages]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
 type UnsupportedLanguagePairException struct {
 	Message *string
 

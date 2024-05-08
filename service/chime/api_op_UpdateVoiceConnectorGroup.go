@@ -12,16 +12,19 @@ import (
 )
 
 // Updates details of the specified Amazon Chime Voice Connector group, such as
-// the name and Amazon Chime Voice Connector priority ranking. This API is is no
-// longer supported and will not be updated. We recommend using the latest version,
-// UpdateVoiceConnectorGroup (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_UpdateVoiceConnectorGroup.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// the name and Amazon Chime Voice Connector priority ranking.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [UpdateVoiceConnectorGroup], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by UpdateVoiceConnectorGroup in the Amazon Chime SDK Voice
 // Namespace
+//
+// [UpdateVoiceConnectorGroup]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_UpdateVoiceConnectorGroup.html
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
 func (c *Client) UpdateVoiceConnectorGroup(ctx context.Context, params *UpdateVoiceConnectorGroupInput, optFns ...func(*Options)) (*UpdateVoiceConnectorGroupOutput, error) {
 	if params == nil {
 		params = &UpdateVoiceConnectorGroupInput{}

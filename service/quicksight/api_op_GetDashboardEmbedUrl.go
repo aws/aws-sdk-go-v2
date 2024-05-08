@@ -14,23 +14,31 @@ import (
 // Generates a temporary session URL and authorization code(bearer token) that you
 // can use to embed an Amazon QuickSight read-only dashboard in your website or
 // application. Before you use this command, make sure that you have configured the
-// dashboards and permissions. Currently, you can use GetDashboardEmbedURL only
-// from the server, not from the user's browser. The following rules apply to the
-// generated URL:
+// dashboards and permissions.
+//
+// Currently, you can use GetDashboardEmbedURL only from the server, not from the
+// user's browser. The following rules apply to the generated URL:
+//
 //   - They must be used together.
+//
 //   - They can be used one time only.
+//
 //   - They are valid for 5 minutes after you run this command.
+//
 //   - You are charged only when the URL is used or there is interaction with
 //     Amazon QuickSight.
+//
 //   - The resulting user session is valid for 15 minutes (default) up to 10 hours
 //     (maximum). You can use the optional SessionLifetimeInMinutes parameter to
 //     customize session duration.
 //
-// For more information, see Embedding Analytics Using GetDashboardEmbedUrl (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-deprecated.html)
-// in the Amazon QuickSight User Guide. For more information about the high-level
-// steps for embedding and for an interactive demo of the ways you can customize
-// embedding, visit the Amazon QuickSight Developer Portal (https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html)
-// .
+// For more information, see [Embedding Analytics Using GetDashboardEmbedUrl] in the Amazon QuickSight User Guide.
+//
+// For more information about the high-level steps for embedding and for an
+// interactive demo of the ways you can customize embedding, visit the [Amazon QuickSight Developer Portal].
+//
+// [Amazon QuickSight Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
+// [Embedding Analytics Using GetDashboardEmbedUrl]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-deprecated.html
 func (c *Client) GetDashboardEmbedUrl(ctx context.Context, params *GetDashboardEmbedUrlInput, optFns ...func(*Options)) (*GetDashboardEmbedUrlOutput, error) {
 	if params == nil {
 		params = &GetDashboardEmbedUrlInput{}
@@ -100,10 +108,14 @@ type GetDashboardEmbedUrlInput struct {
 	// The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT
 	// identity type. You can use this for any Amazon QuickSight users in your account
 	// (readers, authors, or admins) authenticated as one of the following:
+	//
 	//   - Active Directory (AD) users or group members
+	//
 	//   - Invited nonfederated users
+	//
 	//   - IAM users and IAM role-based sessions authenticated through Federated
 	//   Single Sign-On using SAML, OpenID Connect, or IAM federation.
+	//
 	// Omit this parameter for users in the third group – IAM users and IAM role-based
 	// sessions.
 	UserArn *string

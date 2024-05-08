@@ -27,10 +27,12 @@ type Field struct {
 
 // Identity information for the EC2 instance that is hosting the task runner. You
 // can get this value by calling a metadata URI from the EC2 instance. For more
-// information, see Instance Metadata (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html)
-// in the Amazon Elastic Compute Cloud User Guide. Passing in this value proves
-// that your task runner is running on an EC2 instance, and ensures the proper AWS
-// Data Pipeline service charges are applied to your pipeline.
+// information, see [Instance Metadata]in the Amazon Elastic Compute Cloud User Guide. Passing in
+// this value proves that your task runner is running on an EC2 instance, and
+// ensures the proper AWS Data Pipeline service charges are applied to your
+// pipeline.
+//
+// [Instance Metadata]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html
 type InstanceIdentity struct {
 
 	// A description of an EC2 instance that is generated when the instance is
@@ -49,12 +51,14 @@ type InstanceIdentity struct {
 // specified value.
 type Operator struct {
 
-	// The logical operation to be performed: equal ( EQ ), equal reference ( REF_EQ ),
-	// less than or equal ( LE ), greater than or equal ( GE ), or between ( BETWEEN ).
-	// Equal reference ( REF_EQ ) can be used only with reference fields. The other
+	//  The logical operation to be performed: equal ( EQ ), equal reference ( REF_EQ
+	// ), less than or equal ( LE ), greater than or equal ( GE ), or between ( BETWEEN
+	// ). Equal reference ( REF_EQ ) can be used only with reference fields. The other
 	// comparison types can be used only with String fields. The comparison types you
-	// can use apply only to certain object fields, as detailed below. The comparison
-	// operators EQ and REF_EQ act on the following fields:
+	// can use apply only to certain object fields, as detailed below.
+	//
+	// The comparison operators EQ and REF_EQ act on the following fields:
+	//
 	//   - name
 	//   - @sphere
 	//   - parent
@@ -65,7 +69,9 @@ type Operator struct {
 	//   - @scheduledEndTime
 	//   - @actualStartTime
 	//   - @actualEndTime
+	//
 	// The comparison operators GE , LE , and BETWEEN act on the following fields:
+	//
 	//   - @scheduledStartTime
 	//   - @scheduledEndTime
 	//   - @actualStartTime
@@ -155,8 +161,9 @@ type PipelineDescription struct {
 	Description *string
 
 	// A list of tags to associated with a pipeline. Tags let you control access to
-	// pipelines. For more information, see Controlling User Access to Pipelines (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
-	// in the AWS Data Pipeline Developer Guide.
+	// pipelines. For more information, see [Controlling User Access to Pipelines]in the AWS Data Pipeline Developer Guide.
+	//
+	// [Controlling User Access to Pipelines]: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html
 	Tags []Tag
 
 	noSmithyDocumentSerde
@@ -227,20 +234,23 @@ type Selector struct {
 
 // Tags are key/value pairs defined by a user and associated with a pipeline to
 // control access. AWS Data Pipeline allows you to associate ten tags per pipeline.
-// For more information, see Controlling User Access to Pipelines (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
-// in the AWS Data Pipeline Developer Guide.
+// For more information, see [Controlling User Access to Pipelines]in the AWS Data Pipeline Developer Guide.
+//
+// [Controlling User Access to Pipelines]: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html
 type Tag struct {
 
-	// The key name of a tag defined by a user. For more information, see Controlling
-	// User Access to Pipelines (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
-	// in the AWS Data Pipeline Developer Guide.
+	// The key name of a tag defined by a user. For more information, see [Controlling User Access to Pipelines] in the AWS
+	// Data Pipeline Developer Guide.
+	//
+	// [Controlling User Access to Pipelines]: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html
 	//
 	// This member is required.
 	Key *string
 
 	// The optional value portion of a tag defined by a user. For more information,
-	// see Controlling User Access to Pipelines (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
-	// in the AWS Data Pipeline Developer Guide.
+	// see [Controlling User Access to Pipelines]in the AWS Data Pipeline Developer Guide.
+	//
+	// [Controlling User Access to Pipelines]: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html
 	//
 	// This member is required.
 	Value *string
@@ -262,8 +272,7 @@ type TaskObject struct {
 	// The ID of the pipeline that provided the task.
 	PipelineId *string
 
-	// An internal identifier for the task. This ID is passed to the SetTaskStatus and
-	// ReportTaskProgress actions.
+	// An internal identifier for the task. This ID is passed to the SetTaskStatus and ReportTaskProgress actions.
 	TaskId *string
 
 	noSmithyDocumentSerde

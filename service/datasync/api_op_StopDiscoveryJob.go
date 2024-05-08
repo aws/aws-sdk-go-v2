@@ -10,11 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a running DataSync discovery job. You can stop a discovery job anytime. A
-// job that's stopped before it's scheduled to end likely will provide you some
-// information about your on-premises storage system resources. To get
-// recommendations for a stopped job, you must use the GenerateRecommendations (https://docs.aws.amazon.com/datasync/latest/userguide/API_GenerateRecommendations.html)
-// operation.
+// Stops a running DataSync discovery job.
+//
+// You can stop a discovery job anytime. A job that's stopped before it's
+// scheduled to end likely will provide you some information about your on-premises
+// storage system resources. To get recommendations for a stopped job, you must use
+// the [GenerateRecommendations]operation.
+//
+// [GenerateRecommendations]: https://docs.aws.amazon.com/datasync/latest/userguide/API_GenerateRecommendations.html
 func (c *Client) StopDiscoveryJob(ctx context.Context, params *StopDiscoveryJobInput, optFns ...func(*Options)) (*StopDiscoveryJobOutput, error) {
 	if params == nil {
 		params = &StopDiscoveryJobInput{}

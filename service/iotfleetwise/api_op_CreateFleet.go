@@ -11,10 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a fleet that represents a group of vehicles. You must create both a
-// signal catalog and vehicles before you can create a fleet. For more information,
-// see Fleets (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleets.html)
-// in the Amazon Web Services IoT FleetWise Developer Guide.
+//	Creates a fleet that represents a group of vehicles.
+//
+// You must create both a signal catalog and vehicles before you can create a
+// fleet.
+//
+// For more information, see [Fleets] in the Amazon Web Services IoT FleetWise Developer
+// Guide.
+//
+// [Fleets]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleets.html
 func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optFns ...func(*Options)) (*CreateFleetOutput, error) {
 	if params == nil {
 		params = &CreateFleetInput{}
@@ -32,17 +37,17 @@ func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optF
 
 type CreateFleetInput struct {
 
-	// The unique ID of the fleet to create.
+	//  The unique ID of the fleet to create.
 	//
 	// This member is required.
 	FleetId *string
 
-	// The Amazon Resource Name (ARN) of a signal catalog.
+	//  The Amazon Resource Name (ARN) of a signal catalog.
 	//
 	// This member is required.
 	SignalCatalogArn *string
 
-	// A brief description of the fleet to create.
+	//  A brief description of the fleet to create.
 	Description *string
 
 	// Metadata that can be used to manage the fleet.
@@ -53,12 +58,12 @@ type CreateFleetInput struct {
 
 type CreateFleetOutput struct {
 
-	// The ARN of the created fleet.
+	//  The ARN of the created fleet.
 	//
 	// This member is required.
 	Arn *string
 
-	// The ID of the created fleet.
+	//  The ID of the created fleet.
 	//
 	// This member is required.
 	Id *string

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a list of evidence to an assessment report in an Audit Manager
+//	Associates a list of evidence to an assessment report in an Audit Manager
+//
 // assessment.
 func (c *Client) BatchAssociateAssessmentReportEvidence(ctx context.Context, params *BatchAssociateAssessmentReportEvidenceInput, optFns ...func(*Options)) (*BatchAssociateAssessmentReportEvidenceOutput, error) {
 	if params == nil {
@@ -30,17 +31,17 @@ func (c *Client) BatchAssociateAssessmentReportEvidence(ctx context.Context, par
 
 type BatchAssociateAssessmentReportEvidenceInput struct {
 
-	// The identifier for the assessment.
+	//  The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifier for the folder that the evidence is stored in.
+	//  The identifier for the folder that the evidence is stored in.
 	//
 	// This member is required.
 	EvidenceFolderId *string
 
-	// The list of evidence identifiers.
+	//  The list of evidence identifiers.
 	//
 	// This member is required.
 	EvidenceIds []string
@@ -50,10 +51,10 @@ type BatchAssociateAssessmentReportEvidenceInput struct {
 
 type BatchAssociateAssessmentReportEvidenceOutput struct {
 
-	// A list of errors that the BatchAssociateAssessmentReportEvidence API returned.
+	//  A list of errors that the BatchAssociateAssessmentReportEvidence API returned.
 	Errors []types.AssessmentReportEvidenceError
 
-	// The list of evidence identifiers.
+	//  The list of evidence identifiers.
 	EvidenceIds []string
 
 	// Metadata pertaining to the operation's result.

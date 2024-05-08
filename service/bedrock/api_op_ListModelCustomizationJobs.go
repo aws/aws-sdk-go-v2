@@ -13,9 +13,11 @@ import (
 )
 
 // Returns a list of model customization jobs that you have submitted. You can
-// filter the jobs to return based on one or more criteria. For more information,
-// see Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
-// in the Amazon Bedrock User Guide.
+// filter the jobs to return based on one or more criteria.
+//
+// For more information, see [Custom models] in the Amazon Bedrock User Guide.
+//
+// [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
 func (c *Client) ListModelCustomizationJobs(ctx context.Context, params *ListModelCustomizationJobsInput, optFns ...func(*Options)) (*ListModelCustomizationJobsOutput, error) {
 	if params == nil {
 		params = &ListModelCustomizationJobsInput{}

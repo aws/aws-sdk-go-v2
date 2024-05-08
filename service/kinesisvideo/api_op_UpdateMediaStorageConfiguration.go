@@ -13,9 +13,11 @@ import (
 
 // Associates a SignalingChannel to a stream to store the media. There are two
 // signaling modes that you can specify :
+//
 //   - If StorageStatus is enabled, the data will be stored in the StreamARN
 //     provided. In order for WebRTC Ingestion to work, the stream must have data
 //     retention enabled.
+//
 //   - If StorageStatus is disabled, no data will be stored, and the StreamARN
 //     parameter will not be needed.
 //

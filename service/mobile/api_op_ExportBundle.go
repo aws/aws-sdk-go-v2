@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates customized software development kit (SDK) and or tool packages used
+//	Generates customized software development kit (SDK) and or tool packages used
+//
 // to integrate mobile web or mobile app clients with backend AWS resources.
 func (c *Client) ExportBundle(ctx context.Context, params *ExportBundleInput, optFns ...func(*Options)) (*ExportBundleOutput, error) {
 	if params == nil {
@@ -28,31 +29,33 @@ func (c *Client) ExportBundle(ctx context.Context, params *ExportBundleInput, op
 	return out, nil
 }
 
-// Request structure used to request generation of custom SDK and tool packages
+//	Request structure used to request generation of custom SDK and tool packages
+//
 // required to integrate mobile web or app clients with backed AWS resources.
 type ExportBundleInput struct {
 
-	// Unique bundle identifier.
+	//  Unique bundle identifier.
 	//
 	// This member is required.
 	BundleId *string
 
-	// Developer desktop or target application platform.
+	//  Developer desktop or target application platform.
 	Platform types.Platform
 
-	// Unique project identifier.
+	//  Unique project identifier.
 	ProjectId *string
 
 	noSmithyDocumentSerde
 }
 
-// Result structure which contains link to download custom-generated SDK and tool
+//	Result structure which contains link to download custom-generated SDK and tool
+//
 // packages used to integrate mobile web or app clients with backed AWS resources.
 type ExportBundleOutput struct {
 
-	// URL which contains the custom-generated SDK and tool packages used to integrate
-	// the client mobile app or web app with the AWS resources created by the AWS
-	// Mobile Hub project.
+	//  URL which contains the custom-generated SDK and tool packages used to
+	// integrate the client mobile app or web app with the AWS resources created by the
+	// AWS Mobile Hub project.
 	DownloadUrl *string
 
 	// Metadata pertaining to the operation's result.

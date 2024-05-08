@@ -19,8 +19,9 @@ import (
 // 72 hours of requesting the ACM certificate. If more than 72 hours have elapsed
 // since your original request or since your last attempt to resend validation
 // mail, you must request a new certificate. For more information about setting up
-// your contact email addresses, see Configure Email for your Domain (https://docs.aws.amazon.com/acm/latest/userguide/setup-email.html)
-// .
+// your contact email addresses, see [Configure Email for your Domain].
+//
+// [Configure Email for your Domain]: https://docs.aws.amazon.com/acm/latest/userguide/setup-email.html
 func (c *Client) ResendValidationEmail(ctx context.Context, params *ResendValidationEmailInput, optFns ...func(*Options)) (*ResendValidationEmailOutput, error) {
 	if params == nil {
 		params = &ResendValidationEmailInput{}
@@ -39,11 +40,11 @@ func (c *Client) ResendValidationEmail(ctx context.Context, params *ResendValida
 type ResendValidationEmailInput struct {
 
 	// String that contains the ARN of the requested certificate. The certificate ARN
-	// is generated and returned by the RequestCertificate action as soon as the
-	// request is made. By default, using this parameter causes email to be sent to all
-	// top-level domains you specified in the certificate request. The ARN must be of
-	// the form:
-	// arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012
+	// is generated and returned by the RequestCertificateaction as soon as the request is made. By
+	// default, using this parameter causes email to be sent to all top-level domains
+	// you specified in the certificate request. The ARN must be of the form:
+	//
+	//     arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012
 	//
 	// This member is required.
 	CertificateArn *string
@@ -60,10 +61,15 @@ type ResendValidationEmailInput struct {
 	// for site.subdomain.example.com and specify a ValidationDomain of
 	// subdomain.example.com , ACM sends email to the domain registrant, technical
 	// contact, and administrative contact in WHOIS and the following five addresses:
+	//
 	//   - admin@subdomain.example.com
+	//
 	//   - administrator@subdomain.example.com
+	//
 	//   - hostmaster@subdomain.example.com
+	//
 	//   - postmaster@subdomain.example.com
+	//
 	//   - webmaster@subdomain.example.com
 	//
 	// This member is required.

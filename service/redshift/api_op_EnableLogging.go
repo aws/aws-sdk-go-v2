@@ -31,15 +31,19 @@ func (c *Client) EnableLogging(ctx context.Context, params *EnableLoggingInput, 
 
 type EnableLoggingInput struct {
 
-	// The identifier of the cluster on which logging is to be started. Example:
-	// examplecluster
+	// The identifier of the cluster on which logging is to be started.
+	//
+	// Example: examplecluster
 	//
 	// This member is required.
 	ClusterIdentifier *string
 
 	// The name of an existing S3 bucket where the log files are to be stored.
+	//
 	// Constraints:
+	//
 	//   - Must be in the same region as the cluster
+	//
 	//   - The cluster must have read bucket and put object permissions
 	BucketName *string
 
@@ -50,14 +54,23 @@ type EnableLoggingInput struct {
 	// useractivitylog , and userlog .
 	LogExports []string
 
-	// The prefix applied to the log file names. Constraints:
+	// The prefix applied to the log file names.
+	//
+	// Constraints:
+	//
 	//   - Cannot exceed 512 characters
+	//
 	//   - Cannot contain spaces( ), double quotes ("), single quotes ('), a backslash
 	//   (\), or control characters. The hexadecimal codes for invalid characters are:
+	//
 	//   - x00 to x20
+	//
 	//   - x22
+	//
 	//   - x27
+	//
 	//   - x5c
+	//
 	//   - x7f or larger
 	S3KeyPrefix *string
 

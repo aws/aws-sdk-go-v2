@@ -29,10 +29,10 @@ func (c *Client) GetDelegations(ctx context.Context, params *GetDelegationsInput
 
 type GetDelegationsInput struct {
 
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	MaxResults *int32
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -40,10 +40,10 @@ type GetDelegationsInput struct {
 
 type GetDelegationsOutput struct {
 
-	// The list of delegations that the GetDelegations API returned.
+	//  The list of delegations that the GetDelegations API returned.
 	Delegations []types.DelegationMetadata
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -138,7 +138,7 @@ var _ GetDelegationsAPIClient = (*Client)(nil)
 
 // GetDelegationsPaginatorOptions is the paginator options for GetDelegations
 type GetDelegationsPaginatorOptions struct {
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

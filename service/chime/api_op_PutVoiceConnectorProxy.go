@@ -12,15 +12,19 @@ import (
 )
 
 // Puts the specified proxy configuration to the specified Amazon Chime Voice
-// Connector. This API is is no longer supported and will not be updated. We
-// recommend using the latest version, PutVoiceConnectorProxy (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorProxy.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// Connector.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [PutVoiceConnectorProxy], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by PutVoiceConnectorProxy in the Amazon Chime SDK Voice
 // Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [PutVoiceConnectorProxy]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorProxy.html
 func (c *Client) PutVoiceConnectorProxy(ctx context.Context, params *PutVoiceConnectorProxyInput, optFns ...func(*Options)) (*PutVoiceConnectorProxyOutput, error) {
 	if params == nil {
 		params = &PutVoiceConnectorProxyInput{}

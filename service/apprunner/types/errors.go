@@ -114,9 +114,12 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // App Runner can't create this resource. You've reached your account quota for
-// this resource type. For App Runner per-resource quotas, see App Runner
-// endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/apprunner.html)
-// in the Amazon Web Services General Reference.
+// this resource type.
+//
+// For App Runner per-resource quotas, see [App Runner endpoints and quotas] in the Amazon Web Services General
+// Reference.
+//
+// [App Runner endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/apprunner.html
 type ServiceQuotaExceededException struct {
 	Message *string
 

@@ -13,27 +13,40 @@ import (
 
 // This operation assigns a feature variation to one given user session. You pass
 // in an entityID that represents the user. Evidently then checks the evaluation
-// rules and assigns the variation. The first rules that are evaluated are the
-// override rules. If the user's entityID matches an override rule, the user is
-// served the variation specified by that rule. If there is a current launch with
-// this feature that uses segment overrides, and if the user session's
-// evaluationContext matches a segment rule defined in a segment override, the
-// configuration in the segment overrides is used. For more information about
-// segments, see CreateSegment (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html)
-// and Use segments to focus your audience (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html)
-// . If there is a launch with no segment overrides, the user might be assigned to
-// a variation in the launch. The chance of this depends on the percentage of users
+// rules and assigns the variation.
+//
+// The first rules that are evaluated are the override rules. If the user's
+// entityID matches an override rule, the user is served the variation specified by
+// that rule.
+//
+// If there is a current launch with this feature that uses segment overrides, and
+// if the user session's evaluationContext matches a segment rule defined in a
+// segment override, the configuration in the segment overrides is used. For more
+// information about segments, see [CreateSegment]and [Use segments to focus your audience].
+//
+// If there is a launch with no segment overrides, the user might be assigned to a
+// variation in the launch. The chance of this depends on the percentage of users
 // that are allocated to that launch. If the user is enrolled in the launch, the
 // variation they are served depends on the allocation of the various feature
-// variations used for the launch. If the user is not assigned to a launch, and
-// there is an ongoing experiment for this feature, the user might be assigned to a
-// variation in the experiment. The chance of this depends on the percentage of
-// users that are allocated to that experiment. If the experiment uses a segment,
-// then only user sessions with evaluationContext values that match the segment
-// rule are used in the experiment. If the user is enrolled in the experiment, the
-// variation they are served depends on the allocation of the various feature
-// variations used for the experiment. If the user is not assigned to a launch or
-// experiment, they are served the default variation.
+// variations used for the launch.
+//
+// If the user is not assigned to a launch, and there is an ongoing experiment for
+// this feature, the user might be assigned to a variation in the experiment. The
+// chance of this depends on the percentage of users that are allocated to that
+// experiment.
+//
+// If the experiment uses a segment, then only user sessions with evaluationContext
+// values that match the segment rule are used in the experiment.
+//
+// If the user is enrolled in the experiment, the variation they are served
+// depends on the allocation of the various feature variations used for the
+// experiment.
+//
+// If the user is not assigned to a launch or experiment, they are served the
+// default variation.
+//
+// [Use segments to focus your audience]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html
+// [CreateSegment]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html
 func (c *Client) EvaluateFeature(ctx context.Context, params *EvaluateFeatureInput, optFns ...func(*Options)) (*EvaluateFeatureOutput, error) {
 	if params == nil {
 		params = &EvaluateFeatureInput{}
@@ -70,9 +83,12 @@ type EvaluateFeatureInput struct {
 	// A JSON object of attributes that you can optionally pass in as part of the
 	// evaluation event sent to Evidently from the user session. Evidently can use this
 	// value to match user sessions with defined audience segments. For more
-	// information, see Use segments to focus your audience (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html)
-	// . If you include this parameter, the value must be a JSON object. A JSON array
-	// is not supported.
+	// information, see [Use segments to focus your audience].
+	//
+	// If you include this parameter, the value must be a JSON object. A JSON array is
+	// not supported.
+	//
+	// [Use segments to focus your audience]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html
 	//
 	// This value conforms to the media type: application/json
 	EvaluationContext *string

@@ -30,7 +30,7 @@ func (c *Client) GetDecoderManifest(ctx context.Context, params *GetDecoderManif
 
 type GetDecoderManifestInput struct {
 
-	// The name of the decoder manifest to retrieve information about.
+	//  The name of the decoder manifest to retrieve information about.
 	//
 	// This member is required.
 	Name *string
@@ -40,40 +40,40 @@ type GetDecoderManifestInput struct {
 
 type GetDecoderManifestOutput struct {
 
-	// The Amazon Resource Name (ARN) of the decoder manifest.
+	//  The Amazon Resource Name (ARN) of the decoder manifest.
 	//
 	// This member is required.
 	Arn *string
 
-	// The time the decoder manifest was created in seconds since epoch (January 1,
+	//  The time the decoder manifest was created in seconds since epoch (January 1,
 	// 1970 at midnight UTC time).
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// The time the decoder manifest was last updated in seconds since epoch (January
+	//  The time the decoder manifest was last updated in seconds since epoch (January
 	// 1, 1970 at midnight UTC time).
 	//
 	// This member is required.
 	LastModificationTime *time.Time
 
-	// The name of the decoder manifest.
+	//  The name of the decoder manifest.
 	//
 	// This member is required.
 	Name *string
 
-	// A brief description of the decoder manifest.
+	//  A brief description of the decoder manifest.
 	Description *string
 
 	// The detailed message for the decoder manifest. When a decoder manifest is in an
 	// INVALID status, the message contains detailed reason and help information.
 	Message *string
 
-	// The ARN of a vehicle model (model manifest) associated with the decoder
+	//  The ARN of a vehicle model (model manifest) associated with the decoder
 	// manifest.
 	ModelManifestArn *string
 
-	// The state of the decoder manifest. If the status is ACTIVE , the decoder
+	//  The state of the decoder manifest. If the status is ACTIVE , the decoder
 	// manifest can't be edited. If the status is marked DRAFT , you can edit the
 	// decoder manifest.
 	Status types.ManifestStatus

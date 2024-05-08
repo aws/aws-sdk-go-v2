@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the name of the delegated Amazon Web Services administrator account for a
+//	Gets the name of the delegated Amazon Web Services administrator account for a
+//
 // specified organization.
 func (c *Client) GetOrganizationAdminAccount(ctx context.Context, params *GetOrganizationAdminAccountInput, optFns ...func(*Options)) (*GetOrganizationAdminAccountOutput, error) {
 	if params == nil {
@@ -33,10 +34,10 @@ type GetOrganizationAdminAccountInput struct {
 
 type GetOrganizationAdminAccountOutput struct {
 
-	// The identifier for the administrator account.
+	//  The identifier for the administrator account.
 	AdminAccountId *string
 
-	// The identifier for the organization.
+	//  The identifier for the organization.
 	OrganizationId *string
 
 	// Metadata pertaining to the operation's result.

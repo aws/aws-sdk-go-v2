@@ -30,15 +30,18 @@ func (c *Client) CreateIntegrationAssociation(ctx context.Context, params *Creat
 
 type CreateIntegrationAssociationInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The Amazon Resource Name (ARN) of the integration. When integrating with Amazon
-	// Pinpoint, the Amazon Connect and Amazon Pinpoint instances must be in the same
-	// account.
+	// The Amazon Resource Name (ARN) of the integration.
+	//
+	// When integrating with Amazon Pinpoint, the Amazon Connect and Amazon Pinpoint
+	// instances must be in the same account.
 	//
 	// This member is required.
 	IntegrationArn *string

@@ -13,8 +13,9 @@ const (
 )
 
 // Values returns all known values for CloudWatchEventSource. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CloudWatchEventSource) Values() []CloudWatchEventSource {
 	return []CloudWatchEventSource{
 		"EC2",
@@ -36,8 +37,9 @@ const (
 
 // Values returns all known values for ConfigurationEventResourceType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigurationEventResourceType) Values() []ConfigurationEventResourceType {
 	return []ConfigurationEventResourceType{
 		"CLOUDWATCH_ALARM",
@@ -58,6 +60,7 @@ const (
 
 // Values returns all known values for ConfigurationEventStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigurationEventStatus) Values() []ConfigurationEventStatus {
 	return []ConfigurationEventStatus{
@@ -76,8 +79,9 @@ const (
 )
 
 // Values returns all known values for DiscoveryType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DiscoveryType) Values() []DiscoveryType {
 	return []DiscoveryType{
 		"RESOURCE_GROUP_BASED",
@@ -93,8 +97,9 @@ const (
 )
 
 // Values returns all known values for FeedbackKey. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FeedbackKey) Values() []FeedbackKey {
 	return []FeedbackKey{
 		"INSIGHTS_FEEDBACK",
@@ -111,8 +116,9 @@ const (
 )
 
 // Values returns all known values for FeedbackValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FeedbackValue) Values() []FeedbackValue {
 	return []FeedbackValue{
 		"NOT_SPECIFIED",
@@ -129,8 +135,9 @@ const (
 )
 
 // Values returns all known values for GroupingType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GroupingType) Values() []GroupingType {
 	return []GroupingType{
 		"ACCOUNT_BASED",
@@ -147,8 +154,9 @@ const (
 )
 
 // Values returns all known values for LogFilter. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LogFilter) Values() []LogFilter {
 	return []LogFilter{
 		"ERROR",
@@ -166,8 +174,9 @@ const (
 )
 
 // Values returns all known values for OsType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OsType) Values() []OsType {
 	return []OsType{
 		"WINDOWS",
@@ -185,8 +194,9 @@ const (
 )
 
 // Values returns all known values for RecommendationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationType) Values() []RecommendationType {
 	return []RecommendationType{
 		"INFRA_ONLY",
@@ -205,8 +215,9 @@ const (
 )
 
 // Values returns all known values for ResolutionMethod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolutionMethod) Values() []ResolutionMethod {
 	return []ResolutionMethod{
 		"MANUAL",
@@ -226,8 +237,9 @@ const (
 )
 
 // Values returns all known values for SeverityLevel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SeverityLevel) Values() []SeverityLevel {
 	return []SeverityLevel{
 		"Informative",
@@ -249,8 +261,9 @@ const (
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Status) Values() []Status {
 	return []Status{
 		"IGNORE",
@@ -289,8 +302,9 @@ const (
 )
 
 // Values returns all known values for Tier. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Tier) Values() []Tier {
 	return []Tier{
 		"CUSTOM",
@@ -325,8 +339,9 @@ const (
 )
 
 // Values returns all known values for UpdateStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateStatus) Values() []UpdateStatus {
 	return []UpdateStatus{
 		"RESOLVED",
@@ -342,8 +357,9 @@ const (
 )
 
 // Values returns all known values for Visibility. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Visibility) Values() []Visibility {
 	return []Visibility{
 		"IGNORED",

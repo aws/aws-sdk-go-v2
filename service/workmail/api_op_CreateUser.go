@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a user who can be used in WorkMail by calling the RegisterToWorkMail
-// operation.
+// Creates a user who can be used in WorkMail by calling the RegisterToWorkMail operation.
 func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns ...func(*Options)) (*CreateUserOutput, error) {
 	if params == nil {
 		params = &CreateUserInput{}
@@ -58,9 +57,10 @@ type CreateUserInput struct {
 	// The password for the new user.
 	Password *string
 
-	// The role of the new user. You cannot pass SYSTEM_USER or RESOURCE role in a
-	// single request. When a user role is not selected, the default role of USER is
-	// selected.
+	// The role of the new user.
+	//
+	// You cannot pass SYSTEM_USER or RESOURCE role in a single request. When a user
+	// role is not selected, the default role of USER is selected.
 	Role types.UserRole
 
 	noSmithyDocumentSerde

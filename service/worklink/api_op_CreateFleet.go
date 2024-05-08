@@ -45,7 +45,7 @@ type CreateFleetInput struct {
 	// closest AWS Region to users, which may be outside of your home Region.
 	OptimizeForEndUserLocation *bool
 
-	// The tags to add to the resource. A tag is a key-value pair.
+	//  The tags to add to the resource. A tag is a key-value pair.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

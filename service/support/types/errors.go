@@ -192,8 +192,8 @@ func (e *CaseIdNotFound) ErrorCode() string {
 }
 func (e *CaseIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The limit for the number of DescribeAttachment requests in a short period of
-// time has been exceeded.
+// The limit for the number of DescribeAttachment requests in a short period of time has been
+// exceeded.
 type DescribeAttachmentLimitExceeded struct {
 	Message *string
 
@@ -245,7 +245,8 @@ func (e *InternalServerError) ErrorCode() string {
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// You have exceeded the maximum allowed TPS (Transactions Per Second) for the
+//	You have exceeded the maximum allowed TPS (Transactions Per Second) for the
+//
 // operations.
 type ThrottlingException struct {
 	Message *string

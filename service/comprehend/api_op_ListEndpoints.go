@@ -12,8 +12,9 @@ import (
 )
 
 // Gets a list of all existing endpoints that you've created. For information
-// about endpoints, see Managing endpoints (https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html)
-// .
+// about endpoints, see [Managing endpoints].
+//
+// [Managing endpoints]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
 func (c *Client) ListEndpoints(ctx context.Context, params *ListEndpointsInput, optFns ...func(*Options)) (*ListEndpointsOutput, error) {
 	if params == nil {
 		params = &ListEndpointsInput{}

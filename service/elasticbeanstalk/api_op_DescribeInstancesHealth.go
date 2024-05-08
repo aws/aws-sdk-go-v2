@@ -13,8 +13,9 @@ import (
 )
 
 // Retrieves detailed information about the health of instances in your AWS
-// Elastic Beanstalk. This operation requires enhanced health reporting (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html)
-// .
+// Elastic Beanstalk. This operation requires [enhanced health reporting].
+//
+// [enhanced health reporting]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html
 func (c *Client) DescribeInstancesHealth(ctx context.Context, params *DescribeInstancesHealthInput, optFns ...func(*Options)) (*DescribeInstancesHealthOutput, error) {
 	if params == nil {
 		params = &DescribeInstancesHealthInput{}
@@ -54,9 +55,10 @@ type DescribeInstancesHealthInput struct {
 // Beanstalk environment.
 type DescribeInstancesHealthOutput struct {
 
-	// Detailed health information about each instance. The output differs slightly
-	// between Linux and Windows environments. There is a difference in the members
-	// that are supported under the type.
+	// Detailed health information about each instance.
+	//
+	// The output differs slightly between Linux and Windows environments. There is a
+	// difference in the members that are supported under the type.
 	InstanceHealthList []types.SingleInstanceHealth
 
 	// Pagination token for the next page of results, if available.

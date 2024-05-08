@@ -12,8 +12,10 @@ import (
 )
 
 // Returns the list of bundles that are available in Amazon Lightsail. A bundle
-// describes the performance specifications for a database. You can use a bundle ID
-// to create a new database with explicit performance specifications.
+// describes the performance specifications for a database.
+//
+// You can use a bundle ID to create a new database with explicit performance
+// specifications.
 func (c *Client) GetRelationalDatabaseBundles(ctx context.Context, params *GetRelationalDatabaseBundlesInput, optFns ...func(*Options)) (*GetRelationalDatabaseBundlesOutput, error) {
 	if params == nil {
 		params = &GetRelationalDatabaseBundlesInput{}
@@ -35,10 +37,11 @@ type GetRelationalDatabaseBundlesInput struct {
 	// bundles in the response of your request.
 	IncludeInactive *bool
 
-	// The token to advance to the next page of results from your request. To get a
-	// page token, perform an initial GetRelationalDatabaseBundles request. If your
-	// results are paginated, the response will return a next page token that you can
-	// specify as the page token in a subsequent request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetRelationalDatabaseBundles request.
+	// If your results are paginated, the response will return a next page token that
+	// you can specify as the page token in a subsequent request.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -49,10 +52,12 @@ type GetRelationalDatabaseBundlesOutput struct {
 	// An object describing the result of your get relational database bundles request.
 	Bundles []types.RelationalDatabaseBundle
 
-	// The token to advance to the next page of results from your request. A next page
-	// token is not returned if there are no more results to display. To get the next
-	// page of results, perform another GetRelationalDatabaseBundles request and
-	// specify the next page token using the pageToken parameter.
+	// The token to advance to the next page of results from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetRelationalDatabaseBundles
+	// request and specify the next page token using the pageToken parameter.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

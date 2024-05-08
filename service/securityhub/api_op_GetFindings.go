@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of findings that match the specified criteria. If finding
-// aggregation is enabled, then when you call GetFindings from the aggregation
-// Region, the results include all of the matching findings from both the
-// aggregation Region and the linked Regions.
+// Returns a list of findings that match the specified criteria.
+//
+// If finding aggregation is enabled, then when you call GetFindings from the
+// aggregation Region, the results include all of the matching findings from both
+// the aggregation Region and the linked Regions.
 func (c *Client) GetFindings(ctx context.Context, params *GetFindingsInput, optFns ...func(*Options)) (*GetFindingsOutput, error) {
 	if params == nil {
 		params = &GetFindingsInput{}
@@ -33,19 +34,23 @@ func (c *Client) GetFindings(ctx context.Context, params *GetFindingsInput, optF
 type GetFindingsInput struct {
 
 	// The finding attributes used to define a condition to filter the returned
-	// findings. You can filter by up to 10 finding attributes. For each attribute, you
-	// can provide up to 20 filter values. Note that in the available filter fields,
-	// WorkflowState is deprecated. To search for a finding based on its workflow
-	// status, use WorkflowStatus .
+	// findings.
+	//
+	// You can filter by up to 10 finding attributes. For each attribute, you can
+	// provide up to 20 filter values.
+	//
+	// Note that in the available filter fields, WorkflowState is deprecated. To
+	// search for a finding based on its workflow status, use WorkflowStatus .
 	Filters *types.AwsSecurityFindingFilters
 
 	// The maximum number of findings to return.
 	MaxResults *int32
 
 	// The token that is required for pagination. On your first call to the GetFindings
-	// operation, set the value of this parameter to NULL . For subsequent calls to the
-	// operation, to continue listing data, set the value of this parameter to the
-	// value returned from the previous response.
+	// operation, set the value of this parameter to NULL .
+	//
+	// For subsequent calls to the operation, to continue listing data, set the value
+	// of this parameter to the value returned from the previous response.
 	NextToken *string
 
 	// The finding attributes used to sort the list of returned findings.

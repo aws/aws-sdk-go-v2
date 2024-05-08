@@ -12,9 +12,11 @@ import (
 )
 
 // Lists all Security Hub membership invitations that were sent to the current
-// Amazon Web Services account. This operation is only used by accounts that are
-// managed by invitation. Accounts that are managed using the integration with
-// Organizations do not receive invitations.
+// Amazon Web Services account.
+//
+// This operation is only used by accounts that are managed by invitation.
+// Accounts that are managed using the integration with Organizations do not
+// receive invitations.
 func (c *Client) ListInvitations(ctx context.Context, params *ListInvitationsInput, optFns ...func(*Options)) (*ListInvitationsOutput, error) {
 	if params == nil {
 		params = &ListInvitationsInput{}
@@ -36,9 +38,10 @@ type ListInvitationsInput struct {
 	MaxResults *int32
 
 	// The token that is required for pagination. On your first call to the
-	// ListInvitations operation, set the value of this parameter to NULL . For
-	// subsequent calls to the operation, to continue listing data, set the value of
-	// this parameter to the value returned from the previous response.
+	// ListInvitations operation, set the value of this parameter to NULL .
+	//
+	// For subsequent calls to the operation, to continue listing data, set the value
+	// of this parameter to the value returned from the previous response.
 	NextToken *string
 
 	noSmithyDocumentSerde

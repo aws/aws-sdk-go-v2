@@ -29,21 +29,21 @@ func (c *Client) DescribeUpdateDirectory(ctx context.Context, params *DescribeUp
 
 type DescribeUpdateDirectoryInput struct {
 
-	// The unique identifier of the directory.
+	//  The unique identifier of the directory.
 	//
 	// This member is required.
 	DirectoryId *string
 
-	// The type of updates you want to describe for the directory.
+	//  The type of updates you want to describe for the directory.
 	//
 	// This member is required.
 	UpdateType types.UpdateType
 
-	// The DescribeUpdateDirectoryResult . NextToken value from a previous call to
-	// DescribeUpdateDirectory . Pass null if this is the first call.
+	//  The DescribeUpdateDirectoryResult . NextToken value from a previous call to DescribeUpdateDirectory.
+	// Pass null if this is the first call.
 	NextToken *string
 
-	// The name of the Region.
+	//  The name of the Region.
 	RegionName *string
 
 	noSmithyDocumentSerde
@@ -51,11 +51,11 @@ type DescribeUpdateDirectoryInput struct {
 
 type DescribeUpdateDirectoryOutput struct {
 
-	// If not null, more results are available. Pass this value for the NextToken
+	//  If not null, more results are available. Pass this value for the NextToken
 	// parameter.
 	NextToken *string
 
-	// The list of update activities on a directory for the requested update type.
+	//  The list of update activities on a directory for the requested update type.
 	UpdateActivities []types.UpdateInfoEntry
 
 	// Metadata pertaining to the operation's result.

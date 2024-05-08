@@ -13,8 +13,7 @@ import (
 // Designates the specified version number as the default version for the
 // specified customer managed permission. New resource shares automatically use
 // this new default permission. Existing resource shares continue to use their
-// original permission version, but you can use ReplacePermissionAssociations to
-// update them.
+// original permission version, but you can use ReplacePermissionAssociationsto update them.
 func (c *Client) SetDefaultPermissionVersion(ctx context.Context, params *SetDefaultPermissionVersionInput, optFns ...func(*Options)) (*SetDefaultPermissionVersionOutput, error) {
 	if params == nil {
 		params = &SetDefaultPermissionVersionInput{}
@@ -32,15 +31,17 @@ func (c *Client) SetDefaultPermissionVersion(ctx context.Context, params *SetDef
 
 type SetDefaultPermissionVersionInput struct {
 
-	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the customer managed permission whose default version you want to change.
+	// Specifies the [Amazon Resource Name (ARN)] of the customer managed permission whose default version you
+	// want to change.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	PermissionArn *string
 
 	// Specifies the version number that you want to designate as the default for
 	// customer managed permission. To see a list of all available version numbers, use
-	// ListPermissionVersions .
+	// ListPermissionVersions.
 	//
 	// This member is required.
 	PermissionVersion *int32
@@ -49,10 +50,15 @@ type SetDefaultPermissionVersionInput struct {
 	// idempotency of the request. This lets you safely retry the request without
 	// accidentally performing the same operation a second time. Passing the same value
 	// to a later call to an operation requires that you also pass the same value for
-	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
-	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you. If you retry the operation with the same ClientToken , but with
-	// different parameters, the retry fails with an IdempotentParameterMismatch error.
+	// all other parameters. We recommend that you use a [UUID type of value.].
+	//
+	// If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
+	//
+	// If you retry the operation with the same ClientToken , but with different
+	// parameters, the retry fails with an IdempotentParameterMismatch error.
+	//
+	// [UUID type of value.]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientToken *string
 
 	noSmithyDocumentSerde

@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for AnomalySeverity. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnomalySeverity) Values() []AnomalySeverity {
 	return []AnomalySeverity{
 		"LOW",
@@ -31,8 +32,9 @@ const (
 )
 
 // Values returns all known values for AnomalyStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnomalyStatus) Values() []AnomalyStatus {
 	return []AnomalyStatus{
 		"ONGOING",
@@ -49,8 +51,9 @@ const (
 )
 
 // Values returns all known values for AnomalyType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnomalyType) Values() []AnomalyType {
 	return []AnomalyType{
 		"CAUSAL",
@@ -69,8 +72,9 @@ const (
 
 // Values returns all known values for CloudWatchMetricDataStatusCode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CloudWatchMetricDataStatusCode) Values() []CloudWatchMetricDataStatusCode {
 	return []CloudWatchMetricDataStatusCode{
 		"Complete",
@@ -94,8 +98,9 @@ const (
 )
 
 // Values returns all known values for CloudWatchMetricsStat. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CloudWatchMetricsStat) Values() []CloudWatchMetricsStat {
 	return []CloudWatchMetricsStat{
 		"Sum",
@@ -119,8 +124,9 @@ const (
 
 // Values returns all known values for CostEstimationServiceResourceState. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CostEstimationServiceResourceState) Values() []CostEstimationServiceResourceState {
 	return []CostEstimationServiceResourceState{
 		"ACTIVE",
@@ -137,8 +143,9 @@ const (
 )
 
 // Values returns all known values for CostEstimationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CostEstimationStatus) Values() []CostEstimationStatus {
 	return []CostEstimationStatus{
 		"ONGOING",
@@ -158,8 +165,9 @@ const (
 )
 
 // Values returns all known values for EventClass. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventClass) Values() []EventClass {
 	return []EventClass{
 		"INFRASTRUCTURE",
@@ -179,8 +187,9 @@ const (
 )
 
 // Values returns all known values for EventDataSource. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventDataSource) Values() []EventDataSource {
 	return []EventDataSource{
 		"AWS_CLOUD_TRAIL",
@@ -197,8 +206,9 @@ const (
 )
 
 // Values returns all known values for EventSourceOptInStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventSourceOptInStatus) Values() []EventSourceOptInStatus {
 	return []EventSourceOptInStatus{
 		"ENABLED",
@@ -218,8 +228,9 @@ const (
 )
 
 // Values returns all known values for InsightFeedbackOption. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InsightFeedbackOption) Values() []InsightFeedbackOption {
 	return []InsightFeedbackOption{
 		"VALID_COLLECTION",
@@ -240,8 +251,9 @@ const (
 )
 
 // Values returns all known values for InsightSeverity. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InsightSeverity) Values() []InsightSeverity {
 	return []InsightSeverity{
 		"LOW",
@@ -259,8 +271,9 @@ const (
 )
 
 // Values returns all known values for InsightStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InsightStatus) Values() []InsightStatus {
 	return []InsightStatus{
 		"ONGOING",
@@ -277,8 +290,9 @@ const (
 )
 
 // Values returns all known values for InsightType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InsightType) Values() []InsightType {
 	return []InsightType{
 		"REACTIVE",
@@ -304,8 +318,9 @@ const (
 )
 
 // Values returns all known values for Locale. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Locale) Values() []Locale {
 	return []Locale{
 		"DE_DE",
@@ -337,8 +352,9 @@ const (
 )
 
 // Values returns all known values for LogAnomalyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LogAnomalyType) Values() []LogAnomalyType {
 	return []LogAnomalyType{
 		"KEYWORD",
@@ -364,8 +380,9 @@ const (
 )
 
 // Values returns all known values for NotificationMessageType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationMessageType) Values() []NotificationMessageType {
 	return []NotificationMessageType{
 		"NEW_INSIGHT",
@@ -385,8 +402,9 @@ const (
 )
 
 // Values returns all known values for OptInStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OptInStatus) Values() []OptInStatus {
 	return []OptInStatus{
 		"ENABLED",
@@ -406,8 +424,9 @@ const (
 
 // Values returns all known values for OrganizationResourceCollectionType. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrganizationResourceCollectionType) Values() []OrganizationResourceCollectionType {
 	return []OrganizationResourceCollectionType{
 		"AWS_CLOUD_FORMATION",
@@ -427,8 +446,9 @@ const (
 )
 
 // Values returns all known values for ResourceCollectionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceCollectionType) Values() []ResourceCollectionType {
 	return []ResourceCollectionType{
 		"AWS_CLOUD_FORMATION",
@@ -446,8 +466,9 @@ const (
 )
 
 // Values returns all known values for ResourcePermission. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourcePermission) Values() []ResourcePermission {
 	return []ResourcePermission{
 		"FULL_PERMISSION",
@@ -489,8 +510,9 @@ const (
 )
 
 // Values returns all known values for ResourceTypeFilter. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceTypeFilter) Values() []ResourceTypeFilter {
 	return []ResourceTypeFilter{
 		"LOG_GROUPS",
@@ -533,6 +555,7 @@ const (
 
 // Values returns all known values for ServerSideEncryptionType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ServerSideEncryptionType) Values() []ServerSideEncryptionType {
 	return []ServerSideEncryptionType{
@@ -573,8 +596,9 @@ const (
 )
 
 // Values returns all known values for ServiceName. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceName) Values() []ServiceName {
 	return []ServiceName{
 		"API_GATEWAY",
@@ -615,8 +639,9 @@ const (
 
 // Values returns all known values for UpdateResourceCollectionAction. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateResourceCollectionAction) Values() []UpdateResourceCollectionAction {
 	return []UpdateResourceCollectionAction{
 		"ADD",
@@ -638,6 +663,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

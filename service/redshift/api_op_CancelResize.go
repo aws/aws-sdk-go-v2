@@ -59,16 +59,19 @@ type CancelResizeOutput struct {
 	// complete, this value will be 0.
 	EstimatedTimeToCompletionInSeconds *int64
 
-	// The names of tables that have been completely imported . Valid Values: List of
-	// table names.
+	// The names of tables that have been completely imported .
+	//
+	// Valid Values: List of table names.
 	ImportTablesCompleted []string
 
-	// The names of tables that are being currently imported. Valid Values: List of
-	// table names.
+	// The names of tables that are being currently imported.
+	//
+	// Valid Values: List of table names.
 	ImportTablesInProgress []string
 
-	// The names of tables that have not been yet imported. Valid Values: List of
-	// table names
+	// The names of tables that have not been yet imported.
+	//
+	// Valid Values: List of table names
 	ImportTablesNotStarted []string
 
 	// An optional string to provide additional details about the resize action.
@@ -85,16 +88,19 @@ type CancelResizeOutput struct {
 	// describe the type of resize operation being performed.
 	ResizeType *string
 
-	// The status of the resize operation. Valid Values: NONE | IN_PROGRESS | FAILED |
-	// SUCCEEDED | CANCELLING
+	// The status of the resize operation.
+	//
+	// Valid Values: NONE | IN_PROGRESS | FAILED | SUCCEEDED | CANCELLING
 	Status *string
 
-	// The cluster type after the resize operation is complete. Valid Values:
-	// multi-node | single-node
+	// The cluster type after the resize operation is complete.
+	//
+	// Valid Values: multi-node | single-node
 	TargetClusterType *string
 
-	// The type of encryption for the cluster after the resize is complete. Possible
-	// values are KMS and None .
+	// The type of encryption for the cluster after the resize is complete.
+	//
+	// Possible values are KMS and None .
 	TargetEncryptionType *string
 
 	// The node type that the cluster will have after the resize operation is complete.

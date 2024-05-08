@@ -17,12 +17,14 @@ import (
 // message to a mobile app or by the Subscribe action for subscription to a topic.
 // The CreatePlatformEndpoint action is idempotent, so if the requester already
 // owns an endpoint with the same device token and attributes, that endpoint's ARN
-// is returned without creating a new endpoint. For more information, see Using
-// Amazon SNS Mobile Push Notifications (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html)
-// . When using CreatePlatformEndpoint with Baidu, two attributes must be
-// provided: ChannelId and UserId. The token field must also contain the ChannelId.
-// For more information, see Creating an Amazon SNS Endpoint for Baidu (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePushBaiduEndpoint.html)
-// .
+// is returned without creating a new endpoint. For more information, see [Using Amazon SNS Mobile Push Notifications].
+//
+// When using CreatePlatformEndpoint with Baidu, two attributes must be provided:
+// ChannelId and UserId. The token field must also contain the ChannelId. For more
+// information, see [Creating an Amazon SNS Endpoint for Baidu].
+//
+// [Creating an Amazon SNS Endpoint for Baidu]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePushBaiduEndpoint.html
+// [Using Amazon SNS Mobile Push Notifications]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
 func (c *Client) CreatePlatformEndpoint(ctx context.Context, params *CreatePlatformEndpointInput, optFns ...func(*Options)) (*CreatePlatformEndpointOutput, error) {
 	if params == nil {
 		params = &CreatePlatformEndpointInput{}
@@ -56,8 +58,9 @@ type CreatePlatformEndpointInput struct {
 	// This member is required.
 	Token *string
 
-	// For a list of attributes, see SetEndpointAttributes (https://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html)
-	// .
+	// For a list of attributes, see [SetEndpointAttributes]SetEndpointAttributes .
+	//
+	// [SetEndpointAttributes]: https://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html
 	Attributes map[string]string
 
 	// Arbitrary user data to associate with the endpoint. Amazon SNS does not use

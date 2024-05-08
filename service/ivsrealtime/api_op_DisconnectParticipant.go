@@ -30,7 +30,7 @@ func (c *Client) DisconnectParticipant(ctx context.Context, params *DisconnectPa
 type DisconnectParticipantInput struct {
 
 	// Identifier of the participant to be disconnected. This is assigned by IVS and
-	// returned by CreateParticipantToken .
+	// returned by CreateParticipantToken.
 	//
 	// This member is required.
 	ParticipantId *string

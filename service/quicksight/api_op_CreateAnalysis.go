@@ -47,9 +47,13 @@ type CreateAnalysisInput struct {
 	// This member is required.
 	Name *string
 
-	// The definition of an analysis. A definition is the data model of all features
-	// in a Dashboard, Template, or Analysis. Either a SourceEntity or a Definition
-	// must be provided in order for the request to be valid.
+	// The definition of an analysis.
+	//
+	// A definition is the data model of all features in a Dashboard, Template, or
+	// Analysis.
+	//
+	// Either a SourceEntity or a Definition must be provided in order for the request
+	// to be valid.
 	Definition *types.AnalysisDefinition
 
 	// When you create the analysis, Amazon QuickSight adds the analysis to these
@@ -63,14 +67,17 @@ type CreateAnalysisInput struct {
 	// A structure that describes the principals and the resource-level permissions on
 	// an analysis. You can use the Permissions structure to grant permissions by
 	// providing a list of Identity and Access Management (IAM) action information for
-	// each principal listed by Amazon Resource Name (ARN). To specify no permissions,
-	// omit Permissions .
+	// each principal listed by Amazon Resource Name (ARN).
+	//
+	// To specify no permissions, omit Permissions .
 	Permissions []types.ResourcePermission
 
 	// A source entity to use for the analysis that you're creating. This metadata
 	// structure contains details that describe a source template and one or more
-	// datasets. Either a SourceEntity or a Definition must be provided in order for
-	// the request to be valid.
+	// datasets.
+	//
+	// Either a SourceEntity or a Definition must be provided in order for the request
+	// to be valid.
 	SourceEntity *types.AnalysisSourceEntity
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to

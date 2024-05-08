@@ -37,7 +37,9 @@ type DescribeAgentsInput struct {
 	AgentIds []string
 
 	// You can filter the request using various logical operators and a key-value
-	// format. For example: {"key": "collectionStatus", "value": "STARTED"}
+	// format. For example:
+	//
+	//     {"key": "collectionStatus", "value": "STARTED"}
 	Filters []types.Filter
 
 	// The total number of agents/collectors to return in a single page of output. The

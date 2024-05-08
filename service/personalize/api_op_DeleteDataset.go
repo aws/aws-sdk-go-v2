@@ -12,8 +12,9 @@ import (
 
 // Deletes a dataset. You can't delete a dataset if an associated DatasetImportJob
 // or SolutionVersion is in the CREATE PENDING or IN PROGRESS state. For more
-// information on datasets, see CreateDataset (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html)
-// .
+// information on datasets, see [CreateDataset].
+//
+// [CreateDataset]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html
 func (c *Client) DeleteDataset(ctx context.Context, params *DeleteDatasetInput, optFns ...func(*Options)) (*DeleteDatasetOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetInput{}

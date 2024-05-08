@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for ChecksumType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChecksumType) Values() []ChecksumType {
 	return []ChecksumType{
 		"SHA1",
@@ -27,8 +28,9 @@ const (
 )
 
 // Values returns all known values for DeploymentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentStatus) Values() []DeploymentStatus {
 	return []DeploymentStatus{
 		"SUCCESS",
@@ -44,8 +46,9 @@ const (
 )
 
 // Values returns all known values for DeploymentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentType) Values() []DeploymentType {
 	return []DeploymentType{
 		"Model",
@@ -61,8 +64,9 @@ const (
 )
 
 // Values returns all known values for FailureHandlingPolicy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FailureHandlingPolicy) Values() []FailureHandlingPolicy {
 	return []FailureHandlingPolicy{
 		"ROLLBACK_ON_FAILURE",
@@ -79,8 +83,9 @@ const (
 )
 
 // Values returns all known values for ModelState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelState) Values() []ModelState {
 	return []ModelState{
 		"DEPLOY",

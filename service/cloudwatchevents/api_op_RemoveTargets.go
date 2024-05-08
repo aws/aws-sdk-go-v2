@@ -12,12 +12,15 @@ import (
 )
 
 // Removes the specified targets from the specified rule. When the rule is
-// triggered, those targets are no longer be invoked. When you remove a target,
-// when the associated rule triggers, removed targets might continue to be invoked.
-// Allow a short period of time for changes to take effect. This action can
-// partially fail if too many requests are made at the same time. If that happens,
-// FailedEntryCount is non-zero in the response and each entry in FailedEntries
-// provides the ID of the failed target and the error code.
+// triggered, those targets are no longer be invoked.
+//
+// When you remove a target, when the associated rule triggers, removed targets
+// might continue to be invoked. Allow a short period of time for changes to take
+// effect.
+//
+// This action can partially fail if too many requests are made at the same time.
+// If that happens, FailedEntryCount is non-zero in the response and each entry in
+// FailedEntries provides the ID of the failed target and the error code.
 func (c *Client) RemoveTargets(ctx context.Context, params *RemoveTargetsInput, optFns ...func(*Options)) (*RemoveTargetsOutput, error) {
 	if params == nil {
 		params = &RemoveTargetsInput{}

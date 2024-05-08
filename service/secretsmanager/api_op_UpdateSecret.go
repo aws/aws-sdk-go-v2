@@ -11,37 +11,47 @@ import (
 )
 
 // Modifies the details of a secret, including metadata and the secret value. To
-// change the secret value, you can also use PutSecretValue . To change the
-// rotation configuration of a secret, use RotateSecret instead. To change a
-// secret so that it is managed by another service, you need to recreate the secret
-// in that service. See Secrets Manager secrets managed by other Amazon Web
-// Services services (https://docs.aws.amazon.com/secretsmanager/latest/userguide/service-linked-secrets.html)
-// . We recommend you avoid calling UpdateSecret at a sustained rate of more than
+// change the secret value, you can also use PutSecretValue.
+//
+// To change the rotation configuration of a secret, use RotateSecret instead.
+//
+// To change a secret so that it is managed by another service, you need to
+// recreate the secret in that service. See [Secrets Manager secrets managed by other Amazon Web Services services].
+//
+// We recommend you avoid calling UpdateSecret at a sustained rate of more than
 // once every 10 minutes. When you call UpdateSecret to update the secret value,
 // Secrets Manager creates a new version of the secret. Secrets Manager removes
 // outdated versions when there are more than 100, but it does not remove versions
 // created less than 24 hours ago. If you update the secret value more than once
 // every 10 minutes, you create more versions than Secrets Manager removes, and you
-// will reach the quota for secret versions. If you include SecretString or
-// SecretBinary to create a new secret version, Secrets Manager automatically moves
-// the staging label AWSCURRENT to the new version. Then it attaches the label
-// AWSPREVIOUS to the version that AWSCURRENT was removed from. If you call this
-// operation with a ClientRequestToken that matches an existing version's VersionId
-// , the operation results in an error. You can't modify an existing version, you
-// can only create a new version. To remove a version, remove all staging labels
-// from it. See UpdateSecretVersionStage . Secrets Manager generates a CloudTrail
-// log entry when you call this action. Do not include sensitive information in
-// request parameters except SecretBinary or SecretString because it might be
-// logged. For more information, see Logging Secrets Manager events with CloudTrail (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html)
-// . Required permissions: secretsmanager:UpdateSecret . For more information, see
-// IAM policy actions for Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
-// and Authentication and access control in Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html)
-// . If you use a customer managed key, you must also have kms:GenerateDataKey ,
-// kms:Encrypt , and kms:Decrypt permissions on the key. If you change the KMS key
-// and you don't have kms:Encrypt permission to the new key, Secrets Manager does
-// not re-ecrypt existing secret versions with the new key. For more information,
-// see Secret encryption and decryption (https://docs.aws.amazon.com/secretsmanager/latest/userguide/security-encryption.html)
-// .
+// will reach the quota for secret versions.
+//
+// If you include SecretString or SecretBinary to create a new secret version,
+// Secrets Manager automatically moves the staging label AWSCURRENT to the new
+// version. Then it attaches the label AWSPREVIOUS to the version that AWSCURRENT
+// was removed from.
+//
+// If you call this operation with a ClientRequestToken that matches an existing
+// version's VersionId , the operation results in an error. You can't modify an
+// existing version, you can only create a new version. To remove a version, remove
+// all staging labels from it. See UpdateSecretVersionStage.
+//
+// Secrets Manager generates a CloudTrail log entry when you call this action. Do
+// not include sensitive information in request parameters except SecretBinary or
+// SecretString because it might be logged. For more information, see [Logging Secrets Manager events with CloudTrail].
+//
+// Required permissions: secretsmanager:UpdateSecret . For more information, see [IAM policy actions for Secrets Manager]
+// and [Authentication and access control in Secrets Manager]. If you use a customer managed key, you must also have kms:GenerateDataKey
+// , kms:Encrypt , and kms:Decrypt permissions on the key. If you change the KMS
+// key and you don't have kms:Encrypt permission to the new key, Secrets Manager
+// does not re-ecrypt existing secret versions with the new key. For more
+// information, see [Secret encryption and decryption].
+//
+// [Authentication and access control in Secrets Manager]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+// [Logging Secrets Manager events with CloudTrail]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
+// [Secret encryption and decryption]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/security-encryption.html
+// [Secrets Manager secrets managed by other Amazon Web Services services]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/service-linked-secrets.html
+// [IAM policy actions for Secrets Manager]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
 func (c *Client) UpdateSecret(ctx context.Context, params *UpdateSecretInput, optFns ...func(*Options)) (*UpdateSecretOutput, error) {
 	if params == nil {
 		params = &UpdateSecretInput{}
@@ -59,25 +69,34 @@ func (c *Client) UpdateSecret(ctx context.Context, params *UpdateSecretInput, op
 
 type UpdateSecretInput struct {
 
-	// The ARN or name of the secret. For an ARN, we recommend that you specify a
-	// complete ARN rather than a partial ARN. See Finding a secret from a partial ARN (https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen)
-	// .
+	// The ARN or name of the secret.
+	//
+	// For an ARN, we recommend that you specify a complete ARN rather than a partial
+	// ARN. See [Finding a secret from a partial ARN].
+	//
+	// [Finding a secret from a partial ARN]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
 	//
 	// This member is required.
 	SecretId *string
 
 	// If you include SecretString or SecretBinary , then Secrets Manager creates a new
 	// version for the secret, and this parameter specifies the unique identifier for
-	// the new version. If you use the Amazon Web Services CLI or one of the Amazon Web
-	// Services SDKs to call this operation, then you can leave this parameter empty.
-	// The CLI or SDK generates a random UUID for you and includes it as the value for
-	// this parameter in the request. If you generate a raw HTTP request to the Secrets
-	// Manager service endpoint, then you must generate a ClientRequestToken and
-	// include it in the request. This value helps ensure idempotency. Secrets Manager
-	// uses this value to prevent the accidental creation of duplicate versions if
-	// there are failures and retries during a rotation. We recommend that you generate
-	// a UUID-type (https://wikipedia.org/wiki/Universally_unique_identifier) value to
-	// ensure uniqueness of your versions within the specified secret.
+	// the new version.
+	//
+	// If you use the Amazon Web Services CLI or one of the Amazon Web Services SDKs
+	// to call this operation, then you can leave this parameter empty. The CLI or SDK
+	// generates a random UUID for you and includes it as the value for this parameter
+	// in the request.
+	//
+	// If you generate a raw HTTP request to the Secrets Manager service endpoint,
+	// then you must generate a ClientRequestToken and include it in the request.
+	//
+	// This value helps ensure idempotency. Secrets Manager uses this value to prevent
+	// the accidental creation of duplicate versions if there are failures and retries
+	// during a rotation. We recommend that you generate a [UUID-type]value to ensure uniqueness
+	// of your versions within the specified secret.
+	//
+	// [UUID-type]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientRequestToken *string
 
 	// The description of the secret.
@@ -88,32 +107,41 @@ type UpdateSecretInput struct {
 	// AWSCURRENT , AWSPENDING , or AWSPREVIOUS . If you don't have kms:Encrypt
 	// permission to the new key, Secrets Manager does not re-ecrypt existing secret
 	// versions with the new key. For more information about versions and staging
-	// labels, see Concepts: Version (https://docs.aws.amazon.com/secretsmanager/latest/userguide/getting-started.html#term_version)
-	// . A key alias is always prefixed by alias/ , for example
-	// alias/aws/secretsmanager . For more information, see About aliases (https://docs.aws.amazon.com/kms/latest/developerguide/alias-about.html)
-	// . If you set this to an empty string, Secrets Manager uses the Amazon Web
+	// labels, see [Concepts: Version].
+	//
+	// A key alias is always prefixed by alias/ , for example alias/aws/secretsmanager
+	// . For more information, see [About aliases].
+	//
+	// If you set this to an empty string, Secrets Manager uses the Amazon Web
 	// Services managed key aws/secretsmanager . If this key doesn't already exist in
 	// your account, then Secrets Manager creates it for you automatically. All users
 	// and roles in the Amazon Web Services account automatically have access to use
 	// aws/secretsmanager . Creating aws/secretsmanager can result in a one-time
-	// significant delay in returning the result. You can only use the Amazon Web
-	// Services managed key aws/secretsmanager if you call this operation using
-	// credentials from the same Amazon Web Services account that owns the secret. If
-	// the secret is in a different account, then you must use a customer managed key
-	// and provide the ARN of that KMS key in this field. The user making the call must
-	// have permissions to both the secret and the KMS key in their respective
-	// accounts.
+	// significant delay in returning the result.
+	//
+	// You can only use the Amazon Web Services managed key aws/secretsmanager if you
+	// call this operation using credentials from the same Amazon Web Services account
+	// that owns the secret. If the secret is in a different account, then you must use
+	// a customer managed key and provide the ARN of that KMS key in this field. The
+	// user making the call must have permissions to both the secret and the KMS key in
+	// their respective accounts.
+	//
+	// [Concepts: Version]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/getting-started.html#term_version
+	// [About aliases]: https://docs.aws.amazon.com/kms/latest/developerguide/alias-about.html
 	KmsKeyId *string
 
 	// The binary data to encrypt and store in the new version of the secret. We
 	// recommend that you store your binary data in a file and then pass the contents
-	// of the file as a parameter. Either SecretBinary or SecretString must have a
-	// value, but not both. You can't access this parameter in the Secrets Manager
-	// console.
+	// of the file as a parameter.
+	//
+	// Either SecretBinary or SecretString must have a value, but not both.
+	//
+	// You can't access this parameter in the Secrets Manager console.
 	SecretBinary []byte
 
 	// The text data to encrypt and store in the new version of the secret. We
 	// recommend you use a JSON structure of key/value pairs for your secret value.
+	//
 	// Either SecretBinary or SecretString must have a value, but not both.
 	SecretString *string
 

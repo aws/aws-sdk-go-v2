@@ -11,28 +11,45 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a broker. Note: This API is asynchronous. To create a broker, you must
-// either use the AmazonMQFullAccess IAM policy or include the following EC2
-// permissions in your IAM policy.
-//   - ec2:CreateNetworkInterface This permission is required to allow Amazon MQ
-//     to create an elastic network interface (ENI) on behalf of your account.
-//   - ec2:CreateNetworkInterfacePermission This permission is required to attach
-//     the ENI to the broker instance.
+// Creates a broker. Note: This API is asynchronous.
+//
+// To create a broker, you must either use the AmazonMQFullAccess IAM policy or
+// include the following EC2 permissions in your IAM policy.
+//
+//   - ec2:CreateNetworkInterface
+//
+// This permission is required to allow Amazon MQ to create an elastic network
+//
+//	interface (ENI) on behalf of your account.
+//
+//	- ec2:CreateNetworkInterfacePermission
+//
+// This permission is required to attach the ENI to the broker instance.
+//
 //   - ec2:DeleteNetworkInterface
+//
 //   - ec2:DeleteNetworkInterfacePermission
+//
 //   - ec2:DetachNetworkInterface
+//
 //   - ec2:DescribeInternetGateways
+//
 //   - ec2:DescribeNetworkInterfaces
+//
 //   - ec2:DescribeNetworkInterfacePermissions
+//
 //   - ec2:DescribeRouteTables
+//
 //   - ec2:DescribeSecurityGroups
+//
 //   - ec2:DescribeSubnets
+//
 //   - ec2:DescribeVpcs
 //
-// For more information, see Create an IAM User and Get Your Amazon Web Services
-// Credentials (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/amazon-mq-setting-up.html#create-iam-user)
-// and Never Modify or Delete the Amazon MQ Elastic Network Interface (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/connecting-to-amazon-mq.html#never-modify-delete-elastic-network-interface)
-// in the Amazon MQ Developer Guide.
+// For more information, see [Create an IAM User and Get Your Amazon Web Services Credentials] and [Never Modify or Delete the Amazon MQ Elastic Network Interface] in the Amazon MQ Developer Guide.
+//
+// [Never Modify or Delete the Amazon MQ Elastic Network Interface]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/connecting-to-amazon-mq.html#never-modify-delete-elastic-network-interface
+// [Create an IAM User and Get Your Amazon Web Services Credentials]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/amazon-mq-setting-up.html#create-iam-user
 func (c *Client) CreateBroker(ctx context.Context, params *CreateBrokerInput, optFns ...func(*Options)) (*CreateBrokerOutput, error) {
 	if params == nil {
 		params = &CreateBrokerInput{}
@@ -62,11 +79,12 @@ type CreateBrokerInput struct {
 	// Required. The broker's name. This value must be unique in your Amazon Web
 	// Services account, 1-50 characters long, must contain only letters, numbers,
 	// dashes, and underscores, and must not contain white spaces, brackets, wildcard
-	// characters, or special characters. Do not add personally identifiable
-	// information (PII) or other confidential or sensitive information in broker
-	// names. Broker names are accessible to other Amazon Web Services services,
-	// including CloudWatch Logs. Broker names are not intended to be used for private
-	// or sensitive data.
+	// characters, or special characters.
+	//
+	// Do not add personally identifiable information (PII) or other confidential or
+	// sensitive information in broker names. Broker names are accessible to other
+	// Amazon Web Services services, including CloudWatch Logs. Broker names are not
+	// intended to be used for private or sensitive data.
 	//
 	// This member is required.
 	BrokerName *string
@@ -83,8 +101,9 @@ type CreateBrokerInput struct {
 	EngineType types.EngineType
 
 	// Required. The broker engine's version. For a list of supported engine versions,
-	// see Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
-	// .
+	// see [Supported engines].
+	//
+	// [Supported engines]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
 	//
 	// This member is required.
 	EngineVersion *string
@@ -117,9 +136,11 @@ type CreateBrokerInput struct {
 	Configuration *types.ConfigurationId
 
 	// The unique ID that the requester receives for the created broker. Amazon MQ
-	// passes your ID with the API action. We recommend using a Universally Unique
-	// Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if
-	// your application doesn't require idempotency.
+	// passes your ID with the API action.
+	//
+	// We recommend using a Universally Unique Identifier (UUID) for the
+	// creatorRequestId. You may omit the creatorRequestId if your application doesn't
+	// require idempotency.
 	CreatorRequestId *string
 
 	// Defines whether this broker is a part of a data replication pair.
@@ -158,12 +179,14 @@ type CreateBrokerInput struct {
 	// example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ Amazon MQ for ActiveMQ
 	// deployment requires two subnets. A CLUSTER_MULTI_AZ Amazon MQ for RabbitMQ
 	// deployment has no subnet requirements when deployed with public accessibility.
-	// Deployment without public accessibility requires at least one subnet. If you
-	// specify subnets in a shared VPC (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html)
-	// for a RabbitMQ broker, the associated VPC to which the specified subnets belong
-	// must be owned by your Amazon Web Services account. Amazon MQ will not be able to
-	// create VPC endpoints in VPCs that are not owned by your Amazon Web Services
-	// account.
+	// Deployment without public accessibility requires at least one subnet.
+	//
+	// If you specify subnets in a [shared VPC] for a RabbitMQ broker, the associated VPC to which
+	// the specified subnets belong must be owned by your Amazon Web Services account.
+	// Amazon MQ will not be able to create VPC endpoints in VPCs that are not owned by
+	// your Amazon Web Services account.
+	//
+	// [shared VPC]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html
 	SubnetIds []string
 
 	// Create tags when creating the broker.

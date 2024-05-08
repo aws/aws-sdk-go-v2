@@ -12,11 +12,13 @@ import (
 	"time"
 )
 
-// Describes the result of an existing snapshot job that has finished running. A
-// finished snapshot job will return a COMPLETED or FAILED status when you poll
-// the job with a DescribeDashboardSnapshotJob API call. If the job has not
-// finished running, this operation returns a message that says Dashboard Snapshot
-// Job with id has not reached a terminal state. .
+// Describes the result of an existing snapshot job that has finished running.
+//
+// A finished snapshot job will return a COMPLETED or FAILED status when you poll
+// the job with a DescribeDashboardSnapshotJob API call.
+//
+// If the job has not finished running, this operation returns a message that says
+// Dashboard Snapshot Job with id has not reached a terminal state. .
 func (c *Client) DescribeDashboardSnapshotJobResult(ctx context.Context, params *DescribeDashboardSnapshotJobResultInput, optFns ...func(*Options)) (*DescribeDashboardSnapshotJobResultOutput, error) {
 	if params == nil {
 		params = &DescribeDashboardSnapshotJobResultInput{}

@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for DeletionMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeletionMode) Values() []DeletionMode {
 	return []DeletionMode{
 		"SoftDelete",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for ExpirationTimeResponse. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExpirationTimeResponse) Values() []ExpirationTimeResponse {
 	return []ExpirationTimeResponse{
 		"Enabled",
@@ -47,8 +49,9 @@ const (
 )
 
 // Values returns all known values for TargetStore. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetStore) Values() []TargetStore {
 	return []TargetStore{
 		"OnlineStore",
@@ -68,8 +71,9 @@ const (
 )
 
 // Values returns all known values for TtlDurationUnit. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TtlDurationUnit) Values() []TtlDurationUnit {
 	return []TtlDurationUnit{
 		"Seconds",

@@ -55,7 +55,7 @@ type DescribeTestSetGenerationOutput struct {
 	// The date and time of the last update for the test set generation.
 	LastUpdatedDateTime *time.Time
 
-	// The roleARN of the test set used for the test set generation.
+	//  The roleARN of the test set used for the test set generation.
 	RoleArn *string
 
 	// The Amazon S3 storage location for the test set generation.

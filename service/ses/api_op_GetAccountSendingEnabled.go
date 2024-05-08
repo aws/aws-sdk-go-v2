@@ -11,7 +11,9 @@ import (
 )
 
 // Returns the email sending status of the Amazon SES account for the current
-// Region. You can execute this operation no more than once per second.
+// Region.
+//
+// You can execute this operation no more than once per second.
 func (c *Client) GetAccountSendingEnabled(ctx context.Context, params *GetAccountSendingEnabledInput, optFns ...func(*Options)) (*GetAccountSendingEnabledOutput, error) {
 	if params == nil {
 		params = &GetAccountSendingEnabledInput{}

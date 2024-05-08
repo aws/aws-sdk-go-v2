@@ -12,9 +12,11 @@ import (
 	"time"
 )
 
-// List of Device Defender ML Detect mitigation actions tasks. Requires permission
-// to access the ListDetectMitigationActionsTasks (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//	List of Device Defender ML Detect mitigation actions tasks.
+//
+// Requires permission to access the [ListDetectMitigationActionsTasks] action.
+//
+// [ListDetectMitigationActionsTasks]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListDetectMitigationActionsTasks(ctx context.Context, params *ListDetectMitigationActionsTasksInput, optFns ...func(*Options)) (*ListDetectMitigationActionsTasksOutput, error) {
 	if params == nil {
 		params = &ListDetectMitigationActionsTasksInput{}
@@ -32,13 +34,13 @@ func (c *Client) ListDetectMitigationActionsTasks(ctx context.Context, params *L
 
 type ListDetectMitigationActionsTasksInput struct {
 
-	// The end of the time period for which ML Detect mitigation actions tasks are
+	//  The end of the time period for which ML Detect mitigation actions tasks are
 	// returned.
 	//
 	// This member is required.
 	EndTime *time.Time
 
-	// A filter to limit results to those found after the specified time. You must
+	//  A filter to limit results to those found after the specified time. You must
 	// specify either the startTime and endTime or the taskId, but not both.
 	//
 	// This member is required.
@@ -47,7 +49,7 @@ type ListDetectMitigationActionsTasksInput struct {
 	// The maximum number of results to return at one time. The default is 25.
 	MaxResults *int32
 
-	// The token for the next set of results.
+	//  The token for the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -55,11 +57,11 @@ type ListDetectMitigationActionsTasksInput struct {
 
 type ListDetectMitigationActionsTasksOutput struct {
 
-	// A token that can be used to retrieve the next set of results, or null if there
+	//  A token that can be used to retrieve the next set of results, or null if there
 	// are no additional results.
 	NextToken *string
 
-	// The collection of ML Detect mitigation tasks that matched the filter criteria.
+	//  The collection of ML Detect mitigation tasks that matched the filter criteria.
 	Tasks []types.DetectMitigationActionsTaskSummary
 
 	// Metadata pertaining to the operation's result.

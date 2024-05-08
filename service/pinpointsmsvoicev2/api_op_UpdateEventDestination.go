@@ -13,10 +13,12 @@ import (
 
 // Updates an existing event destination in a configuration set. You can update
 // the IAM role ARN for CloudWatch Logs and Kinesis Data Firehose. You can also
-// enable or disable the event destination. You may want to update an event
-// destination to change its matching event types or updating the destination
-// resource ARN. You can't change an event destination's type between CloudWatch
-// Logs, Kinesis Data Firehose, and Amazon SNS.
+// enable or disable the event destination.
+//
+// You may want to update an event destination to change its matching event types
+// or updating the destination resource ARN. You can't change an event
+// destination's type between CloudWatch Logs, Kinesis Data Firehose, and Amazon
+// SNS.
 func (c *Client) UpdateEventDestination(ctx context.Context, params *UpdateEventDestinationInput, optFns ...func(*Options)) (*UpdateEventDestinationOutput, error) {
 	if params == nil {
 		params = &UpdateEventDestinationInput{}
@@ -56,8 +58,9 @@ type UpdateEventDestinationInput struct {
 	// Kinesis Data Firehose.
 	KinesisFirehoseDestination *types.KinesisFirehoseDestination
 
-	// An array of event types that determine which events to log. The TEXT_SENT event
-	// type is not supported.
+	// An array of event types that determine which events to log.
+	//
+	// The TEXT_SENT event type is not supported.
 	MatchingEventTypes []types.EventType
 
 	// An object that contains information about an event destination that sends data

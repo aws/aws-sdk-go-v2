@@ -88,9 +88,10 @@ func (e *ActivityWorkerLimitExceeded) ErrorCode() string {
 func (e *ActivityWorkerLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Updating or deleting a resource can cause an inconsistent state. This error
-// occurs when there're concurrent requests for DeleteStateMachineVersion ,
-// PublishStateMachineVersion , or UpdateStateMachine with the publish parameter
-// set to true . HTTP Status Code: 409
+// occurs when there're concurrent requests for DeleteStateMachineVersion, PublishStateMachineVersion, or UpdateStateMachine with the publish parameter
+// set to true .
+//
+// HTTP Status Code: 409
 type ConflictException struct {
 	Message *string
 
@@ -117,6 +118,7 @@ func (e *ConflictException) ErrorCode() string {
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The execution has the same name as another execution (but a different input ).
+//
 // Executions with the same name and input are considered idempotent.
 type ExecutionAlreadyExists struct {
 	Message *string
@@ -486,7 +488,9 @@ func (e *ResourceNotFound) ErrorCode() string {
 }
 func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request would cause a service quota to be exceeded. HTTP Status Code: 402
+// The request would cause a service quota to be exceeded.
+//
+// HTTP Status Code: 402
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -696,8 +700,10 @@ func (e *TaskTimedOut) ErrorCode() string {
 }
 func (e *TaskTimedOut) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You've exceeded the number of tags allowed for a resource. See the  Limits Topic (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html)
-// in the Step Functions Developer Guide.
+// You've exceeded the number of tags allowed for a resource. See the [Limits Topic] in the Step
+// Functions Developer Guide.
+//
+// [Limits Topic]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html
 type TooManyTags struct {
 	Message *string
 

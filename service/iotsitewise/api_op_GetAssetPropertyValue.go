@@ -11,15 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets an asset property's current value. For more information, see Querying
-// current values (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#current-values)
-// in the IoT SiteWise User Guide. To identify an asset property, you must specify
-// one of the following:
+// Gets an asset property's current value. For more information, see [Querying current values] in the IoT
+// SiteWise User Guide.
+//
+// To identify an asset property, you must specify one of the following:
+//
 //   - The assetId and propertyId of an asset property.
+//
 //   - A propertyAlias , which is a data stream alias (for example,
 //     /company/windfarm/3/turbine/7/temperature ). To define an asset property's
-//     alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
-//     .
+//     alias, see [UpdateAssetProperty].
+//
+// [UpdateAssetProperty]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html
+// [Querying current values]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#current-values
 func (c *Client) GetAssetPropertyValue(ctx context.Context, params *GetAssetPropertyValueInput, optFns ...func(*Options)) (*GetAssetPropertyValueOutput, error) {
 	if params == nil {
 		params = &GetAssetPropertyValueInput{}
@@ -42,8 +46,9 @@ type GetAssetPropertyValueInput struct {
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
 	// path (for example, /company/windfarm/3/turbine/7/temperature ). For more
-	// information, see Mapping industrial data streams to asset properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
-	// in the IoT SiteWise User Guide.
+	// information, see [Mapping industrial data streams to asset properties]in the IoT SiteWise User Guide.
+	//
+	// [Mapping industrial data streams to asset properties]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html
 	PropertyAlias *string
 
 	// The ID of the asset property, in UUID format.

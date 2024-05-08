@@ -13,13 +13,16 @@ import (
 )
 
 // Creates a new database from an existing database snapshot in Amazon Lightsail.
+//
 // You can create a new database from a snapshot in if something goes wrong with
 // your original database, or to change it to a different plan, such as a high
-// availability or standard plan. The create relational database from snapshot
-// operation supports tag-based access control via request tags and resource tags
-// applied to the resource identified by relationalDatabaseSnapshotName. For more
-// information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
-// .
+// availability or standard plan.
+//
+// The create relational database from snapshot operation supports tag-based
+// access control via request tags and resource tags applied to the resource
+// identified by relationalDatabaseSnapshotName. For more information, see the [Amazon Lightsail Developer Guide].
+//
+// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
 func (c *Client) CreateRelationalDatabaseFromSnapshot(ctx context.Context, params *CreateRelationalDatabaseFromSnapshotInput, optFns ...func(*Options)) (*CreateRelationalDatabaseFromSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateRelationalDatabaseFromSnapshotInput{}
@@ -37,17 +40,23 @@ func (c *Client) CreateRelationalDatabaseFromSnapshot(ctx context.Context, param
 
 type CreateRelationalDatabaseFromSnapshotInput struct {
 
-	// The name to use for your new Lightsail database resource. Constraints:
+	// The name to use for your new Lightsail database resource.
+	//
+	// Constraints:
+	//
 	//   - Must contain from 2 to 255 alphanumeric characters, or hyphens.
+	//
 	//   - The first and last character must be a letter or number.
 	//
 	// This member is required.
 	RelationalDatabaseName *string
 
 	// The Availability Zone in which to create your new database. Use the us-east-2a
-	// case-sensitive format. You can get a list of Availability Zones by using the
-	// get regions operation. Be sure to add the include relational database
-	// Availability Zones parameter to your request.
+	// case-sensitive format.
+	//
+	// You can get a list of Availability Zones by using the get regions operation. Be
+	// sure to add the include relational database Availability Zones parameter to
+	// your request.
 	AvailabilityZone *string
 
 	// Specifies the accessibility options for your new database. A value of true
@@ -57,34 +66,48 @@ type CreateRelationalDatabaseFromSnapshotInput struct {
 	PubliclyAccessible *bool
 
 	// The bundle ID for your new database. A bundle describes the performance
-	// specifications for your database. You can get a list of database bundle IDs by
-	// using the get relational database bundles operation. When creating a new
-	// database from a snapshot, you cannot choose a bundle that is smaller than the
-	// bundle of the source database.
+	// specifications for your database.
+	//
+	// You can get a list of database bundle IDs by using the get relational database
+	// bundles operation.
+	//
+	// When creating a new database from a snapshot, you cannot choose a bundle that
+	// is smaller than the bundle of the source database.
 	RelationalDatabaseBundleId *string
 
 	// The name of the database snapshot from which to create your new database.
 	RelationalDatabaseSnapshotName *string
 
-	// The date and time to restore your database from. Constraints:
+	// The date and time to restore your database from.
+	//
+	// Constraints:
+	//
 	//   - Must be before the latest restorable time for the database.
+	//
 	//   - Cannot be specified if the use latest restorable time parameter is true .
+	//
 	//   - Specified in Coordinated Universal Time (UTC).
-	//   - Specified in the Unix time format. For example, if you wish to use a
-	//   restore time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the
-	//   restore time.
+	//
+	//   - Specified in the Unix time format.
+	//
+	// For example, if you wish to use a restore time of October 1, 2018, at 8 PM UTC,
+	//   then you input 1538424000 as the restore time.
 	RestoreTime *time.Time
 
 	// The name of the source database.
 	SourceRelationalDatabaseName *string
 
-	// The tag keys and optional values to add to the resource during create. Use the
-	// TagResource action to tag a resource after it's created.
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// Use the TagResource action to tag a resource after it's created.
 	Tags []types.Tag
 
 	// Specifies whether your database is restored from the latest backup time. A
-	// value of true restores from the latest backup time. Default: false Constraints:
-	// Cannot be specified if the restore time parameter is provided.
+	// value of true restores from the latest backup time.
+	//
+	// Default: false
+	//
+	// Constraints: Cannot be specified if the restore time parameter is provided.
 	UseLatestRestorableTime *bool
 
 	noSmithyDocumentSerde

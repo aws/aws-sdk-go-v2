@@ -11,11 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the detailed parameter list for a particular DB cluster parameter
-// group. For more information on Amazon Aurora, see What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
-// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-// see Multi-AZ DB cluster deployments (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
-// in the Amazon RDS User Guide.
+// Returns the detailed parameter list for a particular DB cluster parameter group.
+//
+// For more information on Amazon Aurora, see [What is Amazon Aurora?] in the Amazon Aurora User Guide.
+//
+// For more information on Multi-AZ DB clusters, see [Multi-AZ DB cluster deployments] in the Amazon RDS User Guide.
+//
+// [What is Amazon Aurora?]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
+// [Multi-AZ DB cluster deployments]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
 func (c *Client) DescribeDBClusterParameters(ctx context.Context, params *DescribeDBClusterParametersInput, optFns ...func(*Options)) (*DescribeDBClusterParametersOutput, error) {
 	if params == nil {
 		params = &DescribeDBClusterParametersInput{}
@@ -34,7 +37,10 @@ func (c *Client) DescribeDBClusterParameters(ctx context.Context, params *Descri
 type DescribeDBClusterParametersInput struct {
 
 	// The name of a specific DB cluster parameter group to return parameter details
-	// for. Constraints:
+	// for.
+	//
+	// Constraints:
+	//
 	//   - If supplied, must match the name of an existing DBClusterParameterGroup.
 	//
 	// This member is required.
@@ -50,13 +56,21 @@ type DescribeDBClusterParametersInput struct {
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
+	// included in the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
-	// A specific source to return parameters for. Valid Values:
+	// A specific source to return parameters for.
+	//
+	// Valid Values:
+	//
 	//   - customer
+	//
 	//   - engine
+	//
 	//   - service
 	Source *string
 
@@ -173,7 +187,10 @@ var _ DescribeDBClusterParametersAPIClient = (*Client)(nil)
 type DescribeDBClusterParametersPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
+	// included in the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 

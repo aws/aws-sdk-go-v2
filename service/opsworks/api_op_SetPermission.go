@@ -10,13 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specifies a user's permissions. For more information, see Security and
-// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/workingsecurity.html)
-// . Required Permissions: To use this action, an IAM user must have a Manage
+// Specifies a user's permissions. For more information, see [Security and Permissions].
+//
+// Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// permissions. For more information on user permissions, see [Managing User Permissions].
+//
+// [Security and Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingsecurity.html
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) SetPermission(ctx context.Context, params *SetPermissionInput, optFns ...func(*Options)) (*SetPermissionOutput, error) {
 	if params == nil {
 		params = &SetPermissionInput{}
@@ -52,14 +53,20 @@ type SetPermissionInput struct {
 
 	// The user's permission level, which must be set to one of the following strings.
 	// You cannot set your own permissions level.
+	//
 	//   - deny
+	//
 	//   - show
+	//
 	//   - deploy
+	//
 	//   - manage
+	//
 	//   - iam_only
-	// For more information about the permissions associated with these levels, see
-	// Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-	// .
+	//
+	// For more information about the permissions associated with these levels, see [Managing User Permissions].
+	//
+	// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 	Level *string
 
 	noSmithyDocumentSerde

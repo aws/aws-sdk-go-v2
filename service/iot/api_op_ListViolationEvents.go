@@ -14,9 +14,11 @@ import (
 
 // Lists the Device Defender security profile violations discovered during the
 // given time period. You can use filters to limit the results to those alerts
-// issued for a particular security profile, behavior, or thing (device). Requires
-// permission to access the ListViolationEvents (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// issued for a particular security profile, behavior, or thing (device).
+//
+// Requires permission to access the [ListViolationEvents] action.
+//
+// [ListViolationEvents]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListViolationEvents(ctx context.Context, params *ListViolationEventsInput, optFns ...func(*Options)) (*ListViolationEventsOutput, error) {
 	if params == nil {
 		params = &ListViolationEventsInput{}
@@ -44,10 +46,10 @@ type ListViolationEventsInput struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// The criteria for a behavior.
+	//  The criteria for a behavior.
 	BehaviorCriteriaType types.BehaviorCriteriaType
 
-	// A list of all suppressed alerts.
+	//  A list of all suppressed alerts.
 	ListSuppressedAlerts *bool
 
 	// The maximum number of results to return at one time.

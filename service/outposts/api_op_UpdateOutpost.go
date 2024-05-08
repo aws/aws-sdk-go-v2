@@ -29,7 +29,7 @@ func (c *Client) UpdateOutpost(ctx context.Context, params *UpdateOutpostInput, 
 
 type UpdateOutpostInput struct {
 
-	// The ID or ARN of the Outpost.
+	//  The ID or ARN of the Outpost.
 	//
 	// This member is required.
 	OutpostId *string
@@ -40,7 +40,7 @@ type UpdateOutpostInput struct {
 	// The name of the Outpost.
 	Name *string
 
-	// The type of hardware for this Outpost.
+	//  The type of hardware for this Outpost.
 	SupportedHardwareType types.SupportedHardwareType
 
 	noSmithyDocumentSerde

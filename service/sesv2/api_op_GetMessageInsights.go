@@ -13,7 +13,9 @@ import (
 
 // Provides information about a specific message, including the from address, the
 // subject, the recipient address, email tags, as well as events associated with
-// the message. You can execute this operation no more than once per second.
+// the message.
+//
+// You can execute this operation no more than once per second.
 func (c *Client) GetMessageInsights(ctx context.Context, params *GetMessageInsightsInput, optFns ...func(*Options)) (*GetMessageInsightsOutput, error) {
 	if params == nil {
 		params = &GetMessageInsightsInput{}
@@ -32,7 +34,7 @@ func (c *Client) GetMessageInsights(ctx context.Context, params *GetMessageInsig
 // A request to return information about a message.
 type GetMessageInsightsInput struct {
 
-	// A MessageId is a unique identifier for a message, and is returned when sending
+	//  A MessageId is a unique identifier for a message, and is returned when sending
 	// emails through Amazon SES.
 	//
 	// This member is required.
@@ -44,9 +46,10 @@ type GetMessageInsightsInput struct {
 // Information about a message.
 type GetMessageInsightsOutput struct {
 
-	// A list of tags, in the form of name/value pairs, that were applied to the email
-	// you sent, along with Amazon SES Auto-Tags (https://docs.aws.amazon.com/ses/latest/dg/monitor-using-event-publishing.html)
-	// .
+	//  A list of tags, in the form of name/value pairs, that were applied to the
+	// email you sent, along with Amazon SES [Auto-Tags].
+	//
+	// [Auto-Tags]: https://docs.aws.amazon.com/ses/latest/dg/monitor-using-event-publishing.html
 	EmailTags []types.MessageTag
 
 	// The from address used to send the message.

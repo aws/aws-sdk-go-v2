@@ -29,10 +29,10 @@ func (c *Client) StartRecommendationReportGeneration(ctx context.Context, params
 
 type StartRecommendationReportGenerationInput struct {
 
-	// Groups the resources in the recommendation report with a unique name.
+	//  Groups the resources in the recommendation report with a unique name.
 	GroupIdFilter []types.Group
 
-	// The output format for the recommendation report file. The default format is
+	//  The output format for the recommendation report file. The default format is
 	// Microsoft Excel.
 	OutputFormat types.OutputFormat
 
@@ -41,7 +41,7 @@ type StartRecommendationReportGenerationInput struct {
 
 type StartRecommendationReportGenerationOutput struct {
 
-	// The ID of the recommendation report generation task.
+	//  The ID of the recommendation report generation task.
 	Id *string
 
 	// Metadata pertaining to the operation's result.

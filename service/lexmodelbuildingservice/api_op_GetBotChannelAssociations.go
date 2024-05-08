@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all of the channels associated with the specified bot. The
-// GetBotChannelAssociations operation requires permissions for the
+//	Returns a list of all of the channels associated with the specified bot.
+//
+// The GetBotChannelAssociations operation requires permissions for the
 // lex:GetBotChannelAssociations action.
 func (c *Client) GetBotChannelAssociations(ctx context.Context, params *GetBotChannelAssociationsInput, optFns ...func(*Options)) (*GetBotChannelAssociationsOutput, error) {
 	if params == nil {
@@ -42,7 +43,8 @@ type GetBotChannelAssociationsInput struct {
 	// This member is required.
 	BotName *string
 
-	// The maximum number of associations to return in the response. The default is 50.
+	// The maximum number of associations to return in the response. The default is
+	// 50.
 	MaxResults *int32
 
 	// Substring to match in channel association names. An association will be
@@ -168,7 +170,8 @@ var _ GetBotChannelAssociationsAPIClient = (*Client)(nil)
 // GetBotChannelAssociationsPaginatorOptions is the paginator options for
 // GetBotChannelAssociations
 type GetBotChannelAssociationsPaginatorOptions struct {
-	// The maximum number of associations to return in the response. The default is 50.
+	// The maximum number of associations to return in the response. The default is
+	// 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

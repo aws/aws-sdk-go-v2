@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for CompressionOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CompressionOption) Values() []CompressionOption {
 	return []CompressionOption{
 		"GZIP",
@@ -34,8 +35,9 @@ const (
 )
 
 // Values returns all known values for ExecutionStatusCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExecutionStatusCode) Values() []ExecutionStatusCode {
 	return []ExecutionStatusCode{
 		"INITIATION_IN_PROCESS",
@@ -58,8 +60,9 @@ const (
 )
 
 // Values returns all known values for ExecutionStatusReason. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExecutionStatusReason) Values() []ExecutionStatusReason {
 	return []ExecutionStatusReason{
 		"INSUFFICIENT_PERMISSION",
@@ -77,8 +80,9 @@ const (
 )
 
 // Values returns all known values for ExportStatusCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExportStatusCode) Values() []ExportStatusCode {
 	return []ExportStatusCode{
 		"HEALTHY",
@@ -95,8 +99,9 @@ const (
 )
 
 // Values returns all known values for FormatOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FormatOption) Values() []FormatOption {
 	return []FormatOption{
 		"TEXT_OR_CSV",
@@ -112,8 +117,9 @@ const (
 )
 
 // Values returns all known values for FrequencyOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FrequencyOption) Values() []FrequencyOption {
 	return []FrequencyOption{
 		"SYNCHRONOUS",
@@ -129,8 +135,9 @@ const (
 )
 
 // Values returns all known values for OverwriteOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OverwriteOption) Values() []OverwriteOption {
 	return []OverwriteOption{
 		"CREATE_NEW_REPORT",
@@ -146,8 +153,9 @@ const (
 )
 
 // Values returns all known values for S3OutputType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3OutputType) Values() []S3OutputType {
 	return []S3OutputType{
 		"CUSTOM",
@@ -166,6 +174,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

@@ -11,10 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a resource of the Resilience Hub application. This API accepts only
-// one of the following parameters to descibe the resource:
+// Describes a resource of the Resilience Hub application.
+//
+// This API accepts only one of the following parameters to descibe the resource:
+//
 //   - resourceName
+//
 //   - logicalResourceId
+//
 //   - physicalResourceId (Along with physicalResourceId , you can also provide
 //     awsAccountId , and awsRegion )
 func (c *Client) DescribeAppVersionResource(ctx context.Context, params *DescribeAppVersionResourceInput, optFns ...func(*Options)) (*DescribeAppVersionResourceOutput, error) {
@@ -36,8 +40,10 @@ type DescribeAppVersionResourceInput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
+	// guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AppArn *string
@@ -69,8 +75,10 @@ type DescribeAppVersionResourceOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
+	// guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AppArn *string

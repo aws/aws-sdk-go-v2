@@ -14,11 +14,14 @@ import (
 // Creates a view that users can query by using the Search operation. Results from
 // queries that you make using this view include only resources that match the
 // view's Filters . For more information about Amazon Web Services Resource
-// Explorer views, see Managing views (https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-views.html)
-// in the Amazon Web Services Resource Explorer User Guide. Only the principals
-// with an IAM identity-based policy that grants Allow to the Search action on a
-// Resource with the Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-// of this view can Search using views you create with this operation.
+// Explorer views, see [Managing views]in the Amazon Web Services Resource Explorer User Guide.
+//
+// Only the principals with an IAM identity-based policy that grants Allow to the
+// Search action on a Resource with the [Amazon resource name (ARN)] of this view can Search using views you create
+// with this operation.
+//
+// [Managing views]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-views.html
+// [Amazon resource name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 func (c *Client) CreateView(ctx context.Context, params *CreateViewInput, optFns ...func(*Options)) (*CreateViewOutput, error) {
 	if params == nil {
 		params = &CreateViewInput{}
@@ -37,36 +40,45 @@ func (c *Client) CreateView(ctx context.Context, params *CreateViewInput, optFns
 type CreateViewInput struct {
 
 	// The name of the new view. This name appears in the list of views in Resource
-	// Explorer. The name must be no more than 64 characters long, and can include
-	// letters, digits, and the dash (-) character. The name must be unique within its
-	// Amazon Web Services Region.
+	// Explorer.
+	//
+	// The name must be no more than 64 characters long, and can include letters,
+	// digits, and the dash (-) character. The name must be unique within its Amazon
+	// Web Services Region.
 	//
 	// This member is required.
 	ViewName *string
 
 	// This value helps ensure idempotency. Resource Explorer uses this value to
 	// prevent the accidental creation of duplicate versions. We recommend that you
-	// generate a UUID-type value (https://wikipedia.org/wiki/Universally_unique_identifier)
-	// to ensure the uniqueness of your views.
+	// generate a [UUID-type value]to ensure the uniqueness of your views.
+	//
+	// [UUID-type value]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientToken *string
 
 	// An array of strings that specify which resources are included in the results of
-	// queries made using this view. When you use this view in a Search operation, the
-	// filter string is combined with the search's QueryString parameter using a
-	// logical AND operator. For information about the supported syntax, see Search
-	// query reference for Resource Explorer (https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html)
-	// in the Amazon Web Services Resource Explorer User Guide. This query string in
-	// the context of this operation supports only filter prefixes (https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters)
-	// with optional operators (https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators)
+	// queries made using this view. When you use this view in a Searchoperation, the filter
+	// string is combined with the search's QueryString parameter using a logical AND
+	// operator.
+	//
+	// For information about the supported syntax, see [Search query reference for Resource Explorer] in the Amazon Web Services
+	// Resource Explorer User Guide.
+	//
+	// This query string in the context of this operation supports only [filter prefixes] with optional [operators]
 	// . It doesn't support free-form text. For example, the string region:us*
 	// service:ec2 -tag:stage=prod includes all Amazon EC2 resources in any Amazon Web
 	// Services Region that begins with the letters us and is not tagged with a key
 	// Stage that has the value prod .
+	//
+	// [filter prefixes]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters
+	// [Search query reference for Resource Explorer]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html
+	// [operators]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators
 	Filters *types.SearchFilter
 
 	// Specifies optional fields that you want included in search results from this
-	// view. It is a list of objects that each describe a field to include. The default
-	// is an empty list, with no optional fields included in the results.
+	// view. It is a list of objects that each describe a field to include.
+	//
+	// The default is an empty list, with no optional fields included in the results.
 	IncludedProperties []types.IncludedProperty
 
 	// The root ARN of the account, an organizational unit (OU), or an organization

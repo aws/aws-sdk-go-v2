@@ -29,9 +29,9 @@ func (c *Client) UpdateWorkspaceConfiguration(ctx context.Context, params *Updat
 type UpdateWorkspaceConfigurationInput struct {
 
 	// The new configuration string for the workspace. For more information about the
-	// format and configuration options available, see Working in your Grafana
-	// workspace (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html)
-	// .
+	// format and configuration options available, see [Working in your Grafana workspace].
+	//
+	// [Working in your Grafana workspace]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
 	//
 	// This value conforms to the media type: application/json
 	//
@@ -44,11 +44,15 @@ type UpdateWorkspaceConfigurationInput struct {
 	WorkspaceId *string
 
 	// Specifies the version of Grafana to support in the workspace. If not specified,
-	// keeps the current version of the workspace. Can only be used to upgrade (for
-	// example, from 8.4 to 9.4), not downgrade (for example, from 9.4 to 8.4). To know
-	// what versions are available to upgrade to for a specific workspace, see the
-	// ListVersions (https://docs.aws.amazon.com/grafana/latest/APIReference/API_ListVersions.html)
-	// operation.
+	// keeps the current version of the workspace.
+	//
+	// Can only be used to upgrade (for example, from 8.4 to 9.4), not downgrade (for
+	// example, from 9.4 to 8.4).
+	//
+	// To know what versions are available to upgrade to for a specific workspace, see
+	// the [ListVersions]operation.
+	//
+	// [ListVersions]: https://docs.aws.amazon.com/grafana/latest/APIReference/API_ListVersions.html
 	GrafanaVersion *string
 
 	noSmithyDocumentSerde

@@ -37,7 +37,7 @@ type ListTagsInput struct {
 	// Maximum number of tags to return.
 	MaxResults *int32
 
-	// If the response to the previous ListTags request is truncated, SageMaker
+	//  If the response to the previous ListTags request is truncated, SageMaker
 	// returns this token. To retrieve the next set of tags, use it in the subsequent
 	// request.
 	NextToken *string
@@ -47,7 +47,7 @@ type ListTagsInput struct {
 
 type ListTagsOutput struct {
 
-	// If response is truncated, SageMaker includes a token in the response. You can
+	//  If response is truncated, SageMaker includes a token in the response. You can
 	// use this token in your subsequent request to fetch next set of tokens.
 	NextToken *string
 

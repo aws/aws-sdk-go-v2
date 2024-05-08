@@ -12,8 +12,10 @@ import (
 )
 
 // Provides a list of groups that are mapped to users before a given ordering or
-// timestamp identifier. ListGroupsOlderThanOrderingId is currently not supported
-// in the Amazon Web Services GovCloud (US-West) region.
+// timestamp identifier.
+//
+// ListGroupsOlderThanOrderingId is currently not supported in the Amazon Web
+// Services GovCloud (US-West) region.
 func (c *Client) ListGroupsOlderThanOrderingId(ctx context.Context, params *ListGroupsOlderThanOrderingIdInput, optFns ...func(*Options)) (*ListGroupsOlderThanOrderingIdOutput, error) {
 	if params == nil {
 		params = &ListGroupsOlderThanOrderingIdInput{}
@@ -47,11 +49,11 @@ type ListGroupsOlderThanOrderingIdInput struct {
 	// before a given ordering timestamp identifier.
 	DataSourceId *string
 
-	// The maximum number of returned groups that are mapped to users before a given
+	//  The maximum number of returned groups that are mapped to users before a given
 	// ordering or timestamp identifier.
 	MaxResults *int32
 
-	// If the previous response was incomplete (because there is more data to
+	//  If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Kendra returns a pagination token in the response. You can use
 	// this pagination token to retrieve the next set of groups that are mapped to
 	// users before a given ordering or timestamp identifier.
@@ -62,13 +64,13 @@ type ListGroupsOlderThanOrderingIdInput struct {
 
 type ListGroupsOlderThanOrderingIdOutput struct {
 
-	// Summary information for list of groups that are mapped to users before a given
+	//  Summary information for list of groups that are mapped to users before a given
 	// ordering or timestamp identifier.
 	GroupsSummaries []types.GroupSummary
 
-	// If the response is truncated, Amazon Kendra returns this token that you can use
-	// in the subsequent request to retrieve the next set of groups that are mapped to
-	// users before a given ordering or timestamp identifier.
+	//  If the response is truncated, Amazon Kendra returns this token that you can
+	// use in the subsequent request to retrieve the next set of groups that are mapped
+	// to users before a given ordering or timestamp identifier.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -167,7 +169,7 @@ var _ ListGroupsOlderThanOrderingIdAPIClient = (*Client)(nil)
 // ListGroupsOlderThanOrderingIdPaginatorOptions is the paginator options for
 // ListGroupsOlderThanOrderingId
 type ListGroupsOlderThanOrderingIdPaginatorOptions struct {
-	// The maximum number of returned groups that are mapped to users before a given
+	//  The maximum number of returned groups that are mapped to users before a given
 	// ordering or timestamp identifier.
 	Limit int32
 

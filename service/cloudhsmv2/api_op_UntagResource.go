@@ -29,7 +29,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 type UntagResourceInput struct {
 
 	// The cluster identifier (ID) for the cluster whose tags you are removing. To
-	// find the cluster ID, use DescribeClusters .
+	// find the cluster ID, use DescribeClusters.
 	//
 	// This member is required.
 	ResourceId *string

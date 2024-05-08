@@ -13,9 +13,10 @@ import (
 )
 
 // Syncrhonizes robots in a fleet to the latest deployment. This is helpful if
-// robots were added after a deployment. This API will no longer be supported as of
-// May 2, 2022. Use it to remove resources that were created for Deployment
-// Service.
+// robots were added after a deployment.
+//
+// This API will no longer be supported as of May 2, 2022. Use it to remove
+// resources that were created for Deployment Service.
 //
 // Deprecated: Support for the AWS RoboMaker application deployment feature has
 // ended. For additional information, see
@@ -65,22 +66,41 @@ type SyncDeploymentJobOutput struct {
 	// Information about the deployment configuration.
 	DeploymentConfig *types.DeploymentConfig
 
-	// The failure code if the job fails: InternalServiceError Internal service error.
+	// The failure code if the job fails:
+	//
+	// InternalServiceError Internal service error.
+	//
 	// RobotApplicationCrash Robot application exited abnormally.
-	// SimulationApplicationCrash Simulation application exited abnormally.
+	//
+	// SimulationApplicationCrash  Simulation application exited abnormally.
+	//
 	// BadPermissionsRobotApplication Robot application bundle could not be downloaded.
+	//
 	// BadPermissionsSimulationApplication Simulation application bundle could not be
-	// downloaded. BadPermissionsS3Output Unable to publish outputs to
-	// customer-provided S3 bucket. BadPermissionsCloudwatchLogs Unable to publish logs
-	// to customer-provided CloudWatch Logs resource. SubnetIpLimitExceeded Subnet IP
-	// limit exceeded. ENILimitExceeded ENI limit exceeded.
+	// downloaded.
+	//
+	// BadPermissionsS3Output Unable to publish outputs to customer-provided S3 bucket.
+	//
+	// BadPermissionsCloudwatchLogs Unable to publish logs to customer-provided
+	// CloudWatch Logs resource.
+	//
+	// SubnetIpLimitExceeded Subnet IP limit exceeded.
+	//
+	// ENILimitExceeded ENI limit exceeded.
+	//
 	// BadPermissionsUserCredentials Unable to use the Role provided.
+	//
 	// InvalidBundleRobotApplication Robot bundle cannot be extracted (invalid format,
-	// bundling error, or other issue). InvalidBundleSimulationApplication Simulation
-	// bundle cannot be extracted (invalid format, bundling error, or other issue).
+	// bundling error, or other issue).
+	//
+	// InvalidBundleSimulationApplication Simulation bundle cannot be extracted
+	// (invalid format, bundling error, or other issue).
+	//
 	// RobotApplicationVersionMismatchedEtag Etag for RobotApplication does not match
-	// value during version creation. SimulationApplicationVersionMismatchedEtag Etag
-	// for SimulationApplication does not match value during version creation.
+	// value during version creation.
+	//
+	// SimulationApplicationVersionMismatchedEtag Etag for SimulationApplication does
+	// not match value during version creation.
 	FailureCode types.DeploymentJobErrorCode
 
 	// The failure reason if the job fails.

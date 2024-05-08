@@ -12,9 +12,10 @@ import (
 )
 
 // Gets the code of a CloudFront function. To get configuration information and
-// metadata about a function, use DescribeFunction . To get a function's code, you
-// must provide the function's name and stage. To get these values, you can use
-// ListFunctions .
+// metadata about a function, use DescribeFunction .
+//
+// To get a function's code, you must provide the function's name and stage. To
+// get these values, you can use ListFunctions .
 func (c *Client) GetFunction(ctx context.Context, params *GetFunctionInput, optFns ...func(*Options)) (*GetFunctionOutput, error) {
 	if params == nil {
 		params = &GetFunctionInput{}

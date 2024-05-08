@@ -34,7 +34,9 @@ type ListProjectAssetsInput struct {
 	// This member is required.
 	ProjectId *string
 
-	// The maximum number of results to return for each paginated request. Default: 50
+	// The maximum number of results to return for each paginated request.
+	//
+	// Default: 50
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
@@ -179,7 +181,9 @@ var _ ListProjectAssetsAPIClient = (*Client)(nil)
 
 // ListProjectAssetsPaginatorOptions is the paginator options for ListProjectAssets
 type ListProjectAssetsPaginatorOptions struct {
-	// The maximum number of results to return for each paginated request. Default: 50
+	// The maximum number of results to return for each paginated request.
+	//
+	// Default: 50
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

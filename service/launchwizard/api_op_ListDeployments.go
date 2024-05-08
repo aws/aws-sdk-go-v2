@@ -30,7 +30,9 @@ func (c *Client) ListDeployments(ctx context.Context, params *ListDeploymentsInp
 type ListDeploymentsInput struct {
 
 	// Filters to scope the results. The following filters are supported:
+	//
 	//   - WORKLOAD_NAME
+	//
 	//   - DEPLOYMENT_STATUS
 	Filters []types.DeploymentFilter
 

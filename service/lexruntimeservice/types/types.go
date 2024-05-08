@@ -73,24 +73,31 @@ type DialogAction struct {
 
 	// The next action that the bot should take in its interaction with the user. The
 	// possible values are:
+	//
 	//   - ConfirmIntent - The next action is asking the user if the intent is complete
 	//   and ready to be fulfilled. This is a yes/no question such as "Place the order?"
+	//
 	//   - Close - Indicates that the there will not be a response from the user. For
 	//   example, the statement "Your order has been placed" does not require a response.
 	//
 	//   - Delegate - The next action is determined by Amazon Lex.
+	//
 	//   - ElicitIntent - The next action is to determine the intent that the user
 	//   wants to fulfill.
+	//
 	//   - ElicitSlot - The next action is to elicit a slot value from the user.
 	//
 	// This member is required.
 	Type DialogActionType
 
 	// The fulfillment state of the intent. The possible values are:
+	//
 	//   - Failed - The Lambda function associated with the intent failed to fulfill
 	//   the intent.
+	//
 	//   - Fulfilled - The intent has fulfilled by the Lambda function associated with
 	//   the intent.
+	//
 	//   - ReadyForFulfillment - All of the information necessary for the intent is
 	//   present and the intent ready to be fulfilled by the client application.
 	FulfillmentState FulfillmentState
@@ -103,11 +110,15 @@ type DialogAction struct {
 	Message *string
 
 	//   - PlainText - The message contains plain UTF-8 text.
+	//
 	//   - CustomPayload - The message is a custom format for the client.
+	//
 	//   - SSML - The message contains text formatted for voice output.
+	//
 	//   - Composite - The message contains an escaped JSON object containing one or
-	//   more messages. For more information, see Message Groups (https://docs.aws.amazon.com/lex/latest/dg/howitworks-manage-prompts.html)
-	//   .
+	//   more messages. For more information, see [Message Groups].
+	//
+	// [Message Groups]: https://docs.aws.amazon.com/lex/latest/dg/howitworks-manage-prompts.html
 	MessageFormat MessageFormatType
 
 	// The name of the slot that should be elicited from the user.
@@ -160,40 +171,51 @@ type IntentSummary struct {
 
 	// The next action that the bot should take in its interaction with the user. The
 	// possible values are:
+	//
 	//   - ConfirmIntent - The next action is asking the user if the intent is complete
 	//   and ready to be fulfilled. This is a yes/no question such as "Place the order?"
+	//
 	//   - Close - Indicates that the there will not be a response from the user. For
 	//   example, the statement "Your order has been placed" does not require a response.
 	//
 	//   - ElicitIntent - The next action is to determine the intent that the user
 	//   wants to fulfill.
+	//
 	//   - ElicitSlot - The next action is to elicit a slot value from the user.
 	//
 	// This member is required.
 	DialogActionType DialogActionType
 
 	// A user-defined label that identifies a particular intent. You can use this
-	// label to return to a previous intent. Use the checkpointLabelFilter parameter
-	// of the GetSessionRequest operation to filter the intents returned by the
-	// operation to those with only the specified label.
+	// label to return to a previous intent.
+	//
+	// Use the checkpointLabelFilter parameter of the GetSessionRequest operation to
+	// filter the intents returned by the operation to those with only the specified
+	// label.
 	CheckpointLabel *string
 
 	// The status of the intent after the user responds to the confirmation prompt. If
 	// the user confirms the intent, Amazon Lex sets this field to Confirmed . If the
 	// user denies the intent, Amazon Lex sets this value to Denied . The possible
 	// values are:
+	//
 	//   - Confirmed - The user has responded "Yes" to the confirmation prompt,
 	//   confirming that the intent is complete and that it is ready to be fulfilled.
+	//
 	//   - Denied - The user has responded "No" to the confirmation prompt.
+	//
 	//   - None - The user has never been prompted for confirmation; or, the user was
 	//   prompted but did not confirm or deny the prompt.
 	ConfirmationStatus ConfirmationStatus
 
 	// The fulfillment state of the intent. The possible values are:
+	//
 	//   - Failed - The Lambda function associated with the intent failed to fulfill
 	//   the intent.
+	//
 	//   - Fulfilled - The intent has fulfilled by the Lambda function associated with
 	//   the intent.
+	//
 	//   - ReadyForFulfillment - All of the information necessary for the intent is
 	//   present and the intent ready to be fulfilled by the client application.
 	FulfillmentState FulfillmentState
@@ -247,9 +269,10 @@ type ResponseCard struct {
 	noSmithyDocumentSerde
 }
 
-// The sentiment expressed in an utterance. When the bot is configured to send
-// utterances to Amazon Comprehend for sentiment analysis, this field structure
-// contains the result of the analysis.
+// The sentiment expressed in an utterance.
+//
+// When the bot is configured to send utterances to Amazon Comprehend for
+// sentiment analysis, this field structure contains the result of the analysis.
 type SentimentResponse struct {
 
 	// The inferred sentiment that Amazon Comprehend has the highest confidence in.

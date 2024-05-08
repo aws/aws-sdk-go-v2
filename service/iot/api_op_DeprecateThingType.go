@@ -11,8 +11,11 @@ import (
 )
 
 // Deprecates a thing type. You can not associate new things with deprecated thing
-// type. Requires permission to access the DeprecateThingType (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// type.
+//
+// Requires permission to access the [DeprecateThingType] action.
+//
+// [DeprecateThingType]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DeprecateThingType(ctx context.Context, params *DeprecateThingTypeInput, optFns ...func(*Options)) (*DeprecateThingTypeOutput, error) {
 	if params == nil {
 		params = &DeprecateThingTypeInput{}

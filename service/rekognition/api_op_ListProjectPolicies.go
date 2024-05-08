@@ -11,10 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation applies only to Amazon Rekognition Custom Labels. Gets a list of
-// the project policies attached to a project. To attach a project policy to a
-// project, call PutProjectPolicy . To remove a project policy from a project, call
-// DeleteProjectPolicy . This operation requires permissions to perform the
+// This operation applies only to Amazon Rekognition Custom Labels.
+//
+// Gets a list of the project policies attached to a project.
+//
+// To attach a project policy to a project, call PutProjectPolicy. To remove a project policy from
+// a project, call DeleteProjectPolicy.
+//
+// This operation requires permissions to perform the
 // rekognition:ListProjectPolicies action.
 func (c *Client) ListProjectPolicies(ctx context.Context, params *ListProjectPoliciesInput, optFns ...func(*Options)) (*ListProjectPoliciesOutput, error) {
 	if params == nil {

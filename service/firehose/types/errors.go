@@ -200,9 +200,10 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 
 // The service is unavailable. Back off and retry the operation. If you continue
 // to see the exception, throughput limits for the delivery stream may have been
-// exceeded. For more information about limits and how to request an increase, see
-// Amazon Firehose Limits (https://docs.aws.amazon.com/firehose/latest/dev/limits.html)
+// exceeded. For more information about limits and how to request an increase, see [Amazon Firehose Limits]
 // .
+//
+// [Amazon Firehose Limits]: https://docs.aws.amazon.com/firehose/latest/dev/limits.html
 type ServiceUnavailableException struct {
 	Message *string
 

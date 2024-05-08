@@ -29,7 +29,7 @@ func (c *Client) ListKxDataviews(ctx context.Context, params *ListKxDataviewsInp
 
 type ListKxDataviewsInput struct {
 
-	// The name of the database where the dataviews were created.
+	//  The name of the database where the dataviews were created.
 	//
 	// This member is required.
 	DatabaseName *string
@@ -43,7 +43,7 @@ type ListKxDataviewsInput struct {
 	// The maximum number of results to return in this request.
 	MaxResults int32
 
-	// A token that indicates where a results page should begin.
+	//  A token that indicates where a results page should begin.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -51,10 +51,10 @@ type ListKxDataviewsInput struct {
 
 type ListKxDataviewsOutput struct {
 
-	// The list of kdb dataviews that are currently active for the given database.
+	//  The list of kdb dataviews that are currently active for the given database.
 	KxDataviews []types.KxDataviewListEntry
 
-	// A token that indicates where a results page should begin.
+	//  A token that indicates where a results page should begin.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

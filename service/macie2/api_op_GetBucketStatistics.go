@@ -71,10 +71,12 @@ type GetBucketStatisticsOutput struct {
 
 	// The total storage size, in bytes, of all the objects that Amazon Macie can
 	// analyze in the buckets. These objects use a supported storage class and have a
-	// file name extension for a supported file or storage format. If versioning is
-	// enabled for any of the buckets, this value is based on the size of the latest
-	// version of each applicable object in the buckets. This value doesn't reflect the
-	// storage size of all versions of all applicable objects in the buckets.
+	// file name extension for a supported file or storage format.
+	//
+	// If versioning is enabled for any of the buckets, this value is based on the
+	// size of the latest version of each applicable object in the buckets. This value
+	// doesn't reflect the storage size of all versions of all applicable objects in
+	// the buckets.
 	ClassifiableSizeInBytes *int64
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
@@ -84,17 +86,20 @@ type GetBucketStatisticsOutput struct {
 	// The total number of objects in the buckets.
 	ObjectCount *int64
 
-	// The total storage size, in bytes, of the buckets. If versioning is enabled for
-	// any of the buckets, this value is based on the size of the latest version of
-	// each object in the buckets. This value doesn't reflect the storage size of all
-	// versions of the objects in the buckets.
+	// The total storage size, in bytes, of the buckets.
+	//
+	// If versioning is enabled for any of the buckets, this value is based on the
+	// size of the latest version of each object in the buckets. This value doesn't
+	// reflect the storage size of all versions of the objects in the buckets.
 	SizeInBytes *int64
 
 	// The total storage size, in bytes, of the objects that are compressed (.gz,
-	// .gzip, .zip) files in the buckets. If versioning is enabled for any of the
-	// buckets, this value is based on the size of the latest version of each
-	// applicable object in the buckets. This value doesn't reflect the storage size of
-	// all versions of the applicable objects in the buckets.
+	// .gzip, .zip) files in the buckets.
+	//
+	// If versioning is enabled for any of the buckets, this value is based on the
+	// size of the latest version of each applicable object in the buckets. This value
+	// doesn't reflect the storage size of all versions of the applicable objects in
+	// the buckets.
 	SizeInBytesCompressed *int64
 
 	// The total number of objects that Amazon Macie can't analyze in the buckets.

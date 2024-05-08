@@ -16,22 +16,32 @@ import (
 // running on the compute use this token to communicate with the Amazon GameLift
 // service, such as when calling the Amazon GameLift server SDK action InitSDK() .
 // Authentication tokens are valid for a limited time span, so you need to request
-// a fresh token before the current token expires. Use this operation based on the
-// fleet compute type:
+// a fresh token before the current token expires.
+//
+// Use this operation based on the fleet compute type:
+//
 //   - For EC2 fleets, auth token retrieval and refresh is handled automatically.
 //     All game servers that are running on all fleet instances have access to a valid
 //     auth token.
+//
 //   - For ANYWHERE and CONTAINER fleets, if you're using the Amazon GameLift
 //     Agent, auth token retrieval and refresh is handled automatically for any
 //     container or Anywhere compute where the Agent is running. If you're not using
 //     the Agent, create a mechanism to retrieve and refresh auth tokens for computes
 //     that are running game server processes.
 //
-// Learn more
-//   - Create an Anywhere fleet (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-anywhere.html)
-//   - Test your integration (https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-testing.html)
-//   - Server SDK reference guides (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk.html)
-//     (for version 5.x)
+// # Learn more
+//
+// [Create an Anywhere fleet]
+//
+// [Test your integration]
+//
+// [Server SDK reference guides]
+//   - (for version 5.x)
+//
+// [Test your integration]: https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-testing.html
+// [Server SDK reference guides]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk.html
+// [Create an Anywhere fleet]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-anywhere.html
 func (c *Client) GetComputeAuthToken(ctx context.Context, params *GetComputeAuthTokenInput, optFns ...func(*Options)) (*GetComputeAuthTokenOutput, error) {
 	if params == nil {
 		params = &GetComputeAuthTokenInput{}
@@ -72,10 +82,11 @@ type GetComputeAuthTokenOutput struct {
 	// A valid temporary authentication token.
 	AuthToken *string
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to an Amazon GameLift compute resource and uniquely
-	// identifies it. ARNs are unique across all Regions. Format is
-	// arn:aws:gamelift:::compute/compute-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	// The Amazon Resource Name ([ARN] ) that is assigned to an Amazon GameLift compute
+	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
+	// is arn:aws:gamelift:::compute/compute-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	ComputeArn *string
 
 	// The name of the compute resource that the authentication token is issued to.
@@ -84,10 +95,11 @@ type GetComputeAuthTokenOutput struct {
 	// The amount of time until the authentication token is no longer valid.
 	ExpirationTimestamp *time.Time
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
-	// it. ARNs are unique across all Regions. Format is
-	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift fleet
+	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
+	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	FleetArn *string
 
 	// A unique identifier for the fleet that the compute is registered to.

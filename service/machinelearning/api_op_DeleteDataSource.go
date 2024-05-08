@@ -10,10 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Assigns the DELETED status to a DataSource , rendering it unusable. After using
-// the DeleteDataSource operation, you can use the GetDataSource operation to
-// verify that the status of the DataSource changed to DELETED. Caution: The
-// results of the DeleteDataSource operation are irreversible.
+// Assigns the DELETED status to a DataSource , rendering it unusable.
+//
+// After using the DeleteDataSource operation, you can use the GetDataSource operation to
+// verify that the status of the DataSource changed to DELETED.
+//
+// Caution: The results of the DeleteDataSource operation are irreversible.
 func (c *Client) DeleteDataSource(ctx context.Context, params *DeleteDataSourceInput, optFns ...func(*Options)) (*DeleteDataSourceOutput, error) {
 	if params == nil {
 		params = &DeleteDataSourceInput{}

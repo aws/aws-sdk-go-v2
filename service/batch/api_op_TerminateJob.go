@@ -37,8 +37,8 @@ type TerminateJobInput struct {
 	JobId *string
 
 	// A message to attach to the job that explains the reason for canceling it. This
-	// message is returned by future DescribeJobs operations on the job. This message
-	// is also recorded in the Batch activity logs.
+	// message is returned by future DescribeJobsoperations on the job. This message is also
+	// recorded in the Batch activity logs.
 	//
 	// This member is required.
 	Reason *string

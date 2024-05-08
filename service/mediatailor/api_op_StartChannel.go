@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a channel. For information about MediaTailor channels, see Working with
-// channels (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
-// in the MediaTailor User Guide.
+// Starts a channel. For information about MediaTailor channels, see [Working with channels] in the
+// MediaTailor User Guide.
+//
+// [Working with channels]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html
 func (c *Client) StartChannel(ctx context.Context, params *StartChannelInput, optFns ...func(*Options)) (*StartChannelOutput, error) {
 	if params == nil {
 		params = &StartChannelInput{}

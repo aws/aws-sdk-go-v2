@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListReviewableHITs operation retrieves the HITs with Status equal to
+//	The ListReviewableHITs operation retrieves the HITs with Status equal to
+//
 // Reviewable or Status equal to Reviewing that belong to the Requester calling the
 // operation.
 func (c *Client) ListReviewableHITs(ctx context.Context, params *ListReviewableHITsInput, optFns ...func(*Options)) (*ListReviewableHITsOutput, error) {
@@ -31,17 +32,17 @@ func (c *Client) ListReviewableHITs(ctx context.Context, params *ListReviewableH
 
 type ListReviewableHITsInput struct {
 
-	// The ID of the HIT type of the HITs to consider for the query. If not specified,
-	// all HITs for the Reviewer are considered
+	//  The ID of the HIT type of the HITs to consider for the query. If not
+	// specified, all HITs for the Reviewer are considered
 	HITTypeId *string
 
-	// Limit the number of results returned.
+	//  Limit the number of results returned.
 	MaxResults *int32
 
 	// Pagination Token
 	NextToken *string
 
-	// Can be either Reviewable or Reviewing . Reviewable is the default value.
+	//  Can be either Reviewable or Reviewing . Reviewable is the default value.
 	Status types.ReviewableHITStatus
 
 	noSmithyDocumentSerde
@@ -49,7 +50,7 @@ type ListReviewableHITsInput struct {
 
 type ListReviewableHITsOutput struct {
 
-	// The list of HIT elements returned by the query.
+	//  The list of HIT elements returned by the query.
 	HITs []types.HIT
 
 	// If the previous response was incomplete (because there is more data to
@@ -57,8 +58,8 @@ type ListReviewableHITsOutput struct {
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
 
-	// The number of HITs on this page in the filtered results list, equivalent to the
-	// number of HITs being returned by this call.
+	//  The number of HITs on this page in the filtered results list, equivalent to
+	// the number of HITs being returned by this call.
 	NumResults *int32
 
 	// Metadata pertaining to the operation's result.
@@ -154,7 +155,7 @@ var _ ListReviewableHITsAPIClient = (*Client)(nil)
 // ListReviewableHITsPaginatorOptions is the paginator options for
 // ListReviewableHITs
 type ListReviewableHITsPaginatorOptions struct {
-	// Limit the number of results returned.
+	//  Limit the number of results returned.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

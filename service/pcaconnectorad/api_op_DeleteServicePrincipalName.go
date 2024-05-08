@@ -29,15 +29,16 @@ func (c *Client) DeleteServicePrincipalName(ctx context.Context, params *DeleteS
 
 type DeleteServicePrincipalNameInput struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called CreateConnector (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html)
-	// .
+	//  The Amazon Resource Name (ARN) that was returned when you called [CreateConnector].
+	//
+	// [CreateConnector]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html
 	//
 	// This member is required.
 	ConnectorArn *string
 
-	// The Amazon Resource Name (ARN) that was returned when you called
-	// CreateDirectoryRegistration (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html)
-	// .
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration].
+	//
+	// [CreateDirectoryRegistration]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html
 	//
 	// This member is required.
 	DirectoryRegistrationArn *string

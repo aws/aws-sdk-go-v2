@@ -44,12 +44,17 @@ type ListServiceInstancesInput struct {
 	// The name of the service that the service instance belongs to.
 	ServiceName *string
 
-	// The field that the result list is sorted by. When you choose to sort by
-	// serviceName , service instances within each service are sorted by service
-	// instance name. Default: serviceName
+	// The field that the result list is sorted by.
+	//
+	// When you choose to sort by serviceName , service instances within each service
+	// are sorted by service instance name.
+	//
+	// Default: serviceName
 	SortBy types.ListServiceInstancesSortBy
 
-	// Result list sort order. Default: ASCENDING
+	// Result list sort order.
+	//
+	// Default: ASCENDING
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde

@@ -11,12 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The BatchUpdateTableRows API allows you to update one or more rows in a table
-// in a workbook. You can specify the values to set in some or all of the columns
-// in the table for the specified rows. If a column is not explicitly specified in
-// a particular row, then that column will not be updated for that row. To clear
-// out the data in a specific cell, you need to set the value as an empty string
-// ("").
+//	The BatchUpdateTableRows API allows you to update one or more rows in a table
+//
+// in a workbook.
+//
+// You can specify the values to set in some or all of the columns in the table
+// for the specified rows. If a column is not explicitly specified in a particular
+// row, then that column will not be updated for that row. To clear out the data in
+// a specific cell, you need to set the value as an empty string ("").
 func (c *Client) BatchUpdateTableRows(ctx context.Context, params *BatchUpdateTableRowsInput, optFns ...func(*Options)) (*BatchUpdateTableRowsOutput, error) {
 	if params == nil {
 		params = &BatchUpdateTableRowsInput{}
@@ -34,34 +36,42 @@ func (c *Client) BatchUpdateTableRows(ctx context.Context, params *BatchUpdateTa
 
 type BatchUpdateTableRowsInput struct {
 
-	// The list of rows to update in the table. Each item in this list needs to
+	//  The list of rows to update in the table. Each item in this list needs to
 	// contain the row id to update along with the map of column id to cell values for
 	// each column in that row that needs to be updated. You need to specify at least
 	// one row in this list, and for each row, you need to specify at least one column
-	// to update. Note that if one of the row or column ids in the request does not
-	// exist in the table, then the request fails and no updates are made to the table.
+	// to update.
+	//
+	// Note that if one of the row or column ids in the request does not exist in the
+	// table, then the request fails and no updates are made to the table.
 	//
 	// This member is required.
 	RowsToUpdate []types.UpdateRowData
 
-	// The ID of the table where the rows are being updated. If a table with the
-	// specified id could not be found, this API throws ResourceNotFoundException.
+	// The ID of the table where the rows are being updated.
+	//
+	// If a table with the specified id could not be found, this API throws
+	// ResourceNotFoundException.
 	//
 	// This member is required.
 	TableId *string
 
-	// The ID of the workbook where the rows are being updated. If a workbook with the
-	// specified id could not be found, this API throws ResourceNotFoundException.
+	// The ID of the workbook where the rows are being updated.
+	//
+	// If a workbook with the specified id could not be found, this API throws
+	// ResourceNotFoundException.
 	//
 	// This member is required.
 	WorkbookId *string
 
-	// The request token for performing the update action. Request tokens help to
+	//  The request token for performing the update action. Request tokens help to
 	// identify duplicate requests. If a call times out or fails due to a transient
 	// error like a failed network connection, you can retry the call with the same
 	// request token. The service ensures that if the first call using that request
 	// token is successfully performed, the second call will not perform the action
-	// again. Note that request tokens are valid only for a few minutes. You cannot use
+	// again.
+	//
+	// Note that request tokens are valid only for a few minutes. You cannot use
 	// request tokens to dedupe requests spanning hours or days.
 	ClientRequestToken *string
 
@@ -75,7 +85,7 @@ type BatchUpdateTableRowsOutput struct {
 	// This member is required.
 	WorkbookCursor int64
 
-	// The list of batch items in the request that could not be updated in the table.
+	//  The list of batch items in the request that could not be updated in the table.
 	// Each element in this list contains one item from the request that could not be
 	// updated in the table along with the reason why that item could not be updated.
 	FailedBatchItems []types.FailedBatchItem

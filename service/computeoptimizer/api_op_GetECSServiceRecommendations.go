@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns Amazon ECS service recommendations. Compute Optimizer generates
-// recommendations for Amazon ECS services on Fargate that meet a specific set of
-// requirements. For more information, see the Supported resources and requirements (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html)
-// in the Compute Optimizer User Guide.
+//	Returns Amazon ECS service recommendations.
+//
+// Compute Optimizer generates recommendations for Amazon ECS services on Fargate
+// that meet a specific set of requirements. For more information, see the [Supported resources and requirements]in the
+// Compute Optimizer User Guide.
+//
+// [Supported resources and requirements]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
 func (c *Client) GetECSServiceRecommendations(ctx context.Context, params *GetECSServiceRecommendationsInput, optFns ...func(*Options)) (*GetECSServiceRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetECSServiceRecommendationsInput{}
@@ -32,27 +35,35 @@ func (c *Client) GetECSServiceRecommendations(ctx context.Context, params *GetEC
 
 type GetECSServiceRecommendationsInput struct {
 
-	// Return the Amazon ECS service recommendations to the specified Amazon Web
-	// Services account IDs. If your account is the management account or the delegated
-	// administrator of an organization, use this parameter to return the Amazon ECS
-	// service recommendations to specific member accounts. You can only specify one
-	// account ID per request.
+	//  Return the Amazon ECS service recommendations to the specified Amazon Web
+	// Services account IDs.
+	//
+	// If your account is the management account or the delegated administrator of an
+	// organization, use this parameter to return the Amazon ECS service
+	// recommendations to specific member accounts.
+	//
+	// You can only specify one account ID per request.
 	AccountIds []string
 
-	// An array of objects to specify a filter that returns a more specific list of
+	//  An array of objects to specify a filter that returns a more specific list of
 	// Amazon ECS service recommendations.
 	Filters []types.ECSServiceRecommendationFilter
 
-	// The maximum number of Amazon ECS service recommendations to return with a
-	// single request. To retrieve the remaining results, make another request with the
-	// returned nextToken value.
+	//  The maximum number of Amazon ECS service recommendations to return with a
+	// single request.
+	//
+	// To retrieve the remaining results, make another request with the returned
+	// nextToken value.
 	MaxResults *int32
 
-	// The token to advance to the next page of Amazon ECS service recommendations.
+	//  The token to advance to the next page of Amazon ECS service recommendations.
 	NextToken *string
 
-	// The ARN that identifies the Amazon ECS service. The following is the format of
-	// the ARN: arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name
+	//  The ARN that identifies the Amazon ECS service.
+	//
+	// The following is the format of the ARN:
+	//
+	//     arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name
 	ServiceArns []string
 
 	noSmithyDocumentSerde
@@ -60,13 +71,13 @@ type GetECSServiceRecommendationsInput struct {
 
 type GetECSServiceRecommendationsOutput struct {
 
-	// An array of objects that describe the Amazon ECS service recommendations.
+	//  An array of objects that describe the Amazon ECS service recommendations.
 	EcsServiceRecommendations []types.ECSServiceRecommendation
 
-	// An array of objects that describe errors of the request.
+	//  An array of objects that describe errors of the request.
 	Errors []types.GetRecommendationError
 
-	// The token to advance to the next page of Amazon ECS service recommendations.
+	//  The token to advance to the next page of Amazon ECS service recommendations.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

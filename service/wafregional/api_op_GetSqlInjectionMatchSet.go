@@ -11,12 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
-// in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
-// . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Returns the SqlInjectionMatchSet that is specified by
-// SqlInjectionMatchSetId .
+// This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
+// developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the [AWS WAF Developer Guide]. With the
+// latest version, AWS WAF has a single set of endpoints for regional and global
+// use.
+//
+// Returns the SqlInjectionMatchSet that is specified by SqlInjectionMatchSetId .
+//
+// [AWS WAF Classic]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+// [AWS WAF Developer Guide]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
 func (c *Client) GetSqlInjectionMatchSet(ctx context.Context, params *GetSqlInjectionMatchSetInput, optFns ...func(*Options)) (*GetSqlInjectionMatchSetOutput, error) {
 	if params == nil {
 		params = &GetSqlInjectionMatchSetInput{}
@@ -32,12 +37,11 @@ func (c *Client) GetSqlInjectionMatchSet(ctx context.Context, params *GetSqlInje
 	return out, nil
 }
 
-// A request to get a SqlInjectionMatchSet .
+// A request to get a SqlInjectionMatchSet.
 type GetSqlInjectionMatchSetInput struct {
 
-	// The SqlInjectionMatchSetId of the SqlInjectionMatchSet that you want to get.
-	// SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet and by
-	// ListSqlInjectionMatchSets .
+	// The SqlInjectionMatchSetId of the SqlInjectionMatchSet that you want to get. SqlInjectionMatchSetId
+	// is returned by CreateSqlInjectionMatchSetand by ListSqlInjectionMatchSets.
 	//
 	// This member is required.
 	SqlInjectionMatchSetId *string
@@ -48,13 +52,19 @@ type GetSqlInjectionMatchSetInput struct {
 // The response to a GetSqlInjectionMatchSet request.
 type GetSqlInjectionMatchSetOutput struct {
 
-	// Information about the SqlInjectionMatchSet that you specified in the
-	// GetSqlInjectionMatchSet request. For more information, see the following topics:
-	//   - SqlInjectionMatchSet : Contains Name , SqlInjectionMatchSetId , and an array
-	//   of SqlInjectionMatchTuple objects
-	//   - SqlInjectionMatchTuple : Each SqlInjectionMatchTuple object contains
-	//   FieldToMatch and TextTransformation
-	//   - FieldToMatch : Contains Data and Type
+	// Information about the SqlInjectionMatchSet that you specified in the GetSqlInjectionMatchSet
+	// request. For more information, see the following topics:
+	//
+	// SqlInjectionMatchSet
+	//   - : Contains Name , SqlInjectionMatchSetId , and an array of
+	//   SqlInjectionMatchTuple objects
+	//
+	// SqlInjectionMatchTuple
+	//   - : Each SqlInjectionMatchTuple object contains FieldToMatch and
+	//   TextTransformation
+	//
+	// FieldToMatch
+	//   - : Contains Data and Type
 	SqlInjectionMatchSet *types.SqlInjectionMatchSet
 
 	// Metadata pertaining to the operation's result.

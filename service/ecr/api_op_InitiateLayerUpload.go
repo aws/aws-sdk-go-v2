@@ -10,13 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Notifies Amazon ECR that you intend to upload an image layer. When an image is
-// pushed, the InitiateLayerUpload API is called once per image layer that has not
-// already been uploaded. Whether or not an image layer has been uploaded is
-// determined by the BatchCheckLayerAvailability API action. This operation is used
-// by the Amazon ECR proxy and is not generally used by customers for pulling and
-// pushing images. In most cases, you should use the docker CLI to pull, tag, and
-// push images.
+// Notifies Amazon ECR that you intend to upload an image layer.
+//
+// When an image is pushed, the InitiateLayerUpload API is called once per image
+// layer that has not already been uploaded. Whether or not an image layer has been
+// uploaded is determined by the BatchCheckLayerAvailability API action.
+//
+// This operation is used by the Amazon ECR proxy and is not generally used by
+// customers for pulling and pushing images. In most cases, you should use the
+// docker CLI to pull, tag, and push images.
 func (c *Client) InitiateLayerUpload(ctx context.Context, params *InitiateLayerUploadInput, optFns ...func(*Options)) (*InitiateLayerUploadOutput, error) {
 	if params == nil {
 		params = &InitiateLayerUploadInput{}
@@ -52,8 +54,8 @@ type InitiateLayerUploadOutput struct {
 	// The size, in bytes, that Amazon ECR expects future layer part uploads to be.
 	PartSize *int64
 
-	// The upload ID for the layer upload. This parameter is passed to further
-	// UploadLayerPart and CompleteLayerUpload operations.
+	// The upload ID for the layer upload. This parameter is passed to further UploadLayerPart and CompleteLayerUpload
+	// operations.
 	UploadId *string
 
 	// Metadata pertaining to the operation's result.

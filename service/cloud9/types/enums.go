@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectionType) Values() []ConnectionType {
 	return []ConnectionType{
 		"CONNECT_SSH",
@@ -33,6 +34,7 @@ const (
 
 // Values returns all known values for EnvironmentLifecycleStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (EnvironmentLifecycleStatus) Values() []EnvironmentLifecycleStatus {
 	return []EnvironmentLifecycleStatus{
@@ -58,8 +60,9 @@ const (
 )
 
 // Values returns all known values for EnvironmentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnvironmentStatus) Values() []EnvironmentStatus {
 	return []EnvironmentStatus{
 		"error",
@@ -81,8 +84,9 @@ const (
 )
 
 // Values returns all known values for EnvironmentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnvironmentType) Values() []EnvironmentType {
 	return []EnvironmentType{
 		"ssh",
@@ -100,6 +104,7 @@ const (
 
 // Values returns all known values for ManagedCredentialsAction. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ManagedCredentialsAction) Values() []ManagedCredentialsAction {
 	return []ManagedCredentialsAction{
@@ -127,6 +132,7 @@ const (
 
 // Values returns all known values for ManagedCredentialsStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ManagedCredentialsStatus) Values() []ManagedCredentialsStatus {
 	return []ManagedCredentialsStatus{
@@ -153,8 +159,9 @@ const (
 )
 
 // Values returns all known values for MemberPermissions. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MemberPermissions) Values() []MemberPermissions {
 	return []MemberPermissions{
 		"read-write",
@@ -172,8 +179,9 @@ const (
 )
 
 // Values returns all known values for Permissions. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Permissions) Values() []Permissions {
 	return []Permissions{
 		"owner",

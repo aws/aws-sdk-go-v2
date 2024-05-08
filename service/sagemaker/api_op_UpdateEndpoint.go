@@ -15,17 +15,22 @@ import (
 // instances. SageMaker shifts endpoint traffic to the new instances with the
 // updated endpoint configuration and then deletes the old instances using the
 // previous EndpointConfig (there is no availability loss). For more information
-// about how to control the update and traffic shifting process, see Update models
-// in production (https://docs.aws.amazon.com/sagemaker/latest/dg/deployment-guardrails.html)
-// . When SageMaker receives the request, it sets the endpoint status to Updating .
+// about how to control the update and traffic shifting process, see [Update models in production].
+//
+// When SageMaker receives the request, it sets the endpoint status to Updating .
 // After updating the endpoint, it sets the status to InService . To check the
-// status of an endpoint, use the DescribeEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html)
-// API. You must not delete an EndpointConfig in use by an endpoint that is live
-// or while the UpdateEndpoint or CreateEndpoint operations are being performed on
-// the endpoint. To update an endpoint, you must create a new EndpointConfig . If
-// you delete the EndpointConfig of an endpoint that is active or being created or
-// updated you may lose visibility into the instance type the endpoint is using.
+// status of an endpoint, use the [DescribeEndpoint]API.
+//
+// You must not delete an EndpointConfig in use by an endpoint that is live or
+// while the UpdateEndpoint or CreateEndpoint operations are being performed on
+// the endpoint. To update an endpoint, you must create a new EndpointConfig .
+//
+// If you delete the EndpointConfig of an endpoint that is active or being created
+// or updated you may lose visibility into the instance type the endpoint is using.
 // The endpoint must be deleted in order to stop incurring charges.
+//
+// [DescribeEndpoint]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html
+// [Update models in production]: https://docs.aws.amazon.com/sagemaker/latest/dg/deployment-guardrails.html
 func (c *Client) UpdateEndpoint(ctx context.Context, params *UpdateEndpointInput, optFns ...func(*Options)) (*UpdateEndpointOutput, error) {
 	if params == nil {
 		params = &UpdateEndpointInput{}
@@ -59,19 +64,20 @@ type UpdateEndpointInput struct {
 
 	// When you are updating endpoint resources with RetainAllVariantProperties , whose
 	// value is set to true , ExcludeRetainedVariantProperties specifies the list of
-	// type VariantProperty (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VariantProperty.html)
-	// to override with the values provided by EndpointConfig . If you don't specify a
-	// value for ExcludeRetainedVariantProperties , no variant properties are
+	// type [VariantProperty]to override with the values provided by EndpointConfig . If you don't
+	// specify a value for ExcludeRetainedVariantProperties , no variant properties are
 	// overridden.
+	//
+	// [VariantProperty]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VariantProperty.html
 	ExcludeRetainedVariantProperties []types.VariantProperty
 
-	// When updating endpoint resources, enables or disables the retention of variant
-	// properties (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VariantProperty.html)
-	// , such as the instance count or the variant weight. To retain the variant
-	// properties of an endpoint when updating it, set RetainAllVariantProperties to
-	// true . To use the variant properties specified in a new EndpointConfig call
-	// when updating an endpoint, set RetainAllVariantProperties to false . The default
-	// is false .
+	// When updating endpoint resources, enables or disables the retention of [variant properties], such
+	// as the instance count or the variant weight. To retain the variant properties of
+	// an endpoint when updating it, set RetainAllVariantProperties to true . To use
+	// the variant properties specified in a new EndpointConfig call when updating an
+	// endpoint, set RetainAllVariantProperties to false . The default is false .
+	//
+	// [variant properties]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VariantProperty.html
 	RetainAllVariantProperties *bool
 
 	// Specifies whether to reuse the last deployment configuration. The default value

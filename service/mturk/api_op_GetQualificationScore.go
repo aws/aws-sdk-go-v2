@@ -11,11 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The GetQualificationScore operation returns the value of a Worker's
-// Qualification for a given Qualification type. To get a Worker's Qualification,
-// you must know the Worker's ID. The Worker's ID is included in the assignment
-// data returned by the ListAssignmentsForHIT operation. Only the owner of a
-// Qualification type can query the value of a Worker's Qualification of that type.
+//	The GetQualificationScore operation returns the value of a Worker's
+//
+// Qualification for a given Qualification type.
+//
+// To get a Worker's Qualification, you must know the Worker's ID. The Worker's ID
+// is included in the assignment data returned by the ListAssignmentsForHIT
+// operation.
+//
+// Only the owner of a Qualification type can query the value of a Worker's
+// Qualification of that type.
 func (c *Client) GetQualificationScore(ctx context.Context, params *GetQualificationScoreInput, optFns ...func(*Options)) (*GetQualificationScoreOutput, error) {
 	if params == nil {
 		params = &GetQualificationScoreInput{}
@@ -48,7 +53,7 @@ type GetQualificationScoreInput struct {
 
 type GetQualificationScoreOutput struct {
 
-	// The Qualification data structure of the Qualification assigned to a user,
+	//  The Qualification data structure of the Qualification assigned to a user,
 	// including the Qualification type and the value (score).
 	Qualification *types.Qualification
 

@@ -14,16 +14,19 @@ import (
 // Validates an address to be used for 911 calls made with Amazon Chime Voice
 // Connectors. You can use validated addresses in a Presence Information Data
 // Format Location Object file that you include in SIP requests. That helps ensure
-// that addresses are routed to the appropriate Public Safety Answering Point. This
-// API is is no longer supported and will not be updated. We recommend using the
-// latest version, ValidateE911Address (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_ValidateE911Address.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// that addresses are routed to the appropriate Public Safety Answering Point.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [ValidateE911Address], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by ValidateE911Address in the Amazon Chime SDK Voice
 // Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [ValidateE911Address]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_ValidateE911Address.html
 func (c *Client) ValidateE911Address(ctx context.Context, params *ValidateE911AddressInput, optFns ...func(*Options)) (*ValidateE911AddressOutput, error) {
 	if params == nil {
 		params = &ValidateE911AddressInput{}

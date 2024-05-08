@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of proposals for the network. Applies only to Hyperledger Fabric.
+// Returns a list of proposals for the network.
+//
+// Applies only to Hyperledger Fabric.
 func (c *Client) ListProposals(ctx context.Context, params *ListProposalsInput, optFns ...func(*Options)) (*ListProposalsOutput, error) {
 	if params == nil {
 		params = &ListProposalsInput{}
@@ -29,15 +31,15 @@ func (c *Client) ListProposals(ctx context.Context, params *ListProposalsInput, 
 
 type ListProposalsInput struct {
 
-	// The unique identifier of the network.
+	//  The unique identifier of the network.
 	//
 	// This member is required.
 	NetworkId *string
 
-	// The maximum number of proposals to return.
+	//  The maximum number of proposals to return.
 	MaxResults *int32
 
-	// The pagination token that indicates the next set of results to retrieve.
+	//  The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -145,7 +147,7 @@ var _ ListProposalsAPIClient = (*Client)(nil)
 
 // ListProposalsPaginatorOptions is the paginator options for ListProposals
 type ListProposalsPaginatorOptions struct {
-	// The maximum number of proposals to return.
+	//  The maximum number of proposals to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

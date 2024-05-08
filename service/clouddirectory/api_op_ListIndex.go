@@ -43,8 +43,9 @@ type ListIndexInput struct {
 	ConsistencyLevel types.ConsistencyLevel
 
 	// The maximum number of objects in a single page to retrieve from the index
-	// during a request. For more information, see Amazon Cloud Directory Limits (http://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-	// .
+	// during a request. For more information, see [Amazon Cloud Directory Limits].
+	//
+	// [Amazon Cloud Directory Limits]: http://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html
 	MaxResults *int32
 
 	// The pagination token.
@@ -159,8 +160,9 @@ var _ ListIndexAPIClient = (*Client)(nil)
 // ListIndexPaginatorOptions is the paginator options for ListIndex
 type ListIndexPaginatorOptions struct {
 	// The maximum number of objects in a single page to retrieve from the index
-	// during a request. For more information, see Amazon Cloud Directory Limits (http://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-	// .
+	// during a request. For more information, see [Amazon Cloud Directory Limits].
+	//
+	// [Amazon Cloud Directory Limits]: http://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

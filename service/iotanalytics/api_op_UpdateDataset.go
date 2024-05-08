@@ -44,8 +44,9 @@ type UpdateDatasetInput struct {
 	ContentDeliveryRules []types.DatasetContentDeliveryRule
 
 	// A list of data rules that send notifications to CloudWatch, when data arrives
-	// late. To specify lateDataRules , the dataset must use a DeltaTimer (https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html)
-	// filter.
+	// late. To specify lateDataRules , the dataset must use a [DeltaTimer] filter.
+	//
+	// [DeltaTimer]: https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html
 	LateDataRules []types.LateDataRule
 
 	// How long, in days, dataset contents are kept for the dataset.
@@ -58,9 +59,9 @@ type UpdateDatasetInput struct {
 	// Optional. How many versions of dataset contents are kept. If not specified or
 	// set to null, only the latest version plus the latest succeeded version (if they
 	// are different) are kept for the time period specified by the retentionPeriod
-	// parameter. For more information, see Keeping Multiple Versions of IoT Analytics
-	// datasets (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
-	// in the IoT Analytics User Guide.
+	// parameter. For more information, see [Keeping Multiple Versions of IoT Analytics datasets]in the IoT Analytics User Guide.
+	//
+	// [Keeping Multiple Versions of IoT Analytics datasets]: https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions
 	VersioningConfiguration *types.VersioningConfiguration
 
 	noSmithyDocumentSerde

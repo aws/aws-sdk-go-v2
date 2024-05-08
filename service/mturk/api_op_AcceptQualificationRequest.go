@@ -10,10 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The AcceptQualificationRequest operation approves a Worker's request for a
-// Qualification. Only the owner of the Qualification type can grant a
-// Qualification request for that type. A successful request for the
-// AcceptQualificationRequest operation returns with no errors and an empty body.
+//	The AcceptQualificationRequest operation approves a Worker's request for a
+//
+// Qualification.
+//
+// Only the owner of the Qualification type can grant a Qualification request for
+// that type.
+//
+// A successful request for the AcceptQualificationRequest operation returns with
+// no errors and an empty body.
 func (c *Client) AcceptQualificationRequest(ctx context.Context, params *AcceptQualificationRequestInput, optFns ...func(*Options)) (*AcceptQualificationRequestOutput, error) {
 	if params == nil {
 		params = &AcceptQualificationRequestInput{}
@@ -37,7 +42,7 @@ type AcceptQualificationRequestInput struct {
 	// This member is required.
 	QualificationRequestId *string
 
-	// The value of the Qualification. You can omit this value if you are using the
+	//  The value of the Qualification. You can omit this value if you are using the
 	// presence or absence of the Qualification as the basis for a HIT requirement.
 	IntegerValue *int32
 

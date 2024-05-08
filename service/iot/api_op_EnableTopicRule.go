@@ -10,8 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the rule. Requires permission to access the EnableTopicRule (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Enables the rule.
+//
+// Requires permission to access the [EnableTopicRule] action.
+//
+// [EnableTopicRule]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) EnableTopicRule(ctx context.Context, params *EnableTopicRuleInput, optFns ...func(*Options)) (*EnableTopicRuleOutput, error) {
 	if params == nil {
 		params = &EnableTopicRuleInput{}

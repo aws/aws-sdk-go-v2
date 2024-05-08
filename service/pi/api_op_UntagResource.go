@@ -31,8 +31,9 @@ type UntagResourceInput struct {
 
 	// The Amazon RDS Performance Insights resource that the tags are added to. This
 	// value is an Amazon Resource Name (ARN). For information about creating an ARN,
-	// see Constructing an RDS Amazon Resource Name (ARN) (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
-	// .
+	// see [Constructing an RDS Amazon Resource Name (ARN)].
+	//
+	// [Constructing an RDS Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
 	//
 	// This member is required.
 	ResourceARN *string

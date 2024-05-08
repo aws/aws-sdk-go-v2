@@ -76,12 +76,13 @@ type Application struct {
 	// The network configuration for customer VPC connectivity for the application.
 	NetworkConfiguration *NetworkConfiguration
 
-	// The Configuration (https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html)
-	// specifications of an application. Each configuration consists of a
+	// The [Configuration] specifications of an application. Each configuration consists of a
 	// classification and properties. You use this parameter when creating or updating
 	// an application. To see the runtimeConfiguration object of an application, run
-	// the GetApplication (https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_GetApplication.html)
-	// API operation.
+	// the [GetApplication]API operation.
+	//
+	// [Configuration]: https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html
+	// [GetApplication]: https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_GetApplication.html
 	RuntimeConfiguration []Configuration
 
 	// The state details of the application.
@@ -194,11 +195,14 @@ type CloudWatchLoggingConfiguration struct {
 	// The types of logs that you want to publish to CloudWatch. If you don't specify
 	// any log types, driver STDOUT and STDERR logs will be published to CloudWatch
 	// Logs by default. For more information including the supported worker types for
-	// Hive and Spark, see Logging for EMR Serverless with CloudWatch (https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/logging.html#jobs-log-storage-cw)
-	// .
+	// Hive and Spark, see [Logging for EMR Serverless with CloudWatch].
+	//
 	//   - Key Valid Values: SPARK_DRIVER , SPARK_EXECUTOR , HIVE_DRIVER , TEZ_TASK
+	//
 	//   - Array Members Valid Values: STDOUT , STDERR , HIVE_LOG , TEZ_AM ,
 	//   SYSTEM_LOGS
+	//
+	// [Logging for EMR Serverless with CloudWatch]: https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/logging.html#jobs-log-storage-cw
 	LogTypes map[string][]string
 
 	noSmithyDocumentSerde

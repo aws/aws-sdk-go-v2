@@ -29,28 +29,28 @@ func (c *Client) NotifyTerminateProvisionedProductEngineWorkflowResult(ctx conte
 
 type NotifyTerminateProvisionedProductEngineWorkflowResultInput struct {
 
-	// The idempotency token that identifies the terminate engine execution.
+	//  The idempotency token that identifies the terminate engine execution.
 	//
 	// This member is required.
 	IdempotencyToken *string
 
-	// The identifier of the record.
+	//  The identifier of the record.
 	//
 	// This member is required.
 	RecordId *string
 
-	// The status of the terminate engine execution.
+	//  The status of the terminate engine execution.
 	//
 	// This member is required.
 	Status types.EngineWorkflowStatus
 
-	// The encrypted contents of the terminate engine execution payload that Service
+	//  The encrypted contents of the terminate engine execution payload that Service
 	// Catalog sends after the Terraform product terminate workflow starts.
 	//
 	// This member is required.
 	WorkflowToken *string
 
-	// The reason why the terminate engine execution failed.
+	//  The reason why the terminate engine execution failed.
 	FailureReason *string
 
 	noSmithyDocumentSerde

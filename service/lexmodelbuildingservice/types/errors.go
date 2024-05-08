@@ -168,7 +168,8 @@ func (e *NotFoundException) ErrorCode() string {
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The checksum of the resource that you are trying to change does not match the
+//	The checksum of the resource that you are trying to change does not match the
+//
 // checksum in the request. Check the resource's checksum and try again.
 type PreconditionFailedException struct {
 	Message *string
@@ -197,8 +198,11 @@ func (e *PreconditionFailedException) ErrorFault() smithy.ErrorFault { return sm
 
 // The resource that you are attempting to delete is referred to by another
 // resource. Use this information to remove references to the resource that you are
-// trying to delete. The body of the exception contains a JSON object that
-// describes the resource. { "resourceType": BOT | BOTALIAS | BOTCHANNEL | INTENT,
+// trying to delete.
+//
+// The body of the exception contains a JSON object that describes the resource.
+//
+//	{ "resourceType": BOT | BOTALIAS | BOTCHANNEL | INTENT,
 //
 //	"resourceReference": {
 //

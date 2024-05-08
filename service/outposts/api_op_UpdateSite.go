@@ -29,7 +29,7 @@ func (c *Client) UpdateSite(ctx context.Context, params *UpdateSiteInput, optFns
 
 type UpdateSiteInput struct {
 
-	// The ID or the Amazon Resource Name (ARN) of the site.
+	//  The ID or the Amazon Resource Name (ARN) of the site.
 	//
 	// This member is required.
 	SiteId *string

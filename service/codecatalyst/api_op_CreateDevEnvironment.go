@@ -13,10 +13,12 @@ import (
 
 // Creates a Dev Environment in Amazon CodeCatalyst, a cloud-based development
 // environment that you can use to quickly work on the code stored in the source
-// repositories of your project. When created in the Amazon CodeCatalyst console,
-// by default a Dev Environment is configured to have a 2 core processor, 4GB of
-// RAM, and 16GB of persistent storage. None of these defaults apply to a Dev
-// Environment created programmatically.
+// repositories of your project.
+//
+// When created in the Amazon CodeCatalyst console, by default a Dev Environment
+// is configured to have a 2 core processor, 4GB of RAM, and 16GB of persistent
+// storage. None of these defaults apply to a Dev Environment created
+// programmatically.
 func (c *Client) CreateDevEnvironment(ctx context.Context, params *CreateDevEnvironmentInput, optFns ...func(*Options)) (*CreateDevEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateDevEnvironmentInput{}
@@ -39,9 +41,10 @@ type CreateDevEnvironmentInput struct {
 	// This member is required.
 	InstanceType types.InstanceType
 
-	// Information about the amount of storage allocated to the Dev Environment. By
-	// default, a Dev Environment is configured to have 16GB of persistent storage when
-	// created from the Amazon CodeCatalyst console, but there is no default when
+	// Information about the amount of storage allocated to the Dev Environment.
+	//
+	// By default, a Dev Environment is configured to have 16GB of persistent storage
+	// when created from the Amazon CodeCatalyst console, but there is no default when
 	// programmatically creating a Dev Environment. Valid values for persistent storage
 	// are based on memory sizes in 16GB increments. Valid values are 16, 32, and 64.
 	//
@@ -68,9 +71,10 @@ type CreateDevEnvironmentInput struct {
 	ClientToken *string
 
 	// Information about the integrated development environment (IDE) configured for a
-	// Dev Environment. An IDE is required to create a Dev Environment. For Dev
-	// Environment creation, this field contains configuration information and must be
-	// provided.
+	// Dev Environment.
+	//
+	// An IDE is required to create a Dev Environment. For Dev Environment creation,
+	// this field contains configuration information and must be provided.
 	Ides []types.IdeConfiguration
 
 	// The amount of time the Dev Environment will run without any activity detected

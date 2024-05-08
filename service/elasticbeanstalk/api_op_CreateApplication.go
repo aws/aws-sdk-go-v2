@@ -43,9 +43,10 @@ type CreateApplicationInput struct {
 	// application from accumulating too many versions.
 	ResourceLifecycleConfig *types.ApplicationResourceLifecycleConfig
 
-	// Specifies the tags applied to the application. Elastic Beanstalk applies these
-	// tags only to the application. Environments that you create in the application
-	// don't inherit the tags.
+	// Specifies the tags applied to the application.
+	//
+	// Elastic Beanstalk applies these tags only to the application. Environments that
+	// you create in the application don't inherit the tags.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -54,7 +55,7 @@ type CreateApplicationInput struct {
 // Result message containing a single description of an application.
 type CreateApplicationOutput struct {
 
-	// The ApplicationDescription of the application.
+	//  The ApplicationDescription of the application.
 	Application *types.ApplicationDescription
 
 	// Metadata pertaining to the operation's result.

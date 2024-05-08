@@ -15,27 +15,35 @@ import (
 // address or domain that you use when you send email. Before you can use an
 // identity to send email, you first have to verify it. By verifying an identity,
 // you demonstrate that you're the owner of the identity, and that you've given
-// Amazon SES API v2 permission to send email from the identity. When you verify an
-// email address, Amazon SES sends an email to the address. Your email address is
-// verified as soon as you follow the link in the verification email. When you
-// verify a domain without specifying the DkimSigningAttributes object, this
-// operation provides a set of DKIM tokens. You can convert these tokens into CNAME
-// records, which you then add to the DNS configuration for your domain. Your
+// Amazon SES API v2 permission to send email from the identity.
+//
+// When you verify an email address, Amazon SES sends an email to the address.
+// Your email address is verified as soon as you follow the link in the
+// verification email.
+//
+// When you verify a domain without specifying the DkimSigningAttributes object,
+// this operation provides a set of DKIM tokens. You can convert these tokens into
+// CNAME records, which you then add to the DNS configuration for your domain. Your
 // domain is verified when Amazon SES detects these records in the DNS
-// configuration for your domain. This verification method is known as Easy DKIM (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html)
-// . Alternatively, you can perform the verification process by providing your own
+// configuration for your domain. This verification method is known as [Easy DKIM].
+//
+// Alternatively, you can perform the verification process by providing your own
 // public-private key pair. This verification method is known as Bring Your Own
 // DKIM (BYODKIM). To use BYODKIM, your call to the CreateEmailIdentity operation
 // has to include the DkimSigningAttributes object. When you specify this object,
 // you provide a selector (a component of the DNS record name that identifies the
-// public key to use for DKIM authentication) and a private key. When you verify a
-// domain, this operation provides a set of DKIM tokens, which you can convert into
-// CNAME tokens. You add these CNAME tokens to the DNS configuration for your
-// domain. Your domain is verified when Amazon SES detects these records in the DNS
-// configuration for your domain. For some DNS providers, it can take 72 hours or
-// more to complete the domain verification process. Additionally, you can
-// associate an existing configuration set with the email identity that you're
-// verifying.
+// public key to use for DKIM authentication) and a private key.
+//
+// When you verify a domain, this operation provides a set of DKIM tokens, which
+// you can convert into CNAME tokens. You add these CNAME tokens to the DNS
+// configuration for your domain. Your domain is verified when Amazon SES detects
+// these records in the DNS configuration for your domain. For some DNS providers,
+// it can take 72 hours or more to complete the domain verification process.
+//
+// Additionally, you can associate an existing configuration set with the email
+// identity that you're verifying.
+//
+// [Easy DKIM]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
 func (c *Client) CreateEmailIdentity(ctx context.Context, params *CreateEmailIdentityInput, optFns ...func(*Options)) (*CreateEmailIdentityOutput, error) {
 	if params == nil {
 		params = &CreateEmailIdentityInput{}
@@ -67,9 +75,12 @@ type CreateEmailIdentityInput struct {
 
 	// If your request includes this object, Amazon SES configures the identity to use
 	// Bring Your Own DKIM (BYODKIM) for DKIM authentication purposes, or, configures
-	// the key length to be used for Easy DKIM (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html)
-	// . You can only specify this object if the email identity is a domain, as opposed
+	// the key length to be used for [Easy DKIM].
+	//
+	// You can only specify this object if the email identity is a domain, as opposed
 	// to an address.
+	//
+	// [Easy DKIM]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
 	DkimSigningAttributes *types.DkimSigningAttributes
 
 	// An array of objects that define the tags (keys and values) to associate with
@@ -80,8 +91,9 @@ type CreateEmailIdentityInput struct {
 }
 
 // If the email identity is a domain, this object contains information about the
-// DKIM verification status for the domain. If the email identity is an email
-// address, this object is empty.
+// DKIM verification status for the domain.
+//
+// If the email identity is an email address, this object is empty.
 type CreateEmailIdentityOutput struct {
 
 	// An object that contains information about the DKIM attributes for the identity.
@@ -93,8 +105,9 @@ type CreateEmailIdentityOutput struct {
 
 	// Specifies whether or not the identity is verified. You can only send email from
 	// verified email addresses or domains. For more information about verifying
-	// identities, see the Amazon Pinpoint User Guide (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html)
-	// .
+	// identities, see the [Amazon Pinpoint User Guide].
+	//
+	// [Amazon Pinpoint User Guide]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html
 	VerifiedForSendingStatus bool
 
 	// Metadata pertaining to the operation's result.

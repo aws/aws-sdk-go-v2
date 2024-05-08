@@ -67,7 +67,7 @@ type CreateWebExperienceInput struct {
 
 type CreateWebExperienceOutput struct {
 
-	// The Amazon Resource Name (ARN) of an Amazon Q Business web experience.
+	//  The Amazon Resource Name (ARN) of an Amazon Q Business web experience.
 	WebExperienceArn *string
 
 	// The identifier of the Amazon Q Business web experience.

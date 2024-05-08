@@ -44,11 +44,16 @@ type DescribeAccountSubscriptionInput struct {
 type DescribeAccountSubscriptionOutput struct {
 
 	// A structure that contains the following elements:
+	//
 	//   - Your Amazon QuickSight account name.
+	//
 	//   - The edition of Amazon QuickSight that your account is using.
+	//
 	//   - The notification email address that is associated with the Amazon
 	//   QuickSight account.
+	//
 	//   - The authentication type of the Amazon QuickSight account.
+	//
 	//   - The status of the Amazon QuickSight account's subscription.
 	AccountInfo *types.AccountInfo
 

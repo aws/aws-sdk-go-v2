@@ -13,11 +13,16 @@ import (
 
 // Gets status information about a specified load job. Neptune keeps track of the
 // most recent 1,024 bulk load jobs, and stores the last 10,000 error details per
-// job. See Neptune Loader Get-Status API (https://docs.aws.amazon.com/neptune/latest/userguide/load-api-reference-status.htm)
-// for more information. When invoking this operation in a Neptune cluster that has
-// IAM authentication enabled, the IAM user or role making the request must have a
-// policy attached that allows the neptune-db:GetLoaderJobStatus (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getloaderjobstatus)
-// IAM action in that cluster..
+// job.
+//
+// See [Neptune Loader Get-Status API] for more information.
+//
+// When invoking this operation in a Neptune cluster that has IAM authentication
+// enabled, the IAM user or role making the request must have a policy attached
+// that allows the [neptune-db:GetLoaderJobStatus]IAM action in that cluster..
+//
+// [neptune-db:GetLoaderJobStatus]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getloaderjobstatus
+// [Neptune Loader Get-Status API]: https://docs.aws.amazon.com/neptune/latest/userguide/load-api-reference-status.htm
 func (c *Client) GetLoaderJobStatus(ctx context.Context, params *GetLoaderJobStatusInput, optFns ...func(*Options)) (*GetLoaderJobStatusOutput, error) {
 	if params == nil {
 		params = &GetLoaderJobStatusInput{}
@@ -45,8 +50,10 @@ type GetLoaderJobStatusInput struct {
 	Details *bool
 
 	// Flag indicating whether or not to include a list of errors encountered ( TRUE
-	// or FALSE ; the default is FALSE ). The list of errors is paged. The page and
-	// errorsPerPage parameters allow you to page through all the errors.
+	// or FALSE ; the default is FALSE ).
+	//
+	// The list of errors is paged. The page and errorsPerPage parameters allow you to
+	// page through all the errors.
 	Errors *bool
 
 	// The number of errors returned in each page (a positive integer; the default is

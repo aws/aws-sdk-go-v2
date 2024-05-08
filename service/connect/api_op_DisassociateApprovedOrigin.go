@@ -11,6 +11,7 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
+//
 // Revokes access to integrated applications from Amazon Connect.
 func (c *Client) DisassociateApprovedOrigin(ctx context.Context, params *DisassociateApprovedOriginInput, optFns ...func(*Options)) (*DisassociateApprovedOriginOutput, error) {
 	if params == nil {
@@ -29,8 +30,10 @@ func (c *Client) DisassociateApprovedOrigin(ctx context.Context, params *Disasso
 
 type DisassociateApprovedOriginInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

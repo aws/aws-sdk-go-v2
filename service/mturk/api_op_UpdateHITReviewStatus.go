@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The UpdateHITReviewStatus operation updates the status of a HIT. If the status
+//	The UpdateHITReviewStatus operation updates the status of a HIT. If the status
+//
 // is Reviewable, this operation can update the status to Reviewing, or it can
 // revert a Reviewing HIT back to the Reviewable status.
 func (c *Client) UpdateHITReviewStatus(ctx context.Context, params *UpdateHITReviewStatusInput, optFns ...func(*Options)) (*UpdateHITReviewStatusOutput, error) {
@@ -30,14 +31,16 @@ func (c *Client) UpdateHITReviewStatus(ctx context.Context, params *UpdateHITRev
 
 type UpdateHITReviewStatusInput struct {
 
-	// The ID of the HIT to update.
+	//  The ID of the HIT to update.
 	//
 	// This member is required.
 	HITId *string
 
-	// Specifies how to update the HIT status. Default is False .
+	//  Specifies how to update the HIT status. Default is False .
+	//
 	//   - Setting this to false will only transition a HIT from Reviewable to
 	//   Reviewing
+	//
 	//   - Setting this to true will only transition a HIT from Reviewing to Reviewable
 	Revert *bool
 

@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes tags (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html)
-// from a detector, dataset, or alert.
+// Removes [tags] from a detector, dataset, or alert.
+//
+// [tags]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

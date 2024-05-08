@@ -127,38 +127,45 @@ type CvssScoreDetails struct {
 // An object representing a filter on a DescribeImages operation.
 type DescribeImagesFilter struct {
 
-	// The tag status with which to filter your DescribeImages results. You can filter
-	// results based on whether they are TAGGED or UNTAGGED .
+	// The tag status with which to filter your DescribeImages results. You can filter results based
+	// on whether they are TAGGED or UNTAGGED .
 	TagStatus TagStatus
 
 	noSmithyDocumentSerde
 }
 
 // The encryption configuration for the repository. This determines how the
-// contents of your repository are encrypted at rest. By default, when no
-// encryption configuration is set or the AES256 encryption type is used, Amazon
-// ECR uses server-side encryption with Amazon S3-managed encryption keys which
-// encrypts your data at rest using an AES-256 encryption algorithm. This does not
-// require any action on your part. For more control over the encryption of the
-// contents of your repository, you can use server-side encryption with Key
-// Management Service key stored in Key Management Service (KMS) to encrypt your
-// images. For more information, see Amazon ECR encryption at rest (https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html)
-// in the Amazon Elastic Container Registry User Guide.
+// contents of your repository are encrypted at rest.
+//
+// By default, when no encryption configuration is set or the AES256 encryption
+// type is used, Amazon ECR uses server-side encryption with Amazon S3-managed
+// encryption keys which encrypts your data at rest using an AES-256 encryption
+// algorithm. This does not require any action on your part.
+//
+// For more control over the encryption of the contents of your repository, you
+// can use server-side encryption with Key Management Service key stored in Key
+// Management Service (KMS) to encrypt your images. For more information, see [Amazon ECR encryption at rest]in
+// the Amazon Elastic Container Registry User Guide.
+//
+// [Amazon ECR encryption at rest]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html
 type EncryptionConfiguration struct {
 
-	// The encryption type to use. If you use the KMS encryption type, the contents of
-	// the repository will be encrypted using server-side encryption with Key
-	// Management Service key stored in KMS. When you use KMS to encrypt your data, you
-	// can either use the default Amazon Web Services managed KMS key for Amazon ECR,
-	// or specify your own KMS key, which you already created. For more information,
-	// see Protecting data using server-side encryption with an KMS key stored in Key
-	// Management Service (SSE-KMS) (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
-	// in the Amazon Simple Storage Service Console Developer Guide. If you use the
-	// AES256 encryption type, Amazon ECR uses server-side encryption with Amazon
-	// S3-managed encryption keys which encrypts the images in the repository using an
-	// AES-256 encryption algorithm. For more information, see Protecting data using
-	// server-side encryption with Amazon S3-managed encryption keys (SSE-S3) (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)
-	// in the Amazon Simple Storage Service Console Developer Guide.
+	// The encryption type to use.
+	//
+	// If you use the KMS encryption type, the contents of the repository will be
+	// encrypted using server-side encryption with Key Management Service key stored in
+	// KMS. When you use KMS to encrypt your data, you can either use the default
+	// Amazon Web Services managed KMS key for Amazon ECR, or specify your own KMS key,
+	// which you already created. For more information, see [Protecting data using server-side encryption with an KMS key stored in Key Management Service (SSE-KMS)]in the Amazon Simple
+	// Storage Service Console Developer Guide.
+	//
+	// If you use the AES256 encryption type, Amazon ECR uses server-side encryption
+	// with Amazon S3-managed encryption keys which encrypts the images in the
+	// repository using an AES-256 encryption algorithm. For more information, see [Protecting data using server-side encryption with Amazon S3-managed encryption keys (SSE-S3)]in
+	// the Amazon Simple Storage Service Console Developer Guide.
+	//
+	// [Protecting data using server-side encryption with Amazon S3-managed encryption keys (SSE-S3)]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+	// [Protecting data using server-side encryption with an KMS key stored in Key Management Service (SSE-KMS)]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 	//
 	// This member is required.
 	EncryptionType EncryptionType
@@ -268,24 +275,29 @@ type ImageDetail struct {
 	// The current state of the scan.
 	ImageScanStatus *ImageScanStatus
 
-	// The size, in bytes, of the image in the repository. If the image is a manifest
-	// list, this will be the max size of all manifests in the list. Beginning with
-	// Docker version 1.9, the Docker client compresses image layers before pushing
-	// them to a V2 Docker registry. The output of the docker images command shows the
-	// uncompressed image size, so it may return a larger image size than the image
-	// sizes returned by DescribeImages .
+	// The size, in bytes, of the image in the repository.
+	//
+	// If the image is a manifest list, this will be the max size of all manifests in
+	// the list.
+	//
+	// Beginning with Docker version 1.9, the Docker client compresses image layers
+	// before pushing them to a V2 Docker registry. The output of the docker images
+	// command shows the uncompressed image size, so it may return a larger image size
+	// than the image sizes returned by DescribeImages.
 	ImageSizeInBytes *int64
 
 	// The list of tags associated with this image.
 	ImageTags []string
 
 	// The date and time, expressed in standard JavaScript date format, when Amazon
-	// ECR recorded the last image pull. Amazon ECR refreshes the last image pull
-	// timestamp at least once every 24 hours. For example, if you pull an image once a
-	// day then the lastRecordedPullTime timestamp will indicate the exact time that
-	// the image was last pulled. However, if you pull an image once an hour, because
-	// Amazon ECR refreshes the lastRecordedPullTime timestamp at least once every 24
-	// hours, the result may not be the exact time that the image was last pulled.
+	// ECR recorded the last image pull.
+	//
+	// Amazon ECR refreshes the last image pull timestamp at least once every 24
+	// hours. For example, if you pull an image once a day then the
+	// lastRecordedPullTime timestamp will indicate the exact time that the image was
+	// last pulled. However, if you pull an image once an hour, because Amazon ECR
+	// refreshes the lastRecordedPullTime timestamp at least once every 24 hours, the
+	// result may not be the exact time that the image was last pulled.
 	LastRecordedPullTime *time.Time
 
 	// The Amazon Web Services account ID associated with the registry to which this
@@ -407,8 +419,9 @@ type ImageScanningConfiguration struct {
 	// The setting that determines whether images are scanned after being pushed to a
 	// repository. If set to true , images will be scanned after being pushed. If this
 	// parameter is not specified, it will default to false and images will not be
-	// scanned unless a scan is manually started with the API_StartImageScan (https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_StartImageScan.html)
-	// API.
+	// scanned unless a scan is manually started with the [API_StartImageScan]API.
+	//
+	// [API_StartImageScan]: https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_StartImageScan.html
 	ScanOnPush bool
 
 	noSmithyDocumentSerde
@@ -513,8 +526,8 @@ type LifecyclePolicyRuleAction struct {
 // An object representing a filter on a ListImages operation.
 type ListImagesFilter struct {
 
-	// The tag status with which to filter your ListImages results. You can filter
-	// results based on whether they are TAGGED or UNTAGGED .
+	// The tag status with which to filter your ListImages results. You can filter results based
+	// on whether they are TAGGED or UNTAGGED .
 	TagStatus TagStatus
 
 	noSmithyDocumentSerde
@@ -815,8 +828,9 @@ type ResourceDetails struct {
 }
 
 // The details of a scanning repository filter. For more information on how to use
-// filters, see Using filters (https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html#image-scanning-filters)
-// in the Amazon Elastic Container Registry User Guide.
+// filters, see [Using filters]in the Amazon Elastic Container Registry User Guide.
+//
+// [Using filters]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html#image-scanning-filters
 type ScanningRepositoryFilter struct {
 
 	// The filter to use when scanning.

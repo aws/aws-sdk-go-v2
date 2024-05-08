@@ -30,30 +30,37 @@ func (c *Client) CreateRepository(ctx context.Context, params *CreateRepositoryI
 // Represents the input of a create repository operation.
 type CreateRepositoryInput struct {
 
-	// The name of the new repository to be created. The repository name must be
-	// unique across the calling Amazon Web Services account. Repository names are
-	// limited to 100 alphanumeric, dash, and underscore characters, and cannot include
-	// certain characters. For more information about the limits on repository names,
-	// see Quotas (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
-	// in the CodeCommit User Guide. The suffix .git is prohibited.
+	// The name of the new repository to be created.
+	//
+	// The repository name must be unique across the calling Amazon Web Services
+	// account. Repository names are limited to 100 alphanumeric, dash, and underscore
+	// characters, and cannot include certain characters. For more information about
+	// the limits on repository names, see [Quotas]in the CodeCommit User Guide. The suffix
+	// .git is prohibited.
+	//
+	// [Quotas]: https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
 	//
 	// This member is required.
 	RepositoryName *string
 
 	// The ID of the encryption key. You can view the ID of an encryption key in the
 	// KMS console, or use the KMS APIs to programmatically retrieve a key ID. For more
-	// information about acceptable values for kmsKeyID, see KeyId (https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId)
-	// in the Decrypt API description in the Key Management Service API Reference. If
-	// no key is specified, the default aws/codecommit Amazon Web Services managed key
-	// is used.
+	// information about acceptable values for kmsKeyID, see [KeyId]in the Decrypt API
+	// description in the Key Management Service API Reference.
+	//
+	// If no key is specified, the default aws/codecommit Amazon Web Services managed
+	// key is used.
+	//
+	// [KeyId]: https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
 	KmsKeyId *string
 
-	// A comment or description about the new repository. The description field for a
-	// repository accepts all HTML characters and all valid Unicode characters.
-	// Applications that do not HTML-encode the description and display it in a webpage
-	// can expose users to potentially malicious code. Make sure that you HTML-encode
-	// the description field in any application that uses this API to display the
-	// repository description on a webpage.
+	// A comment or description about the new repository.
+	//
+	// The description field for a repository accepts all HTML characters and all
+	// valid Unicode characters. Applications that do not HTML-encode the description
+	// and display it in a webpage can expose users to potentially malicious code. Make
+	// sure that you HTML-encode the description field in any application that uses
+	// this API to display the repository description on a webpage.
 	RepositoryDescription *string
 
 	// One or more tag key-value pairs to use when tagging this repository.

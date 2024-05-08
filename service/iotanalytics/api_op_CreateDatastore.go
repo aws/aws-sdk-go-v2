@@ -34,7 +34,7 @@ type CreateDatastoreInput struct {
 	// This member is required.
 	DatastoreName *string
 
-	// Contains information about the partition dimensions in a data store.
+	//  Contains information about the partition dimensions in a data store.
 	DatastorePartitions *types.DatastorePartitions
 
 	// Where data in a data store is stored.. You can choose serviceManagedS3 storage,
@@ -44,9 +44,13 @@ type CreateDatastoreInput struct {
 	DatastoreStorage types.DatastoreStorage
 
 	// Contains the configuration information of file formats. IoT Analytics data
-	// stores support JSON and Parquet (https://parquet.apache.org/) . The default file
-	// format is JSON. You can specify only one format. You can't change the file
-	// format after you create the data store.
+	// stores support JSON and [Parquet].
+	//
+	// The default file format is JSON. You can specify only one format.
+	//
+	// You can't change the file format after you create the data store.
+	//
+	// [Parquet]: https://parquet.apache.org/
 	FileFormatConfiguration *types.FileFormatConfiguration
 
 	// How long, in days, message data is kept for the data store. When

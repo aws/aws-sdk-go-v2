@@ -29,11 +29,15 @@ func (c *Client) ListGroupsForEntity(ctx context.Context, params *ListGroupsForE
 
 type ListGroupsForEntityInput struct {
 
-	// The identifier for the entity. The entity ID can accept UserId or GroupID,
-	// Username or Groupname, or email.
+	// The identifier for the entity.
+	//
+	// The entity ID can accept UserId or GroupID, Username or Groupname, or email.
+	//
 	//   - Entity ID: 12345678-1234-1234-1234-123456789012 or
 	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//
 	//   - Email address: entity@domain.tld
+	//
 	//   - Entity name: entity
 	//
 	// This member is required.

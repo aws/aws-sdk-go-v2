@@ -12,9 +12,11 @@ import (
 )
 
 // List the Amazon Web Services services for which the specified account is a
-// delegated administrator. This operation can be called only from the
-// organization's management account or by a member account that is a delegated
-// administrator for an Amazon Web Services service.
+// delegated administrator.
+//
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an Amazon Web Services
+// service.
 func (c *Client) ListDelegatedServicesForAccount(ctx context.Context, params *ListDelegatedServicesForAccountInput, optFns ...func(*Options)) (*ListDelegatedServicesForAccountOutput, error) {
 	if params == nil {
 		params = &ListDelegatedServicesForAccountInput{}

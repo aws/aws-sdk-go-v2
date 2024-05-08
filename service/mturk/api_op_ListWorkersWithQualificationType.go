@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListWorkersWithQualificationType operation returns all of the Workers that
+//	The ListWorkersWithQualificationType operation returns all of the Workers that
+//
 // have been associated with a given Qualification type.
 func (c *Client) ListWorkersWithQualificationType(ctx context.Context, params *ListWorkersWithQualificationTypeInput, optFns ...func(*Options)) (*ListWorkersWithQualificationTypeOutput, error) {
 	if params == nil {
@@ -35,13 +36,13 @@ type ListWorkersWithQualificationTypeInput struct {
 	// This member is required.
 	QualificationTypeId *string
 
-	// Limit the number of results returned.
+	//  Limit the number of results returned.
 	MaxResults *int32
 
 	// Pagination Token
 	NextToken *string
 
-	// The status of the Qualifications to return. Can be Granted | Revoked .
+	//  The status of the Qualifications to return. Can be Granted | Revoked .
 	Status types.QualificationStatus
 
 	noSmithyDocumentSerde
@@ -54,11 +55,11 @@ type ListWorkersWithQualificationTypeOutput struct {
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
 
-	// The number of Qualifications on this page in the filtered results list,
+	//  The number of Qualifications on this page in the filtered results list,
 	// equivalent to the number of Qualifications being returned by this call.
 	NumResults *int32
 
-	// The list of Qualification elements returned by this call.
+	//  The list of Qualification elements returned by this call.
 	Qualifications []types.Qualification
 
 	// Metadata pertaining to the operation's result.
@@ -157,7 +158,7 @@ var _ ListWorkersWithQualificationTypeAPIClient = (*Client)(nil)
 // ListWorkersWithQualificationTypePaginatorOptions is the paginator options for
 // ListWorkersWithQualificationType
 type ListWorkersWithQualificationTypePaginatorOptions struct {
-	// Limit the number of results returned.
+	//  Limit the number of results returned.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

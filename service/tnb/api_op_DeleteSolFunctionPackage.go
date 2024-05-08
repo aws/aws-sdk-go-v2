@@ -10,13 +10,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a function package. A function package is a .zip file in CSAR (Cloud
-// Service Archive) format that contains a network function (an ETSI standard
-// telecommunication application) and function package descriptor that uses the
-// TOSCA standard to describe how the network functions should run on your network.
+// Deletes a function package.
+//
+// A function package is a .zip file in CSAR (Cloud Service Archive) format that
+// contains a network function (an ETSI standard telecommunication application) and
+// function package descriptor that uses the TOSCA standard to describe how the
+// network functions should run on your network.
+//
 // To delete a function package, the package must be in a disabled state. To
-// disable a function package, see UpdateSolFunctionPackage (https://docs.aws.amazon.com/tnb/latest/APIReference/API_UpdateSolFunctionPackage.html)
-// .
+// disable a function package, see [UpdateSolFunctionPackage].
+//
+// [UpdateSolFunctionPackage]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_UpdateSolFunctionPackage.html
 func (c *Client) DeleteSolFunctionPackage(ctx context.Context, params *DeleteSolFunctionPackageInput, optFns ...func(*Options)) (*DeleteSolFunctionPackageOutput, error) {
 	if params == nil {
 		params = &DeleteSolFunctionPackageInput{}

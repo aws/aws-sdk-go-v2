@@ -28,7 +28,7 @@ func (c *Client) CreateDBSubnetGroup(ctx context.Context, params *CreateDBSubnet
 	return out, nil
 }
 
-// Represents the input to CreateDBSubnetGroup .
+// Represents the input to CreateDBSubnetGroup.
 type CreateDBSubnetGroupInput struct {
 
 	// The description for the subnet group.
@@ -37,8 +37,11 @@ type CreateDBSubnetGroupInput struct {
 	DBSubnetGroupDescription *string
 
 	// The name for the subnet group. This value is stored as a lowercase string.
+	//
 	// Constraints: Must contain no more than 255 letters, numbers, periods,
-	// underscores, spaces, or hyphens. Must not be default. Example: mySubnetgroup
+	// underscores, spaces, or hyphens. Must not be default.
+	//
+	// Example: mySubnetgroup
 	//
 	// This member is required.
 	DBSubnetGroupName *string

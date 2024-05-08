@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the connectors that you created by using the
-// https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector)
-// action.
+// Lists the connectors that you created by using the [https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector] action.
+//
+// [https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector
 func (c *Client) ListConnectors(ctx context.Context, params *ListConnectorsInput, optFns ...func(*Options)) (*ListConnectorsOutput, error) {
 	if params == nil {
 		params = &ListConnectorsInput{}

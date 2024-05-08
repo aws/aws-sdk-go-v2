@@ -15,13 +15,25 @@ import (
 // different key. Each alias is associated with only one Amazon Web Services
 // Payment Cryptography key at a time, although a key can have multiple aliases.
 // The alias and the Amazon Web Services Payment Cryptography key must be in the
-// same Amazon Web Services account and Amazon Web Services Region Cross-account
-// use: This operation can't be used across different Amazon Web Services accounts.
+// same Amazon Web Services account and Amazon Web Services Region
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
+//
 // Related operations:
-//   - CreateAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateAlias.html)
-//   - DeleteAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html)
-//   - GetAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html)
-//   - ListAliases (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html)
+//
+// [CreateAlias]
+//
+// [DeleteAlias]
+//
+// [GetAlias]
+//
+// [ListAliases]
+//
+// [ListAliases]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html
+// [DeleteAlias]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html
+// [CreateAlias]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateAlias.html
+// [GetAlias]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html
 func (c *Client) UpdateAlias(ctx context.Context, params *UpdateAliasInput, optFns ...func(*Options)) (*UpdateAliasOutput, error) {
 	if params == nil {
 		params = &UpdateAliasInput{}

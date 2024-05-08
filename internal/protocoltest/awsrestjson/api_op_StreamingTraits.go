@@ -11,9 +11,10 @@ import (
 	"io"
 )
 
-// This examples serializes a streaming blob shape in the request body. In this
-// example, no JSON document is synthesized because the payload is not a structure
-// or a union type.
+// This examples serializes a streaming blob shape in the request body.
+//
+// In this example, no JSON document is synthesized because the payload is not a
+// structure or a union type.
 func (c *Client) StreamingTraits(ctx context.Context, params *StreamingTraitsInput, optFns ...func(*Options)) (*StreamingTraitsOutput, error) {
 	if params == nil {
 		params = &StreamingTraitsInput{}

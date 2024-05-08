@@ -12,21 +12,29 @@ import (
 	"time"
 )
 
-// Retrieves metadata for a Greengrass core device. IoT Greengrass relies on
-// individual devices to send status updates to the Amazon Web Services Cloud. If
-// the IoT Greengrass Core software isn't running on the device, or if device isn't
-// connected to the Amazon Web Services Cloud, then the reported status of that
-// device might not reflect its current status. The status timestamp indicates when
-// the device status was last updated. Core devices send status updates at the
-// following times:
+// Retrieves metadata for a Greengrass core device.
+//
+// IoT Greengrass relies on individual devices to send status updates to the
+// Amazon Web Services Cloud. If the IoT Greengrass Core software isn't running on
+// the device, or if device isn't connected to the Amazon Web Services Cloud, then
+// the reported status of that device might not reflect its current status. The
+// status timestamp indicates when the device status was last updated.
+//
+// Core devices send status updates at the following times:
+//
 //   - When the IoT Greengrass Core software starts
+//
 //   - When the core device receives a deployment from the Amazon Web Services
 //     Cloud
+//
 //   - When the status of any component on the core device becomes BROKEN
-//   - At a regular interval that you can configure (https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss)
-//     , which defaults to 24 hours
+//
+//   - At a [regular interval that you can configure], which defaults to 24 hours
+//
 //   - For IoT Greengrass Core v2.7.0, the core device sends status updates upon
 //     local deployment and cloud deployment
+//
+// [regular interval that you can configure]: https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss
 func (c *Client) GetCoreDevice(ctx context.Context, params *GetCoreDeviceInput, optFns ...func(*Options)) (*GetCoreDeviceOutput, error) {
 	if params == nil {
 		params = &GetCoreDeviceInput{}
@@ -62,9 +70,10 @@ type GetCoreDeviceOutput struct {
 
 	// The version of the IoT Greengrass Core software that the core device runs. This
 	// version is equivalent to the version of the Greengrass nucleus component that
-	// runs on the core device. For more information, see the Greengrass nucleus
-	// component (https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html)
-	// in the IoT Greengrass V2 Developer Guide.
+	// runs on the core device. For more information, see the [Greengrass nucleus component]in the IoT Greengrass V2
+	// Developer Guide.
+	//
+	// [Greengrass nucleus component]: https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html
 	CoreVersion *string
 
 	// The time at which the core device's status last updated, expressed in ISO 8601
@@ -75,15 +84,18 @@ type GetCoreDeviceOutput struct {
 	Platform *string
 
 	// The status of the core device. The core device status can be:
+	//
 	//   - HEALTHY – The IoT Greengrass Core software and all components run on the
 	//   core device without issue.
+	//
 	//   - UNHEALTHY – The IoT Greengrass Core software or a component is in a failed
 	//   state on the core device.
 	Status types.CoreDeviceStatus
 
 	// A list of key-value pairs that contain metadata for the resource. For more
-	// information, see Tag your resources (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html)
-	// in the IoT Greengrass V2 Developer Guide.
+	// information, see [Tag your resources]in the IoT Greengrass V2 Developer Guide.
+	//
+	// [Tag your resources]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

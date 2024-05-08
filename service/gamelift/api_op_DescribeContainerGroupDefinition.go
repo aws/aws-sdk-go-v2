@@ -11,13 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the Amazon GameLift containers feature, which is
-// currently in public preview. Retrieves the properties of a container group
-// definition, including all container definitions in the group. To retrieve a
-// container group definition, provide a resource identifier. If successful, this
-// operation returns the complete properties of the container group definition.
-// Learn more
-//   - Manage a container group definition (https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-create-groups.html)
+//	This operation is used with the Amazon GameLift containers feature, which is
+//
+// currently in public preview.
+//
+// Retrieves the properties of a container group definition, including all
+// container definitions in the group.
+//
+// To retrieve a container group definition, provide a resource identifier. If
+// successful, this operation returns the complete properties of the container
+// group definition.
+//
+// # Learn more
+//
+// [Manage a container group definition]
+//
+// [Manage a container group definition]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-create-groups.html
 func (c *Client) DescribeContainerGroupDefinition(ctx context.Context, params *DescribeContainerGroupDefinitionInput, optFns ...func(*Options)) (*DescribeContainerGroupDefinitionOutput, error) {
 	if params == nil {
 		params = &DescribeContainerGroupDefinitionInput{}

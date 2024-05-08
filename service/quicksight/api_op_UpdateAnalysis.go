@@ -47,8 +47,10 @@ type UpdateAnalysisInput struct {
 	// This member is required.
 	Name *string
 
-	// The definition of an analysis. A definition is the data model of all features
-	// in a Dashboard, Template, or Analysis.
+	// The definition of an analysis.
+	//
+	// A definition is the data model of all features in a Dashboard, Template, or
+	// Analysis.
 	Definition *types.AnalysisDefinition
 
 	// The parameter names and override values that you want to use. An analysis can

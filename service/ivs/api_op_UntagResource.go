@@ -35,10 +35,11 @@ type UntagResourceInput struct {
 	ResourceArn *string
 
 	// Array of tags to be removed. Array of maps, each of the form string:string
-	// (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for more information, including restrictions that apply to tags and "Tag naming
-	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
-	// what is documented there.
+	// (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions that apply to
+	// tags and "Tag naming limits and requirements"; Amazon IVS has no
+	// service-specific constraints beyond what is documented there.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	//
 	// This member is required.
 	TagKeys []string

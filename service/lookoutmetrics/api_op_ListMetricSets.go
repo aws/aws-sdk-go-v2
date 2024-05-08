@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the datasets in the current AWS Region. Amazon Lookout for Metrics API
-// actions are eventually consistent. If you do a read operation on a resource
-// immediately after creating or modifying it, use retries to allow time for the
-// write operation to complete.
+// Lists the datasets in the current AWS Region.
+//
+// Amazon Lookout for Metrics API actions are eventually consistent. If you do a
+// read operation on a resource immediately after creating or modifying it, use
+// retries to allow time for the write operation to complete.
 func (c *Client) ListMetricSets(ctx context.Context, params *ListMetricSetsInput, optFns ...func(*Options)) (*ListMetricSetsOutput, error) {
 	if params == nil {
 		params = &ListMetricSetsInput{}

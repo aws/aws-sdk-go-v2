@@ -30,10 +30,10 @@ func (c *Client) ListBundles(ctx context.Context, params *ListBundlesInput, optF
 // Request structure to request all available bundles.
 type ListBundlesInput struct {
 
-	// Maximum number of records to list in a single response.
+	//  Maximum number of records to list in a single response.
 	MaxResults int32
 
-	// Pagination token. Set to null to start listing bundles from start. If non-null
+	//  Pagination token. Set to null to start listing bundles from start. If non-null
 	// pagination token is returned in a result, then pass its value in here in another
 	// request to list more bundles.
 	NextToken *string
@@ -44,10 +44,10 @@ type ListBundlesInput struct {
 // Result structure contains a list of all available bundles with details.
 type ListBundlesOutput struct {
 
-	// A list of bundles.
+	//  A list of bundles.
 	BundleList []types.BundleDetails
 
-	// Pagination token. If non-null pagination token is returned in a result, then
+	//  Pagination token. If non-null pagination token is returned in a result, then
 	// pass its value in another request to fetch more entries.
 	NextToken *string
 
@@ -142,7 +142,7 @@ var _ ListBundlesAPIClient = (*Client)(nil)
 
 // ListBundlesPaginatorOptions is the paginator options for ListBundles
 type ListBundlesPaginatorOptions struct {
-	// Maximum number of records to list in a single response.
+	//  Maximum number of records to list in a single response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

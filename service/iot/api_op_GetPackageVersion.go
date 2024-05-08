@@ -12,9 +12,11 @@ import (
 	"time"
 )
 
-// Gets information about the specified package version. Requires permission to
-// access the GetPackageVersion (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Gets information about the specified package version.
+//
+// Requires permission to access the [GetPackageVersion] action.
+//
+// [GetPackageVersion]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) GetPackageVersion(ctx context.Context, params *GetPackageVersionInput, optFns ...func(*Options)) (*GetPackageVersionOutput, error) {
 	if params == nil {
 		params = &GetPackageVersionInput{}
@@ -69,9 +71,9 @@ type GetPackageVersionOutput struct {
 	// The ARN for the package version.
 	PackageVersionArn *string
 
-	// The status associated to the package version. For more information, see Package
-	// version lifecycle (https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle)
-	// .
+	// The status associated to the package version. For more information, see [Package version lifecycle].
+	//
+	// [Package version lifecycle]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
 	Status types.PackageVersionStatus
 
 	// The name of the package version.

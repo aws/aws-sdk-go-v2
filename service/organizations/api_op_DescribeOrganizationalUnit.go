@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about an organizational unit (OU). This operation can be
-// called only from the organization's management account or by a member account
-// that is a delegated administrator for an Amazon Web Services service.
+// Retrieves information about an organizational unit (OU).
+//
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an Amazon Web Services
+// service.
 func (c *Client) DescribeOrganizationalUnit(ctx context.Context, params *DescribeOrganizationalUnitInput, optFns ...func(*Options)) (*DescribeOrganizationalUnitOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationalUnitInput{}
@@ -32,11 +34,14 @@ func (c *Client) DescribeOrganizationalUnit(ctx context.Context, params *Describ
 type DescribeOrganizationalUnitInput struct {
 
 	// The unique identifier (ID) of the organizational unit that you want details
-	// about. You can get the ID from the ListOrganizationalUnitsForParent operation.
-	// The regex pattern (http://wikipedia.org/wiki/regex) for an organizational unit
-	// ID string requires "ou-" followed by from 4 to 32 lowercase letters or digits
-	// (the ID of the root that contains the OU). This string is followed by a second
-	// "-" dash and from 8 to 32 additional lowercase letters or digits.
+	// about. You can get the ID from the ListOrganizationalUnitsForParentoperation.
+	//
+	// The [regex pattern] for an organizational unit ID string requires "ou-" followed by from 4 to
+	// 32 lowercase letters or digits (the ID of the root that contains the OU). This
+	// string is followed by a second "-" dash and from 8 to 32 additional lowercase
+	// letters or digits.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	OrganizationalUnitId *string

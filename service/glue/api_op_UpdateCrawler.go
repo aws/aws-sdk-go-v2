@@ -41,9 +41,9 @@ type UpdateCrawlerInput struct {
 	Classifiers []string
 
 	// Crawler configuration information. This versioned JSON string allows users to
-	// specify aspects of a crawler's behavior. For more information, see Setting
-	// crawler configuration options (https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)
-	// .
+	// specify aspects of a crawler's behavior. For more information, see [Setting crawler configuration options].
+	//
+	// [Setting crawler configuration options]: https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
 	Configuration *string
 
 	// The name of the SecurityConfiguration structure to be used by this crawler.
@@ -70,10 +70,10 @@ type UpdateCrawlerInput struct {
 	// new crawler to access customer resources.
 	Role *string
 
-	// A cron expression used to specify the schedule (see Time-Based Schedules for
-	// Jobs and Crawlers (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)
-	// . For example, to run something every day at 12:15 UTC, you would specify:
-	// cron(15 12 * * ? *) .
+	// A cron expression used to specify the schedule (see [Time-Based Schedules for Jobs and Crawlers]. For example, to run
+	// something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *) .
+	//
+	// [Time-Based Schedules for Jobs and Crawlers]: https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
 	Schedule *string
 
 	// The policy for the crawler's update and deletion behavior.

@@ -37,7 +37,9 @@ type UpdateClusterInput struct {
 
 	// The password associated with the elastic cluster administrator. This password
 	// can contain any printable ASCII character except forward slash (/), double quote
-	// ("), or the "at" symbol (@). Constraints: Must contain from 8 to 100 characters.
+	// ("), or the "at" symbol (@).
+	//
+	// Constraints: Must contain from 8 to 100 characters.
 	AdminUserPassword *string
 
 	// The authentication type used to determine where to fetch the password used for
@@ -55,10 +57,16 @@ type UpdateClusterInput struct {
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal
-	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi Default: a 30-minute
-	// window selected at random from an 8-hour block of time for each Amazon Web
-	// Services Region, occurring on a random day of the week. Valid days: Mon, Tue,
-	// Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
+	// Coordinated Time (UTC).
+	//
+	// Format: ddd:hh24:mi-ddd:hh24:mi
+	//
+	// Default: a 30-minute window selected at random from an 8-hour block of time for
+	// each Amazon Web Services Region, occurring on a random day of the week.
+	//
+	// Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
+	//
+	// Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
 
 	// The number of vCPUs assigned to each elastic cluster shard. Maximum is 64.

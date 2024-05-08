@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified lifecycle policy. For more information about updating a
-// policy, see Modify lifecycle policies (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-modify-delete.html#modify)
-// .
+// Updates the specified lifecycle policy.
+//
+// For more information about updating a policy, see [Modify lifecycle policies].
+//
+// [Modify lifecycle policies]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-modify-delete.html#modify
 func (c *Client) UpdateLifecyclePolicy(ctx context.Context, params *UpdateLifecyclePolicyInput, optFns ...func(*Options)) (*UpdateLifecyclePolicyOutput, error) {
 	if params == nil {
 		params = &UpdateLifecyclePolicyInput{}
@@ -36,15 +38,15 @@ type UpdateLifecyclePolicyInput struct {
 	// This member is required.
 	PolicyId *string
 
-	// [Default policies only] Indicates whether the policy should copy tags from the
+	//  [Default policies only] Indicates whether the policy should copy tags from the
 	// source resource to the snapshot or AMI.
 	CopyTags *bool
 
-	// [Default policies only] Specifies how often the policy should run and create
+	//  [Default policies only] Specifies how often the policy should run and create
 	// snapshots or AMIs. The creation frequency can range from 1 to 7 days.
 	CreateInterval *int32
 
-	// [Default policies only] Specifies destination Regions for snapshot or AMI
+	//  [Default policies only] Specifies destination Regions for snapshot or AMI
 	// copies. You can specify up to 3 destination Regions. If you do not want to
 	// create cross-Region copies, omit this parameter.
 	CrossRegionCopyTargets []types.CrossRegionCopyTarget
@@ -52,37 +54,44 @@ type UpdateLifecyclePolicyInput struct {
 	// A description of the lifecycle policy.
 	Description *string
 
-	// [Default policies only] Specifies exclusion parameters for volumes or instances
-	// for which you do not want to create snapshots or AMIs. The policy will not
-	// create snapshots or AMIs for target resources that match any of the specified
-	// exclusion parameters.
+	//  [Default policies only] Specifies exclusion parameters for volumes or
+	// instances for which you do not want to create snapshots or AMIs. The policy will
+	// not create snapshots or AMIs for target resources that match any of the
+	// specified exclusion parameters.
 	Exclusions *types.Exclusions
 
 	// The Amazon Resource Name (ARN) of the IAM role used to run the operations
 	// specified by the lifecycle policy.
 	ExecutionRoleArn *string
 
-	// [Default policies only] Defines the snapshot or AMI retention behavior for the
+	//  [Default policies only] Defines the snapshot or AMI retention behavior for the
 	// policy if the source volume or instance is deleted, or if the policy enters the
-	// error, disabled, or deleted state. By default (ExtendDeletion=false):
+	// error, disabled, or deleted state.
+	//
+	// By default (ExtendDeletion=false):
+	//
 	//   - If a source resource is deleted, Amazon Data Lifecycle Manager will
 	//   continue to delete previously created snapshots or AMIs, up to but not including
 	//   the last one, based on the specified retention period. If you want Amazon Data
 	//   Lifecycle Manager to delete all snapshots or AMIs, including the last one,
 	//   specify true .
+	//
 	//   - If a policy enters the error, disabled, or deleted state, Amazon Data
 	//   Lifecycle Manager stops deleting snapshots and AMIs. If you want Amazon Data
 	//   Lifecycle Manager to continue deleting snapshots or AMIs, including the last
 	//   one, if the policy enters one of these states, specify true .
+	//
 	// If you enable extended deletion (ExtendDeletion=true), you override both
-	// default behaviors simultaneously. Default: false
+	// default behaviors simultaneously.
+	//
+	// Default: false
 	ExtendDeletion *bool
 
 	// The configuration of the lifecycle policy. You cannot update the policy type or
 	// the resource type.
 	PolicyDetails *types.PolicyDetails
 
-	// [Default policies only] Specifies how long the policy should retain snapshots
+	//  [Default policies only] Specifies how long the policy should retain snapshots
 	// or AMIs before deleting them. The retention period can range from 2 to 14 days,
 	// but it must be greater than the creation frequency to ensure that the policy
 	// retains at least 1 snapshot or AMI at any given time.

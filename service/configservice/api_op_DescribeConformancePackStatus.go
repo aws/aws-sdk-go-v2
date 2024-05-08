@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides one or more conformance packs deployment status. If there are no
-// conformance packs then you will see an empty result.
+// Provides one or more conformance packs deployment status.
+//
+// If there are no conformance packs then you will see an empty result.
 func (c *Client) DescribeConformancePackStatus(ctx context.Context, params *DescribeConformancePackStatusInput, optFns ...func(*Options)) (*DescribeConformancePackStatusOutput, error) {
 	if params == nil {
 		params = &DescribeConformancePackStatusInput{}

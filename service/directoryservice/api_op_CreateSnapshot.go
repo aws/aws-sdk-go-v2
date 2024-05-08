@@ -11,7 +11,9 @@ import (
 )
 
 // Creates a snapshot of a Simple AD or Microsoft AD directory in the Amazon Web
-// Services cloud. You cannot take snapshots of AD Connector directories.
+// Services cloud.
+//
+// You cannot take snapshots of AD Connector directories.
 func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput, optFns ...func(*Options)) (*CreateSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateSnapshotInput{}

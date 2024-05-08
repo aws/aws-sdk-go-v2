@@ -11,9 +11,11 @@ import (
 )
 
 // Disassociates the current Security Hub member account from the associated
-// administrator account. This operation is only used by accounts that are not part
-// of an organization. For organization accounts, only the administrator account
-// can disassociate a member account.
+// administrator account.
+//
+// This operation is only used by accounts that are not part of an organization.
+// For organization accounts, only the administrator account can disassociate a
+// member account.
 func (c *Client) DisassociateFromAdministratorAccount(ctx context.Context, params *DisassociateFromAdministratorAccountInput, optFns ...func(*Options)) (*DisassociateFromAdministratorAccountOutput, error) {
 	if params == nil {
 		params = &DisassociateFromAdministratorAccountInput{}

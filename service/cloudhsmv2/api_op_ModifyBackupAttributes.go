@@ -30,7 +30,7 @@ func (c *Client) ModifyBackupAttributes(ctx context.Context, params *ModifyBacku
 type ModifyBackupAttributesInput struct {
 
 	// The identifier (ID) of the backup to modify. To find the ID of a backup, use
-	// the DescribeBackups operation.
+	// the DescribeBackupsoperation.
 	//
 	// This member is required.
 	BackupId *string

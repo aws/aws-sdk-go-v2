@@ -35,20 +35,31 @@ type DescribeExportTasksInput struct {
 
 	// Filters specify one or more snapshot or cluster exports to describe. The
 	// filters are specified as name-value pairs that define what to include in the
-	// output. Filter names and values are case-sensitive. Supported filters include
-	// the following:
+	// output. Filter names and values are case-sensitive.
+	//
+	// Supported filters include the following:
+	//
 	//   - export-task-identifier - An identifier for the snapshot or cluster export
 	//   task.
+	//
 	//   - s3-bucket - The Amazon S3 bucket the data is exported to.
+	//
 	//   - source-arn - The Amazon Resource Name (ARN) of the snapshot or cluster
 	//   exported to Amazon S3.
+	//
 	//   - status - The status of the export task. Must be lowercase. Valid statuses
 	//   are the following:
+	//
 	//   - canceled
+	//
 	//   - canceling
+	//
 	//   - complete
+	//
 	//   - failed
+	//
 	//   - in_progress
+	//
 	//   - starting
 	Filters []types.Filter
 
@@ -60,8 +71,11 @@ type DescribeExportTasksInput struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified value, a pagination token called a marker is included in the
 	// response. You can use the marker in a later DescribeExportTasks request to
-	// retrieve the remaining results. Default: 100 Constraints: Minimum 20, maximum
-	// 100.
+	// retrieve the remaining results.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The Amazon Resource Name (ARN) of the snapshot or cluster exported to Amazon S3.
@@ -182,8 +196,11 @@ type DescribeExportTasksPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified value, a pagination token called a marker is included in the
 	// response. You can use the marker in a later DescribeExportTasks request to
-	// retrieve the remaining results. Default: 100 Constraints: Minimum 20, maximum
-	// 100.
+	// retrieve the remaining results.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

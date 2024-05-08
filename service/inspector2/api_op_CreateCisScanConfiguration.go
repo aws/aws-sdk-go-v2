@@ -39,8 +39,8 @@ type CreateCisScanConfigurationInput struct {
 	// This member is required.
 	Schedule types.Schedule
 
-	// The security level for the CIS scan configuration. Security level refers to the
-	// Benchmark levels that CIS assigns to a profile.
+	//  The security level for the CIS scan configuration. Security level refers to
+	// the Benchmark levels that CIS assigns to a profile.
 	//
 	// This member is required.
 	SecurityLevel types.CisSecurityLevel

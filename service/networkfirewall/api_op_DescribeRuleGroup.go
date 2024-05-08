@@ -34,19 +34,22 @@ type DescribeRuleGroupInput struct {
 	// Network Firewall runs the analysis.
 	AnalyzeRuleGroup bool
 
-	// The Amazon Resource Name (ARN) of the rule group. You must specify the ARN or
-	// the name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the rule group.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	RuleGroupArn *string
 
 	// The descriptive name of the rule group. You can't change the name of a rule
-	// group after you create it. You must specify the ARN or the name, and you can
-	// specify both.
+	// group after you create it.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	RuleGroupName *string
 
 	// Indicates whether the rule group is stateless or stateful. If the rule group is
 	// stateless, it contains stateless rules. If it is stateful, it contains stateful
-	// rules. This setting is required for requests that do not include the
-	// RuleGroupARN .
+	// rules.
+	//
+	// This setting is required for requests that do not include the RuleGroupARN .
 	Type types.RuleGroupType
 
 	noSmithyDocumentSerde
@@ -54,35 +57,37 @@ type DescribeRuleGroupInput struct {
 
 type DescribeRuleGroupOutput struct {
 
-	// The high-level properties of a rule group. This, along with the RuleGroup ,
-	// define the rule group. You can retrieve all objects for a rule group by calling
-	// DescribeRuleGroup .
+	// The high-level properties of a rule group. This, along with the RuleGroup, define the
+	// rule group. You can retrieve all objects for a rule group by calling DescribeRuleGroup.
 	//
 	// This member is required.
 	RuleGroupResponse *types.RuleGroupResponse
 
 	// A token used for optimistic locking. Network Firewall returns a token to your
 	// requests that access the rule group. The token marks the state of the rule group
-	// resource at the time of the request. To make changes to the rule group, you
-	// provide the token in your request. Network Firewall uses the token to ensure
-	// that the rule group hasn't changed since you last retrieved it. If it has
-	// changed, the operation fails with an InvalidTokenException . If this happens,
-	// retrieve the rule group again to get a current copy of it with a current token.
-	// Reapply your changes as needed, then try the operation again using the new
-	// token.
+	// resource at the time of the request.
+	//
+	// To make changes to the rule group, you provide the token in your request.
+	// Network Firewall uses the token to ensure that the rule group hasn't changed
+	// since you last retrieved it. If it has changed, the operation fails with an
+	// InvalidTokenException . If this happens, retrieve the rule group again to get a
+	// current copy of it with a current token. Reapply your changes as needed, then
+	// try the operation again using the new token.
 	//
 	// This member is required.
 	UpdateToken *string
 
-	// The object that defines the rules in a rule group. This, along with
-	// RuleGroupResponse , define the rule group. You can retrieve all objects for a
-	// rule group by calling DescribeRuleGroup . Network Firewall uses a rule group to
-	// inspect and control network traffic. You define stateless rule groups to inspect
-	// individual packets and you define stateful rule groups to inspect packets in the
-	// context of their traffic flow. To use a rule group, you include it by reference
-	// in an Network Firewall firewall policy, then you use the policy in a firewall.
-	// You can reference a rule group from more than one firewall policy, and you can
-	// use a firewall policy in more than one firewall.
+	// The object that defines the rules in a rule group. This, along with RuleGroupResponse, define
+	// the rule group. You can retrieve all objects for a rule group by calling DescribeRuleGroup.
+	//
+	// Network Firewall uses a rule group to inspect and control network traffic. You
+	// define stateless rule groups to inspect individual packets and you define
+	// stateful rule groups to inspect packets in the context of their traffic flow.
+	//
+	// To use a rule group, you include it by reference in an Network Firewall
+	// firewall policy, then you use the policy in a firewall. You can reference a rule
+	// group from more than one firewall policy, and you can use a firewall policy in
+	// more than one firewall.
 	RuleGroup *types.RuleGroup
 
 	// Metadata pertaining to the operation's result.

@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an Evidently experiment. Don't use this operation to update an
-// experiment's tag. Instead, use TagResource (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html)
-// .
+// Updates an Evidently experiment.
+//
+// Don't use this operation to update an experiment's tag. Instead, use [TagResource].
+//
+// [TagResource]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html
 func (c *Client) UpdateExperiment(ctx context.Context, params *UpdateExperimentInput, optFns ...func(*Options)) (*UpdateExperimentOutput, error) {
 	if params == nil {
 		params = &UpdateExperimentInput{}
@@ -69,8 +71,10 @@ type UpdateExperimentInput struct {
 	// The portion of the available audience that you want to allocate to this
 	// experiment, in thousandths of a percent. The available audience is the total
 	// audience minus the audience that you have allocated to overrides or current
-	// launches of this feature. This is represented in thousandths of a percent. For
-	// example, specify 20,000 to allocate 20% of the available audience.
+	// launches of this feature.
+	//
+	// This is represented in thousandths of a percent. For example, specify 20,000 to
+	// allocate 20% of the available audience.
 	SamplingRate *int64
 
 	// Adds an audience segment to an experiment. When a segment is used in an

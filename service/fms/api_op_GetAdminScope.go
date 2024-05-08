@@ -46,13 +46,17 @@ type GetAdminScopeOutput struct {
 
 	// The current status of the request to onboard a member account as an Firewall
 	// Manager administrator.
+	//
 	//   - ONBOARDING - The account is onboarding to Firewall Manager as an
 	//   administrator.
+	//
 	//   - ONBOARDING_COMPLETE - Firewall Manager The account is onboarded to Firewall
 	//   Manager as an administrator, and can perform actions on the resources defined in
-	//   their AdminScope .
+	//   their AdminScope.
+	//
 	//   - OFFBOARDING - The account is being removed as an Firewall Manager
 	//   administrator.
+	//
 	//   - OFFBOARDING_COMPLETE - The account has been removed as an Firewall Manager
 	//   administrator.
 	Status types.OrganizationStatus

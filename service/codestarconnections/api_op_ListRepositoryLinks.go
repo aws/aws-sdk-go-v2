@@ -29,10 +29,10 @@ func (c *Client) ListRepositoryLinks(ctx context.Context, params *ListRepository
 
 type ListRepositoryLinksInput struct {
 
-	// A non-zero, non-negative integer used to limit the number of returned results.
+	//  A non-zero, non-negative integer used to limit the number of returned results.
 	MaxResults int32
 
-	// An enumeration token that, when provided in a request, returns the next batch
+	//  An enumeration token that, when provided in a request, returns the next batch
 	// of the results.
 	NextToken *string
 
@@ -143,7 +143,7 @@ var _ ListRepositoryLinksAPIClient = (*Client)(nil)
 // ListRepositoryLinksPaginatorOptions is the paginator options for
 // ListRepositoryLinks
 type ListRepositoryLinksPaginatorOptions struct {
-	// A non-zero, non-negative integer used to limit the number of returned results.
+	//  A non-zero, non-negative integer used to limit the number of returned results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

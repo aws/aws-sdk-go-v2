@@ -29,17 +29,17 @@ func (c *Client) DescribeFlowExecutionRecords(ctx context.Context, params *Descr
 
 type DescribeFlowExecutionRecordsInput struct {
 
-	// The specified name of the flow. Spaces are not allowed. Use underscores (_) or
+	//  The specified name of the flow. Spaces are not allowed. Use underscores (_) or
 	// hyphens (-) only.
 	//
 	// This member is required.
 	FlowName *string
 
-	// Specifies the maximum number of items that should be returned in the result
+	//  Specifies the maximum number of items that should be returned in the result
 	// set. The default for maxResults is 20 (for all paginated API operations).
 	MaxResults *int32
 
-	// The pagination token for the next page of data.
+	//  The pagination token for the next page of data.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,10 +47,10 @@ type DescribeFlowExecutionRecordsInput struct {
 
 type DescribeFlowExecutionRecordsOutput struct {
 
-	// Returns a list of all instances when this flow was run.
+	//  Returns a list of all instances when this flow was run.
 	FlowExecutions []types.ExecutionRecord
 
-	// The pagination token for the next page of data.
+	//  The pagination token for the next page of data.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -149,7 +149,7 @@ var _ DescribeFlowExecutionRecordsAPIClient = (*Client)(nil)
 // DescribeFlowExecutionRecordsPaginatorOptions is the paginator options for
 // DescribeFlowExecutionRecords
 type DescribeFlowExecutionRecordsPaginatorOptions struct {
-	// Specifies the maximum number of items that should be returned in the result
+	//  Specifies the maximum number of items that should be returned in the result
 	// set. The default for maxResults is 20 (for all paginated API operations).
 	Limit int32
 

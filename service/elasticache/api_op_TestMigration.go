@@ -29,13 +29,13 @@ func (c *Client) TestMigration(ctx context.Context, params *TestMigrationInput, 
 
 type TestMigrationInput struct {
 
-	// List of endpoints from which data should be migrated. List should have only one
-	// element.
+	//  List of endpoints from which data should be migrated. List should have only
+	// one element.
 	//
 	// This member is required.
 	CustomerNodeEndpointList []types.CustomerNodeEndpoint
 
-	// The ID of the replication group to which data is to be migrated.
+	//  The ID of the replication group to which data is to be migrated.
 	//
 	// This member is required.
 	ReplicationGroupId *string

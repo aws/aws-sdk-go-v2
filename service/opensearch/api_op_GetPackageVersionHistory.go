@@ -13,9 +13,9 @@ import (
 
 // Returns a list of Amazon OpenSearch Service package versions, along with their
 // creation time, commit message, and plugin properties (if the package is a zip
-// plugin package). For more information, see Custom packages for Amazon
-// OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html)
-// .
+// plugin package). For more information, see [Custom packages for Amazon OpenSearch Service].
+//
+// [Custom packages for Amazon OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html
 func (c *Client) GetPackageVersionHistory(ctx context.Context, params *GetPackageVersionHistoryInput, optFns ...func(*Options)) (*GetPackageVersionHistoryOutput, error) {
 	if params == nil {
 		params = &GetPackageVersionHistoryInput{}

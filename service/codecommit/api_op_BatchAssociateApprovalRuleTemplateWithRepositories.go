@@ -35,9 +35,10 @@ type BatchAssociateApprovalRuleTemplateWithRepositoriesInput struct {
 	// This member is required.
 	ApprovalRuleTemplateName *string
 
-	// The names of the repositories you want to associate with the template. The
-	// length constraint limit is for each string in the array. The array itself can be
-	// empty.
+	// The names of the repositories you want to associate with the template.
+	//
+	// The length constraint limit is for each string in the array. The array itself
+	// can be empty.
 	//
 	// This member is required.
 	RepositoryNames []string

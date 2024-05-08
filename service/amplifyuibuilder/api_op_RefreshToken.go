@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is for internal use. Amplify uses this action to refresh a previously
-// issued access token that might have expired.
+// This is for internal use.
+//
+// Amplify uses this action to refresh a previously issued access token that might
+// have expired.
 func (c *Client) RefreshToken(ctx context.Context, params *RefreshTokenInput, optFns ...func(*Options)) (*RefreshTokenOutput, error) {
 	if params == nil {
 		params = &RefreshTokenInput{}

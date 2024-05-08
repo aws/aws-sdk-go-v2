@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a project in the specified portal. Make sure that the project name and
-// description don't contain confidential information.
+// Creates a project in the specified portal.
+//
+// Make sure that the project name and description don't contain confidential
+// information.
 func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, optFns ...func(*Options)) (*CreateProjectOutput, error) {
 	if params == nil {
 		params = &CreateProjectInput{}
@@ -48,8 +50,9 @@ type CreateProjectInput struct {
 	ProjectDescription *string
 
 	// A list of key-value pairs that contain metadata for the project. For more
-	// information, see Tagging your IoT SiteWise resources (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
-	// in the IoT SiteWise User Guide.
+	// information, see [Tagging your IoT SiteWise resources]in the IoT SiteWise User Guide.
+	//
+	// [Tagging your IoT SiteWise resources]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -57,9 +60,11 @@ type CreateProjectInput struct {
 
 type CreateProjectOutput struct {
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the project, which has the following format.
-	// arn:${Partition}:iotsitewise:${Region}:${Account}:project/${ProjectId}
+	// The [ARN] of the project, which has the following format.
+	//
+	//     arn:${Partition}:iotsitewise:${Region}:${Account}:project/${ProjectId}
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	ProjectArn *string

@@ -13,8 +13,9 @@ import (
 
 // Lists all the subscription descriptions for a customer account. The description
 // for a subscription includes SubscriptionName, SNSTopicARN, CustomerID,
-// SourceType, SourceID, CreationTime, and Status. If you specify a
-// SubscriptionName, lists the description for that subscription.
+// SourceType, SourceID, CreationTime, and Status.
+//
+// If you specify a SubscriptionName, lists the description for that subscription.
 func (c *Client) DescribeEventSubscriptions(ctx context.Context, params *DescribeEventSubscriptionsInput, optFns ...func(*Options)) (*DescribeEventSubscriptionsOutput, error) {
 	if params == nil {
 		params = &DescribeEventSubscriptionsInput{}
@@ -35,16 +36,19 @@ type DescribeEventSubscriptionsInput struct {
 	// This parameter is not currently supported.
 	Filters []types.Filter
 
-	// An optional pagination token provided by a previous
+	//  An optional pagination token provided by a previous
 	// DescribeOrderableDBInstanceOptions request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to the value specified by
 	// MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The name of the event notification subscription you want to describe.
@@ -58,7 +62,7 @@ type DescribeEventSubscriptionsOutput struct {
 	// A list of EventSubscriptions data types.
 	EventSubscriptionsList []types.EventSubscription
 
-	// An optional pagination token provided by a previous
+	//  An optional pagination token provided by a previous
 	// DescribeOrderableDBInstanceOptions request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to the value specified by
 	// MaxRecords .
@@ -160,10 +164,13 @@ var _ DescribeEventSubscriptionsAPIClient = (*Client)(nil)
 // DescribeEventSubscriptionsPaginatorOptions is the paginator options for
 // DescribeEventSubscriptions
 type DescribeEventSubscriptionsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

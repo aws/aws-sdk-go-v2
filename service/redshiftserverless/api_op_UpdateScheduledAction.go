@@ -46,20 +46,24 @@ type UpdateScheduledActionInput struct {
 	// scheduled action. This IAM role must allow the Amazon Redshift scheduler to
 	// schedule creating snapshots (Principal scheduler.redshift.amazonaws.com) to
 	// assume permissions on your behalf. For more information about the IAM role to
-	// use with the Amazon Redshift scheduler, see Using Identity-Based Policies for
-	// Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html)
-	// in the Amazon Redshift Cluster Management Guide
+	// use with the Amazon Redshift scheduler, see [Using Identity-Based Policies for Amazon Redshift]in the Amazon Redshift Cluster
+	// Management Guide
+	//
+	// [Using Identity-Based Policies for Amazon Redshift]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html
 	RoleArn *string
 
 	// The schedule for a one-time (at timestamp format) or recurring (cron format)
 	// scheduled action. Schedule invocations must be separated by at least one hour.
 	// Times are in UTC.
+	//
 	//   - Format of at timestamp is yyyy-mm-ddThh:mm:ss . For example,
 	//   2016-03-04T17:27:00 .
+	//
 	//   - Format of cron expression is (Minutes Hours Day-of-month Month Day-of-week
-	//   Year) . For example, "(0 10 ? * MON *)" . For more information, see Cron
-	//   Expressions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
-	//   in the Amazon CloudWatch Events User Guide.
+	//   Year) . For example, "(0 10 ? * MON *)" . For more information, see [Cron Expressions]in the
+	//   Amazon CloudWatch Events User Guide.
+	//
+	// [Cron Expressions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
 	Schedule types.Schedule
 
 	// The descripion of the scheduled action to update to.
@@ -69,9 +73,10 @@ type UpdateScheduledActionInput struct {
 	StartTime *time.Time
 
 	// A JSON format string of the Amazon Redshift Serverless API operation with input
-	// parameters. The following is an example of a target action. "{"CreateSnapshot":
-	// {"NamespaceName": "sampleNamespace","SnapshotName": "sampleSnapshot",
-	// "retentionPeriod": "1"}}"
+	// parameters. The following is an example of a target action.
+	//
+	//     "{"CreateSnapshot": {"NamespaceName": "sampleNamespace","SnapshotName":
+	//     "sampleSnapshot", "retentionPeriod": "1"}}"
 	TargetAction types.TargetAction
 
 	noSmithyDocumentSerde

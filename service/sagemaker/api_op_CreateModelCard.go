@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon SageMaker Model Card. For information about how to use model
-// cards, see Amazon SageMaker Model Card (https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html)
-// .
+// Creates an Amazon SageMaker Model Card.
+//
+// For information about how to use model cards, see [Amazon SageMaker Model Card].
+//
+// [Amazon SageMaker Model Card]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html
 func (c *Client) CreateModelCard(ctx context.Context, params *CreateModelCardInput, optFns ...func(*Options)) (*CreateModelCardOutput, error) {
 	if params == nil {
 		params = &CreateModelCardInput{}
@@ -31,8 +33,9 @@ func (c *Client) CreateModelCard(ctx context.Context, params *CreateModelCardInp
 
 type CreateModelCardInput struct {
 
-	// The content of the model card. Content must be in model card JSON schema (https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html#model-cards-json-schema)
-	// and provided as a string.
+	// The content of the model card. Content must be in [model card JSON schema] and provided as a string.
+	//
+	// [model card JSON schema]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html#model-cards-json-schema
 	//
 	// This member is required.
 	Content *string
@@ -44,9 +47,13 @@ type CreateModelCardInput struct {
 
 	// The approval status of the model card within your organization. Different
 	// organizations might have different criteria for model card review and approval.
+	//
 	//   - Draft : The model card is a work in progress.
+	//
 	//   - PendingReview : The model card is pending review.
+	//
 	//   - Approved : The model card is approved.
+	//
 	//   - Archived : The model card is archived. No more updates should be made to the
 	//   model card, but it can still be exported.
 	//

@@ -33,7 +33,7 @@ type ListDataIngestionJobsInput struct {
 	// The name of the dataset being used for the data ingestion job.
 	DatasetName *string
 
-	// Specifies the maximum number of data ingestion jobs to list.
+	//  Specifies the maximum number of data ingestion jobs to list.
 	MaxResults *int32
 
 	// An opaque pagination token indicating where to continue the listing of data
@@ -52,7 +52,7 @@ type ListDataIngestionJobsOutput struct {
 	// name and status.
 	DataIngestionJobSummaries []types.DataIngestionJobSummary
 
-	// An opaque pagination token indicating where to continue the listing of data
+	//  An opaque pagination token indicating where to continue the listing of data
 	// ingestion jobs.
 	NextToken *string
 
@@ -149,7 +149,7 @@ var _ ListDataIngestionJobsAPIClient = (*Client)(nil)
 // ListDataIngestionJobsPaginatorOptions is the paginator options for
 // ListDataIngestionJobs
 type ListDataIngestionJobsPaginatorOptions struct {
-	// Specifies the maximum number of data ingestion jobs to list.
+	//  Specifies the maximum number of data ingestion jobs to list.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

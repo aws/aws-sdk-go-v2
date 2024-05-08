@@ -19,10 +19,14 @@ import (
 
 // Creates an S3 Access Grants instance, which serves as a logical grouping for
 // access grants. You can create one S3 Access Grants instance per Region per
-// account. Permissions You must have the s3:CreateAccessGrantsInstance permission
-// to use this operation. Additional Permissions To associate an IAM Identity
-// Center instance with your S3 Access Grants instance, you must also have the
-// sso:DescribeInstance , sso:CreateApplication , sso:PutApplicationGrant , and
+// account.
+//
+// Permissions You must have the s3:CreateAccessGrantsInstance permission to use
+// this operation.
+//
+// Additional Permissions To associate an IAM Identity Center instance with your
+// S3 Access Grants instance, you must also have the sso:DescribeInstance ,
+// sso:CreateApplication , sso:PutApplicationGrant , and
 // sso:PutApplicationAuthenticationMethod permissions.
 func (c *Client) CreateAccessGrantsInstance(ctx context.Context, params *CreateAccessGrantsInstanceInput, optFns ...func(*Options)) (*CreateAccessGrantsInstanceOutput, error) {
 	if params == nil {
@@ -51,9 +55,10 @@ type CreateAccessGrantsInstanceInput struct {
 	// Resource Name (ARN) of the Amazon Web Services IAM Identity Center instance that
 	// you are associating with your S3 Access Grants instance. An IAM Identity Center
 	// instance is your corporate identity directory that you added to the IAM Identity
-	// Center. You can use the ListInstances (https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html)
-	// API operation to retrieve a list of your Identity Center instances and their
-	// ARNs.
+	// Center. You can use the [ListInstances]API operation to retrieve a list of your Identity
+	// Center instances and their ARNs.
+	//
+	// [ListInstances]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html
 	IdentityCenterArn *string
 
 	// The Amazon Web Services resource tags that you are adding to the S3 Access

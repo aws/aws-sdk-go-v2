@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a custom action target in Security Hub. You can use custom actions on
-// findings and insights in Security Hub to trigger target actions in Amazon
-// CloudWatch Events.
+// Creates a custom action target in Security Hub.
+//
+// You can use custom actions on findings and insights in Security Hub to trigger
+// target actions in Amazon CloudWatch Events.
 func (c *Client) CreateActionTarget(ctx context.Context, params *CreateActionTargetInput, optFns ...func(*Options)) (*CreateActionTargetOutput, error) {
 	if params == nil {
 		params = &CreateActionTargetInput{}

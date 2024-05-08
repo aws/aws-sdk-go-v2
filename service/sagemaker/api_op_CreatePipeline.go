@@ -50,8 +50,9 @@ type CreatePipelineInput struct {
 	// specified, it applies to all runs of this pipeline by default.
 	ParallelismConfiguration *types.ParallelismConfiguration
 
-	// The JSON pipeline definition (https://aws-sagemaker-mlops.github.io/sagemaker-model-building-pipeline-definition-JSON-schema/)
-	// of the pipeline.
+	// The [JSON pipeline definition] of the pipeline.
+	//
+	// [JSON pipeline definition]: https://aws-sagemaker-mlops.github.io/sagemaker-model-building-pipeline-definition-JSON-schema/
 	PipelineDefinition *string
 
 	// The location of the pipeline definition stored in Amazon S3. If specified,

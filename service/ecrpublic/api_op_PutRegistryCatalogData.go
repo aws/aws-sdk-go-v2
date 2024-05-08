@@ -30,8 +30,10 @@ func (c *Client) PutRegistryCatalogData(ctx context.Context, params *PutRegistry
 type PutRegistryCatalogDataInput struct {
 
 	// The display name for a public registry. The display name is shown as the
-	// repository author in the Amazon ECR Public Gallery. The registry display name is
-	// only publicly visible in the Amazon ECR Public Gallery for verified accounts.
+	// repository author in the Amazon ECR Public Gallery.
+	//
+	// The registry display name is only publicly visible in the Amazon ECR Public
+	// Gallery for verified accounts.
 	DisplayName *string
 
 	noSmithyDocumentSerde

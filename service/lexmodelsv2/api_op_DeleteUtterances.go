@@ -10,15 +10,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes stored utterances. Amazon Lex stores the utterances that users send to
-// your bot. Utterances are stored for 15 days for use with the
-// ListAggregatedUtterances (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListAggregatedUtterances.html)
-// operation, and then stored indefinitely for use in improving the ability of your
-// bot to respond to user input.. Use the DeleteUtterances operation to manually
-// delete utterances for a specific session. When you use the DeleteUtterances
-// operation, utterances stored for improving your bot's ability to respond to user
-// input are deleted immediately. Utterances stored for use with the
-// ListAggregatedUtterances operation are deleted after 15 days.
+// Deletes stored utterances.
+//
+// Amazon Lex stores the utterances that users send to your bot. Utterances are
+// stored for 15 days for use with the [ListAggregatedUtterances]operation, and then stored indefinitely for
+// use in improving the ability of your bot to respond to user input..
+//
+// Use the DeleteUtterances operation to manually delete utterances for a specific
+// session. When you use the DeleteUtterances operation, utterances stored for
+// improving your bot's ability to respond to user input are deleted immediately.
+// Utterances stored for use with the ListAggregatedUtterances operation are
+// deleted after 15 days.
+//
+// [ListAggregatedUtterances]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListAggregatedUtterances.html
 func (c *Client) DeleteUtterances(ctx context.Context, params *DeleteUtterancesInput, optFns ...func(*Options)) (*DeleteUtterancesOutput, error) {
 	if params == nil {
 		params = &DeleteUtterancesInput{}
@@ -42,15 +46,16 @@ type DeleteUtterancesInput struct {
 	BotId *string
 
 	// The identifier of the language and locale where the utterances were collected.
-	// The string must match one of the supported locales. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
-	// .
+	// The string must match one of the supported locales. For more information, see [Supported languages].
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	LocaleId *string
 
 	// The unique identifier of the session with the user. The ID is returned in the
-	// response from the RecognizeText (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_RecognizeText.html)
-	// and RecognizeUtterance (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_RecognizeUtterance.html)
-	// operations.
+	// response from the [RecognizeText]and [RecognizeUtterance] operations.
+	//
+	// [RecognizeUtterance]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_RecognizeUtterance.html
+	// [RecognizeText]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_RecognizeText.html
 	SessionId *string
 
 	noSmithyDocumentSerde

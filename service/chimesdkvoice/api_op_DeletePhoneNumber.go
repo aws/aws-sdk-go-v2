@@ -12,8 +12,10 @@ import (
 
 // Moves the specified phone number into the Deletion queue. A phone number must
 // be disassociated from any users or Amazon Chime SDK Voice Connectors before it
-// can be deleted. Deleted phone numbers remain in the Deletion queue queue for 7
-// days before they are deleted permanently.
+// can be deleted.
+//
+// Deleted phone numbers remain in the Deletion queue queue for 7 days before they
+// are deleted permanently.
 func (c *Client) DeletePhoneNumber(ctx context.Context, params *DeletePhoneNumberInput, optFns ...func(*Options)) (*DeletePhoneNumberOutput, error) {
 	if params == nil {
 		params = &DeletePhoneNumberInput{}

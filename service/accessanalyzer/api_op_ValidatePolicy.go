@@ -39,13 +39,15 @@ type ValidatePolicyInput struct {
 
 	// The type of policy to validate. Identity policies grant permissions to IAM
 	// principals. Identity policies include managed and inline policies for IAM roles,
-	// users, and groups. Resource policies grant permissions on Amazon Web Services
-	// resources. Resource policies include trust policies for IAM roles and bucket
-	// policies for Amazon S3 buckets. You can provide a generic input such as identity
-	// policy or resource policy or a specific input such as managed policy or Amazon
-	// S3 bucket policy. Service control policies (SCPs) are a type of organization
-	// policy attached to an Amazon Web Services organization, organizational unit
-	// (OU), or an account.
+	// users, and groups.
+	//
+	// Resource policies grant permissions on Amazon Web Services resources. Resource
+	// policies include trust policies for IAM roles and bucket policies for Amazon S3
+	// buckets. You can provide a generic input such as identity policy or resource
+	// policy or a specific input such as managed policy or Amazon S3 bucket policy.
+	//
+	// Service control policies (SCPs) are a type of organization policy attached to
+	// an Amazon Web Services organization, organizational unit (OU), or an account.
 	//
 	// This member is required.
 	PolicyType types.PolicyType
@@ -62,12 +64,13 @@ type ValidatePolicyInput struct {
 	// The type of resource to attach to your resource policy. Specify a value for the
 	// policy validation resource type only if the policy type is RESOURCE_POLICY . For
 	// example, to validate a resource policy to attach to an Amazon S3 bucket, you can
-	// choose AWS::S3::Bucket for the policy validation resource type. For resource
-	// types not supported as valid values, IAM Access Analyzer runs policy checks that
-	// apply to all resource policies. For example, to validate a resource policy to
-	// attach to a KMS key, do not specify a value for the policy validation resource
-	// type and IAM Access Analyzer will run policy checks that apply to all resource
-	// policies.
+	// choose AWS::S3::Bucket for the policy validation resource type.
+	//
+	// For resource types not supported as valid values, IAM Access Analyzer runs
+	// policy checks that apply to all resource policies. For example, to validate a
+	// resource policy to attach to a KMS key, do not specify a value for the policy
+	// validation resource type and IAM Access Analyzer will run policy checks that
+	// apply to all resource policies.
 	ValidatePolicyResourceType types.ValidatePolicyResourceType
 
 	noSmithyDocumentSerde

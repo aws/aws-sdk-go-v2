@@ -11,12 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Neptune ML model training job. See Model training using the
-// modeltraining command (https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html)
-// . When invoking this operation in a Neptune cluster that has IAM authentication
+// Creates a new Neptune ML model training job. See [Model training using the modeltraining command]modeltraining .
+//
+// When invoking this operation in a Neptune cluster that has IAM authentication
 // enabled, the IAM user or role making the request must have a policy attached
-// that allows the neptune-db:StartMLModelTrainingJob (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#startmlmodeltrainingjob)
-// IAM action in that cluster.
+// that allows the [neptune-db:StartMLModelTrainingJob]IAM action in that cluster.
+//
+// [Model training using the modeltraining command]: https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html
+// [neptune-db:StartMLModelTrainingJob]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#startmlmodeltrainingjob
 func (c *Client) StartMLModelTrainingJob(ctx context.Context, params *StartMLModelTrainingJobInput, optFns ...func(*Options)) (*StartMLModelTrainingJobOutput, error) {
 	if params == nil {
 		params = &StartMLModelTrainingJobInput{}

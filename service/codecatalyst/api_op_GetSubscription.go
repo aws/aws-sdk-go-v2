@@ -45,15 +45,17 @@ type GetSubscriptionOutput struct {
 	AwsAccountName *string
 
 	// The day and time the pending change will be applied to the space, in
-	// coordinated universal time (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// .
+	// coordinated universal time (UTC) timestamp format as specified in [RFC 3339].
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	PendingSubscriptionStartTime *time.Time
 
 	// The type of the billing plan that the space will be changed to at the start of
 	// the next billing cycle. This applies only to changes that reduce the
 	// functionality available for the space. Billing plan changes that increase
-	// functionality are applied immediately. For more information, see Pricing (https://codecatalyst.aws/explore/pricing)
-	// .
+	// functionality are applied immediately. For more information, see [Pricing].
+	//
+	// [Pricing]: https://codecatalyst.aws/explore/pricing
 	PendingSubscriptionType *string
 
 	// The type of the billing plan for the space.

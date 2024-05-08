@@ -43,19 +43,21 @@ type StartJobInput struct {
 
 	// Describes the type for the job. The job type RELEASE starts a new job with the
 	// latest change from the specified branch. This value is available only for apps
-	// that are connected to a repository. The job type RETRY retries an existing job.
-	// If the job type value is RETRY , the jobId is also required.
+	// that are connected to a repository.
+	//
+	// The job type RETRY retries an existing job. If the job type value is RETRY , the
+	// jobId is also required.
 	//
 	// This member is required.
 	JobType types.JobType
 
-	// The commit ID from a third-party repository provider for the job.
+	//  The commit ID from a third-party repository provider for the job.
 	CommitId *string
 
-	// The commit message from a third-party repository provider for the job.
+	//  The commit message from a third-party repository provider for the job.
 	CommitMessage *string
 
-	// The commit date and time for the job.
+	//  The commit date and time for the job.
 	CommitTime *time.Time
 
 	// The unique ID for an existing job. This is required if the value of jobType is
@@ -71,7 +73,7 @@ type StartJobInput struct {
 // The result structure for the run job request.
 type StartJobOutput struct {
 
-	// The summary for the job.
+	//  The summary for the job.
 	//
 	// This member is required.
 	JobSummary *types.JobSummary

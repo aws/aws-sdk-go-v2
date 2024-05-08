@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ItemType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ItemType) Values() []ItemType {
 	return []ItemType{
 		"OBJECT",
@@ -28,8 +29,9 @@ const (
 )
 
 // Values returns all known values for StorageClass. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StorageClass) Values() []StorageClass {
 	return []StorageClass{
 		"TEMPORAL",
@@ -45,8 +47,9 @@ const (
 )
 
 // Values returns all known values for UploadAvailability. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UploadAvailability) Values() []UploadAvailability {
 	return []UploadAvailability{
 		"STANDARD",

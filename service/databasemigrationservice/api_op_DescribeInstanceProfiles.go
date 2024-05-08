@@ -36,10 +36,11 @@ type DescribeInstanceProfilesInput struct {
 
 	// Specifies the unique pagination token that makes it possible to display the
 	// next page of results. If this parameter is specified, the response includes only
-	// records beyond the marker, up to the value specified by MaxRecords . If Marker
-	// is returned by a previous response, there are more results available. The value
-	// of Marker is a unique pagination token for each page. To retrieve the next
-	// page, make the call again using the returned token and keeping all other
+	// records beyond the marker, up to the value specified by MaxRecords .
+	//
+	// If Marker is returned by a previous response, there are more results available.
+	// The value of Marker is a unique pagination token for each page. To retrieve the
+	// next page, make the call again using the returned token and keeping all other
 	// arguments unchanged.
 	Marker *string
 
@@ -58,10 +59,11 @@ type DescribeInstanceProfilesOutput struct {
 
 	// Specifies the unique pagination token that makes it possible to display the
 	// next page of results. If this parameter is specified, the response includes only
-	// records beyond the marker, up to the value specified by MaxRecords . If Marker
-	// is returned by a previous response, there are more results available. The value
-	// of Marker is a unique pagination token for each page. To retrieve the next
-	// page, make the call again using the returned token and keeping all other
+	// records beyond the marker, up to the value specified by MaxRecords .
+	//
+	// If Marker is returned by a previous response, there are more results available.
+	// The value of Marker is a unique pagination token for each page. To retrieve the
+	// next page, make the call again using the returned token and keeping all other
 	// arguments unchanged.
 	Marker *string
 

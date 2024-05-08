@@ -12,12 +12,17 @@ import (
 )
 
 // Reverts the application to the previous running version. You can roll back an
-// application if you suspect it is stuck in a transient status. You can roll back
-// an application only if it is in the UPDATING or AUTOSCALING status. When you
-// rollback an application, it loads state data from the last successful snapshot.
-// If the application has no snapshots, Managed Service for Apache Flink rejects
-// the rollback request. This action is not supported for Managed Service for
-// Apache Flink for SQL applications.
+// application if you suspect it is stuck in a transient status.
+//
+// You can roll back an application only if it is in the UPDATING or AUTOSCALING
+// status.
+//
+// When you rollback an application, it loads state data from the last successful
+// snapshot. If the application has no snapshots, Managed Service for Apache Flink
+// rejects the rollback request.
+//
+// This action is not supported for Managed Service for Apache Flink for SQL
+// applications.
 func (c *Client) RollbackApplication(ctx context.Context, params *RollbackApplicationInput, optFns ...func(*Options)) (*RollbackApplicationOutput, error) {
 	if params == nil {
 		params = &RollbackApplicationInput{}
@@ -41,7 +46,7 @@ type RollbackApplicationInput struct {
 	ApplicationName *string
 
 	// The current application version ID. You can retrieve the application version ID
-	// using DescribeApplication .
+	// using DescribeApplication.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64

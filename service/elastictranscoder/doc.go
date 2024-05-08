@@ -3,5 +3,7 @@
 // Package elastictranscoder provides the API client, operations, and parameter
 // types for Amazon Elastic Transcoder.
 //
-// AWS Elastic Transcoder Service The AWS Elastic Transcoder Service.
+// # AWS Elastic Transcoder Service
+//
+// The AWS Elastic Transcoder Service.
 package elastictranscoder

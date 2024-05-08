@@ -13,9 +13,8 @@ import (
 
 // Returns a list of offering promotions. Each offering promotion record contains
 // the ID and description of the promotion. The API returns a NotEligible error if
-// the caller is not permitted to invoke the operation. Contact
-// aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com) if
-// you must be able to invoke this operation.
+// the caller is not permitted to invoke the operation. Contact aws-devicefarm-support@amazon.comif you must be
+// able to invoke this operation.
 func (c *Client) ListOfferingPromotions(ctx context.Context, params *ListOfferingPromotionsInput, optFns ...func(*Options)) (*ListOfferingPromotionsOutput, error) {
 	if params == nil {
 		params = &ListOfferingPromotionsInput{}

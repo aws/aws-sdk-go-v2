@@ -164,13 +164,17 @@ type AppInstanceUserEndpoint struct {
 
 	// A read-only field that represents the state of an AppInstanceUserEndpoint .
 	// Supported values:
+	//
 	//   - ACTIVE : The AppInstanceUserEndpoint is active and able to receive messages.
 	//   When ACTIVE , the EndpointStatusReason remains empty.
+	//
 	//   - INACTIVE : The AppInstanceUserEndpoint is inactive and can't receive
 	//   message. When INACTIVE , the corresponding reason will be conveyed through
 	//   EndpointStatusReason .
+	//
 	//   - INVALID_DEVICE_TOKEN indicates that an AppInstanceUserEndpoint is INACTIVE
 	//   due to invalid device token
+	//
 	//   - INVALID_PINPOINT_ARN indicates that an AppInstanceUserEndpoint is INACTIVE
 	//   due to an invalid pinpoint ARN that was input through the ResourceArn field.
 	EndpointState *EndpointState
@@ -267,13 +271,17 @@ type EndpointAttributes struct {
 
 // A read-only field that represents the state of an AppInstanceUserEndpoint .
 // Supported values:
+//
 //   - ACTIVE : The AppInstanceUserEndpoint is active and able to receive messages.
 //     When ACTIVE , the EndpointStatusReason remains empty.
+//
 //   - INACTIVE : The AppInstanceUserEndpoint is inactive and can't receive
 //     message. When INACTIVE, the corresponding reason will be conveyed through
 //     EndpointStatusReason.
+//
 //   - INVALID_DEVICE_TOKEN indicates that an AppInstanceUserEndpoint is INACTIVE
 //     due to invalid device token
+//
 //   - INVALID_PINPOINT_ARN indicates that an AppInstanceUserEndpoint is INACTIVE
 //     due to an invalid pinpoint ARN that was input through the ResourceArn field.
 type EndpointState struct {
@@ -321,20 +329,26 @@ type Identity struct {
 type InvokedBy struct {
 
 	// Sets standard messages as the bot trigger. For standard messages:
+	//
 	//   - ALL : The bot processes all standard messages.
+	//
 	//   - AUTO : The bot responds to ALL messages when the channel has one other
 	//   non-hidden member, and responds to MENTIONS when the channel has more than one
 	//   other non-hidden member.
+	//
 	//   - MENTIONS : The bot processes all standard messages that have a message
 	//   attribute with CHIME.mentions and a value of the bot ARN.
+	//
 	//   - NONE : The bot processes no standard messages.
 	//
 	// This member is required.
 	StandardMessages StandardMessages
 
 	// Sets targeted messages as the bot trigger. For targeted messages:
+	//
 	//   - ALL : The bot processes all TargetedMessages sent to it. The bot then
 	//   responds with a targeted message back to the sender.
+	//
 	//   - NONE : The bot processes no targeted messages.
 	//
 	// This member is required.
@@ -354,9 +368,10 @@ type LexConfiguration struct {
 
 	// Identifies the Amazon Lex V2 bot's language and locale. The string must match
 	// one of the supported locales in Amazon Lex V2. All of the intents, slot types,
-	// and slots used in the bot must have the same locale. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// and slots used in the bot must have the same locale. For more information, see [Supported languages]
 	// in the Amazon Lex V2 Developer Guide.
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string
@@ -364,8 +379,10 @@ type LexConfiguration struct {
 	// Specifies the type of message that triggers a bot.
 	InvokedBy *InvokedBy
 
-	// Deprecated. Use InvokedBy instead. Determines whether the Amazon Lex V2 bot
-	// responds to all standard messages. Control messages are not supported.
+	//  Deprecated. Use InvokedBy instead.
+	//
+	// Determines whether the Amazon Lex V2 bot responds to all standard messages.
+	// Control messages are not supported.
 	RespondsTo RespondsTo
 
 	// The name of the welcome intent configured in the Amazon Lex V2 bot.

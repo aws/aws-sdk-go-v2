@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Device Defender security profile. Requires permission to access the
-// CreateSecurityProfile (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Creates a Device Defender security profile.
+//
+// Requires permission to access the [CreateSecurityProfile] action.
+//
+// [CreateSecurityProfile]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreateSecurityProfile(ctx context.Context, params *CreateSecurityProfileInput, optFns ...func(*Options)) (*CreateSecurityProfileOutput, error) {
 	if params == nil {
 		params = &CreateSecurityProfileInput{}
@@ -36,8 +38,9 @@ type CreateSecurityProfileInput struct {
 	// This member is required.
 	SecurityProfileName *string
 
-	// Please use CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead. A
-	// list of metrics whose data is retained (stored). By default, data is retained
+	//  Please use CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
+	//
+	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors , but it is also retained for any
 	// metric specified here. Can be used with custom metrics; cannot be used with
 	// dimensions.

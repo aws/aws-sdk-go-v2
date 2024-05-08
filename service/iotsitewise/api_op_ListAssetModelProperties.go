@@ -33,18 +33,22 @@ type ListAssetModelPropertiesInput struct {
 
 	// The ID of the asset model. This can be either the actual ID in UUID format, or
 	// else externalId: followed by the external ID, if it has one. For more
-	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetModelId *string
 
-	// Filters the requested list of asset model properties. You can choose one of the
-	// following options:
+	//  Filters the requested list of asset model properties. You can choose one of
+	// the following options:
+	//
 	//   - ALL – The list includes all asset model properties for a given asset model
 	//   ID.
+	//
 	//   - BASE – The list includes only base asset model properties for a given asset
 	//   model ID.
+	//
 	// Default: BASE
 	Filter types.ListAssetModelPropertiesFilter
 

@@ -12,20 +12,32 @@ import (
 	"time"
 )
 
-// Updates the configuration of an existing state machine alias (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html)
-// by modifying its description or routingConfiguration . You must specify at least
-// one of the description or routingConfiguration parameters to update a state
-// machine alias. UpdateStateMachineAlias is an idempotent API. Step Functions
-// bases the idempotency check on the stateMachineAliasArn , description , and
+// Updates the configuration of an existing state machine [alias] by modifying its
+// description or routingConfiguration .
+//
+// You must specify at least one of the description or routingConfiguration
+// parameters to update a state machine alias.
+//
+// UpdateStateMachineAlias is an idempotent API. Step Functions bases the
+// idempotency check on the stateMachineAliasArn , description , and
 // routingConfiguration parameters. Requests with the same parameters return an
-// idempotent response. This operation is eventually consistent. All StartExecution
-// requests made within a few seconds use the latest alias configuration.
-// Executions started immediately after calling UpdateStateMachineAlias may use
-// the previous routing configuration. Related operations:
-//   - CreateStateMachineAlias
-//   - DescribeStateMachineAlias
-//   - ListStateMachineAliases
-//   - DeleteStateMachineAlias
+// idempotent response.
+//
+// This operation is eventually consistent. All StartExecution requests made within a few
+// seconds use the latest alias configuration. Executions started immediately after
+// calling UpdateStateMachineAlias may use the previous routing configuration.
+//
+// Related operations:
+//
+// # CreateStateMachineAlias
+//
+// # DescribeStateMachineAlias
+//
+// # ListStateMachineAliases
+//
+// # DeleteStateMachineAlias
+//
+// [alias]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
 func (c *Client) UpdateStateMachineAlias(ctx context.Context, params *UpdateStateMachineAliasInput, optFns ...func(*Options)) (*UpdateStateMachineAliasOutput, error) {
 	if params == nil {
 		params = &UpdateStateMachineAliasInput{}
@@ -51,9 +63,10 @@ type UpdateStateMachineAliasInput struct {
 	// A description of the state machine alias.
 	Description *string
 
-	// The routing configuration of the state machine alias. An array of RoutingConfig
-	// objects that specifies up to two state machine versions that the alias starts
-	// executions for.
+	// The routing configuration of the state machine alias.
+	//
+	// An array of RoutingConfig objects that specifies up to two state machine
+	// versions that the alias starts executions for.
 	RoutingConfiguration []types.RoutingConfigurationListItem
 
 	noSmithyDocumentSerde

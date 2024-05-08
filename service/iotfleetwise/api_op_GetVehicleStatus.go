@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the status of a vehicle with any associated
+//	Retrieves information about the status of a vehicle with any associated
+//
 // campaigns.
 func (c *Client) GetVehicleStatus(ctx context.Context, params *GetVehicleStatusInput, optFns ...func(*Options)) (*GetVehicleStatusOutput, error) {
 	if params == nil {
@@ -30,19 +31,21 @@ func (c *Client) GetVehicleStatus(ctx context.Context, params *GetVehicleStatusI
 
 type GetVehicleStatusInput struct {
 
-	// The ID of the vehicle to retrieve information about.
+	//  The ID of the vehicle to retrieve information about.
 	//
 	// This member is required.
 	VehicleName *string
 
-	// The maximum number of items to return, between 1 and 100, inclusive.
+	//  The maximum number of items to return, between 1 and 100, inclusive.
 	MaxResults *int32
 
-	// A pagination token for the next set of results. If the results of a search are
-	// large, only a portion of the results are returned, and a nextToken pagination
-	// token is returned in the response. To retrieve the next set of results, reissue
-	// the search request and include the returned token. When all results have been
-	// returned, the response does not contain a pagination token value.
+	// A pagination token for the next set of results.
+	//
+	// If the results of a search are large, only a portion of the results are
+	// returned, and a nextToken pagination token is returned in the response. To
+	// retrieve the next set of results, reissue the search request and include the
+	// returned token. When all results have been returned, the response does not
+	// contain a pagination token value.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -50,10 +53,10 @@ type GetVehicleStatusInput struct {
 
 type GetVehicleStatusOutput struct {
 
-	// Lists information about the state of the vehicle with deployed campaigns.
+	//  Lists information about the state of the vehicle with deployed campaigns.
 	Campaigns []types.VehicleStatus
 
-	// The token to retrieve the next set of results, or null if there are no more
+	//  The token to retrieve the next set of results, or null if there are no more
 	// results.
 	NextToken *string
 
@@ -152,7 +155,7 @@ var _ GetVehicleStatusAPIClient = (*Client)(nil)
 
 // GetVehicleStatusPaginatorOptions is the paginator options for GetVehicleStatus
 type GetVehicleStatusPaginatorOptions struct {
-	// The maximum number of items to return, between 1 and 100, inclusive.
+	//  The maximum number of items to return, between 1 and 100, inclusive.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

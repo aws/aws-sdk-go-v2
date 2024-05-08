@@ -39,8 +39,9 @@ type DescribeAccountPoliciesInput struct {
 	// CloudWatch unified cross-account observability, you can use this to specify the
 	// account ID of a source account. If you do, the operation returns the account
 	// policy for the specified account. Currently, you can specify only one account ID
-	// in this parameter. If you omit this parameter, only the policy in the current
-	// account is returned.
+	// in this parameter.
+	//
+	// If you omit this parameter, only the policy in the current account is returned.
 	AccountIdentifiers []string
 
 	// Use this parameter to limit the returned policies to only the policy with the

@@ -11,17 +11,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the configuration for a CloudFront distribution. The update process
-// includes getting the current distribution configuration, updating it to make
-// your changes, and then submitting an UpdateDistribution request to make the
-// updates. To update a web distribution using the CloudFront API
+// Updates the configuration for a CloudFront distribution.
+//
+// The update process includes getting the current distribution configuration,
+// updating it to make your changes, and then submitting an UpdateDistribution
+// request to make the updates.
+//
+// To update a web distribution using the CloudFront API
+//
 //   - Use GetDistributionConfig to get the current configuration, including the
 //     version identifier ( ETag ).
+//
 //   - Update the distribution configuration that was returned in the response.
 //     Note the following important requirements and restrictions:
+//
 //   - You must rename the ETag field to IfMatch , leaving the value unchanged.
 //     (Set the value of IfMatch to the value of ETag , then remove the ETag field.)
+//
 //   - You can't change the value of CallerReference .
+//
 //   - Submit an UpdateDistribution request, providing the distribution
 //     configuration. The new configuration replaces the existing configuration. The
 //     values that you specify in an UpdateDistribution request are not merged into

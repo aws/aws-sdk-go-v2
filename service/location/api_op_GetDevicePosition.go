@@ -12,8 +12,9 @@ import (
 	"time"
 )
 
-// Retrieves a device's most recent position according to its sample time. Device
-// positions are deleted after 30 days.
+// Retrieves a device's most recent position according to its sample time.
+//
+// Device positions are deleted after 30 days.
 func (c *Client) GetDevicePosition(ctx context.Context, params *GetDevicePositionInput, optFns ...func(*Options)) (*GetDevicePositionOutput, error) {
 	if params == nil {
 		params = &GetDevicePositionInput{}
@@ -51,15 +52,18 @@ type GetDevicePositionOutput struct {
 	// This member is required.
 	Position []float64
 
-	// The timestamp for when the tracker resource received the device position in
-	// ISO 8601  (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp for when the tracker resource received the device position in [ISO 8601]
+	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	ReceivedTime *time.Time
 
-	// The timestamp at which the device's position was determined. Uses  ISO 8601  (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp at which the device's position was determined. Uses [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	SampleTime *time.Time

@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the status of one or more versions of a package. Using
+//	Updates the status of one or more versions of a package. Using
+//
 // UpdatePackageVersionsStatus , you can update the status of package versions to
 // Archived , Published , or Unlisted . To set the status of a package version to
-// Disposed , use DisposePackageVersions (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DisposePackageVersions.html)
-// .
+// Disposed , use [DisposePackageVersions].
+//
+// [DisposePackageVersions]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DisposePackageVersions.html
 func (c *Client) UpdatePackageVersionsStatus(ctx context.Context, params *UpdatePackageVersionsStatusInput, optFns ...func(*Options)) (*UpdatePackageVersionsStatusOutput, error) {
 	if params == nil {
 		params = &UpdatePackageVersionsStatusInput{}
@@ -33,58 +35,62 @@ func (c *Client) UpdatePackageVersionsStatus(ctx context.Context, params *Update
 
 type UpdatePackageVersionsStatusInput struct {
 
-	// The name of the domain that contains the repository that contains the package
+	//  The name of the domain that contains the repository that contains the package
 	// versions with a status to be updated.
 	//
 	// This member is required.
 	Domain *string
 
-	// A format that specifies the type of the package with the statuses to update.
+	//  A format that specifies the type of the package with the statuses to update.
 	//
 	// This member is required.
 	Format types.PackageFormat
 
-	// The name of the package with the version statuses to update.
+	//  The name of the package with the version statuses to update.
 	//
 	// This member is required.
 	Package *string
 
-	// The repository that contains the package versions with the status you want to
+	//  The repository that contains the package versions with the status you want to
 	// update.
 	//
 	// This member is required.
 	Repository *string
 
-	// The status you want to change the package version status to.
+	//  The status you want to change the package version status to.
 	//
 	// This member is required.
 	TargetStatus types.PackageVersionStatus
 
-	// An array of strings that specify the versions of the package with the statuses
+	//  An array of strings that specify the versions of the package with the statuses
 	// to update.
 	//
 	// This member is required.
 	Versions []string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The package version’s expected status before it is updated. If expectedStatus
+	//  The package version’s expected status before it is updated. If expectedStatus
 	// is provided, the package version's status is updated only if its status at the
 	// time UpdatePackageVersionsStatus is called matches expectedStatus .
 	ExpectedStatus types.PackageVersionStatus
 
 	// The namespace of the package version to be updated. The package component that
 	// specifies its namespace depends on its type. For example:
+	//
 	//   - The namespace of a Maven package version is its groupId .
+	//
 	//   - The namespace of an npm or Swift package version is its scope .
+	//
 	//   - The namespace of a generic package is its namespace .
+	//
 	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
 	//   component, package versions of those formats do not have a namespace.
 	Namespace *string
 
-	// A map of package versions and package version revisions. The map key is the
+	//  A map of package versions and package version revisions. The map key is the
 	// package version (for example, 3.5.2 ), and the map value is the package version
 	// revision.
 	VersionRevisions map[string]string
@@ -94,11 +100,11 @@ type UpdatePackageVersionsStatusInput struct {
 
 type UpdatePackageVersionsStatusOutput struct {
 
-	// A list of SuccessfulPackageVersionInfo objects, one for each package version
+	//  A list of SuccessfulPackageVersionInfo objects, one for each package version
 	// with a status that successfully updated.
 	FailedVersions map[string]types.PackageVersionError
 
-	// A list of PackageVersionError objects, one for each package version with a
+	//  A list of PackageVersionError objects, one for each package version with a
 	// status that failed to update.
 	SuccessfulVersions map[string]types.SuccessfulPackageVersionInfo
 

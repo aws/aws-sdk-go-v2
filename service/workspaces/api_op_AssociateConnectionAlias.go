@@ -11,10 +11,13 @@ import (
 )
 
 // Associates the specified connection alias with the specified directory to
-// enable cross-Region redirection. For more information, see Cross-Region
-// Redirection for Amazon WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html)
-// . Before performing this operation, call DescribeConnectionAliases (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html)
-// to make sure that the current state of the connection alias is CREATED .
+// enable cross-Region redirection. For more information, see [Cross-Region Redirection for Amazon WorkSpaces].
+//
+// Before performing this operation, call [DescribeConnectionAliases] to make sure that the current state of
+// the connection alias is CREATED .
+//
+// [DescribeConnectionAliases]: https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html
+// [Cross-Region Redirection for Amazon WorkSpaces]: https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html
 func (c *Client) AssociateConnectionAlias(ctx context.Context, params *AssociateConnectionAliasInput, optFns ...func(*Options)) (*AssociateConnectionAliasOutput, error) {
 	if params == nil {
 		params = &AssociateConnectionAliasInput{}

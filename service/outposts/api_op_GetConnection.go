@@ -11,14 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Amazon Web Services uses this action to install Outpost servers. Gets
-// information about the specified connection. Use CloudTrail to monitor this
-// action or Amazon Web Services managed policy for Amazon Web Services Outposts to
-// secure it. For more information, see Amazon Web Services managed policies for
-// Amazon Web Services Outposts (https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html)
-// and Logging Amazon Web Services Outposts API calls with Amazon Web Services
-// CloudTrail (https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html)
-// in the Amazon Web Services Outposts User Guide.
+//	Amazon Web Services uses this action to install Outpost servers.
+//
+// Gets information about the specified connection.
+//
+// Use CloudTrail to monitor this action or Amazon Web Services managed policy for
+// Amazon Web Services Outposts to secure it. For more information, see [Amazon Web Services managed policies for Amazon Web Services Outposts]and [Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail] in
+// the Amazon Web Services Outposts User Guide.
+//
+// [Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail]: https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html
+// [Amazon Web Services managed policies for Amazon Web Services Outposts]: https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html
 func (c *Client) GetConnection(ctx context.Context, params *GetConnectionInput, optFns ...func(*Options)) (*GetConnectionOutput, error) {
 	if params == nil {
 		params = &GetConnectionInput{}
@@ -36,7 +38,7 @@ func (c *Client) GetConnection(ctx context.Context, params *GetConnectionInput, 
 
 type GetConnectionInput struct {
 
-	// The ID of the connection.
+	//  The ID of the connection.
 	//
 	// This member is required.
 	ConnectionId *string
@@ -46,10 +48,10 @@ type GetConnectionInput struct {
 
 type GetConnectionOutput struct {
 
-	// Information about the connection.
+	//  Information about the connection.
 	ConnectionDetails *types.ConnectionDetails
 
-	// The ID of the connection.
+	//  The ID of the connection.
 	ConnectionId *string
 
 	// Metadata pertaining to the operation's result.

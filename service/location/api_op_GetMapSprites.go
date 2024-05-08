@@ -31,10 +31,15 @@ func (c *Client) GetMapSprites(ctx context.Context, params *GetMapSpritesInput, 
 type GetMapSpritesInput struct {
 
 	// The name of the sprite ﬁle. Use the following ﬁle names for the sprite sheet:
+	//
 	//   - sprites.png
+	//
 	//   - sprites@2x.png for high pixel density displays
+	//
 	// For the JSON document containing image offsets. Use the following ﬁle names:
+	//
 	//   - sprites.json
+	//
 	//   - sprites@2x.json for high pixel density displays
 	//
 	// This member is required.
@@ -45,8 +50,9 @@ type GetMapSpritesInput struct {
 	// This member is required.
 	MapName *string
 
-	// The optional API key (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-	// to authorize the request.
+	// The optional [API key] to authorize the request.
+	//
+	// [API key]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
 	Key *string
 
 	noSmithyDocumentSerde

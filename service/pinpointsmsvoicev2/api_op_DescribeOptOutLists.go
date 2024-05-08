@@ -11,12 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified opt-out list or all opt-out lists in your account. If
-// you specify opt-out list names, the output includes information for only the
+// Describes the specified opt-out list or all opt-out lists in your account.
+//
+// If you specify opt-out list names, the output includes information for only the
 // specified opt-out lists. Opt-out lists include only those that meet the filter
 // criteria. If you don't specify opt-out list names or filters, the output
-// includes information for all opt-out lists. If you specify an opt-out list name
-// that isn't valid, an error is returned.
+// includes information for all opt-out lists.
+//
+// If you specify an opt-out list name that isn't valid, an error is returned.
 func (c *Client) DescribeOptOutLists(ctx context.Context, params *DescribeOptOutListsInput, optFns ...func(*Options)) (*DescribeOptOutListsOutput, error) {
 	if params == nil {
 		params = &DescribeOptOutListsInput{}

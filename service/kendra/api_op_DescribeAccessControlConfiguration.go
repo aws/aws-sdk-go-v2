@@ -65,8 +65,10 @@ type DescribeAccessControlConfigurationOutput struct {
 	// control configuration.
 	ErrorMessage *string
 
-	// The list of principal (https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html)
-	// lists that define the hierarchy for which documents users should have access to.
+	// The list of [principal] lists that define the hierarchy for which documents users should
+	// have access to.
+	//
+	// [principal]: https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html
 	HierarchicalAccessControlList []types.HierarchicalPrincipal
 
 	// Metadata pertaining to the operation's result.

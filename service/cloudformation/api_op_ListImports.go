@@ -12,10 +12,12 @@ import (
 
 // Lists all stacks that are importing an exported output value. To modify or
 // remove an exported output value, first use this action to see which stacks are
-// using it. To see the exported output values in your account, see ListExports .
-// For more information about importing an exported output value, see the
-// Fn::ImportValue (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html)
+// using it. To see the exported output values in your account, see ListExports.
+//
+// For more information about importing an exported output value, see the [Fn::ImportValue]
 // function.
+//
+// [Fn::ImportValue]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html
 func (c *Client) ListImports(ctx context.Context, params *ListImportsInput, optFns ...func(*Options)) (*ListImportsOutput, error) {
 	if params == nil {
 		params = &ListImportsInput{}
@@ -39,8 +41,8 @@ type ListImportsInput struct {
 	// This member is required.
 	ExportName *string
 
-	// A string (provided by the ListImports response output) that identifies the next
-	// page of stacks that are importing the specified exported output value.
+	// A string (provided by the ListImports response output) that identifies the next page of
+	// stacks that are importing the specified exported output value.
 	NextToken *string
 
 	noSmithyDocumentSerde

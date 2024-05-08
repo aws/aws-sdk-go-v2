@@ -34,7 +34,7 @@ type UpdateAssessmentFrameworkShareInput struct {
 	// This member is required.
 	Action types.ShareRequestAction
 
-	// The unique identifier for the share request.
+	//  The unique identifier for the share request.
 	//
 	// This member is required.
 	RequestId *string
@@ -49,7 +49,7 @@ type UpdateAssessmentFrameworkShareInput struct {
 
 type UpdateAssessmentFrameworkShareOutput struct {
 
-	// The updated share request that's returned by the UpdateAssessmentFrameworkShare
+	//  The updated share request that's returned by the UpdateAssessmentFrameworkShare
 	// operation.
 	AssessmentFrameworkShareRequest *types.AssessmentFrameworkShareRequest
 

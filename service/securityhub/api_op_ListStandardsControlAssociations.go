@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specifies whether a control is currently enabled or disabled in each enabled
+//	Specifies whether a control is currently enabled or disabled in each enabled
+//
 // standard in the calling account.
 func (c *Client) ListStandardsControlAssociations(ctx context.Context, params *ListStandardsControlAssociationsInput, optFns ...func(*Options)) (*ListStandardsControlAssociationsOutput, error) {
 	if params == nil {
@@ -30,14 +31,14 @@ func (c *Client) ListStandardsControlAssociations(ctx context.Context, params *L
 
 type ListStandardsControlAssociationsInput struct {
 
-	// The identifier of the control (identified with SecurityControlId ,
+	//  The identifier of the control (identified with SecurityControlId ,
 	// SecurityControlArn , or a mix of both parameters) that you want to determine the
 	// enablement status of in each enabled standard.
 	//
 	// This member is required.
 	SecurityControlId *string
 
-	// An optional parameter that limits the total results of the API response to the
+	//  An optional parameter that limits the total results of the API response to the
 	// specified number. If this parameter isn't provided in the request, the results
 	// include the first 25 standard and control associations. The results also include
 	// a NextToken parameter that you can use in a subsequent API call to get the next
@@ -46,7 +47,7 @@ type ListStandardsControlAssociationsInput struct {
 	// Security Hub standards that you've enabled in the calling account.
 	MaxResults *int32
 
-	// Optional pagination parameter.
+	//  Optional pagination parameter.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -54,13 +55,13 @@ type ListStandardsControlAssociationsInput struct {
 
 type ListStandardsControlAssociationsOutput struct {
 
-	// An array that provides the enablement status and other details for each
+	//  An array that provides the enablement status and other details for each
 	// security control that applies to each enabled standard.
 	//
 	// This member is required.
 	StandardsControlAssociationSummaries []types.StandardsControlAssociationSummary
 
-	// A pagination parameter that's included in the response only if it was included
+	//  A pagination parameter that's included in the response only if it was included
 	// in the request.
 	NextToken *string
 
@@ -160,7 +161,7 @@ var _ ListStandardsControlAssociationsAPIClient = (*Client)(nil)
 // ListStandardsControlAssociationsPaginatorOptions is the paginator options for
 // ListStandardsControlAssociations
 type ListStandardsControlAssociationsPaginatorOptions struct {
-	// An optional parameter that limits the total results of the API response to the
+	//  An optional parameter that limits the total results of the API response to the
 	// specified number. If this parameter isn't provided in the request, the results
 	// include the first 25 standard and control associations. The results also include
 	// a NextToken parameter that you can use in a subsequent API call to get the next

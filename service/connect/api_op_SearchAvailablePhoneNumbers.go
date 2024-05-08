@@ -43,9 +43,10 @@ type SearchAvailablePhoneNumbersInput struct {
 	PhoneNumberType types.PhoneNumberType
 
 	// The identifier of the Amazon Connect instance that phone numbers are claimed
-	// to. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance. You must enter InstanceId or
-	// TargetArn .
+	// to. You can [find the instance ID]in the Amazon Resource Name (ARN) of the instance. You must enter
+	// InstanceId or TargetArn .
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	InstanceId *string
 
 	// The maximum number of results to return per page.

@@ -28,7 +28,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the specified flow.
+	//  The Amazon Resource Name (ARN) of the specified flow.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -38,7 +38,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// The tags used to organize, track, or control access for your flow.
+	//  The tags used to organize, track, or control access for your flow.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

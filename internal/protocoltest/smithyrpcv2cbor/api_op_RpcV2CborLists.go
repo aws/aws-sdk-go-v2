@@ -14,6 +14,7 @@ import (
 
 // This test case serializes JSON lists for the following cases for both input and
 // output:
+//
 //   - Normal lists.
 //   - Normal sets.
 //   - Lists of lists.

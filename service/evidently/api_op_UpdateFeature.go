@@ -11,9 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing feature. You can't use this operation to update the tags of
-// an existing feature. Instead, use TagResource (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html)
-// .
+// Updates an existing feature.
+//
+// You can't use this operation to update the tags of an existing feature.
+// Instead, use [TagResource].
+//
+// [TagResource]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html
 func (c *Client) UpdateFeature(ctx context.Context, params *UpdateFeatureInput, optFns ...func(*Options)) (*UpdateFeatureOutput, error) {
 	if params == nil {
 		params = &UpdateFeatureInput{}
@@ -59,9 +62,10 @@ type UpdateFeatureInput struct {
 	// Specified users that should always be served a specific variation of a feature.
 	// Each user is specified by a key-value pair . For each key, specify a user by
 	// entering their user ID, account ID, or some other identifier. For the value,
-	// specify the name of the variation that they are to be served. This parameter is
-	// limited to 2500 overrides or a total of 40KB. The 40KB limit includes an
-	// overhead of 6 bytes per override.
+	// specify the name of the variation that they are to be served.
+	//
+	// This parameter is limited to 2500 overrides or a total of 40KB. The 40KB limit
+	// includes an overhead of 6 bytes per override.
 	EntityOverrides map[string]string
 
 	// Specify ALL_RULES to activate the traffic allocation specified by any ongoing
@@ -70,9 +74,10 @@ type UpdateFeatureInput struct {
 	EvaluationStrategy types.FeatureEvaluationStrategy
 
 	// Removes a variation from the feature. If the variation you specify doesn't
-	// exist, then this makes no change and does not report an error. This operation
-	// fails if you try to remove a variation that is part of an ongoing launch or
-	// experiment.
+	// exist, then this makes no change and does not report an error.
+	//
+	// This operation fails if you try to remove a variation that is part of an
+	// ongoing launch or experiment.
 	RemoveVariations []string
 
 	noSmithyDocumentSerde

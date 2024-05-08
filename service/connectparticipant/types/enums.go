@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for ArtifactStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ArtifactStatus) Values() []ArtifactStatus {
 	return []ArtifactStatus{
 		"APPROVED",
@@ -41,8 +42,9 @@ const (
 )
 
 // Values returns all known values for ChatItemType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChatItemType) Values() []ChatItemType {
 	return []ChatItemType{
 		"TYPING",
@@ -69,8 +71,9 @@ const (
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectionType) Values() []ConnectionType {
 	return []ConnectionType{
 		"WEBSOCKET",
@@ -90,8 +93,9 @@ const (
 )
 
 // Values returns all known values for ParticipantRole. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ParticipantRole) Values() []ParticipantRole {
 	return []ParticipantRole{
 		"AGENT",
@@ -117,8 +121,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"CONTACT",
@@ -141,8 +146,9 @@ const (
 )
 
 // Values returns all known values for ScanDirection. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScanDirection) Values() []ScanDirection {
 	return []ScanDirection{
 		"FORWARD",
@@ -159,8 +165,9 @@ const (
 )
 
 // Values returns all known values for SortKey. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortKey) Values() []SortKey {
 	return []SortKey{
 		"DESCENDING",

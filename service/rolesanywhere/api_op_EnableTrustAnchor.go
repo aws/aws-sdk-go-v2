@@ -12,8 +12,9 @@ import (
 )
 
 // Enables a trust anchor. When enabled, certificates in the trust anchor chain
-// are authorized for trust validation. Required permissions:
-// rolesanywhere:EnableTrustAnchor .
+// are authorized for trust validation.
+//
+// Required permissions: rolesanywhere:EnableTrustAnchor .
 func (c *Client) EnableTrustAnchor(ctx context.Context, params *EnableTrustAnchorInput, optFns ...func(*Options)) (*EnableTrustAnchorOutput, error) {
 	if params == nil {
 		params = &EnableTrustAnchorInput{}

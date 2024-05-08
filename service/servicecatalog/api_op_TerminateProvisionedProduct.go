@@ -11,9 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Terminates the specified provisioned product. This operation does not delete
-// any records associated with the provisioned product. You can check the status of
-// this request using DescribeRecord .
+// Terminates the specified provisioned product.
+//
+// This operation does not delete any records associated with the provisioned
+// product.
+//
+// You can check the status of this request using DescribeRecord.
 func (c *Client) TerminateProvisionedProduct(ctx context.Context, params *TerminateProvisionedProductInput, optFns ...func(*Options)) (*TerminateProvisionedProductOutput, error) {
 	if params == nil {
 		params = &TerminateProvisionedProductInput{}
@@ -40,7 +43,9 @@ type TerminateProvisionedProductInput struct {
 	TerminateToken *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

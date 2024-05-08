@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a RepositoryDescription object that contains detailed information about
-// the requested repository.
+//	Returns a RepositoryDescription object that contains detailed information
+//
+// about the requested repository.
 func (c *Client) DescribeRepository(ctx context.Context, params *DescribeRepositoryInput, optFns ...func(*Options)) (*DescribeRepositoryOutput, error) {
 	if params == nil {
 		params = &DescribeRepositoryInput{}
@@ -30,17 +31,17 @@ func (c *Client) DescribeRepository(ctx context.Context, params *DescribeReposit
 
 type DescribeRepositoryInput struct {
 
-	// The name of the domain that contains the repository to describe.
+	//  The name of the domain that contains the repository to describe.
 	//
 	// This member is required.
 	Domain *string
 
-	// A string that specifies the name of the requested repository.
+	//  A string that specifies the name of the requested repository.
 	//
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
@@ -49,7 +50,7 @@ type DescribeRepositoryInput struct {
 
 type DescribeRepositoryOutput struct {
 
-	// A RepositoryDescription object that contains the requested repository
+	//  A RepositoryDescription object that contains the requested repository
 	// information.
 	Repository *types.RepositoryDescription
 

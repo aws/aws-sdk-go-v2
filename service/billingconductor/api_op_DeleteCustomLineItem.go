@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the custom line item identified by the given ARN in the current, or
+//	Deletes the custom line item identified by the given ARN in the current, or
+//
 // previous billing period.
 func (c *Client) DeleteCustomLineItem(ctx context.Context, params *DeleteCustomLineItemInput, optFns ...func(*Options)) (*DeleteCustomLineItemOutput, error) {
 	if params == nil {
@@ -30,7 +31,7 @@ func (c *Client) DeleteCustomLineItem(ctx context.Context, params *DeleteCustomL
 
 type DeleteCustomLineItemInput struct {
 
-	// The ARN of the custom line item to be deleted.
+	//  The ARN of the custom line item to be deleted.
 	//
 	// This member is required.
 	Arn *string

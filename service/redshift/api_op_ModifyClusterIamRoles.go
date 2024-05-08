@@ -12,10 +12,12 @@ import (
 )
 
 // Modifies the list of Identity and Access Management (IAM) roles that can be
-// used by the cluster to access other Amazon Web Services services. The maximum
-// number of IAM roles that you can associate is subject to a quota. For more
-// information, go to Quotas and limits (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-// in the Amazon Redshift Cluster Management Guide.
+// used by the cluster to access other Amazon Web Services services.
+//
+// The maximum number of IAM roles that you can associate is subject to a quota.
+// For more information, go to [Quotas and limits]in the Amazon Redshift Cluster Management Guide.
+//
+// [Quotas and limits]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
 func (c *Client) ModifyClusterIamRoles(ctx context.Context, params *ModifyClusterIamRolesInput, optFns ...func(*Options)) (*ModifyClusterIamRolesOutput, error) {
 	if params == nil {
 		params = &ModifyClusterIamRolesInput{}

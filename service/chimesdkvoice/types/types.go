@@ -187,8 +187,9 @@ type OrderedPhoneNumber struct {
 }
 
 // Origination settings enable your SIP hosts to receive inbound calls using your
-// Amazon Chime SDK Voice Connector. The parameters listed below are not required,
-// but you must use at least one.
+// Amazon Chime SDK Voice Connector.
+//
+// The parameters listed below are not required, but you must use at least one.
 type Origination struct {
 
 	// When origination settings are disabled, inbound calls are not enabled for your
@@ -206,8 +207,9 @@ type Origination struct {
 
 // Origination routes define call distribution properties for your SIP hosts to
 // receive inbound calls using an Amazon Chime SDK Voice Connector. Limit: Ten
-// origination routes for each Voice Connector. The parameters listed below are not
-// required, but you must use at least one.
+// origination routes for each Voice Connector.
+//
+// The parameters listed below are not required, but you must use at least one.
 type OriginationRoute struct {
 
 	// The FQDN or IP address to contact for origination traffic.
@@ -460,9 +462,10 @@ type ProxySession struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that contains the configuration settings for server-side
-// encryption. We only support symmetric keys. Do not use asymmetric or HMAC keys,
-// or KMS aliases.
+// A structure that contains the configuration settings for server-side encryption.
+//
+// We only support symmetric keys. Do not use asymmetric or HMAC keys, or KMS
+// aliases.
 type ServerSideEncryptionConfiguration struct {
 
 	// The ARN of the KMS key used to encrypt the enrollment data in a voice profile
@@ -503,10 +506,12 @@ type SipMediaApplication struct {
 	noSmithyDocumentSerde
 }
 
-// The Alexa Skill configuration of a SIP media application. Due to changes made
-// by the Amazon Alexa service, this data type is no longer available for use. For
-// more information, refer to the Alexa Smart Properties (https://developer.amazon.com/en-US/alexa/alexasmartproperties)
-// page.
+// The Alexa Skill configuration of a SIP media application.
+//
+// Due to changes made by the Amazon Alexa service, this data type is no longer
+// available for use. For more information, refer to the [Alexa Smart Properties]page.
+//
+// [Alexa Smart Properties]: https://developer.amazon.com/en-US/alexa/alexasmartproperties
 type SipMediaApplicationAlexaSkillConfiguration struct {
 
 	// The ID of the Alexa Skill configuration.
@@ -747,7 +752,7 @@ type TerminationHealth struct {
 }
 
 // The phone number ID, product type, or calling name fields to update, used with
-// the BatchUpdatePhoneNumber and UpdatePhoneNumber actions.
+// the BatchUpdatePhoneNumberand UpdatePhoneNumber actions.
 type UpdatePhoneNumberRequestItem struct {
 
 	// The phone number ID to update.

@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the number of open reactive insights, the number of open proactive
+//	Returns the number of open reactive insights, the number of open proactive
+//
 // insights, and the number of metrics analyzed in your Amazon Web Services
 // account. Use these numbers to gauge the health of operations in your Amazon Web
 // Services account.
@@ -35,19 +36,19 @@ type DescribeAccountHealthInput struct {
 
 type DescribeAccountHealthOutput struct {
 
-	// An integer that specifies the number of metrics that have been analyzed in your
-	// Amazon Web Services account.
+	//  An integer that specifies the number of metrics that have been analyzed in
+	// your Amazon Web Services account.
 	//
 	// This member is required.
 	MetricsAnalyzed int32
 
-	// An integer that specifies the number of open proactive insights in your Amazon
+	//  An integer that specifies the number of open proactive insights in your Amazon
 	// Web Services account.
 	//
 	// This member is required.
 	OpenProactiveInsights int32
 
-	// An integer that specifies the number of open reactive insights in your Amazon
+	//  An integer that specifies the number of open reactive insights in your Amazon
 	// Web Services account.
 	//
 	// This member is required.
@@ -59,7 +60,7 @@ type DescribeAccountHealthOutput struct {
 	// This member is required.
 	ResourceHours *int64
 
-	// Number of resources that DevOps Guru is monitoring in your Amazon Web Services
+	//  Number of resources that DevOps Guru is monitoring in your Amazon Web Services
 	// account.
 	AnalyzedResourceCount *int64
 

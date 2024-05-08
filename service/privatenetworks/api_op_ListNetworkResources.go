@@ -13,9 +13,10 @@ import (
 
 // Lists network resources. Add filters to your request to return a more specific
 // list of results. Use filters to match the Amazon Resource Name (ARN) of an order
-// or the status of network resources. If you specify multiple filters, filters are
-// joined with an OR, and the request returns results that match all of the
-// specified filters.
+// or the status of network resources.
+//
+// If you specify multiple filters, filters are joined with an OR, and the request
+// returns results that match all of the specified filters.
 func (c *Client) ListNetworkResources(ctx context.Context, params *ListNetworkResourcesInput, optFns ...func(*Options)) (*ListNetworkResourcesOutput, error) {
 	if params == nil {
 		params = &ListNetworkResourcesInput{}
@@ -39,9 +40,12 @@ type ListNetworkResourcesInput struct {
 	NetworkArn *string
 
 	// The filters.
+	//
 	//   - ORDER - The Amazon Resource Name (ARN) of the order.
+	//
 	//   - STATUS - The status ( AVAILABLE | DELETED | DELETING | PENDING |
 	//   PENDING_RETURN | PROVISIONING | SHIPPED ).
+	//
 	// Filter values are case sensitive. If you specify multiple values for a filter,
 	// the values are joined with an OR , and the request returns all results that
 	// match any of the specified values.

@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a domain resource for the specified domain (example.com). The create
-// domain operation supports tag-based access control via request tags. For more
-// information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
-// .
+// Creates a domain resource for the specified domain (example.com).
+//
+// The create domain operation supports tag-based access control via request tags.
+// For more information, see the [Amazon Lightsail Developer Guide].
+//
+// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
 func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, optFns ...func(*Options)) (*CreateDomainOutput, error) {
 	if params == nil {
 		params = &CreateDomainInput{}
@@ -37,8 +39,9 @@ type CreateDomainInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The tag keys and optional values to add to the resource during create. Use the
-	// TagResource action to tag a resource after it's created.
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// Use the TagResource action to tag a resource after it's created.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

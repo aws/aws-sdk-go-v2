@@ -15,8 +15,9 @@ import (
 // to specific domains. Shows all domains by default. To get the number of
 // searchable documents in a domain, use the console or submit a matchall request
 // to your domain's search endpoint: q=matchall&q.parser=structured&size=0 . For
-// more information, see Getting Information about a Search Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html)
-// in the Amazon CloudSearch Developer Guide.
+// more information, see [Getting Information about a Search Domain]in the Amazon CloudSearch Developer Guide.
+//
+// [Getting Information about a Search Domain]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html
 func (c *Client) DescribeDomains(ctx context.Context, params *DescribeDomainsInput, optFns ...func(*Options)) (*DescribeDomainsOutput, error) {
 	if params == nil {
 		params = &DescribeDomainsInput{}
@@ -32,9 +33,9 @@ func (c *Client) DescribeDomains(ctx context.Context, params *DescribeDomainsInp
 	return out, nil
 }
 
-// Container for the parameters to the DescribeDomains operation. By default shows
-// the status of all domains. To restrict the response to particular domains,
-// specify the names of the domains you want to describe.
+// Container for the parameters to the DescribeDomains operation. By default shows the status of
+// all domains. To restrict the response to particular domains, specify the names
+// of the domains you want to describe.
 type DescribeDomainsInput struct {
 
 	// The names of the domains you want to include in the response.

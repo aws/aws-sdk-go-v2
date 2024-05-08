@@ -29,8 +29,10 @@ func (c *Client) CreateSecurityProfile(ctx context.Context, params *CreateSecuri
 
 type CreateSecurityProfileInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -60,8 +62,9 @@ type CreateSecurityProfileInput struct {
 	HierarchyRestrictedResources []string
 
 	// Permissions assigned to the security profile. For a list of valid permissions,
-	// see List of security profile permissions (https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html)
-	// .
+	// see [List of security profile permissions].
+	//
+	// [List of security profile permissions]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html
 	Permissions []string
 
 	// The list of resources that a security profile applies tag restrictions to in

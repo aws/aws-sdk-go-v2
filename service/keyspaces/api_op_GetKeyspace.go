@@ -44,7 +44,7 @@ type GetKeyspaceOutput struct {
 	// This member is required.
 	KeyspaceName *string
 
-	// Returns the replication strategy of the keyspace. The options are SINGLE_REGION
+	//  Returns the replication strategy of the keyspace. The options are SINGLE_REGION
 	// or MULTI_REGION .
 	//
 	// This member is required.
@@ -55,7 +55,7 @@ type GetKeyspaceOutput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// If the replicationStrategy of the keyspace is MULTI_REGION , a list of
+	//  If the replicationStrategy of the keyspace is MULTI_REGION , a list of
 	// replication Regions is returned.
 	ReplicationRegions []string
 

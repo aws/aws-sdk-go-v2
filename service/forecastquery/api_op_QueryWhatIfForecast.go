@@ -31,9 +31,13 @@ type QueryWhatIfForecastInput struct {
 
 	// The filtering criteria to apply when retrieving the forecast. For example, to
 	// get the forecast for client_21 in the electricity usage dataset, specify the
-	// following: {"item_id" : "client_21"} To get the full what-if forecast, use the
-	// CreateForecastExportJob (https://docs.aws.amazon.com/en_us/forecast/latest/dg/API_CreateWhatIfForecastExport.html)
-	// operation.
+	// following:
+	//
+	//     {"item_id" : "client_21"}
+	//
+	// To get the full what-if forecast, use the [CreateForecastExportJob] operation.
+	//
+	// [CreateForecastExportJob]: https://docs.aws.amazon.com/en_us/forecast/latest/dg/API_CreateWhatIfForecastExport.html
 	//
 	// This member is required.
 	Filters map[string]string
@@ -61,8 +65,7 @@ type QueryWhatIfForecastInput struct {
 
 type QueryWhatIfForecastOutput struct {
 
-	// Provides information about a forecast. Returned as part of the QueryForecast
-	// response.
+	// Provides information about a forecast. Returned as part of the QueryForecast response.
 	Forecast *types.Forecast
 
 	// Metadata pertaining to the operation's result.

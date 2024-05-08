@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Lists all inference events that have been found for the specified inference
+//	Lists all inference events that have been found for the specified inference
+//
 // scheduler.
 func (c *Client) ListInferenceEvents(ctx context.Context, params *ListInferenceEventsInput, optFns ...func(*Options)) (*ListInferenceEventsOutput, error) {
 	if params == nil {
@@ -42,7 +43,7 @@ type ListInferenceEventsInput struct {
 	// This member is required.
 	IntervalEndTime *time.Time
 
-	// Lookout for Equipment will return all the inference events with an end time
+	//  Lookout for Equipment will return all the inference events with an end time
 	// equal to or greater than the start time given.
 	//
 	// This member is required.

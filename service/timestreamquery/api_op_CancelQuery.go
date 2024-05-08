@@ -11,12 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a query that has been issued. Cancellation is provided only if the
+//	Cancels a query that has been issued. Cancellation is provided only if the
+//
 // query has not completed running before the cancellation request was issued.
 // Because cancellation is an idempotent operation, subsequent cancellation
 // requests will return a CancellationMessage , indicating that the query has
-// already been canceled. See code sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.cancel-query.html)
-// for details.
+// already been canceled. See [code sample]for details.
+//
+// [code sample]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.cancel-query.html
 func (c *Client) CancelQuery(ctx context.Context, params *CancelQueryInput, optFns ...func(*Options)) (*CancelQueryOutput, error) {
 	if params == nil {
 		params = &CancelQueryInput{}
@@ -34,7 +36,7 @@ func (c *Client) CancelQuery(ctx context.Context, params *CancelQueryInput, optF
 
 type CancelQueryInput struct {
 
-	// The ID of the query that needs to be cancelled. QueryID is returned as part of
+	//  The ID of the query that needs to be cancelled. QueryID is returned as part of
 	// the query result.
 	//
 	// This member is required.
@@ -45,7 +47,7 @@ type CancelQueryInput struct {
 
 type CancelQueryOutput struct {
 
-	// A CancellationMessage is returned when a CancelQuery request for the query
+	//  A CancellationMessage is returned when a CancelQuery request for the query
 	// specified by QueryId has already been issued.
 	CancellationMessage *string
 

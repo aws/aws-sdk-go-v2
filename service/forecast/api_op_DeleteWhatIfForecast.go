@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a what-if forecast created using the CreateWhatIfForecast operation.
-// You can delete only what-if forecasts that have a status of ACTIVE or
-// CREATE_FAILED . To get the status, use the DescribeWhatIfForecast operation.
+// Deletes a what-if forecast created using the CreateWhatIfForecast operation. You can delete only
+// what-if forecasts that have a status of ACTIVE or CREATE_FAILED . To get the
+// status, use the DescribeWhatIfForecastoperation.
+//
 // You can't delete a what-if forecast while it is being exported. After a what-if
 // forecast is deleted, you can no longer query the what-if analysis.
 func (c *Client) DeleteWhatIfForecast(ctx context.Context, params *DeleteWhatIfForecastInput, optFns ...func(*Options)) (*DeleteWhatIfForecastOutput, error) {

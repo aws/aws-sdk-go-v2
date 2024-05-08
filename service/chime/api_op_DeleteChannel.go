@@ -11,17 +11,22 @@ import (
 )
 
 // Immediately makes a channel and its memberships inaccessible and marks them for
-// deletion. This is an irreversible process. The x-amz-chime-bearer request
-// header is mandatory. Use the AppInstanceUserArn of the user that makes the API
-// call as the value in the header. This API is is no longer supported and will not
-// be updated. We recommend using the latest version, DeleteChannel (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DeleteChannel.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// deletion. This is an irreversible process.
+//
+// The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn
+// of the user that makes the API call as the value in the header.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [DeleteChannel], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by DeleteChannel in the Amazon Chime SDK Messaging
 // Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [DeleteChannel]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DeleteChannel.html
 func (c *Client) DeleteChannel(ctx context.Context, params *DeleteChannelInput, optFns ...func(*Options)) (*DeleteChannelOutput, error) {
 	if params == nil {
 		params = &DeleteChannelInput{}

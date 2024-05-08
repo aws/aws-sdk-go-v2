@@ -14,14 +14,19 @@ import (
 // Detects text in the input document. Amazon Textract can detect lines of text
 // and the words that make up a line of text. The input document must be in one of
 // the following image formats: JPEG, PNG, PDF, or TIFF. DetectDocumentText
-// returns the detected text in an array of Block objects. Each document page has
-// as an associated Block of type PAGE. Each PAGE Block object is the parent of
-// LINE Block objects that represent the lines of detected text on a page. A LINE
-// Block object is a parent for each word that makes up the line. Words are
-// represented by Block objects of type WORD. DetectDocumentText is a synchronous
-// operation. To analyze documents asynchronously, use StartDocumentTextDetection .
-// For more information, see Document Text Detection (https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html)
-// .
+// returns the detected text in an array of Blockobjects.
+//
+// Each document page has as an associated Block of type PAGE. Each PAGE Block
+// object is the parent of LINE Block objects that represent the lines of detected
+// text on a page. A LINE Block object is a parent for each word that makes up the
+// line. Words are represented by Block objects of type WORD.
+//
+// DetectDocumentText is a synchronous operation. To analyze documents
+// asynchronously, use StartDocumentTextDetection.
+//
+// For more information, see [Document Text Detection].
+//
+// [Document Text Detection]: https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html
 func (c *Client) DetectDocumentText(ctx context.Context, params *DetectDocumentTextInput, optFns ...func(*Options)) (*DetectDocumentTextOutput, error) {
 	if params == nil {
 		params = &DetectDocumentTextInput{}
@@ -41,9 +46,10 @@ type DetectDocumentTextInput struct {
 
 	// The input document as base64-encoded bytes or an Amazon S3 object. If you use
 	// the AWS CLI to call Amazon Textract operations, you can't pass image bytes. The
-	// document must be an image in JPEG or PNG format. If you're using an AWS SDK to
-	// call Amazon Textract, you might not need to base64-encode image bytes that are
-	// passed using the Bytes field.
+	// document must be an image in JPEG or PNG format.
+	//
+	// If you're using an AWS SDK to call Amazon Textract, you might not need to
+	// base64-encode image bytes that are passed using the Bytes field.
 	//
 	// This member is required.
 	Document *types.Document

@@ -18,8 +18,9 @@ import (
 // instances that are registered using a private DNS namespace can be discovered
 // using either a DiscoverInstances request or using DNS. For the current quota on
 // the number of namespaces that you can create using the same Amazon Web Services
-// account, see Cloud Map quotas (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
-// in the Cloud Map Developer Guide.
+// account, see [Cloud Map quotas]in the Cloud Map Developer Guide.
+//
+// [Cloud Map quotas]: https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html
 func (c *Client) CreatePrivateDnsNamespace(ctx context.Context, params *CreatePrivateDnsNamespaceInput, optFns ...func(*Options)) (*CreatePrivateDnsNamespaceOutput, error) {
 	if params == nil {
 		params = &CreatePrivateDnsNamespaceInput{}
@@ -72,8 +73,9 @@ type CreatePrivateDnsNamespaceInput struct {
 type CreatePrivateDnsNamespaceOutput struct {
 
 	// A value that you can use to determine whether the request completed
-	// successfully. To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html)
-	// .
+	// successfully. To get the status of the operation, see [GetOperation].
+	//
+	// [GetOperation]: https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

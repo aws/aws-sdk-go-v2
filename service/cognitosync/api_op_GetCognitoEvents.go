@@ -11,8 +11,10 @@ import (
 )
 
 // Gets the events and the corresponding Lambda functions associated with an
-// identity pool.This API can only be called with developer credentials. You cannot
-// call this API with the temporary user credentials provided by Cognito Identity.
+// identity pool.
+//
+// This API can only be called with developer credentials. You cannot call this
+// API with the temporary user credentials provided by Cognito Identity.
 func (c *Client) GetCognitoEvents(ctx context.Context, params *GetCognitoEventsInput, optFns ...func(*Options)) (*GetCognitoEventsOutput, error) {
 	if params == nil {
 		params = &GetCognitoEventsInput{}

@@ -10,19 +10,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers the resource as managed by the Data Catalog. To add or update data,
-// Lake Formation needs read/write access to the chosen Amazon S3 path. Choose a
-// role that you know has permission to do this, or choose the
-// AWSServiceRoleForLakeFormationDataAccess service-linked role. When you register
-// the first Amazon S3 path, the service-linked role and a new inline policy are
-// created on your behalf. Lake Formation adds the first path to the inline policy
-// and attaches it to the service-linked role. When you register subsequent paths,
-// Lake Formation adds the path to the existing policy. The following request
-// registers a new location and gives Lake Formation permission to use the
-// service-linked role to access that location. ResourceArn =
-// arn:aws:s3:::my-bucket UseServiceLinkedRole = true If UseServiceLinkedRole is
-// not set to true, you must provide or set the RoleArn :
-// arn:aws:iam::12345:role/my-data-access-role
+// Registers the resource as managed by the Data Catalog.
+//
+// To add or update data, Lake Formation needs read/write access to the chosen
+// Amazon S3 path. Choose a role that you know has permission to do this, or choose
+// the AWSServiceRoleForLakeFormationDataAccess service-linked role. When you
+// register the first Amazon S3 path, the service-linked role and a new inline
+// policy are created on your behalf. Lake Formation adds the first path to the
+// inline policy and attaches it to the service-linked role. When you register
+// subsequent paths, Lake Formation adds the path to the existing policy.
+//
+// The following request registers a new location and gives Lake Formation
+// permission to use the service-linked role to access that location.
+//
+//	ResourceArn = arn:aws:s3:::my-bucket UseServiceLinkedRole = true
+//
+// If UseServiceLinkedRole is not set to true, you must provide or set the RoleArn :
+//
+//	arn:aws:iam::12345:role/my-data-access-role
 func (c *Client) RegisterResource(ctx context.Context, params *RegisterResourceInput, optFns ...func(*Options)) (*RegisterResourceOutput, error) {
 	if params == nil {
 		params = &RegisterResourceInput{}
@@ -45,7 +50,7 @@ type RegisterResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// Specifies whether the data access of tables pointing to the location can be
+	//  Specifies whether the data access of tables pointing to the location can be
 	// managed by both Lake Formation permissions as well as Amazon S3 bucket policies.
 	HybridAccessEnabled *bool
 
@@ -54,9 +59,11 @@ type RegisterResourceInput struct {
 
 	// Designates an Identity and Access Management (IAM) service-linked role by
 	// registering this role with the Data Catalog. A service-linked role is a unique
-	// type of IAM role that is linked directly to Lake Formation. For more
-	// information, see Using Service-Linked Roles for Lake Formation (https://docs.aws.amazon.com/lake-formation/latest/dg/service-linked-roles.html)
-	// .
+	// type of IAM role that is linked directly to Lake Formation.
+	//
+	// For more information, see [Using Service-Linked Roles for Lake Formation].
+	//
+	// [Using Service-Linked Roles for Lake Formation]: https://docs.aws.amazon.com/lake-formation/latest/dg/service-linked-roles.html
 	UseServiceLinkedRole *bool
 
 	// Whether or not the resource is a federated resource.

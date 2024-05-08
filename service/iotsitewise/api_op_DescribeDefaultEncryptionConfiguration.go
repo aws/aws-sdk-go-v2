@@ -13,8 +13,9 @@ import (
 
 // Retrieves information about the default encryption configuration for the Amazon
 // Web Services account in the default or specified Region. For more information,
-// see Key management (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html)
-// in the IoT SiteWise User Guide.
+// see [Key management]in the IoT SiteWise User Guide.
+//
+// [Key management]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html
 func (c *Client) DescribeDefaultEncryptionConfiguration(ctx context.Context, params *DescribeDefaultEncryptionConfigurationInput, optFns ...func(*Options)) (*DescribeDefaultEncryptionConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeDefaultEncryptionConfigurationInput{}

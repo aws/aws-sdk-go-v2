@@ -35,8 +35,9 @@ type ListNotificationsInput struct {
 	// The token to use to retrieve the next set of results.
 	NextToken *string
 
-	// The ARN for the related resource for the notification. Only one of WorkloadID
-	// or ResourceARN should be specified.
+	// The ARN for the related resource for the notification.
+	//
+	// Only one of WorkloadID or ResourceARN should be specified.
 	ResourceArn *string
 
 	// The ID assigned to the workload. This ID is unique within an Amazon Web

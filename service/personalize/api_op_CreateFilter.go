@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a recommendation filter. For more information, see Filtering
-// recommendations and user segments (https://docs.aws.amazon.com/personalize/latest/dg/filter.html)
-// .
+// Creates a recommendation filter. For more information, see [Filtering recommendations and user segments].
+//
+// [Filtering recommendations and user segments]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
 func (c *Client) CreateFilter(ctx context.Context, params *CreateFilterInput, optFns ...func(*Options)) (*CreateFilterOutput, error) {
 	if params == nil {
 		params = &CreateFilterInput{}
@@ -38,8 +38,9 @@ type CreateFilterInput struct {
 
 	// The filter expression defines which items are included or excluded from
 	// recommendations. Filter expression must follow specific format rules. For
-	// information about filter expression structure and syntax, see Filter expressions (https://docs.aws.amazon.com/personalize/latest/dg/filter-expressions.html)
-	// .
+	// information about filter expression structure and syntax, see [Filter expressions].
+	//
+	// [Filter expressions]: https://docs.aws.amazon.com/personalize/latest/dg/filter-expressions.html
 	//
 	// This member is required.
 	FilterExpression *string
@@ -49,8 +50,9 @@ type CreateFilterInput struct {
 	// This member is required.
 	Name *string
 
-	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
-	// to apply to the filter.
+	// A list of [tags] to apply to the filter.
+	//
+	// [tags]: https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

@@ -46,7 +46,7 @@ type GetKxVolumeInput struct {
 
 type GetKxVolumeOutput struct {
 
-	// A list of cluster identifiers that a volume is attached to.
+	//  A list of cluster identifiers that a volume is attached to.
 	AttachedClusters []types.KxAttachedCluster
 
 	// The identifier of the availability zones.
@@ -56,12 +56,12 @@ type GetKxVolumeOutput struct {
 	// FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
 	AzMode types.KxAzMode
 
-	// The timestamp at which the volume was created in FinSpace. The value is
+	//  The timestamp at which the volume was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	CreatedTimestamp *time.Time
 
-	// A description of the volume.
+	//  A description of the volume.
 	Description *string
 
 	// A unique identifier for the kdb environment, whose clusters can attach to the
@@ -73,32 +73,41 @@ type GetKxVolumeOutput struct {
 	// 2021 12:00:00 PM UTC is specified as 1635768000000.
 	LastModifiedTimestamp *time.Time
 
-	// Specifies the configuration for the Network attached storage (NAS_1) file
+	//  Specifies the configuration for the Network attached storage (NAS_1) file
 	// system volume.
 	Nas1Configuration *types.KxNAS1Configuration
 
 	// The status of volume creation.
+	//
 	//   - CREATING – The volume creation is in progress.
+	//
 	//   - CREATE_FAILED – The volume creation has failed.
+	//
 	//   - ACTIVE – The volume is active.
+	//
 	//   - UPDATING – The volume is in the process of being updated.
+	//
 	//   - UPDATE_FAILED – The update action failed.
+	//
 	//   - UPDATED – The volume is successfully updated.
+	//
 	//   - DELETING – The volume is in the process of being deleted.
+	//
 	//   - DELETE_FAILED – The system failed to delete the volume.
+	//
 	//   - DELETED – The volume is successfully deleted.
 	Status types.KxVolumeStatus
 
 	// The error message when a failed state occurs.
 	StatusReason *string
 
-	// The ARN identifier of the volume.
+	//  The ARN identifier of the volume.
 	VolumeArn *string
 
-	// A unique identifier for the volume.
+	//  A unique identifier for the volume.
 	VolumeName *string
 
-	// The type of file system volume. Currently, FinSpace only supports NAS_1 volume
+	//  The type of file system volume. Currently, FinSpace only supports NAS_1 volume
 	// type.
 	VolumeType types.KxVolumeType
 

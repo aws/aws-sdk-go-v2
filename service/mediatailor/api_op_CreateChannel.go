@@ -12,9 +12,10 @@ import (
 	"time"
 )
 
-// Creates a channel. For information about MediaTailor channels, see Working with
-// channels (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
-// in the MediaTailor User Guide.
+// Creates a channel. For information about MediaTailor channels, see [Working with channels] in the
+// MediaTailor User Guide.
+//
+// [Working with channels]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html
 func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, optFns ...func(*Options)) (*CreateChannelOutput, error) {
 	if params == nil {
 		params = &CreateChannelInput{}
@@ -42,11 +43,13 @@ type CreateChannelInput struct {
 	// This member is required.
 	Outputs []types.RequestOutputItem
 
-	// The type of playback mode to use for this channel. LINEAR - The programs in the
-	// schedule play once back-to-back in the schedule. LOOP - The programs in the
-	// schedule play back-to-back in an endless loop. When the last program in the
-	// schedule stops playing, playback loops back to the first program in the
-	// schedule.
+	// The type of playback mode to use for this channel.
+	//
+	// LINEAR - The programs in the schedule play once back-to-back in the schedule.
+	//
+	// LOOP - The programs in the schedule play back-to-back in an endless loop. When
+	// the last program in the schedule stops playing, playback loops back to the first
+	// program in the schedule.
 	//
 	// This member is required.
 	PlaybackMode types.PlaybackMode
@@ -62,14 +65,15 @@ type CreateChannelInput struct {
 
 	// The tags to assign to the channel. Tags are key-value pairs that you can
 	// associate with Amazon resources to help with organization, access control, and
-	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
-	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html) .
+	// cost tracking. For more information, see [Tagging AWS Elemental MediaTailor Resources].
+	//
+	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
 	Tags map[string]string
 
 	// The tier of the channel.
 	Tier types.Tier
 
-	// The time-shifted viewing configuration you want to associate to the channel.
+	//  The time-shifted viewing configuration you want to associate to the channel.
 	TimeShiftConfiguration *types.TimeShiftConfiguration
 
 	noSmithyDocumentSerde
@@ -107,14 +111,15 @@ type CreateChannelOutput struct {
 
 	// The tags to assign to the channel. Tags are key-value pairs that you can
 	// associate with Amazon resources to help with organization, access control, and
-	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
-	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html) .
+	// cost tracking. For more information, see [Tagging AWS Elemental MediaTailor Resources].
+	//
+	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
 	Tags map[string]string
 
 	// The tier of the channel.
 	Tier *string
 
-	// The time-shifted viewing configuration assigned to the channel.
+	//  The time-shifted viewing configuration assigned to the channel.
 	TimeShiftConfiguration *types.TimeShiftConfiguration
 
 	// Metadata pertaining to the operation's result.

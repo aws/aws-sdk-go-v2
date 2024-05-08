@@ -10,12 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Amazon resource names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-// of the views available in the Amazon Web Services Region in which you call this
-// operation. Always check the NextToken response parameter for a null value when
-// calling a paginated operation. These operations can occasionally return an empty
-// set of results even when there are more results available. The NextToken
-// response parameter value is null only when there are no more results to display.
+// Lists the [Amazon resource names (ARNs)] of the views available in the Amazon Web Services Region in which
+// you call this operation.
+//
+// Always check the NextToken response parameter for a null value when calling a
+// paginated operation. These operations can occasionally return an empty set of
+// results even when there are more results available. The NextToken response
+// parameter value is null only when there are no more results to display.
+//
+// [Amazon resource names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 func (c *Client) ListViews(ctx context.Context, params *ListViewsInput, optFns ...func(*Options)) (*ListViewsOutput, error) {
 	if params == nil {
 		params = &ListViewsInput{}
@@ -38,10 +41,11 @@ type ListViewsInput struct {
 	// appropriate to the operation. If additional items exist beyond those included in
 	// the current response, the NextToken response element is present and has a value
 	// (is not null). Include that value as the NextToken request parameter in the
-	// next call to the operation to get the next part of the results. An API operation
-	// can return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that you
-	// receive all of the results.
+	// next call to the operation to get the next part of the results.
+	//
+	// An API operation can return fewer results than the maximum even when there are
+	// more results available. You should check NextToken after every operation to
+	// ensure that you receive all of the results.
 	MaxResults *int32
 
 	// The parameter for receiving additional results if you receive a NextToken
@@ -163,10 +167,11 @@ type ListViewsPaginatorOptions struct {
 	// appropriate to the operation. If additional items exist beyond those included in
 	// the current response, the NextToken response element is present and has a value
 	// (is not null). Include that value as the NextToken request parameter in the
-	// next call to the operation to get the next part of the results. An API operation
-	// can return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that you
-	// receive all of the results.
+	// next call to the operation to get the next part of the results.
+	//
+	// An API operation can return fewer results than the maximum even when there are
+	// more results available. You should check NextToken after every operation to
+	// ensure that you receive all of the results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

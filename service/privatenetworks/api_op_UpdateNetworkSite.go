@@ -35,8 +35,9 @@ type UpdateNetworkSiteInput struct {
 	NetworkSiteArn *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
-	// .
+	// the request. For more information, see [How to ensure idempotency].
+	//
+	// [How to ensure idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	// The description.
@@ -50,7 +51,7 @@ type UpdateNetworkSiteOutput struct {
 	// Information about the network site.
 	NetworkSite *types.NetworkSite
 
-	// The network site tags.
+	//  The network site tags.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

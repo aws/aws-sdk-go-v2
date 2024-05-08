@@ -42,13 +42,17 @@ type BatchGetRumMetricDefinitionsInput struct {
 	Destination types.MetricDestination
 
 	// This parameter is required if Destination is Evidently . If Destination is
-	// CloudWatch , do not use this parameter. This parameter specifies the ARN of the
-	// Evidently experiment that corresponds to the destination.
+	// CloudWatch , do not use this parameter.
+	//
+	// This parameter specifies the ARN of the Evidently experiment that corresponds
+	// to the destination.
 	DestinationArn *string
 
 	// The maximum number of results to return in one operation. The default is 50.
-	// The maximum that you can specify is 100. To retrieve the remaining results, make
-	// another call with the returned NextToken value.
+	// The maximum that you can specify is 100.
+	//
+	// To retrieve the remaining results, make another call with the returned NextToken
+	// value.
 	MaxResults *int32
 
 	// Use the token returned by the previous operation to request the next page of
@@ -165,8 +169,10 @@ var _ BatchGetRumMetricDefinitionsAPIClient = (*Client)(nil)
 // BatchGetRumMetricDefinitions
 type BatchGetRumMetricDefinitionsPaginatorOptions struct {
 	// The maximum number of results to return in one operation. The default is 50.
-	// The maximum that you can specify is 100. To retrieve the remaining results, make
-	// another call with the returned NextToken value.
+	// The maximum that you can specify is 100.
+	//
+	// To retrieve the remaining results, make another call with the returned NextToken
+	// value.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

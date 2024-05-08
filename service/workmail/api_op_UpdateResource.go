@@ -12,8 +12,8 @@ import (
 )
 
 // Updates data for the resource. To have the latest information, it must be
-// preceded by a DescribeResource call. The dataset in the request should be the
-// one expected when performing another DescribeResource call.
+// preceded by a DescribeResourcecall. The dataset in the request should be the one expected when
+// performing another DescribeResource call.
 func (c *Client) UpdateResource(ctx context.Context, params *UpdateResourceInput, optFns ...func(*Options)) (*UpdateResourceOutput, error) {
 	if params == nil {
 		params = &UpdateResourceInput{}
@@ -37,11 +37,15 @@ type UpdateResourceInput struct {
 	// This member is required.
 	OrganizationId *string
 
-	// The identifier of the resource to be updated. The identifier can accept
-	// ResourceId, Resourcename, or email. The following identity formats are
-	// available:
+	// The identifier of the resource to be updated.
+	//
+	// The identifier can accept ResourceId, Resourcename, or email. The following
+	// identity formats are available:
+	//
 	//   - Resource ID: r-0123456789a0123456789b0123456789
+	//
 	//   - Email address: resource@domain.tld
+	//
 	//   - Resource name: resource
 	//
 	// This member is required.

@@ -31,8 +31,10 @@ func (c *Client) ListNamespaces(ctx context.Context, params *ListNamespacesInput
 type ListNamespacesInput struct {
 
 	// A complex type that contains specifications for the namespaces that you want to
-	// list. If you specify more than one filter, a namespace must match all filters to
-	// be returned by ListNamespaces .
+	// list.
+	//
+	// If you specify more than one filter, a namespace must match all filters to be
+	// returned by ListNamespaces .
 	Filters []types.NamespaceFilter
 
 	// The maximum number of namespaces that you want Cloud Map to return in the
@@ -40,11 +42,14 @@ type ListNamespacesInput struct {
 	// MaxResults , Cloud Map returns up to 100 namespaces.
 	MaxResults *int32
 
-	// For the first ListNamespaces request, omit this value. If the response contains
-	// NextToken , submit another ListNamespaces request to get the next group of
-	// results. Specify the value of NextToken from the previous response in the next
-	// request. Cloud Map gets MaxResults namespaces and then filters them based on
-	// the specified criteria. It's possible that no namespaces in the first MaxResults
+	// For the first ListNamespaces request, omit this value.
+	//
+	// If the response contains NextToken , submit another ListNamespaces request to
+	// get the next group of results. Specify the value of NextToken from the previous
+	// response in the next request.
+	//
+	// Cloud Map gets MaxResults namespaces and then filters them based on the
+	// specified criteria. It's possible that no namespaces in the first MaxResults
 	// namespaces matched the specified criteria but that subsequent groups of
 	// MaxResults namespaces do contain namespaces that match the criteria.
 	NextToken *string
@@ -60,11 +65,12 @@ type ListNamespacesOutput struct {
 
 	// If the response contains NextToken , submit another ListNamespaces request to
 	// get the next group of results. Specify the value of NextToken from the previous
-	// response in the next request. Cloud Map gets MaxResults namespaces and then
-	// filters them based on the specified criteria. It's possible that no namespaces
-	// in the first MaxResults namespaces matched the specified criteria but that
-	// subsequent groups of MaxResults namespaces do contain namespaces that match the
-	// criteria.
+	// response in the next request.
+	//
+	// Cloud Map gets MaxResults namespaces and then filters them based on the
+	// specified criteria. It's possible that no namespaces in the first MaxResults
+	// namespaces matched the specified criteria but that subsequent groups of
+	// MaxResults namespaces do contain namespaces that match the criteria.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -15,9 +15,11 @@ import (
 // If you want a transient cluster that shuts down after the last of the current
 // executing steps are completed, you can configure SetKeepJobFlowAliveWhenNoSteps
 // to false. If you want a long running cluster, configure
-// SetKeepJobFlowAliveWhenNoSteps to true. For more information, see Managing
-// Cluster Termination (https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html)
-// in the Amazon EMR Management Guide.
+// SetKeepJobFlowAliveWhenNoSteps to true.
+//
+// For more information, see [Managing Cluster Termination] in the Amazon EMR Management Guide.
+//
+// [Managing Cluster Termination]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html
 func (c *Client) SetKeepJobFlowAliveWhenNoSteps(ctx context.Context, params *SetKeepJobFlowAliveWhenNoStepsInput, optFns ...func(*Options)) (*SetKeepJobFlowAliveWhenNoStepsOutput, error) {
 	if params == nil {
 		params = &SetKeepJobFlowAliveWhenNoStepsInput{}
@@ -36,9 +38,10 @@ func (c *Client) SetKeepJobFlowAliveWhenNoSteps(ctx context.Context, params *Set
 type SetKeepJobFlowAliveWhenNoStepsInput struct {
 
 	// A list of strings that uniquely identify the clusters to protect. This
-	// identifier is returned by RunJobFlow (https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html)
-	// and can also be obtained from DescribeJobFlows (https://docs.aws.amazon.com/emr/latest/APIReference/API_DescribeJobFlows.html)
-	// .
+	// identifier is returned by [RunJobFlow]and can also be obtained from [DescribeJobFlows].
+	//
+	// [DescribeJobFlows]: https://docs.aws.amazon.com/emr/latest/APIReference/API_DescribeJobFlows.html
+	// [RunJobFlow]: https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html
 	//
 	// This member is required.
 	JobFlowIds []string

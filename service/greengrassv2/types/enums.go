@@ -14,8 +14,9 @@ const (
 )
 
 // Values returns all known values for CloudComponentState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CloudComponentState) Values() []CloudComponentState {
 	return []CloudComponentState{
 		"REQUESTED",
@@ -35,8 +36,9 @@ const (
 )
 
 // Values returns all known values for ComponentDependencyType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComponentDependencyType) Values() []ComponentDependencyType {
 	return []ComponentDependencyType{
 		"HARD",
@@ -54,6 +56,7 @@ const (
 
 // Values returns all known values for ComponentVisibilityScope. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ComponentVisibilityScope) Values() []ComponentVisibilityScope {
 	return []ComponentVisibilityScope{
@@ -71,8 +74,9 @@ const (
 )
 
 // Values returns all known values for CoreDeviceStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CoreDeviceStatus) Values() []CoreDeviceStatus {
 	return []CoreDeviceStatus{
 		"HEALTHY",
@@ -90,8 +94,9 @@ const (
 
 // Values returns all known values for DeploymentComponentUpdatePolicyAction. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentComponentUpdatePolicyAction) Values() []DeploymentComponentUpdatePolicyAction {
 	return []DeploymentComponentUpdatePolicyAction{
 		"NOTIFY_COMPONENTS",
@@ -109,8 +114,9 @@ const (
 
 // Values returns all known values for DeploymentFailureHandlingPolicy. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentFailureHandlingPolicy) Values() []DeploymentFailureHandlingPolicy {
 	return []DeploymentFailureHandlingPolicy{
 		"ROLLBACK",
@@ -127,8 +133,9 @@ const (
 )
 
 // Values returns all known values for DeploymentHistoryFilter. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentHistoryFilter) Values() []DeploymentHistoryFilter {
 	return []DeploymentHistoryFilter{
 		"ALL",
@@ -148,8 +155,9 @@ const (
 )
 
 // Values returns all known values for DeploymentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentStatus) Values() []DeploymentStatus {
 	return []DeploymentStatus{
 		"ACTIVE",
@@ -176,8 +184,9 @@ const (
 
 // Values returns all known values for EffectiveDeploymentExecutionStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EffectiveDeploymentExecutionStatus) Values() []EffectiveDeploymentExecutionStatus {
 	return []EffectiveDeploymentExecutionStatus{
 		"IN_PROGRESS",
@@ -207,8 +216,9 @@ const (
 
 // Values returns all known values for InstalledComponentLifecycleState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstalledComponentLifecycleState) Values() []InstalledComponentLifecycleState {
 	return []InstalledComponentLifecycleState{
 		"NEW",
@@ -232,8 +242,9 @@ const (
 
 // Values returns all known values for InstalledComponentTopologyFilter. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstalledComponentTopologyFilter) Values() []InstalledComponentTopologyFilter {
 	return []InstalledComponentTopologyFilter{
 		"ALL",
@@ -249,8 +260,9 @@ const (
 )
 
 // Values returns all known values for IoTJobAbortAction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IoTJobAbortAction) Values() []IoTJobAbortAction {
 	return []IoTJobAbortAction{
 		"CANCEL",
@@ -269,6 +281,7 @@ const (
 
 // Values returns all known values for IoTJobExecutionFailureType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (IoTJobExecutionFailureType) Values() []IoTJobExecutionFailureType {
 	return []IoTJobExecutionFailureType{
@@ -288,8 +301,9 @@ const (
 )
 
 // Values returns all known values for LambdaEventSourceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LambdaEventSourceType) Values() []LambdaEventSourceType {
 	return []LambdaEventSourceType{
 		"PUB_SUB",
@@ -307,6 +321,7 @@ const (
 
 // Values returns all known values for LambdaFilesystemPermission. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LambdaFilesystemPermission) Values() []LambdaFilesystemPermission {
 	return []LambdaFilesystemPermission{
@@ -325,8 +340,9 @@ const (
 
 // Values returns all known values for LambdaInputPayloadEncodingType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LambdaInputPayloadEncodingType) Values() []LambdaInputPayloadEncodingType {
 	return []LambdaInputPayloadEncodingType{
 		"json",
@@ -343,8 +359,9 @@ const (
 )
 
 // Values returns all known values for LambdaIsolationMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LambdaIsolationMode) Values() []LambdaIsolationMode {
 	return []LambdaIsolationMode{
 		"GreengrassContainer",
@@ -361,8 +378,9 @@ const (
 )
 
 // Values returns all known values for RecipeOutputFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecipeOutputFormat) Values() []RecipeOutputFormat {
 	return []RecipeOutputFormat{
 		"JSON",
@@ -382,6 +400,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{
@@ -402,8 +421,9 @@ const (
 )
 
 // Values returns all known values for VendorGuidance. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VendorGuidance) Values() []VendorGuidance {
 	return []VendorGuidance{
 		"ACTIVE",

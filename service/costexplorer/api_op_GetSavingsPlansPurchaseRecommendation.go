@@ -62,12 +62,13 @@ type GetSavingsPlansPurchaseRecommendationInput struct {
 	// You can filter your recommendations by Account ID with the LINKED_ACCOUNT
 	// dimension. To filter your recommendations by Account ID, specify Key as
 	// LINKED_ACCOUNT and Value as the comma-separated Acount ID(s) that you want to
-	// see Savings Plans purchase recommendations for. For
-	// GetSavingsPlansPurchaseRecommendation, the Filter doesn't include CostCategories
-	// or Tags . It only includes Dimensions . With Dimensions , Key must be
-	// LINKED_ACCOUNT and Value can be a single Account ID or multiple comma-separated
-	// Account IDs that you want to see Savings Plans Purchase Recommendations for. AND
-	// and OR operators are not supported.
+	// see Savings Plans purchase recommendations for.
+	//
+	// For GetSavingsPlansPurchaseRecommendation, the Filter doesn't include
+	// CostCategories or Tags . It only includes Dimensions . With Dimensions , Key
+	// must be LINKED_ACCOUNT and Value can be a single Account ID or multiple
+	// comma-separated Account IDs that you want to see Savings Plans Purchase
+	// Recommendations for. AND and OR operators are not supported.
 	Filter *types.Expression
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the

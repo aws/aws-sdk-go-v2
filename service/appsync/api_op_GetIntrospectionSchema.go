@@ -48,9 +48,11 @@ type GetIntrospectionSchemaInput struct {
 
 type GetIntrospectionSchemaOutput struct {
 
-	// The schema, in GraphQL Schema Definition Language (SDL) format. For more
-	// information, see the GraphQL SDL documentation (http://graphql.org/learn/schema/)
-	// .
+	// The schema, in GraphQL Schema Definition Language (SDL) format.
+	//
+	// For more information, see the [GraphQL SDL documentation].
+	//
+	// [GraphQL SDL documentation]: http://graphql.org/learn/schema/
 	Schema []byte
 
 	// Metadata pertaining to the operation's result.

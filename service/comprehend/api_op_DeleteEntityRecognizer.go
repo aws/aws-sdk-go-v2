@@ -10,12 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an entity recognizer. Only those recognizers that are in terminated
-// states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using
-// the model, a ResourceInUseException will be returned. This is an asynchronous
-// action that puts the recognizer into a DELETING state, and it is then removed by
-// a background job. Once removed, the recognizer disappears from your account and
-// is no longer available for use.
+// Deletes an entity recognizer.
+//
+// Only those recognizers that are in terminated states (IN_ERROR, TRAINED) will
+// be deleted. If an active inference job is using the model, a
+// ResourceInUseException will be returned.
+//
+// This is an asynchronous action that puts the recognizer into a DELETING state,
+// and it is then removed by a background job. Once removed, the recognizer
+// disappears from your account and is no longer available for use.
 func (c *Client) DeleteEntityRecognizer(ctx context.Context, params *DeleteEntityRecognizerInput, optFns ...func(*Options)) (*DeleteEntityRecognizerOutput, error) {
 	if params == nil {
 		params = &DeleteEntityRecognizerInput{}

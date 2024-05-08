@@ -12,8 +12,9 @@ import (
 )
 
 // Stop the service update. For more information on service updates and stopping
-// them, see Stopping Service Updates (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/stopping-self-service-updates.html)
-// .
+// them, see [Stopping Service Updates].
+//
+// [Stopping Service Updates]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/stopping-self-service-updates.html
 func (c *Client) BatchStopUpdateAction(ctx context.Context, params *BatchStopUpdateActionInput, optFns ...func(*Options)) (*BatchStopUpdateActionOutput, error) {
 	if params == nil {
 		params = &BatchStopUpdateActionInput{}

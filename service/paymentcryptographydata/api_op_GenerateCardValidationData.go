@@ -13,24 +13,34 @@ import (
 
 // Generates card-related validation data using algorithms such as Card
 // Verification Values (CVV/CVV2), Dynamic Card Verification Values (dCVV/dCVV2),
-// or Card Security Codes (CSC). For more information, see Generate card data (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/generate-card-data.html)
-// in the Amazon Web Services Payment Cryptography User Guide. This operation
-// generates a CVV or CSC value that is printed on a payment credit or debit card
-// during card production. The CVV or CSC, PAN (Primary Account Number) and
-// expiration date of the card are required to check its validity during
-// transaction processing. To begin this operation, a CVK (Card Verification Key)
-// encryption key is required. You can use CreateKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html)
-// or ImportKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html)
-// to establish a CVK within Amazon Web Services Payment Cryptography. The
-// KeyModesOfUse should be set to Generate and Verify for a CVK encryption key.
-// For information about valid keys for this operation, see Understanding key
-// attributes (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html)
-// and Key types for specific data operations (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html)
-// in the Amazon Web Services Payment Cryptography User Guide. Cross-account use:
-// This operation can't be used across different Amazon Web Services accounts.
+// or Card Security Codes (CSC). For more information, see [Generate card data]in the Amazon Web
+// Services Payment Cryptography User Guide.
+//
+// This operation generates a CVV or CSC value that is printed on a payment credit
+// or debit card during card production. The CVV or CSC, PAN (Primary Account
+// Number) and expiration date of the card are required to check its validity
+// during transaction processing. To begin this operation, a CVK (Card Verification
+// Key) encryption key is required. You can use [CreateKey]or [ImportKey] to establish a CVK within
+// Amazon Web Services Payment Cryptography. The KeyModesOfUse should be set to
+// Generate and Verify for a CVK encryption key.
+//
+// For information about valid keys for this operation, see [Understanding key attributes] and [Key types for specific data operations] in the Amazon
+// Web Services Payment Cryptography User Guide.
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
+//
 // Related operations:
-//   - ImportKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html)
-//   - VerifyCardValidationData
+//
+// [ImportKey]
+//
+// # VerifyCardValidationData
+//
+// [Generate card data]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/generate-card-data.html
+// [ImportKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
+// [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+// [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+// [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
 func (c *Client) GenerateCardValidationData(ctx context.Context, params *GenerateCardValidationDataInput, optFns ...func(*Options)) (*GenerateCardValidationDataOutput, error) {
 	if params == nil {
 		params = &GenerateCardValidationDataInput{}
@@ -82,8 +92,10 @@ type GenerateCardValidationDataOutput struct {
 
 	// The key check value (KCV) of the encryption key. The KCV is used to check if
 	// all parties holding a given key have the same key or to detect that a key has
-	// changed. Amazon Web Services Payment Cryptography computes the KCV according to
-	// the CMAC specification.
+	// changed.
+	//
+	// Amazon Web Services Payment Cryptography computes the KCV according to the CMAC
+	// specification.
 	//
 	// This member is required.
 	KeyCheckValue *string

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches the specified customer managed policy to the specified PermissionSet .
+// Attaches the specified customer managed policy to the specified PermissionSet.
 func (c *Client) AttachCustomerManagedPolicyReferenceToPermissionSet(ctx context.Context, params *AttachCustomerManagedPolicyReferenceToPermissionSetInput, optFns ...func(*Options)) (*AttachCustomerManagedPolicyReferenceToPermissionSetOutput, error) {
 	if params == nil {
 		params = &AttachCustomerManagedPolicyReferenceToPermissionSetInput{}

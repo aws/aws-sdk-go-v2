@@ -39,18 +39,18 @@ type CreateBudgetActionInput struct {
 	// This member is required.
 	ActionThreshold *types.ActionThreshold
 
-	// The type of action. This defines the type of tasks that can be carried out by
+	//  The type of action. This defines the type of tasks that can be carried out by
 	// this action. This field also determines the format for definition.
 	//
 	// This member is required.
 	ActionType types.ActionType
 
-	// This specifies if the action needs manual or automatic approval.
+	//  This specifies if the action needs manual or automatic approval.
 	//
 	// This member is required.
 	ApprovalModel types.ApprovalModel
 
-	// A string that represents the budget name. The ":" and "\" characters, and the
+	//  A string that represents the budget name. The ":" and "\" characters, and the
 	// "/action/" substring, aren't allowed.
 	//
 	// This member is required.
@@ -61,18 +61,18 @@ type CreateBudgetActionInput struct {
 	// This member is required.
 	Definition *types.Definition
 
-	// The role passed for action execution and reversion. Roles and actions must be
+	//  The role passed for action execution and reversion. Roles and actions must be
 	// in the same account.
 	//
 	// This member is required.
 	ExecutionRoleArn *string
 
-	// The type of a notification. It must be ACTUAL or FORECASTED.
+	//  The type of a notification. It must be ACTUAL or FORECASTED.
 	//
 	// This member is required.
 	NotificationType types.NotificationType
 
-	// A list of subscribers.
+	//  A list of subscribers.
 	//
 	// This member is required.
 	Subscribers []types.Subscriber
@@ -91,12 +91,12 @@ type CreateBudgetActionOutput struct {
 	// This member is required.
 	AccountId *string
 
-	// A system-generated universally unique identifier (UUID) for the action.
+	//  A system-generated universally unique identifier (UUID) for the action.
 	//
 	// This member is required.
 	ActionId *string
 
-	// A string that represents the budget name. The ":" and "\" characters, and the
+	//  A string that represents the budget name. The ":" and "\" characters, and the
 	// "/action/" substring, aren't allowed.
 	//
 	// This member is required.

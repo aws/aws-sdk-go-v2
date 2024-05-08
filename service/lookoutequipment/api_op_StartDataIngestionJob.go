@@ -30,7 +30,7 @@ func (c *Client) StartDataIngestionJob(ctx context.Context, params *StartDataIng
 
 type StartDataIngestionJobInput struct {
 
-	// A unique identifier for the request. If you do not set the client request
+	//  A unique identifier for the request. If you do not set the client request
 	// token, Amazon Lookout for Equipment generates one.
 	//
 	// This member is required.
@@ -41,13 +41,13 @@ type StartDataIngestionJobInput struct {
 	// This member is required.
 	DatasetName *string
 
-	// Specifies information for the input data for the data ingestion job, including
+	//  Specifies information for the input data for the data ingestion job, including
 	// dataset S3 location.
 	//
 	// This member is required.
 	IngestionInputConfiguration *types.IngestionInputConfiguration
 
-	// The Amazon Resource Name (ARN) of a role with permission to access the data
+	//  The Amazon Resource Name (ARN) of a role with permission to access the data
 	// source for the data ingestion job.
 	//
 	// This member is required.

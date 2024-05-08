@@ -12,8 +12,9 @@ import (
 )
 
 // Searches a set of tables based on properties in the table metadata as well as
-// on the parent database. You can search against text or filter conditions. You
-// can only get tables that you have access to based on the security policies
+// on the parent database. You can search against text or filter conditions.
+//
+// You can only get tables that you have access to based on the security policies
 // defined in Lake Formation. You need at least a read-only access to the table for
 // it to be returned. If you do not have access to all the columns in the table,
 // these columns will not be searched against when returning the list of tables
@@ -41,14 +42,16 @@ type SearchTablesInput struct {
 	CatalogId *string
 
 	// A list of key-value pairs, and a comparator used to filter the search results.
-	// Returns all entities matching the predicate. The Comparator member of the
-	// PropertyPredicate struct is used only for time fields, and can be omitted for
-	// other field types. Also, when comparing string values, such as when Key=Name , a
-	// fuzzy match algorithm is used. The Key field (for example, the value of the Name
-	// field) is split on certain punctuation characters, for example, -, :, #, etc.
-	// into tokens. Then each token is exact-match compared with the Value member of
-	// PropertyPredicate . For example, if Key=Name and Value=link , tables named
-	// customer-link and xx-link-yy are returned, but xxlinkyy is not returned.
+	// Returns all entities matching the predicate.
+	//
+	// The Comparator member of the PropertyPredicate struct is used only for time
+	// fields, and can be omitted for other field types. Also, when comparing string
+	// values, such as when Key=Name , a fuzzy match algorithm is used. The Key field
+	// (for example, the value of the Name field) is split on certain punctuation
+	// characters, for example, -, :, #, etc. into tokens. Then each token is
+	// exact-match compared with the Value member of PropertyPredicate . For example,
+	// if Key=Name and Value=link , tables named customer-link and xx-link-yy are
+	// returned, but xxlinkyy is not returned.
 	Filters []types.PropertyPredicate
 
 	// The maximum number of tables to return in a single response.
@@ -59,13 +62,16 @@ type SearchTablesInput struct {
 
 	// Allows you to specify that you want to search the tables shared with your
 	// account. The allowable values are FOREIGN or ALL .
+	//
 	//   - If set to FOREIGN , will search the tables shared with your account.
+	//
 	//   - If set to ALL , will search the tables shared with your account, as well as
 	//   the tables in yor local account.
 	ResourceShareType types.ResourceShareType
 
-	// A string used for a text search. Specifying a value in quotes filters based on
-	// an exact match to the value.
+	// A string used for a text search.
+	//
+	// Specifying a value in quotes filters based on an exact match to the value.
 	SearchText *string
 
 	// A list of criteria for sorting the results by a field name, in an ascending or

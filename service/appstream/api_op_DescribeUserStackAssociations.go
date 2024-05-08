@@ -13,7 +13,9 @@ import (
 
 // Retrieves a list that describes the UserStackAssociation objects. You must
 // specify either or both of the following:
+//
 //   - The stack name
+//
 //   - The user name (email address of the user associated with the stack) and the
 //     authentication type for the user
 func (c *Client) DescribeUserStackAssociations(ctx context.Context, params *DescribeUserStackAssociationsInput, optFns ...func(*Options)) (*DescribeUserStackAssociationsOutput, error) {
@@ -47,8 +49,9 @@ type DescribeUserStackAssociationsInput struct {
 	// The name of the stack that is associated with the user.
 	StackName *string
 
-	// The email address of the user who is associated with the stack. Users' email
-	// addresses are case-sensitive.
+	// The email address of the user who is associated with the stack.
+	//
+	// Users' email addresses are case-sensitive.
 	UserName *string
 
 	noSmithyDocumentSerde

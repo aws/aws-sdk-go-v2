@@ -13,9 +13,11 @@ import (
 )
 
 // Returns a DataSource that includes metadata and data file information, as well
-// as the current status of the DataSource . GetDataSource provides results in
-// normal or verbose format. The verbose format adds the schema description and the
-// list of files pointed to by the DataSource to the normal format.
+// as the current status of the DataSource .
+//
+// GetDataSource provides results in normal or verbose format. The verbose format
+// adds the schema description and the list of files pointed to by the DataSource
+// to the normal format.
 func (c *Client) GetDataSource(ctx context.Context, params *GetDataSourceInput, optFns ...func(*Options)) (*GetDataSourceOutput, error) {
 	if params == nil {
 		params = &GetDataSourceInput{}
@@ -39,8 +41,10 @@ type GetDataSourceInput struct {
 	DataSourceId *string
 
 	// Specifies whether the GetDataSource operation should return DataSourceSchema .
-	// If true, DataSourceSchema is returned. If false, DataSourceSchema is not
-	// returned.
+	//
+	// If true, DataSourceSchema is returned.
+	//
+	// If false, DataSourceSchema is not returned.
 	Verbose bool
 
 	noSmithyDocumentSerde
@@ -49,7 +53,7 @@ type GetDataSourceInput struct {
 // Represents the output of a GetDataSource operation and describes a DataSource .
 type GetDataSourceOutput struct {
 
-	// The parameter is true if statistics need to be generated from the observation
+	//  The parameter is true if statistics need to be generated from the observation
 	// data.
 	ComputeStatistics bool
 
@@ -82,8 +86,9 @@ type GetDataSourceOutput struct {
 	// to the value of the DataSourceId in the request.
 	DataSourceId *string
 
-	// The schema used by all of the data files of this DataSource . Note: This
-	// parameter is provided as part of the verbose format.
+	// The schema used by all of the data files of this DataSource .
+	//
+	// Note: This parameter is provided as part of the verbose format.
 	DataSourceSchema *string
 
 	// The epoch time when Amazon Machine Learning marked the DataSource as COMPLETED
@@ -114,8 +119,10 @@ type GetDataSourceOutput struct {
 	// Describes the DataSource details specific to Amazon Redshift.
 	RedshiftMetadata *types.RedshiftMetadata
 
-	// The Amazon Resource Name (ARN) of an AWS IAM Role (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts)
-	// , such as the following: arn:aws:iam::account:role/rolename.
+	// The Amazon Resource Name (ARN) of an [AWS IAM Role], such as the following:
+	// arn:aws:iam::account:role/rolename.
+	//
+	// [AWS IAM Role]: https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts
 	RoleARN *string
 
 	// The epoch time when Amazon Machine Learning marked the DataSource as INPROGRESS
@@ -124,11 +131,16 @@ type GetDataSourceOutput struct {
 
 	// The current status of the DataSource . This element can have one of the
 	// following values:
+	//
 	//   - PENDING - Amazon ML submitted a request to create a DataSource .
+	//
 	//   - INPROGRESS - The creation process is underway.
+	//
 	//   - FAILED - The request to create a DataSource did not run to completion. It is
 	//   not usable.
+	//
 	//   - COMPLETED - The creation process completed successfully.
+	//
 	//   - DELETED - The DataSource is marked as deleted. It is not usable.
 	Status types.EntityStatus
 

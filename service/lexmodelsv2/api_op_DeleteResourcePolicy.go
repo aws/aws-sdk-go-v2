@@ -36,8 +36,9 @@ type DeleteResourcePolicyInput struct {
 	ResourceArn *string
 
 	// The identifier of the revision to edit. If this ID doesn't match the current
-	// revision number, Amazon Lex returns an exception If you don't specify a revision
-	// ID, Amazon Lex will delete the current policy.
+	// revision number, Amazon Lex returns an exception
+	//
+	// If you don't specify a revision ID, Amazon Lex will delete the current policy.
 	ExpectedRevisionId *string
 
 	noSmithyDocumentSerde

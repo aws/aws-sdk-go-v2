@@ -11,9 +11,10 @@ import (
 )
 
 // Deletes the detector version. You cannot delete detector versions that are in
-// ACTIVE status. When you delete a detector version, Amazon Fraud Detector
-// permanently deletes the detector and the data is no longer stored in Amazon
-// Fraud Detector.
+// ACTIVE status.
+//
+// When you delete a detector version, Amazon Fraud Detector permanently deletes
+// the detector and the data is no longer stored in Amazon Fraud Detector.
 func (c *Client) DeleteDetectorVersion(ctx context.Context, params *DeleteDetectorVersionInput, optFns ...func(*Options)) (*DeleteDetectorVersionOutput, error) {
 	if params == nil {
 		params = &DeleteDetectorVersionInput{}

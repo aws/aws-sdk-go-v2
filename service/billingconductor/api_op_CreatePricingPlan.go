@@ -34,17 +34,19 @@ type CreatePricingPlanInput struct {
 	// This member is required.
 	Name *string
 
-	// The token that is needed to support idempotency. Idempotency isn't currently
+	//  The token that is needed to support idempotency. Idempotency isn't currently
 	// supported, but will be implemented in a future update.
 	ClientToken *string
 
 	// The description of the pricing plan.
 	Description *string
 
-	// A list of Amazon Resource Names (ARNs) that define the pricing plan parameters.
+	//  A list of Amazon Resource Names (ARNs) that define the pricing plan
+	// parameters.
 	PricingRuleArns []string
 
-	// A map that contains tag keys and tag values that are attached to a pricing plan.
+	//  A map that contains tag keys and tag values that are attached to a pricing
+	// plan.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

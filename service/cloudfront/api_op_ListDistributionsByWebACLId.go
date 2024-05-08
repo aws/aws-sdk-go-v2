@@ -33,10 +33,13 @@ type ListDistributionsByWebACLIdInput struct {
 
 	// The ID of the WAF web ACL that you want to list the associated distributions.
 	// If you specify "null" for the ID, the request returns a list of the
-	// distributions that aren't associated with a web ACL. For WAFV2, this is the ARN
-	// of the web ACL, such as
+	// distributions that aren't associated with a web ACL.
+	//
+	// For WAFV2, this is the ARN of the web ACL, such as
 	// arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111
-	// . For WAF Classic, this is the ID of the web ACL, such as
+	// .
+	//
+	// For WAF Classic, this is the ID of the web ACL, such as
 	// a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 .
 	//
 	// This member is required.

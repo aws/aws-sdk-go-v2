@@ -12,11 +12,15 @@ import (
 )
 
 // Retrieves the service configuration associated with the specified resource
-// group. For details about the service configuration syntax, see Service
-// configurations for Resource Groups (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html)
-// . Minimum permissions To run this command, you must have the following
-// permissions:
+// group. For details about the service configuration syntax, see [Service configurations for Resource Groups].
+//
+// # Minimum permissions
+//
+// To run this command, you must have the following permissions:
+//
 //   - resource-groups:GetGroupConfiguration
+//
+// [Service configurations for Resource Groups]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
 func (c *Client) GetGroupConfiguration(ctx context.Context, params *GetGroupConfigurationInput, optFns ...func(*Options)) (*GetGroupConfigurationOutput, error) {
 	if params == nil {
 		params = &GetGroupConfigurationInput{}
@@ -44,9 +48,9 @@ type GetGroupConfigurationInput struct {
 type GetGroupConfigurationOutput struct {
 
 	// A structure that describes the service configuration attached with the
-	// specified group. For details about the service configuration syntax, see
-	// Service configurations for Resource Groups (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html)
-	// .
+	// specified group. For details about the service configuration syntax, see [Service configurations for Resource Groups].
+	//
+	// [Service configurations for Resource Groups]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
 	GroupConfiguration *types.GroupConfiguration
 
 	// Metadata pertaining to the operation's result.

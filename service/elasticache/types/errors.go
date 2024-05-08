@@ -613,8 +613,9 @@ func (e *GlobalReplicationGroupNotFoundFault) ErrorFault() smithy.ErrorFault {
 }
 
 // The requested cache node type is not available in the specified Availability
-// Zone. For more information, see InsufficientCacheClusterCapacity (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ErrorMessages.html#ErrorMessages.INSUFFICIENT_CACHE_CLUSTER_CAPACITY)
-// in the ElastiCache User Guide.
+// Zone. For more information, see [InsufficientCacheClusterCapacity]in the ElastiCache User Guide.
+//
+// [InsufficientCacheClusterCapacity]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ErrorMessages.html#ErrorMessages.INSUFFICIENT_CACHE_CLUSTER_CAPACITY
 type InsufficientCacheClusterCapacityFault struct {
 	Message *string
 
@@ -1702,8 +1703,10 @@ func (e *SnapshotAlreadyExistsFault) ErrorCode() string {
 func (e *SnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You attempted one of the following operations:
+//
 //   - Creating a snapshot of a Redis cluster running on a cache.t1.micro cache
 //     node.
+//
 //   - Creating a snapshot of a cluster that is running Memcached rather than
 //     Redis.
 //

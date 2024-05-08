@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Manages the generation and use of RDF graph statistics. When invoking this
-// operation in a Neptune cluster that has IAM authentication enabled, the IAM user
-// or role making the request must have a policy attached that allows the
-// neptune-db:ManageStatistics (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#managestatistics)
-// IAM action in that cluster.
+// Manages the generation and use of RDF graph statistics.
+//
+// When invoking this operation in a Neptune cluster that has IAM authentication
+// enabled, the IAM user or role making the request must have a policy attached
+// that allows the [neptune-db:ManageStatistics]IAM action in that cluster.
+//
+// [neptune-db:ManageStatistics]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#managestatistics
 func (c *Client) ManageSparqlStatistics(ctx context.Context, params *ManageSparqlStatisticsInput, optFns ...func(*Options)) (*ManageSparqlStatisticsOutput, error) {
 	if params == nil {
 		params = &ManageSparqlStatisticsInput{}

@@ -31,8 +31,8 @@ func (c *Client) ListFileSystemAssociations(ctx context.Context, params *ListFil
 
 type ListFileSystemAssociationsInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// The maximum number of file system associations to return in the response. If

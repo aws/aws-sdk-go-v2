@@ -11,9 +11,11 @@ import (
 )
 
 // Deletes the mobile device access override for the given WorkMail organization,
-// user, and device. Deleting already deleted and non-existing overrides does not
-// produce an error. In those cases, the service sends back an HTTP 200 response
-// with an empty HTTP body.
+// user, and device.
+//
+// Deleting already deleted and non-existing overrides does not produce an error.
+// In those cases, the service sends back an HTTP 200 response with an empty HTTP
+// body.
 func (c *Client) DeleteMobileDeviceAccessOverride(ctx context.Context, params *DeleteMobileDeviceAccessOverrideInput, optFns ...func(*Options)) (*DeleteMobileDeviceAccessOverrideOutput, error) {
 	if params == nil {
 		params = &DeleteMobileDeviceAccessOverrideInput{}
@@ -44,9 +46,12 @@ type DeleteMobileDeviceAccessOverrideInput struct {
 
 	// The WorkMail user for which you want to delete the override. Accepts the
 	// following types of user identities:
+	//
 	//   - User ID: 12345678-1234-1234-1234-123456789012 or
 	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//
 	//   - Email address: user@domain.tld
+	//
 	//   - User name: user
 	//
 	// This member is required.

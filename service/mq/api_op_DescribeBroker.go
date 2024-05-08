@@ -91,9 +91,9 @@ type DescribeBrokerOutput struct {
 	// The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
 	EngineType types.EngineType
 
-	// The broker engine's version. For a list of supported engine versions, see
-	// Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
-	// .
+	// The broker engine's version. For a list of supported engine versions, see [Supported engines].
+	//
+	// [Supported engines]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
 	EngineVersion *string
 
 	// The broker's instance type.
@@ -123,13 +123,15 @@ type DescribeBrokerOutput struct {
 	PendingDataReplicationMode types.DataReplicationMode
 
 	// The broker engine version to upgrade to. For a list of supported engine
-	// versions, see Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
-	// .
+	// versions, see [Supported engines].
+	//
+	// [Supported engines]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
 	PendingEngineVersion *string
 
 	// The broker's host instance type to upgrade to. For a list of supported instance
-	// types, see Broker instance types (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types)
-	// .
+	// types, see [Broker instance types].
+	//
+	// [Broker instance types]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types
 	PendingHostInstanceType *string
 
 	// The metadata of the LDAP server that will be used to authenticate and authorize

@@ -12,8 +12,9 @@ import (
 )
 
 // Deletes the specified tags associated with an ML object. After this operation
-// is complete, you can't recover deleted tags. If you specify a tag that doesn't
-// exist, Amazon ML ignores it.
+// is complete, you can't recover deleted tags.
+//
+// If you specify a tag that doesn't exist, Amazon ML ignores it.
 func (c *Client) DeleteTags(ctx context.Context, params *DeleteTagsInput, optFns ...func(*Options)) (*DeleteTagsOutput, error) {
 	if params == nil {
 		params = &DeleteTagsInput{}

@@ -42,9 +42,10 @@ type ConnectAppAuthorizationInput struct {
 	// This member is required.
 	AppBundleIdentifier *string
 
-	// Contains OAuth2 authorization information. This is required if the app
-	// authorization for the request is configured with an OAuth2 ( oauth2 )
-	// authorization type.
+	// Contains OAuth2 authorization information.
+	//
+	// This is required if the app authorization for the request is configured with an
+	// OAuth2 ( oauth2 ) authorization type.
 	AuthRequest *types.AuthRequest
 
 	noSmithyDocumentSerde

@@ -36,10 +36,11 @@ type CreateGeneratedTemplateInput struct {
 	// This member is required.
 	GeneratedTemplateName *string
 
-	// An optional list of resources to be included in the generated template. If no
-	// resources are specified,the template will be created without any resources.
-	// Resources can be added to the template using the UpdateGeneratedTemplate API
-	// action.
+	// An optional list of resources to be included in the generated template.
+	//
+	// If no resources are specified,the template will be created without any
+	// resources. Resources can be added to the template using the
+	// UpdateGeneratedTemplate API action.
 	Resources []types.ResourceDefinition
 
 	// An optional name or ARN of a stack to use as the base stack for the generated

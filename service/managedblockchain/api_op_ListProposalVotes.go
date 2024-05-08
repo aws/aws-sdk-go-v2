@@ -12,8 +12,9 @@ import (
 )
 
 // Returns the list of votes for a specified proposal, including the value of each
-// vote and the unique identifier of the member that cast the vote. Applies only to
-// Hyperledger Fabric.
+// vote and the unique identifier of the member that cast the vote.
+//
+// Applies only to Hyperledger Fabric.
 func (c *Client) ListProposalVotes(ctx context.Context, params *ListProposalVotesInput, optFns ...func(*Options)) (*ListProposalVotesOutput, error) {
 	if params == nil {
 		params = &ListProposalVotesInput{}
@@ -31,20 +32,20 @@ func (c *Client) ListProposalVotes(ctx context.Context, params *ListProposalVote
 
 type ListProposalVotesInput struct {
 
-	// The unique identifier of the network.
+	//  The unique identifier of the network.
 	//
 	// This member is required.
 	NetworkId *string
 
-	// The unique identifier of the proposal.
+	//  The unique identifier of the proposal.
 	//
 	// This member is required.
 	ProposalId *string
 
-	// The maximum number of votes to return.
+	//  The maximum number of votes to return.
 	MaxResults *int32
 
-	// The pagination token that indicates the next set of results to retrieve.
+	//  The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,10 +53,10 @@ type ListProposalVotesInput struct {
 
 type ListProposalVotesOutput struct {
 
-	// The pagination token that indicates the next set of results to retrieve.
+	//  The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 
-	// The list of votes.
+	//  The list of votes.
 	ProposalVotes []types.VoteSummary
 
 	// Metadata pertaining to the operation's result.
@@ -153,7 +154,7 @@ var _ ListProposalVotesAPIClient = (*Client)(nil)
 
 // ListProposalVotesPaginatorOptions is the paginator options for ListProposalVotes
 type ListProposalVotesPaginatorOptions struct {
-	// The maximum number of votes to return.
+	//  The maximum number of votes to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

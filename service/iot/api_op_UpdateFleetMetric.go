@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the data for a fleet metric. Requires permission to access the
-// UpdateFleetMetric (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Updates the data for a fleet metric.
+//
+// Requires permission to access the [UpdateFleetMetric] action.
+//
+// [UpdateFleetMetric]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdateFleetMetric(ctx context.Context, params *UpdateFleetMetricInput, optFns ...func(*Options)) (*UpdateFleetMetricOutput, error) {
 	if params == nil {
 		params = &UpdateFleetMetricInput{}
@@ -64,8 +66,9 @@ type UpdateFleetMetricInput struct {
 	QueryVersion *string
 
 	// Used to support unit transformation such as milliseconds to seconds. The unit
-	// must be supported by CW metric (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html)
-	// .
+	// must be supported by [CW metric].
+	//
+	// [CW metric]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
 	Unit types.FleetMetricUnit
 
 	noSmithyDocumentSerde

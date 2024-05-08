@@ -12,9 +12,10 @@ import (
 )
 
 // Creates an SSL/TLS certificate that secures traffic for your website. After the
-// certificate is created, it is installed on the specified Lightsail instance. If
-// you provide more than one domain name in the request, at least one name must be
-// less than or equal to 63 characters in length.
+// certificate is created, it is installed on the specified Lightsail instance.
+//
+// If you provide more than one domain name in the request, at least one name must
+// be less than or equal to 63 characters in length.
 func (c *Client) SetupInstanceHttps(ctx context.Context, params *SetupInstanceHttpsInput, optFns ...func(*Options)) (*SetupInstanceHttpsOutput, error) {
 	if params == nil {
 		params = &SetupInstanceHttpsInput{}

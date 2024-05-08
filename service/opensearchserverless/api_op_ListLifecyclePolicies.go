@@ -12,8 +12,9 @@ import (
 )
 
 // Returns a list of OpenSearch Serverless lifecycle policies. For more
-// information, see Viewing data lifecycle policies (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-list)
-// .
+// information, see [Viewing data lifecycle policies].
+//
+// [Viewing data lifecycle policies]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-list
 func (c *Client) ListLifecyclePolicies(ctx context.Context, params *ListLifecyclePoliciesInput, optFns ...func(*Options)) (*ListLifecyclePoliciesOutput, error) {
 	if params == nil {
 		params = &ListLifecyclePoliciesInput{}

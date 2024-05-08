@@ -10,10 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Assigns the DELETED status to an MLModel , rendering it unusable. After using
-// the DeleteMLModel operation, you can use the GetMLModel operation to verify
-// that the status of the MLModel changed to DELETED. Caution: The result of the
-// DeleteMLModel operation is irreversible.
+// Assigns the DELETED status to an MLModel , rendering it unusable.
+//
+// After using the DeleteMLModel operation, you can use the GetMLModel operation
+// to verify that the status of the MLModel changed to DELETED.
+//
+// Caution: The result of the DeleteMLModel operation is irreversible.
 func (c *Client) DeleteMLModel(ctx context.Context, params *DeleteMLModelInput, optFns ...func(*Options)) (*DeleteMLModelOutput, error) {
 	if params == nil {
 		params = &DeleteMLModelInput{}
@@ -39,9 +41,10 @@ type DeleteMLModelInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a DeleteMLModel operation. You can use the GetMLModel
-// operation and check the value of the Status parameter to see whether an MLModel
-// is marked as DELETED .
+// Represents the output of a DeleteMLModel operation.
+//
+// You can use the GetMLModel operation and check the value of the Status
+// parameter to see whether an MLModel is marked as DELETED .
 type DeleteMLModelOutput struct {
 
 	// A user-supplied ID that uniquely identifies the MLModel . This value should be

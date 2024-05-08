@@ -35,8 +35,9 @@ type ListServiceTemplateVersionsInput struct {
 	TemplateName *string
 
 	// To view a list of minor of versions under a major version of a service
-	// template, include major Version . To view a list of major versions of a service
-	// template, exclude major Version .
+	// template, include major Version .
+	//
+	// To view a list of major versions of a service template, exclude major Version .
 	MajorVersion *string
 
 	// The maximum number of major or minor versions of a service template to list.

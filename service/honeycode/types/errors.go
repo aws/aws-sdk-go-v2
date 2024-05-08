@@ -7,7 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You do not have sufficient access to perform this action. Check that the
+//	You do not have sufficient access to perform this action. Check that the
+//
 // workbook is owned by you and your IAM policy allows access to the resource in
 // the request.
 type AccessDeniedException struct {
@@ -246,7 +247,8 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Request is invalid. The message in the response contains details on why the
+//	Request is invalid. The message in the response contains details on why the
+//
 // request is invalid.
 type ValidationException struct {
 	Message *string

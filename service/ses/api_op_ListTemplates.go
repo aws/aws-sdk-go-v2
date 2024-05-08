@@ -12,8 +12,9 @@ import (
 )
 
 // Lists the email templates present in your Amazon SES account in the current
-// Amazon Web Services Region. You can execute this operation no more than once per
-// second.
+// Amazon Web Services Region.
+//
+// You can execute this operation no more than once per second.
 func (c *Client) ListTemplates(ctx context.Context, params *ListTemplatesInput, optFns ...func(*Options)) (*ListTemplatesOutput, error) {
 	if params == nil {
 		params = &ListTemplatesInput{}

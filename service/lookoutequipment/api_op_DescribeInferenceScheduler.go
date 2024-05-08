@@ -12,8 +12,9 @@ import (
 	"time"
 )
 
-// Specifies information about the inference scheduler being used, including name,
-// model, status, and associated metadata
+//	Specifies information about the inference scheduler being used, including
+//
+// name, model, status, and associated metadata
 func (c *Client) DescribeInferenceScheduler(ctx context.Context, params *DescribeInferenceSchedulerInput, optFns ...func(*Options)) (*DescribeInferenceSchedulerOutput, error) {
 	if params == nil {
 		params = &DescribeInferenceSchedulerInput{}
@@ -44,7 +45,7 @@ type DescribeInferenceSchedulerOutput struct {
 	// Specifies the time at which the inference scheduler was created.
 	CreatedAt *time.Time
 
-	// A period of time (in minutes) by which inference on the data is delayed after
+	//  A period of time (in minutes) by which inference on the data is delayed after
 	// the data starts. For instance, if you select an offset delay time of five
 	// minutes, inference will not begin on the data until the first data measurement
 	// after the five minute mark. For example, if five minutes is selected, the
@@ -54,11 +55,11 @@ type DescribeInferenceSchedulerOutput struct {
 	// when uploading new data.
 	DataDelayOffsetInMinutes *int64
 
-	// Specifies configuration information for the input data for the inference
+	//  Specifies configuration information for the input data for the inference
 	// scheduler, including delimiter, format, and dataset location.
 	DataInputConfiguration *types.InferenceInputConfiguration
 
-	// Specifies information for the output results for the inference scheduler,
+	//  Specifies information for the output results for the inference scheduler,
 	// including the output S3 location.
 	DataOutputConfiguration *types.InferenceOutputConfiguration
 
@@ -88,7 +89,7 @@ type DescribeInferenceSchedulerOutput struct {
 	// described.
 	ModelName *string
 
-	// The Amazon Resource Name (ARN) of a role with permission to access the data
+	//  The Amazon Resource Name (ARN) of a role with permission to access the data
 	// source for the inference scheduler being described.
 	RoleArn *string
 
@@ -99,7 +100,8 @@ type DescribeInferenceSchedulerOutput struct {
 	// Indicates the status of the inference scheduler.
 	Status types.InferenceSchedulerStatus
 
-	// Specifies the time at which the inference scheduler was last updated, if it was.
+	// Specifies the time at which the inference scheduler was last updated, if it
+	// was.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

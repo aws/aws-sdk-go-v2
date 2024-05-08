@@ -12,9 +12,11 @@ import (
 	"time"
 )
 
-// Updates a Device Defender detect custom metric. Requires permission to access
-// the UpdateCustomMetric (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Updates a Device Defender detect custom metric.
+//
+// Requires permission to access the [UpdateCustomMetric] action.
+//
+// [UpdateCustomMetric]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdateCustomMetric(ctx context.Context, params *UpdateCustomMetricInput, optFns ...func(*Options)) (*UpdateCustomMetricOutput, error) {
 	if params == nil {
 		params = &UpdateCustomMetricInput{}
@@ -32,14 +34,14 @@ func (c *Client) UpdateCustomMetric(ctx context.Context, params *UpdateCustomMet
 
 type UpdateCustomMetricInput struct {
 
-	// Field represents a friendly name in the console for the custom metric, it
+	//  Field represents a friendly name in the console for the custom metric, it
 	// doesn't have to be unique. Don't use this name as the metric identifier in the
 	// device metric report. Can be updated.
 	//
 	// This member is required.
 	DisplayName *string
 
-	// The name of the custom metric. Cannot be updated.
+	//  The name of the custom metric. Cannot be updated.
 	//
 	// This member is required.
 	MetricName *string
@@ -49,24 +51,26 @@ type UpdateCustomMetricInput struct {
 
 type UpdateCustomMetricOutput struct {
 
-	// The creation date of the custom metric in milliseconds since epoch.
+	//  The creation date of the custom metric in milliseconds since epoch.
 	CreationDate *time.Time
 
-	// A friendly name in the console for the custom metric
+	//  A friendly name in the console for the custom metric
 	DisplayName *string
 
-	// The time the custom metric was last modified in milliseconds since epoch.
+	//  The time the custom metric was last modified in milliseconds since epoch.
 	LastModifiedDate *time.Time
 
-	// The Amazon Resource Number (ARN) of the custom metric.
+	//  The Amazon Resource Number (ARN) of the custom metric.
 	MetricArn *string
 
-	// The name of the custom metric.
+	//  The name of the custom metric.
 	MetricName *string
 
-	// The type of the custom metric. The type number only takes a single metric value
-	// as an input, but while submitting the metrics value in the DeviceMetrics report,
-	// it must be passed as an array with a single value.
+	//  The type of the custom metric.
+	//
+	// The type number only takes a single metric value as an input, but while
+	// submitting the metrics value in the DeviceMetrics report, it must be passed as
+	// an array with a single value.
 	MetricType types.CustomMetricType
 
 	// Metadata pertaining to the operation's result.

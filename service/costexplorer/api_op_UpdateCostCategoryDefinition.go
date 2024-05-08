@@ -41,9 +41,9 @@ type UpdateCostCategoryDefinitionInput struct {
 	// This member is required.
 	RuleVersion types.CostCategoryRuleVersion
 
-	// The Expression object used to categorize costs. For more information, see
-	// CostCategoryRule  (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html)
-	// .
+	// The Expression object used to categorize costs. For more information, see [CostCategoryRule].
+	//
+	// [CostCategoryRule]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html
 	//
 	// This member is required.
 	Rules []types.CostCategoryRule
@@ -57,8 +57,8 @@ type UpdateCostCategoryDefinitionInput struct {
 	// future.
 	EffectiveStart *string
 
-	// The split charge rules used to allocate your charges between your Cost Category
-	// values.
+	//  The split charge rules used to allocate your charges between your Cost
+	// Category values.
 	SplitChargeRules []types.CostCategorySplitChargeRule
 
 	noSmithyDocumentSerde

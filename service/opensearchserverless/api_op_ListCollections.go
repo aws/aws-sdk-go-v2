@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all OpenSearch Serverless collections. For more information, see Creating
-// and managing Amazon OpenSearch Serverless collections (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html)
-// . Make sure to include an empty request body {} if you don't include any
+// Lists all OpenSearch Serverless collections. For more information, see [Creating and managing Amazon OpenSearch Serverless collections].
+//
+// Make sure to include an empty request body {} if you don't include any
 // collection filters in the request.
+//
+// [Creating and managing Amazon OpenSearch Serverless collections]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html
 func (c *Client) ListCollections(ctx context.Context, params *ListCollectionsInput, optFns ...func(*Options)) (*ListCollectionsOutput, error) {
 	if params == nil {
 		params = &ListCollectionsInput{}
@@ -32,7 +34,7 @@ func (c *Client) ListCollections(ctx context.Context, params *ListCollectionsInp
 
 type ListCollectionsInput struct {
 
-	// A list of filter names and values that you can use for requests.
+	//  A list of filter names and values that you can use for requests.
 	CollectionFilters *types.CollectionFilters
 
 	// The maximum number of results to return. Default is 20. You can use nextToken

@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get a list of component Infrastructure as Code (IaC) outputs. For more
-// information about components, see Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
-// in the Proton User Guide.
+// Get a list of component Infrastructure as Code (IaC) outputs.
+//
+// For more information about components, see [Proton components] in the Proton User Guide.
+//
+// [Proton components]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
 func (c *Client) ListComponentOutputs(ctx context.Context, params *ListComponentOutputsInput, optFns ...func(*Options)) (*ListComponentOutputsOutput, error) {
 	if params == nil {
 		params = &ListComponentOutputsInput{}

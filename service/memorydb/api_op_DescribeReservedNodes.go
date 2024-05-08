@@ -46,8 +46,9 @@ type DescribeReservedNodesInput struct {
 	NextToken *string
 
 	// The node type filter value. Use this parameter to show only those reservations
-	// matching the specified node type. For more information, see Supported node types (https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported)
-	// .
+	// matching the specified node type. For more information, see [Supported node types].
+	//
+	// [Supported node types]: https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported
 	NodeType *string
 
 	// The offering type filter value. Use this parameter to show only the available

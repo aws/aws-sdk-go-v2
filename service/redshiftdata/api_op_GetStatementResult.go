@@ -12,9 +12,12 @@ import (
 )
 
 // Fetches the temporarily cached result of an SQL statement. A token is returned
-// to page through the statement results. For more information about the Amazon
-// Redshift Data API and CLI usage examples, see Using the Amazon Redshift Data API (https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html)
-// in the Amazon Redshift Management Guide.
+// to page through the statement results.
+//
+// For more information about the Amazon Redshift Data API and CLI usage examples,
+// see [Using the Amazon Redshift Data API]in the Amazon Redshift Management Guide.
+//
+// [Using the Amazon Redshift Data API]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
 func (c *Client) GetStatementResult(ctx context.Context, params *GetStatementResultInput, optFns ...func(*Options)) (*GetStatementResultOutput, error) {
 	if params == nil {
 		params = &GetStatementResultInput{}

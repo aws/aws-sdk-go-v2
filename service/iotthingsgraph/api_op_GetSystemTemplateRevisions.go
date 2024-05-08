@@ -34,8 +34,11 @@ func (c *Client) GetSystemTemplateRevisions(ctx context.Context, params *GetSyst
 
 type GetSystemTemplateRevisionsInput struct {
 
-	// The ID of the system template. The ID should be in the following format.
-	// urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME
+	// The ID of the system template.
+	//
+	// The ID should be in the following format.
+	//
+	//     urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME
 	//
 	// This member is required.
 	Id *string

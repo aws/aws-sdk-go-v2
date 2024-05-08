@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an OpenSearch Ingestion pipeline. For more information, see Creating
-// Amazon OpenSearch Ingestion pipelines (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html)
-// .
+// Creates an OpenSearch Ingestion pipeline. For more information, see [Creating Amazon OpenSearch Ingestion pipelines].
+//
+// [Creating Amazon OpenSearch Ingestion pipelines]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html
 func (c *Client) CreatePipeline(ctx context.Context, params *CreatePipelineInput, optFns ...func(*Options)) (*CreatePipelineOutput, error) {
 	if params == nil {
 		params = &CreatePipelineInput{}

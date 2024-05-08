@@ -14,34 +14,46 @@ import (
 // Places a request for a new game session in a queue. When processing a placement
 // request, Amazon GameLift searches for available resources on the queue's
 // destinations, scanning each until it finds resources or the placement request
-// times out. A game session placement request can also request player sessions.
-// When a new game session is successfully created, Amazon GameLift creates a
-// player session for each player included in the request. When placing a game
-// session, by default Amazon GameLift tries each fleet in the order they are
-// listed in the queue configuration. Ideally, a queue's destinations are listed in
-// preference order. Alternatively, when requesting a game session with players,
-// you can also provide latency data for each player in relevant Regions. Latency
-// data indicates the performance lag a player experiences when connected to a
-// fleet in the Region. Amazon GameLift uses latency data to reorder the list of
-// destinations to place the game session in a Region with minimal lag. If latency
-// data is provided for multiple players, Amazon GameLift calculates each Region's
-// average lag for all players and reorders to get the best game play across all
-// players. To place a new game session request, specify the following:
+// times out.
+//
+// A game session placement request can also request player sessions. When a new
+// game session is successfully created, Amazon GameLift creates a player session
+// for each player included in the request.
+//
+// When placing a game session, by default Amazon GameLift tries each fleet in the
+// order they are listed in the queue configuration. Ideally, a queue's
+// destinations are listed in preference order.
+//
+// Alternatively, when requesting a game session with players, you can also
+// provide latency data for each player in relevant Regions. Latency data indicates
+// the performance lag a player experiences when connected to a fleet in the
+// Region. Amazon GameLift uses latency data to reorder the list of destinations to
+// place the game session in a Region with minimal lag. If latency data is provided
+// for multiple players, Amazon GameLift calculates each Region's average lag for
+// all players and reorders to get the best game play across all players.
+//
+// To place a new game session request, specify the following:
+//
 //   - The queue name and a set of game session properties and settings
+//
 //   - A unique ID (such as a UUID) for the placement. You use this ID to track
 //     the status of the placement request
+//
 //   - (Optional) A set of player data and a unique player ID for each player that
 //     you are joining to the new game session (player data is optional, but if you
 //     include it, you must also provide a unique ID for each player)
+//
 //   - Latency data for all players (if you want to optimize game play for the
 //     players)
 //
-// If successful, a new game session placement is created. To track the status of
-// a placement request, call DescribeGameSessionPlacement (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessionPlacement.html)
-// and check the request's status. If the status is FULFILLED , a new game session
-// has been created and a game session ARN and Region are referenced. If the
-// placement request times out, you can resubmit the request or retry it with a
-// different queue.
+// If successful, a new game session placement is created.
+//
+// To track the status of a placement request, call [DescribeGameSessionPlacement] and check the request's
+// status. If the status is FULFILLED , a new game session has been created and a
+// game session ARN and Region are referenced. If the placement request times out,
+// you can resubmit the request or retry it with a different queue.
+//
+// [DescribeGameSessionPlacement]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessionPlacement.html
 func (c *Client) StartGameSessionPlacement(ctx context.Context, params *StartGameSessionPlacementInput, optFns ...func(*Options)) (*StartGameSessionPlacementOutput, error) {
 	if params == nil {
 		params = &StartGameSessionPlacementInput{}
@@ -87,8 +99,9 @@ type StartGameSessionPlacementInput struct {
 
 	// A set of custom game session properties, formatted as a single string value.
 	// This data is passed to a game server process in the GameSession object with a
-	// request to start a new game session (see Start a Game Session (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)
-	// ).
+	// request to start a new game session (see [Start a Game Session]).
+	//
+	// [Start a Game Session]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
 	GameSessionData *string
 
 	// A descriptive label that is associated with a game session. Session names do

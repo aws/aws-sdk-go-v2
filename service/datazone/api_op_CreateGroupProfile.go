@@ -40,7 +40,7 @@ type CreateGroupProfileInput struct {
 	// This member is required.
 	GroupIdentifier *string
 
-	// A unique, case-sensitive identifier that is provided to ensure the idempotency
+	//  A unique, case-sensitive identifier that is provided to ensure the idempotency
 	// of the request.
 	ClientToken *string
 

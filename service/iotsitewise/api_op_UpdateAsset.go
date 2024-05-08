@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an asset's name. For more information, see Updating assets and models (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html)
-// in the IoT SiteWise User Guide.
+// Updates an asset's name. For more information, see [Updating assets and models] in the IoT SiteWise User
+// Guide.
+//
+// [Updating assets and models]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html
 func (c *Client) UpdateAsset(ctx context.Context, params *UpdateAssetInput, optFns ...func(*Options)) (*UpdateAssetOutput, error) {
 	if params == nil {
 		params = &UpdateAssetInput{}
@@ -32,8 +34,9 @@ type UpdateAssetInput struct {
 
 	// The ID of the asset to update. This can be either the actual ID in UUID format,
 	// or else externalId: followed by the external ID, if it has one. For more
-	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetId *string
@@ -48,8 +51,9 @@ type UpdateAssetInput struct {
 
 	// An external ID to assign to the asset. The asset must not already have an
 	// external ID. The external ID must be unique within your Amazon Web Services
-	// account. For more information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
-	// in the IoT SiteWise User Guide.
+	// account. For more information, see [Using external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Using external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
 	AssetExternalId *string
 
 	// A unique case-sensitive identifier that you can provide to ensure the

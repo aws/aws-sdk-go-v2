@@ -11,9 +11,12 @@ import (
 )
 
 // Retrieves a list of all tags for the specified AppStream 2.0 resource. You can
-// tag AppStream 2.0 image builders, images, fleets, and stacks. For more
-// information about tags, see Tagging Your Resources (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
-// in the Amazon AppStream 2.0 Administration Guide.
+// tag AppStream 2.0 image builders, images, fleets, and stacks.
+//
+// For more information about tags, see [Tagging Your Resources] in the Amazon AppStream 2.0
+// Administration Guide.
+//
+// [Tagging Your Resources]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

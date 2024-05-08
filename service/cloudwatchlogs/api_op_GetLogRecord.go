@@ -13,7 +13,9 @@ import (
 // Retrieves all of the fields and values of a single log event. All fields are
 // retrieved, even if the original query that produced the logRecordPointer
 // retrieved only a subset of fields. Fields are returned as field name/field value
-// pairs. The full unparsed log event is returned within @message .
+// pairs.
+//
+// The full unparsed log event is returned within @message .
 func (c *Client) GetLogRecord(ctx context.Context, params *GetLogRecordInput, optFns ...func(*Options)) (*GetLogRecordOutput, error) {
 	if params == nil {
 		params = &GetLogRecordInput{}
@@ -40,8 +42,10 @@ type GetLogRecordInput struct {
 	LogRecordPointer *string
 
 	// Specify true to display the log event fields with all sensitive data unmasked
-	// and visible. The default is false . To use this operation with this parameter,
-	// you must be signed into an account with the logs:Unmask permission.
+	// and visible. The default is false .
+	//
+	// To use this operation with this parameter, you must be signed into an account
+	// with the logs:Unmask permission.
 	Unmask bool
 
 	noSmithyDocumentSerde

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a target account, organizational unit, or the root from a
+//	Disassociates a target account, organizational unit, or the root from a
+//
 // specified configuration. When you disassociate a configuration from its target,
 // the target inherits the configuration of the closest parent. If there’s no
 // configuration to inherit, the target retains its settings but becomes a
@@ -35,14 +36,14 @@ func (c *Client) StartConfigurationPolicyDisassociation(ctx context.Context, par
 
 type StartConfigurationPolicyDisassociationInput struct {
 
-	// The Amazon Resource Name (ARN) of a configuration policy, the universally
+	//  The Amazon Resource Name (ARN) of a configuration policy, the universally
 	// unique identifier (UUID) of a configuration policy, or a value of
 	// SELF_MANAGED_SECURITY_HUB for a self-managed configuration.
 	//
 	// This member is required.
 	ConfigurationPolicyIdentifier *string
 
-	// The identifier of the target account, organizational unit, or the root to
+	//  The identifier of the target account, organizational unit, or the root to
 	// disassociate from the specified configuration.
 	Target types.Target
 

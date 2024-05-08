@@ -12,11 +12,18 @@ import (
 )
 
 // Returns a list of ARNs of the resources that are members of a specified
-// resource group. Minimum permissions To run this command, you must have the
-// following permissions:
+// resource group.
+//
+// # Minimum permissions
+//
+// To run this command, you must have the following permissions:
+//
 //   - resource-groups:ListGroupResources
+//
 //   - cloudformation:DescribeStacks
+//
 //   - cloudformation:ListStackResources
+//
 //   - tag:GetResources
 func (c *Client) ListGroupResources(ctx context.Context, params *ListGroupResourcesInput, optFns ...func(*Options)) (*ListGroupResourcesOutput, error) {
 	if params == nil {
@@ -35,31 +42,35 @@ func (c *Client) ListGroupResources(ctx context.Context, params *ListGroupResour
 
 type ListGroupResourcesInput struct {
 
-	// Filters, formatted as ResourceFilter objects, that you want to apply to a
-	// ListGroupResources operation. Filters the results to include only those of the
-	// specified resource types.
+	// Filters, formatted as ResourceFilter objects, that you want to apply to a ListGroupResources
+	// operation. Filters the results to include only those of the specified resource
+	// types.
+	//
 	//   - resource-type - Filter resources by their type. Specify up to five resource
 	//   types in the format AWS::ServiceCode::ResourceType . For example,
 	//   AWS::EC2::Instance , or AWS::S3::Bucket .
+	//
 	// When you specify a resource-type filter for ListGroupResources , Resource Groups
 	// validates your filter resource types against the types that are defined in the
 	// query associated with the group. For example, if a group contains only S3
 	// buckets because its query specifies only that resource type, but your
 	// resource-type filter includes EC2 instances, AWS Resource Groups does not filter
 	// for EC2 instances. In this case, a ListGroupResources request returns a
-	// BadRequestException error with a message similar to the following: The resource
-	// types specified as filters in the request are not valid. The error includes a
-	// list of resource types that failed the validation because they are not part of
-	// the query associated with the group. This validation doesn't occur when the
-	// group query specifies AWS::AllSupported , because a group based on such a query
-	// can contain any of the allowed resource types for the query type (tag-based or
-	// Amazon CloudFront stack-based queries).
+	// BadRequestException error with a message similar to the following:
+	//
+	//     The resource types specified as filters in the request are not valid.
+	//
+	// The error includes a list of resource types that failed the validation because
+	// they are not part of the query associated with the group. This validation
+	// doesn't occur when the group query specifies AWS::AllSupported , because a group
+	// based on such a query can contain any of the allowed resource types for the
+	// query type (tag-based or Amazon CloudFront stack-based queries).
 	Filters []types.ResourceFilter
 
 	// The name or the ARN of the resource group
 	Group *string
 
-	// Deprecated - don't use this parameter. Use the Group request field instead.
+	//  Deprecated - don't use this parameter. Use the Group request field instead.
 	//
 	// Deprecated: This field is deprecated, use Group instead.
 	GroupName *string
@@ -98,7 +109,8 @@ type ListGroupResourcesOutput struct {
 	// RESOURCE_TYPE_NOT_SUPPORTED .
 	QueryErrors []types.QueryError
 
-	// Deprecated - don't use this parameter. Use the Resources response field instead.
+	//  Deprecated - don't use this parameter. Use the Resources response field
+	// instead.
 	//
 	// Deprecated: This field is deprecated, use Resources instead.
 	ResourceIdentifiers []types.ResourceIdentifier

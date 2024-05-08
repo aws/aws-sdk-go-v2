@@ -27,8 +27,8 @@ func (c *Client) DescribeVpcEndpoints(ctx context.Context, params *DescribeVpcEn
 	return out, nil
 }
 
-// Container for request parameters to the DescribeVpcEndpoints operation.
-// Specifies the list of VPC endpoints to be described.
+// Container for request parameters to the DescribeVpcEndpoints operation. Specifies the list of VPC
+// endpoints to be described.
 type DescribeVpcEndpointsInput struct {
 
 	// The unique identifiers of the endpoints to get information about.
@@ -39,10 +39,9 @@ type DescribeVpcEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response parameters to the DescribeVpcEndpoints operation.
-// Returns a list containing configuration details and status of the VPC Endpoints
-// as well as a list containing error responses of the endpoints that could not be
-// described
+// Container for response parameters to the DescribeVpcEndpoints operation. Returns a list containing
+// configuration details and status of the VPC Endpoints as well as a list
+// containing error responses of the endpoints that could not be described
 type DescribeVpcEndpointsOutput struct {
 
 	// Any errors associated with the request.

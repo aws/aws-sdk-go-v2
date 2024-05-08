@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a budget and, if included, notifications and subscribers. Only one of
-// BudgetLimit or PlannedBudgetLimits can be present in the syntax at one time.
-// Use the syntax that matches your case. The Request Syntax section shows the
-// BudgetLimit syntax. For PlannedBudgetLimits , see the Examples (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_CreateBudget.html#API_CreateBudget_Examples)
-// section.
+// Creates a budget and, if included, notifications and subscribers.
+//
+// Only one of BudgetLimit or PlannedBudgetLimits can be present in the syntax at
+// one time. Use the syntax that matches your case. The Request Syntax section
+// shows the BudgetLimit syntax. For PlannedBudgetLimits , see the [Examples] section.
+//
+// [Examples]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_CreateBudget.html#API_CreateBudget_Examples
 func (c *Client) CreateBudget(ctx context.Context, params *CreateBudgetInput, optFns ...func(*Options)) (*CreateBudgetOutput, error) {
 	if params == nil {
 		params = &CreateBudgetInput{}

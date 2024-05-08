@@ -28,8 +28,9 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the resource.
+	// The [ARN] of the resource.
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	ResourceArn *string
@@ -40,8 +41,9 @@ type ListTagsForResourceInput struct {
 type ListTagsForResourceOutput struct {
 
 	// A list of key-value pairs that contain metadata for the resource. For more
-	// information, see Tag your resources (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html)
-	// in the IoT Greengrass V2 Developer Guide.
+	// information, see [Tag your resources]in the IoT Greengrass V2 Developer Guide.
+	//
+	// [Tag your resources]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

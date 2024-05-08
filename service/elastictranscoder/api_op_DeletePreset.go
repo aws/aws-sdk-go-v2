@@ -11,6 +11,7 @@ import (
 )
 
 // The DeletePreset operation removes a preset that you've added in an AWS region.
+//
 // You can't delete the default presets that are included with Elastic Transcoder.
 func (c *Client) DeletePreset(ctx context.Context, params *DeletePresetInput, optFns ...func(*Options)) (*DeletePresetOutput, error) {
 	if params == nil {

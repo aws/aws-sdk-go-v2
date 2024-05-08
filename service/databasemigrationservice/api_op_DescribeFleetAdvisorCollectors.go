@@ -29,11 +29,14 @@ func (c *Client) DescribeFleetAdvisorCollectors(ctx context.Context, params *Des
 
 type DescribeFleetAdvisorCollectorsInput struct {
 
-	// If you specify any of the following filters, the output includes information
+	//  If you specify any of the following filters, the output includes information
 	// for only those collectors that meet the filter criteria:
+	//
 	//   - collector-referenced-id – The ID of the collector agent, for example
 	//   d4610ac5-e323-4ad9-bc50-eaf7249dfe9d .
+	//
 	//   - collector-name – The name of the collector agent.
+	//
 	// An example is: describe-fleet-advisor-collectors --filter
 	// Name="collector-referenced-id",Values="d4610ac5-e323-4ad9-bc50-eaf7249dfe9d"
 	Filters []types.Filter

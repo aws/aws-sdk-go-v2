@@ -28,15 +28,15 @@ func (c *Client) GetListElements(ctx context.Context, params *GetListElementsInp
 
 type GetListElementsInput struct {
 
-	// The name of the list.
+	//  The name of the list.
 	//
 	// This member is required.
 	Name *string
 
-	// The maximum number of objects to return for the request.
+	//  The maximum number of objects to return for the request.
 	MaxResults *int32
 
-	// The next token for the subsequent request.
+	//  The next token for the subsequent request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -44,10 +44,10 @@ type GetListElementsInput struct {
 
 type GetListElementsOutput struct {
 
-	// The list elements.
+	//  The list elements.
 	Elements []string
 
-	// The next page token.
+	//  The next page token.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -145,7 +145,7 @@ var _ GetListElementsAPIClient = (*Client)(nil)
 
 // GetListElementsPaginatorOptions is the paginator options for GetListElements
 type GetListElementsPaginatorOptions struct {
-	// The maximum number of objects to return for the request.
+	//  The maximum number of objects to return for the request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

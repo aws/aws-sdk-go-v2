@@ -12,8 +12,10 @@ import (
 )
 
 // Provides a list of custom language models that match the specified criteria. If
-// no criteria are specified, all custom language models are returned. To get
-// detailed information about a specific custom language model, use the operation.
+// no criteria are specified, all custom language models are returned.
+//
+// To get detailed information about a specific custom language model, use the
+// operation.
 func (c *Client) ListLanguageModels(ctx context.Context, params *ListLanguageModelsInput, optFns ...func(*Options)) (*ListLanguageModelsOutput, error) {
 	if params == nil {
 		params = &ListLanguageModelsInput{}

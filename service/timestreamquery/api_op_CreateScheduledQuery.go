@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a scheduled query that will be run on your behalf at the configured
+//	Create a scheduled query that will be run on your behalf at the configured
+//
 // schedule. Timestream assumes the execution role provided as part of the
 // ScheduledQueryExecutionRoleArn parameter to run the query. You can use the
 // NotificationConfiguration parameter to configure notification for your scheduled
@@ -55,12 +56,13 @@ type CreateScheduledQueryInput struct {
 	// The query string to run. Parameter names can be specified in the query string @
 	// character followed by an identifier. The named Parameter @scheduled_runtime is
 	// reserved and can be used in the query to get the time at which the query is
-	// scheduled to run. The timestamp calculated according to the
-	// ScheduleConfiguration parameter, will be the value of @scheduled_runtime
-	// paramater for each query run. For example, consider an instance of a scheduled
-	// query executing on 2021-12-01 00:00:00. For this instance, the
-	// @scheduled_runtime parameter is initialized to the timestamp 2021-12-01 00:00:00
-	// when invoking the query.
+	// scheduled to run.
+	//
+	// The timestamp calculated according to the ScheduleConfiguration parameter, will
+	// be the value of @scheduled_runtime paramater for each query run. For example,
+	// consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For
+	// this instance, the @scheduled_runtime parameter is initialized to the timestamp
+	// 2021-12-01 00:00:00 when invoking the query.
 	//
 	// This member is required.
 	QueryString *string
@@ -80,8 +82,10 @@ type CreateScheduledQueryInput struct {
 	// words, making the same request repeatedly will produce the same result. Making
 	// multiple identical CreateScheduledQuery requests has the same effect as making a
 	// single request.
+	//
 	//   - If CreateScheduledQuery is called without a ClientToken , the Query SDK
 	//   generates a ClientToken on your behalf.
+	//
 	//   - After 8 hours, any request with the same ClientToken is treated as a new
 	//   request.
 	ClientToken *string
@@ -90,8 +94,10 @@ type CreateScheduledQueryInput struct {
 	// the Amazon KMS key is not specified, the scheduled query resource will be
 	// encrypted with a Timestream owned Amazon KMS key. To specify a KMS key, use the
 	// key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix the
-	// name with alias/ If ErrorReportConfiguration uses SSE_KMS as encryption type,
-	// the same KmsKeyId is used to encrypt the error report at rest.
+	// name with alias/
+	//
+	// If ErrorReportConfiguration uses SSE_KMS as encryption type, the same KmsKeyId
+	// is used to encrypt the error report at rest.
 	KmsKeyId *string
 
 	// A list of key-value pairs to label the scheduled query.

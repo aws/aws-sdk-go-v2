@@ -13,8 +13,9 @@ import (
 
 // Lists all the subscription descriptions for a customer account. The description
 // for a subscription includes SubscriptionName , SNSTopicARN , CustomerID ,
-// SourceType , SourceID , CreationTime , and Status . If you specify a
-// SubscriptionName , lists the description for that subscription.
+// SourceType , SourceID , CreationTime , and Status .
+//
+// If you specify a SubscriptionName , lists the description for that subscription.
 func (c *Client) DescribeEventSubscriptions(ctx context.Context, params *DescribeEventSubscriptionsInput, optFns ...func(*Options)) (*DescribeEventSubscriptionsOutput, error) {
 	if params == nil {
 		params = &DescribeEventSubscriptionsInput{}
@@ -30,7 +31,7 @@ func (c *Client) DescribeEventSubscriptions(ctx context.Context, params *Describ
 	return out, nil
 }
 
-// Represents the input to DescribeEventSubscriptions .
+// Represents the input to DescribeEventSubscriptions.
 type DescribeEventSubscriptionsInput struct {
 
 	// This parameter is not currently supported.
@@ -41,9 +42,12 @@ type DescribeEventSubscriptionsInput struct {
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -54,7 +58,7 @@ type DescribeEventSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of DescribeEventSubscriptions .
+// Represents the output of DescribeEventSubscriptions.
 type DescribeEventSubscriptionsOutput struct {
 
 	// A list of event subscriptions.
@@ -161,9 +165,12 @@ var _ DescribeEventSubscriptionsAPIClient = (*Client)(nil)
 // DescribeEventSubscriptionsPaginatorOptions is the paginator options for
 // DescribeEventSubscriptions
 type DescribeEventSubscriptionsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 

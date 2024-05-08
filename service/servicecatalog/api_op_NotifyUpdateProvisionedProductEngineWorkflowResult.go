@@ -29,31 +29,31 @@ func (c *Client) NotifyUpdateProvisionedProductEngineWorkflowResult(ctx context.
 
 type NotifyUpdateProvisionedProductEngineWorkflowResultInput struct {
 
-	// The idempotency token that identifies the update engine execution.
+	//  The idempotency token that identifies the update engine execution.
 	//
 	// This member is required.
 	IdempotencyToken *string
 
-	// The identifier of the record.
+	//  The identifier of the record.
 	//
 	// This member is required.
 	RecordId *string
 
-	// The status of the update engine execution.
+	//  The status of the update engine execution.
 	//
 	// This member is required.
 	Status types.EngineWorkflowStatus
 
-	// The encrypted contents of the update engine execution payload that Service
+	//  The encrypted contents of the update engine execution payload that Service
 	// Catalog sends after the Terraform product update workflow starts.
 	//
 	// This member is required.
 	WorkflowToken *string
 
-	// The reason why the update engine execution failed.
+	//  The reason why the update engine execution failed.
 	FailureReason *string
 
-	// The output of the update engine execution.
+	//  The output of the update engine execution.
 	Outputs []types.RecordOutput
 
 	noSmithyDocumentSerde

@@ -29,7 +29,7 @@ func (c *Client) UpdateAttributeGroup(ctx context.Context, params *UpdateAttribu
 
 type UpdateAttributeGroupInput struct {
 
-	// The name, ID, or ARN of the attribute group that holds the attributes to
+	//  The name, ID, or ARN of the attribute group that holds the attributes to
 	// describe the application.
 	//
 	// This member is required.

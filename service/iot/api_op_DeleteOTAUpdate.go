@@ -10,8 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete an OTA update. Requires permission to access the DeleteOTAUpdate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Delete an OTA update.
+//
+// Requires permission to access the [DeleteOTAUpdate] action.
+//
+// [DeleteOTAUpdate]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DeleteOTAUpdate(ctx context.Context, params *DeleteOTAUpdateInput, optFns ...func(*Options)) (*DeleteOTAUpdateOutput, error) {
 	if params == nil {
 		params = &DeleteOTAUpdateInput{}

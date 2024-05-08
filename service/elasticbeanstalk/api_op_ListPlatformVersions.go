@@ -12,11 +12,12 @@ import (
 )
 
 // Lists the platform versions available for your account in an AWS Region.
-// Provides summary information about each platform version. Compare to
-// DescribePlatformVersion , which provides full details about a single platform
-// version. For definitions of platform version and other platform-related terms,
-// see AWS Elastic Beanstalk Platforms Glossary (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html)
-// .
+// Provides summary information about each platform version. Compare to DescribePlatformVersion, which
+// provides full details about a single platform version.
+//
+// For definitions of platform version and other platform-related terms, see [AWS Elastic Beanstalk Platforms Glossary].
+//
+// [AWS Elastic Beanstalk Platforms Glossary]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html
 func (c *Client) ListPlatformVersions(ctx context.Context, params *ListPlatformVersionsInput, optFns ...func(*Options)) (*ListPlatformVersionsOutput, error) {
 	if params == nil {
 		params = &ListPlatformVersionsInput{}
@@ -43,8 +44,9 @@ type ListPlatformVersionsInput struct {
 
 	// For a paginated request. Specify a token from a previous response page to
 	// retrieve the next response page. All other parameter values must be identical to
-	// the ones specified in the initial request. If no NextToken is specified, the
-	// first page is retrieved.
+	// the ones specified in the initial request.
+	//
+	// If no NextToken is specified, the first page is retrieved.
 	NextToken *string
 
 	noSmithyDocumentSerde

@@ -11,10 +11,10 @@ import (
 )
 
 // Lists the security policies that are attached to your servers and SFTP
-// connectors. For more information about security policies, see Working with
-// security policies for servers (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html)
-// or Working with security policies for SFTP connectors (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html)
-// .
+// connectors. For more information about security policies, see [Working with security policies for servers]or [Working with security policies for SFTP connectors].
+//
+// [Working with security policies for SFTP connectors]: https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html
+// [Working with security policies for servers]: https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html
 func (c *Client) ListSecurityPolicies(ctx context.Context, params *ListSecurityPoliciesInput, optFns ...func(*Options)) (*ListSecurityPoliciesOutput, error) {
 	if params == nil {
 		params = &ListSecurityPoliciesInput{}

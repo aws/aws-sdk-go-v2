@@ -11,9 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a launch of a given feature. Don't use this operation to update the
-// tags of an existing launch. Instead, use TagResource (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html)
+// Updates a launch of a given feature.
+//
+// Don't use this operation to update the tags of an existing launch. Instead, use [TagResource]
 // .
+//
+// [TagResource]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html
 func (c *Client) UpdateLaunch(ctx context.Context, params *UpdateLaunchInput, optFns ...func(*Options)) (*UpdateLaunchOutput, error) {
 	if params == nil {
 		params = &UpdateLaunchInput{}

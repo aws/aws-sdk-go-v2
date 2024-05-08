@@ -12,8 +12,9 @@ import (
 )
 
 // Lists the virtual private gateways owned by the Amazon Web Services account.
-// You can create one or more Direct Connect private virtual interfaces linked to a
-// virtual private gateway.
+//
+// You can create one or more Direct Connect private virtual interfaces linked to
+// a virtual private gateway.
 func (c *Client) DescribeVirtualGateways(ctx context.Context, params *DescribeVirtualGatewaysInput, optFns ...func(*Options)) (*DescribeVirtualGatewaysOutput, error) {
 	if params == nil {
 		params = &DescribeVirtualGatewaysInput{}

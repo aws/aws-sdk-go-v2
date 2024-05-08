@@ -13,8 +13,9 @@ import (
 
 // Runs a DataSync discovery job on your on-premises storage system. If you
 // haven't added the storage system to DataSync Discovery yet, do this first by
-// using the AddStorageSystem (https://docs.aws.amazon.com/datasync/latest/userguide/API_AddStorageSystem.html)
-// operation.
+// using the [AddStorageSystem]operation.
+//
+// [AddStorageSystem]: https://docs.aws.amazon.com/datasync/latest/userguide/API_AddStorageSystem.html
 func (c *Client) StartDiscoveryJob(ctx context.Context, params *StartDiscoveryJobInput, optFns ...func(*Options)) (*StartDiscoveryJobOutput, error) {
 	if params == nil {
 		params = &StartDiscoveryJobInput{}
@@ -39,10 +40,11 @@ type StartDiscoveryJobInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// Specifies in minutes how long you want the discovery job to run. For more
-	// accurate recommendations, we recommend a duration of at least 14 days. Longer
-	// durations allow time to collect a sufficient number of data points and provide a
-	// realistic representation of storage performance and utilization.
+	// Specifies in minutes how long you want the discovery job to run.
+	//
+	// For more accurate recommendations, we recommend a duration of at least 14 days.
+	// Longer durations allow time to collect a sufficient number of data points and
+	// provide a realistic representation of storage performance and utilization.
 	//
 	// This member is required.
 	CollectionDurationMinutes *int32

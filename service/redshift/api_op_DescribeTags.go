@@ -13,12 +13,16 @@ import (
 
 // Returns a list of tags. You can return tags from a specific resource by
 // specifying an ARN, or you can return all tags for a given type of resource, such
-// as clusters, snapshots, and so on. The following are limitations for
-// DescribeTags :
+// as clusters, snapshots, and so on.
+//
+// The following are limitations for DescribeTags :
+//
 //   - You cannot specify an ARN and a resource-type value together in the same
 //     request.
+//
 //   - You cannot use the MaxRecords and Marker parameters together with the ARN
 //     parameter.
+//
 //   - The MaxRecords parameter can be a range from 10 to 50 results to return in a
 //     request.
 //
@@ -26,9 +30,11 @@ import (
 // Redshift returns all resources that match any combination of the specified keys
 // and values. For example, if you have owner and environment for tag keys, and
 // admin and test for tag values, all resources that have any combination of those
-// values are returned. If both tag keys and values are omitted from the request,
-// resources are returned regardless of whether they have tag keys or values
-// associated with them.
+// values are returned.
+//
+// If both tag keys and values are omitted from the request, resources are
+// returned regardless of whether they have tag keys or values associated with
+// them.
 func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, optFns ...func(*Options)) (*DescribeTagsOutput, error) {
 	if params == nil {
 		params = &DescribeTagsInput{}
@@ -65,20 +71,31 @@ type DescribeTagsInput struct {
 
 	// The type of resource with which you want to view tags. Valid resource types
 	// are:
+	//
 	//   - Cluster
+	//
 	//   - CIDR/IP
+	//
 	//   - EC2 security group
+	//
 	//   - Snapshot
+	//
 	//   - Cluster security group
+	//
 	//   - Subnet group
+	//
 	//   - HSM connection
+	//
 	//   - HSM certificate
+	//
 	//   - Parameter group
+	//
 	//   - Snapshot copy grant
+	//
 	// For more information about Amazon Redshift resource types and constructing
-	// ARNs, go to Specifying Policy Elements: Actions, Effects, Resources, and
-	// Principals (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions)
-	// in the Amazon Redshift Cluster Management Guide.
+	// ARNs, go to [Specifying Policy Elements: Actions, Effects, Resources, and Principals]in the Amazon Redshift Cluster Management Guide.
+	//
+	// [Specifying Policy Elements: Actions, Effects, Resources, and Principals]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions
 	ResourceType *string
 
 	// A tag key or keys for which you want to return all matching resources that are

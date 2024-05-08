@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Tags an OpenSearch Ingestion pipeline. For more information, see Tagging Amazon
-// OpenSearch Ingestion pipelines (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html)
-// .
+// Tags an OpenSearch Ingestion pipeline. For more information, see [Tagging Amazon OpenSearch Ingestion pipelines].
+//
+// [Tagging Amazon OpenSearch Ingestion pipelines]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

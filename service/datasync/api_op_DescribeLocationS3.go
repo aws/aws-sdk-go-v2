@@ -44,9 +44,11 @@ type DescribeLocationS3Input struct {
 type DescribeLocationS3Output struct {
 
 	// The ARNs of the DataSync agents deployed on your Outpost when using working
-	// with Amazon S3 on Outposts. For more information, see Deploy your DataSync
-	// agent on Outposts (https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent)
-	// .
+	// with Amazon S3 on Outposts.
+	//
+	// For more information, see [Deploy your DataSync agent on Outposts].
+	//
+	// [Deploy your DataSync agent on Outposts]: https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent
 	AgentArns []string
 
 	// The time that the Amazon S3 location was created.
@@ -59,16 +61,20 @@ type DescribeLocationS3Output struct {
 	LocationUri *string
 
 	// Specifies the Amazon Resource Name (ARN) of the Identity and Access Management
-	// (IAM) role that DataSync uses to access your S3 bucket. For more information,
-	// see Accessing S3 buckets (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-access)
-	// .
+	// (IAM) role that DataSync uses to access your S3 bucket.
+	//
+	// For more information, see [Accessing S3 buckets].
+	//
+	// [Accessing S3 buckets]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-access
 	S3Config *types.S3Config
 
 	// When Amazon S3 is a destination location, this is the storage class that you
-	// chose for your objects. Some storage classes have behaviors that can affect your
-	// Amazon S3 storage costs. For more information, see Storage class considerations
-	// with Amazon S3 transfers (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes)
-	// .
+	// chose for your objects.
+	//
+	// Some storage classes have behaviors that can affect your Amazon S3 storage
+	// costs. For more information, see [Storage class considerations with Amazon S3 transfers].
+	//
+	// [Storage class considerations with Amazon S3 transfers]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes
 	S3StorageClass types.S3StorageClass
 
 	// Metadata pertaining to the operation's result.

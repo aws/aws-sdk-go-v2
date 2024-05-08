@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the resource policy on a repository that specifies permissions to access
-// it. When you call PutRepositoryPermissionsPolicy , the resource policy on the
+//	Sets the resource policy on a repository that specifies permissions to access
+//
+// it.
+//
+// When you call PutRepositoryPermissionsPolicy , the resource policy on the
 // repository is ignored when evaluting permissions. This ensures that the owner of
 // a repository cannot lock themselves out of the repository, which would prevent
 // them from being able to update the resource policy.
@@ -33,27 +36,28 @@ func (c *Client) PutRepositoryPermissionsPolicy(ctx context.Context, params *Put
 
 type PutRepositoryPermissionsPolicyInput struct {
 
-	// The name of the domain containing the repository to set the resource policy on.
+	//  The name of the domain containing the repository to set the resource policy
+	// on.
 	//
 	// This member is required.
 	Domain *string
 
-	// A valid displayable JSON Aspen policy string to be set as the access control
+	//  A valid displayable JSON Aspen policy string to be set as the access control
 	// resource policy on the provided repository.
 	//
 	// This member is required.
 	PolicyDocument *string
 
-	// The name of the repository to set the resource policy on.
+	//  The name of the repository to set the resource policy on.
 	//
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// Sets the revision of the resource policy that specifies permissions to access
+	//  Sets the revision of the resource policy that specifies permissions to access
 	// the repository. This revision is used for optimistic locking, which prevents
 	// others from overwriting your changes to the repository's resource policy.
 	PolicyRevision *string
@@ -63,7 +67,7 @@ type PutRepositoryPermissionsPolicyInput struct {
 
 type PutRepositoryPermissionsPolicyOutput struct {
 
-	// The resource policy that was set after processing the request.
+	//  The resource policy that was set after processing the request.
 	Policy *types.ResourcePolicy
 
 	// Metadata pertaining to the operation's result.

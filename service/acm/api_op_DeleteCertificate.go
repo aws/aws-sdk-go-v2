@@ -12,11 +12,12 @@ import (
 
 // Deletes a certificate and its associated private key. If this action succeeds,
 // the certificate no longer appears in the list that can be displayed by calling
-// the ListCertificates action or be retrieved by calling the GetCertificate
-// action. The certificate will not be available for use by Amazon Web Services
-// services integrated with ACM. You cannot delete an ACM certificate that is being
-// used by another Amazon Web Services service. To delete a certificate that is in
-// use, the certificate association must first be removed.
+// the ListCertificatesaction or be retrieved by calling the GetCertificate action. The certificate will not be
+// available for use by Amazon Web Services services integrated with ACM.
+//
+// You cannot delete an ACM certificate that is being used by another Amazon Web
+// Services service. To delete a certificate that is in use, the certificate
+// association must first be removed.
 func (c *Client) DeleteCertificate(ctx context.Context, params *DeleteCertificateInput, optFns ...func(*Options)) (*DeleteCertificateOutput, error) {
 	if params == nil {
 		params = &DeleteCertificateInput{}
@@ -36,9 +37,12 @@ type DeleteCertificateInput struct {
 
 	// String that contains the ARN of the ACM certificate to be deleted. This must be
 	// of the form:
-	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	//
+	//     arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
+	//
+	// For more information about ARNs, see [Amazon Resource Names (ARNs)].
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	CertificateArn *string

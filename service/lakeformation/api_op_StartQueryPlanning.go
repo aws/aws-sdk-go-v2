@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Submits a request to process a query statement. This operation generates work
-// units that can be retrieved with the GetWorkUnits operation as soon as the
-// query state is WORKUNITS_AVAILABLE or FINISHED.
+// Submits a request to process a query statement.
+//
+// This operation generates work units that can be retrieved with the GetWorkUnits
+// operation as soon as the query state is WORKUNITS_AVAILABLE or FINISHED.
 func (c *Client) StartQueryPlanning(ctx context.Context, params *StartQueryPlanningInput, optFns ...func(*Options)) (*StartQueryPlanningOutput, error) {
 	if params == nil {
 		params = &StartQueryPlanningInput{}

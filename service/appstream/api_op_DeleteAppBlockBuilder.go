@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an app block builder. An app block builder can only be deleted when it
-// has no association with an app block.
+// Deletes an app block builder.
+//
+// An app block builder can only be deleted when it has no association with an app
+// block.
 func (c *Client) DeleteAppBlockBuilder(ctx context.Context, params *DeleteAppBlockBuilderInput, optFns ...func(*Options)) (*DeleteAppBlockBuilderOutput, error) {
 	if params == nil {
 		params = &DeleteAppBlockBuilderInput{}

@@ -14,12 +14,14 @@ import (
 // Enable or disable the Deliverability dashboard. When you enable the
 // Deliverability dashboard, you gain access to reputation, deliverability, and
 // other metrics for the domains that you use to send email. You also gain the
-// ability to perform predictive inbox placement tests. When you use the
-// Deliverability dashboard, you pay a monthly subscription charge, in addition to
-// any other fees that you accrue by using Amazon SES and other Amazon Web Services
-// services. For more information about the features and cost of a Deliverability
-// dashboard subscription, see Amazon SES Pricing (http://aws.amazon.com/ses/pricing/)
-// .
+// ability to perform predictive inbox placement tests.
+//
+// When you use the Deliverability dashboard, you pay a monthly subscription
+// charge, in addition to any other fees that you accrue by using Amazon SES and
+// other Amazon Web Services services. For more information about the features and
+// cost of a Deliverability dashboard subscription, see [Amazon SES Pricing].
+//
+// [Amazon SES Pricing]: http://aws.amazon.com/ses/pricing/
 func (c *Client) PutDeliverabilityDashboardOption(ctx context.Context, params *PutDeliverabilityDashboardOptionInput, optFns ...func(*Options)) (*PutDeliverabilityDashboardOptionOutput, error) {
 	if params == nil {
 		params = &PutDeliverabilityDashboardOptionInput{}
@@ -38,12 +40,14 @@ func (c *Client) PutDeliverabilityDashboardOption(ctx context.Context, params *P
 // Enable or disable the Deliverability dashboard. When you enable the
 // Deliverability dashboard, you gain access to reputation, deliverability, and
 // other metrics for the domains that you use to send email using Amazon SES API
-// v2. You also gain the ability to perform predictive inbox placement tests. When
-// you use the Deliverability dashboard, you pay a monthly subscription charge, in
-// addition to any other fees that you accrue by using Amazon SES and other Amazon
-// Web Services services. For more information about the features and cost of a
-// Deliverability dashboard subscription, see Amazon Pinpoint Pricing (http://aws.amazon.com/pinpoint/pricing/)
-// .
+// v2. You also gain the ability to perform predictive inbox placement tests.
+//
+// When you use the Deliverability dashboard, you pay a monthly subscription
+// charge, in addition to any other fees that you accrue by using Amazon SES and
+// other Amazon Web Services services. For more information about the features and
+// cost of a Deliverability dashboard subscription, see [Amazon Pinpoint Pricing].
+//
+// [Amazon Pinpoint Pricing]: http://aws.amazon.com/pinpoint/pricing/
 type PutDeliverabilityDashboardOptionInput struct {
 
 	// Specifies whether to enable the Deliverability dashboard. To enable the

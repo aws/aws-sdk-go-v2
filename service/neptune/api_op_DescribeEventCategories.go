@@ -33,8 +33,9 @@ type DescribeEventCategoriesInput struct {
 	// This parameter is not currently supported.
 	Filters []types.Filter
 
-	// The type of source that is generating the events. Valid values: db-instance |
-	// db-parameter-group | db-security-group | db-snapshot
+	// The type of source that is generating the events.
+	//
+	// Valid values: db-instance | db-parameter-group | db-security-group | db-snapshot
 	SourceType *string
 
 	noSmithyDocumentSerde

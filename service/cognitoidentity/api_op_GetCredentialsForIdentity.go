@@ -14,8 +14,9 @@ import (
 // Returns credentials for the provided identity ID. Any provided logins will be
 // validated against supported login providers. If the token is for
 // cognito-identity.amazonaws.com, it will be passed through to AWS Security Token
-// Service with the appropriate role for the token. This is a public API. You do
-// not need any credentials to call this API.
+// Service with the appropriate role for the token.
+//
+// This is a public API. You do not need any credentials to call this API.
 func (c *Client) GetCredentialsForIdentity(ctx context.Context, params *GetCredentialsForIdentityInput, optFns ...func(*Options)) (*GetCredentialsForIdentityOutput, error) {
 	if params == nil {
 		params = &GetCredentialsForIdentityInput{}
@@ -47,12 +48,16 @@ type GetCredentialsForIdentityInput struct {
 
 	// A set of optional name-value pairs that map provider names to provider tokens.
 	// The name-value pair will follow the syntax "provider_name":
-	// "provider_user_identifier". Logins should not be specified when trying to get
-	// credentials for an unauthenticated identity. The Logins parameter is required
-	// when using identities associated with external identity providers such as
-	// Facebook. For examples of Logins maps, see the code examples in the External
-	// Identity Providers (https://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html)
-	// section of the Amazon Cognito Developer Guide.
+	// "provider_user_identifier".
+	//
+	// Logins should not be specified when trying to get credentials for an
+	// unauthenticated identity.
+	//
+	// The Logins parameter is required when using identities associated with external
+	// identity providers such as Facebook. For examples of Logins maps, see the code
+	// examples in the [External Identity Providers]section of the Amazon Cognito Developer Guide.
+	//
+	// [External Identity Providers]: https://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html
 	Logins map[string]string
 
 	noSmithyDocumentSerde

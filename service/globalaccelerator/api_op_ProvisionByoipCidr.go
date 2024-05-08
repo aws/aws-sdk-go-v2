@@ -14,9 +14,12 @@ import (
 // Provisions an IP address range to use with your Amazon Web Services resources
 // through bring your own IP addresses (BYOIP) and creates a corresponding address
 // pool. After the address range is provisioned, it is ready to be advertised using
-// AdvertiseByoipCidr (https://docs.aws.amazon.com/global-accelerator/latest/api/AdvertiseByoipCidr.html)
-// . For more information, see Bring your own IP addresses (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
-// in the Global Accelerator Developer Guide.
+// [AdvertiseByoipCidr].
+//
+// For more information, see [Bring your own IP addresses (BYOIP)] in the Global Accelerator Developer Guide.
+//
+// [AdvertiseByoipCidr]: https://docs.aws.amazon.com/global-accelerator/latest/api/AdvertiseByoipCidr.html
+// [Bring your own IP addresses (BYOIP)]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
 func (c *Client) ProvisionByoipCidr(ctx context.Context, params *ProvisionByoipCidrInput, optFns ...func(*Options)) (*ProvisionByoipCidrOutput, error) {
 	if params == nil {
 		params = &ProvisionByoipCidrInput{}
@@ -37,8 +40,11 @@ type ProvisionByoipCidrInput struct {
 	// The public IPv4 address range, in CIDR notation. The most specific IP prefix
 	// that you can specify is /24. The address range cannot overlap with another
 	// address range that you've brought to this Amazon Web Services Region or another
-	// Region. For more information, see Bring your own IP addresses (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
-	// in the Global Accelerator Developer Guide.
+	// Region.
+	//
+	// For more information, see [Bring your own IP addresses (BYOIP)] in the Global Accelerator Developer Guide.
+	//
+	// [Bring your own IP addresses (BYOIP)]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
 	//
 	// This member is required.
 	Cidr *string

@@ -69,20 +69,35 @@ type CreateWorldGenerationJobOutput struct {
 	// created.
 	CreatedAt *time.Time
 
-	// The failure code of the world generator job if it failed: InternalServiceError
-	// Internal service error. LimitExceeded The requested resource exceeds the maximum
-	// number allowed, or the number of concurrent stream requests exceeds the maximum
-	// number allowed. ResourceNotFound The specified resource could not be found.
-	// RequestThrottled The request was throttled. InvalidInput An input parameter in
-	// the request is not valid.
+	// The failure code of the world generator job if it failed:
+	//
+	// InternalServiceError Internal service error.
+	//
+	// LimitExceeded The requested resource exceeds the maximum number allowed, or the
+	// number of concurrent stream requests exceeds the maximum number allowed.
+	//
+	// ResourceNotFound The specified resource could not be found.
+	//
+	// RequestThrottled The request was throttled.
+	//
+	// InvalidInput An input parameter in the request is not valid.
 	FailureCode types.WorldGenerationJobErrorCode
 
-	// The status of the world generator job. Pending The world generator job request
-	// is pending. Running The world generator job is running. Completed The world
-	// generator job completed. Failed The world generator job failed. See failureCode
-	// for more information. PartialFailed Some worlds did not generate. Canceled The
-	// world generator job was cancelled. Canceling The world generator job is being
-	// cancelled.
+	// The status of the world generator job.
+	//
+	// Pending The world generator job request is pending.
+	//
+	// Running The world generator job is running.
+	//
+	// Completed The world generator job completed.
+	//
+	// Failed The world generator job failed. See failureCode for more information.
+	//
+	// PartialFailed Some worlds did not generate.
+	//
+	// Canceled The world generator job was cancelled.
+	//
+	// Canceling The world generator job is being cancelled.
 	Status types.WorldGenerationJobStatus
 
 	// A map that contains tag keys and tag values that are attached to the world

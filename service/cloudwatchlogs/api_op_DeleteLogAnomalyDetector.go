@@ -29,8 +29,9 @@ func (c *Client) DeleteLogAnomalyDetector(ctx context.Context, params *DeleteLog
 type DeleteLogAnomalyDetectorInput struct {
 
 	// The ARN of the anomaly detector to delete. You can find the ARNs of log anomaly
-	// detectors in your account by using the ListLogAnomalyDetectors (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListLogAnomalyDetectors.html)
-	// operation.
+	// detectors in your account by using the [ListLogAnomalyDetectors]operation.
+	//
+	// [ListLogAnomalyDetectors]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListLogAnomalyDetectors.html
 	//
 	// This member is required.
 	AnomalyDetectorArn *string

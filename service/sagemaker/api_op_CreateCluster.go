@@ -14,8 +14,9 @@ import (
 // Creates a SageMaker HyperPod cluster. SageMaker HyperPod is a capability of
 // SageMaker for creating and managing persistent clusters for developing large
 // machine learning models, such as large language models (LLMs) and diffusion
-// models. To learn more, see Amazon SageMaker HyperPod (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod.html)
-// in the Amazon SageMaker Developer Guide.
+// models. To learn more, see [Amazon SageMaker HyperPod]in the Amazon SageMaker Developer Guide.
+//
+// [Amazon SageMaker HyperPod]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod.html
 func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, optFns ...func(*Options)) (*CreateClusterOutput, error) {
 	if params == nil {
 		params = &CreateClusterInput{}
@@ -46,16 +47,16 @@ type CreateClusterInput struct {
 	// Custom tags for managing the SageMaker HyperPod cluster as an Amazon Web
 	// Services resource. You can add tags to your cluster in the same way you add them
 	// in other Amazon Web Services services that support tagging. To learn more about
-	// tagging Amazon Web Services resources in general, see Tagging Amazon Web
-	// Services Resources User Guide (https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html)
-	// .
+	// tagging Amazon Web Services resources in general, see [Tagging Amazon Web Services Resources User Guide].
+	//
+	// [Tagging Amazon Web Services Resources User Guide]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
 	Tags []types.Tag
 
 	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
 	// hosted models, and compute resources have access to. You can control access to
-	// and from your resources by configuring a VPC. For more information, see Give
-	// SageMaker Access to Resources in your Amazon VPC (https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html)
-	// .
+	// and from your resources by configuring a VPC. For more information, see [Give SageMaker Access to Resources in your Amazon VPC].
+	//
+	// [Give SageMaker Access to Resources in your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde

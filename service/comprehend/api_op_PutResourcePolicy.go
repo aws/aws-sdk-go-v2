@@ -39,10 +39,14 @@ type PutResourcePolicyInput struct {
 	// JSON as a UTF-8 encoded string without line breaks. To provide valid JSON for
 	// your policy, enclose the attribute names and values in double quotes. If the
 	// JSON body is also enclosed in double quotes, then you must escape the double
-	// quotes that are inside the policy: "{\"attribute\": \"value\", \"attribute\":
-	// [\"value\"]}" To avoid escaping quotes, you can use single quotes to enclose the
-	// policy and double quotes to enclose the JSON names and values: '{"attribute":
-	// "value", "attribute": ["value"]}'
+	// quotes that are inside the policy:
+	//
+	//     "{\"attribute\": \"value\", \"attribute\": [\"value\"]}"
+	//
+	// To avoid escaping quotes, you can use single quotes to enclose the policy and
+	// double quotes to enclose the JSON names and values:
+	//
+	//     '{"attribute": "value", "attribute": ["value"]}'
 	//
 	// This member is required.
 	ResourcePolicy *string

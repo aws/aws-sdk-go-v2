@@ -278,9 +278,10 @@ func (e *LanguageNotSupportedException) ErrorFault() smithy.ErrorFault { return 
 
 // Amazon Polly can't find the specified lexicon. This could be caused by a
 // lexicon that is missing, its name is misspelled or specifying a lexicon that is
-// in a different region. Verify that the lexicon exists, is in the region (see
-// ListLexicons ) and that you spelled its name is spelled correctly. Then try
-// again.
+// in a different region.
+//
+// Verify that the lexicon exists, is in the region (see ListLexicons) and that you spelled
+// its name is spelled correctly. Then try again.
 type LexiconNotFoundException struct {
 	Message *string
 
@@ -554,8 +555,9 @@ func (e *UnsupportedPlsAlphabetException) ErrorCode() string {
 func (e *UnsupportedPlsAlphabetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The language specified in the lexicon is unsupported. For a list of supported
-// languages, see Lexicon Attributes (https://docs.aws.amazon.com/polly/latest/dg/API_LexiconAttributes.html)
-// .
+// languages, see [Lexicon Attributes].
+//
+// [Lexicon Attributes]: https://docs.aws.amazon.com/polly/latest/dg/API_LexiconAttributes.html
 type UnsupportedPlsLanguageException struct {
 	Message *string
 

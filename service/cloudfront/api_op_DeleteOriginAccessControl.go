@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a CloudFront origin access control. You cannot delete an origin access
-// control if it's in use. First, update all distributions to remove the origin
-// access control from all origins, then delete the origin access control.
+// Deletes a CloudFront origin access control.
+//
+// You cannot delete an origin access control if it's in use. First, update all
+// distributions to remove the origin access control from all origins, then delete
+// the origin access control.
 func (c *Client) DeleteOriginAccessControl(ctx context.Context, params *DeleteOriginAccessControlInput, optFns ...func(*Options)) (*DeleteOriginAccessControlOutput, error) {
 	if params == nil {
 		params = &DeleteOriginAccessControlInput{}

@@ -39,11 +39,14 @@ type BatchModifyClusterSnapshotsInput struct {
 	Force *bool
 
 	// The number of days that a manual snapshot is retained. If you specify the value
-	// -1, the manual snapshot is retained indefinitely. The number must be either -1
-	// or an integer between 1 and 3,653. If you decrease the manual snapshot retention
-	// period from its current value, existing manual snapshots that fall outside of
-	// the new retention period will return an error. If you want to suppress the
-	// errors and delete the snapshots, use the force option.
+	// -1, the manual snapshot is retained indefinitely.
+	//
+	// The number must be either -1 or an integer between 1 and 3,653.
+	//
+	// If you decrease the manual snapshot retention period from its current value,
+	// existing manual snapshots that fall outside of the new retention period will
+	// return an error. If you want to suppress the errors and delete the snapshots,
+	// use the force option.
 	ManualSnapshotRetentionPeriod *int32
 
 	noSmithyDocumentSerde

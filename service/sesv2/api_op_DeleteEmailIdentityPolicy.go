@@ -12,12 +12,18 @@ import (
 
 // Deletes the specified sending authorization policy for the given identity (an
 // email address or a domain). This API returns successfully even if a policy with
-// the specified name does not exist. This API is for the identity owner only. If
-// you have not verified the identity, this API will return an error. Sending
-// authorization is a feature that enables an identity owner to authorize other
-// senders to use its identities. For information about using sending
-// authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
-// . You can execute this operation no more than once per second.
+// the specified name does not exist.
+//
+// This API is for the identity owner only. If you have not verified the identity,
+// this API will return an error.
+//
+// Sending authorization is a feature that enables an identity owner to authorize
+// other senders to use its identities. For information about using sending
+// authorization, see the [Amazon SES Developer Guide].
+//
+// You can execute this operation no more than once per second.
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
 func (c *Client) DeleteEmailIdentityPolicy(ctx context.Context, params *DeleteEmailIdentityPolicyInput, optFns ...func(*Options)) (*DeleteEmailIdentityPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteEmailIdentityPolicyInput{}
@@ -35,9 +41,9 @@ func (c *Client) DeleteEmailIdentityPolicy(ctx context.Context, params *DeleteEm
 
 // Represents a request to delete a sending authorization policy for an identity.
 // Sending authorization is an Amazon SES feature that enables you to authorize
-// other senders to use your identities. For information, see the Amazon SES
-// Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-management.html)
-// .
+// other senders to use your identities. For information, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-management.html
 type DeleteEmailIdentityPolicyInput struct {
 
 	// The email identity.
@@ -45,8 +51,10 @@ type DeleteEmailIdentityPolicyInput struct {
 	// This member is required.
 	EmailIdentity *string
 
-	// The name of the policy. The policy name cannot exceed 64 characters and can
-	// only include alphanumeric characters, dashes, and underscores.
+	// The name of the policy.
+	//
+	// The policy name cannot exceed 64 characters and can only include alphanumeric
+	// characters, dashes, and underscores.
 	//
 	// This member is required.
 	PolicyName *string

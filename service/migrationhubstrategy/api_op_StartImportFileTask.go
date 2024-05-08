@@ -29,18 +29,18 @@ func (c *Client) StartImportFileTask(ctx context.Context, params *StartImportFil
 
 type StartImportFileTaskInput struct {
 
-	// A descriptive name for the request.
+	//  A descriptive name for the request.
 	//
 	// This member is required.
 	Name *string
 
-	// The S3 bucket where the import file is located. The bucket name is required to
+	//  The S3 bucket where the import file is located. The bucket name is required to
 	// begin with migrationhub-strategy- .
 	//
 	// This member is required.
 	S3Bucket *string
 
-	// The Amazon S3 key name of the import file.
+	//  The Amazon S3 key name of the import file.
 	//
 	// This member is required.
 	S3key *string
@@ -54,8 +54,8 @@ type StartImportFileTaskInput struct {
 	// can be as filter in ListApplicationComponents and ListServers .
 	GroupId []types.Group
 
-	// The S3 bucket where Strategy Recommendations uploads import results. The bucket
-	// name is required to begin with migrationhub-strategy-.
+	//  The S3 bucket where Strategy Recommendations uploads import results. The
+	// bucket name is required to begin with migrationhub-strategy-.
 	S3bucketForReportData *string
 
 	noSmithyDocumentSerde
@@ -63,7 +63,7 @@ type StartImportFileTaskInput struct {
 
 type StartImportFileTaskOutput struct {
 
-	// The ID for a specific import task. The ID is unique within an AWS account.
+	//  The ID for a specific import task. The ID is unique within an AWS account.
 	Id *string
 
 	// Metadata pertaining to the operation's result.

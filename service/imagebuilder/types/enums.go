@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for BuildType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BuildType) Values() []BuildType {
 	return []BuildType{
 		"USER_INITIATED",
@@ -30,8 +31,9 @@ const (
 )
 
 // Values returns all known values for ComponentFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComponentFormat) Values() []ComponentFormat {
 	return []ComponentFormat{
 		"SHELL",
@@ -46,8 +48,9 @@ const (
 )
 
 // Values returns all known values for ComponentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComponentStatus) Values() []ComponentStatus {
 	return []ComponentStatus{
 		"DEPRECATED",
@@ -63,8 +66,9 @@ const (
 )
 
 // Values returns all known values for ComponentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComponentType) Values() []ComponentType {
 	return []ComponentType{
 		"BUILD",
@@ -81,6 +85,7 @@ const (
 
 // Values returns all known values for ContainerRepositoryService. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ContainerRepositoryService) Values() []ContainerRepositoryService {
 	return []ContainerRepositoryService{
@@ -96,8 +101,9 @@ const (
 )
 
 // Values returns all known values for ContainerType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContainerType) Values() []ContainerType {
 	return []ContainerType{
 		"DOCKER",
@@ -114,8 +120,9 @@ const (
 )
 
 // Values returns all known values for DiskImageFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DiskImageFormat) Values() []DiskImageFormat {
 	return []DiskImageFormat{
 		"VMDK",
@@ -138,8 +145,9 @@ const (
 )
 
 // Values returns all known values for EbsVolumeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EbsVolumeType) Values() []EbsVolumeType {
 	return []EbsVolumeType{
 		"standard",
@@ -166,8 +174,9 @@ const (
 )
 
 // Values returns all known values for ImageScanStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageScanStatus) Values() []ImageScanStatus {
 	return []ImageScanStatus{
 		"PENDING",
@@ -191,8 +200,9 @@ const (
 )
 
 // Values returns all known values for ImageSource. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageSource) Values() []ImageSource {
 	return []ImageSource{
 		"AMAZON_MANAGED",
@@ -221,8 +231,9 @@ const (
 )
 
 // Values returns all known values for ImageStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageStatus) Values() []ImageStatus {
 	return []ImageStatus{
 		"PENDING",
@@ -249,8 +260,9 @@ const (
 )
 
 // Values returns all known values for ImageType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageType) Values() []ImageType {
 	return []ImageType{
 		"AMI",
@@ -270,8 +282,9 @@ const (
 
 // Values returns all known values for LifecycleExecutionResourceActionName. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LifecycleExecutionResourceActionName) Values() []LifecycleExecutionResourceActionName {
 	return []LifecycleExecutionResourceActionName{
 		"AVAILABLE",
@@ -293,8 +306,9 @@ const (
 
 // Values returns all known values for LifecycleExecutionResourceStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LifecycleExecutionResourceStatus) Values() []LifecycleExecutionResourceStatus {
 	return []LifecycleExecutionResourceStatus{
 		"FAILED",
@@ -318,6 +332,7 @@ const (
 
 // Values returns all known values for LifecycleExecutionStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LifecycleExecutionStatus) Values() []LifecycleExecutionStatus {
 	return []LifecycleExecutionStatus{
@@ -341,8 +356,9 @@ const (
 
 // Values returns all known values for LifecyclePolicyDetailActionType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LifecyclePolicyDetailActionType) Values() []LifecyclePolicyDetailActionType {
 	return []LifecyclePolicyDetailActionType{
 		"DELETE",
@@ -361,8 +377,9 @@ const (
 
 // Values returns all known values for LifecyclePolicyDetailFilterType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LifecyclePolicyDetailFilterType) Values() []LifecyclePolicyDetailFilterType {
 	return []LifecyclePolicyDetailFilterType{
 		"AGE",
@@ -380,6 +397,7 @@ const (
 
 // Values returns all known values for LifecyclePolicyResourceType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LifecyclePolicyResourceType) Values() []LifecyclePolicyResourceType {
 	return []LifecyclePolicyResourceType{
@@ -397,8 +415,9 @@ const (
 )
 
 // Values returns all known values for LifecyclePolicyStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LifecyclePolicyStatus) Values() []LifecyclePolicyStatus {
 	return []LifecyclePolicyStatus{
 		"DISABLED",
@@ -417,8 +436,9 @@ const (
 )
 
 // Values returns all known values for LifecyclePolicyTimeUnit. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LifecyclePolicyTimeUnit) Values() []LifecyclePolicyTimeUnit {
 	return []LifecyclePolicyTimeUnit{
 		"DAYS",
@@ -437,8 +457,9 @@ const (
 )
 
 // Values returns all known values for OnWorkflowFailure. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OnWorkflowFailure) Values() []OnWorkflowFailure {
 	return []OnWorkflowFailure{
 		"CONTINUE",
@@ -457,8 +478,9 @@ const (
 )
 
 // Values returns all known values for Ownership. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Ownership) Values() []Ownership {
 	return []Ownership{
 		"Self",
@@ -478,8 +500,9 @@ const (
 
 // Values returns all known values for PipelineExecutionStartCondition. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PipelineExecutionStartCondition) Values() []PipelineExecutionStartCondition {
 	return []PipelineExecutionStartCondition{
 		"EXPRESSION_MATCH_ONLY",
@@ -496,8 +519,9 @@ const (
 )
 
 // Values returns all known values for PipelineStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PipelineStatus) Values() []PipelineStatus {
 	return []PipelineStatus{
 		"DISABLED",
@@ -514,8 +538,9 @@ const (
 )
 
 // Values returns all known values for Platform. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Platform) Values() []Platform {
 	return []Platform{
 		"Windows",
@@ -534,8 +559,9 @@ const (
 )
 
 // Values returns all known values for ResourceStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceStatus) Values() []ResourceStatus {
 	return []ResourceStatus{
 		"AVAILABLE",
@@ -560,8 +586,9 @@ const (
 )
 
 // Values returns all known values for WorkflowExecutionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkflowExecutionStatus) Values() []WorkflowExecutionStatus {
 	return []WorkflowExecutionStatus{
 		"PENDING",
@@ -583,8 +610,9 @@ const (
 )
 
 // Values returns all known values for WorkflowStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkflowStatus) Values() []WorkflowStatus {
 	return []WorkflowStatus{
 		"DEPRECATED",
@@ -600,8 +628,9 @@ const (
 )
 
 // Values returns all known values for WorkflowStepActionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkflowStepActionType) Values() []WorkflowStepActionType {
 	return []WorkflowStepActionType{
 		"RESUME",
@@ -621,8 +650,9 @@ const (
 
 // Values returns all known values for WorkflowStepExecutionRollbackStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkflowStepExecutionRollbackStatus) Values() []WorkflowStepExecutionRollbackStatus {
 	return []WorkflowStepExecutionRollbackStatus{
 		"RUNNING",
@@ -646,6 +676,7 @@ const (
 
 // Values returns all known values for WorkflowStepExecutionStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkflowStepExecutionStatus) Values() []WorkflowStepExecutionStatus {
 	return []WorkflowStepExecutionStatus{
@@ -668,8 +699,9 @@ const (
 )
 
 // Values returns all known values for WorkflowType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkflowType) Values() []WorkflowType {
 	return []WorkflowType{
 		"BUILD",

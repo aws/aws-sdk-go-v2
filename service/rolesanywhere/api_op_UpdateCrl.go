@@ -13,8 +13,9 @@ import (
 
 // Updates the certificate revocation list (CRL). A CRL is a list of certificates
 // that have been revoked by the issuing certificate authority (CA). IAM Roles
-// Anywhere validates against the CRL before issuing credentials. Required
-// permissions: rolesanywhere:UpdateCrl .
+// Anywhere validates against the CRL before issuing credentials.
+//
+// Required permissions: rolesanywhere:UpdateCrl .
 func (c *Client) UpdateCrl(ctx context.Context, params *UpdateCrlInput, optFns ...func(*Options)) (*UpdateCrlOutput, error) {
 	if params == nil {
 		params = &UpdateCrlInput{}

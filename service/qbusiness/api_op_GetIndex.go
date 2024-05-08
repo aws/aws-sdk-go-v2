@@ -62,16 +62,16 @@ type GetIndexOutput struct {
 
 	// Configuration information for document attributes or metadata. Document
 	// metadata are fields associated with your documents. For example, the company
-	// department name associated with each document. For more information, see
-	// Understanding document attributes (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/doc-attributes-types.html#doc-attributes)
-	// .
+	// department name associated with each document. For more information, see [Understanding document attributes].
+	//
+	// [Understanding document attributes]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/doc-attributes-types.html#doc-attributes
 	DocumentAttributeConfigurations []types.DocumentAttributeConfiguration
 
 	// When the Status field value is FAILED , the ErrorMessage field contains a
 	// message that explains why.
 	Error *types.ErrorDetail
 
-	// The Amazon Resource Name (ARN) of the Amazon Q Business index.
+	//  The Amazon Resource Name (ARN) of the Amazon Q Business index.
 	IndexArn *string
 
 	// The identifier of the Amazon Q Business index.

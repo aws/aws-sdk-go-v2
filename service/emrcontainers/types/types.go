@@ -197,7 +197,7 @@ type Endpoint struct {
 	// The execution role ARN of the endpoint.
 	ExecutionRoleArn *string
 
-	// The reasons why the endpoint has failed.
+	//  The reasons why the endpoint has failed.
 	FailureReason FailureReason
 
 	// The ID of the endpoint.
@@ -218,7 +218,7 @@ type Endpoint struct {
 	// The state of the endpoint.
 	State EndpointState
 
-	// Additional details of the endpoint state.
+	//  Additional details of the endpoint state.
 	StateDetails *string
 
 	// The subnet IDs of the endpoint.
@@ -333,10 +333,10 @@ type JobTemplate struct {
 	// The ARN of the job template.
 	Arn *string
 
-	// The date and time when the job template was created.
+	//  The date and time when the job template was created.
 	CreatedAt *time.Time
 
-	// The user who created the job template.
+	//  The user who created the job template.
 	CreatedBy *string
 
 	// The error message in case the decryption of job template fails.
@@ -345,7 +345,7 @@ type JobTemplate struct {
 	// The ID of the job template.
 	Id *string
 
-	// The KMS key ARN used to encrypt the job template.
+	//  The KMS key ARN used to encrypt the job template.
 	KmsKeyArn *string
 
 	// The name of the job template.
@@ -372,12 +372,12 @@ type JobTemplateData struct {
 	// This member is required.
 	JobDriver *JobDriver
 
-	// The release version of Amazon EMR.
+	//  The release version of Amazon EMR.
 	//
 	// This member is required.
 	ReleaseLabel *string
 
-	// The configuration settings that are used to override defaults configuration.
+	//  The configuration settings that are used to override defaults configuration.
 	ConfigurationOverrides *ParametricConfigurationOverrides
 
 	// The tags assigned to jobs started using the job template.
@@ -424,50 +424,54 @@ type MonitoringConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A configuration for CloudWatch monitoring. You can configure your jobs to send
+//	A configuration for CloudWatch monitoring. You can configure your jobs to send
+//
 // log information to CloudWatch Logs. This data type allows job template
 // parameters to be specified within.
 type ParametricCloudWatchMonitoringConfiguration struct {
 
-	// The name of the log group for log publishing.
+	//  The name of the log group for log publishing.
 	LogGroupName *string
 
-	// The specified name prefix for log streams.
+	//  The specified name prefix for log streams.
 	LogStreamNamePrefix *string
 
 	noSmithyDocumentSerde
 }
 
-// A configuration specification to be used to override existing configurations.
+//	A configuration specification to be used to override existing configurations.
+//
 // This data type allows job template parameters to be specified within.
 type ParametricConfigurationOverrides struct {
 
-	// The configurations for the application running by the job run.
+	//  The configurations for the application running by the job run.
 	ApplicationConfiguration []Configuration
 
-	// The configurations for monitoring.
+	//  The configurations for monitoring.
 	MonitoringConfiguration *ParametricMonitoringConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Configuration setting for monitoring. This data type allows job template
+//	Configuration setting for monitoring. This data type allows job template
+//
 // parameters to be specified within.
 type ParametricMonitoringConfiguration struct {
 
-	// Monitoring configurations for CloudWatch.
+	//  Monitoring configurations for CloudWatch.
 	CloudWatchMonitoringConfiguration *ParametricCloudWatchMonitoringConfiguration
 
-	// Monitoring configurations for the persistent application UI.
+	//  Monitoring configurations for the persistent application UI.
 	PersistentAppUI *string
 
-	// Amazon S3 configuration for monitoring log publishing.
+	//  Amazon S3 configuration for monitoring log publishing.
 	S3MonitoringConfiguration *ParametricS3MonitoringConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Amazon S3 configuration for monitoring log publishing. You can configure your
+//	Amazon S3 configuration for monitoring log publishing. You can configure your
+//
 // jobs to send log information to Amazon S3. This data type allows job template
 // parameters to be specified within.
 type ParametricS3MonitoringConfiguration struct {
@@ -500,7 +504,8 @@ type RetryPolicyExecution struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon S3 configuration for monitoring log publishing. You can configure your
+//	Amazon S3 configuration for monitoring log publishing. You can configure your
+//
 // jobs to send log information to Amazon S3.
 type S3MonitoringConfiguration struct {
 

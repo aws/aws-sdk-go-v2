@@ -30,8 +30,9 @@ func (c *Client) ImportComponent(ctx context.Context, params *ImportComponentInp
 type ImportComponentInput struct {
 
 	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// in the Amazon EC2 API Reference.
+	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
@@ -52,12 +53,15 @@ type ImportComponentInput struct {
 	Platform types.Platform
 
 	// The semantic version of the component. This version follows the semantic
-	// version syntax. The semantic version has four nodes: ../. You can assign values
-	// for the first three, and can filter on all of them. Filtering: With semantic
-	// versioning, you have the flexibility to use wildcards (x) to specify the most
-	// recent versions or nodes when selecting the base image or components for your
-	// recipe. When you use a wildcard in any node, all nodes to the right of the first
-	// wildcard must also be wildcards.
+	// version syntax.
+	//
+	// The semantic version has four nodes: ../. You can assign values for the first
+	// three, and can filter on all of them.
+	//
+	// Filtering: With semantic versioning, you have the flexibility to use wildcards
+	// (x) to specify the most recent versions or nodes when selecting the base image
+	// or components for your recipe. When you use a wildcard in any node, all nodes to
+	// the right of the first wildcard must also be wildcards.
 	//
 	// This member is required.
 	SemanticVersion *string

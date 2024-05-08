@@ -12,29 +12,41 @@ import (
 )
 
 // Translates encrypted PIN block from and to ISO 9564 formats 0,1,3,4. For more
-// information, see Translate PIN data (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/translate-pin-data.html)
-// in the Amazon Web Services Payment Cryptography User Guide. PIN block
-// translation involves changing the encrytion of PIN block from one encryption key
-// to another encryption key and changing PIN block format from one to another
-// without PIN block data leaving Amazon Web Services Payment Cryptography. The
-// encryption key transformation can be from PEK (Pin Encryption Key) to BDK (Base
-// Derivation Key) for DUKPT or from BDK for DUKPT to PEK. Amazon Web Services
-// Payment Cryptography supports TDES and AES key derivation type for DUKPT
-// translations. The allowed combinations of PIN block format translations are
-// guided by PCI. It is important to note that not all encrypted PIN block formats
-// (example, format 1) require PAN (Primary Account Number) as input. And as such,
-// PIN block format that requires PAN (example, formats 0,3,4) cannot be translated
-// to a format (format 1) that does not require a PAN for generation. For
-// information about valid keys for this operation, see Understanding key
-// attributes (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html)
-// and Key types for specific data operations (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html)
-// in the Amazon Web Services Payment Cryptography User Guide. Amazon Web Services
-// Payment Cryptography currently supports ISO PIN block 4 translation for PIN
-// block built using legacy PAN length. That is, PAN is the right most 12 digits
-// excluding the check digits. Cross-account use: This operation can't be used
-// across different Amazon Web Services accounts. Related operations:
-//   - GeneratePinData
-//   - VerifyPinData
+// information, see [Translate PIN data]in the Amazon Web Services Payment Cryptography User Guide.
+//
+// PIN block translation involves changing the encrytion of PIN block from one
+// encryption key to another encryption key and changing PIN block format from one
+// to another without PIN block data leaving Amazon Web Services Payment
+// Cryptography. The encryption key transformation can be from PEK (Pin Encryption
+// Key) to BDK (Base Derivation Key) for DUKPT or from BDK for DUKPT to PEK. Amazon
+// Web Services Payment Cryptography supports TDES and AES key derivation type for
+// DUKPT translations.
+//
+// The allowed combinations of PIN block format translations are guided by PCI. It
+// is important to note that not all encrypted PIN block formats (example, format
+// 1) require PAN (Primary Account Number) as input. And as such, PIN block format
+// that requires PAN (example, formats 0,3,4) cannot be translated to a format
+// (format 1) that does not require a PAN for generation.
+//
+// For information about valid keys for this operation, see [Understanding key attributes] and [Key types for specific data operations] in the Amazon
+// Web Services Payment Cryptography User Guide.
+//
+// Amazon Web Services Payment Cryptography currently supports ISO PIN block 4
+// translation for PIN block built using legacy PAN length. That is, PAN is the
+// right most 12 digits excluding the check digits.
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
+//
+// Related operations:
+//
+// # GeneratePinData
+//
+// # VerifyPinData
+//
+// [Translate PIN data]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/translate-pin-data.html
+// [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+// [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
 func (c *Client) TranslatePinData(ctx context.Context, params *TranslatePinDataInput, optFns ...func(*Options)) (*TranslatePinDataOutput, error) {
 	if params == nil {
 		params = &TranslatePinDataInput{}
@@ -103,8 +115,10 @@ type TranslatePinDataOutput struct {
 
 	// The key check value (KCV) of the encryption key. The KCV is used to check if
 	// all parties holding a given key have the same key or to detect that a key has
-	// changed. Amazon Web Services Payment Cryptography computes the KCV according to
-	// the CMAC specification.
+	// changed.
+	//
+	// Amazon Web Services Payment Cryptography computes the KCV according to the CMAC
+	// specification.
 	//
 	// This member is required.
 	KeyCheckValue *string

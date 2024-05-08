@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// View a list of environment account connections. For more information, see
-// Environment account connections (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html)
-// in the Proton User guide.
+// View a list of environment account connections.
+//
+// For more information, see [Environment account connections] in the Proton User guide.
+//
+// [Environment account connections]: https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html
 func (c *Client) ListEnvironmentAccountConnections(ctx context.Context, params *ListEnvironmentAccountConnectionsInput, optFns ...func(*Options)) (*ListEnvironmentAccountConnectionsOutput, error) {
 	if params == nil {
 		params = &ListEnvironmentAccountConnectionsInput{}

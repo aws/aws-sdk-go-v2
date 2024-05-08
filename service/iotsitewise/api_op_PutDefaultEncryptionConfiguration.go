@@ -12,8 +12,9 @@ import (
 )
 
 // Sets the default encryption configuration for the Amazon Web Services account.
-// For more information, see Key management (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html)
-// in the IoT SiteWise User Guide.
+// For more information, see [Key management]in the IoT SiteWise User Guide.
+//
+// [Key management]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html
 func (c *Client) PutDefaultEncryptionConfiguration(ctx context.Context, params *PutDefaultEncryptionConfigurationInput, optFns ...func(*Options)) (*PutDefaultEncryptionConfigurationOutput, error) {
 	if params == nil {
 		params = &PutDefaultEncryptionConfigurationInput{}

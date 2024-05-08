@@ -13,7 +13,7 @@ import (
 
 // Applies a scheduled managed action immediately. A managed action can be applied
 // only if its status is Scheduled . Get the status and action ID of a managed
-// action with DescribeEnvironmentManagedActions .
+// action with DescribeEnvironmentManagedActions.
 func (c *Client) ApplyEnvironmentManagedAction(ctx context.Context, params *ApplyEnvironmentManagedActionInput, optFns ...func(*Options)) (*ApplyEnvironmentManagedActionOutput, error) {
 	if params == nil {
 		params = &ApplyEnvironmentManagedActionInput{}

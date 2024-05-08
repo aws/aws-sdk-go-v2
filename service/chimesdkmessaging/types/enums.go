@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for AllowNotifications. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AllowNotifications) Values() []AllowNotifications {
 	return []AllowNotifications{
 		"ALL",
@@ -31,8 +32,9 @@ const (
 )
 
 // Values returns all known values for ChannelMembershipType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChannelMembershipType) Values() []ChannelMembershipType {
 	return []ChannelMembershipType{
 		"DEFAULT",
@@ -50,8 +52,9 @@ const (
 
 // Values returns all known values for ChannelMessagePersistenceType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChannelMessagePersistenceType) Values() []ChannelMessagePersistenceType {
 	return []ChannelMessagePersistenceType{
 		"PERSISTENT",
@@ -70,8 +73,9 @@ const (
 )
 
 // Values returns all known values for ChannelMessageStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChannelMessageStatus) Values() []ChannelMessageStatus {
 	return []ChannelMessageStatus{
 		"SENT",
@@ -90,8 +94,9 @@ const (
 )
 
 // Values returns all known values for ChannelMessageType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChannelMessageType) Values() []ChannelMessageType {
 	return []ChannelMessageType{
 		"STANDARD",
@@ -108,8 +113,9 @@ const (
 )
 
 // Values returns all known values for ChannelMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChannelMode) Values() []ChannelMode {
 	return []ChannelMode{
 		"UNRESTRICTED",
@@ -126,8 +132,9 @@ const (
 )
 
 // Values returns all known values for ChannelPrivacy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChannelPrivacy) Values() []ChannelPrivacy {
 	return []ChannelPrivacy{
 		"PUBLIC",
@@ -157,8 +164,9 @@ const (
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"BadRequest",
@@ -188,8 +196,9 @@ const (
 )
 
 // Values returns all known values for ExpirationCriterion. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExpirationCriterion) Values() []ExpirationCriterion {
 	return []ExpirationCriterion{
 		"CREATED_TIMESTAMP",
@@ -206,8 +215,9 @@ const (
 )
 
 // Values returns all known values for FallbackAction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FallbackAction) Values() []FallbackAction {
 	return []FallbackAction{
 		"CONTINUE",
@@ -223,8 +233,9 @@ const (
 )
 
 // Values returns all known values for InvocationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InvocationType) Values() []InvocationType {
 	return []InvocationType{
 		"ASYNC",
@@ -240,8 +251,9 @@ const (
 )
 
 // Values returns all known values for MessagingDataType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MessagingDataType) Values() []MessagingDataType {
 	return []MessagingDataType{
 		"Channel",
@@ -258,8 +270,9 @@ const (
 )
 
 // Values returns all known values for PushNotificationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PushNotificationType) Values() []PushNotificationType {
 	return []PushNotificationType{
 		"DEFAULT",
@@ -275,8 +288,9 @@ const (
 )
 
 // Values returns all known values for SearchFieldKey. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SearchFieldKey) Values() []SearchFieldKey {
 	return []SearchFieldKey{
 		"MEMBERS",
@@ -292,8 +306,9 @@ const (
 )
 
 // Values returns all known values for SearchFieldOperator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SearchFieldOperator) Values() []SearchFieldOperator {
 	return []SearchFieldOperator{
 		"EQUALS",
@@ -310,8 +325,9 @@ const (
 )
 
 // Values returns all known values for SortOrder. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",

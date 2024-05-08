@@ -34,11 +34,11 @@ type DescribeBudgetNotificationsForAccountInput struct {
 	// This member is required.
 	AccountId *string
 
-	// An integer that represents how many budgets a paginated response contains. The
+	//  An integer that represents how many budgets a paginated response contains. The
 	// default is 50.
 	MaxResults *int32
 
-	// A generic string.
+	//  A generic string.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,10 +46,10 @@ type DescribeBudgetNotificationsForAccountInput struct {
 
 type DescribeBudgetNotificationsForAccountOutput struct {
 
-	// A list of budget names and associated notifications for an account.
+	//  A list of budget names and associated notifications for an account.
 	BudgetNotificationsForAccount []types.BudgetNotificationsForAccount
 
-	// A generic string.
+	//  A generic string.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -148,7 +148,7 @@ var _ DescribeBudgetNotificationsForAccountAPIClient = (*Client)(nil)
 // DescribeBudgetNotificationsForAccountPaginatorOptions is the paginator options
 // for DescribeBudgetNotificationsForAccount
 type DescribeBudgetNotificationsForAccountPaginatorOptions struct {
-	// An integer that represents how many budgets a paginated response contains. The
+	//  An integer that represents how many budgets a paginated response contains. The
 	// default is 50.
 	Limit int32
 

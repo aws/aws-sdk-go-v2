@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets summary information about playback key pairs. For more information, see
-// Setting Up Private Channels (https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html)
+// Gets summary information about playback key pairs. For more information, see [Setting Up Private Channels]
 // in the Amazon IVS User Guide.
+//
+// [Setting Up Private Channels]: https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html
 func (c *Client) ListPlaybackKeyPairs(ctx context.Context, params *ListPlaybackKeyPairsInput, optFns ...func(*Options)) (*ListPlaybackKeyPairsOutput, error) {
 	if params == nil {
 		params = &ListPlaybackKeyPairsInput{}

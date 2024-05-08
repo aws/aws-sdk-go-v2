@@ -63,7 +63,9 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 
 // An issue occurred with the internal server used for your Amazon Kendra
 // Intelligent Ranking service. Please wait a few minutes and try again, or contact
-// Support (http://aws.amazon.com/contact-us/) for help.
+// [Support]for help.
+//
+// [Support]: http://aws.amazon.com/contact-us/
 type InternalServerException struct {
 	Message *string
 
@@ -144,9 +146,11 @@ func (e *ResourceUnavailableException) ErrorCode() string {
 func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have exceeded the set limits for your Amazon Kendra Intelligent Ranking
-// service. Please see Quotas (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html)
-// for more information, or contact Support (http://aws.amazon.com/contact-us/) to
-// inquire about an increase of limits.
+// service. Please see [Quotas]for more information, or contact [Support] to inquire about an
+// increase of limits.
+//
+// [Support]: http://aws.amazon.com/contact-us/
+// [Quotas]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
 type ServiceQuotaExceededException struct {
 	Message *string
 

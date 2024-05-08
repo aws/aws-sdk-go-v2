@@ -10,16 +10,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the streaming configurations of an AppInstance . This API is is no
-// longer supported and will not be updated. We recommend using the latest version,
-// DeleteAppInstanceStreamingConfigurations (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DeleteAppInstanceStreamingConfigurations.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// Deletes the streaming configurations of an AppInstance .
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [DeleteAppInstanceStreamingConfigurations], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by DeleteAppInstanceStreamingConfigurations in the Amazon
 // Chime SDK Messaging Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [DeleteAppInstanceStreamingConfigurations]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DeleteAppInstanceStreamingConfigurations.html
 func (c *Client) DeleteAppInstanceStreamingConfigurations(ctx context.Context, params *DeleteAppInstanceStreamingConfigurationsInput, optFns ...func(*Options)) (*DeleteAppInstanceStreamingConfigurationsOutput, error) {
 	if params == nil {
 		params = &DeleteAppInstanceStreamingConfigurationsInput{}

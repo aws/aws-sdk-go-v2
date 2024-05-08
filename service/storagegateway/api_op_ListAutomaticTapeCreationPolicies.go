@@ -12,8 +12,9 @@ import (
 )
 
 // Lists the automatic tape creation policies for a gateway. If there are no
-// automatic tape creation policies for the gateway, it returns an empty list. This
-// operation is only supported for tape gateways.
+// automatic tape creation policies for the gateway, it returns an empty list.
+//
+// This operation is only supported for tape gateways.
 func (c *Client) ListAutomaticTapeCreationPolicies(ctx context.Context, params *ListAutomaticTapeCreationPoliciesInput, optFns ...func(*Options)) (*ListAutomaticTapeCreationPoliciesOutput, error) {
 	if params == nil {
 		params = &ListAutomaticTapeCreationPoliciesInput{}
@@ -31,8 +32,8 @@ func (c *Client) ListAutomaticTapeCreationPolicies(ctx context.Context, params *
 
 type ListAutomaticTapeCreationPoliciesInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	noSmithyDocumentSerde

@@ -39,10 +39,10 @@ type GetUpgradeHistoryInput struct {
 	// This member is required.
 	DomainName *string
 
-	// Set this value to limit the number of results returned.
+	//  Set this value to limit the number of results returned.
 	MaxResults int32
 
-	// Paginated APIs accepts NextToken input to returns next page results and
+	//  Paginated APIs accepts NextToken input to returns next page results and
 	// provides a NextToken output in the response which can be used by the client to
 	// retrieve more results.
 	NextToken *string
@@ -57,9 +57,8 @@ type GetUpgradeHistoryOutput struct {
 	// page of results
 	NextToken *string
 
-	// A list of UpgradeHistory objects corresponding to each Upgrade or Upgrade
-	// Eligibility Check performed on a domain returned as part of
-	// GetUpgradeHistoryResponse object.
+	//  A list of UpgradeHistory objects corresponding to each Upgrade or Upgrade Eligibility Check
+	// performed on a domain returned as part of GetUpgradeHistoryResponseobject.
 	UpgradeHistories []types.UpgradeHistory
 
 	// Metadata pertaining to the operation's result.
@@ -157,7 +156,7 @@ var _ GetUpgradeHistoryAPIClient = (*Client)(nil)
 
 // GetUpgradeHistoryPaginatorOptions is the paginator options for GetUpgradeHistory
 type GetUpgradeHistoryPaginatorOptions struct {
-	// Set this value to limit the number of results returned.
+	//  Set this value to limit the number of results returned.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

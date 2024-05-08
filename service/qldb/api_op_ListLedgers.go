@@ -12,9 +12,10 @@ import (
 )
 
 // Returns all ledgers that are associated with the current Amazon Web Services
-// account and Region. This action returns a maximum of MaxResults items and is
-// paginated so that you can retrieve all the items by calling ListLedgers
-// multiple times.
+// account and Region.
+//
+// This action returns a maximum of MaxResults items and is paginated so that you
+// can retrieve all the items by calling ListLedgers multiple times.
 func (c *Client) ListLedgers(ctx context.Context, params *ListLedgersInput, optFns ...func(*Options)) (*ListLedgersOutput, error) {
 	if params == nil {
 		params = &ListLedgersInput{}
@@ -51,8 +52,10 @@ type ListLedgersOutput struct {
 	Ledgers []types.LedgerSummary
 
 	// A pagination token, indicating whether there are more results available:
+	//
 	//   - If NextToken is empty, then the last page of results has been processed and
 	//   there are no more results to be retrieved.
+	//
 	//   - If NextToken is not empty, then there are more results available. To
 	//   retrieve the next page of results, use the value of NextToken in a subsequent
 	//   ListLedgers call.

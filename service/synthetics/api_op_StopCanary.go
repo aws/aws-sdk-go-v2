@@ -12,8 +12,9 @@ import (
 
 // Stops the canary to prevent all future runs. If the canary is currently
 // running,the run that is in progress completes on its own, publishes metrics, and
-// uploads artifacts, but it is not recorded in Synthetics as a completed run. You
-// can use StartCanary to start it running again with the canary’s current
+// uploads artifacts, but it is not recorded in Synthetics as a completed run.
+//
+// You can use StartCanary to start it running again with the canary’s current
 // schedule at any point in the future.
 func (c *Client) StopCanary(ctx context.Context, params *StopCanaryInput, optFns ...func(*Options)) (*StopCanaryOutput, error) {
 	if params == nil {
@@ -33,8 +34,9 @@ func (c *Client) StopCanary(ctx context.Context, params *StopCanaryInput, optFns
 type StopCanaryInput struct {
 
 	// The name of the canary that you want to stop. To find the names of your
-	// canaries, use ListCanaries (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html)
-	// .
+	// canaries, use [ListCanaries].
+	//
+	// [ListCanaries]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html
 	//
 	// This member is required.
 	Name *string

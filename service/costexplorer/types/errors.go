@@ -7,7 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// A request to backfill is already in progress. Once the previous request is
+//	A request to backfill is already in progress. Once the previous request is
+//
 // complete, you can create another request.
 type BackfillLimitExceededException struct {
 	Message *string
@@ -219,8 +220,9 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You've reached the limit on the number of resources you can create, or exceeded
-// the size of an individual resource.
+//	You've reached the limit on the number of resources you can create, or
+//
+// exceeded the size of an individual resource.
 type ServiceQuotaExceededException struct {
 	Message *string
 

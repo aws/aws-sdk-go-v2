@@ -15,12 +15,21 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Deletes the specified
-// Object Lambda Access Point. The following actions are related to
-// DeleteAccessPointForObjectLambda :
-//   - CreateAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html)
-//   - GetAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html)
-//   - ListAccessPointsForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html)
+// This operation is not supported by directory buckets.
+//
+// Deletes the specified Object Lambda Access Point.
+//
+// The following actions are related to DeleteAccessPointForObjectLambda :
+//
+// [CreateAccessPointForObjectLambda]
+//
+// [GetAccessPointForObjectLambda]
+//
+// [ListAccessPointsForObjectLambda]
+//
+// [CreateAccessPointForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html
+// [ListAccessPointsForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html
+// [GetAccessPointForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html
 func (c *Client) DeleteAccessPointForObjectLambda(ctx context.Context, params *DeleteAccessPointForObjectLambdaInput, optFns ...func(*Options)) (*DeleteAccessPointForObjectLambdaOutput, error) {
 	if params == nil {
 		params = &DeleteAccessPointForObjectLambdaInput{}

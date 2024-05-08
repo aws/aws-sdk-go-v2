@@ -12,10 +12,12 @@ import (
 	"time"
 )
 
-// Gets the retention settings for the specified Amazon Chime Enterprise account.
-// For more information about retention settings, see Managing Chat Retention
-// Policies (https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html) in
-// the Amazon Chime Administration Guide.
+//	Gets the retention settings for the specified Amazon Chime Enterprise account.
+//
+// For more information about retention settings, see [Managing Chat Retention Policies]in the Amazon Chime
+// Administration Guide.
+//
+// [Managing Chat Retention Policies]: https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html
 func (c *Client) GetRetentionSettings(ctx context.Context, params *GetRetentionSettingsInput, optFns ...func(*Options)) (*GetRetentionSettingsOutput, error) {
 	if params == nil {
 		params = &GetRetentionSettingsInput{}

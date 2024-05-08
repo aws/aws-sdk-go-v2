@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns compliance details for each rule in that conformance pack. You must
-// provide exact rule names.
+// Returns compliance details for each rule in that conformance pack.
+//
+// You must provide exact rule names.
 func (c *Client) DescribeConformancePackCompliance(ctx context.Context, params *DescribeConformancePackComplianceInput, optFns ...func(*Options)) (*DescribeConformancePackComplianceOutput, error) {
 	if params == nil {
 		params = &DescribeConformancePackComplianceInput{}

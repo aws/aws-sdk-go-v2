@@ -12,8 +12,10 @@ import (
 )
 
 // Asynchronously deletes one or more documents added using the BatchPutDocument
-// API from an Amazon Q Business index. You can see the progress of the deletion,
-// and any error messages related to the process, by using CloudWatch.
+// API from an Amazon Q Business index.
+//
+// You can see the progress of the deletion, and any error messages related to the
+// process, by using CloudWatch.
 func (c *Client) BatchDeleteDocument(ctx context.Context, params *BatchDeleteDocumentInput, optFns ...func(*Options)) (*BatchDeleteDocumentOutput, error) {
 	if params == nil {
 		params = &BatchDeleteDocumentInput{}

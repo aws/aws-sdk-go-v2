@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about unique problems, such as exceptions or crashes. Unique
-// problems are defined as a single instance of an error across a run, job, or
-// suite. For example, if a call in your application consistently raises an
+// Gets information about unique problems, such as exceptions or crashes.
+//
+// Unique problems are defined as a single instance of an error across a run, job,
+// or suite. For example, if a call in your application consistently raises an
 // exception ( OutOfBoundsException in MyActivity.java:386 ), ListUniqueProblems
 // returns a single entry instead of many individual entries for that exception.
 func (c *Client) ListUniqueProblems(ctx context.Context, params *ListUniqueProblemsInput, optFns ...func(*Options)) (*ListUniqueProblemsOutput, error) {
@@ -54,13 +55,22 @@ type ListUniqueProblemsOutput struct {
 	// operation to return the next set of items in the list.
 	NextToken *string
 
-	// Information about the unique problems. Allowed values include:
+	// Information about the unique problems.
+	//
+	// Allowed values include:
+	//
 	//   - PENDING
+	//
 	//   - PASSED
+	//
 	//   - WARNED
+	//
 	//   - FAILED
+	//
 	//   - SKIPPED
+	//
 	//   - ERRORED
+	//
 	//   - STOPPED
 	UniqueProblems map[string][]types.UniqueProblem
 

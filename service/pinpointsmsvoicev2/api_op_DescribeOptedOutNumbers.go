@@ -12,13 +12,15 @@ import (
 )
 
 // Describes the specified opted out destination numbers or all opted out
-// destination numbers in an opt-out list. If you specify opted out numbers, the
-// output includes information for only the specified opted out numbers. If you
-// specify filters, the output includes information for only those opted out
-// numbers that meet the filter criteria. If you don't specify opted out numbers or
-// filters, the output includes information for all opted out destination numbers
-// in your opt-out list. If you specify an opted out number that isn't valid, an
-// error is returned.
+// destination numbers in an opt-out list.
+//
+// If you specify opted out numbers, the output includes information for only the
+// specified opted out numbers. If you specify filters, the output includes
+// information for only those opted out numbers that meet the filter criteria. If
+// you don't specify opted out numbers or filters, the output includes information
+// for all opted out destination numbers in your opt-out list.
+//
+// If you specify an opted out number that isn't valid, an error is returned.
 func (c *Client) DescribeOptedOutNumbers(ctx context.Context, params *DescribeOptedOutNumbersInput, optFns ...func(*Options)) (*DescribeOptedOutNumbersOutput, error) {
 	if params == nil {
 		params = &DescribeOptedOutNumbersInput{}
@@ -36,8 +38,8 @@ func (c *Client) DescribeOptedOutNumbers(ctx context.Context, params *DescribeOp
 
 type DescribeOptedOutNumbersInput struct {
 
-	// The OptOutListName or OptOutListArn of the OptOutList. You can use
-	// DescribeOptOutLists to find the values for OptOutListName and OptOutListArn.
+	// The OptOutListName or OptOutListArn of the OptOutList. You can use DescribeOptOutLists to find the
+	// values for OptOutListName and OptOutListArn.
 	//
 	// This member is required.
 	OptOutListName *string

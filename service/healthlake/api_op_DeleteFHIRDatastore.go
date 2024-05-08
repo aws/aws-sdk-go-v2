@@ -29,7 +29,7 @@ func (c *Client) DeleteFHIRDatastore(ctx context.Context, params *DeleteFHIRData
 
 type DeleteFHIRDatastoreInput struct {
 
-	// The AWS-generated ID for the data store to be deleted.
+	//  The AWS-generated ID for the data store to be deleted.
 	//
 	// This member is required.
 	DatastoreId *string

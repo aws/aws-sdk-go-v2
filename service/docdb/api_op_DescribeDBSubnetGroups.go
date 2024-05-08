@@ -29,7 +29,7 @@ func (c *Client) DescribeDBSubnetGroups(ctx context.Context, params *DescribeDBS
 	return out, nil
 }
 
-// Represents the input to DescribeDBSubnetGroups .
+// Represents the input to DescribeDBSubnetGroups.
 type DescribeDBSubnetGroupsInput struct {
 
 	// The name of the subnet group to return details for.
@@ -43,16 +43,19 @@ type DescribeDBSubnetGroupsInput struct {
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of DescribeDBSubnetGroups .
+// Represents the output of DescribeDBSubnetGroups.
 type DescribeDBSubnetGroupsOutput struct {
 
 	// Detailed information about one or more subnet groups.
@@ -159,9 +162,12 @@ var _ DescribeDBSubnetGroupsAPIClient = (*Client)(nil)
 // DescribeDBSubnetGroupsPaginatorOptions is the paginator options for
 // DescribeDBSubnetGroups
 type DescribeDBSubnetGroupsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 

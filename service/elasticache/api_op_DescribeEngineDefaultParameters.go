@@ -31,9 +31,10 @@ func (c *Client) DescribeEngineDefaultParameters(ctx context.Context, params *De
 // Represents the input of a DescribeEngineDefaultParameters operation.
 type DescribeEngineDefaultParametersInput struct {
 
-	// The name of the cache parameter group family. Valid values are: memcached1.4 |
-	// memcached1.5 | memcached1.6 | redis2.6 | redis2.8 | redis3.2 | redis4.0 |
-	// redis5.0 | redis6.x | redis6.2 | redis7
+	// The name of the cache parameter group family.
+	//
+	// Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 |
+	// redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis6.2 | redis7
 	//
 	// This member is required.
 	CacheParameterGroupFamily *string
@@ -46,8 +47,11 @@ type DescribeEngineDefaultParametersInput struct {
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: minimum 20; maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -156,8 +160,11 @@ var _ DescribeEngineDefaultParametersAPIClient = (*Client)(nil)
 type DescribeEngineDefaultParametersPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: minimum 20; maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

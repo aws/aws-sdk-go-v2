@@ -39,13 +39,15 @@ type GetScalingConfigurationRecommendationInput struct {
 	// The name of an endpoint benchmarked during a previously completed inference
 	// recommendation job. This name should come from one of the recommendations
 	// returned by the job specified in the InferenceRecommendationsJobName field.
+	//
 	// Specify either this field or the RecommendationId field.
 	EndpointName *string
 
 	// The recommendation ID of a previously completed inference recommendation. This
 	// ID should come from one of the recommendations returned by the job specified in
-	// the InferenceRecommendationsJobName field. Specify either this field or the
-	// EndpointName field.
+	// the InferenceRecommendationsJobName field.
+	//
+	// Specify either this field or the EndpointName field.
 	RecommendationId *string
 
 	// An object where you specify the anticipated traffic pattern for an endpoint.

@@ -10,10 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a user profile. Required Permissions: To use this action, an IAM user
-// must have an attached policy that explicitly grants permissions. For more
-// information about user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// Deletes a user profile.
+//
+// Required Permissions: To use this action, an IAM user must have an attached
+// policy that explicitly grants permissions. For more information about user
+// permissions, see [Managing User Permissions].
+//
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DeleteUserProfile(ctx context.Context, params *DeleteUserProfileInput, optFns ...func(*Options)) (*DeleteUserProfileOutput, error) {
 	if params == nil {
 		params = &DeleteUserProfileInput{}

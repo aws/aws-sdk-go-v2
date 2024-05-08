@@ -34,9 +34,10 @@ type AssociatedObjectiveSummary struct {
 // An optional filter that narrows the results to a specific objective.
 type CommonControlFilter struct {
 
-	// The objective that's used as filter criteria. You can use this parameter to
-	// specify one objective ARN at a time. Passing multiple ARNs in the
-	// CommonControlFilter isn’t currently supported.
+	// The objective that's used as filter criteria.
+	//
+	// You can use this parameter to specify one objective ARN at a time. Passing
+	// multiple ARNs in the CommonControlFilter isn’t currently supported.
 	Objectives []ObjectiveResourceFilter
 
 	noSmithyDocumentSerde
@@ -126,9 +127,10 @@ type DomainSummary struct {
 // An optional filter that narrows the list of objectives to a specific domain.
 type ObjectiveFilter struct {
 
-	// The domain that's used as filter criteria. You can use this parameter to
-	// specify one domain ARN at a time. Passing multiple ARNs in the ObjectiveFilter
-	// isn’t currently supported.
+	// The domain that's used as filter criteria.
+	//
+	// You can use this parameter to specify one domain ARN at a time. Passing
+	// multiple ARNs in the ObjectiveFilter isn’t currently supported.
 	Domains []DomainResourceFilter
 
 	noSmithyDocumentSerde

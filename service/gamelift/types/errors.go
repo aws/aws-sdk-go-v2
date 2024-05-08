@@ -282,10 +282,12 @@ func (e *NotFoundException) ErrorCode() string {
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation failed because Amazon GameLift has not yet finished validating
-// this compute. We recommend attempting 8 to 10 retries over 3 to 5 minutes with
-// exponential backoffs and jitter (http://aws.amazon.com/blogs/https:/aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/)
+//	The operation failed because Amazon GameLift has not yet finished validating
+//
+// this compute. We recommend attempting 8 to 10 retries over 3 to 5 minutes with [exponential backoffs and jitter]
 // .
+//
+// [exponential backoffs and jitter]: http://aws.amazon.com/blogs/https:/aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/
 type NotReadyException struct {
 	Message *string
 

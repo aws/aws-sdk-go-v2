@@ -12,7 +12,9 @@ import (
 )
 
 // Returns all the available versions for the specified Amazon Connect instance
-// and view identifier. Results will be sorted from highest to lowest.
+// and view identifier.
+//
+// Results will be sorted from highest to lowest.
 func (c *Client) ListViewVersions(ctx context.Context, params *ListViewVersionsInput, optFns ...func(*Options)) (*ListViewVersionsOutput, error) {
 	if params == nil {
 		params = &ListViewVersionsInput{}

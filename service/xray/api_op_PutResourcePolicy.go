@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the resource policy to grant one or more Amazon Web Services services and
+//	Sets the resource policy to grant one or more Amazon Web Services services and
+//
 // accounts permissions to access X-Ray. Each resource policy will be associated
 // with a specific Amazon Web Services account. Each Amazon Web Services account
 // can have a maximum of 5 resource policies, and each policy name must be unique
@@ -45,21 +46,27 @@ type PutResourcePolicyInput struct {
 	PolicyName *string
 
 	// A flag to indicate whether to bypass the resource policy lockout safety check.
+	//
 	// Setting this value to true increases the risk that the policy becomes
-	// unmanageable. Do not set this value to true indiscriminately. Use this parameter
-	// only when you include a policy in the request and you intend to prevent the
-	// principal that is making the request from making a subsequent PutResourcePolicy
-	// request. The default value is false.
+	// unmanageable. Do not set this value to true indiscriminately.
+	//
+	// Use this parameter only when you include a policy in the request and you intend
+	// to prevent the principal that is making the request from making a subsequent
+	// PutResourcePolicy request.
+	//
+	// The default value is false.
 	BypassPolicyLockoutCheck bool
 
 	// Specifies a specific policy revision, to ensure an atomic create operation. By
 	// default the resource policy is created if it does not exist, or updated with an
 	// incremented revision id. The revision id is unique to each policy in the
-	// account. If the policy revision id does not match the latest revision id, the
-	// operation will fail with an InvalidPolicyRevisionIdException exception. You can
-	// also provide a PolicyRevisionId of 0. In this case, the operation will fail
-	// with an InvalidPolicyRevisionIdException exception if a resource policy with
-	// the same name already exists.
+	// account.
+	//
+	// If the policy revision id does not match the latest revision id, the operation
+	// will fail with an InvalidPolicyRevisionIdException exception. You can also
+	// provide a PolicyRevisionId of 0. In this case, the operation will fail with an
+	// InvalidPolicyRevisionIdException exception if a resource policy with the same
+	// name already exists.
 	PolicyRevisionId *string
 
 	noSmithyDocumentSerde

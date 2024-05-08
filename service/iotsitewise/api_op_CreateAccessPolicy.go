@@ -55,8 +55,9 @@ type CreateAccessPolicyInput struct {
 	ClientToken *string
 
 	// A list of key-value pairs that contain metadata for the access policy. For more
-	// information, see Tagging your IoT SiteWise resources (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
-	// in the IoT SiteWise User Guide.
+	// information, see [Tagging your IoT SiteWise resources]in the IoT SiteWise User Guide.
+	//
+	// [Tagging your IoT SiteWise resources]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -64,9 +65,11 @@ type CreateAccessPolicyInput struct {
 
 type CreateAccessPolicyOutput struct {
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the access policy, which has the following format.
-	// arn:${Partition}:iotsitewise:${Region}:${Account}:access-policy/${AccessPolicyId}
+	// The [ARN] of the access policy, which has the following format.
+	//
+	//     arn:${Partition}:iotsitewise:${Region}:${Account}:access-policy/${AccessPolicyId}
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AccessPolicyArn *string

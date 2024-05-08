@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The DeletePipeline operation removes a pipeline. You can only delete a pipeline
-// that has never been used or that is not currently in use (doesn't contain any
-// active jobs). If the pipeline is currently in use, DeletePipeline returns an
-// error.
+// The DeletePipeline operation removes a pipeline.
+//
+// You can only delete a pipeline that has never been used or that is not
+// currently in use (doesn't contain any active jobs). If the pipeline is currently
+// in use, DeletePipeline returns an error.
 func (c *Client) DeletePipeline(ctx context.Context, params *DeletePipelineInput, optFns ...func(*Options)) (*DeletePipelineOutput, error) {
 	if params == nil {
 		params = &DeletePipelineInput{}

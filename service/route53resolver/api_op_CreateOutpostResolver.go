@@ -30,8 +30,9 @@ func (c *Client) CreateOutpostResolver(ctx context.Context, params *CreateOutpos
 type CreateOutpostResolverInput struct {
 
 	// A unique string that identifies the request and that allows failed requests to
-	// be retried without the risk of running the operation twice. CreatorRequestId
-	// can be any unique string, for example, a date/time stamp.
+	// be retried without the risk of running the operation twice.
+	//
+	// CreatorRequestId can be any unique string, for example, a date/time stamp.
 	//
 	// This member is required.
 	CreatorRequestId *string
@@ -48,7 +49,7 @@ type CreateOutpostResolverInput struct {
 	// This member is required.
 	OutpostArn *string
 
-	// The Amazon EC2 instance type. If you specify this, you must also specify a
+	//  The Amazon EC2 instance type. If you specify this, you must also specify a
 	// value for the OutpostArn .
 	//
 	// This member is required.
@@ -58,7 +59,7 @@ type CreateOutpostResolverInput struct {
 	// minimal value is 4.
 	InstanceCount *int32
 
-	// A string that helps identify the Route 53 Resolvers on Outpost.
+	//  A string that helps identify the Route 53 Resolvers on Outpost.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

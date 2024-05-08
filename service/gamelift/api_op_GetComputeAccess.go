@@ -11,23 +11,43 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation has been expanded to use with the Amazon GameLift containers
-// feature, which is currently in public preview. Requests authorization to
-// remotely connect to a hosting resource in a Amazon GameLift managed fleet. This
-// operation is not used with Amazon GameLift Anywhere fleets To request access,
-// specify the compute name and the fleet ID. If successful, this operation returns
-// a set of temporary Amazon Web Services credentials, including a two-part access
-// key and a session token. EC2 fleets With an EC2 fleet (where compute type is EC2
-// ), use these credentials with Amazon EC2 Systems Manager (SSM) to start a
-// session with the compute. For more details, see Starting a session (CLI) (https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html#sessions-start-cli)
-// in the Amazon EC2 Systems Manager User Guide. Container fleets With a container
-// fleet (where compute type is CONTAINER ), use these credentials and the target
-// value with SSM to connect to the fleet instance where the container is running.
-// After you're connected to the instance, use Docker commands to interact with the
-// container. Learn more
-//   - Remotely connect to fleet instances (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html)
-//   - Debug fleet issues (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html)
-//   - Remotely connect to a container fleet (https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-remote-access.html)
+//	This operation has been expanded to use with the Amazon GameLift containers
+//
+// feature, which is currently in public preview.
+//
+// Requests authorization to remotely connect to a hosting resource in a Amazon
+// GameLift managed fleet. This operation is not used with Amazon GameLift Anywhere
+// fleets
+//
+// To request access, specify the compute name and the fleet ID. If successful,
+// this operation returns a set of temporary Amazon Web Services credentials,
+// including a two-part access key and a session token.
+//
+// # EC2 fleets
+//
+// With an EC2 fleet (where compute type is EC2 ), use these credentials with
+// Amazon EC2 Systems Manager (SSM) to start a session with the compute. For more
+// details, see [Starting a session (CLI)]in the Amazon EC2 Systems Manager User Guide.
+//
+// # Container fleets
+//
+// With a container fleet (where compute type is CONTAINER ), use these credentials
+// and the target value with SSM to connect to the fleet instance where the
+// container is running. After you're connected to the instance, use Docker
+// commands to interact with the container.
+//
+// # Learn more
+//
+// [Remotely connect to fleet instances]
+//
+// [Debug fleet issues]
+//
+// [Remotely connect to a container fleet]
+//
+// [Remotely connect to fleet instances]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html
+// [Remotely connect to a container fleet]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-remote-access.html
+// [Debug fleet issues]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html
+// [Starting a session (CLI)]: https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html#sessions-start-cli
 func (c *Client) GetComputeAccess(ctx context.Context, params *GetComputeAccessInput, optFns ...func(*Options)) (*GetComputeAccessOutput, error) {
 	if params == nil {
 		params = &GetComputeAccessInput{}
@@ -65,10 +85,11 @@ type GetComputeAccessInput struct {
 
 type GetComputeAccessOutput struct {
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to an Amazon GameLift compute resource and uniquely
-	// identifies it. ARNs are unique across all Regions. Format is
-	// arn:aws:gamelift:::compute/compute-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	// The Amazon Resource Name ([ARN] ) that is assigned to an Amazon GameLift compute
+	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
+	// is arn:aws:gamelift:::compute/compute-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	ComputeArn *string
 
 	// The identifier of the compute resource to be accessed. This value might be
@@ -79,10 +100,11 @@ type GetComputeAccessOutput struct {
 	// the compute resource with Amazon EC2 Systems Manager (SSM).
 	Credentials *types.AwsCredentials
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
-	// it. ARNs are unique across all Regions. Format is
-	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift fleet
+	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
+	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	FleetArn *string
 
 	// The ID of the fleet that holds the compute resource to be accessed.

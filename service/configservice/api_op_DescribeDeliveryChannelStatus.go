@@ -13,8 +13,9 @@ import (
 
 // Returns the current status of the specified delivery channel. If a delivery
 // channel is not specified, this action returns the current status of all delivery
-// channels associated with the account. Currently, you can specify only one
-// delivery channel per region in your account.
+// channels associated with the account.
+//
+// Currently, you can specify only one delivery channel per region in your account.
 func (c *Client) DescribeDeliveryChannelStatus(ctx context.Context, params *DescribeDeliveryChannelStatusInput, optFns ...func(*Options)) (*DescribeDeliveryChannelStatusOutput, error) {
 	if params == nil {
 		params = &DescribeDeliveryChannelStatusInput{}

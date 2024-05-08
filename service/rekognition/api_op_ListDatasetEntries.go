@@ -10,19 +10,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation applies only to Amazon Rekognition Custom Labels. Lists the
-// entries (images) within a dataset. An entry is a JSON Line that contains the
-// information for a single image, including the image location, assigned labels,
-// and object location bounding boxes. For more information, see Creating a
-// manifest file (https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-manifest-files.html)
-// . JSON Lines in the response include information about non-terminal errors found
+// This operation applies only to Amazon Rekognition Custom Labels.
+//
+// Lists the entries (images) within a dataset. An entry is a JSON Line that
+// contains the information for a single image, including the image location,
+// assigned labels, and object location bounding boxes. For more information, see [Creating a manifest file].
+//
+// JSON Lines in the response include information about non-terminal errors found
 // in the dataset. Non terminal errors are reported in errors lists within each
 // JSON Line. The same information is reported in the training and testing
 // validation result manifests that Amazon Rekognition Custom Labels creates during
-// model training. You can filter the response in variety of ways, such as choosing
-// which labels to return and returning JSON Lines created after a specific date.
+// model training.
+//
+// You can filter the response in variety of ways, such as choosing which labels
+// to return and returning JSON Lines created after a specific date.
+//
 // This operation requires permissions to perform the
 // rekognition:ListDatasetEntries action.
+//
+// [Creating a manifest file]: https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-manifest-files.html
 func (c *Client) ListDatasetEntries(ctx context.Context, params *ListDatasetEntriesInput, optFns ...func(*Options)) (*ListDatasetEntriesOutput, error) {
 	if params == nil {
 		params = &ListDatasetEntriesInput{}
@@ -40,7 +46,7 @@ func (c *Client) ListDatasetEntries(ctx context.Context, params *ListDatasetEntr
 
 type ListDatasetEntriesInput struct {
 
-	// The Amazon Resource Name (ARN) for the dataset that you want to use.
+	//  The Amazon Resource Name (ARN) for the dataset that you want to use.
 	//
 	// This member is required.
 	DatasetArn *string
@@ -53,7 +59,7 @@ type ListDatasetEntriesInput struct {
 	// entries that have errors.
 	HasErrors *bool
 
-	// Specify true to get only the JSON Lines where the image is labeled. Specify
+	//  Specify true to get only the JSON Lines where the image is labeled. Specify
 	// false to get only the JSON Lines where the image isn't labeled. If you don't
 	// specify Labeled , ListDatasetEntries returns JSON Lines for labeled and
 	// unlabeled images.
@@ -81,7 +87,7 @@ type ListDatasetEntriesInput struct {
 
 type ListDatasetEntriesOutput struct {
 
-	// A list of entries (images) in the dataset.
+	//  A list of entries (images) in the dataset.
 	DatasetEntries []string
 
 	// If the previous response was incomplete (because there is more results to

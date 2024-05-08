@@ -15,9 +15,9 @@ import (
 // detector ID. For newly enabled detectors or data sources, the cost returned will
 // include only the usage so far under 30 days. This may differ from the cost
 // metrics in the console, which project usage over 30 days to provide a monthly
-// cost estimate. For more information, see Understanding How Usage Costs are
-// Calculated (https://docs.aws.amazon.com/guardduty/latest/ug/monitoring_costs.html#usage-calculations)
-// .
+// cost estimate. For more information, see [Understanding How Usage Costs are Calculated].
+//
+// [Understanding How Usage Costs are Calculated]: https://docs.aws.amazon.com/guardduty/latest/ug/monitoring_costs.html#usage-calculations
 func (c *Client) GetUsageStatistics(ctx context.Context, params *GetUsageStatisticsInput, optFns ...func(*Options)) (*GetUsageStatisticsOutput, error) {
 	if params == nil {
 		params = &GetUsageStatisticsInput{}

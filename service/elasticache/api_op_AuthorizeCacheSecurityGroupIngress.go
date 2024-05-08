@@ -13,8 +13,10 @@ import (
 
 // Allows network ingress to a cache security group. Applications using
 // ElastiCache must be running on Amazon EC2, and Amazon EC2 security groups are
-// used as the authorization mechanism. You cannot authorize ingress from an Amazon
-// EC2 security group in one region to an ElastiCache cluster in another region.
+// used as the authorization mechanism.
+//
+// You cannot authorize ingress from an Amazon EC2 security group in one region to
+// an ElastiCache cluster in another region.
 func (c *Client) AuthorizeCacheSecurityGroupIngress(ctx context.Context, params *AuthorizeCacheSecurityGroupIngressInput, optFns ...func(*Options)) (*AuthorizeCacheSecurityGroupIngressOutput, error) {
 	if params == nil {
 		params = &AuthorizeCacheSecurityGroupIngressInput{}
@@ -57,8 +59,11 @@ type AuthorizeCacheSecurityGroupIngressInput struct {
 type AuthorizeCacheSecurityGroupIngressOutput struct {
 
 	// Represents the output of one of the following operations:
+	//
 	//   - AuthorizeCacheSecurityGroupIngress
+	//
 	//   - CreateCacheSecurityGroup
+	//
 	//   - RevokeCacheSecurityGroupIngress
 	CacheSecurityGroup *types.CacheSecurityGroup
 

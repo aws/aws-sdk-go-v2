@@ -11,7 +11,7 @@ import (
 // The deleted unique ID.
 type DeletedUniqueId struct {
 
-	// The unique ID of the deleted item.
+	//  The unique ID of the deleted item.
 	//
 	// This member is required.
 	UniqueId *string
@@ -22,7 +22,7 @@ type DeletedUniqueId struct {
 // The Delete Unique Id error.
 type DeleteUniqueIdError struct {
 
-	// The error type for the batch delete unique ID operation.
+	//  The error type for the batch delete unique ID operation.
 	//
 	// This member is required.
 	ErrorType DeleteUniqueIdErrorType
@@ -108,10 +108,13 @@ type IdMappingWorkflowInputSource struct {
 	// The name of the schema to be retrieved.
 	SchemaName *string
 
-	// The type of ID namespace. There are two types: SOURCE and TARGET . The SOURCE
-	// contains configurations for sourceId data that will be processed in an ID
-	// mapping workflow. The TARGET contains a configuration of targetId to which all
-	// sourceIds will resolve to.
+	// The type of ID namespace. There are two types: SOURCE and TARGET .
+	//
+	// The SOURCE contains configurations for sourceId data that will be processed in
+	// an ID mapping workflow.
+	//
+	// The TARGET contains a configuration of targetId to which all sourceIds will
+	// resolve to.
 	Type IdNamespaceType
 
 	noSmithyDocumentSerde
@@ -207,10 +210,13 @@ type IdNamespaceSummary struct {
 	// This member is required.
 	IdNamespaceName *string
 
-	// The type of ID namespace. There are two types: SOURCE and TARGET . The SOURCE
-	// contains configurations for sourceId data that will be processed in an ID
-	// mapping workflow. The TARGET contains a configuration of targetId to which all
-	// sourceIds will resolve to.
+	// The type of ID namespace. There are two types: SOURCE and TARGET .
+	//
+	// The SOURCE contains configurations for sourceId data that will be processed in
+	// an ID mapping workflow.
+	//
+	// The TARGET contains a configuration of targetId to which all sourceIds will
+	// resolve to.
 	//
 	// This member is required.
 	Type IdNamespaceType
@@ -668,10 +674,11 @@ type SchemaInputAttribute struct {
 	Type SchemaAttributeType
 
 	// A string that instructs Entity Resolution to combine several columns into a
-	// unified column with the identical attribute type. For example, when working with
-	// columns such as first_name , middle_name , and last_name , assigning them a
-	// common groupName will prompt Entity Resolution to concatenate them into a
-	// single value.
+	// unified column with the identical attribute type.
+	//
+	// For example, when working with columns such as first_name , middle_name , and
+	// last_name , assigning them a common groupName will prompt Entity Resolution to
+	// concatenate them into a single value.
 	GroupName *string
 
 	// A key that allows grouping of multiple input attributes into a unified matching

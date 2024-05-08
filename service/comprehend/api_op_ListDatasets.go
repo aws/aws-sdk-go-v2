@@ -12,8 +12,9 @@ import (
 )
 
 // List the datasets that you have configured in this Region. For more information
-// about datasets, see Flywheel overview (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html)
-// in the Amazon Comprehend Developer Guide.
+// about datasets, see [Flywheel overview]in the Amazon Comprehend Developer Guide.
+//
+// [Flywheel overview]: https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html
 func (c *Client) ListDatasets(ctx context.Context, params *ListDatasetsInput, optFns ...func(*Options)) (*ListDatasetsOutput, error) {
 	if params == nil {
 		params = &ListDatasetsInput{}

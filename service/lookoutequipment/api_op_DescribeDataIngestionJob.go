@@ -44,17 +44,17 @@ type DescribeDataIngestionJobOutput struct {
 	// The time at which the data ingestion job was created.
 	CreatedAt *time.Time
 
-	// Indicates the latest timestamp corresponding to data that was successfully
+	//  Indicates the latest timestamp corresponding to data that was successfully
 	// ingested during this specific ingestion job.
 	DataEndTime *time.Time
 
-	// Gives statistics about a completed ingestion job. These statistics primarily
+	//  Gives statistics about a completed ingestion job. These statistics primarily
 	// relate to quantifying incorrect data such as MissingCompleteSensorData,
 	// MissingSensorData, UnsupportedDateFormats, InsufficientSensorData, and
 	// DuplicateTimeStamps.
 	DataQualitySummary *types.DataQualitySummary
 
-	// Indicates the earliest timestamp corresponding to data that was successfully
+	//  Indicates the earliest timestamp corresponding to data that was successfully
 	// ingested during this specific ingestion job.
 	DataStartTime *time.Time
 
@@ -65,7 +65,7 @@ type DescribeDataIngestionJobOutput struct {
 	// Specifies the reason for failure when a data ingestion job has failed.
 	FailedReason *string
 
-	// Indicates the size of the ingested dataset.
+	//  Indicates the size of the ingested dataset.
 	IngestedDataSize *int64
 
 	// Gives statistics about how many files have been ingested, and which files have
@@ -90,7 +90,7 @@ type DescribeDataIngestionJobOutput struct {
 	// Indicates the status of the DataIngestionJob operation.
 	Status types.IngestionJobStatus
 
-	// Provides details about status of the ingestion job that is currently in
+	//  Provides details about status of the ingestion job that is currently in
 	// progress.
 	StatusDetail *string
 

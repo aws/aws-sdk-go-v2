@@ -34,7 +34,7 @@ type CreateProcessingJobInput struct {
 	// This member is required.
 	AppSpecification *types.AppSpecification
 
-	// The name of the processing job. The name must be unique within an Amazon Web
+	//  The name of the processing job. The name must be unique within an Amazon Web
 	// Services Region in the Amazon Web Services account.
 	//
 	// This member is required.
@@ -59,9 +59,16 @@ type CreateProcessingJobInput struct {
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
-	//   - CreateProcessingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html)
-	//   - CreateTrainingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
-	//   - CreateTransformJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html)
+	//
+	// [CreateProcessingJob]
+	//
+	// [CreateTrainingJob]
+	//
+	// [CreateTransformJob]
+	//
+	// [CreateTransformJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html
+	// [CreateTrainingJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html
+	// [CreateProcessingJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html
 	ExperimentConfig *types.ExperimentConfig
 
 	// Networking options for a processing job, such as whether to allow inbound and
@@ -79,9 +86,10 @@ type CreateProcessingJobInput struct {
 	// The time limit for how long the processing job is allowed to run.
 	StoppingCondition *types.ProcessingStoppingCondition
 
-	// (Optional) An array of key-value pairs. For more information, see Using Cost
-	// Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
-	// in the Amazon Web Services Billing and Cost Management User Guide.
+	// (Optional) An array of key-value pairs. For more information, see [Using Cost Allocation Tags] in the
+	// Amazon Web Services Billing and Cost Management User Guide.
+	//
+	// [Using Cost Allocation Tags]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

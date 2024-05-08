@@ -31,8 +31,10 @@ func (c *Client) SubmitFeedback(ctx context.Context, params *SubmitFeedbackInput
 // The structure representing the SubmitFeedbackRequest.
 type SubmitFeedbackInput struct {
 
-	// The universally unique identifier (UUID) of the AnomalyInstance (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AnomalyInstance.html)
-	// object that is included in the analysis data.
+	// The universally unique identifier (UUID) of the [AnomalyInstance]AnomalyInstance object that is
+	// included in the analysis data.
+	//
+	// [AnomalyInstance]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AnomalyInstance.html
 	//
 	// This member is required.
 	AnomalyInstanceId *string
@@ -42,7 +44,7 @@ type SubmitFeedbackInput struct {
 	// This member is required.
 	ProfilingGroupName *string
 
-	// The feedback tpye. Thee are two valid values, Positive and Negative .
+	//  The feedback tpye. Thee are two valid values, Positive and Negative .
 	//
 	// This member is required.
 	Type types.FeedbackType

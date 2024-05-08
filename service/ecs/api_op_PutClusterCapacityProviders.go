@@ -12,18 +12,21 @@ import (
 )
 
 // Modifies the available capacity providers and the default capacity provider
-// strategy for a cluster. You must specify both the available capacity providers
-// and a default capacity provider strategy for the cluster. If the specified
-// cluster has existing capacity providers associated with it, you must specify all
-// existing capacity providers in addition to any new ones you want to add. Any
-// existing capacity providers that are associated with a cluster that are omitted
-// from a PutClusterCapacityProviders API call will be disassociated with the
-// cluster. You can only disassociate an existing capacity provider from a cluster
-// if it's not being used by any existing tasks. When creating a service or running
-// a task on a cluster, if no capacity provider or launch type is specified, then
-// the cluster's default capacity provider strategy is used. We recommend that you
-// define a default capacity provider strategy for your cluster. However, you must
-// specify an empty array ( [] ) to bypass defining a default strategy.
+// strategy for a cluster.
+//
+// You must specify both the available capacity providers and a default capacity
+// provider strategy for the cluster. If the specified cluster has existing
+// capacity providers associated with it, you must specify all existing capacity
+// providers in addition to any new ones you want to add. Any existing capacity
+// providers that are associated with a cluster that are omitted from a PutClusterCapacityProvidersAPI call
+// will be disassociated with the cluster. You can only disassociate an existing
+// capacity provider from a cluster if it's not being used by any existing tasks.
+//
+// When creating a service or running a task on a cluster, if no capacity provider
+// or launch type is specified, then the cluster's default capacity provider
+// strategy is used. We recommend that you define a default capacity provider
+// strategy for your cluster. However, you must specify an empty array ( [] ) to
+// bypass defining a default strategy.
 func (c *Client) PutClusterCapacityProviders(ctx context.Context, params *PutClusterCapacityProvidersInput, optFns ...func(*Options)) (*PutClusterCapacityProvidersOutput, error) {
 	if params == nil {
 		params = &PutClusterCapacityProvidersInput{}
@@ -41,13 +44,15 @@ func (c *Client) PutClusterCapacityProviders(ctx context.Context, params *PutClu
 
 type PutClusterCapacityProvidersInput struct {
 
-	// The name of one or more capacity providers to associate with the cluster. If
-	// specifying a capacity provider that uses an Auto Scaling group, the capacity
+	// The name of one or more capacity providers to associate with the cluster.
+	//
+	// If specifying a capacity provider that uses an Auto Scaling group, the capacity
 	// provider must already be created. New capacity providers can be created with the
-	// CreateCapacityProvider API operation. To use a Fargate capacity provider,
-	// specify either the FARGATE or FARGATE_SPOT capacity providers. The Fargate
-	// capacity providers are available to all accounts and only need to be associated
-	// with a cluster to be used.
+	// CreateCapacityProviderAPI operation.
+	//
+	// To use a Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT
+	// capacity providers. The Fargate capacity providers are available to all accounts
+	// and only need to be associated with a cluster to be used.
 	//
 	// This member is required.
 	CapacityProviders []string
@@ -59,20 +64,25 @@ type PutClusterCapacityProvidersInput struct {
 	// This member is required.
 	Cluster *string
 
-	// The capacity provider strategy to use by default for the cluster. When creating
-	// a service or running a task on a cluster, if no capacity provider or launch type
-	// is specified then the default capacity provider strategy for the cluster is
-	// used. A capacity provider strategy consists of one or more capacity providers
-	// along with the base and weight to assign to them. A capacity provider must be
-	// associated with the cluster to be used in a capacity provider strategy. The
-	// PutClusterCapacityProviders API is used to associate a capacity provider with a
-	// cluster. Only capacity providers with an ACTIVE or UPDATING status can be used.
+	// The capacity provider strategy to use by default for the cluster.
+	//
+	// When creating a service or running a task on a cluster, if no capacity provider
+	// or launch type is specified then the default capacity provider strategy for the
+	// cluster is used.
+	//
+	// A capacity provider strategy consists of one or more capacity providers along
+	// with the base and weight to assign to them. A capacity provider must be
+	// associated with the cluster to be used in a capacity provider strategy. The PutClusterCapacityProvidersAPI
+	// is used to associate a capacity provider with a cluster. Only capacity providers
+	// with an ACTIVE or UPDATING status can be used.
+	//
 	// If specifying a capacity provider that uses an Auto Scaling group, the capacity
 	// provider must already be created. New capacity providers can be created with the
-	// CreateCapacityProvider API operation. To use a Fargate capacity provider,
-	// specify either the FARGATE or FARGATE_SPOT capacity providers. The Fargate
-	// capacity providers are available to all accounts and only need to be associated
-	// with a cluster to be used.
+	// CreateCapacityProviderAPI operation.
+	//
+	// To use a Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT
+	// capacity providers. The Fargate capacity providers are available to all accounts
+	// and only need to be associated with a cluster to be used.
 	//
 	// This member is required.
 	DefaultCapacityProviderStrategy []types.CapacityProviderStrategyItem

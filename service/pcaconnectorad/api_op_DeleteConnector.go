@@ -12,12 +12,12 @@ import (
 
 // Deletes a connector for Active Directory. You must provide the Amazon Resource
 // Name (ARN) of the connector that you want to delete. You can find the ARN by
-// calling the
-// https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_ListConnectors (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_ListConnectors)
-// action. Deleting a connector does not deregister your directory with Amazon Web
-// Services Private CA. You can deregister your directory by calling the
-// https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_DeleteDirectoryRegistration (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_DeleteDirectoryRegistration)
-// action.
+// calling the [https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_ListConnectors]action. Deleting a connector does not deregister your directory
+// with Amazon Web Services Private CA. You can deregister your directory by
+// calling the [https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_DeleteDirectoryRegistration]action.
+//
+// [https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_ListConnectors]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_ListConnectors
+// [https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_DeleteDirectoryRegistration]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_DeleteDirectoryRegistration
 func (c *Client) DeleteConnector(ctx context.Context, params *DeleteConnectorInput, optFns ...func(*Options)) (*DeleteConnectorOutput, error) {
 	if params == nil {
 		params = &DeleteConnectorInput{}
@@ -35,8 +35,9 @@ func (c *Client) DeleteConnector(ctx context.Context, params *DeleteConnectorInp
 
 type DeleteConnectorInput struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called CreateConnector (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html)
-	// .
+	//  The Amazon Resource Name (ARN) that was returned when you called [CreateConnector].
+	//
+	// [CreateConnector]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html
 	//
 	// This member is required.
 	ConnectorArn *string

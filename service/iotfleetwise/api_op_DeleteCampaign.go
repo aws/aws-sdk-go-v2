@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a data collection campaign. Deleting a campaign suspends all data
+//	Deletes a data collection campaign. Deleting a campaign suspends all data
+//
 // collection and removes it from any vehicles.
 func (c *Client) DeleteCampaign(ctx context.Context, params *DeleteCampaignInput, optFns ...func(*Options)) (*DeleteCampaignOutput, error) {
 	if params == nil {
@@ -29,7 +30,7 @@ func (c *Client) DeleteCampaign(ctx context.Context, params *DeleteCampaignInput
 
 type DeleteCampaignInput struct {
 
-	// The name of the campaign to delete.
+	//  The name of the campaign to delete.
 	//
 	// This member is required.
 	Name *string
@@ -39,8 +40,9 @@ type DeleteCampaignInput struct {
 
 type DeleteCampaignOutput struct {
 
-	// The Amazon Resource Name (ARN) of the deleted campaign. The ARN isn’t returned
-	// if a campaign doesn’t exist.
+	//  The Amazon Resource Name (ARN) of the deleted campaign.
+	//
+	// The ARN isn’t returned if a campaign doesn’t exist.
 	Arn *string
 
 	// The name of the deleted campaign.

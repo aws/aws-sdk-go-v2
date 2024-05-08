@@ -15,9 +15,12 @@ import (
 // Associate a set of tags with an Amazon DynamoDB resource. You can then activate
 // these user-defined tags so that they appear on the Billing and Cost Management
 // console for cost allocation tracking. You can call TagResource up to five times
-// per second, per account. For an overview on tagging DynamoDB resources, see
-// Tagging for DynamoDB (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
-// in the Amazon DynamoDB Developer Guide.
+// per second, per account.
+//
+// For an overview on tagging DynamoDB resources, see [Tagging for DynamoDB] in the Amazon DynamoDB
+// Developer Guide.
+//
+// [Tagging for DynamoDB]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

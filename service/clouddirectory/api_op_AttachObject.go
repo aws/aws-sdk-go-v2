@@ -13,7 +13,9 @@ import (
 
 // Attaches an existing object to another object. An object can be accessed in two
 // ways:
+//
 //   - Using the path
+//
 //   - Using ObjectIdentifier
 func (c *Client) AttachObject(ctx context.Context, params *AttachObjectInput, optFns ...func(*Options)) (*AttachObjectOutput, error) {
 	if params == nil {
@@ -37,8 +39,8 @@ type AttachObjectInput struct {
 	// This member is required.
 	ChildReference *types.ObjectReference
 
-	// Amazon Resource Name (ARN) that is associated with the Directory where both
-	// objects reside. For more information, see arns .
+	// Amazon Resource Name (ARN) that is associated with the Directory where both objects
+	// reside. For more information, see arns.
 	//
 	// This member is required.
 	DirectoryArn *string

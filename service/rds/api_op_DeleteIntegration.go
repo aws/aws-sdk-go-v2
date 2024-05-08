@@ -41,9 +41,10 @@ type DeleteIntegrationInput struct {
 // A zero-ETL integration with Amazon Redshift.
 type DeleteIntegrationOutput struct {
 
-	// The encryption context for the integration. For more information, see
-	// Encryption context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
-	// in the Amazon Web Services Key Management Service Developer Guide.
+	// The encryption context for the integration. For more information, see [Encryption context] in the
+	// Amazon Web Services Key Management Service Developer Guide.
+	//
+	// [Encryption context]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
 	AdditionalEncryptionContext map[string]string
 
 	// The time when the integration was created, in Universal Coordinated Time (UTC).
@@ -76,8 +77,9 @@ type DeleteIntegrationOutput struct {
 	// The current status of the integration.
 	Status types.IntegrationStatus
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
-	// in the Amazon RDS User Guide.
+	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	//
+	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
 	Tags []types.Tag
 
 	// The ARN of the Redshift data warehouse used as the target for replication.

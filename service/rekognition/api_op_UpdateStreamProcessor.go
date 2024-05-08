@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows you to update a stream processor. You can change some settings and
+//	Allows you to update a stream processor. You can change some settings and
+//
 // regions of interest and delete certain parameters.
 func (c *Client) UpdateStreamProcessor(ctx context.Context, params *UpdateStreamProcessorInput, optFns ...func(*Options)) (*UpdateStreamProcessorOutput, error) {
 	if params == nil {
@@ -30,26 +31,27 @@ func (c *Client) UpdateStreamProcessor(ctx context.Context, params *UpdateStream
 
 type UpdateStreamProcessorInput struct {
 
-	// Name of the stream processor that you want to update.
+	//  Name of the stream processor that you want to update.
 	//
 	// This member is required.
 	Name *string
 
-	// Shows whether you are sharing data with Rekognition to improve model
+	//  Shows whether you are sharing data with Rekognition to improve model
 	// performance. You can choose this option at the account level or on a per-stream
 	// basis. Note that if you opt out at the account level this setting is ignored on
 	// individual streams.
 	DataSharingPreferenceForUpdate *types.StreamProcessorDataSharingPreference
 
-	// A list of parameters you want to delete from the stream processor.
+	//  A list of parameters you want to delete from the stream processor.
 	ParametersToDelete []types.StreamProcessorParameterToDelete
 
-	// Specifies locations in the frames where Amazon Rekognition checks for objects
+	//  Specifies locations in the frames where Amazon Rekognition checks for objects
 	// or people. This is an optional parameter for label detection stream processors.
 	RegionsOfInterestForUpdate []types.RegionOfInterest
 
-	// The stream processor settings that you want to update. Label detection settings
-	// can be updated to detect different labels with a different minimum confidence.
+	//  The stream processor settings that you want to update. Label detection
+	// settings can be updated to detect different labels with a different minimum
+	// confidence.
 	SettingsForUpdate *types.StreamProcessorSettingsForUpdate
 
 	noSmithyDocumentSerde

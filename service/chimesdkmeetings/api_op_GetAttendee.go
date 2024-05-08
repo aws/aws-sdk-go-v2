@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the Amazon Chime SDK attendee details for a specified meeting ID and
-// attendee ID. For more information about the Amazon Chime SDK, see Using the
-// Amazon Chime SDK (https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html)
-// in the Amazon Chime Developer Guide.
+//	Gets the Amazon Chime SDK attendee details for a specified meeting ID and
+//
+// attendee ID. For more information about the Amazon Chime SDK, see [Using the Amazon Chime SDK]in the Amazon
+// Chime Developer Guide.
+//
+// [Using the Amazon Chime SDK]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
 func (c *Client) GetAttendee(ctx context.Context, params *GetAttendeeInput, optFns ...func(*Options)) (*GetAttendeeOutput, error) {
 	if params == nil {
 		params = &GetAttendeeInput{}

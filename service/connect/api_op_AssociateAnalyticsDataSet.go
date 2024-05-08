@@ -11,6 +11,7 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
+//
 // Associates the specified dataset for a Amazon Connect instance with the target
 // account. You can associate only one dataset in a single call.
 func (c *Client) AssociateAnalyticsDataSet(ctx context.Context, params *AssociateAnalyticsDataSetInput, optFns ...func(*Options)) (*AssociateAnalyticsDataSetOutput, error) {
@@ -35,8 +36,10 @@ type AssociateAnalyticsDataSetInput struct {
 	// This member is required.
 	DataSetId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

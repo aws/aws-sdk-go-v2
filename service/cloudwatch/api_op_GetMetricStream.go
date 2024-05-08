@@ -72,9 +72,10 @@ type GetMetricStreamOutput struct {
 	Name *string
 
 	// The output format for the stream. Valid values are json , opentelemetry1.0 , and
-	// opentelemetry0.7 . For more information about metric stream output formats, see
-	// Metric streams output formats (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html)
+	// opentelemetry0.7 . For more information about metric stream output formats, see [Metric streams output formats]
 	// .
+	//
+	// [Metric streams output formats]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html
 	OutputFormat types.MetricStreamOutputFormat
 
 	// The ARN of the IAM role that is used by this metric stream.
@@ -85,8 +86,9 @@ type GetMetricStreamOutput struct {
 
 	// Each entry in this array displays information about one or more metrics that
 	// include additional statistics in the metric stream. For more information about
-	// the additional statistics, see CloudWatch statistics definitions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html)
-	// .
+	// the additional statistics, see [CloudWatch statistics definitions].
+	//
+	// [CloudWatch statistics definitions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html
 	StatisticsConfigurations []types.MetricStreamStatisticsConfiguration
 
 	// Metadata pertaining to the operation's result.

@@ -29,13 +29,13 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Timestream resource that the tags will be removed from. This value is an
+	//  The Timestream resource that the tags will be removed from. This value is an
 	// Amazon Resource Name (ARN).
 	//
 	// This member is required.
 	ResourceARN *string
 
-	// A list of tags keys. Existing tags of the resource whose keys are members of
+	//  A list of tags keys. Existing tags of the resource whose keys are members of
 	// this list will be removed from the Timestream resource.
 	//
 	// This member is required.

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a direct-query data source. For more information, see Working with
-// Amazon OpenSearch Service data source integrations with Amazon S3 (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html)
-// .
+// Updates a direct-query data source. For more information, see [Working with Amazon OpenSearch Service data source integrations with Amazon S3].
+//
+// [Working with Amazon OpenSearch Service data source integrations with Amazon S3]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html
 func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceInput, optFns ...func(*Options)) (*UpdateDataSourceOutput, error) {
 	if params == nil {
 		params = &UpdateDataSourceInput{}

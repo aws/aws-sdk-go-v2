@@ -33,8 +33,9 @@ type UpdateEc2DeepInspectionConfigurationInput struct {
 	// Specify TRUE to activate Amazon Inspector deep inspection in your account, or
 	// FALSE to deactivate. Member accounts in an organization cannot deactivate deep
 	// inspection, instead the delegated administrator for the organization can
-	// deactivate a member account using BatchUpdateMemberEc2DeepInspectionStatus (https://docs.aws.amazon.com/inspector/v2/APIReference/API_BatchUpdateMemberEc2DeepInspectionStatus.html)
-	// .
+	// deactivate a member account using [BatchUpdateMemberEc2DeepInspectionStatus].
+	//
+	// [BatchUpdateMemberEc2DeepInspectionStatus]: https://docs.aws.amazon.com/inspector/v2/APIReference/API_BatchUpdateMemberEc2DeepInspectionStatus.html
 	ActivateDeepInspection *bool
 
 	// The Amazon Inspector deep inspection custom paths you are adding for your

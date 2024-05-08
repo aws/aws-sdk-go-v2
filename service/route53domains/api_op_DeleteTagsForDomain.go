@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation deletes the specified tags for a domain. All tag operations are
-// eventually consistent; subsequent operations might not immediately represent all
-// issued operations.
+// This operation deletes the specified tags for a domain.
+//
+// All tag operations are eventually consistent; subsequent operations might not
+// immediately represent all issued operations.
 func (c *Client) DeleteTagsForDomain(ctx context.Context, params *DeleteTagsForDomainInput, optFns ...func(*Options)) (*DeleteTagsForDomainOutput, error) {
 	if params == nil {
 		params = &DeleteTagsForDomainInput{}

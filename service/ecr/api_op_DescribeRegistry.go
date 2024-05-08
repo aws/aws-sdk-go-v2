@@ -12,8 +12,7 @@ import (
 )
 
 // Describes the settings for a registry. The replication configuration for a
-// repository can be created or updated with the PutReplicationConfiguration API
-// action.
+// repository can be created or updated with the PutReplicationConfigurationAPI action.
 func (c *Client) DescribeRegistry(ctx context.Context, params *DescribeRegistryInput, optFns ...func(*Options)) (*DescribeRegistryOutput, error) {
 	if params == nil {
 		params = &DescribeRegistryInput{}

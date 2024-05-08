@@ -28,8 +28,7 @@ func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, 
 
 type DeleteProjectInput struct {
 
-	// The name of the project in the space. To retrieve a list of project names, use
-	// ListProjects .
+	// The name of the project in the space. To retrieve a list of project names, use ListProjects.
 	//
 	// This member is required.
 	Name *string

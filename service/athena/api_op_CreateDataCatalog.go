@@ -50,21 +50,32 @@ type CreateDataCatalogInput struct {
 
 	// Specifies the Lambda function or functions to use for creating the data
 	// catalog. This is a mapping whose values depend on the catalog type.
+	//
 	//   - For the HIVE data catalog type, use the following syntax. The
 	//   metadata-function parameter is required. The sdk-version parameter is optional
 	//   and defaults to the currently supported version.
-	//   metadata-function=lambda_arn, sdk-version=version_number
+	//
+	// metadata-function=lambda_arn, sdk-version=version_number
+	//
 	//   - For the LAMBDA data catalog type, use one of the following sets of required
 	//   parameters, but not both.
+	//
 	//   - If you have one Lambda function that processes metadata and another for
 	//   reading the actual data, use the following syntax. Both parameters are required.
-	//   metadata-function=lambda_arn, record-function=lambda_arn
+	//
+	// metadata-function=lambda_arn, record-function=lambda_arn
+	//
 	//   - If you have a composite Lambda function that processes both metadata and
 	//   data, use the following syntax to specify your Lambda function.
-	//   function=lambda_arn
+	//
+	// function=lambda_arn
+	//
 	//   - The GLUE type takes a catalog ID parameter and is required. The catalog_id
 	//   is the account ID of the Amazon Web Services account to which the Glue Data
-	//   Catalog belongs. catalog-id=catalog_id
+	//   Catalog belongs.
+	//
+	// catalog-id=catalog_id
+	//
 	//   - The GLUE data catalog type also applies to the default AwsDataCatalog that
 	//   already exists in your account, of which you can have only one and cannot
 	//   modify.

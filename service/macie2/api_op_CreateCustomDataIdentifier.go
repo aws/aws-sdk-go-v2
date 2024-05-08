@@ -31,10 +31,12 @@ func (c *Client) CreateCustomDataIdentifier(ctx context.Context, params *CreateC
 type CreateCustomDataIdentifierInput struct {
 
 	// A custom name for the custom data identifier. The name can contain as many as
-	// 128 characters. We strongly recommend that you avoid including any sensitive
-	// data in the name of a custom data identifier. Other users of your account might
-	// be able to see this name, depending on the actions that they're allowed to
-	// perform in Amazon Macie.
+	// 128 characters.
+	//
+	// We strongly recommend that you avoid including any sensitive data in the name
+	// of a custom data identifier. Other users of your account might be able to see
+	// this name, depending on the actions that they're allowed to perform in Amazon
+	// Macie.
 	//
 	// This member is required.
 	Name *string
@@ -50,10 +52,12 @@ type CreateCustomDataIdentifierInput struct {
 	ClientToken *string
 
 	// A custom description of the custom data identifier. The description can contain
-	// as many as 512 characters. We strongly recommend that you avoid including any
-	// sensitive data in the description of a custom data identifier. Other users of
-	// your account might be able to see this description, depending on the actions
-	// that they're allowed to perform in Amazon Macie.
+	// as many as 512 characters.
+	//
+	// We strongly recommend that you avoid including any sensitive data in the
+	// description of a custom data identifier. Other users of your account might be
+	// able to see this description, depending on the actions that they're allowed to
+	// perform in Amazon Macie.
 	Description *string
 
 	// An array that lists specific character sequences (ignore words) to exclude from
@@ -84,16 +88,19 @@ type CreateCustomDataIdentifierInput struct {
 	// specify more than one, the occurrences thresholds must be in ascending order by
 	// severity, moving from LOW to HIGH. For example, 1 for LOW, 50 for MEDIUM, and
 	// 100 for HIGH. If an S3 object contains fewer occurrences than the lowest
-	// specified threshold, Amazon Macie doesn't create a finding. If you don't specify
-	// any values for this array, Macie creates findings for S3 objects that contain at
-	// least one occurrence of text that matches the detection criteria, and Macie
-	// assigns the MEDIUM severity to those findings.
+	// specified threshold, Amazon Macie doesn't create a finding.
+	//
+	// If you don't specify any values for this array, Macie creates findings for S3
+	// objects that contain at least one occurrence of text that matches the detection
+	// criteria, and Macie assigns the MEDIUM severity to those findings.
 	SeverityLevels []types.SeverityLevel
 
 	// A map of key-value pairs that specifies the tags to associate with the custom
-	// data identifier. A custom data identifier can have a maximum of 50 tags. Each
-	// tag consists of a tag key and an associated tag value. The maximum length of a
-	// tag key is 128 characters. The maximum length of a tag value is 256 characters.
+	// data identifier.
+	//
+	// A custom data identifier can have a maximum of 50 tags. Each tag consists of a
+	// tag key and an associated tag value. The maximum length of a tag key is 128
+	// characters. The maximum length of a tag value is 256 characters.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

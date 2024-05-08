@@ -13,9 +13,11 @@ import (
 
 // Returns a list of task definition families that are registered to your account.
 // This list includes task definition families that no longer have any ACTIVE task
-// definition revisions. You can filter out task definition families that don't
-// contain any ACTIVE task definition revisions by setting the status parameter to
-// ACTIVE . You can also filter the results with the familyPrefix parameter.
+// definition revisions.
+//
+// You can filter out task definition families that don't contain any ACTIVE task
+// definition revisions by setting the status parameter to ACTIVE . You can also
+// filter the results with the familyPrefix parameter.
 func (c *Client) ListTaskDefinitionFamilies(ctx context.Context, params *ListTaskDefinitionFamiliesInput, optFns ...func(*Options)) (*ListTaskDefinitionFamiliesOutput, error) {
 	if params == nil {
 		params = &ListTaskDefinitionFamiliesInput{}
@@ -51,9 +53,10 @@ type ListTaskDefinitionFamiliesInput struct {
 	// The nextToken value returned from a ListTaskDefinitionFamilies request
 	// indicating that more results are available to fulfill the request and further
 	// calls will be needed. If maxResults was provided, it is possible the number of
-	// results to be fewer than maxResults . This token should be treated as an opaque
-	// identifier that is only used to retrieve the next items in a list and not for
-	// other programmatic purposes.
+	// results to be fewer than maxResults .
+	//
+	// This token should be treated as an opaque identifier that is only used to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// The task definition family status to filter the ListTaskDefinitionFamilies

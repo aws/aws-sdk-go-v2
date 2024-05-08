@@ -30,12 +30,12 @@ func (c *Client) ListProjects(ctx context.Context, params *ListProjectsInput, op
 // Request structure used to request projects list in AWS Mobile Hub.
 type ListProjectsInput struct {
 
-	// Maximum number of records to list in a single response.
+	//  Maximum number of records to list in a single response.
 	MaxResults int32
 
-	// Pagination token. Set to null to start listing projects from start. If non-null
-	// pagination token is returned in a result, then pass its value in here in another
-	// request to list more projects.
+	//  Pagination token. Set to null to start listing projects from start. If
+	// non-null pagination token is returned in a result, then pass its value in here
+	// in another request to list more projects.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -44,12 +44,12 @@ type ListProjectsInput struct {
 // Result structure used for requests to list projects in AWS Mobile Hub.
 type ListProjectsOutput struct {
 
-	// Pagination token. Set to null to start listing records from start. If non-null
+	//  Pagination token. Set to null to start listing records from start. If non-null
 	// pagination token is returned in a result, then pass its value in here in another
 	// request to list more entries.
 	NextToken *string
 
-	// List of projects.
+	//  List of projects.
 	Projects []types.ProjectSummary
 
 	// Metadata pertaining to the operation's result.
@@ -143,7 +143,7 @@ var _ ListProjectsAPIClient = (*Client)(nil)
 
 // ListProjectsPaginatorOptions is the paginator options for ListProjects
 type ListProjectsPaginatorOptions struct {
-	// Maximum number of records to list in a single response.
+	//  Maximum number of records to list in a single response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

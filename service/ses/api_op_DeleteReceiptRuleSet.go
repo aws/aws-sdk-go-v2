@@ -10,10 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified receipt rule set and all of the receipt rules it
-// contains. The currently active rule set cannot be deleted. For information about
-// managing receipt rule sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html)
-// . You can execute this operation no more than once per second.
+// Deletes the specified receipt rule set and all of the receipt rules it contains.
+//
+// The currently active rule set cannot be deleted.
+//
+// For information about managing receipt rule sets, see the [Amazon SES Developer Guide].
+//
+// You can execute this operation no more than once per second.
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html
 func (c *Client) DeleteReceiptRuleSet(ctx context.Context, params *DeleteReceiptRuleSetInput, optFns ...func(*Options)) (*DeleteReceiptRuleSetOutput, error) {
 	if params == nil {
 		params = &DeleteReceiptRuleSetInput{}
@@ -31,8 +36,9 @@ func (c *Client) DeleteReceiptRuleSet(ctx context.Context, params *DeleteReceipt
 
 // Represents a request to delete a receipt rule set and all of the receipt rules
 // it contains. You use receipt rule sets to receive email with Amazon SES. For
-// more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html)
-// .
+// more information, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
 type DeleteReceiptRuleSetInput struct {
 
 	// The name of the receipt rule set to delete.

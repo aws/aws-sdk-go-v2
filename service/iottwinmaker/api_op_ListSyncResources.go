@@ -29,7 +29,9 @@ func (c *Client) ListSyncResources(ctx context.Context, params *ListSyncResource
 
 type ListSyncResourcesInput struct {
 
-	// The sync source. Currently the only supported syncSource is SITEWISE .
+	// The sync source.
+	//
+	// Currently the only supported syncSource is SITEWISE .
 	//
 	// This member is required.
 	SyncSource *string
@@ -39,15 +41,20 @@ type ListSyncResourcesInput struct {
 	// This member is required.
 	WorkspaceId *string
 
-	// A list of objects that filter the request. The following filter combinations
-	// are supported:
+	// A list of objects that filter the request.
+	//
+	// The following filter combinations are supported:
+	//
 	//   - Filter with state
+	//
 	//   - Filter with ResourceType and ResourceId
+	//
 	//   - Filter with ResourceType and ExternalId
 	Filters []types.SyncResourceFilter
 
-	// The maximum number of results to return at one time. The default is 50. Valid
-	// Range: Minimum value of 0. Maximum value of 200.
+	// The maximum number of results to return at one time. The default is 50.
+	//
+	// Valid Range: Minimum value of 0. Maximum value of 200.
 	MaxResults *int32
 
 	// The string that specifies the next page of results.
@@ -189,8 +196,9 @@ var _ ListSyncResourcesAPIClient = (*Client)(nil)
 
 // ListSyncResourcesPaginatorOptions is the paginator options for ListSyncResources
 type ListSyncResourcesPaginatorOptions struct {
-	// The maximum number of results to return at one time. The default is 50. Valid
-	// Range: Minimum value of 0. Maximum value of 200.
+	// The maximum number of results to return at one time. The default is 50.
+	//
+	// Valid Range: Minimum value of 0. Maximum value of 200.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -29,10 +29,10 @@ func (c *Client) ListNotifications(ctx context.Context, params *ListNotification
 
 type ListNotificationsInput struct {
 
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	MaxResults *int32
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -40,10 +40,10 @@ type ListNotificationsInput struct {
 
 type ListNotificationsOutput struct {
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
-	// The returned list of notifications.
+	//  The returned list of notifications.
 	Notifications []types.Notification
 
 	// Metadata pertaining to the operation's result.
@@ -138,7 +138,7 @@ var _ ListNotificationsAPIClient = (*Client)(nil)
 
 // ListNotificationsPaginatorOptions is the paginator options for ListNotifications
 type ListNotificationsPaginatorOptions struct {
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

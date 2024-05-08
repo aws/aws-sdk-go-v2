@@ -11,20 +11,28 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a knowledge base. When using this API, you cannot reuse Amazon
-// AppIntegrations (https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html)
-// DataIntegrations with external knowledge bases such as Salesforce and
-// ServiceNow. If you do, you'll get an InvalidRequestException error. For
-// example, you're programmatically managing your external knowledge base, and you
-// want to add or remove one of the fields that is being ingested from Salesforce.
-// Do the following:
-//   - Call DeleteKnowledgeBase (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteKnowledgeBase.html)
-//     .
-//   - Call DeleteDataIntegration (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html)
-//     .
-//   - Call CreateDataIntegration (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html)
-//     to recreate the DataIntegration or a create different one.
+// Creates a knowledge base.
+//
+// When using this API, you cannot reuse [Amazon AppIntegrations] DataIntegrations with external knowledge
+// bases such as Salesforce and ServiceNow. If you do, you'll get an
+// InvalidRequestException error.
+//
+// For example, you're programmatically managing your external knowledge base, and
+// you want to add or remove one of the fields that is being ingested from
+// Salesforce. Do the following:
+//
+//   - Call [DeleteKnowledgeBase].
+//
+//   - Call [DeleteDataIntegration].
+//
+//   - Call [CreateDataIntegration]to recreate the DataIntegration or a create different one.
+//
 //   - Call CreateKnowledgeBase.
+//
+// [Amazon AppIntegrations]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html
+// [DeleteKnowledgeBase]: https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteKnowledgeBase.html
+// [DeleteDataIntegration]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html
+// [CreateDataIntegration]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html
 func (c *Client) CreateKnowledgeBase(ctx context.Context, params *CreateKnowledgeBaseInput, optFns ...func(*Options)) (*CreateKnowledgeBaseOutput, error) {
 	if params == nil {
 		params = &CreateKnowledgeBaseInput{}
@@ -56,9 +64,9 @@ type CreateKnowledgeBaseInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// The description.
@@ -68,11 +76,14 @@ type CreateKnowledgeBaseInput struct {
 	RenderingConfiguration *types.RenderingConfiguration
 
 	// The configuration information for the customer managed key used for encryption.
+	//
 	// This KMS key must have a policy that allows kms:CreateGrant , kms:DescribeKey ,
 	// and kms:Decrypt/kms:GenerateDataKey permissions to the IAM identity using the
-	// key to invoke Wisdom. For more information about setting up a customer managed
-	// key for Wisdom, see Enable Amazon Connect Wisdom for your instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html)
-	// .
+	// key to invoke Wisdom.
+	//
+	// For more information about setting up a customer managed key for Wisdom, see [Enable Amazon Connect Wisdom for your instance].
+	//
+	// [Enable Amazon Connect Wisdom for your instance]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
 	// The source of the knowledge base content. Only set this argument for EXTERNAL

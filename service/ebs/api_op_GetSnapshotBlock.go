@@ -12,11 +12,13 @@ import (
 	"io"
 )
 
-// Returns the data in a block in an Amazon Elastic Block Store snapshot. You
-// should always retry requests that receive server ( 5xx ) error responses, and
-// ThrottlingException and RequestThrottledException client error responses. For
-// more information see Error retries (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// Returns the data in a block in an Amazon Elastic Block Store snapshot.
+//
+// You should always retry requests that receive server ( 5xx ) error responses,
+// and ThrottlingException and RequestThrottledException client error responses.
+// For more information see [Error retries]in the Amazon Elastic Compute Cloud User Guide.
+//
+// [Error retries]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html
 func (c *Client) GetSnapshotBlock(ctx context.Context, params *GetSnapshotBlockInput, optFns ...func(*Options)) (*GetSnapshotBlockOutput, error) {
 	if params == nil {
 		params = &GetSnapshotBlockInput{}
@@ -49,11 +51,13 @@ type GetSnapshotBlockInput struct {
 	// This member is required.
 	BlockToken *string
 
-	// The ID of the snapshot containing the block from which to get data. If the
-	// specified snapshot is encrypted, you must have permission to use the KMS key
-	// that was used to encrypt the snapshot. For more information, see Using
-	// encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// The ID of the snapshot containing the block from which to get data.
+	//
+	// If the specified snapshot is encrypted, you must have permission to use the KMS
+	// key that was used to encrypt the snapshot. For more information, see [Using encryption]in the
+	// Amazon Elastic Compute Cloud User Guide.
+	//
+	// [Using encryption]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html
 	//
 	// This member is required.
 	SnapshotId *string

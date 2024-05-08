@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The UntagResource API allows you to removes tags from an ARN-able resource.
+//	The UntagResource API allows you to removes tags from an ARN-able resource.
+//
 // Resource includes workbook, table, screen and screen-automation.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {

@@ -44,8 +44,9 @@ type DescribeIndexOutput struct {
 	// meet the needs of your application. This contains the capacity units used for
 	// the index. A query or document storage capacity of zero indicates that the index
 	// is using the default capacity. For more information on the default capacity for
-	// an index and adjusting this, see Adjusting capacity (https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html)
-	// .
+	// an index and adjusting this, see [Adjusting capacity].
+	//
+	// [Adjusting capacity]: https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html
 	CapacityUnits *types.CapacityUnitsConfiguration
 
 	// The Unix timestamp when the index was created.

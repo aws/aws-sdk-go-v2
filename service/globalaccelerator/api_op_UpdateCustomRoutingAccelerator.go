@@ -35,8 +35,10 @@ type UpdateCustomRoutingAcceleratorInput struct {
 	AcceleratorArn *string
 
 	// Indicates whether an accelerator is enabled. The value is true or false. The
-	// default value is true. If the value is set to true, the accelerator cannot be
-	// deleted. If set to false, the accelerator can be deleted.
+	// default value is true.
+	//
+	// If the value is set to true, the accelerator cannot be deleted. If set to
+	// false, the accelerator can be deleted.
 	Enabled *bool
 
 	// The IP address type that an accelerator supports. For a custom routing

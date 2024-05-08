@@ -14,7 +14,7 @@ import (
 // Describes one or more global networks. By default, all global networks are
 // described. To describe the objects in your global network, you must use the
 // appropriate Get* action. For example, to list the transit gateways in your
-// global network, use GetTransitGatewayRegistrations .
+// global network, use GetTransitGatewayRegistrations.
 func (c *Client) DescribeGlobalNetworks(ctx context.Context, params *DescribeGlobalNetworksInput, optFns ...func(*Options)) (*DescribeGlobalNetworksOutput, error) {
 	if params == nil {
 		params = &DescribeGlobalNetworksInput{}

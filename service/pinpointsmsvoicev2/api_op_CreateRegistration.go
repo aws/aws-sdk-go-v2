@@ -31,7 +31,7 @@ func (c *Client) CreateRegistration(ctx context.Context, params *CreateRegistrat
 type CreateRegistrationInput struct {
 
 	// The type of registration form to create. The list of RegistrationTypes can be
-	// found using the DescribeRegistrationTypeDefinitions action.
+	// found using the DescribeRegistrationTypeDefinitionsaction.
 	//
 	// This member is required.
 	RegistrationType *string
@@ -49,8 +49,9 @@ type CreateRegistrationInput struct {
 
 type CreateRegistrationOutput struct {
 
-	// The time when the registration was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the registration was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	//
 	// This member is required.
 	CreatedTimestamp *time.Time
@@ -71,23 +72,31 @@ type CreateRegistrationOutput struct {
 	RegistrationId *string
 
 	// The status of the registration.
+	//
 	//   - CREATED : Your registration is created but not submitted.
+	//
 	//   - SUBMITTED : Your registration has been submitted and is awaiting review.
+	//
 	//   - REVIEWING : Your registration has been accepted and is being reviewed.
+	//
 	//   - PROVISIONING : Your registration has been approved and your origination
 	//   identity is being created.
+	//
 	//   - COMPLETE : Your registration has been approved and and your origination
 	//   identity has been created.
+	//
 	//   - REQUIRES_UPDATES : You must fix your registration and resubmit it.
+	//
 	//   - CLOSED : The phone number or sender ID has been deleted and you must also
 	//   delete the registration for the number.
+	//
 	//   - DELETED : The registration has been deleted.
 	//
 	// This member is required.
 	RegistrationStatus types.RegistrationStatus
 
 	// The type of registration form to create. The list of RegistrationTypes can be
-	// found using the DescribeRegistrationTypeDefinitions action.
+	// found using the DescribeRegistrationTypeDefinitionsaction.
 	//
 	// This member is required.
 	RegistrationType *string

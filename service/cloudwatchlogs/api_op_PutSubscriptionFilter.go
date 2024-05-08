@@ -13,24 +13,34 @@ import (
 
 // Creates or updates a subscription filter and associates it with the specified
 // log group. With subscription filters, you can subscribe to a real-time stream of
-// log events ingested through PutLogEvents (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html)
-// and have them delivered to a specific destination. When log events are sent to
-// the receiving service, they are Base64 encoded and compressed with the GZIP
-// format. The following destinations are supported for subscription filters:
+// log events ingested through [PutLogEvents]and have them delivered to a specific destination.
+// When log events are sent to the receiving service, they are Base64 encoded and
+// compressed with the GZIP format.
+//
+// The following destinations are supported for subscription filters:
+//
 //   - An Amazon Kinesis data stream belonging to the same account as the
 //     subscription filter, for same-account delivery.
-//   - A logical destination created with PutDestination (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html)
-//     that belongs to a different account, for cross-account delivery. We currently
-//     support Kinesis Data Streams and Firehose as logical destinations.
+//
+//   - A logical destination created with [PutDestination]that belongs to a different account, for
+//     cross-account delivery. We currently support Kinesis Data Streams and Firehose
+//     as logical destinations.
+//
 //   - An Amazon Kinesis Data Firehose delivery stream that belongs to the same
 //     account as the subscription filter, for same-account delivery.
+//
 //   - An Lambda function that belongs to the same account as the subscription
 //     filter, for same-account delivery.
 //
 // Each log group can have up to two subscription filters associated with it. If
 // you are updating an existing filter, you must specify the correct name in
-// filterName . To perform a PutSubscriptionFilter operation for any destination
-// except a Lambda function, you must also have the iam:PassRole permission.
+// filterName .
+//
+// To perform a PutSubscriptionFilter operation for any destination except a
+// Lambda function, you must also have the iam:PassRole permission.
+//
+// [PutDestination]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html
+// [PutLogEvents]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html
 func (c *Client) PutSubscriptionFilter(ctx context.Context, params *PutSubscriptionFilterInput, optFns ...func(*Options)) (*PutSubscriptionFilterOutput, error) {
 	if params == nil {
 		params = &PutSubscriptionFilterInput{}
@@ -50,26 +60,33 @@ type PutSubscriptionFilterInput struct {
 
 	// The ARN of the destination to deliver matching log events to. Currently, the
 	// supported destinations are:
+	//
 	//   - An Amazon Kinesis stream belonging to the same account as the subscription
 	//   filter, for same-account delivery.
+	//
 	//   - A logical destination (specified using an ARN) belonging to a different
-	//   account, for cross-account delivery. If you're setting up a cross-account
-	//   subscription, the destination must have an IAM policy associated with it. The
-	//   IAM policy must allow the sender to send logs to the destination. For more
-	//   information, see PutDestinationPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestinationPolicy.html)
-	//   .
+	//   account, for cross-account delivery.
+	//
+	// If you're setting up a cross-account subscription, the destination must have an
+	//   IAM policy associated with it. The IAM policy must allow the sender to send logs
+	//   to the destination. For more information, see [PutDestinationPolicy].
+	//
 	//   - A Kinesis Data Firehose delivery stream belonging to the same account as
 	//   the subscription filter, for same-account delivery.
+	//
 	//   - A Lambda function belonging to the same account as the subscription filter,
 	//   for same-account delivery.
+	//
+	// [PutDestinationPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestinationPolicy.html
 	//
 	// This member is required.
 	DestinationArn *string
 
 	// A name for the subscription filter. If you are updating an existing filter, you
 	// must specify the correct name in filterName . To find the name of the filter
-	// currently associated with a log group, use DescribeSubscriptionFilters (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeSubscriptionFilters.html)
-	// .
+	// currently associated with a log group, use [DescribeSubscriptionFilters].
+	//
+	// [DescribeSubscriptionFilters]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeSubscriptionFilters.html
 	//
 	// This member is required.
 	FilterName *string

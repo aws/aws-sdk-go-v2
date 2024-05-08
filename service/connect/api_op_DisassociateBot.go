@@ -12,8 +12,9 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
-// Revokes authorization from the specified instance to access the specified Amazon
-// Lex or Amazon Lex V2 bot.
+//
+// Revokes authorization from the specified instance to access the specified
+// Amazon Lex or Amazon Lex V2 bot.
 func (c *Client) DisassociateBot(ctx context.Context, params *DisassociateBotInput, optFns ...func(*Options)) (*DisassociateBotOutput, error) {
 	if params == nil {
 		params = &DisassociateBotInput{}
@@ -31,8 +32,10 @@ func (c *Client) DisassociateBot(ctx context.Context, params *DisassociateBotInp
 
 type DisassociateBotInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

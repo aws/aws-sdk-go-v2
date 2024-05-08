@@ -11,8 +11,9 @@ import (
 )
 
 // Updates an association. For more information about extensions and associations,
-// see Extending workflows (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
-// in the AppConfig User Guide.
+// see [Extending workflows]in the AppConfig User Guide.
+//
+// [Extending workflows]: https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html
 func (c *Client) UpdateExtensionAssociation(ctx context.Context, params *UpdateExtensionAssociationInput, optFns ...func(*Options)) (*UpdateExtensionAssociationOutput, error) {
 	if params == nil {
 		params = &UpdateExtensionAssociationInput{}

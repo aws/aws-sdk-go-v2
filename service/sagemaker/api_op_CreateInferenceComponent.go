@@ -64,9 +64,10 @@ type CreateInferenceComponentInput struct {
 	// This member is required.
 	VariantName *string
 
-	// A list of key-value pairs associated with the model. For more information, see
-	// Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// A list of key-value pairs associated with the model. For more information, see [Tagging Amazon Web Services resources]
 	// in the Amazon Web Services General Reference.
+	//
+	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

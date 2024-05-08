@@ -37,18 +37,19 @@ type CreateDomainInput struct {
 	Name *string
 
 	// The configuration, containing the KMS key identifier, to be used by Voice ID
-	// for the server-side encryption of your data. Refer to Amazon Connect Voice ID
-	// encryption at rest (https://docs.aws.amazon.com/connect/latest/adminguide/encryption-at-rest.html#encryption-at-rest-voiceid)
-	// for more details on how the KMS key is used.
+	// for the server-side encryption of your data. Refer to [Amazon Connect Voice ID encryption at rest]for more details on how
+	// the KMS key is used.
+	//
+	// [Amazon Connect Voice ID encryption at rest]: https://docs.aws.amazon.com/connect/latest/adminguide/encryption-at-rest.html#encryption-at-rest-voiceid
 	//
 	// This member is required.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// A brief description of this domain.

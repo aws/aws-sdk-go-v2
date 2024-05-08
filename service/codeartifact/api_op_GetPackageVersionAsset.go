@@ -12,7 +12,8 @@ import (
 	"io"
 )
 
-// Returns an asset (or file) that is in a package. For example, for a Maven
+//	Returns an asset (or file) that is in a package. For example, for a Maven
+//
 // package version, use GetPackageVersionAsset to download a JAR file, a POM file,
 // or any other assets in the package version.
 func (c *Client) GetPackageVersionAsset(ctx context.Context, params *GetPackageVersionAssetInput, optFns ...func(*Options)) (*GetPackageVersionAssetOutput, error) {
@@ -32,58 +33,65 @@ func (c *Client) GetPackageVersionAsset(ctx context.Context, params *GetPackageV
 
 type GetPackageVersionAssetInput struct {
 
-	// The name of the requested asset.
+	//  The name of the requested asset.
 	//
 	// This member is required.
 	Asset *string
 
-	// The name of the domain that contains the repository that contains the package
+	//  The name of the domain that contains the repository that contains the package
 	// version with the requested asset.
 	//
 	// This member is required.
 	Domain *string
 
-	// A format that specifies the type of the package version with the requested
+	//  A format that specifies the type of the package version with the requested
 	// asset file.
 	//
 	// This member is required.
 	Format types.PackageFormat
 
-	// The name of the package that contains the requested asset.
+	//  The name of the package that contains the requested asset.
 	//
 	// This member is required.
 	Package *string
 
-	// A string that contains the package version (for example, 3.5.2 ).
+	//  A string that contains the package version (for example, 3.5.2 ).
 	//
 	// This member is required.
 	PackageVersion *string
 
-	// The repository that contains the package version with the requested asset.
+	//  The repository that contains the package version with the requested asset.
 	//
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	// The namespace of the package version with the requested asset file. The package
-	// component that specifies its namespace depends on its type. For example: The
-	// namespace is required when requesting assets from package versions of the
+	// component that specifies its namespace depends on its type. For example:
+	//
+	// The namespace is required when requesting assets from package versions of the
 	// following formats:
+	//
 	//   - Maven
+	//
 	//   - Swift
+	//
 	//   - generic
 	//
 	//   - The namespace of a Maven package version is its groupId .
+	//
 	//   - The namespace of an npm or Swift package version is its scope .
+	//
 	//   - The namespace of a generic package is its namespace .
+	//
 	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
 	//   component, package versions of those formats do not have a namespace.
 	Namespace *string
 
-	// The name of the package version revision that contains the requested asset.
+	//  The name of the package version revision that contains the requested asset.
 	PackageVersionRevision *string
 
 	noSmithyDocumentSerde
@@ -91,16 +99,16 @@ type GetPackageVersionAssetInput struct {
 
 type GetPackageVersionAssetOutput struct {
 
-	// The binary file, or asset, that is downloaded.
+	//  The binary file, or asset, that is downloaded.
 	Asset io.ReadCloser
 
-	// The name of the asset that is downloaded.
+	//  The name of the asset that is downloaded.
 	AssetName *string
 
-	// A string that contains the package version (for example, 3.5.2 ).
+	//  A string that contains the package version (for example, 3.5.2 ).
 	PackageVersion *string
 
-	// The name of the package version revision that contains the downloaded asset.
+	//  The name of the package version revision that contains the downloaded asset.
 	PackageVersionRevision *string
 
 	// Metadata pertaining to the operation's result.

@@ -13,10 +13,14 @@ import (
 )
 
 // Updates the specified configuration template to have the specified properties
-// or configuration option values. If a property (for example, ApplicationName ) is
-// not provided, its value remains unchanged. To clear such properties, specify an
-// empty string. Related Topics
-//   - DescribeConfigurationOptions
+// or configuration option values.
+//
+// If a property (for example, ApplicationName ) is not provided, its value remains
+// unchanged. To clear such properties, specify an empty string.
+//
+// # Related Topics
+//
+// DescribeConfigurationOptions
 func (c *Client) UpdateConfigurationTemplate(ctx context.Context, params *UpdateConfigurationTemplateInput, optFns ...func(*Options)) (*UpdateConfigurationTemplateOutput, error) {
 	if params == nil {
 		params = &UpdateConfigurationTemplateInput{}
@@ -36,15 +40,18 @@ func (c *Client) UpdateConfigurationTemplate(ctx context.Context, params *Update
 type UpdateConfigurationTemplateInput struct {
 
 	// The name of the application associated with the configuration template to
-	// update. If no application is found with this name, UpdateConfigurationTemplate
-	// returns an InvalidParameterValue error.
+	// update.
+	//
+	// If no application is found with this name, UpdateConfigurationTemplate returns
+	// an InvalidParameterValue error.
 	//
 	// This member is required.
 	ApplicationName *string
 
-	// The name of the configuration template to update. If no configuration template
-	// is found with this name, UpdateConfigurationTemplate returns an
-	// InvalidParameterValue error.
+	// The name of the configuration template to update.
+	//
+	// If no configuration template is found with this name,
+	// UpdateConfigurationTemplate returns an InvalidParameterValue error.
 	//
 	// This member is required.
 	TemplateName *string
@@ -57,6 +64,7 @@ type UpdateConfigurationTemplateInput struct {
 	OptionSettings []types.ConfigurationOptionSetting
 
 	// A list of configuration options to remove from the configuration set.
+	//
 	// Constraint: You can remove only UserDefined configuration options.
 	OptionsToRemove []types.OptionSpecification
 
@@ -75,21 +83,25 @@ type UpdateConfigurationTemplateOutput struct {
 	// The date (in UTC time) when this configuration set was last modified.
 	DateUpdated *time.Time
 
-	// If this configuration set is associated with an environment, the
+	//  If this configuration set is associated with an environment, the
 	// DeploymentStatus parameter indicates the deployment status of this configuration
 	// set:
+	//
 	//   - null : This configuration is not associated with a running environment.
+	//
 	//   - pending : This is a draft configuration that is not deployed to the
 	//   associated environment but is in the process of deploying.
+	//
 	//   - deployed : This is the configuration that is currently deployed to the
 	//   associated running environment.
+	//
 	//   - failed : This is a draft configuration that failed to successfully deploy.
 	DeploymentStatus types.ConfigurationDeploymentStatus
 
 	// Describes this configuration set.
 	Description *string
 
-	// If not null , the name of the environment for this configuration set.
+	//  If not null , the name of the environment for this configuration set.
 	EnvironmentName *string
 
 	// A list of the configuration options and their values in this configuration set.
@@ -101,7 +113,8 @@ type UpdateConfigurationTemplateOutput struct {
 	// The name of the solution stack this configuration set uses.
 	SolutionStackName *string
 
-	// If not null , the name of the configuration template for this configuration set.
+	//  If not null , the name of the configuration template for this configuration
+	// set.
 	TemplateName *string
 
 	// Metadata pertaining to the operation's result.

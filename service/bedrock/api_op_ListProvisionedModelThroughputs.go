@@ -12,9 +12,10 @@ import (
 	"time"
 )
 
-// Lists the Provisioned Throughputs in the account. For more information, see
-// Provisioned Throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html)
-// in the Amazon Bedrock User Guide.
+// Lists the Provisioned Throughputs in the account. For more information, see [Provisioned Throughput] in
+// the Amazon Bedrock User Guide.
+//
+// [Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
 func (c *Client) ListProvisionedModelThroughputs(ctx context.Context, params *ListProvisionedModelThroughputsInput, optFns ...func(*Options)) (*ListProvisionedModelThroughputsOutput, error) {
 	if params == nil {
 		params = &ListProvisionedModelThroughputsInput{}
@@ -35,7 +36,8 @@ type ListProvisionedModelThroughputsInput struct {
 	// A filter that returns Provisioned Throughputs created after the specified time.
 	CreationTimeAfter *time.Time
 
-	// A filter that returns Provisioned Throughputs created before the specified time.
+	// A filter that returns Provisioned Throughputs created before the specified
+	// time.
 	CreationTimeBefore *time.Time
 
 	// THe maximum number of results to return in the response. If there are more

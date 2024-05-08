@@ -29,7 +29,7 @@ func (c *Client) ListAnomalousLogGroups(ctx context.Context, params *ListAnomalo
 
 type ListAnomalousLogGroupsInput struct {
 
-	// The ID of the insight containing the log groups.
+	//  The ID of the insight containing the log groups.
 	//
 	// This member is required.
 	InsightId *string
@@ -47,12 +47,12 @@ type ListAnomalousLogGroupsInput struct {
 
 type ListAnomalousLogGroupsOutput struct {
 
-	// The list of Amazon CloudWatch log groups that are related to an insight.
+	//  The list of Amazon CloudWatch log groups that are related to an insight.
 	//
 	// This member is required.
 	AnomalousLogGroups []types.AnomalousLogGroup
 
-	// The ID of the insight containing the log groups.
+	//  The ID of the insight containing the log groups.
 	//
 	// This member is required.
 	InsightId *string

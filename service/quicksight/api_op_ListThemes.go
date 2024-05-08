@@ -42,8 +42,11 @@ type ListThemesInput struct {
 	NextToken *string
 
 	// The type of themes that you want to list. Valid options include the following:
+	//
 	//   - ALL (default) - Display all existing themes.
+	//
 	//   - CUSTOM - Display only the themes created by people using Amazon QuickSight.
+	//
 	//   - QUICKSIGHT - Display only the starting themes defined by Amazon QuickSight.
 	Type types.ThemeType
 

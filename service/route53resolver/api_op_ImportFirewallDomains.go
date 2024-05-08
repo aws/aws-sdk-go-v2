@@ -12,11 +12,16 @@ import (
 )
 
 // Imports domain names from a file into a domain list, for use in a DNS firewall
-// rule group. Each domain specification in your domain list must satisfy the
-// following requirements:
+// rule group.
+//
+// Each domain specification in your domain list must satisfy the following
+// requirements:
+//
 //   - It can optionally start with * (asterisk).
+//
 //   - With the exception of the optional starting asterisk, it must only contain
 //     the following characters: A-Z , a-z , 0-9 , - (hyphen).
+//
 //   - It must be from 1-255 characters in length.
 func (c *Client) ImportFirewallDomains(ctx context.Context, params *ImportFirewallDomainsInput, optFns ...func(*Options)) (*ImportFirewallDomainsOutput, error) {
 	if params == nil {
@@ -36,9 +41,11 @@ func (c *Client) ImportFirewallDomains(ctx context.Context, params *ImportFirewa
 type ImportFirewallDomainsInput struct {
 
 	// The fully qualified URL or URI of the file stored in Amazon Simple Storage
-	// Service (Amazon S3) that contains the list of domains to import. The file must
-	// be in an S3 bucket that's in the same Region as your DNS Firewall. The file must
-	// be a text file and must contain a single domain per line.
+	// Service (Amazon S3) that contains the list of domains to import.
+	//
+	// The file must be in an S3 bucket that's in the same Region as your DNS
+	// Firewall. The file must be a text file and must contain a single domain per
+	// line.
 	//
 	// This member is required.
 	DomainFileUrl *string

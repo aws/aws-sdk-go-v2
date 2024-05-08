@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of aliases for a specified Amazon Lex bot. This operation
-// requires permissions for the lex:GetBotAliases action.
+// Returns a list of aliases for a specified Amazon Lex bot.
+//
+// This operation requires permissions for the lex:GetBotAliases action.
 func (c *Client) GetBotAliases(ctx context.Context, params *GetBotAliasesInput, optFns ...func(*Options)) (*GetBotAliasesOutput, error) {
 	if params == nil {
 		params = &GetBotAliasesInput{}

@@ -48,10 +48,17 @@ type DiscoverInstancesInput struct {
 
 	// The health status of the instances that you want to discover. This parameter is
 	// ignored for services that don't have a health check configured, and all
-	// instances are returned. HEALTHY Returns healthy instances. UNHEALTHY Returns
-	// unhealthy instances. ALL Returns all instances. HEALTHY_OR_ELSE_ALL Returns
-	// healthy instances, unless none are reporting a healthy state. In that case,
-	// return all instances. This is also called failing open.
+	// instances are returned.
+	//
+	// HEALTHY Returns healthy instances.
+	//
+	// UNHEALTHY Returns unhealthy instances.
+	//
+	// ALL Returns all instances.
+	//
+	// HEALTHY_OR_ELSE_ALL Returns healthy instances, unless none are reporting a
+	// healthy state. In that case, return all instances. This is also called failing
+	// open.
 	HealthStatus types.HealthStatusFilter
 
 	// The maximum number of instances that you want Cloud Map to return in the

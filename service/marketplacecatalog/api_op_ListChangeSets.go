@@ -14,8 +14,10 @@ import (
 // Returns the list of change sets owned by the account being used to make the
 // call. You can filter this list by providing any combination of entityId ,
 // ChangeSetName , and status. If you provide more than one filter, the API
-// operation applies a logical AND between the filters. You can describe a change
-// during the 60-day request history retention period for API calls.
+// operation applies a logical AND between the filters.
+//
+// You can describe a change during the 60-day request history retention period
+// for API calls.
 func (c *Client) ListChangeSets(ctx context.Context, params *ListChangeSetsInput, optFns ...func(*Options)) (*ListChangeSetsOutput, error) {
 	if params == nil {
 		params = &ListChangeSetsInput{}
@@ -58,7 +60,7 @@ type ListChangeSetsInput struct {
 
 type ListChangeSetsOutput struct {
 
-	// Array of ChangeSetSummaryListItem objects.
+	//  Array of ChangeSetSummaryListItem objects.
 	ChangeSetSummaryList []types.ChangeSetSummaryListItem
 
 	// The value of the next token, if it exists. Null if there are no more results.

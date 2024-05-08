@@ -13,9 +13,12 @@ import (
 )
 
 // Creates a new configuration set. After you create the configuration set, you
-// can add one or more event destinations to it. A configuration set is a set of
-// rules that you apply to the SMS and voice messages that you send. When you send
-// a message, you can optionally specify a single configuration set.
+// can add one or more event destinations to it.
+//
+// A configuration set is a set of rules that you apply to the SMS and voice
+// messages that you send.
+//
+// When you send a message, you can optionally specify a single configuration set.
 func (c *Client) CreateConfigurationSet(ctx context.Context, params *CreateConfigurationSetInput, optFns ...func(*Options)) (*CreateConfigurationSetOutput, error) {
 	if params == nil {
 		params = &CreateConfigurationSetInput{}
@@ -58,8 +61,9 @@ type CreateConfigurationSetOutput struct {
 	// The name of the new configuration set.
 	ConfigurationSetName *string
 
-	// The time when the configuration set was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the configuration set was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	CreatedTimestamp *time.Time
 
 	// An array of key and value pair tags that's associated with the configuration

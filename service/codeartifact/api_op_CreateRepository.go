@@ -29,7 +29,7 @@ func (c *Client) CreateRepository(ctx context.Context, params *CreateRepositoryI
 
 type CreateRepositoryInput struct {
 
-	// The name of the domain that contains the created repository.
+	//  The name of the domain that contains the created repository.
 	//
 	// This member is required.
 	Domain *string
@@ -39,21 +39,21 @@ type CreateRepositoryInput struct {
 	// This member is required.
 	Repository *string
 
-	// A description of the created repository.
+	//  A description of the created repository.
 	Description *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	// One or more tag key-value pairs for the repository.
 	Tags []types.Tag
 
-	// A list of upstream repositories to associate with the repository. The order of
+	//  A list of upstream repositories to associate with the repository. The order of
 	// the upstream repositories in the list determines their priority order when
-	// CodeArtifact looks for a requested package version. For more information, see
-	// Working with upstream repositories (https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html)
-	// .
+	// CodeArtifact looks for a requested package version. For more information, see [Working with upstream repositories].
+	//
+	// [Working with upstream repositories]: https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html
 	Upstreams []types.UpstreamRepository
 
 	noSmithyDocumentSerde
@@ -61,7 +61,7 @@ type CreateRepositoryInput struct {
 
 type CreateRepositoryOutput struct {
 
-	// Information about the created repository after processing the request.
+	//  Information about the created repository after processing the request.
 	Repository *types.RepositoryDescription
 
 	// Metadata pertaining to the operation's result.

@@ -47,9 +47,9 @@ type StartSingleWirelessDeviceImportTaskInput struct {
 	// request will complete successfully. However, if you try to create a new resource
 	// using the same token but different parameters, an HTTP 409 conflict occurs. If
 	// you omit this value, AWS SDKs will automatically generate a unique client
-	// request. For more information about idempotency, see Ensuring idempotency in
-	// Amazon EC2 API requests (https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html)
-	// .
+	// request. For more information about idempotency, see [Ensuring idempotency in Amazon EC2 API requests].
+	//
+	// [Ensuring idempotency in Amazon EC2 API requests]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
 	ClientRequestToken *string
 
 	// The name of the wireless device for which an import task is being started.

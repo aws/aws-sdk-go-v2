@@ -13,8 +13,9 @@ import (
 )
 
 // Provides a list of properties for the requested lineage group. For more
-// information, see Cross-Account Lineage Tracking  (https://docs.aws.amazon.com/sagemaker/latest/dg/xaccount-lineage-tracking.html)
-// in the Amazon SageMaker Developer Guide.
+// information, see [Cross-Account Lineage Tracking]in the Amazon SageMaker Developer Guide.
+//
+// [Cross-Account Lineage Tracking]: https://docs.aws.amazon.com/sagemaker/latest/dg/xaccount-lineage-tracking.html
 func (c *Client) DescribeLineageGroup(ctx context.Context, params *DescribeLineageGroupInput, optFns ...func(*Options)) (*DescribeLineageGroupOutput, error) {
 	if params == nil {
 		params = &DescribeLineageGroupInput{}

@@ -15,6 +15,7 @@
 // patterns can help you decide when to move or resize your running resources, and
 // still meet your performance and capacity requirements. For more information
 // about Compute Optimizer, including the required permissions to use the service,
-// see the Compute Optimizer User Guide (https://docs.aws.amazon.com/compute-optimizer/latest/ug/)
-// .
+// see the [Compute Optimizer User Guide].
+//
+// [Compute Optimizer User Guide]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/
 package computeoptimizer

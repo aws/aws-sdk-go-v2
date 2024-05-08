@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of profiling groups. The profiling groups are returned as
-// ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
-// objects.
+//	Returns a list of profiling groups. The profiling groups are returned as [ProfilingGroupDescription]
+//
+// ProfilingGroupDescription objects.
+//
+// [ProfilingGroupDescription]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html
 func (c *Client) ListProfilingGroups(ctx context.Context, params *ListProfilingGroupsInput, optFns ...func(*Options)) (*ListProfilingGroupsOutput, error) {
 	if params == nil {
 		params = &ListProfilingGroupsInput{}
@@ -33,9 +35,11 @@ func (c *Client) ListProfilingGroups(ctx context.Context, params *ListProfilingG
 type ListProfilingGroupsInput struct {
 
 	// A Boolean value indicating whether to include a description. If true , then a
-	// list of ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
-	// objects that contain detailed information about profiling groups is returned. If
-	// false , then a list of profiling group names is returned.
+	// list of [ProfilingGroupDescription]ProfilingGroupDescription objects that contain detailed information
+	// about profiling groups is returned. If false , then a list of profiling group
+	// names is returned.
+	//
+	// [ProfilingGroupDescription]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html
 	IncludeDescription *bool
 
 	// The maximum number of profiling groups results returned by ListProfilingGroups
@@ -48,9 +52,10 @@ type ListProfilingGroupsInput struct {
 	// The nextToken value returned from a previous paginated ListProfilingGroups
 	// request where maxResults was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
-	// returned the nextToken value. This token should be treated as an opaque
-	// identifier that is only used to retrieve the next items in a list and not for
-	// other programmatic purposes.
+	// returned the nextToken value.
+	//
+	// This token should be treated as an opaque identifier that is only used to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -59,9 +64,11 @@ type ListProfilingGroupsInput struct {
 // The structure representing the listProfilingGroupsResponse.
 type ListProfilingGroupsOutput struct {
 
-	// A returned list of profiling group names. A list of the names is returned only
-	// if includeDescription is false , otherwise a list of ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+	//  A returned list of profiling group names. A list of the names is returned only
+	// if includeDescription is false , otherwise a list of [ProfilingGroupDescription]ProfilingGroupDescription
 	// objects is returned.
+	//
+	// [ProfilingGroupDescription]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html
 	//
 	// This member is required.
 	ProfilingGroupNames []string
@@ -72,10 +79,11 @@ type ListProfilingGroupsOutput struct {
 	// no more results to return.
 	NextToken *string
 
-	// A returned list ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
-	// objects. A list of ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
-	// objects is returned only if includeDescription is true , otherwise a list of
-	// profiling group names is returned.
+	//  A returned list [ProfilingGroupDescription]ProfilingGroupDescription objects. A list of [ProfilingGroupDescription]
+	// ProfilingGroupDescription objects is returned only if includeDescription is true
+	// , otherwise a list of profiling group names is returned.
+	//
+	// [ProfilingGroupDescription]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html
 	ProfilingGroups []types.ProfilingGroupDescription
 
 	// Metadata pertaining to the operation's result.

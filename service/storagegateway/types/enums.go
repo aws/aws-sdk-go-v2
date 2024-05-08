@@ -16,8 +16,9 @@ const (
 )
 
 // Values returns all known values for ActiveDirectoryStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActiveDirectoryStatus) Values() []ActiveDirectoryStatus {
 	return []ActiveDirectoryStatus{
 		"ACCESS_DENIED",
@@ -41,8 +42,9 @@ const (
 
 // Values returns all known values for AvailabilityMonitorTestStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AvailabilityMonitorTestStatus) Values() []AvailabilityMonitorTestStatus {
 	return []AvailabilityMonitorTestStatus{
 		"COMPLETE",
@@ -60,8 +62,9 @@ const (
 )
 
 // Values returns all known values for CaseSensitivity. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CaseSensitivity) Values() []CaseSensitivity {
 	return []CaseSensitivity{
 		"ClientSpecified",
@@ -138,8 +141,9 @@ const (
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"ActivationKeyExpired",
@@ -216,8 +220,9 @@ const (
 )
 
 // Values returns all known values for FileShareType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FileShareType) Values() []FileShareType {
 	return []FileShareType{
 		"NFS",
@@ -235,8 +240,9 @@ const (
 )
 
 // Values returns all known values for GatewayCapacity. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GatewayCapacity) Values() []GatewayCapacity {
 	return []GatewayCapacity{
 		"Small",
@@ -258,8 +264,9 @@ const (
 )
 
 // Values returns all known values for HostEnvironment. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HostEnvironment) Values() []HostEnvironment {
 	return []HostEnvironment{
 		"VMWARE",
@@ -285,8 +292,9 @@ const (
 )
 
 // Values returns all known values for ObjectACL. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ObjectACL) Values() []ObjectACL {
 	return []ObjectACL{
 		"private",
@@ -308,8 +316,9 @@ const (
 )
 
 // Values returns all known values for PoolStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PoolStatus) Values() []PoolStatus {
 	return []PoolStatus{
 		"ACTIVE",
@@ -327,8 +336,9 @@ const (
 )
 
 // Values returns all known values for RetentionLockType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RetentionLockType) Values() []RetentionLockType {
 	return []RetentionLockType{
 		"COMPLIANCE",
@@ -347,8 +357,9 @@ const (
 )
 
 // Values returns all known values for SMBSecurityStrategy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SMBSecurityStrategy) Values() []SMBSecurityStrategy {
 	return []SMBSecurityStrategy{
 		"ClientSpecified",
@@ -366,8 +377,9 @@ const (
 )
 
 // Values returns all known values for TapeStorageClass. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TapeStorageClass) Values() []TapeStorageClass {
 	return []TapeStorageClass{
 		"DEEP_ARCHIVE",

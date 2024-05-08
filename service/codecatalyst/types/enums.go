@@ -15,8 +15,9 @@ const (
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComparisonOperator) Values() []ComparisonOperator {
 	return []ComparisonOperator{
 		"EQ",
@@ -38,6 +39,7 @@ const (
 
 // Values returns all known values for DevEnvironmentSessionType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DevEnvironmentSessionType) Values() []DevEnvironmentSessionType {
 	return []DevEnvironmentSessionType{
@@ -61,8 +63,9 @@ const (
 )
 
 // Values returns all known values for DevEnvironmentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DevEnvironmentStatus) Values() []DevEnvironmentStatus {
 	return []DevEnvironmentStatus{
 		"PENDING",
@@ -85,8 +88,9 @@ const (
 )
 
 // Values returns all known values for FilterKey. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FilterKey) Values() []FilterKey {
 	return []FilterKey{
 		"hasAccessTo",
@@ -105,8 +109,9 @@ const (
 )
 
 // Values returns all known values for InstanceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceType) Values() []InstanceType {
 	return []InstanceType{
 		"dev.standard1.small",
@@ -125,8 +130,9 @@ const (
 )
 
 // Values returns all known values for OperationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OperationType) Values() []OperationType {
 	return []OperationType{
 		"READONLY",
@@ -144,8 +150,9 @@ const (
 )
 
 // Values returns all known values for UserType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UserType) Values() []UserType {
 	return []UserType{
 		"USER",
@@ -164,8 +171,9 @@ const (
 )
 
 // Values returns all known values for WorkflowRunMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkflowRunMode) Values() []WorkflowRunMode {
 	return []WorkflowRunMode{
 		"QUEUED",
@@ -192,8 +200,9 @@ const (
 )
 
 // Values returns all known values for WorkflowRunStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkflowRunStatus) Values() []WorkflowRunStatus {
 	return []WorkflowRunStatus{
 		"SUCCEEDED",
@@ -219,8 +228,9 @@ const (
 )
 
 // Values returns all known values for WorkflowStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkflowStatus) Values() []WorkflowStatus {
 	return []WorkflowStatus{
 		"INVALID",

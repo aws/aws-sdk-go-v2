@@ -14,8 +14,10 @@ import (
 // Describes the specified client branding. Client branding allows you to
 // customize the log in page of various device types for your users. You can add
 // your company logo, the support email address, support link, link to reset
-// password, and a custom message for users trying to sign in. Only device types
-// that have branding information configured will be shown in the response.
+// password, and a custom message for users trying to sign in.
+//
+// Only device types that have branding information configured will be shown in
+// the response.
 func (c *Client) DescribeClientBranding(ctx context.Context, params *DescribeClientBrandingInput, optFns ...func(*Options)) (*DescribeClientBrandingOutput, error) {
 	if params == nil {
 		params = &DescribeClientBrandingInput{}

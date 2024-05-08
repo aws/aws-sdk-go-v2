@@ -12,8 +12,9 @@ import (
 )
 
 // Updates a machine learning (ML) project that is created from a template that
-// sets up an ML pipeline from training to deploying an approved model. You must
-// not update a project that is in use. If you update the
+// sets up an ML pipeline from training to deploying an approved model.
+//
+// You must not update a project that is in use. If you update the
 // ServiceCatalogProvisioningUpdateDetails of a project that is active or being
 // created, or updated, you may lose resources already created by the project.
 func (c *Client) UpdateProject(ctx context.Context, params *UpdateProjectInput, optFns ...func(*Options)) (*UpdateProjectOutput, error) {
@@ -44,17 +45,19 @@ type UpdateProjectInput struct {
 	// The product ID and provisioning artifact ID to provision a service catalog. The
 	// provisioning artifact ID will default to the latest provisioning artifact ID of
 	// the product, if you don't provide the provisioning artifact ID. For more
-	// information, see What is Amazon Web Services Service Catalog (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html)
-	// .
+	// information, see [What is Amazon Web Services Service Catalog].
+	//
+	// [What is Amazon Web Services Service Catalog]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
 	ServiceCatalogProvisioningUpdateDetails *types.ServiceCatalogProvisioningUpdateDetails
 
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or
-	// environment. For more information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// . In addition, the project must have tag update constraints set in order to
-	// include this parameter in the request. For more information, see Amazon Web
-	// Services Service Catalog Tag Update Constraints (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints-resourceupdate.html)
-	// .
+	// environment. For more information, see [Tagging Amazon Web Services Resources]. In addition, the project must have tag
+	// update constraints set in order to include this parameter in the request. For
+	// more information, see [Amazon Web Services Service Catalog Tag Update Constraints].
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Amazon Web Services Service Catalog Tag Update Constraints]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints-resourceupdate.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

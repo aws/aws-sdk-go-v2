@@ -12,9 +12,10 @@ import (
 	"time"
 )
 
-// Delete an existing pipe. For more information about pipes, see Amazon
-// EventBridge Pipes (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html)
-// in the Amazon EventBridge User Guide.
+// Delete an existing pipe. For more information about pipes, see [Amazon EventBridge Pipes] in the Amazon
+// EventBridge User Guide.
+//
+// [Amazon EventBridge Pipes]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html
 func (c *Client) DeletePipe(ctx context.Context, params *DeletePipeInput, optFns ...func(*Options)) (*DeletePipeOutput, error) {
 	if params == nil {
 		params = &DeletePipeInput{}
@@ -54,8 +55,9 @@ type DeletePipeOutput struct {
 	// The state the pipe should be in.
 	DesiredState types.RequestedPipeStateDescribeResponse
 
-	// When the pipe was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
-	// (YYYY-MM-DDThh:mm:ss.sTZD).
+	// When the pipe was last updated, in [ISO-8601 format] (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
 	LastModifiedTime *time.Time
 
 	// The name of the pipe.

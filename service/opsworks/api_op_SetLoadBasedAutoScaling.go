@@ -12,15 +12,19 @@ import (
 )
 
 // Specify the load-based auto scaling configuration for a specified layer. For
-// more information, see Managing Load with Time-based and Load-based Instances (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html)
-// . To use load-based auto scaling, you must create a set of load-based auto
+// more information, see [Managing Load with Time-based and Load-based Instances].
+//
+// To use load-based auto scaling, you must create a set of load-based auto
 // scaling instances. Load-based auto scaling operates only on the instances from
 // that set, so you must ensure that you have created enough instances to handle
-// the maximum anticipated load. Required Permissions: To use this action, an IAM
-// user must have a Manage permissions level for the stack, or an attached policy
-// that explicitly grants permissions. For more information on user permissions,
-// see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// the maximum anticipated load.
+//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see [Managing User Permissions].
+//
+// [Managing Load with Time-based and Load-based Instances]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) SetLoadBasedAutoScaling(ctx context.Context, params *SetLoadBasedAutoScalingInput, optFns ...func(*Options)) (*SetLoadBasedAutoScalingOutput, error) {
 	if params == nil {
 		params = &SetLoadBasedAutoScalingInput{}

@@ -30,8 +30,11 @@ func (c *Client) ListDeployments(ctx context.Context, params *ListDeploymentsInp
 type ListDeploymentsInput struct {
 
 	// The filter for the list of deployments. Choose one of the following options:
+	//
 	//   - ALL – The list includes all deployments.
+	//
 	//   - LATEST_ONLY – The list includes only the latest revision of each deployment.
+	//
 	// Default: LATEST_ONLY
 	HistoryFilter types.DeploymentHistoryFilter
 
@@ -41,12 +44,14 @@ type ListDeploymentsInput struct {
 	// The token to be used for the next set of paginated results.
 	NextToken *string
 
-	// The parent deployment's target ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// within a subdeployment.
+	// The parent deployment's target [ARN] within a subdeployment.
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ParentTargetArn *string
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the target IoT thing or thing group.
+	// The [ARN] of the target IoT thing or thing group.
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	TargetArn *string
 
 	noSmithyDocumentSerde

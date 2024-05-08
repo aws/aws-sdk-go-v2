@@ -12,7 +12,9 @@ import (
 )
 
 // Returns a list of tags attached to the specified Amazon Lookout for Vision
-// model. This operation requires permissions to perform the
+// model.
+//
+// This operation requires permissions to perform the
 // lookoutvision:ListTagsForResource operation.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {

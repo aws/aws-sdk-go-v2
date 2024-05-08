@@ -130,8 +130,9 @@ func TestClient_GreetingWithErrors_FooError_awsRestjson1Deserialize(t *testing.T
 		// Some X-Amzn-Errortype headers contain URLs. Clients need to split the URL on
 		// ':' and take only the first half of the string. For example,
 		// 'ValidationException:http://internal.amazon.com/coral/com.amazon.coral.validate/'
-		// is to be interpreted as 'ValidationException'. For an example service see Amazon
-		// Polly.
+		// is to be interpreted as 'ValidationException'.
+		//
+		// For an example service see Amazon Polly.
 		"RestJsonFooErrorUsingXAmznErrorTypeWithUri": {
 			StatusCode: 500,
 			Header: http.Header{
@@ -152,8 +153,9 @@ func TestClient_GreetingWithErrors_FooError_awsRestjson1Deserialize(t *testing.T
 		// This example uses the 'code' property in the output rather than
 		// X-Amzn-Errortype. Some services do this though it's preferable to send the
 		// X-Amzn-Errortype. Client implementations must first check for the
-		// X-Amzn-Errortype and then check for a top-level 'code' property. For example
-		// service see Amazon S3 Glacier.
+		// X-Amzn-Errortype and then check for a top-level 'code' property.
+		//
+		// For example service see Amazon S3 Glacier.
 		"RestJsonFooErrorUsingCode": {
 			StatusCode: 500,
 			Header: http.Header{

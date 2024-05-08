@@ -12,13 +12,14 @@ import (
 
 // Registers an Elastic IP address with a specified stack. An address can be
 // registered with only one stack at a time. If the address is already registered,
-// you must first deregister it by calling DeregisterElasticIp . For more
-// information, see Resource Management (https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html)
-// . Required Permissions: To use this action, an IAM user must have a Manage
+// you must first deregister it by calling DeregisterElasticIp. For more information, see [Resource Management].
+//
+// Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// permissions. For more information on user permissions, see [Managing User Permissions].
+//
+// [Resource Management]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) RegisterElasticIp(ctx context.Context, params *RegisterElasticIpInput, optFns ...func(*Options)) (*RegisterElasticIpOutput, error) {
 	if params == nil {
 		params = &RegisterElasticIpInput{}

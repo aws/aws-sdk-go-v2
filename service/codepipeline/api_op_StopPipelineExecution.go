@@ -45,8 +45,9 @@ type StopPipelineExecutionInput struct {
 	PipelineName *string
 
 	// Use this option to stop the pipeline execution by abandoning, rather than
-	// finishing, in-progress actions. This option can lead to failed or
-	// out-of-sequence tasks.
+	// finishing, in-progress actions.
+	//
+	// This option can lead to failed or out-of-sequence tasks.
 	Abandon bool
 
 	// Use this option to enter comments, such as the reason the pipeline was stopped.

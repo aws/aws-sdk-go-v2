@@ -11,11 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds one or more tags to the specified resource. Currently, you can attach tags
-// to the following resources in Organizations.
+// Adds one or more tags to the specified resource.
+//
+// Currently, you can attach tags to the following resources in Organizations.
+//
 //   - Amazon Web Services account
+//
 //   - Organization root
+//
 //   - Organizational unit (OU)
+//
 //   - Policy (any type)
 //
 // This operation can be called only from the organization's management account or
@@ -38,23 +43,30 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The ID of the resource to add a tag to. You can specify any of the following
-	// taggable resources.
+	// The ID of the resource to add a tag to.
+	//
+	// You can specify any of the following taggable resources.
+	//
 	//   - Amazon Web Services account – specify the account ID number.
+	//
 	//   - Organizational unit – specify the OU ID that begins with ou- and looks
 	//   similar to: ou-1a2b-34uvwxyz
+	//
 	//   - Root – specify the root ID that begins with r- and looks similar to: r-1a2b
+	//
 	//   - Policy – specify the policy ID that begins with p- andlooks similar to:
 	//   p-12abcdefg3
 	//
 	// This member is required.
 	ResourceId *string
 
-	// A list of tags to add to the specified resource. For each tag in the list, you
-	// must specify both a tag key and a value. The value can be an empty string, but
-	// you can't set it to null . If any one of the tags is not valid or if you exceed
-	// the maximum allowed number of tags for a resource, then the entire request
-	// fails.
+	// A list of tags to add to the specified resource.
+	//
+	// For each tag in the list, you must specify both a tag key and a value. The
+	// value can be an empty string, but you can't set it to null .
+	//
+	// If any one of the tags is not valid or if you exceed the maximum allowed number
+	// of tags for a resource, then the entire request fails.
 	//
 	// This member is required.
 	Tags []types.Tag

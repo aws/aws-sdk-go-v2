@@ -19,8 +19,9 @@ import (
 // general label that acts as a category for a more specific tag value. A tag value
 // acts as a descriptor for a tag key. Tags can help you identify, categorize, and
 // manage resources in different ways, such as by owner, environment, or other
-// criteria. For more information, see Tagging Amazon Security Lake resources (https://docs.aws.amazon.com/security-lake/latest/userguide/tagging-resources.html)
-// in the Amazon Security Lake User Guide.
+// criteria. For more information, see [Tagging Amazon Security Lake resources]in the Amazon Security Lake User Guide.
+//
+// [Tagging Amazon Security Lake resources]: https://docs.aws.amazon.com/security-lake/latest/userguide/tagging-resources.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

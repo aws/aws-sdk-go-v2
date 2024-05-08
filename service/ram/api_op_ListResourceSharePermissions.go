@@ -29,8 +29,10 @@ func (c *Client) ListResourceSharePermissions(ctx context.Context, params *ListR
 
 type ListResourceSharePermissionsInput struct {
 
-	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the resource share for which you want to retrieve the associated permissions.
+	// Specifies the [Amazon Resource Name (ARN)] of the resource share for which you want to retrieve the
+	// associated permissions.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	ResourceShareArn *string

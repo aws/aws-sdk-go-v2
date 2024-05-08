@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the most recent feedback submitted in the current Amazon Web Services
+//	Returns the most recent feedback submitted in the current Amazon Web Services
+//
 // account and Region.
 func (c *Client) DescribeFeedback(ctx context.Context, params *DescribeFeedbackInput, optFns ...func(*Options)) (*DescribeFeedbackOutput, error) {
 	if params == nil {
@@ -30,7 +31,7 @@ func (c *Client) DescribeFeedback(ctx context.Context, params *DescribeFeedbackI
 
 type DescribeFeedbackInput struct {
 
-	// The ID of the insight for which the feedback was provided.
+	//  The ID of the insight for which the feedback was provided.
 	InsightId *string
 
 	noSmithyDocumentSerde
@@ -38,7 +39,7 @@ type DescribeFeedbackInput struct {
 
 type DescribeFeedbackOutput struct {
 
-	// Information about insight feedback received from a customer.
+	//  Information about insight feedback received from a customer.
 	InsightFeedback *types.InsightFeedback
 
 	// Metadata pertaining to the operation's result.

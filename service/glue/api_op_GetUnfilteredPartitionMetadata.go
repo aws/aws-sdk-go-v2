@@ -12,8 +12,10 @@ import (
 )
 
 // Retrieves partition metadata from the Data Catalog that contains unfiltered
-// metadata. For IAM authorization, the public IAM action associated with this API
-// is glue:GetPartition .
+// metadata.
+//
+// For IAM authorization, the public IAM action associated with this API is
+// glue:GetPartition .
 func (c *Client) GetUnfilteredPartitionMetadata(ctx context.Context, params *GetUnfilteredPartitionMetadataInput, optFns ...func(*Options)) (*GetUnfilteredPartitionMetadataOutput, error) {
 	if params == nil {
 		params = &GetUnfilteredPartitionMetadataInput{}

@@ -41,7 +41,9 @@ type UpdateDetectorVersionStatusInput struct {
 	// This member is required.
 	DetectorVersionId *string
 
-	// The new status. The only supported values are ACTIVE and INACTIVE
+	// The new status.
+	//
+	// The only supported values are ACTIVE and INACTIVE
 	//
 	// This member is required.
 	Status types.DetectorVersionStatus

@@ -29,12 +29,12 @@ func (c *Client) GetDeploymentTarget(ctx context.Context, params *GetDeploymentT
 
 type GetDeploymentTargetInput struct {
 
-	// The unique ID of a deployment.
+	//  The unique ID of a deployment.
 	//
 	// This member is required.
 	DeploymentId *string
 
-	// The unique ID of a deployment target.
+	//  The unique ID of a deployment target.
 	//
 	// This member is required.
 	TargetId *string
@@ -44,7 +44,7 @@ type GetDeploymentTargetInput struct {
 
 type GetDeploymentTargetOutput struct {
 
-	// A deployment target that contains information about a deployment such as its
+	//  A deployment target that contains information about a deployment such as its
 	// status, lifecycle events, and when it was last updated. It also contains
 	// metadata about the deployment target. The deployment target metadata depends on
 	// the deployment target's type ( instanceTarget , lambdaTarget , or ecsTarget ).

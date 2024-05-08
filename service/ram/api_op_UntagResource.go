@@ -34,15 +34,17 @@ type UntagResourceInput struct {
 	// This member is required.
 	TagKeys []string
 
-	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the managed permission that you want to remove tags from. You must specify
-	// either resourceArn , or resourceShareArn , but not both.
+	// Specifies the [Amazon Resource Name (ARN)] of the managed permission that you want to remove tags from. You
+	// must specify either resourceArn , or resourceShareArn , but not both.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceArn *string
 
-	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the resource share that you want to remove tags from. The tags are removed
-	// from the resource share, not the resources in the resource share. You must
-	// specify either resourceShareArn , or resourceArn , but not both.
+	// Specifies the [Amazon Resource Name (ARN)] of the resource share that you want to remove tags from. The
+	// tags are removed from the resource share, not the resources in the resource
+	// share. You must specify either resourceShareArn , or resourceArn , but not both.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceShareArn *string
 
 	noSmithyDocumentSerde

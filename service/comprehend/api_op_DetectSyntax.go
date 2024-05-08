@@ -12,8 +12,9 @@ import (
 )
 
 // Inspects text for syntax and the part of speech of words in the document. For
-// more information, see Syntax (https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html)
-// in the Comprehend Developer Guide.
+// more information, see [Syntax]in the Comprehend Developer Guide.
+//
+// [Syntax]: https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html
 func (c *Client) DetectSyntax(ctx context.Context, params *DetectSyntaxInput, optFns ...func(*Options)) (*DetectSyntaxOutput, error) {
 	if params == nil {
 		params = &DetectSyntaxInput{}
@@ -51,8 +52,9 @@ type DetectSyntaxOutput struct {
 	// A collection of syntax tokens describing the text. For each token, the response
 	// provides the text, the token type, where the text begins and ends, and the level
 	// of confidence that Amazon Comprehend has that the token is correct. For a list
-	// of token types, see Syntax (https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html)
-	// in the Comprehend Developer Guide.
+	// of token types, see [Syntax]in the Comprehend Developer Guide.
+	//
+	// [Syntax]: https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html
 	SyntaxTokens []types.SyntaxToken
 
 	// Metadata pertaining to the operation's result.

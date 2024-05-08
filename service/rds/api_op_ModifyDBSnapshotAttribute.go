@@ -12,20 +12,25 @@ import (
 )
 
 // Adds an attribute and values to, or removes an attribute and values from, a
-// manual DB snapshot. To share a manual DB snapshot with other Amazon Web Services
-// accounts, specify restore as the AttributeName and use the ValuesToAdd
-// parameter to add a list of IDs of the Amazon Web Services accounts that are
-// authorized to restore the manual DB snapshot. Uses the value all to make the
-// manual DB snapshot public, which means it can be copied or restored by all
-// Amazon Web Services accounts. Don't add the all value for any manual DB
-// snapshots that contain private information that you don't want available to all
-// Amazon Web Services accounts. If the manual DB snapshot is encrypted, it can be
-// shared, but only by specifying a list of authorized Amazon Web Services account
-// IDs for the ValuesToAdd parameter. You can't use all as a value for that
-// parameter in this case. To view which Amazon Web Services accounts have access
-// to copy or restore a manual DB snapshot, or whether a manual DB snapshot public
-// or private, use the DescribeDBSnapshotAttributes API operation. The accounts
-// are returned as values for the restore attribute.
+// manual DB snapshot.
+//
+// To share a manual DB snapshot with other Amazon Web Services accounts, specify
+// restore as the AttributeName and use the ValuesToAdd parameter to add a list of
+// IDs of the Amazon Web Services accounts that are authorized to restore the
+// manual DB snapshot. Uses the value all to make the manual DB snapshot public,
+// which means it can be copied or restored by all Amazon Web Services accounts.
+//
+// Don't add the all value for any manual DB snapshots that contain private
+// information that you don't want available to all Amazon Web Services accounts.
+//
+// If the manual DB snapshot is encrypted, it can be shared, but only by
+// specifying a list of authorized Amazon Web Services account IDs for the
+// ValuesToAdd parameter. You can't use all as a value for that parameter in this
+// case.
+//
+// To view which Amazon Web Services accounts have access to copy or restore a
+// manual DB snapshot, or whether a manual DB snapshot public or private, use the DescribeDBSnapshotAttributes
+// API operation. The accounts are returned as values for the restore attribute.
 func (c *Client) ModifyDBSnapshotAttribute(ctx context.Context, params *ModifyDBSnapshotAttributeInput, optFns ...func(*Options)) (*ModifyDBSnapshotAttributeOutput, error) {
 	if params == nil {
 		params = &ModifyDBSnapshotAttributeInput{}
@@ -43,10 +48,12 @@ func (c *Client) ModifyDBSnapshotAttribute(ctx context.Context, params *ModifyDB
 
 type ModifyDBSnapshotAttributeInput struct {
 
-	// The name of the DB snapshot attribute to modify. To manage authorization for
-	// other Amazon Web Services accounts to copy or restore a manual DB snapshot, set
-	// this value to restore . To view the list of attributes available to modify, use
-	// the DescribeDBSnapshotAttributes API operation.
+	// The name of the DB snapshot attribute to modify.
+	//
+	// To manage authorization for other Amazon Web Services accounts to copy or
+	// restore a manual DB snapshot, set this value to restore .
+	//
+	// To view the list of attributes available to modify, use the DescribeDBSnapshotAttributes API operation.
 	//
 	// This member is required.
 	AttributeName *string
@@ -57,21 +64,25 @@ type ModifyDBSnapshotAttributeInput struct {
 	DBSnapshotIdentifier *string
 
 	// A list of DB snapshot attributes to add to the attribute specified by
-	// AttributeName . To authorize other Amazon Web Services accounts to copy or
-	// restore a manual snapshot, set this list to include one or more Amazon Web
-	// Services account IDs, or all to make the manual DB snapshot restorable by any
-	// Amazon Web Services account. Do not add the all value for any manual DB
-	// snapshots that contain private information that you don't want available to all
-	// Amazon Web Services accounts.
+	// AttributeName .
+	//
+	// To authorize other Amazon Web Services accounts to copy or restore a manual
+	// snapshot, set this list to include one or more Amazon Web Services account IDs,
+	// or all to make the manual DB snapshot restorable by any Amazon Web Services
+	// account. Do not add the all value for any manual DB snapshots that contain
+	// private information that you don't want available to all Amazon Web Services
+	// accounts.
 	ValuesToAdd []string
 
 	// A list of DB snapshot attributes to remove from the attribute specified by
-	// AttributeName . To remove authorization for other Amazon Web Services accounts
-	// to copy or restore a manual snapshot, set this list to include one or more
-	// Amazon Web Services account identifiers, or all to remove authorization for any
-	// Amazon Web Services account to copy or restore the DB snapshot. If you specify
-	// all , an Amazon Web Services account whose account ID is explicitly added to the
-	// restore attribute can still copy or restore the manual DB snapshot.
+	// AttributeName .
+	//
+	// To remove authorization for other Amazon Web Services accounts to copy or
+	// restore a manual snapshot, set this list to include one or more Amazon Web
+	// Services account identifiers, or all to remove authorization for any Amazon Web
+	// Services account to copy or restore the DB snapshot. If you specify all , an
+	// Amazon Web Services account whose account ID is explicitly added to the restore
+	// attribute can still copy or restore the manual DB snapshot.
 	ValuesToRemove []string
 
 	noSmithyDocumentSerde
@@ -80,9 +91,11 @@ type ModifyDBSnapshotAttributeInput struct {
 type ModifyDBSnapshotAttributeOutput struct {
 
 	// Contains the results of a successful call to the DescribeDBSnapshotAttributes
-	// API action. Manual DB snapshot attributes are used to authorize other Amazon Web
-	// Services accounts to copy or restore a manual DB snapshot. For more information,
-	// see the ModifyDBSnapshotAttribute API action.
+	// API action.
+	//
+	// Manual DB snapshot attributes are used to authorize other Amazon Web Services
+	// accounts to copy or restore a manual DB snapshot. For more information, see the
+	// ModifyDBSnapshotAttribute API action.
 	DBSnapshotAttributesResult *types.DBSnapshotAttributesResult
 
 	// Metadata pertaining to the operation's result.

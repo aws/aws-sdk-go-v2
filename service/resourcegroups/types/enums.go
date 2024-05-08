@@ -13,6 +13,7 @@ const (
 
 // Values returns all known values for GroupConfigurationStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (GroupConfigurationStatus) Values() []GroupConfigurationStatus {
 	return []GroupConfigurationStatus{
@@ -31,8 +32,9 @@ const (
 )
 
 // Values returns all known values for GroupFilterName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GroupFilterName) Values() []GroupFilterName {
 	return []GroupFilterName{
 		"resource-type",
@@ -50,8 +52,9 @@ const (
 
 // Values returns all known values for GroupLifecycleEventsDesiredStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GroupLifecycleEventsDesiredStatus) Values() []GroupLifecycleEventsDesiredStatus {
 	return []GroupLifecycleEventsDesiredStatus{
 		"ACTIVE",
@@ -71,6 +74,7 @@ const (
 
 // Values returns all known values for GroupLifecycleEventsStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (GroupLifecycleEventsStatus) Values() []GroupLifecycleEventsStatus {
 	return []GroupLifecycleEventsStatus{
@@ -92,8 +96,9 @@ const (
 )
 
 // Values returns all known values for QueryErrorCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QueryErrorCode) Values() []QueryErrorCode {
 	return []QueryErrorCode{
 		"CLOUDFORMATION_STACK_INACTIVE",
@@ -112,8 +117,9 @@ const (
 )
 
 // Values returns all known values for QueryType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QueryType) Values() []QueryType {
 	return []QueryType{
 		"TAG_FILTERS_1_0",
@@ -129,8 +135,9 @@ const (
 )
 
 // Values returns all known values for ResourceFilterName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceFilterName) Values() []ResourceFilterName {
 	return []ResourceFilterName{
 		"resource-type",
@@ -145,8 +152,9 @@ const (
 )
 
 // Values returns all known values for ResourceStatusValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceStatusValue) Values() []ResourceStatusValue {
 	return []ResourceStatusValue{
 		"PENDING",

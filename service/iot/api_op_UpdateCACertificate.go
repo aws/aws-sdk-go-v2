@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a registered CA certificate. Requires permission to access the
-// UpdateCACertificate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Updates a registered CA certificate.
+//
+// Requires permission to access the [UpdateCACertificate] action.
+//
+// [UpdateCACertificate]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdateCACertificate(ctx context.Context, params *UpdateCACertificateInput, optFns ...func(*Options)) (*UpdateCACertificateOutput, error) {
 	if params == nil {
 		params = &UpdateCACertificateInput{}
@@ -41,8 +43,9 @@ type UpdateCACertificateInput struct {
 	// "DISABLE".
 	NewAutoRegistrationStatus types.AutoRegistrationStatus
 
-	// The updated status of the CA certificate. Note: The status value
-	// REGISTER_INACTIVE is deprecated and should not be used.
+	// The updated status of the CA certificate.
+	//
+	// Note: The status value REGISTER_INACTIVE is deprecated and should not be used.
 	NewStatus types.CACertificateStatus
 
 	// Information about the registration configuration.

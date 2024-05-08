@@ -18,8 +18,9 @@ const (
 )
 
 // Values returns all known values for AttributeName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AttributeName) Values() []AttributeName {
 	return []AttributeName{
 		"SIGN",
@@ -86,8 +87,9 @@ const (
 )
 
 // Values returns all known values for EntitySubType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EntitySubType) Values() []EntitySubType {
 	return []EntitySubType{
 		"NAME",
@@ -152,8 +154,9 @@ const (
 )
 
 // Values returns all known values for EntityType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EntityType) Values() []EntityType {
 	return []EntityType{
 		"MEDICATION",
@@ -180,8 +183,9 @@ const (
 )
 
 // Values returns all known values for ICD10CMAttributeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ICD10CMAttributeType) Values() []ICD10CMAttributeType {
 	return []ICD10CMAttributeType{
 		"ACUITY",
@@ -202,8 +206,9 @@ const (
 )
 
 // Values returns all known values for ICD10CMEntityCategory. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ICD10CMEntityCategory) Values() []ICD10CMEntityCategory {
 	return []ICD10CMEntityCategory{
 		"MEDICAL_CONDITION",
@@ -219,8 +224,9 @@ const (
 )
 
 // Values returns all known values for ICD10CMEntityType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ICD10CMEntityType) Values() []ICD10CMEntityType {
 	return []ICD10CMEntityType{
 		"DX_NAME",
@@ -238,8 +244,9 @@ const (
 )
 
 // Values returns all known values for ICD10CMRelationshipType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ICD10CMRelationshipType) Values() []ICD10CMRelationshipType {
 	return []ICD10CMRelationshipType{
 		"OVERLAP",
@@ -262,8 +269,9 @@ const (
 )
 
 // Values returns all known values for ICD10CMTraitName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ICD10CMTraitName) Values() []ICD10CMTraitName {
 	return []ICD10CMTraitName{
 		"NEGATION",
@@ -290,8 +298,9 @@ const (
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"SUBMITTED",
@@ -312,8 +321,9 @@ const (
 )
 
 // Values returns all known values for LanguageCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LanguageCode) Values() []LanguageCode {
 	return []LanguageCode{
 		"en",
@@ -349,8 +359,9 @@ const (
 )
 
 // Values returns all known values for RelationshipType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RelationshipType) Values() []RelationshipType {
 	return []RelationshipType{
 		"EVERY",
@@ -392,8 +403,9 @@ const (
 )
 
 // Values returns all known values for RxNormAttributeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RxNormAttributeType) Values() []RxNormAttributeType {
 	return []RxNormAttributeType{
 		"DOSAGE",
@@ -414,8 +426,9 @@ const (
 )
 
 // Values returns all known values for RxNormEntityCategory. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RxNormEntityCategory) Values() []RxNormEntityCategory {
 	return []RxNormEntityCategory{
 		"MEDICATION",
@@ -431,8 +444,9 @@ const (
 )
 
 // Values returns all known values for RxNormEntityType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RxNormEntityType) Values() []RxNormEntityType {
 	return []RxNormEntityType{
 		"BRAND_NAME",
@@ -449,8 +463,9 @@ const (
 )
 
 // Values returns all known values for RxNormTraitName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RxNormTraitName) Values() []RxNormTraitName {
 	return []RxNormTraitName{
 		"NEGATION",
@@ -471,8 +486,9 @@ const (
 )
 
 // Values returns all known values for SNOMEDCTAttributeType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SNOMEDCTAttributeType) Values() []SNOMEDCTAttributeType {
 	return []SNOMEDCTAttributeType{
 		"ACUITY",
@@ -494,8 +510,9 @@ const (
 )
 
 // Values returns all known values for SNOMEDCTEntityCategory. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SNOMEDCTEntityCategory) Values() []SNOMEDCTEntityCategory {
 	return []SNOMEDCTEntityCategory{
 		"MEDICAL_CONDITION",
@@ -515,8 +532,9 @@ const (
 )
 
 // Values returns all known values for SNOMEDCTEntityType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SNOMEDCTEntityType) Values() []SNOMEDCTEntityType {
 	return []SNOMEDCTEntityType{
 		"DX_NAME",
@@ -541,6 +559,7 @@ const (
 
 // Values returns all known values for SNOMEDCTRelationshipType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SNOMEDCTRelationshipType) Values() []SNOMEDCTRelationshipType {
 	return []SNOMEDCTRelationshipType{
@@ -570,8 +589,9 @@ const (
 )
 
 // Values returns all known values for SNOMEDCTTraitName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SNOMEDCTTraitName) Values() []SNOMEDCTTraitName {
 	return []SNOMEDCTTraitName{
 		"NEGATION",

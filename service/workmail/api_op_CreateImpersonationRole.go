@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an impersonation role for the given WorkMail organization. Idempotency
-// ensures that an API request completes no more than one time. With an idempotent
-// request, if the original request completes successfully, any subsequent retries
-// also complete successfully without performing any further actions.
+// Creates an impersonation role for the given WorkMail organization.
+//
+// Idempotency ensures that an API request completes no more than one time. With
+// an idempotent request, if the original request completes successfully, any
+// subsequent retries also complete successfully without performing any further
+// actions.
 func (c *Client) CreateImpersonationRole(ctx context.Context, params *CreateImpersonationRoleInput, optFns ...func(*Options)) (*CreateImpersonationRoleOutput, error) {
 	if params == nil {
 		params = &CreateImpersonationRoleInput{}

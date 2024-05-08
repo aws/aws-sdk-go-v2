@@ -14,13 +14,16 @@ import (
 // Returns a database user name and temporary password with temporary
 // authorization to log in to an Amazon Redshift database. The database user is
 // mapped 1:1 to the source Identity and Access Management (IAM) identity. For more
-// information about IAM identities, see IAM Identities (users, user groups, and
-// roles) (https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) in the Amazon
-// Web Services Identity and Access Management User Guide. The Identity and Access
-// Management (IAM) identity that runs this operation must have an IAM policy
-// attached that allows access to all necessary actions and resources. For more
-// information about permissions, see Using identity-based policies (IAM policies) (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html)
-// in the Amazon Redshift Cluster Management Guide.
+// information about IAM identities, see [IAM Identities (users, user groups, and roles)]in the Amazon Web Services Identity and
+// Access Management User Guide.
+//
+// The Identity and Access Management (IAM) identity that runs this operation must
+// have an IAM policy attached that allows access to all necessary actions and
+// resources. For more information about permissions, see [Using identity-based policies (IAM policies)]in the Amazon Redshift
+// Cluster Management Guide.
+//
+// [IAM Identities (users, user groups, and roles)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html
+// [Using identity-based policies (IAM policies)]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html
 func (c *Client) GetClusterCredentialsWithIAM(ctx context.Context, params *GetClusterCredentialsWithIAMInput, optFns ...func(*Options)) (*GetClusterCredentialsWithIAMOutput, error) {
 	if params == nil {
 		params = &GetClusterCredentialsWithIAMInput{}
@@ -51,8 +54,9 @@ type GetClusterCredentialsWithIAMInput struct {
 	// access to all databases is allowed.
 	DbName *string
 
-	// The number of seconds until the returned temporary password expires. Range:
-	// 900-3600. Default: 900.
+	// The number of seconds until the returned temporary password expires.
+	//
+	// Range: 900-3600. Default: 900.
 	DurationSeconds *int32
 
 	noSmithyDocumentSerde

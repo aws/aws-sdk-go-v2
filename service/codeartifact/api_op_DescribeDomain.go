@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a DomainDescription (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainDescription.html)
-// object that contains information about the requested domain.
+//	Returns a [DomainDescription] object that contains information about the requested domain.
+//
+// [DomainDescription]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainDescription.html
 func (c *Client) DescribeDomain(ctx context.Context, params *DescribeDomainInput, optFns ...func(*Options)) (*DescribeDomainOutput, error) {
 	if params == nil {
 		params = &DescribeDomainInput{}
@@ -30,12 +31,12 @@ func (c *Client) DescribeDomain(ctx context.Context, params *DescribeDomainInput
 
 type DescribeDomainInput struct {
 
-	// A string that specifies the name of the requested domain.
+	//  A string that specifies the name of the requested domain.
 	//
 	// This member is required.
 	Domain *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
@@ -44,7 +45,7 @@ type DescribeDomainInput struct {
 
 type DescribeDomainOutput struct {
 
-	// Information about a domain. A domain is a container for repositories. When you
+	//  Information about a domain. A domain is a container for repositories. When you
 	// create a domain, it is empty until you add one or more repositories.
 	Domain *types.DomainDescription
 

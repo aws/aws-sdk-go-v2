@@ -29,12 +29,12 @@ func (c *Client) BatchDisassociateResourcesFromCustomLineItem(ctx context.Contex
 
 type BatchDisassociateResourcesFromCustomLineItemInput struct {
 
-	// A list containing the ARNs of resources to be disassociated.
+	//  A list containing the ARNs of resources to be disassociated.
 	//
 	// This member is required.
 	ResourceArns []string
 
-	// A percentage custom line item ARN to disassociate the resources from.
+	//  A percentage custom line item ARN to disassociate the resources from.
 	//
 	// This member is required.
 	TargetArn *string
@@ -47,11 +47,11 @@ type BatchDisassociateResourcesFromCustomLineItemInput struct {
 
 type BatchDisassociateResourcesFromCustomLineItemOutput struct {
 
-	// A list of DisassociateResourceResponseElement for each resource that failed
+	//  A list of DisassociateResourceResponseElement for each resource that failed
 	// disassociation from a percentage custom line item.
 	FailedDisassociatedResources []types.DisassociateResourceResponseElement
 
-	// A list of DisassociateResourceResponseElement for each resource that's been
+	//  A list of DisassociateResourceResponseElement for each resource that's been
 	// disassociated from a percentage custom line item successfully.
 	SuccessfullyDisassociatedResources []types.DisassociateResourceResponseElement
 

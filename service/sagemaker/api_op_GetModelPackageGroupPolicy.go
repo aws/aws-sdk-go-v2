@@ -11,8 +11,10 @@ import (
 )
 
 // Gets a resource policy that manages access for a model group. For information
-// about resource policies, see Identity-based policies and resource-based policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html)
-// in the Amazon Web Services Identity and Access Management User Guide..
+// about resource policies, see [Identity-based policies and resource-based policies]in the Amazon Web Services Identity and Access
+// Management User Guide..
+//
+// [Identity-based policies and resource-based policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html
 func (c *Client) GetModelPackageGroupPolicy(ctx context.Context, params *GetModelPackageGroupPolicyInput, optFns ...func(*Options)) (*GetModelPackageGroupPolicyOutput, error) {
 	if params == nil {
 		params = &GetModelPackageGroupPolicyInput{}

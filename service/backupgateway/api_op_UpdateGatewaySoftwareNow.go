@@ -11,9 +11,10 @@ import (
 )
 
 // Updates the gateway virtual machine (VM) software. The request immediately
-// triggers the software update. When you make this request, you get a 200 OK
-// success response immediately. However, it might take some time for the update to
-// complete.
+// triggers the software update.
+//
+// When you make this request, you get a 200 OK success response immediately.
+// However, it might take some time for the update to complete.
 func (c *Client) UpdateGatewaySoftwareNow(ctx context.Context, params *UpdateGatewaySoftwareNowInput, optFns ...func(*Options)) (*UpdateGatewaySoftwareNowOutput, error) {
 	if params == nil {
 		params = &UpdateGatewaySoftwareNowInput{}

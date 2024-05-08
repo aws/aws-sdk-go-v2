@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all tags for an accelerator. For more information, see Tagging in Global
-// Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html)
-// in the Global Accelerator Developer Guide.
+// List all tags for an accelerator.
+//
+// For more information, see [Tagging in Global Accelerator] in the Global Accelerator Developer Guide.
+//
+// [Tagging in Global Accelerator]: https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

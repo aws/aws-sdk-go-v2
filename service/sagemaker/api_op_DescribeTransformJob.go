@@ -88,8 +88,10 @@ type DescribeTransformJobOutput struct {
 
 	// Specifies the number of records to include in a mini-batch for an HTTP
 	// inference request. A record is a single unit of input data that inference can be
-	// made on. For example, a single line in a CSV file is a record. To enable the
-	// batch strategy, you must set SplitType to Line , RecordIO , or TFRecord .
+	// made on. For example, a single line in a CSV file is a record.
+	//
+	// To enable the batch strategy, you must set SplitType to Line , RecordIO , or
+	// TFRecord .
 	BatchStrategy types.BatchStrategy
 
 	// Configuration to control how SageMaker captures inference data.
@@ -100,9 +102,9 @@ type DescribeTransformJobOutput struct {
 	// results in the output. The input filter provided allows you to exclude input
 	// data that is not needed for inference in a batch transform job. The output
 	// filter provided allows you to include input data relevant to interpreting the
-	// predictions in the output from the job. For more information, see Associate
-	// Prediction Results with their Corresponding Input Records (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html)
-	// .
+	// predictions in the output from the job. For more information, see [Associate Prediction Results with their Corresponding Input Records].
+	//
+	// [Associate Prediction Results with their Corresponding Input Records]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html
 	DataProcessing *types.DataProcessing
 
 	// The environment variables to set in the Docker container. We support up to 16
@@ -111,16 +113,23 @@ type DescribeTransformJobOutput struct {
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
-	//   - CreateProcessingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html)
-	//   - CreateTrainingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
-	//   - CreateTransformJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html)
+	//
+	// [CreateProcessingJob]
+	//
+	// [CreateTrainingJob]
+	//
+	// [CreateTransformJob]
+	//
+	// [CreateTransformJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html
+	// [CreateTrainingJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html
+	// [CreateProcessingJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html
 	ExperimentConfig *types.ExperimentConfig
 
 	// If the transform job failed, FailureReason describes why it failed. A transform
 	// job creates a log file, which includes error messages, and stores it as an
-	// Amazon S3 object. For more information, see Log Amazon SageMaker Events with
-	// Amazon CloudWatch (https://docs.aws.amazon.com/sagemaker/latest/dg/logging-cloudwatch.html)
-	// .
+	// Amazon S3 object. For more information, see [Log Amazon SageMaker Events with Amazon CloudWatch].
+	//
+	// [Log Amazon SageMaker Events with Amazon CloudWatch]: https://docs.aws.amazon.com/sagemaker/latest/dg/logging-cloudwatch.html
 	FailureReason *string
 
 	// The Amazon Resource Name (ARN) of the Amazon SageMaker Ground Truth labeling
@@ -138,9 +147,10 @@ type DescribeTransformJobOutput struct {
 	// invocation.
 	ModelClientConfig *types.ModelClientConfig
 
-	// Indicates when the transform job has been completed, or has stopped or failed.
-	// You are billed for the time interval between this time and the value of
-	// TransformStartTime .
+	// Indicates when the transform job has been
+	//
+	// completed, or has stopped or failed. You are billed for the time interval
+	// between this time and the value of TransformStartTime .
 	TransformEndTime *time.Time
 
 	// Identifies the Amazon S3 location where you want Amazon SageMaker to save the
@@ -279,12 +289,13 @@ type TransformJobCompletedOrStoppedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeTransformJobInput, *DescribeTransformJobOutput, error) (bool, error)
 }
 

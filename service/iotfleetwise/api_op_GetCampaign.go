@@ -30,7 +30,7 @@ func (c *Client) GetCampaign(ctx context.Context, params *GetCampaignInput, optF
 
 type GetCampaignInput struct {
 
-	// The name of the campaign to retrieve information about.
+	//  The name of the campaign to retrieve information about.
 	//
 	// This member is required.
 	Name *string
@@ -40,40 +40,43 @@ type GetCampaignInput struct {
 
 type GetCampaignOutput struct {
 
-	// The Amazon Resource Name (ARN) of the campaign.
+	//  The Amazon Resource Name (ARN) of the campaign.
 	Arn *string
 
-	// Information about the data collection scheme associated with the campaign.
+	//  Information about the data collection scheme associated with the campaign.
 	CollectionScheme types.CollectionScheme
 
-	// Whether to compress signals before transmitting data to Amazon Web Services IoT
-	// FleetWise. If OFF is specified, the signals aren't compressed. If it's not
+	//  Whether to compress signals before transmitting data to Amazon Web Services
+	// IoT FleetWise. If OFF is specified, the signals aren't compressed. If it's not
 	// specified, SNAPPY is used.
 	Compression types.Compression
 
-	// The time the campaign was created in seconds since epoch (January 1, 1970 at
+	//  The time the campaign was created in seconds since epoch (January 1, 1970 at
 	// midnight UTC time).
 	CreationTime *time.Time
 
 	// The destination where the campaign sends data. You can choose to send data to
-	// be stored in Amazon S3 or Amazon Timestream. Amazon S3 optimizes the cost of
-	// data storage and provides additional mechanisms to use vehicle data, such as
-	// data lakes, centralized data storage, data processing pipelines, and analytics.
+	// be stored in Amazon S3 or Amazon Timestream.
+	//
+	// Amazon S3 optimizes the cost of data storage and provides additional mechanisms
+	// to use vehicle data, such as data lakes, centralized data storage, data
+	// processing pipelines, and analytics.
+	//
 	// You can use Amazon Timestream to access and analyze time series data, and
 	// Timestream to query vehicle data so that you can identify trends and patterns.
 	DataDestinationConfigs []types.DataDestinationConfig
 
-	// A list of vehicle attributes associated with the campaign.
+	//  A list of vehicle attributes associated with the campaign.
 	DataExtraDimensions []string
 
 	// The description of the campaign.
 	Description *string
 
-	// Option for a vehicle to send diagnostic trouble codes to Amazon Web Services
+	//  Option for a vehicle to send diagnostic trouble codes to Amazon Web Services
 	// IoT FleetWise.
 	DiagnosticsMode types.DiagnosticsMode
 
-	// The time the campaign expires, in seconds since epoch (January 1, 1970 at
+	//  The time the campaign expires, in seconds since epoch (January 1, 1970 at
 	// midnight UTC time). Vehicle data won't be collected after the campaign expires.
 	ExpiryTime *time.Time
 
@@ -83,34 +86,34 @@ type GetCampaignOutput struct {
 	// The name of the campaign.
 	Name *string
 
-	// How long (in seconds) to collect raw data after a triggering event initiates
+	//  How long (in seconds) to collect raw data after a triggering event initiates
 	// the collection.
 	PostTriggerCollectionDuration *int64
 
-	// A number indicating the priority of one campaign over another campaign for a
+	//  A number indicating the priority of one campaign over another campaign for a
 	// certain vehicle or fleet. A campaign with the lowest value is deployed to
 	// vehicles before any other campaigns.
 	Priority *int32
 
-	// The ARN of a signal catalog.
+	//  The ARN of a signal catalog.
 	SignalCatalogArn *string
 
-	// Information about a list of signals to collect data on.
+	//  Information about a list of signals to collect data on.
 	SignalsToCollect []types.SignalInformation
 
-	// Whether to store collected data after a vehicle lost a connection with the
+	//  Whether to store collected data after a vehicle lost a connection with the
 	// cloud. After a connection is re-established, the data is automatically forwarded
 	// to Amazon Web Services IoT FleetWise.
 	SpoolingMode types.SpoolingMode
 
-	// The time, in milliseconds, to deliver a campaign after it was approved.
+	//  The time, in milliseconds, to deliver a campaign after it was approved.
 	StartTime *time.Time
 
 	// The state of the campaign. The status can be one of: CREATING ,
 	// WAITING_FOR_APPROVAL , RUNNING , and SUSPENDED .
 	Status types.CampaignStatus
 
-	// The ARN of the vehicle or the fleet targeted by the campaign.
+	//  The ARN of the vehicle or the fleet targeted by the campaign.
 	TargetArn *string
 
 	// Metadata pertaining to the operation's result.

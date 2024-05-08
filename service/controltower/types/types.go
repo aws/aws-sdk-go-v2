@@ -77,20 +77,27 @@ type ControlOperation struct {
 	noSmithyDocumentSerde
 }
 
-// The drift summary of the enabled control. Amazon Web Services Control Tower
-// expects the enabled control configuration to include all supported and governed
-// Regions. If the enabled control differs from the expected configuration, it is
-// defined to be in a state of drift. You can repair this drift by resetting the
-// enabled control.
+// The drift summary of the enabled control.
+//
+// Amazon Web Services Control Tower expects the enabled control configuration to
+// include all supported and governed Regions. If the enabled control differs from
+// the expected configuration, it is defined to be in a state of drift. You can
+// repair this drift by resetting the enabled control.
 type DriftStatusSummary struct {
 
-	// The drift status of the enabled control. Valid values:
+	//  The drift status of the enabled control.
+	//
+	// Valid values:
+	//
 	//   - DRIFTED : The enabledControl deployed in this configuration doesn’t match
 	//   the configuration that Amazon Web Services Control Tower expected.
+	//
 	//   - IN_SYNC : The enabledControl deployed in this configuration matches the
 	//   configuration that Amazon Web Services Control Tower expected.
+	//
 	//   - NOT_CHECKING : Amazon Web Services Control Tower does not check drift for
 	//   this enabled control. Drift is not supported for the control type.
+	//
 	//   - UNKNOWN : Amazon Web Services Control Tower is not able to check the drift
 	//   status for the enabled control.
 	DriftStatus DriftStatus
@@ -212,8 +219,9 @@ type EnabledControlDetails struct {
 	Arn *string
 
 	// The control identifier of the enabled control. For information on how to find
-	// the controlIdentifier , see the overview page (https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html)
-	// .
+	// the controlIdentifier , see [the overview page].
+	//
+	// [the overview page]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
 	ControlIdentifier *string
 
 	// The drift status of the enabled control.
@@ -226,8 +234,9 @@ type EnabledControlDetails struct {
 	StatusSummary *EnablementStatusSummary
 
 	// The ARN of the organizational unit. For information on how to find the
-	// targetIdentifier , see the overview page (https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html)
-	// .
+	// targetIdentifier , see [the overview page].
+	//
+	// [the overview page]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
 	TargetIdentifier *string
 
 	// Target Amazon Web Services Regions for the enabled control.
@@ -295,9 +304,14 @@ type EnablementStatusSummary struct {
 	// The last operation identifier for the enabled control.
 	LastOperationIdentifier *string
 
-	// The deployment status of the enabled control. Valid values:
+	//  The deployment status of the enabled control.
+	//
+	// Valid values:
+	//
 	//   - SUCCEEDED : The enabledControl configuration was deployed successfully.
+	//
 	//   - UNDER_CHANGE : The enabledControl configuration is changing.
+	//
 	//   - FAILED : The enabledControl configuration failed to deploy.
 	Status EnablementStatus
 
@@ -333,14 +347,19 @@ type LandingZoneDetail struct {
 	noSmithyDocumentSerde
 }
 
-// The drift status summary of the landing zone. If the landing zone differs from
-// the expected configuration, it is defined to be in a state of drift. You can
-// repair this drift by resetting the landing zone.
+// The drift status summary of the landing zone.
+//
+// If the landing zone differs from the expected configuration, it is defined to
+// be in a state of drift. You can repair this drift by resetting the landing zone.
 type LandingZoneDriftStatusSummary struct {
 
-	// The drift status of the landing zone. Valid values:
+	// The drift status of the landing zone.
+	//
+	// Valid values:
+	//
 	//   - DRIFTED : The landing zone deployed in this configuration does not match the
 	//   configuration that Amazon Web Services Control Tower expected.
+	//
 	//   - IN_SYNC : The landing zone deployed in this configuration matches the
 	//   configuration that Amazon Web Services Control Tower expected.
 	Status LandingZoneDriftStatus
@@ -354,10 +373,16 @@ type LandingZoneOperationDetail struct {
 	// The landing zone operation end time.
 	EndTime *time.Time
 
-	// The landing zone operation type. Valid values:
+	// The landing zone operation type.
+	//
+	// Valid values:
+	//
 	//   - DELETE : The DeleteLandingZone operation.
+	//
 	//   - CREATE : The CreateLandingZone operation.
+	//
 	//   - UPDATE : The UpdateLandingZone operation.
+	//
 	//   - RESET : The ResetLandingZone operation.
 	OperationType LandingZoneOperationType
 
@@ -365,8 +390,11 @@ type LandingZoneOperationDetail struct {
 	StartTime *time.Time
 
 	// Valid values:
+	//
 	//   - SUCCEEDED : The landing zone operation succeeded.
+	//
 	//   - IN_PROGRESS : The landing zone operation is in progress.
+	//
 	//   - FAILED : The landing zone operation failed.
 	Status LandingZoneOperationStatus
 
@@ -387,11 +415,13 @@ type LandingZoneSummary struct {
 }
 
 // An Amazon Web Services Region in which Amazon Web Services Control Tower
-// expects to find the control deployed. The expected Regions are based on the
-// Regions that are governed by the landing zone. In certain cases, a control is
-// not actually enabled in the Region as expected, such as during drift, or mixed
-// governance (https://docs.aws.amazon.com/controltower/latest/userguide/region-how.html#mixed-governance)
-// .
+// expects to find the control deployed.
+//
+// The expected Regions are based on the Regions that are governed by the landing
+// zone. In certain cases, a control is not actually enabled in the Region as
+// expected, such as during drift, or [mixed governance].
+//
+// [mixed governance]: https://docs.aws.amazon.com/controltower/latest/userguide/region-how.html#mixed-governance
 type Region struct {
 
 	// The Amazon Web Services Region name.

@@ -71,9 +71,11 @@ type ListModelVersionsInput struct {
 type ListModelVersionsOutput struct {
 
 	// Provides information on the specified model version, including the created
-	// time, model and dataset ARNs, and status. If you don't supply the ModelName
-	// request parameter, or if you supply the name of a model that doesn't exist,
-	// ListModelVersions returns an empty array in ModelVersionSummaries .
+	// time, model and dataset ARNs, and status.
+	//
+	// If you don't supply the ModelName request parameter, or if you supply the name
+	// of a model that doesn't exist, ListModelVersions returns an empty array in
+	// ModelVersionSummaries .
 	ModelVersionSummaries []types.ModelVersionSummary
 
 	// If the total number of results exceeds the limit that the response can display,

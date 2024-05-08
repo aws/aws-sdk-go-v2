@@ -13,11 +13,13 @@ import (
 
 // Records action interaction event data. An action interaction event is an
 // interaction between a user and an action. For example, a user taking an action,
-// such a enrolling in a membership program or downloading your app. For more
-// information about recording action interactions, see Recording action
-// interaction events (https://docs.aws.amazon.com/personalize/latest/dg/recording-action-interaction-events.html)
-// . For more information about actions in an Actions dataset, see Actions dataset (https://docs.aws.amazon.com/personalize/latest/dg/actions-datasets.html)
-// .
+// such a enrolling in a membership program or downloading your app.
+//
+// For more information about recording action interactions, see [Recording action interaction events]. For more
+// information about actions in an Actions dataset, see [Actions dataset].
+//
+// [Recording action interaction events]: https://docs.aws.amazon.com/personalize/latest/dg/recording-action-interaction-events.html
+// [Actions dataset]: https://docs.aws.amazon.com/personalize/latest/dg/actions-datasets.html
 func (c *Client) PutActionInteractions(ctx context.Context, params *PutActionInteractionsInput, optFns ...func(*Options)) (*PutActionInteractionsOutput, error) {
 	if params == nil {
 		params = &PutActionInteractionsInput{}
@@ -42,8 +44,9 @@ type PutActionInteractionsInput struct {
 
 	// The ID of your action interaction event tracker. When you create an Action
 	// interactions dataset, Amazon Personalize creates an action interaction event
-	// tracker for you. For more information, see Action interaction event tracker ID (https://docs.aws.amazon.com/personalize/latest/dg/action-interaction-tracker-id.html)
-	// .
+	// tracker for you. For more information, see [Action interaction event tracker ID].
+	//
+	// [Action interaction event tracker ID]: https://docs.aws.amazon.com/personalize/latest/dg/action-interaction-tracker-id.html
 	//
 	// This member is required.
 	TrackingId *string

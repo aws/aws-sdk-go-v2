@@ -11,12 +11,18 @@ import (
 )
 
 // Adds or updates a sending authorization policy for the specified identity (an
-// email address or a domain). This operation is for the identity owner only. If
-// you have not verified the identity, it returns an error. Sending authorization
-// is a feature that enables an identity owner to authorize other senders to use
-// its identities. For information about using sending authorization, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html)
-// . You can execute this operation no more than once per second.
+// email address or a domain).
+//
+// This operation is for the identity owner only. If you have not verified the
+// identity, it returns an error.
+//
+// Sending authorization is a feature that enables an identity owner to authorize
+// other senders to use its identities. For information about using sending
+// authorization, see the [Amazon SES Developer Guide].
+//
+// You can execute this operation no more than once per second.
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
 func (c *Client) PutIdentityPolicy(ctx context.Context, params *PutIdentityPolicyInput, optFns ...func(*Options)) (*PutIdentityPolicyOutput, error) {
 	if params == nil {
 		params = &PutIdentityPolicyInput{}
@@ -34,30 +40,34 @@ func (c *Client) PutIdentityPolicy(ctx context.Context, params *PutIdentityPolic
 
 // Represents a request to add or update a sending authorization policy for an
 // identity. Sending authorization is an Amazon SES feature that enables you to
-// authorize other senders to use your identities. For information, see the Amazon
-// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html)
-// .
+// authorize other senders to use your identities. For information, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
 type PutIdentityPolicyInput struct {
 
 	// The identity to which that the policy applies. You can specify an identity by
 	// using its name or by using its Amazon Resource Name (ARN). Examples:
 	// user@example.com , example.com ,
-	// arn:aws:ses:us-east-1:123456789012:identity/example.com . To successfully call
-	// this operation, you must own the identity.
+	// arn:aws:ses:us-east-1:123456789012:identity/example.com .
+	//
+	// To successfully call this operation, you must own the identity.
 	//
 	// This member is required.
 	Identity *string
 
-	// The text of the policy in JSON format. The policy cannot exceed 4 KB. For
-	// information about the syntax of sending authorization policies, see the Amazon
-	// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/sending-authorization-policies.html)
-	// .
+	// The text of the policy in JSON format. The policy cannot exceed 4 KB.
+	//
+	// For information about the syntax of sending authorization policies, see the [Amazon SES Developer Guide].
+	//
+	// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization-policies.html
 	//
 	// This member is required.
 	Policy *string
 
-	// The name of the policy. The policy name cannot exceed 64 characters and can
-	// only include alphanumeric characters, dashes, and underscores.
+	// The name of the policy.
+	//
+	// The policy name cannot exceed 64 characters and can only include alphanumeric
+	// characters, dashes, and underscores.
 	//
 	// This member is required.
 	PolicyName *string

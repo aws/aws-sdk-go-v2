@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is a paginated call to list linked accounts that are linked to the payer
+//	This is a paginated call to list linked accounts that are linked to the payer
+//
 // account for the specified time period. If no information is provided, the
 // current billing period is used. The response will optionally include the billing
 // group that's associated with the linked account.
@@ -32,16 +33,20 @@ func (c *Client) ListAccountAssociations(ctx context.Context, params *ListAccoun
 
 type ListAccountAssociationsInput struct {
 
-	// The preferred billing period to get account associations.
+	//  The preferred billing period to get account associations.
 	BillingPeriod *string
 
 	// The filter on the account ID of the linked account, or any of the following:
-	// MONITORED : linked accounts that are associated to billing groups. UNMONITORED :
-	// linked accounts that aren't associated to billing groups. Billing Group Arn :
-	// linked accounts that are associated to the provided billing group Arn.
+	//
+	// MONITORED : linked accounts that are associated to billing groups.
+	//
+	// UNMONITORED : linked accounts that aren't associated to billing groups.
+	//
+	// Billing Group Arn : linked accounts that are associated to the provided billing
+	// group Arn.
 	Filters *types.ListAccountAssociationsFilter
 
-	// The pagination token that's used on subsequent calls to retrieve accounts.
+	//  The pagination token that's used on subsequent calls to retrieve accounts.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,10 +54,10 @@ type ListAccountAssociationsInput struct {
 
 type ListAccountAssociationsOutput struct {
 
-	// The list of linked accounts in the payer account.
+	//  The list of linked accounts in the payer account.
 	LinkedAccounts []types.AccountAssociationsListElement
 
-	// The pagination token that's used on subsequent calls to get accounts.
+	//  The pagination token that's used on subsequent calls to get accounts.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

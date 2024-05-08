@@ -11,8 +11,9 @@ import (
 )
 
 // Update a dataset to replace its schema with a new or existing one. For more
-// information, see Replacing a dataset's schema (https://docs.aws.amazon.com/personalize/latest/dg/updating-dataset-schema.html)
-// .
+// information, see [Replacing a dataset's schema].
+//
+// [Replacing a dataset's schema]: https://docs.aws.amazon.com/personalize/latest/dg/updating-dataset-schema.html
 func (c *Client) UpdateDataset(ctx context.Context, params *UpdateDatasetInput, optFns ...func(*Options)) (*UpdateDatasetOutput, error) {
 	if params == nil {
 		params = &UpdateDatasetInput{}

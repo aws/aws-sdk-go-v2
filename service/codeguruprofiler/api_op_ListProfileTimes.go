@@ -37,11 +37,14 @@ type ListProfileTimesInput struct {
 	// This member is required.
 	EndTime *time.Time
 
-	// The aggregation period. This specifies the period during which an aggregation
+	//  The aggregation period. This specifies the period during which an aggregation
 	// profile collects posted agent profiles for a profiling group. There are 3 valid
 	// values.
+	//
 	//   - P1D — 1 day
+	//
 	//   - PT1H — 1 hour
+	//
 	//   - PT5M — 5 minutes
 	//
 	// This member is required.
@@ -67,9 +70,10 @@ type ListProfileTimesInput struct {
 	// The nextToken value returned from a previous paginated ListProfileTimes request
 	// where maxResults was used and the results exceeded the value of that parameter.
 	// Pagination continues from the end of the previous results that returned the
-	// nextToken value. This token should be treated as an opaque identifier that is
-	// only used to retrieve the next items in a list and not for other programmatic
-	// purposes.
+	// nextToken value.
+	//
+	// This token should be treated as an opaque identifier that is only used to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// The order (ascending or descending by start time of the profile) to use when

@@ -11,8 +11,9 @@ import (
 )
 
 // Allows a schema to be updated using JSON upload. Only available for development
-// schemas. See JSON Schema Format (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_jsonformat.html#schemas_json)
-// for more information.
+// schemas. See [JSON Schema Format]for more information.
+//
+// [JSON Schema Format]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_jsonformat.html#schemas_json
 func (c *Client) PutSchemaFromJson(ctx context.Context, params *PutSchemaFromJsonInput, optFns ...func(*Options)) (*PutSchemaFromJsonOutput, error) {
 	if params == nil {
 		params = &PutSchemaFromJsonInput{}

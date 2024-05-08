@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a mailbox export job. If the mailbox export job is near completion, it
-// might not be possible to cancel it.
+// Cancels a mailbox export job.
+//
+// If the mailbox export job is near completion, it might not be possible to
+// cancel it.
 func (c *Client) CancelMailboxExportJob(ctx context.Context, params *CancelMailboxExportJobInput, optFns ...func(*Options)) (*CancelMailboxExportJobOutput, error) {
 	if params == nil {
 		params = &CancelMailboxExportJobInput{}

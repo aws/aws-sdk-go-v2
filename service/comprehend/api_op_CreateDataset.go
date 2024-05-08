@@ -12,8 +12,10 @@ import (
 )
 
 // Creates a dataset to upload training or test data for a model associated with a
-// flywheel. For more information about datasets, see Flywheel overview (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html)
-// in the Amazon Comprehend Developer Guide.
+// flywheel. For more information about datasets, see [Flywheel overview]in the Amazon Comprehend
+// Developer Guide.
+//
+// [Flywheel overview]: https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {
 		params = &CreateDatasetInput{}

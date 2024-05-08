@@ -10,11 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a backup. You can delete both manual and automated backups. This
-// operation is asynchronous. An InvalidStateException is thrown when a backup
-// deletion is already in progress. A ResourceNotFoundException is thrown when the
-// backup does not exist. A ValidationException is thrown when parameters of the
-// request are not valid.
+//	Deletes a backup. You can delete both manual and automated backups. This
+//
+// operation is asynchronous.
+//
+// An InvalidStateException is thrown when a backup deletion is already in
+// progress. A ResourceNotFoundException is thrown when the backup does not exist.
+// A ValidationException is thrown when parameters of the request are not valid.
 func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, optFns ...func(*Options)) (*DeleteBackupOutput, error) {
 	if params == nil {
 		params = &DeleteBackupInput{}

@@ -68,9 +68,10 @@ type BrokerNodeGroupInfo struct {
 	// The distribution of broker nodes across Availability Zones. This is an optional
 	// parameter. If you don't specify it, Amazon MSK gives it the value DEFAULT. You
 	// can also explicitly set this parameter to the value DEFAULT. No other values are
-	// currently allowed. Amazon MSK distributes the broker nodes evenly across the
-	// Availability Zones that correspond to the subnets you provide when you create
-	// the cluster.
+	// currently allowed.
+	//
+	// Amazon MSK distributes the broker nodes evenly across the Availability Zones
+	// that correspond to the subnets you provide when you create the cluster.
 	BrokerAZDistribution BrokerAZDistribution
 
 	// Information about the broker access configuration.
@@ -258,8 +259,9 @@ type ClusterInfo struct {
 	// Specifies which metrics are gathered for the MSK cluster. This property has the
 	// following possible values: DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and
 	// PER_TOPIC_PER_PARTITION. For a list of the metrics associated with each of these
-	// levels of monitoring, see Monitoring (https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html)
-	// .
+	// levels of monitoring, see [Monitoring].
+	//
+	// [Monitoring]: https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html
 	EnhancedMonitoring EnhancedMonitoring
 
 	LoggingInfo *LoggingInfo
@@ -644,16 +646,23 @@ type EncryptionInfo struct {
 type EncryptionInTransit struct {
 
 	// Indicates the encryption setting for data in transit between clients and
-	// brokers. The following are the possible values. TLS means that client-broker
-	// communication is enabled with TLS only. TLS_PLAINTEXT means that client-broker
-	// communication is enabled for both TLS-encrypted, as well as plaintext data.
+	// brokers. The following are the possible values.
+	//
+	// TLS means that client-broker communication is enabled with TLS only.
+	//
+	// TLS_PLAINTEXT means that client-broker communication is enabled for both
+	// TLS-encrypted, as well as plaintext data.
+	//
 	// PLAINTEXT means that client-broker communication is enabled in plaintext only.
+	//
 	// The default value is TLS_PLAINTEXT.
 	ClientBroker ClientBroker
 
 	// When set to true, it indicates that data communication among the broker nodes
 	// of the cluster is encrypted. When set to false, the communication happens in
-	// plaintext. The default value is true.
+	// plaintext.
+	//
+	// The default value is true.
 	InCluster *bool
 
 	noSmithyDocumentSerde

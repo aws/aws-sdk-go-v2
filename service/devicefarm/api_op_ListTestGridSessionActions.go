@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the actions taken in a TestGridSession .
+// Returns a list of the actions taken in a TestGridSession.
 func (c *Client) ListTestGridSessionActions(ctx context.Context, params *ListTestGridSessionActionsInput, optFns ...func(*Options)) (*ListTestGridSessionActionsOutput, error) {
 	if params == nil {
 		params = &ListTestGridSessionActionsInput{}

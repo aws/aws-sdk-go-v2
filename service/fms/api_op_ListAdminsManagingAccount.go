@@ -13,7 +13,7 @@ import (
 // Lists the accounts that are managing the specified Organizations member
 // account. This is useful for any member account so that they can view the
 // accounts who are managing their account. This operation only returns the
-// managing administrators that have the requested account within their AdminScope .
+// managing administrators that have the requested account within their AdminScope.
 func (c *Client) ListAdminsManagingAccount(ctx context.Context, params *ListAdminsManagingAccountInput, optFns ...func(*Options)) (*ListAdminsManagingAccountOutput, error) {
 	if params == nil {
 		params = &ListAdminsManagingAccountInput{}
@@ -49,7 +49,7 @@ type ListAdminsManagingAccountInput struct {
 
 type ListAdminsManagingAccountOutput struct {
 
-	// The list of accounts who manage member accounts within their AdminScope .
+	// The list of accounts who manage member accounts within their AdminScope.
 	AdminAccounts []string
 
 	// When you request a list of objects with a MaxResults setting, if the number of

@@ -34,11 +34,10 @@ type DescribeDataSharesInput struct {
 	DataShareArn *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeDataShares request exceed the
-	// value specified in MaxRecords , Amazon Web Services returns a value in the
-	// Marker field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// response records. When the results of a DescribeDataSharesrequest exceed the value specified in
+	// MaxRecords , Amazon Web Services returns a value in the Marker field of the
+	// response. You can retrieve the next set of response records by providing the
+	// returned marker value in the Marker parameter and retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
@@ -56,11 +55,10 @@ type DescribeDataSharesOutput struct {
 	DataShares []types.DataShare
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeDataShares request exceed the
-	// value specified in MaxRecords , Amazon Web Services returns a value in the
-	// Marker field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// response records. When the results of a DescribeDataSharesrequest exceed the value specified in
+	// MaxRecords , Amazon Web Services returns a value in the Marker field of the
+	// response. You can retrieve the next set of response records by providing the
+	// returned marker value in the Marker parameter and retrying the request.
 	Marker *string
 
 	// Metadata pertaining to the operation's result.

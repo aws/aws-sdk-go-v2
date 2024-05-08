@@ -39,20 +39,33 @@ type UpdateResolverEndpointInput struct {
 	// The name of the Resolver endpoint that you want to update.
 	Name *string
 
-	// The protocols you want to use for the endpoint. DoH-FIPS is applicable for
-	// inbound endpoints only. For an inbound endpoint you can apply the protocols as
-	// follows:
+	//  The protocols you want to use for the endpoint. DoH-FIPS is applicable for
+	// inbound endpoints only.
+	//
+	// For an inbound endpoint you can apply the protocols as follows:
+	//
 	//   - Do53 and DoH in combination.
+	//
 	//   - Do53 and DoH-FIPS in combination.
+	//
 	//   - Do53 alone.
+	//
 	//   - DoH alone.
+	//
 	//   - DoH-FIPS alone.
+	//
 	//   - None, which is treated as Do53.
+	//
 	// For an outbound endpoint you can apply the protocols as follows:
+	//
 	//   - Do53 and DoH in combination.
+	//
 	//   - Do53 alone.
+	//
 	//   - DoH alone.
+	//
 	//   - None, which is treated as Do53.
+	//
 	// You can't change the protocol of an inbound endpoint directly from only Do53 to
 	// only DoH, or DoH-FIPS. This is to prevent a sudden disruption to incoming
 	// traffic that relies on Do53. To change the protocol from Do53 to DoH, or
@@ -61,11 +74,13 @@ type UpdateResolverEndpointInput struct {
 	// DoH-FIPS, and then remove the Do53.
 	Protocols []types.Protocol
 
-	// Specifies the endpoint type for what type of IP address the endpoint uses to
-	// forward DNS queries. Updating to IPV6 type isn't currently supported.
+	//  Specifies the endpoint type for what type of IP address the endpoint uses to
+	// forward DNS queries.
+	//
+	// Updating to IPV6 type isn't currently supported.
 	ResolverEndpointType types.ResolverEndpointType
 
-	// Specifies the IPv6 address when you update the Resolver endpoint from IPv4 to
+	//  Specifies the IPv6 address when you update the Resolver endpoint from IPv4 to
 	// dual-stack. If you don't specify an IPv6 address, one will be automatically
 	// chosen from your subnet.
 	UpdateIpAddresses []types.UpdateIpAddress

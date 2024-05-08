@@ -12,9 +12,11 @@ import (
 )
 
 // Deletes GuardDuty member accounts (to the current GuardDuty administrator
-// account) specified by the account IDs. With autoEnableOrganizationMembers
-// configuration for your organization set to ALL , you'll receive an error if you
-// attempt to disable GuardDuty for a member account in your organization.
+// account) specified by the account IDs.
+//
+// With autoEnableOrganizationMembers configuration for your organization set to
+// ALL , you'll receive an error if you attempt to disable GuardDuty for a member
+// account in your organization.
 func (c *Client) DeleteMembers(ctx context.Context, params *DeleteMembersInput, optFns ...func(*Options)) (*DeleteMembersOutput, error) {
 	if params == nil {
 		params = &DeleteMembersInput{}

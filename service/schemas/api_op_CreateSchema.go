@@ -12,7 +12,9 @@ import (
 	"time"
 )
 
-// Creates a schema definition. Inactive schemas will be deleted after two years.
+// Creates a schema definition.
+//
+// Inactive schemas will be deleted after two years.
 func (c *Client) CreateSchema(ctx context.Context, params *CreateSchemaInput, optFns ...func(*Options)) (*CreateSchemaOutput, error) {
 	if params == nil {
 		params = &CreateSchemaInput{}

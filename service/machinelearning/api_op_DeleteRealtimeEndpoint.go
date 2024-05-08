@@ -37,8 +37,9 @@ type DeleteRealtimeEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of an DeleteRealtimeEndpoint operation. The result
-// contains the MLModelId and the endpoint information for the MLModel .
+// Represents the output of an DeleteRealtimeEndpoint operation.
+//
+// The result contains the MLModelId and the endpoint information for the MLModel .
 type DeleteRealtimeEndpointOutput struct {
 
 	// A user-supplied ID that uniquely identifies the MLModel . This value should be

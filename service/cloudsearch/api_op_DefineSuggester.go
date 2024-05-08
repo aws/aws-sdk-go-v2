@@ -14,9 +14,10 @@ import (
 // Configures a suggester for a domain. A suggester enables you to display
 // possible matches before users finish typing their queries. When you configure a
 // suggester, you must specify the name of the text field you want to search for
-// possible matches and a unique name for the suggester. For more information, see
-// Getting Search Suggestions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
+// possible matches and a unique name for the suggester. For more information, see [Getting Search Suggestions]
 // in the Amazon CloudSearch Developer Guide.
+//
+// [Getting Search Suggestions]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html
 func (c *Client) DefineSuggester(ctx context.Context, params *DefineSuggesterInput, optFns ...func(*Options)) (*DefineSuggesterOutput, error) {
 	if params == nil {
 		params = &DefineSuggesterInput{}
@@ -32,8 +33,8 @@ func (c *Client) DefineSuggester(ctx context.Context, params *DefineSuggesterInp
 	return out, nil
 }
 
-// Container for the parameters to the DefineSuggester operation. Specifies the
-// name of the domain you want to update and the suggester configuration.
+// Container for the parameters to the DefineSuggester operation. Specifies the name of the
+// domain you want to update and the suggester configuration.
 type DefineSuggesterInput struct {
 
 	// A string that represents the name of a domain. Domain names are unique across

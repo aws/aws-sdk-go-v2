@@ -27,7 +27,7 @@ type AccountLimit struct {
 	TotalCodeSize int64
 
 	// The maximum number of simultaneous function executions, minus the capacity
-	// that's reserved for individual functions with PutFunctionConcurrency .
+	// that's reserved for individual functions with PutFunctionConcurrency.
 	UnreservedConcurrentExecutions *int32
 
 	noSmithyDocumentSerde
@@ -46,8 +46,9 @@ type AccountUsage struct {
 	noSmithyDocumentSerde
 }
 
-// Provides configuration information about a Lambda function alias (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html)
-// .
+// Provides configuration information about a Lambda function [alias].
+//
+// [alias]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
 type AliasConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the alias.
@@ -65,15 +66,17 @@ type AliasConfiguration struct {
 	// A unique identifier that changes when you update the alias.
 	RevisionId *string
 
-	// The routing configuration (https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html)
-	// of the alias.
+	// The [routing configuration] of the alias.
+	//
+	// [routing configuration]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
 	RoutingConfig *AliasRoutingConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// The traffic-shifting (https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html)
-// configuration of a Lambda function alias.
+// The [traffic-shifting] configuration of a Lambda function alias.
+//
+// [traffic-shifting]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
 type AliasRoutingConfiguration struct {
 
 	// The second version, and the percentage of traffic that's routed to it.
@@ -101,15 +104,17 @@ type AmazonManagedKafkaEventSourceConfig struct {
 	// The identifier for the Kafka consumer group to join. The consumer group ID must
 	// be unique among all your Kafka event sources. After creating a Kafka event
 	// source mapping with the consumer group ID specified, you cannot update this
-	// value. For more information, see Customizable consumer group ID (https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id)
-	// .
+	// value. For more information, see [Customizable consumer group ID].
+	//
+	// [Customizable consumer group ID]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id
 	ConsumerGroupId *string
 
 	noSmithyDocumentSerde
 }
 
-// Details about a Code signing configuration (https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html)
-// .
+// Details about a [Code signing configuration].
+//
+// [Code signing configuration]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
 type CodeSigningConfig struct {
 
 	// List of allowed publishers.
@@ -145,14 +150,18 @@ type CodeSigningConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Code signing configuration policies (https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-policies)
-// specify the validation failure action for signature mismatch or expiry.
+// Code signing configuration [policies] specify the validation failure action for signature
+// mismatch or expiry.
+//
+// [policies]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-policies
 type CodeSigningPolicies struct {
 
 	// Code signing configuration policy for deployment validation failure. If you set
 	// the policy to Enforce , Lambda blocks the deployment request if signature
 	// validation checks fail. If you set the policy to Warn , Lambda allows the
-	// deployment and creates a CloudWatch log. Default value: Warn
+	// deployment and creates a CloudWatch log.
+	//
+	// Default value: Warn
 	UntrustedArtifactOnDeployment CodeSigningPolicy
 
 	noSmithyDocumentSerde
@@ -161,17 +170,19 @@ type CodeSigningPolicies struct {
 type Concurrency struct {
 
 	// The number of concurrent executions that are reserved for this function. For
-	// more information, see Managing Lambda reserved concurrency (https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html)
-	// .
+	// more information, see [Managing Lambda reserved concurrency].
+	//
+	// [Managing Lambda reserved concurrency]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html
 	ReservedConcurrentExecutions *int32
 
 	noSmithyDocumentSerde
 }
 
-// The cross-origin resource sharing (CORS) (https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
-// settings for your Lambda function URL. Use CORS to grant access to your function
-// URL from any origin. You can also use CORS to control access for specific HTTP
-// headers and methods in requests to your function URL.
+// The [cross-origin resource sharing (CORS)] settings for your Lambda function URL. Use CORS to grant access to your
+// function URL from any origin. You can also use CORS to control access for
+// specific HTTP headers and methods in requests to your function URL.
+//
+// [cross-origin resource sharing (CORS)]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 type Cors struct {
 
 	// Whether to allow cookies or other credentials in requests to your function URL.
@@ -188,8 +199,10 @@ type Cors struct {
 
 	// The origins that can access your function URL. You can list any number of
 	// specific origins, separated by a comma. For example: https://www.example.com ,
-	// http://localhost:60905 . Alternatively, you can grant access to all origins
-	// using the wildcard character ( * ).
+	// http://localhost:60905 .
+	//
+	// Alternatively, you can grant access to all origins using the wildcard character
+	// ( * ).
 	AllowOrigins []string
 
 	// The HTTP headers in your function response that you want to expose to origins
@@ -204,8 +217,9 @@ type Cors struct {
 	noSmithyDocumentSerde
 }
 
-// The dead-letter queue (https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq)
-// for failed asynchronous invocations.
+// The [dead-letter queue] for failed asynchronous invocations.
+//
+// [dead-letter queue]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq
 type DeadLetterConfig struct {
 
 	// The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
@@ -230,14 +244,14 @@ type DestinationConfig struct {
 // Specific configuration settings for a DocumentDB event source.
 type DocumentDBEventSourceConfig struct {
 
-	// The name of the collection to consume within the database. If you do not
+	//  The name of the collection to consume within the database. If you do not
 	// specify a collection, Lambda consumes all collections.
 	CollectionName *string
 
-	// The name of the database to consume within the DocumentDB cluster.
+	//  The name of the database to consume within the DocumentDB cluster.
 	DatabaseName *string
 
-	// Determines what DocumentDB sends to your event stream during document update
+	//  Determines what DocumentDB sends to your event stream during document update
 	// operations. If set to UpdateLookup, DocumentDB sends a delta describing the
 	// changes, along with a copy of the entire document. Otherwise, DocumentDB sends
 	// only a partial document that contains the changes.
@@ -252,9 +266,9 @@ type DocumentDBEventSourceConfig struct {
 // configuration.
 type Environment struct {
 
-	// Environment variable key-value pairs. For more information, see Using Lambda
-	// environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)
-	// .
+	// Environment variable key-value pairs. For more information, see [Using Lambda environment variables].
+	//
+	// [Using Lambda environment variables]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html
 	Variables map[string]string
 
 	noSmithyDocumentSerde
@@ -287,9 +301,9 @@ type EnvironmentResponse struct {
 }
 
 // The size of the function's /tmp directory in MB. The default value is 512, but
-// can be any whole number between 512 and 10,240 MB. For more information, see
-// Configuring ephemeral storage (console) (https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage)
-// .
+// can be any whole number between 512 and 10,240 MB. For more information, see [Configuring ephemeral storage (console)].
+//
+// [Configuring ephemeral storage (console)]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
 type EphemeralStorage struct {
 
 	// The size of the function's /tmp directory.
@@ -301,7 +315,7 @@ type EphemeralStorage struct {
 }
 
 // A mapping between an Amazon Web Services resource and a Lambda function. For
-// details, see CreateEventSourceMapping .
+// details, see CreateEventSourceMapping.
 type EventSourceMappingConfiguration struct {
 
 	// Specific configuration settings for an Amazon Managed Streaming for Apache
@@ -311,10 +325,13 @@ type EventSourceMappingConfiguration struct {
 	// The maximum number of records in each batch that Lambda pulls from your stream
 	// or queue and sends to your function. Lambda passes all of the records in the
 	// batch to the function in a single call, up to the payload limit for synchronous
-	// invocation (6 MB). Default value: Varies by service. For Amazon SQS, the default
-	// is 10. For all other services, the default is 100. Related setting: When you set
-	// BatchSize to a value greater than 10, you must set
-	// MaximumBatchingWindowInSeconds to at least 1.
+	// invocation (6 MB).
+	//
+	// Default value: Varies by service. For Amazon SQS, the default is 10. For all
+	// other services, the default is 100.
+	//
+	// Related setting: When you set BatchSize to a value greater than 10, you must
+	// set MaximumBatchingWindowInSeconds to at least 1.
 	BatchSize *int32
 
 	// (Kinesis and DynamoDB Streams only) If the function returns an error, split the
@@ -333,8 +350,9 @@ type EventSourceMappingConfiguration struct {
 	EventSourceArn *string
 
 	// An object that defines the filter criteria that determine whether Lambda should
-	// process an event. For more information, see Lambda event filtering (https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html)
-	// .
+	// process an event. For more information, see [Lambda event filtering].
+	//
+	// [Lambda event filtering]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html
 	FilterCriteria *FilterCriteria
 
 	// The ARN of the Lambda function.
@@ -353,23 +371,27 @@ type EventSourceMappingConfiguration struct {
 
 	// The maximum amount of time, in seconds, that Lambda spends gathering records
 	// before invoking the function. You can configure MaximumBatchingWindowInSeconds
-	// to any value from 0 seconds to 300 seconds in increments of seconds. For streams
-	// and Amazon SQS event sources, the default batching window is 0 seconds. For
-	// Amazon MSK, Self-managed Apache Kafka, Amazon MQ, and DocumentDB event sources,
-	// the default batching window is 500 ms. Note that because you can only change
-	// MaximumBatchingWindowInSeconds in increments of seconds, you cannot revert back
-	// to the 500 ms default batching window after you have changed it. To restore the
-	// default batching window, you must create a new event source mapping. Related
-	// setting: For streams and Amazon SQS event sources, when you set BatchSize to a
-	// value greater than 10, you must set MaximumBatchingWindowInSeconds to at least
-	// 1.
+	// to any value from 0 seconds to 300 seconds in increments of seconds.
+	//
+	// For streams and Amazon SQS event sources, the default batching window is 0
+	// seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ, and DocumentDB
+	// event sources, the default batching window is 500 ms. Note that because you can
+	// only change MaximumBatchingWindowInSeconds in increments of seconds, you cannot
+	// revert back to the 500 ms default batching window after you have changed it. To
+	// restore the default batching window, you must create a new event source mapping.
+	//
+	// Related setting: For streams and Amazon SQS event sources, when you set
+	// BatchSize to a value greater than 10, you must set
+	// MaximumBatchingWindowInSeconds to at least 1.
 	MaximumBatchingWindowInSeconds *int32
 
 	// (Kinesis and DynamoDB Streams only) Discard records older than the specified
 	// age. The default value is -1, which sets the maximum age to infinite. When the
-	// value is set to infinite, Lambda never discards old records. The minimum valid
-	// value for maximum record age is 60s. Although values less than 60 and greater
-	// than -1 fall within the parameter's absolute range, they are not allowed
+	// value is set to infinite, Lambda never discards old records.
+	//
+	// The minimum valid value for maximum record age is 60s. Although values less
+	// than 60 and greater than -1 fall within the parameter's absolute range, they are
+	// not allowed
 	MaximumRecordAgeInSeconds *int32
 
 	// (Kinesis and DynamoDB Streams only) Discard records after the specified number
@@ -382,12 +404,13 @@ type EventSourceMappingConfiguration struct {
 	// concurrently from each shard. The default value is 1.
 	ParallelizationFactor *int32
 
-	// (Amazon MQ) The name of the Amazon MQ broker destination queue to consume.
+	//  (Amazon MQ) The name of the Amazon MQ broker destination queue to consume.
 	Queues []string
 
 	// (Amazon SQS only) The scaling configuration for the event source. For more
-	// information, see Configuring maximum concurrency for Amazon SQS event sources (https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency)
-	// .
+	// information, see [Configuring maximum concurrency for Amazon SQS event sources].
+	//
+	// [Configuring maximum concurrency for Amazon SQS event sources]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency
 	ScalingConfig *ScalingConfig
 
 	// The self-managed Apache Kafka cluster for your event source.
@@ -432,9 +455,9 @@ type EventSourceMappingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Details about the connection between a Lambda function and an Amazon EFS file
-// system (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)
-// .
+// Details about the connection between a Lambda function and an [Amazon EFS file system].
+//
+// [Amazon EFS file system]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html
 type FileSystemConfig struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon EFS access point that provides
@@ -451,13 +474,15 @@ type FileSystemConfig struct {
 	noSmithyDocumentSerde
 }
 
-// A structure within a FilterCriteria object that defines an event filtering
+//	A structure within a FilterCriteria object that defines an event filtering
+//
 // pattern.
 type Filter struct {
 
-	// A filter pattern. For more information on the syntax of a filter pattern, see
-	// Filter rule syntax (https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-syntax)
+	//  A filter pattern. For more information on the syntax of a filter pattern, see [Filter rule syntax]
 	// .
+	//
+	// [Filter rule syntax]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-syntax
 	Pattern *string
 
 	noSmithyDocumentSerde
@@ -466,7 +491,7 @@ type Filter struct {
 // An object that contains the filters for an event source.
 type FilterCriteria struct {
 
-	// A list of filters.
+	//  A list of filters.
 	Filters []Filter
 
 	noSmithyDocumentSerde
@@ -477,8 +502,9 @@ type FilterCriteria struct {
 // of a container image.
 type FunctionCode struct {
 
-	// URI of a container image (https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html)
-	// in the Amazon ECR registry.
+	// URI of a [container image] in the Amazon ECR registry.
+	//
+	// [container image]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html
 	ImageUri *string
 
 	// An Amazon S3 bucket in the same Amazon Web Services Region as your function.
@@ -536,18 +562,20 @@ type FunctionConfiguration struct {
 	// The function's description.
 	Description *string
 
-	// The function's environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)
-	// . Omitted from CloudTrail logs.
+	// The function's [environment variables]. Omitted from CloudTrail logs.
+	//
+	// [environment variables]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html
 	Environment *EnvironmentResponse
 
 	// The size of the function's /tmp directory in MB. The default value is 512, but
-	// can be any whole number between 512 and 10,240 MB. For more information, see
-	// Configuring ephemeral storage (console) (https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage)
-	// .
+	// can be any whole number between 512 and 10,240 MB. For more information, see [Configuring ephemeral storage (console)].
+	//
+	// [Configuring ephemeral storage (console)]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
 	EphemeralStorage *EphemeralStorage
 
-	// Connection settings for an Amazon EFS file system (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)
-	// .
+	// Connection settings for an [Amazon EFS file system].
+	//
+	// [Amazon EFS file system]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html
 	FileSystemConfigs []FileSystemConfig
 
 	// The function's Amazon Resource Name (ARN).
@@ -562,14 +590,18 @@ type FunctionConfiguration struct {
 	// The function's image configuration values.
 	ImageConfigResponse *ImageConfigResponse
 
-	// The KMS key that's used to encrypt the function's environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption)
-	// . When Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html)
-	// is activated, this key is also used to encrypt the function's snapshot. This key
-	// is returned only if you've configured a customer managed key.
+	// The KMS key that's used to encrypt the function's [environment variables]. When [Lambda SnapStart] is activated, this
+	// key is also used to encrypt the function's snapshot. This key is returned only
+	// if you've configured a customer managed key.
+	//
+	// [Lambda SnapStart]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html
+	// [environment variables]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption
 	KMSKeyArn *string
 
-	// The date and time that the function was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
+	// The date and time that the function was last updated, in [ISO-8601 format]
 	// (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
 	LastModified *string
 
 	// The status of the last update that was performed on the function. This is first
@@ -582,8 +614,9 @@ type FunctionConfiguration struct {
 	// The reason code for the last update that was performed on the function.
 	LastUpdateStatusReasonCode LastUpdateStatusReasonCode
 
-	// The function's layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
-	// .
+	// The function's [layers].
+	//
+	// [layers]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 	Layers []Layer
 
 	// The function's Amazon CloudWatch Logs configuration settings.
@@ -605,11 +638,13 @@ type FunctionConfiguration struct {
 	// The function's execution role.
 	Role *string
 
-	// The identifier of the function's runtime (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
-	// . Runtime is required if the deployment package is a .zip file archive. The
-	// following list includes deprecated runtimes. For more information, see Runtime
-	// deprecation policy (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy)
-	// .
+	// The identifier of the function's [runtime]. Runtime is required if the deployment
+	// package is a .zip file archive.
+	//
+	// The following list includes deprecated runtimes. For more information, see [Runtime deprecation policy].
+	//
+	// [runtime]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+	// [Runtime deprecation policy]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
 	Runtime Runtime
 
 	// The ARN of the runtime and any errors that occured.
@@ -623,8 +658,9 @@ type FunctionConfiguration struct {
 
 	// Set ApplyOn to PublishedVersions to create a snapshot of the initialized
 	// execution environment when you publish a function version. For more information,
-	// see Improving startup performance with Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html)
-	// .
+	// see [Improving startup performance with Lambda SnapStart].
+	//
+	// [Improving startup performance with Lambda SnapStart]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
 	SnapStart *SnapStartResponse
 
 	// The current state of the function. When the state is Inactive , you can
@@ -656,11 +692,16 @@ type FunctionConfiguration struct {
 
 type FunctionEventInvokeConfig struct {
 
-	// A destination for events after they have been sent to a function for
-	// processing. Destinations
+	// A destination for events after they have been sent to a function for processing.
+	//
+	// Destinations
+	//
 	//   - Function - The Amazon Resource Name (ARN) of a Lambda function.
+	//
 	//   - Queue - The ARN of a standard SQS queue.
+	//
 	//   - Topic - The ARN of a standard SNS topic.
+	//
 	//   - Event Bus - The ARN of an Amazon EventBridge event bus.
 	DestinationConfig *DestinationConfig
 
@@ -685,14 +726,16 @@ type FunctionUrlConfig struct {
 	// The type of authentication that your function URL uses. Set to AWS_IAM if you
 	// want to restrict access to authenticated users only. Set to NONE if you want to
 	// bypass IAM authentication to create a public endpoint. For more information, see
-	// Security and auth model for Lambda function URLs (https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html)
-	// .
+	// [Security and auth model for Lambda function URLs].
+	//
+	// [Security and auth model for Lambda function URLs]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
 	//
 	// This member is required.
 	AuthType FunctionUrlAuthType
 
-	// When the function URL was created, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
-	// (YYYY-MM-DDThh:mm:ss.sTZD).
+	// When the function URL was created, in [ISO-8601 format] (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
 	//
 	// This member is required.
 	CreationTime *string
@@ -707,33 +750,39 @@ type FunctionUrlConfig struct {
 	// This member is required.
 	FunctionUrl *string
 
-	// When the function URL configuration was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
+	// When the function URL configuration was last updated, in [ISO-8601 format]
 	// (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
 	//
 	// This member is required.
 	LastModifiedTime *string
 
-	// The cross-origin resource sharing (CORS) (https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
-	// settings for your function URL.
+	// The [cross-origin resource sharing (CORS)] settings for your function URL.
+	//
+	// [cross-origin resource sharing (CORS)]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 	Cors *Cors
 
 	// Use one of the following options:
+	//
 	//   - BUFFERED – This is the default option. Lambda invokes your function using
 	//   the Invoke API operation. Invocation results are available when the payload is
 	//   complete. The maximum payload size is 6 MB.
+	//
 	//   - RESPONSE_STREAM – Your function streams payload results as they become
 	//   available. Lambda invokes your function using the InvokeWithResponseStream API
-	//   operation. The maximum response payload size is 20 MB, however, you can
-	//   request a quota increase (https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html)
-	//   .
+	//   operation. The maximum response payload size is 20 MB, however, you can [request a quota increase].
+	//
+	// [request a quota increase]: https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html
 	InvokeMode InvokeMode
 
 	noSmithyDocumentSerde
 }
 
 // Configuration values that override the container image Dockerfile settings. For
-// more information, see Container image settings (https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms)
-// .
+// more information, see [Container image settings].
+//
+// [Container image settings]: https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms
 type ImageConfig struct {
 
 	// Specifies parameters that you want to pass in with ENTRYPOINT.
@@ -829,8 +878,9 @@ type InvokeWithResponseStreamResponseEventMemberPayloadChunk struct {
 func (*InvokeWithResponseStreamResponseEventMemberPayloadChunk) isInvokeWithResponseStreamResponseEvent() {
 }
 
-// An Lambda layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
-// .
+// An [Lambda layer].
+//
+// [Lambda layer]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 type Layer struct {
 
 	// The Amazon Resource Name (ARN) of the function layer.
@@ -848,8 +898,9 @@ type Layer struct {
 	noSmithyDocumentSerde
 }
 
-// Details about an Lambda layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
-// .
+// Details about an [Lambda layer].
+//
+// [Lambda layer]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 type LayersListItem struct {
 
 	// The newest version of the layer.
@@ -864,9 +915,10 @@ type LayersListItem struct {
 	noSmithyDocumentSerde
 }
 
-// A ZIP archive that contains the contents of an Lambda layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
-// . You can specify either an Amazon S3 location, or upload a layer archive
-// directly.
+// A ZIP archive that contains the contents of an [Lambda layer]. You can specify either an
+// Amazon S3 location, or upload a layer archive directly.
+//
+// [Lambda layer]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 type LayerVersionContentInput struct {
 
 	// The Amazon S3 bucket of the layer archive.
@@ -885,8 +937,9 @@ type LayerVersionContentInput struct {
 	noSmithyDocumentSerde
 }
 
-// Details about a version of an Lambda layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
-// .
+// Details about a version of an [Lambda layer].
+//
+// [Lambda layer]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 type LayerVersionContentOutput struct {
 
 	// The SHA-256 hash of the layer archive.
@@ -907,17 +960,21 @@ type LayerVersionContentOutput struct {
 	noSmithyDocumentSerde
 }
 
-// Details about a version of an Lambda layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
-// .
+// Details about a version of an [Lambda layer].
+//
+// [Lambda layer]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 type LayerVersionsListItem struct {
 
-	// A list of compatible instruction set architectures (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)
-	// .
+	// A list of compatible [instruction set architectures].
+	//
+	// [instruction set architectures]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
 	CompatibleArchitectures []Architecture
 
-	// The layer's compatible runtimes. The following list includes deprecated
-	// runtimes. For more information, see Runtime deprecation policy (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy)
-	// .
+	// The layer's compatible runtimes.
+	//
+	// The following list includes deprecated runtimes. For more information, see [Runtime deprecation policy].
+	//
+	// [Runtime deprecation policy]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
 	CompatibleRuntimes []Runtime
 
 	// The date that the version was created, in ISO 8601 format. For example,
@@ -968,16 +1025,21 @@ type LoggingConfig struct {
 // A destination for events that failed processing.
 type OnFailure struct {
 
-	// The Amazon Resource Name (ARN) of the destination resource. To retain records
-	// of asynchronous invocations (https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations)
-	// , you can configure an Amazon SNS topic, Amazon SQS queue, Lambda function, or
-	// Amazon EventBridge event bus as the destination. To retain records of failed
-	// invocations from Kinesis and DynamoDB event sources (https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#event-source-mapping-destinations)
-	// , you can configure an Amazon SNS topic or Amazon SQS queue as the destination.
-	// To retain records of failed invocations from self-managed Kafka (https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination)
-	// or Amazon MSK (https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination)
-	// , you can configure an Amazon SNS topic, Amazon SQS queue, or Amazon S3 bucket
-	// as the destination.
+	// The Amazon Resource Name (ARN) of the destination resource.
+	//
+	// To retain records of [asynchronous invocations], you can configure an Amazon SNS topic, Amazon SQS queue,
+	// Lambda function, or Amazon EventBridge event bus as the destination.
+	//
+	// To retain records of failed invocations from [Kinesis and DynamoDB event sources], you can configure an Amazon SNS
+	// topic or Amazon SQS queue as the destination.
+	//
+	// To retain records of failed invocations from [self-managed Kafka] or [Amazon MSK], you can configure an Amazon
+	// SNS topic, Amazon SQS queue, or Amazon S3 bucket as the destination.
+	//
+	// [Amazon MSK]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination
+	// [Kinesis and DynamoDB event sources]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#event-source-mapping-destinations
+	// [asynchronous invocations]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations
+	// [self-managed Kafka]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination
 	Destination *string
 
 	noSmithyDocumentSerde
@@ -1007,8 +1069,9 @@ type ProvisionedConcurrencyConfigListItem struct {
 	// The Amazon Resource Name (ARN) of the alias or version.
 	FunctionArn *string
 
-	// The date and time that a user last updated the configuration, in ISO 8601 format (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// .
+	// The date and time that a user last updated the configuration, in [ISO 8601 format].
+	//
+	// [ISO 8601 format]: https://www.iso.org/iso-8601-date-and-time-format.html
 	LastModified *string
 
 	// The amount of provisioned concurrency requested.
@@ -1077,16 +1140,18 @@ type SelfManagedKafkaEventSourceConfig struct {
 	// The identifier for the Kafka consumer group to join. The consumer group ID must
 	// be unique among all your Kafka event sources. After creating a Kafka event
 	// source mapping with the consumer group ID specified, you cannot update this
-	// value. For more information, see Customizable consumer group ID (https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id)
-	// .
+	// value. For more information, see [Customizable consumer group ID].
+	//
+	// [Customizable consumer group ID]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id
 	ConsumerGroupId *string
 
 	noSmithyDocumentSerde
 }
 
-// The function's Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html)
-// setting. Set ApplyOn to PublishedVersions to create a snapshot of the
-// initialized execution environment when you publish a function version.
+// The function's [Lambda SnapStart] setting. Set ApplyOn to PublishedVersions to create a snapshot
+// of the initialized execution environment when you publish a function version.
+//
+// [Lambda SnapStart]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
 type SnapStart struct {
 
 	// Set to PublishedVersions to create a snapshot of the initialized execution
@@ -1096,17 +1161,19 @@ type SnapStart struct {
 	noSmithyDocumentSerde
 }
 
-// The function's SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html)
-// setting.
+// The function's [SnapStart] setting.
+//
+// [SnapStart]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
 type SnapStartResponse struct {
 
 	// When set to PublishedVersions , Lambda creates a snapshot of the execution
 	// environment when you publish a function version.
 	ApplyOn SnapStartApplyOn
 
-	// When you provide a qualified Amazon Resource Name (ARN) (https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using)
-	// , this response element indicates whether SnapStart is activated for the
-	// specified function version.
+	// When you provide a [qualified Amazon Resource Name (ARN)], this response element indicates whether SnapStart is
+	// activated for the specified function version.
+	//
+	// [qualified Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using
 	OptimizationStatus SnapStartOptimizationStatus
 
 	noSmithyDocumentSerde
@@ -1118,28 +1185,37 @@ type SourceAccessConfiguration struct {
 
 	// The type of authentication protocol, VPC components, or virtual host for your
 	// event source. For example: "Type":"SASL_SCRAM_512_AUTH" .
+	//
 	//   - BASIC_AUTH – (Amazon MQ) The Secrets Manager secret that stores your broker
 	//   credentials.
+	//
 	//   - BASIC_AUTH – (Self-managed Apache Kafka) The Secrets Manager ARN of your
 	//   secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.
+	//
 	//   - VPC_SUBNET – (Self-managed Apache Kafka) The subnets associated with your
 	//   VPC. Lambda connects to these subnets to fetch data from your self-managed
 	//   Apache Kafka cluster.
+	//
 	//   - VPC_SECURITY_GROUP – (Self-managed Apache Kafka) The VPC security group used
 	//   to manage access to your self-managed Apache Kafka brokers.
+	//
 	//   - SASL_SCRAM_256_AUTH – (Self-managed Apache Kafka) The Secrets Manager ARN of
 	//   your secret key used for SASL SCRAM-256 authentication of your self-managed
 	//   Apache Kafka brokers.
+	//
 	//   - SASL_SCRAM_512_AUTH – (Amazon MSK, Self-managed Apache Kafka) The Secrets
 	//   Manager ARN of your secret key used for SASL SCRAM-512 authentication of your
 	//   self-managed Apache Kafka brokers.
+	//
 	//   - VIRTUAL_HOST –- (RabbitMQ) The name of the virtual host in your RabbitMQ
 	//   broker. Lambda uses this RabbitMQ host as the event source. This property cannot
 	//   be specified in an UpdateEventSourceMapping API call.
+	//
 	//   - CLIENT_CERTIFICATE_TLS_AUTH – (Amazon MSK, self-managed Apache Kafka) The
 	//   Secrets Manager ARN of your secret key containing the certificate chain (X.509
 	//   PEM), private key (PKCS#8 PEM), and private key password (optional) used for
 	//   mutual TLS authentication of your MSK/Apache Kafka brokers.
+	//
 	//   - SERVER_ROOT_CA_CERTIFICATE – (Self-managed Apache Kafka) The Secrets Manager
 	//   ARN of your secret key containing the root CA certificate (X.509 PEM) used for
 	//   TLS encryption of your Apache Kafka brokers.
@@ -1152,9 +1228,10 @@ type SourceAccessConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The function's X-Ray (https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html)
-// tracing configuration. To sample and record incoming requests, set Mode to
-// Active .
+// The function's [X-Ray] tracing configuration. To sample and record incoming requests,
+// set Mode to Active .
+//
+// [X-Ray]: https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html
 type TracingConfig struct {
 
 	// The tracing mode.
@@ -1173,8 +1250,9 @@ type TracingConfigResponse struct {
 }
 
 // The VPC security groups and subnets that are attached to a Lambda function. For
-// more information, see Configuring a Lambda function to access resources in a VPC (https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html)
-// .
+// more information, see [Configuring a Lambda function to access resources in a VPC].
+//
+// [Configuring a Lambda function to access resources in a VPC]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html
 type VpcConfig struct {
 
 	// Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack

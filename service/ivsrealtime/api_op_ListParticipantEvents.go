@@ -30,8 +30,8 @@ func (c *Client) ListParticipantEvents(ctx context.Context, params *ListParticip
 
 type ListParticipantEventsInput struct {
 
-	// Unique identifier for this participant. This is assigned by IVS and returned by
-	// CreateParticipantToken .
+	// Unique identifier for this participant. This is assigned by IVS and returned by CreateParticipantToken
+	// .
 	//
 	// This member is required.
 	ParticipantId *string

@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a channel flow, an irreversible process. This is a developer API. This
-// API works only when the channel flow is not associated with any channel. To get
-// a list of all channels that a channel flow is associated with, use the
+// Deletes a channel flow, an irreversible process. This is a developer API.
+//
+// This API works only when the channel flow is not associated with any channel.
+// To get a list of all channels that a channel flow is associated with, use the
 // ListChannelsAssociatedWithChannelFlow API. Use the DisassociateChannelFlow API
 // to disassociate a channel flow from all channels.
 func (c *Client) DeleteChannelFlow(ctx context.Context, params *DeleteChannelFlowInput, optFns ...func(*Options)) (*DeleteChannelFlowOutput, error) {

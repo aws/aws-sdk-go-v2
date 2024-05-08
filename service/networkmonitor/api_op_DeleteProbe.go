@@ -11,10 +11,12 @@ import (
 )
 
 // Deletes the specified probe. Once a probe is deleted you'll no longer incur any
-// billing fees for that probe. This action requires both the monitorName and
-// probeId parameters. Run ListMonitors to get a list of monitor names. Run
-// GetMonitor to get a list of probes and probe IDs. You can only delete a single
-// probe at a time using this action.
+// billing fees for that probe.
+//
+// This action requires both the monitorName and probeId parameters. Run
+// ListMonitors to get a list of monitor names. Run GetMonitor to get a list of
+// probes and probe IDs. You can only delete a single probe at a time using this
+// action.
 func (c *Client) DeleteProbe(ctx context.Context, params *DeleteProbeInput, optFns ...func(*Options)) (*DeleteProbeOutput, error) {
 	if params == nil {
 		params = &DeleteProbeInput{}

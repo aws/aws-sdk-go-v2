@@ -29,19 +29,23 @@ func (c *Client) DescribeEndpointTypes(ctx context.Context, params *DescribeEndp
 
 type DescribeEndpointTypesInput struct {
 
-	// Filters applied to the endpoint types. Valid filter names: engine-name |
-	// endpoint-type
+	// Filters applied to the endpoint types.
+	//
+	// Valid filter names: engine-name | endpoint-type
 	Filters []types.Filter
 
-	// An optional pagination token provided by a previous request. If this parameter
+	//  An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -49,7 +53,7 @@ type DescribeEndpointTypesInput struct {
 
 type DescribeEndpointTypesOutput struct {
 
-	// An optional pagination token provided by a previous request. If this parameter
+	//  An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
@@ -153,10 +157,13 @@ var _ DescribeEndpointTypesAPIClient = (*Client)(nil)
 // DescribeEndpointTypesPaginatorOptions is the paginator options for
 // DescribeEndpointTypes
 type DescribeEndpointTypesPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

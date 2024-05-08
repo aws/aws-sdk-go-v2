@@ -14,6 +14,7 @@ const (
 
 // Values returns all known values for LinuxSubscriptionsDiscovery. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LinuxSubscriptionsDiscovery) Values() []LinuxSubscriptionsDiscovery {
 	return []LinuxSubscriptionsDiscovery{
@@ -35,8 +36,9 @@ const (
 )
 
 // Values returns all known values for Operator. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Operator) Values() []Operator {
 	return []Operator{
 		"Equal",
@@ -56,8 +58,9 @@ const (
 )
 
 // Values returns all known values for OrganizationIntegration. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrganizationIntegration) Values() []OrganizationIntegration {
 	return []OrganizationIntegration{
 		"Enabled",
@@ -80,8 +83,9 @@ const (
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Status) Values() []Status {
 	return []Status{
 		"InProgress",

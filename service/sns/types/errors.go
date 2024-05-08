@@ -408,9 +408,10 @@ func (e *KMSDisabledException) ErrorCode() string {
 func (e *KMSDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the state of the specified resource isn't
-// valid for this request. For more information, see Key states of Amazon Web
-// Services KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-// in the Key Management Service Developer Guide.
+// valid for this request. For more information, see [Key states of Amazon Web Services KMS keys]in the Key Management Service
+// Developer Guide.
+//
+// [Key states of Amazon Web Services KMS keys]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
 type KMSInvalidStateException struct {
 	Message *string
 
@@ -490,8 +491,9 @@ func (e *KMSOptInRequired) ErrorCode() string {
 func (e *KMSOptInRequired) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was denied due to request throttling. For more information about
-// throttling, see Limits (https://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second)
-// in the Key Management Service Developer Guide.
+// throttling, see [Limits]in the Key Management Service Developer Guide.
+//
+// [Limits]: https://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second
 type KMSThrottlingException struct {
 	Message *string
 

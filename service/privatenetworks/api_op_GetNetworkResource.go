@@ -44,7 +44,7 @@ type GetNetworkResourceOutput struct {
 	// This member is required.
 	NetworkResource *types.NetworkResource
 
-	// The network resource tags.
+	//  The network resource tags.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

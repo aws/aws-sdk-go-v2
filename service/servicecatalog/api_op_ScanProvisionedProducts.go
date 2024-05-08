@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the provisioned products that are available (not terminated). To use
-// additional filtering, see SearchProvisionedProducts .
+// Lists the provisioned products that are available (not terminated).
+//
+// To use additional filtering, see SearchProvisionedProducts.
 func (c *Client) ScanProvisionedProducts(ctx context.Context, params *ScanProvisionedProductsInput, optFns ...func(*Options)) (*ScanProvisionedProductsOutput, error) {
 	if params == nil {
 		params = &ScanProvisionedProductsInput{}
@@ -31,7 +32,9 @@ func (c *Client) ScanProvisionedProducts(ctx context.Context, params *ScanProvis
 type ScanProvisionedProductsInput struct {
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Updates a configuration policy. Only the Security Hub delegated administrator
+//	Updates a configuration policy. Only the Security Hub delegated administrator
+//
 // can invoke this operation from the home Region.
 func (c *Client) UpdateConfigurationPolicy(ctx context.Context, params *UpdateConfigurationPolicyInput, optFns ...func(*Options)) (*UpdateConfigurationPolicyOutput, error) {
 	if params == nil {
@@ -31,33 +32,34 @@ func (c *Client) UpdateConfigurationPolicy(ctx context.Context, params *UpdateCo
 
 type UpdateConfigurationPolicyInput struct {
 
-	// The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the
+	//  The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the
 	// configuration policy.
 	//
 	// This member is required.
 	Identifier *string
 
-	// An object that defines how Security Hub is configured. It includes whether
+	//  An object that defines how Security Hub is configured. It includes whether
 	// Security Hub is enabled or disabled, a list of enabled security standards, a
 	// list of enabled or disabled security controls, and a list of custom parameter
 	// values for specified controls. If you provide a list of security controls that
 	// are enabled in the configuration policy, Security Hub disables all other
 	// controls (including newly released controls). If you provide a list of security
 	// controls that are disabled in the configuration policy, Security Hub enables all
-	// other controls (including newly released controls). When updating a
-	// configuration policy, provide a complete list of standards that you want to
-	// enable and a complete list of controls that you want to enable or disable. The
-	// updated configuration replaces the current configuration.
+	// other controls (including newly released controls).
+	//
+	// When updating a configuration policy, provide a complete list of standards that
+	// you want to enable and a complete list of controls that you want to enable or
+	// disable. The updated configuration replaces the current configuration.
 	ConfigurationPolicy types.Policy
 
-	// The description of the configuration policy.
+	//  The description of the configuration policy.
 	Description *string
 
-	// The name of the configuration policy. Alphanumeric characters and the following
-	// ASCII characters are permitted: -, ., !, *, / .
+	//  The name of the configuration policy. Alphanumeric characters and the
+	// following ASCII characters are permitted: -, ., !, *, / .
 	Name *string
 
-	// The reason for updating the configuration policy.
+	//  The reason for updating the configuration policy.
 	UpdatedReason *string
 
 	noSmithyDocumentSerde
@@ -65,10 +67,10 @@ type UpdateConfigurationPolicyInput struct {
 
 type UpdateConfigurationPolicyOutput struct {
 
-	// The ARN of the configuration policy.
+	//  The ARN of the configuration policy.
 	Arn *string
 
-	// An object that defines how Security Hub is configured. It includes whether
+	//  An object that defines how Security Hub is configured. It includes whether
 	// Security Hub is enabled or disabled, a list of enabled security standards, a
 	// list of enabled or disabled security controls, and a list of custom parameter
 	// values for specified controls. If the request included a list of security
@@ -78,20 +80,20 @@ type UpdateConfigurationPolicyOutput struct {
 	// Security Hub enables all other controls (including newly released controls).
 	ConfigurationPolicy types.Policy
 
-	// The date and time, in UTC and ISO 8601 format, that the configuration policy
+	//  The date and time, in UTC and ISO 8601 format, that the configuration policy
 	// was created.
 	CreatedAt *time.Time
 
-	// The description of the configuration policy.
+	//  The description of the configuration policy.
 	Description *string
 
-	// The UUID of the configuration policy.
+	//  The UUID of the configuration policy.
 	Id *string
 
-	// The name of the configuration policy.
+	//  The name of the configuration policy.
 	Name *string
 
-	// The date and time, in UTC and ISO 8601 format, that the configuration policy
+	//  The date and time, in UTC and ISO 8601 format, that the configuration policy
 	// was last updated.
 	UpdatedAt *time.Time
 

@@ -13,8 +13,9 @@ import (
 
 // Lists all the subscription descriptions for a customer account. The description
 // for a subscription includes SubscriptionName , SNSTopicARN , CustomerID ,
-// SourceType , SourceID , CreationTime , and Status . If you specify a
-// SubscriptionName , lists the description for that subscription.
+// SourceType , SourceID , CreationTime , and Status .
+//
+// If you specify a SubscriptionName , lists the description for that subscription.
 func (c *Client) DescribeEventSubscriptions(ctx context.Context, params *DescribeEventSubscriptionsInput, optFns ...func(*Options)) (*DescribeEventSubscriptionsOutput, error) {
 	if params == nil {
 		params = &DescribeEventSubscriptionsInput{}
@@ -44,7 +45,10 @@ type DescribeEventSubscriptionsInput struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The name of the RDS event notification subscription you want to describe.
@@ -164,7 +168,10 @@ type DescribeEventSubscriptionsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

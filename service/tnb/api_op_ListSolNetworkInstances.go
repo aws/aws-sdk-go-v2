@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists your network instances. A network instance is a single network created in
-// Amazon Web Services TNB that can be deployed and on which life-cycle operations
-// (like terminate, update, and delete) can be performed.
+// Lists your network instances.
+//
+// A network instance is a single network created in Amazon Web Services TNB that
+// can be deployed and on which life-cycle operations (like terminate, update, and
+// delete) can be performed.
 func (c *Client) ListSolNetworkInstances(ctx context.Context, params *ListSolNetworkInstancesInput, optFns ...func(*Options)) (*ListSolNetworkInstancesOutput, error) {
 	if params == nil {
 		params = &ListSolNetworkInstancesInput{}

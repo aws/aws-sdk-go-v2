@@ -14,10 +14,12 @@ import (
 // gateway. Virtual tapes archived in the VTS are not associated with any gateway.
 // However after a tape is retrieved, it is associated with a gateway, even though
 // it is also listed in the VTS, that is, archive. This operation is only supported
-// in the tape gateway type. Once a tape is successfully retrieved to a gateway, it
-// cannot be retrieved again to another gateway. You must archive the tape again
-// before you can retrieve it to another gateway. This operation is only supported
 // in the tape gateway type.
+//
+// Once a tape is successfully retrieved to a gateway, it cannot be retrieved
+// again to another gateway. You must archive the tape again before you can
+// retrieve it to another gateway. This operation is only supported in the tape
+// gateway type.
 func (c *Client) RetrieveTapeArchive(ctx context.Context, params *RetrieveTapeArchiveInput, optFns ...func(*Options)) (*RetrieveTapeArchiveOutput, error) {
 	if params == nil {
 		params = &RetrieveTapeArchiveInput{}
@@ -37,9 +39,11 @@ func (c *Client) RetrieveTapeArchive(ctx context.Context, params *RetrieveTapeAr
 type RetrieveTapeArchiveInput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway you want to retrieve the virtual
-	// tape to. Use the ListGateways operation to return a list of gateways for your
-	// account and Amazon Web Services Region. You retrieve archived virtual tapes to
-	// only one gateway and the gateway must be a tape gateway.
+	// tape to. Use the ListGatewaysoperation to return a list of gateways for your account and
+	// Amazon Web Services Region.
+	//
+	// You retrieve archived virtual tapes to only one gateway and the gateway must be
+	// a tape gateway.
 	//
 	// This member is required.
 	GatewayARN *string

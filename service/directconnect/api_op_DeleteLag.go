@@ -63,8 +63,9 @@ type DeleteLagOutput struct {
 	// possible values are 1Gbps and 10Gbps.
 	ConnectionsBandwidth *string
 
-	// The LAG MAC Security (MACsec) encryption mode. The valid values are no_encrypt ,
-	// should_encrypt , and must_encrypt .
+	// The LAG MAC Security (MACsec) encryption mode.
+	//
+	// The valid values are no_encrypt , should_encrypt , and must_encrypt .
 	EncryptionMode *string
 
 	// Indicates whether the LAG supports a secondary BGP peer in the same address
@@ -81,13 +82,20 @@ type DeleteLagOutput struct {
 	LagName *string
 
 	// The state of the LAG. The following are the possible values:
+	//
 	//   - requested : The initial state of a LAG. The LAG stays in the requested state
 	//   until the Letter of Authorization (LOA) is available.
+	//
 	//   - pending : The LAG has been approved and is being initialized.
+	//
 	//   - available : The network link is established and the LAG is ready for use.
+	//
 	//   - down : The network link is down.
+	//
 	//   - deleting : The LAG is being deleted.
+	//
 	//   - deleted : The LAG is deleted.
+	//
 	//   - unknown : The state of the LAG is not available.
 	LagState types.LagState
 

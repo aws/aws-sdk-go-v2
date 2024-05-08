@@ -12,15 +12,19 @@ import (
 
 // Used to enable or disable feedback forwarding for an identity. This setting
 // determines what happens when an identity is used to send an email that results
-// in a bounce or complaint event. When you enable feedback forwarding, Amazon
-// Pinpoint sends you email notifications when bounce or complaint events occur.
-// Amazon Pinpoint sends this notification to the address that you specified in the
-// Return-Path header of the original email. When you disable feedback forwarding,
-// Amazon Pinpoint sends notifications through other mechanisms, such as by
-// notifying an Amazon SNS topic. You're required to have a method of tracking
-// bounces and complaints. If you haven't set up another mechanism for receiving
-// bounce or complaint notifications, Amazon Pinpoint sends an email notification
-// when these events occur (even if this setting is disabled).
+// in a bounce or complaint event.
+//
+// When you enable feedback forwarding, Amazon Pinpoint sends you email
+// notifications when bounce or complaint events occur. Amazon Pinpoint sends this
+// notification to the address that you specified in the Return-Path header of the
+// original email.
+//
+// When you disable feedback forwarding, Amazon Pinpoint sends notifications
+// through other mechanisms, such as by notifying an Amazon SNS topic. You're
+// required to have a method of tracking bounces and complaints. If you haven't set
+// up another mechanism for receiving bounce or complaint notifications, Amazon
+// Pinpoint sends an email notification when these events occur (even if this
+// setting is disabled).
 func (c *Client) PutEmailIdentityFeedbackAttributes(ctx context.Context, params *PutEmailIdentityFeedbackAttributesInput, optFns ...func(*Options)) (*PutEmailIdentityFeedbackAttributesOutput, error) {
 	if params == nil {
 		params = &PutEmailIdentityFeedbackAttributesInput{}
@@ -46,16 +50,18 @@ type PutEmailIdentityFeedbackAttributesInput struct {
 	// This member is required.
 	EmailIdentity *string
 
-	// Sets the feedback forwarding configuration for the identity. If the value is
-	// true , Amazon Pinpoint sends you email notifications when bounce or complaint
-	// events occur. Amazon Pinpoint sends this notification to the address that you
-	// specified in the Return-Path header of the original email. When you set this
-	// value to false , Amazon Pinpoint sends notifications through other mechanisms,
-	// such as by notifying an Amazon SNS topic or another event destination. You're
-	// required to have a method of tracking bounces and complaints. If you haven't set
-	// up another mechanism for receiving bounce or complaint notifications, Amazon
-	// Pinpoint sends an email notification when these events occur (even if this
-	// setting is disabled).
+	// Sets the feedback forwarding configuration for the identity.
+	//
+	// If the value is true , Amazon Pinpoint sends you email notifications when bounce
+	// or complaint events occur. Amazon Pinpoint sends this notification to the
+	// address that you specified in the Return-Path header of the original email.
+	//
+	// When you set this value to false , Amazon Pinpoint sends notifications through
+	// other mechanisms, such as by notifying an Amazon SNS topic or another event
+	// destination. You're required to have a method of tracking bounces and
+	// complaints. If you haven't set up another mechanism for receiving bounce or
+	// complaint notifications, Amazon Pinpoint sends an email notification when these
+	// events occur (even if this setting is disabled).
 	EmailForwardingEnabled bool
 
 	noSmithyDocumentSerde

@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Returns the association between a configuration and a target account,
+//	Returns the association between a configuration and a target account,
+//
 // organizational unit, or the root. The configuration can be a configuration
 // policy or self-managed behavior. Only the Security Hub delegated administrator
 // can invoke this operation from the home Region.
@@ -33,7 +34,7 @@ func (c *Client) GetConfigurationPolicyAssociation(ctx context.Context, params *
 
 type GetConfigurationPolicyAssociationInput struct {
 
-	// The target account ID, organizational unit ID, or the root ID to retrieve the
+	//  The target account ID, organizational unit ID, or the root ID to retrieve the
 	// association for.
 	//
 	// This member is required.
@@ -44,31 +45,31 @@ type GetConfigurationPolicyAssociationInput struct {
 
 type GetConfigurationPolicyAssociationOutput struct {
 
-	// The current status of the association between the specified target and the
+	//  The current status of the association between the specified target and the
 	// configuration.
 	AssociationStatus types.ConfigurationPolicyAssociationStatus
 
-	// The explanation for a FAILED value for AssociationStatus .
+	//  The explanation for a FAILED value for AssociationStatus .
 	AssociationStatusMessage *string
 
-	// Indicates whether the association between the specified target and the
+	//  Indicates whether the association between the specified target and the
 	// configuration was directly applied by the Security Hub delegated administrator
 	// or inherited from a parent.
 	AssociationType types.AssociationType
 
-	// The universally unique identifier (UUID) of a configuration policy. For
+	//  The universally unique identifier (UUID) of a configuration policy. For
 	// self-managed behavior, the value is SELF_MANAGED_SECURITY_HUB .
 	ConfigurationPolicyId *string
 
-	// The target account ID, organizational unit ID, or the root ID for which the
+	//  The target account ID, organizational unit ID, or the root ID for which the
 	// association is retrieved.
 	TargetId *string
 
-	// Specifies whether the target is an Amazon Web Services account, organizational
+	//  Specifies whether the target is an Amazon Web Services account, organizational
 	// unit, or the organization root.
 	TargetType types.TargetType
 
-	// The date and time, in UTC and ISO 8601 format, that the configuration policy
+	//  The date and time, in UTC and ISO 8601 format, that the configuration policy
 	// association was last updated.
 	UpdatedAt *time.Time
 

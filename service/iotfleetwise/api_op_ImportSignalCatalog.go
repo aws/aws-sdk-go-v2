@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a signal catalog using your existing VSS formatted content from your
+//	Creates a signal catalog using your existing VSS formatted content from your
+//
 // local device.
 func (c *Client) ImportSignalCatalog(ctx context.Context, params *ImportSignalCatalogInput, optFns ...func(*Options)) (*ImportSignalCatalogOutput, error) {
 	if params == nil {
@@ -35,7 +36,7 @@ type ImportSignalCatalogInput struct {
 	// This member is required.
 	Name *string
 
-	// A brief description of the signal catalog.
+	//  A brief description of the signal catalog.
 	Description *string
 
 	// Metadata that can be used to manage the signal catalog.
@@ -50,12 +51,12 @@ type ImportSignalCatalogInput struct {
 
 type ImportSignalCatalogOutput struct {
 
-	// The Amazon Resource Name (ARN) of the imported signal catalog.
+	//  The Amazon Resource Name (ARN) of the imported signal catalog.
 	//
 	// This member is required.
 	Arn *string
 
-	// The name of the imported signal catalog.
+	//  The name of the imported signal catalog.
 	//
 	// This member is required.
 	Name *string

@@ -13,8 +13,9 @@ const (
 )
 
 // Values returns all known values for AppAuthorizationStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppAuthorizationStatus) Values() []AppAuthorizationStatus {
 	return []AppAuthorizationStatus{
 		"PendingConnect",
@@ -33,8 +34,9 @@ const (
 )
 
 // Values returns all known values for AuthType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthType) Values() []AuthType {
 	return []AuthType{
 		"oauth2",
@@ -51,8 +53,9 @@ const (
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Format) Values() []Format {
 	return []Format{
 		"json",
@@ -70,6 +73,7 @@ const (
 
 // Values returns all known values for IngestionDestinationStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (IngestionDestinationStatus) Values() []IngestionDestinationStatus {
 	return []IngestionDestinationStatus{
@@ -87,8 +91,9 @@ const (
 )
 
 // Values returns all known values for IngestionState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IngestionState) Values() []IngestionState {
 	return []IngestionState{
 		"enabled",
@@ -104,8 +109,9 @@ const (
 )
 
 // Values returns all known values for IngestionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IngestionType) Values() []IngestionType {
 	return []IngestionType{
 		"auditLog",
@@ -121,8 +127,9 @@ const (
 )
 
 // Values returns all known values for Persona. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Persona) Values() []Persona {
 	return []Persona{
 		"admin",
@@ -141,8 +148,9 @@ const (
 )
 
 // Values returns all known values for ResultStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResultStatus) Values() []ResultStatus {
 	return []ResultStatus{
 		"IN_PROGRESS",
@@ -161,8 +169,9 @@ const (
 )
 
 // Values returns all known values for Schema. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Schema) Values() []Schema {
 	return []Schema{
 		"ocsf",
@@ -182,6 +191,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

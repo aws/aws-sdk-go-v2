@@ -13,8 +13,10 @@ import (
 // Disassociates the Greengrass service role from IoT Greengrass for your Amazon
 // Web Services account in this Amazon Web Services Region. Without a service role,
 // IoT Greengrass can't verify the identity of client devices or manage core device
-// connectivity information. For more information, see Greengrass service role (https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html)
-// in the IoT Greengrass Version 2 Developer Guide.
+// connectivity information. For more information, see [Greengrass service role]in the IoT Greengrass
+// Version 2 Developer Guide.
+//
+// [Greengrass service role]: https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html
 func (c *Client) DisassociateServiceRoleFromAccount(ctx context.Context, params *DisassociateServiceRoleFromAccountInput, optFns ...func(*Options)) (*DisassociateServiceRoleFromAccountOutput, error) {
 	if params == nil {
 		params = &DisassociateServiceRoleFromAccountInput{}

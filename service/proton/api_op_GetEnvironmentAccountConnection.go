@@ -12,8 +12,11 @@ import (
 )
 
 // In an environment account, get the detailed data for an environment account
-// connection. For more information, see Environment account connections (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html)
-// in the Proton User guide.
+// connection.
+//
+// For more information, see [Environment account connections] in the Proton User guide.
+//
+// [Environment account connections]: https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html
 func (c *Client) GetEnvironmentAccountConnection(ctx context.Context, params *GetEnvironmentAccountConnectionInput, optFns ...func(*Options)) (*GetEnvironmentAccountConnectionOutput, error) {
 	if params == nil {
 		params = &GetEnvironmentAccountConnectionInput{}

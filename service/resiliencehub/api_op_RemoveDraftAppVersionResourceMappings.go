@@ -30,8 +30,10 @@ type RemoveDraftAppVersionResourceMappingsInput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
+	// guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AppArn *string
@@ -41,8 +43,9 @@ type RemoveDraftAppVersionResourceMappingsInput struct {
 	AppRegistryAppNames []string
 
 	// The names of the Amazon Elastic Kubernetes Service clusters and namespaces you
-	// want to remove from the resource mappings. This parameter accepts values in
-	// "eks-cluster/namespace" format.
+	// want to remove from the resource mappings.
+	//
+	// This parameter accepts values in "eks-cluster/namespace" format.
 	EksSourceNames []string
 
 	// The names of the CloudFormation stacks you want to remove from the resource
@@ -66,8 +69,10 @@ type RemoveDraftAppVersionResourceMappingsOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
+	// guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	AppArn *string
 
 	// The version of the application.

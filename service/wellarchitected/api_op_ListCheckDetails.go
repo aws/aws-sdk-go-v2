@@ -39,8 +39,9 @@ type ListCheckDetailsInput struct {
 	// This member is required.
 	LensArn *string
 
-	// The ID used to identify a pillar, for example, security . A pillar is identified
-	// by its PillarReviewSummary$PillarId .
+	// The ID used to identify a pillar, for example, security .
+	//
+	// A pillar is identified by its PillarReviewSummary$PillarId.
 	//
 	// This member is required.
 	PillarId *string

@@ -56,7 +56,8 @@ type ListCostAllocationTagsInput struct {
 
 type ListCostAllocationTagsOutput struct {
 
-	// A list of cost allocation tags that includes the detailed metadata for each one.
+	// A list of cost allocation tags that includes the detailed metadata for each
+	// one.
 	CostAllocationTags []types.CostAllocationTag
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the

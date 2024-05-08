@@ -14,7 +14,13 @@ import (
 // Retrieves the properties for one or more game session queues. When requesting
 // multiple queues, use the pagination parameters to retrieve results as a set of
 // sequential pages. When specifying a list of queues, objects are returned only
-// for queues that currently exist in the Region. Learn more View Your Queues (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-console.html)
+// for queues that currently exist in the Region.
+//
+// # Learn more
+//
+// [View Your Queues]
+//
+// [View Your Queues]: https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-console.html
 func (c *Client) DescribeGameSessionQueues(ctx context.Context, params *DescribeGameSessionQueuesInput, optFns ...func(*Options)) (*DescribeGameSessionQueuesOutput, error) {
 	if params == nil {
 		params = &DescribeGameSessionQueuesInput{}

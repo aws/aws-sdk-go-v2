@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates one or more automation rules based on rule Amazon Resource Names (ARNs)
-// and input parameters.
+//	Updates one or more automation rules based on rule Amazon Resource Names
+//
+// (ARNs) and input parameters.
 func (c *Client) BatchUpdateAutomationRules(ctx context.Context, params *BatchUpdateAutomationRulesInput, optFns ...func(*Options)) (*BatchUpdateAutomationRulesOutput, error) {
 	if params == nil {
 		params = &BatchUpdateAutomationRulesInput{}
@@ -30,8 +31,8 @@ func (c *Client) BatchUpdateAutomationRules(ctx context.Context, params *BatchUp
 
 type BatchUpdateAutomationRulesInput struct {
 
-	// An array of ARNs for the rules that are to be updated. Optionally, you can also
-	// include RuleStatus and RuleOrder .
+	//  An array of ARNs for the rules that are to be updated. Optionally, you can
+	// also include RuleStatus and RuleOrder .
 	//
 	// This member is required.
 	UpdateAutomationRulesRequestItems []types.UpdateAutomationRulesRequestItem
@@ -41,10 +42,10 @@ type BatchUpdateAutomationRulesInput struct {
 
 type BatchUpdateAutomationRulesOutput struct {
 
-	// A list of properly processed rule ARNs.
+	//  A list of properly processed rule ARNs.
 	ProcessedAutomationRules []string
 
-	// A list of objects containing RuleArn , ErrorCode , and ErrorMessage . This
+	//  A list of objects containing RuleArn , ErrorCode , and ErrorMessage . This
 	// parameter tells you which automation rules the request didn't update and why.
 	UnprocessedAutomationRules []types.UnprocessedAutomationRule
 

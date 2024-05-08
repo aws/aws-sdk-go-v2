@@ -15,8 +15,9 @@ const (
 )
 
 // Values returns all known values for AnomalyDetectorStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnomalyDetectorStatus) Values() []AnomalyDetectorStatus {
 	return []AnomalyDetectorStatus{
 		"INITIALIZING",
@@ -39,8 +40,9 @@ const (
 )
 
 // Values returns all known values for DataProtectionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataProtectionStatus) Values() []DataProtectionStatus {
 	return []DataProtectionStatus{
 		"ACTIVATED",
@@ -60,8 +62,9 @@ const (
 )
 
 // Values returns all known values for DeliveryDestinationType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeliveryDestinationType) Values() []DeliveryDestinationType {
 	return []DeliveryDestinationType{
 		"S3",
@@ -79,8 +82,9 @@ const (
 )
 
 // Values returns all known values for Distribution. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Distribution) Values() []Distribution {
 	return []Distribution{
 		"Random",
@@ -101,8 +105,9 @@ const (
 )
 
 // Values returns all known values for EvaluationFrequency. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EvaluationFrequency) Values() []EvaluationFrequency {
 	return []EvaluationFrequency{
 		"ONE_MIN",
@@ -127,8 +132,9 @@ const (
 )
 
 // Values returns all known values for ExportTaskStatusCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExportTaskStatusCode) Values() []ExportTaskStatusCode {
 	return []ExportTaskStatusCode{
 		"CANCELLED",
@@ -148,8 +154,9 @@ const (
 )
 
 // Values returns all known values for InheritedProperty. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InheritedProperty) Values() []InheritedProperty {
 	return []InheritedProperty{
 		"ACCOUNT_DATA_PROTECTION",
@@ -165,8 +172,9 @@ const (
 )
 
 // Values returns all known values for LogGroupClass. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LogGroupClass) Values() []LogGroupClass {
 	return []LogGroupClass{
 		"STANDARD",
@@ -183,8 +191,9 @@ const (
 )
 
 // Values returns all known values for OrderBy. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrderBy) Values() []OrderBy {
 	return []OrderBy{
 		"LogStreamName",
@@ -204,8 +213,9 @@ const (
 )
 
 // Values returns all known values for OutputFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OutputFormat) Values() []OutputFormat {
 	return []OutputFormat{
 		"json",
@@ -225,8 +235,9 @@ const (
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PolicyType) Values() []PolicyType {
 	return []PolicyType{
 		"DATA_PROTECTION_POLICY",
@@ -248,8 +259,9 @@ const (
 )
 
 // Values returns all known values for QueryStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QueryStatus) Values() []QueryStatus {
 	return []QueryStatus{
 		"Scheduled",
@@ -270,8 +282,9 @@ const (
 )
 
 // Values returns all known values for Scope. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Scope) Values() []Scope {
 	return []Scope{
 		"ALL",
@@ -312,8 +325,9 @@ const (
 )
 
 // Values returns all known values for StandardUnit. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StandardUnit) Values() []StandardUnit {
 	return []StandardUnit{
 		"Seconds",
@@ -356,8 +370,9 @@ const (
 )
 
 // Values returns all known values for State. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (State) Values() []State {
 	return []State{
 		"Active",
@@ -375,8 +390,9 @@ const (
 )
 
 // Values returns all known values for SuppressionState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SuppressionState) Values() []SuppressionState {
 	return []SuppressionState{
 		"SUPPRESSED",
@@ -393,8 +409,9 @@ const (
 )
 
 // Values returns all known values for SuppressionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SuppressionType) Values() []SuppressionType {
 	return []SuppressionType{
 		"LIMITED",
@@ -412,8 +429,9 @@ const (
 )
 
 // Values returns all known values for SuppressionUnit. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SuppressionUnit) Values() []SuppressionUnit {
 	return []SuppressionUnit{
 		"SECONDS",

@@ -12,12 +12,19 @@ import (
 	"time"
 )
 
-// Returns details about a state machine alias (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html)
-// . Related operations:
-//   - CreateStateMachineAlias
-//   - ListStateMachineAliases
-//   - UpdateStateMachineAlias
-//   - DeleteStateMachineAlias
+// Returns details about a state machine [alias].
+//
+// Related operations:
+//
+// # CreateStateMachineAlias
+//
+// # ListStateMachineAliases
+//
+// # UpdateStateMachineAlias
+//
+// # DeleteStateMachineAlias
+//
+// [alias]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
 func (c *Client) DescribeStateMachineAlias(ctx context.Context, params *DescribeStateMachineAliasInput, optFns ...func(*Options)) (*DescribeStateMachineAliasOutput, error) {
 	if params == nil {
 		params = &DescribeStateMachineAliasInput{}
@@ -60,8 +67,9 @@ type DescribeStateMachineAliasOutput struct {
 	// The Amazon Resource Name (ARN) of the state machine alias.
 	StateMachineAliasArn *string
 
-	// The date the state machine alias was last updated. For a newly created state
-	// machine, this is the same as the creation date.
+	// The date the state machine alias was last updated.
+	//
+	// For a newly created state machine, this is the same as the creation date.
 	UpdateDate *time.Time
 
 	// Metadata pertaining to the operation's result.

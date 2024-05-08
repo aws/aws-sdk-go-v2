@@ -14,9 +14,9 @@ import (
 // This API call activates a control. It starts an asynchronous operation that
 // creates Amazon Web Services resources on the specified organizational unit and
 // the accounts it contains. The resources created will vary according to the
-// control that you specify. For usage examples, see the Amazon Web Services
-// Control Tower User Guide  (https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html)
-// .
+// control that you specify. For usage examples, see [the Amazon Web Services Control Tower User Guide].
+//
+// [the Amazon Web Services Control Tower User Guide]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
 func (c *Client) EnableControl(ctx context.Context, params *EnableControlInput, optFns ...func(*Options)) (*EnableControlOutput, error) {
 	if params == nil {
 		params = &EnableControlInput{}
@@ -36,15 +36,17 @@ type EnableControlInput struct {
 
 	// The ARN of the control. Only Strongly recommended and Elective controls are
 	// permitted, with the exception of the Region deny control. For information on how
-	// to find the controlIdentifier , see the overview page (https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html)
-	// .
+	// to find the controlIdentifier , see [the overview page].
+	//
+	// [the overview page]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
 	//
 	// This member is required.
 	ControlIdentifier *string
 
 	// The ARN of the organizational unit. For information on how to find the
-	// targetIdentifier , see the overview page (https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html)
-	// .
+	// targetIdentifier , see [the overview page].
+	//
+	// [the overview page]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
 	//
 	// This member is required.
 	TargetIdentifier *string

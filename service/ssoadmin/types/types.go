@@ -32,8 +32,9 @@ type AccessControlAttribute struct {
 }
 
 // The value used for mapping a specified attribute to an identity source. For
-// more information, see Attribute mappings (https://docs.aws.amazon.com/singlesignon/latest/userguide/attributemappingsconcept.html)
-// in the IAM Identity Center User Guide.
+// more information, see [Attribute mappings]in the IAM Identity Center User Guide.
+//
+// [Attribute mappings]: https://docs.aws.amazon.com/singlesignon/latest/userguide/attributemappingsconcept.html
 type AccessControlAttributeValue struct {
 
 	// The identity source to use when mapping a specified attribute to IAM Identity
@@ -46,22 +47,22 @@ type AccessControlAttributeValue struct {
 }
 
 // The assignment that indicates a principal's limited access to a specified
-// Amazon Web Services account with a specified permission set. The term principal
-// here refers to a user or group that is defined in IAM Identity Center.
+// Amazon Web Services account with a specified permission set.
+//
+// The term principal here refers to a user or group that is defined in IAM
+// Identity Center.
 type AccountAssignment struct {
 
 	// The identifier of the Amazon Web Services account.
 	AccountId *string
 
-	// The ARN of the permission set. For more information about ARNs, see Amazon
-	// Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon
-	// Web Services General Reference.
+	// The ARN of the permission set. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the
+	// Amazon Web Services General Reference.
 	PermissionSetArn *string
 
 	// An identifier for an object in IAM Identity Center, such as a user or group.
 	// PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For
-	// more information about PrincipalIds in IAM Identity Center, see the IAM
-	// Identity Center Identity Store API Reference .
+	// more information about PrincipalIds in IAM Identity Center, see the IAM Identity Center Identity Store API Reference.
 	PrincipalId *string
 
 	// The entity type for which the assignment will be created.
@@ -100,15 +101,13 @@ type AccountAssignmentOperationStatus struct {
 	// The message that contains an error or exception in case of an operation failure.
 	FailureReason *string
 
-	// The ARN of the permission set. For more information about ARNs, see Amazon
-	// Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon
-	// Web Services General Reference.
+	// The ARN of the permission set. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the
+	// Amazon Web Services General Reference.
 	PermissionSetArn *string
 
 	// An identifier for an object in IAM Identity Center, such as a user or group.
 	// PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For
-	// more information about PrincipalIds in IAM Identity Center, see the IAM
-	// Identity Center Identity Store API Reference .
+	// more information about PrincipalIds in IAM Identity Center, see the IAM Identity Center Identity Store API Reference.
 	PrincipalId *string
 
 	// The entity type for which the assignment will be created.
@@ -246,8 +245,7 @@ type ApplicationProvider struct {
 type AttachedManagedPolicy struct {
 
 	// The ARN of the Amazon Web Services managed policy. For more information about
-	// ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service
-	// Namespaces in the Amazon Web Services General Reference.
+	// ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespacesin the Amazon Web Services General Reference.
 	Arn *string
 
 	// The name of the Amazon Web Services managed policy.
@@ -325,9 +323,10 @@ type CustomerManagedPolicyReference struct {
 	Name *string
 
 	// The path to the IAM policy that you have configured in each account where you
-	// want to deploy your permission set. The default is / . For more information, see
-	// Friendly names and paths (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names)
+	// want to deploy your permission set. The default is / . For more information, see [Friendly names and paths]
 	// in the IAM User Guide.
+	//
+	// [Friendly names and paths]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names
 	Path *string
 
 	noSmithyDocumentSerde
@@ -451,9 +450,8 @@ type InstanceMetadata struct {
 	IdentityStoreId *string
 
 	// The ARN of the Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// Amazon Web Services Service Namespaces in the Amazon Web Services General
-	// Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespacesin the Amazon Web Services
+	// General Reference.
 	InstanceArn *string
 
 	// The name of the Identity Center instance.
@@ -585,13 +583,14 @@ type OperationStatusFilter struct {
 // CustomerManagedPolicyReference to use the name and path of a customer managed
 // policy, or ManagedPolicyArn to use the ARN of an Amazon Web Services managed
 // policy. A permissions boundary represents the maximum permissions that any
-// policy can grant your role. For more information, see Permissions boundaries
-// for IAM entities (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
-// in the IAM User Guide. Policies used as permissions boundaries don't provide
-// permissions. You must also attach an IAM policy to the role. To learn how the
-// effective permissions for a role are evaluated, see IAM JSON policy evaluation
-// logic (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html)
-// in the IAM User Guide.
+// policy can grant your role. For more information, see [Permissions boundaries for IAM entities]in the IAM User Guide.
+//
+// Policies used as permissions boundaries don't provide permissions. You must
+// also attach an IAM policy to the role. To learn how the effective permissions
+// for a role are evaluated, see [IAM JSON policy evaluation logic]in the IAM User Guide.
+//
+// [Permissions boundaries for IAM entities]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+// [IAM JSON policy evaluation logic]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
 type PermissionsBoundary struct {
 
 	// Specifies the name and path of a customer managed policy. You must have an IAM
@@ -612,15 +611,14 @@ type PermissionSet struct {
 	// The date that the permission set was created.
 	CreatedDate *time.Time
 
-	// The description of the PermissionSet .
+	// The description of the PermissionSet.
 	Description *string
 
 	// The name of the permission set.
 	Name *string
 
-	// The ARN of the permission set. For more information about ARNs, see Amazon
-	// Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon
-	// Web Services General Reference.
+	// The ARN of the permission set. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the
+	// Amazon Web Services General Reference.
 	PermissionSetArn *string
 
 	// Used to redirect users within the application during the federation
@@ -649,8 +647,7 @@ type PermissionSetProvisioningStatus struct {
 	FailureReason *string
 
 	// The ARN of the permission set that is being provisioned. For more information
-	// about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service
-	// Namespaces in the Amazon Web Services General Reference.
+	// about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespacesin the Amazon Web Services General Reference.
 	PermissionSetArn *string
 
 	// The identifier for tracking the request operation that is generated by the
@@ -741,8 +738,10 @@ type SignInOptions struct {
 
 	// This determines how IAM Identity Center navigates the user to the target
 	// application. It can be one of the following values:
+	//
 	//   - APPLICATION : IAM Identity Center redirects the customer to the configured
 	//   ApplicationUrl .
+	//
 	//   - IDENTITY_CENTER : IAM Identity Center uses SAML identity-provider initiated
 	//   authentication to sign the customer directly into a SAML-based application.
 	//

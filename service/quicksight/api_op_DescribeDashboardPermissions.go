@@ -54,8 +54,9 @@ type DescribeDashboardPermissionsOutput struct {
 	// A structure that contains the configuration of a shareable link that grants
 	// access to the dashboard. Your users can use the link to view and interact with
 	// the dashboard, if the dashboard has been shared with them. For more information
-	// about sharing dashboards, see Sharing Dashboards (https://docs.aws.amazon.com/quicksight/latest/user/sharing-a-dashboard.html)
-	// .
+	// about sharing dashboards, see [Sharing Dashboards].
+	//
+	// [Sharing Dashboards]: https://docs.aws.amazon.com/quicksight/latest/user/sharing-a-dashboard.html
 	LinkSharingConfiguration *types.LinkSharingConfiguration
 
 	// A structure that contains the permissions for the dashboard.

@@ -10,10 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified event. When you delete an event, Amazon Fraud Detector
-// permanently deletes that event and the event data is no longer stored in Amazon
-// Fraud Detector. If deleteAuditHistory is True , event data is available through
-// search for up to 30 seconds after the delete operation is completed.
+// Deletes the specified event.
+//
+// When you delete an event, Amazon Fraud Detector permanently deletes that event
+// and the event data is no longer stored in Amazon Fraud Detector. If
+// deleteAuditHistory is True , event data is available through search for up to 30
+// seconds after the delete operation is completed.
 func (c *Client) DeleteEvent(ctx context.Context, params *DeleteEventInput, optFns ...func(*Options)) (*DeleteEventOutput, error) {
 	if params == nil {
 		params = &DeleteEventInput{}

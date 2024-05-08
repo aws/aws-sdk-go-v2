@@ -56,12 +56,14 @@ type CreateCustomActionTypeInput struct {
 	// This member is required.
 	Version *string
 
-	// The configuration properties for the custom action. You can refer to a name in
-	// the configuration properties of the custom action within the URL templates by
-	// following the format of {Config:name}, as long as the configuration property is
-	// both required and not secret. For more information, see Create a Custom Action
-	// for a Pipeline (https://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html)
-	// .
+	// The configuration properties for the custom action.
+	//
+	// You can refer to a name in the configuration properties of the custom action
+	// within the URL templates by following the format of {Config:name}, as long as
+	// the configuration property is both required and not secret. For more
+	// information, see [Create a Custom Action for a Pipeline].
+	//
+	// [Create a Custom Action for a Pipeline]: https://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html
 	ConfigurationProperties []types.ActionConfigurationProperty
 
 	// URLs that provide users information about this custom action.

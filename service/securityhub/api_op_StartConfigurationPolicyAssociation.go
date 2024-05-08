@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Associates a target account, organizational unit, or the root with a specified
+//	Associates a target account, organizational unit, or the root with a specified
+//
 // configuration. The target can be associated with a configuration policy or
 // self-managed behavior. Only the Security Hub delegated administrator can invoke
 // this operation from the home Region.
@@ -33,14 +34,14 @@ func (c *Client) StartConfigurationPolicyAssociation(ctx context.Context, params
 
 type StartConfigurationPolicyAssociationInput struct {
 
-	// The Amazon Resource Name (ARN) of a configuration policy, the universally
+	//  The Amazon Resource Name (ARN) of a configuration policy, the universally
 	// unique identifier (UUID) of a configuration policy, or a value of
 	// SELF_MANAGED_SECURITY_HUB for a self-managed configuration.
 	//
 	// This member is required.
 	ConfigurationPolicyIdentifier *string
 
-	// The identifier of the target account, organizational unit, or the root to
+	//  The identifier of the target account, organizational unit, or the root to
 	// associate with the specified configuration.
 	//
 	// This member is required.
@@ -51,30 +52,30 @@ type StartConfigurationPolicyAssociationInput struct {
 
 type StartConfigurationPolicyAssociationOutput struct {
 
-	// The current status of the association between the specified target and the
+	//  The current status of the association between the specified target and the
 	// configuration.
 	AssociationStatus types.ConfigurationPolicyAssociationStatus
 
-	// An explanation for a FAILED value for AssociationStatus .
+	//  An explanation for a FAILED value for AssociationStatus .
 	AssociationStatusMessage *string
 
-	// Indicates whether the association between the specified target and the
+	//  Indicates whether the association between the specified target and the
 	// configuration was directly applied by the Security Hub delegated administrator
 	// or inherited from a parent.
 	AssociationType types.AssociationType
 
-	// The UUID of the configuration policy.
+	//  The UUID of the configuration policy.
 	ConfigurationPolicyId *string
 
-	// The identifier of the target account, organizational unit, or the organization
+	//  The identifier of the target account, organizational unit, or the organization
 	// root with which the configuration is associated.
 	TargetId *string
 
-	// Indicates whether the target is an Amazon Web Services account, organizational
+	//  Indicates whether the target is an Amazon Web Services account, organizational
 	// unit, or the organization root.
 	TargetType types.TargetType
 
-	// The date and time, in UTC and ISO 8601 format, that the configuration policy
+	//  The date and time, in UTC and ISO 8601 format, that the configuration policy
 	// association was last updated.
 	UpdatedAt *time.Time
 

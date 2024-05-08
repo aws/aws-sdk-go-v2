@@ -10,14 +10,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
-// in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
-// . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Returns an array of IP addresses currently being blocked by the
-// RateBasedRule that is specified by the RuleId . The maximum number of managed
-// keys that will be blocked is 10,000. If more than 10,000 addresses exceed the
-// rate limit, the 10,000 addresses with the highest rates will be blocked.
+// This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
+// developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the [AWS WAF Developer Guide]. With the
+// latest version, AWS WAF has a single set of endpoints for regional and global
+// use.
+//
+// Returns an array of IP addresses currently being blocked by the RateBasedRule that is
+// specified by the RuleId . The maximum number of managed keys that will be
+// blocked is 10,000. If more than 10,000 addresses exceed the rate limit, the
+// 10,000 addresses with the highest rates will be blocked.
+//
+// [AWS WAF Classic]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+// [AWS WAF Developer Guide]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
 func (c *Client) GetRateBasedRuleManagedKeys(ctx context.Context, params *GetRateBasedRuleManagedKeysInput, optFns ...func(*Options)) (*GetRateBasedRuleManagedKeysOutput, error) {
 	if params == nil {
 		params = &GetRateBasedRuleManagedKeysInput{}
@@ -35,8 +41,8 @@ func (c *Client) GetRateBasedRuleManagedKeys(ctx context.Context, params *GetRat
 
 type GetRateBasedRuleManagedKeysInput struct {
 
-	// The RuleId of the RateBasedRule for which you want to get a list of ManagedKeys
-	// . RuleId is returned by CreateRateBasedRule and by ListRateBasedRules .
+	// The RuleId of the RateBasedRule for which you want to get a list of ManagedKeys . RuleId is
+	// returned by CreateRateBasedRuleand by ListRateBasedRules.
 	//
 	// This member is required.
 	RuleId *string
@@ -49,8 +55,7 @@ type GetRateBasedRuleManagedKeysInput struct {
 
 type GetRateBasedRuleManagedKeysOutput struct {
 
-	// An array of IP addresses that currently are blocked by the specified
-	// RateBasedRule .
+	// An array of IP addresses that currently are blocked by the specified RateBasedRule.
 	ManagedKeys []string
 
 	// A null value and not currently used.

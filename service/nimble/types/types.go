@@ -97,9 +97,11 @@ type EulaAcceptance struct {
 // A launch profile controls your artist workforce’s access to studio components,
 // like compute farms, shared file systems, managed file systems, and license
 // server configurations, as well as instance types and Amazon Machine Images
-// (AMIs). Studio administrators create launch profiles in the Nimble Studio
-// console. Artists can use their launch profiles to launch an instance from the
-// Nimble Studio portal. Each user’s launch profile defines how they can launch a
+// (AMIs).
+//
+// Studio administrators create launch profiles in the Nimble Studio console.
+// Artists can use their launch profiles to launch an instance from the Nimble
+// Studio portal. Each user’s launch profile defines how they can launch a
 // streaming session. By default, studio admins can use all launch profiles.
 type LaunchProfile struct {
 
@@ -162,8 +164,10 @@ type LaunchProfile struct {
 }
 
 // A launch profile initialization contains information required for a workstation
-// or server to connect to a launch profile. This includes scripts, endpoints,
-// security groups, subnets, and other configuration.
+// or server to connect to a launch profile.
+//
+// This includes scripts, endpoints, security groups, subnets, and other
+// configuration.
 type LaunchProfileInitialization struct {
 
 	// A LaunchProfileInitializationActiveDirectory resource.
@@ -256,13 +260,20 @@ type LaunchProfileInitializationScript struct {
 // access to studio users in the Nimble Studio portal without writing or
 // maintaining complex IAM policies. A launch profile member is a user association
 // from your studio identity source who is granted permissions to a launch profile.
+//
 // A launch profile member (type USER) provides the following permissions to that
 // launch profile:
+//
 //   - GetLaunchProfile
+//
 //   - GetLaunchProfileInitialization
+//
 //   - GetLaunchProfileMembers
+//
 //   - GetLaunchProfileMember
+//
 //   - CreateStreamingSession
+//
 //   - GetLaunchProfileDetails
 type LaunchProfileMembership struct {
 
@@ -383,11 +394,14 @@ type StreamConfiguration struct {
 	// Indicates if a streaming session created from this launch profile should be
 	// terminated automatically or retained without termination after being in a
 	// STOPPED state.
+	//
 	//   - When ACTIVATED , the streaming session is scheduled for termination after
 	//   being in the STOPPED state for the time specified in
 	//   maxStoppedSessionLengthInMinutes .
+	//
 	//   - When DEACTIVATED , the streaming session can remain in the STOPPED state
 	//   indefinitely.
+	//
 	// This parameter is only allowed when sessionPersistenceMode is ACTIVATED . When
 	// allowed, the default value for this parameter is DEACTIVATED .
 	AutomaticTerminationMode AutomaticTerminationMode
@@ -400,16 +414,20 @@ type StreamConfiguration struct {
 
 	// Integer that determines if you can start and stop your sessions and how long a
 	// session can stay in the STOPPED state. The default value is 0. The maximum
-	// value is 5760. This field is allowed only when sessionPersistenceMode is
-	// ACTIVATED and automaticTerminationMode is ACTIVATED . If the value is set to 0,
-	// your sessions can’t be STOPPED . If you then call StopStreamingSession , the
-	// session fails. If the time that a session stays in the READY state exceeds the
-	// maxSessionLengthInMinutes value, the session will automatically be terminated
-	// (instead of STOPPED ). If the value is set to a positive number, the session can
-	// be stopped. You can call StopStreamingSession to stop sessions in the READY
-	// state. If the time that a session stays in the READY state exceeds the
-	// maxSessionLengthInMinutes value, the session will automatically be stopped
-	// (instead of terminated).
+	// value is 5760.
+	//
+	// This field is allowed only when sessionPersistenceMode is ACTIVATED and
+	// automaticTerminationMode is ACTIVATED .
+	//
+	// If the value is set to 0, your sessions can’t be STOPPED . If you then call
+	// StopStreamingSession , the session fails. If the time that a session stays in
+	// the READY state exceeds the maxSessionLengthInMinutes value, the session will
+	// automatically be terminated (instead of STOPPED ).
+	//
+	// If the value is set to a positive number, the session can be stopped. You can
+	// call StopStreamingSession to stop sessions in the READY state. If the time that
+	// a session stays in the READY state exceeds the maxSessionLengthInMinutes value,
+	// the session will automatically be stopped (instead of terminated).
 	MaxStoppedSessionLengthInMinutes int32
 
 	// Information about the streaming session backup.
@@ -424,8 +442,9 @@ type StreamConfiguration struct {
 	SessionStorage *StreamConfigurationSessionStorage
 
 	// Custom volume configuration for the root volumes that are attached to streaming
-	// sessions. This parameter is only allowed when sessionPersistenceMode is
-	// ACTIVATED .
+	// sessions.
+	//
+	// This parameter is only allowed when sessionPersistenceMode is ACTIVATED .
 	VolumeConfiguration *VolumeConfiguration
 
 	noSmithyDocumentSerde
@@ -455,11 +474,14 @@ type StreamConfigurationCreate struct {
 	// Indicates if a streaming session created from this launch profile should be
 	// terminated automatically or retained without termination after being in a
 	// STOPPED state.
+	//
 	//   - When ACTIVATED , the streaming session is scheduled for termination after
 	//   being in the STOPPED state for the time specified in
 	//   maxStoppedSessionLengthInMinutes .
+	//
 	//   - When DEACTIVATED , the streaming session can remain in the STOPPED state
 	//   indefinitely.
+	//
 	// This parameter is only allowed when sessionPersistenceMode is ACTIVATED . When
 	// allowed, the default value for this parameter is DEACTIVATED .
 	AutomaticTerminationMode AutomaticTerminationMode
@@ -472,16 +494,20 @@ type StreamConfigurationCreate struct {
 
 	// Integer that determines if you can start and stop your sessions and how long a
 	// session can stay in the STOPPED state. The default value is 0. The maximum
-	// value is 5760. This field is allowed only when sessionPersistenceMode is
-	// ACTIVATED and automaticTerminationMode is ACTIVATED . If the value is set to 0,
-	// your sessions can’t be STOPPED . If you then call StopStreamingSession , the
-	// session fails. If the time that a session stays in the READY state exceeds the
-	// maxSessionLengthInMinutes value, the session will automatically be terminated
-	// (instead of STOPPED ). If the value is set to a positive number, the session can
-	// be stopped. You can call StopStreamingSession to stop sessions in the READY
-	// state. If the time that a session stays in the READY state exceeds the
-	// maxSessionLengthInMinutes value, the session will automatically be stopped
-	// (instead of terminated).
+	// value is 5760.
+	//
+	// This field is allowed only when sessionPersistenceMode is ACTIVATED and
+	// automaticTerminationMode is ACTIVATED .
+	//
+	// If the value is set to 0, your sessions can’t be STOPPED . If you then call
+	// StopStreamingSession , the session fails. If the time that a session stays in
+	// the READY state exceeds the maxSessionLengthInMinutes value, the session will
+	// automatically be terminated (instead of STOPPED ).
+	//
+	// If the value is set to a positive number, the session can be stopped. You can
+	// call StopStreamingSession to stop sessions in the READY state. If the time that
+	// a session stays in the READY state exceeds the maxSessionLengthInMinutes value,
+	// the session will automatically be stopped (instead of terminated).
 	MaxStoppedSessionLengthInMinutes int32
 
 	// Configures how streaming sessions are backed up when launched from this launch
@@ -498,8 +524,9 @@ type StreamConfigurationCreate struct {
 	SessionStorage *StreamConfigurationSessionStorage
 
 	// Custom volume configuration for the root volumes that are attached to streaming
-	// sessions. This parameter is only allowed when sessionPersistenceMode is
-	// ACTIVATED .
+	// sessions.
+	//
+	// This parameter is only allowed when sessionPersistenceMode is ACTIVATED .
 	VolumeConfiguration *VolumeConfiguration
 
 	noSmithyDocumentSerde
@@ -513,10 +540,11 @@ type StreamConfigurationSessionBackup struct {
 	// launch profile can have.
 	MaxBackupsToRetain int32
 
-	// Specifies how artists sessions are backed up. Configures backups for streaming
-	// sessions launched with this launch profile. The default value is DEACTIVATED ,
-	// which means that backups are deactivated. To allow backups, set this value to
-	// AUTOMATIC .
+	// Specifies how artists sessions are backed up.
+	//
+	// Configures backups for streaming sessions launched with this launch profile.
+	// The default value is DEACTIVATED , which means that backups are deactivated. To
+	// allow backups, set this value to AUTOMATIC .
 	Mode SessionBackupMode
 
 	noSmithyDocumentSerde
@@ -537,12 +565,17 @@ type StreamConfigurationSessionStorage struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a streaming image resource. Streaming images are used by studio
-// users to select which operating system and software they want to use in a Nimble
-// Studio streaming session. Amazon provides a number of streaming images that
-// include popular 3rd-party software. You can create your own streaming images
-// using an Amazon EC2 machine image that you create for this purpose. You can also
-// include software that your users require.
+// Represents a streaming image resource.
+//
+// Streaming images are used by studio users to select which operating system and
+// software they want to use in a Nimble Studio streaming session.
+//
+// Amazon provides a number of streaming images that include popular 3rd-party
+// software.
+//
+// You can create your own streaming images using an Amazon EC2 machine image that
+// you create for this purpose. You can also include software that your users
+// require.
 type StreamingImage struct {
 
 	// The Amazon Resource Name (ARN) that is assigned to a studio resource and
@@ -616,11 +649,14 @@ type StreamingSession struct {
 	// Indicates if a streaming session created from this launch profile should be
 	// terminated automatically or retained without termination after being in a
 	// STOPPED state.
+	//
 	//   - When ACTIVATED , the streaming session is scheduled for termination after
 	//   being in the STOPPED state for the time specified in
 	//   maxStoppedSessionLengthInMinutes .
+	//
 	//   - When DEACTIVATED , the streaming session can remain in the STOPPED state
 	//   indefinitely.
+	//
 	// This parameter is only allowed when sessionPersistenceMode is ACTIVATED . When
 	// allowed, the default value for this parameter is DEACTIVATED .
 	AutomaticTerminationMode AutomaticTerminationMode
@@ -703,8 +739,9 @@ type StreamingSession struct {
 	UpdatedBy *string
 
 	// Custom volume configuration for the root volumes that are attached to streaming
-	// sessions. This parameter is only allowed when sessionPersistenceMode is
-	// ACTIVATED .
+	// sessions.
+	//
+	// This parameter is only allowed when sessionPersistenceMode is ACTIVATED .
 	VolumeConfiguration *VolumeConfiguration
 
 	// Determine if an EBS volume created from this streaming session will be backed
@@ -801,17 +838,24 @@ type StreamingSessionStream struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a studio resource. A studio is the core resource used with Nimble
-// Studio. You must create a studio first, before any other resource type can be
-// created. All other resources you create and manage in Nimble Studio are
-// contained within a studio. When creating a studio, you must provides two IAM
-// roles for use with the Nimble Studio portal. These roles are assumed by your
-// users when they log in to the Nimble Studio portal via IAM Identity Center and
-// your identity source. The user role must have the AmazonNimbleStudio-StudioUser
-// managed policy attached for the portal to function properly. The admin role must
-// have the AmazonNimbleStudio-StudioAdmin managed policy attached for the portal
-// to function properly. Your studio roles must trust the
-// identity.nimble.amazonaws.com service principal to function properly.
+// Represents a studio resource.
+//
+// A studio is the core resource used with Nimble Studio. You must create a studio
+// first, before any other resource type can be created. All other resources you
+// create and manage in Nimble Studio are contained within a studio.
+//
+// When creating a studio, you must provides two IAM roles for use with the Nimble
+// Studio portal. These roles are assumed by your users when they log in to the
+// Nimble Studio portal via IAM Identity Center and your identity source.
+//
+// The user role must have the AmazonNimbleStudio-StudioUser managed policy
+// attached for the portal to function properly.
+//
+// The admin role must have the AmazonNimbleStudio-StudioAdmin managed policy
+// attached for the portal to function properly.
+//
+// Your studio roles must trust the identity.nimble.amazonaws.com service
+// principal to function properly.
 type Studio struct {
 
 	// The IAM role that studio admins assume when logging in to the Nimble Studio
@@ -875,13 +919,15 @@ type Studio struct {
 
 // A studio component represents a network resource to be used by a studio's users
 // and workflows. A typical studio contains studio components for each of the
-// following: render farm, Active Directory, licensing, and file system. Access to
-// a studio component is managed by specifying security groups for the resource, as
-// well as its endpoint. A studio component also has a set of initialization
-// scripts that are returned by GetLaunchProfileInitialization . These
-// initialization scripts run on streaming sessions when they start. They provide
-// users with flexibility in controlling how the studio resources are configured on
-// a streaming session.
+// following: render farm, Active Directory, licensing, and file system.
+//
+// Access to a studio component is managed by specifying security groups for the
+// resource, as well as its endpoint.
+//
+// A studio component also has a set of initialization scripts that are returned
+// by GetLaunchProfileInitialization . These initialization scripts run on
+// streaming sessions when they start. They provide users with flexibility in
+// controlling how the studio resources are configured on a streaming session.
 type StudioComponent struct {
 
 	// The Amazon Resource Name (ARN) that is assigned to a studio resource and
@@ -1041,14 +1087,17 @@ type StudioEncryptionConfiguration struct {
 }
 
 // A studio member is an association of a user from your studio identity source to
-// elevated permissions that they are granted in the studio. When you add a user to
-// your studio using the Nimble Studio console, they are given access to the
-// studio's IAM Identity Center application and are given access to log in to the
-// Nimble Studio portal. These users have the permissions provided by the studio's
-// user IAM role and do not appear in the studio membership collection. Only studio
-// admins appear in studio membership. When you add a user to studio membership
-// with the ADMIN persona, upon logging in to the Nimble Studio portal, they are
-// granted permissions specified by the Studio's Admin IAM role.
+// elevated permissions that they are granted in the studio.
+//
+// When you add a user to your studio using the Nimble Studio console, they are
+// given access to the studio's IAM Identity Center application and are given
+// access to log in to the Nimble Studio portal. These users have the permissions
+// provided by the studio's user IAM role and do not appear in the studio
+// membership collection. Only studio admins appear in studio membership.
+//
+// When you add a user to studio membership with the ADMIN persona, upon logging
+// in to the Nimble Studio portal, they are granted permissions specified by the
+// Studio's Admin IAM role.
 type StudioMembership struct {
 
 	// The ID of the identity store.
@@ -1094,8 +1143,9 @@ type ValidationResult struct {
 }
 
 // Custom volume configuration for the root volumes that are attached to streaming
-// sessions. This parameter is only allowed when sessionPersistenceMode is
-// ACTIVATED .
+// sessions.
+//
+// This parameter is only allowed when sessionPersistenceMode is ACTIVATED .
 type VolumeConfiguration struct {
 
 	// The number of I/O operations per second for the root volume that is attached to

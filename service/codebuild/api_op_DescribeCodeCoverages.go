@@ -29,7 +29,7 @@ func (c *Client) DescribeCodeCoverages(ctx context.Context, params *DescribeCode
 
 type DescribeCodeCoveragesInput struct {
 
-	// The ARN of the report for which test cases are returned.
+	//  The ARN of the report for which test cases are returned.
 	//
 	// This member is required.
 	ReportArn *string
@@ -48,9 +48,12 @@ type DescribeCodeCoveragesInput struct {
 	// exclude this parameter.
 	NextToken *string
 
-	// Specifies how the results are sorted. Possible values are: FILE_PATH The
-	// results are sorted by file path. LINE_COVERAGE_PERCENTAGE The results are sorted
-	// by the percentage of lines that are covered.
+	// Specifies how the results are sorted. Possible values are:
+	//
+	// FILE_PATH The results are sorted by file path.
+	//
+	// LINE_COVERAGE_PERCENTAGE The results are sorted by the percentage of lines that
+	// are covered.
 	SortBy types.ReportCodeCoverageSortByType
 
 	// Specifies if the results are sorted in ascending or descending order.

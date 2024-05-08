@@ -16,10 +16,15 @@ import (
 // can categorize resources by purpose, owner, environment, or team. Each tag
 // consists of a key and a value, which you define. You can add tags to the
 // following Storage Gateway resources:
+//
 //   - Storage gateways of all types
+//
 //   - Storage volumes
+//
 //   - Virtual tapes
+//
 //   - NFS and SMB file shares
+//
 //   - File System associations
 //
 // You can create a maximum of 50 tags for each resource. Virtual tapes and
@@ -48,10 +53,12 @@ type AddTagsToResourceInput struct {
 	ResourceARN *string
 
 	// The key-value pair that represents the tag you want to add to the resource. The
-	// value can be an empty string. Valid characters for key and value are letters,
-	// spaces, and numbers representable in UTF-8 format, and the following special
-	// characters: + - = . _ : / @. The maximum length of a tag's key is 128
-	// characters, and the maximum length for a tag's value is 256.
+	// value can be an empty string.
+	//
+	// Valid characters for key and value are letters, spaces, and numbers
+	// representable in UTF-8 format, and the following special characters: + - = . _ :
+	// / @. The maximum length of a tag's key is 128 characters, and the maximum length
+	// for a tag's value is 256.
 	//
 	// This member is required.
 	Tags []types.Tag

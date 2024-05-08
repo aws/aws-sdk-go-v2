@@ -7,7 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Your account isn't registered with Audit Manager. Check the delegated
+//	Your account isn't registered with Audit Manager. Check the delegated
+//
 // administrator setup on the Audit Manager settings page, and try again.
 type AccessDeniedException struct {
 	Message *string
@@ -34,7 +35,8 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An internal service error occurred during the processing of your request. Try
+//	An internal service error occurred during the processing of your request. Try
+//
 // again later.
 type InternalServerException struct {
 	Message *string
@@ -91,10 +93,11 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've reached your account quota for this resource type. To perform the
-// requested action, delete some existing resources or request a quota increase (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
-// from the Service Quotas console. For a list of Audit Manager service quotas, see
-// Quotas and restrictions for Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html)
-// .
+// requested action, delete some existing resources or [request a quota increase]from the Service Quotas
+// console. For a list of Audit Manager service quotas, see [Quotas and restrictions for Audit Manager].
+//
+// [request a quota increase]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+// [Quotas and restrictions for Audit Manager]: https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html
 type ServiceQuotaExceededException struct {
 	Message *string
 

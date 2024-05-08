@@ -30,15 +30,14 @@ func (c *Client) DescribePermissionSetProvisioningStatus(ctx context.Context, pa
 type DescribePermissionSetProvisioningStatusInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// Amazon Web Services Service Namespaces in the Amazon Web Services General
-	// Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespacesin the Amazon Web Services
+	// General Reference.
 	//
 	// This member is required.
 	InstanceArn *string
 
-	// The identifier that is provided by the ProvisionPermissionSet call to retrieve
-	// the current status of the provisioning workflow.
+	// The identifier that is provided by the ProvisionPermissionSet call to retrieve the current status of
+	// the provisioning workflow.
 	//
 	// This member is required.
 	ProvisionPermissionSetRequestId *string

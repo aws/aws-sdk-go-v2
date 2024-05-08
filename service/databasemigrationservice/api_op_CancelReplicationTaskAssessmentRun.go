@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a single premigration assessment run. This operation prevents any
-// individual assessments from running if they haven't started running. It also
-// attempts to cancel any individual assessments that are currently running.
+// Cancels a single premigration assessment run.
+//
+// This operation prevents any individual assessments from running if they haven't
+// started running. It also attempts to cancel any individual assessments that are
+// currently running.
 func (c *Client) CancelReplicationTaskAssessmentRun(ctx context.Context, params *CancelReplicationTaskAssessmentRunInput, optFns ...func(*Options)) (*CancelReplicationTaskAssessmentRunOutput, error) {
 	if params == nil {
 		params = &CancelReplicationTaskAssessmentRunInput{}

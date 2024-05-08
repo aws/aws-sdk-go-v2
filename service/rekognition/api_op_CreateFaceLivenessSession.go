@@ -13,13 +13,16 @@ import (
 
 // This API operation initiates a Face Liveness session. It returns a SessionId ,
 // which you can use to start streaming Face Liveness video and get the results for
-// a Face Liveness session. You can use the OutputConfig option in the Settings
-// parameter to provide an Amazon S3 bucket location. The Amazon S3 bucket stores
-// reference images and audit images. If no Amazon S3 bucket is defined, raw bytes
-// are sent instead. You can use AuditImagesLimit to limit the number of audit
-// images returned when GetFaceLivenessSessionResults is called. This number is
-// between 0 and 4. By default, it is set to 0. The limit is best effort and based
-// on the duration of the selfie-video.
+// a Face Liveness session.
+//
+// You can use the OutputConfig option in the Settings parameter to provide an
+// Amazon S3 bucket location. The Amazon S3 bucket stores reference images and
+// audit images. If no Amazon S3 bucket is defined, raw bytes are sent instead.
+//
+// You can use AuditImagesLimit to limit the number of audit images returned when
+// GetFaceLivenessSessionResults is called. This number is between 0 and 4. By
+// default, it is set to 0. The limit is best effort and based on the duration of
+// the selfie-video.
 func (c *Client) CreateFaceLivenessSession(ctx context.Context, params *CreateFaceLivenessSessionInput, optFns ...func(*Options)) (*CreateFaceLivenessSessionOutput, error) {
 	if params == nil {
 		params = &CreateFaceLivenessSessionInput{}
@@ -43,7 +46,7 @@ type CreateFaceLivenessSessionInput struct {
 	// the same session multiple times.
 	ClientRequestToken *string
 
-	// The identifier for your AWS Key Management Service key (AWS KMS key). Used to
+	//  The identifier for your AWS Key Management Service key (AWS KMS key). Used to
 	// encrypt audit images and reference images.
 	KmsKeyId *string
 

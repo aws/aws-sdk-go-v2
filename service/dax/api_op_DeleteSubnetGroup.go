@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a subnet group. You cannot delete a subnet group if it is associated
-// with any DAX clusters.
+// Deletes a subnet group.
+//
+// You cannot delete a subnet group if it is associated with any DAX clusters.
 func (c *Client) DeleteSubnetGroup(ctx context.Context, params *DeleteSubnetGroupInput, optFns ...func(*Options)) (*DeleteSubnetGroupOutput, error) {
 	if params == nil {
 		params = &DeleteSubnetGroupInput{}

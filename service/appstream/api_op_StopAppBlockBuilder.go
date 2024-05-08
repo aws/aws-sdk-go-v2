@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops an app block builder. Stopping an app block builder terminates the
-// instance, and the instance state is not persisted.
+// Stops an app block builder.
+//
+// Stopping an app block builder terminates the instance, and the instance state
+// is not persisted.
 func (c *Client) StopAppBlockBuilder(ctx context.Context, params *StopAppBlockBuilderInput, optFns ...func(*Options)) (*StopAppBlockBuilderOutput, error) {
 	if params == nil {
 		params = &StopAppBlockBuilderInput{}

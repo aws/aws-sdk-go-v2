@@ -12,27 +12,37 @@ import (
 )
 
 // Gets the path tracking results of a Amazon Rekognition Video analysis started
-// by StartPersonTracking . The person path tracking operation is started by a call
-// to StartPersonTracking which returns a job identifier ( JobId ). When the
-// operation finishes, Amazon Rekognition Video publishes a completion status to
-// the Amazon Simple Notification Service topic registered in the initial call to
-// StartPersonTracking . To get the results of the person path tracking operation,
-// first check that the status value published to the Amazon SNS topic is SUCCEEDED
-// . If so, call GetPersonTracking and pass the job identifier ( JobId ) from the
-// initial call to StartPersonTracking . GetPersonTracking returns an array,
-// Persons , of tracked persons and the time(s) their paths were tracked in the
-// video. GetPersonTracking only returns the default facial attributes ( BoundingBox
-// , Confidence , Landmarks , Pose , and Quality ). The other facial attributes
+// by StartPersonTracking.
+//
+// The person path tracking operation is started by a call to StartPersonTracking
+// which returns a job identifier ( JobId ). When the operation finishes, Amazon
+// Rekognition Video publishes a completion status to the Amazon Simple
+// Notification Service topic registered in the initial call to StartPersonTracking
+// .
+//
+// To get the results of the person path tracking operation, first check that the
+// status value published to the Amazon SNS topic is SUCCEEDED . If so, call GetPersonTracking and
+// pass the job identifier ( JobId ) from the initial call to StartPersonTracking .
+//
+// GetPersonTracking returns an array, Persons , of tracked persons and the time(s)
+// their paths were tracked in the video.
+//
+// GetPersonTracking only returns the default facial attributes ( BoundingBox ,
+// Confidence , Landmarks , Pose , and Quality ). The other facial attributes
 // listed in the Face object of the following response syntax are not returned.
+//
 // For more information, see FaceDetail in the Amazon Rekognition Developer Guide.
-// By default, the array is sorted by the time(s) a person's path is tracked in the
-// video. You can sort by tracked persons by specifying INDEX for the SortBy input
-// parameter. Use the MaxResults parameter to limit the number of items returned.
-// If there are more results than specified in MaxResults , the value of NextToken
-// in the operation response contains a pagination token for getting the next set
-// of results. To get the next page of results, call GetPersonTracking and
-// populate the NextToken request parameter with the token value returned from the
-// previous call to GetPersonTracking .
+//
+// By default, the array is sorted by the time(s) a person's path is tracked in
+// the video. You can sort by tracked persons by specifying INDEX for the SortBy
+// input parameter.
+//
+// Use the MaxResults parameter to limit the number of items returned. If there
+// are more results than specified in MaxResults , the value of NextToken in the
+// operation response contains a pagination token for getting the next set of
+// results. To get the next page of results, call GetPersonTracking and populate
+// the NextToken request parameter with the token value returned from the previous
+// call to GetPersonTracking .
 func (c *Client) GetPersonTracking(ctx context.Context, params *GetPersonTrackingInput, optFns ...func(*Options)) (*GetPersonTrackingOutput, error) {
 	if params == nil {
 		params = &GetPersonTrackingInput{}
@@ -103,8 +113,8 @@ type GetPersonTrackingOutput struct {
 	StatusMessage *string
 
 	// Video file stored in an Amazon S3 bucket. Amazon Rekognition video start
-	// operations such as StartLabelDetection use Video to specify a video for
-	// analysis. The supported file formats are .mp4, .mov and .avi.
+	// operations such as StartLabelDetectionuse Video to specify a video for analysis. The supported
+	// file formats are .mp4, .mov and .avi.
 	Video *types.Video
 
 	// Information about a video that Amazon Rekognition Video analyzed. Videometadata

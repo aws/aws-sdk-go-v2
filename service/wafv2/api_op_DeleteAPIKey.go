@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified API key. After you delete a key, it can take up to 24
-// hours for WAF to disallow use of the key in all regions.
+// Deletes the specified API key.
+//
+// After you delete a key, it can take up to 24 hours for WAF to disallow use of
+// the key in all regions.
 func (c *Client) DeleteAPIKey(ctx context.Context, params *DeleteAPIKeyInput, optFns ...func(*Options)) (*DeleteAPIKeyOutput, error) {
 	if params == nil {
 		params = &DeleteAPIKeyInput{}
@@ -39,10 +41,14 @@ type DeleteAPIKeyInput struct {
 	// regional application. A regional application can be an Application Load Balancer
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito
 	// user pool, an App Runner service, or an Amazon Web Services Verified Access
-	// instance. To work with CloudFront, you must also specify the Region US East (N.
-	// Virginia) as follows:
+	// instance.
+	//
+	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
+	// as follows:
+	//
 	//   - CLI - Specify the Region when you use the CloudFront scope:
 	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//
 	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.

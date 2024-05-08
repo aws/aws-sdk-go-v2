@@ -34,9 +34,10 @@ type UpdatePartitionInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// The new partition object to update the partition to. The Values property can't
-	// be changed. If you want to change the partition key values for a partition,
-	// delete and recreate the partition.
+	// The new partition object to update the partition to.
+	//
+	// The Values property can't be changed. If you want to change the partition key
+	// values for a partition, delete and recreate the partition.
 	//
 	// This member is required.
 	PartitionInput *types.PartitionInput

@@ -34,8 +34,9 @@ type ListSyncJobsInput struct {
 	// This member is required.
 	WorkspaceId *string
 
-	// The maximum number of results to return at one time. The default is 50. Valid
-	// Range: Minimum value of 0. Maximum value of 200.
+	// The maximum number of results to return at one time. The default is 50.
+	//
+	// Valid Range: Minimum value of 0. Maximum value of 200.
 	MaxResults *int32
 
 	// The string that specifies the next page of results.
@@ -176,8 +177,9 @@ var _ ListSyncJobsAPIClient = (*Client)(nil)
 
 // ListSyncJobsPaginatorOptions is the paginator options for ListSyncJobs
 type ListSyncJobsPaginatorOptions struct {
-	// The maximum number of results to return at one time. The default is 50. Valid
-	// Range: Minimum value of 0. Maximum value of 200.
+	// The maximum number of results to return at one time. The default is 50.
+	//
+	// Valid Range: Minimum value of 0. Maximum value of 200.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

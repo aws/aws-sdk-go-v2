@@ -12,8 +12,10 @@ import (
 )
 
 // Updates an existing volume by using a snapshot from another Amazon FSx for
-// OpenZFS file system. For more information, see on-demand data replication (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/on-demand-replication.html)
-// in the Amazon FSx for OpenZFS User Guide.
+// OpenZFS file system. For more information, see [on-demand data replication]in the Amazon FSx for OpenZFS
+// User Guide.
+//
+// [on-demand data replication]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/on-demand-replication.html
 func (c *Client) CopySnapshotAndUpdateVolume(ctx context.Context, params *CopySnapshotAndUpdateVolumeInput, optFns ...func(*Options)) (*CopySnapshotAndUpdateVolumeOutput, error) {
 	if params == nil {
 		params = &CopySnapshotAndUpdateVolumeInput{}
@@ -34,8 +36,9 @@ type CopySnapshotAndUpdateVolumeInput struct {
 	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
 	// Amazon Web Services resources. We require an ARN when you need to specify a
 	// resource unambiguously across all of Amazon Web Services. For more information,
-	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	SourceSnapshotARN *string
@@ -51,23 +54,30 @@ type CopySnapshotAndUpdateVolumeInput struct {
 	ClientRequestToken *string
 
 	// Specifies the strategy to use when copying data from a snapshot to the volume.
+	//
 	//   - FULL_COPY - Copies all data from the snapshot to the volume.
+	//
 	//   - INCREMENTAL_COPY - Copies only the snapshot data that's changed since the
 	//   previous replication.
+	//
 	// CLONE isn't a valid copy strategy option for the CopySnapshotAndUpdateVolume
 	// operation.
 	CopyStrategy types.OpenZFSCopyStrategy
 
 	// Confirms that you want to delete data on the destination volume that wasn’t
-	// there during the previous snapshot replication. Your replication will fail if
-	// you don’t include an option for a specific type of data and that data is on your
-	// destination. For example, if you don’t include DELETE_INTERMEDIATE_SNAPSHOTS
-	// and there are intermediate snapshots on the destination, you can’t copy the
-	// snapshot.
+	// there during the previous snapshot replication.
+	//
+	// Your replication will fail if you don’t include an option for a specific type
+	// of data and that data is on your destination. For example, if you don’t include
+	// DELETE_INTERMEDIATE_SNAPSHOTS and there are intermediate snapshots on the
+	// destination, you can’t copy the snapshot.
+	//
 	//   - DELETE_INTERMEDIATE_SNAPSHOTS - Deletes snapshots on the destination volume
 	//   that aren’t on the source volume.
+	//
 	//   - DELETE_CLONED_VOLUMES - Deletes snapshot clones on the destination volume
 	//   that aren't on the source volume.
+	//
 	//   - DELETE_INTERMEDIATE_DATA - Overwrites snapshots on the destination volume
 	//   that don’t match the source snapshot that you’re copying.
 	Options []types.UpdateOpenZFSVolumeOption

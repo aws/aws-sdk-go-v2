@@ -67,8 +67,9 @@ type UpdateContentInput struct {
 	// The title of the content.
 	Title *string
 
-	// A pointer to the uploaded asset. This value is returned by StartContentUpload (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html)
-	// .
+	// A pointer to the uploaded asset. This value is returned by [StartContentUpload].
+	//
+	// [StartContentUpload]: https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html
 	UploadId *string
 
 	noSmithyDocumentSerde

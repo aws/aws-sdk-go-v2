@@ -29,12 +29,12 @@ func (c *Client) BatchDeleteDelegationByAssessment(ctx context.Context, params *
 
 type BatchDeleteDelegationByAssessmentInput struct {
 
-	// The identifier for the assessment.
+	//  The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifiers for the delegations.
+	//  The identifiers for the delegations.
 	//
 	// This member is required.
 	DelegationIds []string
@@ -44,7 +44,7 @@ type BatchDeleteDelegationByAssessmentInput struct {
 
 type BatchDeleteDelegationByAssessmentOutput struct {
 
-	// A list of errors that the BatchDeleteDelegationByAssessment API returned.
+	//  A list of errors that the BatchDeleteDelegationByAssessment API returned.
 	Errors []types.BatchDeleteDelegationByAssessmentError
 
 	// Metadata pertaining to the operation's result.

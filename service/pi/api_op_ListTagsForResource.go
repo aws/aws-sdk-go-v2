@@ -31,9 +31,9 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 type ListTagsForResourceInput struct {
 
 	// Lists all the tags for the Amazon RDS Performance Insights resource. This value
-	// is an Amazon Resource Name (ARN). For information about creating an ARN, see
-	// Constructing an RDS Amazon Resource Name (ARN) (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
-	// .
+	// is an Amazon Resource Name (ARN). For information about creating an ARN, see [Constructing an RDS Amazon Resource Name (ARN)].
+	//
+	// [Constructing an RDS Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
 	//
 	// This member is required.
 	ResourceARN *string

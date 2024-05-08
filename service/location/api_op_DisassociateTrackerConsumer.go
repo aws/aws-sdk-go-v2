@@ -11,6 +11,7 @@ import (
 )
 
 // Removes the association between a tracker resource and a geofence collection.
+//
 // Once you unlink a tracker resource from a geofence collection, the tracker
 // positions will no longer be automatically evaluated against geofences.
 func (c *Client) DisassociateTrackerConsumer(ctx context.Context, params *DisassociateTrackerConsumerInput, optFns ...func(*Options)) (*DisassociateTrackerConsumerOutput, error) {
@@ -33,6 +34,7 @@ type DisassociateTrackerConsumerInput struct {
 	// The Amazon Resource Name (ARN) for the geofence collection to be disassociated
 	// from the tracker resource. Used when you need to specify a resource across all
 	// Amazon Web Services.
+	//
 	//   - Format example:
 	//   arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer
 	//

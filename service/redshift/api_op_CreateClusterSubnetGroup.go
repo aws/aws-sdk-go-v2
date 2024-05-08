@@ -13,9 +13,12 @@ import (
 
 // Creates a new Amazon Redshift subnet group. You must provide a list of one or
 // more subnets in your existing Amazon Virtual Private Cloud (Amazon VPC) when
-// creating Amazon Redshift subnet group. For information about subnet groups, go
-// to Amazon Redshift Cluster Subnet Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-cluster-subnet-groups.html)
-// in the Amazon Redshift Cluster Management Guide.
+// creating Amazon Redshift subnet group.
+//
+// For information about subnet groups, go to [Amazon Redshift Cluster Subnet Groups] in the Amazon Redshift Cluster
+// Management Guide.
+//
+// [Amazon Redshift Cluster Subnet Groups]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-cluster-subnet-groups.html
 func (c *Client) CreateClusterSubnetGroup(ctx context.Context, params *CreateClusterSubnetGroupInput, optFns ...func(*Options)) (*CreateClusterSubnetGroupOutput, error) {
 	if params == nil {
 		params = &CreateClusterSubnetGroupInput{}
@@ -34,11 +37,17 @@ func (c *Client) CreateClusterSubnetGroup(ctx context.Context, params *CreateClu
 type CreateClusterSubnetGroupInput struct {
 
 	// The name for the subnet group. Amazon Redshift stores the value as a lowercase
-	// string. Constraints:
+	// string.
+	//
+	// Constraints:
+	//
 	//   - Must contain no more than 255 alphanumeric characters or hyphens.
+	//
 	//   - Must not be "Default".
+	//
 	//   - Must be unique for all subnet groups that are created by your Amazon Web
 	//   Services account.
+	//
 	// Example: examplesubnetgroup
 	//
 	// This member is required.

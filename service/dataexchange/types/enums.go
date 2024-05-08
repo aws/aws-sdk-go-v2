@@ -14,8 +14,9 @@ const (
 )
 
 // Values returns all known values for AssetType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssetType) Values() []AssetType {
 	return []AssetType{
 		"S3_SNAPSHOT",
@@ -40,8 +41,9 @@ const (
 )
 
 // Values returns all known values for Code. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Code) Values() []Code {
 	return []Code{
 		"ACCESS_DENIED_EXCEPTION",
@@ -63,8 +65,9 @@ const (
 
 // Values returns all known values for DatabaseLFTagPolicyPermission. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatabaseLFTagPolicyPermission) Values() []DatabaseLFTagPolicyPermission {
 	return []DatabaseLFTagPolicyPermission{
 		"DESCRIBE",
@@ -80,8 +83,9 @@ const (
 )
 
 // Values returns all known values for ExceptionCause. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExceptionCause) Values() []ExceptionCause {
 	return []ExceptionCause{
 		"InsufficientS3BucketPolicy",
@@ -101,8 +105,9 @@ const (
 )
 
 // Values returns all known values for JobErrorLimitName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobErrorLimitName) Values() []JobErrorLimitName {
 	return []JobErrorLimitName{
 		"Assets per revision",
@@ -123,8 +128,9 @@ const (
 )
 
 // Values returns all known values for JobErrorResourceTypes. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobErrorResourceTypes) Values() []JobErrorResourceTypes {
 	return []JobErrorResourceTypes{
 		"REVISION",
@@ -142,8 +148,9 @@ const (
 
 // Values returns all known values for LakeFormationDataPermissionType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LakeFormationDataPermissionType) Values() []LakeFormationDataPermissionType {
 	return []LakeFormationDataPermissionType{
 		"LFTagPolicy",
@@ -159,8 +166,9 @@ const (
 )
 
 // Values returns all known values for LFPermission. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LFPermission) Values() []LFPermission {
 	return []LFPermission{
 		"DESCRIBE",
@@ -177,8 +185,9 @@ const (
 )
 
 // Values returns all known values for LFResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LFResourceType) Values() []LFResourceType {
 	return []LFResourceType{
 		"TABLE",
@@ -221,8 +230,9 @@ const (
 )
 
 // Values returns all known values for LimitName. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LimitName) Values() []LimitName {
 	return []LimitName{
 		"Products per account",
@@ -267,8 +277,9 @@ const (
 )
 
 // Values returns all known values for NotificationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationType) Values() []NotificationType {
 	return []NotificationType{
 		"DATA_DELAY",
@@ -287,8 +298,9 @@ const (
 )
 
 // Values returns all known values for Origin. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Origin) Values() []Origin {
 	return []Origin{
 		"OWNED",
@@ -304,8 +316,9 @@ const (
 )
 
 // Values returns all known values for ProtocolType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProtocolType) Values() []ProtocolType {
 	return []ProtocolType{
 		"REST",
@@ -324,8 +337,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"DATA_SET",
@@ -346,8 +360,9 @@ const (
 )
 
 // Values returns all known values for SchemaChangeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SchemaChangeType) Values() []SchemaChangeType {
 	return []SchemaChangeType{
 		"ADD",
@@ -366,6 +381,7 @@ const (
 
 // Values returns all known values for ServerSideEncryptionTypes. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ServerSideEncryptionTypes) Values() []ServerSideEncryptionTypes {
 	return []ServerSideEncryptionTypes{
@@ -387,8 +403,9 @@ const (
 )
 
 // Values returns all known values for State. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (State) Values() []State {
 	return []State{
 		"WAITING",
@@ -410,6 +427,7 @@ const (
 
 // Values returns all known values for TableTagPolicyLFPermission. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (TableTagPolicyLFPermission) Values() []TableTagPolicyLFPermission {
 	return []TableTagPolicyLFPermission{
@@ -434,8 +452,9 @@ const (
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{
 		"IMPORT_ASSETS_FROM_S3",

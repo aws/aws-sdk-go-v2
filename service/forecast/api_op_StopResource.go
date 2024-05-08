@@ -10,16 +10,26 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a resource. The resource undergoes the following states: CREATE_STOPPING
-// and CREATE_STOPPED . You cannot resume a resource once it has been stopped. This
-// operation can be applied to the following resources (and their corresponding
-// child resources):
+// Stops a resource.
+//
+// The resource undergoes the following states: CREATE_STOPPING and CREATE_STOPPED
+// . You cannot resume a resource once it has been stopped.
+//
+// This operation can be applied to the following resources (and their
+// corresponding child resources):
+//
 //   - Dataset Import Job
+//
 //   - Predictor Job
+//
 //   - Forecast Job
+//
 //   - Forecast Export Job
+//
 //   - Predictor Backtest Export Job
+//
 //   - Explainability Job
+//
 //   - Explainability Export Job
 func (c *Client) StopResource(ctx context.Context, params *StopResourceInput, optFns ...func(*Options)) (*StopResourceOutput, error) {
 	if params == nil {

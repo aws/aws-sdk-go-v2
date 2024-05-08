@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a notebook instance lifecycle configuration created with the
-// CreateNotebookInstanceLifecycleConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateNotebookInstanceLifecycleConfig.html)
-// API.
+// Updates a notebook instance lifecycle configuration created with the [CreateNotebookInstanceLifecycleConfig] API.
+//
+// [CreateNotebookInstanceLifecycleConfig]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateNotebookInstanceLifecycleConfig.html
 func (c *Client) UpdateNotebookInstanceLifecycleConfig(ctx context.Context, params *UpdateNotebookInstanceLifecycleConfigInput, optFns ...func(*Options)) (*UpdateNotebookInstanceLifecycleConfigOutput, error) {
 	if params == nil {
 		params = &UpdateNotebookInstanceLifecycleConfigInput{}

@@ -72,10 +72,12 @@ type CreatePipeInput struct {
 	// The list of key-value pairs to associate with the pipe.
 	Tags map[string]string
 
-	// The parameters required to set up a target for your pipe. For more information
-	// about pipe target parameters, including how to use dynamic path parameters, see
-	// Target parameters (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html)
-	// in the Amazon EventBridge User Guide.
+	// The parameters required to set up a target for your pipe.
+	//
+	// For more information about pipe target parameters, including how to use dynamic
+	// path parameters, see [Target parameters]in the Amazon EventBridge User Guide.
+	//
+	// [Target parameters]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html
 	TargetParameters *types.PipeTargetParameters
 
 	noSmithyDocumentSerde
@@ -95,8 +97,9 @@ type CreatePipeOutput struct {
 	// The state the pipe should be in.
 	DesiredState types.RequestedPipeState
 
-	// When the pipe was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
-	// (YYYY-MM-DDThh:mm:ss.sTZD).
+	// When the pipe was last updated, in [ISO-8601 format] (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
 	LastModifiedTime *time.Time
 
 	// The name of the pipe.

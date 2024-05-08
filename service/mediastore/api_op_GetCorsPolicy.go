@@ -12,9 +12,11 @@ import (
 )
 
 // Returns the cross-origin resource sharing (CORS) configuration information that
-// is set for the container. To use this operation, you must have permission to
-// perform the MediaStore:GetCorsPolicy action. By default, the container owner
-// has this permission and can grant it to others.
+// is set for the container.
+//
+// To use this operation, you must have permission to perform the
+// MediaStore:GetCorsPolicy action. By default, the container owner has this
+// permission and can grant it to others.
 func (c *Client) GetCorsPolicy(ctx context.Context, params *GetCorsPolicyInput, optFns ...func(*Options)) (*GetCorsPolicyOutput, error) {
 	if params == nil {
 		params = &GetCorsPolicyInput{}

@@ -14,18 +14,24 @@ import (
 // Permanently bans a member from a channel. Moderators can't add banned members
 // to a channel. To undo a ban, you first have to DeleteChannelBan , and then
 // CreateChannelMembership . Bans are cleaned up when you delete users or channels.
+//
 // If you ban a user who is already part of a channel, that user is automatically
-// kicked from the channel. The x-amz-chime-bearer request header is mandatory.
-// Use the AppInstanceUserArn of the user that makes the API call as the value in
-// the header. This API is is no longer supported and will not be updated. We
-// recommend using the latest version, CreateChannelBan (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannelBan.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// kicked from the channel.
+//
+// The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn
+// of the user that makes the API call as the value in the header.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [CreateChannelBan], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by CreateChannelBan in the Amazon Chime SDK Messaging
 // Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [CreateChannelBan]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannelBan.html
 func (c *Client) CreateChannelBan(ctx context.Context, params *CreateChannelBanInput, optFns ...func(*Options)) (*CreateChannelBanOutput, error) {
 	if params == nil {
 		params = &CreateChannelBanInput{}

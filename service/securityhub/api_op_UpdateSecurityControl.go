@@ -29,17 +29,17 @@ func (c *Client) UpdateSecurityControl(ctx context.Context, params *UpdateSecuri
 
 type UpdateSecurityControlInput struct {
 
-	// An object that specifies which security control parameters to update.
+	//  An object that specifies which security control parameters to update.
 	//
 	// This member is required.
 	Parameters map[string]types.ParameterConfiguration
 
-	// The Amazon Resource Name (ARN) or ID of the control to update.
+	//  The Amazon Resource Name (ARN) or ID of the control to update.
 	//
 	// This member is required.
 	SecurityControlId *string
 
-	// The most recent reason for updating the properties of the security control.
+	//  The most recent reason for updating the properties of the security control.
 	// This field accepts alphanumeric characters in addition to white spaces, dashes,
 	// and underscores.
 	LastUpdateReason *string

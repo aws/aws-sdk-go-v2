@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the IAM policy that is attached to the specified rule group. You must
-// be the owner of the rule group to perform this operation.
+// Returns the IAM policy that is attached to the specified rule group.
+//
+// You must be the owner of the rule group to perform this operation.
 func (c *Client) GetPermissionPolicy(ctx context.Context, params *GetPermissionPolicyInput, optFns ...func(*Options)) (*GetPermissionPolicyOutput, error) {
 	if params == nil {
 		params = &GetPermissionPolicyInput{}

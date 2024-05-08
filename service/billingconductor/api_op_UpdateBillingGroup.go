@@ -38,7 +38,7 @@ type UpdateBillingGroupInput struct {
 	// ) enabled.
 	AccountGrouping *types.UpdateBillingGroupAccountGrouping
 
-	// The preferences and settings that will be used to compute the Amazon Web
+	//  The preferences and settings that will be used to compute the Amazon Web
 	// Services charges for a billing group.
 	ComputationPreference *types.ComputationPreference
 
@@ -63,29 +63,29 @@ type UpdateBillingGroupOutput struct {
 	// The Amazon Resource Name (ARN) of the billing group that was updated.
 	Arn *string
 
-	// A description of the billing group.
+	//  A description of the billing group.
 	Description *string
 
-	// The most recent time when the billing group was modified.
+	//  The most recent time when the billing group was modified.
 	LastModifiedTime int64
 
-	// The name of the billing group. The names must be unique to each billing group.
+	//  The name of the billing group. The names must be unique to each billing group.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the pricing plan to compute Amazon Web
+	//  The Amazon Resource Name (ARN) of the pricing plan to compute Amazon Web
 	// Services charges for the billing group.
 	PricingPlanArn *string
 
-	// The account ID that serves as the main account in a billing group.
+	//  The account ID that serves as the main account in a billing group.
 	PrimaryAccountId *string
 
-	// The number of accounts in the particular billing group.
+	//  The number of accounts in the particular billing group.
 	Size int64
 
-	// The status of the billing group. Only one of the valid values can be used.
+	//  The status of the billing group. Only one of the valid values can be used.
 	Status types.BillingGroupStatus
 
-	// The reason why the billing group is in its current status.
+	//  The reason why the billing group is in its current status.
 	StatusReason *string
 
 	// Metadata pertaining to the operation's result.

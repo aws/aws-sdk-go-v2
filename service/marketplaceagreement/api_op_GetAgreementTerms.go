@@ -12,7 +12,9 @@ import (
 )
 
 // Obtains details about the terms in an agreement that you participated in as
-// proposer or acceptor. The details include:
+// proposer or acceptor.
+//
+// The details include:
 //
 //   - TermType – The type of term, such as LegalTerm , RenewalTerm , or
 //     ConfigurableUpfrontPricingTerm .

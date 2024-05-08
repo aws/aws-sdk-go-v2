@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe Elasticsearch Limits for a given InstanceType and
-// ElasticsearchVersion. When modifying existing Domain, specify the DomainName to
-// know what Limits are supported for modifying.
+//	Describe Elasticsearch Limits for a given InstanceType and
+//
+// ElasticsearchVersion. When modifying existing Domain, specify the DomainNameto know what
+// Limits are supported for modifying.
 func (c *Client) DescribeElasticsearchInstanceTypeLimits(ctx context.Context, params *DescribeElasticsearchInstanceTypeLimitsInput, optFns ...func(*Options)) (*DescribeElasticsearchInstanceTypeLimitsOutput, error) {
 	if params == nil {
 		params = &DescribeElasticsearchInstanceTypeLimitsInput{}
@@ -29,35 +30,34 @@ func (c *Client) DescribeElasticsearchInstanceTypeLimits(ctx context.Context, pa
 	return out, nil
 }
 
-// Container for the parameters to DescribeElasticsearchInstanceTypeLimits
-// operation.
+// Container for the parameters to DescribeElasticsearchInstanceTypeLimits operation.
 type DescribeElasticsearchInstanceTypeLimitsInput struct {
 
-	// Version of Elasticsearch for which Limits are needed.
+	//  Version of Elasticsearch for which Limits are needed.
 	//
 	// This member is required.
 	ElasticsearchVersion *string
 
-	// The instance type for an Elasticsearch cluster for which Elasticsearch Limits
-	// are needed.
+	//  The instance type for an Elasticsearch cluster for which Elasticsearch Limits are
+	// needed.
 	//
 	// This member is required.
 	InstanceType types.ESPartitionInstanceType
 
-	// DomainName represents the name of the Domain that we are trying to modify. This
-	// should be present only if we are querying for Elasticsearch Limits for existing
+	//  DomainName represents the name of the Domain that we are trying to modify.
+	// This should be present only if we are querying for Elasticsearch Limitsfor existing
 	// domain.
 	DomainName *string
 
 	noSmithyDocumentSerde
 }
 
-// Container for the parameters received from
-// DescribeElasticsearchInstanceTypeLimits operation.
+// Container for the parameters received from DescribeElasticsearchInstanceTypeLimits operation.
 type DescribeElasticsearchInstanceTypeLimitsOutput struct {
 
-	// Map of Role of the Instance and Limits that are applicable. Role performed by
+	//  Map of Role of the Instance and Limits that are applicable. Role performed by
 	// given Instance in Elasticsearch can be one of the following:
+	//
 	//   - data: If the given InstanceType is used as data node
 	//   - master: If the given InstanceType is used as master node
 	//   - ultra_warm: If the given InstanceType is used as warm node

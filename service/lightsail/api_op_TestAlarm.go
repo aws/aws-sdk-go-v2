@@ -14,11 +14,14 @@ import (
 // Tests an alarm by displaying a banner on the Amazon Lightsail console. If a
 // notification trigger is configured for the specified alarm, the test also sends
 // a notification to the notification protocol ( Email and/or SMS ) configured for
-// the alarm. An alarm is used to monitor a single metric for one of your
-// resources. When a metric condition is met, the alarm can notify you by email,
-// SMS text message, and a banner displayed on the Amazon Lightsail console. For
-// more information, see Alarms in Amazon Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms)
-// .
+// the alarm.
+//
+// An alarm is used to monitor a single metric for one of your resources. When a
+// metric condition is met, the alarm can notify you by email, SMS text message,
+// and a banner displayed on the Amazon Lightsail console. For more information,
+// see [Alarms in Amazon Lightsail].
+//
+// [Alarms in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms
 func (c *Client) TestAlarm(ctx context.Context, params *TestAlarmInput, optFns ...func(*Options)) (*TestAlarmOutput, error) {
 	if params == nil {
 		params = &TestAlarmInput{}
@@ -41,11 +44,15 @@ type TestAlarmInput struct {
 	// This member is required.
 	AlarmName *string
 
-	// The alarm state to test. An alarm has the following possible states that can be
-	// tested:
+	// The alarm state to test.
+	//
+	// An alarm has the following possible states that can be tested:
+	//
 	//   - ALARM - The metric is outside of the defined threshold.
+	//
 	//   - INSUFFICIENT_DATA - The alarm has just started, the metric is not available,
 	//   or not enough data is available for the metric to determine the alarm state.
+	//
 	//   - OK - The metric is within the defined threshold.
 	//
 	// This member is required.

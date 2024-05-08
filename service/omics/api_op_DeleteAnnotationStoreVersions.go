@@ -29,17 +29,17 @@ func (c *Client) DeleteAnnotationStoreVersions(ctx context.Context, params *Dele
 
 type DeleteAnnotationStoreVersionsInput struct {
 
-	// The name of the annotation store from which versions are being deleted.
+	//  The name of the annotation store from which versions are being deleted.
 	//
 	// This member is required.
 	Name *string
 
-	// The versions of an annotation store to be deleted.
+	//  The versions of an annotation store to be deleted.
 	//
 	// This member is required.
 	Versions []string
 
-	// Forces the deletion of an annotation store version when imports are
+	//  Forces the deletion of an annotation store version when imports are
 	// in-progress..
 	Force bool
 
@@ -48,7 +48,7 @@ type DeleteAnnotationStoreVersionsInput struct {
 
 type DeleteAnnotationStoreVersionsOutput struct {
 
-	// Any errors that occur when attempting to delete an annotation store version.
+	//  Any errors that occur when attempting to delete an annotation store version.
 	Errors []types.VersionDeleteError
 
 	// Metadata pertaining to the operation's result.

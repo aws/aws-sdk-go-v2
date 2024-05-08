@@ -14,6 +14,7 @@ import (
 
 // Describes the settings for your account that include the query pricing model
 // and the configured maximum TCUs the service can use for your query workload.
+//
 // You're charged only for the duration of compute units used for your workloads.
 func (c *Client) DescribeAccountSettings(ctx context.Context, params *DescribeAccountSettingsInput, optFns ...func(*Options)) (*DescribeAccountSettingsOutput, error) {
 	if params == nil {
@@ -36,8 +37,10 @@ type DescribeAccountSettingsInput struct {
 
 type DescribeAccountSettingsOutput struct {
 
-	// The maximum number of Timestream compute units (https://docs.aws.amazon.com/timestream/latest/developerguide/tcu.html)
-	// (TCUs) the service will use at any point in time to serve your queries.
+	// The maximum number of [Timestream compute units] (TCUs) the service will use at any point in time to
+	// serve your queries.
+	//
+	// [Timestream compute units]: https://docs.aws.amazon.com/timestream/latest/developerguide/tcu.html
 	MaxQueryTCU *int32
 
 	// The pricing model for queries in your account.

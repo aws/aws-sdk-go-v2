@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AccessRight. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessRight) Values() []AccessRight {
 	return []AccessRight{
 		"ALLOW",
@@ -94,8 +95,9 @@ const (
 )
 
 // Values returns all known values for ApplicationPolicyType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationPolicyType) Values() []ApplicationPolicyType {
 	return []ApplicationPolicyType{
 		"ALL_APPLICATION_POLICIES",
@@ -181,8 +183,9 @@ const (
 )
 
 // Values returns all known values for ClientCompatibilityV2. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClientCompatibilityV2) Values() []ClientCompatibilityV2 {
 	return []ClientCompatibilityV2{
 		"WINDOWS_SERVER_2003",
@@ -206,8 +209,9 @@ const (
 )
 
 // Values returns all known values for ClientCompatibilityV3. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClientCompatibilityV3) Values() []ClientCompatibilityV3 {
 	return []ClientCompatibilityV3{
 		"WINDOWS_SERVER_2008",
@@ -228,8 +232,9 @@ const (
 )
 
 // Values returns all known values for ClientCompatibilityV4. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClientCompatibilityV4) Values() []ClientCompatibilityV4 {
 	return []ClientCompatibilityV4{
 		"WINDOWS_SERVER_2012",
@@ -249,8 +254,9 @@ const (
 )
 
 // Values returns all known values for ConnectorStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectorStatus) Values() []ConnectorStatus {
 	return []ConnectorStatus{
 		"CREATING",
@@ -275,8 +281,9 @@ const (
 )
 
 // Values returns all known values for ConnectorStatusReason. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectorStatusReason) Values() []ConnectorStatusReason {
 	return []ConnectorStatusReason{
 		"DIRECTORY_ACCESS_DENIED",
@@ -302,6 +309,7 @@ const (
 
 // Values returns all known values for DirectoryRegistrationStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DirectoryRegistrationStatus) Values() []DirectoryRegistrationStatus {
 	return []DirectoryRegistrationStatus{
@@ -326,8 +334,9 @@ const (
 
 // Values returns all known values for DirectoryRegistrationStatusReason. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DirectoryRegistrationStatusReason) Values() []DirectoryRegistrationStatusReason {
 	return []DirectoryRegistrationStatusReason{
 		"DIRECTORY_ACCESS_DENIED",
@@ -349,8 +358,9 @@ const (
 )
 
 // Values returns all known values for HashAlgorithm. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HashAlgorithm) Values() []HashAlgorithm {
 	return []HashAlgorithm{
 		"SHA256",
@@ -368,8 +378,9 @@ const (
 )
 
 // Values returns all known values for KeySpec. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KeySpec) Values() []KeySpec {
 	return []KeySpec{
 		"KEY_EXCHANGE",
@@ -385,8 +396,9 @@ const (
 )
 
 // Values returns all known values for KeyUsagePropertyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KeyUsagePropertyType) Values() []KeyUsagePropertyType {
 	return []KeyUsagePropertyType{
 		"ALL",
@@ -404,8 +416,9 @@ const (
 )
 
 // Values returns all known values for PrivateKeyAlgorithm. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PrivateKeyAlgorithm) Values() []PrivateKeyAlgorithm {
 	return []PrivateKeyAlgorithm{
 		"RSA",
@@ -427,6 +440,7 @@ const (
 
 // Values returns all known values for ServicePrincipalNameStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ServicePrincipalNameStatus) Values() []ServicePrincipalNameStatus {
 	return []ServicePrincipalNameStatus{
@@ -450,8 +464,9 @@ const (
 
 // Values returns all known values for ServicePrincipalNameStatusReason. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServicePrincipalNameStatusReason) Values() []ServicePrincipalNameStatusReason {
 	return []ServicePrincipalNameStatusReason{
 		"DIRECTORY_ACCESS_DENIED",
@@ -471,8 +486,9 @@ const (
 )
 
 // Values returns all known values for TemplateStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TemplateStatus) Values() []TemplateStatus {
 	return []TemplateStatus{
 		"ACTIVE",
@@ -496,6 +512,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{
@@ -522,8 +539,9 @@ const (
 )
 
 // Values returns all known values for ValidityPeriodType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidityPeriodType) Values() []ValidityPeriodType {
 	return []ValidityPeriodType{
 		"HOURS",

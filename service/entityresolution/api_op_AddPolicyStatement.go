@@ -30,8 +30,9 @@ func (c *Client) AddPolicyStatement(ctx context.Context, params *AddPolicyStatem
 
 type AddPolicyStatementInput struct {
 
-	// The action that the principal can use on the resource. For example,
-	// entityresolution:GetIdMappingJob , entityresolution:GetMatchingJob .
+	// The action that the principal can use on the resource.
+	//
+	// For example, entityresolution:GetIdMappingJob , entityresolution:GetMatchingJob .
 	//
 	// This member is required.
 	Action []string

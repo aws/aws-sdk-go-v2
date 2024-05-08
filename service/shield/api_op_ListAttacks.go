@@ -32,28 +32,35 @@ type ListAttacksInput struct {
 
 	// The end of the time period for the attacks. This is a timestamp type. The
 	// request syntax listing for this call indicates a number type, but you can
-	// provide the time in any valid timestamp format (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp)
-	// setting.
+	// provide the time in any valid [timestamp format]setting.
+	//
+	// [timestamp format]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp
 	EndTime *types.TimeRange
 
 	// The greatest number of objects that you want Shield Advanced to return to the
 	// list request. Shield Advanced might return fewer objects than you indicate in
 	// this setting, even if more objects are available. If there are more objects
 	// remaining, Shield Advanced will always also return a NextToken value in the
-	// response. The default setting is 20.
+	// response.
+	//
+	// The default setting is 20.
 	MaxResults *int32
 
 	// When you request a list of objects from Shield Advanced, if the response does
 	// not include all of the remaining available objects, Shield Advanced includes a
 	// NextToken value in the response. You can retrieve the next batch of objects by
 	// requesting the list again and providing the token that was returned by the prior
-	// call in your request. You can indicate the maximum number of objects that you
-	// want Shield Advanced to return for a single call with the MaxResults setting.
-	// Shield Advanced will not return more than MaxResults objects, but may return
-	// fewer, even if more objects are still available. Whenever more objects remain
-	// that Shield Advanced has not yet returned to you, the response will include a
-	// NextToken value. On your first call to a list operation, leave this setting
-	// empty.
+	// call in your request.
+	//
+	// You can indicate the maximum number of objects that you want Shield Advanced to
+	// return for a single call with the MaxResults setting. Shield Advanced will not
+	// return more than MaxResults objects, but may return fewer, even if more objects
+	// are still available.
+	//
+	// Whenever more objects remain that Shield Advanced has not yet returned to you,
+	// the response will include a NextToken value.
+	//
+	// On your first call to a list operation, leave this setting empty.
 	NextToken *string
 
 	// The ARNs (Amazon Resource Names) of the resources that were attacked. If you
@@ -62,8 +69,9 @@ type ListAttacksInput struct {
 
 	// The start of the time period for the attacks. This is a timestamp type. The
 	// request syntax listing for this call indicates a number type, but you can
-	// provide the time in any valid timestamp format (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp)
-	// setting.
+	// provide the time in any valid [timestamp format]setting.
+	//
+	// [timestamp format]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp
 	StartTime *types.TimeRange
 
 	noSmithyDocumentSerde
@@ -78,12 +86,15 @@ type ListAttacksOutput struct {
 	// not include all of the remaining available objects, Shield Advanced includes a
 	// NextToken value in the response. You can retrieve the next batch of objects by
 	// requesting the list again and providing the token that was returned by the prior
-	// call in your request. You can indicate the maximum number of objects that you
-	// want Shield Advanced to return for a single call with the MaxResults setting.
-	// Shield Advanced will not return more than MaxResults objects, but may return
-	// fewer, even if more objects are still available. Whenever more objects remain
-	// that Shield Advanced has not yet returned to you, the response will include a
-	// NextToken value.
+	// call in your request.
+	//
+	// You can indicate the maximum number of objects that you want Shield Advanced to
+	// return for a single call with the MaxResults setting. Shield Advanced will not
+	// return more than MaxResults objects, but may return fewer, even if more objects
+	// are still available.
+	//
+	// Whenever more objects remain that Shield Advanced has not yet returned to you,
+	// the response will include a NextToken value.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -181,7 +192,9 @@ type ListAttacksPaginatorOptions struct {
 	// list request. Shield Advanced might return fewer objects than you indicate in
 	// this setting, even if more objects are available. If there are more objects
 	// remaining, Shield Advanced will always also return a NextToken value in the
-	// response. The default setting is 20.
+	// response.
+	//
+	// The default setting is 20.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

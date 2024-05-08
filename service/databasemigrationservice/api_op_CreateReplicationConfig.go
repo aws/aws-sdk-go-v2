@@ -49,9 +49,14 @@ type CreateReplicationConfigInput struct {
 	ReplicationConfigIdentifier *string
 
 	// The type of DMS Serverless replication to provision using this replication
-	// configuration. Possible values:
+	// configuration.
+	//
+	// Possible values:
+	//
 	//   - "full-load"
+	//
 	//   - "cdc"
+	//
 	//   - "full-load-and-cdc"
 	//
 	// This member is required.
@@ -64,9 +69,9 @@ type CreateReplicationConfigInput struct {
 	SourceEndpointArn *string
 
 	// JSON table mappings for DMS Serverless replications that are provisioned using
-	// this replication configuration. For more information, see Specifying table
-	// selection and transformations rules using JSON (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.SelectionTransformation.html)
-	// .
+	// this replication configuration. For more information, see [Specifying table selection and transformations rules using JSON].
+	//
+	// [Specifying table selection and transformations rules using JSON]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.SelectionTransformation.html
 	//
 	// This member is required.
 	TableMappings *string
@@ -78,25 +83,28 @@ type CreateReplicationConfigInput struct {
 	TargetEndpointArn *string
 
 	// Optional JSON settings for DMS Serverless replications that are provisioned
-	// using this replication configuration. For example, see Change processing tuning
-	// settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.ChangeProcessingTuning.html)
-	// .
+	// using this replication configuration. For example, see [Change processing tuning settings].
+	//
+	// [Change processing tuning settings]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.ChangeProcessingTuning.html
 	ReplicationSettings *string
 
 	// Optional unique value or name that you set for a given resource that can be
 	// used to construct an Amazon Resource Name (ARN) for that resource. For more
-	// information, see Fine-grained access control using resource names and tags (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.FineGrainedAccess)
-	// .
+	// information, see [Fine-grained access control using resource names and tags].
+	//
+	// [Fine-grained access control using resource names and tags]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.FineGrainedAccess
 	ResourceIdentifier *string
 
 	// Optional JSON settings for specifying supplemental data. For more information,
-	// see Specifying supplemental data for task settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html)
-	// .
+	// see [Specifying supplemental data for task settings].
+	//
+	// [Specifying supplemental data for task settings]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html
 	SupplementalSettings *string
 
 	// One or more optional tags associated with resources used by the DMS Serverless
-	// replication. For more information, see Tagging resources in Database Migration
-	// Service (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tagging.html) .
+	// replication. For more information, see [Tagging resources in Database Migration Service].
+	//
+	// [Tagging resources in Database Migration Service]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

@@ -10,8 +10,9 @@ import (
 type BatchGetRecordError struct {
 
 	// The error code of an error that has occurred when attempting to retrieve a
-	// batch of Records. For more information on errors, see Errors (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_GetRecord.html#API_feature_store_GetRecord_Errors)
-	// .
+	// batch of Records. For more information on errors, see [Errors].
+	//
+	// [Errors]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_GetRecord.html#API_feature_store_GetRecord_Errors
 	//
 	// This member is required.
 	ErrorCode *string
@@ -106,8 +107,9 @@ type FeatureValue struct {
 
 // Time to live duration, where the record is hard deleted after the expiration
 // time is reached; ExpiresAt = EventTime + TtlDuration . For information on
-// HardDelete, see the DeleteRecord (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html)
-// API in the Amazon SageMaker API Reference guide.
+// HardDelete, see the [DeleteRecord]API in the Amazon SageMaker API Reference guide.
+//
+// [DeleteRecord]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html
 type TtlDuration struct {
 
 	// TtlDuration time unit.

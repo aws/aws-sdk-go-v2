@@ -12,9 +12,11 @@ import (
 )
 
 // Starts a deployment for a manually deployed app. Manually deployed apps are not
-// connected to a repository. The maximum duration between the CreateDeployment
-// call and the StartDeployment call cannot exceed 8 hours. If the duration
-// exceeds 8 hours, the StartDeployment call and the associated Job will fail.
+// connected to a repository.
+//
+// The maximum duration between the CreateDeployment call and the StartDeployment
+// call cannot exceed 8 hours. If the duration exceeds 8 hours, the StartDeployment
+// call and the associated Job will fail.
 func (c *Client) StartDeployment(ctx context.Context, params *StartDeploymentInput, optFns ...func(*Options)) (*StartDeploymentOutput, error) {
 	if params == nil {
 		params = &StartDeploymentInput{}

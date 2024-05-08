@@ -12,11 +12,15 @@ import (
 	"time"
 )
 
-// Lists the INFO, WARN, and ERROR events for periodic configuration updates
+//	Lists the INFO, WARN, and ERROR events for periodic configuration updates
+//
 // performed by Application Insights. Examples of events represented are:
+//
 //   - INFO: creating a new alarm or updating an alarm threshold.
+//
 //   - WARN: alarm not created due to insufficient data points used to predict
 //     thresholds.
+//
 //   - ERROR: alarm not created due to permission errors or exceeding quotas.
 func (c *Client) ListConfigurationHistory(ctx context.Context, params *ListConfigurationHistoryInput, optFns ...func(*Options)) (*ListConfigurationHistoryOutput, error) {
 	if params == nil {
@@ -45,9 +49,9 @@ type ListConfigurationHistoryInput struct {
 	// WARN, and ERROR.
 	EventStatus types.ConfigurationEventStatus
 
-	// The maximum number of results returned by ListConfigurationHistory in paginated
-	// output. When this parameter is used, ListConfigurationHistory returns only
-	// MaxResults in a single page along with a NextToken response element. The
+	//  The maximum number of results returned by ListConfigurationHistory in
+	// paginated output. When this parameter is used, ListConfigurationHistory returns
+	// only MaxResults in a single page along with a NextToken response element. The
 	// remaining results of the initial request can be seen by sending another
 	// ListConfigurationHistory request with the returned NextToken value. If this
 	// parameter is not used, then ListConfigurationHistory returns all results.
@@ -71,7 +75,7 @@ type ListConfigurationHistoryInput struct {
 
 type ListConfigurationHistoryOutput struct {
 
-	// The list of configuration events and their corresponding details.
+	//  The list of configuration events and their corresponding details.
 	EventList []types.ConfigurationEvent
 
 	// The NextToken value to include in a future ListConfigurationHistory request.
@@ -173,9 +177,9 @@ var _ ListConfigurationHistoryAPIClient = (*Client)(nil)
 // ListConfigurationHistoryPaginatorOptions is the paginator options for
 // ListConfigurationHistory
 type ListConfigurationHistoryPaginatorOptions struct {
-	// The maximum number of results returned by ListConfigurationHistory in paginated
-	// output. When this parameter is used, ListConfigurationHistory returns only
-	// MaxResults in a single page along with a NextToken response element. The
+	//  The maximum number of results returned by ListConfigurationHistory in
+	// paginated output. When this parameter is used, ListConfigurationHistory returns
+	// only MaxResults in a single page along with a NextToken response element. The
 	// remaining results of the initial request can be seen by sending another
 	// ListConfigurationHistory request with the returned NextToken value. If this
 	// parameter is not used, then ListConfigurationHistory returns all results.

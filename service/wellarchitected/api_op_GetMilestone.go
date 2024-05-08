@@ -30,7 +30,9 @@ func (c *Client) GetMilestone(ctx context.Context, params *GetMilestoneInput, op
 // Input to get a milestone.
 type GetMilestoneInput struct {
 
-	// The milestone number. A workload can have a maximum of 100 milestones.
+	// The milestone number.
+	//
+	// A workload can have a maximum of 100 milestones.
 	//
 	// This member is required.
 	MilestoneNumber *int32

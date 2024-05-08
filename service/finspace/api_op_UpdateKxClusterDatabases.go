@@ -13,9 +13,10 @@ import (
 
 // Updates the databases mounted on a kdb cluster, which includes the changesetId
 // and all the dbPaths to be cached. This API does not allow you to change a
-// database name or add a database if you created a cluster without one. Using this
-// API you can point a cluster to a different changeset and modify a list of
-// partitions being cached.
+// database name or add a database if you created a cluster without one.
+//
+// Using this API you can point a cluster to a different changeset and modify a
+// list of partitions being cached.
 func (c *Client) UpdateKxClusterDatabases(ctx context.Context, params *UpdateKxClusterDatabasesInput, optFns ...func(*Options)) (*UpdateKxClusterDatabasesOutput, error) {
 	if params == nil {
 		params = &UpdateKxClusterDatabasesInput{}
@@ -38,7 +39,7 @@ type UpdateKxClusterDatabasesInput struct {
 	// This member is required.
 	ClusterName *string
 
-	// The structure of databases mounted on the cluster.
+	//  The structure of databases mounted on the cluster.
 	//
 	// This member is required.
 	Databases []types.KxDatabaseConfiguration
@@ -51,7 +52,7 @@ type UpdateKxClusterDatabasesInput struct {
 	// A token that ensures idempotency. This token expires in 10 minutes.
 	ClientToken *string
 
-	// The configuration that allows you to choose how you want to update the
+	//  The configuration that allows you to choose how you want to update the
 	// databases on a cluster.
 	DeploymentConfiguration *types.KxDeploymentConfiguration
 

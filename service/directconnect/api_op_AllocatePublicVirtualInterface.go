@@ -12,14 +12,18 @@ import (
 )
 
 // Provisions a public virtual interface to be owned by the specified Amazon Web
-// Services account. The owner of a connection calls this function to provision a
-// public virtual interface to be owned by the specified Amazon Web Services
-// account. Virtual interfaces created using this function must be confirmed by the
-// owner using ConfirmPublicVirtualInterface . Until this step has been completed,
-// the virtual interface is in the confirming state and is not available to handle
-// traffic. When creating an IPv6 public virtual interface, omit the Amazon address
-// and customer address. IPv6 addresses are automatically assigned from the Amazon
-// pool of IPv6 addresses; you cannot specify custom IPv6 addresses.
+// Services account.
+//
+// The owner of a connection calls this function to provision a public virtual
+// interface to be owned by the specified Amazon Web Services account.
+//
+// Virtual interfaces created using this function must be confirmed by the owner
+// using ConfirmPublicVirtualInterface. Until this step has been completed, the virtual interface is in the
+// confirming state and is not available to handle traffic.
+//
+// When creating an IPv6 public virtual interface, omit the Amazon address and
+// customer address. IPv6 addresses are automatically assigned from the Amazon pool
+// of IPv6 addresses; you cannot specify custom IPv6 addresses.
 func (c *Client) AllocatePublicVirtualInterface(ctx context.Context, params *AllocatePublicVirtualInterfaceInput, optFns ...func(*Options)) (*AllocatePublicVirtualInterfaceOutput, error) {
 	if params == nil {
 		params = &AllocatePublicVirtualInterfaceInput{}
@@ -69,7 +73,9 @@ type AllocatePublicVirtualInterfaceOutput struct {
 	AmazonSideAsn *int64
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration. The valid values are 1-2147483647.
+	// configuration.
+	//
+	// The valid values are 1-2147483647.
 	Asn int32
 
 	// The authentication key for BGP configuration. This string has a minimum length
@@ -137,24 +143,33 @@ type AllocatePublicVirtualInterfaceOutput struct {
 	VirtualInterfaceName *string
 
 	// The state of the virtual interface. The following are the possible values:
+	//
 	//   - confirming : The creation of the virtual interface is pending confirmation
 	//   from the virtual interface owner. If the owner of the virtual interface is
 	//   different from the owner of the connection on which it is provisioned, then the
 	//   virtual interface will remain in this state until it is confirmed by the virtual
 	//   interface owner.
+	//
 	//   - verifying : This state only applies to public virtual interfaces. Each
 	//   public virtual interface needs validation before the virtual interface can be
 	//   created.
+	//
 	//   - pending : A virtual interface is in this state from the time that it is
 	//   created until the virtual interface is ready to forward traffic.
+	//
 	//   - available : A virtual interface that is able to forward traffic.
+	//
 	//   - down : A virtual interface that is BGP down.
-	//   - deleting : A virtual interface is in this state immediately after calling
-	//   DeleteVirtualInterface until it can no longer forward traffic.
+	//
+	//   - deleting : A virtual interface is in this state immediately after calling DeleteVirtualInterface
+	//   until it can no longer forward traffic.
+	//
 	//   - deleted : A virtual interface that cannot forward traffic.
+	//
 	//   - rejected : The virtual interface owner has declined creation of the virtual
 	//   interface. If a virtual interface in the Confirming state is deleted by the
 	//   virtual interface owner, the virtual interface enters the Rejected state.
+	//
 	//   - unknown : The state of the virtual interface is not available.
 	VirtualInterfaceState types.VirtualInterfaceState
 

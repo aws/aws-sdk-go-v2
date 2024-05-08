@@ -12,8 +12,10 @@ import (
 )
 
 // Allows a third-party analytical engine to retrieve unfiltered table metadata
-// from the Data Catalog. For IAM authorization, the public IAM action associated
-// with this API is glue:GetTable .
+// from the Data Catalog.
+//
+// For IAM authorization, the public IAM action associated with this API is
+// glue:GetTable .
 func (c *Client) GetUnfilteredTableMetadata(ctx context.Context, params *GetUnfilteredTableMetadataInput, optFns ...func(*Options)) (*GetUnfilteredTableMetadataOutput, error) {
 	if params == nil {
 		params = &GetUnfilteredTableMetadataInput{}
@@ -49,21 +51,27 @@ type GetUnfilteredTableMetadataInput struct {
 	// Indicates the level of filtering a third-party analytical engine is capable of
 	// enforcing when calling the GetUnfilteredTableMetadata API operation. Accepted
 	// values are:
+	//
 	//   - COLUMN_PERMISSION - Column permissions ensure that users can access only
 	//   specific columns in the table. If there are particular columns contain sensitive
 	//   data, data lake administrators can define column filters that exclude access to
 	//   specific columns.
+	//
 	//   - CELL_FILTER_PERMISSION - Cell-level filtering combines column filtering
 	//   (include or exclude columns) and row filter expressions to restrict access to
 	//   individual elements in the table.
+	//
 	//   - NESTED_PERMISSION - Nested permissions combines cell-level filtering and
 	//   nested column filtering to restrict access to columns and/or nested columns in
 	//   specific rows based on row filter expressions.
+	//
 	//   - NESTED_CELL_PERMISSION - Nested cell permissions combines nested permission
 	//   with nested cell-level filtering. This allows different subsets of nested
 	//   columns to be restricted based on an array of row filter expressions.
+	//
 	// Note: Each of these permission types follows a hierarchical order where each
 	// subsequent permission type includes all permission of the previous type.
+	//
 	// Important: If you provide a supported permission type that doesn't match the
 	// user's level of permissions on the table, then Lake Formation raises an
 	// exception. For example, if the third-party engine calling the

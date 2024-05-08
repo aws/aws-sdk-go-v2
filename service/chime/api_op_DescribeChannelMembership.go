@@ -11,18 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the full details of a user's channel membership. The x-amz-chime-bearer
-// request header is mandatory. Use the AppInstanceUserArn of the user that makes
-// the API call as the value in the header. This API is is no longer supported and
-// will not be updated. We recommend using the latest version,
-// DescribeChannelMembership (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DescribeChannelMembership.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// Returns the full details of a user's channel membership.
+//
+// The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn
+// of the user that makes the API call as the value in the header.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [DescribeChannelMembership], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by DescribeChannelMembership in the Amazon Chime SDK
 // Messaging Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [DescribeChannelMembership]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DescribeChannelMembership.html
 func (c *Client) DescribeChannelMembership(ctx context.Context, params *DescribeChannelMembershipInput, optFns ...func(*Options)) (*DescribeChannelMembershipOutput, error) {
 	if params == nil {
 		params = &DescribeChannelMembershipInput{}

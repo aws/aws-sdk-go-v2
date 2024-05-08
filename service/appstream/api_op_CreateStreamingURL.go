@@ -52,8 +52,10 @@ type CreateStreamingURLInput struct {
 	// operating system desktop. To do so, specify Desktop.
 	ApplicationId *string
 
-	// The session context. For more information, see Session Context (https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters)
-	// in the Amazon AppStream 2.0 Administration Guide.
+	// The session context. For more information, see [Session Context] in the Amazon AppStream 2.0
+	// Administration Guide.
+	//
+	// [Session Context]: https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters
 	SessionContext *string
 
 	// The time that the streaming URL will be valid, in seconds. Specify a value

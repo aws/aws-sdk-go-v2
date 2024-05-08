@@ -11,7 +11,8 @@ import (
 	"time"
 )
 
-// Returns the website access logs for a specific time range using a presigned URL.
+// Returns the website access logs for a specific time range using a presigned
+// URL.
 func (c *Client) GenerateAccessLogs(ctx context.Context, params *GenerateAccessLogsInput, optFns ...func(*Options)) (*GenerateAccessLogsOutput, error) {
 	if params == nil {
 		params = &GenerateAccessLogsInput{}

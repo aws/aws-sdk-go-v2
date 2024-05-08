@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the software package versions associated to the account. Requires
-// permission to access the ListPackageVersions (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Lists the software package versions associated to the account.
+//
+// Requires permission to access the [ListPackageVersions] action.
+//
+// [ListPackageVersions]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListPackageVersions(ctx context.Context, params *ListPackageVersionsInput, optFns ...func(*Options)) (*ListPackageVersionsOutput, error) {
 	if params == nil {
 		params = &ListPackageVersionsInput{}
@@ -42,9 +44,9 @@ type ListPackageVersionsInput struct {
 	// The token for the next set of results.
 	NextToken *string
 
-	// The status of the package version. For more information, see Package version
-	// lifecycle (https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle)
-	// .
+	// The status of the package version. For more information, see [Package version lifecycle].
+	//
+	// [Package version lifecycle]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
 	Status types.PackageVersionStatus
 
 	noSmithyDocumentSerde

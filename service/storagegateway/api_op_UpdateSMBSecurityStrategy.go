@@ -12,7 +12,10 @@ import (
 )
 
 // Updates the SMB security strategy on a file gateway. This action is only
-// supported in file gateways. This API is called Security level in the User Guide.
+// supported in file gateways.
+//
+// This API is called Security level in the User Guide.
+//
 // A higher security level can affect performance of the gateway.
 func (c *Client) UpdateSMBSecurityStrategy(ctx context.Context, params *UpdateSMBSecurityStrategyInput, optFns ...func(*Options)) (*UpdateSMBSecurityStrategyOutput, error) {
 	if params == nil {
@@ -31,19 +34,23 @@ func (c *Client) UpdateSMBSecurityStrategy(ctx context.Context, params *UpdateSM
 
 type UpdateSMBSecurityStrategyInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
 
-	// Specifies the type of security strategy. ClientSpecified: if you use this
-	// option, requests are established based on what is negotiated by the client. This
-	// option is recommended when you want to maximize compatibility across different
-	// clients in your environment. Supported only in S3 File Gateway.
+	// Specifies the type of security strategy.
+	//
+	// ClientSpecified: if you use this option, requests are established based on what
+	// is negotiated by the client. This option is recommended when you want to
+	// maximize compatibility across different clients in your environment. Supported
+	// only in S3 File Gateway.
+	//
 	// MandatorySigning: if you use this option, file gateway only allows connections
 	// from SMBv2 or SMBv3 clients that have signing enabled. This option works with
 	// SMB clients on Microsoft Windows Vista, Windows Server 2008 or newer.
+	//
 	// MandatoryEncryption: if you use this option, file gateway only allows
 	// connections from SMBv3 clients that have encryption enabled. This option is
 	// highly recommended for environments that handle sensitive data. This option
@@ -57,8 +64,8 @@ type UpdateSMBSecurityStrategyInput struct {
 
 type UpdateSMBSecurityStrategyOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

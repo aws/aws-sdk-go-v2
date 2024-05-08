@@ -50,11 +50,12 @@ type ImportNotebookInput struct {
 	WorkGroup *string
 
 	// A unique case-sensitive string used to ensure the request to import the
-	// notebook is idempotent (executes only once). This token is listed as not
-	// required because Amazon Web Services SDKs (for example the Amazon Web Services
-	// SDK for Java) auto-generate the token for you. If you are not using the Amazon
-	// Web Services SDK or the Amazon Web Services CLI, you must provide this token or
-	// the action will fail.
+	// notebook is idempotent (executes only once).
+	//
+	// This token is listed as not required because Amazon Web Services SDKs (for
+	// example the Amazon Web Services SDK for Java) auto-generate the token for you.
+	// If you are not using the Amazon Web Services SDK or the Amazon Web Services CLI,
+	// you must provide this token or the action will fail.
 	ClientRequestToken *string
 
 	// A URI that specifies the Amazon S3 location of a notebook file in ipynb format.

@@ -37,7 +37,7 @@ type ListDataSourceSyncJobsInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// The identifier of the data source connector.
+	//  The identifier of the data source connector.
 	//
 	// This member is required.
 	DataSourceId *string
@@ -48,7 +48,7 @@ type ListDataSourceSyncJobsInput struct {
 	// This member is required.
 	IndexId *string
 
-	// The end time of the data source connector sync.
+	//  The end time of the data source connector sync.
 	EndTime *time.Time
 
 	// The maximum number of synchronization jobs to return in the response.
@@ -59,7 +59,7 @@ type ListDataSourceSyncJobsInput struct {
 	// use this pagination token to retrieve the next set of responses.
 	NextToken *string
 
-	// The start time of the data source connector sync.
+	//  The start time of the data source connector sync.
 	StartTime *time.Time
 
 	// Only returns synchronization jobs with the Status field equal to the specified

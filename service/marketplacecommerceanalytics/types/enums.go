@@ -34,8 +34,9 @@ const (
 )
 
 // Values returns all known values for DataSetType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataSetType) Values() []DataSetType {
 	return []DataSetType{
 		"customer_subscriber_hourly_monthly_subscriptions",
@@ -75,8 +76,9 @@ const (
 )
 
 // Values returns all known values for SupportDataSetType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SupportDataSetType) Values() []SupportDataSetType {
 	return []SupportDataSetType{
 		"customer_support_contacts_data",

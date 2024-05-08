@@ -52,8 +52,9 @@ type PutAuthPolicyOutput struct {
 	// is set to Amazon Web Services_IAM . If you provide a policy, then authentication
 	// and authorization decisions are made based on this policy and the client's IAM
 	// policy. If the Auth type is NONE , then, any auth policy you provide will remain
-	// inactive. For more information, see Create a service network (https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network)
-	// in the Amazon VPC Lattice User Guide.
+	// inactive. For more information, see [Create a service network]in the Amazon VPC Lattice User Guide.
+	//
+	// [Create a service network]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network
 	State types.AuthPolicyState
 
 	// Metadata pertaining to the operation's result.

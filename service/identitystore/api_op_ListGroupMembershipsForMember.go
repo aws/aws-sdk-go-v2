@@ -12,10 +12,12 @@ import (
 )
 
 // For the specified member in the specified identity store, returns the list of
-// all GroupMembership objects and returns results in paginated form. If you have
-// administrator access to a member account, you can use this API from the member
-// account. Read about member accounts (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html)
-// in the Organizations User Guide.
+// all GroupMembership objects and returns results in paginated form.
+//
+// If you have administrator access to a member account, you can use this API from
+// the member account. Read about [member accounts]in the Organizations User Guide.
+//
+// [member accounts]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html
 func (c *Client) ListGroupMembershipsForMember(ctx context.Context, params *ListGroupMembershipsForMemberInput, optFns ...func(*Options)) (*ListGroupMembershipsForMemberOutput, error) {
 	if params == nil {
 		params = &ListGroupMembershipsForMemberInput{}

@@ -13,9 +13,9 @@ import (
 
 // Pause an active App Runner service. App Runner reduces compute capacity for the
 // service to zero and loses state (for example, ephemeral storage is removed).
+//
 // This is an asynchronous operation. On a successful call, you can use the
-// returned OperationId and the ListOperations call to track the operation's
-// progress.
+// returned OperationId and the ListOperations call to track the operation's progress.
 func (c *Client) PauseService(ctx context.Context, params *PauseServiceInput, optFns ...func(*Options)) (*PauseServiceOutput, error) {
 	if params == nil {
 		params = &PauseServiceInput{}
@@ -49,7 +49,7 @@ type PauseServiceOutput struct {
 	Service *types.Service
 
 	// The unique ID of the asynchronous operation that this request started. You can
-	// use it combined with the ListOperations call to track the operation's progress.
+	// use it combined with the ListOperationscall to track the operation's progress.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

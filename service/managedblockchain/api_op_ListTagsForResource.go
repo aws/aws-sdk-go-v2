@@ -11,9 +11,13 @@ import (
 )
 
 // Returns a list of tags for the specified resource. Each tag consists of a key
-// and optional value. For more information about tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
-// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
-// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+// and optional value.
+//
+// For more information about tags, see [Tagging Resources] in the Amazon Managed Blockchain Ethereum
+// Developer Guide, or [Tagging Resources]in the Amazon Managed Blockchain Hyperledger Fabric
+// Developer Guide.
+//
+// [Tagging Resources]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -32,8 +36,9 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 type ListTagsForResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource. For more information about ARNs
-	// and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// and their format, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	ResourceArn *string

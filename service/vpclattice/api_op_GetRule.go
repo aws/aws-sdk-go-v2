@@ -13,8 +13,10 @@ import (
 )
 
 // Retrieves information about listener rules. You can also retrieve information
-// about the default listener rule. For more information, see Listener rules (https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules)
-// in the Amazon VPC Lattice User Guide.
+// about the default listener rule. For more information, see [Listener rules]in the Amazon VPC
+// Lattice User Guide.
+//
+// [Listener rules]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules
 func (c *Client) GetRule(ctx context.Context, params *GetRuleInput, optFns ...func(*Options)) (*GetRuleOutput, error) {
 	if params == nil {
 		params = &GetRuleInput{}

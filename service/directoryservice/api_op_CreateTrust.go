@@ -15,10 +15,11 @@ import (
 // relationships. For example, you can establish a trust between your Managed
 // Microsoft AD directory, and your existing self-managed Microsoft Active
 // Directory. This would allow you to provide users and groups access to resources
-// in either domain, with a single set of credentials. This action initiates the
-// creation of the Amazon Web Services side of a trust relationship between an
-// Managed Microsoft AD directory and an external domain. You can create either a
-// forest trust or an external trust.
+// in either domain, with a single set of credentials.
+//
+// This action initiates the creation of the Amazon Web Services side of a trust
+// relationship between an Managed Microsoft AD directory and an external domain.
+// You can create either a forest trust or an external trust.
 func (c *Client) CreateTrust(ctx context.Context, params *CreateTrustInput, optFns ...func(*Options)) (*CreateTrustOutput, error) {
 	if params == nil {
 		params = &CreateTrustInput{}
@@ -38,9 +39,10 @@ func (c *Client) CreateTrust(ctx context.Context, params *CreateTrustInput, optF
 // relationships. For example, you can establish a trust between your Managed
 // Microsoft AD directory, and your existing self-managed Microsoft Active
 // Directory. This would allow you to provide users and groups access to resources
-// in either domain, with a single set of credentials. This action initiates the
-// creation of the Amazon Web Services side of a trust relationship between an
-// Managed Microsoft AD directory and an external domain.
+// in either domain, with a single set of credentials.
+//
+// This action initiates the creation of the Amazon Web Services side of a trust
+// relationship between an Managed Microsoft AD directory and an external domain.
 type CreateTrustInput struct {
 
 	// The Directory ID of the Managed Microsoft AD directory for which to establish

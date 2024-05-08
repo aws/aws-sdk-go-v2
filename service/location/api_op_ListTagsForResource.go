@@ -30,6 +30,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 type ListTagsForResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
+	//
 	//   - Format example: arn:aws:geo:region:account-id:resourcetype/ExampleResource
 	//
 	// This member is required.
@@ -42,6 +43,7 @@ type ListTagsForResourceOutput struct {
 
 	// Tags that have been applied to the specified resource. Tags are mapped from the
 	// tag key to the tag value: "TagKey" : "TagValue" .
+	//
 	//   - Format example: {"tag1" : "value1", "tag2" : "value2"}
 	Tags map[string]string
 

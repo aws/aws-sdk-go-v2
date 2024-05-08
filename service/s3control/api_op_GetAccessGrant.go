@@ -18,6 +18,7 @@ import (
 )
 
 // Get the details of an access grant from your S3 Access Grants instance.
+//
 // Permissions You must have the s3:GetAccessGrant permission to use this
 // operation.
 func (c *Client) GetAccessGrant(ctx context.Context, params *GetAccessGrantInput, optFns ...func(*Options)) (*GetAccessGrantOutput, error) {
@@ -97,8 +98,11 @@ type GetAccessGrantOutput struct {
 
 	// The type of permission that was granted in the access grant. Can be one of the
 	// following values:
+	//
 	//   - READ – Grant read-only access to the S3 data.
+	//
 	//   - WRITE – Grant write-only access to the S3 data.
+	//
 	//   - READWRITE – Grant both read and write access to the S3 data.
 	Permission types.Permission
 

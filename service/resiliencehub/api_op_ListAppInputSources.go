@@ -12,9 +12,9 @@ import (
 )
 
 // Lists all the input sources of the Resilience Hub application. For more
-// information about the input sources supported by Resilience Hub, see Discover
-// the structure and describe your Resilience Hub application (https://docs.aws.amazon.com/resilience-hub/latest/userguide/discover-structure.html)
-// .
+// information about the input sources supported by Resilience Hub, see [Discover the structure and describe your Resilience Hub application].
+//
+// [Discover the structure and describe your Resilience Hub application]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/discover-structure.html
 func (c *Client) ListAppInputSources(ctx context.Context, params *ListAppInputSourcesInput, optFns ...func(*Options)) (*ListAppInputSourcesOutput, error) {
 	if params == nil {
 		params = &ListAppInputSourcesInput{}
@@ -34,8 +34,10 @@ type ListAppInputSourcesInput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
+	// guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AppArn *string

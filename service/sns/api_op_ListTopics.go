@@ -13,8 +13,9 @@ import (
 
 // Returns a list of the requester's topics. Each call returns a limited list of
 // topics, up to 100. If there are more topics, a NextToken is also returned. Use
-// the NextToken parameter in a new ListTopics call to get further results. This
-// action is throttled at 30 transactions per second (TPS).
+// the NextToken parameter in a new ListTopics call to get further results.
+//
+// This action is throttled at 30 transactions per second (TPS).
 func (c *Client) ListTopics(ctx context.Context, params *ListTopicsInput, optFns ...func(*Options)) (*ListTopicsOutput, error) {
 	if params == nil {
 		params = &ListTopicsInput{}

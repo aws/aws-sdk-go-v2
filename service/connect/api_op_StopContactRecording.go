@@ -15,8 +15,9 @@ import (
 // ongoing call, you can't use StartContactRecording to restart it. For scenarios
 // where the recording has started and you want to suspend it for sensitive
 // information (for example, to collect a credit card number), and then restart it,
-// use SuspendContactRecording and ResumeContactRecording. Only voice recordings
-// are supported at this time.
+// use SuspendContactRecording and ResumeContactRecording.
+//
+// Only voice recordings are supported at this time.
 func (c *Client) StopContactRecording(ctx context.Context, params *StopContactRecordingInput, optFns ...func(*Options)) (*StopContactRecordingOutput, error) {
 	if params == nil {
 		params = &StopContactRecordingInput{}
@@ -45,8 +46,10 @@ type StopContactRecordingInput struct {
 	// This member is required.
 	InitialContactId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

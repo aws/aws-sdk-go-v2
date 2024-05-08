@@ -30,7 +30,7 @@ func (c *Client) DeleteAttributeGroup(ctx context.Context, params *DeleteAttribu
 
 type DeleteAttributeGroupInput struct {
 
-	// The name, ID, or ARN of the attribute group that holds the attributes to
+	//  The name, ID, or ARN of the attribute group that holds the attributes to
 	// describe the application.
 	//
 	// This member is required.

@@ -27,8 +27,9 @@ func (c *Client) VerifyEmailAddress(ctx context.Context, params *VerifyEmailAddr
 }
 
 // Represents a request to begin email address verification with Amazon SES. For
-// information about email address verification, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-email-addresses-procedure)
-// .
+// information about email address verification, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-email-addresses-procedure
 type VerifyEmailAddressInput struct {
 
 	// The email address to be verified.

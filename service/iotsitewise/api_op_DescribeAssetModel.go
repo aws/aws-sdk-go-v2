@@ -36,13 +36,14 @@ type DescribeAssetModelInput struct {
 
 	// The ID of the asset model. This can be either the actual ID in UUID format, or
 	// else externalId: followed by the external ID, if it has one. For more
-	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetModelId *string
 
-	// Whether or not to exclude asset model properties from the response.
+	//  Whether or not to exclude asset model properties from the response.
 	ExcludeProperties bool
 
 	noSmithyDocumentSerde
@@ -50,9 +51,11 @@ type DescribeAssetModelInput struct {
 
 type DescribeAssetModelOutput struct {
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the asset model, which has the following format.
-	// arn:${Partition}:iotsitewise:${Region}:${Account}:asset-model/${AssetModelId}
+	// The [ARN] of the asset model, which has the following format.
+	//
+	//     arn:${Partition}:iotsitewise:${Region}:${Account}:asset-model/${AssetModelId}
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AssetModelArn *string
@@ -89,9 +92,10 @@ type DescribeAssetModelOutput struct {
 	// This member is required.
 	AssetModelName *string
 
-	// The list of asset properties for the asset model. This object doesn't include
-	// properties that you define in composite models. You can find composite model
-	// properties in the assetModelCompositeModels object.
+	// The list of asset properties for the asset model.
+	//
+	// This object doesn't include properties that you define in composite models. You
+	// can find composite model properties in the assetModelCompositeModels object.
 	//
 	// This member is required.
 	AssetModelProperties []types.AssetModelProperty
@@ -114,8 +118,10 @@ type DescribeAssetModelOutput struct {
 	AssetModelExternalId *string
 
 	// The type of asset model.
+	//
 	//   - ASSET_MODEL – (default) An asset model that you can use to create assets.
 	//   Can't be included as a component in another asset model.
+	//
 	//   - COMPONENT_MODEL – A reusable component that you can include in the
 	//   composite models of other asset models. You can't create assets directly from
 	//   this type of asset model.
@@ -276,12 +282,13 @@ type AssetModelActiveWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeAssetModelInput, *DescribeAssetModelOutput, error) (bool, error)
 }
 
@@ -467,12 +474,13 @@ type AssetModelNotExistsWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeAssetModelInput, *DescribeAssetModelOutput, error) (bool, error)
 }
 

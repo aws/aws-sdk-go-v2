@@ -12,9 +12,13 @@ import (
 )
 
 // Deletes an Amazon FSx backup. After deletion, the backup no longer exists, and
-// its data is gone. The DeleteBackup call returns instantly. The backup won't
-// show up in later DescribeBackups calls. The data in a deleted backup is also
-// deleted and can't be recovered by any means.
+// its data is gone.
+//
+// The DeleteBackup call returns instantly. The backup won't show up in later
+// DescribeBackups calls.
+//
+// The data in a deleted backup is also deleted and can't be recovered by any
+// means.
 func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, optFns ...func(*Options)) (*DeleteBackupOutput, error) {
 	if params == nil {
 		params = &DeleteBackupInput{}

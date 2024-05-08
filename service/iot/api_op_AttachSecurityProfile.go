@@ -12,8 +12,11 @@ import (
 
 // Associates a Device Defender security profile with a thing group or this
 // account. Each thing group or account can have up to five security profiles
-// associated with it. Requires permission to access the AttachSecurityProfile (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// associated with it.
+//
+// Requires permission to access the [AttachSecurityProfile] action.
+//
+// [AttachSecurityProfile]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) AttachSecurityProfile(ctx context.Context, params *AttachSecurityProfileInput, optFns ...func(*Options)) (*AttachSecurityProfileOutput, error) {
 	if params == nil {
 		params = &AttachSecurityProfileInput{}

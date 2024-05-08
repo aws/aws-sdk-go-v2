@@ -13,10 +13,14 @@ import (
 )
 
 // Adds an integration between the service and a third-party service, which
-// includes Amazon AppFlow and Amazon Connect. An integration can belong to only
-// one domain. To add or remove tags on an existing Integration, see TagResource  (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html)
-// / UntagResource (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html)
-// .
+// includes Amazon AppFlow and Amazon Connect.
+//
+// An integration can belong to only one domain.
+//
+// To add or remove tags on an existing Integration, see [TagResource]/[UntagResource] .
+//
+// [TagResource]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html
+// [UntagResource]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html
 func (c *Client) PutIntegration(ctx context.Context, params *PutIntegrationInput, optFns ...func(*Options)) (*PutIntegrationOutput, error) {
 	if params == nil {
 		params = &PutIntegrationInput{}

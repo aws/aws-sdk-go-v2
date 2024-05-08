@@ -46,23 +46,28 @@ type CreateRetrainingSchedulerInput struct {
 	// This member is required.
 	ModelName *string
 
-	// This parameter uses the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)
-	// standard to set the frequency at which you want retraining to occur in terms of
-	// Years, Months, and/or Days (note: other parameters like Time are not currently
-	// supported). The minimum value is 30 days (P30D) and the maximum value is 1 year
-	// (P1Y). For example, the following values are valid:
+	// This parameter uses the [ISO 8601] standard to set the frequency at which you want
+	// retraining to occur in terms of Years, Months, and/or Days (note: other
+	// parameters like Time are not currently supported). The minimum value is 30 days
+	// (P30D) and the maximum value is 1 year (P1Y). For example, the following values
+	// are valid:
+	//
 	//   - P3M15D – Every 3 months and 15 days
+	//
 	//   - P2M – Every 2 months
+	//
 	//   - P150D – Every 150 days
+	//
+	// [ISO 8601]: https://en.wikipedia.org/wiki/ISO_8601#Durations
 	//
 	// This member is required.
 	RetrainingFrequency *string
 
 	// Indicates how the service will use new models. In MANAGED mode, new models will
 	// automatically be used for inference if they have better performance than the
-	// current model. In MANUAL mode, the new models will not be used until they are
-	// manually activated (https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/versioning-model.html#model-activation)
-	// .
+	// current model. In MANUAL mode, the new models will not be used [until they are manually activated].
+	//
+	// [until they are manually activated]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/versioning-model.html#model-activation
 	PromoteMode types.ModelPromoteMode
 
 	// The start date for the retraining scheduler. Lookout for Equipment truncates

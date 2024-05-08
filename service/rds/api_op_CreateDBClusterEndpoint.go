@@ -12,7 +12,9 @@ import (
 )
 
 // Creates a new custom endpoint and associates it with an Amazon Aurora DB
-// cluster. This action applies only to Aurora DB clusters.
+// cluster.
+//
+// This action applies only to Aurora DB clusters.
 func (c *Client) CreateDBClusterEndpoint(ctx context.Context, params *CreateDBClusterEndpointInput, optFns ...func(*Options)) (*CreateDBClusterEndpointOutput, error) {
 	if params == nil {
 		params = &CreateDBClusterEndpointInput{}
@@ -64,9 +66,13 @@ type CreateDBClusterEndpointInput struct {
 // This data type represents the information you need to connect to an Amazon
 // Aurora DB cluster. This data type is used as a response element in the following
 // actions:
+//
 //   - CreateDBClusterEndpoint
+//
 //   - DescribeDBClusterEndpoints
+//
 //   - ModifyDBClusterEndpoint
+//
 //   - DeleteDBClusterEndpoint
 //
 // For the data structure that represents Amazon RDS DB instance endpoints, see

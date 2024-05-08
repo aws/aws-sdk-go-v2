@@ -15,13 +15,16 @@
 // privileges, uses of exposed credentials, or communication with malicious IPs,
 // domains, or presence of malware on your Amazon EC2 instances and container
 // workloads. For example, GuardDuty can detect compromised EC2 instances and
-// container workloads serving malware, or mining bitcoin. GuardDuty also monitors
-// Amazon Web Services account access behavior for signs of compromise, such as
-// unauthorized infrastructure deployments like EC2 instances deployed in a Region
-// that has never been used, or unusual API calls like a password policy change to
-// reduce password strength. GuardDuty informs you about the status of your Amazon
-// Web Services environment by producing security findings that you can view in the
-// GuardDuty console or through Amazon EventBridge. For more information, see the
-// Amazon GuardDuty User Guide (https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html)
-// .
+// container workloads serving malware, or mining bitcoin.
+//
+// GuardDuty also monitors Amazon Web Services account access behavior for signs
+// of compromise, such as unauthorized infrastructure deployments like EC2
+// instances deployed in a Region that has never been used, or unusual API calls
+// like a password policy change to reduce password strength.
+//
+// GuardDuty informs you about the status of your Amazon Web Services environment
+// by producing security findings that you can view in the GuardDuty console or
+// through Amazon EventBridge. For more information, see the [Amazon GuardDuty User Guide].
+//
+// [Amazon GuardDuty User Guide]: https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html
 package guardduty

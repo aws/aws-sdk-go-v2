@@ -13,7 +13,9 @@ import (
 
 // Updates a profile, a list of the roles that IAM Roles Anywhere service is
 // trusted to assume. You use profiles to intersect permissions with IAM managed
-// policies. Required permissions: rolesanywhere:UpdateProfile .
+// policies.
+//
+// Required permissions: rolesanywhere:UpdateProfile .
 func (c *Client) UpdateProfile(ctx context.Context, params *UpdateProfileInput, optFns ...func(*Options)) (*UpdateProfileOutput, error) {
 	if params == nil {
 		params = &UpdateProfileInput{}
@@ -36,10 +38,11 @@ type UpdateProfileInput struct {
 	// This member is required.
 	ProfileId *string
 
-	// Used to determine how long sessions vended using this profile are valid for.
-	// See the Expiration section of the CreateSession API documentation (https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object)
-	// page for more details. In requests, if this value is not provided, the default
-	// value will be 3600.
+	//  Used to determine how long sessions vended using this profile are valid for.
+	// See the Expiration section of the [CreateSession API documentation] page for more details. In requests, if this
+	// value is not provided, the default value will be 3600.
+	//
+	// [CreateSession API documentation]: https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object
 	DurationSeconds *int32
 
 	// A list of managed policy ARNs that apply to the vended session credentials.

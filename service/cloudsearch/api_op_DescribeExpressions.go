@@ -14,9 +14,10 @@ import (
 // Gets the expressions configured for the search domain. Can be limited to
 // specific expressions by name. By default, shows all expressions and includes any
 // pending changes to the configuration. Set the Deployed option to true to show
-// the active configuration and exclude pending changes. For more information, see
-// Configuring Expressions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
+// the active configuration and exclude pending changes. For more information, see [Configuring Expressions]
 // in the Amazon CloudSearch Developer Guide.
+//
+// [Configuring Expressions]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html
 func (c *Client) DescribeExpressions(ctx context.Context, params *DescribeExpressionsInput, optFns ...func(*Options)) (*DescribeExpressionsOutput, error) {
 	if params == nil {
 		params = &DescribeExpressionsInput{}
@@ -32,11 +33,10 @@ func (c *Client) DescribeExpressions(ctx context.Context, params *DescribeExpres
 	return out, nil
 }
 
-// Container for the parameters to the DescribeDomains operation. Specifies the
-// name of the domain you want to describe. To restrict the response to particular
-// expressions, specify the names of the expressions you want to describe. To show
-// the active configuration and exclude any pending changes, set the Deployed
-// option to true .
+// Container for the parameters to the DescribeDomains operation. Specifies the name of the
+// domain you want to describe. To restrict the response to particular expressions,
+// specify the names of the expressions you want to describe. To show the active
+// configuration and exclude any pending changes, set the Deployed option to true .
 type DescribeExpressionsInput struct {
 
 	// The name of the domain you want to describe.
@@ -48,8 +48,8 @@ type DescribeExpressionsInput struct {
 	// changes ( false ). Defaults to false .
 	Deployed *bool
 
-	// Limits the DescribeExpressions response to the specified expressions. If not
-	// specified, all expressions are shown.
+	// Limits the DescribeExpressions response to the specified expressions. If not specified, all
+	// expressions are shown.
 	ExpressionNames []string
 
 	noSmithyDocumentSerde

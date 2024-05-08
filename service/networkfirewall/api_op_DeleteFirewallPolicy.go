@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified FirewallPolicy .
+// Deletes the specified FirewallPolicy.
 func (c *Client) DeleteFirewallPolicy(ctx context.Context, params *DeleteFirewallPolicyInput, optFns ...func(*Options)) (*DeleteFirewallPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteFirewallPolicyInput{}
@@ -29,13 +29,15 @@ func (c *Client) DeleteFirewallPolicy(ctx context.Context, params *DeleteFirewal
 
 type DeleteFirewallPolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the firewall policy. You must specify the ARN
-	// or the name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the firewall policy.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	FirewallPolicyArn *string
 
 	// The descriptive name of the firewall policy. You can't change the name of a
-	// firewall policy after you create it. You must specify the ARN or the name, and
-	// you can specify both.
+	// firewall policy after you create it.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	FirewallPolicyName *string
 
 	noSmithyDocumentSerde
@@ -43,8 +45,7 @@ type DeleteFirewallPolicyInput struct {
 
 type DeleteFirewallPolicyOutput struct {
 
-	// The object containing the definition of the FirewallPolicyResponse that you
-	// asked to delete.
+	// The object containing the definition of the FirewallPolicyResponse that you asked to delete.
 	//
 	// This member is required.
 	FirewallPolicyResponse *types.FirewallPolicyResponse

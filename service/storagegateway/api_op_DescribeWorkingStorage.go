@@ -13,8 +13,10 @@ import (
 // Returns information about the working storage of a gateway. This operation is
 // only supported in the stored volumes gateway type. This operation is deprecated
 // in cached volumes API version (20120630). Use DescribeUploadBuffer instead.
+//
 // Working storage is also referred to as upload buffer. You can also use the
 // DescribeUploadBuffer operation to add upload buffer to a stored volume gateway.
+//
 // The response includes disk IDs that are configured as working storage, and it
 // includes the amount of working storage allocated and used.
 func (c *Client) DescribeWorkingStorage(ctx context.Context, params *DescribeWorkingStorageInput, optFns ...func(*Options)) (*DescribeWorkingStorageOutput, error) {
@@ -35,8 +37,8 @@ func (c *Client) DescribeWorkingStorage(ctx context.Context, params *DescribeWor
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway.
 type DescribeWorkingStorageInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -53,8 +55,8 @@ type DescribeWorkingStorageOutput struct {
 	// then the DiskIds array is empty.
 	DiskIds []string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// The total working storage in bytes allocated for the gateway. If no working

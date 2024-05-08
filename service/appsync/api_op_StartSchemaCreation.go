@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a new schema to your GraphQL API. This operation is asynchronous. Use to
-// determine when it has completed.
+// Adds a new schema to your GraphQL API.
+//
+// This operation is asynchronous. Use to determine when it has completed.
 func (c *Client) StartSchemaCreation(ctx context.Context, params *StartSchemaCreationInput, optFns ...func(*Options)) (*StartSchemaCreationOutput, error) {
 	if params == nil {
 		params = &StartSchemaCreationInput{}

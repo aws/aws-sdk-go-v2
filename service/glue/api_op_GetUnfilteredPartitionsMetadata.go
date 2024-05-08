@@ -12,8 +12,10 @@ import (
 )
 
 // Retrieves partition metadata from the Data Catalog that contains unfiltered
-// metadata. For IAM authorization, the public IAM action associated with this API
-// is glue:GetPartitions .
+// metadata.
+//
+// For IAM authorization, the public IAM action associated with this API is
+// glue:GetPartitions .
 func (c *Client) GetUnfilteredPartitionsMetadata(ctx context.Context, params *GetUnfilteredPartitionsMetadataInput, optFns ...func(*Options)) (*GetUnfilteredPartitionsMetadataOutput, error) {
 	if params == nil {
 		params = &GetUnfilteredPartitionsMetadataInput{}
@@ -55,35 +57,71 @@ type GetUnfilteredPartitionsMetadataInput struct {
 	// A structure containing Lake Formation audit context information.
 	AuditContext *types.AuditContext
 
-	// An expression that filters the partitions to be returned. The expression uses
-	// SQL syntax similar to the SQL WHERE filter clause. The SQL statement parser
-	// JSQLParser (http://jsqlparser.sourceforge.net/home.php) parses the expression.
+	// An expression that filters the partitions to be returned.
+	//
+	// The expression uses SQL syntax similar to the SQL WHERE filter clause. The SQL
+	// statement parser [JSQLParser]parses the expression.
+	//
 	// Operators: The following are the operators that you can use in the Expression
-	// API call: = Checks whether the values of the two operands are equal; if yes,
-	// then the condition becomes true. Example: Assume 'variable a' holds 10 and
-	// 'variable b' holds 20. (a = b) is not true. < > Checks whether the values of two
-	// operands are equal; if the values are not equal, then the condition becomes
-	// true. Example: (a < > b) is true. > Checks whether the value of the left operand
-	// is greater than the value of the right operand; if yes, then the condition
-	// becomes true. Example: (a > b) is not true. < Checks whether the value of the
-	// left operand is less than the value of the right operand; if yes, then the
-	// condition becomes true. Example: (a < b) is true. >= Checks whether the value of
-	// the left operand is greater than or equal to the value of the right operand; if
-	// yes, then the condition becomes true. Example: (a >= b) is not true. <= Checks
-	// whether the value of the left operand is less than or equal to the value of the
-	// right operand; if yes, then the condition becomes true. Example: (a <= b) is
-	// true. AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL Logical operators. Supported
-	// Partition Key Types: The following are the supported partition keys.
+	// API call:
+	//
+	// = Checks whether the values of the two operands are equal; if yes, then the
+	// condition becomes true.
+	//
+	// Example: Assume 'variable a' holds 10 and 'variable b' holds 20.
+	//
+	// (a = b) is not true.
+	//
+	// < > Checks whether the values of two operands are equal; if the values are not
+	// equal, then the condition becomes true.
+	//
+	// Example: (a < > b) is true.
+	//
+	// > Checks whether the value of the left operand is greater than the value of the
+	// right operand; if yes, then the condition becomes true.
+	//
+	// Example: (a > b) is not true.
+	//
+	// < Checks whether the value of the left operand is less than the value of the
+	// right operand; if yes, then the condition becomes true.
+	//
+	// Example: (a < b) is true.
+	//
+	// >= Checks whether the value of the left operand is greater than or equal to the
+	// value of the right operand; if yes, then the condition becomes true.
+	//
+	// Example: (a >= b) is not true.
+	//
+	// <= Checks whether the value of the left operand is less than or equal to the
+	// value of the right operand; if yes, then the condition becomes true.
+	//
+	// Example: (a <= b) is true.
+	//
+	// AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL Logical operators.
+	//
+	// Supported Partition Key Types: The following are the supported partition keys.
+	//
 	//   - string
+	//
 	//   - date
+	//
 	//   - timestamp
+	//
 	//   - int
+	//
 	//   - bigint
+	//
 	//   - long
+	//
 	//   - tinyint
+	//
 	//   - smallint
+	//
 	//   - decimal
+	//
 	// If an type is encountered that is not valid, an exception is thrown.
+	//
+	// [JSQLParser]: http://jsqlparser.sourceforge.net/home.php
 	Expression *string
 
 	// The maximum number of partitions to return in a single response.

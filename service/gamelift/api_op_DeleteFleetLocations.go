@@ -13,11 +13,20 @@ import (
 
 // Removes locations from a multi-location fleet. When deleting a location, all
 // game server process and all instances that are still active in the location are
-// shut down. To delete fleet locations, identify the fleet ID and provide a list
-// of the locations to be deleted. If successful, GameLift sets the location status
-// to DELETING , and begins to shut down existing server processes and terminate
-// instances in each location being deleted. When completed, the location status
-// changes to TERMINATED . Learn more Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// shut down.
+//
+// To delete fleet locations, identify the fleet ID and provide a list of the
+// locations to be deleted.
+//
+// If successful, GameLift sets the location status to DELETING , and begins to
+// shut down existing server processes and terminate instances in each location
+// being deleted. When completed, the location status changes to TERMINATED .
+//
+// # Learn more
+//
+// [Setting up Amazon GameLift fleets]
+//
+// [Setting up Amazon GameLift fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) DeleteFleetLocations(ctx context.Context, params *DeleteFleetLocationsInput, optFns ...func(*Options)) (*DeleteFleetLocationsOutput, error) {
 	if params == nil {
 		params = &DeleteFleetLocationsInput{}
@@ -52,10 +61,11 @@ type DeleteFleetLocationsInput struct {
 
 type DeleteFleetLocationsOutput struct {
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
-	// it. ARNs are unique across all Regions. Format is
-	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift fleet
+	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
+	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	FleetArn *string
 
 	// A unique identifier for the fleet that location attributes are being deleted

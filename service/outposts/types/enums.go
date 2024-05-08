@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AddressType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AddressType) Values() []AddressType {
 	return []AddressType{
 		"SHIPPING_ADDRESS",
@@ -30,8 +31,9 @@ const (
 )
 
 // Values returns all known values for AssetState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssetState) Values() []AssetState {
 	return []AssetState{
 		"ACTIVE",
@@ -48,8 +50,9 @@ const (
 )
 
 // Values returns all known values for AssetType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssetType) Values() []AssetType {
 	return []AssetType{
 		"COMPUTE",
@@ -64,8 +67,9 @@ const (
 )
 
 // Values returns all known values for CapacityTaskFailureType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CapacityTaskFailureType) Values() []CapacityTaskFailureType {
 	return []CapacityTaskFailureType{
 		"UNSUPPORTED_CAPACITY_CONFIGURATION",
@@ -84,8 +88,9 @@ const (
 )
 
 // Values returns all known values for CapacityTaskStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CapacityTaskStatus) Values() []CapacityTaskStatus {
 	return []CapacityTaskStatus{
 		"REQUESTED",
@@ -105,8 +110,9 @@ const (
 )
 
 // Values returns all known values for CatalogItemClass. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CatalogItemClass) Values() []CatalogItemClass {
 	return []CatalogItemClass{
 		"RACK",
@@ -123,8 +129,9 @@ const (
 )
 
 // Values returns all known values for CatalogItemStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CatalogItemStatus) Values() []CatalogItemStatus {
 	return []CatalogItemStatus{
 		"AVAILABLE",
@@ -142,8 +149,9 @@ const (
 )
 
 // Values returns all known values for ComputeAssetState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComputeAssetState) Values() []ComputeAssetState {
 	return []ComputeAssetState{
 		"ACTIVE",
@@ -161,8 +169,9 @@ const (
 )
 
 // Values returns all known values for FiberOpticCableType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FiberOpticCableType) Values() []FiberOpticCableType {
 	return []FiberOpticCableType{
 		"SINGLE_MODE",
@@ -186,8 +195,9 @@ const (
 )
 
 // Values returns all known values for LineItemStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LineItemStatus) Values() []LineItemStatus {
 	return []LineItemStatus{
 		"PREPARING",
@@ -215,6 +225,7 @@ const (
 
 // Values returns all known values for MaximumSupportedWeightLbs. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (MaximumSupportedWeightLbs) Values() []MaximumSupportedWeightLbs {
 	return []MaximumSupportedWeightLbs{
@@ -246,8 +257,9 @@ const (
 )
 
 // Values returns all known values for OpticalStandard. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OpticalStandard) Values() []OpticalStandard {
 	return []OpticalStandard{
 		"OPTIC_10GBASE_SR",
@@ -283,8 +295,9 @@ const (
 )
 
 // Values returns all known values for OrderStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrderStatus) Values() []OrderStatus {
 	return []OrderStatus{
 		"RECEIVED",
@@ -309,8 +322,9 @@ const (
 )
 
 // Values returns all known values for OrderType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrderType) Values() []OrderType {
 	return []OrderType{
 		"OUTPOST",
@@ -328,8 +342,9 @@ const (
 )
 
 // Values returns all known values for PaymentOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PaymentOption) Values() []PaymentOption {
 	return []PaymentOption{
 		"ALL_UPFRONT",
@@ -347,8 +362,9 @@ const (
 )
 
 // Values returns all known values for PaymentTerm. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PaymentTerm) Values() []PaymentTerm {
 	return []PaymentTerm{
 		"THREE_YEARS",
@@ -367,8 +383,9 @@ const (
 )
 
 // Values returns all known values for PowerConnector. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PowerConnector) Values() []PowerConnector {
 	return []PowerConnector{
 		"L6_30P",
@@ -389,8 +406,9 @@ const (
 )
 
 // Values returns all known values for PowerDrawKva. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PowerDrawKva) Values() []PowerDrawKva {
 	return []PowerDrawKva{
 		"POWER_5_KVA",
@@ -409,8 +427,9 @@ const (
 )
 
 // Values returns all known values for PowerFeedDrop. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PowerFeedDrop) Values() []PowerFeedDrop {
 	return []PowerFeedDrop{
 		"ABOVE_RACK",
@@ -427,8 +446,9 @@ const (
 )
 
 // Values returns all known values for PowerPhase. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PowerPhase) Values() []PowerPhase {
 	return []PowerPhase{
 		"SINGLE_PHASE",
@@ -445,8 +465,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"OUTPOST",
@@ -466,8 +487,9 @@ const (
 )
 
 // Values returns all known values for ShipmentCarrier. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ShipmentCarrier) Values() []ShipmentCarrier {
 	return []ShipmentCarrier{
 		"DHL",
@@ -487,8 +509,9 @@ const (
 )
 
 // Values returns all known values for SupportedHardwareType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SupportedHardwareType) Values() []SupportedHardwareType {
 	return []SupportedHardwareType{
 		"RACK",
@@ -505,8 +528,9 @@ const (
 )
 
 // Values returns all known values for SupportedStorageEnum. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SupportedStorageEnum) Values() []SupportedStorageEnum {
 	return []SupportedStorageEnum{
 		"EBS",
@@ -531,8 +555,9 @@ const (
 )
 
 // Values returns all known values for UplinkCount. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UplinkCount) Values() []UplinkCount {
 	return []UplinkCount{
 		"UPLINK_COUNT_1",
@@ -559,8 +584,9 @@ const (
 )
 
 // Values returns all known values for UplinkGbps. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UplinkGbps) Values() []UplinkGbps {
 	return []UplinkGbps{
 		"UPLINK_1G",

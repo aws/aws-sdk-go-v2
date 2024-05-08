@@ -7,8 +7,10 @@ import (
 	"time"
 )
 
-// Describes an action. For more information, see FIS actions (https://docs.aws.amazon.com/fis/latest/userguide/fis-actions-reference.html)
-// in the Fault Injection Service User Guide.
+// Describes an action. For more information, see [FIS actions] in the Fault Injection Service
+// User Guide.
+//
+// [FIS actions]: https://docs.aws.amazon.com/fis/latest/userguide/fis-actions-reference.html
 type Action struct {
 
 	// The Amazon Resource Name (ARN) of the action.
@@ -74,9 +76,11 @@ type ActionTarget struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies an action for an experiment template. For more information, see
-// Actions (https://docs.aws.amazon.com/fis/latest/userguide/actions.html) in the
-// Fault Injection Service User Guide.
+// Specifies an action for an experiment template.
+//
+// For more information, see [Actions] in the Fault Injection Service User Guide.
+//
+// [Actions]: https://docs.aws.amazon.com/fis/latest/userguide/actions.html
 type CreateExperimentTemplateActionInput struct {
 
 	// The ID of the action. The format of the action ID is:
@@ -149,8 +153,11 @@ type CreateExperimentTemplateStopConditionInput struct {
 
 // Specifies a target for an experiment. You must specify at least one Amazon
 // Resource Name (ARN) or at least one resource tag. You cannot specify both ARNs
-// and tags. For more information, see Targets (https://docs.aws.amazon.com/fis/latest/userguide/targets.html)
-// in the Fault Injection Service User Guide.
+// and tags.
+//
+// For more information, see [Targets] in the Fault Injection Service User Guide.
+//
+// [Targets]: https://docs.aws.amazon.com/fis/latest/userguide/targets.html
 type CreateExperimentTemplateTargetInput struct {
 
 	// The resource type. The resource type must be supported for the specified action.
@@ -161,10 +168,13 @@ type CreateExperimentTemplateTargetInput struct {
 	// Scopes the identified resources to a specific count of the resources at random,
 	// or a percentage of the resources. All identified resources are included in the
 	// target.
+	//
 	//   - ALL - Run the action on all identified targets. This is the default.
+	//
 	//   - COUNT(n) - Run the action on the specified number of targets, chosen from
 	//   the identified targets at random. For example, COUNT(1) selects one of the
 	//   targets.
+	//
 	//   - PERCENT(n) - Run the action on the specified percentage of targets, chosen
 	//   from the identified targets at random. For example, PERCENT(25) selects 25% of
 	//   the targets.
@@ -664,9 +674,11 @@ type ExperimentTemplateTargetFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a filter used for the target resource input in an experiment
-// template. For more information, see Resource filters (https://docs.aws.amazon.com/fis/latest/userguide/targets.html#target-filters)
-// in the Fault Injection Service User Guide.
+// Specifies a filter used for the target resource input in an experiment template.
+//
+// For more information, see [Resource filters] in the Fault Injection Service User Guide.
+//
+// [Resource filters]: https://docs.aws.amazon.com/fis/latest/userguide/targets.html#target-filters
 type ExperimentTemplateTargetInputFilter struct {
 
 	// The attribute path for the filter.

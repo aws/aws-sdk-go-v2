@@ -29,19 +29,19 @@ func (c *Client) ListAnnotationStoreVersions(ctx context.Context, params *ListAn
 
 type ListAnnotationStoreVersionsInput struct {
 
-	// The name of an annotation store.
+	//  The name of an annotation store.
 	//
 	// This member is required.
 	Name *string
 
-	// A filter to apply to the list of annotation store versions.
+	//  A filter to apply to the list of annotation store versions.
 	Filter *types.ListAnnotationStoreVersionsFilter
 
-	// The maximum number of annotation store versions to return in one page of
+	//  The maximum number of annotation store versions to return in one page of
 	// results.
 	MaxResults *int32
 
-	// Specifies the pagination token from a previous request to retrieve the next
+	//  Specifies the pagination token from a previous request to retrieve the next
 	// page of results.
 	NextToken *string
 
@@ -50,10 +50,10 @@ type ListAnnotationStoreVersionsInput struct {
 
 type ListAnnotationStoreVersionsOutput struct {
 
-	// Lists all versions of an annotation store.
+	//  Lists all versions of an annotation store.
 	AnnotationStoreVersions []types.AnnotationStoreVersionItem
 
-	// Specifies the pagination token from a previous request to retrieve the next
+	//  Specifies the pagination token from a previous request to retrieve the next
 	// page of results.
 	NextToken *string
 
@@ -183,7 +183,7 @@ var _ ListAnnotationStoreVersionsAPIClient = (*Client)(nil)
 // ListAnnotationStoreVersionsPaginatorOptions is the paginator options for
 // ListAnnotationStoreVersions
 type ListAnnotationStoreVersionsPaginatorOptions struct {
-	// The maximum number of annotation store versions to return in one page of
+	//  The maximum number of annotation store versions to return in one page of
 	// results.
 	Limit int32
 

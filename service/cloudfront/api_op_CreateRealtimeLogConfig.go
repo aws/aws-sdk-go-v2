@@ -11,11 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a real-time log configuration. After you create a real-time log
-// configuration, you can attach it to one or more cache behaviors to send
-// real-time log data to the specified Amazon Kinesis data stream. For more
-// information about real-time log configurations, see Real-time logs (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html)
-// in the Amazon CloudFront Developer Guide.
+// Creates a real-time log configuration.
+//
+// After you create a real-time log configuration, you can attach it to one or
+// more cache behaviors to send real-time log data to the specified Amazon Kinesis
+// data stream.
+//
+// For more information about real-time log configurations, see [Real-time logs] in the Amazon
+// CloudFront Developer Guide.
+//
+// [Real-time logs]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html
 func (c *Client) CreateRealtimeLogConfig(ctx context.Context, params *CreateRealtimeLogConfigInput, optFns ...func(*Options)) (*CreateRealtimeLogConfigOutput, error) {
 	if params == nil {
 		params = &CreateRealtimeLogConfigInput{}
@@ -39,9 +44,12 @@ type CreateRealtimeLogConfigInput struct {
 	// This member is required.
 	EndPoints []types.EndPoint
 
-	// A list of fields to include in each real-time log record. For more information
-	// about fields, see Real-time log configuration fields (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields)
-	// in the Amazon CloudFront Developer Guide.
+	// A list of fields to include in each real-time log record.
+	//
+	// For more information about fields, see [Real-time log configuration fields] in the Amazon CloudFront Developer
+	// Guide.
+	//
+	// [Real-time log configuration fields]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields
 	//
 	// This member is required.
 	Fields []string

@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Elasticsearch domain. For more information, see Creating
-// Elasticsearch Domains (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains)
-// in the Amazon Elasticsearch Service Developer Guide.
+// Creates a new Elasticsearch domain. For more information, see [Creating Elasticsearch Domains] in the Amazon
+// Elasticsearch Service Developer Guide.
+//
+// [Creating Elasticsearch Domains]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains
 func (c *Client) CreateElasticsearchDomain(ctx context.Context, params *CreateElasticsearchDomainInput, optFns ...func(*Options)) (*CreateElasticsearchDomainOutput, error) {
 	if params == nil {
 		params = &CreateElasticsearchDomainInput{}
@@ -39,13 +40,14 @@ type CreateElasticsearchDomainInput struct {
 	// This member is required.
 	DomainName *string
 
-	// IAM access policy as a JSON-formatted string.
+	//  IAM access policy as a JSON-formatted string.
 	AccessPolicies *string
 
-	// Option to allow references to indices in an HTTP request body. Must be false
+	//  Option to allow references to indices in an HTTP request body. Must be false
 	// when configuring access to individual sub-resources. By default, the value is
-	// true . See Configuration Advanced Options (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options)
-	// for more information.
+	// true . See [Configuration Advanced Options] for more information.
+	//
+	// [Configuration Advanced Options]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options
 	AdvancedOptions map[string]string
 
 	// Specifies advanced security options.
@@ -55,15 +57,16 @@ type CreateElasticsearchDomainInput struct {
 	AutoTuneOptions *types.AutoTuneOptionsInput
 
 	// Options to specify the Cognito user and identity pools for Kibana
-	// authentication. For more information, see Amazon Cognito Authentication for
-	// Kibana (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html)
-	// .
+	// authentication. For more information, see [Amazon Cognito Authentication for Kibana].
+	//
+	// [Amazon Cognito Authentication for Kibana]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html
 	CognitoOptions *types.CognitoOptions
 
 	// Options to specify configuration that will be applied to the domain endpoint.
 	DomainEndpointOptions *types.DomainEndpointOptions
 
-	// Options to enable, disable and specify the type and size of EBS storage volumes.
+	// Options to enable, disable and specify the type and size of EBS storage
+	// volumes.
 	EBSOptions *types.EBSOptions
 
 	// Configuration options for an Elasticsearch domain. Specifies the instance type
@@ -71,8 +74,10 @@ type CreateElasticsearchDomainInput struct {
 	ElasticsearchClusterConfig *types.ElasticsearchClusterConfig
 
 	// String of format X.Y to specify version for the Elasticsearch domain eg. "1.5"
-	// or "2.3". For more information, see Creating Elasticsearch Domains (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains)
-	// in the Amazon Elasticsearch Service Developer Guide.
+	// or "2.3". For more information, see [Creating Elasticsearch Domains]in the Amazon Elasticsearch Service
+	// Developer Guide.
+	//
+	// [Creating Elasticsearch Domains]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains
 	ElasticsearchVersion *string
 
 	// Specifies the Encryption At Rest Options.
@@ -93,8 +98,9 @@ type CreateElasticsearchDomainInput struct {
 	TagList []types.Tag
 
 	// Options to specify the subnets and security groups for VPC endpoint. For more
-	// information, see Creating a VPC (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc)
-	// in VPC Endpoints for Amazon Elasticsearch Service Domains
+	// information, see [Creating a VPC]in VPC Endpoints for Amazon Elasticsearch Service Domains
+	//
+	// [Creating a VPC]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc
 	VPCOptions *types.VPCOptions
 
 	noSmithyDocumentSerde

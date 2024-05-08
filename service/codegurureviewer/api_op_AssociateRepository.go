@@ -16,18 +16,24 @@ import (
 // Reviewer. When you associate a repository, CodeGuru Reviewer reviews source code
 // changes in the repository's pull requests and provides automatic
 // recommendations. You can view recommendations using the CodeGuru Reviewer
-// console. For more information, see Recommendations in Amazon CodeGuru Reviewer (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html)
-// in the Amazon CodeGuru Reviewer User Guide. If you associate a CodeCommit or S3
-// repository, it must be in the same Amazon Web Services Region and Amazon Web
-// Services account where its CodeGuru Reviewer code reviews are configured.
+// console. For more information, see [Recommendations in Amazon CodeGuru Reviewer]in the Amazon CodeGuru Reviewer User Guide.
+//
+// If you associate a CodeCommit or S3 repository, it must be in the same Amazon
+// Web Services Region and Amazon Web Services account where its CodeGuru Reviewer
+// code reviews are configured.
+//
 // Bitbucket and GitHub Enterprise Server repositories are managed by Amazon Web
 // Services CodeStar Connections to connect to CodeGuru Reviewer. For more
-// information, see Associate a repository (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-associate-repository.html)
-// in the Amazon CodeGuru Reviewer User Guide. You cannot use the CodeGuru Reviewer
-// SDK or the Amazon Web Services CLI to associate a GitHub repository with Amazon
-// CodeGuru Reviewer. To associate a GitHub repository, use the console. For more
-// information, see Getting started with CodeGuru Reviewer (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html)
-// in the CodeGuru Reviewer User Guide.
+// information, see [Associate a repository]in the Amazon CodeGuru Reviewer User Guide.
+//
+// You cannot use the CodeGuru Reviewer SDK or the Amazon Web Services CLI to
+// associate a GitHub repository with Amazon CodeGuru Reviewer. To associate a
+// GitHub repository, use the console. For more information, see [Getting started with CodeGuru Reviewer]in the CodeGuru
+// Reviewer User Guide.
+//
+// [Recommendations in Amazon CodeGuru Reviewer]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html
+// [Getting started with CodeGuru Reviewer]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html
+// [Associate a repository]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-associate-repository.html
 func (c *Client) AssociateRepository(ctx context.Context, params *AssociateRepositoryInput, optFns ...func(*Options)) (*AssociateRepositoryOutput, error) {
 	if params == nil {
 		params = &AssociateRepositoryInput{}
@@ -55,17 +61,21 @@ type AssociateRepositoryInput struct {
 	ClientRequestToken *string
 
 	// A KMSKeyDetails object that contains:
+	//
 	//   - The encryption option for this repository association. It is either owned
 	//   by Amazon Web Services Key Management Service (KMS) ( AWS_OWNED_CMK ) or
 	//   customer managed ( CUSTOMER_MANAGED_CMK ).
+	//
 	//   - The ID of the Amazon Web Services KMS key that is associated with this
 	//   repository association.
 	KMSKeyDetails *types.KMSKeyDetails
 
 	// An array of key-value pairs used to tag an associated repository. A tag is a
 	// custom attribute label with two parts:
+	//
 	//   - A tag key (for example, CostCenter , Environment , Project , or Secret ).
 	//   Tag keys are case sensitive.
+	//
 	//   - An optional field known as a tag value (for example, 111122223333 ,
 	//   Production , or a team name). Omitting the tag value is the same as using an
 	//   empty string. Like tag keys, tag values are case sensitive.
@@ -81,8 +91,10 @@ type AssociateRepositoryOutput struct {
 
 	// An array of key-value pairs used to tag an associated repository. A tag is a
 	// custom attribute label with two parts:
+	//
 	//   - A tag key (for example, CostCenter , Environment , Project , or Secret ).
 	//   Tag keys are case sensitive.
+	//
 	//   - An optional field known as a tag value (for example, 111122223333 ,
 	//   Production , or a team name). Omitting the tag value is the same as using an
 	//   empty string. Like tag keys, tag values are case sensitive.

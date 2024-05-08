@@ -145,9 +145,13 @@ func (e *ModelNotReadyException) ErrorCode() string {
 }
 func (e *ModelNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An error occurred while streaming the response body. This error can have the
-// following error codes: ModelInvocationTimeExceeded The model failed to finish
-// sending the response within the timeout period allowed by Amazon SageMaker.
+//	An error occurred while streaming the response body. This error can have the
+//
+// following error codes:
+//
+// ModelInvocationTimeExceeded The model failed to finish sending the response
+// within the timeout period allowed by Amazon SageMaker.
+//
 // StreamBroken The Transmission Control Protocol (TCP) connection between the
 // client and the model was reset or closed.
 type ModelStreamError struct {

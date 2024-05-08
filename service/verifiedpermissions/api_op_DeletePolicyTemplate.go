@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified policy template from the policy store. This operation
-// also deletes any policies that were created from the specified policy template.
-// Those policies are immediately removed from all future API responses, and are
-// asynchronously deleted from the policy store.
+// Deletes the specified policy template from the policy store.
+//
+// This operation also deletes any policies that were created from the specified
+// policy template. Those policies are immediately removed from all future API
+// responses, and are asynchronously deleted from the policy store.
 func (c *Client) DeletePolicyTemplate(ctx context.Context, params *DeletePolicyTemplateInput, optFns ...func(*Options)) (*DeletePolicyTemplateOutput, error) {
 	if params == nil {
 		params = &DeletePolicyTemplateInput{}

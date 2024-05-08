@@ -11,9 +11,9 @@ import (
 )
 
 // Deletes an Evidently project. Before you can delete a project, you must delete
-// all the features that the project contains. To delete a feature, use
-// DeleteFeature (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_DeleteFeature.html)
-// .
+// all the features that the project contains. To delete a feature, use [DeleteFeature].
+//
+// [DeleteFeature]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_DeleteFeature.html
 func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, optFns ...func(*Options)) (*DeleteProjectOutput, error) {
 	if params == nil {
 		params = &DeleteProjectInput{}

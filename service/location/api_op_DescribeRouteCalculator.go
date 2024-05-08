@@ -42,6 +42,7 @@ type DescribeRouteCalculatorOutput struct {
 
 	// The Amazon Resource Name (ARN) for the Route calculator resource. Use the ARN
 	// when you specify a resource across Amazon Web Services.
+	//
 	//   - Format example:
 	//   arn:aws:geo:region:account-id:route-calculator/ExampleCalculator
 	//
@@ -53,21 +54,28 @@ type DescribeRouteCalculatorOutput struct {
 	// This member is required.
 	CalculatorName *string
 
-	// The timestamp when the route calculator resource was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp when the route calculator resource was created in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
 	//   - For example, 2020–07-2T12:15:20.000Z+01:00
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	CreateTime *time.Time
 
 	// The data provider of traffic and road network data. Indicates one of the
 	// available providers:
+	//
 	//   - Esri
+	//
 	//   - Grab
+	//
 	//   - Here
-	// For more information about data providers, see Amazon Location Service data
-	// providers (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html)
-	// .
+	//
+	// For more information about data providers, see [Amazon Location Service data providers].
+	//
+	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
 	//
 	// This member is required.
 	DataSource *string
@@ -77,9 +85,12 @@ type DescribeRouteCalculatorOutput struct {
 	// This member is required.
 	Description *string
 
-	// The timestamp when the route calculator resource was last updated in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp when the route calculator resource was last updated in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
 	//   - For example, 2020–07-2T12:15:20.000Z+01:00
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time

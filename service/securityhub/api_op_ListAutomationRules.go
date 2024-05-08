@@ -29,12 +29,12 @@ func (c *Client) ListAutomationRules(ctx context.Context, params *ListAutomation
 
 type ListAutomationRulesInput struct {
 
-	// The maximum number of rules to return in the response. This currently ranges
+	//  The maximum number of rules to return in the response. This currently ranges
 	// from 1 to 100.
 	MaxResults *int32
 
-	// A token to specify where to start paginating the response. This is the NextToken
-	// from a previously truncated response. On your first call to the
+	//  A token to specify where to start paginating the response. This is the
+	// NextToken from a previously truncated response. On your first call to the
 	// ListAutomationRules API, set the value of this parameter to NULL .
 	NextToken *string
 
@@ -43,11 +43,11 @@ type ListAutomationRulesInput struct {
 
 type ListAutomationRulesOutput struct {
 
-	// Metadata for rules in the calling account. The response includes rules with a
+	//  Metadata for rules in the calling account. The response includes rules with a
 	// RuleStatus of ENABLED and DISABLED .
 	AutomationRulesMetadata []types.AutomationRulesMetadata
 
-	// A pagination token for the response.
+	//  A pagination token for the response.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

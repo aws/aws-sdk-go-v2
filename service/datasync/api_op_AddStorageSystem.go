@@ -57,9 +57,10 @@ type AddStorageSystemInput struct {
 	ServerConfiguration *types.DiscoveryServerConfiguration
 
 	// Specifies the type of on-premises storage system that you want DataSync
-	// Discovery to collect information about. DataSync Discovery currently supports
-	// NetApp Fabric-Attached Storage (FAS) and All Flash FAS (AFF) systems running
-	// ONTAP 9.7 or later.
+	// Discovery to collect information about.
+	//
+	// DataSync Discovery currently supports NetApp Fabric-Attached Storage (FAS) and
+	// All Flash FAS (AFF) systems running ONTAP 9.7 or later.
 	//
 	// This member is required.
 	SystemType types.DiscoverySystemType

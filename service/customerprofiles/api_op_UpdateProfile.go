@@ -12,9 +12,11 @@ import (
 )
 
 // Updates the properties of a profile. The ProfileId is required for updating a
-// customer profile. When calling the UpdateProfile API, specifying an empty string
-// value means that any existing value will be removed. Not specifying a string
-// value means that any value already there will be kept.
+// customer profile.
+//
+// When calling the UpdateProfile API, specifying an empty string value means that
+// any existing value will be removed. Not specifying a string value means that any
+// value already there will be kept.
 func (c *Client) UpdateProfile(ctx context.Context, params *UpdateProfileInput, optFns ...func(*Options)) (*UpdateProfileOutput, error) {
 	if params == nil {
 		params = &UpdateProfileInput{}

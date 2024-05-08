@@ -44,11 +44,12 @@ type UpdatePortalInput struct {
 	// This member is required.
 	PortalName *string
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of a service role that allows the portal's users to access your IoT SiteWise
-	// resources on your behalf. For more information, see Using service roles for IoT
-	// SiteWise Monitor (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
-	// in the IoT SiteWise User Guide.
+	// The [ARN] of a service role that allows the portal's users to access your IoT
+	// SiteWise resources on your behalf. For more information, see [Using service roles for IoT SiteWise Monitor]in the IoT
+	// SiteWise User Guide.
+	//
+	// [Using service roles for IoT SiteWise Monitor]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	RoleArn *string
@@ -56,8 +57,9 @@ type UpdatePortalInput struct {
 	// Contains the configuration information of an alarm created in an IoT SiteWise
 	// Monitor portal. You can use the alarm to monitor an asset property and get
 	// notified when the asset property value is outside a specified range. For more
-	// information, see Monitoring with alarms (https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html)
-	// in the IoT SiteWise Application Guide.
+	// information, see [Monitoring with alarms]in the IoT SiteWise Application Guide.
+	//
+	// [Monitoring with alarms]: https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html
 	Alarms *types.Alarms
 
 	// A unique case-sensitive identifier that you can provide to ensure the
@@ -72,7 +74,9 @@ type UpdatePortalInput struct {
 	PortalDescription *string
 
 	// Contains an image that is one of the following:
+	//
 	//   - An image file. Choose this option to upload a new image.
+	//
 	//   - The ID of an existing image. Choose this option to keep an existing image.
 	PortalLogoImage *types.Image
 

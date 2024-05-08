@@ -32,7 +32,9 @@ type DescribeDBShardGroupsInput struct {
 	// The user-supplied DB shard group identifier or the Amazon Resource Name (ARN)
 	// of the DB shard group. If this parameter is specified, information for only the
 	// specific DB shard group is returned. This parameter isn't case-sensitive.
+	//
 	// Constraints:
+	//
 	//   - If supplied, must match an existing DB shard group identifier.
 	DBShardGroupIdentifier *string
 
@@ -46,7 +48,10 @@ type DescribeDBShardGroupsInput struct {
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
+	// included in the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100
 	MaxRecords *int32
 

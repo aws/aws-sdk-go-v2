@@ -18,7 +18,9 @@ import (
 // Lists and describes the versions of an Amazon Rekognition project. You can
 // specify up to 10 model or adapter versions in ProjectVersionArns . If you don't
 // specify a value, descriptions for all model/adapter versions in the project are
-// returned. This operation requires permissions to perform the
+// returned.
+//
+// This operation requires permissions to perform the
 // rekognition:DescribeProjectVersions action.
 func (c *Client) DescribeProjectVersions(ctx context.Context, params *DescribeProjectVersionsInput, optFns ...func(*Options)) (*DescribeProjectVersionsOutput, error) {
 	if params == nil {
@@ -289,12 +291,13 @@ type ProjectVersionRunningWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeProjectVersionsInput, *DescribeProjectVersionsOutput, error) (bool, error)
 }
 
@@ -503,12 +506,13 @@ type ProjectVersionTrainingCompletedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeProjectVersionsInput, *DescribeProjectVersionsOutput, error) (bool, error)
 }
 

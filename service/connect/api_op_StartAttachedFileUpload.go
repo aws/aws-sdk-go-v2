@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides a pre-signed Amazon S3 URL in response for uploading your content. You
-// may only use this API to upload attachments to a Connect Case (https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html)
-// .
+// Provides a pre-signed Amazon S3 URL in response for uploading your content.
+//
+// You may only use this API to upload attachments to a [Connect Case].
+//
+// [Connect Case]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
 func (c *Client) StartAttachedFileUpload(ctx context.Context, params *StartAttachedFileUploadInput, optFns ...func(*Options)) (*StartAttachedFileUploadOutput, error) {
 	if params == nil {
 		params = &StartAttachedFileUploadInput{}
@@ -31,8 +33,12 @@ func (c *Client) StartAttachedFileUpload(ctx context.Context, params *StartAttac
 
 type StartAttachedFileUploadInput struct {
 
-	// The resource to which the attached file is (being) uploaded to. Cases (https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html)
-	// are the only current supported resource. This value must be a valid ARN.
+	// The resource to which the attached file is (being) uploaded to. [Cases] are the only
+	// current supported resource.
+	//
+	// This value must be a valid ARN.
+	//
+	// [Cases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
 	//
 	// This member is required.
 	AssociatedResourceArn *string
@@ -59,9 +65,9 @@ type StartAttachedFileUploadInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// Represents the identity that created the file.

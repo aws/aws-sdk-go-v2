@@ -12,7 +12,9 @@ import (
 )
 
 // This action is only used by the Amazon ECS agent, and it is not intended for
-// use outside of the agent. Sent to acknowledge that an attachment changed states.
+// use outside of the agent.
+//
+// Sent to acknowledge that an attachment changed states.
 func (c *Client) SubmitAttachmentStateChanges(ctx context.Context, params *SubmitAttachmentStateChangesInput, optFns ...func(*Options)) (*SubmitAttachmentStateChangesOutput, error) {
 	if params == nil {
 		params = &SubmitAttachmentStateChangesInput{}

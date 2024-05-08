@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified policy from the policy store. This operation is
-// idempotent; if you specify a policy that doesn't exist, the request response
-// returns a successful HTTP 200 status code.
+// Deletes the specified policy from the policy store.
+//
+// This operation is idempotent; if you specify a policy that doesn't exist, the
+// request response returns a successful HTTP 200 status code.
 func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, optFns ...func(*Options)) (*DeletePolicyOutput, error) {
 	if params == nil {
 		params = &DeletePolicyInput{}

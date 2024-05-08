@@ -33,20 +33,27 @@ type PutResourcePolicyInput struct {
 
 	// Details of the new policy, including the identity of the principal that is
 	// enabled to put logs to this account. This is formatted as a JSON string. This
-	// parameter is required. The following example creates a resource policy enabling
-	// the Route 53 service to put DNS query logs in to the specified log group.
-	// Replace "logArn" with the ARN of your CloudWatch Logs resource, such as a log
-	// group or log stream. CloudWatch Logs also supports aws:SourceArn (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn)
-	// and aws:SourceAccount (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount)
-	// condition context keys. In the example resource policy, you would replace the
-	// value of SourceArn with the resource making the call from Route 53 to
-	// CloudWatch Logs. You would also replace the value of SourceAccount with the
-	// Amazon Web Services account ID making that call. { "Version": "2012-10-17",
-	// "Statement": [ { "Sid": "Route53LogsToCloudWatchLogs", "Effect": "Allow",
-	// "Principal": { "Service": [ "route53.amazonaws.com" ] }, "Action":
-	// "logs:PutLogEvents", "Resource": "logArn", "Condition": { "ArnLike": {
-	// "aws:SourceArn": "myRoute53ResourceArn" }, "StringEquals": {
-	// "aws:SourceAccount": "myAwsAccountId" } } } ] }
+	// parameter is required.
+	//
+	// The following example creates a resource policy enabling the Route 53 service
+	// to put DNS query logs in to the specified log group. Replace "logArn" with the
+	// ARN of your CloudWatch Logs resource, such as a log group or log stream.
+	//
+	// CloudWatch Logs also supports [aws:SourceArn] and [aws:SourceAccount] condition context keys.
+	//
+	// In the example resource policy, you would replace the value of SourceArn with
+	// the resource making the call from Route 53 to CloudWatch Logs. You would also
+	// replace the value of SourceAccount with the Amazon Web Services account ID
+	// making that call.
+	//
+	//     { "Version": "2012-10-17", "Statement": [ { "Sid":
+	//     "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": { "Service": [
+	//     "route53.amazonaws.com" ] }, "Action": "logs:PutLogEvents", "Resource":
+	//     "logArn", "Condition": { "ArnLike": { "aws:SourceArn": "myRoute53ResourceArn" },
+	//     "StringEquals": { "aws:SourceAccount": "myAwsAccountId" } } } ] }
+	//
+	// [aws:SourceAccount]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount
+	// [aws:SourceArn]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn
 	PolicyDocument *string
 
 	// Name of the new policy. This parameter is required.

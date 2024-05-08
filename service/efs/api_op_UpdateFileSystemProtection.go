@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates protection on the file system. This operation requires permissions for
-// the elasticfilesystem:UpdateFileSystemProtection action.
+// Updates protection on the file system.
+//
+// This operation requires permissions for the
+// elasticfilesystem:UpdateFileSystemProtection action.
 func (c *Client) UpdateFileSystemProtection(ctx context.Context, params *UpdateFileSystemProtectionInput, optFns ...func(*Options)) (*UpdateFileSystemProtectionOutput, error) {
 	if params == nil {
 		params = &UpdateFileSystemProtectionInput{}
@@ -36,15 +38,19 @@ type UpdateFileSystemProtectionInput struct {
 	FileSystemId *string
 
 	// The status of the file system's replication overwrite protection.
+	//
 	//   - ENABLED – The file system cannot be used as the destination file system in a
 	//   replication configuration. The file system is writeable. Replication overwrite
 	//   protection is ENABLED by default.
+	//
 	//   - DISABLED – The file system can be used as the destination file system in a
 	//   replication configuration. The file system is read-only and can only be modified
 	//   by EFS replication.
+	//
 	//   - REPLICATING – The file system is being used as the destination file system
 	//   in a replication configuration. The file system is read-only and is only
 	//   modified only by EFS replication.
+	//
 	// If the replication configuration is deleted, the file system's replication
 	// overwrite protection is re-enabled, the file system becomes writeable.
 	ReplicationOverwriteProtection types.ReplicationOverwriteProtection
@@ -56,15 +62,19 @@ type UpdateFileSystemProtectionInput struct {
 type UpdateFileSystemProtectionOutput struct {
 
 	// The status of the file system's replication overwrite protection.
+	//
 	//   - ENABLED – The file system cannot be used as the destination file system in a
 	//   replication configuration. The file system is writeable. Replication overwrite
 	//   protection is ENABLED by default.
+	//
 	//   - DISABLED – The file system can be used as the destination file system in a
 	//   replication configuration. The file system is read-only and can only be modified
 	//   by EFS replication.
+	//
 	//   - REPLICATING – The file system is being used as the destination file system
 	//   in a replication configuration. The file system is read-only and is only
 	//   modified only by EFS replication.
+	//
 	// If the replication configuration is deleted, the file system's replication
 	// overwrite protection is re-enabled, the file system becomes writeable.
 	ReplicationOverwriteProtection types.ReplicationOverwriteProtection

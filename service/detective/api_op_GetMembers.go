@@ -32,8 +32,10 @@ type GetMembersInput struct {
 
 	// The list of Amazon Web Services account identifiers for the member account for
 	// which to return member details. You can request details for up to 50 member
-	// accounts at a time. You cannot use GetMembers to retrieve information about
-	// member accounts that were removed from the behavior graph.
+	// accounts at a time.
+	//
+	// You cannot use GetMembers to retrieve information about member accounts that
+	// were removed from the behavior graph.
 	//
 	// This member is required.
 	AccountIds []string
@@ -53,8 +55,9 @@ type GetMembersOutput struct {
 	MemberDetails []types.MemberDetail
 
 	// The requested member accounts for which Detective was unable to return member
-	// details. For each account, provides the reason why the request could not be
-	// processed.
+	// details.
+	//
+	// For each account, provides the reason why the request could not be processed.
 	UnprocessedAccounts []types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.

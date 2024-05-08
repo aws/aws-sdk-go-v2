@@ -42,7 +42,7 @@ type ListElasticsearchInstanceTypesInput struct {
 	// instance types when modifying existing domain.
 	DomainName *string
 
-	// Set this value to limit the number of results returned. Value provided must be
+	//  Set this value to limit the number of results returned. Value provided must be
 	// greater than 30 else it wont be honored.
 	MaxResults int32
 
@@ -53,12 +53,10 @@ type ListElasticsearchInstanceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for the parameters returned by ListElasticsearchInstanceTypes
-// operation.
+// Container for the parameters returned by ListElasticsearchInstanceTypes operation.
 type ListElasticsearchInstanceTypesOutput struct {
 
-	// List of instance types supported by Amazon Elasticsearch service for given
-	// ElasticsearchVersion
+	//  List of instance types supported by Amazon Elasticsearch service for given ElasticsearchVersion
 	ElasticsearchInstanceTypes []types.ESPartitionInstanceType
 
 	// In case if there are more results available NextToken would be present, make
@@ -162,7 +160,7 @@ var _ ListElasticsearchInstanceTypesAPIClient = (*Client)(nil)
 // ListElasticsearchInstanceTypesPaginatorOptions is the paginator options for
 // ListElasticsearchInstanceTypes
 type ListElasticsearchInstanceTypesPaginatorOptions struct {
-	// Set this value to limit the number of results returned. Value provided must be
+	//  Set this value to limit the number of results returned. Value provided must be
 	// greater than 30 else it wont be honored.
 	Limit int32
 

@@ -13,14 +13,17 @@ import (
 
 // Lists descriptions of all the Amazon Redshift event notification subscriptions
 // for a customer account. If you specify a subscription name, lists the
-// description for that subscription. If you specify both tag keys and tag values
-// in the same request, Amazon Redshift returns all event notification
-// subscriptions that match any combination of the specified keys and values. For
-// example, if you have owner and environment for tag keys, and admin and test for
-// tag values, all subscriptions that have any combination of those values are
-// returned. If both tag keys and values are omitted from the request,
-// subscriptions are returned regardless of whether they have tag keys or values
-// associated with them.
+// description for that subscription.
+//
+// If you specify both tag keys and tag values in the same request, Amazon
+// Redshift returns all event notification subscriptions that match any combination
+// of the specified keys and values. For example, if you have owner and environment
+// for tag keys, and admin and test for tag values, all subscriptions that have
+// any combination of those values are returned.
+//
+// If both tag keys and values are omitted from the request, subscriptions are
+// returned regardless of whether they have tag keys or values associated with
+// them.
 func (c *Client) DescribeEventSubscriptions(ctx context.Context, params *DescribeEventSubscriptionsInput, optFns ...func(*Options)) (*DescribeEventSubscriptionsOutput, error) {
 	if params == nil {
 		params = &DescribeEventSubscriptionsInput{}
@@ -49,7 +52,10 @@ type DescribeEventSubscriptionsInput struct {
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -183,7 +189,10 @@ type DescribeEventSubscriptionsPaginatorOptions struct {
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 

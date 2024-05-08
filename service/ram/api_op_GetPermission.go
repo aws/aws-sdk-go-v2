@@ -29,19 +29,21 @@ func (c *Client) GetPermission(ctx context.Context, params *GetPermissionInput, 
 
 type GetPermissionInput struct {
 
-	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the permission whose contents you want to retrieve. To find the ARN for a
-	// permission, use either the ListPermissions operation or go to the Permissions
-	// library (https://console.aws.amazon.com/ram/home#Permissions:) page in the RAM
-	// console and then choose the name of the permission. The ARN is displayed on the
-	// detail page.
+	// Specifies the [Amazon Resource Name (ARN)] of the permission whose contents you want to retrieve. To find
+	// the ARN for a permission, use either the ListPermissionsoperation or go to the [Permissions library] page in the
+	// RAM console and then choose the name of the permission. The ARN is displayed on
+	// the detail page.
+	//
+	// [Permissions library]: https://console.aws.amazon.com/ram/home#Permissions:
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	PermissionArn *string
 
 	// Specifies the version number of the RAM permission to retrieve. If you don't
-	// specify this parameter, the operation retrieves the default version. To see the
-	// list of available versions, use ListPermissionVersions .
+	// specify this parameter, the operation retrieves the default version.
+	//
+	// To see the list of available versions, use ListPermissionVersions.
 	PermissionVersion *int32
 
 	noSmithyDocumentSerde

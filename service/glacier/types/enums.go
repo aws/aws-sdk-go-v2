@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for ActionCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionCode) Values() []ActionCode {
 	return []ActionCode{
 		"ArchiveRetrieval",
@@ -36,8 +37,9 @@ const (
 )
 
 // Values returns all known values for CannedACL. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CannedACL) Values() []CannedACL {
 	return []CannedACL{
 		"private",
@@ -59,8 +61,9 @@ const (
 )
 
 // Values returns all known values for EncryptionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncryptionType) Values() []EncryptionType {
 	return []EncryptionType{
 		"aws:kms",
@@ -76,8 +79,9 @@ const (
 )
 
 // Values returns all known values for ExpressionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExpressionType) Values() []ExpressionType {
 	return []ExpressionType{
 		"SQL",
@@ -94,8 +98,9 @@ const (
 )
 
 // Values returns all known values for FileHeaderInfo. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FileHeaderInfo) Values() []FileHeaderInfo {
 	return []FileHeaderInfo{
 		"USE",
@@ -116,8 +121,9 @@ const (
 )
 
 // Values returns all known values for Permission. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Permission) Values() []Permission {
 	return []Permission{
 		"FULL_CONTROL",
@@ -137,8 +143,9 @@ const (
 )
 
 // Values returns all known values for QuoteFields. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QuoteFields) Values() []QuoteFields {
 	return []QuoteFields{
 		"ALWAYS",
@@ -156,8 +163,9 @@ const (
 )
 
 // Values returns all known values for StatusCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StatusCode) Values() []StatusCode {
 	return []StatusCode{
 		"InProgress",
@@ -176,8 +184,9 @@ const (
 )
 
 // Values returns all known values for StorageClass. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StorageClass) Values() []StorageClass {
 	return []StorageClass{
 		"STANDARD",
@@ -196,8 +205,9 @@ const (
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{
 		"AmazonCustomerByEmail",

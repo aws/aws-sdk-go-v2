@@ -12,27 +12,52 @@ import (
 )
 
 // Trains or retrains an active solution in a Custom dataset group. A solution is
-// created using the CreateSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
-// operation and must be in the ACTIVE state before calling CreateSolutionVersion .
-// A new version of the solution is created every time you call this operation.
-// Status A solution version can be in one of the following states:
+// created using the [CreateSolution]operation and must be in the ACTIVE state before calling
+// CreateSolutionVersion . A new version of the solution is created every time you
+// call this operation.
+//
+// # Status
+//
+// A solution version can be in one of the following states:
+//
 //   - CREATE PENDING
+//
 //   - CREATE IN_PROGRESS
+//
 //   - ACTIVE
+//
 //   - CREATE FAILED
+//
 //   - CREATE STOPPING
+//
 //   - CREATE STOPPED
 //
-// To get the status of the version, call DescribeSolutionVersion (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html)
-// . Wait until the status shows as ACTIVE before calling CreateCampaign . If the
-// status shows as CREATE FAILED, the response includes a failureReason key, which
-// describes why the job failed. Related APIs
-//   - ListSolutionVersions (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html)
-//   - DescribeSolutionVersion (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html)
-//   - ListSolutions (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html)
-//   - CreateSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
-//   - DescribeSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html)
-//   - DeleteSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html)
+// To get the status of the version, call [DescribeSolutionVersion]. Wait until the status shows as ACTIVE
+// before calling CreateCampaign .
+//
+// If the status shows as CREATE FAILED, the response includes a failureReason
+// key, which describes why the job failed.
+//
+// # Related APIs
+//
+// [ListSolutionVersions]
+//
+// [DescribeSolutionVersion]
+//
+// [ListSolutions]
+//
+// [CreateSolution]
+//
+// [DescribeSolution]
+//
+// [DeleteSolution]
+//
+// [DescribeSolutionVersion]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html
+// [DeleteSolution]: https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html
+// [CreateSolution]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html
+// [ListSolutionVersions]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html
+// [ListSolutions]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html
+// [DescribeSolution]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html
 func (c *Client) CreateSolutionVersion(ctx context.Context, params *CreateSolutionVersionInput, optFns ...func(*Options)) (*CreateSolutionVersionOutput, error) {
 	if params == nil {
 		params = &CreateSolutionVersionInput{}
@@ -59,25 +84,29 @@ type CreateSolutionVersionInput struct {
 	// The name of the solution version.
 	Name *string
 
-	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
-	// to apply to the solution version.
+	// A list of [tags] to apply to the solution version.
+	//
+	// [tags]: https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html
 	Tags []types.Tag
 
 	// The scope of training to be performed when creating the solution version. The
 	// default is FULL . This creates a completely new model based on the entirety of
-	// the training data from the datasets in your dataset group. If you use
-	// User-Personalization (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html)
-	// , you can specify a training mode of UPDATE . This updates the model to consider
-	// new items for recommendations. It is not a full retraining. You should still
-	// complete a full retraining weekly. If you specify UPDATE , Amazon Personalize
-	// will stop automatic updates for the solution version. To resume updates, create
-	// a new solution with training mode set to FULL and deploy it in a campaign. For
-	// more information about automatic updates, see Automatic updates (https://docs.aws.amazon.com/personalize/latest/dg/use-case-recipe-features.html#maintaining-with-automatic-updates)
-	// . The UPDATE option can only be used when you already have an active solution
+	// the training data from the datasets in your dataset group.
+	//
+	// If you use [User-Personalization], you can specify a training mode of UPDATE . This updates the model
+	// to consider new items for recommendations. It is not a full retraining. You
+	// should still complete a full retraining weekly. If you specify UPDATE , Amazon
+	// Personalize will stop automatic updates for the solution version. To resume
+	// updates, create a new solution with training mode set to FULL and deploy it in
+	// a campaign. For more information about automatic updates, see [Automatic updates].
+	//
+	// The UPDATE option can only be used when you already have an active solution
 	// version created from the input solution using the FULL option and the input
-	// solution was trained with the User-Personalization (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html)
-	// recipe or the legacy HRNN-Coldstart (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html)
-	// recipe.
+	// solution was trained with the [User-Personalization]recipe or the legacy [HRNN-Coldstart] recipe.
+	//
+	// [User-Personalization]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html
+	// [HRNN-Coldstart]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html
+	// [Automatic updates]: https://docs.aws.amazon.com/personalize/latest/dg/use-case-recipe-features.html#maintaining-with-automatic-updates
 	TrainingMode types.TrainingMode
 
 	noSmithyDocumentSerde

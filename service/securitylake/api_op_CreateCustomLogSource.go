@@ -50,34 +50,63 @@ type CreateCustomLogSourceInput struct {
 	// The Open Cybersecurity Schema Framework (OCSF) event classes which describes
 	// the type of data that the custom source will send to Security Lake. The
 	// supported event classes are:
+	//
 	//   - ACCESS_ACTIVITY
+	//
 	//   - FILE_ACTIVITY
+	//
 	//   - KERNEL_ACTIVITY
+	//
 	//   - KERNEL_EXTENSION
+	//
 	//   - MEMORY_ACTIVITY
+	//
 	//   - MODULE_ACTIVITY
+	//
 	//   - PROCESS_ACTIVITY
+	//
 	//   - REGISTRY_KEY_ACTIVITY
+	//
 	//   - REGISTRY_VALUE_ACTIVITY
+	//
 	//   - RESOURCE_ACTIVITY
+	//
 	//   - SCHEDULED_JOB_ACTIVITY
+	//
 	//   - SECURITY_FINDING
+	//
 	//   - ACCOUNT_CHANGE
+	//
 	//   - AUTHENTICATION
+	//
 	//   - AUTHORIZATION
+	//
 	//   - ENTITY_MANAGEMENT_AUDIT
+	//
 	//   - DHCP_ACTIVITY
+	//
 	//   - NETWORK_ACTIVITY
+	//
 	//   - DNS_ACTIVITY
+	//
 	//   - FTP_ACTIVITY
+	//
 	//   - HTTP_ACTIVITY
+	//
 	//   - RDP_ACTIVITY
+	//
 	//   - SMB_ACTIVITY
+	//
 	//   - SSH_ACTIVITY
+	//
 	//   - CONFIG_STATE
+	//
 	//   - INVENTORY_INFO
+	//
 	//   - EMAIL_ACTIVITY
+	//
 	//   - API_ACTIVITY
+	//
 	//   - CLOUD_API
 	EventClasses []string
 

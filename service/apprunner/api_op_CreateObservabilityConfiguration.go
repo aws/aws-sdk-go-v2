@@ -14,17 +14,20 @@ import (
 // Create an App Runner observability configuration resource. App Runner requires
 // this resource when you create or update App Runner services and you want to
 // enable non-default observability features. You can share an observability
-// configuration across multiple services. Create multiple revisions of a
-// configuration by calling this action multiple times using the same
-// ObservabilityConfigurationName . The call returns incremental
-// ObservabilityConfigurationRevision values. When you create a service and
-// configure an observability configuration resource, the service uses the latest
-// active revision of the observability configuration by default. You can
-// optionally configure the service to use a specific revision. The observability
-// configuration resource is designed to configure multiple features (currently one
-// feature, tracing). This action takes optional parameters that describe the
-// configuration of these features (currently one parameter, TraceConfiguration ).
-// If you don't specify a feature parameter, App Runner doesn't enable the feature.
+// configuration across multiple services.
+//
+// Create multiple revisions of a configuration by calling this action multiple
+// times using the same ObservabilityConfigurationName . The call returns
+// incremental ObservabilityConfigurationRevision values. When you create a
+// service and configure an observability configuration resource, the service uses
+// the latest active revision of the observability configuration by default. You
+// can optionally configure the service to use a specific revision.
+//
+// The observability configuration resource is designed to configure multiple
+// features (currently one feature, tracing). This action takes optional parameters
+// that describe the configuration of these features (currently one parameter,
+// TraceConfiguration ). If you don't specify a feature parameter, App Runner
+// doesn't enable the feature.
 func (c *Client) CreateObservabilityConfiguration(ctx context.Context, params *CreateObservabilityConfigurationInput, optFns ...func(*Options)) (*CreateObservabilityConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateObservabilityConfigurationInput{}
@@ -45,11 +48,14 @@ type CreateObservabilityConfigurationInput struct {
 	// A name for the observability configuration. When you use it for the first time
 	// in an Amazon Web Services Region, App Runner creates revision number 1 of this
 	// name. When you use the same name in subsequent calls, App Runner creates
-	// incremental revisions of the configuration. The name DefaultConfiguration is
-	// reserved. You can't use it to create a new observability configuration, and you
-	// can't create a revision of it. When you want to use your own observability
-	// configuration for your App Runner service, create a configuration with a
-	// different name, and then provide it when you create or update your service.
+	// incremental revisions of the configuration.
+	//
+	// The name DefaultConfiguration is reserved. You can't use it to create a new
+	// observability configuration, and you can't create a revision of it.
+	//
+	// When you want to use your own observability configuration for your App Runner
+	// service, create a configuration with a different name, and then provide it when
+	// you create or update your service.
 	//
 	// This member is required.
 	ObservabilityConfigurationName *string

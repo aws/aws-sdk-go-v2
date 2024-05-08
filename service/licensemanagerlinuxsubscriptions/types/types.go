@@ -41,9 +41,10 @@ type Instance struct {
 	// The time in which the last discovery updated the instance details.
 	LastUpdatedTime *string
 
-	// The product code for the instance. For more information, see Usage operation
-	// values (https://docs.aws.amazon.com/license-manager/latest/userguide/linux-subscriptions-usage-operation.html)
-	// in the License Manager User Guide .
+	// The product code for the instance. For more information, see [Usage operation values] in the License
+	// Manager User Guide .
+	//
+	// [Usage operation values]: https://docs.aws.amazon.com/license-manager/latest/userguide/linux-subscriptions-usage-operation.html
 	ProductCode []string
 
 	// The Region the instance is running in.
@@ -56,8 +57,9 @@ type Instance struct {
 	SubscriptionName *string
 
 	// The usage operation of the instance. For more information, see For more
-	// information, see Usage operation values (https://docs.aws.amazon.com/license-manager/latest/userguide/linux-subscriptions-usage-operation.html)
-	// in the License Manager User Guide.
+	// information, see [Usage operation values]in the License Manager User Guide.
+	//
+	// [Usage operation values]: https://docs.aws.amazon.com/license-manager/latest/userguide/linux-subscriptions-usage-operation.html
 	UsageOperation *string
 
 	noSmithyDocumentSerde

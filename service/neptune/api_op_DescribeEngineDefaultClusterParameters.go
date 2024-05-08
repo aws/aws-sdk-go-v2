@@ -39,16 +39,19 @@ type DescribeEngineDefaultClusterParametersInput struct {
 	// This parameter is not currently supported.
 	Filters []types.Filter
 
-	// An optional pagination token provided by a previous
+	//  An optional pagination token provided by a previous
 	// DescribeEngineDefaultClusterParameters request. If this parameter is specified,
 	// the response includes only records beyond the marker, up to the value specified
 	// by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -56,8 +59,7 @@ type DescribeEngineDefaultClusterParametersInput struct {
 
 type DescribeEngineDefaultClusterParametersOutput struct {
 
-	// Contains the result of a successful invocation of the
-	// DescribeEngineDefaultParameters action.
+	//  Contains the result of a successful invocation of the DescribeEngineDefaultParameters action.
 	EngineDefaults *types.EngineDefaults
 
 	// Metadata pertaining to the operation's result.

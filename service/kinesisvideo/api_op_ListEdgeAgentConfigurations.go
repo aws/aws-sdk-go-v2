@@ -12,7 +12,9 @@ import (
 )
 
 // Returns an array of edge configurations associated with the specified Edge
-// Agent. In the request, you must specify the Edge Agent HubDeviceArn .
+// Agent.
+//
+// In the request, you must specify the Edge Agent HubDeviceArn .
 func (c *Client) ListEdgeAgentConfigurations(ctx context.Context, params *ListEdgeAgentConfigurationsInput, optFns ...func(*Options)) (*ListEdgeAgentConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListEdgeAgentConfigurationsInput{}

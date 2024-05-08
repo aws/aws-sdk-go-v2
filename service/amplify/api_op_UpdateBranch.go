@@ -30,7 +30,7 @@ func (c *Client) UpdateBranch(ctx context.Context, params *UpdateBranchInput, op
 // The request structure for the update branch request.
 type UpdateBranchInput struct {
 
-	// The unique ID for an Amplify app.
+	//  The unique ID for an Amplify app.
 	//
 	// This member is required.
 	AppId *string
@@ -48,50 +48,51 @@ type UpdateBranchInput struct {
 	// Amplify app.
 	BackendEnvironmentArn *string
 
-	// The basic authorization credentials for the branch. You must base64-encode the
+	//  The basic authorization credentials for the branch. You must base64-encode the
 	// authorization credentials and provide them in the format user:password .
 	BasicAuthCredentials *string
 
-	// The build specification (build spec) for the branch.
+	//  The build specification (build spec) for the branch.
 	BuildSpec *string
 
-	// The description for the branch.
+	//  The description for the branch.
 	Description *string
 
-	// The display name for a branch. This is used as the default domain prefix.
+	//  The display name for a branch. This is used as the default domain prefix.
 	DisplayName *string
 
-	// Enables auto building for the branch.
+	//  Enables auto building for the branch.
 	EnableAutoBuild *bool
 
-	// Enables basic authorization for the branch.
+	//  Enables basic authorization for the branch.
 	EnableBasicAuth *bool
 
-	// Enables notifications for the branch.
+	//  Enables notifications for the branch.
 	EnableNotification *bool
 
-	// Enables performance mode for the branch. Performance mode optimizes for faster
-	// hosting performance by keeping content cached at the edge for a longer interval.
-	// When performance mode is enabled, hosting configuration or code changes can take
-	// up to 10 minutes to roll out.
+	// Enables performance mode for the branch.
+	//
+	// Performance mode optimizes for faster hosting performance by keeping content
+	// cached at the edge for a longer interval. When performance mode is enabled,
+	// hosting configuration or code changes can take up to 10 minutes to roll out.
 	EnablePerformanceMode *bool
 
-	// Enables pull request previews for this branch.
+	//  Enables pull request previews for this branch.
 	EnablePullRequestPreview *bool
 
-	// The environment variables for the branch.
+	//  The environment variables for the branch.
 	EnvironmentVariables map[string]string
 
-	// The framework for the branch.
+	//  The framework for the branch.
 	Framework *string
 
-	// The Amplify environment name for the pull request.
+	//  The Amplify environment name for the pull request.
 	PullRequestEnvironmentName *string
 
-	// Describes the current stage for the branch.
+	//  Describes the current stage for the branch.
 	Stage types.Stage
 
-	// The content Time to Live (TTL) for the website in seconds.
+	//  The content Time to Live (TTL) for the website in seconds.
 	Ttl *string
 
 	noSmithyDocumentSerde
@@ -100,7 +101,7 @@ type UpdateBranchInput struct {
 // The result structure for the update branch request.
 type UpdateBranchOutput struct {
 
-	// The branch for an Amplify app, which maps to a third-party repository branch.
+	//  The branch for an Amplify app, which maps to a third-party repository branch.
 	//
 	// This member is required.
 	Branch *types.Branch

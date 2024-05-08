@@ -12,9 +12,11 @@ import (
 
 // Adds a domain to the list of identities for your Amazon SES account in the
 // current Amazon Web Services Region and attempts to verify it. For more
-// information about verifying domains, see Verifying Email Addresses and Domains (https://docs.aws.amazon.com/ses/latest/dg/verify-addresses-and-domains.html)
-// in the Amazon SES Developer Guide. You can execute this operation no more than
-// once per second.
+// information about verifying domains, see [Verifying Email Addresses and Domains]in the Amazon SES Developer Guide.
+//
+// You can execute this operation no more than once per second.
+//
+// [Verifying Email Addresses and Domains]: https://docs.aws.amazon.com/ses/latest/dg/verify-addresses-and-domains.html
 func (c *Client) VerifyDomainIdentity(ctx context.Context, params *VerifyDomainIdentityInput, optFns ...func(*Options)) (*VerifyDomainIdentityOutput, error) {
 	if params == nil {
 		params = &VerifyDomainIdentityInput{}
@@ -32,9 +34,9 @@ func (c *Client) VerifyDomainIdentity(ctx context.Context, params *VerifyDomainI
 
 // Represents a request to begin Amazon SES domain verification and to generate
 // the TXT records that you must publish to the DNS server of your domain to
-// complete the verification. For information about domain verification, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-domain-procedure)
-// .
+// complete the verification. For information about domain verification, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-domain-procedure
 type VerifyDomainIdentityInput struct {
 
 	// The domain to be verified.
@@ -50,13 +52,15 @@ type VerifyDomainIdentityInput struct {
 type VerifyDomainIdentityOutput struct {
 
 	// A TXT record that you must place in the DNS settings of the domain to complete
-	// domain verification with Amazon SES. As Amazon SES searches for the TXT record,
-	// the domain's verification status is "Pending". When Amazon SES detects the
-	// record, the domain's verification status changes to "Success". If Amazon SES is
-	// unable to detect the record within 72 hours, the domain's verification status
-	// changes to "Failed." In that case, to verify the domain, you must restart the
-	// verification process from the beginning. The domain's verification status also
-	// changes to "Success" when it is DKIM verified.
+	// domain verification with Amazon SES.
+	//
+	// As Amazon SES searches for the TXT record, the domain's verification status is
+	// "Pending". When Amazon SES detects the record, the domain's verification status
+	// changes to "Success". If Amazon SES is unable to detect the record within 72
+	// hours, the domain's verification status changes to "Failed." In that case, to
+	// verify the domain, you must restart the verification process from the beginning.
+	// The domain's verification status also changes to "Success" when it is DKIM
+	// verified.
 	//
 	// This member is required.
 	VerificationToken *string

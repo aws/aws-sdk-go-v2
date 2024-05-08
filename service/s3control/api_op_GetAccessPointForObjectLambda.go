@@ -17,12 +17,21 @@ import (
 	"time"
 )
 
-// This operation is not supported by directory buckets. Returns configuration
-// information about the specified Object Lambda Access Point The following actions
-// are related to GetAccessPointForObjectLambda :
-//   - CreateAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html)
-//   - DeleteAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html)
-//   - ListAccessPointsForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html)
+// This operation is not supported by directory buckets.
+//
+// # Returns configuration information about the specified Object Lambda Access Point
+//
+// The following actions are related to GetAccessPointForObjectLambda :
+//
+// [CreateAccessPointForObjectLambda]
+//
+// [DeleteAccessPointForObjectLambda]
+//
+// [ListAccessPointsForObjectLambda]
+//
+// [CreateAccessPointForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html
+// [ListAccessPointsForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html
+// [DeleteAccessPointForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html
 func (c *Client) GetAccessPointForObjectLambda(ctx context.Context, params *GetAccessPointForObjectLambdaInput, optFns ...func(*Options)) (*GetAccessPointForObjectLambdaOutput, error) {
 	if params == nil {
 		params = &GetAccessPointForObjectLambdaInput{}

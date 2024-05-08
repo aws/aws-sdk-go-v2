@@ -76,9 +76,10 @@ type DescribeThesaurusOutput struct {
 
 	// The current status of the thesaurus. When the value is ACTIVE , queries are able
 	// to use the thesaurus. If the Status field value is FAILED , the ErrorMessage
-	// field provides more information. If the status is ACTIVE_BUT_UPDATE_FAILED , it
-	// means that Amazon Kendra could not ingest the new thesaurus file. The old
-	// thesaurus file is still active.
+	// field provides more information.
+	//
+	// If the status is ACTIVE_BUT_UPDATE_FAILED , it means that Amazon Kendra could
+	// not ingest the new thesaurus file. The old thesaurus file is still active.
 	Status types.ThesaurusStatus
 
 	// The number of synonym rules in the thesaurus file.

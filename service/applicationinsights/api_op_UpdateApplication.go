@@ -38,22 +38,23 @@ type UpdateApplicationInput struct {
 	// instance roles if they are missing.
 	AttachMissingPermission *bool
 
-	// Turns auto-configuration on or off.
+	//  Turns auto-configuration on or off.
 	AutoConfigEnabled *bool
 
-	// Indicates whether Application Insights can listen to CloudWatch events for the
+	//  Indicates whether Application Insights can listen to CloudWatch events for the
 	// application resources, such as instance terminated , failed deployment , and
 	// others.
 	CWEMonitorEnabled *bool
 
-	// When set to true , creates opsItems for any problems detected on an application.
+	//  When set to true , creates opsItems for any problems detected on an
+	// application.
 	OpsCenterEnabled *bool
 
-	// The SNS topic provided to Application Insights that is associated to the
+	//  The SNS topic provided to Application Insights that is associated to the
 	// created opsItem. Allows you to receive notifications for updates to the opsItem.
 	OpsItemSNSTopicArn *string
 
-	// Disassociates the SNS topic from the opsItem created for detected problems.
+	//  Disassociates the SNS topic from the opsItem created for detected problems.
 	RemoveSNSTopic *bool
 
 	noSmithyDocumentSerde

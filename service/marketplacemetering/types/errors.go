@@ -441,9 +441,11 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The timestamp value passed in the UsageRecord is out of allowed range. For
-// BatchMeterUsage , if any of the records are outside of the allowed range, the
-// entire batch is not processed. You must remove invalid records and try again.
+// The timestamp value passed in the UsageRecord is out of allowed range.
+//
+// For BatchMeterUsage , if any of the records are outside of the allowed range,
+// the entire batch is not processed. You must remove invalid records and try
+// again.
 type TimestampOutOfBoundsException struct {
 	Message *string
 

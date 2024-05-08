@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the alerts attached to a detector. Amazon Lookout for Metrics API actions
-// are eventually consistent. If you do a read operation on a resource immediately
-// after creating or modifying it, use retries to allow time for the write
-// operation to complete.
+// Lists the alerts attached to a detector.
+//
+// Amazon Lookout for Metrics API actions are eventually consistent. If you do a
+// read operation on a resource immediately after creating or modifying it, use
+// retries to allow time for the write operation to complete.
 func (c *Client) ListAlerts(ctx context.Context, params *ListAlertsInput, optFns ...func(*Options)) (*ListAlertsOutput, error) {
 	if params == nil {
 		params = &ListAlertsInput{}

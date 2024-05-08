@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified view. If the specified view is the default view for its
-// Amazon Web Services Region, then all Search operations in that Region must
-// explicitly specify the view to use until you configure a new default by calling
-// the AssociateDefaultView operation.
+// Deletes the specified view.
+//
+// If the specified view is the default view for its Amazon Web Services Region,
+// then all Searchoperations in that Region must explicitly specify the view to use
+// until you configure a new default by calling the AssociateDefaultViewoperation.
 func (c *Client) DeleteView(ctx context.Context, params *DeleteViewInput, optFns ...func(*Options)) (*DeleteViewOutput, error) {
 	if params == nil {
 		params = &DeleteViewInput{}
@@ -31,8 +32,9 @@ func (c *Client) DeleteView(ctx context.Context, params *DeleteViewInput, optFns
 
 type DeleteViewInput struct {
 
-	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the view that you want to delete.
+	// The [Amazon resource name (ARN)] of the view that you want to delete.
+	//
+	// [Amazon resource name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	ViewArn *string
@@ -42,8 +44,9 @@ type DeleteViewInput struct {
 
 type DeleteViewOutput struct {
 
-	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the view that you successfully deleted.
+	// The [Amazon resource name (ARN)] of the view that you successfully deleted.
+	//
+	// [Amazon resource name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ViewArn *string
 
 	// Metadata pertaining to the operation's result.

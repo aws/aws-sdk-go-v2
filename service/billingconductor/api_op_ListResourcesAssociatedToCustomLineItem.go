@@ -29,23 +29,23 @@ func (c *Client) ListResourcesAssociatedToCustomLineItem(ctx context.Context, pa
 
 type ListResourcesAssociatedToCustomLineItemInput struct {
 
-	// The ARN of the custom line item for which the resource associations will be
+	//  The ARN of the custom line item for which the resource associations will be
 	// listed.
 	//
 	// This member is required.
 	Arn *string
 
-	// The billing period for which the resource associations will be listed.
+	//  The billing period for which the resource associations will be listed.
 	BillingPeriod *string
 
-	// (Optional) A ListResourcesAssociatedToCustomLineItemFilter that can specify the
-	// types of resources that should be retrieved.
+	//  (Optional) A ListResourcesAssociatedToCustomLineItemFilter that can specify
+	// the types of resources that should be retrieved.
 	Filters *types.ListResourcesAssociatedToCustomLineItemFilter
 
-	// (Optional) The maximum number of resource associations to be retrieved.
+	//  (Optional) The maximum number of resource associations to be retrieved.
 	MaxResults *int32
 
-	// (Optional) The pagination token that's returned by a previous request.
+	//  (Optional) The pagination token that's returned by a previous request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -53,14 +53,14 @@ type ListResourcesAssociatedToCustomLineItemInput struct {
 
 type ListResourcesAssociatedToCustomLineItemOutput struct {
 
-	// The custom line item ARN for which the resource associations are listed.
+	//  The custom line item ARN for which the resource associations are listed.
 	Arn *string
 
-	// A list of ListResourcesAssociatedToCustomLineItemResponseElement for each
+	//  A list of ListResourcesAssociatedToCustomLineItemResponseElement for each
 	// resource association retrieved.
 	AssociatedResources []types.ListResourcesAssociatedToCustomLineItemResponseElement
 
-	// The pagination token to be used in subsequent requests to retrieve additional
+	//  The pagination token to be used in subsequent requests to retrieve additional
 	// results.
 	NextToken *string
 
@@ -160,7 +160,7 @@ var _ ListResourcesAssociatedToCustomLineItemAPIClient = (*Client)(nil)
 // ListResourcesAssociatedToCustomLineItemPaginatorOptions is the paginator
 // options for ListResourcesAssociatedToCustomLineItem
 type ListResourcesAssociatedToCustomLineItemPaginatorOptions struct {
-	// (Optional) The maximum number of resource associations to be retrieved.
+	//  (Optional) The maximum number of resource associations to be retrieved.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

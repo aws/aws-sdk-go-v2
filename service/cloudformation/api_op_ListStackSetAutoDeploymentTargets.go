@@ -37,14 +37,21 @@ type ListStackSetAutoDeploymentTargetsInput struct {
 
 	// Specifies whether you are acting as an account administrator in the
 	// organization's management account or as a delegated administrator in a member
-	// account. By default, SELF is specified. Use SELF for StackSets with
-	// self-managed permissions.
+	// account.
+	//
+	// By default, SELF is specified. Use SELF for StackSets with self-managed
+	// permissions.
+	//
 	//   - If you are signed in to the management account, specify SELF .
+	//
 	//   - If you are signed in to a delegated administrator account, specify
-	//   DELEGATED_ADMIN . Your Amazon Web Services account must be registered as a
-	//   delegated administrator in the management account. For more information, see
-	//   Register a delegated administrator (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
-	//   in the CloudFormation User Guide.
+	//   DELEGATED_ADMIN .
+	//
+	// Your Amazon Web Services account must be registered as a delegated
+	//   administrator in the management account. For more information, see [Register a delegated administrator]in the
+	//   CloudFormation User Guide.
+	//
+	// [Register a delegated administrator]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
 	CallAs types.CallAs
 
 	// The maximum number of results to be returned with a single call. If the number
@@ -63,10 +70,11 @@ type ListStackSetAutoDeploymentTargetsInput struct {
 type ListStackSetAutoDeploymentTargetsOutput struct {
 
 	// If the request doesn't return all the remaining results, NextToken is set to a
-	// token. To retrieve the next set of results, call
-	// ListStackSetAutoDeploymentTargets (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackSetAutoDeploymentTargets.html)
-	// again and use that value for the NextToken parameter. If the request returns
-	// all results, NextToken is set to an empty string.
+	// token. To retrieve the next set of results, call [ListStackSetAutoDeploymentTargets]again and use that value for
+	// the NextToken parameter. If the request returns all results, NextToken is set
+	// to an empty string.
+	//
+	// [ListStackSetAutoDeploymentTargets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackSetAutoDeploymentTargets.html
 	NextToken *string
 
 	// An array of summaries of the deployment targets for the stack set.

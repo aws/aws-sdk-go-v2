@@ -20,8 +20,10 @@ type ErrorInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata for function package artifacts. Artifacts are the contents of the
-// package descriptor file and the state of the package.
+// Metadata for function package artifacts.
+//
+// Artifacts are the contents of the package descriptor file and the state of the
+// package.
 type FunctionArtifactMeta struct {
 
 	// Lists of function package overrides.
@@ -30,8 +32,9 @@ type FunctionArtifactMeta struct {
 	noSmithyDocumentSerde
 }
 
-// The metadata of a network function instance. A network function instance is a
-// function in a function package .
+// The metadata of a network function instance.
+//
+// A network function instance is a function in a function package .
 type GetSolFunctionInstanceMetadata struct {
 
 	// The date that the resource was created.
@@ -47,11 +50,12 @@ type GetSolFunctionInstanceMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata related to the function package. A function package is a .zip file in
-// CSAR (Cloud Service Archive) format that contains a network function (an ETSI
-// standard telecommunication application) and function package descriptor that
-// uses the TOSCA standard to describe how the network functions should run on your
-// network.
+// Metadata related to the function package.
+//
+// A function package is a .zip file in CSAR (Cloud Service Archive) format that
+// contains a network function (an ETSI standard telecommunication application) and
+// function package descriptor that uses the TOSCA standard to describe how the
+// network functions should run on your network.
 type GetSolFunctionPackageMetadata struct {
 
 	// The date that the resource was created.
@@ -70,9 +74,11 @@ type GetSolFunctionPackageMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a network function. A network instance is a single network
-// created in Amazon Web Services TNB that can be deployed and on which life-cycle
-// operations (like terminate, update, and delete) can be performed.
+// Information about a network function.
+//
+// A network instance is a single network created in Amazon Web Services TNB that
+// can be deployed and on which life-cycle operations (like terminate, update, and
+// delete) can be performed.
 type GetSolInstantiatedVnfInfo struct {
 
 	// State of the network function.
@@ -81,9 +87,11 @@ type GetSolInstantiatedVnfInfo struct {
 	noSmithyDocumentSerde
 }
 
-// The metadata of a network instance. A network instance is a single network
-// created in Amazon Web Services TNB that can be deployed and on which life-cycle
-// operations (like terminate, update, and delete) can be performed.
+// The metadata of a network instance.
+//
+// A network instance is a single network created in Amazon Web Services TNB that
+// can be deployed and on which life-cycle operations (like terminate, update, and
+// delete) can be performed.
 type GetSolNetworkInstanceMetadata struct {
 
 	// The date that the resource was created.
@@ -99,9 +107,10 @@ type GetSolNetworkInstanceMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata related to a network operation occurrence. A network operation is any
-// operation that is done to your network, such as network instance instantiation
-// or termination.
+// Metadata related to a network operation occurrence.
+//
+// A network operation is any operation that is done to your network, such as
+// network instance instantiation or termination.
 type GetSolNetworkOperationMetadata struct {
 
 	// The date that the resource was created.
@@ -117,9 +126,10 @@ type GetSolNetworkOperationMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Gets the details of a network operation. A network operation is any operation
-// that is done to your network, such as network instance instantiation or
-// termination.
+// Gets the details of a network operation.
+//
+// A network operation is any operation that is done to your network, such as
+// network instance instantiation or termination.
 type GetSolNetworkOperationTaskDetails struct {
 
 	// Context for the network operation task.
@@ -143,9 +153,11 @@ type GetSolNetworkOperationTaskDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata associated with a network package. A network package is a .zip file in
-// CSAR (Cloud Service Archive) format defines the function packages you want to
-// deploy and the Amazon Web Services infrastructure you want to deploy them on.
+// Metadata associated with a network package.
+//
+// A network package is a .zip file in CSAR (Cloud Service Archive) format defines
+// the function packages you want to deploy and the Amazon Web Services
+// infrastructure you want to deploy them on.
 type GetSolNetworkPackageMetadata struct {
 
 	// The date that the resource was created.
@@ -165,10 +177,11 @@ type GetSolNetworkPackageMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Details of resource associated with a network function. A network instance is a
-// single network created in Amazon Web Services TNB that can be deployed and on
-// which life-cycle operations (like terminate, update, and delete) can be
-// performed.
+// Details of resource associated with a network function.
+//
+// A network instance is a single network created in Amazon Web Services TNB that
+// can be deployed and on which life-cycle operations (like terminate, update, and
+// delete) can be performed.
 type GetSolVnfcResourceInfo struct {
 
 	// The metadata of the network function compute.
@@ -177,9 +190,11 @@ type GetSolVnfcResourceInfo struct {
 	noSmithyDocumentSerde
 }
 
-// The metadata of a network function. A network instance is a single network
-// created in Amazon Web Services TNB that can be deployed and on which life-cycle
-// operations (like terminate, update, and delete) can be performed.
+// The metadata of a network function.
+//
+// A network instance is a single network created in Amazon Web Services TNB that
+// can be deployed and on which life-cycle operations (like terminate, update, and
+// delete) can be performed.
 type GetSolVnfcResourceInfoMetadata struct {
 
 	// Information about the cluster.
@@ -194,8 +209,9 @@ type GetSolVnfcResourceInfoMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the network function. A network function instance is a
-// function in a function package .
+// Information about the network function.
+//
+// A network function instance is a function in a function package .
 type GetSolVnfInfo struct {
 
 	// State of the network function instance.
@@ -207,8 +223,9 @@ type GetSolVnfInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Lifecycle management operation details on the network instance. Lifecycle
-// management operations are deploy, update, or delete operations.
+// Lifecycle management operation details on the network instance.
+//
+// Lifecycle management operations are deploy, update, or delete operations.
 type LcmOperationInfo struct {
 
 	// The identifier of the network operation.
@@ -219,8 +236,9 @@ type LcmOperationInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Lists information about a network function instance. A network function
-// instance is a function in a function package .
+// Lists information about a network function instance.
+//
+// A network function instance is a function in a function package .
 type ListSolFunctionInstanceInfo struct {
 
 	// Network function instance ARN.
@@ -253,9 +271,11 @@ type ListSolFunctionInstanceInfo struct {
 	// This member is required.
 	VnfPkgId *string
 
-	// Information about a network function. A network instance is a single network
-	// created in Amazon Web Services TNB that can be deployed and on which life-cycle
-	// operations (like terminate, update, and delete) can be performed.
+	// Information about a network function.
+	//
+	// A network instance is a single network created in Amazon Web Services TNB that
+	// can be deployed and on which life-cycle operations (like terminate, update, and
+	// delete) can be performed.
 	InstantiatedVnfInfo *GetSolInstantiatedVnfInfo
 
 	// Function package name.
@@ -264,8 +284,9 @@ type ListSolFunctionInstanceInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Lists network function instance metadata. A network function instance is a
-// function in a function package .
+// Lists network function instance metadata.
+//
+// A network function instance is a function in a function package .
 type ListSolFunctionInstanceMetadata struct {
 
 	// When the network function instance was created.
@@ -281,11 +302,12 @@ type ListSolFunctionInstanceMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a function package. A function package is a .zip file in CSAR
-// (Cloud Service Archive) format that contains a network function (an ETSI
-// standard telecommunication application) and function package descriptor that
-// uses the TOSCA standard to describe how the network functions should run on your
-// network.
+// Information about a function package.
+//
+// A function package is a .zip file in CSAR (Cloud Service Archive) format that
+// contains a network function (an ETSI standard telecommunication application) and
+// function package descriptor that uses the TOSCA standard to describe how the
+// network functions should run on your network.
 type ListSolFunctionPackageInfo struct {
 
 	// Function package ARN.
@@ -331,11 +353,12 @@ type ListSolFunctionPackageInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Details for the function package metadata. A function package is a .zip file in
-// CSAR (Cloud Service Archive) format that contains a network function (an ETSI
-// standard telecommunication application) and function package descriptor that
-// uses the TOSCA standard to describe how the network functions should run on your
-// network.
+// Details for the function package metadata.
+//
+// A function package is a .zip file in CSAR (Cloud Service Archive) format that
+// contains a network function (an ETSI standard telecommunication application) and
+// function package descriptor that uses the TOSCA standard to describe how the
+// network functions should run on your network.
 type ListSolFunctionPackageMetadata struct {
 
 	// The date that the resource was created.
@@ -351,9 +374,11 @@ type ListSolFunctionPackageMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Info about the specific network instance. A network instance is a single
-// network created in Amazon Web Services TNB that can be deployed and on which
-// life-cycle operations (like terminate, update, and delete) can be performed.
+// Info about the specific network instance.
+//
+// A network instance is a single network created in Amazon Web Services TNB that
+// can be deployed and on which life-cycle operations (like terminate, update, and
+// delete) can be performed.
 type ListSolNetworkInstanceInfo struct {
 
 	// Network instance ARN.
@@ -399,9 +424,11 @@ type ListSolNetworkInstanceInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata details for a network instance. A network instance is a single network
-// created in Amazon Web Services TNB that can be deployed and on which life-cycle
-// operations (like terminate, update, and delete) can be performed.
+// Metadata details for a network instance.
+//
+// A network instance is a single network created in Amazon Web Services TNB that
+// can be deployed and on which life-cycle operations (like terminate, update, and
+// delete) can be performed.
 type ListSolNetworkInstanceMetadata struct {
 
 	// The date that the resource was created.
@@ -454,9 +481,10 @@ type ListSolNetworkOperationsInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata related to a network operation. A network operation is any operation
-// that is done to your network, such as network instance instantiation or
-// termination.
+// Metadata related to a network operation.
+//
+// A network operation is any operation that is done to your network, such as
+// network instance instantiation or termination.
 type ListSolNetworkOperationsMetadata struct {
 
 	// The date that the resource was created.
@@ -472,9 +500,11 @@ type ListSolNetworkOperationsMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Details of a network package. A network package is a .zip file in CSAR (Cloud
-// Service Archive) format defines the function packages you want to deploy and the
-// Amazon Web Services infrastructure you want to deploy them on.
+// Details of a network package.
+//
+// A network package is a .zip file in CSAR (Cloud Service Archive) format defines
+// the function packages you want to deploy and the Amazon Web Services
+// infrastructure you want to deploy them on.
 type ListSolNetworkPackageInfo struct {
 
 	// Network package ARN.
@@ -529,9 +559,11 @@ type ListSolNetworkPackageInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata related to a network package. A network package is a .zip file in CSAR
-// (Cloud Service Archive) format defines the function packages you want to deploy
-// and the Amazon Web Services infrastructure you want to deploy them on.
+// Metadata related to a network package.
+//
+// A network package is a .zip file in CSAR (Cloud Service Archive) format defines
+// the function packages you want to deploy and the Amazon Web Services
+// infrastructure you want to deploy them on.
 type ListSolNetworkPackageMetadata struct {
 
 	// The date that the resource was created.
@@ -547,8 +579,10 @@ type ListSolNetworkPackageMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata for network package artifacts. Artifacts are the contents of the
-// package descriptor file and the state of the package.
+// Metadata for network package artifacts.
+//
+// Artifacts are the contents of the package descriptor file and the state of the
+// package.
 type NetworkArtifactMeta struct {
 
 	// Lists network package overrides.
@@ -571,27 +605,34 @@ type ProblemDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Update metadata in a function package. A function package is a .zip file in
-// CSAR (Cloud Service Archive) format that contains a network function (an ETSI
-// standard telecommunication application) and function package descriptor that
-// uses the TOSCA standard to describe how the network functions should run on your
-// network.
+// Update metadata in a function package.
+//
+// A function package is a .zip file in CSAR (Cloud Service Archive) format that
+// contains a network function (an ETSI standard telecommunication application) and
+// function package descriptor that uses the TOSCA standard to describe how the
+// network functions should run on your network.
 type PutSolFunctionPackageContentMetadata struct {
 
-	// Metadata for function package artifacts. Artifacts are the contents of the
-	// package descriptor file and the state of the package.
+	// Metadata for function package artifacts.
+	//
+	// Artifacts are the contents of the package descriptor file and the state of the
+	// package.
 	Vnfd *FunctionArtifactMeta
 
 	noSmithyDocumentSerde
 }
 
-// Update metadata in a network package. A network package is a .zip file in CSAR
-// (Cloud Service Archive) format defines the function packages you want to deploy
-// and the Amazon Web Services infrastructure you want to deploy them on.
+// Update metadata in a network package.
+//
+// A network package is a .zip file in CSAR (Cloud Service Archive) format defines
+// the function packages you want to deploy and the Amazon Web Services
+// infrastructure you want to deploy them on.
 type PutSolNetworkPackageContentMetadata struct {
 
-	// Metadata for network package artifacts. Artifacts are the contents of the
-	// package descriptor file and the state of the package.
+	// Metadata for network package artifacts.
+	//
+	// Artifacts are the contents of the package descriptor file and the state of the
+	// package.
 	Nsd *NetworkArtifactMeta
 
 	noSmithyDocumentSerde
@@ -610,7 +651,9 @@ type ToscaOverride struct {
 }
 
 // Information parameters and/or the configurable properties for a network
-// function. A network function instance is a function in a function package .
+// function.
+//
+// A network function instance is a function in a function package .
 type UpdateSolNetworkModify struct {
 
 	// Provides values for the configurable properties declared in the function
@@ -619,8 +662,9 @@ type UpdateSolNetworkModify struct {
 	// This member is required.
 	VnfConfigurableProperties document.Interface
 
-	// ID of the network function instance. A network function instance is a function
-	// in a function package .
+	// ID of the network function instance.
+	//
+	// A network function instance is a function in a function package .
 	//
 	// This member is required.
 	VnfInstanceId *string
@@ -628,27 +672,34 @@ type UpdateSolNetworkModify struct {
 	noSmithyDocumentSerde
 }
 
-// Validates function package content metadata. A function package is a .zip file
-// in CSAR (Cloud Service Archive) format that contains a network function (an ETSI
-// standard telecommunication application) and function package descriptor that
-// uses the TOSCA standard to describe how the network functions should run on your
-// network.
+// Validates function package content metadata.
+//
+// A function package is a .zip file in CSAR (Cloud Service Archive) format that
+// contains a network function (an ETSI standard telecommunication application) and
+// function package descriptor that uses the TOSCA standard to describe how the
+// network functions should run on your network.
 type ValidateSolFunctionPackageContentMetadata struct {
 
-	// Metadata for function package artifacts. Artifacts are the contents of the
-	// package descriptor file and the state of the package.
+	// Metadata for function package artifacts.
+	//
+	// Artifacts are the contents of the package descriptor file and the state of the
+	// package.
 	Vnfd *FunctionArtifactMeta
 
 	noSmithyDocumentSerde
 }
 
-// Validates network package content metadata. A network package is a .zip file in
-// CSAR (Cloud Service Archive) format defines the function packages you want to
-// deploy and the Amazon Web Services infrastructure you want to deploy them on.
+// Validates network package content metadata.
+//
+// A network package is a .zip file in CSAR (Cloud Service Archive) format defines
+// the function packages you want to deploy and the Amazon Web Services
+// infrastructure you want to deploy them on.
 type ValidateSolNetworkPackageContentMetadata struct {
 
-	// Metadata for network package artifacts. Artifacts are the contents of the
-	// package descriptor file and the state of the package.
+	// Metadata for network package artifacts.
+	//
+	// Artifacts are the contents of the package descriptor file and the state of the
+	// package.
 	Nsd *NetworkArtifactMeta
 
 	noSmithyDocumentSerde

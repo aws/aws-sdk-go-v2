@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the approximate count of unique values that match the query. Requires
-// permission to access the GetCardinality (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Returns the approximate count of unique values that match the query.
+//
+// Requires permission to access the [GetCardinality] action.
+//
+// [GetCardinality]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) GetCardinality(ctx context.Context, params *GetCardinalityInput, optFns ...func(*Options)) (*GetCardinalityOutput, error) {
 	if params == nil {
 		params = &GetCardinalityInput{}

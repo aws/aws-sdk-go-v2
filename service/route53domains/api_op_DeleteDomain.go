@@ -11,8 +11,9 @@ import (
 )
 
 // This operation deletes the specified domain. This action is permanent. For more
-// information, see Deleting a domain name registration (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-delete.html)
-// . To transfer the domain registration to another registrar, use the transfer
+// information, see [Deleting a domain name registration].
+//
+// To transfer the domain registration to another registrar, use the transfer
 // process that’s provided by the registrar to which you want to transfer the
 // registration. Otherwise, the following apply:
 //
@@ -24,6 +25,8 @@ import (
 //   - When the registration has been deleted, we'll send you a confirmation to
 //     the registrant contact. The email will come from
 //     noreply@domainnameverification.net or noreply@registrar.amazon.com .
+//
+// [Deleting a domain name registration]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-delete.html
 func (c *Client) DeleteDomain(ctx context.Context, params *DeleteDomainInput, optFns ...func(*Options)) (*DeleteDomainOutput, error) {
 	if params == nil {
 		params = &DeleteDomainInput{}
@@ -52,8 +55,9 @@ type DeleteDomainInput struct {
 type DeleteDomainOutput struct {
 
 	// Identifier for tracking the progress of the request. To query the operation
-	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
-	// .
+	// status, use [GetOperationDetail].
+	//
+	// [GetOperationDetail]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

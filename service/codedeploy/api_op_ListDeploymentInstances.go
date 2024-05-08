@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The newer BatchGetDeploymentTargets should be used instead because it works
+//	The newer BatchGetDeploymentTargets should be used instead because it works
+//
 // with all compute types. ListDeploymentInstances throws an exception if it is
-// used with a compute platform other than EC2/On-premises or Lambda. Lists the
-// instance for a deployment associated with the user or Amazon Web Services
-// account.
+// used with a compute platform other than EC2/On-premises or Lambda.
+//
+// Lists the instance for a deployment associated with the user or Amazon Web
+// Services account.
 //
 // Deprecated: This operation is deprecated, use ListDeploymentTargets instead.
 func (c *Client) ListDeploymentInstances(ctx context.Context, params *ListDeploymentInstancesInput, optFns ...func(*Options)) (*ListDeploymentInstancesOutput, error) {
@@ -36,18 +38,23 @@ func (c *Client) ListDeploymentInstances(ctx context.Context, params *ListDeploy
 // Represents the input of a ListDeploymentInstances operation.
 type ListDeploymentInstancesInput struct {
 
-	// The unique ID of a deployment.
+	//  The unique ID of a deployment.
 	//
 	// This member is required.
 	DeploymentId *string
 
 	// A subset of instances to list by status:
+	//
 	//   - Pending : Include those instances with pending deployments.
-	//   - InProgress : Include those instances where deployments are still in
-	//   progress.
+	//
+	//   - InProgress : Include those instances where deployments are still in progress.
+	//
 	//   - Succeeded : Include those instances with successful deployments.
+	//
 	//   - Failed : Include those instances with failed deployments.
+	//
 	//   - Skipped : Include those instances with skipped deployments.
+	//
 	//   - Unknown : Include those instances with deployments in an unknown state.
 	InstanceStatusFilter []types.InstanceStatus
 

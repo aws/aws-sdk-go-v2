@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches for related items that are associated with a case. If no filters are
-// provided, this returns all related items associated with a case.
+// Searches for related items that are associated with a case.
+//
+// If no filters are provided, this returns all related items associated with a
+// case.
 func (c *Client) SearchRelatedItems(ctx context.Context, params *SearchRelatedItemsInput, optFns ...func(*Options)) (*SearchRelatedItemsOutput, error) {
 	if params == nil {
 		params = &SearchRelatedItemsInput{}

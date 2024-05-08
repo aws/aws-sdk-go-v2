@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a provisioning template version. Requires permission to access the
-// DeleteProvisioningTemplateVersion (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Deletes a provisioning template version.
+//
+// Requires permission to access the [DeleteProvisioningTemplateVersion] action.
+//
+// [DeleteProvisioningTemplateVersion]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DeleteProvisioningTemplateVersion(ctx context.Context, params *DeleteProvisioningTemplateVersionInput, optFns ...func(*Options)) (*DeleteProvisioningTemplateVersionOutput, error) {
 	if params == nil {
 		params = &DeleteProvisioningTemplateVersionInput{}

@@ -20,7 +20,7 @@ type Attachment struct {
 }
 
 // The file name and ID of an attachment to a case communication. You can use the
-// ID to retrieve the attachment with the DescribeAttachment operation.
+// ID to retrieve the attachment with the DescribeAttachmentoperation.
 type AttachmentDetails struct {
 
 	// The ID of the attachment.
@@ -33,37 +33,55 @@ type AttachmentDetails struct {
 }
 
 // A JSON-formatted object that contains the metadata for a support case. It is
-// contained in the response from a DescribeCases request. CaseDetails contains
-// the following fields:
+// contained in the response from a DescribeCasesrequest. CaseDetails contains the following
+// fields:
+//
 //   - caseId - The support case ID requested or returned in the call. The case ID
 //     is an alphanumeric string formatted as shown in this example:
 //     case-12345678910-2013-c4c1d2bf33c5cf47.
+//
 //   - categoryCode - The category of problem for the support case. Corresponds to
-//     the CategoryCode values returned by a call to DescribeServices .
+//     the CategoryCode values returned by a call to DescribeServices.
+//
 //   - displayId - The identifier for the case on pages in the Amazon Web Services
 //     Support Center.
+//
 //   - language - The language in which Amazon Web Services Support handles the
 //     case. Amazon Web Services Support currently supports Chinese (“zh”), English
 //     ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1 code
 //     for the language parameter if you want support in that language.
+//
 //   - nextToken - A resumption point for pagination.
-//   - recentCommunications - One or more Communication objects. Fields of these
-//     objects are attachments , body , caseId , submittedBy , and timeCreated .
+//
+//   - recentCommunications - One or more Communicationobjects. Fields of these objects are
+//     attachments , body , caseId , submittedBy , and timeCreated .
+//
 //   - serviceCode - The identifier for the Amazon Web Services service that
-//     corresponds to the service code defined in the call to DescribeServices .
+//     corresponds to the service code defined in the call to DescribeServices.
+//
 //   - severityCode - The severity code assigned to the case. Contains one of the
-//     values returned by the call to DescribeSeverityLevels . The possible values
-//     are: low , normal , high , urgent , and critical .
+//     values returned by the call to DescribeSeverityLevels. The possible values are: low , normal , high
+//     , urgent , and critical .
+//
 //   - status - The status of the case in the Amazon Web Services Support Center.
 //     Valid values:
+//
 //   - opened
+//
 //   - pending-customer-action
+//
 //   - reopened
+//
 //   - resolved
+//
 //   - unassigned
+//
 //   - work-in-progress
+//
 //   - subject - The subject line of the case.
+//
 //   - submittedBy - The email address of the account that submitted the case.
+//
 //   - timeCreated - The time the case was created, in ISO-8601 format.
 type CaseDetails struct {
 
@@ -94,18 +112,26 @@ type CaseDetails struct {
 	RecentCommunications *RecentCaseCommunications
 
 	// The code for the Amazon Web Services service. You can get a list of codes and
-	// the corresponding service names by calling DescribeServices .
+	// the corresponding service names by calling DescribeServices.
 	ServiceCode *string
 
-	// The code for the severity level returned by the call to DescribeSeverityLevels .
+	// The code for the severity level returned by the call to DescribeSeverityLevels.
 	SeverityCode *string
 
-	// The status of the case. Valid values:
+	// The status of the case.
+	//
+	// Valid values:
+	//
 	//   - opened
+	//
 	//   - pending-customer-action
+	//
 	//   - reopened
+	//
 	//   - resolved
+	//
 	//   - unassigned
+	//
 	//   - work-in-progress
 	Status *string
 
@@ -122,8 +148,8 @@ type CaseDetails struct {
 }
 
 // A JSON-formatted name/value pair that represents the category name and category
-// code of the problem, selected from the DescribeServices response for each
-// Amazon Web Services service.
+// code of the problem, selected from the DescribeServicesresponse for each Amazon Web Services
+// service.
 type Category struct {
 
 	// The category code for the support case.
@@ -166,26 +192,28 @@ type Communication struct {
 
 // A JSON-formatted object that contains the CommunicationTypeOptions for creating
 // a case for a certain communication channel. It is contained in the response from
-// a DescribeCreateCaseOptions request. CommunicationTypeOptions contains the
-// following fields:
+// a DescribeCreateCaseOptionsrequest. CommunicationTypeOptions contains the following fields:
+//
 //   - datesWithoutSupport - A JSON-formatted list containing date and time ranges
 //     for periods without support in UTC time. Date and time format is RFC 3339 :
 //     'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.
+//
 //   - supportedHours - A JSON-formatted list containing time ranges when support
 //     are available. Time format is RFC 3339 : 'HH:mm:ss.SSS'.
+//
 //   - type - A string value indicating the communication type that the
 //     aforementioned rules apply to. At the moment the type value can assume one of 3
 //     values at the moment chat , web and call .
 type CommunicationTypeOptions struct {
 
-	// A JSON-formatted list containing date and time ranges for periods without
+	//  A JSON-formatted list containing date and time ranges for periods without
 	// support
 	DatesWithoutSupport []DateInterval
 
-	// A JSON-formatted list containing time ranges when support is available.
+	//  A JSON-formatted list containing time ranges when support is available.
 	SupportedHours []SupportedHour
 
-	// A string value indicating the communication type. At the moment the type value
+	//  A string value indicating the communication type. At the moment the type value
 	// can assume one of 3 values at the moment chat, web and call.
 	Type *string
 
@@ -195,11 +223,11 @@ type CommunicationTypeOptions struct {
 // Date and time (UTC) format in RFC 3339 : 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.
 type DateInterval struct {
 
-	// End Date Time (UTC). RFC 3339 format : 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.
+	//  End Date Time (UTC). RFC 3339 format : 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.
 	EndDateTime *string
 
-	// A JSON object containing start and date time (UTC). Date and time format is RFC
-	// 3339 : 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.
+	//  A JSON object containing start and date time (UTC). Date and time format is
+	// RFC 3339 : 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.
 	StartDateTime *string
 
 	noSmithyDocumentSerde
@@ -217,17 +245,16 @@ type RecentCaseCommunications struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an Amazon Web Services service returned by the
-// DescribeServices operation.
+// Information about an Amazon Web Services service returned by the DescribeServices operation.
 type Service struct {
 
 	// A list of categories that describe the type of support issue a case describes.
 	// Categories consist of a category name and a category code. Category names and
-	// codes are passed to Amazon Web Services Support when you call CreateCase .
+	// codes are passed to Amazon Web Services Support when you call CreateCase.
 	Categories []Category
 
-	// The code for an Amazon Web Services service returned by the DescribeServices
-	// response. The name element contains the corresponding friendly name.
+	// The code for an Amazon Web Services service returned by the DescribeServices response. The name
+	// element contains the corresponding friendly name.
 	Code *string
 
 	// The friendly name for an Amazon Web Services service. The code element contains
@@ -239,26 +266,37 @@ type Service struct {
 
 // A code and name pair that represents the severity level of a support case. The
 // available values depend on the support plan for the account. For more
-// information, see Choosing a severity (https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity)
-// in the Amazon Web Services Support User Guide.
+// information, see [Choosing a severity]in the Amazon Web Services Support User Guide.
+//
+// [Choosing a severity]: https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity
 type SeverityLevel struct {
 
-	// The code for case severity level. Valid values: low | normal | high | urgent |
-	// critical
+	// The code for case severity level.
+	//
+	// Valid values: low | normal | high | urgent | critical
 	Code *string
 
-	// The name of the severity level that corresponds to the severity level code. The
-	// values returned by the API are different from the values that appear in the
+	// The name of the severity level that corresponds to the severity level code.
+	//
+	// The values returned by the API are different from the values that appear in the
 	// Amazon Web Services Support Center. For example, the API uses the code low , but
-	// the name appears as General guidance in Support Center. The following are the
-	// API code names and how they appear in the console:
+	// the name appears as General guidance in Support Center.
+	//
+	// The following are the API code names and how they appear in the console:
+	//
 	//   - low - General guidance
+	//
 	//   - normal - System impaired
+	//
 	//   - high - Production system impaired
+	//
 	//   - urgent - Production system down
+	//
 	//   - critical - Business-critical system down
-	// For more information, see Choosing a severity (https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity)
-	// in the Amazon Web Services Support User Guide.
+	//
+	// For more information, see [Choosing a severity] in the Amazon Web Services Support User Guide.
+	//
+	// [Choosing a severity]: https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity
 	Name *string
 
 	noSmithyDocumentSerde
@@ -268,27 +306,28 @@ type SeverityLevel struct {
 // 'HH:mm:ss.SSS' .
 type SupportedHour struct {
 
-	// End Time. RFC 3339 format 'HH:mm:ss.SSS' .
+	//  End Time. RFC 3339 format 'HH:mm:ss.SSS' .
 	EndTime *string
 
-	// Start Time. RFC 3339 format 'HH:mm:ss.SSS' .
+	//  Start Time. RFC 3339 format 'HH:mm:ss.SSS' .
 	StartTime *string
 
 	noSmithyDocumentSerde
 }
 
-// A JSON-formatted object that contains the available ISO 639-1 language code ,
+//	A JSON-formatted object that contains the available ISO 639-1 language code ,
+//
 // language name and langauge display value. The language code is what should be
-// used in the CreateCase call.
+// used in the CreateCasecall.
 type SupportedLanguage struct {
 
-	// 2 digit ISO 639-1 code. e.g. en
+	//  2 digit ISO 639-1 code. e.g. en
 	Code *string
 
-	// Language display value e.g. ENGLISH
+	//  Language display value e.g. ENGLISH
 	Display *string
 
-	// Full language description e.g. ENGLISH
+	//  Full language description e.g. ENGLISH
 	Language *string
 
 	noSmithyDocumentSerde
@@ -326,9 +365,8 @@ type TrustedAdvisorCheckDescription struct {
 
 	// The column headings for the data returned by the Trusted Advisor check. The
 	// order of the headings corresponds to the order of the data in the Metadata
-	// element of the TrustedAdvisorResourceDetail for the check. Metadata contains
-	// all the data that is shown in the Excel download, even in those cases where the
-	// UI shows just summary data.
+	// element of the TrustedAdvisorResourceDetailfor the check. Metadata contains all the data that is shown in
+	// the Excel download, even in those cases where the UI shows just summary data.
 	//
 	// This member is required.
 	Metadata []*string
@@ -356,12 +394,17 @@ type TrustedAdvisorCheckRefreshStatus struct {
 	MillisUntilNextRefreshable int64
 
 	// The status of the Trusted Advisor check for which a refresh has been requested:
+	//
 	//   - none - The check is not refreshed or the non-success status exceeds the
 	//   timeout
+	//
 	//   - enqueued - The check refresh requests has entered the refresh queue
+	//
 	//   - processing - The check refresh request is picked up by the rule processing
 	//   engine
+	//
 	//   - success - The check is successfully refreshed
+	//
 	//   - abandoned - The check refresh has failed
 	//
 	// This member is required.
@@ -370,8 +413,7 @@ type TrustedAdvisorCheckRefreshStatus struct {
 	noSmithyDocumentSerde
 }
 
-// The results of a Trusted Advisor check returned by
-// DescribeTrustedAdvisorCheckResult .
+// The results of a Trusted Advisor check returned by DescribeTrustedAdvisorCheckResult.
 type TrustedAdvisorCheckResult struct {
 
 	// Summary information that relates to the category of the check. Cost Optimizing
@@ -391,7 +433,7 @@ type TrustedAdvisorCheckResult struct {
 	FlaggedResources []TrustedAdvisorResourceDetail
 
 	// Details about Amazon Web Services resources that were analyzed in a call to
-	// Trusted Advisor DescribeTrustedAdvisorCheckSummaries .
+	// Trusted Advisor DescribeTrustedAdvisorCheckSummaries.
 	//
 	// This member is required.
 	ResourcesSummary *TrustedAdvisorResourcesSummary
@@ -426,7 +468,7 @@ type TrustedAdvisorCheckSummary struct {
 	CheckId *string
 
 	// Details about Amazon Web Services resources that were analyzed in a call to
-	// Trusted Advisor DescribeTrustedAdvisorCheckSummaries .
+	// Trusted Advisor DescribeTrustedAdvisorCheckSummaries.
 	//
 	// This member is required.
 	ResourcesSummary *TrustedAdvisorResourcesSummary
@@ -471,10 +513,9 @@ type TrustedAdvisorCostOptimizingSummary struct {
 type TrustedAdvisorResourceDetail struct {
 
 	// Additional information about the identified resource. The exact metadata and
-	// its order can be obtained by inspecting the TrustedAdvisorCheckDescription
-	// object returned by the call to DescribeTrustedAdvisorChecks . Metadata contains
-	// all the data that is shown in the Excel download, even in those cases where the
-	// UI shows just summary data.
+	// its order can be obtained by inspecting the TrustedAdvisorCheckDescriptionobject returned by the call to DescribeTrustedAdvisorChecks.
+	// Metadata contains all the data that is shown in the Excel download, even in
+	// those cases where the UI shows just summary data.
 	//
 	// This member is required.
 	Metadata []*string
@@ -500,7 +541,7 @@ type TrustedAdvisorResourceDetail struct {
 }
 
 // Details about Amazon Web Services resources that were analyzed in a call to
-// Trusted Advisor DescribeTrustedAdvisorCheckSummaries .
+// Trusted Advisor DescribeTrustedAdvisorCheckSummaries.
 type TrustedAdvisorResourcesSummary struct {
 
 	// The number of Amazon Web Services resources that were flagged (listed) by the

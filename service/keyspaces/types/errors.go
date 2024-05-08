@@ -118,8 +118,9 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation exceeded the service quota for this resource. For more
-// information on service quotas, see Quotas (https://docs.aws.amazon.com/keyspaces/latest/devguide/quotas.html)
-// in the Amazon Keyspaces Developer Guide.
+// information on service quotas, see [Quotas]in the Amazon Keyspaces Developer Guide.
+//
+// [Quotas]: https://docs.aws.amazon.com/keyspaces/latest/devguide/quotas.html
 type ServiceQuotaExceededException struct {
 	Message *string
 

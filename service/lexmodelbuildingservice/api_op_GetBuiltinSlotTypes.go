@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of built-in slot types that meet the specified criteria. For a list
-// of built-in slot types, see Slot Type Reference (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference)
-// in the Alexa Skills Kit. This operation requires permission for the
-// lex:GetBuiltInSlotTypes action.
+// Gets a list of built-in slot types that meet the specified criteria.
+//
+// For a list of built-in slot types, see [Slot Type Reference] in the Alexa Skills Kit.
+//
+// This operation requires permission for the lex:GetBuiltInSlotTypes action.
+//
+// [Slot Type Reference]: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference
 func (c *Client) GetBuiltinSlotTypes(ctx context.Context, params *GetBuiltinSlotTypesInput, optFns ...func(*Options)) (*GetBuiltinSlotTypesOutput, error) {
 	if params == nil {
 		params = &GetBuiltinSlotTypesInput{}

@@ -11,11 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about all of the versions of a bot. The ListBotVersions
-// operation returns a summary of each version of a bot. For example, if a bot has
-// three numbered versions, the ListBotVersions operation returns for summaries,
-// one for each numbered version and one for the DRAFT version. The ListBotVersions
-// operation always returns at least one version, the DRAFT version.
+// Gets information about all of the versions of a bot.
+//
+// The ListBotVersions operation returns a summary of each version of a bot. For
+// example, if a bot has three numbered versions, the ListBotVersions operation
+// returns for summaries, one for each numbered version and one for the DRAFT
+// version.
+//
+// The ListBotVersions operation always returns at least one version, the DRAFT
+// version.
 func (c *Client) ListBotVersions(ctx context.Context, params *ListBotVersionsInput, optFns ...func(*Options)) (*ListBotVersionsOutput, error) {
 	if params == nil {
 		params = &ListBotVersionsInput{}

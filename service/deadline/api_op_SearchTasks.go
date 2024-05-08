@@ -45,8 +45,9 @@ type SearchTasksInput struct {
 	QueueIds []string
 
 	// The filter expression, AND or OR , to use when searching among a group of search
-	// strings in a resource. You can use two groupings per search each within
-	// parenthesis () .
+	// strings in a resource.
+	//
+	// You can use two groupings per search each within parenthesis () .
 	FilterExpressions *types.SearchGroupedFilterExpressions
 
 	// The job ID for the task search.

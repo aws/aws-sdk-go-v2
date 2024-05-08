@@ -16,9 +16,12 @@ import (
 // set up successfully. We highly recommend that you call this operation to test
 // your authentication method as soon as you create your server. By doing so, you
 // can troubleshoot issues with the identity provider integration to ensure that
-// your users can successfully use the service. The ServerId and UserName
-// parameters are required. The ServerProtocol , SourceIp , and UserPassword are
-// all optional. Note the following:
+// your users can successfully use the service.
+//
+// The ServerId and UserName parameters are required. The ServerProtocol , SourceIp
+// , and UserPassword are all optional.
+//
+// Note the following:
 //
 //   - You cannot use TestIdentityProvider if the IdentityProviderType of your
 //     server is SERVICE_MANAGED .
@@ -32,15 +35,23 @@ import (
 //     is empty.
 //
 //   - If you provide a server ID for a server that uses service-managed users,
-//     you get an error: An error occurred (InvalidRequestException) when calling
-//     the TestIdentityProvider operation: s-server-ID not configured for external auth
+//     you get an error:
 //
-//   - If you enter a Server ID for the --server-id parameter that does not
-//     identify an actual Transfer server, you receive the following error: An error
-//     occurred (ResourceNotFoundException) when calling the TestIdentityProvider
-//     operation: Unknown server . It is possible your sever is in a different
-//     region. You can specify a region by adding the following: --region region-code
-//     , such as --region us-east-2 to specify a server in US East (Ohio).
+// An error occurred (InvalidRequestException) when calling the
+//
+//	TestIdentityProvider operation: s-server-ID not configured for external auth
+//
+//	- If you enter a Server ID for the --server-id parameter that does not
+//	identify an actual Transfer server, you receive the following error:
+//
+// An error occurred (ResourceNotFoundException) when calling the
+//
+//	TestIdentityProvider operation: Unknown server .
+//
+// It is possible your sever is in a different region. You can specify a region by
+//
+//	adding the following: --region region-code , such as --region us-east-2 to
+//	specify a server in US East (Ohio).
 func (c *Client) TestIdentityProvider(ctx context.Context, params *TestIdentityProviderInput, optFns ...func(*Options)) (*TestIdentityProviderOutput, error) {
 	if params == nil {
 		params = &TestIdentityProviderInput{}
@@ -69,10 +80,16 @@ type TestIdentityProviderInput struct {
 	// This member is required.
 	UserName *string
 
-	// The type of file transfer protocol to be tested. The available protocols are:
+	// The type of file transfer protocol to be tested.
+	//
+	// The available protocols are:
+	//
 	//   - Secure Shell (SSH) File Transfer Protocol (SFTP)
+	//
 	//   - File Transfer Protocol Secure (FTPS)
+	//
 	//   - File Transfer Protocol (FTP)
+	//
 	//   - Applicability Statement 2 (AS2)
 	ServerProtocol types.Protocol
 
@@ -98,9 +115,10 @@ type TestIdentityProviderOutput struct {
 	// This member is required.
 	Url *string
 
-	// A message that indicates whether the test was successful or not. If an empty
-	// string is returned, the most likely cause is that the authentication failed due
-	// to an incorrect username or password.
+	// A message that indicates whether the test was successful or not.
+	//
+	// If an empty string is returned, the most likely cause is that the
+	// authentication failed due to an incorrect username or password.
 	Message *string
 
 	// The response that is returned from your API Gateway or your Lambda function.

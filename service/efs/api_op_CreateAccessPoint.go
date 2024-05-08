@@ -17,20 +17,24 @@ import (
 // operating system user and group override any identity information provided by
 // the NFS client. The file system path is exposed as the access point's root
 // directory. Applications using the access point can only access data in the
-// application's own directory and any subdirectories. To learn more, see Mounting
-// a file system using EFS access points (https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html)
-// . If multiple requests to create access points on the same file system are sent
+// application's own directory and any subdirectories. To learn more, see [Mounting a file system using EFS access points].
+//
+// If multiple requests to create access points on the same file system are sent
 // in quick succession, and the file system is near the limit of 1,000 access
 // points, you may experience a throttling response for these requests. This is to
-// ensure that the file system does not exceed the stated access point limit. This
-// operation requires permissions for the elasticfilesystem:CreateAccessPoint
-// action. Access points can be tagged on creation. If tags are specified in the
-// creation action, IAM performs additional authorization on the
+// ensure that the file system does not exceed the stated access point limit.
+//
+// This operation requires permissions for the elasticfilesystem:CreateAccessPoint
+// action.
+//
+// Access points can be tagged on creation. If tags are specified in the creation
+// action, IAM performs additional authorization on the
 // elasticfilesystem:TagResource action to verify if users have permissions to
 // create tags. Therefore, you must grant explicit permissions to use the
-// elasticfilesystem:TagResource action. For more information, see Granting
-// permissions to tag resources during creation (https://docs.aws.amazon.com/efs/latest/ug/using-tags-efs.html#supported-iam-actions-tagging.html)
-// .
+// elasticfilesystem:TagResource action. For more information, see [Granting permissions to tag resources during creation].
+//
+// [Mounting a file system using EFS access points]: https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html
+// [Granting permissions to tag resources during creation]: https://docs.aws.amazon.com/efs/latest/ug/using-tags-efs.html#supported-iam-actions-tagging.html
 func (c *Client) CreateAccessPoint(ctx context.Context, params *CreateAccessPointInput, optFns ...func(*Options)) (*CreateAccessPointOutput, error) {
 	if params == nil {
 		params = &CreateAccessPointInput{}
@@ -69,17 +73,19 @@ type CreateAccessPointInput struct {
 	// If the RootDirectory > Path specified does not exist, Amazon EFS creates it and
 	// applies the CreationInfo settings when a client connects to an access point.
 	// When specifying a RootDirectory , you must provide the Path , and the
-	// CreationInfo . Amazon EFS creates a root directory only if you have provided the
-	// CreationInfo: OwnUid, OwnGID, and permissions for the directory. If you do not
-	// provide this information, Amazon EFS does not create the root directory. If the
-	// root directory does not exist, attempts to mount using the access point will
-	// fail.
+	// CreationInfo .
+	//
+	// Amazon EFS creates a root directory only if you have provided the CreationInfo:
+	// OwnUid, OwnGID, and permissions for the directory. If you do not provide this
+	// information, Amazon EFS does not create the root directory. If the root
+	// directory does not exist, attempts to mount using the access point will fail.
 	RootDirectory *types.RootDirectory
 
 	// Creates tags associated with the access point. Each tag is a key-value pair,
-	// each key must be unique. For more information, see Tagging Amazon Web Services
-	// resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in
-	// the Amazon Web Services General Reference Guide.
+	// each key must be unique. For more information, see [Tagging Amazon Web Services resources]in the Amazon Web Services
+	// General Reference Guide.
+	//
+	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

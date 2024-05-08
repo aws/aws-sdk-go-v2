@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the rules for the specific topic. Requires permission to access the
-// ListTopicRules (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Lists the rules for the specific topic.
+//
+// Requires permission to access the [ListTopicRules] action.
+//
+// [ListTopicRules]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListTopicRules(ctx context.Context, params *ListTopicRulesInput, optFns ...func(*Options)) (*ListTopicRulesOutput, error) {
 	if params == nil {
 		params = &ListTopicRulesInput{}

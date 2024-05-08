@@ -12,10 +12,11 @@ import (
 )
 
 // Gets a list of all of the Amazon Web Services that you can choose to include in
-// your assessment. When you create an assessment (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_CreateAssessment.html)
-// , specify which of these services you want to include to narrow the assessment's
-// scope (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Scope.html)
-// .
+// your assessment. When you [create an assessment], specify which of these services you want to include
+// to narrow the assessment's [scope].
+//
+// [create an assessment]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_CreateAssessment.html
+// [scope]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Scope.html
 func (c *Client) GetServicesInScope(ctx context.Context, params *GetServicesInScopeInput, optFns ...func(*Options)) (*GetServicesInScopeOutput, error) {
 	if params == nil {
 		params = &GetServicesInScopeInput{}
@@ -37,7 +38,7 @@ type GetServicesInScopeInput struct {
 
 type GetServicesInScopeOutput struct {
 
-	// The metadata that's associated with the Amazon Web Service.
+	//  The metadata that's associated with the Amazon Web Service.
 	ServiceMetadata []types.ServiceMetadata
 
 	// Metadata pertaining to the operation's result.

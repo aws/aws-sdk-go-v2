@@ -31,22 +31,36 @@ func (c *Client) ListEventSourceMappings(ctx context.Context, params *ListEventS
 type ListEventSourceMappingsInput struct {
 
 	// The Amazon Resource Name (ARN) of the event source.
+	//
 	//   - Amazon Kinesis – The ARN of the data stream or a stream consumer.
+	//
 	//   - Amazon DynamoDB Streams – The ARN of the stream.
+	//
 	//   - Amazon Simple Queue Service – The ARN of the queue.
+	//
 	//   - Amazon Managed Streaming for Apache Kafka – The ARN of the cluster or the
-	//   ARN of the VPC connection (for cross-account event source mappings (https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc)
-	//   ).
+	//   ARN of the VPC connection (for [cross-account event source mappings]).
+	//
 	//   - Amazon MQ – The ARN of the broker.
+	//
 	//   - Amazon DocumentDB – The ARN of the DocumentDB change stream.
+	//
+	// [cross-account event source mappings]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc
 	EventSourceArn *string
 
-	// The name or ARN of the Lambda function. Name formats
+	// The name or ARN of the Lambda function.
+	//
+	// Name formats
+	//
 	//   - Function name – MyFunction .
+	//
 	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
+	//
 	//   - Version or Alias ARN –
 	//   arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD .
+	//
 	//   - Partial ARN – 123456789012:function:MyFunction .
+	//
 	// The length constraint applies only to the full ARN. If you specify only the
 	// function name, it's limited to 64 characters in length.
 	FunctionName *string

@@ -37,10 +37,14 @@ type ListConfigurationsInput struct {
 	ConfigurationType types.ConfigurationItemType
 
 	// You can filter the request using various logical operators and a key-value
-	// format. For example: {"key": "serverType", "value": "webServer"} For a complete
-	// list of filter options and guidance about using them with this action, see
-	// Using the ListConfigurations Action (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
-	// in the Amazon Web Services Application Discovery Service User Guide.
+	// format. For example:
+	//
+	//     {"key": "serverType", "value": "webServer"}
+	//
+	// For a complete list of filter options and guidance about using them with this
+	// action, see [Using the ListConfigurations Action]in the Amazon Web Services Application Discovery Service User Guide.
+	//
+	// [Using the ListConfigurations Action]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations
 	Filters []types.Filter
 
 	// The total number of items to return. The maximum value is 100.
@@ -53,9 +57,10 @@ type ListConfigurationsInput struct {
 	NextToken *string
 
 	// Certain filter criteria return output that can be sorted in ascending or
-	// descending order. For a list of output characteristics for each filter, see
-	// Using the ListConfigurations Action (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
-	// in the Amazon Web Services Application Discovery Service User Guide.
+	// descending order. For a list of output characteristics for each filter, see [Using the ListConfigurations Action]in
+	// the Amazon Web Services Application Discovery Service User Guide.
+	//
+	// [Using the ListConfigurations Action]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations
 	OrderBy []types.OrderByElement
 
 	noSmithyDocumentSerde

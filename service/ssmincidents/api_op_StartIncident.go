@@ -41,11 +41,18 @@ type StartIncidentInput struct {
 	ClientToken *string
 
 	// Defines the impact to the customers. Providing an impact overwrites the impact
-	// provided by a response plan. Supported impact codes
+	// provided by a response plan.
+	//
+	// Supported impact codes
+	//
 	//   - 1 - Critical
+	//
 	//   - 2 - High
+	//
 	//   - 3 - Medium
+	//
 	//   - 4 - Low
+	//
 	//   - 5 - No Impact
 	Impact *int32
 

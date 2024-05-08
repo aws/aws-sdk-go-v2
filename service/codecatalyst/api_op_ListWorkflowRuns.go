@@ -51,7 +51,7 @@ type ListWorkflowRunsInput struct {
 	// Information used to sort the items in the returned list.
 	SortBy []types.WorkflowRunSortCriteria
 
-	// The ID of the workflow. To retrieve a list of workflow IDs, use ListWorkflows .
+	// The ID of the workflow. To retrieve a list of workflow IDs, use ListWorkflows.
 	WorkflowId *string
 
 	noSmithyDocumentSerde

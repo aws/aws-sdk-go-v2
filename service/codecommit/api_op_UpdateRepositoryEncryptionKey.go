@@ -31,8 +31,10 @@ type UpdateRepositoryEncryptionKeyInput struct {
 
 	// The ID of the encryption key. You can view the ID of an encryption key in the
 	// KMS console, or use the KMS APIs to programmatically retrieve a key ID. For more
-	// information about acceptable values for keyID, see KeyId (https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId)
-	// in the Decrypt API description in the Key Management Service API Reference.
+	// information about acceptable values for keyID, see [KeyId]in the Decrypt API
+	// description in the Key Management Service API Reference.
+	//
+	// [KeyId]: https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
 	//
 	// This member is required.
 	KmsKeyId *string

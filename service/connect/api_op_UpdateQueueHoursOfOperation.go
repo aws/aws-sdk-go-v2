@@ -11,6 +11,7 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
+//
 // Updates the hours of operation for the specified queue.
 func (c *Client) UpdateQueueHoursOfOperation(ctx context.Context, params *UpdateQueueHoursOfOperationInput, optFns ...func(*Options)) (*UpdateQueueHoursOfOperationOutput, error) {
 	if params == nil {
@@ -34,8 +35,10 @@ type UpdateQueueHoursOfOperationInput struct {
 	// This member is required.
 	HoursOfOperationId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

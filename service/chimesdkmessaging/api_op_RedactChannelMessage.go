@@ -11,8 +11,9 @@ import (
 )
 
 // Redacts message content, but not metadata. The message exists in the back end,
-// but the action returns null content, and the state shows as redacted. The
-// x-amz-chime-bearer request header is mandatory. Use the ARN of the
+// but the action returns null content, and the state shows as redacted.
+//
+// The x-amz-chime-bearer request header is mandatory. Use the ARN of the
 // AppInstanceUser or AppInstanceBot that makes the API call as the value in the
 // header.
 func (c *Client) RedactChannelMessage(ctx context.Context, params *RedactChannelMessageInput, optFns ...func(*Options)) (*RedactChannelMessageOutput, error) {
@@ -61,8 +62,9 @@ type RedactChannelMessageOutput struct {
 	// The ID of the message being redacted.
 	MessageId *string
 
-	// The ID of the SubChannel in the response. Only required when redacting messages
-	// in a SubChannel that the user belongs to.
+	// The ID of the SubChannel in the response.
+	//
+	// Only required when redacting messages in a SubChannel that the user belongs to.
 	SubChannelId *string
 
 	// Metadata pertaining to the operation's result.

@@ -12,8 +12,9 @@ import (
 )
 
 // Gets aggregated values (for example, average, minimum, and maximum) for one or
-// more asset properties. For more information, see Querying aggregates (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates)
-// in the IoT SiteWise User Guide.
+// more asset properties. For more information, see [Querying aggregates]in the IoT SiteWise User Guide.
+//
+// [Querying aggregates]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates
 func (c *Client) BatchGetAssetPropertyAggregates(ctx context.Context, params *BatchGetAssetPropertyAggregatesInput, optFns ...func(*Options)) (*BatchGetAssetPropertyAggregatesOutput, error) {
 	if params == nil {
 		params = &BatchGetAssetPropertyAggregatesInput{}
@@ -39,7 +40,9 @@ type BatchGetAssetPropertyAggregatesInput struct {
 
 	// The maximum number of results to return for each paginated request. A result
 	// set is returned in the two cases, whichever occurs first.
+	//
 	//   - The size of the result set is equal to 1 MB.
+	//
 	//   - The number of data points in the result set is equal to the value of
 	//   maxResults . The maximum value of maxResults is 4000.
 	MaxResults *int32
@@ -204,7 +207,9 @@ var _ BatchGetAssetPropertyAggregatesAPIClient = (*Client)(nil)
 type BatchGetAssetPropertyAggregatesPaginatorOptions struct {
 	// The maximum number of results to return for each paginated request. A result
 	// set is returned in the two cases, whichever occurs first.
+	//
 	//   - The size of the result set is equal to 1 MB.
+	//
 	//   - The number of data points in the result set is equal to the value of
 	//   maxResults . The maximum value of maxResults is 4000.
 	Limit int32

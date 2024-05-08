@@ -29,7 +29,7 @@ func (c *Client) GetServerStrategies(ctx context.Context, params *GetServerStrat
 
 type GetServerStrategiesInput struct {
 
-	// The ID of the server.
+	//  The ID of the server.
 	//
 	// This member is required.
 	ServerId *string
@@ -39,7 +39,7 @@ type GetServerStrategiesInput struct {
 
 type GetServerStrategiesOutput struct {
 
-	// A list of strategy recommendations for the server.
+	//  A list of strategy recommendations for the server.
 	ServerStrategies []types.ServerStrategy
 
 	// Metadata pertaining to the operation's result.

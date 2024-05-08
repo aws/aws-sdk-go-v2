@@ -49,11 +49,14 @@ type CopySnapshotInput struct {
 	Tags []types.Tag
 
 	// The Amazon S3 bucket to which the snapshot is exported. This parameter is used
-	// only when exporting a snapshot for external access. When using this parameter to
-	// export a snapshot, be sure MemoryDB has the needed permissions to this S3
-	// bucket. For more information, see Step 2: Grant MemoryDB Access to Your Amazon
-	// S3 Bucket (https://docs.aws.amazon.com/MemoryDB/latest/devguide/snapshots-exporting.html)
-	// .
+	// only when exporting a snapshot for external access.
+	//
+	// When using this parameter to export a snapshot, be sure MemoryDB has the needed
+	// permissions to this S3 bucket. For more information, see
+	//
+	// [Step 2: Grant MemoryDB Access to Your Amazon S3 Bucket].
+	//
+	// [Step 2: Grant MemoryDB Access to Your Amazon S3 Bucket]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/snapshots-exporting.html
 	TargetBucket *string
 
 	noSmithyDocumentSerde

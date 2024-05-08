@@ -37,8 +37,9 @@ type UpdateLandingZoneInput struct {
 	LandingZoneIdentifier *string
 
 	// The manifest.yaml file is a text file that describes your Amazon Web Services
-	// resources. For examples, review The manifest file (https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file)
-	// .
+	// resources. For examples, review [The manifest file].
+	//
+	// [The manifest file]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
 	//
 	// This member is required.
 	Manifest document.Interface

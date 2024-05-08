@@ -17,11 +17,12 @@ import (
 )
 
 // Retrieves the specified alarms. You can filter the results by specifying a
-// prefix for the alarm name, the alarm state, or a prefix for any action. To use
-// this operation and return information about composite alarms, you must be signed
-// on with the cloudwatch:DescribeAlarms permission that is scoped to * . You can't
-// return information about composite alarms if your cloudwatch:DescribeAlarms
-// permission has a narrower scope.
+// prefix for the alarm name, the alarm state, or a prefix for any action.
+//
+// To use this operation and return information about composite alarms, you must
+// be signed on with the cloudwatch:DescribeAlarms permission that is scoped to * .
+// You can't return information about composite alarms if your
+// cloudwatch:DescribeAlarms permission has a narrower scope.
 func (c *Client) DescribeAlarms(ctx context.Context, params *DescribeAlarmsInput, optFns ...func(*Options)) (*DescribeAlarmsOutput, error) {
 	if params == nil {
 		params = &DescribeAlarmsInput{}
@@ -45,8 +46,9 @@ type DescribeAlarmsInput struct {
 	ActionPrefix *string
 
 	// An alarm name prefix. If you specify this parameter, you receive information
-	// about all alarms that have names that start with this prefix. If this parameter
-	// is specified, you cannot specify AlarmNames .
+	// about all alarms that have names that start with this prefix.
+	//
+	// If this parameter is specified, you cannot specify AlarmNames .
 	AlarmNamePrefix *string
 
 	// The names of the alarms to retrieve information about.
@@ -54,11 +56,14 @@ type DescribeAlarmsInput struct {
 
 	// Use this parameter to specify whether you want the operation to return metric
 	// alarms or composite alarms. If you omit this parameter, only metric alarms are
-	// returned, even if composite alarms exist in the account. For example, if you
-	// omit this parameter or specify MetricAlarms , the operation returns only a list
-	// of metric alarms. It does not return any composite alarms, even if composite
-	// alarms exist in the account. If you specify CompositeAlarms , the operation
-	// returns only a list of composite alarms, and does not return any metric alarms.
+	// returned, even if composite alarms exist in the account.
+	//
+	// For example, if you omit this parameter or specify MetricAlarms , the operation
+	// returns only a list of metric alarms. It does not return any composite alarms,
+	// even if composite alarms exist in the account.
+	//
+	// If you specify CompositeAlarms , the operation returns only a list of composite
+	// alarms, and does not return any metric alarms.
 	AlarmTypes []types.AlarmType
 
 	// If you use this parameter and specify the name of a composite alarm, the
@@ -66,13 +71,17 @@ type DescribeAlarmsInput struct {
 	// specify. These are the metric alarms and composite alarms referenced in the
 	// AlarmRule field of the composite alarm that you specify in ChildrenOfAlarmName .
 	// Information about the composite alarm that you name in ChildrenOfAlarmName is
-	// not returned. If you specify ChildrenOfAlarmName , you cannot specify any other
-	// parameters in the request except for MaxRecords and NextToken . If you do so,
-	// you receive a validation error. Only the Alarm Name , ARN , StateValue
-	// (OK/ALARM/INSUFFICIENT_DATA), and StateUpdatedTimestamp information are
-	// returned by this operation when you use this parameter. To get complete
-	// information about these alarms, perform another DescribeAlarms operation and
-	// specify the parent alarm names in the AlarmNames parameter.
+	// not returned.
+	//
+	// If you specify ChildrenOfAlarmName , you cannot specify any other parameters in
+	// the request except for MaxRecords and NextToken . If you do so, you receive a
+	// validation error.
+	//
+	// Only the Alarm Name , ARN , StateValue (OK/ALARM/INSUFFICIENT_DATA), and
+	// StateUpdatedTimestamp information are returned by this operation when you use
+	// this parameter. To get complete information about these alarms, perform another
+	// DescribeAlarms operation and specify the parent alarm names in the AlarmNames
+	// parameter.
 	ChildrenOfAlarmName *string
 
 	// The maximum number of alarm descriptions to retrieve.
@@ -86,11 +95,14 @@ type DescribeAlarmsInput struct {
 	// the operation returns information about the "parent" alarms of the alarm you
 	// specify. These are the composite alarms that have AlarmRule parameters that
 	// reference the alarm named in ParentsOfAlarmName . Information about the alarm
-	// that you specify in ParentsOfAlarmName is not returned. If you specify
-	// ParentsOfAlarmName , you cannot specify any other parameters in the request
-	// except for MaxRecords and NextToken . If you do so, you receive a validation
-	// error. Only the Alarm Name and ARN are returned by this operation when you use
-	// this parameter. To get complete information about these alarms, perform another
+	// that you specify in ParentsOfAlarmName is not returned.
+	//
+	// If you specify ParentsOfAlarmName , you cannot specify any other parameters in
+	// the request except for MaxRecords and NextToken . If you do so, you receive a
+	// validation error.
+	//
+	// Only the Alarm Name and ARN are returned by this operation when you use this
+	// parameter. To get complete information about these alarms, perform another
 	// DescribeAlarms operation and specify the parent alarm names in the AlarmNames
 	// parameter.
 	ParentsOfAlarmName *string
@@ -317,12 +329,13 @@ type AlarmExistsWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeAlarmsInput, *DescribeAlarmsOutput, error) (bool, error)
 }
 
@@ -494,12 +507,13 @@ type CompositeAlarmExistsWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeAlarmsInput, *DescribeAlarmsOutput, error) (bool, error)
 }
 

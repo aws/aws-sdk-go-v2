@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The StartTableDataImportJob API allows you to start an import job on a table.
+//	The StartTableDataImportJob API allows you to start an import job on a table.
+//
 // This API will only return the id of the job that was started. To find out the
 // status of the import request, you need to call the DescribeTableDataImportJob
 // API.
@@ -32,43 +33,49 @@ func (c *Client) StartTableDataImportJob(ctx context.Context, params *StartTable
 
 type StartTableDataImportJobInput struct {
 
-	// The request token for performing the update action. Request tokens help to
+	//  The request token for performing the update action. Request tokens help to
 	// identify duplicate requests. If a call times out or fails due to a transient
 	// error like a failed network connection, you can retry the call with the same
 	// request token. The service ensures that if the first call using that request
 	// token is successfully performed, the second call will not perform the action
-	// again. Note that request tokens are valid only for a few minutes. You cannot use
+	// again.
+	//
+	// Note that request tokens are valid only for a few minutes. You cannot use
 	// request tokens to dedupe requests spanning hours or days.
 	//
 	// This member is required.
 	ClientRequestToken *string
 
-	// The format of the data that is being imported. Currently the only option
+	//  The format of the data that is being imported. Currently the only option
 	// supported is "DELIMITED_TEXT".
 	//
 	// This member is required.
 	DataFormat types.ImportSourceDataFormat
 
-	// The source of the data that is being imported. The size of source must be no
+	//  The source of the data that is being imported. The size of source must be no
 	// larger than 100 MB. Source must have no more than 100,000 cells and no more than
 	// 1,000 rows.
 	//
 	// This member is required.
 	DataSource *types.ImportDataSource
 
-	// The ID of the table where the rows are being imported. If a table with the
-	// specified id could not be found, this API throws ResourceNotFoundException.
+	// The ID of the table where the rows are being imported.
+	//
+	// If a table with the specified id could not be found, this API throws
+	// ResourceNotFoundException.
 	//
 	// This member is required.
 	DestinationTableId *string
 
-	// The options for customizing this import request.
+	//  The options for customizing this import request.
 	//
 	// This member is required.
 	ImportOptions *types.ImportOptions
 
-	// The ID of the workbook where the rows are being imported. If a workbook with
-	// the specified id could not be found, this API throws ResourceNotFoundException.
+	// The ID of the workbook where the rows are being imported.
+	//
+	// If a workbook with the specified id could not be found, this API throws
+	// ResourceNotFoundException.
 	//
 	// This member is required.
 	WorkbookId *string
@@ -78,14 +85,14 @@ type StartTableDataImportJobInput struct {
 
 type StartTableDataImportJobOutput struct {
 
-	// The id that is assigned to this import job. Future requests to find out the
+	//  The id that is assigned to this import job. Future requests to find out the
 	// status of this import job need to send this id in the appropriate parameter in
 	// the request.
 	//
 	// This member is required.
 	JobId *string
 
-	// The status of the import job immediately after submitting the request.
+	//  The status of the import job immediately after submitting the request.
 	//
 	// This member is required.
 	JobStatus types.TableDataImportJobStatus

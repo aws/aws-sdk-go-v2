@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for AlternateContactType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AlternateContactType) Values() []AlternateContactType {
 	return []AlternateContactType{
 		"BILLING",
@@ -34,8 +35,9 @@ const (
 )
 
 // Values returns all known values for RegionOptStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RegionOptStatus) Values() []RegionOptStatus {
 	return []RegionOptStatus{
 		"ENABLED",
@@ -56,6 +58,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

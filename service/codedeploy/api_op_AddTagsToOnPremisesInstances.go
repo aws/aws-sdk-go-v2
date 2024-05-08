@@ -35,9 +35,10 @@ type AddTagsToOnPremisesInstancesInput struct {
 	// This member is required.
 	InstanceNames []string
 
-	// The tag key-value pairs to add to the on-premises instances. Keys and values
-	// are both required. Keys cannot be null or empty strings. Value-only tags are not
-	// allowed.
+	// The tag key-value pairs to add to the on-premises instances.
+	//
+	// Keys and values are both required. Keys cannot be null or empty strings.
+	// Value-only tags are not allowed.
 	//
 	// This member is required.
 	Tags []types.Tag

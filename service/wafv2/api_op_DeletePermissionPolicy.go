@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Permanently deletes an IAM policy from the specified rule group. You must be
-// the owner of the rule group to perform this operation.
+// Permanently deletes an IAM policy from the specified rule group.
+//
+// You must be the owner of the rule group to perform this operation.
 func (c *Client) DeletePermissionPolicy(ctx context.Context, params *DeletePermissionPolicyInput, optFns ...func(*Options)) (*DeletePermissionPolicyOutput, error) {
 	if params == nil {
 		params = &DeletePermissionPolicyInput{}
@@ -30,7 +31,9 @@ func (c *Client) DeletePermissionPolicy(ctx context.Context, params *DeletePermi
 type DeletePermissionPolicyInput struct {
 
 	// The Amazon Resource Name (ARN) of the rule group from which you want to delete
-	// the policy. You must be the owner of the rule group to perform this operation.
+	// the policy.
+	//
+	// You must be the owner of the rule group to perform this operation.
 	//
 	// This member is required.
 	ResourceArn *string

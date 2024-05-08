@@ -10,13 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Fleet Hub for IoT Device Management web application. When creating a
-// Fleet Hub application, you must create an organization instance of IAM Identity
-// Center if you don't already have one. The Fleet Hub application you create must
-// also be in the same Amazon Web Services Region of the organization instance of
-// IAM Identity Center. For more information see Enabling IAM Identity Center (https://docs.aws.amazon.com/singlesignon/latest/userguide/get-set-up-for-idc.html)
-// and Organization instances of IAM Identity Center (https://docs.aws.amazon.com/singlesignon/latest/userguide/organization-instances-identity-center.html)
-// .
+// Creates a Fleet Hub for IoT Device Management web application.
+//
+// When creating a Fleet Hub application, you must create an organization instance
+// of IAM Identity Center if you don't already have one. The Fleet Hub application
+// you create must also be in the same Amazon Web Services Region of the
+// organization instance of IAM Identity Center. For more information see [Enabling IAM Identity Center]and [Organization instances of IAM Identity Center].
+//
+// [Enabling IAM Identity Center]: https://docs.aws.amazon.com/singlesignon/latest/userguide/get-set-up-for-idc.html
+// [Organization instances of IAM Identity Center]: https://docs.aws.amazon.com/singlesignon/latest/userguide/organization-instances-identity-center.html
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}
@@ -40,8 +42,9 @@ type CreateApplicationInput struct {
 	ApplicationName *string
 
 	// The ARN of the role that the web application assumes when it interacts with
-	// Amazon Web Services IoT Core. The name of the role must be in the form
-	// AWSIotFleetHub_random_string .
+	// Amazon Web Services IoT Core.
+	//
+	// The name of the role must be in the form AWSIotFleetHub_random_string .
 	//
 	// This member is required.
 	RoleArn *string

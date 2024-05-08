@@ -316,7 +316,7 @@ type ScanNameWithFindingNum struct {
 // Information about a scan.
 type ScanSummary struct {
 
-	// The time when the scan was created.
+	//  The time when the scan was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
@@ -377,14 +377,14 @@ type ValidationExceptionField struct {
 // detected.
 type Vulnerability struct {
 
-	// An object that describes the location of the detected security vulnerability in
-	// your code.
+	//  An object that describes the location of the detected security vulnerability
+	// in your code.
 	FilePath *FilePath
 
 	// The identifier for the vulnerability.
 	Id *string
 
-	// The number of times the vulnerability appears in your code.
+	//  The number of times the vulnerability appears in your code.
 	ItemCount *int32
 
 	// One or more URL addresses that contain details about a vulnerability.

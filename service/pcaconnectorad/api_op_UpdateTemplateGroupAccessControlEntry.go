@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a group access control entry you created using
-// CreateTemplateGroupAccessControlEntry (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplateGroupAccessControlEntry.html)
-// .
+// Update a group access control entry you created using [CreateTemplateGroupAccessControlEntry].
+//
+// [CreateTemplateGroupAccessControlEntry]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplateGroupAccessControlEntry.html
 func (c *Client) UpdateTemplateGroupAccessControlEntry(ctx context.Context, params *UpdateTemplateGroupAccessControlEntryInput, optFns ...func(*Options)) (*UpdateTemplateGroupAccessControlEntryOutput, error) {
 	if params == nil {
 		params = &UpdateTemplateGroupAccessControlEntryInput{}
@@ -37,8 +37,9 @@ type UpdateTemplateGroupAccessControlEntryInput struct {
 	// This member is required.
 	GroupSecurityIdentifier *string
 
-	// The Amazon Resource Name (ARN) that was returned when you called CreateTemplate (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html)
-	// .
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate].
+	//
+	// [CreateTemplate]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html
 	//
 	// This member is required.
 	TemplateArn *string

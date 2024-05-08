@@ -13,12 +13,15 @@ import (
 // Enables the specified member account to administer the Organizations features
 // of the specified Amazon Web Services service. It grants read-only access to
 // Organizations service data. The account still requires IAM permissions to access
-// and administer the Amazon Web Services service. You can run this action only for
-// Amazon Web Services services that support this feature. For a current list of
-// services that support it, see the column Supports Delegated Administrator in the
-// table at Amazon Web Services Services that you can use with Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html)
-// in the Organizations User Guide. This operation can be called only from the
-// organization's management account.
+// and administer the Amazon Web Services service.
+//
+// You can run this action only for Amazon Web Services services that support this
+// feature. For a current list of services that support it, see the column Supports
+// Delegated Administrator in the table at [Amazon Web Services Services that you can use with Organizations]in the Organizations User Guide.
+//
+// This operation can be called only from the organization's management account.
+//
+// [Amazon Web Services Services that you can use with Organizations]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html
 func (c *Client) RegisterDelegatedAdministrator(ctx context.Context, params *RegisterDelegatedAdministratorInput, optFns ...func(*Options)) (*RegisterDelegatedAdministratorOutput, error) {
 	if params == nil {
 		params = &RegisterDelegatedAdministratorInput{}

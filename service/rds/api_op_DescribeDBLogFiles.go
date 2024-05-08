@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of DB log files for the DB instance. This command doesn't apply
-// to RDS Custom.
+// Returns a list of DB log files for the DB instance.
+//
+// This command doesn't apply to RDS Custom.
 func (c *Client) DescribeDBLogFiles(ctx context.Context, params *DescribeDBLogFilesInput, optFns ...func(*Options)) (*DescribeDBLogFilesOutput, error) {
 	if params == nil {
 		params = &DescribeDBLogFilesInput{}
@@ -31,7 +32,10 @@ func (c *Client) DescribeDBLogFiles(ctx context.Context, params *DescribeDBLogFi
 type DescribeDBLogFilesInput struct {
 
 	// The customer-assigned name of the DB instance that contains the log files you
-	// want to list. Constraints:
+	// want to list.
+	//
+	// Constraints:
+	//
 	//   - Must match the identifier of an existing DBInstance.
 	//
 	// This member is required.

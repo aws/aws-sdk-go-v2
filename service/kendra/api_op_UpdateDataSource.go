@@ -43,11 +43,13 @@ type UpdateDataSourceInput struct {
 	Configuration *types.DataSourceConfiguration
 
 	// Configuration information you want to update for altering document metadata and
-	// content during the document ingestion process. For more information on how to
-	// create, modify and delete document metadata, or make other content alterations
-	// when you ingest documents into Amazon Kendra, see Customizing document metadata
-	// during the ingestion process (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html)
-	// .
+	// content during the document ingestion process.
+	//
+	// For more information on how to create, modify and delete document metadata, or
+	// make other content alterations when you ingest documents into Amazon Kendra, see
+	// [Customizing document metadata during the ingestion process].
+	//
+	// [Customizing document metadata during the ingestion process]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html
 	CustomDocumentEnrichmentConfiguration *types.CustomDocumentEnrichmentConfiguration
 
 	// A new description for the data source connector.
@@ -56,24 +58,27 @@ type UpdateDataSourceInput struct {
 	// The code for a language you want to update for the data source connector. This
 	// allows you to support a language for all documents when updating the data
 	// source. English is supported by default. For more information on supported
-	// languages, including their codes, see Adding documents in languages other than
-	// English (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html) .
+	// languages, including their codes, see [Adding documents in languages other than English].
+	//
+	// [Adding documents in languages other than English]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
 	LanguageCode *string
 
 	// A new name for the data source connector.
 	Name *string
 
 	// The Amazon Resource Name (ARN) of a role with permission to access the data
-	// source and required resources. For more information, see IAM roles for Amazon
-	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html) .
+	// source and required resources. For more information, see [IAM roles for Amazon Kendra].
+	//
+	// [IAM roles for Amazon Kendra]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
 	RoleArn *string
 
 	// The sync schedule you want to update for the data source connector.
 	Schedule *string
 
 	// Configuration information for an Amazon Virtual Private Cloud to connect to
-	// your data source. For more information, see Configuring a VPC (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html)
-	// .
+	// your data source. For more information, see [Configuring a VPC].
+	//
+	// [Configuring a VPC]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
 	VpcConfiguration *types.DataSourceVpcConfiguration
 
 	noSmithyDocumentSerde

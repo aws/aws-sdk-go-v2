@@ -12,9 +12,10 @@ import (
 )
 
 // Returns the domain's endpoint options, specifically whether all requests to the
-// domain must arrive over HTTPS. For more information, see Configuring Domain
-// Endpoint Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html)
-// in the Amazon CloudSearch Developer Guide.
+// domain must arrive over HTTPS. For more information, see [Configuring Domain Endpoint Options]in the Amazon
+// CloudSearch Developer Guide.
+//
+// [Configuring Domain Endpoint Options]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html
 func (c *Client) DescribeDomainEndpointOptions(ctx context.Context, params *DescribeDomainEndpointOptionsInput, optFns ...func(*Options)) (*DescribeDomainEndpointOptionsOutput, error) {
 	if params == nil {
 		params = &DescribeDomainEndpointOptionsInput{}
@@ -30,9 +31,9 @@ func (c *Client) DescribeDomainEndpointOptions(ctx context.Context, params *Desc
 	return out, nil
 }
 
-// Container for the parameters to the DescribeDomainEndpointOptions operation.
-// Specify the name of the domain you want to describe. To show the active
-// configuration and exclude any pending changes, set the Deployed option to true .
+// Container for the parameters to the DescribeDomainEndpointOptions operation. Specify the name of the domain
+// you want to describe. To show the active configuration and exclude any pending
+// changes, set the Deployed option to true .
 type DescribeDomainEndpointOptionsInput struct {
 
 	// A string that represents the name of a domain.

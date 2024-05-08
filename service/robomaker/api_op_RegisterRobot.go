@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers a robot with a fleet. This API is no longer supported and will throw
-// an error if used.
+// Registers a robot with a fleet.
+//
+// This API is no longer supported and will throw an error if used.
 //
 // Deprecated: AWS RoboMaker is unable to process this request as the support for
 // the AWS RoboMaker application deployment feature has ended. For additional

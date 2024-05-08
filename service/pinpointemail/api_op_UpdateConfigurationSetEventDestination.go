@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the configuration of an event destination for a configuration set. In
-// Amazon Pinpoint, events include message sends, deliveries, opens, clicks,
+// Update the configuration of an event destination for a configuration set.
+//
+// In Amazon Pinpoint, events include message sends, deliveries, opens, clicks,
 // bounces, and complaints. Event destinations are places that you can send
 // information about these events to. For example, you can send event data to
 // Amazon SNS to receive notifications when you receive bounces or complaints, or

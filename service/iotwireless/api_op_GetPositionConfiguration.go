@@ -11,12 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get position configuration for a given resource. This action is no longer
-// supported. Calls to retrieve the position configuration should use the
-// GetResourcePosition (https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetResourcePosition.html)
-// API operation instead.
+// Get position configuration for a given resource.
+//
+// This action is no longer supported. Calls to retrieve the position
+// configuration should use the [GetResourcePosition]API operation instead.
 //
 // Deprecated: This operation is no longer supported.
+//
+// [GetResourcePosition]: https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetResourcePosition.html
 func (c *Client) GetPositionConfiguration(ctx context.Context, params *GetPositionConfigurationInput, optFns ...func(*Options)) (*GetPositionConfigurationOutput, error) {
 	if params == nil {
 		params = &GetPositionConfigurationInput{}

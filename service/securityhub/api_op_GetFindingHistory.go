@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Returns history for a Security Hub finding in the last 90 days. The history
+//	Returns history for a Security Hub finding in the last 90 days. The history
+//
 // includes changes made to any fields in the Amazon Web Services Security Finding
 // Format (ASFF).
 func (c *Client) GetFindingHistory(ctx context.Context, params *GetFindingHistoryInput, optFns ...func(*Options)) (*GetFindingHistoryOutput, error) {
@@ -37,61 +38,79 @@ type GetFindingHistoryInput struct {
 	// This member is required.
 	FindingIdentifier *types.AwsSecurityFindingIdentifier
 
-	// An ISO 8601-formatted timestamp that indicates the end time of the requested
-	// finding history. If you provide values for both StartTime and EndTime , Security
-	// Hub returns finding history for the specified time period. If you provide a
-	// value for StartTime but not for EndTime , Security Hub returns finding history
-	// from the StartTime to the time at which the API is called. If you provide a
-	// value for EndTime but not for StartTime , Security Hub returns finding history
-	// from the CreatedAt (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt)
+	//  An ISO 8601-formatted timestamp that indicates the end time of the requested
+	// finding history.
+	//
+	// If you provide values for both StartTime and EndTime , Security Hub returns
+	// finding history for the specified time period. If you provide a value for
+	// StartTime but not for EndTime , Security Hub returns finding history from the
+	// StartTime to the time at which the API is called. If you provide a value for
+	// EndTime but not for StartTime , Security Hub returns finding history from the [CreatedAt]
 	// timestamp of the finding to the EndTime . If you provide neither StartTime nor
 	// EndTime , Security Hub returns finding history from the CreatedAt timestamp of
 	// the finding to the time at which the API is called. In all of these scenarios,
 	// the response is limited to 100 results, and the maximum time period is limited
-	// to 90 days. This field accepts only the specified formats. Timestamps can end
-	// with Z or ("+" / "-") time-hour [":" time-minute] . The time-secfrac after
-	// seconds is limited to a maximum of 9 digits. The offset is bounded by +/-18:00.
-	// Here are valid timestamp formats with examples:
+	// to 90 days.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
+	//
+	// [CreatedAt]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
 	EndTime *time.Time
 
-	// The maximum number of results to be returned. If you don’t provide it, Security
-	// Hub returns up to 100 results of finding history.
+	//  The maximum number of results to be returned. If you don’t provide it,
+	// Security Hub returns up to 100 results of finding history.
 	MaxResults *int32
 
-	// A token for pagination purposes. Provide NULL as the initial value. In
+	//  A token for pagination purposes. Provide NULL as the initial value. In
 	// subsequent requests, provide the token included in the response to get up to an
 	// additional 100 results of finding history. If you don’t provide NextToken ,
 	// Security Hub returns up to 100 results of finding history for each request.
 	NextToken *string
 
-	// A timestamp that indicates the start time of the requested finding history. If
-	// you provide values for both StartTime and EndTime , Security Hub returns finding
-	// history for the specified time period. If you provide a value for StartTime but
-	// not for EndTime , Security Hub returns finding history from the StartTime to
-	// the time at which the API is called. If you provide a value for EndTime but not
-	// for StartTime , Security Hub returns finding history from the CreatedAt (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt)
+	// A timestamp that indicates the start time of the requested finding history.
+	//
+	// If you provide values for both StartTime and EndTime , Security Hub returns
+	// finding history for the specified time period. If you provide a value for
+	// StartTime but not for EndTime , Security Hub returns finding history from the
+	// StartTime to the time at which the API is called. If you provide a value for
+	// EndTime but not for StartTime , Security Hub returns finding history from the [CreatedAt]
 	// timestamp of the finding to the EndTime . If you provide neither StartTime nor
 	// EndTime , Security Hub returns finding history from the CreatedAt timestamp of
 	// the finding to the time at which the API is called. In all of these scenarios,
 	// the response is limited to 100 results, and the maximum time period is limited
-	// to 90 days. This field accepts only the specified formats. Timestamps can end
-	// with Z or ("+" / "-") time-hour [":" time-minute] . The time-secfrac after
-	// seconds is limited to a maximum of 9 digits. The offset is bounded by +/-18:00.
-	// Here are valid timestamp formats with examples:
+	// to 90 days.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
+	//
+	// [CreatedAt]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -99,12 +118,12 @@ type GetFindingHistoryInput struct {
 
 type GetFindingHistoryOutput struct {
 
-	// A token for pagination purposes. Provide this token in the subsequent request
+	//  A token for pagination purposes. Provide this token in the subsequent request
 	// to GetFindingsHistory to get up to an additional 100 results of history for the
 	// same finding that you specified in your initial request.
 	NextToken *string
 
-	// A list of events that altered the specified finding during the specified time
+	//  A list of events that altered the specified finding during the specified time
 	// period.
 	Records []types.FindingHistoryRecord
 
@@ -203,8 +222,8 @@ var _ GetFindingHistoryAPIClient = (*Client)(nil)
 
 // GetFindingHistoryPaginatorOptions is the paginator options for GetFindingHistory
 type GetFindingHistoryPaginatorOptions struct {
-	// The maximum number of results to be returned. If you don’t provide it, Security
-	// Hub returns up to 100 results of finding history.
+	//  The maximum number of results to be returned. If you don’t provide it,
+	// Security Hub returns up to 100 results of finding history.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -10,12 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a model compilation job. To stop a job, Amazon SageMaker sends the
-// algorithm the SIGTERM signal. This gracefully shuts the job down. If the job
-// hasn't stopped, it sends the SIGKILL signal. When it receives a
-// StopCompilationJob request, Amazon SageMaker changes the CompilationJobStatus
-// of the job to Stopping . After Amazon SageMaker stops the job, it sets the
-// CompilationJobStatus to Stopped .
+// Stops a model compilation job.
+//
+// To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal. This
+// gracefully shuts the job down. If the job hasn't stopped, it sends the SIGKILL
+// signal.
+//
+// When it receives a StopCompilationJob request, Amazon SageMaker changes the
+// CompilationJobStatus of the job to Stopping . After Amazon SageMaker stops the
+// job, it sets the CompilationJobStatus to Stopped .
 func (c *Client) StopCompilationJob(ctx context.Context, params *StopCompilationJobInput, optFns ...func(*Options)) (*StopCompilationJobOutput, error) {
 	if params == nil {
 		params = &StopCompilationJobInput{}

@@ -14,14 +14,21 @@ import (
 // Creates a new Amazon ElastiCache cache parameter group. An ElastiCache cache
 // parameter group is a collection of parameters and their values that are applied
 // to all of the nodes in any cluster or replication group using the
-// CacheParameterGroup. A newly created CacheParameterGroup is an exact duplicate
-// of the default parameter group for the CacheParameterGroupFamily. To customize
-// the newly created CacheParameterGroup you can change the values of specific
-// parameters. For more information, see:
-//   - ModifyCacheParameterGroup (https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html)
-//     in the ElastiCache API Reference.
-//   - Parameters and Parameter Groups (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html)
-//     in the ElastiCache User Guide.
+// CacheParameterGroup.
+//
+// A newly created CacheParameterGroup is an exact duplicate of the default
+// parameter group for the CacheParameterGroupFamily. To customize the newly
+// created CacheParameterGroup you can change the values of specific parameters.
+// For more information, see:
+//
+// [ModifyCacheParameterGroup]
+//   - in the ElastiCache API Reference.
+//
+// [Parameters and Parameter Groups]
+//   - in the ElastiCache User Guide.
+//
+// [ModifyCacheParameterGroup]: https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html
+// [Parameters and Parameter Groups]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html
 func (c *Client) CreateCacheParameterGroup(ctx context.Context, params *CreateCacheParameterGroupInput, optFns ...func(*Options)) (*CreateCacheParameterGroupOutput, error) {
 	if params == nil {
 		params = &CreateCacheParameterGroupInput{}
@@ -41,8 +48,10 @@ func (c *Client) CreateCacheParameterGroup(ctx context.Context, params *CreateCa
 type CreateCacheParameterGroupInput struct {
 
 	// The name of the cache parameter group family that the cache parameter group can
-	// be used with. Valid values are: memcached1.4 | memcached1.5 | memcached1.6 |
-	// redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis7
+	// be used with.
+	//
+	// Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 |
+	// redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis7
 	//
 	// This member is required.
 	CacheParameterGroupFamily *string

@@ -34,16 +34,19 @@ type ListContactEvaluationsInput struct {
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
 
 	// The token for the next set of results. Use the value returned in the previous
-	// response in the next request to retrieve the next set of results. This is not
-	// expected to be set because the value returned in the previous response is always
-	// null.
+	// response in the next request to retrieve the next set of results.
+	//
+	// This is not expected to be set because the value returned in the previous
+	// response is always null.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -57,6 +60,7 @@ type ListContactEvaluationsOutput struct {
 	EvaluationSummaryList []types.EvaluationSummary
 
 	// If there are additional results, this is the token for the next set of results.
+	//
 	// This is always returned as null in the response.
 	NextToken *string
 

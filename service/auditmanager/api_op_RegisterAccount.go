@@ -29,10 +29,10 @@ func (c *Client) RegisterAccount(ctx context.Context, params *RegisterAccountInp
 
 type RegisterAccountInput struct {
 
-	// The delegated administrator account for Audit Manager.
+	//  The delegated administrator account for Audit Manager.
 	DelegatedAdminAccount *string
 
-	// The KMS key details.
+	//  The KMS key details.
 	KmsKey *string
 
 	noSmithyDocumentSerde
@@ -40,7 +40,7 @@ type RegisterAccountInput struct {
 
 type RegisterAccountOutput struct {
 
-	// The status of the account registration request.
+	//  The status of the account registration request.
 	Status types.AccountStatus
 
 	// Metadata pertaining to the operation's result.

@@ -14,6 +14,7 @@ import (
 // Retrieves a list of documents that match the specified search criteria. How you
 // specify the search criteria depends on which query parser you use. Amazon
 // CloudSearch supports four query parsers:
+//
 //   - simple : search all text and text-array fields for the specified string.
 //     Search for phrases, individual terms, and prefixes.
 //   - structured : search specific fields, construct compound queries using
@@ -23,12 +24,15 @@ import (
 //   - dismax : specify search criteria using the simplified subset of the Apache
 //     Lucene query parser syntax defined by the DisMax query parser.
 //
-// For more information, see Searching Your Data (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching.html)
-// in the Amazon CloudSearch Developer Guide. The endpoint for submitting Search
-// requests is domain-specific. You submit search requests to a domain's search
-// endpoint. To get the search endpoint for your domain, use the Amazon CloudSearch
-// configuration service DescribeDomains action. A domain's endpoints are also
-// displayed on the domain dashboard in the Amazon CloudSearch console.
+// For more information, see [Searching Your Data] in the Amazon CloudSearch Developer Guide.
+//
+// The endpoint for submitting Search requests is domain-specific. You submit
+// search requests to a domain's search endpoint. To get the search endpoint for
+// your domain, use the Amazon CloudSearch configuration service DescribeDomains
+// action. A domain's endpoints are also displayed on the domain dashboard in the
+// Amazon CloudSearch console.
+//
+// [Searching Your Data]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching.html
 func (c *Client) Search(ctx context.Context, params *SearchInput, optFns ...func(*Options)) (*SearchOutput, error) {
 	if params == nil {
 		params = &SearchInput{}
@@ -51,9 +55,12 @@ type SearchInput struct {
 	// criteria depends on the query parser used for the request and the parser options
 	// specified in the queryOptions parameter. By default, the simple query parser is
 	// used to process requests. To use the structured , lucene , or dismax query
-	// parser, you must also specify the queryParser parameter. For more information
-	// about specifying search criteria, see Searching Your Data (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching.html)
-	// in the Amazon CloudSearch Developer Guide.
+	// parser, you must also specify the queryParser parameter.
+	//
+	// For more information about specifying search criteria, see [Searching Your Data] in the Amazon
+	// CloudSearch Developer Guide.
+	//
+	// [Searching Your Data]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching.html
 	//
 	// This member is required.
 	Query *string
@@ -63,18 +70,27 @@ type SearchInput struct {
 	// can specify either the cursor or start parameter in a request; they are
 	// mutually exclusive. To get the first cursor, set the cursor value to initial .
 	// In subsequent requests, specify the cursor value returned in the hits section of
-	// the response. For more information, see Paginating Results (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/paginating-results.html)
-	// in the Amazon CloudSearch Developer Guide.
+	// the response.
+	//
+	// For more information, see [Paginating Results] in the Amazon CloudSearch Developer Guide.
+	//
+	// [Paginating Results]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/paginating-results.html
 	Cursor *string
 
 	// Defines one or more numeric expressions that can be used to sort results or
 	// specify search or filter criteria. You can also specify expressions as return
-	// fields. You specify the expressions in JSON using the form
+	// fields.
+	//
+	// You specify the expressions in JSON using the form
 	// {"EXPRESSIONNAME":"EXPRESSION"} . You can define and use multiple expressions in
-	// a search request. For example: {"expression1":"_score*rating",
-	// "expression2":"(1/rank)*year"} For information about the variables, operators,
-	// and functions you can use in expressions, see Writing Expressions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html#writing-expressions)
-	// in the Amazon CloudSearch Developer Guide.
+	// a search request. For example:
+	//
+	//     {"expression1":"_score*rating", "expression2":"(1/rank)*year"}
+	//
+	// For information about the variables, operators, and functions you can use in
+	// expressions, see [Writing Expressions]in the Amazon CloudSearch Developer Guide.
+	//
+	// [Writing Expressions]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html#writing-expressions
 	Expr *string
 
 	// Specifies one or more fields for which to get facet information, and options
@@ -82,38 +98,54 @@ type SearchInput struct {
 	// facet-enabled in the domain configuration. The fields and options are specified
 	// in JSON using the form
 	// {"FIELD":{"OPTION":VALUE,"OPTION:"STRING"},"FIELD":{"OPTION":VALUE,"OPTION":"STRING"}}
-	// . You can specify the following faceting options:
+	// .
+	//
+	// You can specify the following faceting options:
+	//
 	//   - buckets specifies an array of the facet values or ranges to count. Ranges
 	//   are specified using the same syntax that you use to search for a range of
-	//   values. For more information, see Searching for a Range of Values (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching-ranges.html)
-	//   in the Amazon CloudSearch Developer Guide. Buckets are returned in the order
-	//   they are specified in the request. The sort and size options are not valid if
-	//   you specify buckets .
+	//   values. For more information, see [Searching for a Range of Values]in the Amazon CloudSearch Developer Guide.
+	//   Buckets are returned in the order they are specified in the request. The sort
+	//   and size options are not valid if you specify buckets .
+	//
 	//   - size specifies the maximum number of facets to include in the results. By
 	//   default, Amazon CloudSearch returns counts for the top 10. The size parameter
 	//   is only valid when you specify the sort option; it cannot be used in
 	//   conjunction with buckets .
+	//
 	//   - sort specifies how you want to sort the facets in the results: bucket or
 	//   count . Specify bucket to sort alphabetically or numerically by facet value
 	//   (in ascending order). Specify count to sort by the facet counts computed for
 	//   each facet value (in descending order). To retrieve facet counts for particular
 	//   values or ranges of values, use the buckets option instead of sort .
+	//
 	// If no facet options are specified, facet counts are computed for all field
 	// values, the facets are sorted by facet count, and the top 10 facets are returned
-	// in the results. To count particular buckets of values, use the buckets option.
-	// For example, the following request uses the buckets option to calculate and
-	// return facet counts by decade.
-	// {"year":{"buckets":["[1970,1979]","[1980,1989]","[1990,1999]","[2000,2009]","[2010,}"]}}
+	// in the results.
+	//
+	// To count particular buckets of values, use the buckets option. For example, the
+	// following request uses the buckets option to calculate and return facet counts
+	// by decade.
+	//
+	//     {"year":{"buckets":["[1970,1979]","[1980,1989]","[1990,1999]","[2000,2009]","[2010,}"]}}
+	//
 	// To sort facets by facet count, use the count option. For example, the following
 	// request sets the sort option to count to sort the facet values by facet count,
 	// with the facet values that have the most matching documents listed first.
 	// Setting the size option to 3 returns only the top three facet values.
-	// {"year":{"sort":"count","size":3}} To sort the facets by value, use the bucket
-	// option. For example, the following request sets the sort option to bucket to
-	// sort the facet values numerically by year, with earliest year listed first.
-	// {"year":{"sort":"bucket"}} For more information, see Getting and Using Facet
-	// Information (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/faceting.html)
-	// in the Amazon CloudSearch Developer Guide.
+	//
+	//     {"year":{"sort":"count","size":3}}
+	//
+	// To sort the facets by value, use the bucket option. For example, the following
+	// request sets the sort option to bucket to sort the facet values numerically by
+	// year, with earliest year listed first.
+	//
+	//     {"year":{"sort":"bucket"}}
+	//
+	// For more information, see [Getting and Using Facet Information] in the Amazon CloudSearch Developer Guide.
+	//
+	// [Searching for a Range of Values]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching-ranges.html
+	// [Getting and Using Facet Information]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/faceting.html
 	Facet *string
 
 	// Specifies a structured query that filters the results of a search without
@@ -122,16 +154,22 @@ type SearchInput struct {
 	// constraints specified in the query parameter. Specifying a filter controls only
 	// which matching documents are included in the results, it has no effect on how
 	// they are scored and sorted. The filterQuery parameter supports the full
-	// structured query syntax. For more information about using filters, see
-	// Filtering Matching Documents (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/filtering-results.html)
-	// in the Amazon CloudSearch Developer Guide.
+	// structured query syntax.
+	//
+	// For more information about using filters, see [Filtering Matching Documents] in the Amazon CloudSearch
+	// Developer Guide.
+	//
+	// [Filtering Matching Documents]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/filtering-results.html
 	FilterQuery *string
 
 	// Retrieves highlights for matches in the specified text or text-array fields.
 	// Each specified field must be highlight enabled in the domain configuration. The
 	// fields and options are specified in JSON using the form
 	// {"FIELD":{"OPTION":VALUE,"OPTION:"STRING"},"FIELD":{"OPTION":VALUE,"OPTION":"STRING"}}
-	// . You can specify the following highlight options:
+	// .
+	//
+	// You can specify the following highlight options:
+	//
 	//   - format : specifies the format of the data in the text field: text or html .
 	//   When data is returned as HTML, all non-alphanumeric characters are encoded. The
 	//   default is html .
@@ -145,9 +183,13 @@ type SearchInput struct {
 	//   * .
 	// If no highlight options are specified for a field, the returned field text is
 	// treated as HTML and the first match is highlighted with emphasis tags:
-	// <em>search-term</em> . For example, the following request retrieves highlights
-	// for the actors and title fields. { "actors": {}, "title": {"format":
-	// "text","max_phrases": 2,"pre_tag": "","post_tag": ""} }
+	// <em>search-term</em> .
+	//
+	// For example, the following request retrieves highlights for the actors and title
+	// fields.
+	//
+	//     { "actors": {}, "title": {"format": "text","max_phrases": 2,"pre_tag":
+	//     "","post_tag": ""} }
 	Highlight *string
 
 	// Enables partial results to be returned if one or more index partitions are
@@ -165,8 +207,10 @@ type SearchInput struct {
 
 	// Configures options for the query parser specified in the queryParser parameter.
 	// You specify the options in JSON using the following form
-	// {"OPTION1":"VALUE1","OPTION2":VALUE2"..."OPTIONN":"VALUEN"}. The options you can
-	// configure vary according to which parser you use:
+	// {"OPTION1":"VALUE1","OPTION2":VALUE2"..."OPTIONN":"VALUEN"}.
+	//
+	// The options you can configure vary according to which parser you use:
+	//
 	//   - defaultOperator : The default operator used to combine individual terms in
 	//   the search string. For example: defaultOperator: 'or' . For the dismax parser,
 	//   you specify a percentage that represents the percentage of terms in the search
@@ -236,15 +280,18 @@ type SearchInput struct {
 	//   if two documents have the same max field score for a particular term, the score
 	//   for the document that has matches in more fields will be higher. The formula for
 	//   calculating the score with a tieBreaker is (max field score) + (tieBreaker) *
-	//   (sum of the scores for the rest of the matching fields) . Set tieBreaker to 0
-	//   to disregard all but the highest scoring field (pure max): "tieBreaker":0 .
-	//   Set to 1 to sum the scores from all fields (pure sum): "tieBreaker":1 . Valid
-	//   values: 0.0 to 1.0. Default: 0.0. Valid for: dismax .
+	//   (sum of the scores for the rest of the matching fields) .
+	//
+	// Set tieBreaker to 0 to disregard all but the highest scoring field (pure max):
+	//   "tieBreaker":0 . Set to 1 to sum the scores from all fields (pure sum):
+	//   "tieBreaker":1 . Valid values: 0.0 to 1.0. Default: 0.0. Valid for: dismax .
 	QueryOptions *string
 
 	// Specifies which query parser to use to process the request. If queryParser is
-	// not specified, Amazon CloudSearch uses the simple query parser. Amazon
-	// CloudSearch supports four query parsers:
+	// not specified, Amazon CloudSearch uses the simple query parser.
+	//
+	// Amazon CloudSearch supports four query parsers:
+	//
 	//   - simple : perform simple searches of text and text-array fields. By default,
 	//   the simple query parser searches all text and text-array fields. You can
 	//   specify which fields to search by with the queryOptions parameter. If you
@@ -254,20 +301,21 @@ type SearchInput struct {
 	//   and * (wildcard) operators to exclude particular terms, find results that
 	//   match any of the specified terms, or search for a prefix. To search for a phrase
 	//   rather than individual terms, enclose the phrase in double quotes. For more
-	//   information, see Searching for Text (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching-text.html)
-	//   in the Amazon CloudSearch Developer Guide.
+	//   information, see [Searching for Text]in the Amazon CloudSearch Developer Guide.
 	//   - structured : perform advanced searches by combining multiple expressions to
 	//   define the search criteria. You can also search within particular fields, search
 	//   for values and ranges of values, and use advanced options such as term boosting,
-	//   matchall , and near . For more information, see Constructing Compound Queries (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching-compound-queries.html)
-	//   in the Amazon CloudSearch Developer Guide.
+	//   matchall , and near . For more information, see [Constructing Compound Queries]in the Amazon CloudSearch
+	//   Developer Guide.
 	//   - lucene : search using the Apache Lucene query parser syntax. For more
-	//   information, see Apache Lucene Query Parser Syntax (http://lucene.apache.org/core/4_6_0/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description)
-	//   .
+	//   information, see [Apache Lucene Query Parser Syntax].
 	//   - dismax : search using the simplified subset of the Apache Lucene query
-	//   parser syntax defined by the DisMax query parser. For more information, see
-	//   DisMax Query Parser Syntax (http://wiki.apache.org/solr/DisMaxQParserPlugin#Query_Syntax)
-	//   .
+	//   parser syntax defined by the DisMax query parser. For more information, see [DisMax Query Parser Syntax].
+	//
+	// [DisMax Query Parser Syntax]: http://wiki.apache.org/solr/DisMaxQParserPlugin#Query_Syntax
+	// [Apache Lucene Query Parser Syntax]: http://lucene.apache.org/core/4_6_0/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description
+	// [Constructing Compound Queries]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching-compound-queries.html
+	// [Searching for Text]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching-text.html
 	QueryParser types.QueryParser
 
 	// Specifies the field and expression values to include in the response. Multiple
@@ -287,21 +335,29 @@ type SearchInput struct {
 	// in the domain configuration. Array type fields cannot be used for sorting. If no
 	// sort parameter is specified, results are sorted by their default relevance
 	// scores in descending order: _score desc . You can also sort by document ID ( _id
-	// asc ) and version ( _version desc ). For more information, see Sorting Results (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/sorting-results.html)
-	// in the Amazon CloudSearch Developer Guide.
+	// asc ) and version ( _version desc ).
+	//
+	// For more information, see [Sorting Results] in the Amazon CloudSearch Developer Guide.
+	//
+	// [Sorting Results]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/sorting-results.html
 	Sort *string
 
 	// Specifies the offset of the first search hit you want to return. Note that the
 	// result set is zero-based; the first result is at index 0. You can specify either
-	// the start or cursor parameter in a request, they are mutually exclusive. For
-	// more information, see Paginating Results (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/paginating-results.html)
-	// in the Amazon CloudSearch Developer Guide.
+	// the start or cursor parameter in a request, they are mutually exclusive.
+	//
+	// For more information, see [Paginating Results] in the Amazon CloudSearch Developer Guide.
+	//
+	// [Paginating Results]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/paginating-results.html
 	Start int64
 
 	// Specifies one or more fields for which to get statistics information. Each
 	// specified field must be facet-enabled in the domain configuration. The fields
-	// are specified in JSON using the form: {"FIELD-A":{},"FIELD-B":{}} There are
-	// currently no options supported for statistics.
+	// are specified in JSON using the form:
+	//
+	//     {"FIELD-A":{},"FIELD-B":{}}
+	//
+	// There are currently no options supported for statistics.
 	Stats *string
 
 	noSmithyDocumentSerde

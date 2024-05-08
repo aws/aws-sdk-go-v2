@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListReviewPolicyResultsForHIT operation retrieves the computed results and
+//	The ListReviewPolicyResultsForHIT operation retrieves the computed results and
+//
 // the actions taken in the course of executing your Review Policies for a given
 // HIT. For information about how to specify Review Policies when you call
 // CreateHIT, see Review Policies. The ListReviewPolicyResultsForHIT operation can
@@ -44,16 +45,16 @@ type ListReviewPolicyResultsForHITInput struct {
 	// Pagination token
 	NextToken *string
 
-	// The Policy Level(s) to retrieve review results for - HIT or Assignment. If
+	//  The Policy Level(s) to retrieve review results for - HIT or Assignment. If
 	// omitted, the default behavior is to retrieve all data for both policy levels.
 	// For a list of all the described policies, see Review Policies.
 	PolicyLevels []types.ReviewPolicyLevel
 
-	// Specify if the operation should retrieve a list of the actions taken executing
+	//  Specify if the operation should retrieve a list of the actions taken executing
 	// the Review Policies and their outcomes.
 	RetrieveActions *bool
 
-	// Specify if the operation should retrieve a list of the results computed by the
+	//  Specify if the operation should retrieve a list of the results computed by the
 	// Review Policies.
 	RetrieveResults *bool
 
@@ -62,11 +63,11 @@ type ListReviewPolicyResultsForHITInput struct {
 
 type ListReviewPolicyResultsForHITOutput struct {
 
-	// The name of the Assignment-level Review Policy. This contains only the
+	//  The name of the Assignment-level Review Policy. This contains only the
 	// PolicyName element.
 	AssignmentReviewPolicy *types.ReviewPolicy
 
-	// Contains both ReviewResult and ReviewAction elements for an Assignment.
+	//  Contains both ReviewResult and ReviewAction elements for an Assignment.
 	AssignmentReviewReport *types.ReviewReport
 
 	// The HITId of the HIT for which results have been returned.

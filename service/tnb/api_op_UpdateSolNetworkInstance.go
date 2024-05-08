@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a network instance. A network instance is a single network created in
-// Amazon Web Services TNB that can be deployed and on which life-cycle operations
-// (like terminate, update, and delete) can be performed.
+// Update a network instance.
+//
+// A network instance is a single network created in Amazon Web Services TNB that
+// can be deployed and on which life-cycle operations (like terminate, update, and
+// delete) can be performed.
 func (c *Client) UpdateSolNetworkInstance(ctx context.Context, params *UpdateSolNetworkInstanceInput, optFns ...func(*Options)) (*UpdateSolNetworkInstanceOutput, error) {
 	if params == nil {
 		params = &UpdateSolNetworkInstanceInput{}

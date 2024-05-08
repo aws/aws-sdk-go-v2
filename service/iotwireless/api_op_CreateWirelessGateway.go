@@ -11,9 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provisions a wireless gateway. When provisioning a wireless gateway, you might
-// run into duplication errors for the following reasons.
+// Provisions a wireless gateway.
+//
+// When provisioning a wireless gateway, you might run into duplication errors for
+// the following reasons.
+//
 //   - If you specify a GatewayEui value that already exists.
+//
 //   - If you used a ClientRequestToken with the same parameters within the last 10
 //     minutes.
 //
@@ -47,9 +51,9 @@ type CreateWirelessGatewayInput struct {
 	// request will complete successfully. However, if you try to create a new resource
 	// using the same token but different parameters, an HTTP 409 conflict occurs. If
 	// you omit this value, AWS SDKs will automatically generate a unique client
-	// request. For more information about idempotency, see Ensuring idempotency in
-	// Amazon EC2 API requests (https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html)
-	// .
+	// request. For more information about idempotency, see [Ensuring idempotency in Amazon EC2 API requests].
+	//
+	// [Ensuring idempotency in Amazon EC2 API requests]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
 	ClientRequestToken *string
 
 	// The description of the new resource.

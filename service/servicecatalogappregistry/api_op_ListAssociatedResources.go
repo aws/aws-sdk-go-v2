@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all of the resources that are associated with the specified application.
-// Results are paginated. If you share an application, and a consumer account
-// associates a tag query to the application, all of the users who can access the
-// application can also view the tag values in all accounts that are associated
-// with it using this API.
+//	Lists all of the resources that are associated with the specified application.
+//
+// Results are paginated.
+//
+// If you share an application, and a consumer account associates a tag query to
+// the application, all of the users who can access the application can also view
+// the tag values in all accounts that are associated with it using this API.
 func (c *Client) ListAssociatedResources(ctx context.Context, params *ListAssociatedResourcesInput, optFns ...func(*Options)) (*ListAssociatedResourcesOutput, error) {
 	if params == nil {
 		params = &ListAssociatedResourcesInput{}
@@ -33,7 +35,7 @@ func (c *Client) ListAssociatedResources(ctx context.Context, params *ListAssoci
 
 type ListAssociatedResourcesInput struct {
 
-	// The name, ID, or ARN of the application.
+	//  The name, ID, or ARN of the application.
 	//
 	// This member is required.
 	Application *string

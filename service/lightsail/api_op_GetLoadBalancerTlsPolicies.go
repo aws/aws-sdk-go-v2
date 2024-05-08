@@ -12,9 +12,12 @@ import (
 )
 
 // Returns a list of TLS security policies that you can apply to Lightsail load
-// balancers. For more information about load balancer TLS security policies, see
-// Configuring TLS security policies on your Amazon Lightsail load balancers (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy)
-// in the Amazon Lightsail Developer Guide.
+// balancers.
+//
+// For more information about load balancer TLS security policies, see [Configuring TLS security policies on your Amazon Lightsail load balancers] in the
+// Amazon Lightsail Developer Guide.
+//
+// [Configuring TLS security policies on your Amazon Lightsail load balancers]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy
 func (c *Client) GetLoadBalancerTlsPolicies(ctx context.Context, params *GetLoadBalancerTlsPoliciesInput, optFns ...func(*Options)) (*GetLoadBalancerTlsPoliciesOutput, error) {
 	if params == nil {
 		params = &GetLoadBalancerTlsPoliciesInput{}
@@ -32,10 +35,11 @@ func (c *Client) GetLoadBalancerTlsPolicies(ctx context.Context, params *GetLoad
 
 type GetLoadBalancerTlsPoliciesInput struct {
 
-	// The token to advance to the next page of results from your request. To get a
-	// page token, perform an initial GetLoadBalancerTlsPolicies request. If your
-	// results are paginated, the response will return a next page token that you can
-	// specify as the page token in a subsequent request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetLoadBalancerTlsPolicies request. If
+	// your results are paginated, the response will return a next page token that you
+	// can specify as the page token in a subsequent request.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -43,10 +47,12 @@ type GetLoadBalancerTlsPoliciesInput struct {
 
 type GetLoadBalancerTlsPoliciesOutput struct {
 
-	// The token to advance to the next page of results from your request. A next page
-	// token is not returned if there are no more results to display. To get the next
-	// page of results, perform another GetLoadBalancerTlsPolicies request and specify
-	// the next page token using the pageToken parameter.
+	// The token to advance to the next page of results from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetLoadBalancerTlsPolicies
+	// request and specify the next page token using the pageToken parameter.
 	NextPageToken *string
 
 	// An array of objects that describe the TLS security policies that are available.

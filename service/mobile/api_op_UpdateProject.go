@@ -30,12 +30,12 @@ func (c *Client) UpdateProject(ctx context.Context, params *UpdateProjectInput, 
 // Request structure used for requests to update project configuration.
 type UpdateProjectInput struct {
 
-	// Unique project identifier.
+	//  Unique project identifier.
 	//
 	// This member is required.
 	ProjectId *string
 
-	// ZIP or YAML file which contains project configuration to be updated. This
+	//  ZIP or YAML file which contains project configuration to be updated. This
 	// should be the contents of the file downloaded from the URL provided in an export
 	// project operation.
 	Contents []byte
@@ -46,7 +46,7 @@ type UpdateProjectInput struct {
 // Result structure used for requests to updated project configuration.
 type UpdateProjectOutput struct {
 
-	// Detailed information about the updated AWS Mobile Hub project.
+	//  Detailed information about the updated AWS Mobile Hub project.
 	Details *types.ProjectDetails
 
 	// Metadata pertaining to the operation's result.

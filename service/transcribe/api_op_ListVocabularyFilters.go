@@ -12,8 +12,9 @@ import (
 )
 
 // Provides a list of custom vocabulary filters that match the specified criteria.
-// If no criteria are specified, all custom vocabularies are returned. To get
-// detailed information about a specific custom vocabulary filter, use the
+// If no criteria are specified, all custom vocabularies are returned.
+//
+// To get detailed information about a specific custom vocabulary filter, use the
 // operation.
 func (c *Client) ListVocabularyFilters(ctx context.Context, params *ListVocabularyFiltersInput, optFns ...func(*Options)) (*ListVocabularyFiltersOutput, error) {
 	if params == nil {

@@ -12,10 +12,11 @@ import (
 )
 
 // Creates a transfer location for an Amazon EFS file system. DataSync can use
-// this location as a source or destination for transferring data. Before you
-// begin, make sure that you understand how DataSync accesses Amazon EFS file
-// systems (https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html#create-efs-location-access)
-// .
+// this location as a source or destination for transferring data.
+//
+// Before you begin, make sure that you understand how DataSync [accesses Amazon EFS file systems].
+//
+// [accesses Amazon EFS file systems]: https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html#create-efs-location-access
 func (c *Client) CreateLocationEfs(ctx context.Context, params *CreateLocationEfsInput, optFns ...func(*Options)) (*CreateLocationEfsOutput, error) {
 	if params == nil {
 		params = &CreateLocationEfsInput{}
@@ -54,16 +55,18 @@ type CreateLocationEfsInput struct {
 	FileSystemAccessRoleArn *string
 
 	// Specifies whether you want DataSync to use Transport Layer Security (TLS) 1.2
-	// encryption when it copies data to or from the Amazon EFS file system. If you
-	// specify an access point using AccessPointArn or an IAM role using
+	// encryption when it copies data to or from the Amazon EFS file system.
+	//
+	// If you specify an access point using AccessPointArn or an IAM role using
 	// FileSystemAccessRoleArn , you must set this parameter to TLS1_2 .
 	InTransitEncryption types.EfsInTransitEncryption
 
 	// Specifies a mount path for your Amazon EFS file system. This is where DataSync
 	// reads or writes data (depending on if this is a source or destination location).
 	// By default, DataSync uses the root directory, but you can also include
-	// subdirectories. You must specify a value with forward slashes (for example,
-	// /path/to/folder ).
+	// subdirectories.
+	//
+	// You must specify a value with forward slashes (for example, /path/to/folder ).
 	Subdirectory *string
 
 	// Specifies the key-value pair that represents a tag that you want to add to the

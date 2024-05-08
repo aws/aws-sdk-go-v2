@@ -193,6 +193,7 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // License Manager cannot allocate a license to a resource because of its state.
+//
 // For example, you cannot allocate a license to an instance in the process of
 // shutting down.
 type InvalidResourceStateException struct {

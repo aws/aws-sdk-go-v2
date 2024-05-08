@@ -11,12 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing default message type on a configuration set. A message type
-// is a type of messages that you plan to send. If you send account-related
-// messages or time-sensitive messages such as one-time passcodes, choose
-// Transactional. If you plan to send messages that contain marketing material or
-// other promotional content, choose Promotional. This setting applies to your
-// entire Amazon Web Services account.
+// Deletes an existing default message type on a configuration set.
+//
+// A message type is a type of messages that you plan to send. If you send
+// account-related messages or time-sensitive messages such as one-time passcodes,
+// choose Transactional. If you plan to send messages that contain marketing
+// material or other promotional content, choose Promotional. This setting applies
+// to your entire Amazon Web Services account.
 func (c *Client) DeleteDefaultMessageType(ctx context.Context, params *DeleteDefaultMessageTypeInput, optFns ...func(*Options)) (*DeleteDefaultMessageTypeOutput, error) {
 	if params == nil {
 		params = &DeleteDefaultMessageTypeInput{}
@@ -36,7 +37,7 @@ type DeleteDefaultMessageTypeInput struct {
 
 	// The name of the configuration set or the configuration set Amazon Resource Name
 	// (ARN) to delete the default message type from. The ConfigurationSetName and
-	// ConfigurationSetArn can be found using the DescribeConfigurationSets action.
+	// ConfigurationSetArn can be found using the DescribeConfigurationSetsaction.
 	//
 	// This member is required.
 	ConfigurationSetName *string

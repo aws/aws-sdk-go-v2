@@ -14,9 +14,9 @@ import (
 // Imports the specified Windows 10 or 11 Bring Your Own License (BYOL) image into
 // Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that
 // is in your Amazon Web Services account, and you must own the image. For more
-// information about creating BYOL images, see Bring Your Own Windows Desktop
-// Licenses (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html)
-// .
+// information about creating BYOL images, see [Bring Your Own Windows Desktop Licenses].
+//
+// [Bring Your Own Windows Desktop Licenses]: https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html
 func (c *Client) ImportWorkspaceImage(ctx context.Context, params *ImportWorkspaceImageInput, optFns ...func(*Options)) (*ImportWorkspaceImageOutput, error) {
 	if params == nil {
 		params = &ImportWorkspaceImageInput{}
@@ -53,23 +53,30 @@ type ImportWorkspaceImageInput struct {
 	// protocol you want to use for your BYOL Workspace image, either PCoIP, WorkSpaces
 	// Streaming Protocol (WSP), or bring your own protocol (BYOP). To use WSP, specify
 	// a value that ends in _WSP . To use PCoIP, specify a value that does not end in
-	// _WSP . To use BYOP, specify a value that ends in _BYOP . For non-GPU-enabled
-	// bundles (bundles other than Graphics or GraphicsPro), specify BYOL_REGULAR ,
-	// BYOL_REGULAR_WSP , or BYOL_REGULAR_BYOP , depending on the protocol. The
-	// BYOL_REGULAR_BYOP and BYOL_GRAPHICS_G4DN_BYOP values are only supported by
+	// _WSP . To use BYOP, specify a value that ends in _BYOP .
+	//
+	// For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro),
+	// specify BYOL_REGULAR , BYOL_REGULAR_WSP , or BYOL_REGULAR_BYOP , depending on
+	// the protocol.
+	//
+	// The BYOL_REGULAR_BYOP and BYOL_GRAPHICS_G4DN_BYOP values are only supported by
 	// Amazon WorkSpaces Core. Contact your account team to be allow-listed to use
-	// these values. For more information, see Amazon WorkSpaces Core (http://aws.amazon.com/workspaces/core/)
-	// .
+	// these values. For more information, see [Amazon WorkSpaces Core].
+	//
+	// [Amazon WorkSpaces Core]: http://aws.amazon.com/workspaces/core/
 	//
 	// This member is required.
 	IngestionProcess types.WorkspaceImageIngestionProcess
 
 	// If specified, the version of Microsoft Office to subscribe to. Valid only for
 	// Windows 10 and 11 BYOL images. For more information about subscribing to Office
-	// for BYOL images, see Bring Your Own Windows Desktop Licenses (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html)
-	// .
+	// for BYOL images, see [Bring Your Own Windows Desktop Licenses].
+	//
 	//   - Although this parameter is an array, only one item is allowed at this time.
+	//
 	//   - Windows 11 only supports Microsoft_Office_2019 .
+	//
+	// [Bring Your Own Windows Desktop Licenses]: https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html
 	Applications []types.Application
 
 	// The tags. Each WorkSpaces resource can have a maximum of 50 tags.

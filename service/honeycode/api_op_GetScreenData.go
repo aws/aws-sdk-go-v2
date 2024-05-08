@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The GetScreenData API allows retrieval of data from a screen in a Honeycode
+//	The GetScreenData API allows retrieval of data from a screen in a Honeycode
+//
 // app. The API allows setting local variables in the screen to filter, sort or
 // otherwise affect what will be displayed on the screen.
 func (c *Client) GetScreenData(ctx context.Context, params *GetScreenDataInput, optFns ...func(*Options)) (*GetScreenDataOutput, error) {
@@ -46,18 +47,21 @@ type GetScreenDataInput struct {
 	// This member is required.
 	WorkbookId *string
 
-	// The number of results to be returned on a single page. Specify a number between
-	// 1 and 100. The maximum value is 100. This parameter is optional. If you don't
-	// specify this parameter, the default page size is 100.
+	//  The number of results to be returned on a single page. Specify a number
+	// between 1 and 100. The maximum value is 100.
+	//
+	// This parameter is optional. If you don't specify this parameter, the default
+	// page size is 100.
 	MaxResults *int32
 
-	// This parameter is optional. If a nextToken is not specified, the API returns
-	// the first page of data. Pagination tokens expire after 1 hour. If you use a
-	// token that was returned more than an hour back, the API will throw
-	// ValidationException.
+	//  This parameter is optional. If a nextToken is not specified, the API returns
+	// the first page of data.
+	//
+	// Pagination tokens expire after 1 hour. If you use a token that was returned
+	// more than an hour back, the API will throw ValidationException.
 	NextToken *string
 
-	// Variables are optional and are needed only if the screen requires them to
+	//  Variables are optional and are needed only if the screen requires them to
 	// render correctly. Variables are specified as a map where the key is the name of
 	// the variable as defined on the screen. The value is an object which currently
 	// has only one property, rawValue, which holds the value of the variable to be
@@ -74,14 +78,14 @@ type GetScreenDataOutput struct {
 	// This member is required.
 	Results map[string]types.ResultSet
 
-	// Indicates the cursor of the workbook at which the data returned by this
+	//  Indicates the cursor of the workbook at which the data returned by this
 	// workbook is read. Workbook cursor keeps increasing with every update and the
 	// increments are not sequential.
 	//
 	// This member is required.
 	WorkbookCursor int64
 
-	// Provides the pagination token to load the next page if there are more results
+	//  Provides the pagination token to load the next page if there are more results
 	// matching the request. If a pagination token is not present in the response, it
 	// means that all data matching the query has been loaded.
 	NextToken *string

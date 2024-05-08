@@ -37,9 +37,12 @@ type ListResolverConfigsInput struct {
 
 	// (Optional) If the current Amazon Web Services account has more than MaxResults
 	// Resolver configurations, use NextToken to get the second and subsequent pages
-	// of results. For the first ListResolverConfigs request, omit this value. For the
-	// second and subsequent requests, get the value of NextToken from the previous
-	// response and specify that value for NextToken in the request.
+	// of results.
+	//
+	// For the first ListResolverConfigs request, omit this value.
+	//
+	// For the second and subsequent requests, get the value of NextToken from the
+	// previous response and specify that value for NextToken in the request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,11 +52,12 @@ type ListResolverConfigsOutput struct {
 
 	// If a response includes the last of the Resolver configurations that are
 	// associated with the current Amazon Web Services account, NextToken doesn't
-	// appear in the response. If a response doesn't include the last of the
-	// configurations, you can get more configurations by submitting another
-	// ListResolverConfigs request. Get the value of NextToken that Amazon Route 53
-	// returned in the previous response and include it in NextToken in the next
-	// request.
+	// appear in the response.
+	//
+	// If a response doesn't include the last of the configurations, you can get more
+	// configurations by submitting another ListResolverConfigs request. Get the value
+	// of NextToken that Amazon Route 53 returned in the previous response and include
+	// it in NextToken in the next request.
 	NextToken *string
 
 	// An array that contains one ResolverConfigs element for each Resolver

@@ -14,6 +14,7 @@ const (
 
 // Values returns all known values for CachePolicyCookieBehavior. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CachePolicyCookieBehavior) Values() []CachePolicyCookieBehavior {
 	return []CachePolicyCookieBehavior{
@@ -34,6 +35,7 @@ const (
 
 // Values returns all known values for CachePolicyHeaderBehavior. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CachePolicyHeaderBehavior) Values() []CachePolicyHeaderBehavior {
 	return []CachePolicyHeaderBehavior{
@@ -54,8 +56,9 @@ const (
 
 // Values returns all known values for CachePolicyQueryStringBehavior. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CachePolicyQueryStringBehavior) Values() []CachePolicyQueryStringBehavior {
 	return []CachePolicyQueryStringBehavior{
 		"none",
@@ -74,8 +77,9 @@ const (
 )
 
 // Values returns all known values for CachePolicyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CachePolicyType) Values() []CachePolicyType {
 	return []CachePolicyType{
 		"managed",
@@ -93,8 +97,9 @@ const (
 )
 
 // Values returns all known values for CertificateSource. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CertificateSource) Values() []CertificateSource {
 	return []CertificateSource{
 		"cloudfront",
@@ -113,8 +118,9 @@ const (
 
 // Values returns all known values for ContinuousDeploymentPolicyType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContinuousDeploymentPolicyType) Values() []ContinuousDeploymentPolicyType {
 	return []ContinuousDeploymentPolicyType{
 		"SingleWeight",
@@ -133,8 +139,9 @@ const (
 )
 
 // Values returns all known values for EventType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"viewer-request",
@@ -152,8 +159,9 @@ const (
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Format) Values() []Format {
 	return []Format{
 		"URLEncoded",
@@ -169,8 +177,9 @@ const (
 )
 
 // Values returns all known values for FrameOptionsList. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FrameOptionsList) Values() []FrameOptionsList {
 	return []FrameOptionsList{
 		"DENY",
@@ -187,8 +196,9 @@ const (
 )
 
 // Values returns all known values for FunctionRuntime. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FunctionRuntime) Values() []FunctionRuntime {
 	return []FunctionRuntime{
 		"cloudfront-js-1.0",
@@ -205,8 +215,9 @@ const (
 )
 
 // Values returns all known values for FunctionStage. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FunctionStage) Values() []FunctionStage {
 	return []FunctionStage{
 		"DEVELOPMENT",
@@ -224,8 +235,9 @@ const (
 )
 
 // Values returns all known values for GeoRestrictionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GeoRestrictionType) Values() []GeoRestrictionType {
 	return []GeoRestrictionType{
 		"blacklist",
@@ -245,8 +257,9 @@ const (
 )
 
 // Values returns all known values for HttpVersion. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HttpVersion) Values() []HttpVersion {
 	return []HttpVersion{
 		"http1.1",
@@ -266,8 +279,9 @@ const (
 )
 
 // Values returns all known values for ICPRecordalStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ICPRecordalStatus) Values() []ICPRecordalStatus {
 	return []ICPRecordalStatus{
 		"APPROVED",
@@ -284,8 +298,9 @@ const (
 )
 
 // Values returns all known values for ImportSourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImportSourceType) Values() []ImportSourceType {
 	return []ImportSourceType{
 		"S3",
@@ -302,8 +317,9 @@ const (
 )
 
 // Values returns all known values for ItemSelection. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ItemSelection) Values() []ItemSelection {
 	return []ItemSelection{
 		"none",
@@ -326,8 +342,9 @@ const (
 )
 
 // Values returns all known values for Method. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Method) Values() []Method {
 	return []Method{
 		"GET",
@@ -354,8 +371,9 @@ const (
 )
 
 // Values returns all known values for MinimumProtocolVersion. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MinimumProtocolVersion) Values() []MinimumProtocolVersion {
 	return []MinimumProtocolVersion{
 		"SSLv3",
@@ -380,8 +398,9 @@ const (
 
 // Values returns all known values for OriginAccessControlOriginTypes. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OriginAccessControlOriginTypes) Values() []OriginAccessControlOriginTypes {
 	return []OriginAccessControlOriginTypes{
 		"s3",
@@ -402,8 +421,9 @@ const (
 
 // Values returns all known values for OriginAccessControlSigningBehaviors. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OriginAccessControlSigningBehaviors) Values() []OriginAccessControlSigningBehaviors {
 	return []OriginAccessControlSigningBehaviors{
 		"never",
@@ -421,8 +441,9 @@ const (
 
 // Values returns all known values for OriginAccessControlSigningProtocols. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OriginAccessControlSigningProtocols) Values() []OriginAccessControlSigningProtocols {
 	return []OriginAccessControlSigningProtocols{
 		"sigv4",
@@ -439,8 +460,9 @@ const (
 )
 
 // Values returns all known values for OriginProtocolPolicy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OriginProtocolPolicy) Values() []OriginProtocolPolicy {
 	return []OriginProtocolPolicy{
 		"http-only",
@@ -461,8 +483,9 @@ const (
 
 // Values returns all known values for OriginRequestPolicyCookieBehavior. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OriginRequestPolicyCookieBehavior) Values() []OriginRequestPolicyCookieBehavior {
 	return []OriginRequestPolicyCookieBehavior{
 		"none",
@@ -485,8 +508,9 @@ const (
 
 // Values returns all known values for OriginRequestPolicyHeaderBehavior. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OriginRequestPolicyHeaderBehavior) Values() []OriginRequestPolicyHeaderBehavior {
 	return []OriginRequestPolicyHeaderBehavior{
 		"none",
@@ -509,8 +533,9 @@ const (
 
 // Values returns all known values for OriginRequestPolicyQueryStringBehavior.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OriginRequestPolicyQueryStringBehavior) Values() []OriginRequestPolicyQueryStringBehavior {
 	return []OriginRequestPolicyQueryStringBehavior{
 		"none",
@@ -529,8 +554,9 @@ const (
 )
 
 // Values returns all known values for OriginRequestPolicyType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OriginRequestPolicyType) Values() []OriginRequestPolicyType {
 	return []OriginRequestPolicyType{
 		"managed",
@@ -548,8 +574,9 @@ const (
 )
 
 // Values returns all known values for PriceClass. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PriceClass) Values() []PriceClass {
 	return []PriceClass{
 		"PriceClass_100",
@@ -568,8 +595,9 @@ const (
 
 // Values returns all known values for RealtimeMetricsSubscriptionStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RealtimeMetricsSubscriptionStatus) Values() []RealtimeMetricsSubscriptionStatus {
 	return []RealtimeMetricsSubscriptionStatus{
 		"Enabled",
@@ -592,8 +620,9 @@ const (
 )
 
 // Values returns all known values for ReferrerPolicyList. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReferrerPolicyList) Values() []ReferrerPolicyList {
 	return []ReferrerPolicyList{
 		"no-referrer",
@@ -623,8 +652,9 @@ const (
 
 // Values returns all known values for
 // ResponseHeadersPolicyAccessControlAllowMethodsValues. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResponseHeadersPolicyAccessControlAllowMethodsValues) Values() []ResponseHeadersPolicyAccessControlAllowMethodsValues {
 	return []ResponseHeadersPolicyAccessControlAllowMethodsValues{
 		"GET",
@@ -648,6 +678,7 @@ const (
 
 // Values returns all known values for ResponseHeadersPolicyType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ResponseHeadersPolicyType) Values() []ResponseHeadersPolicyType {
 	return []ResponseHeadersPolicyType{
@@ -667,8 +698,9 @@ const (
 )
 
 // Values returns all known values for SslProtocol. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SslProtocol) Values() []SslProtocol {
 	return []SslProtocol{
 		"SSLv3",
@@ -688,8 +720,9 @@ const (
 )
 
 // Values returns all known values for SSLSupportMethod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SSLSupportMethod) Values() []SSLSupportMethod {
 	return []SSLSupportMethod{
 		"sni-only",
@@ -708,8 +741,9 @@ const (
 )
 
 // Values returns all known values for ViewerProtocolPolicy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ViewerProtocolPolicy) Values() []ViewerProtocolPolicy {
 	return []ViewerProtocolPolicy{
 		"allow-all",

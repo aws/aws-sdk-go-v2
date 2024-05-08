@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds one or more actions to an Actions dataset. For more information see
-// Importing actions individually (https://docs.aws.amazon.com/personalize/latest/dg/importing-actions.html)
-// .
+// Adds one or more actions to an Actions dataset. For more information see [Importing actions individually].
+//
+// [Importing actions individually]: https://docs.aws.amazon.com/personalize/latest/dg/importing-actions.html
 func (c *Client) PutActions(ctx context.Context, params *PutActionsInput, optFns ...func(*Options)) (*PutActionsOutput, error) {
 	if params == nil {
 		params = &PutActionsInput{}

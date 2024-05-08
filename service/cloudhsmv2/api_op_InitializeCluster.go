@@ -14,7 +14,7 @@ import (
 // Claims an AWS CloudHSM cluster by submitting the cluster certificate issued by
 // your issuing certificate authority (CA) and the CA's root certificate. Before
 // you can claim a cluster, you must sign the cluster's certificate signing request
-// (CSR) with your issuing CA. To get the cluster's CSR, use DescribeClusters .
+// (CSR) with your issuing CA. To get the cluster's CSR, use DescribeClusters.
 func (c *Client) InitializeCluster(ctx context.Context, params *InitializeClusterInput, optFns ...func(*Options)) (*InitializeClusterOutput, error) {
 	if params == nil {
 		params = &InitializeClusterInput{}
@@ -33,7 +33,7 @@ func (c *Client) InitializeCluster(ctx context.Context, params *InitializeCluste
 type InitializeClusterInput struct {
 
 	// The identifier (ID) of the cluster that you are claiming. To find the cluster
-	// ID, use DescribeClusters .
+	// ID, use DescribeClusters.
 	//
 	// This member is required.
 	ClusterId *string

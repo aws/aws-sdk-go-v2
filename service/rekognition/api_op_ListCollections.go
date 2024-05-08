@@ -12,9 +12,13 @@ import (
 
 // Returns list of collection IDs in your account. If the result is truncated, the
 // response also provides a NextToken that you can use in the subsequent request
-// to fetch the next set of collection IDs. For an example, see Listing collections
-// in the Amazon Rekognition Developer Guide. This operation requires permissions
-// to perform the rekognition:ListCollections action.
+// to fetch the next set of collection IDs.
+//
+// For an example, see Listing collections in the Amazon Rekognition Developer
+// Guide.
+//
+// This operation requires permissions to perform the rekognition:ListCollections
+// action.
 func (c *Client) ListCollections(ctx context.Context, params *ListCollectionsInput, optFns ...func(*Options)) (*ListCollectionsOutput, error) {
 	if params == nil {
 		params = &ListCollectionsInput{}

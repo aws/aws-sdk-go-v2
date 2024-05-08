@@ -31,7 +31,9 @@ func (c *Client) CreateAccessor(ctx context.Context, params *CreateAccessorInput
 
 type CreateAccessorInput struct {
 
-	// The type of accessor. Currently, accessor type is restricted to BILLING_TOKEN .
+	// The type of accessor.
+	//
+	// Currently, accessor type is restricted to BILLING_TOKEN .
 	//
 	// This member is required.
 	AccessorType types.AccessorType
@@ -45,22 +47,31 @@ type CreateAccessorInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// The blockchain network that the Accessor token is created for. We recommend
-	// using the appropriate networkType value for the blockchain network that you are
-	// creating the Accessor token for. You cannnot use the value
+	// The blockchain network that the Accessor token is created for.
+	//
+	// We recommend using the appropriate networkType value for the blockchain network
+	// that you are creating the Accessor token for. You cannnot use the value
 	// ETHEREUM_MAINNET_AND_GOERLI to specify a networkType for your Accessor token.
+	//
 	// The default value of ETHEREUM_MAINNET_AND_GOERLI is only applied:
+	//
 	//   - when the CreateAccessor action does not set a networkType .
+	//
 	//   - to all existing Accessor tokens that were created before the networkType
 	//   property was introduced.
 	NetworkType types.AccessorNetworkType
 
-	// Tags to assign to the Accessor. Each tag consists of a key and an optional
-	// value. You can specify multiple key-value pairs in a single request with an
-	// overall maximum of 50 tags allowed per resource. For more information about
-	// tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	// Tags to assign to the Accessor.
+	//
+	// Each tag consists of a key and an optional value. You can specify multiple
+	// key-value pairs in a single request with an overall maximum of 50 tags allowed
+	// per resource.
+	//
+	// For more information about tags, see [Tagging Resources] in the Amazon Managed Blockchain Ethereum
+	// Developer Guide, or [Tagging Resources]in the Amazon Managed Blockchain Hyperledger Fabric
+	// Developer Guide.
+	//
+	// [Tagging Resources]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde

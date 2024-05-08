@@ -29,16 +29,21 @@ func (c *Client) PutDataProtectionPolicy(ctx context.Context, params *PutDataPro
 
 type PutDataProtectionPolicyInput struct {
 
-	// The JSON serialization of the topic's DataProtectionPolicy . The
-	// DataProtectionPolicy must be in JSON string format. Length Constraints: Maximum
-	// length of 30,720.
+	// The JSON serialization of the topic's DataProtectionPolicy .
+	//
+	// The DataProtectionPolicy must be in JSON string format.
+	//
+	// Length Constraints: Maximum length of 30,720.
 	//
 	// This member is required.
 	DataProtectionPolicy *string
 
-	// The ARN of the topic whose DataProtectionPolicy you want to add or update. For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// The ARN of the topic whose DataProtectionPolicy you want to add or update.
+	//
+	// For more information about ARNs, see [Amazon Resource Names (ARNs)] in the Amazon Web Services General
+	// Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	ResourceArn *string

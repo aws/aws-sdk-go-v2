@@ -12,21 +12,34 @@ import (
 )
 
 // BatchMeterUsage is called from a SaaS application listed on AWS Marketplace to
-// post metering records for a set of customers. For identical requests, the API is
-// idempotent; requests can be retried with the same records or a subset of the
-// input records. Every request to BatchMeterUsage is for one product. If you need
-// to meter usage for multiple products, you must make multiple calls to
-// BatchMeterUsage . Usage records are expected to be submitted as quickly as
-// possible after the event that is being recorded, and are not accepted more than
-// 6 hours after the event. BatchMeterUsage can process up to 25 UsageRecords at a
-// time. A UsageRecord can optionally include multiple usage allocations, to
-// provide customers with usage data split into buckets by tags that you define (or
-// allow the customer to define). BatchMeterUsage returns a list of
-// UsageRecordResult objects, showing the result for each UsageRecord , as well as
-// a list of UnprocessedRecords , indicating errors in the service side that you
-// should retry. BatchMeterUsage requests must be less than 1MB in size. For an
-// example of using BatchMeterUsage , see  BatchMeterUsage code example (https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example)
-// in the AWS Marketplace Seller Guide.
+// post metering records for a set of customers.
+//
+// For identical requests, the API is idempotent; requests can be retried with the
+// same records or a subset of the input records.
+//
+// Every request to BatchMeterUsage is for one product. If you need to meter usage
+// for multiple products, you must make multiple calls to BatchMeterUsage .
+//
+// Usage records are expected to be submitted as quickly as possible after the
+// event that is being recorded, and are not accepted more than 6 hours after the
+// event.
+//
+// BatchMeterUsage can process up to 25 UsageRecords at a time.
+//
+// A UsageRecord can optionally include multiple usage allocations, to provide
+// customers with usage data split into buckets by tags that you define (or allow
+// the customer to define).
+//
+// BatchMeterUsage returns a list of UsageRecordResult objects, showing the result
+// for each UsageRecord , as well as a list of UnprocessedRecords , indicating
+// errors in the service side that you should retry.
+//
+// BatchMeterUsage requests must be less than 1MB in size.
+//
+// For an example of using BatchMeterUsage , see [BatchMeterUsage code example] in the AWS Marketplace Seller
+// Guide.
+//
+// [BatchMeterUsage code example]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example
 func (c *Client) BatchMeterUsage(ctx context.Context, params *BatchMeterUsageInput, optFns ...func(*Options)) (*BatchMeterUsageOutput, error) {
 	if params == nil {
 		params = &BatchMeterUsageInput{}

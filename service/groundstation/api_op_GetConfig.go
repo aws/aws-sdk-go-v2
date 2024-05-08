@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns Config information. Only one Config response can be returned.
+// Returns Config information.
+//
+// Only one Config response can be returned.
 func (c *Client) GetConfig(ctx context.Context, params *GetConfigInput, optFns ...func(*Options)) (*GetConfigOutput, error) {
 	if params == nil {
 		params = &GetConfigInput{}

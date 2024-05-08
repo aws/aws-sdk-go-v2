@@ -12,8 +12,10 @@ import (
 )
 
 // Provides a list of Call Analytics categories, including all rules that make up
-// each category. To get detailed information about a specific Call Analytics
-// category, use the operation.
+// each category.
+//
+// To get detailed information about a specific Call Analytics category, use the
+// operation.
 func (c *Client) ListCallAnalyticsCategories(ctx context.Context, params *ListCallAnalyticsCategoriesInput, optFns ...func(*Options)) (*ListCallAnalyticsCategoriesOutput, error) {
 	if params == nil {
 		params = &ListCallAnalyticsCategoriesInput{}

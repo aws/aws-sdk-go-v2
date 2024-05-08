@@ -12,10 +12,12 @@ import (
 )
 
 // List of SQL statements. By default, only finished statements are shown. A token
-// is returned to page through the statement list. For more information about the
-// Amazon Redshift Data API and CLI usage examples, see Using the Amazon Redshift
-// Data API (https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the
-// Amazon Redshift Management Guide.
+// is returned to page through the statement list.
+//
+// For more information about the Amazon Redshift Data API and CLI usage examples,
+// see [Using the Amazon Redshift Data API]in the Amazon Redshift Management Guide.
+//
+// [Using the Amazon Redshift Data API]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
 func (c *Client) ListStatements(ctx context.Context, params *ListStatementsInput, optFns ...func(*Options)) (*ListStatementsOutput, error) {
 	if params == nil {
 		params = &ListStatementsInput{}
@@ -60,13 +62,20 @@ type ListStatementsInput struct {
 	StatementName *string
 
 	// The status of the SQL statement to list. Status values are defined as follows:
+	//
 	//   - ABORTED - The query run was stopped by the user.
+	//
 	//   - ALL - A status value that includes all query statuses. This value can be
 	//   used to filter results.
+	//
 	//   - FAILED - The query run failed.
+	//
 	//   - FINISHED - The query has finished running.
+	//
 	//   - PICKED - The query has been chosen to be run.
+	//
 	//   - STARTED - The query run has started.
+	//
 	//   - SUBMITTED - The query was submitted, but not yet processed.
 	Status types.StatusString
 

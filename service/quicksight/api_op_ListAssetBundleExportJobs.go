@@ -33,7 +33,8 @@ func (c *Client) ListAssetBundleExportJobs(ctx context.Context, params *ListAsse
 
 type ListAssetBundleExportJobsInput struct {
 
-	// The ID of the Amazon Web Services account that the export jobs were executed in.
+	// The ID of the Amazon Web Services account that the export jobs were executed
+	// in.
 	//
 	// This member is required.
 	AwsAccountId *string

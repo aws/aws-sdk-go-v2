@@ -36,7 +36,9 @@ type ListComponentsInput struct {
 	// The token to be used for the next set of paginated results.
 	NextToken *string
 
-	// The scope of the components to list. Default: PRIVATE
+	// The scope of the components to list.
+	//
+	// Default: PRIVATE
 	Scope types.ComponentVisibilityScope
 
 	noSmithyDocumentSerde

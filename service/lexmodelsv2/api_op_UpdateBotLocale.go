@@ -42,8 +42,9 @@ type UpdateBotLocaleInput struct {
 	BotVersion *string
 
 	// The identifier of the language and locale to update. The string must match one
-	// of the supported locales. For more information, see Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
-	// .
+	// of the supported locales. For more information, see [Supported languages].
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string

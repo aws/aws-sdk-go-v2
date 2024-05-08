@@ -12,8 +12,9 @@ import (
 )
 
 // Deletes a cluster snapshot. If the snapshot is being copied, the copy operation
-// is terminated. The cluster snapshot must be in the available state to be
-// deleted.
+// is terminated.
+//
+// The cluster snapshot must be in the available state to be deleted.
 func (c *Client) DeleteDBClusterSnapshot(ctx context.Context, params *DeleteDBClusterSnapshotInput, optFns ...func(*Options)) (*DeleteDBClusterSnapshotOutput, error) {
 	if params == nil {
 		params = &DeleteDBClusterSnapshotInput{}
@@ -29,11 +30,13 @@ func (c *Client) DeleteDBClusterSnapshot(ctx context.Context, params *DeleteDBCl
 	return out, nil
 }
 
-// Represents the input to DeleteDBClusterSnapshot .
+// Represents the input to DeleteDBClusterSnapshot.
 type DeleteDBClusterSnapshotInput struct {
 
-	// The identifier of the cluster snapshot to delete. Constraints: Must be the name
-	// of an existing cluster snapshot in the available state.
+	// The identifier of the cluster snapshot to delete.
+	//
+	// Constraints: Must be the name of an existing cluster snapshot in the available
+	// state.
 	//
 	// This member is required.
 	DBClusterSnapshotIdentifier *string

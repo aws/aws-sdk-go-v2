@@ -39,9 +39,11 @@ type DescribeDashboardInput struct {
 
 type DescribeDashboardOutput struct {
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the dashboard, which has the following format.
-	// arn:${Partition}:iotsitewise:${Region}:${Account}:dashboard/${DashboardId}
+	// The [ARN] of the dashboard, which has the following format.
+	//
+	//     arn:${Partition}:iotsitewise:${Region}:${Account}:dashboard/${DashboardId}
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	DashboardArn *string
@@ -51,9 +53,10 @@ type DescribeDashboardOutput struct {
 	// This member is required.
 	DashboardCreationDate *time.Time
 
-	// The dashboard's definition JSON literal. For detailed information, see Creating
-	// dashboards (CLI) (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html)
-	// in the IoT SiteWise User Guide.
+	// The dashboard's definition JSON literal. For detailed information, see [Creating dashboards (CLI)] in the
+	// IoT SiteWise User Guide.
+	//
+	// [Creating dashboards (CLI)]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html
 	//
 	// This member is required.
 	DashboardDefinition *string

@@ -31,8 +31,9 @@ type DescribeDefaultParametersInput struct {
 
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so
-	// that the remaining results can be retrieved. The value for MaxResults must be
-	// between 20 and 100.
+	// that the remaining results can be retrieved.
+	//
+	// The value for MaxResults must be between 20 and 100.
 	MaxResults *int32
 
 	// An optional token returned from a prior request. Use this token for pagination

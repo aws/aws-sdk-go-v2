@@ -10,8 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes tags from a specified resource group. Minimum permissions To run this
-// command, you must have the following permissions:
+// Deletes tags from a specified resource group.
+//
+// # Minimum permissions
+//
+// To run this command, you must have the following permissions:
+//
 //   - resource-groups:Untag
 func (c *Client) Untag(ctx context.Context, params *UntagInput, optFns ...func(*Options)) (*UntagOutput, error) {
 	if params == nil {

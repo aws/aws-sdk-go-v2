@@ -36,13 +36,18 @@ type UpdatePrimaryEmailAddressInput struct {
 	// This member is required.
 	Email *string
 
-	// The user, group, or resource to update. The identifier can accept UseriD,
-	// ResourceId, or GroupId, Username, Resourcename, or Groupname, or email. The
-	// following identity formats are available:
+	// The user, group, or resource to update.
+	//
+	// The identifier can accept UseriD, ResourceId, or GroupId, Username,
+	// Resourcename, or Groupname, or email. The following identity formats are
+	// available:
+	//
 	//   - Entity ID: 12345678-1234-1234-1234-123456789012,
 	//   r-0123456789a0123456789b0123456789, or
 	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//
 	//   - Email address: entity@domain.tld
+	//
 	//   - Entity name: entity
 	//
 	// This member is required.

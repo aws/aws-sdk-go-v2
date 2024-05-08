@@ -12,9 +12,9 @@ import (
 )
 
 // Associates an access policy and its scope to an access entry. For more
-// information about associating access policies, see Associating and
-// disassociating access policies to and from access entries (https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html)
-// in the Amazon EKS User Guide.
+// information about associating access policies, see [Associating and disassociating access policies to and from access entries]in the Amazon EKS User Guide.
+//
+// [Associating and disassociating access policies to and from access entries]: https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html
 func (c *Client) AssociateAccessPolicy(ctx context.Context, params *AssociateAccessPolicyInput, optFns ...func(*Options)) (*AssociateAccessPolicyOutput, error) {
 	if params == nil {
 		params = &AssociateAccessPolicyInput{}

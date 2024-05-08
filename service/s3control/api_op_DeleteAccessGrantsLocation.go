@@ -17,11 +17,14 @@ import (
 
 // Deregisters a location from your S3 Access Grants instance. You can only delete
 // a location registration from an S3 Access Grants instance if there are no grants
-// associated with this location. See Delete a grant (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html)
-// for information on how to delete grants. You need to have at least one
-// registered location in your S3 Access Grants instance in order to create access
-// grants. Permissions You must have the s3:DeleteAccessGrantsLocation permission
-// to use this operation.
+// associated with this location. See [Delete a grant]for information on how to delete grants. You
+// need to have at least one registered location in your S3 Access Grants instance
+// in order to create access grants.
+//
+// Permissions You must have the s3:DeleteAccessGrantsLocation permission to use
+// this operation.
+//
+// [Delete a grant]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html
 func (c *Client) DeleteAccessGrantsLocation(ctx context.Context, params *DeleteAccessGrantsLocationInput, optFns ...func(*Options)) (*DeleteAccessGrantsLocationOutput, error) {
 	if params == nil {
 		params = &DeleteAccessGrantsLocationInput{}

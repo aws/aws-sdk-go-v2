@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ChangeAction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeAction) Values() []ChangeAction {
 	return []ChangeAction{
 		"INSERT",
@@ -30,8 +31,9 @@ const (
 )
 
 // Values returns all known values for ChangeTokenStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeTokenStatus) Values() []ChangeTokenStatus {
 	return []ChangeTokenStatus{
 		"PROVISIONED",
@@ -53,8 +55,9 @@ const (
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComparisonOperator) Values() []ComparisonOperator {
 	return []ComparisonOperator{
 		"EQ",
@@ -74,8 +77,9 @@ const (
 )
 
 // Values returns all known values for GeoMatchConstraintType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GeoMatchConstraintType) Values() []GeoMatchConstraintType {
 	return []GeoMatchConstraintType{
 		"Country",
@@ -338,8 +342,9 @@ const (
 )
 
 // Values returns all known values for GeoMatchConstraintValue. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GeoMatchConstraintValue) Values() []GeoMatchConstraintValue {
 	return []GeoMatchConstraintValue{
 		"AF",
@@ -603,8 +608,9 @@ const (
 )
 
 // Values returns all known values for IPSetDescriptorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IPSetDescriptorType) Values() []IPSetDescriptorType {
 	return []IPSetDescriptorType{
 		"IPV4",
@@ -626,8 +632,9 @@ const (
 )
 
 // Values returns all known values for MatchFieldType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MatchFieldType) Values() []MatchFieldType {
 	return []MatchFieldType{
 		"URI",
@@ -654,8 +661,9 @@ const (
 )
 
 // Values returns all known values for MigrationErrorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MigrationErrorType) Values() []MigrationErrorType {
 	return []MigrationErrorType{
 		"ENTITY_NOT_SUPPORTED",
@@ -693,8 +701,9 @@ const (
 )
 
 // Values returns all known values for ParameterExceptionField. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ParameterExceptionField) Values() []ParameterExceptionField {
 	return []ParameterExceptionField{
 		"CHANGE_ACTION",
@@ -730,6 +739,7 @@ const (
 
 // Values returns all known values for ParameterExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ParameterExceptionReason) Values() []ParameterExceptionReason {
 	return []ParameterExceptionReason{
@@ -752,8 +762,9 @@ const (
 )
 
 // Values returns all known values for PositionalConstraint. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PositionalConstraint) Values() []PositionalConstraint {
 	return []PositionalConstraint{
 		"EXACTLY",
@@ -778,8 +789,9 @@ const (
 )
 
 // Values returns all known values for PredicateType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PredicateType) Values() []PredicateType {
 	return []PredicateType{
 		"IPMatch",
@@ -800,8 +812,9 @@ const (
 )
 
 // Values returns all known values for RateKey. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RateKey) Values() []RateKey {
 	return []RateKey{
 		"IP",
@@ -817,8 +830,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"APPLICATION_LOAD_BALANCER",
@@ -839,8 +853,9 @@ const (
 )
 
 // Values returns all known values for TextTransformation. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TextTransformation) Values() []TextTransformation {
 	return []TextTransformation{
 		"NONE",
@@ -862,8 +877,9 @@ const (
 )
 
 // Values returns all known values for WafActionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WafActionType) Values() []WafActionType {
 	return []WafActionType{
 		"BLOCK",
@@ -881,8 +897,9 @@ const (
 )
 
 // Values returns all known values for WafOverrideActionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WafOverrideActionType) Values() []WafOverrideActionType {
 	return []WafOverrideActionType{
 		"NONE",
@@ -900,8 +917,9 @@ const (
 )
 
 // Values returns all known values for WafRuleType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WafRuleType) Values() []WafRuleType {
 	return []WafRuleType{
 		"REGULAR",

@@ -85,9 +85,14 @@ type DescribeSpaceOutput struct {
 	// IAM Identity Center (Successor to Amazon Web Services Single Sign-On)
 	// authentication, users can navigate to the URL after appending the respective
 	// redirect parameter for the application type to be federated through Amazon Web
-	// Services IAM Identity Center. The following application types are supported:
+	// Services IAM Identity Center.
+	//
+	// The following application types are supported:
+	//
 	//   - Studio Classic: &redirect=JupyterServer
+	//
 	//   - JupyterLab: &redirect=JupyterLab
+	//
 	//   - Code Editor, based on Code-OSS, Visual Studio Code - Open Source:
 	//   &redirect=CodeEditor
 	Url *string

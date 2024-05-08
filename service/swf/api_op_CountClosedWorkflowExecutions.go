@@ -12,25 +12,36 @@ import (
 )
 
 // Returns the number of closed workflow executions within the given domain that
-// meet the specified filtering criteria. This operation is eventually consistent.
-// The results are best effort and may not exactly reflect recent updates and
-// changes. Access Control You can use IAM policies to control this action's access
-// to Amazon SWF resources as follows:
+// meet the specified filtering criteria.
+//
+// This operation is eventually consistent. The results are best effort and may
+// not exactly reflect recent updates and changes.
+//
+// # Access Control
+//
+// You can use IAM policies to control this action's access to Amazon SWF
+// resources as follows:
+//
 //   - Use a Resource element with the domain name to limit the action to only
 //     specified domains.
+//
 //   - Use an Action element to allow or deny permission to call this action.
+//
 //   - Constrain the following parameters by using a Condition element with the
 //     appropriate keys.
+//
 //   - tagFilter.tag : String constraint. The key is swf:tagFilter.tag .
+//
 //   - typeFilter.name : String constraint. The key is swf:typeFilter.name .
+//
 //   - typeFilter.version : String constraint. The key is swf:typeFilter.version .
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or the
 // parameter values fall outside the specified constraints, the action fails. The
 // associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED .
-// For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
-// in the Amazon SWF Developer Guide.
+// For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows]in the Amazon SWF Developer Guide.
+//
+// [Using IAM to Manage Access to Amazon SWF Workflows]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
 func (c *Client) CountClosedWorkflowExecutions(ctx context.Context, params *CountClosedWorkflowExecutionsInput, optFns ...func(*Options)) (*CountClosedWorkflowExecutionsOutput, error) {
 	if params == nil {
 		params = &CountClosedWorkflowExecutionsInput{}
@@ -55,31 +66,42 @@ type CountClosedWorkflowExecutionsInput struct {
 
 	// If specified, only workflow executions that match this close status are
 	// counted. This filter has an affect only if executionStatus is specified as
-	// CLOSED . closeStatusFilter , executionFilter , typeFilter and tagFilter are
-	// mutually exclusive. You can specify at most one of these in a request.
+	// CLOSED .
+	//
+	// closeStatusFilter , executionFilter , typeFilter and tagFilter are mutually
+	// exclusive. You can specify at most one of these in a request.
 	CloseStatusFilter *types.CloseStatusFilter
 
 	// If specified, only workflow executions that meet the close time criteria of the
-	// filter are counted. startTimeFilter and closeTimeFilter are mutually exclusive.
-	// You must specify one of these in a request but not both.
+	// filter are counted.
+	//
+	// startTimeFilter and closeTimeFilter are mutually exclusive. You must specify
+	// one of these in a request but not both.
 	CloseTimeFilter *types.ExecutionTimeFilter
 
 	// If specified, only workflow executions matching the WorkflowId in the filter
-	// are counted. closeStatusFilter , executionFilter , typeFilter and tagFilter are
-	// mutually exclusive. You can specify at most one of these in a request.
+	// are counted.
+	//
+	// closeStatusFilter , executionFilter , typeFilter and tagFilter are mutually
+	// exclusive. You can specify at most one of these in a request.
 	ExecutionFilter *types.WorkflowExecutionFilter
 
 	// If specified, only workflow executions that meet the start time criteria of the
-	// filter are counted. startTimeFilter and closeTimeFilter are mutually exclusive.
-	// You must specify one of these in a request but not both.
+	// filter are counted.
+	//
+	// startTimeFilter and closeTimeFilter are mutually exclusive. You must specify
+	// one of these in a request but not both.
 	StartTimeFilter *types.ExecutionTimeFilter
 
 	// If specified, only executions that have a tag that matches the filter are
-	// counted. closeStatusFilter , executionFilter , typeFilter and tagFilter are
-	// mutually exclusive. You can specify at most one of these in a request.
+	// counted.
+	//
+	// closeStatusFilter , executionFilter , typeFilter and tagFilter are mutually
+	// exclusive. You can specify at most one of these in a request.
 	TagFilter *types.TagFilter
 
 	// If specified, indicates the type of the workflow executions to be counted.
+	//
 	// closeStatusFilter , executionFilter , typeFilter and tagFilter are mutually
 	// exclusive. You can specify at most one of these in a request.
 	TypeFilter *types.WorkflowTypeFilter
@@ -87,8 +109,7 @@ type CountClosedWorkflowExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the count of workflow executions returned from
-// CountOpenWorkflowExecutions or CountClosedWorkflowExecutions
+// Contains the count of workflow executions returned from CountOpenWorkflowExecutions or CountClosedWorkflowExecutions
 type CountClosedWorkflowExecutionsOutput struct {
 
 	// The number of workflow executions.

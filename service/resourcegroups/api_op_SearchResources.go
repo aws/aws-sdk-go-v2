@@ -12,12 +12,19 @@ import (
 )
 
 // Returns a list of Amazon Web Services resource identifiers that matches the
-// specified query. The query uses the same format as a resource query in a
-// CreateGroup or UpdateGroupQuery operation. Minimum permissions To run this
-// command, you must have the following permissions:
+// specified query. The query uses the same format as a resource query in a CreateGroupor UpdateGroupQuery
+// operation.
+//
+// # Minimum permissions
+//
+// To run this command, you must have the following permissions:
+//
 //   - resource-groups:SearchResources
+//
 //   - cloudformation:DescribeStacks
+//
 //   - cloudformation:ListStackResources
+//
 //   - tag:GetResources
 func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInput, optFns ...func(*Options)) (*SearchResourcesOutput, error) {
 	if params == nil {
@@ -37,7 +44,7 @@ func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInp
 type SearchResourcesInput struct {
 
 	// The search query, using the same formats that are supported for resource group
-	// definition. For more information, see CreateGroup .
+	// definition. For more information, see CreateGroup.
 	//
 	// This member is required.
 	ResourceQuery *types.ResourceQuery
@@ -71,9 +78,13 @@ type SearchResourcesOutput struct {
 	NextToken *string
 
 	// A list of QueryError objects. Each error contains an ErrorCode and Message .
+	//
 	// Possible values for ErrorCode :
+	//
 	//   - CLOUDFORMATION_STACK_INACTIVE
+	//
 	//   - CLOUDFORMATION_STACK_NOT_EXISTING
+	//
 	//   - CLOUDFORMATION_STACK_UNASSUMABLE_ROLE
 	QueryErrors []types.QueryError
 

@@ -32,10 +32,10 @@ type ListSNOMEDCTInferenceJobsInput struct {
 	// Provides information for filtering a list of detection jobs.
 	Filter *types.ComprehendMedicalAsyncJobFilter
 
-	// The maximum number of results to return in each page. The default is 100.
+	//  The maximum number of results to return in each page. The default is 100.
 	MaxResults *int32
 
-	// Identifies the next page of InferSNOMEDCT results to return.
+	//  Identifies the next page of InferSNOMEDCT results to return.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -43,10 +43,10 @@ type ListSNOMEDCTInferenceJobsInput struct {
 
 type ListSNOMEDCTInferenceJobsOutput struct {
 
-	// A list containing the properties of each job that is returned.
+	//  A list containing the properties of each job that is returned.
 	ComprehendMedicalAsyncJobPropertiesList []types.ComprehendMedicalAsyncJobProperties
 
-	// Identifies the next page of results to return.
+	//  Identifies the next page of results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

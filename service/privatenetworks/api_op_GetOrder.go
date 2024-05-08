@@ -44,7 +44,7 @@ type GetOrderOutput struct {
 	// This member is required.
 	Order *types.Order
 
-	// The order tags.
+	//  The order tags.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

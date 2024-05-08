@@ -54,8 +54,9 @@ type UpdateTemplateOutput struct {
 	// The ARN of the migration workflow template being updated. The format for an
 	// Migration Hub Orchestrator template ARN is
 	// arn:aws:migrationhub-orchestrator:region:account:template/template-abcd1234 .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html)
-	// in the AWS General Reference.
+	// For more information about ARNs, see [Amazon Resource Names (ARNs)]in the AWS General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	TemplateArn *string
 
 	// The ID of the migration workflow template being updated.

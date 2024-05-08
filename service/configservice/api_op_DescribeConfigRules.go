@@ -35,8 +35,9 @@ type DescribeConfigRulesInput struct {
 
 	// Returns a list of Detective or Proactive Config rules. By default, this API
 	// returns an unfiltered list. For more information on Detective or Proactive
-	// Config rules, see Evaluation Mode  (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config-rules.html)
-	// in the Config Developer Guide.
+	// Config rules, see [Evaluation Mode]in the Config Developer Guide.
+	//
+	// [Evaluation Mode]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config-rules.html
 	Filters *types.DescribeConfigRulesFilters
 
 	// The nextToken string returned on a previous page that you use to get the next

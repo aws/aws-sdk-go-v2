@@ -29,13 +29,15 @@ func (c *Client) DescribeCopyProductStatus(ctx context.Context, params *Describe
 
 type DescribeCopyProductStatusInput struct {
 
-	// The token for the copy product operation. This token is returned by CopyProduct .
+	// The token for the copy product operation. This token is returned by CopyProduct.
 	//
 	// This member is required.
 	CopyProductToken *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

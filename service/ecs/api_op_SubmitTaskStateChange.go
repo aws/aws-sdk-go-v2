@@ -13,7 +13,9 @@ import (
 )
 
 // This action is only used by the Amazon ECS agent, and it is not intended for
-// use outside of the agent. Sent to acknowledge that a task changed states.
+// use outside of the agent.
+//
+// Sent to acknowledge that a task changed states.
 func (c *Client) SubmitTaskStateChange(ctx context.Context, params *SubmitTaskStateChangeInput, optFns ...func(*Options)) (*SubmitTaskStateChangeOutput, error) {
 	if params == nil {
 		params = &SubmitTaskStateChangeInput{}

@@ -10,11 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates the specified origination identity with a pool. If the origination
-// identity is a phone number and is already associated with another pool, an error
-// is returned. A sender ID can be associated with multiple pools. If the
-// origination identity configuration doesn't match the pool's configuration, an
-// error is returned.
+// Associates the specified origination identity with a pool.
+//
+// If the origination identity is a phone number and is already associated with
+// another pool, an error is returned. A sender ID can be associated with multiple
+// pools.
+//
+// If the origination identity configuration doesn't match the pool's
+// configuration, an error is returned.
 func (c *Client) AssociateOriginationIdentity(ctx context.Context, params *AssociateOriginationIdentityInput, optFns ...func(*Options)) (*AssociateOriginationIdentityOutput, error) {
 	if params == nil {
 		params = &AssociateOriginationIdentityInput{}
@@ -39,15 +42,15 @@ type AssociateOriginationIdentityInput struct {
 	IsoCountryCode *string
 
 	// The origination identity to use, such as PhoneNumberId, PhoneNumberArn,
-	// SenderId, or SenderIdArn. You can use DescribePhoneNumbers to find the values
-	// for PhoneNumberId and PhoneNumberArn, while DescribeSenderIds can be used to
-	// get the values for SenderId and SenderIdArn.
+	// SenderId, or SenderIdArn. You can use DescribePhoneNumbersto find the values for PhoneNumberId and
+	// PhoneNumberArn, while DescribeSenderIdscan be used to get the values for SenderId and
+	// SenderIdArn.
 	//
 	// This member is required.
 	OriginationIdentity *string
 
 	// The pool to update with the new Identity. This value can be either the PoolId
-	// or PoolArn, and you can find these values using DescribePools .
+	// or PoolArn, and you can find these values using DescribePools.
 	//
 	// This member is required.
 	PoolId *string
@@ -62,7 +65,8 @@ type AssociateOriginationIdentityInput struct {
 
 type AssociateOriginationIdentityOutput struct {
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region.
 	IsoCountryCode *string
 
 	// The PhoneNumberId or SenderId of the origination identity.

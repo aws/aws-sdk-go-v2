@@ -31,8 +31,8 @@ func (c *Client) CreateTemplateGroupAccessControlEntry(ctx context.Context, para
 
 type CreateTemplateGroupAccessControlEntryInput struct {
 
-	// Allow or deny permissions for an Active Directory group to enroll or autoenroll
-	// certificates for a template.
+	//  Allow or deny permissions for an Active Directory group to enroll or
+	// autoenroll certificates for a template.
 	//
 	// This member is required.
 	AccessRights *types.AccessRights
@@ -49,8 +49,9 @@ type CreateTemplateGroupAccessControlEntryInput struct {
 	// This member is required.
 	GroupSecurityIdentifier *string
 
-	// The Amazon Resource Name (ARN) that was returned when you called CreateTemplate (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html)
-	// .
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate].
+	//
+	// [CreateTemplate]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html
 	//
 	// This member is required.
 	TemplateArn *string

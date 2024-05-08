@@ -45,10 +45,12 @@ type CreateMembershipInput struct {
 	// can receive results.
 	DefaultResultConfiguration *types.MembershipProtectedQueryResultConfiguration
 
-	// The payment responsibilities accepted by the collaboration member. Not required
-	// if the collaboration member has the member ability to run queries. Required if
-	// the collaboration member doesn't have the member ability to run queries but is
-	// configured as a payer by the collaboration creator.
+	// The payment responsibilities accepted by the collaboration member.
+	//
+	// Not required if the collaboration member has the member ability to run queries.
+	//
+	// Required if the collaboration member doesn't have the member ability to run
+	// queries but is configured as a payer by the collaboration creator.
 	PaymentConfiguration *types.MembershipPaymentConfiguration
 
 	// An optional label that you can assign to a resource when you create it. Each

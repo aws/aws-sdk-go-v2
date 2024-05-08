@@ -14,9 +14,10 @@ import (
 
 // Returns events related to clusters, cache security groups, and cache parameter
 // groups. You can obtain events specific to a particular cluster, cache security
-// group, or cache parameter group by providing the name as a parameter. By
-// default, only the events occurring within the last hour are returned; however,
-// you can retrieve up to 14 days' worth of events if necessary.
+// group, or cache parameter group by providing the name as a parameter.
+//
+// By default, only the events occurring within the last hour are returned;
+// however, you can retrieve up to 14 days' worth of events if necessary.
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {
 	if params == nil {
 		params = &DescribeEventsInput{}
@@ -39,7 +40,9 @@ type DescribeEventsInput struct {
 	Duration *int32
 
 	// The end of the time interval for which to retrieve events, specified in ISO
-	// 8601 format. Example: 2017-03-30T07:03:49.555Z
+	// 8601 format.
+	//
+	// Example: 2017-03-30T07:03:49.555Z
 	EndTime *time.Time
 
 	// An optional marker returned from a prior request. Use this marker for
@@ -50,8 +53,11 @@ type DescribeEventsInput struct {
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: minimum 20; maximum 100.
 	MaxRecords *int32
 
 	// The identifier of the event source for which events are returned. If not
@@ -63,7 +69,9 @@ type DescribeEventsInput struct {
 	SourceType types.SourceType
 
 	// The beginning of the time interval to retrieve events for, specified in ISO
-	// 8601 format. Example: 2017-03-30T07:03:49.555Z
+	// 8601 format.
+	//
+	// Example: 2017-03-30T07:03:49.555Z
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -173,8 +181,11 @@ var _ DescribeEventsAPIClient = (*Client)(nil)
 type DescribeEventsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: minimum 20; maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

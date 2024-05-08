@@ -34,7 +34,7 @@ type CreateScheduleGroupInput struct {
 	// This member is required.
 	Name *string
 
-	// Unique, case-sensitive identifier you provide to ensure the idempotency of the
+	//  Unique, case-sensitive identifier you provide to ensure the idempotency of the
 	// request. If you do not specify a client token, EventBridge Scheduler uses a
 	// randomly generated token for the request to ensure idempotency.
 	ClientToken *string

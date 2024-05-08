@@ -42,10 +42,11 @@ type CreateFindingsFilterInput struct {
 	FindingCriteria *types.FindingCriteria
 
 	// A custom name for the filter. The name must contain at least 3 characters and
-	// can contain as many as 64 characters. We strongly recommend that you avoid
-	// including any sensitive data in the name of a filter. Other users of your
-	// account might be able to see this name, depending on the actions that they're
-	// allowed to perform in Amazon Macie.
+	// can contain as many as 64 characters.
+	//
+	// We strongly recommend that you avoid including any sensitive data in the name
+	// of a filter. Other users of your account might be able to see this name,
+	// depending on the actions that they're allowed to perform in Amazon Macie.
 	//
 	// This member is required.
 	Name *string
@@ -55,10 +56,12 @@ type CreateFindingsFilterInput struct {
 	ClientToken *string
 
 	// A custom description of the filter. The description can contain as many as 512
-	// characters. We strongly recommend that you avoid including any sensitive data in
-	// the description of a filter. Other users of your account might be able to see
-	// this description, depending on the actions that they're allowed to perform in
-	// Amazon Macie.
+	// characters.
+	//
+	// We strongly recommend that you avoid including any sensitive data in the
+	// description of a filter. Other users of your account might be able to see this
+	// description, depending on the actions that they're allowed to perform in Amazon
+	// Macie.
 	Description *string
 
 	// The position of the filter in the list of saved filters on the Amazon Macie
@@ -67,6 +70,7 @@ type CreateFindingsFilterInput struct {
 	Position *int32
 
 	// A map of key-value pairs that specifies the tags to associate with the filter.
+	//
 	// A findings filter can have a maximum of 50 tags. Each tag consists of a tag key
 	// and an associated tag value. The maximum length of a tag key is 128 characters.
 	// The maximum length of a tag value is 256 characters.

@@ -11,6 +11,7 @@
 // enables you to create and manage jobs for a Snow Family device. To transfer data
 // locally with a Snow Family device, you'll need to use the Snowball Edge client
 // or the Amazon S3 API Interface for Snowball or OpsHub for Snow Family. For more
-// information, see the User Guide (https://docs.aws.amazon.com/AWSImportExport/latest/ug/api-reference.html)
-// .
+// information, see the [User Guide].
+//
+// [User Guide]: https://docs.aws.amazon.com/AWSImportExport/latest/ug/api-reference.html
 package snowball

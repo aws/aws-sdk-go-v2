@@ -36,9 +36,11 @@ type UpdateCustomRoutingListenerInput struct {
 
 	// The updated port range to support for connections from clients to your
 	// accelerator. If you remove ports that are currently being used by a subnet
-	// endpoint, the call fails. Separately, you set port ranges for endpoints. For
-	// more information, see About endpoints for custom routing accelerators (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-custom-routing-endpoints.html)
-	// .
+	// endpoint, the call fails.
+	//
+	// Separately, you set port ranges for endpoints. For more information, see [About endpoints for custom routing accelerators].
+	//
+	// [About endpoints for custom routing accelerators]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-custom-routing-endpoints.html
 	//
 	// This member is required.
 	PortRanges []types.PortRange

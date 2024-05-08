@@ -15,9 +15,11 @@ import (
 // attributes include account tier, which indicates whether your account is in the
 // sandbox or production environment. When you're ready to move your account out of
 // the sandbox, create an Amazon Web Services Support case for a service limit
-// increase request. New Amazon Pinpoint accounts are placed into an SMS or voice
-// sandbox. The sandbox protects both Amazon Web Services end recipients and SMS or
-// voice recipients from fraud and abuse.
+// increase request.
+//
+// New Amazon Pinpoint accounts are placed into an SMS or voice sandbox. The
+// sandbox protects both Amazon Web Services end recipients and SMS or voice
+// recipients from fraud and abuse.
 func (c *Client) DescribeAccountAttributes(ctx context.Context, params *DescribeAccountAttributesInput, optFns ...func(*Options)) (*DescribeAccountAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeAccountAttributesInput{}

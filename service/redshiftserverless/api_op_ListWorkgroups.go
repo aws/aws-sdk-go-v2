@@ -52,7 +52,7 @@ type ListWorkgroupsOutput struct {
 	// This member is required.
 	Workgroups []types.Workgroup
 
-	// If nextToken is returned, there are more results available. The value of
+	//  If nextToken is returned, there are more results available. The value of
 	// nextToken is a unique pagination token for each page. To retrieve the next page,
 	// make the call again using the returned token.
 	NextToken *string

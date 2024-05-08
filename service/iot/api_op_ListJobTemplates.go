@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of job templates. Requires permission to access the
-// ListJobTemplates (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Returns a list of job templates.
+//
+// Requires permission to access the [ListJobTemplates] action.
+//
+// [ListJobTemplates]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListJobTemplates(ctx context.Context, params *ListJobTemplatesInput, optFns ...func(*Options)) (*ListJobTemplatesOutput, error) {
 	if params == nil {
 		params = &ListJobTemplatesInput{}

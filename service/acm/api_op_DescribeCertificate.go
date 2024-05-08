@@ -16,9 +16,11 @@ import (
 	"time"
 )
 
-// Returns detailed metadata about the specified ACM certificate. If you have just
-// created a certificate using the RequestCertificate action, there is a delay of
-// several seconds before you can retrieve information about it.
+// Returns detailed metadata about the specified ACM certificate.
+//
+// If you have just created a certificate using the RequestCertificate action,
+// there is a delay of several seconds before you can retrieve information about
+// it.
 func (c *Client) DescribeCertificate(ctx context.Context, params *DescribeCertificateInput, optFns ...func(*Options)) (*DescribeCertificateOutput, error) {
 	if params == nil {
 		params = &DescribeCertificateInput{}
@@ -38,9 +40,12 @@ type DescribeCertificateInput struct {
 
 	// The Amazon Resource Name (ARN) of the ACM certificate. The ARN must have the
 	// following form:
-	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	//
+	//     arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
+	//
+	// For more information about ARNs, see [Amazon Resource Names (ARNs)].
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	CertificateArn *string
@@ -180,12 +185,13 @@ type CertificateValidatedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeCertificateInput, *DescribeCertificateOutput, error) (bool, error)
 }
 

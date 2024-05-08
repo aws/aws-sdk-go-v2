@@ -13,8 +13,9 @@ import (
 
 // Returns a list of Managed Service for Apache Flink applications in your
 // account. For each application, the response includes the application name,
-// Amazon Resource Name (ARN), and status. If you want detailed information about a
-// specific application, use DescribeApplication .
+// Amazon Resource Name (ARN), and status.
+//
+// If you want detailed information about a specific application, use DescribeApplication.
 func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsInput, optFns ...func(*Options)) (*ListApplicationsOutput, error) {
 	if params == nil {
 		params = &ListApplicationsInput{}
@@ -36,9 +37,9 @@ type ListApplicationsInput struct {
 	Limit *int32
 
 	// If a previous command returned a pagination token, pass it into this value to
-	// retrieve the next set of results. For more information about pagination, see
-	// Using the Amazon Command Line Interface's Pagination Options (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html)
-	// .
+	// retrieve the next set of results. For more information about pagination, see [Using the Amazon Command Line Interface's Pagination Options].
+	//
+	// [Using the Amazon Command Line Interface's Pagination Options]: https://docs.aws.amazon.com/cli/latest/userguide/pagination.html
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -53,9 +54,9 @@ type ListApplicationsOutput struct {
 
 	// The pagination token for the next set of results, or null if there are no
 	// additional results. Pass this token into a subsequent command to retrieve the
-	// next set of items For more information about pagination, see Using the Amazon
-	// Command Line Interface's Pagination Options (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html)
-	// .
+	// next set of items For more information about pagination, see [Using the Amazon Command Line Interface's Pagination Options].
+	//
+	// [Using the Amazon Command Line Interface's Pagination Options]: https://docs.aws.amazon.com/cli/latest/userguide/pagination.html
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

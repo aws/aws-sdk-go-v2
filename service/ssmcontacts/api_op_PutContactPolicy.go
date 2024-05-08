@@ -12,9 +12,9 @@ import (
 
 // Adds a resource policy to the specified contact or escalation plan. The
 // resource policy is used to share the contact or escalation plan using Resource
-// Access Manager (RAM). For more information about cross-account sharing, see
-// Setting up cross-account functionality (https://docs.aws.amazon.com/incident-manager/latest/userguide/xa.html)
-// .
+// Access Manager (RAM). For more information about cross-account sharing, see [Setting up cross-account functionality].
+//
+// [Setting up cross-account functionality]: https://docs.aws.amazon.com/incident-manager/latest/userguide/xa.html
 func (c *Client) PutContactPolicy(ctx context.Context, params *PutContactPolicyInput, optFns ...func(*Options)) (*PutContactPolicyOutput, error) {
 	if params == nil {
 		params = &PutContactPolicyInput{}

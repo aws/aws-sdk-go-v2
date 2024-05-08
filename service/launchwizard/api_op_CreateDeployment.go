@@ -31,8 +31,10 @@ func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentI
 type CreateDeploymentInput struct {
 
 	// The name of the deployment pattern supported by a given workload. You can use
-	// the ListWorkloadDeploymentPatterns (https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html)
-	// operation to discover supported values for this parameter.
+	// the [ListWorkloadDeploymentPatterns]ListWorkloadDeploymentPatterns operation to discover supported values for
+	// this parameter.
+	//
+	// [ListWorkloadDeploymentPatterns]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html
 	//
 	// This member is required.
 	DeploymentPatternName *string
@@ -43,14 +45,17 @@ type CreateDeploymentInput struct {
 	Name *string
 
 	// The settings specified for the deployment. For more information on the
-	// specifications required for creating a deployment, see Workload specifications (https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications.html)
-	// .
+	// specifications required for creating a deployment, see [Workload specifications].
+	//
+	// [Workload specifications]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications.html
 	//
 	// This member is required.
 	Specifications map[string]string
 
-	// The name of the workload. You can use the ListWorkloadDeploymentPatterns (https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html)
+	// The name of the workload. You can use the [ListWorkloadDeploymentPatterns]ListWorkloadDeploymentPatterns
 	// operation to discover supported values for this parameter.
+	//
+	// [ListWorkloadDeploymentPatterns]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html
 	//
 	// This member is required.
 	WorkloadName *string

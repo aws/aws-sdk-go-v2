@@ -12,8 +12,9 @@ import (
 )
 
 // Updates an existing Amazon Lightsail content delivery network (CDN)
-// distribution. Use this action to update the configuration of your existing
 // distribution.
+//
+// Use this action to update the configuration of your existing distribution.
 func (c *Client) UpdateDistribution(ctx context.Context, params *UpdateDistributionInput, optFns ...func(*Options)) (*UpdateDistributionOutput, error) {
 	if params == nil {
 		params = &UpdateDistributionInput{}
@@ -31,25 +32,31 @@ func (c *Client) UpdateDistribution(ctx context.Context, params *UpdateDistribut
 
 type UpdateDistributionInput struct {
 
-	// The name of the distribution to update. Use the GetDistributions action to get
-	// a list of distribution names that you can specify.
+	// The name of the distribution to update.
+	//
+	// Use the GetDistributions action to get a list of distribution names that you
+	// can specify.
 	//
 	// This member is required.
 	DistributionName *string
 
-	// An object that describes the cache behavior settings for the distribution. The
-	// cacheBehaviorSettings specified in your UpdateDistributionRequest will replace
-	// your distribution's existing settings.
+	// An object that describes the cache behavior settings for the distribution.
+	//
+	// The cacheBehaviorSettings specified in your UpdateDistributionRequest will
+	// replace your distribution's existing settings.
 	CacheBehaviorSettings *types.CacheSettings
 
 	// An array of objects that describe the per-path cache behavior for the
 	// distribution.
 	CacheBehaviors []types.CacheBehaviorPerPath
 
-	// The name of the SSL/TLS certificate that you want to attach to the
-	// distribution. Only certificates with a status of ISSUED can be attached to a
-	// distribution. Use the GetCertificates (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetCertificates.html)
-	// action to get a list of certificate names that you can specify.
+	// The name of the SSL/TLS certificate that you want to attach to the distribution.
+	//
+	// Only certificates with a status of ISSUED can be attached to a distribution.
+	//
+	// Use the [GetCertificates] action to get a list of certificate names that you can specify.
+	//
+	// [GetCertificates]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetCertificates.html
 	CertificateName *string
 
 	// An object that describes the default cache behavior for the distribution.
@@ -59,14 +66,16 @@ type UpdateDistributionInput struct {
 	IsEnabled *bool
 
 	// An object that describes the origin resource for the distribution, such as a
-	// Lightsail instance, bucket, or load balancer. The distribution pulls, caches,
-	// and serves content from the origin.
+	// Lightsail instance, bucket, or load balancer.
+	//
+	// The distribution pulls, caches, and serves content from the origin.
 	Origin *types.InputOrigin
 
 	// Indicates whether the default SSL/TLS certificate is attached to the
 	// distribution. The default value is true . When true , the distribution uses the
-	// default domain name such as d111111abcdef8.cloudfront.net . Set this value to
-	// false to attach a new certificate to the distribution.
+	// default domain name such as d111111abcdef8.cloudfront.net .
+	//
+	// Set this value to false to attach a new certificate to the distribution.
 	UseDefaultCertificate *bool
 
 	// Use this parameter to update the minimum TLS protocol version for the SSL/TLS

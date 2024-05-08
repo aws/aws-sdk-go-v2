@@ -44,8 +44,9 @@ type UpdateNamespaceInput struct {
 	AdminPasswordSecretKmsKeyId *string
 
 	// The password of the administrator for the first database created in the
-	// namespace. This parameter must be updated together with adminUsername . You
-	// can't use adminUserPassword if manageAdminPassword is true.
+	// namespace. This parameter must be updated together with adminUsername .
+	//
+	// You can't use adminUserPassword if manageAdminPassword is true.
 	AdminUserPassword *string
 
 	// The username of the administrator for the first database created in the

@@ -15,11 +15,14 @@ import (
 // Regions. The global database contains a single primary cluster with read-write
 // capability, and a read-only secondary cluster that receives data from the
 // primary cluster through high-speed replication performed by the Aurora storage
-// subsystem. You can create a global database that is initially empty, and then
-// create the primary and secondary DB clusters in the global database. Or you can
-// specify an existing Aurora cluster during the create operation, and this cluster
-// becomes the primary cluster of the global database. This operation applies only
-// to Aurora DB clusters.
+// subsystem.
+//
+// You can create a global database that is initially empty, and then create the
+// primary and secondary DB clusters in the global database. Or you can specify an
+// existing Aurora cluster during the create operation, and this cluster becomes
+// the primary cluster of the global database.
+//
+// This operation applies only to Aurora DB clusters.
 func (c *Client) CreateGlobalCluster(ctx context.Context, params *CreateGlobalClusterInput, optFns ...func(*Options)) (*CreateGlobalClusterOutput, error) {
 	if params == nil {
 		params = &CreateGlobalClusterInput{}
@@ -39,7 +42,10 @@ type CreateGlobalClusterInput struct {
 
 	// The name for your database of up to 64 alphanumeric characters. If you don't
 	// specify a name, Amazon Aurora doesn't create a database in the global database
-	// cluster. Constraints:
+	// cluster.
+	//
+	// Constraints:
+	//
 	//   - Can't be specified if SourceDBClusterIdentifier is specified. In this case,
 	//   Amazon Aurora uses the database name from the source DB cluster.
 	DatabaseName *string
@@ -49,13 +55,20 @@ type CreateGlobalClusterInput struct {
 	// enabled.
 	DeletionProtection *bool
 
-	// The database engine to use for this global database cluster. Valid Values:
-	// aurora-mysql | aurora-postgresql Constraints:
+	// The database engine to use for this global database cluster.
+	//
+	// Valid Values: aurora-mysql | aurora-postgresql
+	//
+	// Constraints:
+	//
 	//   - Can't be specified if SourceDBClusterIdentifier is specified. In this case,
 	//   Amazon Aurora uses the engine of the source DB cluster.
 	Engine *string
 
-	// The engine version to use for this global database cluster. Constraints:
+	// The engine version to use for this global database cluster.
+	//
+	// Constraints:
+	//
 	//   - Can't be specified if SourceDBClusterIdentifier is specified. In this case,
 	//   Amazon Aurora uses the engine version of the source DB cluster.
 	EngineVersion *string
@@ -65,17 +78,26 @@ type CreateGlobalClusterInput struct {
 	GlobalClusterIdentifier *string
 
 	// The Amazon Resource Name (ARN) to use as the primary cluster of the global
-	// database. If you provide a value for this parameter, don't specify values for
-	// the following settings because Amazon Aurora uses the values from the specified
+	// database.
+	//
+	// If you provide a value for this parameter, don't specify values for the
+	// following settings because Amazon Aurora uses the values from the specified
 	// source DB cluster:
+	//
 	//   - DatabaseName
+	//
 	//   - Engine
+	//
 	//   - EngineVersion
+	//
 	//   - StorageEncrypted
 	SourceDBClusterIdentifier *string
 
 	// Specifies whether to enable storage encryption for the new global database
-	// cluster. Constraints:
+	// cluster.
+	//
+	// Constraints:
+	//
 	//   - Can't be specified if SourceDBClusterIdentifier is specified. In this case,
 	//   Amazon Aurora uses the setting from the source DB cluster.
 	StorageEncrypted *bool

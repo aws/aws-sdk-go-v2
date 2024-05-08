@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a CA certificate registration code. Requires permission to access the
-// DeleteRegistrationCode (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Deletes a CA certificate registration code.
+//
+// Requires permission to access the [DeleteRegistrationCode] action.
+//
+// [DeleteRegistrationCode]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DeleteRegistrationCode(ctx context.Context, params *DeleteRegistrationCodeInput, optFns ...func(*Options)) (*DeleteRegistrationCodeOutput, error) {
 	if params == nil {
 		params = &DeleteRegistrationCodeInput{}

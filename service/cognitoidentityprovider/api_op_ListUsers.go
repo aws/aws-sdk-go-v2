@@ -11,13 +11,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists users and their basic details in a user pool. Amazon Cognito evaluates
-// Identity and Access Management (IAM) policies in requests for this API
-// operation. For this operation, you must use IAM credentials to authorize
-// requests, and you must grant yourself the corresponding IAM permission in a
-// policy. Learn more
-//   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
-//   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+// Lists users and their basic details in a user pool.
+//
+// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+// requests for this API operation. For this operation, you must use IAM
+// credentials to authorize requests, and you must grant yourself the corresponding
+// IAM permission in a policy.
+//
+// # Learn more
+//
+// [Signing Amazon Web Services API Requests]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns ...func(*Options)) (*ListUsersOutput, error) {
 	if params == nil {
 		params = &ListUsersInput{}
@@ -44,7 +52,9 @@ type ListUsersInput struct {
 	// A JSON array of user attribute names, for example given_name , that you want
 	// Amazon Cognito to include in the response for each user. When you don't provide
 	// an AttributesToGet parameter, Amazon Cognito returns all attributes for each
-	// user. Use AttributesToGet with required attributes in your user pool, or in
+	// user.
+	//
+	// Use AttributesToGet with required attributes in your user pool, or in
 	// conjunction with Filter . Amazon Cognito returns an error if not all users in
 	// the results have set a value for the attribute you request. Attributes that you
 	// can't filter on, including custom attributes, must have a value set in every
@@ -54,37 +64,58 @@ type ListUsersInput struct {
 	// A filter string of the form "AttributeName Filter-Type "AttributeValue"".
 	// Quotation marks within the filter string must be escaped using the backslash ( \
 	// ) character. For example, "family_name = \"Reddy\"" .
+	//
 	//   - AttributeName: The name of the attribute to search for. You can only search
 	//   for one attribute at a time.
+	//
 	//   - Filter-Type: For an exact match, use = , for example, " given_name = \"Jon\"
 	//   ". For a prefix ("starts with") match, use ^= , for example, " given_name ^=
 	//   \"Jon\" ".
+	//
 	//   - AttributeValue: The attribute value that must be matched for each user.
+	//
 	// If the filter string is empty, ListUsers returns all users in the user pool.
+	//
 	// You can only search for the following standard attributes:
+	//
 	//   - username (case-sensitive)
+	//
 	//   - email
+	//
 	//   - phone_number
+	//
 	//   - name
+	//
 	//   - given_name
+	//
 	//   - family_name
+	//
 	//   - preferred_username
+	//
 	//   - cognito:user_status (called Status in the Console) (case-insensitive)
+	//
 	//   - status (called Enabled in the Console) (case-sensitive)
+	//
 	//   - sub
-	// Custom attributes aren't searchable. You can also list users with a client-side
-	// filter. The server-side filter matches no more than one attribute. For an
-	// advanced search, use a client-side filter with the --query parameter of the
-	// list-users action in the CLI. When you use a client-side filter, ListUsers
-	// returns a paginated list of zero or more users. You can receive multiple pages
-	// in a row with zero results. Repeat the query with each pagination token that is
-	// returned until you receive a null pagination token value, and then review the
-	// combined result. For more information about server-side and client-side
-	// filtering, see FilteringCLI output (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html)
-	// in the Command Line Interface User Guide (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html)
-	// . For more information, see Searching for Users Using the ListUsers API (https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-using-listusers-api)
-	// and Examples of Using the ListUsers API (https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-listusers-api-examples)
-	// in the Amazon Cognito Developer Guide.
+	//
+	// Custom attributes aren't searchable.
+	//
+	// You can also list users with a client-side filter. The server-side filter
+	// matches no more than one attribute. For an advanced search, use a client-side
+	// filter with the --query parameter of the list-users action in the CLI. When you
+	// use a client-side filter, ListUsers returns a paginated list of zero or more
+	// users. You can receive multiple pages in a row with zero results. Repeat the
+	// query with each pagination token that is returned until you receive a null
+	// pagination token value, and then review the combined result.
+	//
+	// For more information about server-side and client-side filtering, see [FilteringCLI output] in the [Command Line Interface User Guide].
+	//
+	// For more information, see [Searching for Users Using the ListUsers API] and [Examples of Using the ListUsers API] in the Amazon Cognito Developer Guide.
+	//
+	// [Command Line Interface User Guide]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html
+	// [Searching for Users Using the ListUsers API]: https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-using-listusers-api
+	// [FilteringCLI output]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html
+	// [Examples of Using the ListUsers API]: https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-listusers-api-examples
 	Filter *string
 
 	// Maximum number of users to be returned.
@@ -111,12 +142,15 @@ type ListUsersOutput struct {
 	PaginationToken *string
 
 	// A list of the user pool users, and their attributes, that match your query.
+	//
 	// Amazon Cognito creates a profile in your user pool for each native user in your
 	// user pool, and each unique user ID from your third-party identity providers
-	// (IdPs). When you link users with the AdminLinkProviderForUser (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminLinkProviderForUser.html)
-	// API operation, the output of ListUsers displays both the IdP user and the
-	// native user that you linked. You can identify IdP users in the Users object of
-	// this API response by the IdP prefix that Amazon Cognito appends to Username .
+	// (IdPs). When you link users with the [AdminLinkProviderForUser]API operation, the output of ListUsers
+	// displays both the IdP user and the native user that you linked. You can identify
+	// IdP users in the Users object of this API response by the IdP prefix that
+	// Amazon Cognito appends to Username .
+	//
+	// [AdminLinkProviderForUser]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminLinkProviderForUser.html
 	Users []types.UserType
 
 	// Metadata pertaining to the operation's result.

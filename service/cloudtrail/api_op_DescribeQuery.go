@@ -14,9 +14,10 @@ import (
 // Returns metadata about a query, including query run time in milliseconds,
 // number of events scanned and matched, and query status. If the query results
 // were delivered to an S3 bucket, the response also provides the S3 URI and the
-// delivery status. You must specify either a QueryID or a QueryAlias . Specifying
-// the QueryAlias parameter returns information about the last query run for the
-// alias.
+// delivery status.
+//
+// You must specify either a QueryID or a QueryAlias . Specifying the QueryAlias
+// parameter returns information about the last query run for the alias.
 func (c *Client) DescribeQuery(ctx context.Context, params *DescribeQueryInput, optFns ...func(*Options)) (*DescribeQueryOutput, error) {
 	if params == nil {
 		params = &DescribeQueryInput{}
@@ -40,7 +41,7 @@ type DescribeQueryInput struct {
 	// Deprecated: EventDataStore is no longer required by DescribeQueryRequest
 	EventDataStore *string
 
-	// The alias that identifies a query template.
+	//  The alias that identifies a query template.
 	QueryAlias *string
 
 	// The query ID.

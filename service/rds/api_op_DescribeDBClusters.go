@@ -18,12 +18,18 @@ import (
 )
 
 // Describes existing Amazon Aurora DB clusters and Multi-AZ DB clusters. This API
-// supports pagination. For more information on Amazon Aurora DB clusters, see
-// What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
-// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-// see Multi-AZ DB cluster deployments (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
-// in the Amazon RDS User Guide. This operation can also return information for
-// Amazon Neptune DB instances and Amazon DocumentDB instances.
+// supports pagination.
+//
+// For more information on Amazon Aurora DB clusters, see [What is Amazon Aurora?] in the Amazon Aurora
+// User Guide.
+//
+// For more information on Multi-AZ DB clusters, see [Multi-AZ DB cluster deployments] in the Amazon RDS User Guide.
+//
+// This operation can also return information for Amazon Neptune DB instances and
+// Amazon DocumentDB instances.
+//
+// [What is Amazon Aurora?]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
+// [Multi-AZ DB cluster deployments]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
 func (c *Client) DescribeDBClusters(ctx context.Context, params *DescribeDBClustersInput, optFns ...func(*Options)) (*DescribeDBClustersOutput, error) {
 	if params == nil {
 		params = &DescribeDBClustersInput{}
@@ -44,21 +50,30 @@ type DescribeDBClustersInput struct {
 	// The user-supplied DB cluster identifier or the Amazon Resource Name (ARN) of
 	// the DB cluster. If this parameter is specified, information for only the
 	// specific DB cluster is returned. This parameter isn't case-sensitive.
+	//
 	// Constraints:
+	//
 	//   - If supplied, must match an existing DB cluster identifier.
 	DBClusterIdentifier *string
 
-	// A filter that specifies one or more DB clusters to describe. Supported Filters:
+	// A filter that specifies one or more DB clusters to describe.
+	//
+	// Supported Filters:
+	//
 	//   - clone-group-id - Accepts clone group identifiers. The results list only
 	//   includes information about the DB clusters associated with these clone groups.
+	//
 	//   - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
 	//   Resource Names (ARNs). The results list only includes information about the DB
 	//   clusters identified by these ARNs.
+	//
 	//   - db-cluster-resource-id - Accepts DB cluster resource identifiers. The
 	//   results list will only include information about the DB clusters identified by
 	//   these DB cluster resource identifiers.
+	//
 	//   - domain - Accepts Active Directory directory IDs. The results list only
 	//   includes information about the DB clusters associated with these domains.
+	//
 	//   - engine - Accepts engine names. The results list only includes information
 	//   about the DB clusters for these engines.
 	Filters []types.Filter
@@ -74,7 +89,10 @@ type DescribeDBClustersInput struct {
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
+	// included in the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100
 	MaxRecords *int32
 
@@ -188,7 +206,10 @@ var _ DescribeDBClustersAPIClient = (*Client)(nil)
 type DescribeDBClustersPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
+	// included in the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100
 	Limit int32
 
@@ -301,12 +322,13 @@ type DBClusterAvailableWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeDBClustersInput, *DescribeDBClustersOutput, error) (bool, error)
 }
 
@@ -608,12 +630,13 @@ type DBClusterDeletedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeDBClustersInput, *DescribeDBClustersOutput, error) (bool, error)
 }
 

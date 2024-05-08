@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new cache subnet group. Use this parameter only when you are creating
-// a cluster in an Amazon Virtual Private Cloud (Amazon VPC).
+// Creates a new cache subnet group.
+//
+// Use this parameter only when you are creating a cluster in an Amazon Virtual
+// Private Cloud (Amazon VPC).
 func (c *Client) CreateCacheSubnetGroup(ctx context.Context, params *CreateCacheSubnetGroupInput, optFns ...func(*Options)) (*CreateCacheSubnetGroupOutput, error) {
 	if params == nil {
 		params = &CreateCacheSubnetGroupInput{}
@@ -37,7 +39,9 @@ type CreateCacheSubnetGroupInput struct {
 	CacheSubnetGroupDescription *string
 
 	// A name for the cache subnet group. This value is stored as a lowercase string.
+	//
 	// Constraints: Must contain no more than 255 alphanumeric characters or hyphens.
+	//
 	// Example: mysubnetgroup
 	//
 	// This member is required.
@@ -58,7 +62,9 @@ type CreateCacheSubnetGroupInput struct {
 type CreateCacheSubnetGroupOutput struct {
 
 	// Represents the output of one of the following operations:
+	//
 	//   - CreateCacheSubnetGroup
+	//
 	//   - ModifyCacheSubnetGroup
 	CacheSubnetGroup *types.CacheSubnetGroup
 

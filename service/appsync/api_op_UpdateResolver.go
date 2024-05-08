@@ -55,6 +55,7 @@ type UpdateResolverInput struct {
 	DataSourceName *string
 
 	// The resolver type.
+	//
 	//   - UNIT: A UNIT resolver type. A UNIT resolver is the default resolver type.
 	//   You can use a UNIT resolver to run a GraphQL query against a single data source.
 	//
@@ -70,17 +71,23 @@ type UpdateResolverInput struct {
 	// that metricsConfig won't be used unless the resolverLevelMetricsBehavior value
 	// is set to PER_RESOLVER_METRICS . If the resolverLevelMetricsBehavior is set to
 	// FULL_REQUEST_RESOLVER_METRICS instead, metricsConfig will be ignored. However,
-	// you can still set its value. metricsConfig can be ENABLED or DISABLED .
+	// you can still set its value.
+	//
+	// metricsConfig can be ENABLED or DISABLED .
 	MetricsConfig types.ResolverLevelMetricsConfig
 
 	// The PipelineConfig .
 	PipelineConfig *types.PipelineConfig
 
-	// The new request mapping template. A resolver uses a request mapping template to
-	// convert a GraphQL expression into a format that a data source can understand.
-	// Mapping templates are written in Apache Velocity Template Language (VTL). VTL
-	// request mapping templates are optional when using an Lambda data source. For all
-	// other data sources, VTL request and response mapping templates are required.
+	// The new request mapping template.
+	//
+	// A resolver uses a request mapping template to convert a GraphQL expression into
+	// a format that a data source can understand. Mapping templates are written in
+	// Apache Velocity Template Language (VTL).
+	//
+	// VTL request mapping templates are optional when using an Lambda data source.
+	// For all other data sources, VTL request and response mapping templates are
+	// required.
 	RequestMappingTemplate *string
 
 	// The new response mapping template.

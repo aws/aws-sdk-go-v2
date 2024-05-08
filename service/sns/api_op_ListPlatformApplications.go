@@ -18,9 +18,11 @@ import (
 // page results, then a NextToken string will be returned. To receive the next
 // page, you call ListPlatformApplications using the NextToken string received
 // from the previous call. When there are no more records to return, NextToken
-// will be null. For more information, see Using Amazon SNS Mobile Push
-// Notifications (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html) .
+// will be null. For more information, see [Using Amazon SNS Mobile Push Notifications].
+//
 // This action is throttled at 15 transactions per second (TPS).
+//
+// [Using Amazon SNS Mobile Push Notifications]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
 func (c *Client) ListPlatformApplications(ctx context.Context, params *ListPlatformApplicationsInput, optFns ...func(*Options)) (*ListPlatformApplicationsOutput, error) {
 	if params == nil {
 		params = &ListPlatformApplicationsInput{}

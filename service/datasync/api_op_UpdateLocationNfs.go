@@ -12,9 +12,11 @@ import (
 )
 
 // Modifies some configurations of the Network File System (NFS) transfer location
-// that you're using with DataSync. For more information, see Configuring
-// transfers to or from an NFS file server (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html)
-// .
+// that you're using with DataSync.
+//
+// For more information, see [Configuring transfers to or from an NFS file server].
+//
+// [Configuring transfers to or from an NFS file server]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html
 func (c *Client) UpdateLocationNfs(ctx context.Context, params *UpdateLocationNfsInput, optFns ...func(*Options)) (*UpdateLocationNfsOutput, error) {
 	if params == nil {
 		params = &UpdateLocationNfsInput{}
@@ -45,10 +47,12 @@ type UpdateLocationNfsInput struct {
 	OnPremConfig *types.OnPremConfig
 
 	// Specifies the export path in your NFS file server that you want DataSync to
-	// mount. This path (or a subdirectory of the path) is where DataSync transfers
-	// data to or from. For information on configuring an export for DataSync, see
-	// Accessing NFS file servers (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs)
-	// .
+	// mount.
+	//
+	// This path (or a subdirectory of the path) is where DataSync transfers data to
+	// or from. For information on configuring an export for DataSync, see [Accessing NFS file servers].
+	//
+	// [Accessing NFS file servers]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs
 	Subdirectory *string
 
 	noSmithyDocumentSerde

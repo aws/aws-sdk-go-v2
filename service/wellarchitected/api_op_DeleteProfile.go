@@ -10,11 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a profile. Disclaimer By sharing your profile with other Amazon Web
-// Services accounts, you acknowledge that Amazon Web Services will make your
-// profile available to those other accounts. Those other accounts may continue to
-// access and use your shared profile even if you delete the profile from your own
-// Amazon Web Services account or terminate your Amazon Web Services account.
+// Delete a profile.
+//
+// # Disclaimer
+//
+// By sharing your profile with other Amazon Web Services accounts, you
+// acknowledge that Amazon Web Services will make your profile available to those
+// other accounts. Those other accounts may continue to access and use your shared
+// profile even if you delete the profile from your own Amazon Web Services account
+// or terminate your Amazon Web Services account.
 func (c *Client) DeleteProfile(ctx context.Context, params *DeleteProfileInput, optFns ...func(*Options)) (*DeleteProfileOutput, error) {
 	if params == nil {
 		params = &DeleteProfileInput{}
@@ -33,13 +37,17 @@ func (c *Client) DeleteProfile(ctx context.Context, params *DeleteProfileInput, 
 type DeleteProfileInput struct {
 
 	// A unique case-sensitive string used to ensure that this request is idempotent
-	// (executes only once). You should not reuse the same token for other requests. If
-	// you retry a request with the same client request token and the same parameters
-	// after the original request has completed successfully, the result of the
-	// original request is returned. This token is listed as required, however, if you
-	// do not specify it, the Amazon Web Services SDKs automatically generate one for
-	// you. If you are not using the Amazon Web Services SDK or the CLI, you must
-	// provide this token or the request will fail.
+	// (executes only once).
+	//
+	// You should not reuse the same token for other requests. If you retry a request
+	// with the same client request token and the same parameters after the original
+	// request has completed successfully, the result of the original request is
+	// returned.
+	//
+	// This token is listed as required, however, if you do not specify it, the Amazon
+	// Web Services SDKs automatically generate one for you. If you are not using the
+	// Amazon Web Services SDK or the CLI, you must provide this token or the request
+	// will fail.
 	//
 	// This member is required.
 	ClientRequestToken *string

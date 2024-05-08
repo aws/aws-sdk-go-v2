@@ -12,13 +12,17 @@ import (
 )
 
 // Deletes the resource-based policy attached to the resource, which can be a
-// table or stream. DeleteResourcePolicy is an idempotent operation; running it
-// multiple times on the same resource doesn't result in an error response, unless
-// you specify an ExpectedRevisionId , which will then return a
-// PolicyNotFoundException . To make sure that you don't inadvertently lock
-// yourself out of your own resources, the root principal in your Amazon Web
-// Services account can perform DeleteResourcePolicy requests, even if your
-// resource-based policy explicitly denies the root principal's access.
+// table or stream.
+//
+// DeleteResourcePolicy is an idempotent operation; running it multiple times on
+// the same resource doesn't result in an error response, unless you specify an
+// ExpectedRevisionId , which will then return a PolicyNotFoundException .
+//
+// To make sure that you don't inadvertently lock yourself out of your own
+// resources, the root principal in your Amazon Web Services account can perform
+// DeleteResourcePolicy requests, even if your resource-based policy explicitly
+// denies the root principal's access.
+//
 // DeleteResourcePolicy is an asynchronous operation. If you issue a
 // GetResourcePolicy request immediately after running the DeleteResourcePolicy
 // request, DynamoDB might still return the deleted policy. This is because the
@@ -62,8 +66,10 @@ type DeleteResourcePolicyInput struct {
 type DeleteResourcePolicyOutput struct {
 
 	// A unique string that represents the revision ID of the policy. If you're
-	// comparing revision IDs, make sure to always use string comparison logic. This
-	// value will be empty if you make a request against a resource without a policy.
+	// comparing revision IDs, make sure to always use string comparison logic.
+	//
+	// This value will be empty if you make a request against a resource without a
+	// policy.
 	RevisionId *string
 
 	// Metadata pertaining to the operation's result.

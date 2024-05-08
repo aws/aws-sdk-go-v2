@@ -12,11 +12,14 @@ import (
 )
 
 // Copies the specified source product to the specified target product or a new
-// product. You can copy a product to the same account or another account. You can
-// copy a product to the same Region or another Region. If you copy a product to
-// another account, you must first share the product in a portfolio using
-// CreatePortfolioShare . This operation is performed asynchronously. To track the
-// progress of the operation, use DescribeCopyProductStatus .
+// product.
+//
+// You can copy a product to the same account or another account. You can copy a
+// product to the same Region or another Region. If you copy a product to another
+// account, you must first share the product in a portfolio using CreatePortfolioShare.
+//
+// This operation is performed asynchronously. To track the progress of the
+// operation, use DescribeCopyProductStatus.
 func (c *Client) CopyProduct(ctx context.Context, params *CopyProductInput, optFns ...func(*Options)) (*CopyProductOutput, error) {
 	if params == nil {
 		params = &CopyProductInput{}
@@ -34,7 +37,7 @@ func (c *Client) CopyProduct(ctx context.Context, params *CopyProductInput, optF
 
 type CopyProductInput struct {
 
-	// A unique identifier that you provide to ensure idempotency. If multiple
+	//  A unique identifier that you provide to ensure idempotency. If multiple
 	// requests differ only by the idempotency token, the same response is returned for
 	// each repeated request.
 	//
@@ -47,7 +50,9 @@ type CopyProductInput struct {
 	SourceProductArn *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

@@ -34,19 +34,20 @@ type ModifyEventSubscriptionInput struct {
 	// This member is required.
 	SubscriptionName *string
 
-	// A Boolean value; set to true to activate the subscription.
+	//  A Boolean value; set to true to activate the subscription.
 	Enabled *bool
 
-	// A list of event categories for a source type that you want to subscribe to. Use
-	// the DescribeEventCategories action to see a list of event categories.
+	//  A list of event categories for a source type that you want to subscribe to.
+	// Use the DescribeEventCategories action to see a list of event categories.
 	EventCategories []string
 
-	// The Amazon Resource Name (ARN) of the Amazon SNS topic created for event
+	//  The Amazon Resource Name (ARN) of the Amazon SNS topic created for event
 	// notification. The ARN is created by Amazon SNS when you create a topic and
 	// subscribe to it.
 	SnsTopicArn *string
 
-	// The type of DMS resource that generates the events you want to subscribe to.
+	//  The type of DMS resource that generates the events you want to subscribe to.
+	//
 	// Valid values: replication-instance | replication-task
 	SourceType *string
 

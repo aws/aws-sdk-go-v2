@@ -29,13 +29,13 @@ func (c *Client) ListLabelGroups(ctx context.Context, params *ListLabelGroupsInp
 
 type ListLabelGroupsInput struct {
 
-	// The beginning of the name of the label groups to be listed.
+	//  The beginning of the name of the label groups to be listed.
 	LabelGroupNameBeginsWith *string
 
-	// Specifies the maximum number of label groups to list.
+	//  Specifies the maximum number of label groups to list.
 	MaxResults *int32
 
-	// An opaque pagination token indicating where to continue the listing of label
+	//  An opaque pagination token indicating where to continue the listing of label
 	// groups.
 	NextToken *string
 
@@ -44,10 +44,10 @@ type ListLabelGroupsInput struct {
 
 type ListLabelGroupsOutput struct {
 
-	// A summary of the label groups.
+	//  A summary of the label groups.
 	LabelGroupSummaries []types.LabelGroupSummary
 
-	// An opaque pagination token indicating where to continue the listing of label
+	//  An opaque pagination token indicating where to continue the listing of label
 	// groups.
 	NextToken *string
 
@@ -143,7 +143,7 @@ var _ ListLabelGroupsAPIClient = (*Client)(nil)
 
 // ListLabelGroupsPaginatorOptions is the paginator options for ListLabelGroups
 type ListLabelGroupsPaginatorOptions struct {
-	// Specifies the maximum number of label groups to list.
+	//  Specifies the maximum number of label groups to list.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

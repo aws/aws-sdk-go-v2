@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This example operation serializes a structure in the HTTP body. It should
-// ensure Content-Type: application/json is used in all requests and that an
-// "empty" body is an empty JSON document ({}).
+// This example operation serializes a structure in the HTTP body.
+//
+// It should ensure Content-Type: application/json is used in all requests and
+// that an "empty" body is an empty JSON document ({}).
 func (c *Client) TestBodyStructure(ctx context.Context, params *TestBodyStructureInput, optFns ...func(*Options)) (*TestBodyStructureOutput, error) {
 	if params == nil {
 		params = &TestBodyStructureInput{}

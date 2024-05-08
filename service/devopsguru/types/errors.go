@@ -7,11 +7,13 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You don't have permissions to perform the requested operation. The user or role
-// that is making the request must have at least one IAM permissions policy
-// attached that grants the required permissions. For more information, see Access
-// Management (https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the
+//	You don't have permissions to perform the requested operation. The user or
+//
+// role that is making the request must have at least one IAM permissions policy
+// attached that grants the required permissions. For more information, see [Access Management]in the
 // IAM User Guide.
+//
+// [Access Management]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html
 type AccessDeniedException struct {
 	Message *string
 
@@ -179,7 +181,8 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Contains information about data passed in to a field during a request that is
+//	Contains information about data passed in to a field during a request that is
+//
 // not valid.
 type ValidationException struct {
 	Message *string

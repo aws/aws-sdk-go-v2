@@ -41,8 +41,9 @@ type CreateDeploymentInput struct {
 	CacheClusterEnabled *bool
 
 	// The stage's cache capacity in GB. For more information about choosing a cache
-	// size, see Enabling API caching to enhance responsiveness (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html)
-	// .
+	// size, see [Enabling API caching to enhance responsiveness].
+	//
+	// [Enabling API caching to enhance responsiveness]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html
 	CacheClusterSize types.CacheClusterSize
 
 	// The input configuration for the canary deployment when the deployment is a

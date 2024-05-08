@@ -14,7 +14,9 @@ import (
 
 // Returns information about all of the operations that return an operation ID and
 // that have ever been performed on domains that were registered by the current
-// account. This command runs only in the us-east-1 Region.
+// account.
+//
+// This command runs only in the us-east-1 Region.
 func (c *Client) ListOperations(ctx context.Context, params *ListOperationsInput, optFns ...func(*Options)) (*ListOperationsOutput, error) {
 	if params == nil {
 		params = &ListOperationsInput{}
@@ -41,16 +43,18 @@ type ListOperationsInput struct {
 	// element.
 	Marker *string
 
-	// Number of domains to be returned. Default: 20
+	// Number of domains to be returned.
+	//
+	// Default: 20
 	MaxItems *int32
 
-	// The sort type for returned values.
+	//  The sort type for returned values.
 	SortBy types.ListOperationsSortAttributeName
 
-	// The sort order for returned values, either ascending or descending.
+	//  The sort order for returned values, either ascending or descending.
 	SortOrder types.SortOrder
 
-	// The status of the operations.
+	//  The status of the operations.
 	Status []types.OperationStatus
 
 	// An optional parameter that lets you get information about all the operations
@@ -58,7 +62,7 @@ type ListOperationsInput struct {
 	// Unix time format and Coordinated Universal time (UTC).
 	SubmittedSince *time.Time
 
-	// An arrays of the domains operation types.
+	//  An arrays of the domains operation types.
 	Type []types.OperationType
 
 	noSmithyDocumentSerde
@@ -167,7 +171,9 @@ var _ ListOperationsAPIClient = (*Client)(nil)
 
 // ListOperationsPaginatorOptions is the paginator options for ListOperations
 type ListOperationsPaginatorOptions struct {
-	// Number of domains to be returned. Default: 20
+	// Number of domains to be returned.
+	//
+	// Default: 20
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

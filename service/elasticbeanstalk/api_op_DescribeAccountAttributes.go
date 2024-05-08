@@ -12,8 +12,9 @@ import (
 )
 
 // Returns attributes related to AWS Elastic Beanstalk that are associated with
-// the calling AWS account. The result currently has one set of attributes—resource
-// quotas.
+// the calling AWS account.
+//
+// The result currently has one set of attributes—resource quotas.
 func (c *Client) DescribeAccountAttributes(ctx context.Context, params *DescribeAccountAttributesInput, optFns ...func(*Options)) (*DescribeAccountAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeAccountAttributesInput{}

@@ -71,14 +71,16 @@ type DataRetrievalPolicy struct {
 // Data retrieval policy rule.
 type DataRetrievalRule struct {
 
-	// The maximum number of bytes that can be retrieved in an hour. This field is
-	// required only if the value of the Strategy field is BytesPerHour . Your PUT
-	// operation will be rejected if the Strategy field is not set to BytesPerHour and
-	// you set this field.
+	// The maximum number of bytes that can be retrieved in an hour.
+	//
+	// This field is required only if the value of the Strategy field is BytesPerHour .
+	// Your PUT operation will be rejected if the Strategy field is not set to
+	// BytesPerHour and you set this field.
 	BytesPerHour *int64
 
-	// The type of data retrieval policy to set. Valid values:
-	// BytesPerHour|FreeTier|None
+	// The type of data retrieval policy to set.
+	//
+	// Valid values: BytesPerHour|FreeTier|None
 	Strategy *string
 
 	noSmithyDocumentSerde
@@ -196,17 +198,24 @@ type GlacierJobDescription struct {
 	RetrievalByteRange *string
 
 	// For an archive retrieval job, this value is the checksum of the archive.
-	// Otherwise, this value is null. The SHA256 tree hash value for the requested
-	// range of an archive. If the InitiateJob request for an archive specified a
-	// tree-hash aligned range, then this field returns a value. If the whole archive
-	// is retrieved, this value is the same as the ArchiveSHA256TreeHash value. This
-	// field is null for the following:
+	// Otherwise, this value is null.
+	//
+	// The SHA256 tree hash value for the requested range of an archive. If the
+	// InitiateJob request for an archive specified a tree-hash aligned range, then
+	// this field returns a value.
+	//
+	// If the whole archive is retrieved, this value is the same as the
+	// ArchiveSHA256TreeHash value.
+	//
+	// This field is null for the following:
+	//
 	//   - Archive retrieval jobs that specify a range that is not tree-hash aligned
 	//
 	//   - Archival jobs that specify a range that is equal to the whole archive, when
 	//   the job status is InProgress
 	//
 	//   - Inventory jobs
+	//
 	//   - Select jobs
 	SHA256TreeHash *string
 
@@ -299,8 +308,9 @@ type InventoryRetrievalJobDescription struct {
 	// An opaque string that represents where to continue pagination of the vault
 	// inventory retrieval results. You use the marker in a new InitiateJob request to
 	// obtain additional inventory items. If there are no more inventory items, this
-	// value is null . For more information, see  Range Inventory Retrieval (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html#api-initiate-job-post-vault-inventory-list-filtering)
-	// .
+	// value is null . For more information, see [Range Inventory Retrieval].
+	//
+	// [Range Inventory Retrieval]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html#api-initiate-job-post-vault-inventory-list-filtering
 	Marker *string
 
 	// The start of the date range in Universal Coordinated Time (UTC) for vault
@@ -369,8 +379,10 @@ type JobParameters struct {
 	// that StartByteValue must be divisible by 1 MB and EndByteValue plus 1 must be
 	// divisible by 1 MB or be the end of the archive specified as the archive byte
 	// size value minus 1. If RetrievalByteRange is not megabyte aligned, this
-	// operation returns a 400 response. An error occurs if you specify this field for
-	// an inventory retrieval job request.
+	// operation returns a 400 response.
+	//
+	// An error occurs if you specify this field for an inventory retrieval job
+	// request.
 	RetrievalByteRange *string
 
 	// The Amazon SNS topic ARN to which Amazon S3 Glacier sends a notification when

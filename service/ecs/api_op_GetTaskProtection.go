@@ -47,10 +47,13 @@ type GetTaskProtectionOutput struct {
 	Failures []types.Failure
 
 	// A list of tasks with the following information.
+	//
 	//   - taskArn : The task ARN.
+	//
 	//   - protectionEnabled : The protection status of the task. If scale-in
 	//   protection is turned on for a task, the value is true . Otherwise, it is false
 	//   .
+	//
 	//   - expirationDate : The epoch time when protection for the task will expire.
 	ProtectedTasks []types.ProtectedTask
 

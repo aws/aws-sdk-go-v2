@@ -11,12 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a resiliency policy. Resilience Hub allows you to provide a value of
-// zero for rtoInSecs and rpoInSecs of your resiliency policy. But, while
-// assessing your application, the lowest possible assessment result is near zero.
-// Hence, if you provide value zero for rtoInSecs and rpoInSecs , the estimated
-// workload RTO and estimated workload RPO result will be near zero and the
-// Compliance status for your application will be set to Policy breached.
+// Updates a resiliency policy.
+//
+// Resilience Hub allows you to provide a value of zero for rtoInSecs and rpoInSecs
+// of your resiliency policy. But, while assessing your application, the lowest
+// possible assessment result is near zero. Hence, if you provide value zero for
+// rtoInSecs and rpoInSecs , the estimated workload RTO and estimated workload RPO
+// result will be near zero and the Compliance status for your application will be
+// set to Policy breached.
 func (c *Client) UpdateResiliencyPolicy(ctx context.Context, params *UpdateResiliencyPolicyInput, optFns ...func(*Options)) (*UpdateResiliencyPolicyOutput, error) {
 	if params == nil {
 		params = &UpdateResiliencyPolicyInput{}
@@ -36,8 +38,10 @@ type UpdateResiliencyPolicyInput struct {
 
 	// Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN
 	// is: arn: partition :resiliencehub: region : account :resiliency-policy/ policy-id
-	// . For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// . For more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General
+	// Reference guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	PolicyArn *string

@@ -34,12 +34,14 @@ type ListTrackerConsumersInput struct {
 	TrackerName *string
 
 	// An optional limit for the number of resources returned in a single call.
+	//
 	// Default value: 100
 	MaxResults *int32
 
 	// The pagination token specifying which page of results to return in the
-	// response. If no token is provided, the default page is the first page. Default
-	// value: null
+	// response. If no token is provided, the default page is the first page.
+	//
+	// Default value: null
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -184,6 +186,7 @@ var _ ListTrackerConsumersAPIClient = (*Client)(nil)
 // ListTrackerConsumers
 type ListTrackerConsumersPaginatorOptions struct {
 	// An optional limit for the number of resources returned in a single call.
+	//
 	// Default value: 100
 	Limit int32
 

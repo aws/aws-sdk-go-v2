@@ -12,7 +12,9 @@ import (
 )
 
 // This action is only used by the Amazon ECS agent, and it is not intended for
-// use outside of the agent. Sent to acknowledge that a container changed states.
+// use outside of the agent.
+//
+// Sent to acknowledge that a container changed states.
 func (c *Client) SubmitContainerStateChange(ctx context.Context, params *SubmitContainerStateChangeInput, optFns ...func(*Options)) (*SubmitContainerStateChangeOutput, error) {
 	if params == nil {
 		params = &SubmitContainerStateChangeInput{}

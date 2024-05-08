@@ -71,10 +71,15 @@ type ListCodeRepositoriesOutput struct {
 
 	// Gets a list of summaries of the Git repositories. Each summary specifies the
 	// following values for the repository:
+	//
 	//   - Name
+	//
 	//   - Amazon Resource Name (ARN)
+	//
 	//   - Creation time
+	//
 	//   - Last modified time
+	//
 	//   - Configuration information, including the URL location of the repository and
 	//   the ARN of the Amazon Web Services Secrets Manager secret that contains the
 	//   credentials used to access the repository.

@@ -50,9 +50,10 @@ type ListServicesInput struct {
 	// The nextToken value returned from a ListServices request indicating that more
 	// results are available to fulfill the request and further calls will be needed.
 	// If maxResults was provided, it is possible the number of results to be fewer
-	// than maxResults . This token should be treated as an opaque identifier that is
-	// only used to retrieve the next items in a list and not for other programmatic
-	// purposes.
+	// than maxResults .
+	//
+	// This token should be treated as an opaque identifier that is only used to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// The scheduling strategy to use when filtering the ListServices results.

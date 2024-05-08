@@ -13,8 +13,10 @@ import (
 
 // Returns the number of events of each event type (issue, scheduled change, and
 // account notification). If no filter is specified, the counts of all events in
-// each category are returned. This API operation uses pagination. Specify the
-// nextToken parameter in the next request to return more results.
+// each category are returned.
+//
+// This API operation uses pagination. Specify the nextToken parameter in the next
+// request to return more results.
 func (c *Client) DescribeEventAggregates(ctx context.Context, params *DescribeEventAggregatesInput, optFns ...func(*Options)) (*DescribeEventAggregatesOutput, error) {
 	if params == nil {
 		params = &DescribeEventAggregatesInput{}

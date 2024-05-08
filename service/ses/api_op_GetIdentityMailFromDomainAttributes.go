@@ -12,8 +12,10 @@ import (
 )
 
 // Returns the custom MAIL FROM attributes for a list of identities (email
-// addresses : domains). This operation is throttled at one request per second and
-// can only get custom MAIL FROM attributes for up to 100 identities at a time.
+// addresses : domains).
+//
+// This operation is throttled at one request per second and can only get custom
+// MAIL FROM attributes for up to 100 identities at a time.
 func (c *Client) GetIdentityMailFromDomainAttributes(ctx context.Context, params *GetIdentityMailFromDomainAttributesInput, optFns ...func(*Options)) (*GetIdentityMailFromDomainAttributesOutput, error) {
 	if params == nil {
 		params = &GetIdentityMailFromDomainAttributesInput{}
@@ -31,8 +33,9 @@ func (c *Client) GetIdentityMailFromDomainAttributes(ctx context.Context, params
 
 // Represents a request to return the Amazon SES custom MAIL FROM attributes for a
 // list of identities. For information about using a custom MAIL FROM domain, see
-// the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/mail-from.html)
-// .
+// the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/mail-from.html
 type GetIdentityMailFromDomainAttributesInput struct {
 
 	// A list of one or more identities.

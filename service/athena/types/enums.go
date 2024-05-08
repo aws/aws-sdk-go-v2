@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for AuthenticationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthenticationType) Values() []AuthenticationType {
 	return []AuthenticationType{
 		"DIRECTORY_IDENTITY",
@@ -34,6 +35,7 @@ const (
 
 // Values returns all known values for CalculationExecutionState. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CalculationExecutionState) Values() []CalculationExecutionState {
 	return []CalculationExecutionState{
@@ -59,6 +61,7 @@ const (
 
 // Values returns all known values for CapacityAllocationStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CapacityAllocationStatus) Values() []CapacityAllocationStatus {
 	return []CapacityAllocationStatus{
@@ -82,6 +85,7 @@ const (
 
 // Values returns all known values for CapacityReservationStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CapacityReservationStatus) Values() []CapacityReservationStatus {
 	return []CapacityReservationStatus{
@@ -104,8 +108,9 @@ const (
 )
 
 // Values returns all known values for ColumnNullable. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ColumnNullable) Values() []ColumnNullable {
 	return []ColumnNullable{
 		"NOT_NULL",
@@ -124,8 +129,9 @@ const (
 )
 
 // Values returns all known values for DataCatalogType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataCatalogType) Values() []DataCatalogType {
 	return []DataCatalogType{
 		"LAMBDA",
@@ -144,8 +150,9 @@ const (
 )
 
 // Values returns all known values for EncryptionOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncryptionOption) Values() []EncryptionOption {
 	return []EncryptionOption{
 		"SSE_S3",
@@ -167,8 +174,9 @@ const (
 )
 
 // Values returns all known values for ExecutorState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExecutorState) Values() []ExecutorState {
 	return []ExecutorState{
 		"CREATING",
@@ -190,8 +198,9 @@ const (
 )
 
 // Values returns all known values for ExecutorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExecutorType) Values() []ExecutorType {
 	return []ExecutorType{
 		"COORDINATOR",
@@ -208,8 +217,9 @@ const (
 )
 
 // Values returns all known values for NotebookType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotebookType) Values() []NotebookType {
 	return []NotebookType{
 		"IPYNB",
@@ -228,8 +238,9 @@ const (
 )
 
 // Values returns all known values for QueryExecutionState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QueryExecutionState) Values() []QueryExecutionState {
 	return []QueryExecutionState{
 		"QUEUED",
@@ -248,8 +259,9 @@ const (
 )
 
 // Values returns all known values for S3AclOption. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3AclOption) Values() []S3AclOption {
 	return []S3AclOption{
 		"BUCKET_OWNER_FULL_CONTROL",
@@ -271,8 +283,9 @@ const (
 )
 
 // Values returns all known values for SessionState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SessionState) Values() []SessionState {
 	return []SessionState{
 		"CREATING",
@@ -296,8 +309,9 @@ const (
 )
 
 // Values returns all known values for StatementType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StatementType) Values() []StatementType {
 	return []StatementType{
 		"DDL",
@@ -314,8 +328,9 @@ const (
 )
 
 // Values returns all known values for ThrottleReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ThrottleReason) Values() []ThrottleReason {
 	return []ThrottleReason{
 		"CONCURRENT_QUERY_LIMIT_EXCEEDED",
@@ -331,8 +346,9 @@ const (
 )
 
 // Values returns all known values for WorkGroupState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkGroupState) Values() []WorkGroupState {
 	return []WorkGroupState{
 		"ENABLED",

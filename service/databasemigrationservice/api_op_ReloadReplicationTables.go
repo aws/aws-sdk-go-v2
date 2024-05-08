@@ -12,9 +12,10 @@ import (
 )
 
 // Reloads the target database table with the source data for a given DMS
-// Serverless replication configuration. You can only use this operation with a
-// task in the RUNNING state, otherwise the service will throw an
-// InvalidResourceStateFault exception.
+// Serverless replication configuration.
+//
+// You can only use this operation with a task in the RUNNING state, otherwise the
+// service will throw an InvalidResourceStateFault exception.
 func (c *Client) ReloadReplicationTables(ctx context.Context, params *ReloadReplicationTablesInput, optFns ...func(*Options)) (*ReloadReplicationTablesOutput, error) {
 	if params == nil {
 		params = &ReloadReplicationTablesInput{}

@@ -16,12 +16,16 @@ import (
 	"time"
 )
 
-// Describes an Amazon EKS cluster. The API server endpoint and certificate
-// authority data returned by this operation are required for kubelet and kubectl
-// to communicate with your Kubernetes API server. For more information, see
-// Creating or updating a kubeconfig file for an Amazon EKS cluster (https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html)
-// . The API server endpoint and certificate authority data aren't available until
+// Describes an Amazon EKS cluster.
+//
+// The API server endpoint and certificate authority data returned by this
+// operation are required for kubelet and kubectl to communicate with your
+// Kubernetes API server. For more information, see [Creating or updating a kubeconfig file for an Amazon EKS cluster]kubeconfig .
+//
+// The API server endpoint and certificate authority data aren't available until
 // the cluster reaches the ACTIVE state.
+//
+// [Creating or updating a kubeconfig file for an Amazon EKS cluster]: https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html
 func (c *Client) DescribeCluster(ctx context.Context, params *DescribeClusterInput, optFns ...func(*Options)) (*DescribeClusterOutput, error) {
 	if params == nil {
 		params = &DescribeClusterInput{}
@@ -177,12 +181,13 @@ type ClusterActiveWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeClusterInput, *DescribeClusterOutput, error) (bool, error)
 }
 
@@ -383,12 +388,13 @@ type ClusterDeletedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeClusterInput, *DescribeClusterOutput, error) (bool, error)
 }
 

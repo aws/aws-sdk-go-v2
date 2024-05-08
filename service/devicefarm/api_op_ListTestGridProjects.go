@@ -40,11 +40,10 @@ type ListTestGridProjectsInput struct {
 
 type ListTestGridProjectsOutput struct {
 
-	// Used for pagination. Pass into ListTestGridProjects to get more results in a
-	// paginated request.
+	// Used for pagination. Pass into ListTestGridProjects to get more results in a paginated request.
 	NextToken *string
 
-	// The list of TestGridProjects, based on a ListTestGridProjectsRequest .
+	// The list of TestGridProjects, based on a ListTestGridProjectsRequest.
 	TestGridProjects []types.TestGridProject
 
 	// Metadata pertaining to the operation's result.

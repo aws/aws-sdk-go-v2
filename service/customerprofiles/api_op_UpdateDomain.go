@@ -13,15 +13,22 @@ import (
 )
 
 // Updates the properties of a domain, including creating or selecting a dead
-// letter queue or an encryption key. After a domain is created, the name can’t be
-// changed. Use this API or CreateDomain (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html)
-// to enable identity resolution (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
-// : set Matching to true. To prevent cross-service impersonation when you call
-// this API, see Cross-service confused deputy prevention (https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html)
-// for sample policies that you should apply. To add or remove tags on an existing
-// Domain, see TagResource (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html)
-// / UntagResource (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html)
-// .
+// letter queue or an encryption key.
+//
+// After a domain is created, the name can’t be changed.
+//
+// Use this API or [CreateDomain] to enable [identity resolution]: set Matching to true.
+//
+// To prevent cross-service impersonation when you call this API, see [Cross-service confused deputy prevention] for sample
+// policies that you should apply.
+//
+// To add or remove tags on an existing Domain, see [TagResource]/[UntagResource] .
+//
+// [CreateDomain]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html
+// [TagResource]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html
+// [Cross-service confused deputy prevention]: https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html
+// [UntagResource]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html
+// [identity resolution]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
 func (c *Client) UpdateDomain(ctx context.Context, params *UpdateDomainInput, optFns ...func(*Options)) (*UpdateDomainOutput, error) {
 	if params == nil {
 		params = &UpdateDomainInput{}
@@ -64,9 +71,13 @@ type UpdateDomainInput struct {
 	// Customer Profiles starts a weekly batch process called Identity Resolution Job.
 	// If you do not specify a date and time for Identity Resolution Job to run, by
 	// default it runs every Saturday at 12AM UTC to detect duplicate profiles in your
-	// domains. After the Identity Resolution Job completes, use the GetMatches (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
-	// API to return and review the results. Or, if you have configured ExportingConfig
-	// in the MatchingRequest , you can download the results from S3.
+	// domains.
+	//
+	// After the Identity Resolution Job completes, use the [GetMatches] API to return and review
+	// the results. Or, if you have configured ExportingConfig in the MatchingRequest ,
+	// you can download the results from S3.
+	//
+	// [GetMatches]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
 	Matching *types.MatchingRequest
 
 	// The process of matching duplicate profiles using the rule-Based matching. If
@@ -117,9 +128,13 @@ type UpdateDomainOutput struct {
 	// Customer Profiles starts a weekly batch process called Identity Resolution Job.
 	// If you do not specify a date and time for Identity Resolution Job to run, by
 	// default it runs every Saturday at 12AM UTC to detect duplicate profiles in your
-	// domains. After the Identity Resolution Job completes, use the GetMatches (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
-	// API to return and review the results. Or, if you have configured ExportingConfig
-	// in the MatchingRequest , you can download the results from S3.
+	// domains.
+	//
+	// After the Identity Resolution Job completes, use the [GetMatches] API to return and review
+	// the results. Or, if you have configured ExportingConfig in the MatchingRequest ,
+	// you can download the results from S3.
+	//
+	// [GetMatches]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
 	Matching *types.MatchingResponse
 
 	// The process of matching duplicate profiles using the rule-Based matching. If

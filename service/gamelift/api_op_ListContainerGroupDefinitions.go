@@ -11,14 +11,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the Amazon GameLift containers feature, which is
-// currently in public preview. Retrieves all container group definitions for the
-// Amazon Web Services account and Amazon Web Services Region that are currently in
-// use. You can filter the result set by the container groups' scheduling strategy.
-// Use the pagination parameters to retrieve results in a set of sequential pages.
+//	This operation is used with the Amazon GameLift containers feature, which is
+//
+// currently in public preview.
+//
+// Retrieves all container group definitions for the Amazon Web Services account
+// and Amazon Web Services Region that are currently in use. You can filter the
+// result set by the container groups' scheduling strategy. Use the pagination
+// parameters to retrieve results in a set of sequential pages.
+//
 // This operation returns the list of container group definitions in no particular
-// order. Learn more
-//   - Manage a container group definition (https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-create-groups.html)
+// order.
+//
+// # Learn more
+//
+// [Manage a container group definition]
+//
+// [Manage a container group definition]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-create-groups.html
 func (c *Client) ListContainerGroupDefinitions(ctx context.Context, params *ListContainerGroupDefinitionsInput, optFns ...func(*Options)) (*ListContainerGroupDefinitionsOutput, error) {
 	if params == nil {
 		params = &ListContainerGroupDefinitionsInput{}
@@ -46,8 +55,10 @@ type ListContainerGroupDefinitionsInput struct {
 	NextToken *string
 
 	// The type of container group definitions to retrieve.
+	//
 	//   - DAEMON -- Daemon container groups run background processes and are deployed
 	//   once per fleet instance.
+	//
 	//   - REPLICA -- Replica container groups run your game server application and
 	//   supporting software. Replica groups might be deployed multiple times per fleet
 	//   instance.

@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches a list of notification settings to a trust anchor. A notification
-// setting includes information such as event name, threshold, status of the
-// notification setting, and the channel to notify. Required permissions:
-// rolesanywhere:PutNotificationSettings .
+// Attaches a list of notification settings to a trust anchor.
+//
+// A notification setting includes information such as event name, threshold,
+// status of the notification setting, and the channel to notify.
+//
+// Required permissions: rolesanywhere:PutNotificationSettings .
 func (c *Client) PutNotificationSettings(ctx context.Context, params *PutNotificationSettingsInput, optFns ...func(*Options)) (*PutNotificationSettingsOutput, error) {
 	if params == nil {
 		params = &PutNotificationSettingsInput{}

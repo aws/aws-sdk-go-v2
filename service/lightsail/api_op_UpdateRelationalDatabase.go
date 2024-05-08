@@ -12,12 +12,15 @@ import (
 )
 
 // Allows the update of one or more attributes of a database in Amazon Lightsail.
+//
 // Updates are applied immediately, or in cases where the updates could result in
-// an outage, are applied during the database's predefined maintenance window. The
-// update relational database operation supports tag-based access control via
+// an outage, are applied during the database's predefined maintenance window.
+//
+// The update relational database operation supports tag-based access control via
 // resource tags applied to the resource identified by relationalDatabaseName. For
-// more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
-// .
+// more information, see the [Amazon Lightsail Developer Guide].
+//
+// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
 func (c *Client) UpdateRelationalDatabase(ctx context.Context, params *UpdateRelationalDatabaseInput, optFns ...func(*Options)) (*UpdateRelationalDatabaseOutput, error) {
 	if params == nil {
 		params = &UpdateRelationalDatabaseInput{}
@@ -41,44 +44,74 @@ type UpdateRelationalDatabaseInput struct {
 	RelationalDatabaseName *string
 
 	// When true , applies changes immediately. When false , applies changes during the
-	// preferred maintenance window. Some changes may cause an outage. Default: false
+	// preferred maintenance window. Some changes may cause an outage.
+	//
+	// Default: false
 	ApplyImmediately *bool
 
 	// Indicates the certificate that needs to be associated with the database.
 	CaCertificateIdentifier *string
 
-	// When true , disables automated backup retention for your database. Disabling
-	// backup retention deletes all automated database backups. Before disabling this,
-	// you may want to create a snapshot of your database using the create relational
-	// database snapshot operation. Updates are applied during the next maintenance
-	// window because this can result in an outage.
+	// When true , disables automated backup retention for your database.
+	//
+	// Disabling backup retention deletes all automated database backups. Before
+	// disabling this, you may want to create a snapshot of your database using the
+	// create relational database snapshot operation.
+	//
+	// Updates are applied during the next maintenance window because this can result
+	// in an outage.
 	DisableBackupRetention *bool
 
-	// When true , enables automated backup retention for your database. Updates are
-	// applied during the next maintenance window because this can result in an outage.
+	// When true , enables automated backup retention for your database.
+	//
+	// Updates are applied during the next maintenance window because this can result
+	// in an outage.
 	EnableBackupRetention *bool
 
 	// The password for the master user. The password can include any printable ASCII
-	// character except "/", """, or "@". MySQL Constraints: Must contain from 8 to 41
-	// characters. PostgreSQL Constraints: Must contain from 8 to 128 characters.
+	// character except "/", """, or "@".
+	//
+	// MySQL
+	//
+	// Constraints: Must contain from 8 to 41 characters.
+	//
+	// PostgreSQL
+	//
+	// Constraints: Must contain from 8 to 128 characters.
 	MasterUserPassword *string
 
 	// The daily time range during which automated backups are created for your
-	// database if automated backups are enabled. Constraints:
-	//   - Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30
+	// database if automated backups are enabled.
+	//
+	// Constraints:
+	//
+	//   - Must be in the hh24:mi-hh24:mi format.
+	//
+	// Example: 16:00-16:30
+	//
 	//   - Specified in Coordinated Universal Time (UTC).
+	//
 	//   - Must not conflict with the preferred maintenance window.
+	//
 	//   - Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur on your
-	// database. The default is a 30-minute window selected at random from an 8-hour
-	// block of time for each Amazon Web Services Region, occurring on a random day of
-	// the week. Constraints:
+	// database.
+	//
+	// The default is a 30-minute window selected at random from an 8-hour block of
+	// time for each Amazon Web Services Region, occurring on a random day of the week.
+	//
+	// Constraints:
+	//
 	//   - Must be in the ddd:hh24:mi-ddd:hh24:mi format.
+	//
 	//   - Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
+	//
 	//   - Must be at least 30 minutes.
+	//
 	//   - Specified in Coordinated Universal Time (UTC).
+	//
 	//   - Example: Tue:17:00-Tue:17:30
 	PreferredMaintenanceWindow *string
 
@@ -89,14 +122,18 @@ type UpdateRelationalDatabaseInput struct {
 	PubliclyAccessible *bool
 
 	// This parameter is used to update the major version of the database. Enter the
-	// blueprintId for the major version that you want to update to. Use the
-	// GetRelationalDatabaseBlueprints (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRelationalDatabaseBlueprints.html)
-	// action to get a list of available blueprint IDs.
+	// blueprintId for the major version that you want to update to.
+	//
+	// Use the [GetRelationalDatabaseBlueprints] action to get a list of available blueprint IDs.
+	//
+	// [GetRelationalDatabaseBlueprints]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRelationalDatabaseBlueprints.html
 	RelationalDatabaseBlueprintId *string
 
 	// When true , the master user password is changed to a new strong password
-	// generated by Lightsail. Use the get relational database master user password
-	// operation to get the new password.
+	// generated by Lightsail.
+	//
+	// Use the get relational database master user password operation to get the new
+	// password.
 	RotateMasterUserPassword *bool
 
 	noSmithyDocumentSerde

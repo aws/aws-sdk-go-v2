@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for Architecture. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Architecture) Values() []Architecture {
 	return []Architecture{
 		"X86_64",
@@ -31,8 +32,9 @@ const (
 )
 
 // Values returns all known values for ComputeType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComputeType) Values() []ComputeType {
 	return []ComputeType{
 		"CPU",
@@ -50,8 +52,9 @@ const (
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataSourceType) Values() []DataSourceType {
 	return []DataSourceType{
 		"Prefix",
@@ -91,8 +94,9 @@ const (
 )
 
 // Values returns all known values for DeploymentJobErrorCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentJobErrorCode) Values() []DeploymentJobErrorCode {
 	return []DeploymentJobErrorCode{
 		"ResourceNotFound",
@@ -135,8 +139,9 @@ const (
 )
 
 // Values returns all known values for DeploymentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentStatus) Values() []DeploymentStatus {
 	return []DeploymentStatus{
 		"Pending",
@@ -157,8 +162,9 @@ const (
 )
 
 // Values returns all known values for ExitBehavior. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExitBehavior) Values() []ExitBehavior {
 	return []ExitBehavior{
 		"FAIL",
@@ -175,8 +181,9 @@ const (
 )
 
 // Values returns all known values for FailureBehavior. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FailureBehavior) Values() []FailureBehavior {
 	return []FailureBehavior{
 		"Fail",
@@ -192,8 +199,9 @@ const (
 )
 
 // Values returns all known values for RenderingEngineType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RenderingEngineType) Values() []RenderingEngineType {
 	return []RenderingEngineType{
 		"OGRE",
@@ -214,8 +222,9 @@ const (
 )
 
 // Values returns all known values for RobotDeploymentStep. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RobotDeploymentStep) Values() []RobotDeploymentStep {
 	return []RobotDeploymentStep{
 		"Validating",
@@ -238,8 +247,9 @@ const (
 )
 
 // Values returns all known values for RobotSoftwareSuiteType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RobotSoftwareSuiteType) Values() []RobotSoftwareSuiteType {
 	return []RobotSoftwareSuiteType{
 		"ROS",
@@ -260,8 +270,9 @@ const (
 
 // Values returns all known values for RobotSoftwareSuiteVersionType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RobotSoftwareSuiteVersionType) Values() []RobotSoftwareSuiteVersionType {
 	return []RobotSoftwareSuiteVersionType{
 		"Kinetic",
@@ -285,8 +296,9 @@ const (
 )
 
 // Values returns all known values for RobotStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RobotStatus) Values() []RobotStatus {
 	return []RobotStatus{
 		"Available",
@@ -308,6 +320,7 @@ const (
 
 // Values returns all known values for SimulationJobBatchErrorCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SimulationJobBatchErrorCode) Values() []SimulationJobBatchErrorCode {
 	return []SimulationJobBatchErrorCode{
@@ -332,6 +345,7 @@ const (
 
 // Values returns all known values for SimulationJobBatchStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SimulationJobBatchStatus) Values() []SimulationJobBatchStatus {
 	return []SimulationJobBatchStatus{
@@ -385,8 +399,9 @@ const (
 )
 
 // Values returns all known values for SimulationJobErrorCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SimulationJobErrorCode) Values() []SimulationJobErrorCode {
 	return []SimulationJobErrorCode{
 		"InternalServiceError",
@@ -440,8 +455,9 @@ const (
 )
 
 // Values returns all known values for SimulationJobStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SimulationJobStatus) Values() []SimulationJobStatus {
 	return []SimulationJobStatus{
 		"Pending",
@@ -468,6 +484,7 @@ const (
 
 // Values returns all known values for SimulationSoftwareSuiteType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SimulationSoftwareSuiteType) Values() []SimulationSoftwareSuiteType {
 	return []SimulationSoftwareSuiteType{
@@ -486,8 +503,9 @@ const (
 )
 
 // Values returns all known values for UploadBehavior. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UploadBehavior) Values() []UploadBehavior {
 	return []UploadBehavior{
 		"UPLOAD_ON_TERMINATE",
@@ -508,8 +526,9 @@ const (
 )
 
 // Values returns all known values for WorldExportJobErrorCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorldExportJobErrorCode) Values() []WorldExportJobErrorCode {
 	return []WorldExportJobErrorCode{
 		"InternalServiceError",
@@ -534,8 +553,9 @@ const (
 )
 
 // Values returns all known values for WorldExportJobStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorldExportJobStatus) Values() []WorldExportJobStatus {
 	return []WorldExportJobStatus{
 		"Pending",
@@ -561,6 +581,7 @@ const (
 
 // Values returns all known values for WorldGenerationJobErrorCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (WorldGenerationJobErrorCode) Values() []WorldGenerationJobErrorCode {
 	return []WorldGenerationJobErrorCode{
@@ -588,6 +609,7 @@ const (
 
 // Values returns all known values for WorldGenerationJobStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (WorldGenerationJobStatus) Values() []WorldGenerationJobStatus {
 	return []WorldGenerationJobStatus{

@@ -12,8 +12,10 @@ import (
 )
 
 // Returns a list of fleets. You can optionally provide filters to retrieve
-// specific fleets. This API will no longer be supported as of May 2, 2022. Use it
-// to remove resources that were created for Deployment Service.
+// specific fleets.
+//
+// This API will no longer be supported as of May 2, 2022. Use it to remove
+// resources that were created for Deployment Service.
 //
 // Deprecated: Support for the AWS RoboMaker application deployment feature has
 // ended. For additional information, see
@@ -35,9 +37,10 @@ func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns
 
 type ListFleetsInput struct {
 
-	// Optional filters to limit results. The filter name name is supported. When
-	// filtering, you must use the complete value of the filtered item. You can use up
-	// to three filters.
+	// Optional filters to limit results.
+	//
+	// The filter name name is supported. When filtering, you must use the complete
+	// value of the filtered item. You can use up to three filters.
 	Filters []types.Filter
 
 	// When this parameter is used, ListFleets only returns maxResults results in a
@@ -52,9 +55,10 @@ type ListFleetsInput struct {
 	// the response object's nextToken parameter value is set to a token. To retrieve
 	// the next set of results, call ListFleets again and assign that token to the
 	// request object's nextToken parameter. If there are no remaining results, the
-	// previous response object's NextToken parameter is set to null. This token should
-	// be treated as an opaque identifier that is only used to retrieve the next items
-	// in a list and not for other programmatic purposes.
+	// previous response object's NextToken parameter is set to null.
+	//
+	// This token should be treated as an opaque identifier that is only used to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	noSmithyDocumentSerde

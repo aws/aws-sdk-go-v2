@@ -14,9 +14,12 @@ import (
 // Creates an instance of IAM Identity Center for a standalone Amazon Web Services
 // account that is not managed by Organizations or a member Amazon Web Services
 // account in an organization. You can create only one instance per account and
-// across all Amazon Web Services Regions. The CreateInstance request is rejected
-// if the following apply:
+// across all Amazon Web Services Regions.
+//
+// The CreateInstance request is rejected if the following apply:
+//
 //   - The instance is created within the organization management account.
+//
 //   - An instance already exists in the same account.
 func (c *Client) CreateInstance(ctx context.Context, params *CreateInstanceInput, optFns ...func(*Options)) (*CreateInstanceOutput, error) {
 	if params == nil {
@@ -39,10 +42,15 @@ type CreateInstanceInput struct {
 	// idempotency of the request. This lets you safely retry the request without
 	// accidentally performing the same operation a second time. Passing the same value
 	// to a later call to an operation requires that you also pass the same value for
-	// all other parameters. We recommend that you use a UUID type of value (https://wikipedia.org/wiki/Universally_unique_identifier)
-	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you. If you retry the operation with the same ClientToken , but with
-	// different parameters, the retry fails with an IdempotentParameterMismatch error.
+	// all other parameters. We recommend that you use a [UUID type of value].
+	//
+	// If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
+	//
+	// If you retry the operation with the same ClientToken , but with different
+	// parameters, the retry fails with an IdempotentParameterMismatch error.
+	//
+	// [UUID type of value]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientToken *string
 
 	// The name of the instance of IAM Identity Center.
@@ -57,8 +65,9 @@ type CreateInstanceInput struct {
 type CreateInstanceOutput struct {
 
 	// The ARN of the instance of IAM Identity Center under which the operation will
-	// run. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// run.
+	//
+	// For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General
 	// Reference.
 	InstanceArn *string
 

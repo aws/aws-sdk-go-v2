@@ -29,13 +29,13 @@ func (c *Client) ListAssessments(ctx context.Context, params *ListAssessmentsInp
 
 type ListAssessmentsInput struct {
 
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	MaxResults *int32
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
-	// The current status of the assessment.
+	//  The current status of the assessment.
 	Status types.AssessmentStatus
 
 	noSmithyDocumentSerde
@@ -46,7 +46,7 @@ type ListAssessmentsOutput struct {
 	// The metadata that the ListAssessments API returns for each assessment.
 	AssessmentMetadata []types.AssessmentMetadataItem
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -141,7 +141,7 @@ var _ ListAssessmentsAPIClient = (*Client)(nil)
 
 // ListAssessmentsPaginatorOptions is the paginator options for ListAssessments
 type ListAssessmentsPaginatorOptions struct {
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

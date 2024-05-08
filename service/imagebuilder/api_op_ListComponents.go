@@ -13,12 +13,15 @@ import (
 
 // Returns the list of components that can be filtered by name, or by using the
 // listed filters to streamline results. Newly created components can take up to
-// two minutes to appear in the ListComponents API Results. The semantic version
-// has four nodes: ../. You can assign values for the first three, and can filter
-// on all of them. Filtering: With semantic versioning, you have the flexibility to
-// use wildcards (x) to specify the most recent versions or nodes when selecting
-// the base image or components for your recipe. When you use a wildcard in any
-// node, all nodes to the right of the first wildcard must also be wildcards.
+// two minutes to appear in the ListComponents API Results.
+//
+// The semantic version has four nodes: ../. You can assign values for the first
+// three, and can filter on all of them.
+//
+// Filtering: With semantic versioning, you have the flexibility to use wildcards
+// (x) to specify the most recent versions or nodes when selecting the base image
+// or components for your recipe. When you use a wildcard in any node, all nodes to
+// the right of the first wildcard must also be wildcards.
 func (c *Client) ListComponents(ctx context.Context, params *ListComponentsInput, optFns ...func(*Options)) (*ListComponentsOutput, error) {
 	if params == nil {
 		params = &ListComponentsInput{}
@@ -40,11 +43,17 @@ type ListComponentsInput struct {
 	ByName bool
 
 	// Use the following filters to streamline results:
+	//
 	//   - description
+	//
 	//   - name
+	//
 	//   - platform
+	//
 	//   - supportedOsVersion
+	//
 	//   - type
+	//
 	//   - version
 	Filters []types.Filter
 
@@ -66,8 +75,10 @@ type ListComponentsInput struct {
 
 type ListComponentsOutput struct {
 
-	// The list of component semantic versions. The semantic version has four nodes:
-	// ../. You can assign values for the first three, and can filter on all of them.
+	// The list of component semantic versions.
+	//
+	// The semantic version has four nodes: ../. You can assign values for the first
+	// three, and can filter on all of them.
 	ComponentVersionList []types.ComponentVersion
 
 	// The next token used for paginated responses. When this field isn't empty, there

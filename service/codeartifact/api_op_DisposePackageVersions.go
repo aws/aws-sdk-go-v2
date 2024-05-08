@@ -11,14 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the assets in package versions and sets the package versions' status to
-// Disposed . A disposed package version cannot be restored in your repository
-// because its assets are deleted. To view all disposed package versions in a
-// repository, use ListPackageVersions (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html)
-// and set the status (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html#API_ListPackageVersions_RequestSyntax)
-// parameter to Disposed . To view information about a disposed package version,
-// use DescribePackageVersion (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DescribePackageVersion.html)
-// .
+//	Deletes the assets in package versions and sets the package versions' status
+//
+// to Disposed . A disposed package version cannot be restored in your repository
+// because its assets are deleted.
+//
+// To view all disposed package versions in a repository, use [ListPackageVersions] and set the [status]
+// parameter to Disposed .
+//
+// To view information about a disposed package version, use [DescribePackageVersion].
+//
+// [DescribePackageVersion]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DescribePackageVersion.html
+// [ListPackageVersions]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html
+// [status]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html#API_ListPackageVersions_RequestSyntax
 func (c *Client) DisposePackageVersions(ctx context.Context, params *DisposePackageVersionsInput, optFns ...func(*Options)) (*DisposePackageVersionsOutput, error) {
 	if params == nil {
 		params = &DisposePackageVersionsInput{}
@@ -36,54 +41,62 @@ func (c *Client) DisposePackageVersions(ctx context.Context, params *DisposePack
 
 type DisposePackageVersionsInput struct {
 
-	// The name of the domain that contains the repository you want to dispose.
+	//  The name of the domain that contains the repository you want to dispose.
 	//
 	// This member is required.
 	Domain *string
 
-	// A format that specifies the type of package versions you want to dispose.
+	//  A format that specifies the type of package versions you want to dispose.
 	//
 	// This member is required.
 	Format types.PackageFormat
 
-	// The name of the package with the versions you want to dispose.
+	//  The name of the package with the versions you want to dispose.
 	//
 	// This member is required.
 	Package *string
 
-	// The name of the repository that contains the package versions you want to
+	//  The name of the repository that contains the package versions you want to
 	// dispose.
 	//
 	// This member is required.
 	Repository *string
 
-	// The versions of the package you want to dispose.
+	//  The versions of the package you want to dispose.
 	//
 	// This member is required.
 	Versions []string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The expected status of the package version to dispose.
+	//  The expected status of the package version to dispose.
 	ExpectedStatus types.PackageVersionStatus
 
 	// The namespace of the package versions to be disposed. The package component
-	// that specifies its namespace depends on its type. For example: The namespace is
-	// required when disposing package versions of the following formats:
+	// that specifies its namespace depends on its type. For example:
+	//
+	// The namespace is required when disposing package versions of the following
+	// formats:
+	//
 	//   - Maven
+	//
 	//   - Swift
+	//
 	//   - generic
 	//
 	//   - The namespace of a Maven package version is its groupId .
+	//
 	//   - The namespace of an npm or Swift package version is its scope .
+	//
 	//   - The namespace of a generic package is its namespace .
+	//
 	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
 	//   component, package versions of those formats do not have a namespace.
 	Namespace *string
 
-	// The revisions of the package versions you want to dispose.
+	//  The revisions of the package versions you want to dispose.
 	VersionRevisions map[string]string
 
 	noSmithyDocumentSerde
@@ -91,17 +104,23 @@ type DisposePackageVersionsInput struct {
 
 type DisposePackageVersionsOutput struct {
 
-	// A PackageVersionError object that contains a map of errors codes for the
+	//  A PackageVersionError object that contains a map of errors codes for the
 	// disposed package versions that failed. The possible error codes are:
+	//
 	//   - ALREADY_EXISTS
+	//
 	//   - MISMATCHED_REVISION
+	//
 	//   - MISMATCHED_STATUS
+	//
 	//   - NOT_ALLOWED
+	//
 	//   - NOT_FOUND
+	//
 	//   - SKIPPED
 	FailedVersions map[string]types.PackageVersionError
 
-	// A list of the package versions that were successfully disposed.
+	//  A list of the package versions that were successfully disposed.
 	SuccessfulVersions map[string]types.SuccessfulPackageVersionInfo
 
 	// Metadata pertaining to the operation's result.

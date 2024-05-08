@@ -11,11 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns descriptive information about an EKS Pod Identity association. This
-// action requires the ID of the association. You can get the ID from the response
-// to the CreatePodIdentityAssocation for newly created associations. Or, you can
-// list the IDs for associations with ListPodIdentityAssociations and filter the
-// list by namespace or service account.
+// Returns descriptive information about an EKS Pod Identity association.
+//
+// This action requires the ID of the association. You can get the ID from the
+// response to the CreatePodIdentityAssocation for newly created associations. Or,
+// you can list the IDs for associations with ListPodIdentityAssociations and
+// filter the list by namespace or service account.
 func (c *Client) DescribePodIdentityAssociation(ctx context.Context, params *DescribePodIdentityAssociationInput, optFns ...func(*Options)) (*DescribePodIdentityAssociationOutput, error) {
 	if params == nil {
 		params = &DescribePodIdentityAssociationInput{}

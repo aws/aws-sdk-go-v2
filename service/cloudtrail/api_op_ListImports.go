@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information on all imports, or a select set of imports by ImportStatus
+//	Returns information on all imports, or a select set of imports by ImportStatus
+//
 // or Destination .
 func (c *Client) ListImports(ctx context.Context, params *ListImportsInput, optFns ...func(*Options)) (*ListImportsOutput, error) {
 	if params == nil {
@@ -30,16 +31,16 @@ func (c *Client) ListImports(ctx context.Context, params *ListImportsInput, optF
 
 type ListImportsInput struct {
 
-	// The ARN of the destination event data store.
+	//  The ARN of the destination event data store.
 	Destination *string
 
-	// The status of the import.
+	//  The status of the import.
 	ImportStatus types.ImportStatus
 
-	// The maximum number of imports to display on a single page.
+	//  The maximum number of imports to display on a single page.
 	MaxResults *int32
 
-	// A token you can use to get the next page of import results.
+	//  A token you can use to get the next page of import results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,10 +48,10 @@ type ListImportsInput struct {
 
 type ListImportsOutput struct {
 
-	// The list of returned imports.
+	//  The list of returned imports.
 	Imports []types.ImportsListItem
 
-	// A token you can use to get the next page of import results.
+	//  A token you can use to get the next page of import results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -144,7 +145,7 @@ var _ ListImportsAPIClient = (*Client)(nil)
 
 // ListImportsPaginatorOptions is the paginator options for ListImports
 type ListImportsPaginatorOptions struct {
-	// The maximum number of imports to display on a single page.
+	//  The maximum number of imports to display on a single page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -61,8 +61,10 @@ type CloudWatchDimensionConfiguration struct {
 	// The default value of the dimension that is published to Amazon CloudWatch if
 	// you don't provide the value of the dimension when you send an email. This value
 	// has to meet the following criteria:
+	//
 	//   - It can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores
 	//   (_), or dashes (-).
+	//
 	//   - It can contain no more than 256 characters.
 	//
 	// This member is required.
@@ -70,8 +72,10 @@ type CloudWatchDimensionConfiguration struct {
 
 	// The name of an Amazon CloudWatch dimension associated with an email sending
 	// metric. The name has to meet the following criteria:
+	//
 	//   - It can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores
 	//   (_), or dashes (-).
+	//
 	//   - It can contain no more than 256 characters.
 	//
 	// This member is required.
@@ -143,8 +147,10 @@ type DedicatedIp struct {
 
 	// The warm-up status of a dedicated IP address. The status can have one of the
 	// following values:
+	//
 	//   - IN_PROGRESS – The IP address isn't ready to use because the dedicated IP
 	//   warm-up process is ongoing.
+	//
 	//   - DONE – The dedicated IP warm-up process is complete, and the IP address is
 	//   ready to use.
 	//
@@ -233,15 +239,20 @@ type DkimAttributes struct {
 	// Describes whether or not Amazon Pinpoint has successfully located the DKIM
 	// records in the DNS records for the domain. The status can be one of the
 	// following:
+	//
 	//   - PENDING – Amazon Pinpoint hasn't yet located the DKIM records in the DNS
 	//   configuration for the domain, but will continue to attempt to locate them.
+	//
 	//   - SUCCESS – Amazon Pinpoint located the DKIM records in the DNS configuration
 	//   for the domain and determined that they're correct. Amazon Pinpoint can now send
 	//   DKIM-signed email from the identity.
+	//
 	//   - FAILED – Amazon Pinpoint was unable to locate the DKIM records in the DNS
 	//   settings for the domain, and won't continue to search for them.
+	//
 	//   - TEMPORARY_FAILURE – A temporary issue occurred, which prevented Amazon
 	//   Pinpoint from determining the DKIM status for the domain.
+	//
 	//   - NOT_STARTED – Amazon Pinpoint hasn't yet started searching for the DKIM
 	//   records in the DKIM records for the domain.
 	Status DkimStatus
@@ -377,19 +388,26 @@ type DomainIspPlacement struct {
 type EmailContent struct {
 
 	// The raw email message. The message has to meet the following criteria:
-	//   - The message has to contain a header and a body, separated by one blank
-	//   line.
+	//
+	//   - The message has to contain a header and a body, separated by one blank line.
+	//
 	//   - All of the required header fields must be present in the message.
+	//
 	//   - Each part of a multipart MIME message must be formatted properly.
+	//
 	//   - If you include attachments, they must be in a file format that Amazon
 	//   Pinpoint supports.
+	//
 	//   - The entire message must be Base64 encoded.
+	//
 	//   - If any of the MIME parts in your message contain content that is outside of
 	//   the 7-bit ASCII character range, you should encode that content to ensure that
 	//   recipients' email clients render the message properly.
+	//
 	//   - The length of any single line of text in the message can't exceed 1,000
-	//   characters. This restriction is defined in RFC 5321 (https://tools.ietf.org/html/rfc5321)
-	//   .
+	//   characters. This restriction is defined in [RFC 5321].
+	//
+	// [RFC 5321]: https://tools.ietf.org/html/rfc5321
 	Raw *RawMessage
 
 	// The simple email message. The message consists of a subject and a message body.
@@ -427,9 +445,10 @@ type EventDestination struct {
 
 	// If true , the event destination is enabled. When the event destination is
 	// enabled, the specified event types are sent to the destinations in this
-	// EventDestinationDefinition . If false , the event destination is disabled. When
-	// the event destination is disabled, events aren't sent to the specified
-	// destinations.
+	// EventDestinationDefinition .
+	//
+	// If false , the event destination is disabled. When the event destination is
+	// disabled, events aren't sent to the specified destinations.
 	Enabled bool
 
 	// An object that defines an Amazon Kinesis Data Firehose destination for email
@@ -462,9 +481,10 @@ type EventDestinationDefinition struct {
 
 	// If true , the event destination is enabled. When the event destination is
 	// enabled, the specified event types are sent to the destinations in this
-	// EventDestinationDefinition . If false , the event destination is disabled. When
-	// the event destination is disabled, events aren't sent to the specified
-	// destinations.
+	// EventDestinationDefinition .
+	//
+	// If false , the event destination is disabled. When the event destination is
+	// disabled, events aren't sent to the specified destinations.
 	Enabled bool
 
 	// An object that defines an Amazon Kinesis Data Firehose destination for email
@@ -495,16 +515,20 @@ type IdentityInfo struct {
 	IdentityName *string
 
 	// The email identity type. The identity type can be one of the following:
+	//
 	//   - EMAIL_ADDRESS – The identity is an email address.
+	//
 	//   - DOMAIN – The identity is a domain.
+	//
 	//   - MANAGED_DOMAIN – The identity is a domain that is managed by AWS.
 	IdentityType IdentityType
 
-	// Indicates whether or not you can send email from the identity. In Amazon
-	// Pinpoint, an identity is an email address or domain that you send email from.
-	// Before you can send email from an identity, you have to demostrate that you own
-	// the identity, and that you authorize Amazon Pinpoint to send email from that
-	// identity.
+	// Indicates whether or not you can send email from the identity.
+	//
+	// In Amazon Pinpoint, an identity is an email address or domain that you send
+	// email from. Before you can send email from an identity, you have to demostrate
+	// that you own the identity, and that you authorize Amazon Pinpoint to send email
+	// from that identity.
 	SendingEnabled bool
 
 	noSmithyDocumentSerde
@@ -566,9 +590,10 @@ type MailFromAttributes struct {
 	// record for a custom MAIL FROM domain. When you set this value to UseDefaultValue
 	// , Amazon Pinpoint uses amazonses.com as the MAIL FROM domain. When you set this
 	// value to RejectMessage , Amazon Pinpoint returns a MailFromDomainNotVerified
-	// error, and doesn't attempt to deliver the email. These behaviors are taken when
-	// the custom MAIL FROM domain configuration is in the Pending , Failed , and
-	// TemporaryFailure states.
+	// error, and doesn't attempt to deliver the email.
+	//
+	// These behaviors are taken when the custom MAIL FROM domain configuration is in
+	// the Pending , Failed , and TemporaryFailure states.
 	//
 	// This member is required.
 	BehaviorOnMxFailure BehaviorOnMxFailure
@@ -579,11 +604,15 @@ type MailFromAttributes struct {
 	MailFromDomain *string
 
 	// The status of the MAIL FROM domain. This status can have the following values:
+	//
 	//   - PENDING – Amazon Pinpoint hasn't started searching for the MX record yet.
+	//
 	//   - SUCCESS – Amazon Pinpoint detected the required MX record for the MAIL FROM
 	//   domain.
+	//
 	//   - FAILED – Amazon Pinpoint can't find the required MX record, or the record no
 	//   longer exists.
+	//
 	//   - TEMPORARY_FAILURE – A temporary issue occurred, which prevented Amazon
 	//   Pinpoint from determining the status of the MAIL FROM domain.
 	//
@@ -605,8 +634,9 @@ type Message struct {
 
 	// The subject line of the email. The subject line can only contain 7-bit ASCII
 	// characters. However, you can specify non-ASCII characters in the subject line by
-	// using encoded-word syntax, as described in RFC 2047 (https://tools.ietf.org/html/rfc2047)
-	// .
+	// using encoded-word syntax, as described in [RFC 2047].
+	//
+	// [RFC 2047]: https://tools.ietf.org/html/rfc2047
 	//
 	// This member is required.
 	Subject *Content
@@ -620,8 +650,10 @@ type MessageTag struct {
 
 	// The name of the message tag. The message tag name has to meet the following
 	// criteria:
+	//
 	//   - It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores
 	//   (_), or dashes (-).
+	//
 	//   - It can contain no more than 256 characters.
 	//
 	// This member is required.
@@ -629,8 +661,10 @@ type MessageTag struct {
 
 	// The value of the message tag. The message tag value has to meet the following
 	// criteria:
+	//
 	//   - It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores
 	//   (_), or dashes (-).
+	//
 	//   - It can contain no more than 256 characters.
 	//
 	// This member is required.
@@ -700,18 +734,25 @@ type PlacementStatistics struct {
 type RawMessage struct {
 
 	// The raw email message. The message has to meet the following criteria:
-	//   - The message has to contain a header and a body, separated by one blank
-	//   line.
+	//
+	//   - The message has to contain a header and a body, separated by one blank line.
+	//
 	//   - All of the required header fields must be present in the message.
+	//
 	//   - Each part of a multipart MIME message must be formatted properly.
+	//
 	//   - Attachments must be in a file format that Amazon Pinpoint supports.
+	//
 	//   - The entire message must be Base64 encoded.
+	//
 	//   - If any of the MIME parts in your message contain content that is outside of
 	//   the 7-bit ASCII character range, you should encode that content to ensure that
 	//   recipients' email clients render the message properly.
+	//
 	//   - The length of any single line of text in the message can't exceed 1,000
-	//   characters. This restriction is defined in RFC 5321 (https://tools.ietf.org/html/rfc5321)
-	//   .
+	//   characters. This restriction is defined in [RFC 5321].
+	//
+	// [RFC 5321]: https://tools.ietf.org/html/rfc5321
 	//
 	// This member is required.
 	Data []byte
@@ -771,9 +812,9 @@ type SendQuota struct {
 type SnsDestination struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish
-	// email events to. For more information about Amazon SNS topics, see the Amazon
-	// SNS Developer Guide (https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html)
-	// .
+	// email events to. For more information about Amazon SNS topics, see the [Amazon SNS Developer Guide].
+	//
+	// [Amazon SNS Developer Guide]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
 	//
 	// This member is required.
 	TopicArn *string
@@ -785,20 +826,26 @@ type SnsDestination struct {
 // label that you optionally define and associate with a resource in Amazon
 // Pinpoint. Tags can help you categorize and manage resources in different ways,
 // such as by purpose, owner, environment, or other criteria. A resource can have
-// as many as 50 tags. Each tag consists of a required tag key and an associated
-// tag value, both of which you define. A tag key is a general label that acts as a
-// category for a more specific tag value. A tag value acts as a descriptor within
-// a tag key. A tag key can contain as many as 128 characters. A tag value can
-// contain as many as 256 characters. The characters can be Unicode letters,
-// digits, white space, or one of the following symbols: _ . : / = + -. The
-// following additional restrictions apply to tags:
+// as many as 50 tags.
+//
+// Each tag consists of a required tag key and an associated tag value, both of
+// which you define. A tag key is a general label that acts as a category for a
+// more specific tag value. A tag value acts as a descriptor within a tag key. A
+// tag key can contain as many as 128 characters. A tag value can contain as many
+// as 256 characters. The characters can be Unicode letters, digits, white space,
+// or one of the following symbols: _ . : / = + -. The following additional
+// restrictions apply to tags:
+//
 //   - Tag keys and values are case sensitive.
+//
 //   - For each associated resource, each tag key must be unique and it can have
 //     only one value.
+//
 //   - The aws: prefix is reserved for use by AWS; you can’t use it in any tag keys
 //     or values that you define. In addition, you can't edit or remove tag keys or
 //     values that use this prefix. Tags that use this prefix don’t count against the
 //     limit of 50 tags per resource.
+//
 //   - You can associate tags with public or shared resources, but the tags are
 //     available only for your AWS account, not any other accounts that share the
 //     resource. In addition, the tags are available only for resources that are
@@ -839,8 +886,9 @@ type Template struct {
 // An object that defines the tracking options for a configuration set. When you
 // use Amazon Pinpoint to send an email, it contains an invisible image that's used
 // to track when recipients open your email. If your email contains links, those
-// links are changed slightly in order to track when recipients click them. These
-// images and links include references to a domain operated by AWS. You can
+// links are changed slightly in order to track when recipients click them.
+//
+// These images and links include references to a domain operated by AWS. You can
 // optionally configure Amazon Pinpoint to use a domain that you operate for these
 // images and links.
 type TrackingOptions struct {

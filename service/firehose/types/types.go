@@ -16,10 +16,11 @@ type AmazonOpenSearchServerlessBufferingHints struct {
 	IntervalInSeconds *int32
 
 	// Buffer incoming data to the specified size, in MBs, before delivering it to the
-	// destination. The default value is 5. We recommend setting this parameter to a
-	// value greater than the amount of data you typically ingest into the delivery
-	// stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, the
-	// value should be 10 MB or higher.
+	// destination. The default value is 5.
+	//
+	// We recommend setting this parameter to a value greater than the amount of data
+	// you typically ingest into the delivery stream in 10 seconds. For example, if you
+	// typically ingest data at 1 MB/sec, the value should be 10 MB or higher.
 	SizeInMBs *int32
 
 	noSmithyDocumentSerde
@@ -178,10 +179,11 @@ type AmazonopensearchserviceBufferingHints struct {
 	IntervalInSeconds *int32
 
 	// Buffer incoming data to the specified size, in MBs, before delivering it to the
-	// destination. The default value is 5. We recommend setting this parameter to a
-	// value greater than the amount of data you typically ingest into the delivery
-	// stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, the
-	// value should be 10 MB or higher.
+	// destination. The default value is 5.
+	//
+	// We recommend setting this parameter to a value greater than the amount of data
+	// you typically ingest into the delivery stream in 10 seconds. For example, if you
+	// typically ingest data at 1 MB/sec, the value should be 10 MB or higher.
 	SizeInMBs *int32
 
 	noSmithyDocumentSerde
@@ -358,11 +360,12 @@ type AmazonopensearchserviceDestinationUpdate struct {
 
 	// The Amazon OpenSearch Service type name. For Elasticsearch 6.x, there can be
 	// only one type per index. If you try to specify a new type for an existing index
-	// that already has another type, Firehose returns an error during runtime. If you
-	// upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery stream,
-	// Firehose still delivers data to Elasticsearch with the old index name and type
-	// name. If you want to update your delivery stream with a new index name, provide
-	// an empty string for TypeName.
+	// that already has another type, Firehose returns an error during runtime.
+	//
+	// If you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery
+	// stream, Firehose still delivers data to Elasticsearch with the old index name
+	// and type name. If you want to update your delivery stream with a new index name,
+	// provide an empty string for TypeName.
 	TypeName *string
 
 	noSmithyDocumentSerde
@@ -414,10 +417,11 @@ type BufferingHints struct {
 	// Buffer incoming data to the specified size, in MiBs, before delivering it to
 	// the destination. The default value is 5. This parameter is optional but if you
 	// specify a value for it, you must also specify a value for IntervalInSeconds ,
-	// and vice versa. We recommend setting this parameter to a value greater than the
-	// amount of data you typically ingest into the delivery stream in 10 seconds. For
-	// example, if you typically ingest data at 1 MiB/sec, the value should be 10 MiB
-	// or higher.
+	// and vice versa.
+	//
+	// We recommend setting this parameter to a value greater than the amount of data
+	// you typically ingest into the delivery stream in 10 seconds. For example, if you
+	// typically ingest data at 1 MiB/sec, the value should be 10 MiB or higher.
 	SizeInMBs *int32
 
 	noSmithyDocumentSerde
@@ -449,18 +453,27 @@ type CopyCommand struct {
 	DataTableName *string
 
 	// Optional parameters to use with the Amazon Redshift COPY command. For more
-	// information, see the "Optional Parameters" section of Amazon Redshift COPY
-	// command (https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html) . Some
-	// possible examples that would apply to Firehose are as follows: delimiter '\t'
-	// lzop; - fields are delimited with "\t" (TAB character) and compressed using
-	// lzop. delimiter '|' - fields are delimited with "|" (this is the default
-	// delimiter). delimiter '|' escape - the delimiter should be escaped. fixedwidth
-	// 'venueid:3,venuename:25,venuecity:12,venuestate:2,venueseats:6' - fields are
-	// fixed width in the source, with each width specified after every column in the
-	// table. JSON 's3://mybucket/jsonpaths.txt' - data is in JSON format, and the
-	// path specified is the format of the data. For more examples, see Amazon
-	// Redshift COPY command examples (https://docs.aws.amazon.com/redshift/latest/dg/r_COPY_command_examples.html)
-	// .
+	// information, see the "Optional Parameters" section of [Amazon Redshift COPY command]. Some possible examples
+	// that would apply to Firehose are as follows:
+	//
+	// delimiter '\t' lzop; - fields are delimited with "\t" (TAB character) and
+	// compressed using lzop.
+	//
+	// delimiter '|' - fields are delimited with "|" (this is the default delimiter).
+	//
+	// delimiter '|' escape - the delimiter should be escaped.
+	//
+	// fixedwidth 'venueid:3,venuename:25,venuecity:12,venuestate:2,venueseats:6' -
+	// fields are fixed width in the source, with each width specified after every
+	// column in the table.
+	//
+	// JSON 's3://mybucket/jsonpaths.txt' - data is in JSON format, and the path
+	// specified is the format of the data.
+	//
+	// For more examples, see [Amazon Redshift COPY command examples].
+	//
+	// [Amazon Redshift COPY command]: https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html
+	// [Amazon Redshift COPY command examples]: https://docs.aws.amazon.com/redshift/latest/dg/r_COPY_command_examples.html
 	CopyOptions *string
 
 	// A comma-separated list of column names.
@@ -474,8 +487,9 @@ type CopyCommand struct {
 // serializer and deserializer that you specify, in addition to the column
 // information from the Amazon Web Services Glue table, to deserialize your input
 // data from JSON and then serialize it to the Parquet or ORC format. For more
-// information, see Firehose Record Format Conversion (https://docs.aws.amazon.com/firehose/latest/dev/record-format-conversion.html)
-// .
+// information, see [Firehose Record Format Conversion].
+//
+// [Firehose Record Format Conversion]: https://docs.aws.amazon.com/firehose/latest/dev/record-format-conversion.html
 type DataFormatConversionConfiguration struct {
 
 	// Defaults to true . Set it to false if you want to disable format conversion
@@ -502,8 +516,9 @@ type DataFormatConversionConfiguration struct {
 type DeliveryStreamDescription struct {
 
 	// The Amazon Resource Name (ARN) of the delivery stream. For more information,
-	// see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	DeliveryStreamARN *string
@@ -515,14 +530,16 @@ type DeliveryStreamDescription struct {
 
 	// The status of the delivery stream. If the status of a delivery stream is
 	// CREATING_FAILED , this status doesn't change, and you can't invoke
-	// CreateDeliveryStream again on it. However, you can invoke the
-	// DeleteDeliveryStream operation to delete it.
+	// CreateDeliveryStream again on it. However, you can invoke the DeleteDeliveryStream operation to
+	// delete it.
 	//
 	// This member is required.
 	DeliveryStreamStatus DeliveryStreamStatus
 
 	// The delivery stream type. This can be one of the following values:
+	//
 	//   - DirectPut : Provider applications access the delivery stream directly.
+	//
 	//   - KinesisStreamAsSource : The delivery stream uses a Kinesis data stream as a
 	//   source.
 	//
@@ -554,15 +571,14 @@ type DeliveryStreamDescription struct {
 	DeliveryStreamEncryptionConfiguration *DeliveryStreamEncryptionConfiguration
 
 	// Provides details in case one of the following operations fails due to an error
-	// related to KMS: CreateDeliveryStream , DeleteDeliveryStream ,
-	// StartDeliveryStreamEncryption , StopDeliveryStreamEncryption .
+	// related to KMS: CreateDeliveryStream, DeleteDeliveryStream, StartDeliveryStreamEncryption, StopDeliveryStreamEncryption.
 	FailureDescription *FailureDescription
 
 	// The date and time that the delivery stream was last updated.
 	LastUpdateTimestamp *time.Time
 
-	// If the DeliveryStreamType parameter is KinesisStreamAsSource , a
-	// SourceDescription object describing the source Kinesis data stream.
+	// If the DeliveryStreamType parameter is KinesisStreamAsSource , a SourceDescription object
+	// describing the source Kinesis data stream.
 	Source *SourceDescription
 
 	noSmithyDocumentSerde
@@ -570,13 +586,12 @@ type DeliveryStreamDescription struct {
 
 // Contains information about the server-side encryption (SSE) status for the
 // delivery stream, the type customer master key (CMK) in use, if any, and the ARN
-// of the CMK. You can get DeliveryStreamEncryptionConfiguration by invoking the
-// DescribeDeliveryStream operation.
+// of the CMK. You can get DeliveryStreamEncryptionConfiguration by invoking the DescribeDeliveryStream
+// operation.
 type DeliveryStreamEncryptionConfiguration struct {
 
 	// Provides details in case one of the following operations fails due to an error
-	// related to KMS: CreateDeliveryStream , DeleteDeliveryStream ,
-	// StartDeliveryStreamEncryption , StopDeliveryStreamEncryption .
+	// related to KMS: CreateDeliveryStream, DeleteDeliveryStream, StartDeliveryStreamEncryption, StopDeliveryStreamEncryption.
 	FailureDescription *FailureDescription
 
 	// If KeyType is CUSTOMER_MANAGED_CMK , this field contains the ARN of the customer
@@ -586,15 +601,15 @@ type DeliveryStreamEncryptionConfiguration struct {
 
 	// Indicates the type of customer master key (CMK) that is used for encryption.
 	// The default setting is Amazon Web Services_OWNED_CMK . For more information
-	// about CMKs, see Customer Master Keys (CMKs) (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys)
-	// .
+	// about CMKs, see [Customer Master Keys (CMKs)].
+	//
+	// [Customer Master Keys (CMKs)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys
 	KeyType KeyType
 
 	// This is the server-side encryption (SSE) status for the delivery stream. For a
-	// full description of the different values of this status, see
-	// StartDeliveryStreamEncryption and StopDeliveryStreamEncryption . If this status
-	// is ENABLING_FAILED or DISABLING_FAILED , it is the status of the most recent
-	// attempt to enable or disable SSE, respectively.
+	// full description of the different values of this status, see StartDeliveryStreamEncryptionand StopDeliveryStreamEncryption. If this
+	// status is ENABLING_FAILED or DISABLING_FAILED , it is the status of the most
+	// recent attempt to enable or disable SSE, respectively.
 	Status DeliveryStreamEncryptionStatus
 
 	noSmithyDocumentSerde
@@ -606,22 +621,26 @@ type DeliveryStreamEncryptionConfigurationInput struct {
 
 	// Indicates the type of customer master key (CMK) to use for encryption. The
 	// default setting is Amazon Web Services_OWNED_CMK . For more information about
-	// CMKs, see Customer Master Keys (CMKs) (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys)
-	// . When you invoke CreateDeliveryStream or StartDeliveryStreamEncryption with
-	// KeyType set to CUSTOMER_MANAGED_CMK, Firehose invokes the Amazon KMS operation
-	// CreateGrant (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html)
-	// to create a grant that allows the Firehose service to use the customer managed
-	// CMK to perform encryption and decryption. Firehose manages that grant. When you
-	// invoke StartDeliveryStreamEncryption to change the CMK for a delivery stream
-	// that is encrypted with a customer managed CMK, Firehose schedules the grant it
-	// had on the old CMK for retirement. You can use a CMK of type
-	// CUSTOMER_MANAGED_CMK to encrypt up to 500 delivery streams. If a
-	// CreateDeliveryStream or StartDeliveryStreamEncryption operation exceeds this
-	// limit, Firehose throws a LimitExceededException . To encrypt your delivery
-	// stream, use symmetric CMKs. Firehose doesn't support asymmetric CMKs. For
-	// information about symmetric and asymmetric CMKs, see About Symmetric and
-	// Asymmetric CMKs (https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html)
-	// in the Amazon Web Services Key Management Service developer guide.
+	// CMKs, see [Customer Master Keys (CMKs)]. When you invoke CreateDeliveryStream or StartDeliveryStreamEncryption with KeyType set to CUSTOMER_MANAGED_CMK,
+	// Firehose invokes the Amazon KMS operation [CreateGrant]to create a grant that allows the
+	// Firehose service to use the customer managed CMK to perform encryption and
+	// decryption. Firehose manages that grant.
+	//
+	// When you invoke StartDeliveryStreamEncryption to change the CMK for a delivery stream that is encrypted with
+	// a customer managed CMK, Firehose schedules the grant it had on the old CMK for
+	// retirement.
+	//
+	// You can use a CMK of type CUSTOMER_MANAGED_CMK to encrypt up to 500 delivery
+	// streams. If a CreateDeliveryStreamor StartDeliveryStreamEncryption operation exceeds this limit, Firehose throws a
+	// LimitExceededException .
+	//
+	// To encrypt your delivery stream, use symmetric CMKs. Firehose doesn't support
+	// asymmetric CMKs. For information about symmetric and asymmetric CMKs, see [About Symmetric and Asymmetric CMKs]in
+	// the Amazon Web Services Key Management Service developer guide.
+	//
+	// [About Symmetric and Asymmetric CMKs]: https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html
+	// [CreateGrant]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html
+	// [Customer Master Keys (CMKs)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys
 	//
 	// This member is required.
 	KeyType KeyType
@@ -635,9 +654,11 @@ type DeliveryStreamEncryptionConfigurationInput struct {
 }
 
 // The deserializer you want Firehose to use for converting the input data from
-// JSON. Firehose then serializes the data to its final format using the Serializer
-// . Firehose supports two types of deserializers: the Apache Hive JSON SerDe (https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-JSON)
-// and the OpenX JSON SerDe (https://github.com/rcongiu/Hive-JSON-Serde) .
+// JSON. Firehose then serializes the data to its final format using the Serializer.
+// Firehose supports two types of deserializers: the [Apache Hive JSON SerDe]and the [OpenX JSON SerDe].
+//
+// [Apache Hive JSON SerDe]: https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-JSON
+// [OpenX JSON SerDe]: https://github.com/rcongiu/Hive-JSON-Serde
 type Deserializer struct {
 
 	// The native Hive / HCatalog JsonSerDe. Used by Firehose for deserializing data,
@@ -702,14 +723,16 @@ type DocumentIdOptions struct {
 	// When the FIREHOSE_DEFAULT option is chosen, Firehose generates a unique
 	// document ID for each record based on a unique internal identifier. The generated
 	// document ID is stable across multiple delivery attempts, which helps prevent the
-	// same record from being indexed multiple times with different document IDs. When
-	// the NO_DOCUMENT_ID option is chosen, Firehose does not include any document IDs
-	// in the requests it sends to the Amazon OpenSearch Service. This causes the
-	// Amazon OpenSearch Service domain to generate document IDs. In case of multiple
-	// delivery attempts, this may cause the same record to be indexed more than once
-	// with different document IDs. This option enables write-heavy operations, such as
-	// the ingestion of logs and observability data, to consume less resources in the
-	// Amazon OpenSearch Service domain, resulting in improved performance.
+	// same record from being indexed multiple times with different document IDs.
+	//
+	// When the NO_DOCUMENT_ID option is chosen, Firehose does not include any
+	// document IDs in the requests it sends to the Amazon OpenSearch Service. This
+	// causes the Amazon OpenSearch Service domain to generate document IDs. In case of
+	// multiple delivery attempts, this may cause the same record to be indexed more
+	// than once with different document IDs. This option enables write-heavy
+	// operations, such as the ingestion of logs and observability data, to consume
+	// less resources in the Amazon OpenSearch Service domain, resulting in improved
+	// performance.
 	//
 	// This member is required.
 	DefaultDocumentIdFormat DefaultDocumentIdFormat
@@ -742,10 +765,11 @@ type ElasticsearchBufferingHints struct {
 	IntervalInSeconds *int32
 
 	// Buffer incoming data to the specified size, in MBs, before delivering it to the
-	// destination. The default value is 5. We recommend setting this parameter to a
-	// value greater than the amount of data you typically ingest into the delivery
-	// stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, the
-	// value should be 10 MB or higher.
+	// destination. The default value is 5.
+	//
+	// We recommend setting this parameter to a value greater than the amount of data
+	// you typically ingest into the delivery stream in 10 seconds. For example, if you
+	// typically ingest data at 1 MB/sec, the value should be 10 MB or higher.
 	SizeInMBs *int32
 
 	noSmithyDocumentSerde
@@ -761,9 +785,10 @@ type ElasticsearchDestinationConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose for
 	// calling the Amazon ES Configuration API and for indexing documents. For more
-	// information, see Grant Firehose Access to an Amazon S3 Destination (https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
-	// and Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// information, see [Grant Firehose Access to an Amazon S3 Destination]and [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Grant Firehose Access to an Amazon S3 Destination]: https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	RoleARN *string
@@ -790,15 +815,18 @@ type ElasticsearchDestinationConfiguration struct {
 
 	// The ARN of the Amazon ES domain. The IAM role must have permissions for
 	// DescribeDomain , DescribeDomains , and DescribeDomainConfig after assuming the
-	// role specified in RoleARN. For more information, see Amazon Resource Names
-	// (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// . Specify either ClusterEndpoint or DomainARN .
+	// role specified in RoleARN. For more information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// Specify either ClusterEndpoint or DomainARN .
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	DomainARN *string
 
 	// The Elasticsearch index rotation period. Index rotation appends a timestamp to
 	// the IndexName to facilitate the expiration of old data. For more information,
-	// see Index Rotation for the Amazon ES Destination (https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation)
-	// . The default value is OneDay .
+	// see [Index Rotation for the Amazon ES Destination]. The default value is OneDay .
+	//
+	// [Index Rotation for the Amazon ES Destination]: https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation
 	IndexRotationPeriod ElasticsearchIndexRotationPeriod
 
 	// The data processing configuration.
@@ -814,15 +842,18 @@ type ElasticsearchDestinationConfiguration struct {
 	// appended to the key prefix. When set to AllDocuments , Firehose delivers all
 	// incoming records to Amazon S3, and also writes failed documents with
 	// AmazonOpenSearchService-failed/ appended to the prefix. For more information,
-	// see Amazon S3 Backup for the Amazon ES Destination (https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup)
-	// . Default value is FailedDocumentsOnly . You can't change this backup mode after
-	// you create the delivery stream.
+	// see [Amazon S3 Backup for the Amazon ES Destination]. Default value is FailedDocumentsOnly .
+	//
+	// You can't change this backup mode after you create the delivery stream.
+	//
+	// [Amazon S3 Backup for the Amazon ES Destination]: https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup
 	S3BackupMode ElasticsearchS3BackupMode
 
 	// The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type
 	// per index. If you try to specify a new type for an existing index that already
-	// has another type, Firehose returns an error during run time. For Elasticsearch
-	// 7.x, don't specify a TypeName .
+	// has another type, Firehose returns an error during run time.
+	//
+	// For Elasticsearch 7.x, don't specify a TypeName .
 	TypeName *string
 
 	// The details of the VPC of the Amazon destination.
@@ -848,9 +879,11 @@ type ElasticsearchDestinationDescription struct {
 	// Firehose generated document ID and OpenSearch Service generated document ID.
 	DocumentIdOptions *DocumentIdOptions
 
-	// The ARN of the Amazon ES domain. For more information, see Amazon Resource
-	// Names (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// . Firehose uses either ClusterEndpoint or DomainARN to send data to Amazon ES.
+	// The ARN of the Amazon ES domain. For more information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// Firehose uses either ClusterEndpoint or DomainARN to send data to Amazon ES.
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	DomainARN *string
 
 	// The Elasticsearch index name.
@@ -866,9 +899,9 @@ type ElasticsearchDestinationDescription struct {
 	RetryOptions *ElasticsearchRetryOptions
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
-	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
-	// Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	RoleARN *string
 
 	// The Amazon S3 backup mode.
@@ -909,18 +942,21 @@ type ElasticsearchDestinationUpdate struct {
 
 	// The ARN of the Amazon ES domain. The IAM role must have permissions for
 	// DescribeDomain , DescribeDomains , and DescribeDomainConfig after assuming the
-	// IAM role specified in RoleARN . For more information, see Amazon Resource Names
-	// (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// . Specify either ClusterEndpoint or DomainARN .
+	// IAM role specified in RoleARN . For more information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// Specify either ClusterEndpoint or DomainARN .
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	DomainARN *string
 
 	// The Elasticsearch index name.
 	IndexName *string
 
 	// The Elasticsearch index rotation period. Index rotation appends a timestamp to
-	// IndexName to facilitate the expiration of old data. For more information, see
-	// Index Rotation for the Amazon ES Destination (https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation)
-	// . Default value is OneDay .
+	// IndexName to facilitate the expiration of old data. For more information, see [Index Rotation for the Amazon ES Destination].
+	// Default value is OneDay .
+	//
+	// [Index Rotation for the Amazon ES Destination]: https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation
 	IndexRotationPeriod ElasticsearchIndexRotationPeriod
 
 	// The data processing configuration.
@@ -932,9 +968,10 @@ type ElasticsearchDestinationUpdate struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose for
 	// calling the Amazon ES Configuration API and for indexing documents. For more
-	// information, see Grant Firehose Access to an Amazon S3 Destination (https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
-	// and Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// information, see [Grant Firehose Access to an Amazon S3 Destination]and [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Grant Firehose Access to an Amazon S3 Destination]: https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	RoleARN *string
 
 	// The Amazon S3 destination.
@@ -942,11 +979,12 @@ type ElasticsearchDestinationUpdate struct {
 
 	// The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type
 	// per index. If you try to specify a new type for an existing index that already
-	// has another type, Firehose returns an error during runtime. If you upgrade
-	// Elasticsearch from 6.x to 7.x and don’t update your delivery stream, Firehose
-	// still delivers data to Elasticsearch with the old index name and type name. If
-	// you want to update your delivery stream with a new index name, provide an empty
-	// string for TypeName .
+	// has another type, Firehose returns an error during runtime.
+	//
+	// If you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery
+	// stream, Firehose still delivers data to Elasticsearch with the old index name
+	// and type name. If you want to update your delivery stream with a new index name,
+	// provide an empty string for TypeName .
 	TypeName *string
 
 	noSmithyDocumentSerde
@@ -981,17 +1019,17 @@ type EncryptionConfiguration struct {
 // Describes the configuration of a destination in Amazon S3.
 type ExtendedS3DestinationConfiguration struct {
 
-	// The ARN of the S3 bucket. For more information, see Amazon Resource Names
-	// (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// The ARN of the S3 bucket. For more information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	BucketARN *string
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
-	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
-	// Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	RoleARN *string
@@ -1023,17 +1061,18 @@ type ExtendedS3DestinationConfiguration struct {
 
 	// A prefix that Firehose evaluates and adds to failed records before writing them
 	// to S3. This prefix appears immediately following the bucket name. For
-	// information about how to specify this prefix, see Custom Prefixes for Amazon S3
-	// Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html) .
+	// information about how to specify this prefix, see [Custom Prefixes for Amazon S3 Objects].
+	//
+	// [Custom Prefixes for Amazon S3 Objects]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
 	ErrorOutputPrefix *string
 
 	// Specify a file extension. It will override the default file extension
 	FileExtension *string
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
-	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html)
-	// .
+	// Amazon S3 files. You can also specify a custom prefix, as described in [Custom Prefixes for Amazon S3 Objects].
+	//
+	// [Custom Prefixes for Amazon S3 Objects]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
 	Prefix *string
 
 	// The data processing configuration.
@@ -1053,9 +1092,9 @@ type ExtendedS3DestinationConfiguration struct {
 // Describes a destination in Amazon S3.
 type ExtendedS3DestinationDescription struct {
 
-	// The ARN of the S3 bucket. For more information, see Amazon Resource Names
-	// (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// The ARN of the S3 bucket. For more information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	BucketARN *string
@@ -1077,9 +1116,9 @@ type ExtendedS3DestinationDescription struct {
 	EncryptionConfiguration *EncryptionConfiguration
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
-	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
-	// Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	RoleARN *string
@@ -1101,17 +1140,18 @@ type ExtendedS3DestinationDescription struct {
 
 	// A prefix that Firehose evaluates and adds to failed records before writing them
 	// to S3. This prefix appears immediately following the bucket name. For
-	// information about how to specify this prefix, see Custom Prefixes for Amazon S3
-	// Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html) .
+	// information about how to specify this prefix, see [Custom Prefixes for Amazon S3 Objects].
+	//
+	// [Custom Prefixes for Amazon S3 Objects]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
 	ErrorOutputPrefix *string
 
 	// Specify a file extension. It will override the default file extension
 	FileExtension *string
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
-	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html)
-	// .
+	// Amazon S3 files. You can also specify a custom prefix, as described in [Custom Prefixes for Amazon S3 Objects].
+	//
+	// [Custom Prefixes for Amazon S3 Objects]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
 	Prefix *string
 
 	// The data processing configuration.
@@ -1129,9 +1169,9 @@ type ExtendedS3DestinationDescription struct {
 // Describes an update for a destination in Amazon S3.
 type ExtendedS3DestinationUpdate struct {
 
-	// The ARN of the S3 bucket. For more information, see Amazon Resource Names
-	// (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// The ARN of the S3 bucket. For more information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	BucketARN *string
 
 	// The buffering option.
@@ -1161,26 +1201,27 @@ type ExtendedS3DestinationUpdate struct {
 
 	// A prefix that Firehose evaluates and adds to failed records before writing them
 	// to S3. This prefix appears immediately following the bucket name. For
-	// information about how to specify this prefix, see Custom Prefixes for Amazon S3
-	// Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html) .
+	// information about how to specify this prefix, see [Custom Prefixes for Amazon S3 Objects].
+	//
+	// [Custom Prefixes for Amazon S3 Objects]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
 	ErrorOutputPrefix *string
 
 	// Specify a file extension. It will override the default file extension
 	FileExtension *string
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
-	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html)
-	// .
+	// Amazon S3 files. You can also specify a custom prefix, as described in [Custom Prefixes for Amazon S3 Objects].
+	//
+	// [Custom Prefixes for Amazon S3 Objects]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
 	Prefix *string
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
-	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
-	// Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	RoleARN *string
 
 	// You can update a delivery stream to enable Amazon S3 backup if it is disabled.
@@ -1194,8 +1235,7 @@ type ExtendedS3DestinationUpdate struct {
 }
 
 // Provides details in case one of the following operations fails due to an error
-// related to KMS: CreateDeliveryStream , DeleteDeliveryStream ,
-// StartDeliveryStreamEncryption , StopDeliveryStreamEncryption .
+// related to KMS: CreateDeliveryStream, DeleteDeliveryStream, StartDeliveryStreamEncryption, StopDeliveryStreamEncryption.
 type FailureDescription struct {
 
 	// A message providing details about the error that caused the failure.
@@ -1221,10 +1261,11 @@ type HiveJsonSerDe struct {
 	// Indicates how you want Firehose to parse the date and timestamps that may be
 	// present in your input data JSON. To specify these format strings, follow the
 	// pattern syntax of JodaTime's DateTimeFormat format strings. For more
-	// information, see Class DateTimeFormat (https://www.joda.org/joda-time/apidocs/org/joda/time/format/DateTimeFormat.html)
-	// . You can also use the special value millis to parse timestamps in epoch
-	// milliseconds. If you don't specify a format, Firehose uses
+	// information, see [Class DateTimeFormat]. You can also use the special value millis to parse
+	// timestamps in epoch milliseconds. If you don't specify a format, Firehose uses
 	// java.sql.Timestamp::valueOf by default.
+	//
+	// [Class DateTimeFormat]: https://www.joda.org/joda-time/apidocs/org/joda/time/format/DateTimeFormat.html
 	TimestampFormats []string
 
 	noSmithyDocumentSerde
@@ -1242,10 +1283,11 @@ type HttpEndpointBufferingHints struct {
 	IntervalInSeconds *int32
 
 	// Buffer incoming data to the specified size, in MBs, before delivering it to the
-	// destination. The default value is 5. We recommend setting this parameter to a
-	// value greater than the amount of data you typically ingest into the delivery
-	// stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, the
-	// value should be 10 MB or higher.
+	// destination. The default value is 5.
+	//
+	// We recommend setting this parameter to a value greater than the amount of data
+	// you typically ingest into the delivery stream in 10 seconds. For example, if you
+	// typically ingest data at 1 MB/sec, the value should be 10 MB or higher.
 	SizeInMBs *int32
 
 	noSmithyDocumentSerde
@@ -1272,10 +1314,12 @@ type HttpEndpointCommonAttribute struct {
 // delivers data.
 type HttpEndpointConfiguration struct {
 
-	// The URL of the HTTP endpoint selected as the destination. If you choose an HTTP
-	// endpoint as your destination, review and follow the instructions in the
-	// Appendix - HTTP Endpoint Delivery Request and Response Specifications (https://docs.aws.amazon.com/firehose/latest/dev/httpdeliveryrequestresponse.html)
-	// .
+	// The URL of the HTTP endpoint selected as the destination.
+	//
+	// If you choose an HTTP endpoint as your destination, review and follow the
+	// instructions in the [Appendix - HTTP Endpoint Delivery Request and Response Specifications].
+	//
+	// [Appendix - HTTP Endpoint Delivery Request and Response Specifications]: https://docs.aws.amazon.com/firehose/latest/dev/httpdeliveryrequestresponse.html
 	//
 	// This member is required.
 	Url *string
@@ -1445,9 +1489,10 @@ type HttpEndpointRequestConfiguration struct {
 	CommonAttributes []HttpEndpointCommonAttribute
 
 	// Firehose uses the content encoding to compress the body of a request before
-	// sending the request to the destination. For more information, see
-	// Content-Encoding (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding)
-	// in MDN Web Docs, the official Mozilla documentation.
+	// sending the request to the destination. For more information, see [Content-Encoding]in MDN Web
+	// Docs, the official Mozilla documentation.
+	//
+	// [Content-Encoding]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding
 	ContentEncoding ContentEncoding
 
 	noSmithyDocumentSerde
@@ -1483,17 +1528,17 @@ type InputFormatConfiguration struct {
 // as the source for a delivery stream.
 type KinesisStreamSourceConfiguration struct {
 
-	// The ARN of the source Kinesis data stream. For more information, see Amazon
-	// Kinesis Data Streams ARN Format (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams)
-	// .
+	// The ARN of the source Kinesis data stream. For more information, see [Amazon Kinesis Data Streams ARN Format].
+	//
+	// [Amazon Kinesis Data Streams ARN Format]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams
 	//
 	// This member is required.
 	KinesisStreamARN *string
 
 	// The ARN of the role that provides access to the source Kinesis data stream. For
-	// more information, see Amazon Web Services Identity and Access Management (IAM)
-	// ARN Format (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam)
-	// .
+	// more information, see [Amazon Web Services Identity and Access Management (IAM) ARN Format].
+	//
+	// [Amazon Web Services Identity and Access Management (IAM) ARN Format]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
 	//
 	// This member is required.
 	RoleARN *string
@@ -1510,14 +1555,15 @@ type KinesisStreamSourceDescription struct {
 	DeliveryStartTimestamp *time.Time
 
 	// The Amazon Resource Name (ARN) of the source Kinesis data stream. For more
-	// information, see Amazon Kinesis Data Streams ARN Format (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams)
-	// .
+	// information, see [Amazon Kinesis Data Streams ARN Format].
+	//
+	// [Amazon Kinesis Data Streams ARN Format]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams
 	KinesisStreamARN *string
 
 	// The ARN of the role used by the source Kinesis data stream. For more
-	// information, see Amazon Web Services Identity and Access Management (IAM) ARN
-	// Format (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam)
-	// .
+	// information, see [Amazon Web Services Identity and Access Management (IAM) ARN Format].
+	//
+	// [Amazon Web Services Identity and Access Management (IAM) ARN Format]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
 	RoleARN *string
 
 	noSmithyDocumentSerde
@@ -1528,9 +1574,9 @@ type KMSEncryptionConfig struct {
 
 	// The Amazon Resource Name (ARN) of the encryption key. Must belong to the same
 	// Amazon Web Services Region as the destination Amazon S3 bucket. For more
-	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
-	// Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AWSKMSKeyARN *string
@@ -1601,14 +1647,18 @@ type OpenXJsonSerDe struct {
 	// you want Firehose to replace them with underscores. This is useful because
 	// Apache Hive does not allow dots in column names. For example, if the JSON
 	// contains a key whose name is "a.b", you can define the column name to be "a_b"
-	// when using this option. The default is false .
+	// when using this option.
+	//
+	// The default is false .
 	ConvertDotsInJsonKeysToUnderscores *bool
 
 	noSmithyDocumentSerde
 }
 
 // A serializer to use for converting data to the ORC format before storing it in
-// Amazon S3. For more information, see Apache ORC (https://orc.apache.org/docs/) .
+// Amazon S3. For more information, see [Apache ORC].
+//
+// [Apache ORC]: https://orc.apache.org/docs/
 type OrcSerDe struct {
 
 	// The Hadoop Distributed File System (HDFS) block size. This is useful if you
@@ -1646,13 +1696,16 @@ type OrcSerDe struct {
 
 	// A number between 0 and 1 that defines the tolerance for block padding as a
 	// decimal fraction of stripe size. The default value is 0.05, which means 5
-	// percent of stripe size. For the default values of 64 MiB ORC stripes and 256 MiB
-	// HDFS blocks, the default block padding tolerance of 5 percent reserves a maximum
-	// of 3.2 MiB for padding within the 256 MiB block. In such a case, if the
-	// available size within the block is more than 3.2 MiB, a new, smaller stripe is
-	// inserted to fit within that space. This ensures that no stripe crosses block
-	// boundaries and causes remote reads within a node-local task. Firehose ignores
-	// this parameter when OrcSerDe$EnablePadding is false .
+	// percent of stripe size.
+	//
+	// For the default values of 64 MiB ORC stripes and 256 MiB HDFS blocks, the
+	// default block padding tolerance of 5 percent reserves a maximum of 3.2 MiB for
+	// padding within the 256 MiB block. In such a case, if the available size within
+	// the block is more than 3.2 MiB, a new, smaller stripe is inserted to fit within
+	// that space. This ensures that no stripe crosses block boundaries and causes
+	// remote reads within a node-local task.
+	//
+	// Firehose ignores this parameter when OrcSerDe$EnablePadding is false .
 	PaddingTolerance *float64
 
 	// The number of rows between index entries. The default is 10,000 and the minimum
@@ -1679,8 +1732,9 @@ type OutputFormatConfiguration struct {
 }
 
 // A serializer to use for converting data to the Parquet format before storing it
-// in Amazon S3. For more information, see Apache Parquet (https://parquet.apache.org/documentation/latest/)
-// .
+// in Amazon S3. For more information, see [Apache Parquet].
+//
+// [Apache Parquet]: https://parquet.apache.org/documentation/latest/
 type ParquetSerDe struct {
 
 	// The Hadoop Distributed File System (HDFS) block size. This is useful if you
@@ -1726,10 +1780,12 @@ type ProcessingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a data processor. If you want to add a new line delimiter between
-// records in objects that are delivered to Amazon S3, choose
-// AppendDelimiterToRecord as a processor type. You don’t have to put a processor
-// parameter when you select AppendDelimiterToRecord .
+// Describes a data processor.
+//
+// If you want to add a new line delimiter between records in objects that are
+// delivered to Amazon S3, choose AppendDelimiterToRecord as a processor type. You
+// don’t have to put a processor parameter when you select AppendDelimiterToRecord
+// .
 type Processor struct {
 
 	// The type of processor.
@@ -1763,10 +1819,10 @@ type ProcessorParameter struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the result for an individual record from a PutRecordBatch request. If
-// the record is successfully added to your delivery stream, it receives a record
-// ID. If the record fails to be added to your delivery stream, the result includes
-// an error code and an error message.
+// Contains the result for an individual record from a PutRecordBatch request. If the record is
+// successfully added to your delivery stream, it receives a record ID. If the
+// record fails to be added to your delivery stream, the result includes an error
+// code and an error message.
 type PutRecordBatchResponseEntry struct {
 
 	// The error code for an individual record result.
@@ -1812,19 +1868,20 @@ type RedshiftDestinationConfiguration struct {
 	Password *string
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
-	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
-	// Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	RoleARN *string
 
 	// The configuration for the intermediate Amazon S3 location from which Amazon
-	// Redshift obtains data. Restrictions are described in the topic for
-	// CreateDeliveryStream . The compression formats SNAPPY or ZIP cannot be
-	// specified in RedshiftDestinationConfiguration.S3Configuration because the
-	// Amazon Redshift COPY operation that reads from the S3 bucket doesn't support
-	// these compression formats.
+	// Redshift obtains data. Restrictions are described in the topic for CreateDeliveryStream.
+	//
+	// The compression formats SNAPPY or ZIP cannot be specified in
+	// RedshiftDestinationConfiguration.S3Configuration because the Amazon Redshift
+	// COPY operation that reads from the S3 bucket doesn't support these compression
+	// formats.
 	//
 	// This member is required.
 	S3Configuration *S3DestinationConfiguration
@@ -1869,9 +1926,9 @@ type RedshiftDestinationDescription struct {
 	CopyCommand *CopyCommand
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
-	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
-	// Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	RoleARN *string
@@ -1928,9 +1985,9 @@ type RedshiftDestinationUpdate struct {
 	RetryOptions *RedshiftRetryOptions
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
-	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
-	// Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	RoleARN *string
 
 	// You can update a delivery stream to enable Amazon S3 backup if it is disabled.
@@ -1940,10 +1997,11 @@ type RedshiftDestinationUpdate struct {
 	// The Amazon S3 destination for backup.
 	S3BackupUpdate *S3DestinationUpdate
 
-	// The Amazon S3 destination. The compression formats SNAPPY or ZIP cannot be
-	// specified in RedshiftDestinationUpdate.S3Update because the Amazon Redshift COPY
-	// operation that reads from the S3 bucket doesn't support these compression
-	// formats.
+	// The Amazon S3 destination.
+	//
+	// The compression formats SNAPPY or ZIP cannot be specified in
+	// RedshiftDestinationUpdate.S3Update because the Amazon Redshift COPY operation
+	// that reads from the S3 bucket doesn't support these compression formats.
 	S3Update *S3DestinationUpdate
 
 	// The name of the user.
@@ -1966,7 +2024,8 @@ type RedshiftRetryOptions struct {
 	noSmithyDocumentSerde
 }
 
-// The retry behavior in case Firehose is unable to deliver data to an Amazon S3
+//	The retry behavior in case Firehose is unable to deliver data to an Amazon S3
+//
 // prefix.
 type RetryOptions struct {
 
@@ -1980,17 +2039,17 @@ type RetryOptions struct {
 // Describes the configuration of a destination in Amazon S3.
 type S3DestinationConfiguration struct {
 
-	// The ARN of the S3 bucket. For more information, see Amazon Resource Names
-	// (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// The ARN of the S3 bucket. For more information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	BucketARN *string
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
-	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
-	// Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	RoleARN *string
@@ -2003,6 +2062,7 @@ type S3DestinationConfiguration struct {
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED .
+	//
 	// The compression formats SNAPPY or ZIP cannot be specified for Amazon Redshift
 	// destinations because they are not supported by the Amazon Redshift COPY
 	// operation that reads from the S3 bucket.
@@ -2014,14 +2074,15 @@ type S3DestinationConfiguration struct {
 
 	// A prefix that Firehose evaluates and adds to failed records before writing them
 	// to S3. This prefix appears immediately following the bucket name. For
-	// information about how to specify this prefix, see Custom Prefixes for Amazon S3
-	// Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html) .
+	// information about how to specify this prefix, see [Custom Prefixes for Amazon S3 Objects].
+	//
+	// [Custom Prefixes for Amazon S3 Objects]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
 	ErrorOutputPrefix *string
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
-	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html)
-	// .
+	// Amazon S3 files. You can also specify a custom prefix, as described in [Custom Prefixes for Amazon S3 Objects].
+	//
+	// [Custom Prefixes for Amazon S3 Objects]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
 	Prefix *string
 
 	noSmithyDocumentSerde
@@ -2030,9 +2091,9 @@ type S3DestinationConfiguration struct {
 // Describes a destination in Amazon S3.
 type S3DestinationDescription struct {
 
-	// The ARN of the S3 bucket. For more information, see Amazon Resource Names
-	// (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// The ARN of the S3 bucket. For more information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	BucketARN *string
@@ -2055,9 +2116,9 @@ type S3DestinationDescription struct {
 	EncryptionConfiguration *EncryptionConfiguration
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
-	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
-	// Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	RoleARN *string
@@ -2067,14 +2128,15 @@ type S3DestinationDescription struct {
 
 	// A prefix that Firehose evaluates and adds to failed records before writing them
 	// to S3. This prefix appears immediately following the bucket name. For
-	// information about how to specify this prefix, see Custom Prefixes for Amazon S3
-	// Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html) .
+	// information about how to specify this prefix, see [Custom Prefixes for Amazon S3 Objects].
+	//
+	// [Custom Prefixes for Amazon S3 Objects]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
 	ErrorOutputPrefix *string
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
-	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html)
-	// .
+	// Amazon S3 files. You can also specify a custom prefix, as described in [Custom Prefixes for Amazon S3 Objects].
+	//
+	// [Custom Prefixes for Amazon S3 Objects]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
 	Prefix *string
 
 	noSmithyDocumentSerde
@@ -2083,9 +2145,9 @@ type S3DestinationDescription struct {
 // Describes an update for a destination in Amazon S3.
 type S3DestinationUpdate struct {
 
-	// The ARN of the S3 bucket. For more information, see Amazon Resource Names
-	// (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// The ARN of the S3 bucket. For more information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	BucketARN *string
 
 	// The buffering option. If no value is specified, BufferingHints object default
@@ -2096,6 +2158,7 @@ type S3DestinationUpdate struct {
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED .
+	//
 	// The compression formats SNAPPY or ZIP cannot be specified for Amazon Redshift
 	// destinations because they are not supported by the Amazon Redshift COPY
 	// operation that reads from the S3 bucket.
@@ -2107,20 +2170,21 @@ type S3DestinationUpdate struct {
 
 	// A prefix that Firehose evaluates and adds to failed records before writing them
 	// to S3. This prefix appears immediately following the bucket name. For
-	// information about how to specify this prefix, see Custom Prefixes for Amazon S3
-	// Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html) .
+	// information about how to specify this prefix, see [Custom Prefixes for Amazon S3 Objects].
+	//
+	// [Custom Prefixes for Amazon S3 Objects]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
 	ErrorOutputPrefix *string
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
-	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html)
-	// .
+	// Amazon S3 files. You can also specify a custom prefix, as described in [Custom Prefixes for Amazon S3 Objects].
+	//
+	// [Custom Prefixes for Amazon S3 Objects]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
 	Prefix *string
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
-	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
-	// Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	RoleARN *string
 
 	noSmithyDocumentSerde
@@ -2135,9 +2199,11 @@ type SchemaConfiguration struct {
 	CatalogId *string
 
 	// Specifies the name of the Amazon Web Services Glue database that contains the
-	// schema for the output data. If the SchemaConfiguration request parameter is
-	// used as part of invoking the CreateDeliveryStream API, then the DatabaseName
-	// property is required and its value must be specified.
+	// schema for the output data.
+	//
+	// If the SchemaConfiguration request parameter is used as part of invoking the
+	// CreateDeliveryStream API, then the DatabaseName property is required and its
+	// value must be specified.
 	DatabaseName *string
 
 	// If you don't specify an Amazon Web Services Region, the default is the current
@@ -2146,15 +2212,19 @@ type SchemaConfiguration struct {
 
 	// The role that Firehose can use to access Amazon Web Services Glue. This role
 	// must be in the same account you use for Firehose. Cross-account roles aren't
-	// allowed. If the SchemaConfiguration request parameter is used as part of
-	// invoking the CreateDeliveryStream API, then the RoleARN property is required
-	// and its value must be specified.
+	// allowed.
+	//
+	// If the SchemaConfiguration request parameter is used as part of invoking the
+	// CreateDeliveryStream API, then the RoleARN property is required and its value
+	// must be specified.
 	RoleARN *string
 
 	// Specifies the Amazon Web Services Glue table that contains the column
-	// information that constitutes your data schema. If the SchemaConfiguration
-	// request parameter is used as part of invoking the CreateDeliveryStream API,
-	// then the TableName property is required and its value must be specified.
+	// information that constitutes your data schema.
+	//
+	// If the SchemaConfiguration request parameter is used as part of invoking the
+	// CreateDeliveryStream API, then the TableName property is required and its value
+	// must be specified.
 	TableName *string
 
 	// Specifies the table version for the output data schema. If you don't specify
@@ -2167,18 +2237,22 @@ type SchemaConfiguration struct {
 
 // The serializer that you want Firehose to use to convert data to the target
 // format before writing it to Amazon S3. Firehose supports two types of
-// serializers: the ORC SerDe (https://hive.apache.org/javadocs/r1.2.2/api/org/apache/hadoop/hive/ql/io/orc/OrcSerde.html)
-// and the Parquet SerDe (https://hive.apache.org/javadocs/r1.2.2/api/org/apache/hadoop/hive/ql/io/parquet/serde/ParquetHiveSerDe.html)
-// .
+// serializers: the [ORC SerDe]and the [Parquet SerDe].
+//
+// [Parquet SerDe]: https://hive.apache.org/javadocs/r1.2.2/api/org/apache/hadoop/hive/ql/io/parquet/serde/ParquetHiveSerDe.html
+// [ORC SerDe]: https://hive.apache.org/javadocs/r1.2.2/api/org/apache/hadoop/hive/ql/io/orc/OrcSerde.html
 type Serializer struct {
 
 	// A serializer to use for converting data to the ORC format before storing it in
-	// Amazon S3. For more information, see Apache ORC (https://orc.apache.org/docs/) .
+	// Amazon S3. For more information, see [Apache ORC].
+	//
+	// [Apache ORC]: https://orc.apache.org/docs/
 	OrcSerDe *OrcSerDe
 
 	// A serializer to use for converting data to the Parquet format before storing it
-	// in Amazon S3. For more information, see Apache Parquet (https://parquet.apache.org/documentation/latest/)
-	// .
+	// in Amazon S3. For more information, see [Apache Parquet].
+	//
+	// [Apache Parquet]: https://parquet.apache.org/documentation/latest/
 	ParquetSerDe *ParquetSerDe
 
 	noSmithyDocumentSerde
@@ -2187,9 +2261,10 @@ type Serializer struct {
 // Configure Snowflake destination
 type SnowflakeDestinationConfiguration struct {
 
-	// URL for accessing your Snowflake account. This URL must include your account
-	// identifier (https://docs.snowflake.com/en/user-guide/admin-account-identifier) .
-	// Note that the protocol (https://) and port number are optional.
+	// URL for accessing your Snowflake account. This URL must include your [account identifier]. Note
+	// that the protocol (https://) and port number are optional.
+	//
+	// [account identifier]: https://docs.snowflake.com/en/user-guide/admin-account-identifier
 	//
 	// This member is required.
 	AccountUrl *string
@@ -2199,9 +2274,9 @@ type SnowflakeDestinationConfiguration struct {
 	// This member is required.
 	Database *string
 
-	// The private key used to encrypt your Snowflake client. For information, see
-	// Using Key Pair Authentication & Key Rotation (https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation)
-	// .
+	// The private key used to encrypt your Snowflake client. For information, see [Using Key Pair Authentication & Key Rotation].
+	//
+	// [Using Key Pair Authentication & Key Rotation]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation
 	//
 	// This member is required.
 	PrivateKey *string
@@ -2245,8 +2320,9 @@ type SnowflakeDestinationConfiguration struct {
 	DataLoadingOption SnowflakeDataLoadingOption
 
 	// Passphrase to decrypt the private key when the key is encrypted. For
-	// information, see Using Key Pair Authentication & Key Rotation (https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation)
-	// .
+	// information, see [Using Key Pair Authentication & Key Rotation].
+	//
+	// [Using Key Pair Authentication & Key Rotation]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation
 	KeyPassphrase *string
 
 	// The name of the record metadata column
@@ -2267,8 +2343,9 @@ type SnowflakeDestinationConfiguration struct {
 	SnowflakeRoleConfiguration *SnowflakeRoleConfiguration
 
 	// The VPCE ID for Firehose to privately connect with Snowflake. The ID format is
-	// com.amazonaws.vpce.[region].vpce-svc-<[id]>. For more information, see Amazon
-	// PrivateLink & Snowflake (https://docs.snowflake.com/en/user-guide/admin-security-privatelink)
+	// com.amazonaws.vpce.[region].vpce-svc-<[id]>. For more information, see [Amazon PrivateLink & Snowflake]
+	//
+	// [Amazon PrivateLink & Snowflake]: https://docs.snowflake.com/en/user-guide/admin-security-privatelink
 	SnowflakeVpcConfiguration *SnowflakeVpcConfiguration
 
 	noSmithyDocumentSerde
@@ -2277,9 +2354,10 @@ type SnowflakeDestinationConfiguration struct {
 // Optional Snowflake destination description
 type SnowflakeDestinationDescription struct {
 
-	// URL for accessing your Snowflake account. This URL must include your account
-	// identifier (https://docs.snowflake.com/en/user-guide/admin-account-identifier) .
-	// Note that the protocol (https://) and port number are optional.
+	// URL for accessing your Snowflake account. This URL must include your [account identifier]. Note
+	// that the protocol (https://) and port number are optional.
+	//
+	// [account identifier]: https://docs.snowflake.com/en/user-guide/admin-account-identifier
 	AccountUrl *string
 
 	// Describes the Amazon CloudWatch logging options for your delivery stream.
@@ -2324,8 +2402,9 @@ type SnowflakeDestinationDescription struct {
 	SnowflakeRoleConfiguration *SnowflakeRoleConfiguration
 
 	// The VPCE ID for Firehose to privately connect with Snowflake. The ID format is
-	// com.amazonaws.vpce.[region].vpce-svc-<[id]>. For more information, see Amazon
-	// PrivateLink & Snowflake (https://docs.snowflake.com/en/user-guide/admin-security-privatelink)
+	// com.amazonaws.vpce.[region].vpce-svc-<[id]>. For more information, see [Amazon PrivateLink & Snowflake]
+	//
+	// [Amazon PrivateLink & Snowflake]: https://docs.snowflake.com/en/user-guide/admin-security-privatelink
 	SnowflakeVpcConfiguration *SnowflakeVpcConfiguration
 
 	// All data in Snowflake is stored in database tables, logically structured as
@@ -2341,9 +2420,10 @@ type SnowflakeDestinationDescription struct {
 // Update to configuration settings
 type SnowflakeDestinationUpdate struct {
 
-	// URL for accessing your Snowflake account. This URL must include your account
-	// identifier (https://docs.snowflake.com/en/user-guide/admin-account-identifier) .
-	// Note that the protocol (https://) and port number are optional.
+	// URL for accessing your Snowflake account. This URL must include your [account identifier]. Note
+	// that the protocol (https://) and port number are optional.
+	//
+	// [account identifier]: https://docs.snowflake.com/en/user-guide/admin-account-identifier
 	AccountUrl *string
 
 	// Describes the Amazon CloudWatch logging options for your delivery stream.
@@ -2352,7 +2432,7 @@ type SnowflakeDestinationUpdate struct {
 	// The name of the content metadata column
 	ContentColumnName *string
 
-	// JSON keys mapped to table column names or choose to split the JSON payload
+	//  JSON keys mapped to table column names or choose to split the JSON payload
 	// where content is mapped to a record content column and source metadata is mapped
 	// to a record metadata column.
 	DataLoadingOption SnowflakeDataLoadingOption
@@ -2361,36 +2441,42 @@ type SnowflakeDestinationUpdate struct {
 	Database *string
 
 	// Passphrase to decrypt the private key when the key is encrypted. For
-	// information, see Using Key Pair Authentication & Key Rotation (https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation)
-	// .
+	// information, see [Using Key Pair Authentication & Key Rotation].
+	//
+	// [Using Key Pair Authentication & Key Rotation]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation
 	KeyPassphrase *string
 
 	// The name of the record metadata column
 	MetaDataColumnName *string
 
-	// The private key used to encrypt your Snowflake client. For information, see
-	// Using Key Pair Authentication & Key Rotation (https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation)
-	// .
+	// The private key used to encrypt your Snowflake client. For information, see [Using Key Pair Authentication & Key Rotation].
+	//
+	// [Using Key Pair Authentication & Key Rotation]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation
 	PrivateKey *string
 
 	// Describes a data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
 
 	// Specify how long Firehose retries sending data to the New Relic HTTP endpoint.
+	//
 	// After sending data, Firehose first waits for an acknowledgment from the HTTP
 	// endpoint. If an error occurs or the acknowledgment doesn’t arrive within the
 	// acknowledgment timeout period, Firehose starts the retry duration counter. It
 	// keeps retrying until the retry duration expires. After that, Firehose considers
-	// it a data delivery failure and backs up the data to your Amazon S3 bucket. Every
-	// time that Firehose sends data to the HTTP endpoint (either the initial attempt
-	// or a retry), it restarts the acknowledgement timeout counter and waits for an
-	// acknowledgement from the HTTP endpoint. Even if the retry duration expires,
-	// Firehose still waits for the acknowledgment until it receives it or the
-	// acknowledgement timeout period is reached. If the acknowledgment times out,
-	// Firehose determines whether there's time left in the retry counter. If there is
-	// time left, it retries again and repeats the logic until it receives an
-	// acknowledgment or determines that the retry time has expired. If you don't want
-	// Firehose to retry sending data, set this value to 0.
+	// it a data delivery failure and backs up the data to your Amazon S3 bucket.
+	//
+	// Every time that Firehose sends data to the HTTP endpoint (either the initial
+	// attempt or a retry), it restarts the acknowledgement timeout counter and waits
+	// for an acknowledgement from the HTTP endpoint.
+	//
+	// Even if the retry duration expires, Firehose still waits for the acknowledgment
+	// until it receives it or the acknowledgement timeout period is reached. If the
+	// acknowledgment times out, Firehose determines whether there's time left in the
+	// retry counter. If there is time left, it retries again and repeats the logic
+	// until it receives an acknowledgment or determines that the retry time has
+	// expired.
+	//
+	// If you don't want Firehose to retry sending data, set this value to 0.
 	RetryOptions *SnowflakeRetryOptions
 
 	// The Amazon Resource Name (ARN) of the Snowflake role
@@ -2421,20 +2507,25 @@ type SnowflakeDestinationUpdate struct {
 }
 
 // Specify how long Firehose retries sending data to the New Relic HTTP endpoint.
+//
 // After sending data, Firehose first waits for an acknowledgment from the HTTP
 // endpoint. If an error occurs or the acknowledgment doesn’t arrive within the
 // acknowledgment timeout period, Firehose starts the retry duration counter. It
 // keeps retrying until the retry duration expires. After that, Firehose considers
-// it a data delivery failure and backs up the data to your Amazon S3 bucket. Every
-// time that Firehose sends data to the HTTP endpoint (either the initial attempt
-// or a retry), it restarts the acknowledgement timeout counter and waits for an
-// acknowledgement from the HTTP endpoint. Even if the retry duration expires,
-// Firehose still waits for the acknowledgment until it receives it or the
-// acknowledgement timeout period is reached. If the acknowledgment times out,
-// Firehose determines whether there's time left in the retry counter. If there is
-// time left, it retries again and repeats the logic until it receives an
-// acknowledgment or determines that the retry time has expired. If you don't want
-// Firehose to retry sending data, set this value to 0.
+// it a data delivery failure and backs up the data to your Amazon S3 bucket.
+//
+// Every time that Firehose sends data to the HTTP endpoint (either the initial
+// attempt or a retry), it restarts the acknowledgement timeout counter and waits
+// for an acknowledgement from the HTTP endpoint.
+//
+// Even if the retry duration expires, Firehose still waits for the acknowledgment
+// until it receives it or the acknowledgement timeout period is reached. If the
+// acknowledgment times out, Firehose determines whether there's time left in the
+// retry counter. If there is time left, it retries again and repeats the logic
+// until it receives an acknowledgment or determines that the retry time has
+// expired.
+//
+// If you don't want Firehose to retry sending data, set this value to 0.
 type SnowflakeRetryOptions struct {
 
 	// the time period where Firehose will retry sending data to the chosen HTTP
@@ -2461,8 +2552,9 @@ type SnowflakeRoleConfiguration struct {
 type SnowflakeVpcConfiguration struct {
 
 	// The VPCE ID for Firehose to privately connect with Snowflake. The ID format is
-	// com.amazonaws.vpce.[region].vpce-svc-<[id]>. For more information, see Amazon
-	// PrivateLink & Snowflake (https://docs.snowflake.com/en/user-guide/admin-security-privatelink)
+	// com.amazonaws.vpce.[region].vpce-svc-<[id]>. For more information, see [Amazon PrivateLink & Snowflake]
+	//
+	// [Amazon PrivateLink & Snowflake]: https://docs.snowflake.com/en/user-guide/admin-security-privatelink
 	//
 	// This member is required.
 	PrivateLinkVpceId *string
@@ -2546,9 +2638,10 @@ type SplunkDestinationConfiguration struct {
 	// FailedEventsOnly , Firehose writes any data that could not be indexed to the
 	// configured Amazon S3 destination. When set to AllEvents , Firehose delivers all
 	// incoming records to Amazon S3, and also writes failed documents to Amazon S3.
-	// The default value is FailedEventsOnly . You can update this backup mode from
-	// FailedEventsOnly to AllEvents . You can't update it from AllEvents to
-	// FailedEventsOnly .
+	// The default value is FailedEventsOnly .
+	//
+	// You can update this backup mode from FailedEventsOnly to AllEvents . You can't
+	// update it from AllEvents to FailedEventsOnly .
 	S3BackupMode SplunkS3BackupMode
 
 	noSmithyDocumentSerde
@@ -2634,9 +2727,10 @@ type SplunkDestinationUpdate struct {
 	// FailedDocumentsOnly , Firehose writes any data that could not be indexed to the
 	// configured Amazon S3 destination. When set to AllEvents , Firehose delivers all
 	// incoming records to Amazon S3, and also writes failed documents to Amazon S3.
-	// The default value is FailedEventsOnly . You can update this backup mode from
-	// FailedEventsOnly to AllEvents . You can't update it from AllEvents to
-	// FailedEventsOnly .
+	// The default value is FailedEventsOnly .
+	//
+	// You can update this backup mode from FailedEventsOnly to AllEvents . You can't
+	// update it from AllEvents to FailedEventsOnly .
 	S3BackupMode SplunkS3BackupMode
 
 	// Your update to the configuration of the backup Amazon S3 location.
@@ -2685,14 +2779,23 @@ type VpcConfiguration struct {
 	// role or you can specify a new role. In either case, make sure that the role
 	// trusts the Firehose service principal and that it grants the following
 	// permissions:
+	//
 	//   - ec2:DescribeVpcs
+	//
 	//   - ec2:DescribeVpcAttribute
+	//
 	//   - ec2:DescribeSubnets
+	//
 	//   - ec2:DescribeSecurityGroups
+	//
 	//   - ec2:DescribeNetworkInterfaces
+	//
 	//   - ec2:CreateNetworkInterface
+	//
 	//   - ec2:CreateNetworkInterfacePermission
+	//
 	//   - ec2:DeleteNetworkInterface
+	//
 	// When you specify subnets for delivering data to the destination in a private
 	// VPC, make sure you have enough number of free IP addresses in chosen subnets. If
 	// there is no available free IP address in a specified subnet, Firehose cannot
@@ -2710,8 +2813,9 @@ type VpcConfiguration struct {
 	// security group allows HTTPS traffic from the security groups specified here. If
 	// you use the same security group for both your delivery stream and the Amazon ES
 	// domain, make sure the security group inbound rule allows HTTPS traffic. For more
-	// information about security group rules, see Security group rules (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules)
-	// in the Amazon VPC documentation.
+	// information about security group rules, see [Security group rules]in the Amazon VPC documentation.
+	//
+	// [Security group rules]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules
 	//
 	// This member is required.
 	SecurityGroupIds []string
@@ -2721,14 +2825,16 @@ type VpcConfiguration struct {
 	// outbound rules allow traffic to flow from the subnets whose IDs are specified
 	// here to the subnets that have the destination Amazon ES endpoints. Firehose
 	// creates at least one ENI in each of the subnets that are specified here. Do not
-	// delete or modify these ENIs. The number of ENIs that Firehose creates in the
-	// subnets specified here scales up and down automatically based on throughput. To
-	// enable Firehose to scale up the number of ENIs to match throughput, ensure that
-	// you have sufficient quota. To help you calculate the quota you need, assume that
-	// Firehose can create up to three ENIs for this delivery stream for each of the
-	// subnets specified here. For more information about ENI quota, see Network
-	// Interfaces  (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis)
-	// in the Amazon VPC Quotas topic.
+	// delete or modify these ENIs.
+	//
+	// The number of ENIs that Firehose creates in the subnets specified here scales
+	// up and down automatically based on throughput. To enable Firehose to scale up
+	// the number of ENIs to match throughput, ensure that you have sufficient quota.
+	// To help you calculate the quota you need, assume that Firehose can create up to
+	// three ENIs for this delivery stream for each of the subnets specified here. For
+	// more information about ENI quota, see [Network Interfaces]in the Amazon VPC Quotas topic.
+	//
+	// [Network Interfaces]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis
 	//
 	// This member is required.
 	SubnetIds []string
@@ -2743,14 +2849,23 @@ type VpcConfigurationDescription struct {
 	// the destination VPC. You can use your existing Firehose delivery role or you can
 	// specify a new role. In either case, make sure that the role trusts the Firehose
 	// service principal and that it grants the following permissions:
+	//
 	//   - ec2:DescribeVpcs
+	//
 	//   - ec2:DescribeVpcAttribute
+	//
 	//   - ec2:DescribeSubnets
+	//
 	//   - ec2:DescribeSecurityGroups
+	//
 	//   - ec2:DescribeNetworkInterfaces
+	//
 	//   - ec2:CreateNetworkInterface
+	//
 	//   - ec2:CreateNetworkInterfacePermission
+	//
 	//   - ec2:DeleteNetworkInterface
+	//
 	// If you revoke these permissions after you create the delivery stream, Firehose
 	// can't scale out by creating more ENIs when necessary. You might therefore see a
 	// degradation in performance.
@@ -2766,8 +2881,9 @@ type VpcConfigurationDescription struct {
 	// HTTPS traffic from the security groups specified here. If you use the same
 	// security group for both your delivery stream and the Amazon ES domain, make sure
 	// the security group inbound rule allows HTTPS traffic. For more information about
-	// security group rules, see Security group rules (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules)
-	// in the Amazon VPC documentation.
+	// security group rules, see [Security group rules]in the Amazon VPC documentation.
+	//
+	// [Security group rules]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules
 	//
 	// This member is required.
 	SecurityGroupIds []string
@@ -2777,14 +2893,16 @@ type VpcConfigurationDescription struct {
 	// outbound rules allow traffic to flow from the subnets whose IDs are specified
 	// here to the subnets that have the destination Amazon ES endpoints. Firehose
 	// creates at least one ENI in each of the subnets that are specified here. Do not
-	// delete or modify these ENIs. The number of ENIs that Firehose creates in the
-	// subnets specified here scales up and down automatically based on throughput. To
-	// enable Firehose to scale up the number of ENIs to match throughput, ensure that
-	// you have sufficient quota. To help you calculate the quota you need, assume that
-	// Firehose can create up to three ENIs for this delivery stream for each of the
-	// subnets specified here. For more information about ENI quota, see Network
-	// Interfaces  (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis)
-	// in the Amazon VPC Quotas topic.
+	// delete or modify these ENIs.
+	//
+	// The number of ENIs that Firehose creates in the subnets specified here scales
+	// up and down automatically based on throughput. To enable Firehose to scale up
+	// the number of ENIs to match throughput, ensure that you have sufficient quota.
+	// To help you calculate the quota you need, assume that Firehose can create up to
+	// three ENIs for this delivery stream for each of the subnets specified here. For
+	// more information about ENI quota, see [Network Interfaces]in the Amazon VPC Quotas topic.
+	//
+	// [Network Interfaces]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis
 	//
 	// This member is required.
 	SubnetIds []string

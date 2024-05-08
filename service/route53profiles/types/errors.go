@@ -7,7 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The current account doesn't have the IAM permissions required to perform the
+//	The current account doesn't have the IAM permissions required to perform the
+//
 // specified operation.
 type AccessDeniedException struct {
 	Message *string

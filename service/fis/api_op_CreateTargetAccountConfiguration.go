@@ -13,8 +13,10 @@ import (
 
 // Creates a target account configuration for the experiment template. A target
 // account configuration is required when accountTargeting of experimentOptions is
-// set to multi-account . For more information, see experiment options (https://docs.aws.amazon.com/fis/latest/userguide/experiment-options.html)
-// in the Fault Injection Service User Guide.
+// set to multi-account . For more information, see [experiment options] in the Fault Injection
+// Service User Guide.
+//
+// [experiment options]: https://docs.aws.amazon.com/fis/latest/userguide/experiment-options.html
 func (c *Client) CreateTargetAccountConfiguration(ctx context.Context, params *CreateTargetAccountConfigurationInput, optFns ...func(*Options)) (*CreateTargetAccountConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateTargetAccountConfigurationInput{}

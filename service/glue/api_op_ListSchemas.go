@@ -13,8 +13,10 @@ import (
 
 // Returns a list of schemas with minimal details. Schemas in Deleting status will
 // not be included in the results. Empty results will be returned if there are no
-// schemas available. When the RegistryId is not provided, all the schemas across
-// registries will be part of the API response.
+// schemas available.
+//
+// When the RegistryId is not provided, all the schemas across registries will be
+// part of the API response.
 func (c *Client) ListSchemas(ctx context.Context, params *ListSchemasInput, optFns ...func(*Options)) (*ListSchemasOutput, error) {
 	if params == nil {
 		params = &ListSchemasInput{}

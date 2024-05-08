@@ -12,14 +12,19 @@ import (
 )
 
 // Attaches an SSL/TLS certificate to your Amazon Lightsail content delivery
-// network (CDN) distribution. After the certificate is attached, your distribution
-// accepts HTTPS traffic for all of the domains that are associated with the
-// certificate. Use the CreateCertificate action to create a certificate that you
-// can attach to your distribution. Only certificates created in the us-east-1
-// Amazon Web Services Region can be attached to Lightsail distributions. Lightsail
-// distributions are global resources that can reference an origin in any Amazon
-// Web Services Region, and distribute its content globally. However, all
-// distributions are located in the us-east-1 Region.
+// network (CDN) distribution.
+//
+// After the certificate is attached, your distribution accepts HTTPS traffic for
+// all of the domains that are associated with the certificate.
+//
+// Use the CreateCertificate action to create a certificate that you can attach to
+// your distribution.
+//
+// Only certificates created in the us-east-1 Amazon Web Services Region can be
+// attached to Lightsail distributions. Lightsail distributions are global
+// resources that can reference an origin in any Amazon Web Services Region, and
+// distribute its content globally. However, all distributions are located in the
+// us-east-1 Region.
 func (c *Client) AttachCertificateToDistribution(ctx context.Context, params *AttachCertificateToDistributionInput, optFns ...func(*Options)) (*AttachCertificateToDistributionOutput, error) {
 	if params == nil {
 		params = &AttachCertificateToDistributionInput{}
@@ -37,20 +42,26 @@ func (c *Client) AttachCertificateToDistribution(ctx context.Context, params *At
 
 type AttachCertificateToDistributionInput struct {
 
-	// The name of the certificate to attach to a distribution. Only certificates with
-	// a status of ISSUED can be attached to a distribution. Use the GetCertificates
-	// action to get a list of certificate names that you can specify. This is the name
-	// of the certificate resource type and is used only to reference the certificate
-	// in other API actions. It can be different than the domain name of the
-	// certificate. For example, your certificate name might be
+	// The name of the certificate to attach to a distribution.
+	//
+	// Only certificates with a status of ISSUED can be attached to a distribution.
+	//
+	// Use the GetCertificates action to get a list of certificate names that you can
+	// specify.
+	//
+	// This is the name of the certificate resource type and is used only to reference
+	// the certificate in other API actions. It can be different than the domain name
+	// of the certificate. For example, your certificate name might be
 	// WordPress-Blog-Certificate and the domain name of the certificate might be
 	// example.com .
 	//
 	// This member is required.
 	CertificateName *string
 
-	// The name of the distribution that the certificate will be attached to. Use the
-	// GetDistributions action to get a list of distribution names that you can specify.
+	// The name of the distribution that the certificate will be attached to.
+	//
+	// Use the GetDistributions action to get a list of distribution names that you
+	// can specify.
 	//
 	// This member is required.
 	DistributionName *string

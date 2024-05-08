@@ -23,8 +23,9 @@ const (
 )
 
 // Values returns all known values for Attribute. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Attribute) Values() []Attribute {
 	return []Attribute{
 		"DEFAULT",
@@ -55,8 +56,9 @@ const (
 )
 
 // Values returns all known values for BodyPart. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BodyPart) Values() []BodyPart {
 	return []BodyPart{
 		"FACE",
@@ -76,6 +78,7 @@ const (
 
 // Values returns all known values for CelebrityRecognitionSortBy. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CelebrityRecognitionSortBy) Values() []CelebrityRecognitionSortBy {
 	return []CelebrityRecognitionSortBy{
@@ -93,8 +96,9 @@ const (
 )
 
 // Values returns all known values for ContentClassifier. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContentClassifier) Values() []ContentClassifier {
 	return []ContentClassifier{
 		"FreeOfPersonallyIdentifiableInformation",
@@ -112,8 +116,9 @@ const (
 
 // Values returns all known values for ContentModerationAggregateBy. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContentModerationAggregateBy) Values() []ContentModerationAggregateBy {
 	return []ContentModerationAggregateBy{
 		"TIMESTAMPS",
@@ -130,8 +135,9 @@ const (
 )
 
 // Values returns all known values for ContentModerationSortBy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContentModerationSortBy) Values() []ContentModerationSortBy {
 	return []ContentModerationSortBy{
 		"NAME",
@@ -148,8 +154,9 @@ const (
 )
 
 // Values returns all known values for CustomizationFeature. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomizationFeature) Values() []CustomizationFeature {
 	return []CustomizationFeature{
 		"CONTENT_MODERATION",
@@ -171,8 +178,9 @@ const (
 )
 
 // Values returns all known values for DatasetStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatasetStatus) Values() []DatasetStatus {
 	return []DatasetStatus{
 		"CREATE_IN_PROGRESS",
@@ -196,6 +204,7 @@ const (
 
 // Values returns all known values for DatasetStatusMessageCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DatasetStatusMessageCode) Values() []DatasetStatusMessageCode {
 	return []DatasetStatusMessageCode{
@@ -214,8 +223,9 @@ const (
 )
 
 // Values returns all known values for DatasetType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatasetType) Values() []DatasetType {
 	return []DatasetType{
 		"TRAIN",
@@ -232,8 +242,9 @@ const (
 )
 
 // Values returns all known values for DetectLabelsFeatureName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DetectLabelsFeatureName) Values() []DetectLabelsFeatureName {
 	return []DetectLabelsFeatureName{
 		"GENERAL_LABELS",
@@ -257,8 +268,9 @@ const (
 )
 
 // Values returns all known values for EmotionName. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EmotionName) Values() []EmotionName {
 	return []EmotionName{
 		"HAPPY",
@@ -282,8 +294,9 @@ const (
 )
 
 // Values returns all known values for FaceAttributes. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FaceAttributes) Values() []FaceAttributes {
 	return []FaceAttributes{
 		"DEFAULT",
@@ -300,8 +313,9 @@ const (
 )
 
 // Values returns all known values for FaceSearchSortBy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FaceSearchSortBy) Values() []FaceSearchSortBy {
 	return []FaceSearchSortBy{
 		"INDEX",
@@ -318,8 +332,9 @@ const (
 )
 
 // Values returns all known values for GenderType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GenderType) Values() []GenderType {
 	return []GenderType{
 		"Male",
@@ -338,8 +353,9 @@ const (
 )
 
 // Values returns all known values for KnownGenderType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KnownGenderType) Values() []KnownGenderType {
 	return []KnownGenderType{
 		"Male",
@@ -359,6 +375,7 @@ const (
 
 // Values returns all known values for LabelDetectionAggregateBy. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LabelDetectionAggregateBy) Values() []LabelDetectionAggregateBy {
 	return []LabelDetectionAggregateBy{
@@ -376,6 +393,7 @@ const (
 
 // Values returns all known values for LabelDetectionFeatureName. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LabelDetectionFeatureName) Values() []LabelDetectionFeatureName {
 	return []LabelDetectionFeatureName{
@@ -392,8 +410,9 @@ const (
 )
 
 // Values returns all known values for LabelDetectionSortBy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LabelDetectionSortBy) Values() []LabelDetectionSortBy {
 	return []LabelDetectionSortBy{
 		"NAME",
@@ -438,8 +457,9 @@ const (
 )
 
 // Values returns all known values for LandmarkType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LandmarkType) Values() []LandmarkType {
 	return []LandmarkType{
 		"eyeLeft",
@@ -487,8 +507,9 @@ const (
 )
 
 // Values returns all known values for LivenessSessionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LivenessSessionStatus) Values() []LivenessSessionStatus {
 	return []LivenessSessionStatus{
 		"CREATED",
@@ -516,6 +537,7 @@ const (
 
 // Values returns all known values for MediaAnalysisJobFailureCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (MediaAnalysisJobFailureCode) Values() []MediaAnalysisJobFailureCode {
 	return []MediaAnalysisJobFailureCode{
@@ -543,8 +565,9 @@ const (
 )
 
 // Values returns all known values for MediaAnalysisJobStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MediaAnalysisJobStatus) Values() []MediaAnalysisJobStatus {
 	return []MediaAnalysisJobStatus{
 		"CREATED",
@@ -566,8 +589,9 @@ const (
 )
 
 // Values returns all known values for OrientationCorrection. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrientationCorrection) Values() []OrientationCorrection {
 	return []OrientationCorrection{
 		"ROTATE_0",
@@ -586,8 +610,9 @@ const (
 )
 
 // Values returns all known values for PersonTrackingSortBy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PersonTrackingSortBy) Values() []PersonTrackingSortBy {
 	return []PersonTrackingSortBy{
 		"INDEX",
@@ -604,8 +629,9 @@ const (
 )
 
 // Values returns all known values for ProjectAutoUpdate. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProjectAutoUpdate) Values() []ProjectAutoUpdate {
 	return []ProjectAutoUpdate{
 		"ENABLED",
@@ -623,8 +649,9 @@ const (
 )
 
 // Values returns all known values for ProjectStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProjectStatus) Values() []ProjectStatus {
 	return []ProjectStatus{
 		"CREATING",
@@ -654,8 +681,9 @@ const (
 )
 
 // Values returns all known values for ProjectVersionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProjectVersionStatus) Values() []ProjectVersionStatus {
 	return []ProjectVersionStatus{
 		"TRAINING_IN_PROGRESS",
@@ -685,8 +713,9 @@ const (
 )
 
 // Values returns all known values for ProtectiveEquipmentType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProtectiveEquipmentType) Values() []ProtectiveEquipmentType {
 	return []ProtectiveEquipmentType{
 		"FACE_COVER",
@@ -707,8 +736,9 @@ const (
 )
 
 // Values returns all known values for QualityFilter. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QualityFilter) Values() []QualityFilter {
 	return []QualityFilter{
 		"NONE",
@@ -733,8 +763,9 @@ const (
 )
 
 // Values returns all known values for Reason. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Reason) Values() []Reason {
 	return []Reason{
 		"EXCEEDS_MAX_FACES",
@@ -756,8 +787,9 @@ const (
 )
 
 // Values returns all known values for SegmentType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SegmentType) Values() []SegmentType {
 	return []SegmentType{
 		"TECHNICAL_CUE",
@@ -775,8 +807,9 @@ const (
 
 // Values returns all known values for StreamProcessorParameterToDelete. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamProcessorParameterToDelete) Values() []StreamProcessorParameterToDelete {
 	return []StreamProcessorParameterToDelete{
 		"ConnectedHomeMinConfidence",
@@ -797,8 +830,9 @@ const (
 )
 
 // Values returns all known values for StreamProcessorStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamProcessorStatus) Values() []StreamProcessorStatus {
 	return []StreamProcessorStatus{
 		"STOPPED",
@@ -824,8 +858,9 @@ const (
 )
 
 // Values returns all known values for TechnicalCueType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TechnicalCueType) Values() []TechnicalCueType {
 	return []TechnicalCueType{
 		"ColorBars",
@@ -847,8 +882,9 @@ const (
 )
 
 // Values returns all known values for TextTypes. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TextTypes) Values() []TextTypes {
 	return []TextTypes{
 		"LINE",
@@ -871,8 +907,9 @@ const (
 )
 
 // Values returns all known values for UnsearchedFaceReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UnsearchedFaceReason) Values() []UnsearchedFaceReason {
 	return []UnsearchedFaceReason{
 		"FACE_NOT_LARGEST",
@@ -897,8 +934,9 @@ const (
 
 // Values returns all known values for UnsuccessfulFaceAssociationReason. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UnsuccessfulFaceAssociationReason) Values() []UnsuccessfulFaceAssociationReason {
 	return []UnsuccessfulFaceAssociationReason{
 		"FACE_NOT_FOUND",
@@ -917,8 +955,9 @@ const (
 
 // Values returns all known values for UnsuccessfulFaceDeletionReason. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UnsuccessfulFaceDeletionReason) Values() []UnsuccessfulFaceDeletionReason {
 	return []UnsuccessfulFaceDeletionReason{
 		"ASSOCIATED_TO_AN_EXISTING_USER",
@@ -936,8 +975,9 @@ const (
 
 // Values returns all known values for UnsuccessfulFaceDisassociationReason. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UnsuccessfulFaceDisassociationReason) Values() []UnsuccessfulFaceDisassociationReason {
 	return []UnsuccessfulFaceDisassociationReason{
 		"FACE_NOT_FOUND",
@@ -956,8 +996,9 @@ const (
 )
 
 // Values returns all known values for UserStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UserStatus) Values() []UserStatus {
 	return []UserStatus{
 		"ACTIVE",
@@ -976,8 +1017,9 @@ const (
 )
 
 // Values returns all known values for VideoColorRange. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VideoColorRange) Values() []VideoColorRange {
 	return []VideoColorRange{
 		"FULL",
@@ -995,8 +1037,9 @@ const (
 )
 
 // Values returns all known values for VideoJobStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VideoJobStatus) Values() []VideoJobStatus {
 	return []VideoJobStatus{
 		"IN_PROGRESS",

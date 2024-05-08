@@ -46,9 +46,9 @@ type UpdateTrainingJobInput struct {
 	// Configuration for remote debugging while the training job is running. You can
 	// update the remote debugging configuration when the SecondaryStatus of the job
 	// is Downloading or Training .To learn more about the remote debugging
-	// functionality of SageMaker, see Access a training container through Amazon Web
-	// Services Systems Manager (SSM) for remote debugging (https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html)
-	// .
+	// functionality of SageMaker, see [Access a training container through Amazon Web Services Systems Manager (SSM) for remote debugging].
+	//
+	// [Access a training container through Amazon Web Services Systems Manager (SSM) for remote debugging]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html
 	RemoteDebugConfig *types.RemoteDebugConfigForUpdate
 
 	// The training job ResourceConfig to update warm pool retention length.

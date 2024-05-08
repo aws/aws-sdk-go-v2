@@ -47,8 +47,9 @@ type VerifyDestinationNumberInput struct {
 
 type VerifyDestinationNumberOutput struct {
 
-	// The time when the destination phone number was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the destination phone number was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	//
 	// This member is required.
 	CreatedTimestamp *time.Time

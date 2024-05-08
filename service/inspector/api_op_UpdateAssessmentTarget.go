@@ -11,8 +11,10 @@ import (
 )
 
 // Updates the assessment target that is specified by the ARN of the assessment
-// target. If resourceGroupArn is not specified, all EC2 instances in the current
-// AWS account and region are included in the assessment target.
+// target.
+//
+// If resourceGroupArn is not specified, all EC2 instances in the current AWS
+// account and region are included in the assessment target.
 func (c *Client) UpdateAssessmentTarget(ctx context.Context, params *UpdateAssessmentTargetInput, optFns ...func(*Options)) (*UpdateAssessmentTargetOutput, error) {
 	if params == nil {
 		params = &UpdateAssessmentTargetInput{}

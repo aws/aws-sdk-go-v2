@@ -14,8 +14,9 @@ import (
 // Creates two URLs that are used to access a virtual computer’s graphical user
 // interface (GUI) session. The primary URL initiates a web-based NICE DCV session
 // to the virtual computer's application. The secondary URL initiates a web-based
-// NICE DCV session to the virtual computer's operating session. Use
-// StartGUISession to open the session.
+// NICE DCV session to the virtual computer's operating session.
+//
+// Use StartGUISession to open the session.
 func (c *Client) CreateGUISessionAccessDetails(ctx context.Context, params *CreateGUISessionAccessDetailsInput, optFns ...func(*Options)) (*CreateGUISessionAccessDetailsOutput, error) {
 	if params == nil {
 		params = &CreateGUISessionAccessDetailsInput{}

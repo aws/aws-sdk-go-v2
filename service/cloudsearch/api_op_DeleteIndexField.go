@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes an IndexField from the search domain. For more information, see
-// Configuring Index Fields (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html)
-// in the Amazon CloudSearch Developer Guide.
+// Removes an IndexField from the search domain. For more information, see [Configuring Index Fields] in the Amazon
+// CloudSearch Developer Guide.
+//
+// [Configuring Index Fields]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html
 func (c *Client) DeleteIndexField(ctx context.Context, params *DeleteIndexFieldInput, optFns ...func(*Options)) (*DeleteIndexFieldOutput, error) {
 	if params == nil {
 		params = &DeleteIndexFieldInput{}
@@ -29,9 +30,8 @@ func (c *Client) DeleteIndexField(ctx context.Context, params *DeleteIndexFieldI
 	return out, nil
 }
 
-// Container for the parameters to the DeleteIndexField operation. Specifies the
-// name of the domain you want to update and the name of the index field you want
-// to delete.
+// Container for the parameters to the DeleteIndexField operation. Specifies the name of the
+// domain you want to update and the name of the index field you want to delete.
 type DeleteIndexFieldInput struct {
 
 	// A string that represents the name of a domain. Domain names are unique across

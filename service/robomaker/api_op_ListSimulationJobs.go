@@ -30,11 +30,13 @@ func (c *Client) ListSimulationJobs(ctx context.Context, params *ListSimulationJ
 
 type ListSimulationJobsInput struct {
 
-	// Optional filters to limit results. The filter names status and
-	// simulationApplicationName and robotApplicationName are supported. When
-	// filtering, you must use the complete value of the filtered item. You can use up
-	// to three filters, but they must be for the same named item. For example, if you
-	// are looking for items with the status Preparing or the status Running .
+	// Optional filters to limit results.
+	//
+	// The filter names status and simulationApplicationName and robotApplicationName
+	// are supported. When filtering, you must use the complete value of the filtered
+	// item. You can use up to three filters, but they must be for the same named item.
+	// For example, if you are looking for items with the status Preparing or the
+	// status Running .
 	Filters []types.Filter
 
 	// When this parameter is used, ListSimulationJobs only returns maxResults results

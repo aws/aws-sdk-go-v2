@@ -129,11 +129,13 @@ type DnsRecord struct {
 	noSmithyDocumentSerde
 }
 
-// The domain to associate with an WorkMail organization. When you configure a
-// domain hosted in Amazon Route 53 (Route 53), all recommended DNS records are
-// added to the organization when you create it. For more information, see Adding
-// a domain (https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html)
-// in the WorkMail Administrator Guide.
+// The domain to associate with an WorkMail organization.
+//
+// When you configure a domain hosted in Amazon Route 53 (Route 53), all
+// recommended DNS records are added to the organization when you create it. For
+// more information, see [Adding a domain]in the WorkMail Administrator Guide.
+//
+// [Adding a domain]: https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html
 type Domain struct {
 
 	// The fully qualified domain name.
@@ -300,7 +302,8 @@ type LambdaAvailabilityProvider struct {
 	noSmithyDocumentSerde
 }
 
-// Filtering options for ListGroups operation. This is only used as input to
+//	Filtering options for ListGroups operation. This is only used as input to
+//
 // Operation.
 type ListGroupsFilters struct {
 
@@ -316,8 +319,9 @@ type ListGroupsFilters struct {
 	noSmithyDocumentSerde
 }
 
-// Filtering options for ListGroupsForEntity operation. This is only used as input
-// to Operation.
+//	Filtering options for ListGroupsForEntity operation. This is only used as
+//
+// input to Operation.
 type ListGroupsForEntityFilters struct {
 
 	// Filters only group names that start with the provided name prefix.
@@ -342,7 +346,8 @@ type ListResourcesFilters struct {
 	noSmithyDocumentSerde
 }
 
-// Filtering options for ListUsers operation. This is only used as input to
+//	Filtering options for ListUsers operation. This is only used as input to
+//
 // Operation.
 type ListUsersFilters struct {
 

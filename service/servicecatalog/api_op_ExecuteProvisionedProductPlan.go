@@ -43,7 +43,9 @@ type ExecuteProvisionedProductPlanInput struct {
 	PlanId *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

@@ -52,14 +52,17 @@ type CreateStorageVirtualMachineInput struct {
 
 	// The security style of the root volume of the SVM. Specify one of the following
 	// values:
+	//
 	//   - UNIX if the file system is managed by a UNIX administrator, the majority of
 	//   users are NFS clients, and an application accessing the data uses a UNIX user as
 	//   the service account.
+	//
 	//   - NTFS if the file system is managed by a Microsoft Windows administrator, the
 	//   majority of users are SMB clients, and an application accessing the data uses a
 	//   Microsoft Windows user as the service account.
-	//   - MIXED This is an advanced setting. For more information, see Volume
-	//   security style in the Amazon FSx for NetApp ONTAP User Guide.
+	//
+	//   - MIXED This is an advanced setting. For more information, see Volume security stylein the Amazon
+	//   FSx for NetApp ONTAP User Guide.
 	RootVolumeSecurityStyle types.StorageVirtualMachineRootVolumeSecurityStyle
 
 	// The password to use when managing the SVM using the NetApp ONTAP CLI or REST

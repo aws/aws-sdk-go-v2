@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified human loop for a flow definition. If the human loop was
-// deleted, this operation will return a ResourceNotFoundException .
+// Deletes the specified human loop for a flow definition.
+//
+// If the human loop was deleted, this operation will return a
+// ResourceNotFoundException .
 func (c *Client) DeleteHumanLoop(ctx context.Context, params *DeleteHumanLoopInput, optFns ...func(*Options)) (*DeleteHumanLoopOutput, error) {
 	if params == nil {
 		params = &DeleteHumanLoopInput{}

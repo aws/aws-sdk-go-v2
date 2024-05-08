@@ -12,11 +12,14 @@ import (
 	"time"
 )
 
-// Lists your Resilience Hub applications. You can filter applications using only
-// one filter at a time or without using any filter. If you try to filter
-// applications using multiple filters, you will get the following error: An error
-// occurred (ValidationException) when calling the ListApps operation: Only one
-// filter is supported for this operation.
+// Lists your Resilience Hub applications.
+//
+// You can filter applications using only one filter at a time or without using
+// any filter. If you try to filter applications using multiple filters, you will
+// get the following error:
+//
+//	An error occurred (ValidationException) when calling the ListApps operation:
+//	Only one filter is supported for this operation.
 func (c *Client) ListApps(ctx context.Context, params *ListAppsInput, optFns ...func(*Options)) (*ListAppsOutput, error) {
 	if params == nil {
 		params = &ListAppsInput{}
@@ -36,8 +39,10 @@ type ListAppsInput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
+	// guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	AppArn *string
 
 	// Indicates the lower limit of the range that is used to filter applications

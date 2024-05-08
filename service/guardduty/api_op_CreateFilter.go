@@ -13,8 +13,9 @@ import (
 
 // Creates a filter using the specified finding criteria. The maximum number of
 // saved filters per Amazon Web Services account per Region is 100. For more
-// information, see Quotas for GuardDuty (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_limits.html)
-// .
+// information, see [Quotas for GuardDuty].
+//
+// [Quotas for GuardDuty]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_limits.html
 func (c *Client) CreateFilter(ctx context.Context, params *CreateFilterInput, optFns ...func(*Options)) (*CreateFilterOutput, error) {
 	if params == nil {
 		params = &CreateFilterInput{}
@@ -38,92 +39,175 @@ type CreateFilterInput struct {
 	// This member is required.
 	DetectorId *string
 
-	// Represents the criteria to be used in the filter for querying findings. You can
-	// only use the following attributes to query findings:
+	// Represents the criteria to be used in the filter for querying findings.
+	//
+	// You can only use the following attributes to query findings:
+	//
 	//   - accountId
+	//
 	//   - id
+	//
 	//   - region
-	//   - severity To filter on the basis of severity, the API and CLI use the
-	//   following input list for the FindingCriteria (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_FindingCriteria.html)
-	//   condition:
+	//
+	//   - severity
+	//
+	// To filter on the basis of severity, the API and CLI use the following input
+	//   list for the [FindingCriteria]condition:
+	//
 	//   - Low: ["1", "2", "3"]
+	//
 	//   - Medium: ["4", "5", "6"]
-	//   - High: ["7", "8", "9"] For more information, see Severity levels for
-	//   GuardDuty findings (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings.html#guardduty_findings-severity)
-	//   .
+	//
+	//   - High: ["7", "8", "9"]
+	//
+	// For more information, see [Severity levels for GuardDuty findings].
+	//
 	//   - type
-	//   - updatedAt Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or
-	//   YYYY-MM-DDTHH:MM:SSZ depending on whether the value contains milliseconds.
+	//
+	//   - updatedAt
+	//
+	// Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ
+	//   depending on whether the value contains milliseconds.
+	//
 	//   - resource.accessKeyDetails.accessKeyId
+	//
 	//   - resource.accessKeyDetails.principalId
+	//
 	//   - resource.accessKeyDetails.userName
+	//
 	//   - resource.accessKeyDetails.userType
+	//
 	//   - resource.instanceDetails.iamInstanceProfile.id
+	//
 	//   - resource.instanceDetails.imageId
+	//
 	//   - resource.instanceDetails.instanceId
+	//
 	//   - resource.instanceDetails.tags.key
+	//
 	//   - resource.instanceDetails.tags.value
+	//
 	//   - resource.instanceDetails.networkInterfaces.ipv6Addresses
+	//
 	//   -
 	//   resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
+	//
 	//   - resource.instanceDetails.networkInterfaces.publicDnsName
+	//
 	//   - resource.instanceDetails.networkInterfaces.publicIp
+	//
 	//   - resource.instanceDetails.networkInterfaces.securityGroups.groupId
+	//
 	//   - resource.instanceDetails.networkInterfaces.securityGroups.groupName
+	//
 	//   - resource.instanceDetails.networkInterfaces.subnetId
+	//
 	//   - resource.instanceDetails.networkInterfaces.vpcId
+	//
 	//   - resource.instanceDetails.outpostArn
+	//
 	//   - resource.resourceType
+	//
 	//   - resource.s3BucketDetails.publicAccess.effectivePermissions
+	//
 	//   - resource.s3BucketDetails.name
+	//
 	//   - resource.s3BucketDetails.tags.key
+	//
 	//   - resource.s3BucketDetails.tags.value
+	//
 	//   - resource.s3BucketDetails.type
+	//
 	//   - service.action.actionType
+	//
 	//   - service.action.awsApiCallAction.api
+	//
 	//   - service.action.awsApiCallAction.callerType
+	//
 	//   - service.action.awsApiCallAction.errorCode
+	//
 	//   - service.action.awsApiCallAction.remoteIpDetails.city.cityName
+	//
 	//   - service.action.awsApiCallAction.remoteIpDetails.country.countryName
+	//
 	//   - service.action.awsApiCallAction.remoteIpDetails.ipAddressV4
+	//
 	//   - service.action.awsApiCallAction.remoteIpDetails.ipAddressV6
+	//
 	//   - service.action.awsApiCallAction.remoteIpDetails.organization.asn
+	//
 	//   - service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg
+	//
 	//   - service.action.awsApiCallAction.serviceName
+	//
 	//   - service.action.dnsRequestAction.domain
+	//
 	//   - service.action.dnsRequestAction.domainWithSuffix
+	//
 	//   - service.action.networkConnectionAction.blocked
+	//
 	//   - service.action.networkConnectionAction.connectionDirection
+	//
 	//   - service.action.networkConnectionAction.localPortDetails.port
+	//
 	//   - service.action.networkConnectionAction.protocol
+	//
 	//   - service.action.networkConnectionAction.remoteIpDetails.city.cityName
+	//
 	//   - service.action.networkConnectionAction.remoteIpDetails.country.countryName
+	//
 	//   - service.action.networkConnectionAction.remoteIpDetails.ipAddressV4
+	//
 	//   - service.action.networkConnectionAction.remoteIpDetails.ipAddressV6
+	//
 	//   - service.action.networkConnectionAction.remoteIpDetails.organization.asn
+	//
 	//   - service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg
+	//
 	//   - service.action.networkConnectionAction.remotePortDetails.port
+	//
 	//   - service.action.awsApiCallAction.remoteAccountDetails.affiliated
+	//
 	//   - service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV4
+	//
 	//   - service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV6
+	//
 	//   - service.action.kubernetesApiCallAction.namespace
+	//
 	//   - service.action.kubernetesApiCallAction.remoteIpDetails.organization.asn
+	//
 	//   - service.action.kubernetesApiCallAction.requestUri
+	//
 	//   - service.action.kubernetesApiCallAction.statusCode
+	//
 	//   - service.action.networkConnectionAction.localIpDetails.ipAddressV4
+	//
 	//   - service.action.networkConnectionAction.localIpDetails.ipAddressV6
+	//
 	//   - service.action.networkConnectionAction.protocol
+	//
 	//   - service.action.awsApiCallAction.serviceName
+	//
 	//   - service.action.awsApiCallAction.remoteAccountDetails.accountId
+	//
 	//   - service.additionalInfo.threatListName
+	//
 	//   - service.resourceRole
+	//
 	//   - resource.eksClusterDetails.name
+	//
 	//   - resource.kubernetesDetails.kubernetesWorkloadDetails.name
+	//
 	//   - resource.kubernetesDetails.kubernetesWorkloadDetails.namespace
+	//
 	//   - resource.kubernetesDetails.kubernetesUserDetails.username
+	//
 	//   - resource.kubernetesDetails.kubernetesWorkloadDetails.containers.image
+	//
 	//   - resource.kubernetesDetails.kubernetesWorkloadDetails.containers.imagePrefix
+	//
 	//   - service.ebsVolumeScanDetails.scanId
+	//
 	//   -
 	//   service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.name
 	//
@@ -134,22 +218,41 @@ type CreateFilterInput struct {
 	//   service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.filePaths.hash
 	//
 	//   - resource.ecsClusterDetails.name
+	//
 	//   - resource.ecsClusterDetails.taskDetails.containers.image
+	//
 	//   - resource.ecsClusterDetails.taskDetails.definitionArn
+	//
 	//   - resource.containerDetails.image
+	//
 	//   - resource.rdsDbInstanceDetails.dbInstanceIdentifier
+	//
 	//   - resource.rdsDbInstanceDetails.dbClusterIdentifier
+	//
 	//   - resource.rdsDbInstanceDetails.engine
+	//
 	//   - resource.rdsDbUserDetails.user
+	//
 	//   - resource.rdsDbInstanceDetails.tags.key
+	//
 	//   - resource.rdsDbInstanceDetails.tags.value
+	//
 	//   - service.runtimeDetails.process.executableSha256
+	//
 	//   - service.runtimeDetails.process.name
+	//
 	//   - service.runtimeDetails.process.name
+	//
 	//   - resource.lambdaDetails.functionName
+	//
 	//   - resource.lambdaDetails.functionArn
+	//
 	//   - resource.lambdaDetails.tags.key
+	//
 	//   - resource.lambdaDetails.tags.value
+	//
+	// [FindingCriteria]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_FindingCriteria.html
+	// [Severity levels for GuardDuty findings]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings.html#guardduty_findings-severity
 	//
 	// This member is required.
 	FindingCriteria *types.FindingCriteria

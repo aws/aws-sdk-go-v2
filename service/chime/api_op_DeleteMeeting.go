@@ -12,16 +12,20 @@ import (
 
 // Deletes the specified Amazon Chime SDK meeting. The operation deletes all
 // attendees, disconnects all clients, and prevents new clients from joining the
-// meeting. For more information about the Amazon Chime SDK, see Using the Amazon
-// Chime SDK (https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html) in
-// the Amazon Chime SDK Developer Guide. This API is is no longer supported and
-// will not be updated. We recommend using the latest version, DeleteMeeting (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_DeleteMeeting.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// meeting. For more information about the Amazon Chime SDK, see [Using the Amazon Chime SDK]in the Amazon
+// Chime SDK Developer Guide.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [DeleteMeeting], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by DeleteMeeting in the Amazon Chime SDK Meetings Namespace
+//
+// [DeleteMeeting]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_DeleteMeeting.html
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [Using the Amazon Chime SDK]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
 func (c *Client) DeleteMeeting(ctx context.Context, params *DeleteMeetingInput, optFns ...func(*Options)) (*DeleteMeetingOutput, error) {
 	if params == nil {
 		params = &DeleteMeetingInput{}

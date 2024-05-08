@@ -12,9 +12,11 @@ import (
 	"time"
 )
 
-// Gets summary information about a domain configuration. Requires permission to
-// access the DescribeDomainConfiguration (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Gets summary information about a domain configuration.
+//
+// Requires permission to access the [DescribeDomainConfiguration] action.
+//
+// [DescribeDomainConfiguration]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DescribeDomainConfiguration(ctx context.Context, params *DescribeDomainConfigurationInput, optFns ...func(*Options)) (*DescribeDomainConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeDomainConfigurationInput{}
