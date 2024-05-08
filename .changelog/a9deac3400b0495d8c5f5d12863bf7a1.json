@@ -1,0 +1,8 @@
+{
+    "id": "a9deac34-00b0-495d-8c5f-5d12863bf7a1",
+    "type": "feature",
+    "description": "Add new engine - generative - that builds the most expressive conversational voices.",
+    "modules": [
+        "service/polly"
+    ]
+}

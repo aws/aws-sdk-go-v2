@@ -59,33 +59,18 @@ type SynthesizeSpeechInput struct {
 	// This member is required.
 	VoiceId types.VoiceId
 
-	// Specifies the engine ( standard , neural or long-form ) for Amazon Polly to use
-	// when processing input text for speech synthesis. For information on Amazon Polly
-	// voices and which voices are available for each engine, see [Available Voices].
-	//
-	// NTTS-only voices
-	//
-	// When using NTTS-only voices such as Kevin (en-US), this parameter is required
-	// and must be set to neural . If the engine is not specified, or is set to
-	// standard , this will result in an error.
-	//
-	// long-form-only voices
-	//
-	// When using long-form-only voices such as Danielle (en-US), this parameter is
-	// required and must be set to long-form . If the engine is not specified, or is
-	// set to standard or neural , this will result in an error.
+	// Specifies the engine ( standard , neural , long-form , or generative ) for
+	// Amazon Polly to use when processing input text for speech synthesis. Provide an
+	// engine that is supported by the voice you select. If you don't provide an
+	// engine, the standard engine is selected by default. If a chosen voice isn't
+	// supported by the standard engine, this will result in an error. For information
+	// on Amazon Polly voices and which voices are available for each engine, see [Available Voices].
 	//
 	// Type: String
 	//
-	// Valid Values: standard | neural | long-form
+	// Valid Values: standard | neural | long-form | generative
 	//
 	// Required: Yes
-	//
-	// Standard voices
-	//
-	// For standard voices, this is not required; the engine parameter defaults to
-	// standard . If the engine is not specified, or is set to standard and an
-	// NTTS-only voice is selected, this will result in an error.
 	//
 	// [Available Voices]: https://docs.aws.amazon.com/polly/latest/dg/voicelist.html
 	Engine types.Engine
@@ -115,7 +100,8 @@ type SynthesizeSpeechInput struct {
 	//
 	// The valid values for mp3 and ogg_vorbis are "8000", "16000", "22050", and
 	// "24000". The default value for standard voices is "22050". The default value for
-	// neural voices is "24000". The default value for long-form voices is "24000".
+	// neural voices is "24000". The default value for long-form voices is "24000". The
+	// default value for generative voices is "24000".
 	//
 	// Valid values for pcm are "8000" and "16000" The default value is "16000".
 	SampleRate *string

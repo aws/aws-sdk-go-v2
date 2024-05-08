@@ -814,6 +814,7 @@ const (
 	UserStatusTypeUnknown             UserStatusType = "UNKNOWN"
 	UserStatusTypeResetRequired       UserStatusType = "RESET_REQUIRED"
 	UserStatusTypeForceChangePassword UserStatusType = "FORCE_CHANGE_PASSWORD"
+	UserStatusTypeExternalProvider    UserStatusType = "EXTERNAL_PROVIDER"
 )
 
 // Values returns all known values for UserStatusType. Note that this can be
@@ -829,6 +830,7 @@ func (UserStatusType) Values() []UserStatusType {
 		"UNKNOWN",
 		"RESET_REQUIRED",
 		"FORCE_CHANGE_PASSWORD",
+		"EXTERNAL_PROVIDER",
 	}
 }
 

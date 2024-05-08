@@ -19,8 +19,6 @@ import (
 //     destination queue can be the original source queue (from which the messages were
 //     driven to the dead-letter-queue), or a custom destination queue.
 //
-//   - Currently, only standard queues are supported.
-//
 //   - Only one active message movement task is supported per queue at any given
 //     time.
 //

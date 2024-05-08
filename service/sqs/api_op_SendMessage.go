@@ -147,8 +147,8 @@ type SendMessageInput struct {
 	//   For each MessageGroupId , the messages are sorted by time sent. The caller
 	//   can't specify a MessageGroupId .
 	//
-	// The length of MessageGroupId is 128 characters. Valid values: alphanumeric
-	// characters and punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) .
+	// The maximum length of MessageGroupId is 128 characters. Valid values:
+	// alphanumeric characters and punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) .
 	//
 	// For best practices of using MessageGroupId , see [Using the MessageGroupId Property] in the Amazon SQS Developer
 	// Guide.

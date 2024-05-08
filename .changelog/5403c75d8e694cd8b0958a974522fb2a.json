@@ -1,0 +1,8 @@
+{
+    "id": "5403c75d-8e69-4cd8-b095-8a974522fb2a",
+    "type": "feature",
+    "description": "Adding Precision Hardware Clock (PHC) to public API DescribeInstanceTypes",
+    "modules": [
+        "service/ec2"
+    ]
+}

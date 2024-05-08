@@ -6,6 +6,7 @@ type MessageSystemAttributeName string
 
 // Enum values for MessageSystemAttributeName
 const (
+	MessageSystemAttributeNameAll                              MessageSystemAttributeName = "All"
 	MessageSystemAttributeNameSenderId                         MessageSystemAttributeName = "SenderId"
 	MessageSystemAttributeNameSentTimestamp                    MessageSystemAttributeName = "SentTimestamp"
 	MessageSystemAttributeNameApproximateReceiveCount          MessageSystemAttributeName = "ApproximateReceiveCount"
@@ -23,6 +24,7 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (MessageSystemAttributeName) Values() []MessageSystemAttributeName {
 	return []MessageSystemAttributeName{
+		"All",
 		"SenderId",
 		"SentTimestamp",
 		"ApproximateReceiveCount",

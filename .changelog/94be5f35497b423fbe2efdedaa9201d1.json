@@ -1,0 +1,8 @@
+{
+    "id": "94be5f35-497b-423f-be2e-fdedaa9201d1",
+    "type": "feature",
+    "description": "Add EXTERNAL_PROVIDER enum value to UserStatusType.",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "cb8efff4-2e4e-46de-8c14-f882068aabea",
+    "type": "feature",
+    "description": "This release adds MessageSystemAttributeNames to ReceiveMessageRequest to replace AttributeNames.",
+    "modules": [
+        "service/sqs"
+    ]
+}

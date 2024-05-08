@@ -6437,6 +6437,25 @@ func (PermissionGroup) Values() []PermissionGroup {
 	}
 }
 
+type PhcSupport string
+
+// Enum values for PhcSupport
+const (
+	PhcSupportUnsupported PhcSupport = "unsupported"
+	PhcSupportSupported   PhcSupport = "supported"
+)
+
+// Values returns all known values for PhcSupport. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PhcSupport) Values() []PhcSupport {
+	return []PhcSupport{
+		"unsupported",
+		"supported",
+	}
+}
+
 type PlacementGroupState string
 
 // Enum values for PlacementGroupState

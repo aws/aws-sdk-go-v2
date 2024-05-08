@@ -83,6 +83,10 @@ type ReceiveMessageInput struct {
 	// This member is required.
 	QueueUrl *string
 
+	//  This parameter has been deprecated but will be supported for backward
+	// compatibility. To provide attribute names, you are encouraged to use
+	// MessageSystemAttributeNames .
+	//
 	// A list of attributes that need to be returned along with each message. These
 	// attributes include:
 	//
@@ -121,6 +125,8 @@ type ReceiveMessageInput struct {
 	// [SSE-KMS]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html
 	// [epoch time]: http://en.wikipedia.org/wiki/Unix_time
 	// [SSE-SQS]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html
+	//
+	// Deprecated: AttributeNames has been replaced by MessageSystemAttributeNames
 	AttributeNames []types.QueueAttributeName
 
 	// The maximum number of messages to return. Amazon SQS never returns more
@@ -150,6 +156,46 @@ type ReceiveMessageInput struct {
 	// example bar.* .
 	MessageAttributeNames []string
 
+	// A list of attributes that need to be returned along with each message. These
+	// attributes include:
+	//
+	//   - All – Returns all values.
+	//
+	//   - ApproximateFirstReceiveTimestamp – Returns the time the message was first
+	//   received from the queue ([epoch time] in milliseconds).
+	//
+	//   - ApproximateReceiveCount – Returns the number of times a message has been
+	//   received across all queues but not deleted.
+	//
+	//   - AWSTraceHeader – Returns the X-Ray trace header string.
+	//
+	//   - SenderId
+	//
+	//   - For a user, returns the user ID, for example ABCDEFGHI1JKLMNOPQ23R .
+	//
+	//   - For an IAM role, returns the IAM role ID, for example
+	//   ABCDE1F2GH3I4JK5LMNOP:i-a123b456 .
+	//
+	//   - SentTimestamp – Returns the time the message was sent to the queue ([epoch time] in
+	//   milliseconds).
+	//
+	//   - SqsManagedSseEnabled – Enables server-side queue encryption using SQS owned
+	//   encryption keys. Only one server-side encryption option is supported per queue
+	//   (for example, [SSE-KMS]or [SSE-SQS]).
+	//
+	//   - MessageDeduplicationId – Returns the value provided by the producer that
+	//   calls the SendMessageaction.
+	//
+	//   - MessageGroupId – Returns the value provided by the producer that calls the SendMessage
+	//   action. Messages with the same MessageGroupId are returned in sequence.
+	//
+	//   - SequenceNumber – Returns the value provided by Amazon SQS.
+	//
+	// [SSE-KMS]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html
+	// [epoch time]: http://en.wikipedia.org/wiki/Unix_time
+	// [SSE-SQS]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html
+	MessageSystemAttributeNames []types.MessageSystemAttributeName
+
 	// This parameter applies only to FIFO (first-in-first-out) queues.
 	//
 	// The token used for deduplication of ReceiveMessage calls. If a networking issue
@@ -163,9 +209,6 @@ type ReceiveMessageInput struct {
 	//
 	//   - When you set FifoQueue , a caller of the ReceiveMessage action can provide a
 	//   ReceiveRequestAttemptId explicitly.
-	//
-	//   - If a caller of the ReceiveMessage action doesn't provide a
-	//   ReceiveRequestAttemptId , Amazon SQS generates a ReceiveRequestAttemptId .
 	//
 	//   - It is possible to retry the ReceiveMessage action with the same
 	//   ReceiveRequestAttemptId if none of the messages have been modified (deleted or
@@ -214,7 +257,7 @@ type ReceiveMessageInput struct {
 	// The duration (in seconds) for which the call waits for a message to arrive in
 	// the queue before returning. If a message is available, the call returns sooner
 	// than WaitTimeSeconds . If no messages are available and the wait time expires,
-	// the call returns successfully with an empty list of messages.
+	// the call does not return a message list.
 	//
 	// To avoid HTTP errors, ensure that the HTTP response timeout for ReceiveMessage
 	// requests is longer than the WaitTimeSeconds parameter. For example, with the

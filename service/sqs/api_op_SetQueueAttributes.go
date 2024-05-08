@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the value of one or more queue attributes. When you change a queue's
-// attributes, the change can take up to 60 seconds for most of the attributes to
-// propagate throughout the Amazon SQS system. Changes made to the
+// Sets the value of one or more queue attributes, like a policy. When you change
+// a queue's attributes, the change can take up to 60 seconds for most of the
+// attributes to propagate throughout the Amazon SQS system. Changes made to the
 // MessageRetentionPeriod attribute can take up to 15 minutes and will impact
 // existing messages in the queue potentially causing them to be expired and
 // deleted if the MessageRetentionPeriod is reduced below the age of existing

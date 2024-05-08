@@ -23,9 +23,6 @@ import (
 //     (from which the messages were driven to the dead-letter-queue), or a custom
 //     destination queue.
 //
-//   - Currently, only standard queues support redrive. FIFO queues don't support
-//     redrive.
-//
 //   - Only one active message movement task is supported per queue at any given
 //     time.
 //

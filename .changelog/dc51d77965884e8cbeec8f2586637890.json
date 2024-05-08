@@ -1,0 +1,8 @@
+{
+    "id": "dc51d779-6588-4e8c-beec-8f2586637890",
+    "type": "documentation",
+    "description": "The policy scope resource tag is always a string value, either a non-empty string or an empty string.",
+    "modules": [
+        "service/fms"
+    ]
+}

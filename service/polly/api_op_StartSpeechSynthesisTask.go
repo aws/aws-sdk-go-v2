@@ -58,9 +58,9 @@ type StartSpeechSynthesisTaskInput struct {
 	// This member is required.
 	VoiceId types.VoiceId
 
-	// Specifies the engine ( standard , neural or long-form ) for Amazon Polly to use
-	// when processing input text for speech synthesis. Using a voice that is not
-	// supported for the engine selected will result in an error.
+	// Specifies the engine ( standard , neural , long-form or generative ) for Amazon
+	// Polly to use when processing input text for speech synthesis. Using a voice that
+	// is not supported for the engine selected will result in an error.
 	Engine types.Engine
 
 	// Optional language code for the Speech Synthesis request. This is only necessary
@@ -88,7 +88,8 @@ type StartSpeechSynthesisTaskInput struct {
 	//
 	// The valid values for mp3 and ogg_vorbis are "8000", "16000", "22050", and
 	// "24000". The default value for standard voices is "22050". The default value for
-	// neural voices is "24000". The default value for long-form voices is "24000".
+	// neural voices is "24000". The default value for long-form voices is "24000". The
+	// default value for generative voices is "24000".
 	//
 	// Valid values for pcm are "8000" and "16000" The default value is "16000".
 	SampleRate *string

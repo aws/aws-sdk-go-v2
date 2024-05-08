@@ -70,9 +70,9 @@ type SynthesisTask struct {
 	// Timestamp for the time the synthesis task was started.
 	CreationTime *time.Time
 
-	// Specifies the engine ( standard , neural or long-form ) for Amazon Polly to use
-	// when processing input text for speech synthesis. Using a voice that is not
-	// supported for the engine selected will result in an error.
+	// Specifies the engine ( standard , neural , long-form or generative ) for Amazon
+	// Polly to use when processing input text for speech synthesis. Using a voice that
+	// is not supported for the engine selected will result in an error.
 	Engine Engine
 
 	// Optional language code for a synthesis task. This is only necessary if using a
@@ -107,7 +107,8 @@ type SynthesisTask struct {
 	//
 	// The valid values for mp3 and ogg_vorbis are "8000", "16000", "22050", and
 	// "24000". The default value for standard voices is "22050". The default value for
-	// neural voices is "24000". The default value for long-form voices is "24000".
+	// neural voices is "24000". The default value for long-form voices is "24000". The
+	// default value for generative voices is "24000".
 	//
 	// Valid values for pcm are "8000" and "16000" The default value is "16000".
 	SampleRate *string
@@ -167,8 +168,8 @@ type Voice struct {
 	// readable voice name that you might display in your application.
 	Name *string
 
-	// Specifies which engines ( standard , neural or long-form ) are supported by a
-	// given voice.
+	// Specifies which engines ( standard , neural , long-form or generative ) are
+	// supported by a given voice.
 	SupportedEngines []Engine
 
 	noSmithyDocumentSerde

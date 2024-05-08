@@ -6,9 +6,10 @@ type Engine string
 
 // Enum values for Engine
 const (
-	EngineStandard Engine = "standard"
-	EngineNeural   Engine = "neural"
-	EngineLongForm Engine = "long-form"
+	EngineStandard   Engine = "standard"
+	EngineNeural     Engine = "neural"
+	EngineLongForm   Engine = "long-form"
+	EngineGenerative Engine = "generative"
 )
 
 // Values returns all known values for Engine. Note that this can be expanded in
@@ -20,6 +21,7 @@ func (Engine) Values() []Engine {
 		"standard",
 		"neural",
 		"long-form",
+		"generative",
 	}
 }
 

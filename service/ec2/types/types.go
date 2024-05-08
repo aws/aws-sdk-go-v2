@@ -8057,6 +8057,10 @@ type InstanceTypeInfo struct {
 	// Indicates whether NitroTPM is supported.
 	NitroTpmSupport NitroTpmSupport
 
+	// Indicates whether a local Precision Time Protocol (PTP) hardware clock (PHC) is
+	// supported.
+	PhcSupport PhcSupport
+
 	// Describes the placement group settings for the instance type.
 	PlacementGroupInfo *PlacementGroupInfo
 

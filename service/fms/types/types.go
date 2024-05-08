@@ -837,9 +837,9 @@ type NetworkAclEntrySet struct {
 	//
 	// If forced remediation is disabled, Firewall Manager marks the network ACL as
 	// noncompliant and does not try to remediate. For more information about the
-	// remediation behavior, see [Network access control list (ACL) policies]in the Firewall Manager Developer Guide.
+	// remediation behavior, see [Remediation for managed network ACLs]in the Firewall Manager Developer Guide.
 	//
-	// [Network access control list (ACL) policies]: https://docs.aws.amazon.com/waf/latest/developerguide/network-acl-policies.html
+	// [Remediation for managed network ACLs]: https://docs.aws.amazon.com/waf/latest/developerguide/network-acl-policies.html#network-acls-remediation
 	//
 	// This member is required.
 	ForceRemediateForFirstEntries *bool
@@ -850,9 +850,9 @@ type NetworkAclEntrySet struct {
 	//
 	// If forced remediation is disabled, Firewall Manager marks the network ACL as
 	// noncompliant and does not try to remediate. For more information about the
-	// remediation behavior, see [Network access control list (ACL) policies]in the Firewall Manager Developer Guide.
+	// remediation behavior, see [Remediation for managed network ACLs]in the Firewall Manager Developer Guide.
 	//
-	// [Network access control list (ACL) policies]: https://docs.aws.amazon.com/waf/latest/developerguide/network-acl-policies.html
+	// [Remediation for managed network ACLs]: https://docs.aws.amazon.com/waf/latest/developerguide/network-acl-policies.html#network-acls-remediation
 	//
 	// This member is required.
 	ForceRemediateForLastEntries *bool
@@ -1406,7 +1406,7 @@ type Policy struct {
 	//   “accountID2”], “ORG_UNIT” : [“ouid111”, “ouid112”]} .
 	IncludeMap map[string][]string
 
-	// The definition of the Network Firewall firewall policy.
+	// Your description of the Firewall Manager policy.
 	PolicyDescription *string
 
 	// The ID of the Firewall Manager policy.
@@ -1870,6 +1870,13 @@ type ResourceSetSummary struct {
 // add more than one tag to a policy scope, a resource must have all the specified
 // tags to be included or excluded. For more information, see [Working with Tag Editor].
 //
+// Every resource tag must have a string value, either a non-empty string or an
+// empty string. If you don't provide a value for a resource tag, Firewall Manager
+// saves the value as an empty string: "". When Firewall Manager compares tags, it
+// only matches two tags if they have the same key and the same value. A tag with
+// an empty string value only matches with tags that also have an empty string
+// value.
+//
 // [Working with Tag Editor]: https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html
 type ResourceTag struct {
 
@@ -1878,7 +1885,8 @@ type ResourceTag struct {
 	// This member is required.
 	Key *string
 
-	// The resource tag value.
+	// The resource tag value. To specify an empty string value, either don't provide
+	// this or specify it as "".
 	Value *string
 
 	noSmithyDocumentSerde

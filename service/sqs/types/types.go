@@ -106,7 +106,8 @@ type ListMessageMoveTasksResultEntry struct {
 	ApproximateNumberOfMessagesMoved int64
 
 	// The number of messages to be moved from the source queue. This number is
-	// obtained at the time of starting the message movement task.
+	// obtained at the time of starting the message movement task and is only included
+	// after the message movement task is selected to start.
 	ApproximateNumberOfMessagesToMove *int64
 
 	// The ARN of the destination queue if it has been specified in the

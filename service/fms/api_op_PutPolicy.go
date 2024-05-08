@@ -58,7 +58,7 @@ import (
 //     advanced threat prevention, smart web application firewalls (WAF), and API
 //     protection.
 //
-// [Amazon Web Services Marketplace]: https://aws.amazon.com/marketplace
+// [Amazon Web Services Marketplace]: http://aws.amazon.com/marketplace
 func (c *Client) PutPolicy(ctx context.Context, params *PutPolicyInput, optFns ...func(*Options)) (*PutPolicyOutput, error) {
 	if params == nil {
 		params = &PutPolicyInput{}
