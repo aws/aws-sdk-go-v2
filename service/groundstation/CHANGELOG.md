@@ -1,3 +1,7 @@
+# v1.27.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.27.0 (2024-04-03)
 
 * **Feature**: This release adds visibilityStartTime and visibilityEndTime to DescribeContact and ListContacts responses.

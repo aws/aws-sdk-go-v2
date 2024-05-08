@@ -1,3 +1,7 @@
+# v1.20.6 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.20.5 (2024-04-12)
 
 * **Documentation**: Documentation updates for AWS IoT Fleet Hub to clarify that Fleet Hub supports organization instance of IAM Identity Center.

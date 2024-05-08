@@ -1,3 +1,7 @@
+# v1.15.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.15.0 (2024-04-30)
 
 * **Feature**: Due to changes made by the Amazon Alexa service, GetSipMediaApplicationAlexaSkillConfiguration and PutSipMediaApplicationAlexaSkillConfiguration APIs are no longer available for use. For more information, refer to the Alexa Smart Properties page.

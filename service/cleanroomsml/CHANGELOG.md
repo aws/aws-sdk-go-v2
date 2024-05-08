@@ -1,3 +1,7 @@
+# v1.4.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.4.0 (2024-04-03)
 
 * **Feature**: The release includes a public SDK for AWS Clean Rooms ML APIs, making them globally available to developers worldwide.

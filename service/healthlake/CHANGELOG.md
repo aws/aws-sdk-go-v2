@@ -1,3 +1,7 @@
+# v1.24.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.24.0 (2024-04-12)
 
 * **Feature**: Added new CREATE_FAILED status for data stores. Added new errorCause to DescribeFHIRDatastore API and ListFHIRDatastores API response for additional insights into data store creation and deletion workflows.

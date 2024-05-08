@@ -1,3 +1,7 @@
+# v1.34.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.34.0 (2024-05-02)
 
 * **Feature**: This releases ability to delete users and their data, including their metadata and interactions data, from a dataset group.

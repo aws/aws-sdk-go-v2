@@ -1,3 +1,7 @@
+# v1.42.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.42.0 (2024-04-18)
 
 * **Feature**: Added IPv6Address fields for local and remote IP addresses

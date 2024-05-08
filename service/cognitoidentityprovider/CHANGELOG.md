@@ -1,3 +1,8 @@
+# v1.38.0 (2024-05-08)
+
+* **Feature**: Add EXTERNAL_PROVIDER enum value to UserStatusType.
+* **Bug Fix**: GoDoc improvement
+
 # v1.37.0 (2024-04-26)
 
 * **Feature**: Add LimitExceededException to SignUp errors

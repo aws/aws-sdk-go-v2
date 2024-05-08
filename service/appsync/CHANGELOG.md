@@ -1,3 +1,7 @@
+# v1.32.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.32.0 (2024-04-25)
 
 * **Feature**: UpdateGraphQLAPI documentation update and datasource introspection secret arn update

@@ -1,3 +1,7 @@
+# v1.10.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.10.0 (2024-04-22)
 
 * **Feature**: Adding support to TR-31/TR-34 exports for optional headers, allowing customers to add additional metadata (such as key version and KSN) when exporting keys from the service.

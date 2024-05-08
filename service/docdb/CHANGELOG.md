@@ -1,3 +1,7 @@
+# v1.34.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.34.0 (2024-04-03)
 
 * **Feature**: This release adds Global Cluster Switchover capability which enables you to change your global cluster's primary AWS Region, the region that serves writes, while preserving the replication between all regions in the global cluster.

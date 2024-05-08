@@ -1,3 +1,7 @@
+# v1.10.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.10.0 (2024-05-03)
 
 * **Feature**: This release adds support for using Provisioned Throughput with Bedrock Agents.

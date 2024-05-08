@@ -1,3 +1,7 @@
+# v1.80.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.80.0 (2024-04-19)
 
 * **Feature**: Adding RowFilter in the response for GetUnfilteredTableMetadata API

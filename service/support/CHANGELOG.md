@@ -1,3 +1,7 @@
+# v1.22.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.22.0 (2024-04-26)
 
 * **Feature**: Releasing minor endpoint updates.

@@ -1,3 +1,7 @@
+# v1.44.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.44.0 (2024-04-12)
 
 * **Feature**: Adds support for Amazon Redshift DescribeClusterSnapshots API to include Snapshot ARN response field.

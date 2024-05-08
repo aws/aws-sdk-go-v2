@@ -1,3 +1,7 @@
+# v1.14.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.14.0 (2024-04-19)
 
 * **Feature**: This update introduces the GetInternetEvent and ListInternetEvents APIs, which provide access to internet events displayed on the Amazon CloudWatch Internet Weather Map.

@@ -1,8 +1,0 @@
-{
-    "id": "9bbf00a5-8785-417d-a92a-797c7539041f",
-    "type": "feature",
-    "description": "This release adds pull through cache rules support for GitLab container registry in Amazon ECR.",
-    "modules": [
-        "service/ecr"
-    ]
-}

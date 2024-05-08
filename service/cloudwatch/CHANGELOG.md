@@ -1,3 +1,7 @@
+# v1.38.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.38.0 (2024-04-11)
 
 * **Feature**: This release adds support for Metric Characteristics for CloudWatch Anomaly Detection. Anomaly Detector now takes Metric Characteristics object with Periodic Spikes boolean field that tells Anomaly Detection that spikes that repeat at the same time every week are part of the expected pattern.

@@ -1,3 +1,7 @@
+# v1.63.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.63.0 (2024-04-30)
 
 * **Feature**: New Q embedding supporting Generative Q&A

@@ -1,3 +1,7 @@
+# v1.26.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.26.0 (2024-03-29)
 
 * **Feature**: This release enhances the ListEntities API to support ResaleAuthorizationId filter and sort for OfferEntity in the request and the addition of a ResaleAuthorizationId field in the response of OfferSummary.

@@ -1,3 +1,7 @@
+# v1.30.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.30.0 (2024-04-16)
 
 * **Feature**: AWS Well-Architected now has a Connector for Jira to allow customers to efficiently track workload risks and improvement efforts and create closed-loop mechanisms.

@@ -1,3 +1,7 @@
+# v1.29.7 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.29.6 (2024-04-22)
 
 * **Documentation**: This release adds examples to several Cloud Map actions.

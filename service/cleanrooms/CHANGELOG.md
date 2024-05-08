@@ -1,3 +1,7 @@
+# v1.12.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.12.0 (2024-04-10)
 
 * **Feature**: AWS Clean Rooms Differential Privacy is now fully available. Differential privacy protects against user-identification attempts.

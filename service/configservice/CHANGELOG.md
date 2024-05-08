@@ -1,3 +1,7 @@
+# v1.46.6 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.46.5 (2024-04-12)
 
 * **Documentation**: Updates documentation for AWS Config

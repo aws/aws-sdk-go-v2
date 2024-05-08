@@ -1,3 +1,7 @@
+# v1.28.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.28.0 (2024-04-24)
 
 * **Feature**: EMRonEKS Service support for SecurityConfiguration enforcement for Spark Jobs.

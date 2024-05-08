@@ -1,3 +1,7 @@
+# v1.35.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.35.0 (2024-04-25)
 
 * **Feature**: Bug Fix: IVS does not support arns with the `svs` prefix

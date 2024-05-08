@@ -1,3 +1,7 @@
+# v1.38.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.38.0 (2024-04-23)
 
 * **Feature**: Added additional metadata that might be applicable to your reservation recommendations.

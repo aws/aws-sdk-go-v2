@@ -1,3 +1,7 @@
+# v1.22.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.22.0 (2024-04-05)
 
 * **Feature**: Added a new QueryErrorCode RESOURCE_TYPE_NOT_SUPPORTED that is returned by the ListGroupResources operation if the group query contains unsupported resource types.

@@ -1,3 +1,7 @@
+# v1.29.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.29.0 (2024-04-09)
 
 * **Feature**: The OrchestrationSendingRoleArn has been added to the email channel and is used to send emails from campaigns or journeys.

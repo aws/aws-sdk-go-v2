@@ -1,3 +1,7 @@
+# v1.17.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.17.0 (2024-05-03)
 
 * **Feature**: This feature supports the release of Files related items

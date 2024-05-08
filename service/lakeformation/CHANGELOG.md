@@ -1,3 +1,7 @@
+# v1.32.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.32.0 (2024-04-16)
 
 * **Feature**: This release adds Lake Formation managed RAM support for the 4 APIs - "DescribeLakeFormationIdentityCenterConfiguration", "CreateLakeFormationIdentityCenterConfiguration", "DescribeLakeFormationIdentityCenterConfiguration", and "DeleteLakeFormationIdentityCenterConfiguration"

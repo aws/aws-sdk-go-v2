@@ -1,3 +1,7 @@
+# v1.4.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.4.0 (2024-04-29)
 
 * **Feature**: This release adds the BatchUpdateRecommendationResourceExclusion API to support batch updates of Recommendation Resource exclusion statuses and introduces a new exclusion status filter to the ListRecommendationResources and ListOrganizationRecommendationResources APIs.

@@ -1,3 +1,7 @@
+# v1.11.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.11.0 (2024-04-16)
 
 * **Feature**: Dash v2 is a MediaPackage V2 feature to support egressing on DASH manifest format.

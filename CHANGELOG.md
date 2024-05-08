@@ -1,3 +1,23 @@
+# Release (2024-05-08)
+
+## General Highlights
+* **Bug Fix**: GoDoc improvement
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.38.0](service/cognitoidentityprovider/CHANGELOG.md#v1380-2024-05-08)
+  * **Feature**: Add EXTERNAL_PROVIDER enum value to UserStatusType.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.161.0](service/ec2/CHANGELOG.md#v11610-2024-05-08)
+  * **Feature**: Adding Precision Hardware Clock (PHC) to public API DescribeInstanceTypes
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.28.0](service/ecr/CHANGELOG.md#v1280-2024-05-08)
+  * **Feature**: This release adds pull through cache rules support for GitLab container registry in Amazon ECR.
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.33.2](service/fms/CHANGELOG.md#v1332-2024-05-08)
+  * **Documentation**: The policy scope resource tag is always a string value, either a non-empty string or an empty string.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.40.0](service/polly/CHANGELOG.md#v1400-2024-05-08)
+  * **Feature**: Add new engine - generative - that builds the most expressive conversational voices.
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.32.0](service/sqs/CHANGELOG.md#v1320-2024-05-08)
+  * **Feature**: This release adds MessageSystemAttributeNames to ReceiveMessageRequest to replace AttributeNames.
+
 # Release (2024-05-07)
 
 ## Module Highlights

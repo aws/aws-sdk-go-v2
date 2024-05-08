@@ -1,3 +1,7 @@
+# v1.40.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.40.0 (2024-04-10)
 
 * **Feature**: Added support for ContentType to content moderation detections.

@@ -1,3 +1,7 @@
+# v1.12.6 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.12.5 (2024-04-02)
 
 * **Documentation**: Doc-only update. Changed "Resources" to "Key Concepts" in docs and updated text.

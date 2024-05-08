@@ -1,3 +1,7 @@
+# v1.78.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.78.0 (2024-04-26)
 
 * **Feature**: SupportsLimitlessDatabase field added to describe-db-engine-versions to indicate whether the DB engine version supports Aurora Limitless Database.

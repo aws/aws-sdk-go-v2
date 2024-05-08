@@ -1,3 +1,7 @@
+# v1.19.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.19.0 (2024-04-18)
 
 * **Feature**: This release adds the capability to publish detailed Spark engine metrics to Amazon Managed Service for Prometheus (AMP) for  enhanced monitoring for Spark jobs.

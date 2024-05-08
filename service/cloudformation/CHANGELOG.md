@@ -1,3 +1,7 @@
+# v1.50.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.50.0 (2024-04-12)
 
 * **Feature**: Adding support for the new parameter "IncludePropertyValues" in the CloudFormation DescribeChangeSet API. When this parameter is included, the DescribeChangeSet response will include more detailed information such as before and after values for the resource properties that will change.

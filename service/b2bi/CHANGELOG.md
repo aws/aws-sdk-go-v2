@@ -1,3 +1,7 @@
+# v1.0.0-preview.23 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.0.0-preview.22 (2024-05-07)
 
 * **Documentation**: Documentation update to clarify the MappingTemplate definition.

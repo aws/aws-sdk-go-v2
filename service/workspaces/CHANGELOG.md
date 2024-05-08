@@ -1,3 +1,7 @@
+# v1.39.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.39.0 (2024-04-18)
 
 * **Feature**: Adds new APIs for managing and sharing WorkSpaces BYOL configuration across accounts.

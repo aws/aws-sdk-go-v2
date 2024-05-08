@@ -1,3 +1,8 @@
+# v1.33.2 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+* **Documentation**: The policy scope resource tag is always a string value, either a non-empty string or an empty string.
+
 # v1.33.1 (2024-05-06)
 
 * No change notes available for this release.

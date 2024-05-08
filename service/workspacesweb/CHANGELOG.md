@@ -1,3 +1,7 @@
+# v1.18.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.18.0 (2024-04-23)
 
 * **Feature**: Added InstanceType and MaxConcurrentSessions parameters on CreatePortal and UpdatePortal Operations as well as the ability to read Customer Managed Key & Additional Encryption Context parameters on supported resources (Portal, BrowserSettings, UserSettings, IPAccessSettings)

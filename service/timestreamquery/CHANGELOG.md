@@ -1,3 +1,7 @@
+# v1.23.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.23.0 (2024-04-29)
 
 * **Feature**: This change allows users to update and describe account settings associated with their accounts.

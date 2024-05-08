@@ -1,3 +1,8 @@
+# v1.40.0 (2024-05-08)
+
+* **Feature**: Add new engine - generative - that builds the most expressive conversational voices.
+* **Bug Fix**: GoDoc improvement
+
 # v1.39.6 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

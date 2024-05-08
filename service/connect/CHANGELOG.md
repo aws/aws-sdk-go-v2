@@ -1,3 +1,7 @@
+# v1.97.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.97.0 (2024-05-03)
 
 * **Feature**: This release adds 5 new APIs for managing attachments: StartAttachedFileUpload, CompleteAttachedFileUpload, GetAttachedFile, BatchGetAttachedFileMetadata, DeleteAttachedFile. These APIs can be used to programmatically upload and download attachments to Connect resources, like cases.

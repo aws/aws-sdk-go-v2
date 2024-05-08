@@ -1,3 +1,7 @@
+# v1.27.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.27.0 (2024-04-26)
 
 * **Feature**: Add ability to manually and automatically roll back a pipeline stage to a previously successful execution.

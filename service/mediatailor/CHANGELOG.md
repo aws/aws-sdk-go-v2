@@ -1,3 +1,7 @@
+# v1.38.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.38.0 (2024-04-12)
 
 * **Feature**: Added InsertionMode to PlaybackConfigurations. This setting controls whether players can use stitched or guided ad insertion. The default for players that do not specify an insertion mode is stitched.

@@ -1,3 +1,7 @@
+# v1.8.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.8.0 (2024-04-03)
 
 * **Feature**: SearchImageSets API now supports following enhancements - Additional support for searching on UpdatedAt and SeriesInstanceUID - Support for searching existing filters between dates/times - Support for sorting the search result by Ascending/Descending - Additional parameters returned in the response

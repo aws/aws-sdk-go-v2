@@ -1,3 +1,7 @@
+# v1.39.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.39.0 (2024-04-16)
 
 * **Feature**: This release adds new APIs to allow customers to configure their Outpost capacity at order-time.

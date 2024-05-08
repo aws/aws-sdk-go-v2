@@ -1,3 +1,7 @@
+# v1.34.2 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.34.1 (2024-04-11)
 
 * **Documentation**: Support access tokens for Bitbucket sources

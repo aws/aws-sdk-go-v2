@@ -1,3 +1,7 @@
+# v1.33.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.33.0 (2024-04-30)
 
 * **Feature**: This release enables customers to create Route53 A and AAAA alias record types to point custom endpoint domain to OpenSearch domain's dualstack search endpoint.

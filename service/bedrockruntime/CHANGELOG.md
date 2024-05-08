@@ -1,3 +1,7 @@
+# v1.8.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.8.0 (2024-04-23)
 
 * **Feature**: This release introduces Guardrails for Amazon Bedrock.

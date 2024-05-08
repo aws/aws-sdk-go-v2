@@ -1,3 +1,7 @@
+# v1.38.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.38.0 (2024-04-16)
 
 * **Feature**: Add PublicGateways in the GetWirelessStatistics call response, indicating the LoRaWAN public network accessed by the device.

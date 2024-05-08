@@ -1,3 +1,7 @@
+# v1.6.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.6.0 (2024-04-30)
 
 * **Feature**: This is a general availability (GA) release of Amazon Q Business. Q Business enables employees in an enterprise to get comprehensive answers to complex questions and take actions through a unified, intuitive web-based chat experience - using an enterprise's existing content, data, and systems.

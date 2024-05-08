@@ -1,3 +1,7 @@
+# v1.23.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.23.0 (2024-05-07)
 
 * **Feature**: This release adds tag support for budgets and budget actions.

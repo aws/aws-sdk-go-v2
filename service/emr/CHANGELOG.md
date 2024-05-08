@@ -1,3 +1,7 @@
+# v1.39.6 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.39.5 (2024-04-01)
 
 * **Documentation**: This release fixes a broken link in the documentation.

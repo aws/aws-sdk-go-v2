@@ -1,3 +1,7 @@
+# v1.8.2 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.8.1 (2024-04-12)
 
 * **Documentation**: Update to API documentation to resolve customer reported issues.

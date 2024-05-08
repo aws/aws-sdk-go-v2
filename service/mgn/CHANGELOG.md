@@ -1,3 +1,7 @@
+# v1.28.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.28.0 (2024-04-08)
 
 * **Feature**: Added USE_SOURCE as default option to LaunchConfigurationTemplate bootMode parameter.

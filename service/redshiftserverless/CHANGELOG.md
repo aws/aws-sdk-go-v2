@@ -1,3 +1,7 @@
+# v1.18.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.18.0 (2024-05-02)
 
 * **Feature**: Update Redshift Serverless List Scheduled Actions Output Response to include Namespace Name.

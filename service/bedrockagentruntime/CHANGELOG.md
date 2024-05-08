@@ -1,3 +1,7 @@
+# v1.8.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.8.0 (2024-04-23)
 
 * **Feature**: This release introduces zero-setup file upload support for the RetrieveAndGenerate API. This allows you to chat with your data without setting up a Knowledge Base.

@@ -1,3 +1,7 @@
+# v1.22.8 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.22.7 (2024-04-30)
 
 * **Documentation**: Documentation updates for AWS Signer. Adds cross-account signing constraint and definitions for cross-account actions.

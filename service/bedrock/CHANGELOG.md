@@ -1,3 +1,7 @@
+# v1.8.2 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.8.1 (2024-05-01)
 
 * No change notes available for this release.

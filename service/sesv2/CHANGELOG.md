@@ -1,3 +1,7 @@
+# v1.29.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.29.0 (2024-05-03)
 
 * **Feature**: Adds support for specifying replacement headers per BulkEmailEntry in SendBulkEmail in SESv2.

@@ -1,3 +1,7 @@
+# v1.13.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.13.0 (2024-04-25)
 
 * **Feature**: Bug Fix: IVS Real Time does not support ARNs using the `svs` prefix.

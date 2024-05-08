@@ -1,3 +1,7 @@
+# v1.27.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.27.0 (2024-04-25)
 
 * **Feature**: Add new ValidateStateMachineDefinition operation, which performs syntax checking on the definition of a Amazon States Language (ASL) state machine.

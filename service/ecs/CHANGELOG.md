@@ -1,3 +1,7 @@
+# v1.41.8 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.41.7 (2024-04-02)
 
 * **Documentation**: Documentation only update for Amazon ECS.

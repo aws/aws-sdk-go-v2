@@ -1,3 +1,7 @@
+# v1.11.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.11.0 (2024-04-26)
 
 * **Feature**: This release adds support for specifying if Answering Machine should wait for prompt sound.

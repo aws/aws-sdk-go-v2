@@ -1,3 +1,7 @@
+# v1.54.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.54.0 (2024-04-03)
 
 * **Feature**: Add Ruby 3.3 (ruby3.3) support to AWS Lambda

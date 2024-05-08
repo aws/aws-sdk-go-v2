@@ -1,3 +1,7 @@
+# v1.139.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.139.0 (2024-05-03)
 
 * **Feature**: Amazon SageMaker Inference now supports m6i, c6i, r6i, m7i, c7i, r7i and g5 instance types for Batch Transform Jobs

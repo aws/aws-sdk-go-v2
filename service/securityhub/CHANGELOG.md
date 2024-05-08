@@ -1,3 +1,7 @@
+# v1.48.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.48.0 (2024-05-01)
 
 * **Feature**: Updated CreateMembers API request with limits.

@@ -1,3 +1,7 @@
+# v1.24.6 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.24.5 (2024-04-23)
 
 * **Documentation**: Clarifies how aggregation works for GetResourceMetrics in the Performance Insights API.

@@ -1,3 +1,7 @@
+# v1.31.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.31.0 (2024-04-24)
 
 * **Feature**: Amazon GameLift releases container fleets support for public preview. Deploy Linux-based containerized game server software for hosting on Amazon GameLift.

@@ -1,3 +1,7 @@
+# v1.5.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.5.0 (2024-04-10)
 
 * **Feature**: Adding tags field to SoftwareSet. Removing tags fields from Summary objects. Changing the list of exceptions in tagging APIs. Fixing an issue where the SDK returns empty tags in Get APIs.

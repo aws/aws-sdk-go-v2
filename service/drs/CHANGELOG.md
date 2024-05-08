@@ -1,3 +1,7 @@
+# v1.26.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
 # v1.26.0 (2024-04-18)
 
 * **Feature**: Outpost ARN added to Source Server and Recovery Instance
