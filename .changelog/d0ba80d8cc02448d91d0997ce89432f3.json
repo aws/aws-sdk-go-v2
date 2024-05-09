@@ -1,0 +1,11 @@
+{
+    "id": "d0ba80d8-cc02-448d-91d0-997ce89432f3",
+    "type": "feature",
+    "description": "Drop test dependency on x/net, h2 support is now available in the stdlib.",
+    "collapse": true,
+    "modules": [
+        "service/internal/eventstreamtesting",
+        "service/kinesis/internal/testing",
+        "service/transcribestreaming/internal/testing"
+    ]
+}
