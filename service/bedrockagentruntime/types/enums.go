@@ -40,6 +40,25 @@ func (ExternalSourceType) Values() []ExternalSourceType {
 	}
 }
 
+type GuadrailAction string
+
+// Enum values for GuadrailAction
+const (
+	GuadrailActionIntervened GuadrailAction = "INTERVENED"
+	GuadrailActionNone       GuadrailAction = "NONE"
+)
+
+// Values returns all known values for GuadrailAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuadrailAction) Values() []GuadrailAction {
+	return []GuadrailAction{
+		"INTERVENED",
+		"NONE",
+	}
+}
+
 type InvocationType string
 
 // Enum values for InvocationType

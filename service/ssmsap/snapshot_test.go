@@ -182,6 +182,18 @@ func TestCheckSnapshot_ListDatabases(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListOperationEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOperationEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListOperationEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListOperations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListOperations(context.Background(), nil, func(o *Options) {
@@ -230,11 +242,35 @@ func TestCheckSnapshot_RegisterApplication(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartApplicationRefresh(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartApplicationRefresh(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartApplicationRefresh")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopApplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -397,6 +433,18 @@ func TestUpdateSnapshot_ListDatabases(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListOperationEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOperationEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListOperationEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListOperations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListOperations(context.Background(), nil, func(o *Options) {
@@ -445,11 +493,35 @@ func TestUpdateSnapshot_RegisterApplication(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartApplicationRefresh(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartApplicationRefresh(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartApplicationRefresh")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopApplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

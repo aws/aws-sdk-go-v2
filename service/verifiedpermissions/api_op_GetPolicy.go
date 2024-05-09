@@ -77,6 +77,15 @@ type GetPolicyOutput struct {
 	// This member is required.
 	PolicyType types.PolicyType
 
+	// The action that a policy permits or forbids. For example, {"actions":
+	// [{"actionId": "ViewPhoto", "actionType": "PhotoFlash::Action"}, {"entityID":
+	// "SharePhoto", "entityType": "PhotoFlash::Action"}]} .
+	Actions []types.ActionIdentifier
+
+	// The effect of the decision that a policy returns to an authorization request.
+	// For example, "effect": "Permit" .
+	Effect types.PolicyEffect
+
 	// The principal specified in the policy's scope. This element isn't included in
 	// the response when Principal isn't present in the policy content.
 	Principal *types.EntityIdentifier

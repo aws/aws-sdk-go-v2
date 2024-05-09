@@ -10441,6 +10441,13 @@ func awsRestjson1_serializeDocumentCampaignEmailMessage(v *types.CampaignEmailMe
 		ok.String(*v.FromAddress)
 	}
 
+	if v.Headers != nil {
+		ok := object.Key("Headers")
+		if err := awsRestjson1_serializeDocumentListOfMessageHeader(v.Headers, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.HtmlBody != nil {
 		ok := object.Key("HtmlBody")
 		ok.String(*v.HtmlBody)
@@ -11181,6 +11188,13 @@ func awsRestjson1_serializeDocumentEmailTemplateRequest(v *types.EmailTemplateRe
 	if v.DefaultSubstitutions != nil {
 		ok := object.Key("DefaultSubstitutions")
 		ok.String(*v.DefaultSubstitutions)
+	}
+
+	if v.Headers != nil {
+		ok := object.Key("Headers")
+		if err := awsRestjson1_serializeDocumentListOfMessageHeader(v.Headers, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.HtmlPart != nil {
@@ -12432,6 +12446,19 @@ func awsRestjson1_serializeDocumentListOfInAppMessageContent(v []types.InAppMess
 	return nil
 }
 
+func awsRestjson1_serializeDocumentListOfMessageHeader(v []types.MessageHeader, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMessageHeader(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentListOfMultiConditionalBranch(v []types.MultiConditionalBranch, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -12833,6 +12860,23 @@ func awsRestjson1_serializeDocumentMessageConfiguration(v *types.MessageConfigur
 		if err := awsRestjson1_serializeDocumentCampaignSmsMessage(v.SMSMessage, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMessageHeader(v *types.MessageHeader, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
 	}
 
 	return nil
@@ -13732,6 +13776,13 @@ func awsRestjson1_serializeDocumentSimpleCondition(v *types.SimpleCondition, val
 func awsRestjson1_serializeDocumentSimpleEmail(v *types.SimpleEmail, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Headers != nil {
+		ok := object.Key("Headers")
+		if err := awsRestjson1_serializeDocumentListOfMessageHeader(v.Headers, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.HtmlPart != nil {
 		ok := object.Key("HtmlPart")

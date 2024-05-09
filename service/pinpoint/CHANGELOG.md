@@ -1,3 +1,7 @@
+# v1.30.0 (2024-05-09)
+
+* **Feature**: This release adds support for specifying email message headers for Email Templates, Campaigns, Journeys and Send Messages.
+
 # v1.29.1 (2024-05-08)
 
 * **Bug Fix**: GoDoc improvement

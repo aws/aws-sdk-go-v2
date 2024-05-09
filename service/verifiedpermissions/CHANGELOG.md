@@ -1,3 +1,7 @@
+# v1.14.0 (2024-05-09)
+
+* **Feature**: Adds policy effect and actions fields to Policy API's.
+
 # v1.13.2 (2024-05-08)
 
 * **Bug Fix**: GoDoc improvement

@@ -12,10 +12,10 @@ import (
 	"sync"
 )
 
-// Sends a prompt for the agent to process and respond to. Use return control
-// event type for function calling.
-//
 // The CLI doesn't support InvokeAgent .
+//
+// Sends a prompt for the agent to process and respond to. Note the following
+// fields for the request:
 //
 //   - To continue the same conversation with an agent, use the same sessionId
 //     value in the request.
@@ -28,9 +28,8 @@ import (
 //   - End a conversation by setting endSession to true .
 //
 //   - In the sessionState object, you can include attributes for the session or
-//     prompt or parameters returned from the action group.
-//
-//   - Use return control event type for function calling.
+//     prompt or, if you configured an action group to return control, results from
+//     invocation of the action group.
 //
 // The response is returned in the bytes field of the chunk object.
 //
@@ -38,6 +37,10 @@ import (
 //
 //   - If you set enableTrace to true in the request, you can trace the agent's
 //     steps and reasoning process that led it to the response.
+//
+//   - If the action predicted was configured to return control, the response
+//     returns parameters for the action, elicited from the user, in the
+//     returnControl field.
 //
 //   - Errors are also surfaced in the response.
 //
@@ -85,10 +88,16 @@ type InvokeAgentInput struct {
 	EndSession *bool
 
 	// The prompt text to send the agent.
+	//
+	// If you include returnControlInvocationResults in the sessionState field, the
+	// inputText field will be ignored.
 	InputText *string
 
 	// Contains parameters that specify various attributes of the session. For more
 	// information, see [Control session context].
+	//
+	// If you include returnControlInvocationResults in the sessionState field, the
+	// inputText field will be ignored.
 	//
 	// [Control session context]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
 	SessionState *types.SessionState

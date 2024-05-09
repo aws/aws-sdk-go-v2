@@ -49,7 +49,7 @@ type ListIdentitySourcesInput struct {
 	// after every operation to ensure that you receive all of the results.
 	//
 	// If you do not specify this parameter, the operation defaults to 10 identity
-	// sources per response. You can specify a maximum of 200 identity sources per
+	// sources per response. You can specify a maximum of 50 identity sources per
 	// response.
 	MaxResults *int32
 
@@ -181,7 +181,7 @@ type ListIdentitySourcesPaginatorOptions struct {
 	// after every operation to ensure that you receive all of the results.
 	//
 	// If you do not specify this parameter, the operation defaults to 10 identity
-	// sources per response. You can specify a maximum of 200 identity sources per
+	// sources per response. You can specify a maximum of 50 identity sources per
 	// response.
 	Limit int32
 

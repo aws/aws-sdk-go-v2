@@ -1403,6 +1403,11 @@ type CampaignEmailMessage struct {
 	// FromAddress specified for the email channel for the application.
 	FromAddress *string
 
+	// The list of [MessageHeaders] for the email. You can have up to 15 MessageHeaders for each email.
+	//
+	// [MessageHeaders]: https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-campaigns-campaign-id.html#apps-application-id-campaigns-campaign-id-model-messageheader
+	Headers []MessageHeader
+
 	// The body of the email, in HTML format, for recipients whose email clients
 	// render HTML content.
 	HtmlBody *string
@@ -2380,6 +2385,11 @@ type EmailTemplateRequest struct {
 	// variables and values.
 	DefaultSubstitutions *string
 
+	// The list of [MessageHeaders] for the email. You can have up to 15 Headers.
+	//
+	// [MessageHeaders]: https://docs.aws.amazon.com/pinpoint/latest/apireference/templates-template-name-email.html#templates-template-name-email-model-messageheader
+	Headers []MessageHeader
+
 	// The message body, in HTML format, to use in email messages that are based on
 	// the message template. We recommend using HTML format for email clients that
 	// render HTML content. You can include links, formatted text, and more in an HTML
@@ -2454,6 +2464,11 @@ type EmailTemplateResponse struct {
 	// key defines a message variable in the template. The corresponding value defines
 	// the default value for that variable.
 	DefaultSubstitutions *string
+
+	// The list of [MessageHeaders] for the email. You can have up to 15 Headers.
+	//
+	// [MessageHeaders]: https://docs.aws.amazon.com/pinpoint/latest/apireference/templates-template-name-email.html#templates-template-name-email-model-messageheader
+	Headers []MessageHeader
 
 	// The message body, in HTML format, that's used in email messages that are based
 	// on the message template.
@@ -4748,6 +4763,24 @@ type MessageConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the name and value pair of an email header to add to your email. You
+// can have up to 15 MessageHeaders. A header can contain information such as the
+// sender, receiver, route, or timestamp.
+type MessageHeader struct {
+
+	// The name of the message header. The header name can contain up to 126
+	// characters.
+	Name *string
+
+	// The value of the message header. The header value can contain up to 870
+	// characters, including the length of any rendered attributes. For example if you
+	// add the {CreationDate} attribute, it renders as YYYY-MM-DDTHH:MM:SS.SSSZ and is
+	// 24 characters in length.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the configuration and other settings for a message.
 type MessageRequest struct {
 
@@ -5977,6 +6010,9 @@ type SimpleCondition struct {
 // Specifies the contents of an email message, composed of a subject, a text part,
 // and an HTML part.
 type SimpleEmail struct {
+
+	// The list of MessageHeaders for the email. You can have up to 15 Headers.
+	Headers []MessageHeader
 
 	// The body of the email message, in HTML format. We recommend using HTML format
 	// for email clients that render HTML content. You can include links, formatted

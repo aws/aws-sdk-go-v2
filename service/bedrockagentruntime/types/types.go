@@ -50,9 +50,9 @@ type ActionGroupInvocationOutput struct {
 //
 // This data type is used in the following API operations:
 //
-//   - In the returnControl field of the [Retrieve response]
+//   - In the returnControl field of the [InvokeAgent response]
 //
-// [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type ApiInvocationInput struct {
 
 	// The action group that the API operation belongs to.
@@ -81,9 +81,9 @@ type ApiInvocationInput struct {
 //
 // This data type is used in the following API operations:
 //
-// [Retrieve response]
+// [InvokeAgent response]
 //
-// [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type ApiParameter struct {
 
 	// The name of the parameter.
@@ -103,9 +103,9 @@ type ApiParameter struct {
 //
 // This data type is used in the following API operations:
 //
-// [Retrieve response]
+// [InvokeAgent response]
 //
-// [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type ApiRequestBody struct {
 
 	// The content of the request body. The key of the object in this field is a media
@@ -120,9 +120,9 @@ type ApiRequestBody struct {
 //
 // This data type is used in the following API operations:
 //
-//   - In the returnControlInvocationResults of the [Retrieve request]
+//   - In the returnControlInvocationResults of the [InvokeAgent request]
 //
-// [Retrieve request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+// [InvokeAgent request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_RequestSyntax
 type ApiResult struct {
 
 	// The action group that the API operation belongs to.
@@ -140,7 +140,8 @@ type ApiResult struct {
 	HttpStatusCode *int32
 
 	// The response body from the API operation. The key of the object is the content
-	// type. The response may be returned directly or from the Lambda function.
+	// type (currently, only TEXT is supported). The response may be returned directly
+	// or from the Lambda function.
 	ResponseBody map[string]ContentBody
 
 	// Controls the final response state returned to end user when API/Function
@@ -187,14 +188,14 @@ type ByteContentDoc struct {
 //
 // This data type is used in the following API operations:
 //
-// [Retrieve response]
+// [InvokeAgent response]
 //   - – in the citations field
 //
 // [RetrieveAndGenerate response]
 //   - – in the citations field
 //
 // [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
-// [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type Citation struct {
 
 	// Contains the generated response and metadata
@@ -210,9 +211,9 @@ type Citation struct {
 //
 // This data type is used in the following API operations:
 //
-//   - In the returnControlInvocationResults field of the [Retrieve request]
+//   - In the returnControlInvocationResults field of the [InvokeAgent request]
 //
-// [Retrieve request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+// [InvokeAgent request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_RequestSyntax
 type ContentBody struct {
 
 	// The body of the API response.
@@ -240,6 +241,18 @@ type ExternalSource struct {
 
 // Contains the generation configuration of the external source wrapper object.
 type ExternalSourcesGenerationConfiguration struct {
+
+	//  Additional model parameters and their corresponding values not included in the
+	// textInferenceConfig structure for an external source. Takes in custom model
+	// parameters specific to the language model being used.
+	AdditionalModelRequestFields map[string]document.Interface
+
+	// The configuration details for the guardrail.
+	GuardrailConfiguration *GuardrailConfiguration
+
+	//  Configuration settings for inference when using RetrieveAndGenerate to
+	// generate responses while using an external source.
+	InferenceConfig *InferenceConfig
 
 	// Contain the textPromptTemplate string for the external source wrapper object.
 	PromptTemplate *PromptTemplate
@@ -321,9 +334,9 @@ type FinalResponse struct {
 //
 // This data type is used in the following API operations:
 //
-//   - In the returnControl field of the [Retrieve response]
+//   - In the returnControl field of the [InvokeAgent response]
 //
-// [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type FunctionInvocationInput struct {
 
 	// The action group that the function belongs to.
@@ -344,9 +357,9 @@ type FunctionInvocationInput struct {
 //
 // This data type is used in the following API operations:
 //
-//   - In the returnControl field of the [Retrieve response]
+//   - In the returnControl field of the [InvokeAgent response]
 //
-// [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type FunctionParameter struct {
 
 	// The name of the parameter.
@@ -366,9 +379,9 @@ type FunctionParameter struct {
 //
 // This data type is used in the following API operations:
 //
-//   - In the returnControlInvocationResults of the [Retrieve request]
+//   - In the returnControlInvocationResults of the [InvokeAgent request]
 //
-// [Retrieve request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+// [InvokeAgent request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_RequestSyntax
 type FunctionResult struct {
 
 	// The action group that the function belongs to.
@@ -379,7 +392,8 @@ type FunctionResult struct {
 	// The name of the function that was called.
 	Function *string
 
-	// The response from the function call using the parameters. The response may be
+	// The response from the function call using the parameters. The key of the object
+	// is the content type (currently, only TEXT is supported). The response may be
 	// returned directly or from the Lambda function.
 	ResponseBody map[string]ContentBody
 
@@ -397,14 +411,14 @@ type FunctionResult struct {
 //
 // This data type is used in the following API operations:
 //
-// [Retrieve response]
+// [InvokeAgent response]
 //   - – in the generatedResponsePart field
 //
 // [RetrieveAndGenerate response]
 //   - – in the generatedResponsePart field
 //
 // [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
-// [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type GeneratedResponsePart struct {
 
 	// Contains metadata about a textual part of the generated response that is
@@ -424,9 +438,49 @@ type GeneratedResponsePart struct {
 // [RetrieveAndGenerate request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
 type GenerationConfiguration struct {
 
+	//  Additional model parameters and corresponding values not included in the
+	// textInferenceConfig structure for a knowledge base. This allows users to provide
+	// custom model parameters specific to the language model being used.
+	AdditionalModelRequestFields map[string]document.Interface
+
+	// The configuration details for the guardrail.
+	GuardrailConfiguration *GuardrailConfiguration
+
+	//  Configuration settings for inference when using RetrieveAndGenerate to
+	// generate responses while using a knowledge base as a source.
+	InferenceConfig *InferenceConfig
+
 	// Contains the template for the prompt that's sent to the model for response
 	// generation.
 	PromptTemplate *PromptTemplate
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details for the guardrail.
+type GuardrailConfiguration struct {
+
+	// The unique identifier for the guardrail.
+	//
+	// This member is required.
+	GuardrailId *string
+
+	// The version of the guardrail.
+	//
+	// This member is required.
+	GuardrailVersion *string
+
+	noSmithyDocumentSerde
+}
+
+//	The configuration for inference settings when generating responses using
+//
+// RetrieveAndGenerate.
+type InferenceConfig struct {
+
+	//  Configuration settings specific to text generation while generating responses
+	// using RetrieveAndGenerate.
+	TextInferenceConfig *TextInferenceConfig
 
 	noSmithyDocumentSerde
 }
@@ -494,14 +548,14 @@ type InvocationInput struct {
 //
 // This data type is used in the following API operations:
 //
-//   - In the returnControl field of the [Retrieve response]
+//   - In the returnControl field of the [InvokeAgent response]
 //
 // The following types satisfy this interface:
 //
 //	InvocationInputMemberMemberApiInvocationInput
 //	InvocationInputMemberMemberFunctionInvocationInput
 //
-// [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type InvocationInputMember interface {
 	isInvocationInputMember()
 }
@@ -526,18 +580,20 @@ type InvocationInputMemberMemberFunctionInvocationInput struct {
 
 func (*InvocationInputMemberMemberFunctionInvocationInput) isInvocationInputMember() {}
 
-// A result from the action group invocation.
+// A result from the invocation of an action. For more information, see [Return control to the agent developer] and [Control session context].
 //
 // This data type is used in the following API operations:
 //
-// [Retrieve request]
+// [InvokeAgent request]
 //
 // The following types satisfy this interface:
 //
 //	InvocationResultMemberMemberApiResult
 //	InvocationResultMemberMemberFunctionResult
 //
-// [Retrieve request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+// [InvokeAgent request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_RequestSyntax
+// [Return control to the agent developer]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-returncontrol.html
+// [Control session context]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
 type InvocationResultMember interface {
 	isInvocationResultMember()
 }
@@ -1309,11 +1365,12 @@ func (*RetrievalFilterMemberStartsWith) isRetrievalFilter() {}
 // [RetrieveAndGenerate response]
 //   - – in the content field
 //
-// [Retrieve response]
+// [InvokeAgent response]
 //   - – in the content field
 //
 // [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
 // [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type RetrievalResultContent struct {
 
 	// The cited text from the data source.
@@ -1334,11 +1391,12 @@ type RetrievalResultContent struct {
 // [RetrieveAndGenerate response]
 //   - – in the location field
 //
-// [Retrieve response]
+// [InvokeAgent response]
 //   - – in the locatino field
 //
 // [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
 // [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type RetrievalResultLocation struct {
 
 	// The type of the location of the data source.
@@ -1362,11 +1420,12 @@ type RetrievalResultLocation struct {
 // [RetrieveAndGenerate response]
 //   - – in the s3Location field
 //
-// [Retrieve response]
+// [InvokeAgent response]
 //   - – in the s3Location field
 //
 // [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
 // [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type RetrievalResultS3Location struct {
 
 	// The S3 URI of the data source.
@@ -1461,11 +1520,11 @@ type RetrieveAndGenerateSessionConfiguration struct {
 // [RetrieveAndGenerate response]
 //   - – in the retrievedReferences field
 //
-// [Retrieve response]
+// [InvokeAgent response]
 //   - – in the retrievedReferences field
 //
 // [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
-// [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type RetrievedReference struct {
 
 	// Contains the cited text from the data source.
@@ -1488,9 +1547,9 @@ type RetrievedReference struct {
 //
 // This data type is used in the following API operations:
 //
-// [Retrieve response]
+// [InvokeAgent response]
 //
-// [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type ReturnControlPayload struct {
 
 	// The identifier of the action group invocation.
@@ -1526,7 +1585,13 @@ type S3ObjectDoc struct {
 // [Lambda function]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-lambda.html
 type SessionState struct {
 
-	// The identifier of the invocation.
+	// The identifier of the invocation of an action. This value must match the
+	// invocationId returned in the InvokeAgent response for the action whose results
+	// are provided in the returnControlInvocationResults field. For more information,
+	// see [Return control to the agent developer]and [Control session context].
+	//
+	// [Return control to the agent developer]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-returncontrol.html
+	// [Control session context]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
 	InvocationId *string
 
 	// Contains attributes that persist across a prompt and the values of those
@@ -1537,7 +1602,13 @@ type SessionState struct {
 	// [Prompt template placeholder variables]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html
 	PromptSessionAttributes map[string]string
 
-	// Contains information about the results from the action group invocation.
+	// Contains information about the results from the action group invocation. For
+	// more information, see [Return control to the agent developer]and [Control session context].
+	//
+	// If you include this field, the inputText field will be ignored.
+	//
+	// [Return control to the agent developer]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-returncontrol.html
+	// [Control session context]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
 	ReturnControlInvocationResults []InvocationResultMember
 
 	// Contains attributes that persist across a session and the values of those
@@ -1555,11 +1626,11 @@ type SessionState struct {
 // [RetrieveAndGenerate response]
 //   - – in the span field
 //
-// [Retrieve response]
+// [InvokeAgent response]
 //   - – in the span field
 //
 // [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
-// [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type Span struct {
 
 	// Where the text with a citation ends in the generated output.
@@ -1567,6 +1638,44 @@ type Span struct {
 
 	// Where the text with a citation starts in the generated output.
 	Start *int32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for text generation using a language model via the
+// RetrieveAndGenerate operation. Includes parameters like temperature, top-p,
+// maximum token count, and stop sequences.
+//
+// The valid range of maxTokens depends on the accepted values for your chosen
+// model's inference parameters. To see the inference parameters for your model,
+// see [Inference parameters for foundation models.]
+//
+// [Inference parameters for foundation models.]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+type TextInferenceConfig struct {
+
+	// The maximum number of tokens to generate in the output text. Do not use the
+	// minimum of 0 or the maximum of 65536. The limit values described here are
+	// arbitary values, for actual values consult the limits defined by your specific
+	// model.
+	MaxTokens *int32
+
+	// A list of sequences of characters that, if generated, will cause the model to
+	// stop generating further tokens. Do not use a minimum length of 1 or a maximum
+	// length of 1000. The limit values described here are arbitary values, for actual
+	// values consult the limits defined by your specific model.
+	StopSequences []string
+
+	//  Controls the random-ness of text generated by the language model, influencing
+	// how much the model sticks to the most predictable next words versus exploring
+	// more surprising options. A lower temperature value (e.g. 0.2 or 0.3) makes model
+	// outputs more deterministic or predictable, while a higher temperature (e.g. 0.8
+	// or 0.9) makes the outputs more creative or unpredictable.
+	Temperature *float32
+
+	//  A probability distribution threshold which controls what the model considers
+	// for the set of possible next tokens. The model will only consider the top p% of
+	// the probability distribution when generating the next token.
+	TopP *float32
 
 	noSmithyDocumentSerde
 }
@@ -1579,11 +1688,11 @@ type Span struct {
 // [RetrieveAndGenerate response]
 //   - – in the textResponsePart field
 //
-// [Retrieve response]
+// [InvokeAgent response]
 //   - – in the textResponsePart field
 //
 // [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
-// [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type TextResponsePart struct {
 
 	// Contains information about where the text with a citation begins and ends in

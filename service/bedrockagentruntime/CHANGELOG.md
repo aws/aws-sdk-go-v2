@@ -1,3 +1,7 @@
+# v1.9.0 (2024-05-09)
+
+* **Feature**: This release adds support to provide guardrail configuration and modify inference parameters that are then used in RetrieveAndGenerate API in Agents for Amazon Bedrock.
+
 # v1.8.1 (2024-05-08)
 
 * **Bug Fix**: GoDoc improvement

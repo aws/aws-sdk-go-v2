@@ -244,8 +244,8 @@ type BatchIsAuthorizedWithTokenOutputItem struct {
 	noSmithyDocumentSerde
 }
 
-// A list of user groups and entities from an Amazon Cognito user pool identity
-// source.
+// The type of entity that a policy store maps to groups from an Amazon Cognito
+// user pool identity source.
 //
 // This data type is part of a [CognitoUserPoolConfiguration] structure and is a request parameter in [CreateIdentitySource].
 //
@@ -262,8 +262,8 @@ type CognitoGroupConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A list of user groups and entities from an Amazon Cognito user pool identity
-// source.
+// The type of entity that a policy store maps to groups from an Amazon Cognito
+// user pool identity source.
 //
 // This data type is part of an [CognitoUserPoolConfigurationDetail] structure and is a response parameter to [GetIdentitySource].
 //
@@ -278,8 +278,8 @@ type CognitoGroupConfigurationDetail struct {
 	noSmithyDocumentSerde
 }
 
-// A list of user groups and entities from an Amazon Cognito user pool identity
-// source.
+// The type of entity that a policy store maps to groups from an Amazon Cognito
+// user pool identity source.
 //
 // This data type is part of an [CognitoUserPoolConfigurationItem] structure and is a response parameter to [ListIdentitySources].
 //
@@ -302,7 +302,8 @@ type CognitoGroupConfigurationItem struct {
 //
 // Example:
 // "CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
-// ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType":
+// "MyCorp::Group"}}
 //
 // [Configuration]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html
 // [CreateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
@@ -325,8 +326,8 @@ type CognitoUserPoolConfiguration struct {
 	// Example: "ClientIds": ["&ExampleCogClientId;"]
 	ClientIds []string
 
-	// The configuration of the user groups from an Amazon Cognito user pool identity
-	// source.
+	// The type of entity that a policy store maps to groups from an Amazon Cognito
+	// user pool identity source.
 	GroupConfiguration *CognitoGroupConfiguration
 
 	noSmithyDocumentSerde
@@ -340,7 +341,8 @@ type CognitoUserPoolConfiguration struct {
 //
 // Example:
 // "CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
-// ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType":
+// "MyCorp::Group"}}
 //
 // [GetIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
 // [ConfigurationDetail]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html
@@ -374,8 +376,8 @@ type CognitoUserPoolConfigurationDetail struct {
 	// This member is required.
 	UserPoolArn *string
 
-	// The configuration of the user groups from an Amazon Cognito user pool identity
-	// source.
+	// The type of entity that a policy store maps to groups from an Amazon Cognito
+	// user pool identity source.
 	GroupConfiguration *CognitoGroupConfigurationDetail
 
 	noSmithyDocumentSerde
@@ -389,7 +391,8 @@ type CognitoUserPoolConfigurationDetail struct {
 //
 // Example:
 // "CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
-// ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType":
+// "MyCorp::Group"}}
 //
 // [ConfigurationItem]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationItem.html
 // [ListIdentitySources]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
@@ -423,8 +426,8 @@ type CognitoUserPoolConfigurationItem struct {
 	// This member is required.
 	UserPoolArn *string
 
-	// The configuration of the user groups from an Amazon Cognito user pool identity
-	// source.
+	// The type of entity that a policy store maps to groups from an Amazon Cognito
+	// user pool identity source.
 	GroupConfiguration *CognitoGroupConfigurationItem
 
 	noSmithyDocumentSerde
@@ -435,7 +438,7 @@ type CognitoUserPoolConfigurationItem struct {
 // At this time, the only valid member of this structure is a Amazon Cognito user
 // pool configuration.
 //
-// You must specify a userPoolArn , and optionally, a ClientId .
+// Specifies a userPoolArn , a groupConfiguration , and a ClientId .
 //
 // This data type is used as a request parameter for the [CreateIdentitySource] operation.
 //
@@ -482,8 +485,8 @@ type ConfigurationDetail interface {
 
 // Contains configuration details of a Amazon Cognito user pool that Verified
 // Permissions can use as a source of authenticated identities as entities. It
-// specifies the [Amazon Resource Name (ARN)]of a Amazon Cognito user pool and one or more application client
-// IDs.
+// specifies the [Amazon Resource Name (ARN)]of a Amazon Cognito user pool, the policy store entity that you
+// want to assign to user groups, and one or more application client IDs.
 //
 // Example:
 // "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
@@ -514,8 +517,8 @@ type ConfigurationItem interface {
 
 // Contains configuration details of a Amazon Cognito user pool that Verified
 // Permissions can use as a source of authenticated identities as entities. It
-// specifies the [Amazon Resource Name (ARN)]of a Amazon Cognito user pool and one or more application client
-// IDs.
+// specifies the [Amazon Resource Name (ARN)]of a Amazon Cognito user pool, the policy store entity that you
+// want to assign to user groups, and one or more application client IDs.
 //
 // Example:
 // "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
@@ -1051,6 +1054,15 @@ type PolicyItem struct {
 	// This member is required.
 	PolicyType PolicyType
 
+	// The action that a policy permits or forbids. For example, {"actions":
+	// [{"actionId": "ViewPhoto", "actionType": "PhotoFlash::Action"}, {"entityID":
+	// "SharePhoto", "entityType": "PhotoFlash::Action"}]} .
+	Actions []ActionIdentifier
+
+	// The effect of the decision that a policy returns to an authorization request.
+	// For example, "effect": "Permit" .
+	Effect PolicyEffect
+
 	// The principal associated with the policy.
 	Principal *EntityIdentifier
 
@@ -1288,8 +1300,7 @@ type TemplateLinkedPolicyDefinitionItem struct {
 	noSmithyDocumentSerde
 }
 
-// A list of user groups and entities from an Amazon Cognito user pool identity
-// source.
+// The user group entities from an Amazon Cognito user pool identity source.
 type UpdateCognitoGroupConfiguration struct {
 
 	// The name of the schema entity type that's mapped to the user pool group.

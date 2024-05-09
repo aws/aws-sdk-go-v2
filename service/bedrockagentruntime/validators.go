@@ -160,6 +160,23 @@ func validateExternalSources(v []types.ExternalSource) error {
 	}
 }
 
+func validateExternalSourcesGenerationConfiguration(v *types.ExternalSourcesGenerationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExternalSourcesGenerationConfiguration"}
+	if v.GuardrailConfiguration != nil {
+		if err := validateGuardrailConfiguration(v.GuardrailConfiguration); err != nil {
+			invalidParams.AddNested("GuardrailConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExternalSourcesRetrieveAndGenerateConfiguration(v *types.ExternalSourcesRetrieveAndGenerateConfiguration) error {
 	if v == nil {
 		return nil
@@ -173,6 +190,11 @@ func validateExternalSourcesRetrieveAndGenerateConfiguration(v *types.ExternalSo
 	} else if v.Sources != nil {
 		if err := validateExternalSources(v.Sources); err != nil {
 			invalidParams.AddNested("Sources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GenerationConfiguration != nil {
+		if err := validateExternalSourcesGenerationConfiguration(v.GenerationConfiguration); err != nil {
+			invalidParams.AddNested("GenerationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -207,6 +229,41 @@ func validateFunctionResult(v *types.FunctionResult) error {
 	invalidParams := smithy.InvalidParamsError{Context: "FunctionResult"}
 	if v.ActionGroup == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionGroup"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGenerationConfiguration(v *types.GenerationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GenerationConfiguration"}
+	if v.GuardrailConfiguration != nil {
+		if err := validateGuardrailConfiguration(v.GuardrailConfiguration); err != nil {
+			invalidParams.AddNested("GuardrailConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailConfiguration(v *types.GuardrailConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailConfiguration"}
+	if v.GuardrailId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GuardrailId"))
+	}
+	if v.GuardrailVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GuardrailVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -287,6 +344,11 @@ func validateKnowledgeBaseRetrieveAndGenerateConfiguration(v *types.KnowledgeBas
 	if v.RetrievalConfiguration != nil {
 		if err := validateKnowledgeBaseRetrievalConfiguration(v.RetrievalConfiguration); err != nil {
 			invalidParams.AddNested("RetrievalConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GenerationConfiguration != nil {
+		if err := validateGenerationConfiguration(v.GenerationConfiguration); err != nil {
+			invalidParams.AddNested("GenerationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
