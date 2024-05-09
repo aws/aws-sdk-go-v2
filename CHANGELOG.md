@@ -1,3 +1,17 @@
+# Release (2024-05-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.9.0](service/bedrockagentruntime/CHANGELOG.md#v190-2024-05-09)
+  * **Feature**: This release adds support to provide guardrail configuration and modify inference parameters that are then used in RetrieveAndGenerate API in Agents for Amazon Bedrock.
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.30.0](service/pinpoint/CHANGELOG.md#v1300-2024-05-09)
+  * **Feature**: This release adds support for specifying email message headers for Email Templates, Campaigns, Journeys and Send Messages.
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.28.2](service/route53resolver/CHANGELOG.md#v1282-2024-05-09)
+  * **Documentation**: Update the DNS Firewall settings to correct a spelling issue.
+* `github.com/aws/aws-sdk-go-v2/service/ssmsap`: [v1.13.0](service/ssmsap/CHANGELOG.md#v1130-2024-05-09)
+  * **Feature**: Added support for application-aware start/stop of SAP applications running on EC2 instances, with SSM for SAP
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.14.0](service/verifiedpermissions/CHANGELOG.md#v1140-2024-05-09)
+  * **Feature**: Adds policy effect and actions fields to Policy API's.
+
 # Release (2024-05-08)
 
 ## General Highlights

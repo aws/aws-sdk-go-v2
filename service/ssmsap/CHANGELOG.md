@@ -1,3 +1,7 @@
+# v1.13.0 (2024-05-09)
+
+* **Feature**: Added support for application-aware start/stop of SAP applications running on EC2 instances, with SSM for SAP
+
 # v1.12.5 (2024-05-08)
 
 * **Bug Fix**: GoDoc improvement

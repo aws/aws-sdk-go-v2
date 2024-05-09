@@ -1,8 +1,0 @@
-{
-    "id": "4b9474b4-fdc9-4579-985a-c0bebd5c28d6",
-    "type": "feature",
-    "description": "This release adds support for specifying email message headers for Email Templates, Campaigns, Journeys and Send Messages.",
-    "modules": [
-        "service/pinpoint"
-    ]
-}

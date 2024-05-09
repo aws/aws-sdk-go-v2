@@ -1,3 +1,7 @@
+# v1.28.2 (2024-05-09)
+
+* **Documentation**: Update the DNS Firewall settings to correct a spelling issue.
+
 # v1.28.1 (2024-05-08)
 
 * **Bug Fix**: GoDoc improvement

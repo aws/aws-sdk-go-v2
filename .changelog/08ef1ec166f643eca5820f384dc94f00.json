@@ -1,8 +1,0 @@
-{
-    "id": "08ef1ec1-66f6-43ec-a582-0f384dc94f00",
-    "type": "feature",
-    "description": "This release adds support to provide guardrail configuration and modify inference parameters that are then used in RetrieveAndGenerate API in Agents for Amazon Bedrock.",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

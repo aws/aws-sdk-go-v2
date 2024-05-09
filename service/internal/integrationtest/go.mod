@@ -66,7 +66,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.40.1
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.40.5
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.23.5
-	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.28.1
+	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.28.2
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.53.2
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.44.7
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.28.7

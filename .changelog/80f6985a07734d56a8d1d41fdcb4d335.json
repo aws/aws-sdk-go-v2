@@ -1,8 +1,0 @@
-{
-    "id": "80f6985a-0773-4d56-a8d1-d41fdcb4d335",
-    "type": "feature",
-    "description": "Adds policy effect and actions fields to Policy API's.",
-    "modules": [
-        "service/verifiedpermissions"
-    ]
-}
