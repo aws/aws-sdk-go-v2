@@ -50,6 +50,12 @@
                 "smithy.api#documentation": "<p>Contains information about an action for a request for which an authorization decision\n            is made.</p>\n         <p>This data type is used as a request parameter to the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a>, <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html\">BatchIsAuthorized</a>, and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a>\n            operations.</p>\n         <p>Example: <code>{ \"actionId\": \"&lt;action name&gt;\", \"actionType\": \"Action\"\n            }</code>\n         </p>"
             }
         },
+        "com.amazonaws.verifiedpermissions#ActionIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.verifiedpermissions#ActionIdentifier"
+            }
+        },
         "com.amazonaws.verifiedpermissions#ActionType": {
             "type": "string",
             "traits": {
@@ -458,7 +464,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of user groups and entities from an Amazon Cognito user pool identity\n            source.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfiguration.html\">CognitoUserPoolConfiguration</a> structure and is a request parameter in <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>.</p>"
+                "smithy.api#documentation": "<p>The type of entity that a policy store maps to groups from an Amazon Cognito user \n            pool identity source.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfiguration.html\">CognitoUserPoolConfiguration</a> structure and is a request parameter in <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>.</p>"
             }
         },
         "com.amazonaws.verifiedpermissions#CognitoGroupConfigurationDetail": {
@@ -472,7 +478,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of user groups and entities from an Amazon Cognito user pool identity\n            source.</p>\n         <p>This data type is part of an <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfigurationItem.html\">CognitoUserPoolConfigurationDetail</a> structure and is a response parameter to\n            <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html\">GetIdentitySource</a>.</p>"
+                "smithy.api#documentation": "<p>The type of entity that a policy store maps to groups from an Amazon Cognito user \n            pool identity source.</p>\n         <p>This data type is part of an <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfigurationItem.html\">CognitoUserPoolConfigurationDetail</a> structure and is a response parameter to\n            <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html\">GetIdentitySource</a>.</p>"
             }
         },
         "com.amazonaws.verifiedpermissions#CognitoGroupConfigurationItem": {
@@ -486,7 +492,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of user groups and entities from an Amazon Cognito user pool identity\n            source.</p>\n         <p>This data type is part of an <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfigurationDetail.html\">CognitoUserPoolConfigurationItem</a> structure and is a response parameter to\n            <a href=\"http://forums.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html\">ListIdentitySources</a>.</p>"
+                "smithy.api#documentation": "<p>The type of entity that a policy store maps to groups from an Amazon Cognito user \n            pool identity source.</p>\n         <p>This data type is part of an <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfigurationDetail.html\">CognitoUserPoolConfigurationItem</a> structure and is a response parameter to\n            <a href=\"http://forums.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html\">ListIdentitySources</a>.</p>"
             }
         },
         "com.amazonaws.verifiedpermissions#CognitoUserPoolConfiguration": {
@@ -508,12 +514,12 @@
                 "groupConfiguration": {
                     "target": "com.amazonaws.verifiedpermissions#CognitoGroupConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of the user groups from an Amazon Cognito user pool identity\n            source.</p>"
+                        "smithy.api#documentation": "<p>The type of entity that a policy store maps to groups from an Amazon Cognito user \n            pool identity source.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used\n            as an identity provider for Verified Permissions.</p>\n         <p>This data type is used as a field that is part of an <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html\">Configuration</a> structure that is\n            used as a parameter to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>.</p>\n         <p>Example:<code>\"CognitoUserPoolConfiguration\":{\"UserPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"ClientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"]}</code>\n         </p>"
+                "smithy.api#documentation": "<p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used\n            as an identity provider for Verified Permissions.</p>\n         <p>This data type is used as a field that is part of an <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html\">Configuration</a> structure that is\n            used as a parameter to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>.</p>\n         <p>Example:<code>\"CognitoUserPoolConfiguration\":{\"UserPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"ClientIds\":\n            [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"],\"groupConfiguration\": {\"groupEntityType\": \"MyCorp::Group\"}}</code>\n         </p>"
             }
         },
         "com.amazonaws.verifiedpermissions#CognitoUserPoolConfigurationDetail": {
@@ -543,12 +549,12 @@
                 "groupConfiguration": {
                     "target": "com.amazonaws.verifiedpermissions#CognitoGroupConfigurationDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of the user groups from an Amazon Cognito user pool identity\n            source.</p>"
+                        "smithy.api#documentation": "<p>The type of entity that a policy store maps to groups from an Amazon Cognito user \n            pool identity source.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used\n            as an identity provider for Verified Permissions.</p>\n         <p>This data type is used as a field that is part of an <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html\">ConfigurationDetail</a> structure that is\n            part of the response to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html\">GetIdentitySource</a>.</p>\n         <p>Example:<code>\"CognitoUserPoolConfiguration\":{\"UserPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"ClientIds\":\n            [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"]}</code>\n         </p>"
+                "smithy.api#documentation": "<p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used\n            as an identity provider for Verified Permissions.</p>\n         <p>This data type is used as a field that is part of an <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html\">ConfigurationDetail</a> structure that is\n            part of the response to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html\">GetIdentitySource</a>.</p>\n         <p>Example:<code>\"CognitoUserPoolConfiguration\":{\"UserPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"ClientIds\":\n            [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"],\"groupConfiguration\": {\"groupEntityType\": \"MyCorp::Group\"}}</code>\n         </p>"
             }
         },
         "com.amazonaws.verifiedpermissions#CognitoUserPoolConfigurationItem": {
@@ -578,12 +584,12 @@
                 "groupConfiguration": {
                     "target": "com.amazonaws.verifiedpermissions#CognitoGroupConfigurationItem",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of the user groups from an Amazon Cognito user pool identity\n            source.</p>"
+                        "smithy.api#documentation": "<p>The type of entity that a policy store maps to groups from an Amazon Cognito user \n            pool identity source.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used\n            as an identity provider for Verified Permissions.</p>\n         <p>This data type is used as a field that is part of the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationItem.html\">ConfigurationItem</a> structure that is\n            part of the response to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html\">ListIdentitySources</a>.</p>\n         <p>Example:<code>\"CognitoUserPoolConfiguration\":{\"UserPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"ClientIds\":\n            [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"]}</code>\n         </p>"
+                "smithy.api#documentation": "<p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used\n            as an identity provider for Verified Permissions.</p>\n         <p>This data type is used as a field that is part of the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationItem.html\">ConfigurationItem</a> structure that is\n            part of the response to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html\">ListIdentitySources</a>.</p>\n         <p>Example:<code>\"CognitoUserPoolConfiguration\":{\"UserPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"ClientIds\":\n            [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"],\"groupConfiguration\": {\"groupEntityType\": \"MyCorp::Group\"}}</code>\n         </p>"
             }
         },
         "com.amazonaws.verifiedpermissions#Configuration": {
@@ -597,7 +603,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains configuration information used when creating a new identity source.</p>\n         <note>\n            <p>At this time, the only valid member of this structure is a Amazon Cognito user pool\n                configuration.</p>\n            <p>You must specify a <code>userPoolArn</code>, and optionally, a\n                    <code>ClientId</code>.</p>\n         </note>\n         <p>This data type is used as a request parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>\n            operation.</p>"
+                "smithy.api#documentation": "<p>Contains configuration information used when creating a new identity source.</p>\n         <note>\n            <p>At this time, the only valid member of this structure is a Amazon Cognito user pool\n                configuration.</p>\n            <p>Specifies a <code>userPoolArn</code>, a <code>groupConfiguration</code>, and a\n                    <code>ClientId</code>.</p>\n         </note>\n         <p>This data type is used as a request parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>\n            operation.</p>"
             }
         },
         "com.amazonaws.verifiedpermissions#ConfigurationDetail": {
@@ -606,7 +612,7 @@
                 "cognitoUserPoolConfiguration": {
                     "target": "com.amazonaws.verifiedpermissions#CognitoUserPoolConfigurationDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of\n            authenticated identities as entities. It specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of a Amazon Cognito user pool\n            and one or more application client IDs.</p>\n         <p>Example:\n            <code>\"configuration\":{\"cognitoUserPoolConfiguration\":{\"userPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"clientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"],\"groupConfiguration\": {\"groupEntityType\": \"MyCorp::Group\"}}}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of\n            authenticated identities as entities. It specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of a Amazon Cognito user pool,\n            the policy store entity that you want to assign to user groups,\n            and one or more application client IDs.</p>\n         <p>Example:\n            <code>\"configuration\":{\"cognitoUserPoolConfiguration\":{\"userPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"clientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"],\"groupConfiguration\": {\"groupEntityType\": \"MyCorp::Group\"}}}</code>\n         </p>"
                     }
                 }
             },
@@ -620,7 +626,7 @@
                 "cognitoUserPoolConfiguration": {
                     "target": "com.amazonaws.verifiedpermissions#CognitoUserPoolConfigurationItem",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of\n            authenticated identities as entities. It specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of a Amazon Cognito user pool\n            and one or more application client IDs.</p>\n         <p>Example:\n            <code>\"configuration\":{\"cognitoUserPoolConfiguration\":{\"userPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"clientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"],\"groupConfiguration\": {\"groupEntityType\": \"MyCorp::Group\"}}}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of\n            authenticated identities as entities. It specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of a Amazon Cognito user pool,\n            the policy store entity that you want to assign to user groups,\n            and one or more application client IDs.</p>\n         <p>Example:\n            <code>\"configuration\":{\"cognitoUserPoolConfiguration\":{\"userPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"clientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"],\"groupConfiguration\": {\"groupEntityType\": \"MyCorp::Group\"}}}</code>\n         </p>"
                     }
                 }
             },
@@ -864,6 +870,12 @@
                         "smithy.api#documentation": "<p>The resource specified in the new policy's scope. This response element isn't present\n            when the <code>resource</code> isn't specified in the policy content.</p>"
                     }
                 },
+                "actions": {
+                    "target": "com.amazonaws.verifiedpermissions#ActionIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action that a policy permits or forbids. For example, \n<code>{\"actions\": [{\"actionId\": \"ViewPhoto\", \"actionType\": \"PhotoFlash::Action\"}, {\"entityID\": \"SharePhoto\", \n\"entityType\": \"PhotoFlash::Action\"}]}</code>.</p>"
+                    }
+                },
                 "createdDate": {
                     "target": "com.amazonaws.verifiedpermissions#TimestampFormat",
                     "traits": {
@@ -876,6 +888,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time the policy was last updated.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "effect": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyEffect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effect of the decision that a policy returns to an authorization \nrequest. For example, <code>\"effect\": \"Permit\"</code>.</p>"
                     }
                 }
             },
@@ -1646,6 +1664,13 @@
                         "smithy.api#documentation": "<p>The resource specified in the policy's scope. This element isn't included in the\n            response when <code>Resource</code> isn't present in the policy content.</p>"
                     }
                 },
+                "actions": {
+                    "target": "com.amazonaws.verifiedpermissions#ActionIdentifierList",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The action that a policy permits or forbids. For example, \n<code>{\"actions\": [{\"actionId\": \"ViewPhoto\", \"actionType\": \"PhotoFlash::Action\"}, {\"entityID\": \"SharePhoto\", \n\"entityType\": \"PhotoFlash::Action\"}]}</code>.</p>"
+                    }
+                },
                 "definition": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyDefinitionDetail",
                     "traits": {
@@ -1668,6 +1693,13 @@
                         "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The date and time that the policy was last updated.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "effect": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyEffect",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The effect of the decision that a policy returns to an authorization \nrequest. For example, <code>\"effect\": \"Permit\"</code>.</p>"
                     }
                 }
             },
@@ -2455,7 +2487,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.verifiedpermissions#ListIdentitySourcesMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the total number of results that you want included in each\n             response. If additional items exist beyond the number you specify, the \n             <code>NextToken</code> response element is returned with a value (not null). Include the\n             specified value as the <code>NextToken</code> request parameter in the next call to the\n             operation to get the next set of results. Note that the service might return fewer\n             results than the maximum even when there are more results available. You should check \n             <code>NextToken</code> after every operation to ensure that you receive all of the\n             results.</p>\n         <p>If you do not specify this parameter, the operation defaults to 10 identity sources per response.\n            You can specify a maximum of 200 identity sources per response.</p>"
+                        "smithy.api#documentation": "<p>Specifies the total number of results that you want included in each\n             response. If additional items exist beyond the number you specify, the \n             <code>NextToken</code> response element is returned with a value (not null). Include the\n             specified value as the <code>NextToken</code> request parameter in the next call to the\n             operation to get the next set of results. Note that the service might return fewer\n             results than the maximum even when there are more results available. You should check \n             <code>NextToken</code> after every operation to ensure that you receive all of the\n             results.</p>\n         <p>If you do not specify this parameter, the operation defaults to 10 identity sources per response.\n            You can specify a maximum of 50 identity sources per response.</p>"
                     }
                 },
                 "filters": {
@@ -2871,6 +2903,23 @@
                 "smithy.api#documentation": "<p>A structure that describes a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyDefinintion.html\">PolicyDefinintion</a>. It will\n            always have either an <code>StaticPolicy</code> or a <code>TemplateLinkedPolicy</code>\n            element.</p>\n         <p>This data type is used as a response parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html\">CreatePolicy</a> and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html\">ListPolicies</a>\n            operations. </p>"
             }
         },
+        "com.amazonaws.verifiedpermissions#PolicyEffect": {
+            "type": "enum",
+            "members": {
+                "PERMIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Permit"
+                    }
+                },
+                "FORBID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Forbid"
+                    }
+                }
+            }
+        },
         "com.amazonaws.verifiedpermissions#PolicyFilter": {
             "type": "structure",
             "members": {
@@ -2949,6 +2998,12 @@
                         "smithy.api#documentation": "<p>The resource associated with the policy.</p>"
                     }
                 },
+                "actions": {
+                    "target": "com.amazonaws.verifiedpermissions#ActionIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action that a policy permits or forbids. For example, \n<code>{\"actions\": [{\"actionId\": \"ViewPhoto\", \"actionType\": \"PhotoFlash::Action\"}, {\"entityID\": \"SharePhoto\", \n\"entityType\": \"PhotoFlash::Action\"}]}</code>.</p>"
+                    }
+                },
                 "definition": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyDefinitionItem",
                     "traits": {
@@ -2968,6 +3023,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time the policy was most recently updated.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "effect": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyEffect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effect of the decision that a policy returns to an authorization \nrequest. For example, <code>\"effect\": \"Permit\"</code>.</p>"
                     }
                 }
             },
@@ -3731,7 +3792,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of user groups and entities from an Amazon Cognito user pool identity\n            source.</p>"
+                "smithy.api#documentation": "<p>The user group entities from an Amazon Cognito user pool identity\n            source.</p>"
             }
         },
         "com.amazonaws.verifiedpermissions#UpdateCognitoUserPoolConfiguration": {
@@ -3978,6 +4039,12 @@
                         "smithy.api#documentation": "<p>The resource specified in the policy's scope. This element isn't included in the\n            response when <code>Resource</code> isn't present in the policy content.</p>"
                     }
                 },
+                "actions": {
+                    "target": "com.amazonaws.verifiedpermissions#ActionIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action that a policy permits or forbids. For example, \n<code>{\"actions\": [{\"actionId\": \"ViewPhoto\", \"actionType\": \"PhotoFlash::Action\"}, {\"entityID\": \"SharePhoto\", \n\"entityType\": \"PhotoFlash::Action\"}]}</code>.</p>"
+                    }
+                },
                 "createdDate": {
                     "target": "com.amazonaws.verifiedpermissions#TimestampFormat",
                     "traits": {
@@ -3990,6 +4057,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the policy was most recently updated.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "effect": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyEffect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effect of the decision that a policy returns to an authorization \nrequest. For example, <code>\"effect\": \"Permit\"</code>.</p>"
                     }
                 }
             },

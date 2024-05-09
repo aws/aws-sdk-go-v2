@@ -760,7 +760,7 @@
                 "FirewallDomainRedirectionAction": {
                     "target": "com.amazonaws.route53resolver#FirewallDomainRedirectionAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tHow you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME, DNAME, ot ALIAS. \n\t\t</p>\n         <p>\n            <code>Inspect_Redirection_Domain </code>(Default) inspects all domains in the redirection chain. The individual domains in the redirection chain must be \n\t\t\tadded to the allow domain list.</p>\n         <p>\n            <code>Trust_Redirection_Domain </code> inspects only the first domain in the redirection chain. You don't need to add the subsequent domains in the redirection list to \n\t\tthe domain alloww list.</p>"
+                        "smithy.api#documentation": "<p>\n\t\t\tHow you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME or DNAME. \n\t\t</p>\n         <p>\n            <code>Inspect_Redirection_Domain </code>(Default) inspects all domains in the redirection chain. The individual domains in the redirection chain must be \n\t\t\tadded to the domain list.</p>\n         <p>\n            <code>Trust_Redirection_Domain </code> inspects only the first domain in the redirection chain. You don't need to add the subsequent domains in the domain in the redirection list to \n\t\t\tthe domain list.</p>"
                     }
                 },
                 "Qtype": {
@@ -2326,7 +2326,7 @@
                 "FirewallDomainRedirectionAction": {
                     "target": "com.amazonaws.route53resolver#FirewallDomainRedirectionAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tHow you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME, DNAME, ot ALIAS. \n\t\t</p>\n         <p>\n            <code>Inspect_Redirection_Domain </code>(Default) inspects all domains in the redirection chain. The individual domains in the redirection chain must be \n\t\t\tadded to the allow domain list.</p>\n         <p>\n            <code>Trust_Redirection_Domain </code> inspects only the first domain in the redirection chain. You don't need to add the subsequent domains in the domain in the redirection list to \n\t\t\tthe domain alloww list.</p>"
+                        "smithy.api#documentation": "<p>\n\t\t\tHow you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME or DNAME. \n\t\t</p>\n         <p>\n            <code>Inspect_Redirection_Domain </code>(Default) inspects all domains in the redirection chain. The individual domains in the redirection chain must be \n\t\t\tadded to the domain list.</p>\n         <p>\n            <code>Trust_Redirection_Domain </code> inspects only the first domain in the redirection chain. You don't need to add the subsequent domains in the domain in the redirection list to \n\t\t\tthe domain list.</p>"
                     }
                 },
                 "Qtype": {
@@ -8629,7 +8629,7 @@
                 "FirewallDomainRedirectionAction": {
                     "target": "com.amazonaws.route53resolver#FirewallDomainRedirectionAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tHow you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME, DNAME, ot ALIAS. \n\t\t</p>\n         <p>\n            <code>Inspect_Redirection_Domain </code>(Default) inspects all domains in the redirection chain. The individual domains in the redirection chain must be \n\t\t\tadded to the allow domain list.</p>\n         <p>\n            <code>Trust_Redirection_Domain </code> inspects only the first domain in the redirection chain. You don't need to add the subsequent domains in the domain in the redirection list to \n\t\t\tthe domain alloww list.</p>"
+                        "smithy.api#documentation": "<p>\n\t\t\tHow you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME or DNAME. \n\t\t</p>\n         <p>\n            <code>Inspect_Redirection_Domain </code>(Default) inspects all domains in the redirection chain. The individual domains in the redirection chain must be \n\t\t\tadded to the domain list.</p>\n         <p>\n            <code>Trust_Redirection_Domain </code> inspects only the first domain in the redirection chain. You don't need to add the subsequent domains in the domain in the redirection list to \n\t\t\tthe domain list.</p>"
                     }
                 },
                 "Qtype": {
