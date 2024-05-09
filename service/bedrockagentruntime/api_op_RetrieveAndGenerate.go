@@ -68,6 +68,9 @@ type RetrieveAndGenerateOutput struct {
 	// knowledge base, alongside information about the sources.
 	Citations []types.Citation
 
+	// Specifies if there is a guardrail intervention in the response.
+	GuardrailAction types.GuadrailAction
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

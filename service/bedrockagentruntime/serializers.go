@@ -14,6 +14,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpInvokeAgent struct {
@@ -337,6 +338,37 @@ func awsRestjson1_serializeOpDocumentRetrieveAndGenerateInput(v *RetrieveAndGene
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAdditionalModelRequestFields(v map[string]document.Interface, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentAdditionalModelRequestFieldsValue(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAdditionalModelRequestFieldsValue(v document.Interface, value smithyjson.Value) error {
+	if v == nil {
+		return nil
+	}
+	if !internaldocument.IsInterface(v) {
+		return fmt.Errorf("%T is not a compatible document type", v)
+	}
+	db, err := v.MarshalSmithyDocument()
+	if err != nil {
+		return err
+	}
+	value.Write(db)
+	return nil
+}
+
 func awsRestjson1_serializeDocumentApiResult(v *types.ApiResult, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -453,6 +485,27 @@ func awsRestjson1_serializeDocumentExternalSourcesGenerationConfiguration(v *typ
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdditionalModelRequestFields != nil {
+		ok := object.Key("additionalModelRequestFields")
+		if err := awsRestjson1_serializeDocumentAdditionalModelRequestFields(v.AdditionalModelRequestFields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GuardrailConfiguration != nil {
+		ok := object.Key("guardrailConfiguration")
+		if err := awsRestjson1_serializeDocumentGuardrailConfiguration(v.GuardrailConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InferenceConfig != nil {
+		ok := object.Key("inferenceConfig")
+		if err := awsRestjson1_serializeDocumentInferenceConfig(v.InferenceConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PromptTemplate != nil {
 		ok := object.Key("promptTemplate")
 		if err := awsRestjson1_serializeDocumentPromptTemplate(v.PromptTemplate, ok); err != nil {
@@ -556,9 +609,61 @@ func awsRestjson1_serializeDocumentGenerationConfiguration(v *types.GenerationCo
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdditionalModelRequestFields != nil {
+		ok := object.Key("additionalModelRequestFields")
+		if err := awsRestjson1_serializeDocumentAdditionalModelRequestFields(v.AdditionalModelRequestFields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GuardrailConfiguration != nil {
+		ok := object.Key("guardrailConfiguration")
+		if err := awsRestjson1_serializeDocumentGuardrailConfiguration(v.GuardrailConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InferenceConfig != nil {
+		ok := object.Key("inferenceConfig")
+		if err := awsRestjson1_serializeDocumentInferenceConfig(v.InferenceConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PromptTemplate != nil {
 		ok := object.Key("promptTemplate")
 		if err := awsRestjson1_serializeDocumentPromptTemplate(v.PromptTemplate, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailConfiguration(v *types.GuardrailConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GuardrailId != nil {
+		ok := object.Key("guardrailId")
+		ok.String(*v.GuardrailId)
+	}
+
+	if v.GuardrailVersion != nil {
+		ok := object.Key("guardrailVersion")
+		ok.String(*v.GuardrailVersion)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInferenceConfig(v *types.InferenceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TextInferenceConfig != nil {
+		ok := object.Key("textInferenceConfig")
+		if err := awsRestjson1_serializeDocumentTextInferenceConfig(v.TextInferenceConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -691,6 +796,17 @@ func awsRestjson1_serializeDocumentPromptTemplate(v *types.PromptTemplate, value
 		ok.String(*v.TextPromptTemplate)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRAGStopSequences(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -918,6 +1034,61 @@ func awsRestjson1_serializeDocumentSessionState(v *types.SessionState, value smi
 		ok := object.Key("sessionAttributes")
 		if err := awsRestjson1_serializeDocumentSessionAttributesMap(v.SessionAttributes, ok); err != nil {
 			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTextInferenceConfig(v *types.TextInferenceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxTokens != nil {
+		ok := object.Key("maxTokens")
+		ok.Integer(*v.MaxTokens)
+	}
+
+	if v.StopSequences != nil {
+		ok := object.Key("stopSequences")
+		if err := awsRestjson1_serializeDocumentRAGStopSequences(v.StopSequences, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Temperature != nil {
+		ok := object.Key("temperature")
+		switch {
+		case math.IsNaN(float64(*v.Temperature)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.Temperature), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.Temperature), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.Temperature)
+
+		}
+	}
+
+	if v.TopP != nil {
+		ok := object.Key("topP")
+		switch {
+		case math.IsNaN(float64(*v.TopP)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.TopP), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.TopP), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.TopP)
+
 		}
 	}
 

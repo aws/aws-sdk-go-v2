@@ -202,6 +202,23 @@ func (ComponentType) Values() []ComponentType {
 	}
 }
 
+type ConnectedEntityType string
+
+// Enum values for ConnectedEntityType
+const (
+	ConnectedEntityTypeDbms ConnectedEntityType = "DBMS"
+)
+
+// Values returns all known values for ConnectedEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectedEntityType) Values() []ConnectedEntityType {
+	return []ConnectedEntityType{
+		"DBMS",
+	}
+}
+
 type CredentialType string
 
 // Enum values for CredentialType
@@ -325,6 +342,27 @@ func (HostRole) Values() []HostRole {
 		"WORKER",
 		"STANDBY",
 		"UNKNOWN",
+	}
+}
+
+type OperationEventStatus string
+
+// Enum values for OperationEventStatus
+const (
+	OperationEventStatusInProgress OperationEventStatus = "IN_PROGRESS"
+	OperationEventStatusCompleted  OperationEventStatus = "COMPLETED"
+	OperationEventStatusFailed     OperationEventStatus = "FAILED"
+)
+
+// Values returns all known values for OperationEventStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OperationEventStatus) Values() []OperationEventStatus {
+	return []OperationEventStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
 	}
 }
 

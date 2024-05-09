@@ -3492,6 +3492,40 @@ func awsAwsjson10_deserializeDocumentActionIdentifier(v **types.ActionIdentifier
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentActionIdentifierList(v *[]types.ActionIdentifier, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ActionIdentifier
+	if *v == nil {
+		cv = []types.ActionIdentifier{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ActionIdentifier
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentActionIdentifier(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentAttributeValue(v *types.AttributeValue, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4943,6 +4977,11 @@ func awsAwsjson10_deserializeDocumentPolicyItem(v **types.PolicyItem, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "actions":
+			if err := awsAwsjson10_deserializeDocumentActionIdentifierList(&sv.Actions, value); err != nil {
+				return err
+			}
+
 		case "createdDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4959,6 +4998,15 @@ func awsAwsjson10_deserializeDocumentPolicyItem(v **types.PolicyItem, value inte
 		case "definition":
 			if err := awsAwsjson10_deserializeDocumentPolicyDefinitionItem(&sv.Definition, value); err != nil {
 				return err
+			}
+
+		case "effect":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyEffect to be of type string, got %T instead", value)
+				}
+				sv.Effect = types.PolicyEffect(jtv)
 			}
 
 		case "lastUpdatedDate":
@@ -6162,6 +6210,11 @@ func awsAwsjson10_deserializeOpDocumentCreatePolicyOutput(v **CreatePolicyOutput
 
 	for key, value := range shape {
 		switch key {
+		case "actions":
+			if err := awsAwsjson10_deserializeDocumentActionIdentifierList(&sv.Actions, value); err != nil {
+				return err
+			}
+
 		case "createdDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6173,6 +6226,15 @@ func awsAwsjson10_deserializeOpDocumentCreatePolicyOutput(v **CreatePolicyOutput
 					return err
 				}
 				sv.CreatedDate = ptr.Time(t)
+			}
+
+		case "effect":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyEffect to be of type string, got %T instead", value)
+				}
+				sv.Effect = types.PolicyEffect(jtv)
 			}
 
 		case "lastUpdatedDate":
@@ -6624,6 +6686,11 @@ func awsAwsjson10_deserializeOpDocumentGetPolicyOutput(v **GetPolicyOutput, valu
 
 	for key, value := range shape {
 		switch key {
+		case "actions":
+			if err := awsAwsjson10_deserializeDocumentActionIdentifierList(&sv.Actions, value); err != nil {
+				return err
+			}
+
 		case "createdDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6640,6 +6707,15 @@ func awsAwsjson10_deserializeOpDocumentGetPolicyOutput(v **GetPolicyOutput, valu
 		case "definition":
 			if err := awsAwsjson10_deserializeDocumentPolicyDefinitionDetail(&sv.Definition, value); err != nil {
 				return err
+			}
+
+		case "effect":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyEffect to be of type string, got %T instead", value)
+				}
+				sv.Effect = types.PolicyEffect(jtv)
 			}
 
 		case "lastUpdatedDate":
@@ -7416,6 +7492,11 @@ func awsAwsjson10_deserializeOpDocumentUpdatePolicyOutput(v **UpdatePolicyOutput
 
 	for key, value := range shape {
 		switch key {
+		case "actions":
+			if err := awsAwsjson10_deserializeDocumentActionIdentifierList(&sv.Actions, value); err != nil {
+				return err
+			}
+
 		case "createdDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7427,6 +7508,15 @@ func awsAwsjson10_deserializeOpDocumentUpdatePolicyOutput(v **UpdatePolicyOutput
 					return err
 				}
 				sv.CreatedDate = ptr.Time(t)
+			}
+
+		case "effect":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyEffect to be of type string, got %T instead", value)
+				}
+				sv.Effect = types.PolicyEffect(jtv)
 			}
 
 		case "lastUpdatedDate":

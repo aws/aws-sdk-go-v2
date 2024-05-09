@@ -22267,6 +22267,11 @@ func awsRestjson1_deserializeDocumentCampaignEmailMessage(v **types.CampaignEmai
 				sv.FromAddress = ptr.String(jtv)
 			}
 
+		case "Headers":
+			if err := awsRestjson1_deserializeDocumentListOfMessageHeader(&sv.Headers, value); err != nil {
+				return err
+			}
+
 		case "HtmlBody":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24051,6 +24056,11 @@ func awsRestjson1_deserializeDocumentEmailTemplateResponse(v **types.EmailTempla
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.DefaultSubstitutions = ptr.String(jtv)
+			}
+
+		case "Headers":
+			if err := awsRestjson1_deserializeDocumentListOfMessageHeader(&sv.Headers, value); err != nil {
+				return err
 			}
 
 		case "HtmlPart":
@@ -28505,6 +28515,40 @@ func awsRestjson1_deserializeDocumentListOfJourneyRunResponse(v *[]types.Journey
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentListOfMessageHeader(v *[]types.MessageHeader, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MessageHeader
+	if *v == nil {
+		cv = []types.MessageHeader{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MessageHeader
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMessageHeader(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentListOfMultiConditionalBranch(v *[]types.MultiConditionalBranch, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -29802,6 +29846,55 @@ func awsRestjson1_deserializeDocumentMessageConfiguration(v **types.MessageConfi
 		case "SMSMessage":
 			if err := awsRestjson1_deserializeDocumentCampaignSmsMessage(&sv.SMSMessage, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMessageHeader(v **types.MessageHeader, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MessageHeader
+	if *v == nil {
+		sv = &types.MessageHeader{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:

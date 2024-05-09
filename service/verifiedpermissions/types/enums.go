@@ -38,6 +38,25 @@ func (OpenIdIssuer) Values() []OpenIdIssuer {
 	}
 }
 
+type PolicyEffect string
+
+// Enum values for PolicyEffect
+const (
+	PolicyEffectPermit PolicyEffect = "Permit"
+	PolicyEffectForbid PolicyEffect = "Forbid"
+)
+
+// Values returns all known values for PolicyEffect. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyEffect) Values() []PolicyEffect {
+	return []PolicyEffect{
+		"Permit",
+		"Forbid",
+	}
+}
+
 type PolicyType string
 
 // Enum values for PolicyType

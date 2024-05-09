@@ -496,6 +496,15 @@ func awsRestjson1_deserializeOpDocumentRetrieveAndGenerateOutput(v **RetrieveAnd
 				return err
 			}
 
+		case "guardrailAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuadrailAction to be of type string, got %T instead", value)
+				}
+				sv.GuardrailAction = types.GuadrailAction(jtv)
+			}
+
 		case "output":
 			if err := awsRestjson1_deserializeDocumentRetrieveAndGenerateOutput(&sv.Output, value); err != nil {
 				return err

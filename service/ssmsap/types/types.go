@@ -411,6 +411,46 @@ type Operation struct {
 	noSmithyDocumentSerde
 }
 
+// An operation event returns details for an operation, including key milestones
+// which can be used to monitor and track operations in progress.
+//
+// Operation events contain:
+//
+//   - Description string
+//
+//   - Resource, including its ARN and type
+//
+//   - Status
+//
+//   - StatusMessage string
+//
+//   - TimeStamp
+//
+// Operation event examples include StartApplication or StopApplication.
+type OperationEvent struct {
+
+	// A description of the operation event. For example, "Stop the EC2 instance
+	// i-abcdefgh987654321".
+	Description *string
+
+	// The resource involved in the operations event.
+	//
+	// Contains ResourceArn ARN and ResourceType .
+	Resource *Resource
+
+	// The status of the operation event. The possible statuses are: IN_PROGRESS ,
+	// COMPLETED , and FAILED .
+	Status OperationEventStatus
+
+	// The status message relating to a specific operation event.
+	StatusMessage *string
+
+	// The timestamp of the specified operation event.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Details of the SAP HANA system replication for the instance.
 type Resilience struct {
 
@@ -428,6 +468,24 @@ type Resilience struct {
 
 	// The tier of the component.
 	HsrTier *string
+
+	noSmithyDocumentSerde
+}
+
+// The resource contains a ResourceArn and the ResourceType .
+type Resource struct {
+
+	// The Amazon Resource Name (ARN) of the source resource.
+	//
+	// Example of ResourceArn : "
+	// arn:aws:ec2:us-east-1:111111111111:instance/i-abcdefgh987654321 "
+	ResourceArn *string
+
+	// The resource type.
+	//
+	// Example of ResourceType : " AWS::SystemsManagerSAP::Component " or "
+	// AWS::EC2::Instance ".
+	ResourceType *string
 
 	noSmithyDocumentSerde
 }

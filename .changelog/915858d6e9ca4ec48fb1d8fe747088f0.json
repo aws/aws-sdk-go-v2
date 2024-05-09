@@ -1,0 +1,8 @@
+{
+    "id": "915858d6-e9ca-4ec4-8fb1-d8fe747088f0",
+    "type": "documentation",
+    "description": "Update the DNS Firewall settings to correct a spelling issue.",
+    "modules": [
+        "service/route53resolver"
+    ]
+}
