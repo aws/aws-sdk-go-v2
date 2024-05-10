@@ -1374,6 +1374,54 @@
                         "smithy.api#enumValue": "ml.g5.48xlarge"
                     }
                 },
+                "ML_G6_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.xlarge"
+                    }
+                },
+                "ML_G6_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.2xlarge"
+                    }
+                },
+                "ML_G6_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.4xlarge"
+                    }
+                },
+                "ML_G6_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.8xlarge"
+                    }
+                },
+                "ML_G6_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.12xlarge"
+                    }
+                },
+                "ML_G6_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.16xlarge"
+                    }
+                },
+                "ML_G6_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.24xlarge"
+                    }
+                },
+                "ML_G6_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.48xlarge"
+                    }
+                },
                 "ML_GEOSPATIAL_INTERACTIVE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -33509,6 +33557,54 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.r6id.32xlarge"
+                    }
+                },
+                "ML_G6_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.xlarge"
+                    }
+                },
+                "ML_G6_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.2xlarge"
+                    }
+                },
+                "ML_G6_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.4xlarge"
+                    }
+                },
+                "ML_G6_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.8xlarge"
+                    }
+                },
+                "ML_G6_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.12xlarge"
+                    }
+                },
+                "ML_G6_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.16xlarge"
+                    }
+                },
+                "ML_G6_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.24xlarge"
+                    }
+                },
+                "ML_G6_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.48xlarge"
                     }
                 }
             }

@@ -990,6 +990,9 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.ssooidc#ArnType": {
+            "type": "string"
+        },
         "com.amazonaws.ssooidc#Assertion": {
             "type": "string",
             "traits": {
@@ -1035,6 +1038,12 @@
         },
         "com.amazonaws.ssooidc#ClientType": {
             "type": "string"
+        },
+        "com.amazonaws.ssooidc#CodeVerifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
         },
         "com.amazonaws.ssooidc#CreateToken": {
             "type": "operation",
@@ -1091,6 +1100,25 @@
                             "clientSecret": "VERYLONGSECRETeyJraWQiOiJrZXktMTU2NDAyODA5OSIsImFsZyI6IkhTMzg0In0",
                             "grantType": "urn:ietf:params:oauth:grant-type:device-code",
                             "deviceCode": "yJraWQiOiJrZXktMTU2Njk2ODA4OCIsImFsZyI6IkhTMzIn0EXAMPLEDEVICECODE"
+                        },
+                        "output": {
+                            "accessToken": "aoal-YigITUDiNX1xZwOMXM5MxOWDL0E0jg9P6_C_jKQPxS_SKCP6f0kh1Up4g7TtvQqkMnD-GJiU_S1gvug6SrggAkc0:MGYCMQD3IatVjV7jAJU91kK3PkS/SfA2wtgWzOgZWDOR7sDGN9t0phCZz5It/aes/3C1Zj0CMQCKWOgRaiz6AIhza3DSXQNMLjRKXC8F8ceCsHlgYLMZ7hZidEXAMPLEACCESSTOKEN",
+                            "tokenType": "Bearer",
+                            "expiresIn": 1579729529,
+                            "refreshToken": "aorvJYubGpU6i91YnH7Mfo-AT2fIVa1zCfA_Rvq9yjVKIP3onFmmykuQ7E93y2I-9Nyj-A_sVvMufaLNL0bqnDRtgAkc0:MGUCMFrRsktMRVlWaOR70XGMFGLL0SlcCw4DiYveIiOVx1uK9BbD0gvAddsW3UTLozXKMgIxAJ3qxUvjpnlLIOaaKOoa/FuNgqJVvr9GMwDtnAtlh9iZzAkEXAMPLEREFRESHTOKEN"
+                        }
+                    },
+                    {
+                        "title": "Call OAuth/OIDC /token endpoint for Refresh Token grant with Secret authentication",
+                        "documentation": "",
+                        "input": {
+                            "clientId": "_yzkThXVzLWVhc3QtMQEXAMPLECLIENTID",
+                            "clientSecret": "VERYLONGSECRETeyJraWQiOiJrZXktMTU2NDAyODA5OSIsImFsZyI6IkhTMzg0In0",
+                            "grantType": "refresh_token",
+                            "refreshToken": "aorvJYubGpU6i91YnH7Mfo-AT2fIVa1zCfA_Rvq9yjVKIP3onFmmykuQ7E93y2I-9Nyj-A_sVvMufaLNL0bqnDRtgAkc0:MGUCMFrRsktMRVlWaOR70XGMFGLL0SlcCw4DiYveIiOVx1uK9BbD0gvAddsW3UTLozXKMgIxAJ3qxUvjpnlLIOaaKOoa/FuNgqJVvr9GMwDtnAtlh9iZzAkEXAMPLEREFRESHTOKEN",
+                            "scope": [
+                                "codewhisperer:completions"
+                            ]
                         },
                         "output": {
                             "accessToken": "aoal-YigITUDiNX1xZwOMXM5MxOWDL0E0jg9P6_C_jKQPxS_SKCP6f0kh1Up4g7TtvQqkMnD-GJiU_S1gvug6SrggAkc0:MGYCMQD3IatVjV7jAJU91kK3PkS/SfA2wtgWzOgZWDOR7sDGN9t0phCZz5It/aes/3C1Zj0CMQCKWOgRaiz6AIhza3DSXQNMLjRKXC8F8ceCsHlgYLMZ7hZidEXAMPLEACCESSTOKEN",
@@ -1161,6 +1189,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Used only when calling this API for the Authorization Code grant type. This value specifies\n      the location of the client or application that has registered to receive the authorization\n        code.</p>"
                     }
+                },
+                "codeVerifier": {
+                    "target": "com.amazonaws.ssooidc#CodeVerifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used only when calling this API for the Authorization Code grant type. This value is generated\n      by the client and presented to validate the original code challenge value the client passed at\n      authorization time.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1173,7 +1207,7 @@
                 "accessToken": {
                     "target": "com.amazonaws.ssooidc#AccessToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A bearer token to access AWS accounts and applications assigned to a user.</p>"
+                        "smithy.api#documentation": "<p>A bearer token to access Amazon Web Services accounts and applications assigned to a user.</p>"
                     }
                 },
                 "tokenType": {
@@ -1253,7 +1287,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates and returns access and refresh tokens for clients and applications that are\n      authenticated using IAM entities. The access token can be used to fetch short-term credentials\n      for the assigned AWS accounts or to access application APIs using <code>bearer</code>\n      authentication.</p>",
+                "smithy.api#documentation": "<p>Creates and returns access and refresh tokens for clients and applications that are\n      authenticated using IAM entities. The access token can be used to fetch short-term credentials\n      for the assigned Amazon Web Services accounts or to access application APIs using <code>bearer</code>\n      authentication.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Call OAuth/OIDC /token endpoint for Authorization Code grant with IAM authentication",
@@ -1276,6 +1310,72 @@
                             "refreshToken": "aorvJYubGpU6i91YnH7Mfo-AT2fIVa1zCfA_Rvq9yjVKIP3onFmmykuQ7E93y2I-9Nyj-A_sVvMufaLNL0bqnDRtgAkc0:MGUCMFrRsktMRVlWaOR70XGMFGLL0SlcCw4DiYveIiOVx1uK9BbD0gvAddsW3UTLozXKMgIxAJ3qxUvjpnlLIOaaKOoa/FuNgqJVvr9GMwDtnAtlh9iZzAkEXAMPLEREFRESHTOKEN",
                             "idToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhd3M6aWRlbnRpdHlfc3RvcmVfaWQiOiJkLTMzMzMzMzMzMzMiLCJzdWIiOiI3MzA0NDhmMi1lMGExLTcwYTctYzk1NC0wMDAwMDAwMDAwMDAiLCJhd3M6aW5zdGFuY2VfYWNjb3VudCI6IjExMTExMTExMTExMSIsInN0czppZGVudGl0eV9jb250ZXh0IjoiRVhBTVBMRUlERU5USVRZQ09OVEVYVCIsInN0czphdWRpdF9jb250ZXh0IjoiRVhBTVBMRUFVRElUQ09OVEVYVCIsImlzcyI6Imh0dHBzOi8vaWRlbnRpdHljZW50ZXIuYW1hem9uYXdzLmNvbS9zc29pbnMtMTExMTExMTExMTExIiwiYXdzOmlkZW50aXR5X3N0b3JlX2FybiI6ImFybjphd3M6aWRlbnRpdHlzdG9yZTo6MTExMTExMTExMTExOmlkZW50aXR5c3RvcmUvZC0zMzMzMzMzMzMzIiwiYXVkIjoiYXJuOmF3czpzc286OjEyMzQ1Njc4OTAxMjphcHBsaWNhdGlvbi9zc29pbnMtMTExMTExMTExMTExL2FwbC0yMjIyMjIyMjIyMjIiLCJhd3M6aW5zdGFuY2VfYXJuIjoiYXJuOmF3czpzc286OjppbnN0YW5jZS9zc29pbnMtMTExMTExMTExMTExIiwiYXdzOmNyZWRlbnRpYWxfaWQiOiJfWlIyTjZhVkJqMjdGUEtheWpfcEtwVjc3QVBERl80MXB4ZXRfWWpJdUpONlVJR2RBdkpFWEFNUExFQ1JFRElEIiwiYXV0aF90aW1lIjoiMjAyMC0wMS0yMlQxMjo0NToyOVoiLCJleHAiOjE1Nzk3Mjk1MjksImlhdCI6MTU3OTcyNTkyOX0.Xyah6qbk78qThzJ41iFU2yfGuRqqtKXHrJYwQ8L9Ip0",
                             "issuedTokenType": "urn:ietf:params:oauth:token-type:refresh_token",
+                            "scope": [
+                                "openid",
+                                "aws",
+                                "sts:identity_context"
+                            ]
+                        }
+                    },
+                    {
+                        "title": "Call OAuth/OIDC /token endpoint for Refresh Token grant with IAM authentication",
+                        "documentation": "",
+                        "input": {
+                            "clientId": "arn:aws:sso::123456789012:application/ssoins-111111111111/apl-222222222222",
+                            "grantType": "refresh_token",
+                            "refreshToken": "aorvJYubGpU6i91YnH7Mfo-AT2fIVa1zCfA_Rvq9yjVKIP3onFmmykuQ7E93y2I-9Nyj-A_sVvMufaLNL0bqnDRtgAkc0:MGUCMFrRsktMRVlWaOR70XGMFGLL0SlcCw4DiYveIiOVx1uK9BbD0gvAddsW3UTLozXKMgIxAJ3qxUvjpnlLIOaaKOoa/FuNgqJVvr9GMwDtnAtlh9iZzAkEXAMPLEREFRESHTOKEN"
+                        },
+                        "output": {
+                            "accessToken": "aoal-YigITUDiNX1xZwOMXM5MxOWDL0E0jg9P6_C_jKQPxS_SKCP6f0kh1Up4g7TtvQqkMnD-GJiU_S1gvug6SrggAkc0:MGYCMQD3IatVjV7jAJU91kK3PkS/SfA2wtgWzOgZWDOR7sDGN9t0phCZz5It/aes/3C1Zj0CMQCKWOgRaiz6AIhza3DSXQNMLjRKXC8F8ceCsHlgYLMZ7hZidEXAMPLEACCESSTOKEN",
+                            "tokenType": "Bearer",
+                            "expiresIn": 1579729529,
+                            "refreshToken": "aorvJYubGpU6i91YnH7Mfo-AT2fIVa1zCfA_Rvq9yjVKIP3onFmmykuQ7E93y2I-9Nyj-A_sVvMufaLNL0bqnDRtgAkc0:MGUCMFrRsktMRVlWaOR70XGMFGLL0SlcCw4DiYveIiOVx1uK9BbD0gvAddsW3UTLozXKMgIxAJ3qxUvjpnlLIOaaKOoa/FuNgqJVvr9GMwDtnAtlh9iZzAkEXAMPLEREFRESHTOKEN",
+                            "issuedTokenType": "urn:ietf:params:oauth:token-type:refresh_token",
+                            "scope": [
+                                "openid",
+                                "aws",
+                                "sts:identity_context"
+                            ]
+                        }
+                    },
+                    {
+                        "title": "Call OAuth/OIDC /token endpoint for JWT Bearer grant with IAM authentication",
+                        "documentation": "",
+                        "input": {
+                            "clientId": "arn:aws:sso::123456789012:application/ssoins-111111111111/apl-222222222222",
+                            "grantType": "urn:ietf:params:oauth:grant-type:jwt-bearer",
+                            "assertion": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjFMVE16YWtpaGlSbGFfOHoyQkVKVlhlV01xbyJ9.eyJ2ZXIiOiIyLjAiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vOTEyMjA0MGQtNmM2Ny00YzViLWIxMTItMzZhMzA0YjY2ZGFkL3YyLjAiLCJzdWIiOiJBQUFBQUFBQUFBQUFBQUFBQUFBQUFJa3pxRlZyU2FTYUZIeTc4MmJidGFRIiwiYXVkIjoiNmNiMDQwMTgtYTNmNS00NmE3LWI5OTUtOTQwYzc4ZjVhZWYzIiwiZXhwIjoxNTM2MzYxNDExLCJpYXQiOjE1MzYyNzQ3MTEsIm5iZiI6MTUzNjI3NDcxMSwibmFtZSI6IkFiZSBMaW5jb2xuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiQWJlTGlAbWljcm9zb2Z0LmNvbSIsIm9pZCI6IjAwMDAwMDAwLTAwMDAtMDAwMC02NmYzLTMzMzJlY2E3ZWE4MSIsInRpZCI6IjkxMjIwNDBkLTZjNjctNGM1Yi1iMTEyLTM2YTMwNGI2NmRhZCIsIm5vbmNlIjoiMTIzNTIzIiwiYWlvIjoiRGYyVVZYTDFpeCFsTUNXTVNPSkJjRmF0emNHZnZGR2hqS3Y4cTVnMHg3MzJkUjVNQjVCaXN2R1FPN1lXQnlqZDhpUURMcSFlR2JJRGFreXA1bW5PcmNkcUhlWVNubHRlcFFtUnA2QUlaOGpZIn0.1AFWW-Ck5nROwSlltm7GzZvDwUkqvhSQpm55TQsmVo9Y59cLhRXpvB8n-55HCr9Z6G_31_UbeUkoz612I2j_Sm9FFShSDDjoaLQr54CreGIJvjtmS3EkK9a7SJBbcpL1MpUtlfygow39tFjY7EVNW9plWUvRrTgVk7lYLprvfzw-CIqw3gHC-T7IK_m_xkr08INERBtaecwhTeN4chPC4W3jdmw_lIxzC48YoQ0dB1L9-ImX98Egypfrlbm0IBL5spFzL6JDZIRRJOu8vecJvj1mq-IUhGt0MacxX8jdxYLP-KUu2d9MbNKpCKJuZ7p8gwTL5B7NlUdh_dmSviPWrw"
+                        },
+                        "output": {
+                            "accessToken": "aoal-YigITUDiNX1xZwOMXM5MxOWDL0E0jg9P6_C_jKQPxS_SKCP6f0kh1Up4g7TtvQqkMnD-GJiU_S1gvug6SrggAkc0:MGYCMQD3IatVjV7jAJU91kK3PkS/SfA2wtgWzOgZWDOR7sDGN9t0phCZz5It/aes/3C1Zj0CMQCKWOgRaiz6AIhza3DSXQNMLjRKXC8F8ceCsHlgYLMZ7hZidEXAMPLEACCESSTOKEN",
+                            "tokenType": "Bearer",
+                            "expiresIn": 1579729529,
+                            "refreshToken": "aorvJYubGpU6i91YnH7Mfo-AT2fIVa1zCfA_Rvq9yjVKIP3onFmmykuQ7E93y2I-9Nyj-A_sVvMufaLNL0bqnDRtgAkc0:MGUCMFrRsktMRVlWaOR70XGMFGLL0SlcCw4DiYveIiOVx1uK9BbD0gvAddsW3UTLozXKMgIxAJ3qxUvjpnlLIOaaKOoa/FuNgqJVvr9GMwDtnAtlh9iZzAkEXAMPLEREFRESHTOKEN",
+                            "idToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhd3M6aWRlbnRpdHlfc3RvcmVfaWQiOiJkLTMzMzMzMzMzMzMiLCJzdWIiOiI3MzA0NDhmMi1lMGExLTcwYTctYzk1NC0wMDAwMDAwMDAwMDAiLCJhd3M6aW5zdGFuY2VfYWNjb3VudCI6IjExMTExMTExMTExMSIsInN0czppZGVudGl0eV9jb250ZXh0IjoiRVhBTVBMRUlERU5USVRZQ09OVEVYVCIsInN0czphdWRpdF9jb250ZXh0IjoiRVhBTVBMRUFVRElUQ09OVEVYVCIsImlzcyI6Imh0dHBzOi8vaWRlbnRpdHljZW50ZXIuYW1hem9uYXdzLmNvbS9zc29pbnMtMTExMTExMTExMTExIiwiYXdzOmlkZW50aXR5X3N0b3JlX2FybiI6ImFybjphd3M6aWRlbnRpdHlzdG9yZTo6MTExMTExMTExMTExOmlkZW50aXR5c3RvcmUvZC0zMzMzMzMzMzMzIiwiYXVkIjoiYXJuOmF3czpzc286OjEyMzQ1Njc4OTAxMjphcHBsaWNhdGlvbi9zc29pbnMtMTExMTExMTExMTExL2FwbC0yMjIyMjIyMjIyMjIiLCJhd3M6aW5zdGFuY2VfYXJuIjoiYXJuOmF3czpzc286OjppbnN0YW5jZS9zc29pbnMtMTExMTExMTExMTExIiwiYXdzOmNyZWRlbnRpYWxfaWQiOiJfWlIyTjZhVkJqMjdGUEtheWpfcEtwVjc3QVBERl80MXB4ZXRfWWpJdUpONlVJR2RBdkpFWEFNUExFQ1JFRElEIiwiYXV0aF90aW1lIjoiMjAyMC0wMS0yMlQxMjo0NToyOVoiLCJleHAiOjE1Nzk3Mjk1MjksImlhdCI6MTU3OTcyNTkyOX0.Xyah6qbk78qThzJ41iFU2yfGuRqqtKXHrJYwQ8L9Ip0",
+                            "issuedTokenType": "urn:ietf:params:oauth:token-type:refresh_token",
+                            "scope": [
+                                "openid",
+                                "aws",
+                                "sts:identity_context"
+                            ]
+                        }
+                    },
+                    {
+                        "title": "Call OAuth/OIDC /token endpoint for Token Exchange grant with IAM authentication",
+                        "documentation": "",
+                        "input": {
+                            "clientId": "arn:aws:sso::123456789012:application/ssoins-111111111111/apl-222222222222",
+                            "grantType": "urn:ietf:params:oauth:grant-type:token-exchange",
+                            "subjectToken": "aoak-Hig8TUDPNX1xZwOMXM5MxOWDL0E0jg9P6_C_jKQPxS_SKCP6f0kh1Up4g7TtvQqkMnD-GJiU_S1gvug6SrggAkc0:MGYCMQD3IatVjV7jAJU91kK3PkS/SfA2wtgWzOgZWDOR7sDGN9t0phCZz5It/aes/3C1Zj0CMQCKWOgRaiz6AIhza3DSXQNMLjRKXC8F8ceCsHlgYLMZ7hZDIFFERENTACCESSTOKEN",
+                            "subjectTokenType": "urn:ietf:params:oauth:token-type:access_token",
+                            "requestedTokenType": "urn:ietf:params:oauth:token-type:access_token"
+                        },
+                        "output": {
+                            "accessToken": "aoal-YigITUDiNX1xZwOMXM5MxOWDL0E0jg9P6_C_jKQPxS_SKCP6f0kh1Up4g7TtvQqkMnD-GJiU_S1gvug6SrggAkc0:MGYCMQD3IatVjV7jAJU91kK3PkS/SfA2wtgWzOgZWDOR7sDGN9t0phCZz5It/aes/3C1Zj0CMQCKWOgRaiz6AIhza3DSXQNMLjRKXC8F8ceCsHlgYLMZ7hZidEXAMPLEACCESSTOKEN",
+                            "tokenType": "Bearer",
+                            "expiresIn": 1579729529,
+                            "idToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhd3M6aWRlbnRpdHlfc3RvcmVfaWQiOiJkLTMzMzMzMzMzMzMiLCJzdWIiOiI3MzA0NDhmMi1lMGExLTcwYTctYzk1NC0wMDAwMDAwMDAwMDAiLCJhd3M6aW5zdGFuY2VfYWNjb3VudCI6IjExMTExMTExMTExMSIsInN0czppZGVudGl0eV9jb250ZXh0IjoiRVhBTVBMRUlERU5USVRZQ09OVEVYVCIsImlzcyI6Imh0dHBzOi8vaWRlbnRpdHljZW50ZXIuYW1hem9uYXdzLmNvbS9zc29pbnMtMTExMTExMTExMTExIiwiYXdzOmlkZW50aXR5X3N0b3JlX2FybiI6ImFybjphd3M6aWRlbnRpdHlzdG9yZTo6MTExMTExMTExMTExOmlkZW50aXR5c3RvcmUvZC0zMzMzMzMzMzMzIiwiYXVkIjoiYXJuOmF3czpzc286OjEyMzQ1Njc4OTAxMjphcHBsaWNhdGlvbi9zc29pbnMtMTExMTExMTExMTExL2FwbC0yMjIyMjIyMjIyMjIiLCJhd3M6aW5zdGFuY2VfYXJuIjoiYXJuOmF3czpzc286OjppbnN0YW5jZS9zc29pbnMtMTExMTExMTExMTExIiwiYXdzOmNyZWRlbnRpYWxfaWQiOiJfWlIyTjZhVkJqMjdGUEtheWpfcEtwVjc3QVBERl80MXB4ZXRfWWpJdUpONlVJR2RBdkpFWEFNUExFQ1JFRElEIiwiYXV0aF90aW1lIjoiMjAyMC0wMS0yMlQxMjo0NToyOVoiLCJleHAiOjE1Nzk3Mjk1MjksImlhdCI6MTU3OTcyNTkyOX0.5SYiW1kMsuUr7nna-l5tlakM0GNbMHvIM2_n0QD23jM",
+                            "issuedTokenType": "urn:ietf:params:oauth:token-type:access_token",
                             "scope": [
                                 "openid",
                                 "aws",
@@ -1355,6 +1455,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Used only when calling this API for the Token Exchange grant type. This value specifies\n      the type of token that the requester can receive. The following values are supported:</p>\n         <p>* Access Token - <code>urn:ietf:params:oauth:token-type:access_token</code>\n         </p>\n         <p>* Refresh Token - <code>urn:ietf:params:oauth:token-type:refresh_token</code>\n         </p>"
                     }
+                },
+                "codeVerifier": {
+                    "target": "com.amazonaws.ssooidc#CodeVerifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used only when calling this API for the Authorization Code grant type. This value is generated\n      by the client and presented to validate the original code challenge value the client passed at\n      authorization time.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1367,7 +1473,7 @@
                 "accessToken": {
                     "target": "com.amazonaws.ssooidc#AccessToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A bearer token to access AWS accounts and applications assigned to a user.</p>"
+                        "smithy.api#documentation": "<p>A bearer token to access Amazon Web Services accounts and applications assigned to a user.</p>"
                     }
                 },
                 "tokenType": {
@@ -1451,6 +1557,12 @@
         },
         "com.amazonaws.ssooidc#GrantType": {
             "type": "string"
+        },
+        "com.amazonaws.ssooidc#GrantTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssooidc#GrantType"
+            }
         },
         "com.amazonaws.ssooidc#IdToken": {
             "type": "string",
@@ -1552,6 +1664,28 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.ssooidc#InvalidRedirectUriException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.ssooidc#Error",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Single error code.\n      For this exception the value will be <code>invalid_redirect_uri</code>.</p>"
+                    }
+                },
+                "error_description": {
+                    "target": "com.amazonaws.ssooidc#ErrorDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Human-readable text providing additional information, used to assist the\n      client developer in understanding the error that occurred.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that one or more redirect URI in the request is not supported for this operation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.ssooidc#InvalidRequestException": {
             "type": "structure",
             "members": {
@@ -1639,6 +1773,12 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.ssooidc#RedirectUris": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssooidc#URI"
+            }
+        },
         "com.amazonaws.ssooidc#RefreshToken": {
             "type": "string",
             "traits": {
@@ -1664,10 +1804,16 @@
                     "target": "com.amazonaws.ssooidc#InvalidClientMetadataException"
                 },
                 {
+                    "target": "com.amazonaws.ssooidc#InvalidRedirectUriException"
+                },
+                {
                     "target": "com.amazonaws.ssooidc#InvalidRequestException"
                 },
                 {
                     "target": "com.amazonaws.ssooidc#InvalidScopeException"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#UnsupportedGrantTypeException"
                 }
             ],
             "traits": {
@@ -1683,7 +1829,16 @@
                             "scopes": [
                                 "sso:account:access",
                                 "codewhisperer:completions"
-                            ]
+                            ],
+                            "redirectUris": [
+                                "127.0.0.1:PORT/oauth/callback"
+                            ],
+                            "grantTypes": [
+                                "authorization_code",
+                                "refresh_token"
+                            ],
+                            "issuerUrl": "https://identitycenter.amazonaws.com/ssoins-1111111111111111",
+                            "entitledApplicationArn": "arn:aws:sso::ACCOUNTID:application/ssoins-1111111111111111/apl-1111111111111111"
                         },
                         "output": {
                             "clientId": "_yzkThXVzLWVhc3QtMQEXAMPLECLIENTID",
@@ -1722,6 +1877,30 @@
                     "target": "com.amazonaws.ssooidc#Scopes",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of scopes that are defined by the client. Upon authorization, this list is used\n      to restrict permissions when granting an access token.</p>"
+                    }
+                },
+                "redirectUris": {
+                    "target": "com.amazonaws.ssooidc#RedirectUris",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of redirect URI that are defined by the client. At completion of authorization,\n      this list is used to restrict what locations the user agent can be redirected back to.</p>"
+                    }
+                },
+                "grantTypes": {
+                    "target": "com.amazonaws.ssooidc#GrantTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of OAuth 2.0 grant types that are defined by the client. This list is used to\n      restrict the token granting flows available to the client.</p>"
+                    }
+                },
+                "issuerUrl": {
+                    "target": "com.amazonaws.ssooidc#URI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM Identity Center Issuer URL associated with an instance of IAM Identity Center. This value is needed for user access to resources through the client.</p>"
+                    }
+                },
+                "entitledApplicationArn": {
+                    "target": "com.amazonaws.ssooidc#ArnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This IAM Identity Center application ARN is used to define administrator-managed configuration for public client access to resources. At\n      authorization, the scopes, grants, and redirect URI available to this client will be restricted by this application resource.</p>"
                     }
                 }
             },
