@@ -211,7 +211,7 @@ func TestClient_GreetingWithErrors_ComplexError_awsRestxmlDeserialize(t *testing
 		ExpectError   *types.ComplexError
 	}{
 		"ComplexError": {
-			StatusCode: 400,
+			StatusCode: 403,
 			Header: http.Header{
 				"Content-Type": []string{"application/xml"},
 				"X-Header":     []string{"Header"},
