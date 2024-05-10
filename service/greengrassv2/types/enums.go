@@ -252,6 +252,25 @@ func (InstalledComponentTopologyFilter) Values() []InstalledComponentTopologyFil
 	}
 }
 
+type IotEndpointType string
+
+// Enum values for IotEndpointType
+const (
+	IotEndpointTypeFips     IotEndpointType = "fips"
+	IotEndpointTypeStandard IotEndpointType = "standard"
+)
+
+// Values returns all known values for IotEndpointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IotEndpointType) Values() []IotEndpointType {
+	return []IotEndpointType{
+		"fips",
+		"standard",
+	}
+}
+
 type IoTJobAbortAction string
 
 // Enum values for IoTJobAbortAction
@@ -385,6 +404,25 @@ func (RecipeOutputFormat) Values() []RecipeOutputFormat {
 	return []RecipeOutputFormat{
 		"JSON",
 		"YAML",
+	}
+}
+
+type S3EndpointType string
+
+// Enum values for S3EndpointType
+const (
+	S3EndpointTypeRegional S3EndpointType = "REGIONAL"
+	S3EndpointTypeGlobal   S3EndpointType = "GLOBAL"
+)
+
+// Values returns all known values for S3EndpointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3EndpointType) Values() []S3EndpointType {
+	return []S3EndpointType{
+		"REGIONAL",
+		"GLOBAL",
 	}
 }
 

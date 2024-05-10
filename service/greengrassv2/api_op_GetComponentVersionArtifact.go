@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +50,18 @@ type GetComponentVersionArtifactInput struct {
 	//
 	// This member is required.
 	ArtifactName *string
+
+	// Determines if the Amazon S3 URL returned is a FIPS pre-signed URL endpoint.
+	// Specify fips if you want the returned Amazon S3 pre-signed URL to point to an
+	// Amazon S3 FIPS endpoint. If you don't specify a value, the default is standard .
+	IotEndpointType types.IotEndpointType
+
+	// Specifies the endpoint to use when getting Amazon S3 pre-signed URLs.
+	//
+	// All Amazon Web Services Regions except US East (N. Virginia) use REGIONAL in
+	// all cases. In the US East (N. Virginia) Region the default is GLOBAL , but you
+	// can change it to REGIONAL with this parameter.
+	S3EndpointType types.S3EndpointType
 
 	noSmithyDocumentSerde
 }

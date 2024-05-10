@@ -1,0 +1,8 @@
+{
+    "id": "4aa8f816-bcd8-4e45-93d2-fa4b71224fbb",
+    "type": "feature",
+    "description": "Introduced support for G6 instance types on Sagemaker Notebook Instances and on SageMaker Studio for JupyterLab and CodeEditor applications.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

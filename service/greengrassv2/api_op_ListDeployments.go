@@ -39,6 +39,8 @@ type ListDeploymentsInput struct {
 	HistoryFilter types.DeploymentHistoryFilter
 
 	// The maximum number of results to be returned per paginated request.
+	//
+	// Default: 50
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
@@ -159,6 +161,8 @@ var _ ListDeploymentsAPIClient = (*Client)(nil)
 // ListDeploymentsPaginatorOptions is the paginator options for ListDeployments
 type ListDeploymentsPaginatorOptions struct {
 	// The maximum number of results to be returned per paginated request.
+	//
+	// Default: 50
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

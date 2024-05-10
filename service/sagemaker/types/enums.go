@@ -201,6 +201,14 @@ const (
 	AppInstanceTypeMlG512xlarge            AppInstanceType = "ml.g5.12xlarge"
 	AppInstanceTypeMlG524xlarge            AppInstanceType = "ml.g5.24xlarge"
 	AppInstanceTypeMlG548xlarge            AppInstanceType = "ml.g5.48xlarge"
+	AppInstanceTypeMlG6Xlarge              AppInstanceType = "ml.g6.xlarge"
+	AppInstanceTypeMlG62xlarge             AppInstanceType = "ml.g6.2xlarge"
+	AppInstanceTypeMlG64xlarge             AppInstanceType = "ml.g6.4xlarge"
+	AppInstanceTypeMlG68xlarge             AppInstanceType = "ml.g6.8xlarge"
+	AppInstanceTypeMlG612xlarge            AppInstanceType = "ml.g6.12xlarge"
+	AppInstanceTypeMlG616xlarge            AppInstanceType = "ml.g6.16xlarge"
+	AppInstanceTypeMlG624xlarge            AppInstanceType = "ml.g6.24xlarge"
+	AppInstanceTypeMlG648xlarge            AppInstanceType = "ml.g6.48xlarge"
 	AppInstanceTypeMlGeospatialInteractive AppInstanceType = "ml.geospatial.interactive"
 	AppInstanceTypeMlP4d24xlarge           AppInstanceType = "ml.p4d.24xlarge"
 	AppInstanceTypeMlP4de24xlarge          AppInstanceType = "ml.p4de.24xlarge"
@@ -354,6 +362,14 @@ func (AppInstanceType) Values() []AppInstanceType {
 		"ml.g5.12xlarge",
 		"ml.g5.24xlarge",
 		"ml.g5.48xlarge",
+		"ml.g6.xlarge",
+		"ml.g6.2xlarge",
+		"ml.g6.4xlarge",
+		"ml.g6.8xlarge",
+		"ml.g6.12xlarge",
+		"ml.g6.16xlarge",
+		"ml.g6.24xlarge",
+		"ml.g6.48xlarge",
 		"ml.geospatial.interactive",
 		"ml.p4d.24xlarge",
 		"ml.p4de.24xlarge",
@@ -3239,6 +3255,14 @@ const (
 	InstanceTypeMlR6id16xlarge InstanceType = "ml.r6id.16xlarge"
 	InstanceTypeMlR6id24xlarge InstanceType = "ml.r6id.24xlarge"
 	InstanceTypeMlR6id32xlarge InstanceType = "ml.r6id.32xlarge"
+	InstanceTypeMlG6Xlarge     InstanceType = "ml.g6.xlarge"
+	InstanceTypeMlG62xlarge    InstanceType = "ml.g6.2xlarge"
+	InstanceTypeMlG64xlarge    InstanceType = "ml.g6.4xlarge"
+	InstanceTypeMlG68xlarge    InstanceType = "ml.g6.8xlarge"
+	InstanceTypeMlG612xlarge   InstanceType = "ml.g6.12xlarge"
+	InstanceTypeMlG616xlarge   InstanceType = "ml.g6.16xlarge"
+	InstanceTypeMlG624xlarge   InstanceType = "ml.g6.24xlarge"
+	InstanceTypeMlG648xlarge   InstanceType = "ml.g6.48xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -3404,6 +3428,14 @@ func (InstanceType) Values() []InstanceType {
 		"ml.r6id.16xlarge",
 		"ml.r6id.24xlarge",
 		"ml.r6id.32xlarge",
+		"ml.g6.xlarge",
+		"ml.g6.2xlarge",
+		"ml.g6.4xlarge",
+		"ml.g6.8xlarge",
+		"ml.g6.12xlarge",
+		"ml.g6.16xlarge",
+		"ml.g6.24xlarge",
+		"ml.g6.48xlarge",
 	}
 }
 

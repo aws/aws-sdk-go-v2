@@ -187,6 +187,8 @@ type ComponentDependencyRequirement struct {
 type ComponentDeploymentSpecification struct {
 
 	// The version of the component.
+	//
+	// This member is required.
 	ComponentVersion *string
 
 	// The configuration updates to deploy for the component. You can define reset
@@ -642,7 +644,8 @@ type InstalledComponent struct {
 
 	// The most recent deployment source that brought the component to the Greengrass
 	// core device. For a thing group deployment or thing deployment, the source will
-	// be the The ID of the deployment. and for local deployments it will be LOCAL .
+	// be the ID of the last deployment that contained the component. For local
+	// deployments it will be LOCAL .
 	//
 	// Any deployment will attempt to reinstall currently broken components on the
 	// device, which will update the last installation source.

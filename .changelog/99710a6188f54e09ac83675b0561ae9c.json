@@ -1,0 +1,8 @@
+{
+    "id": "99710a61-88f5-4e09-ac83-675b0561ae9c",
+    "type": "feature",
+    "description": "Mark ComponentVersion in ComponentDeploymentSpecification as required.",
+    "modules": [
+        "service/greengrassv2"
+    ]
+}

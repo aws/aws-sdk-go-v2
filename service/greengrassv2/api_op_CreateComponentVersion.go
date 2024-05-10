@@ -39,25 +39,10 @@ import (
 //	You can use this operation to migrate Lambda functions from IoT Greengrass V1 to
 //	IoT Greengrass V2.
 //
-// This function only accepts Lambda functions that use the following runtimes:
+// This function accepts Lambda functions in all supported versions of Python,
 //
-//   - Python 2.7 – python2.7
-//
-//   - Python 3.7 – python3.7
-//
-//   - Python 3.8 – python3.8
-//
-//   - Python 3.9 – python3.9
-//
-//   - Java 8 – java8
-//
-//   - Java 11 – java11
-//
-//   - Node.js 10 – nodejs10.x
-//
-//   - Node.js 12 – nodejs12.x
-//
-//   - Node.js 14 – nodejs14.x
+//	Node.js, and Java runtimes. IoT Greengrass doesn't apply any additional
+//	restrictions on deprecated Lambda runtime versions.
 //
 // To create a component from a Lambda function, specify lambdaFunction when you
 //
