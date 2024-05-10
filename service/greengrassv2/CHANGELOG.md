@@ -1,3 +1,7 @@
+# v1.31.0 (2024-05-10)
+
+* **Feature**: Mark ComponentVersion in ComponentDeploymentSpecification as required.
+
 # v1.30.5 (2024-05-08)
 
 * **Bug Fix**: GoDoc improvement

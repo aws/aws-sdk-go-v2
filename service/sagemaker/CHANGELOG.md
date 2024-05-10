@@ -1,3 +1,7 @@
+# v1.140.0 (2024-05-10)
+
+* **Feature**: Introduced support for G6 instance types on Sagemaker Notebook Instances and on SageMaker Studio for JupyterLab and CodeEditor applications.
+
 # v1.139.1 (2024-05-08)
 
 * **Bug Fix**: GoDoc improvement

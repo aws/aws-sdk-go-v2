@@ -1,3 +1,19 @@
+# Release (2024-05-10)
+
+## General Highlights
+* **Feature**: Drop test dependency on x/net, h2 support is now available in the stdlib.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.161.1](service/ec2/CHANGELOG.md#v11611-2024-05-10)
+  * **Bug Fix**: Fix serialization behavior of empty lists.
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.31.0](service/greengrassv2/CHANGELOG.md#v1310-2024-05-10)
+  * **Feature**: Mark ComponentVersion in ComponentDeploymentSpecification as required.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.140.0](service/sagemaker/CHANGELOG.md#v11400-2024-05-10)
+  * **Feature**: Introduced support for G6 instance types on Sagemaker Notebook Instances and on SageMaker Studio for JupyterLab and CodeEditor applications.
+* `github.com/aws/aws-sdk-go-v2/service/ssooidc`: [v1.24.0](service/ssooidc/CHANGELOG.md#v1240-2024-05-10)
+  * **Feature**: Updated request parameters for PKCE support.
+
 # Release (2024-05-09)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "141709e9-7967-446f-a321-3dfafe9aa52f",
-    "type": "feature",
-    "description": "add v2 smoke tests and smithy smokeTests trait for SDK testing",
-    "modules": [
-        "service/applicationdiscoveryservice"
-    ]
-}
