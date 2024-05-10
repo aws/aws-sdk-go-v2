@@ -1,0 +1,8 @@
+{
+    "id": "6ed4b80d-8dd0-46f6-9e9f-c13d60233253",
+    "type": "feature",
+    "description": "Remove deprecated `honeycode` service.",
+    "modules": [
+        "."
+    ]
+}
