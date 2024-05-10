@@ -1,0 +1,8 @@
+{
+    "id": "16a15922-898f-472d-b59d-d9deb6922968",
+    "type": "bugfix",
+    "description": "Fix confusing doc header in `aws/signer/v4` package.",
+    "modules": [
+        "."
+    ]
+}
