@@ -42,7 +42,7 @@ type ListTargetsInput struct {
 	// A pagination token for the next page of results.
 	NextToken *string
 
-	// The targets to list.
+	// The targets.
 	Targets []types.Target
 
 	noSmithyDocumentSerde

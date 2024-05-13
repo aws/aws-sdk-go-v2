@@ -53,8 +53,7 @@ type CreateTargetGroupInput struct {
 	// actions. If the parameters aren't identical, the retry fails.
 	ClientToken *string
 
-	// The target group configuration. If type is set to LAMBDA , this parameter
-	// doesn't apply.
+	// The target group configuration.
 	Config *types.TargetGroupConfig
 
 	// The tags for the target group.
@@ -68,8 +67,7 @@ type CreateTargetGroupOutput struct {
 	// The Amazon Resource Name (ARN) of the target group.
 	Arn *string
 
-	// The target group configuration. If type is set to LAMBDA , this parameter
-	// doesn't apply.
+	// The target group configuration.
 	Config *types.TargetGroupConfig
 
 	// The ID of the target group.
@@ -78,9 +76,9 @@ type CreateTargetGroupOutput struct {
 	// The name of the target group.
 	Name *string
 
-	// The operation's status. You can retry the operation if the status is
-	// CREATE_FAILED . However, if you retry it while the status is CREATE_IN_PROGRESS
-	// , there is no change in the status.
+	// The status. You can retry the operation if the status is CREATE_FAILED .
+	// However, if you retry it while the status is CREATE_IN_PROGRESS , there is no
+	// change in the status.
 	Status types.TargetGroupStatus
 
 	// The type of target group.

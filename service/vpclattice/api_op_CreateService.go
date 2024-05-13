@@ -91,8 +91,8 @@ type CreateServiceOutput struct {
 	// The name of the service.
 	Name *string
 
-	// The status. If the status is CREATE_FAILED , you will have to delete and
-	// recreate the service.
+	// The status. If the status is CREATE_FAILED , you must delete and recreate the
+	// service.
 	Status types.ServiceStatus
 
 	// Metadata pertaining to the operation's result.

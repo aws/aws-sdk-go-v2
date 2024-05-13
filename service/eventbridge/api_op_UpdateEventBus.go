@@ -11,38 +11,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new event bus within your account. This can be a custom event bus
-// which you can use to receive events from your custom applications and services,
-// or it can be a partner event bus which can be matched to a partner event source.
-func (c *Client) CreateEventBus(ctx context.Context, params *CreateEventBusInput, optFns ...func(*Options)) (*CreateEventBusOutput, error) {
+// Updates the specified event bus.
+func (c *Client) UpdateEventBus(ctx context.Context, params *UpdateEventBusInput, optFns ...func(*Options)) (*UpdateEventBusOutput, error) {
 	if params == nil {
-		params = &CreateEventBusInput{}
+		params = &UpdateEventBusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateEventBus", params, optFns, c.addOperationCreateEventBusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateEventBus", params, optFns, c.addOperationUpdateEventBusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateEventBusOutput)
+	out := result.(*UpdateEventBusOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateEventBusInput struct {
-
-	// The name of the new event bus.
-	//
-	// Custom event bus names can't contain the / character, but you can use the /
-	// character in partner event bus names. In addition, for partner event buses, the
-	// name must exactly match the name of the partner event source that this event bus
-	// is matched to.
-	//
-	// You can't use the name default for a custom event bus, as this name is already
-	// used for your account's default event bus.
-	//
-	// This member is required.
-	Name *string
+type UpdateEventBusInput struct {
 
 	// Configuration details of the Amazon SQS queue for EventBridge to use as a
 	// dead-letter queue (DLQ).
@@ -52,10 +37,6 @@ type CreateEventBusInput struct {
 
 	// The event bus description.
 	Description *string
-
-	// If you are creating a partner event bus, this specifies the partner event
-	// source that the new event bus will be matched with.
-	EventSourceName *string
 
 	// The identifier of the KMS customer managed key for EventBridge to use, if you
 	// choose to use a customer managed key to encrypt events on this event bus. The
@@ -88,13 +69,16 @@ type CreateEventBusInput struct {
 	// [CreateDiscoverer]: https://docs.aws.amazon.com/eventbridge/latest/schema-reference/v1-discoverers.html#CreateDiscoverer
 	KmsKeyIdentifier *string
 
-	// Tags to associate with the event bus.
-	Tags []types.Tag
+	// The name of the event bus.
+	Name *string
 
 	noSmithyDocumentSerde
 }
 
-type CreateEventBusOutput struct {
+type UpdateEventBusOutput struct {
+
+	// The event bus Amazon Resource Name (ARN).
+	Arn *string
 
 	// Configuration details of the Amazon SQS queue for EventBridge to use as a
 	// dead-letter queue (DLQ).
@@ -105,9 +89,6 @@ type CreateEventBusOutput struct {
 	// The event bus description.
 	Description *string
 
-	// The ARN of the new event bus.
-	EventBusArn *string
-
 	// The identifier of the KMS customer managed key for EventBridge to use to
 	// encrypt events on this event bus, if one has been specified.
 	//
@@ -116,25 +97,28 @@ type CreateEventBusOutput struct {
 	// [Data encryption in EventBridge]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption.html
 	KmsKeyIdentifier *string
 
+	// The event bus name.
+	Name *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateEventBusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateEventBusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEventBus{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEventBus{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEventBus{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateEventBus{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEventBus"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateEventBus"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -177,10 +161,7 @@ func (c *Client) addOperationCreateEventBusMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateEventBusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEventBus(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEventBus(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -201,10 +182,10 @@ func (c *Client) addOperationCreateEventBusMiddlewares(stack *middleware.Stack, 
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateEventBus(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateEventBus(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "CreateEventBus",
+		OperationName: "UpdateEventBus",
 	}
 }

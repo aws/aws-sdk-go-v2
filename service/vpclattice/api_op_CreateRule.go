@@ -81,9 +81,7 @@ type CreateRuleInput struct {
 
 type CreateRuleOutput struct {
 
-	// The rule action. Each rule must include exactly one of the following types of
-	// actions: forward or fixed-response , and it must be the last action to be
-	// performed.
+	// The rule action.
 	Action types.RuleAction
 
 	// The Amazon Resource Name (ARN) of the rule.

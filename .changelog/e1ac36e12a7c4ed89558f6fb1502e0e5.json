@@ -1,0 +1,8 @@
+{
+    "id": "e1ac36e1-2a7c-4ed8-9558-f6fb1502e0e5",
+    "type": "feature",
+    "description": "This release adds TLS Passthrough support. It also increases max number of target group per rule to 10.",
+    "modules": [
+        "service/vpclattice"
+    ]
+}

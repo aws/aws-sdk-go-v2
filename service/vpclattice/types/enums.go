@@ -111,6 +111,8 @@ const (
 	ListenerProtocolHttp ListenerProtocol = "HTTP"
 	// Indicates HTTPS protocol
 	ListenerProtocolHttps ListenerProtocol = "HTTPS"
+	// Indicates TLS_PASSTHROUGH protocol
+	ListenerProtocolTlsPassthrough ListenerProtocol = "TLS_PASSTHROUGH"
 )
 
 // Values returns all known values for ListenerProtocol. Note that this can be
@@ -121,6 +123,7 @@ func (ListenerProtocol) Values() []ListenerProtocol {
 	return []ListenerProtocol{
 		"HTTP",
 		"HTTPS",
+		"TLS_PASSTHROUGH",
 	}
 }
 
@@ -230,6 +233,8 @@ const (
 	TargetGroupProtocolHttp TargetGroupProtocol = "HTTP"
 	// Indicates HTTPS protocol
 	TargetGroupProtocolHttps TargetGroupProtocol = "HTTPS"
+	// Indicates TCP protocol
+	TargetGroupProtocolTcp TargetGroupProtocol = "TCP"
 )
 
 // Values returns all known values for TargetGroupProtocol. Note that this can be
@@ -240,6 +245,7 @@ func (TargetGroupProtocol) Values() []TargetGroupProtocol {
 	return []TargetGroupProtocol{
 		"HTTP",
 		"HTTPS",
+		"TCP",
 	}
 }
 

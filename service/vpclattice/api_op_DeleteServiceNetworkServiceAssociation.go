@@ -12,7 +12,7 @@ import (
 )
 
 // Deletes the association between a specified service and the specific service
-// network. This request will fail if an association is still in progress.
+// network. This operation fails if an association is still in progress.
 func (c *Client) DeleteServiceNetworkServiceAssociation(ctx context.Context, params *DeleteServiceNetworkServiceAssociationInput, optFns ...func(*Options)) (*DeleteServiceNetworkServiceAssociationOutput, error) {
 	if params == nil {
 		params = &DeleteServiceNetworkServiceAssociationInput{}
@@ -46,9 +46,9 @@ type DeleteServiceNetworkServiceAssociationOutput struct {
 	// The ID of the association.
 	Id *string
 
-	// The operation's status. You can retry the operation if the status is
-	// DELETE_FAILED . However, if you retry it when the status is DELETE_IN_PROGRESS ,
-	// there is no change in the status.
+	// The status. You can retry the operation if the status is DELETE_FAILED .
+	// However, if you retry it when the status is DELETE_IN_PROGRESS , there is no
+	// change in the status.
 	Status types.ServiceNetworkServiceAssociationStatus
 
 	// Metadata pertaining to the operation's result.

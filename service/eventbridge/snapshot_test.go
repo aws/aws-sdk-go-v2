@@ -733,6 +733,18 @@ func TestCheckSnapshot_UpdateEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateEventBus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateEventBus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateEventBus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_ActivateEventSource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ActivateEventSource(context.Background(), nil, func(o *Options) {
@@ -1398,6 +1410,18 @@ func TestUpdateSnapshot_UpdateEndpoint(t *testing.T) {
 	_, err := svc.UpdateEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateEventBus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateEventBus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateEventBus")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

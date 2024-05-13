@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a service with a service network.
+// Associates a service with a service network. For more information, see [Manage service associations] in the
+// Amazon VPC Lattice User Guide.
 //
 // You can't use this operation if the service and service network are already
 // associated or if there is a disassociation or deletion in progress. If the
@@ -23,6 +24,8 @@ import (
 //
 // As a result of this operation, the association is created in the service
 // network account and the association owner account.
+//
+// [Manage service associations]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-service-associations
 func (c *Client) CreateServiceNetworkServiceAssociation(ctx context.Context, params *CreateServiceNetworkServiceAssociationInput, optFns ...func(*Options)) (*CreateServiceNetworkServiceAssociationOutput, error) {
 	if params == nil {
 		params = &CreateServiceNetworkServiceAssociationInput{}
@@ -80,7 +83,7 @@ type CreateServiceNetworkServiceAssociationOutput struct {
 	// The ID of the association.
 	Id *string
 
-	// The operation's status.
+	// The association status.
 	Status types.ServiceNetworkServiceAssociationStatus
 
 	// Metadata pertaining to the operation's result.

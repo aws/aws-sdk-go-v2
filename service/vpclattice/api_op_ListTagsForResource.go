@@ -38,7 +38,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// The tags.
+	// Information about the tags.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

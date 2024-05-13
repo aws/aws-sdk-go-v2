@@ -45,7 +45,7 @@ type ListAccessLogSubscriptionsInput struct {
 
 type ListAccessLogSubscriptionsOutput struct {
 
-	// The access log subscriptions.
+	// Information about the access log subscriptions.
 	//
 	// This member is required.
 	Items []types.AccessLogSubscriptionSummary

@@ -34,11 +34,8 @@ func (c *Client) CreateListener(ctx context.Context, params *CreateListenerInput
 
 type CreateListenerInput struct {
 
-	// The action for the default rule. Each listener has a default rule. Each rule
-	// consists of a priority, one or more actions, and one or more conditions. The
-	// default rule is the rule that's used if no other rules match. Each rule must
-	// include exactly one of the following types of actions: forward or fixed-response
-	// , and it must be the last action to be performed.
+	// The action for the default rule. Each listener has a default rule. The default
+	// rule is used if no other rules match.
 	//
 	// This member is required.
 	DefaultAction types.RuleAction
@@ -50,7 +47,7 @@ type CreateListenerInput struct {
 	// This member is required.
 	Name *string
 
-	// The listener protocol HTTP or HTTPS.
+	// The listener protocol.
 	//
 	// This member is required.
 	Protocol types.ListenerProtocol
@@ -66,8 +63,8 @@ type CreateListenerInput struct {
 	// actions. If the parameters aren't identical, the retry fails.
 	ClientToken *string
 
-	// The listener port. You can specify a value from 1 to 65535 . For HTTP, the
-	// default is 80 . For HTTPS, the default is 443 .
+	// The listener port. You can specify a value from 1 to 65535. For HTTP, the
+	// default is 80. For HTTPS, the default is 443.
 	Port *int32
 
 	// The tags for the listener.

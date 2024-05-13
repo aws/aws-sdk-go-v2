@@ -18,8 +18,8 @@ import (
 // Every association in Amazon VPC Lattice is given a unique Amazon Resource Name
 // (ARN), such as when a service network is associated with a VPC or when a service
 // is associated with a service network. If the association is for a resource that
-// is shared with another account, the association will include the local account
-// ID as the prefix in the ARN for each account the resource is shared with.
+// is shared with another account, the association includes the local account ID as
+// the prefix in the ARN for each account the resource is shared with.
 func (c *Client) ListServiceNetworkServiceAssociations(ctx context.Context, params *ListServiceNetworkServiceAssociationsInput, optFns ...func(*Options)) (*ListServiceNetworkServiceAssociationsOutput, error) {
 	if params == nil {
 		params = &ListServiceNetworkServiceAssociationsInput{}

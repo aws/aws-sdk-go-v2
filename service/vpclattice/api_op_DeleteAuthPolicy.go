@@ -10,11 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified auth policy. If an auth is set to Amazon Web Services_IAM
-// and the auth policy is deleted, all requests will be denied by default. If you
-// are trying to remove the auth policy completely, you must set the auth_type to
-// NONE . If auth is enabled on the resource, but no auth policy is set, all
-// requests will be denied.
+// Deletes the specified auth policy. If an auth is set to AWS_IAM and the auth
+// policy is deleted, all requests are denied. If you are trying to remove the auth
+// policy completely, you must set the auth type to NONE . If auth is enabled on
+// the resource, but no auth policy is set, all requests are denied.
 func (c *Client) DeleteAuthPolicy(ctx context.Context, params *DeleteAuthPolicyInput, optFns ...func(*Options)) (*DeleteAuthPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteAuthPolicyInput{}

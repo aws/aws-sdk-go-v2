@@ -41,7 +41,7 @@ type ListServicesInput struct {
 
 type ListServicesOutput struct {
 
-	// The services.
+	// Information about the services.
 	Items []types.ServiceSummary
 
 	// If there are additional results, a pagination token for the next page of
