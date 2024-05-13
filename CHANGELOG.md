@@ -1,3 +1,11 @@
+# Release (2024-05-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.31.0](service/eventbridge/CHANGELOG.md#v1310-2024-05-13)
+  * **Feature**: Amazon EventBridge introduces KMS customer-managed key (CMK) encryption support for custom and partner events published on EventBridge Event Bus (including default bus) and UpdateEventBus API.
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.8.0](service/vpclattice/CHANGELOG.md#v180-2024-05-13)
+  * **Feature**: This release adds TLS Passthrough support. It also increases max number of target group per rule to 10.
+
 # Release (2024-05-10)
 
 ## General Highlights

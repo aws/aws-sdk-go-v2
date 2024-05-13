@@ -1,3 +1,7 @@
+# v1.31.0 (2024-05-13)
+
+* **Feature**: Amazon EventBridge introduces KMS customer-managed key (CMK) encryption support for custom and partner events published on EventBridge Event Bus (including default bus) and UpdateEventBus API.
+
 # v1.30.5 (2024-05-08)
 
 * **Bug Fix**: GoDoc improvement

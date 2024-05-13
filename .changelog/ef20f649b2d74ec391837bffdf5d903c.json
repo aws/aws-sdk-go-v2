@@ -1,8 +1,0 @@
-{
-    "id": "ef20f649-b2d7-4ec3-9183-7bffdf5d903c",
-    "type": "feature",
-    "description": "Amazon EventBridge introduces KMS customer-managed key (CMK) encryption support for custom and partner events published on EventBridge Event Bus (including default bus) and UpdateEventBus API.",
-    "modules": [
-        "service/eventbridge"
-    ]
-}

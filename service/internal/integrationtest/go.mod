@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.28.5
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.22.5
 	github.com/aws/aws-sdk-go-v2/service/emr v1.39.6
-	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.30.5
+	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.28.7
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.22.5
