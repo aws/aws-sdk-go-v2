@@ -103,28 +103,29 @@ type MetricContext struct {
 
 // MetricData stores the collected metric data.
 type MetricData struct {
-	RequestStartTime           time.Time
-	RequestEndTime             time.Time
-	APICallDuration            time.Duration
-	SerializeStartTime         time.Time
-	SerializeEndTime           time.Time
-	MarshallingDuration        time.Duration
-	ResolveEndpointStartTime   time.Time
-	ResolveEndpointEndTime     time.Time
-	EndpointResolutionDuration time.Duration
-	InThroughput               float64
-	OutThroughput              float64
-	RetryCount                 int
-	Success                    uint8
-	StatusCode                 int
-	ClientRequestID            string
-	ServiceID                  string
-	OperationName              string
-	PartitionID                string
-	Region                     string
-	RequestContentLength       int64
-	Stream                     StreamMetrics
-	Attempts                   []AttemptMetrics
+	RequestStartTime                 time.Time
+	RequestEndTime                   time.Time
+	APICallDuration                  time.Duration
+	SerializeStartTime               time.Time
+	SerializeEndTime                 time.Time
+	MarshallingDuration              time.Duration
+	ResolveEndpointStartTime         time.Time
+	ResolveEndpointEndTime           time.Time
+	EndpointResolutionDuration       time.Duration
+	GetIdentityStart, GetIdentityEnd time.Time
+	InThroughput                     float64
+	OutThroughput                    float64
+	RetryCount                       int
+	Success                          uint8
+	StatusCode                       int
+	ClientRequestID                  string
+	ServiceID                        string
+	OperationName                    string
+	PartitionID                      string
+	Region                           string
+	RequestContentLength             int64
+	Stream                           StreamMetrics
+	Attempts                         []AttemptMetrics
 }
 
 // StreamMetrics stores metrics related to streaming data.
@@ -144,8 +145,6 @@ type AttemptMetrics struct {
 	ConnRequestedTime          time.Time
 	ConnObtainedTime           time.Time
 	ConcurrencyAcquireDuration time.Duration
-	CredentialFetchStartTime   time.Time
-	CredentialFetchEndTime     time.Time
 	SignStartTime              time.Time
 	SignEndTime                time.Time
 	SigningDuration            time.Duration
