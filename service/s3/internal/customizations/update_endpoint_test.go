@@ -1031,7 +1031,7 @@ func TestWriteGetObjectResponse_UpdateEndpoint(t *testing.T) {
 			options: s3.Options{
 				Region: "us-west-2",
 			},
-			expectedReqURL:        "https://test-route.s3-object-lambda.us-west-2.amazonaws.com/WriteGetObjectResponse?x-id=WriteGetObjectResponse",
+			expectedReqURL:        "https://test-route.s3-object-lambda.us-west-2.amazonaws.com/WriteGetObjectResponse",
 			expectedSigningRegion: "us-west-2",
 			expectedSigningName:   "s3-object-lambda",
 		},
@@ -1042,7 +1042,7 @@ func TestWriteGetObjectResponse_UpdateEndpoint(t *testing.T) {
 					UseFIPSEndpoint: aws.FIPSEndpointStateEnabled,
 				},
 			},
-			expectedReqURL:        "https://test-route.s3-object-lambda-fips.us-gov-west-1.amazonaws.com/WriteGetObjectResponse?x-id=WriteGetObjectResponse",
+			expectedReqURL:        "https://test-route.s3-object-lambda-fips.us-gov-west-1.amazonaws.com/WriteGetObjectResponse",
 			expectedSigningRegion: "us-gov-west-1",
 			expectedSigningName:   "s3-object-lambda",
 		},
@@ -1050,7 +1050,7 @@ func TestWriteGetObjectResponse_UpdateEndpoint(t *testing.T) {
 			options: s3.Options{
 				Region: "fips-us-gov-west-1",
 			},
-			expectedReqURL:        "https://test-route.s3-object-lambda-fips.us-gov-west-1.amazonaws.com/WriteGetObjectResponse?x-id=WriteGetObjectResponse",
+			expectedReqURL:        "https://test-route.s3-object-lambda-fips.us-gov-west-1.amazonaws.com/WriteGetObjectResponse",
 			expectedSigningRegion: "us-gov-west-1",
 			expectedSigningName:   "s3-object-lambda",
 		},
@@ -1079,7 +1079,7 @@ func TestWriteGetObjectResponse_UpdateEndpoint(t *testing.T) {
 					}, nil
 				}),
 			},
-			expectedReqURL:        "https://test-route.my-domain.com/WriteGetObjectResponse?x-id=WriteGetObjectResponse",
+			expectedReqURL:        "https://test-route.my-domain.com/WriteGetObjectResponse",
 			expectedSigningRegion: "us-west-2",
 			expectedSigningName:   "s3-object-lambda",
 		},
@@ -1095,7 +1095,7 @@ func TestWriteGetObjectResponse_UpdateEndpoint(t *testing.T) {
 					}, nil
 				}),
 			},
-			expectedReqURL:        "https://test-route.my-domain.com/WriteGetObjectResponse?x-id=WriteGetObjectResponse",
+			expectedReqURL:        "https://test-route.my-domain.com/WriteGetObjectResponse",
 			expectedSigningRegion: "us-west-2",
 			expectedSigningName:   "s3-object-lambda",
 		},
