@@ -3390,6 +3390,46 @@ func (m *validateOpSearchAvailablePhoneNumbers) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchContactFlowModules struct {
+}
+
+func (*validateOpSearchContactFlowModules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchContactFlowModules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchContactFlowModulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchContactFlowModulesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchContactFlows struct {
+}
+
+func (*validateOpSearchContactFlows) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchContactFlows) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchContactFlowsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchContactFlowsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSearchContacts struct {
 }
 
@@ -5584,6 +5624,14 @@ func addOpResumeContactRecordingValidationMiddleware(stack *middleware.Stack) er
 
 func addOpSearchAvailablePhoneNumbersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchAvailablePhoneNumbers{}, middleware.After)
+}
+
+func addOpSearchContactFlowModulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchContactFlowModules{}, middleware.After)
+}
+
+func addOpSearchContactFlowsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchContactFlows{}, middleware.After)
 }
 
 func addOpSearchContactsValidationMiddleware(stack *middleware.Stack) error {
@@ -10776,6 +10824,36 @@ func validateOpSearchAvailablePhoneNumbersInput(v *SearchAvailablePhoneNumbersIn
 	}
 	if len(v.PhoneNumberType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumberType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchContactFlowModulesInput(v *SearchContactFlowModulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchContactFlowModulesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchContactFlowsInput(v *SearchContactFlowsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchContactFlowsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

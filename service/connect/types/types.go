@@ -754,6 +754,9 @@ type ContactFlow struct {
 	// The type of flow.
 	State ContactFlowState
 
+	// The status of the contact flow.
+	Status ContactFlowStatus
+
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
@@ -800,6 +803,37 @@ type ContactFlowModule struct {
 	noSmithyDocumentSerde
 }
 
+// The search criteria to be used to return flow modules.
+type ContactFlowModuleSearchCriteria struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndConditions []ContactFlowModuleSearchCriteria
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []ContactFlowModuleSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition.
+	//
+	// The currently supported values for FieldName are name and description .
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// The search criteria to be used to return flow modules.
+type ContactFlowModuleSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter .
+	// This accepts an OR of AND (List of List) input where:
+	//
+	//   - Top level list specifies conditions that need to be applied with OR operator
+	//
+	//   - Inner list specifies conditions that need to be applied with AND operator.
+	TagFilter *ControlPlaneTagFilter
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary information about a flow.
 type ContactFlowModuleSummary struct {
 
@@ -818,6 +852,46 @@ type ContactFlowModuleSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The search criteria to be used to return contact flows.
+type ContactFlowSearchCriteria struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndConditions []ContactFlowSearchCriteria
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []ContactFlowSearchCriteria
+
+	// The state of the flow.
+	StateCondition ContactFlowState
+
+	// The status of the flow.
+	StatusCondition ContactFlowStatus
+
+	// A leaf node condition which can be used to specify a string condition.
+	//
+	// The currently supported values for FieldName are name and description .
+	StringCondition *StringCondition
+
+	// The type of flow.
+	TypeCondition ContactFlowType
+
+	noSmithyDocumentSerde
+}
+
+// Filters to be applied to search results.
+type ContactFlowSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter .
+	// This accepts an OR of AND (List of List) input where:
+	//
+	//   - Top level list specifies conditions that need to be applied with OR operator
+	//
+	//   - Inner list specifies conditions that need to be applied with AND operator.
+	TagFilter *ControlPlaneTagFilter
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary information about a flow.
 //
 // You can also create and update flows using the [Amazon Connect Flow language].
@@ -830,6 +904,9 @@ type ContactFlowSummary struct {
 
 	// The type of flow.
 	ContactFlowState ContactFlowState
+
+	// The status of the contact flow.
+	ContactFlowStatus ContactFlowStatus
 
 	// The type of flow.
 	ContactFlowType ContactFlowType

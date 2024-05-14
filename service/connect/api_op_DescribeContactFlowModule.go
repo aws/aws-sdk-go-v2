@@ -12,6 +12,11 @@ import (
 )
 
 // Describes the specified flow module.
+//
+// Use the $SAVED alias in the request to describe the SAVED content of a Flow.
+// For example, arn:aws:.../contact-flow/{id}:$SAVED . Once a contact flow is
+// published, $SAVED needs to be supplied to view saved content that has not been
+// published.
 func (c *Client) DescribeContactFlowModule(ctx context.Context, params *DescribeContactFlowModuleInput, optFns ...func(*Options)) (*DescribeContactFlowModuleOutput, error) {
 	if params == nil {
 		params = &DescribeContactFlowModuleInput{}

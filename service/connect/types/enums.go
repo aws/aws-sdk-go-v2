@@ -270,6 +270,25 @@ func (ContactFlowState) Values() []ContactFlowState {
 	}
 }
 
+type ContactFlowStatus string
+
+// Enum values for ContactFlowStatus
+const (
+	ContactFlowStatusPublished ContactFlowStatus = "PUBLISHED"
+	ContactFlowStatusSaved     ContactFlowStatus = "SAVED"
+)
+
+// Values returns all known values for ContactFlowStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContactFlowStatus) Values() []ContactFlowStatus {
+	return []ContactFlowStatus{
+		"PUBLISHED",
+		"SAVED",
+	}
+}
+
 type ContactFlowType string
 
 // Enum values for ContactFlowType

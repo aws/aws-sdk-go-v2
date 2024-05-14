@@ -3,7 +3,6 @@ ListRecommendationTemplates
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
-		OperationInputValidation
 	Serialize stack step
 		setOperationInput
 		ResolveEndpoint

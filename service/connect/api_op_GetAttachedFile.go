@@ -52,7 +52,8 @@ type GetAttachedFileInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// Optional override for the expiry of the pre-signed S3 URL in seconds.
+	// Optional override for the expiry of the pre-signed S3 URL in seconds. The
+	// default value is 300.
 	UrlExpiryInSeconds *int32
 
 	noSmithyDocumentSerde
@@ -68,8 +69,6 @@ type GetAttachedFileOutput struct {
 
 	// The resource to which the attached file is (being) uploaded to. [Cases] are the only
 	// current supported resource.
-	//
-	// This value must be a valid ARN.
 	//
 	// [Cases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
 	AssociatedResourceArn *string

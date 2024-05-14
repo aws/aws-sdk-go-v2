@@ -77,7 +77,8 @@ type StartAttachedFileUploadInput struct {
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} } .
 	Tags map[string]string
 
-	// Optional override for the expiry of the pre-signed S3 URL in seconds.
+	// Optional override for the expiry of the pre-signed S3 URL in seconds. The
+	// default value is 300.
 	UrlExpiryInSeconds *int32
 
 	noSmithyDocumentSerde

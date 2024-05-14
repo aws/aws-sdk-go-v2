@@ -1,0 +1,8 @@
+{
+    "id": "17f68807-01f3-4043-b8f0-c61e28432a0e",
+    "type": "feature",
+    "description": "Amazon Connect provides enhanced search capabilities for flows \u0026 flow modules on the Connect admin website and programmatically using APIs. You can search for flows and flow modules by name, description, type, status, and tags, to filter and identify a specific flow in your Connect instances.",
+    "modules": [
+        "service/connect"
+    ]
+}

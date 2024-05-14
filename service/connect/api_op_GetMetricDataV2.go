@@ -79,7 +79,8 @@ type GetMetricDataV2Input struct {
 	//   AGENT_HIERARCHY_LEVEL_ONE | AGENT_HIERARCHY_LEVEL_TWO |
 	//   AGENT_HIERARCHY_LEVEL_THREE | AGENT_HIERARCHY_LEVEL_FOUR |
 	//   AGENT_HIERARCHY_LEVEL_FIVE | FEATURE | CASE_TEMPLATE_ARN | CASE_STATUS |
-	//   contact/segmentAttributes/connect:Subtype | ROUTING_STEP_EXPRESSION
+	//   contact/segmentAttributes/connect:Subtype | ROUTING_STEP_EXPRESSION |
+	//   Q_CONNECT_ENABLED
 	//
 	//   - Filter values: A maximum of 100 filter values are supported in a single
 	//   request. VOICE, CHAT, and TASK are valid filterValue for the CHANNEL filter
@@ -99,6 +100,17 @@ type GetMetricDataV2Input struct {
 	//   length. This filter is case and order sensitive. JSON string fields must be
 	//   sorted in ascending order and JSON array order should be kept as is.
 	//
+	// Q_CONNECT_ENABLED . TRUE and FALSE are the only valid filterValues for the
+	//   Q_CONNECT_ENABLED filter key.
+	//
+	//   - TRUE includes all contacts that had Amazon Q in Connect enabled as part of
+	//   the flow.
+	//
+	//   - FALSE includes all contacts that did not have Amazon Q in Connect enabled
+	//   as part of the flow
+	//
+	// This filter is available only for contact record-driven metrics.
+	//
 	// [Create a historical metrics report]: https://docs.aws.amazon.com/connect/latest/adminguide/create-historical-metrics-report.html
 	//
 	// This member is required.
@@ -111,7 +123,7 @@ type GetMetricDataV2Input struct {
 	// ABANDONMENT_RATE Unit: Percent
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Abandonment rate]
 	//
@@ -184,14 +196,14 @@ type GetMetricDataV2Input struct {
 	// AVG_ABANDON_TIME Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Average queue abandon time]
 	//
 	// AVG_ACTIVE_TIME Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy
+	// Hierarchy, Q in Connect
 	//
 	// UI name: [Average active time]
 	//
@@ -200,7 +212,7 @@ type GetMetricDataV2Input struct {
 	// Valid metric filter key: INITIATION_METHOD
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Average after contact work time]
 	//
@@ -221,7 +233,7 @@ type GetMetricDataV2Input struct {
 	// AVG_AGENT_PAUSE_TIME Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy
+	// Hierarchy, Q in Connect
 	//
 	// UI name: [Average agent pause time]
 	//
@@ -244,7 +256,7 @@ type GetMetricDataV2Input struct {
 	// AVG_CONTACT_DURATION Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Average contact duration]
 	//
@@ -253,7 +265,7 @@ type GetMetricDataV2Input struct {
 	// AVG_CONVERSATION_DURATION Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Average conversation duration]
 	//
@@ -263,7 +275,7 @@ type GetMetricDataV2Input struct {
 	// Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Average agent greeting time]
 	//
@@ -280,7 +292,7 @@ type GetMetricDataV2Input struct {
 	// AVG_HOLD_TIME Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Average customer hold time]
 	//
@@ -289,14 +301,14 @@ type GetMetricDataV2Input struct {
 	// AVG_HOLD_TIME_ALL_CONTACTS Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Average customer hold time all contacts]
 	//
 	// AVG_HOLDS Unit: Count
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Average holds]
 	//
@@ -305,7 +317,7 @@ type GetMetricDataV2Input struct {
 	// AVG_INTERACTION_AND_HOLD_TIME Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Average agent interaction and customer hold time]
 	//
@@ -314,7 +326,7 @@ type GetMetricDataV2Input struct {
 	// Valid metric filter key: INITIATION_METHOD
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Feature,
-	// contact/segmentAttributes/connect:Subtype
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Average agent interaction time]
 	//
@@ -326,7 +338,7 @@ type GetMetricDataV2Input struct {
 	// Unit: Count
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Average agent interruptions]
 	//
@@ -336,7 +348,7 @@ type GetMetricDataV2Input struct {
 	// Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Average agent interruption time]
 	//
@@ -346,14 +358,14 @@ type GetMetricDataV2Input struct {
 	// Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Average non-talk time]
 	//
 	// AVG_QUEUE_ANSWER_TIME Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Feature,
-	// contact/segmentAttributes/connect:Subtype
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Average queue answer time]
 	//
@@ -362,7 +374,7 @@ type GetMetricDataV2Input struct {
 	// AVG_RESOLUTION_TIME Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile,
-	// contact/segmentAttributes/connect:Subtype
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Average resolution time]
 	//
@@ -372,7 +384,7 @@ type GetMetricDataV2Input struct {
 	// Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Average talk time]
 	//
@@ -382,7 +394,7 @@ type GetMetricDataV2Input struct {
 	// Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Average agent talk time]
 	//
@@ -392,7 +404,7 @@ type GetMetricDataV2Input struct {
 	// Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Average customer talk time]
 	//
@@ -407,7 +419,8 @@ type GetMetricDataV2Input struct {
 	// CONTACTS_ABANDONED Unit: Count
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype, RoutingStepExpression
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, RoutingStepExpression, Q
+	// in Connect
 	//
 	// UI name: [Contact abandoned]
 	//
@@ -416,7 +429,7 @@ type GetMetricDataV2Input struct {
 	// Valid metric filter key: INITIATION_METHOD
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Feature,
-	// contact/segmentAttributes/connect:Subtype
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Contacts created]
 	//
@@ -428,7 +441,7 @@ type GetMetricDataV2Input struct {
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
 	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype,
-	// RoutingStepExpression
+	// RoutingStepExpression, Q in Connect
 	//
 	// UI name: [API contacts handled]
 	//
@@ -439,56 +452,56 @@ type GetMetricDataV2Input struct {
 	// Valid metric filter key: INITIATION_METHOD
 	//
 	// Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Contacts handled (connected to agent timestamp)]
 	//
 	// CONTACTS_HOLD_ABANDONS Unit: Count
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Contacts hold disconnect]
 	//
 	// CONTACTS_ON_HOLD_AGENT_DISCONNECT Unit: Count
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy
+	// Hierarchy, Q in Connect
 	//
 	// UI name: [Contacts hold agent disconnect]
 	//
 	// CONTACTS_ON_HOLD_CUSTOMER_DISCONNECT Unit: Count
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy
+	// Hierarchy, Q in Connect
 	//
 	// UI name: [Contacts hold customer disconnect]
 	//
 	// CONTACTS_PUT_ON_HOLD Unit: Count
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy
+	// Hierarchy, Q in Connect
 	//
 	// UI name: [Contacts put on hold]
 	//
 	// CONTACTS_TRANSFERRED_OUT_EXTERNAL Unit: Count
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy
+	// Hierarchy, Q in Connect
 	//
 	// UI name: [Contacts transferred out external]
 	//
 	// CONTACTS_TRANSFERRED_OUT_INTERNAL Unit: Percent
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy
+	// Hierarchy, Q in Connect
 	//
 	// UI name: [Contacts transferred out internal]
 	//
 	// CONTACTS_QUEUED Unit: Count
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Contacts queued]
 	//
@@ -502,7 +515,7 @@ type GetMetricDataV2Input struct {
 	// CONTACTS_RESOLVED_IN_X Unit: Count
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile,
-	// contact/segmentAttributes/connect:Subtype
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// Threshold: For ThresholdValue enter any whole number from 1 to 604800
 	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
@@ -512,7 +525,7 @@ type GetMetricDataV2Input struct {
 	// CONTACTS_TRANSFERRED_OUT Unit: Count
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Contacts transferred out]
 	//
@@ -521,14 +534,14 @@ type GetMetricDataV2Input struct {
 	// CONTACTS_TRANSFERRED_OUT_BY_AGENT Unit: Count
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Contacts transferred out by agent]
 	//
 	// CONTACTS_TRANSFERRED_OUT_FROM_QUEUE Unit: Count
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Contacts transferred out queue]
 	//
@@ -543,7 +556,7 @@ type GetMetricDataV2Input struct {
 	// MAX_QUEUED_TIME Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Maximum queued time]
 	//
@@ -573,7 +586,7 @@ type GetMetricDataV2Input struct {
 	// Unit: Percentage
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Non-talk time percent]
 	//
@@ -583,7 +596,7 @@ type GetMetricDataV2Input struct {
 	// Unit: Percentage
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Talk time percent]
 	//
@@ -593,7 +606,7 @@ type GetMetricDataV2Input struct {
 	// Unit: Percentage
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Agent talk time percent]
 	//
@@ -603,7 +616,7 @@ type GetMetricDataV2Input struct {
 	// Unit: Percentage
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Customer talk time percent]
 	//
@@ -627,7 +640,7 @@ type GetMetricDataV2Input struct {
 	//
 	// Unit: Percent
 	//
-	// Valid groupings and filters: Queue, Channel, Routing Profile
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Q in Connect
 	//
 	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
 	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
@@ -643,7 +656,7 @@ type GetMetricDataV2Input struct {
 	// SUM_AFTER_CONTACT_WORK_TIME Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy
+	// Hierarchy, Q in Connect
 	//
 	// UI name: [After contact work time]
 	//
@@ -662,7 +675,7 @@ type GetMetricDataV2Input struct {
 	// SUM_CONTACT_FLOW_TIME Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy
+	// Hierarchy, Q in Connect
 	//
 	// UI name: [Contact flow time]
 	//
@@ -676,7 +689,7 @@ type GetMetricDataV2Input struct {
 	// SUM_CONTACTS_ANSWERED_IN_X Unit: Count
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile,
-	// contact/segmentAttributes/connect:Subtype
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
 	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
@@ -686,7 +699,7 @@ type GetMetricDataV2Input struct {
 	// SUM_CONTACTS_ABANDONED_IN_X Unit: Count
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile,
-	// contact/segmentAttributes/connect:Subtype
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
 	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
@@ -698,7 +711,7 @@ type GetMetricDataV2Input struct {
 	// Unit: Count
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Contact disconnected]
 	//
@@ -712,14 +725,14 @@ type GetMetricDataV2Input struct {
 	// SUM_HANDLE_TIME Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy
+	// Hierarchy, Q in Connect
 	//
 	// UI name: [Contact handle time]
 	//
 	// SUM_HOLD_TIME Unit: Count
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy
+	// Hierarchy, Q in Connect
 	//
 	// UI name: [Customer hold time]
 	//
@@ -732,7 +745,7 @@ type GetMetricDataV2Input struct {
 	// SUM_INTERACTION_AND_HOLD_TIME Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy
+	// Hierarchy, Q in Connect
 	//
 	// UI name: [Agent interaction and hold time]
 	//
@@ -758,7 +771,7 @@ type GetMetricDataV2Input struct {
 	// SUM_RETRY_CALLBACK_ATTEMPTS Unit: Count
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile,
-	// contact/segmentAttributes/connect:Subtype
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// UI name: [Callback attempts]
 	//
@@ -870,7 +883,8 @@ type GetMetricDataV2Input struct {
 	// AGENT_HIERARCHY_LEVEL_ONE | AGENT_HIERARCHY_LEVEL_TWO |
 	// AGENT_HIERARCHY_LEVEL_THREE | AGENT_HIERARCHY_LEVEL_FOUR |
 	// AGENT_HIERARCHY_LEVEL_FIVE | CASE_TEMPLATE_ARN | CASE_STATUS |
-	// contact/segmentAttributes/connect:Subtype | ROUTING_STEP_EXPRESSION
+	// contact/segmentAttributes/connect:Subtype | ROUTING_STEP_EXPRESSION |
+	// Q_CONNECT_ENABLED
 	Groupings []string
 
 	// The interval period and timezone to apply to returned metrics.

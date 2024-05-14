@@ -63,6 +63,11 @@ type CreateContactFlowInput struct {
 	// The description of the flow.
 	Description *string
 
+	// Indicates the flow status as either SAVED or PUBLISHED . The PUBLISHED status
+	// will initiate validation on the content. the SAVED status does not initiate
+	// validation of the content. SAVED | PUBLISHED .
+	Status types.ContactFlowStatus
+
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string

@@ -11,6 +11,11 @@ import (
 )
 
 // Updates specified flow module for the specified Amazon Connect instance.
+//
+// Use the $SAVED alias in the request to describe the SAVED content of a Flow.
+// For example, arn:aws:.../contact-flow/{id}:$SAVED . Once a contact flow is
+// published, $SAVED needs to be supplied to view saved content that has not been
+// published.
 func (c *Client) UpdateContactFlowModuleContent(ctx context.Context, params *UpdateContactFlowModuleContentInput, optFns ...func(*Options)) (*UpdateContactFlowModuleContentOutput, error) {
 	if params == nil {
 		params = &UpdateContactFlowModuleContentInput{}

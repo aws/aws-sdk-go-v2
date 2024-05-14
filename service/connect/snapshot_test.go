@@ -2126,6 +2126,30 @@ func TestCheckSnapshot_SearchAvailablePhoneNumbers(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SearchContactFlowModules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchContactFlowModules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchContactFlowModules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SearchContactFlows(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchContactFlows(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchContactFlows")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SearchContacts(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SearchContacts(context.Background(), nil, func(o *Options) {
@@ -5094,6 +5118,30 @@ func TestUpdateSnapshot_SearchAvailablePhoneNumbers(t *testing.T) {
 	_, err := svc.SearchAvailablePhoneNumbers(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SearchAvailablePhoneNumbers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchContactFlowModules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchContactFlowModules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchContactFlowModules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchContactFlows(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchContactFlows(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchContactFlows")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
