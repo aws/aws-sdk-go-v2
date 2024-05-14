@@ -28,7 +28,7 @@ func (m getIdentityStart) HandleFinalize(
 	out middleware.FinalizeOutput, md middleware.Metadata, err error,
 ) {
 	mctx := metrics.Context(ctx)
-	mctx.Data().GetIdentityStart = sdk.NowTime()
+	mctx.Data().GetIdentityStartTime = sdk.NowTime()
 	return next.HandleFinalize(ctx, in)
 }
 
@@ -42,6 +42,6 @@ func (m getIdentityEnd) HandleFinalize(
 	out middleware.FinalizeOutput, md middleware.Metadata, err error,
 ) {
 	mctx := metrics.Context(ctx)
-	mctx.Data().GetIdentityEnd = sdk.NowTime()
+	mctx.Data().GetIdentityEndTime = sdk.NowTime()
 	return next.HandleFinalize(ctx, in)
 }
