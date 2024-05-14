@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.26.1
 	github.com/aws/aws-sdk-go-v2/config v1.27.13
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.16.17
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.16.18
 	github.com/aws/aws-sdk-go-v2/service/acm v1.25.5
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.23.7
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.27.5
@@ -67,7 +67,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.40.5
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.23.5
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.28.2
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.53.2
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.54.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.44.7
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.28.7
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.28.5

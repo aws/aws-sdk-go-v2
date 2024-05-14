@@ -1,3 +1,14 @@
+# Release (2024-05-14)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.98.0](service/connect/CHANGELOG.md#v1980-2024-05-14)
+  * **Feature**: Amazon Connect provides enhanced search capabilities for flows & flow modules on the Connect admin website and programmatically using APIs. You can search for flows and flow modules by name, description, type, status, and tags, to filter and identify a specific flow in your Connect instances.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.54.0](service/s3/CHANGELOG.md#v1540-2024-05-14)
+  * **Feature**: Updated a few x-id in the http uri traits
+
 # Release (2024-05-13)
 
 ## Module Highlights

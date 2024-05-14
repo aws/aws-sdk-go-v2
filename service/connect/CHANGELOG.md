@@ -1,3 +1,7 @@
+# v1.98.0 (2024-05-14)
+
+* **Feature**: Amazon Connect provides enhanced search capabilities for flows & flow modules on the Connect admin website and programmatically using APIs. You can search for flows and flow modules by name, description, type, status, and tags, to filter and identify a specific flow in your Connect instances.
+
 # v1.97.1 (2024-05-08)
 
 * **Bug Fix**: GoDoc improvement

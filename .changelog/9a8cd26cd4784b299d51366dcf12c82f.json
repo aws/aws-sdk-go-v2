@@ -1,8 +1,0 @@
-{
-    "id": "9a8cd26c-d478-4b29-9d51-366dcf12c82f",
-    "type": "feature",
-    "description": "Updated a few x-id in the http uri traits",
-    "modules": [
-        "service/s3"
-    ]
-}
