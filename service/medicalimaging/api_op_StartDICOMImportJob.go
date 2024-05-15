@@ -61,6 +61,9 @@ type StartDICOMImportJobInput struct {
 	// This member is required.
 	OutputS3Uri *string
 
+	// The account ID of the source S3 bucket owner.
+	InputOwnerAccountId *string
+
 	// The import job name.
 	JobName *string
 

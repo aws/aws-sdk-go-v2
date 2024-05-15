@@ -98,6 +98,30 @@ func TestCheckSnapshot_CreateWorkspaceApiKey(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateWorkspaceServiceAccount(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateWorkspaceServiceAccount(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateWorkspaceServiceAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateWorkspaceServiceAccountToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateWorkspaceServiceAccountToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateWorkspaceServiceAccountToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteWorkspace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteWorkspace(context.Background(), nil, func(o *Options) {
@@ -115,6 +139,30 @@ func TestCheckSnapshot_DeleteWorkspaceApiKey(t *testing.T) {
 	_, err := svc.DeleteWorkspaceApiKey(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteWorkspaceApiKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteWorkspaceServiceAccount(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteWorkspaceServiceAccount(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteWorkspaceServiceAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteWorkspaceServiceAccountToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteWorkspaceServiceAccountToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteWorkspaceServiceAccountToken")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -211,6 +259,30 @@ func TestCheckSnapshot_ListWorkspaces(t *testing.T) {
 	_, err := svc.ListWorkspaces(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListWorkspaces")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListWorkspaceServiceAccounts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListWorkspaceServiceAccounts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListWorkspaceServiceAccounts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListWorkspaceServiceAccountTokens(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListWorkspaceServiceAccountTokens(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListWorkspaceServiceAccountTokens")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -325,6 +397,30 @@ func TestUpdateSnapshot_CreateWorkspaceApiKey(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateWorkspaceServiceAccount(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateWorkspaceServiceAccount(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateWorkspaceServiceAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateWorkspaceServiceAccountToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateWorkspaceServiceAccountToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateWorkspaceServiceAccountToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteWorkspace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteWorkspace(context.Background(), nil, func(o *Options) {
@@ -342,6 +438,30 @@ func TestUpdateSnapshot_DeleteWorkspaceApiKey(t *testing.T) {
 	_, err := svc.DeleteWorkspaceApiKey(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteWorkspaceApiKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteWorkspaceServiceAccount(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteWorkspaceServiceAccount(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteWorkspaceServiceAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteWorkspaceServiceAccountToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteWorkspaceServiceAccountToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteWorkspaceServiceAccountToken")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -438,6 +558,30 @@ func TestUpdateSnapshot_ListWorkspaces(t *testing.T) {
 	_, err := svc.ListWorkspaces(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListWorkspaces")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListWorkspaceServiceAccounts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListWorkspaceServiceAccounts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListWorkspaceServiceAccounts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListWorkspaceServiceAccountTokens(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListWorkspaceServiceAccountTokens(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListWorkspaceServiceAccountTokens")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

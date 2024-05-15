@@ -10,33 +10,37 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Grafana API key for the workspace.
+// Deletes a workspace service account from the workspace.
 //
-// In workspaces compatible with Grafana version 9 or above, use workspace service
-// accounts instead of API keys. API keys will be removed in a future release.
-func (c *Client) DeleteWorkspaceApiKey(ctx context.Context, params *DeleteWorkspaceApiKeyInput, optFns ...func(*Options)) (*DeleteWorkspaceApiKeyOutput, error) {
+// This will delete any tokens created for the service account, as well. If the
+// tokens are currently in use, the will fail to authenticate / authorize after
+// they are deleted.
+//
+// Service accounts are only available for workspaces that are compatible with
+// Grafana version 9 and above.
+func (c *Client) DeleteWorkspaceServiceAccount(ctx context.Context, params *DeleteWorkspaceServiceAccountInput, optFns ...func(*Options)) (*DeleteWorkspaceServiceAccountOutput, error) {
 	if params == nil {
-		params = &DeleteWorkspaceApiKeyInput{}
+		params = &DeleteWorkspaceServiceAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteWorkspaceApiKey", params, optFns, c.addOperationDeleteWorkspaceApiKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteWorkspaceServiceAccount", params, optFns, c.addOperationDeleteWorkspaceServiceAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteWorkspaceApiKeyOutput)
+	out := result.(*DeleteWorkspaceServiceAccountOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteWorkspaceApiKeyInput struct {
+type DeleteWorkspaceServiceAccountInput struct {
 
-	// The name of the API key to delete.
+	// The ID of the service account to delete.
 	//
 	// This member is required.
-	KeyName *string
+	ServiceAccountId *string
 
-	// The ID of the workspace to delete.
+	// The ID of the workspace where the service account resides.
 	//
 	// This member is required.
 	WorkspaceId *string
@@ -44,14 +48,14 @@ type DeleteWorkspaceApiKeyInput struct {
 	noSmithyDocumentSerde
 }
 
-type DeleteWorkspaceApiKeyOutput struct {
+type DeleteWorkspaceServiceAccountOutput struct {
 
-	// The name of the key that was deleted.
+	// The ID of the service account deleted.
 	//
 	// This member is required.
-	KeyName *string
+	ServiceAccountId *string
 
-	// The ID of the workspace where the key was deleted.
+	// The ID of the workspace where the service account was deleted.
 	//
 	// This member is required.
 	WorkspaceId *string
@@ -62,19 +66,19 @@ type DeleteWorkspaceApiKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteWorkspaceApiKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteWorkspaceServiceAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkspaceApiKey{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkspaceServiceAccount{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWorkspaceApiKey{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWorkspaceServiceAccount{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteWorkspaceApiKey"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteWorkspaceServiceAccount"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -117,10 +121,10 @@ func (c *Client) addOperationDeleteWorkspaceApiKeyMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeleteWorkspaceApiKeyValidationMiddleware(stack); err != nil {
+	if err = addOpDeleteWorkspaceServiceAccountValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteWorkspaceApiKey(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteWorkspaceServiceAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -141,10 +145,10 @@ func (c *Client) addOperationDeleteWorkspaceApiKeyMiddlewares(stack *middleware.
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteWorkspaceApiKey(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteWorkspaceServiceAccount(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DeleteWorkspaceApiKey",
+		OperationName: "DeleteWorkspaceServiceAccount",
 	}
 }

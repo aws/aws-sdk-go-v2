@@ -871,6 +871,12 @@ func awsRestjson1_serializeDocumentRetrievalFilter(v types.RetrievalFilter, valu
 			return err
 		}
 
+	case *types.RetrievalFilterMemberListContains:
+		av := object.Key("listContains")
+		if err := awsRestjson1_serializeDocumentFilterAttribute(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.RetrievalFilterMemberNotEquals:
 		av := object.Key("notEquals")
 		if err := awsRestjson1_serializeDocumentFilterAttribute(&uv.Value, av); err != nil {
@@ -891,6 +897,12 @@ func awsRestjson1_serializeDocumentRetrievalFilter(v types.RetrievalFilter, valu
 
 	case *types.RetrievalFilterMemberStartsWith:
 		av := object.Key("startsWith")
+		if err := awsRestjson1_serializeDocumentFilterAttribute(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RetrievalFilterMemberStringContains:
+		av := object.Key("stringContains")
 		if err := awsRestjson1_serializeDocumentFilterAttribute(&uv.Value, av); err != nil {
 			return err
 		}

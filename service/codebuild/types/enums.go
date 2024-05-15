@@ -355,8 +355,9 @@ type FleetContextCode string
 
 // Enum values for FleetContextCode
 const (
-	FleetContextCodeCreateFailed FleetContextCode = "CREATE_FAILED"
-	FleetContextCodeUpdateFailed FleetContextCode = "UPDATE_FAILED"
+	FleetContextCodeCreateFailed   FleetContextCode = "CREATE_FAILED"
+	FleetContextCodeUpdateFailed   FleetContextCode = "UPDATE_FAILED"
+	FleetContextCodeActionRequired FleetContextCode = "ACTION_REQUIRED"
 )
 
 // Values returns all known values for FleetContextCode. Note that this can be
@@ -367,6 +368,7 @@ func (FleetContextCode) Values() []FleetContextCode {
 	return []FleetContextCode{
 		"CREATE_FAILED",
 		"UPDATE_FAILED",
+		"ACTION_REQUIRED",
 	}
 }
 

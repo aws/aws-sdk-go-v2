@@ -31,9 +31,10 @@ func (c *Client) ImportSourceCredentials(ctx context.Context, params *ImportSour
 
 type ImportSourceCredentialsInput struct {
 
-	//  The type of authentication used to connect to a GitHub, GitHub Enterprise, or
-	// Bitbucket repository. An OAUTH connection is not supported by the API and must
-	// be created using the CodeBuild console.
+	//  The type of authentication used to connect to a GitHub, GitHub Enterprise,
+	// GitLab, GitLab Self Managed, or Bitbucket repository. An OAUTH connection is not
+	// supported by the API and must be created using the CodeBuild console. Note that
+	// CODECONNECTIONS is only valid for GitLab and GitLab Self Managed.
 	//
 	// This member is required.
 	AuthType types.AuthType
@@ -44,7 +45,8 @@ type ImportSourceCredentialsInput struct {
 	ServerType types.ServerType
 
 	//  For GitHub or GitHub Enterprise, this is the personal access token. For
-	// Bitbucket, this is either the access token or the app password.
+	// Bitbucket, this is either the access token or the app password. For the authType
+	// CODECONNECTIONS, this is the connectionArn .
 	//
 	// This member is required.
 	Token *string

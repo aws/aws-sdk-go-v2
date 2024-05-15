@@ -14,6 +14,9 @@ import (
 // authenticate requests sent to the workspace's HTTP API. See [https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html]for available APIs
 // and example requests.
 //
+// In workspaces compatible with Grafana version 9 or above, use workspace service
+// accounts instead of API keys. API keys will be removed in a future release.
+//
 // [https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html]: https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html
 func (c *Client) CreateWorkspaceApiKey(ctx context.Context, params *CreateWorkspaceApiKeyInput, optFns ...func(*Options)) (*CreateWorkspaceApiKeyOutput, error) {
 	if params == nil {
@@ -39,7 +42,7 @@ type CreateWorkspaceApiKeyInput struct {
 
 	// Specifies the permission level of the key.
 	//
-	// Valid values: VIEWER | EDITOR | ADMIN
+	// Valid values: ADMIN | EDITOR | VIEWER
 	//
 	// This member is required.
 	KeyRole *string

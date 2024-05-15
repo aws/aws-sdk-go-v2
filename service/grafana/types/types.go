@@ -260,6 +260,91 @@ type SamlConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that contains the information about one service account.
+type ServiceAccountSummary struct {
+
+	// The role of the service account, which sets the permission level used when
+	// calling Grafana APIs.
+	//
+	// This member is required.
+	GrafanaRole Role
+
+	// The unique ID of the service account.
+	//
+	// This member is required.
+	Id *string
+
+	// Returns true if the service account is disabled. Service accounts can be
+	// disabled and enabled in the Amazon Managed Grafana console.
+	//
+	// This member is required.
+	IsDisabled *string
+
+	// The name of the service account.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the information about a service account token.
+type ServiceAccountTokenSummary struct {
+
+	// When the service account token was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// When the service account token will expire.
+	//
+	// This member is required.
+	ExpiresAt *time.Time
+
+	// The unique ID of the service account token.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the service account token.
+	//
+	// This member is required.
+	Name *string
+
+	// The last time the token was used to authorize a Grafana HTTP API.
+	LastUsedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the information about a service account token.
+//
+// This structure is returned when creating the token. It is important to store
+// the key that is returned, as it is not retrievable at a later time.
+//
+// If you lose the key, you can delete and recreate the token, which will create a
+// new key.
+type ServiceAccountTokenSummaryWithKey struct {
+
+	// The unique ID of the service account token.
+	//
+	// This member is required.
+	Id *string
+
+	// The key for the service account token. Used when making calls to the Grafana
+	// HTTP APIs to authenticate and authorize the requests.
+	//
+	// This member is required.
+	Key *string
+
+	// The name of the service account token.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // A structure containing information about one error encountered while performing
 // an [UpdatePermissions]operation.
 //
@@ -443,9 +528,9 @@ type WorkspaceDescription struct {
 	FreeTrialExpiration *time.Time
 
 	// The token that ties this workspace to a Grafana Labs account. For more
-	// information, see [Register with Grafana Labs].
+	// information, see [Link your account with Grafana Labs].
 	//
-	// [Register with Grafana Labs]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
+	// [Link your account with Grafana Labs]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
 	GrafanaToken *string
 
 	// If this workspace has a full Grafana Enterprise license purchased through
@@ -562,9 +647,9 @@ type WorkspaceSummary struct {
 	Description *string
 
 	// The token that ties this workspace to a Grafana Labs account. For more
-	// information, see [Register with Grafana Labs].
+	// information, see [Link your account with Grafana Labs].
 	//
-	// [Register with Grafana Labs]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
+	// [Link your account with Grafana Labs]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
 	GrafanaToken *string
 
 	// Specifies whether this workspace has a full Grafana Enterprise license.

@@ -80,6 +80,8 @@ type ActionLocalPortDetails struct {
 	Port *int32
 
 	// The port name of the local connection.
+	//
+	// Length Constraints: 128.
 	PortName *string
 
 	noSmithyDocumentSerde
@@ -117,6 +119,8 @@ type ActionRemotePortDetails struct {
 	Port *int32
 
 	// The port name of the remote connection.
+	//
+	// Length Constraints: 128.
 	PortName *string
 
 	noSmithyDocumentSerde
@@ -998,6 +1002,8 @@ type AwsApiCallAction struct {
 	AffectedResources map[string]string
 
 	// The name of the API method that was issued.
+	//
+	// Length Constraints: 128.
 	Api *string
 
 	// Indicates whether the API call originated from a remote IP address ( remoteip )
@@ -1051,6 +1057,8 @@ type AwsApiCallAction struct {
 	RemoteIpDetails *ActionRemoteIpDetails
 
 	// The name of the Amazon Web Services service that the API method belongs to.
+	//
+	// Length Constraints: 128.
 	ServiceName *string
 
 	noSmithyDocumentSerde
@@ -1061,6 +1069,8 @@ type AwsApiCallAction struct {
 type AwsApiCallActionDomainDetails struct {
 
 	// The name of the DNS domain that issued the API call.
+	//
+	// Length Constraints: 128.
 	Domain *string
 
 	noSmithyDocumentSerde
@@ -12879,6 +12889,8 @@ type AwsSecurityFinding struct {
 
 	// The Amazon Web Services account ID that a finding is generated in.
 	//
+	// Length Constraints: 12.
+	//
 	// This member is required.
 	AwsAccountId *string
 
@@ -12904,21 +12916,26 @@ type AwsSecurityFinding struct {
 	// This member is required.
 	CreatedAt *string
 
-	// A finding's description.
+	// A finding's description. Description is a required property.
 	//
-	// In this release, Description is a required property.
+	// Length Constraints: Minimum length of 1. Maximum length of 1024.
 	//
 	// This member is required.
 	Description *string
 
 	// The identifier for the solution-specific component (a discrete unit of logic)
 	// that generated a finding. In various security findings providers' solutions,
-	// this generator can be called a rule, a check, a detector, a plugin, etc.
+	// this generator can be called a rule, a check, a detector, a plugin, or something
+	// else.
+	//
+	// Length Constraints: Minimum length of 1. Maximum length of 512.
 	//
 	// This member is required.
 	GeneratorId *string
 
 	// The security findings provider-specific identifier for a finding.
+	//
+	// Length Constraints: Minimum length of 1. Maximum length of 512.
 	//
 	// This member is required.
 	Id *string
@@ -12927,23 +12944,27 @@ type AwsSecurityFinding struct {
 	// generates findings. This can be the ARN for a third-party product that is
 	// integrated with Security Hub, or the ARN for a custom integration.
 	//
+	// Length Constraints: Minimum length of 12. Maximum length of 2048.
+	//
 	// This member is required.
 	ProductArn *string
 
 	// A set of resource data types that describe the resources that the finding
 	// refers to.
 	//
+	// Array Members: Minimum number of 1 item. Maximum number of 32 items.
+	//
 	// This member is required.
 	Resources []Resource
 
-	// The schema version that a finding is formatted for.
+	// The schema version that a finding is formatted for. The value is 2018-10-08 .
 	//
 	// This member is required.
 	SchemaVersion *string
 
-	// A finding's title.
+	// A finding's title. Title is a required property.
 	//
-	// In this release, Title is a required property.
+	// Length Constraints: Minimum length of 1. Maximum length of 256.
 	//
 	// This member is required.
 	Title *string
@@ -12973,6 +12994,8 @@ type AwsSecurityFinding struct {
 	Action *Action
 
 	// The name of the Amazon Web Services account from which a finding was generated.
+	//
+	// Length Constraints: Minimum length of 1. Maximum length of 50.
 	AwsAccountName *string
 
 	// The name of the company for the product that generated the finding.
@@ -12983,6 +13006,8 @@ type AwsSecurityFinding struct {
 	//
 	// When you use the Security Hub console or API to filter findings by company
 	// name, you use this attribute.
+	//
+	// Length Constraints: Minimum length of 1. Maximum length of 128.
 	CompanyName *string
 
 	// This data type is exclusive to findings that are generated as the result of a
@@ -13057,6 +13082,8 @@ type AwsSecurityFinding struct {
 	LastObservedAt *string
 
 	// A list of malware related to a finding.
+	//
+	// Array Members: Maximum number of 5 items.
 	Malware []Malware
 
 	// The details of network-related information about a finding.
@@ -13076,7 +13103,7 @@ type AwsSecurityFinding struct {
 	// The details of process-related information about a finding.
 	Process *ProcessDetails
 
-	// A imestamp that indicates when Security Hub received a finding and begins to
+	// A timestamp that indicates when Security Hub received a finding and begins to
 	// process it.
 	//
 	// This field accepts only the specified formats. Timestamps can end with Z or
@@ -13112,6 +13139,8 @@ type AwsSecurityFinding struct {
 	//
 	// When you use the Security Hub console or API to filter findings by product
 	// name, you use this attribute.
+	//
+	// Length Constraints: Minimum length of 1. Maximum length of 128.
 	ProductName *string
 
 	// The record state of a finding.
@@ -13121,9 +13150,13 @@ type AwsSecurityFinding struct {
 	//
 	// Security Hub populates this attribute automatically for each finding. You
 	// cannot update it using BatchImportFindings or BatchUpdateFindings .
+	//
+	// Length Constraints: Minimum length of 1. Maximum length of 16.
 	Region *string
 
 	// A list of related findings.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 10 items.
 	RelatedFindings []RelatedFinding
 
 	// A data type that describes the remediation options for a finding.
@@ -13140,10 +13173,14 @@ type AwsSecurityFinding struct {
 	SourceUrl *string
 
 	// Threat intelligence details related to a finding.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 5 items.
 	ThreatIntelIndicators []ThreatIntelIndicator
 
 	// Details about the threat detected in a security finding and the file paths that
 	// were affected by the threat.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 32 items.
 	Threats []Threat
 
 	// One or more finding types in the format of namespace/category/classifier that
@@ -13151,10 +13188,15 @@ type AwsSecurityFinding struct {
 	//
 	// Valid namespace values are: Software and Configuration Checks | TTPs | Effects
 	// | Unusual Behaviors | Sensitive Data Identifications
+	//
+	// Array Members: Maximum number of 50 items.
 	Types []string
 
 	// A list of name/value string pairs associated with the finding. These are
 	// custom, user-defined fields added to a finding.
+	//
+	// Can contain up to 50 key-value pairs. For each key-value pair, the key can
+	// contain up to 128 characters, and the value can contain up to 1024 characters.
 	UserDefinedFields map[string]string
 
 	// Indicates the veracity of a finding.
@@ -14997,6 +15039,8 @@ type Compliance struct {
 	// For a control, the industry or regulatory framework requirements that are
 	// related to the control. The check for that control is aligned with these
 	// requirements.
+	//
+	// Array Members: Maximum number of 32 items.
 	RelatedRequirements []string
 
 	//  The unique identifier of a control across standards. Values for this field
@@ -15019,8 +15063,8 @@ type Compliance struct {
 	//
 	//   - NOT_AVAILABLE - Check could not be performed due to a service outage, API
 	//   error, or because the result of the Config evaluation was NOT_APPLICABLE . If
-	//   the Config evaluation result was NOT_APPLICABLE , then after 3 days, Security
-	//   Hub automatically archives the finding.
+	//   the Config evaluation result was NOT_APPLICABLE for a Security Hub control,
+	//   Security Hub automatically archives the finding after 3 days.
 	Status ComplianceStatus
 
 	// For findings generated from controls, a list of reasons behind the value of
@@ -15394,9 +15438,13 @@ type DnsRequestAction struct {
 	Blocked *bool
 
 	// The DNS domain that is associated with the DNS request.
+	//
+	// Length Constraints: 128.
 	Domain *string
 
 	// The protocol that was used for the DNS request.
+	//
+	// Length Constraints: Minimum length of 1. Maximum length of 64.
 	Protocol *string
 
 	noSmithyDocumentSerde
@@ -15452,16 +15500,24 @@ type EnumListConfigurationOptions struct {
 type FilePaths struct {
 
 	// The name of the infected or suspicious file corresponding to the hash.
+	//
+	// Length Constraints: Minimum of 1 length. Maximum of 128 length.
 	FileName *string
 
 	// Path to the infected or suspicious file on the resource it was detected on.
+	//
+	// Length Constraints: Minimum of 1 length. Maximum of 128 length.
 	FilePath *string
 
 	// The hash value for the infected or suspicious file.
+	//
+	// Length Constraints: Minimum of 1 length. Maximum of 128 length.
 	Hash *string
 
 	// The Amazon Resource Name (ARN) of the resource on which the threat was
 	// detected.
+	//
+	// Length Constraints: Minimum of 1 length. Maximum of 128 length.
 	ResourceId *string
 
 	noSmithyDocumentSerde
@@ -15618,6 +15674,8 @@ type FindingProviderSeverity struct {
 	Label SeverityLabel
 
 	// The finding provider's original value for the severity.
+	//
+	// Length Constraints: Minimum length of 1. Maximum length of 64.
 	Original *string
 
 	noSmithyDocumentSerde
@@ -15698,6 +15756,8 @@ type GeneratorDetails struct {
 	Description *string
 
 	//  An array of tags used to identify the detector associated with the finding.
+	//
+	// Array Members: Minimum number of 0 items. Maximum number of 10 items.
 	Labels []string
 
 	//  The name of the detector used to identify the code vulnerability.
@@ -15968,10 +16028,14 @@ type Malware struct {
 
 	// The name of the malware that was observed.
 	//
+	// Length Constraints: Minimum of 1. Maximum of 64.
+	//
 	// This member is required.
 	Name *string
 
 	// The file system path of the malware that was observed.
+	//
+	// Length Constraints: Minimum of 1. Maximum of 512.
 	Path *string
 
 	// The state of the malware that was observed.
@@ -16113,6 +16177,8 @@ type Member struct {
 type Network struct {
 
 	// The destination domain of network-related information about a finding.
+	//
+	// Length Constraints: Minimum of 1. Maximum of 128.
 	DestinationDomain *string
 
 	// The destination IPv4 address of network-related information about a finding.
@@ -16131,9 +16197,13 @@ type Network struct {
 	OpenPortRange *PortRange
 
 	// The protocol of network-related information about a finding.
+	//
+	// Length Constraints: Minimum of 1. Maximum of 16.
 	Protocol *string
 
 	// The source domain of network-related information about a finding.
+	//
+	// Length Constraints: Minimum of 1. Maximum of 128.
 	SourceDomain *string
 
 	// The source IPv4 address of network-related information about a finding.
@@ -16166,6 +16236,8 @@ type NetworkConnectionAction struct {
 	LocalPortDetails *ActionLocalPortDetails
 
 	// The protocol used to make the network connection request.
+	//
+	// Length Constraints: Minimum length of 1. Maximum length of 64.
 	Protocol *string
 
 	// Information about the remote IP address that issued the network connection
@@ -16186,6 +16258,8 @@ type NetworkHeader struct {
 	Destination *NetworkPathComponentDetails
 
 	// The protocol used for the component.
+	//
+	// Length Constraints: Minimum of 1. Maximum of 16.
 	Protocol *string
 
 	// Information about the origin of the component.
@@ -16198,9 +16272,13 @@ type NetworkHeader struct {
 type NetworkPathComponent struct {
 
 	// The identifier of a component in the network path.
+	//
+	// Length Constraints: Minimum of 1. Maximum of 32.
 	ComponentId *string
 
 	// The type of component.
+	//
+	// Length Constraints: Minimum of 1. Maximum of 32.
 	ComponentType *string
 
 	// Information about the component that comes after the current component in the
@@ -16230,6 +16308,8 @@ type NetworkPathComponentDetails struct {
 type Note struct {
 
 	// The text of a note.
+	//
+	// Length Constraints: Minimum of 1. Maximum of 512.
 	//
 	// This member is required.
 	Text *string
@@ -16521,33 +16601,49 @@ type PatchSummary struct {
 	// The identifier of the compliance standard that was used to determine the patch
 	// compliance status.
 	//
+	// Length Constraints: Minimum length of 1. Maximum length of 256.
+	//
 	// This member is required.
 	Id *string
 
 	// The number of patches from the compliance standard that failed to install.
+	//
+	// The value can be an integer from 0 to 100000 .
 	FailedCount *int32
 
 	// The number of patches from the compliance standard that were installed
 	// successfully.
+	//
+	// The value can be an integer from 0 to 100000 .
 	InstalledCount *int32
 
 	// The number of installed patches that are not part of the compliance standard.
+	//
+	// The value can be an integer from 0 to 100000 .
 	InstalledOtherCount *int32
 
 	// The number of patches that were applied, but that require the instance to be
 	// rebooted in order to be marked as installed.
+	//
+	// The value can be an integer from 0 to 100000 .
 	InstalledPendingReboot *int32
 
 	// The number of patches that are installed but are also on a list of patches that
 	// the customer rejected.
+	//
+	// The value can be an integer from 0 to 100000 .
 	InstalledRejectedCount *int32
 
 	// The number of patches that are part of the compliance standard but are not
 	// installed. The count includes patches that failed to install.
+	//
+	// The value can be an integer from 0 to 100000 .
 	MissingCount *int32
 
 	// The type of patch operation performed. For Patch Manager, the values are SCAN
 	// and INSTALL .
+	//
+	// Length Constraints: Minimum length of 1. Maximum length of 256.
 	Operation *string
 
 	// Indicates when the operation completed.
@@ -16589,6 +16685,8 @@ type PatchSummary struct {
 	OperationStartTime *string
 
 	// The reboot option specified for the instance.
+	//
+	// Length Constraints: Minimum length of 1. Maximum length of 256.
 	RebootOption *string
 
 	noSmithyDocumentSerde
@@ -16697,6 +16795,8 @@ type ProcessDetails struct {
 	LaunchedAt *string
 
 	// The name of the process.
+	//
+	// Length Constraints: Minimum of 1. Maximum of 64.
 	Name *string
 
 	// The parent process ID. This field accepts positive integers between O and
@@ -16704,6 +16804,8 @@ type ProcessDetails struct {
 	ParentPid *int32
 
 	// The path to the process executable.
+	//
+	// Length Constraints: Minimum of 1. Maximum of 512.
 	Path *string
 
 	// The process ID.
@@ -16814,6 +16916,8 @@ type Recommendation struct {
 
 	// Describes the recommended steps to take to remediate an issue identified in a
 	// finding.
+	//
+	// Length Constraints: Minimum of 1 length. Maximum of 512 length.
 	Text *string
 
 	// A URL to a page or site that contains information about how to remediate a
@@ -16879,6 +16983,8 @@ type Resource struct {
 	// If the resource does not match any of the provided types, then set Type to Other
 	// .
 	//
+	// Length Constraints: Minimum length of 1. Maximum length of 256.
+	//
 	// This member is required.
 	Type *string
 
@@ -16900,6 +17006,8 @@ type Resource struct {
 
 	// The canonical Amazon Web Services external Region name where this resource is
 	// located.
+	//
+	// Length Constraints: Minimum length of 1. Maximum length of 16.
 	Region *string
 
 	// Identifies the role of the resource in the finding. A resource is either the
@@ -16907,7 +17015,9 @@ type Resource struct {
 	ResourceRole *string
 
 	// A list of Amazon Web Services tags associated with a resource at the time the
-	// finding was processed.
+	// finding was processed. Tags must follow [Amazon Web Services tag naming limits and requirements].
+	//
+	// [Amazon Web Services tag naming limits and requirements]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html#tag-conventions
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -17906,6 +18016,8 @@ type Severity struct {
 	// Deprecated. The normalized severity of a finding. Instead of providing
 	// Normalized , provide Label .
 	//
+	// The value of Normalized can be an integer between 0 and 100 .
+	//
 	// If you provide Label and do not provide Normalized , then Normalized is set
 	// automatically as follows.
 	//
@@ -17921,6 +18033,8 @@ type Severity struct {
 	Normalized *int32
 
 	// The native severity from the finding product that generated the finding.
+	//
+	// Length Constraints: Minimum length of 1. Maximum length of 64.
 	Original *string
 
 	// Deprecated. This attribute isn't included in findings. Instead of providing
@@ -18552,15 +18666,21 @@ func (*TargetMemberRootId) isTarget() {}
 type Threat struct {
 
 	// Provides information about the file paths that were affected by the threat.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 5 items.
 	FilePaths []FilePaths
 
 	// This total number of items in which the threat has been detected.
 	ItemCount *int32
 
 	// The name of the threat.
+	//
+	// Length Constraints: Minimum of 1 length. Maximum of 128 length.
 	Name *string
 
 	// The severity of the threat.
+	//
+	// Length Constraints: Minimum of 1 length. Maximum of 128 length.
 	Severity *string
 
 	noSmithyDocumentSerde
@@ -18593,6 +18713,8 @@ type ThreatIntelIndicator struct {
 	LastObservedAt *string
 
 	// The source of the threat intelligence indicator.
+	//
+	// Length Constraints: Minimum of 1 length. Maximum of 64 length.
 	Source *string
 
 	// The URL to the page or site where you can get more information about the threat
@@ -18603,6 +18725,8 @@ type ThreatIntelIndicator struct {
 	Type ThreatIntelIndicatorType
 
 	// The value of a threat intelligence indicator.
+	//
+	// Length Constraints: Minimum of 1 length. Maximum of 512 length.
 	Value *string
 
 	noSmithyDocumentSerde

@@ -88,7 +88,7 @@ type CreateWorkspaceInput struct {
 	Configuration *string
 
 	// Specifies the version of Grafana to support in the new workspace. If not
-	// specified, defaults to the latest version (for example, 9.4).
+	// specified, defaults to the latest version (for example, 10.4).
 	//
 	// To get a list of supported versions, use the ListVersions operation.
 	GrafanaVersion *string

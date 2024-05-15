@@ -176,6 +176,9 @@ func ExampleRetrievalFilter_outputUsage() {
 	case *types.RetrievalFilterMemberLessThanOrEquals:
 		_ = v.Value // Value is types.FilterAttribute
 
+	case *types.RetrievalFilterMemberListContains:
+		_ = v.Value // Value is types.FilterAttribute
+
 	case *types.RetrievalFilterMemberNotEquals:
 		_ = v.Value // Value is types.FilterAttribute
 
@@ -186,6 +189,9 @@ func ExampleRetrievalFilter_outputUsage() {
 		_ = v.Value // Value is []types.RetrievalFilter
 
 	case *types.RetrievalFilterMemberStartsWith:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberStringContains:
 		_ = v.Value // Value is types.FilterAttribute
 
 	case *types.UnknownUnionMember:

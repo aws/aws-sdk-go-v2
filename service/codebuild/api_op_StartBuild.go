@@ -193,7 +193,7 @@ type StartBuildInput struct {
 
 	// An authorization type for this build that overrides the one defined in the
 	// build project. This override applies only if the build project's source is
-	// BitBucket or GitHub.
+	// BitBucket, GitHub, GitLab, or GitLab Self Managed.
 	SourceAuthOverride *types.SourceAuth
 
 	// A location that overrides, for this build, the source location for the one
@@ -215,6 +215,8 @@ type StartBuildInput struct {
 	// request ID is specified, it must use the format pr/pull-request-ID (for example
 	// pr/25 ). If a branch name is specified, the branch's HEAD commit ID is used. If
 	// not specified, the default branch's HEAD commit ID is used.
+	//
+	// GitLab The commit ID, branch, or Git tag to use.
 	//
 	// Bitbucket The commit ID, branch name, or tag name that corresponds to the
 	// version of the source code you want to build. If a branch name is specified, the

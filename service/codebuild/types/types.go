@@ -183,8 +183,8 @@ type Build struct {
 	// When the build process started, expressed in Unix time format.
 	StartTime *time.Time
 
-	// How long, in minutes, for CodeBuild to wait before timing out this build if it
-	// does not get marked as completed.
+	// How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before
+	// timing out this build if it does not get marked as completed.
 	TimeoutInMinutes *int32
 
 	// If your CodeBuild project accesses resources in an Amazon VPC, you provide this
@@ -957,6 +957,9 @@ type Fleet struct {
 	// [Build environment compute types]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
 	EnvironmentType EnvironmentType
 
+	// The service role associated with the compute fleet.
+	FleetServiceRole *string
+
 	// The ID of the compute fleet.
 	Id *string
 
@@ -973,6 +976,12 @@ type Fleet struct {
 	//
 	//   - For overflow behavior ON_DEMAND , your overflow builds run on CodeBuild
 	//   on-demand.
+	//
+	// If you choose to set your overflow behavior to on-demand while creating a
+	//   VPC-connected fleet, make sure that you add the required VPC permissions to your
+	//   project service role. For more information, see [Example policy statement to allow CodeBuild access to Amazon Web Services services required to create a VPC network interface].
+	//
+	// [Example policy statement to allow CodeBuild access to Amazon Web Services services required to create a VPC network interface]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface
 	OverflowBehavior FleetOverflowBehavior
 
 	// The scaling configuration of the compute fleet.
@@ -986,6 +995,9 @@ type Fleet struct {
 	// These tags are available for use by Amazon Web Services services that support
 	// CodeBuild build project tags.
 	Tags []Tag
+
+	// Information about the VPC configuration that CodeBuild accesses.
+	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
 }
@@ -1229,6 +1241,8 @@ type Project struct {
 	//   request ID is specified, it must use the format pr/pull-request-ID (for
 	//   example pr/25 ). If a branch name is specified, the branch's HEAD commit ID is
 	//   used. If not specified, the default branch's HEAD commit ID is used.
+	//
+	//   - For GitLab: the commit ID, branch, or Git tag to use.
 	//
 	//   - For Bitbucket: the commit ID, branch name, or tag name that corresponds to
 	//   the version of the source code you want to build. If a branch name is specified,
@@ -1938,11 +1952,13 @@ type ProjectSourceVersion struct {
 	//
 	//   - For CodeCommit: the commit ID, branch, or Git tag to use.
 	//
-	//   - For GitHub or GitLab: the commit ID, pull request ID, branch name, or tag
-	//   name that corresponds to the version of the source code you want to build. If a
-	//   pull request ID is specified, it must use the format pr/pull-request-ID (for
+	//   - For GitHub: the commit ID, pull request ID, branch name, or tag name that
+	//   corresponds to the version of the source code you want to build. If a pull
+	//   request ID is specified, it must use the format pr/pull-request-ID (for
 	//   example, pr/25 ). If a branch name is specified, the branch's HEAD commit ID
 	//   is used. If not specified, the default branch's HEAD commit ID is used.
+	//
+	//   - For GitLab: the commit ID, branch, or Git tag to use.
 	//
 	//   - For Bitbucket: the commit ID, branch name, or tag name that corresponds to
 	//   the version of the source code you want to build. If a branch name is specified,

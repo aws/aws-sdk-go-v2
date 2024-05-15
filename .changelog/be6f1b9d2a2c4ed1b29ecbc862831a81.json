@@ -1,0 +1,8 @@
+{
+    "id": "be6f1b9d-2a2c-4ed1-b29e-cbc862831a81",
+    "type": "feature",
+    "description": "CodeBuild Reserved Capacity VPC Support",
+    "modules": [
+        "service/codebuild"
+    ]
+}

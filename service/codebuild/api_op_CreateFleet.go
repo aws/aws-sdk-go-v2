@@ -118,6 +118,9 @@ type CreateFleetInput struct {
 	// This member is required.
 	Name *string
 
+	// The service role associated with the compute fleet.
+	FleetServiceRole *string
+
 	// The compute fleet overflow behavior.
 	//
 	//   - For overflow behavior QUEUE , your overflow builds need to wait on the
@@ -125,6 +128,12 @@ type CreateFleetInput struct {
 	//
 	//   - For overflow behavior ON_DEMAND , your overflow builds run on CodeBuild
 	//   on-demand.
+	//
+	// If you choose to set your overflow behavior to on-demand while creating a
+	//   VPC-connected fleet, make sure that you add the required VPC permissions to your
+	//   project service role. For more information, see [Example policy statement to allow CodeBuild access to Amazon Web Services services required to create a VPC network interface].
+	//
+	// [Example policy statement to allow CodeBuild access to Amazon Web Services services required to create a VPC network interface]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface
 	OverflowBehavior types.FleetOverflowBehavior
 
 	// The scaling configuration of the compute fleet.
@@ -135,6 +144,9 @@ type CreateFleetInput struct {
 	// These tags are available for use by Amazon Web Services services that support
 	// CodeBuild build project tags.
 	Tags []types.Tag
+
+	// Information about the VPC configuration that CodeBuild accesses.
+	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde
 }

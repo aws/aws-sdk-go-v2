@@ -1,0 +1,8 @@
+{
+    "id": "f48b30ae-7b5c-475e-864a-08770acc2b81",
+    "type": "feature",
+    "description": "Added support for importing medical imaging data from Amazon S3 buckets across accounts and regions.",
+    "modules": [
+        "service/medicalimaging"
+    ]
+}

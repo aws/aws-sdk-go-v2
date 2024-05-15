@@ -835,6 +835,7 @@ type TaskExecutionStatus string
 // Enum values for TaskExecutionStatus
 const (
 	TaskExecutionStatusQueued       TaskExecutionStatus = "QUEUED"
+	TaskExecutionStatusCancelling   TaskExecutionStatus = "CANCELLING"
 	TaskExecutionStatusLaunching    TaskExecutionStatus = "LAUNCHING"
 	TaskExecutionStatusPreparing    TaskExecutionStatus = "PREPARING"
 	TaskExecutionStatusTransferring TaskExecutionStatus = "TRANSFERRING"
@@ -850,6 +851,7 @@ const (
 func (TaskExecutionStatus) Values() []TaskExecutionStatus {
 	return []TaskExecutionStatus{
 		"QUEUED",
+		"CANCELLING",
 		"LAUNCHING",
 		"PREPARING",
 		"TRANSFERRING",

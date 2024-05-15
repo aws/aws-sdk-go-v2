@@ -14,11 +14,11 @@ import (
 // Search image sets based on defined input attributes.
 //
 // SearchImageSets accepts a single search query parameter and returns a paginated
-// response of all image sets that have the matching criteria. All range queries
-// must be input as (lowerBound, upperBound) .
+// response of all image sets that have the matching criteria. All date range
+// queries must be input as (lowerBound, upperBound) .
 //
-// SearchImageSets uses the updatedAt field for sorting in decreasing order from
-// latest to oldest.
+// By default, SearchImageSets uses the updatedAt field for sorting in descending
+// order from newest to oldest.
 func (c *Client) SearchImageSets(ctx context.Context, params *SearchImageSetsInput, optFns ...func(*Options)) (*SearchImageSetsOutput, error) {
 	if params == nil {
 		params = &SearchImageSetsInput{}

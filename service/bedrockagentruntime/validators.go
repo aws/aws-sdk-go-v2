@@ -416,6 +416,11 @@ func validateRetrievalFilter(v types.RetrievalFilter) error {
 			invalidParams.AddNested("[lessThanOrEquals]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.RetrievalFilterMemberListContains:
+		if err := validateFilterAttribute(&uv.Value); err != nil {
+			invalidParams.AddNested("[listContains]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.RetrievalFilterMemberNotEquals:
 		if err := validateFilterAttribute(&uv.Value); err != nil {
 			invalidParams.AddNested("[notEquals]", err.(smithy.InvalidParamsError))
@@ -434,6 +439,11 @@ func validateRetrievalFilter(v types.RetrievalFilter) error {
 	case *types.RetrievalFilterMemberStartsWith:
 		if err := validateFilterAttribute(&uv.Value); err != nil {
 			invalidParams.AddNested("[startsWith]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RetrievalFilterMemberStringContains:
+		if err := validateFilterAttribute(&uv.Value); err != nil {
+			invalidParams.AddNested("[stringContains]", err.(smithy.InvalidParamsError))
 		}
 
 	}

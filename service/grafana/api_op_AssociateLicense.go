@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Assigns a Grafana Enterprise license to a workspace. Upgrading to Grafana
-// Enterprise incurs additional fees. For more information, see [Upgrade a workspace to Grafana Enterprise].
+// Assigns a Grafana Enterprise license to a workspace. To upgrade, you must use
+// ENTERPRISE for the licenseType , and pass in a valid Grafana Labs token for the
+// grafanaToken . Upgrading to Grafana Enterprise incurs additional fees. For more
+// information, see [Upgrade a workspace to Grafana Enterprise].
 //
 // [Upgrade a workspace to Grafana Enterprise]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html
 func (c *Client) AssociateLicense(ctx context.Context, params *AssociateLicenseInput, optFns ...func(*Options)) (*AssociateLicenseOutput, error) {
@@ -46,9 +48,9 @@ type AssociateLicenseInput struct {
 	WorkspaceId *string
 
 	// A token from Grafana Labs that ties your Amazon Web Services account with a
-	// Grafana Labs account. For more information, see [Register with Grafana Labs].
+	// Grafana Labs account. For more information, see [Link your account with Grafana Labs].
 	//
-	// [Register with Grafana Labs]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
+	// [Link your account with Grafana Labs]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
 	GrafanaToken *string
 
 	noSmithyDocumentSerde

@@ -1205,7 +1205,8 @@ type ResponseStreamMemberTrace struct {
 func (*ResponseStreamMemberTrace) isResponseStream() {}
 
 // Specifies the filters to use on the metadata attributes in the knowledge base
-// data sources before returning results. For more information, see [Query configurations].
+// data sources before returning results. For more information, see [Query configurations]. See the
+// examples below to see how to use these filters.
 //
 // This data type is used in the following API operations:
 //
@@ -1224,10 +1225,12 @@ func (*ResponseStreamMemberTrace) isResponseStream() {}
 //	RetrievalFilterMemberIn
 //	RetrievalFilterMemberLessThan
 //	RetrievalFilterMemberLessThanOrEquals
+//	RetrievalFilterMemberListContains
 //	RetrievalFilterMemberNotEquals
 //	RetrievalFilterMemberNotIn
 //	RetrievalFilterMemberOrAll
 //	RetrievalFilterMemberStartsWith
+//	RetrievalFilterMemberStringContains
 //
 // [RetrieveAndGenerate request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
 // [Retrieve request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
@@ -1236,8 +1239,8 @@ type RetrievalFilter interface {
 	isRetrievalFilter()
 }
 
-// Knowledge base data sources whose metadata attributes fulfill all the filter
-// conditions inside this list are returned.
+// Knowledge base data sources are returned if their metadata attributes fulfill
+// all the filter conditions inside this list.
 type RetrievalFilterMemberAndAll struct {
 	Value []RetrievalFilter
 
@@ -1246,8 +1249,13 @@ type RetrievalFilterMemberAndAll struct {
 
 func (*RetrievalFilterMemberAndAll) isRetrievalFilter() {}
 
-// Knowledge base data sources that contain a metadata attribute whose name
-// matches the key and whose value matches the value in this object are returned.
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value matches the value in this object.
+//
+// The following example would return data sources with an animal attribute whose
+// value is cat :
+//
+//	"equals": { "key": "animal", "value": "cat" }
 type RetrievalFilterMemberEquals struct {
 	Value FilterAttribute
 
@@ -1256,9 +1264,14 @@ type RetrievalFilterMemberEquals struct {
 
 func (*RetrievalFilterMemberEquals) isRetrievalFilter() {}
 
-// Knowledge base data sources that contain a metadata attribute whose name
-// matches the key and whose value is greater than the value in this object are
-// returned.
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is greater than the value in this
+// object.
+//
+// The following example would return data sources with an year attribute whose
+// value is greater than 1989 :
+//
+//	"greaterThan": { "key": "year", "value": 1989 }
 type RetrievalFilterMemberGreaterThan struct {
 	Value FilterAttribute
 
@@ -1267,9 +1280,14 @@ type RetrievalFilterMemberGreaterThan struct {
 
 func (*RetrievalFilterMemberGreaterThan) isRetrievalFilter() {}
 
-// Knowledge base data sources that contain a metadata attribute whose name
-// matches the key and whose value is greater than or equal to the value in this
-// object are returned.
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is greater than or equal to the value
+// in this object.
+//
+// The following example would return data sources with an year attribute whose
+// value is greater than or equal to 1989 :
+//
+//	"greaterThanOrEquals": { "key": "year", "value": 1989 }
 type RetrievalFilterMemberGreaterThanOrEquals struct {
 	Value FilterAttribute
 
@@ -1278,9 +1296,14 @@ type RetrievalFilterMemberGreaterThanOrEquals struct {
 
 func (*RetrievalFilterMemberGreaterThanOrEquals) isRetrievalFilter() {}
 
-// Knowledge base data sources that contain a metadata attribute whose name
-// matches the key and whose value is in the list specified in the value in this
-// object are returned.
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is in the list specified in the value
+// in this object.
+//
+// The following example would return data sources with an animal attribute that
+// is either cat or dog :
+//
+//	"in": { "key": "animal", "value": ["cat", "dog"] }
 type RetrievalFilterMemberIn struct {
 	Value FilterAttribute
 
@@ -1289,9 +1312,14 @@ type RetrievalFilterMemberIn struct {
 
 func (*RetrievalFilterMemberIn) isRetrievalFilter() {}
 
-// Knowledge base data sources that contain a metadata attribute whose name
-// matches the key and whose value is less than the value in this object are
-// returned.
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is less than the value in this
+// object.
+//
+// The following example would return data sources with an year attribute whose
+// value is less than to 1989 .
+//
+//	"lessThan": { "key": "year", "value": 1989 }
 type RetrievalFilterMemberLessThan struct {
 	Value FilterAttribute
 
@@ -1300,9 +1328,14 @@ type RetrievalFilterMemberLessThan struct {
 
 func (*RetrievalFilterMemberLessThan) isRetrievalFilter() {}
 
-// Knowledge base data sources that contain a metadata attribute whose name
-// matches the key and whose value is less than or equal to the value in this
-// object are returned.
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is less than or equal to the value
+// in this object.
+//
+// The following example would return data sources with an year attribute whose
+// value is less than or equal to 1989 .
+//
+//	"lessThanOrEquals": { "key": "year", "value": 1989 }
 type RetrievalFilterMemberLessThanOrEquals struct {
 	Value FilterAttribute
 
@@ -1311,9 +1344,30 @@ type RetrievalFilterMemberLessThanOrEquals struct {
 
 func (*RetrievalFilterMemberLessThanOrEquals) isRetrievalFilter() {}
 
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is a list that contains the value as
+// one of its members.
+//
+// The following example would return data sources with an animals attribute that
+// is a list containing a cat member (for example ["dog", "cat"] ).
+//
+//	"listContains": { "key": "animals", "value": "cat" }
+type RetrievalFilterMemberListContains struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberListContains) isRetrievalFilter() {}
+
 // Knowledge base data sources that contain a metadata attribute whose name
 // matches the key and whose value doesn't match the value in this object are
 // returned.
+//
+// The following example would return data sources that don't contain an animal
+// attribute whose value is cat .
+//
+//	"notEquals": { "key": "animal", "value": "cat" }
 type RetrievalFilterMemberNotEquals struct {
 	Value FilterAttribute
 
@@ -1322,9 +1376,14 @@ type RetrievalFilterMemberNotEquals struct {
 
 func (*RetrievalFilterMemberNotEquals) isRetrievalFilter() {}
 
-// Knowledge base data sources that contain a metadata attribute whose name
-// matches the key and whose value isn't in the list specified in the value in
-// this object are returned.
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value isn't in the list specified in the
+// value in this object.
+//
+// The following example would return data sources whose animal attribute is
+// neither cat nor dog .
+//
+//	"notIn": { "key": "animal", "value": ["cat", "dog"] }
 type RetrievalFilterMemberNotIn struct {
 	Value FilterAttribute
 
@@ -1333,8 +1392,8 @@ type RetrievalFilterMemberNotIn struct {
 
 func (*RetrievalFilterMemberNotIn) isRetrievalFilter() {}
 
-// Knowledge base data sources whose metadata attributes fulfill at least one of
-// the filter conditions inside this list are returned.
+// Knowledge base data sources are returned if their metadata attributes fulfill
+// at least one of the filter conditions inside this list.
 type RetrievalFilterMemberOrAll struct {
 	Value []RetrievalFilter
 
@@ -1343,10 +1402,15 @@ type RetrievalFilterMemberOrAll struct {
 
 func (*RetrievalFilterMemberOrAll) isRetrievalFilter() {}
 
-// Knowledge base data sources that contain a metadata attribute whose name
-// matches the key and whose value starts with the value in this object are
-// returned. This filter is currently only supported for Amazon OpenSearch
-// Serverless vector stores.
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value starts with the value in this
+// object. This filter is currently only supported for Amazon OpenSearch Serverless
+// vector stores.
+//
+// The following example would return data sources with an animal attribute starts
+// with ca (for example, cat or camel ).
+//
+//	"startsWith": { "key": "animal", "value": "ca" }
 type RetrievalFilterMemberStartsWith struct {
 	Value FilterAttribute
 
@@ -1354,6 +1418,29 @@ type RetrievalFilterMemberStartsWith struct {
 }
 
 func (*RetrievalFilterMemberStartsWith) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is one of the following:
+//
+//   - A string that contains the value as a substring. The following example would
+//     return data sources with an animal attribute that contains the substring at
+//     (for example cat ).
+//
+// "stringContains": { "key": "animal", "value": "at" }
+//
+//   - A list with a member that contains the value as a substring. The following
+//     example would return data sources with an animals attribute that is a list
+//     containing a member that contains the substring at (for example ["dog", "cat"]
+//     ).
+//
+// "stringContains": { "key": "animals", "value": "at" }
+type RetrievalFilterMemberStringContains struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberStringContains) isRetrievalFilter() {}
 
 // Contains the cited text from the data source.
 //

@@ -1216,6 +1216,11 @@ func awsRestjson1_serializeOpDocumentStartDICOMImportJobInput(v *StartDICOMImpor
 		ok.String(*v.DataAccessRoleArn)
 	}
 
+	if v.InputOwnerAccountId != nil {
+		ok := object.Key("inputOwnerAccountId")
+		ok.String(*v.InputOwnerAccountId)
+	}
+
 	if v.InputS3Uri != nil {
 		ok := object.Key("inputS3Uri")
 		ok.String(*v.InputS3Uri)
