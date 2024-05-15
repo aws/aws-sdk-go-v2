@@ -3,4 +3,4 @@
 package repostspace
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.3.5"
+const goModuleVersion = "1.3.6"

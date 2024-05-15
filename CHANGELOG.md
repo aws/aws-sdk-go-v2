@@ -1,3 +1,25 @@
+# Release (2024-05-15)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.26.2
+  * **Bug Fix**: Adjust internal metrics collection for revised authentication workflow.
+  * **Bug Fix**: Fix confusing doc header in `aws/signer/v4` package.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.10.0](service/bedrockagentruntime/CHANGELOG.md#v1100-2024-05-15)
+  * **Feature**: Updating Bedrock Knowledge Base Metadata & Filters feature with two new filters listContains and stringContains
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.35.0](service/codebuild/CHANGELOG.md#v1350-2024-05-15)
+  * **Feature**: CodeBuild Reserved Capacity VPC Support
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.38.0](service/datasync/CHANGELOG.md#v1380-2024-05-15)
+  * **Feature**: Task executions now display a CANCELLING status when an execution is in the process of being cancelled.
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.22.0](service/grafana/CHANGELOG.md#v1220-2024-05-15)
+  * **Feature**: This release adds new ServiceAccount and ServiceAccountToken APIs.
+* `github.com/aws/aws-sdk-go-v2/service/medicalimaging`: [v1.9.0](service/medicalimaging/CHANGELOG.md#v190-2024-05-15)
+  * **Feature**: Added support for importing medical imaging data from Amazon S3 buckets across accounts and regions.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.48.2](service/securityhub/CHANGELOG.md#v1482-2024-05-15)
+  * **Documentation**: Documentation-only update for AWS Security Hub
+
 # Release (2024-05-14)
 
 ## General Highlights

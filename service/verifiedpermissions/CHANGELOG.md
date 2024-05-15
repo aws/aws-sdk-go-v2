@@ -1,3 +1,7 @@
+# v1.14.1 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2024-05-09)
 
 * **Feature**: Adds policy effect and actions fields to Policy API's.

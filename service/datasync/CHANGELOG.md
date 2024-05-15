@@ -1,3 +1,8 @@
+# v1.38.0 (2024-05-15)
+
+* **Feature**: Task executions now display a CANCELLING status when an execution is in the process of being cancelled.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.2 (2024-05-08)
 
 * **Bug Fix**: GoDoc improvement

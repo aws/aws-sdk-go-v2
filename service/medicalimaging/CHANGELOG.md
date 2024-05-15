@@ -1,3 +1,8 @@
+# v1.9.0 (2024-05-15)
+
+* **Feature**: Added support for importing medical imaging data from Amazon S3 buckets across accounts and regions.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.1 (2024-05-08)
 
 * **Bug Fix**: GoDoc improvement

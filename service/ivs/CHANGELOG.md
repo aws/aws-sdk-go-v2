@@ -1,3 +1,7 @@
+# v1.35.2 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.1 (2024-05-08)
 
 * **Bug Fix**: GoDoc improvement

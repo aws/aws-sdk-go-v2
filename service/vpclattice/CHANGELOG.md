@@ -1,3 +1,7 @@
+# v1.8.1 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2024-05-13)
 
 * **Feature**: This release adds TLS Passthrough support. It also increases max number of target group per rule to 10.

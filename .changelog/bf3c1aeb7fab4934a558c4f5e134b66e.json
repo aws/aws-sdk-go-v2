@@ -1,8 +1,0 @@
-{
-    "id": "bf3c1aeb-7fab-4934-a558-c4f5e134b66e",
-    "type": "feature",
-    "description": "Task executions now display a CANCELLING status when an execution is in the process of being cancelled.",
-    "modules": [
-        "service/datasync"
-    ]
-}

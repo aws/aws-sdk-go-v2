@@ -1,8 +1,0 @@
-{
-    "id": "cbe8567c-5bea-4f3d-a840-ce697dbcc49a",
-    "type": "feature",
-    "description": "This release adds new ServiceAccount and ServiceAccountToken APIs.",
-    "modules": [
-        "service/grafana"
-    ]
-}

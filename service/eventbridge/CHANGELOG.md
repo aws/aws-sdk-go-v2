@@ -1,3 +1,7 @@
+# v1.31.1 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.0 (2024-05-13)
 
 * **Feature**: Amazon EventBridge introduces KMS customer-managed key (CMK) encryption support for custom and partner events published on EventBridge Event Bus (including default bus) and UpdateEventBus API.

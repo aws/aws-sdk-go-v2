@@ -1,8 +1,0 @@
-{
-    "id": "af2f22d6-f216-48f2-a050-413093066fa6",
-    "type": "feature",
-    "description": "Updating Bedrock Knowledge Base Metadata \u0026 Filters feature with two new filters listContains and stringContains",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

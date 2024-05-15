@@ -1,3 +1,7 @@
+# v1.28.3 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.2 (2024-05-09)
 
 * **Documentation**: Update the DNS Firewall settings to correct a spelling issue.

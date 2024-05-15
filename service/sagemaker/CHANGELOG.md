@@ -1,3 +1,7 @@
+# v1.140.1 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.140.0 (2024-05-10)
 
 * **Feature**: Introduced support for G6 instance types on Sagemaker Notebook Instances and on SageMaker Studio for JupyterLab and CodeEditor applications.

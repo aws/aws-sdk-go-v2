@@ -1,3 +1,7 @@
+# v1.38.1 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.0 (2024-05-08)
 
 * **Feature**: Add EXTERNAL_PROVIDER enum value to UserStatusType.

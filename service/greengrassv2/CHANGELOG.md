@@ -1,3 +1,7 @@
+# v1.31.1 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.0 (2024-05-10)
 
 * **Feature**: Mark ComponentVersion in ComponentDeploymentSpecification as required.

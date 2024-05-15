@@ -1,3 +1,8 @@
+# v1.48.2 (2024-05-15)
+
+* **Documentation**: Documentation-only update for AWS Security Hub
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.48.1 (2024-05-08)
 
 * **Bug Fix**: GoDoc improvement

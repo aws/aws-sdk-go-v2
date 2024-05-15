@@ -1,3 +1,8 @@
+# v1.22.0 (2024-05-15)
+
+* **Feature**: This release adds new ServiceAccount and ServiceAccountToken APIs.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.3 (2024-05-08)
 
 * **Bug Fix**: GoDoc improvement

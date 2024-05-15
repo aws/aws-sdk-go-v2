@@ -1,3 +1,8 @@
+# v1.35.0 (2024-05-15)
+
+* **Feature**: CodeBuild Reserved Capacity VPC Support
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.2 (2024-05-08)
 
 * **Bug Fix**: GoDoc improvement

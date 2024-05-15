@@ -1,3 +1,7 @@
+# v1.28.1 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2024-05-08)
 
 * **Feature**: This release adds pull through cache rules support for GitLab container registry in Amazon ECR.

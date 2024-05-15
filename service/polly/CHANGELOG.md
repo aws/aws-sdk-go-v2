@@ -1,3 +1,7 @@
+# v1.40.1 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.0 (2024-05-08)
 
 * **Feature**: Add new engine - generative - that builds the most expressive conversational voices.

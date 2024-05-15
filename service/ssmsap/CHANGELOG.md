@@ -1,3 +1,7 @@
+# v1.13.1 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2024-05-09)
 
 * **Feature**: Added support for application-aware start/stop of SAP applications running on EC2 instances, with SSM for SAP

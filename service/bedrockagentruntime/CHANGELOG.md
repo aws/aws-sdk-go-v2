@@ -1,3 +1,8 @@
+# v1.10.0 (2024-05-15)
+
+* **Feature**: Updating Bedrock Knowledge Base Metadata & Filters feature with two new filters listContains and stringContains
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2024-05-09)
 
 * **Feature**: This release adds support to provide guardrail configuration and modify inference parameters that are then used in RetrieveAndGenerate API in Agents for Amazon Bedrock.

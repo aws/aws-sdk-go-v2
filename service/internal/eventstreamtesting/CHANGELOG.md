@@ -1,3 +1,7 @@
+# v1.4.1 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.4.0 (2024-05-10)
 
 * **Feature**: Drop test dependency on x/net, h2 support is now available in the stdlib.

@@ -1,3 +1,7 @@
+# v1.30.1 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.0 (2024-05-09)
 
 * **Feature**: This release adds support for specifying email message headers for Email Templates, Campaigns, Journeys and Send Messages.
