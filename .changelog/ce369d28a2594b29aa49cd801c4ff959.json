@@ -1,0 +1,8 @@
+{
+    "id": "ce369d28-a259-4b29-aa49-cd801c4ff959",
+    "type": "bugfix",
+    "description": "Adjust internal metrics collection for revised authentication workflow.",
+    "modules": [
+        "."
+    ]
+}
