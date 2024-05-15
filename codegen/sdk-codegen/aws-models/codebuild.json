@@ -686,7 +686,7 @@
                 "timeoutInMinutes": {
                     "target": "com.amazonaws.codebuild#WrapperInt",
                     "traits": {
-                        "smithy.api#documentation": "<p>How long, in minutes, for CodeBuild to wait before timing out this build if it does not\n            get marked as completed.</p>"
+                        "smithy.api#documentation": "<p>How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before timing out this build if it does not\n            get marked as completed.</p>"
                     }
                 },
                 "queuedTimeoutInMinutes": {
@@ -2881,7 +2881,16 @@
                 "overflowBehavior": {
                     "target": "com.amazonaws.codebuild#FleetOverflowBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>The compute fleet overflow behavior.</p>\n         <ul>\n            <li>\n               <p>For overflow behavior <code>QUEUE</code>, your overflow builds need to wait on \n                    the existing fleet instance to become available.</p>\n            </li>\n            <li>\n               <p>For overflow behavior <code>ON_DEMAND</code>, your overflow builds run on CodeBuild on-demand.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The compute fleet overflow behavior.</p>\n         <ul>\n            <li>\n               <p>For overflow behavior <code>QUEUE</code>, your overflow builds need to wait on \n                    the existing fleet instance to become available.</p>\n            </li>\n            <li>\n               <p>For overflow behavior <code>ON_DEMAND</code>, your overflow builds run on CodeBuild on-demand.</p>\n               <note>\n                  <p>If you choose to set your overflow behavior to on-demand while creating a VPC-connected \n                    fleet, make sure that you add the required VPC permissions to your project service role. For more \n                    information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface\">Example \n                    policy statement to allow CodeBuild access to Amazon Web Services services required to create a VPC network interface</a>.</p>\n               </note>\n            </li>\n         </ul>"
+                    }
+                },
+                "vpcConfig": {
+                    "target": "com.amazonaws.codebuild#VpcConfig"
+                },
+                "fleetServiceRole": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service role associated with the compute fleet.</p>"
                     }
                 },
                 "tags": {
@@ -2964,7 +2973,7 @@
                 "sourceVersion": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A version of the build input to be built for this project. If not specified, the latest\n            version is used. If specified, it must be one of: </p>\n         <ul>\n            <li>\n               <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n          corresponds to the version of the source code you want to build. If a pull\n          request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n          (for example <code>pr/25</code>). If a branch name is specified, the branch's\n          HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n          used.</p>\n            </li>\n            <li>\n               <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n          version of the source code you want to build. If a branch name is specified, the\n          branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n          commit ID is used.</p>\n            </li>\n            <li>\n               <p>For Amazon S3: the version ID of the object that represents the build input ZIP\n          file to use.</p>\n            </li>\n         </ul>\n         <p>If <code>sourceVersion</code> is specified at the build level, then that version takes\n            precedence over this <code>sourceVersion</code> (at the project level). </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n                with CodeBuild</a> in the <i>CodeBuild User Guide</i>. \n    </p>"
+                        "smithy.api#documentation": "<p>A version of the build input to be built for this project. If not specified, the latest\n            version is used. If specified, it must be one of: </p>\n         <ul>\n            <li>\n               <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n          corresponds to the version of the source code you want to build. If a pull\n          request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n          (for example <code>pr/25</code>). If a branch name is specified, the branch's\n          HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n          used.</p>\n            </li>\n            <li>\n               <p>For GitLab: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n          version of the source code you want to build. If a branch name is specified, the\n          branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n          commit ID is used.</p>\n            </li>\n            <li>\n               <p>For Amazon S3: the version ID of the object that represents the build input ZIP\n          file to use.</p>\n            </li>\n         </ul>\n         <p>If <code>sourceVersion</code> is specified at the build level, then that version takes\n            precedence over this <code>sourceVersion</code> (at the project level). </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n                with CodeBuild</a> in the <i>CodeBuild User Guide</i>. \n    </p>"
                     }
                 },
                 "secondarySourceVersions": {
@@ -3033,7 +3042,7 @@
                 "vpcConfig": {
                     "target": "com.amazonaws.codebuild#VpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>VpcConfig enables CodeBuild to access resources in an Amazon VPC.</p>"
+                        "smithy.api#documentation": "<p>VpcConfig enables CodeBuild to access resources in an Amazon VPC.</p>\n         <note>\n            <p>If you're using compute fleets during project creation, do not provide vpcConfig.</p>\n         </note>"
                     }
                 },
                 "badgeEnabled": {
@@ -4091,7 +4100,16 @@
                 "overflowBehavior": {
                     "target": "com.amazonaws.codebuild#FleetOverflowBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>The compute fleet overflow behavior.</p>\n         <ul>\n            <li>\n               <p>For overflow behavior <code>QUEUE</code>, your overflow builds need to wait on \n                    the existing fleet instance to become available.</p>\n            </li>\n            <li>\n               <p>For overflow behavior <code>ON_DEMAND</code>, your overflow builds run on CodeBuild on-demand.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The compute fleet overflow behavior.</p>\n         <ul>\n            <li>\n               <p>For overflow behavior <code>QUEUE</code>, your overflow builds need to wait on \n                    the existing fleet instance to become available.</p>\n            </li>\n            <li>\n               <p>For overflow behavior <code>ON_DEMAND</code>, your overflow builds run on CodeBuild on-demand.</p>\n               <note>\n                  <p>If you choose to set your overflow behavior to on-demand while creating a VPC-connected \n                    fleet, make sure that you add the required VPC permissions to your project service role. For more \n                    information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface\">Example \n                    policy statement to allow CodeBuild access to Amazon Web Services services required to create a VPC network interface</a>.</p>\n               </note>\n            </li>\n         </ul>"
+                    }
+                },
+                "vpcConfig": {
+                    "target": "com.amazonaws.codebuild#VpcConfig"
+                },
+                "fleetServiceRole": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service role associated with the compute fleet.</p>"
                     }
                 },
                 "tags": {
@@ -4138,6 +4156,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
+                },
+                "ACTION_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTION_REQUIRED"
                     }
                 }
             }
@@ -4521,7 +4545,7 @@
                 "token": {
                     "target": "com.amazonaws.codebuild#SensitiveNonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p> For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket,\n            this is either the access token or the app password. </p>",
+                        "smithy.api#documentation": "<p> For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket,\n            this is either the access token or the app password. For the <code>authType</code> CODECONNECTIONS, \n            this is the <code>connectionArn</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4535,7 +4559,7 @@
                 "authType": {
                     "target": "com.amazonaws.codebuild#AuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of authentication used to connect to a GitHub, GitHub Enterprise, or\n            Bitbucket repository. An OAUTH connection is not supported by the API and must be\n            created using the CodeBuild console. </p>",
+                        "smithy.api#documentation": "<p> The type of authentication used to connect to a GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or\n            Bitbucket repository. An OAUTH connection is not supported by the API and must be\n            created using the CodeBuild console. Note that CODECONNECTIONS is only valid for \n            GitLab and GitLab Self Managed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5834,7 +5858,7 @@
                 "sourceVersion": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A version of the build input to be built for this project. If not specified, the\n      latest version is used. If specified, it must be one of:</p>\n         <ul>\n            <li>\n               <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n          corresponds to the version of the source code you want to build. If a pull\n          request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n          (for example <code>pr/25</code>). If a branch name is specified, the branch's\n          HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n          used.</p>\n            </li>\n            <li>\n               <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n          version of the source code you want to build. If a branch name is specified, the\n          branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n          commit ID is used.</p>\n            </li>\n            <li>\n               <p>For Amazon S3: the version ID of the object that represents the build input ZIP\n          file to use.</p>\n            </li>\n         </ul>\n         <p>If <code>sourceVersion</code> is specified at the build level, then that version\n      takes precedence over this <code>sourceVersion</code> (at the project level). </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n      with CodeBuild</a> in the <i>CodeBuild User Guide</i>. \n    </p>"
+                        "smithy.api#documentation": "<p>A version of the build input to be built for this project. If not specified, the\n      latest version is used. If specified, it must be one of:</p>\n         <ul>\n            <li>\n               <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n          corresponds to the version of the source code you want to build. If a pull\n          request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n          (for example <code>pr/25</code>). If a branch name is specified, the branch's\n          HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n          used.</p>\n            </li>\n            <li>\n               <p>For GitLab: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n          version of the source code you want to build. If a branch name is specified, the\n          branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n          commit ID is used.</p>\n            </li>\n            <li>\n               <p>For Amazon S3: the version ID of the object that represents the build input ZIP\n          file to use.</p>\n            </li>\n         </ul>\n         <p>If <code>sourceVersion</code> is specified at the build level, then that version\n      takes precedence over this <code>sourceVersion</code> (at the project level). </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n      with CodeBuild</a> in the <i>CodeBuild User Guide</i>. \n    </p>"
                     }
                 },
                 "secondarySourceVersions": {
@@ -6290,9 +6314,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 2,
-                    "max": 255
+                    "max": 150
                 },
-                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9\\-_]{1,254}$"
+                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9\\-_]{1,149}$"
             }
         },
         "com.amazonaws.codebuild#ProjectNames": {
@@ -6424,7 +6448,7 @@
                 "sourceVersion": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source version for the corresponding source identifier. If specified, must be one\n          of:</p>\n         <ul>\n            <li>\n               <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For GitHub or GitLab: the commit ID, pull request ID, branch name, or tag name that\n                  corresponds to the version of the source code you want to build. If a pull\n                  request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n                  (for example, <code>pr/25</code>). If a branch name is specified, the branch's\n                  HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n                  used.</p>\n            </li>\n            <li>\n               <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n                  version of the source code you want to build. If a branch name is specified, the\n                  branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n                  commit ID is used.</p>\n            </li>\n            <li>\n               <p>For Amazon S3: the version ID of the object that represents the build input ZIP\n                  file to use.</p>\n            </li>\n         </ul>\n         <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n              with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>",
+                        "smithy.api#documentation": "<p>The source version for the corresponding source identifier. If specified, must be one\n          of:</p>\n         <ul>\n            <li>\n               <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n                  corresponds to the version of the source code you want to build. If a pull\n                  request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n                  (for example, <code>pr/25</code>). If a branch name is specified, the branch's\n                  HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n                  used.</p>\n            </li>\n            <li>\n               <p>For GitLab: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n                  version of the source code you want to build. If a branch name is specified, the\n                  branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n                  commit ID is used.</p>\n            </li>\n            <li>\n               <p>For Amazon S3: the version ID of the object that represents the build input ZIP\n                  file to use.</p>\n            </li>\n         </ul>\n         <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n              with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7863,7 +7887,7 @@
                 "sourceVersion": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the build input to be built, for this build only. If not specified,\n            the latest version is used. If specified, the contents depends on the source\n            provider:</p>\n         <dl>\n            <dt>CodeCommit</dt>\n            <dd>\n               <p>The commit ID, branch, or Git tag to use.</p>\n            </dd>\n            <dt>GitHub</dt>\n            <dd>\n               <p>The commit ID, pull request ID, branch name, or tag name that corresponds\n                        to the version of the source code you want to build. If a pull request ID is\n                        specified, it must use the format <code>pr/pull-request-ID</code> (for\n                        example <code>pr/25</code>). If a branch name is specified, the branch's\n                        HEAD commit ID is used. If not specified, the default branch's HEAD commit\n                        ID is used.</p>\n            </dd>\n            <dt>Bitbucket</dt>\n            <dd>\n               <p>The commit ID, branch name, or tag name that corresponds to the version of\n                        the source code you want to build. If a branch name is specified, the\n                        branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n                        commit ID is used.</p>\n            </dd>\n            <dt>Amazon S3</dt>\n            <dd>\n               <p>The version ID of the object that represents the build input ZIP file to\n                        use.</p>\n            </dd>\n         </dl>\n         <p>If <code>sourceVersion</code> is specified at the project level, then this\n            <code>sourceVersion</code> (at the build level) takes precedence. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n            with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>The version of the build input to be built, for this build only. If not specified,\n            the latest version is used. If specified, the contents depends on the source\n            provider:</p>\n         <dl>\n            <dt>CodeCommit</dt>\n            <dd>\n               <p>The commit ID, branch, or Git tag to use.</p>\n            </dd>\n            <dt>GitHub</dt>\n            <dd>\n               <p>The commit ID, pull request ID, branch name, or tag name that corresponds\n                        to the version of the source code you want to build. If a pull request ID is\n                        specified, it must use the format <code>pr/pull-request-ID</code> (for\n                        example <code>pr/25</code>). If a branch name is specified, the branch's\n                        HEAD commit ID is used. If not specified, the default branch's HEAD commit\n                        ID is used.</p>\n            </dd>\n            <dt>GitLab</dt>\n            <dd>\n               <p>The commit ID, branch, or Git tag to use.</p>\n            </dd>\n            <dt>Bitbucket</dt>\n            <dd>\n               <p>The commit ID, branch name, or tag name that corresponds to the version of\n                        the source code you want to build. If a branch name is specified, the\n                        branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n                        commit ID is used.</p>\n            </dd>\n            <dt>Amazon S3</dt>\n            <dd>\n               <p>The version ID of the object that represents the build input ZIP file to\n                        use.</p>\n            </dd>\n         </dl>\n         <p>If <code>sourceVersion</code> is specified at the project level, then this\n            <code>sourceVersion</code> (at the build level) takes precedence. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n            with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>"
                     }
                 },
                 "artifactsOverride": {
@@ -7899,7 +7923,7 @@
                 "sourceAuthOverride": {
                     "target": "com.amazonaws.codebuild#SourceAuth",
                     "traits": {
-                        "smithy.api#documentation": "<p>An authorization type for this build that overrides the one defined in the build\n            project. This override applies only if the build project's source is BitBucket or\n            GitHub.</p>"
+                        "smithy.api#documentation": "<p>An authorization type for this build that overrides the one defined in the build\n            project. This override applies only if the build project's source is BitBucket, GitHub, \n            GitLab, or GitLab Self Managed.</p>"
                     }
                 },
                 "gitCloneDepthOverride": {
@@ -8445,7 +8469,16 @@
                 "overflowBehavior": {
                     "target": "com.amazonaws.codebuild#FleetOverflowBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>The compute fleet overflow behavior.</p>\n         <ul>\n            <li>\n               <p>For overflow behavior <code>QUEUE</code>, your overflow builds need to wait on \n                    the existing fleet instance to become available.</p>\n            </li>\n            <li>\n               <p>For overflow behavior <code>ON_DEMAND</code>, your overflow builds run on CodeBuild on-demand.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The compute fleet overflow behavior.</p>\n         <ul>\n            <li>\n               <p>For overflow behavior <code>QUEUE</code>, your overflow builds need to wait on \n                    the existing fleet instance to become available.</p>\n            </li>\n            <li>\n               <p>For overflow behavior <code>ON_DEMAND</code>, your overflow builds run on CodeBuild on-demand.</p>\n               <note>\n                  <p>If you choose to set your overflow behavior to on-demand while creating a VPC-connected \n                    fleet, make sure that you add the required VPC permissions to your project service role. For more \n                    information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface\">Example \n                    policy statement to allow CodeBuild access to Amazon Web Services services required to create a VPC network interface</a>.</p>\n               </note>\n            </li>\n         </ul>"
+                    }
+                },
+                "vpcConfig": {
+                    "target": "com.amazonaws.codebuild#VpcConfig"
+                },
+                "fleetServiceRole": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service role associated with the compute fleet.</p>"
                     }
                 },
                 "tags": {
@@ -8524,7 +8557,7 @@
                 "sourceVersion": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> A version of the build input to be built for this project. If not specified, the\n    latest version is used. If specified, it must be one of: </p>\n         <ul>\n            <li>\n               <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n            corresponds to the version of the source code you want to build. If a pull\n            request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n            (for example <code>pr/25</code>). If a branch name is specified, the branch's\n            HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n            used.</p>\n            </li>\n            <li>\n               <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n            version of the source code you want to build. If a branch name is specified, the\n            branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n            commit ID is used.</p>\n            </li>\n            <li>\n               <p>For Amazon S3: the version ID of the object that represents the build input ZIP\n            file to use.</p>\n            </li>\n         </ul>\n         <p> If <code>sourceVersion</code> is specified at the build level, then that version\n    takes precedence over this <code>sourceVersion</code> (at the project level). </p>\n         <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n        with CodeBuild</a> in the <i>CodeBuild User Guide</i>. \n    </p>"
+                        "smithy.api#documentation": "<p> A version of the build input to be built for this project. If not specified, the\n    latest version is used. If specified, it must be one of: </p>\n         <ul>\n            <li>\n               <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n            corresponds to the version of the source code you want to build. If a pull\n            request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n            (for example <code>pr/25</code>). If a branch name is specified, the branch's\n            HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n            used.</p>\n            </li>\n            <li>\n               <p>For GitLab: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n            version of the source code you want to build. If a branch name is specified, the\n            branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n            commit ID is used.</p>\n            </li>\n            <li>\n               <p>For Amazon S3: the version ID of the object that represents the build input ZIP\n            file to use.</p>\n            </li>\n         </ul>\n         <p> If <code>sourceVersion</code> is specified at the build level, then that version\n    takes precedence over this <code>sourceVersion</code> (at the project level). </p>\n         <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n        with CodeBuild</a> in the <i>CodeBuild User Guide</i>. \n    </p>"
                     }
                 },
                 "secondarySourceVersions": {

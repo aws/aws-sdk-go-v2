@@ -8533,6 +8533,12 @@
                         "smithy.api#enumValue": "QUEUED"
                     }
                 },
+                "CANCELLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLING"
+                    }
+                },
                 "LAUNCHING": {
                     "target": "smithy.api#Unit",
                     "traits": {

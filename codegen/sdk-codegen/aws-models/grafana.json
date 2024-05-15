@@ -35,6 +35,12 @@
                     "target": "com.amazonaws.grafana#Permission"
                 },
                 {
+                    "target": "com.amazonaws.grafana#ServiceAccount"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ServiceAccountToken"
+                },
+                {
                     "target": "com.amazonaws.grafana#Workspace"
                 }
             ],
@@ -981,7 +987,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns a Grafana Enterprise license to a workspace. Upgrading to Grafana Enterprise\n            incurs additional fees. For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html\">Upgrade a\n                workspace to Grafana Enterprise</a>.</p>",
+                "smithy.api#documentation": "<p>Assigns a Grafana Enterprise license to a workspace. To upgrade, you must use\n            <code>ENTERPRISE</code> for the <code>licenseType</code>, and pass in a valid\n            Grafana Labs token for the <code>grafanaToken</code>. Upgrading to Grafana Enterprise\n            incurs additional fees. For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html\">Upgrade a\n                workspace to Grafana Enterprise</a>.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "POST",
@@ -1011,7 +1017,7 @@
                 "grafanaToken": {
                     "target": "com.amazonaws.grafana#GrafanaToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token from Grafana Labs that ties your Amazon Web Services account with a Grafana \n            Labs account. For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise\">Register with Grafana Labs</a>.</p>",
+                        "smithy.api#documentation": "<p>A token from Grafana Labs that ties your Amazon Web Services account with a Grafana \n            Labs account. For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise\">Link your account with Grafana Labs</a>.</p>",
                         "smithy.api#httpHeader": "Grafana-Token"
                     }
                 }
@@ -1262,7 +1268,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Grafana API key for the workspace. This key can be used to authenticate\n            requests sent to the workspace's HTTP API. See <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html\">https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html</a>\n            for available APIs and example requests.</p>",
+                "smithy.api#documentation": "<p>Creates a Grafana API key for the workspace. This key can be used to authenticate\n            requests sent to the workspace's HTTP API. See <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html\">https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html</a>\n            for available APIs and example requests.</p>\n         <note>\n            <p>In workspaces compatible with Grafana version 9 or above, use workspace service \n                accounts instead of API keys. API keys will be removed in a future release.</p>\n         </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1283,7 +1289,7 @@
                 "keyRole": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the permission level of the key.</p>\n         <p> Valid values: <code>VIEWER</code>|<code>EDITOR</code>|<code>ADMIN</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the permission level of the key.</p>\n         <p> Valid values: <code>ADMIN</code>|<code>EDITOR</code>|<code>VIEWER</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1440,7 +1446,7 @@
                 "grafanaVersion": {
                     "target": "com.amazonaws.grafana#GrafanaVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the version of Grafana to support in the new workspace. If not specified, \n            defaults to the latest version (for example, 9.4).</p>\n         <p>To get a list of supported versions, use the <code>ListVersions</code>\n            operation.</p>"
+                        "smithy.api#documentation": "<p>Specifies the version of Grafana to support in the new workspace. If not specified, \n            defaults to the latest version (for example, 10.4).</p>\n         <p>To get a list of supported versions, use the <code>ListVersions</code>\n            operation.</p>"
                     }
                 }
             }
@@ -1455,6 +1461,223 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.grafana#CreateWorkspaceServiceAccount": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.grafana#CreateWorkspaceServiceAccountRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.grafana#CreateWorkspaceServiceAccountResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.grafana#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a service account for the workspace. A service account can be used to call \n            Grafana HTTP APIs, and run automated workloads. After creating the service account with\n            the correct <code>GrafanaRole</code> for your use case, use \n            <code>CreateWorkspaceServiceAccountToken</code> to create a token that can be used to\n            authenticate and authorize Grafana HTTP API calls.</p>\n         <p>You can only create service accounts for workspaces that are compatible with Grafana\n            version 9 and above.</p>\n         <note>\n            <p>For more information about service accounts, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/service-accounts.html\">Service accounts</a> in \n                the <i>Amazon Managed Grafana User Guide</i>.</p>\n            <p>For more information about the Grafana HTTP APIs, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html\">Using Grafana HTTP \n                APIs</a> in the <i>Amazon Managed Grafana User Guide</i>.</p>\n         </note>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/workspaces/{workspaceId}/serviceaccounts"
+                }
+            }
+        },
+        "com.amazonaws.grafana#CreateWorkspaceServiceAccountRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.grafana#ServiceAccountName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the service account. The name must be unique within the workspace, as it\n            determines the ID associated with the service account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "grafanaRole": {
+                    "target": "com.amazonaws.grafana#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permission level to use for this service account.</p>\n         <note>\n            <p>For more information about the roles and the permissions each has, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/Grafana-user-roles.html\">User\n                roles</a> in the <i>Amazon Managed Grafana User Guide</i>.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace within which to create the service account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.grafana#CreateWorkspaceServiceAccountResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the service account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "grafanaRole": {
+                    "target": "com.amazonaws.grafana#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permission level given to the service account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workspace with which the service account is associated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.grafana#CreateWorkspaceServiceAccountToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.grafana#CreateWorkspaceServiceAccountTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.grafana#CreateWorkspaceServiceAccountTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.grafana#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a token that can be used to authenticate and authorize Grafana HTTP API\n            operations for the given <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/service-accounts.html\">workspace service \n            account</a>. The service account acts as a user for the API operations, and\n            defines the permissions that are used by the API.</p>\n         <important>\n            <p>When you create the service account token, you will receive a key that is used\n                when calling Grafana APIs. Do not lose this key, as it will not be retrievable\n                again.</p>\n            <p>If you do lose the key, you can delete the token and recreate it to receive a \n                new key. This will disable the initial key.</p>\n         </important>\n         <p>Service accounts are only available for workspaces that are compatible with Grafana\n            version 9 and above.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/workspaces/{workspaceId}/serviceaccounts/{serviceAccountId}/tokens"
+                }
+            }
+        },
+        "com.amazonaws.grafana#CreateWorkspaceServiceAccountTokenRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.grafana#ServiceAccountTokenName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the token to create.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "secondsToLive": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets how long the token will be valid, in seconds. You can set the time up to 30 \n            days in the future.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 2592000
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceAccountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the service account for which to create a token.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace the service account resides within.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.grafana#CreateWorkspaceServiceAccountTokenResponse": {
+            "type": "structure",
+            "members": {
+                "serviceAccountToken": {
+                    "target": "com.amazonaws.grafana#ServiceAccountTokenSummaryWithKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the created token, including the key. Be sure to store the key\n            securely.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceAccountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the service account where the token was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace where the token was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.grafana#DataSourceType": {
@@ -1582,7 +1805,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a Grafana API key for the workspace.</p>",
+                "smithy.api#documentation": "<p>Deletes a Grafana API key for the workspace.</p>\n         <note>\n            <p>In workspaces compatible with Grafana version 9 or above, use workspace service \n                accounts instead of API keys. API keys will be removed in a future release.</p>\n         </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "DELETE",
@@ -1655,6 +1878,187 @@
                 }
             }
         },
+        "com.amazonaws.grafana#DeleteWorkspaceServiceAccount": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.grafana#DeleteWorkspaceServiceAccountRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.grafana#DeleteWorkspaceServiceAccountResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.grafana#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a workspace service account from the workspace.</p>\n         <p>This will delete any tokens created for the service account, as well. If the tokens\n            are currently in use, the will fail to authenticate / authorize after they are \n            deleted.</p>\n         <p>Service accounts are only available for workspaces that are compatible with Grafana\n            version 9 and above.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/workspaces/{workspaceId}/serviceaccounts/{serviceAccountId}"
+                }
+            }
+        },
+        "com.amazonaws.grafana#DeleteWorkspaceServiceAccountRequest": {
+            "type": "structure",
+            "members": {
+                "serviceAccountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the service account to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace where the service account resides.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.grafana#DeleteWorkspaceServiceAccountResponse": {
+            "type": "structure",
+            "members": {
+                "serviceAccountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the service account deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace where the service account was deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.grafana#DeleteWorkspaceServiceAccountToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.grafana#DeleteWorkspaceServiceAccountTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.grafana#DeleteWorkspaceServiceAccountTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.grafana#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a token for the workspace service account.</p>\n         <p>This will disable the key associated with the token. If any automation is currently \n            using the key, it will no longer be authenticated or authorized to perform actions with \n            the Grafana HTTP APIs.</p>\n         <p>Service accounts are only available for workspaces that are compatible with Grafana\n            version 9 and above.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/workspaces/{workspaceId}/serviceaccounts/{serviceAccountId}/tokens/{tokenId}"
+                }
+            }
+        },
+        "com.amazonaws.grafana#DeleteWorkspaceServiceAccountTokenRequest": {
+            "type": "structure",
+            "members": {
+                "tokenId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the token to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceAccountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the service account from which to delete the token.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace from which to delete the token.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.grafana#DeleteWorkspaceServiceAccountTokenResponse": {
+            "type": "structure",
+            "members": {
+                "tokenId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the token that was deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceAccountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the service account where the token was deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace where the token was deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.grafana#DescribeWorkspace": {
             "type": "operation",
             "input": {
@@ -1701,6 +2105,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.grafana#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.grafana#InternalServerException"
@@ -2322,6 +2729,237 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.grafana#ListWorkspaceServiceAccountTokens": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.grafana#ListWorkspaceServiceAccountTokensRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.grafana#ListWorkspaceServiceAccountTokensResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.grafana#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of tokens for a workspace service account.</p>\n         <note>\n            <p>This does not return the key for each token. You cannot access keys after they\n                are created. To create a new key, delete the token and recreate it.</p>\n         </note>\n         <p>Service accounts are only available for workspaces that are compatible with Grafana\n            version 9 and above.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/workspaces/{workspaceId}/serviceaccounts/{serviceAccountId}/tokens"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "serviceAccountTokens"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.grafana#ListWorkspaceServiceAccountTokensRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of tokens to include in the results.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.grafana#PaginationToken",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The token for the next set of service accounts to return. (You receive this token\n            from a previous <code>ListWorkspaceServiceAccountTokens</code> operation.)</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "serviceAccountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the service account for which to return tokens.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace for which to return tokens.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.grafana#ListWorkspaceServiceAccountTokensResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.grafana#PaginationToken",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of service accounts.</p>"
+                    }
+                },
+                "serviceAccountTokens": {
+                    "target": "com.amazonaws.grafana#ServiceAccountTokenList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures containing information about the tokens.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceAccountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the service account where the tokens reside.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace where the tokens reside.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.grafana#ListWorkspaceServiceAccounts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.grafana#ListWorkspaceServiceAccountsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.grafana#ListWorkspaceServiceAccountsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.grafana#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of service accounts for a workspace.</p>\n         <p>Service accounts are only available for workspaces that are compatible with Grafana\n            version 9 and above.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/workspaces/{workspaceId}/serviceaccounts"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "serviceAccounts"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.grafana#ListWorkspaceServiceAccountsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of service accounts to include in the results.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.grafana#PaginationToken",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The token for the next set of service accounts to return. (You receive this token\n            from a previous <code>ListWorkspaceServiceAccounts</code> operation.)</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workspace for which to list service accounts.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.grafana#ListWorkspaceServiceAccountsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.grafana#PaginationToken",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of service accounts.</p>"
+                    }
+                },
+                "serviceAccounts": {
+                    "target": "com.amazonaws.grafana#ServiceAccountList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures containing information about the service accounts.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workspace to which the service accounts are associated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.grafana#ListWorkspaces": {
             "type": "operation",
             "input": {
@@ -2755,6 +3393,200 @@
                     "min": 1,
                     "max": 5
                 }
+            }
+        },
+        "com.amazonaws.grafana#ServiceAccount": {
+            "type": "resource",
+            "identifiers": {
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId"
+                }
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.grafana#CreateWorkspaceServiceAccount"
+                },
+                {
+                    "target": "com.amazonaws.grafana#DeleteWorkspaceServiceAccount"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ListWorkspaceServiceAccounts"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "workspaces/{workspaceId}/serviceaccounts"
+                }
+            }
+        },
+        "com.amazonaws.grafana#ServiceAccountList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.grafana#ServiceAccountSummary"
+            }
+        },
+        "com.amazonaws.grafana#ServiceAccountName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.grafana#ServiceAccountSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the service account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "isDisabled": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns true if the service account is disabled. Service accounts can be disabled and\n            enabled in the Amazon Managed Grafana console.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "grafanaRole": {
+                    "target": "com.amazonaws.grafana#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role of the service account, which sets the permission level used when calling\n            Grafana APIs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the information about one service account.</p>"
+            }
+        },
+        "com.amazonaws.grafana#ServiceAccountToken": {
+            "type": "resource",
+            "identifiers": {
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId"
+                },
+                "serviceAccountId": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.grafana#CreateWorkspaceServiceAccountToken"
+                },
+                {
+                    "target": "com.amazonaws.grafana#DeleteWorkspaceServiceAccountToken"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ListWorkspaceServiceAccountTokens"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "workspaces/{workspaceId}/serviceaccounts/{serviceAccountId}/tokens"
+                }
+            }
+        },
+        "com.amazonaws.grafana#ServiceAccountTokenKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.grafana#ServiceAccountTokenList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.grafana#ServiceAccountTokenSummary"
+            }
+        },
+        "com.amazonaws.grafana#ServiceAccountTokenName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.grafana#ServiceAccountTokenSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the service account token.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service account token.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the service account token was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expiresAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the service account token will expire.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUsedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the token was used to authorize a Grafana HTTP API.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the information about a service account token.</p>"
+            }
+        },
+        "com.amazonaws.grafana#ServiceAccountTokenSummaryWithKey": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the service account token.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service account token.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.grafana#ServiceAccountTokenKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key for the service account token. Used when making calls to the Grafana HTTP \n            APIs to authenticate and authorize the requests.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the information about a service account token.</p>\n         <p>This structure is returned when creating the token. It is important to store the\n            <code>key</code> that is returned, as it is not retrievable at a later time.</p>\n         <p>If you lose the key, you can delete and recreate the token, which will create a\n            new key.</p>"
             }
         },
         "com.amazonaws.grafana#ServiceQuotaExceededException": {
@@ -3828,7 +4660,7 @@
                 "grafanaToken": {
                     "target": "com.amazonaws.grafana#GrafanaToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token that ties this workspace to a Grafana Labs account. For more information, \n            see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise\">Register with Grafana Labs</a>.</p>"
+                        "smithy.api#documentation": "<p>The token that ties this workspace to a Grafana Labs account. For more information, \n            see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise\">Link your account with Grafana Labs</a>.</p>"
                     }
                 }
             },
@@ -4012,7 +4844,7 @@
                 "grafanaToken": {
                     "target": "com.amazonaws.grafana#GrafanaToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token that ties this workspace to a Grafana Labs account. For more information, \n            see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise\">Register with Grafana Labs</a>.</p>"
+                        "smithy.api#documentation": "<p>The token that ties this workspace to a Grafana Labs account. For more information, \n            see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise\">Link your account with Grafana Labs</a>.</p>"
                     }
                 }
             },

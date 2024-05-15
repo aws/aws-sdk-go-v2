@@ -770,6 +770,16 @@
                 "smithy.api#pattern": "^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:medical-imaging:[a-z0-9-]+:[0-9]{12}:datastore/[0-9a-z]{32}(/imageset/[0-9a-z]{32})?$"
             }
         },
+        "com.amazonaws.medicalimaging#AwsAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^\\d+$"
+            }
+        },
         "com.amazonaws.medicalimaging#ClientToken": {
             "type": "string",
             "traits": {
@@ -3409,7 +3419,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Search image sets based on defined input attributes.</p>\n         <note>\n            <p>\n               <code>SearchImageSets</code> accepts a single search \n               query parameter and returns a paginated response of all image sets that have the \n               matching criteria. All range queries must be input as <code>(lowerBound, upperBound)</code>.</p>\n            <p>\n               <code>SearchImageSets</code> uses the <code>updatedAt</code> field for sorting \n               in decreasing order from latest to oldest.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Search image sets based on defined input attributes.</p>\n         <note>\n            <p>\n               <code>SearchImageSets</code> accepts a single search query parameter and returns a paginated\n               response of all image sets that have the matching criteria. All date range queries must be input\n               as <code>(lowerBound, upperBound)</code>.</p>\n            <p>By default, <code>SearchImageSets</code> uses the <code>updatedAt</code> field for sorting \n               in descending order from newest to oldest.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "runtime-"
                 },
@@ -3655,6 +3665,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The output prefix of the S3 bucket to upload the results of the DICOM import job.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "inputOwnerAccountId": {
+                    "target": "com.amazonaws.medicalimaging#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the source S3 bucket owner.</p>"
                     }
                 }
             },

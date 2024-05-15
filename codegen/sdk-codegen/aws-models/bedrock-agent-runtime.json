@@ -2722,72 +2722,84 @@
                 "equals": {
                     "target": "com.amazonaws.bedrockagentruntime#FilterAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Knowledge base data sources that contain a metadata attribute whose name matches the <code>key</code> and whose value matches the <code>value</code> in this object are returned.</p>"
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose name matches the <code>key</code> and whose value matches the <code>value</code> in this object.</p>\n         <p>The following example would return data sources with an <code>animal</code> attribute whose value is <code>cat</code>:</p>\n         <p>\n            <code>\"equals\": { \"key\": \"animal\", \"value\": \"cat\" }</code>\n         </p>"
                     }
                 },
                 "notEquals": {
                     "target": "com.amazonaws.bedrockagentruntime#FilterAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Knowledge base data sources that contain a metadata attribute whose name matches the <code>key</code> and whose value doesn't match the <code>value</code> in this object are returned.</p>"
+                        "smithy.api#documentation": "<p>Knowledge base data sources that contain a metadata attribute whose name matches the <code>key</code> and whose value doesn't match the <code>value</code> in this object are returned.</p>\n         <p>The following example would return data sources that don't contain an <code>animal</code> attribute whose value is <code>cat</code>.</p>\n         <p>\n            <code>\"notEquals\": { \"key\": \"animal\", \"value\": \"cat\" }</code>\n         </p>"
                     }
                 },
                 "greaterThan": {
                     "target": "com.amazonaws.bedrockagentruntime#FilterAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Knowledge base data sources that contain a metadata attribute whose name matches the <code>key</code> and whose value is greater than the <code>value</code> in this object are returned.</p>"
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose name matches the <code>key</code> and whose value is greater than the <code>value</code> in this object.</p>\n         <p>The following example would return data sources with an <code>year</code> attribute whose value is greater than <code>1989</code>:</p>\n         <p>\n            <code>\"greaterThan\": { \"key\": \"year\", \"value\": 1989 }</code>\n         </p>"
                     }
                 },
                 "greaterThanOrEquals": {
                     "target": "com.amazonaws.bedrockagentruntime#FilterAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Knowledge base data sources that contain a metadata attribute whose name matches the <code>key</code> and whose value is greater than or equal to the <code>value</code> in this object are returned.</p>"
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose name matches the <code>key</code> and whose value is greater than or equal to the <code>value</code> in this object.</p>\n         <p>The following example would return data sources with an <code>year</code> attribute whose value is greater than or equal to <code>1989</code>:</p>\n         <p>\n            <code>\"greaterThanOrEquals\": { \"key\": \"year\", \"value\": 1989 }</code>\n         </p>"
                     }
                 },
                 "lessThan": {
                     "target": "com.amazonaws.bedrockagentruntime#FilterAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Knowledge base data sources that contain a metadata attribute whose name matches the <code>key</code> and whose value is less than the <code>value</code> in this object are returned.</p>"
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose name matches the <code>key</code> and whose value is less than the <code>value</code> in this object.</p>\n         <p>The following example would return data sources with an <code>year</code> attribute whose value is less than to <code>1989</code>.</p>\n         <p>\n            <code>\"lessThan\": { \"key\": \"year\", \"value\": 1989 }</code>\n         </p>"
                     }
                 },
                 "lessThanOrEquals": {
                     "target": "com.amazonaws.bedrockagentruntime#FilterAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Knowledge base data sources that contain a metadata attribute whose name matches the <code>key</code> and whose value is less than or equal to the <code>value</code> in this object are returned.</p>"
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose name matches the <code>key</code> and whose value is less than or equal to the <code>value</code> in this object.</p>\n         <p>The following example would return data sources with an <code>year</code> attribute whose value is less than or equal to <code>1989</code>.</p>\n         <p>\n            <code>\"lessThanOrEquals\": { \"key\": \"year\", \"value\": 1989 }</code>\n         </p>"
                     }
                 },
                 "in": {
                     "target": "com.amazonaws.bedrockagentruntime#FilterAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Knowledge base data sources that contain a metadata attribute whose name matches the <code>key</code> and whose value is in the list specified in the <code>value</code> in this object are returned.</p>"
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose name matches the <code>key</code> and whose value is in the list specified in the <code>value</code> in this object.</p>\n         <p>The following example would return data sources with an <code>animal</code> attribute that is either <code>cat</code> or <code>dog</code>:</p>\n         <p>\n            <code>\"in\": { \"key\": \"animal\", \"value\": [\"cat\", \"dog\"] }</code>\n         </p>"
                     }
                 },
                 "notIn": {
                     "target": "com.amazonaws.bedrockagentruntime#FilterAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Knowledge base data sources that contain a metadata attribute whose name matches the <code>key</code> and whose value isn't in the list specified in the <code>value</code> in this object are returned.</p>"
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose name matches the <code>key</code> and whose value isn't in the list specified in the <code>value</code> in this object.</p>\n         <p>The following example would return data sources whose <code>animal</code> attribute is neither <code>cat</code> nor <code>dog</code>.</p>\n         <p>\n            <code>\"notIn\": { \"key\": \"animal\", \"value\": [\"cat\", \"dog\"] }</code>\n         </p>"
                     }
                 },
                 "startsWith": {
                     "target": "com.amazonaws.bedrockagentruntime#FilterAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Knowledge base data sources that contain a metadata attribute whose name matches the <code>key</code> and whose value starts with the <code>value</code> in this object are returned. This filter is currently only supported for Amazon OpenSearch Serverless vector stores.</p>"
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose name matches the <code>key</code> and whose value starts with the <code>value</code> in this object. This filter is currently only supported for Amazon OpenSearch Serverless vector stores.</p>\n         <p>The following example would return data sources with an <code>animal</code> attribute starts with <code>ca</code> (for example, <code>cat</code> or <code>camel</code>).</p>\n         <p>\n            <code>\"startsWith\": { \"key\": \"animal\", \"value\": \"ca\" }</code>\n         </p>"
+                    }
+                },
+                "listContains": {
+                    "target": "com.amazonaws.bedrockagentruntime#FilterAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose name matches the <code>key</code> and whose value is a list that contains the <code>value</code> as one of its members.</p>\n         <p>The following example would return data sources with an <code>animals</code> attribute that is a list containing a <code>cat</code> member (for example <code>[\"dog\", \"cat\"]</code>).</p>\n         <p>\n            <code>\"listContains\": { \"key\": \"animals\", \"value\": \"cat\" }</code>\n         </p>"
+                    }
+                },
+                "stringContains": {
+                    "target": "com.amazonaws.bedrockagentruntime#FilterAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose name matches the <code>key</code> and whose value is one of the following:</p>\n         <ul>\n            <li>\n               <p>A string that contains the <code>value</code> as a substring. The following example would return data sources with an <code>animal</code> attribute that contains the substring <code>at</code> (for example <code>cat</code>).</p>\n               <p>\n                  <code>\"stringContains\": { \"key\": \"animal\", \"value\": \"at\" }</code>\n               </p>\n            </li>\n            <li>\n               <p>A list with a member that contains the <code>value</code> as a substring. The following example would return data sources with an <code>animals</code> attribute that is a list containing a member that contains the substring <code>at</code> (for example <code>[\"dog\", \"cat\"]</code>).</p>\n               <p>\n                  <code>\"stringContains\": { \"key\": \"animals\", \"value\": \"at\" }</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "andAll": {
                     "target": "com.amazonaws.bedrockagentruntime#RetrievalFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Knowledge base data sources whose metadata attributes fulfill all the filter conditions inside this list are returned.</p>"
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if their metadata attributes fulfill all the filter conditions inside this list.</p>"
                     }
                 },
                 "orAll": {
                     "target": "com.amazonaws.bedrockagentruntime#RetrievalFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Knowledge base data sources whose metadata attributes fulfill at least one of the filter conditions inside this list are returned.</p>"
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if their metadata attributes fulfill at least one of the filter conditions inside this list.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the filters to use on the metadata attributes in the knowledge base data sources before returning results. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html\">Query configurations</a>.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax\">Retrieve request</a> – in the <code>filter</code> field</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax\">RetrieveAndGenerate request</a> – in the <code>filter</code> field</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Specifies the filters to use on the metadata attributes in the knowledge base data sources before returning results. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html\">Query configurations</a>. See the examples below to see how to use these filters.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax\">Retrieve request</a> – in the <code>filter</code> field</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax\">RetrieveAndGenerate request</a> – in the <code>filter</code> field</p>\n            </li>\n         </ul>",
                 "smithy.api#sensitive": {}
             }
         },
