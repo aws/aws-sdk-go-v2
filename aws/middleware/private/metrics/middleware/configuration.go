@@ -54,6 +54,9 @@ func WithMetricMiddlewares(
 		if err := timeSigning(stack); err != nil {
 			return err
 		}
+		if err := stack.Build.Add(&captureUserAgent{}, middleware.After); err != nil {
+			return err
+		}
 		return nil
 	}
 }
