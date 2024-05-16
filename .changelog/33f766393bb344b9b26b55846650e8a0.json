@@ -1,8 +1,0 @@
-{
-    "id": "33f76639-3bb3-44b9-b26b-55846650e8a0",
-    "type": "feature",
-    "description": "Capture user agent in internal metrics.",
-    "modules": [
-        "."
-    ]
-}

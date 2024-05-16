@@ -1,3 +1,8 @@
+# v1.141.0 (2024-05-16)
+
+* **Feature**: Introduced WorkerAccessConfiguration to SageMaker Workteam. This allows customers to configure resource access for workers in a workteam.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.140.1 (2024-05-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.10.1 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.0 (2024-05-15)
 
 * **Feature**: Updating Bedrock Knowledge Base Metadata & Filters feature with two new filters listContains and stringContains

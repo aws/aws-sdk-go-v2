@@ -1,3 +1,26 @@
+# Release (2024-05-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.27.0
+  * **Feature**: Capture user agent in internal metrics.
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.30.0](service/acmpca/CHANGELOG.md#v1300-2024-05-16)
+  * **Feature**: This release adds support for waiters to fail on AccessDeniedException when having insufficient permissions
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.98.2](service/connect/CHANGELOG.md#v1982-2024-05-16)
+  * **Documentation**: Adding Contact Flow metrics to the GetMetricDataV2 API
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.32.0](service/kafka/CHANGELOG.md#v1320-2024-05-16)
+  * **Feature**: AWS MSK support for Broker Removal.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.27.0](service/mwaa/CHANGELOG.md#v1270-2024-05-16)
+  * **Feature**: Amazon MWAA now supports Airflow web server auto scaling to automatically handle increased demand from REST APIs, Command Line Interface (CLI), or more Airflow User Interface (UI) users. Customers can specify maximum and minimum web server instances during environment creation and update workflow.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.64.0](service/quicksight/CHANGELOG.md#v1640-2024-05-16)
+  * **Feature**: This release adds DescribeKeyRegistration and UpdateKeyRegistration APIs to manage QuickSight Customer Managed Keys (CMK).
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.141.0](service/sagemaker/CHANGELOG.md#v11410-2024-05-16)
+  * **Feature**: Introduced WorkerAccessConfiguration to SageMaker Workteam. This allows customers to configure resource access for workers in a workteam.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.28.9](service/secretsmanager/CHANGELOG.md#v1289-2024-05-16)
+  * **Documentation**: Documentation updates for AWS Secrets Manager
+
 # Release (2024-05-15)
 
 ## General Highlights

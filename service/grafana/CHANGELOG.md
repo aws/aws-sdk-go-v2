@@ -1,3 +1,7 @@
+# v1.22.1 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2024-05-15)
 
 * **Feature**: This release adds new ServiceAccount and ServiceAccountToken APIs.

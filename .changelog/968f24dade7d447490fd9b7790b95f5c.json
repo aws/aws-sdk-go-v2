@@ -1,8 +1,0 @@
-{
-    "id": "968f24da-de7d-4474-90fd-9b7790b95f5c",
-    "type": "documentation",
-    "description": "Documentation updates for AWS Secrets Manager",
-    "modules": [
-        "service/secretsmanager"
-    ]
-}

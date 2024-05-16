@@ -1,8 +1,0 @@
-{
-    "id": "de5ea510-479c-4b79-8351-3b6661e85d81",
-    "type": "feature",
-    "description": "Introduced WorkerAccessConfiguration to SageMaker Workteam. This allows customers to configure resource access for workers in a workteam.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

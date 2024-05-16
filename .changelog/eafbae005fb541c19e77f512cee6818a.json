@@ -1,8 +1,0 @@
-{
-    "id": "eafbae00-5fb5-41c1-9e77-f512cee6818a",
-    "type": "documentation",
-    "description": "Adding Contact Flow metrics to the GetMetricDataV2 API",
-    "modules": [
-        "service/connect"
-    ]
-}

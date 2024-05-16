@@ -1,3 +1,7 @@
+# v1.35.1 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.0 (2024-05-15)
 
 * **Feature**: CodeBuild Reserved Capacity VPC Support

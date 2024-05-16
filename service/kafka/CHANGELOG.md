@@ -1,3 +1,8 @@
+# v1.32.0 (2024-05-16)
+
+* **Feature**: AWS MSK support for Broker Removal.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.5 (2024-05-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

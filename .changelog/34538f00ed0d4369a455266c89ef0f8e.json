@@ -1,8 +1,0 @@
-{
-    "id": "34538f00-ed0d-4369-a455-266c89ef0f8e",
-    "type": "feature",
-    "description": "This release adds support for waiters to fail on AccessDeniedException when having insufficient permissions",
-    "modules": [
-        "service/acmpca"
-    ]
-}

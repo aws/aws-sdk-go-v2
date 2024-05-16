@@ -1,3 +1,8 @@
+# v1.30.0 (2024-05-16)
+
+* **Feature**: This release adds support for waiters to fail on AccessDeniedException when having insufficient permissions
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.6 (2024-05-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,8 @@
+# v1.98.2 (2024-05-16)
+
+* **Documentation**: Adding Contact Flow metrics to the GetMetricDataV2 API
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.98.1 (2024-05-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

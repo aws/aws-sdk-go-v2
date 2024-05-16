@@ -1,3 +1,7 @@
+# v1.38.1 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.0 (2024-05-15)
 
 * **Feature**: Task executions now display a CANCELLING status when an execution is in the process of being cancelled.
