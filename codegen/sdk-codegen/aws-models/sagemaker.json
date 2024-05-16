@@ -6543,7 +6543,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 5
+                    "max": 20
                 }
             }
         },
@@ -12476,7 +12476,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a space used for real time collaboration in a domain.</p>"
+                "smithy.api#documentation": "<p>Creates a private space or a space used for real time collaboration in a domain.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateSpaceRequest": {
@@ -13334,6 +13334,12 @@
                         "smithy.api#documentation": "<p>Configures notification of workers regarding available or expiring work items.</p>"
                     }
                 },
+                "WorkerAccessConfiguration": {
+                    "target": "com.amazonaws.sagemaker#WorkerAccessConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this optional parameter to constrain access to an Amazon S3 resource based on the IP address using supported IAM global condition keys. The Amazon S3 resource is accessed in the worker portal using a Amazon S3 presigned URL.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
@@ -13437,7 +13443,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 2
+                    "max": 10
                 }
             }
         },
@@ -13449,7 +13455,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 1
+                    "max": 5
                 }
             }
         },
@@ -26077,6 +26083,23 @@
         "com.amazonaws.sagemaker#EnableSessionTagChaining": {
             "type": "boolean"
         },
+        "com.amazonaws.sagemaker#EnabledOrDisabled": {
+            "type": "enum",
+            "members": {
+                "Enabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Enabled"
+                    }
+                },
+                "Disabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Disabled"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#Endpoint": {
             "type": "structure",
             "members": {
@@ -30807,6 +30830,26 @@
                 "smithy.api#documentation": "<p>The IAM Identity details associated with the user. These details are\n      associated with model package groups, model packages and project entities only.</p>"
             }
         },
+        "com.amazonaws.sagemaker#IamPolicyConstraints": {
+            "type": "structure",
+            "members": {
+                "SourceIp": {
+                    "target": "com.amazonaws.sagemaker#EnabledOrDisabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>SourceIp</code> is <code>Enabled</code> the worker's IP address when a task is rendered in the worker portal is added to the IAM policy as a <code>Condition</code> used to generate the Amazon S3 presigned URL. This IP address is checked by Amazon S3 and must match in order for the Amazon S3 resource to be rendered in the worker portal.</p>"
+                    }
+                },
+                "VpcSourceIp": {
+                    "target": "com.amazonaws.sagemaker#EnabledOrDisabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>VpcSourceIp</code> is <code>Enabled</code> the worker's IP address when a task is rendered in private worker portal inside the VPC is added to the IAM policy as a <code>Condition</code> used to generate the Amazon S3 presigned URL. To render the task successfully Amazon S3 checks that the presigned URL is being accessed over an Amazon S3 VPC Endpoint, and that the worker's IP address matches the IP address in the IAM policy. To learn more about configuring private worker portal, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/samurai-vpc-worker-portal.html\">Use Amazon VPC mode from a private worker portal</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Use this parameter to specify a supported global condition key that is added to the IAM policy.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#IdempotencyToken": {
             "type": "string",
             "traits": {
@@ -35153,7 +35196,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.sagemaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of items to return in the response. If the total\n          number of items available is more than the value specified, a <code>NextToken</code>\n          is provided in the response. To resume pagination, provide the <code>NextToken</code>\n          value in the as part of a subsequent call. The default value is 10.</p>"
+                        "smithy.api#documentation": "<p>This parameter defines the maximum number of results that can be returned in a single response. The <code>MaxResults</code> parameter is an upper bound, not a target. If there are\n          more results available than the value specified, a <code>NextToken</code>\n        is provided in the response. The <code>NextToken</code> indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for <code>MaxResults</code> is 10.</p>"
                     }
                 },
                 "SortOrder": {
@@ -36478,7 +36521,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.sagemaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of items to return in the response. If the total number of items\n      available is more than the value specified, a <code>NextToken</code> is provided in the\n      response. To resume pagination, provide the <code>NextToken</code> value in the as part of a\n      subsequent call. The default value is 10.</p>"
+                        "smithy.api#documentation": "<p>This parameter defines the maximum number of results that can be returned in a single response. The <code>MaxResults</code> parameter is an upper bound, not a target. If there are\n      more results available than the value specified, a <code>NextToken</code>\n      is provided in the response. The <code>NextToken</code> indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for <code>MaxResults</code> is 10.</p>"
                     }
                 }
             },
@@ -41004,7 +41047,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.sagemaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of items to return in the response. If the total number of items\n      available is more than the value specified, a <code>NextToken</code> is provided in the\n      response. To resume pagination, provide the <code>NextToken</code> value in the as part\n      of a subsequent call. The default value is 10.</p>"
+                        "smithy.api#documentation": "<p>This parameter defines the maximum number of results that can be returned in a single response. The <code>MaxResults</code> parameter is an upper bound, not a target. If there are\n      more results available than the value specified, a <code>NextToken</code>\n      is provided in the response. The <code>NextToken</code> indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for <code>MaxResults</code> is 10.</p>"
                     }
                 },
                 "SortOrder": {
@@ -41942,7 +41985,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.sagemaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of items to return in the response. If the total\n          number of items available is more than the value specified, a <code>NextToken</code>\n          is provided in the response. To resume pagination, provide the <code>NextToken</code>\n          value in the as part of a subsequent call. The default value is 10.</p>"
+                        "smithy.api#documentation": "<p>This parameter defines the maximum number of results that can be returned in a single response. The <code>MaxResults</code> parameter is an upper bound, not a target. If there are\n        more results available than the value specified, a <code>NextToken</code>\n        is provided in the response. The <code>NextToken</code> indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for <code>MaxResults</code> is 10.</p>"
                     }
                 },
                 "SortOrder": {
@@ -54567,6 +54610,20 @@
                 "smithy.api#pattern": "^(https|s3)://([^/]+)/?(.*)$"
             }
         },
+        "com.amazonaws.sagemaker#S3Presign": {
+            "type": "structure",
+            "members": {
+                "IamPolicyConstraints": {
+                    "target": "com.amazonaws.sagemaker#IamPolicyConstraints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to specify the allowed request source. Possible sources are either <code>SourceIp</code> or <code>VpcSourceIp</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This object defines the access restrictions to Amazon S3 resources that are included in custom worker task templates using the Liquid filter, <code>grant_read_access</code>.</p>\n         <p>To learn more about how custom templates are created, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-custom-templates.html\">Create custom worker task templates</a>.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#S3StorageConfig": {
             "type": "structure",
             "members": {
@@ -66656,6 +66713,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configures SNS topic notifications for available or expiring work items</p>"
                     }
+                },
+                "WorkerAccessConfiguration": {
+                    "target": "com.amazonaws.sagemaker#WorkerAccessConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this optional parameter to constrain access to an Amazon S3 resource based on the IP address using supported IAM global condition keys. The Amazon S3 resource is accessed in the worker portal using a Amazon S3 presigned URL.</p>"
+                    }
                 }
             },
             "traits": {
@@ -67381,6 +67444,20 @@
                 "smithy.api#documentation": "<p>Status and billing information about the warm pool.</p>"
             }
         },
+        "com.amazonaws.sagemaker#WorkerAccessConfiguration": {
+            "type": "structure",
+            "members": {
+                "S3Presign": {
+                    "target": "com.amazonaws.sagemaker#S3Presign",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines any Amazon S3 resource constraints.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Use this optional parameter to constrain access to an Amazon S3 resource based on the IP address using supported IAM global condition keys. The Amazon S3 resource is accessed in the worker portal using a Amazon S3 presigned URL.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#Workforce": {
             "type": "structure",
             "members": {
@@ -67747,6 +67824,12 @@
                     "target": "com.amazonaws.sagemaker#NotificationConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configures SNS notifications of available or expiring work items for work\n            teams.</p>"
+                    }
+                },
+                "WorkerAccessConfiguration": {
+                    "target": "com.amazonaws.sagemaker#WorkerAccessConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes any access constraints that have been defined for Amazon S3 resources.</p>"
                     }
                 }
             },

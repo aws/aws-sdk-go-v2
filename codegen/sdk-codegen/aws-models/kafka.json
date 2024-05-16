@@ -260,6 +260,28 @@
                 "smithy.api#documentation": "<p>The distribution of broker nodes across Availability Zones. This is an optional parameter. If you don't specify it, Amazon MSK gives it the value DEFAULT. You can also explicitly set this parameter to the value DEFAULT. No other values are currently allowed.</p>\n         <p>Amazon MSK distributes the broker nodes evenly across the Availability Zones that correspond to the subnets you provide when you create the cluster.</p>"
             }
         },
+        "com.amazonaws.kafka#BrokerCountUpdateInfo": {
+            "type": "structure",
+            "members": {
+                "CreatedBrokerIds": {
+                    "target": "com.amazonaws.kafka#__listOf__double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Kafka Broker IDs of brokers being created.</p>",
+                        "smithy.api#jsonName": "createdBrokerIds"
+                    }
+                },
+                "DeletedBrokerIds": {
+                    "target": "com.amazonaws.kafka#__listOf__double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Kafka Broker IDs of brokers being deleted.</p>",
+                        "smithy.api#jsonName": "deletedBrokerIds"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information regarding UpdateBrokerCount.</p>"
+            }
+        },
         "com.amazonaws.kafka#BrokerEBSVolumeInfo": {
             "type": "structure",
             "members": {
@@ -6375,6 +6397,13 @@
                         "smithy.api#documentation": "<p>This controls storage mode for supported storage tiers.</p>",
                         "smithy.api#jsonName": "storageMode"
                     }
+                },
+                "BrokerCountUpdateInfo": {
+                    "target": "com.amazonaws.kafka#BrokerCountUpdateInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes brokers being changed during a broker count update.</p>",
+                        "smithy.api#jsonName": "brokerCountUpdateInfo"
+                    }
                 }
             },
             "traits": {
@@ -9531,6 +9560,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.kafka#VpcConnection"
+            }
+        },
+        "com.amazonaws.kafka#__listOf__double": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#__double"
             }
         },
         "com.amazonaws.kafka#__listOf__string": {

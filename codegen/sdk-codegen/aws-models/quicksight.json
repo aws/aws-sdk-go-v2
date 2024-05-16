@@ -19184,6 +19184,94 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#DescribeKeyRegistration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeKeyRegistrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeKeyRegistrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes all customer managed key registrations in a Amazon QuickSight account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/key-registration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeKeyRegistrationRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the customer managed key registration that you want to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultKeyOnly": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Determines whether the request returns the default key only.</p>",
+                        "smithy.api#httpQuery": "default-key-only"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeKeyRegistrationResponse": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the customer managed key registration specified in the request.</p>"
+                    }
+                },
+                "KeyRegistration": {
+                    "target": "com.amazonaws.quicksight#KeyRegistration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>RegisteredCustomerManagedKey</code> objects in a Amazon QuickSight account.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#DescribeNamespace": {
             "type": "operation",
             "input": {
@@ -21530,6 +21618,49 @@
                     "max": 4096
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.quicksight#FailedKeyRegistrationEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#FailedKeyRegistrationEntry"
+            }
+        },
+        "com.amazonaws.quicksight#FailedKeyRegistrationEntry": {
+            "type": "structure",
+            "members": {
+                "KeyArn": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the KMS key that failed to update.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that provides information about why a <code>FailedKeyRegistrationEntry</code> error occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusCode": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of a <code>FailedKeyRegistrationEntry</code> error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SenderFault": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A boolean that indicates whether a <code>FailedKeyRegistrationEntry</code> resulted from user error. If the value of this property is <code>True</code>, the error was caused by user error. If the value of this property is <code>False</code>, the error occurred on the backend. If your job continues fail and with a <code>False</code>\n            <code>SenderFault</code> value, contact Amazon Web Services Support.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An entry that appears when a <code>KeyRegistration</code> update to Amazon QuickSight fails.</p>"
             }
         },
         "com.amazonaws.quicksight#FieldBasedTooltip": {
@@ -27834,6 +27965,12 @@
                         "smithy.api#enumValue": "VERTICAL"
                     }
                 }
+            }
+        },
+        "com.amazonaws.quicksight#KeyRegistration": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#RegisteredCustomerManagedKey"
             }
         },
         "com.amazonaws.quicksight#LabelOptions": {
@@ -36602,6 +36739,9 @@
                     "target": "com.amazonaws.quicksight#DescribeIpRestriction"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DescribeKeyRegistration"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DescribeNamespace"
                 },
                 {
@@ -36846,6 +36986,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateIpRestriction"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateKeyRegistration"
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdatePublicSharingSettings"
@@ -38144,8 +38287,7 @@
                 "DatabaseUser": {
                     "target": "com.amazonaws.quicksight#DatabaseUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>"
                     }
                 },
                 "DatabaseGroups": {
@@ -38734,7 +38876,7 @@
                 "UserRole": {
                     "target": "com.amazonaws.quicksight#UserRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight role for the user. The user role can be one of the\n\t\t\tfollowing:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>READER</code>: A user who has read-only access to dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTHOR</code>: A user who can create data sources, datasets, analyses, and\n\t\t\t\t\tdashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight\n\t\t\t\t\tsettings.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTRICTED_READER</code>: This role isn't currently available for\n\t\t\t\t\tuse.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTRICTED_AUTHOR</code>: This role isn't currently available for\n\t\t\t\t\tuse.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon QuickSight role for the user. The user role can be one of the\n\t\t\tfollowing:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>READER</code>: A user who has read-only access to dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTHOR</code>: A user who can create data sources, datasets, analyses, and\n\t\t\t\t\tdashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight\n\t\t\t\t\tsettings.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READER_PRO</code>: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q in Amazon QuickSight, can build stories with Amazon Q, and can generate executive summaries from dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTHOR_PRO</code>: Author Pro adds Generative BI capabilities to the Author role. Author Pros can author dashboards with natural language with Amazon Q, build stories with Amazon Q, create Topics for Q&A, and generate executive summaries from dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN_PRO</code>: Admin Pros are Author Pros who can also manage Amazon QuickSight administrative settings. Admin Pro users are billed at Author Pro pricing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTRICTED_READER</code>: This role isn't currently available for\n\t\t\t\t\tuse.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTRICTED_AUTHOR</code>: This role isn't currently available for\n\t\t\t\t\tuse.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -38839,6 +38981,27 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#RegisteredCustomerManagedKey": {
+            "type": "structure",
+            "members": {
+                "KeyArn": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the KMS key that is registered to a Amazon QuickSight account for encryption and decryption use.</p>"
+                    }
+                },
+                "DefaultKey": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether a <code>RegisteredCustomerManagedKey</code> is set as the default key for encryption and decryption use.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A customer managed key structure that contains the information listed below: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>KeyArn</code> - The ARN of a KMS key that is registered to a Amazon QuickSight account for encryption and decryption use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DefaultKey</code> - Indicates whether the current key is set as the default key for encryption and decryption use.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.quicksight#RegisteredUserConsoleFeatureConfigurations": {
@@ -44058,6 +44221,35 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The subtotal options.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SuccessfulKeyRegistrationEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SuccessfulKeyRegistrationEntry"
+            }
+        },
+        "com.amazonaws.quicksight#SuccessfulKeyRegistrationEntry": {
+            "type": "structure",
+            "members": {
+                "KeyArn": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the KMS key that is associated with the <code>SuccessfulKeyRegistrationEntry</code> entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusCode": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of a <code>SuccessfulKeyRegistrationEntry</code> entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A success entry that occurs when a <code>KeyRegistration</code> job is successfully applied to the Amazon QuickSight account.</p>"
             }
         },
         "com.amazonaws.quicksight#Suffix": {
@@ -50682,6 +50874,86 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#UpdateKeyRegistration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateKeyRegistrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateKeyRegistrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a customer managed key in a Amazon QuickSight account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/key-registration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateKeyRegistrationRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the customer managed key registration that you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyRegistration": {
+                    "target": "com.amazonaws.quicksight#KeyRegistration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>RegisteredCustomerManagedKey</code> objects to be updated to the Amazon QuickSight account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateKeyRegistrationResponse": {
+            "type": "structure",
+            "members": {
+                "FailedKeyRegistration": {
+                    "target": "com.amazonaws.quicksight#FailedKeyRegistrationEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all customer managed key registrations that failed to update.</p>"
+                    }
+                },
+                "SuccessfulKeyRegistration": {
+                    "target": "com.amazonaws.quicksight#SuccessfulKeyRegistrationEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all customer managed key registrations that were successfully updated.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#UpdateLinkPermissionList": {
             "type": "list",
             "member": {
@@ -52225,7 +52497,7 @@
                 "Role": {
                     "target": "com.amazonaws.quicksight#UserRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight role of the user. The role can be one of the\n\t\t\tfollowing default security cohorts:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>READER</code>: A user who has read-only access to dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTHOR</code>: A user who can create data sources, datasets, analyses, and\n\t\t\t\t\tdashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight\n\t\t\t\t\tsettings.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READER_PRO</code>: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q Business, can build stories with Amazon Q, and can generate executive summaries from dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTHOR_PRO</code>: Author Pro adds Generative BI capabilities to the Author role. Author Pros can author dashboards with natural language with Amazon Q, build stories with Amazon Q, create Topics for Q&A, and generate executive summaries from dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN_PRO</code>: Admin Pros are Author Pros who can also manage Amazon QuickSight administrative settings. Admin Pro users are billed at Author Pro pricing.</p>\n            </li>\n         </ul>\n         <p>The name of the Amazon QuickSight role is invisible to the user except for the console\n\t        screens dealing with permissions.</p>",
+                        "smithy.api#documentation": "<p>The Amazon QuickSight role of the user. The role can be one of the\n\t\t\tfollowing default security cohorts:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>READER</code>: A user who has read-only access to dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTHOR</code>: A user who can create data sources, datasets, analyses, and\n\t\t\t\t\tdashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight\n\t\t\t\t\tsettings.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READER_PRO</code>: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q in Amazon QuickSight, can build stories with Amazon Q, and can generate executive summaries from dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTHOR_PRO</code>: Author Pro adds Generative BI capabilities to the Author role. Author Pros can author dashboards with natural language with Amazon Q, build stories with Amazon Q, create Topics for Q&A, and generate executive summaries from dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN_PRO</code>: Admin Pros are Author Pros who can also manage Amazon QuickSight administrative settings. Admin Pro users are billed at Author Pro pricing.</p>\n            </li>\n         </ul>\n         <p>The name of the Amazon QuickSight role is invisible to the user except for the console\n\t        screens dealing with permissions.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -52503,7 +52775,7 @@
                 "Role": {
                     "target": "com.amazonaws.quicksight#UserRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight role for the user. The user role can be one of the\n            following:.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>READER</code>: A user who has read-only access to dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTHOR</code>: A user who can create data sources, datasets, analyses,\n                    and dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN</code>: A user who is an author, who can also manage Amazon\n                    Amazon QuickSight settings.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READER_PRO</code>: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q Business, can build stories with Amazon Q, and can generate executive summaries from dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTHOR_PRO</code>: Author Pro adds Generative BI capabilities to the Author role. Author Pros can author dashboards with natural language with Amazon Q, build stories with Amazon Q, create Topics for Q&A, and generate executive summaries from dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN_PRO</code>: Admin Pros are Author Pros who can also manage Amazon QuickSight administrative settings. Admin Pro users are billed at Author Pro pricing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTRICTED_READER</code>: This role isn't currently available for\n                    use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTRICTED_AUTHOR</code>: This role isn't currently available for\n                    use.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Amazon QuickSight role for the user. The user role can be one of the\n            following:.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>READER</code>: A user who has read-only access to dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTHOR</code>: A user who can create data sources, datasets, analyses,\n                    and dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN</code>: A user who is an author, who can also manage Amazon\n                    Amazon QuickSight settings.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READER_PRO</code>: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q in Amazon QuickSight, can build stories with Amazon Q, and can generate executive summaries from dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTHOR_PRO</code>: Author Pro adds Generative BI capabilities to the Author role. Author Pros can author dashboards with natural language with Amazon Q, build stories with Amazon Q, create Topics for Q&A, and generate executive summaries from dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN_PRO</code>: Admin Pros are Author Pros who can also manage Amazon QuickSight administrative settings. Admin Pro users are billed at Author Pro pricing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTRICTED_READER</code>: This role isn't currently available for\n                    use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTRICTED_AUTHOR</code>: This role isn't currently available for\n                    use.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "IdentityType": {

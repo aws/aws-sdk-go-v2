@@ -1115,7 +1115,7 @@
                 "EnvironmentClass": {
                     "target": "com.amazonaws.mwaa#EnvironmentClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment class type. Valid values: <code>mw1.small</code>, <code>mw1.medium</code>, <code>mw1.large</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html\">Amazon MWAA environment class</a>.</p>"
+                        "smithy.api#documentation": "<p>The environment class type. Valid values: <code>mw1.small</code>, <code>mw1.medium</code>, <code>mw1.large</code>, <code>mw1.xlarge</code>, and <code>mw1.2xlarge</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html\">Amazon MWAA environment class</a>.</p>"
                     }
                 },
                 "MaxWorkers": {
@@ -1169,13 +1169,25 @@
                 "Schedulers": {
                     "target": "com.amazonaws.mwaa#Schedulers",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of Apache Airflow schedulers to run in your environment. Valid values:</p>\n         <ul>\n            <li>\n               <p>v2 - Accepts between 2 to 5. Defaults to 2.</p>\n            </li>\n            <li>\n               <p>v1 - Accepts 1.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The number of Apache Airflow schedulers to run in your environment. Valid values:</p>\n         <ul>\n            <li>\n               <p>v2 - Accepts between <code>2</code> to <code>5</code>. Defaults to <code>2</code>.</p>\n            </li>\n            <li>\n               <p>v1 - Accepts <code>1</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "EndpointManagement": {
                     "target": "com.amazonaws.mwaa#EndpointManagement",
                     "traits": {
                         "smithy.api#documentation": "<p>Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA. If set to <code>SERVICE</code>, Amazon MWAA will create and manage the required VPC endpoints in\n        your VPC. If set to <code>CUSTOMER</code>, you must create, and manage, the VPC endpoints for your VPC. If you choose to create an environment in a shared VPC, you must set this value to <code>CUSTOMER</code>.\n        In a shared VPC deployment, the environment will remain in <code>PENDING</code> status until you create the VPC endpoints. If you do not take action to\n            create the endpoints within 72 hours, the status will change to <code>CREATE_FAILED</code>. You can delete the failed environment and create a new one.</p>"
+                    }
+                },
+                "MinWebservers": {
+                    "target": "com.amazonaws.mwaa#MinWebservers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The minimum number of web servers that you want to run in your environment.\n            Amazon MWAA scales the number of Apache Airflow web servers up to the number you specify for <code>MaxWebservers</code>\n            when you interact with your Apache Airflow environment using Apache Airflow REST API, or\n            the Apache Airflow CLI. As the transaction-per-second rate, and the network load, decrease,\n            Amazon MWAA disposes of the additional web servers, and scales down to the number set in <code>MinxWebserers</code>.\n        </p>\n         <p>Valid values: Accepts between <code>2</code> and <code>5</code>. Defaults to <code>2</code>.</p>"
+                    }
+                },
+                "MaxWebservers": {
+                    "target": "com.amazonaws.mwaa#MaxWebservers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum number of web servers that you want to run in your environment.\n            Amazon MWAA scales the number of Apache Airflow web servers up to the number you specify for <code>MaxWebservers</code>\n            when you interact with your Apache Airflow environment using Apache Airflow REST API, or\n            the Apache Airflow CLI. For example, in scenarios where your workload requires network calls to the Apache Airflow REST API with a high transaction-per-second (TPS)\n            rate, Amazon MWAA will increase the number of web servers up to the number set in <code>MaxWebserers</code>. As TPS rates decrease\n            Amazon MWAA disposes of the additional web servers, and scales down to the number set in <code>MinxWebserers</code>.\n        </p>\n         <p>Valid values: Accepts between <code>2</code> and <code>5</code>. Defaults to <code>2</code>.</p>"
                     }
                 }
             },
@@ -1428,7 +1440,7 @@
                 "AirflowVersion": {
                     "target": "com.amazonaws.mwaa#AirflowVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow version on your environment.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow version on your environment.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>, <code>2.8.1</code>.</p>"
                     }
                 },
                 "SourceBucketArn": {
@@ -1488,7 +1500,7 @@
                 "EnvironmentClass": {
                     "target": "com.amazonaws.mwaa#EnvironmentClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment class type. Valid values: <code>mw1.small</code>, <code>mw1.medium</code>, <code>mw1.large</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html\">Amazon MWAA environment class</a>.</p>"
+                        "smithy.api#documentation": "<p>The environment class type. Valid values: <code>mw1.small</code>, <code>mw1.medium</code>, <code>mw1.large</code>, <code>mw1.xlarge</code>, and <code>mw1.2xlarge</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html\">Amazon MWAA environment class</a>.</p>"
                     }
                 },
                 "MaxWorkers": {
@@ -1567,6 +1579,18 @@
                     "target": "com.amazonaws.mwaa#EndpointManagement",
                     "traits": {
                         "smithy.api#documentation": "<p>Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA. If set to <code>SERVICE</code>, Amazon MWAA will create and manage the required VPC endpoints in\n            your VPC. If set to <code>CUSTOMER</code>, you must create, and manage, the VPC endpoints in your VPC.</p>"
+                    }
+                },
+                "MinWebservers": {
+                    "target": "com.amazonaws.mwaa#MinWebservers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The minimum number of web servers that you want to run in your environment.\n            Amazon MWAA scales the number of Apache Airflow web servers up to the number you specify for <code>MaxWebservers</code>\n            when you interact with your Apache Airflow environment using Apache Airflow REST API, or\n            the Apache Airflow CLI. As the transaction-per-second rate, and the network load, decrease,\n            Amazon MWAA disposes of the additional web servers, and scales down to the number set in <code>MinxWebserers</code>.\n        </p>\n         <p>Valid values: Accepts between <code>2</code> and <code>5</code>. Defaults to <code>2</code>.</p>"
+                    }
+                },
+                "MaxWebservers": {
+                    "target": "com.amazonaws.mwaa#MaxWebservers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum number of web servers that you want to run in your environment.\n            Amazon MWAA scales the number of Apache Airflow web servers up to the number you specify for <code>MaxWebservers</code>\n            when you interact with your Apache Airflow environment using Apache Airflow REST API, or\n            the Apache Airflow CLI. For example, in scenarios where your workload requires network calls to the Apache Airflow REST API with a high transaction-per-second (TPS)\n            rate, Amazon MWAA will increase the number of web servers up to the number set in <code>MaxWebserers</code>. As TPS rates decrease\n            Amazon MWAA disposes of the additional web servers, and scales down to the number set in <code>MinxWebserers</code>.\n        </p>\n         <p>Valid values: Accepts between <code>2</code> and <code>5</code>. Defaults to <code>2</code>.</p>"
                     }
                 }
             },
@@ -2049,6 +2073,14 @@
                 ]
             }
         },
+        "com.amazonaws.mwaa#MaxWebservers": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 2
+                }
+            }
+        },
         "com.amazonaws.mwaa#MaxWorkers": {
             "type": "integer",
             "traits": {
@@ -2115,6 +2147,14 @@
                     "message": "This type is for internal use and not meant for public use. Data set for this type will be ignored."
                 },
                 "smithy.api#documentation": "<p>\n            <b>Internal only</b>. Collects Apache Airflow metrics. To learn more about the metrics published to Amazon CloudWatch, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html\">Amazon MWAA performance metrics in Amazon CloudWatch</a>.</p>"
+            }
+        },
+        "com.amazonaws.mwaa#MinWebservers": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 2
+                }
             }
         },
         "com.amazonaws.mwaa#MinWorkers": {
@@ -2728,7 +2768,7 @@
                 "AirflowVersion": {
                     "target": "com.amazonaws.mwaa#AirflowVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. To upgrade your environment, specify a newer version of Apache Airflow supported by Amazon MWAA.</p>\n         <p>Before you upgrade an environment, make sure your requirements, DAGs, plugins, and other resources used in your workflows are compatible with the new Apache Airflow version. For more information about updating\n            your resources, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/upgrading-environment.html\">Upgrading an Amazon MWAA environment</a>.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. To upgrade your environment, specify a newer version of Apache Airflow supported by Amazon MWAA.</p>\n         <p>Before you upgrade an environment, make sure your requirements, DAGs, plugins, and other resources used in your workflows are compatible with the new Apache Airflow version. For more information about updating\n            your resources, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/upgrading-environment.html\">Upgrading an Amazon MWAA environment</a>.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>, <code>2.8.1</code>.</p>"
                     }
                 },
                 "SourceBucketArn": {
@@ -2788,7 +2828,7 @@
                 "EnvironmentClass": {
                     "target": "com.amazonaws.mwaa#EnvironmentClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment class type. Valid values: <code>mw1.small</code>, <code>mw1.medium</code>, <code>mw1.large</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html\">Amazon MWAA environment class</a>.</p>"
+                        "smithy.api#documentation": "<p>The environment class type. Valid values: <code>mw1.small</code>, <code>mw1.medium</code>, <code>mw1.large</code>, <code>mw1.xlarge</code>, and <code>mw1.2xlarge</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html\">Amazon MWAA environment class</a>.</p>"
                     }
                 },
                 "MaxWorkers": {
@@ -2831,6 +2871,18 @@
                     "target": "com.amazonaws.mwaa#Schedulers",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of Apache Airflow schedulers to run in your Amazon MWAA environment.</p>"
+                    }
+                },
+                "MinWebservers": {
+                    "target": "com.amazonaws.mwaa#MinWebservers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The minimum number of web servers that you want to run in your environment.\n            Amazon MWAA scales the number of Apache Airflow web servers up to the number you specify for <code>MaxWebservers</code>\n            when you interact with your Apache Airflow environment using Apache Airflow REST API, or\n            the Apache Airflow CLI. As the transaction-per-second rate, and the network load, decrease,\n            Amazon MWAA disposes of the additional web servers, and scales down to the number set in <code>MinxWebserers</code>.\n        </p>\n         <p>Valid values: Accepts between <code>2</code> and <code>5</code>. Defaults to <code>2</code>.</p>"
+                    }
+                },
+                "MaxWebservers": {
+                    "target": "com.amazonaws.mwaa#MaxWebservers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum number of web servers that you want to run in your environment.\n            Amazon MWAA scales the number of Apache Airflow web servers up to the number you specify for <code>MaxWebservers</code>\n            when you interact with your Apache Airflow environment using Apache Airflow REST API, or\n            the Apache Airflow CLI. For example, in scenarios where your workload requires network calls to the Apache Airflow REST API with a high transaction-per-second (TPS)\n            rate, Amazon MWAA will increase the number of web servers up to the number set in <code>MaxWebserers</code>. As TPS rates decrease\n            Amazon MWAA disposes of the additional web servers, and scales down to the number set in <code>MinxWebserers</code>.\n        </p>\n         <p>Valid values: Accepts between <code>2</code> and <code>5</code>. Defaults to <code>2</code>.</p>"
                     }
                 }
             }

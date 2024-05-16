@@ -108,7 +108,7 @@
                     "sdkId": "ACM PCA",
                     "arnNamespace": "acm-pca",
                     "cloudFormationName": "ACMPCA",
-                    "cloudTrailEventSource": "acmpca.amazonaws.com",
+                    "cloudTrailEventSource": "acm-pca.amazonaws.com",
                     "endpointPrefix": "acm-pca"
                 },
                 "aws.auth#sigv4": {
@@ -2360,6 +2360,9 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists information about a specific audit report created by calling the <a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html\">CreateCertificateAuthorityAuditReport</a> action. Audit information is created\n\t\t\tevery time the certificate authority (CA) private key is used. The private key is used\n\t\t\twhen you call the <a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html\">IssueCertificate</a> action or the\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_RevokeCertificate.html\">RevokeCertificate</a> action. </p>",
+                "smithy.api#suppress": [
+                    "WaitableTraitInvalidErrorType"
+                ],
                 "smithy.waiters#waitable": {
                     "AuditReportCreated": {
                         "documentation": "Wait until a Audit Report is created",
@@ -2382,6 +2385,12 @@
                                         "expected": "FAILED",
                                         "comparator": "stringEquals"
                                     }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "errorType": "AccessDeniedException"
                                 }
                             }
                         ],
@@ -2735,6 +2744,9 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves a certificate from your private CA or one that has been shared with you. The\n\t\t\tARN of the certificate is returned when you call the <a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html\">IssueCertificate</a> action. You\n\t\t\tmust specify both the ARN of your private CA and the ARN of the issued certificate when\n\t\t\tcalling the <b>GetCertificate</b> action. You can retrieve the\n\t\t\tcertificate if it is in the <b>ISSUED</b> state. You can call\n\t\t\tthe <a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html\">CreateCertificateAuthorityAuditReport</a> action to create a report that\n\t\t\tcontains information about all of the certificates issued and revoked by your private\n\t\t\tCA. </p>",
+                "smithy.api#suppress": [
+                    "WaitableTraitInvalidErrorType"
+                ],
                 "smithy.waiters#waitable": {
                     "CertificateIssued": {
                         "documentation": "Wait until a certificate is issued",
@@ -2749,6 +2761,12 @@
                                 "state": "retry",
                                 "matcher": {
                                     "errorType": "RequestInProgressException"
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "errorType": "AccessDeniedException"
                                 }
                             }
                         ],
@@ -2842,6 +2860,9 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves the certificate signing request (CSR) for your private certificate authority\n\t\t\t(CA). The CSR is created when you call the <a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html\">CreateCertificateAuthority</a> action. Sign the CSR with your Amazon Web Services Private CA-hosted\n\t\t\tor on-premises root or subordinate CA. Then import the signed certificate back into\n\t\t\tAmazon Web Services Private CA by calling the <a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html\">ImportCertificateAuthorityCertificate</a> action. The CSR is returned as a\n\t\t\tbase64 PEM-encoded string. </p>",
+                "smithy.api#suppress": [
+                    "WaitableTraitInvalidErrorType"
+                ],
                 "smithy.waiters#waitable": {
                     "CertificateAuthorityCSRCreated": {
                         "documentation": "Wait until a Certificate Authority CSR is created",
@@ -2856,6 +2877,12 @@
                                 "state": "retry",
                                 "matcher": {
                                     "errorType": "RequestInProgressException"
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "errorType": "AccessDeniedException"
                                 }
                             }
                         ],
