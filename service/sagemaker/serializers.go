@@ -22168,6 +22168,23 @@ func awsAwsjson11_serializeDocumentHyperParameterTuningResourceConfig(v *types.H
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentIamPolicyConstraints(v *types.IamPolicyConstraints, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SourceIp) > 0 {
+		ok := object.Key("SourceIp")
+		ok.String(string(v.SourceIp))
+	}
+
+	if len(v.VpcSourceIp) > 0 {
+		ok := object.Key("VpcSourceIp")
+		ok.String(string(v.VpcSourceIp))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentIdentityProviderOAuthSetting(v *types.IdentityProviderOAuthSetting, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -26423,6 +26440,20 @@ func awsAwsjson11_serializeDocumentS3ModelDataSource(v *types.S3ModelDataSource,
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentS3Presign(v *types.S3Presign, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IamPolicyConstraints != nil {
+		ok := object.Key("IamPolicyConstraints")
+		if err := awsAwsjson11_serializeDocumentIamPolicyConstraints(v.IamPolicyConstraints, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentS3StorageConfig(v *types.S3StorageConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -28228,6 +28259,20 @@ func awsAwsjson11_serializeDocumentVpcSecurityGroupIds(v []string, value smithyj
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentWorkerAccessConfiguration(v *types.WorkerAccessConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3Presign != nil {
+		ok := object.Key("S3Presign")
+		if err := awsAwsjson11_serializeDocumentS3Presign(v.S3Presign, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -31346,6 +31391,13 @@ func awsAwsjson11_serializeOpDocumentCreateWorkteamInput(v *CreateWorkteamInput,
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WorkerAccessConfiguration != nil {
+		ok := object.Key("WorkerAccessConfiguration")
+		if err := awsAwsjson11_serializeDocumentWorkerAccessConfiguration(v.WorkerAccessConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -38357,6 +38409,13 @@ func awsAwsjson11_serializeOpDocumentUpdateWorkteamInput(v *UpdateWorkteamInput,
 	if v.NotificationConfiguration != nil {
 		ok := object.Key("NotificationConfiguration")
 		if err := awsAwsjson11_serializeDocumentNotificationConfiguration(v.NotificationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WorkerAccessConfiguration != nil {
+		ok := object.Key("WorkerAccessConfiguration")
+		if err := awsAwsjson11_serializeDocumentWorkerAccessConfiguration(v.WorkerAccessConfiguration, ok); err != nil {
 			return err
 		}
 	}

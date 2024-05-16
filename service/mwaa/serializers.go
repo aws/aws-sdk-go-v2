@@ -205,9 +205,19 @@ func awsRestjson1_serializeOpDocumentCreateEnvironmentInput(v *CreateEnvironment
 		}
 	}
 
+	if v.MaxWebservers != nil {
+		ok := object.Key("MaxWebservers")
+		ok.Integer(*v.MaxWebservers)
+	}
+
 	if v.MaxWorkers != nil {
 		ok := object.Key("MaxWorkers")
 		ok.Integer(*v.MaxWorkers)
+	}
+
+	if v.MinWebservers != nil {
+		ok := object.Key("MinWebservers")
+		ok.Integer(*v.MinWebservers)
 	}
 
 	if v.MinWorkers != nil {
@@ -971,9 +981,19 @@ func awsRestjson1_serializeOpDocumentUpdateEnvironmentInput(v *UpdateEnvironment
 		}
 	}
 
+	if v.MaxWebservers != nil {
+		ok := object.Key("MaxWebservers")
+		ok.Integer(*v.MaxWebservers)
+	}
+
 	if v.MaxWorkers != nil {
 		ok := object.Key("MaxWorkers")
 		ok.Integer(*v.MaxWorkers)
+	}
+
+	if v.MinWebservers != nil {
+		ok := object.Key("MinWebservers")
+		ok.Integer(*v.MinWebservers)
 	}
 
 	if v.MinWorkers != nil {

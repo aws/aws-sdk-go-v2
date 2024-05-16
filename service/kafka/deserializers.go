@@ -9301,6 +9301,67 @@ func awsRestjson1_deserializeErrorUnauthorizedException(response *smithyhttp.Res
 	return output
 }
 
+func awsRestjson1_deserializeDocument__listOf__double(v *[]float64, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []float64
+	if *v == nil {
+		cv = []float64{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col float64
+		if value != nil {
+			switch jtv := value.(type) {
+			case json.Number:
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				col = f64
+
+			case string:
+				var f64 float64
+				switch {
+				case strings.EqualFold(jtv, "NaN"):
+					f64 = math.NaN()
+
+				case strings.EqualFold(jtv, "Infinity"):
+					f64 = math.Inf(1)
+
+				case strings.EqualFold(jtv, "-Infinity"):
+					f64 = math.Inf(-1)
+
+				default:
+					return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+				}
+				col = f64
+
+			default:
+				return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
+
+			}
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOf__string(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10203,6 +10264,47 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBrokerCountUpdateInfo(v **types.BrokerCountUpdateInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BrokerCountUpdateInfo
+	if *v == nil {
+		sv = &types.BrokerCountUpdateInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "createdBrokerIds":
+			if err := awsRestjson1_deserializeDocument__listOf__double(&sv.CreatedBrokerIds, value); err != nil {
+				return err
+			}
+
+		case "deletedBrokerIds":
+			if err := awsRestjson1_deserializeDocument__listOf__double(&sv.DeletedBrokerIds, value); err != nil {
+				return err
 			}
 
 		default:
@@ -12695,6 +12797,11 @@ func awsRestjson1_deserializeDocumentMutableClusterInfo(v **types.MutableCluster
 
 	for key, value := range shape {
 		switch key {
+		case "brokerCountUpdateInfo":
+			if err := awsRestjson1_deserializeDocumentBrokerCountUpdateInfo(&sv.BrokerCountUpdateInfo, value); err != nil {
+				return err
+			}
+
 		case "brokerEBSVolumeInfo":
 			if err := awsRestjson1_deserializeDocument__listOfBrokerEBSVolumeInfo(&sv.BrokerEBSVolumeInfo, value); err != nil {
 				return err

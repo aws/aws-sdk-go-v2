@@ -73,6 +73,18 @@ type RegisterUserInput struct {
 	//   - ADMIN : A user who is an author, who can also manage Amazon QuickSight
 	//   settings.
 	//
+	//   - READER_PRO : Reader Pro adds Generative BI capabilities to the Reader role.
+	//   Reader Pros have access to Amazon Q in Amazon QuickSight, can build stories with
+	//   Amazon Q, and can generate executive summaries from dashboards.
+	//
+	//   - AUTHOR_PRO : Author Pro adds Generative BI capabilities to the Author role.
+	//   Author Pros can author dashboards with natural language with Amazon Q, build
+	//   stories with Amazon Q, create Topics for Q&A, and generate executive summaries
+	//   from dashboards.
+	//
+	//   - ADMIN_PRO : Admin Pros are Author Pros who can also manage Amazon QuickSight
+	//   administrative settings. Admin Pro users are billed at Author Pro pricing.
+	//
 	//   - RESTRICTED_READER : This role isn't currently available for use.
 	//
 	//   - RESTRICTED_AUTHOR : This role isn't currently available for use.

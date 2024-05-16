@@ -1510,6 +1510,26 @@ func (m *validateOpDescribeIpRestriction) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeKeyRegistration struct {
+}
+
+func (*validateOpDescribeKeyRegistration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeKeyRegistration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeKeyRegistrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeKeyRegistrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeNamespace struct {
 }
 
@@ -3150,6 +3170,26 @@ func (m *validateOpUpdateIpRestriction) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateKeyRegistration struct {
+}
+
+func (*validateOpUpdateKeyRegistration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateKeyRegistration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateKeyRegistrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateKeyRegistrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePublicSharingSettings struct {
 }
 
@@ -3750,6 +3790,10 @@ func addOpDescribeIpRestrictionValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDescribeIpRestriction{}, middleware.After)
 }
 
+func addOpDescribeKeyRegistrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeKeyRegistration{}, middleware.After)
+}
+
 func addOpDescribeNamespaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeNamespace{}, middleware.After)
 }
@@ -4076,6 +4120,10 @@ func addOpUpdateIdentityPropagationConfigValidationMiddleware(stack *middleware.
 
 func addOpUpdateIpRestrictionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateIpRestriction{}, middleware.After)
+}
+
+func addOpUpdateKeyRegistrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateKeyRegistration{}, middleware.After)
 }
 
 func addOpUpdatePublicSharingSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -13706,9 +13754,6 @@ func validateRedshiftIAMParameters(v *types.RedshiftIAMParameters) error {
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
-	if v.DatabaseUser == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseUser"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -19444,6 +19489,21 @@ func validateOpDescribeIpRestrictionInput(v *DescribeIpRestrictionInput) error {
 	}
 }
 
+func validateOpDescribeKeyRegistrationInput(v *DescribeKeyRegistrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeKeyRegistrationInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeNamespaceInput(v *DescribeNamespaceInput) error {
 	if v == nil {
 		return nil
@@ -21189,6 +21249,24 @@ func validateOpUpdateIpRestrictionInput(v *UpdateIpRestrictionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateIpRestrictionInput"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateKeyRegistrationInput(v *UpdateKeyRegistrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateKeyRegistrationInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.KeyRegistration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyRegistration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

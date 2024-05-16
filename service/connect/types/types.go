@@ -2977,7 +2977,7 @@ type MetricFilterV2 struct {
 	//
 	// Valid metric filter keys: INITIATION_METHOD , DISCONNECT_REASON . These are the
 	// same values as the InitiationMethod and DisconnectReason in the contact record.
-	// For more information, see [ContactTraceRecord]in the Amazon Connect Administrator's Guide.
+	// For more information, see [ContactTraceRecord]in the Amazon Connect Administrator Guide.
 	//
 	// [ContactTraceRecord]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord
 	MetricFilterKey *string

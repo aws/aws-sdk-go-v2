@@ -8,6 +8,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -327,6 +328,18 @@ func certificateIssuedStateRetryable(ctx context.Context, input *GetCertificateI
 		var errorType *types.RequestInProgressException
 		if errors.As(err, &errorType) {
 			return true, nil
+		}
+	}
+
+	if err != nil {
+		var apiErr smithy.APIError
+		ok := errors.As(err, &apiErr)
+		if !ok {
+			return false, fmt.Errorf("expected err to be of type smithy.APIError, got %w", err)
+		}
+
+		if "AccessDeniedException" == apiErr.ErrorCode() {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 

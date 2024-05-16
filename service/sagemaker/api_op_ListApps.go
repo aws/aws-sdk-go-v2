@@ -32,10 +32,12 @@ type ListAppsInput struct {
 	// A parameter to search for the domain ID.
 	DomainIdEquals *string
 
-	// The total number of items to return in the response. If the total number of
-	// items available is more than the value specified, a NextToken is provided in
-	// the response. To resume pagination, provide the NextToken value in the as part
-	// of a subsequent call. The default value is 10.
+	// This parameter defines the maximum number of results that can be returned in a
+	// single response. The MaxResults parameter is an upper bound, not a target. If
+	// there are more results available than the value specified, a NextToken is
+	// provided in the response. The NextToken indicates that the user should get the
+	// next set of results by providing this token as a part of a subsequent call. The
+	// default value for MaxResults is 10.
 	MaxResults *int32
 
 	// If the previous response was truncated, you will receive this token. Use it in
@@ -159,10 +161,12 @@ var _ ListAppsAPIClient = (*Client)(nil)
 
 // ListAppsPaginatorOptions is the paginator options for ListApps
 type ListAppsPaginatorOptions struct {
-	// The total number of items to return in the response. If the total number of
-	// items available is more than the value specified, a NextToken is provided in
-	// the response. To resume pagination, provide the NextToken value in the as part
-	// of a subsequent call. The default value is 10.
+	// This parameter defines the maximum number of results that can be returned in a
+	// single response. The MaxResults parameter is an upper bound, not a target. If
+	// there are more results available than the value specified, a NextToken is
+	// provided in the response. The NextToken indicates that the user should get the
+	// next set of results by providing this token as a part of a subsequent call. The
+	// default value for MaxResults is 10.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

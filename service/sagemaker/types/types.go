@@ -8273,6 +8273,29 @@ type IamIdentity struct {
 	noSmithyDocumentSerde
 }
 
+// Use this parameter to specify a supported global condition key that is added to
+// the IAM policy.
+type IamPolicyConstraints struct {
+
+	// When SourceIp is Enabled the worker's IP address when a task is rendered in the
+	// worker portal is added to the IAM policy as a Condition used to generate the
+	// Amazon S3 presigned URL. This IP address is checked by Amazon S3 and must match
+	// in order for the Amazon S3 resource to be rendered in the worker portal.
+	SourceIp EnabledOrDisabled
+
+	// When VpcSourceIp is Enabled the worker's IP address when a task is rendered in
+	// private worker portal inside the VPC is added to the IAM policy as a Condition
+	// used to generate the Amazon S3 presigned URL. To render the task successfully
+	// Amazon S3 checks that the presigned URL is being accessed over an Amazon S3 VPC
+	// Endpoint, and that the worker's IP address matches the IP address in the IAM
+	// policy. To learn more about configuring private worker portal, see [Use Amazon VPC mode from a private worker portal].
+	//
+	// [Use Amazon VPC mode from a private worker portal]: https://docs.aws.amazon.com/sagemaker/latest/dg/samurai-vpc-worker-portal.html
+	VpcSourceIp EnabledOrDisabled
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon SageMaker Canvas application setting where you configure OAuth for
 // connecting to an external data source, such as Snowflake.
 type IdentityProviderOAuthSetting struct {
@@ -15271,6 +15294,22 @@ type S3ModelDataSource struct {
 	noSmithyDocumentSerde
 }
 
+// This object defines the access restrictions to Amazon S3 resources that are
+// included in custom worker task templates using the Liquid filter,
+// grant_read_access .
+//
+// To learn more about how custom templates are created, see [Create custom worker task templates].
+//
+// [Create custom worker task templates]: https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-custom-templates.html
+type S3Presign struct {
+
+	// Use this parameter to specify the allowed request source. Possible sources are
+	// either SourceIp or VpcSourceIp .
+	IamPolicyConstraints *IamPolicyConstraints
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon Simple Storage (Amazon S3) location and security configuration for
 // OfflineStore .
 type S3StorageConfig struct {
@@ -18524,6 +18563,17 @@ type WarmPoolStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Use this optional parameter to constrain access to an Amazon S3 resource based
+// on the IP address using supported IAM global condition keys. The Amazon S3
+// resource is accessed in the worker portal using a Amazon S3 presigned URL.
+type WorkerAccessConfiguration struct {
+
+	// Defines any Amazon S3 resource constraints.
+	S3Presign *S3Presign
+
+	noSmithyDocumentSerde
+}
+
 // A single private workforce, which is automatically created when you create your
 // first private work team. You can create one private work force in each Amazon
 // Web Services Region. By default, any workforce-related API operation used in a
@@ -18686,6 +18736,9 @@ type Workteam struct {
 	// The URI of the labeling job's user interface. Workers open this URI to start
 	// labeling your data objects.
 	SubDomain *string
+
+	// Describes any access constraints that have been defined for Amazon S3 resources.
+	WorkerAccessConfiguration *WorkerAccessConfiguration
 
 	// The Amazon Resource Name (ARN) of the workforce.
 	WorkforceArn *string

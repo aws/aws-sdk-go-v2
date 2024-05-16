@@ -1,0 +1,8 @@
+{
+    "id": "3536cf12-d5f2-4eae-8f22-7b3329d2a970",
+    "type": "feature",
+    "description": "AWS MSK support for Broker Removal.",
+    "modules": [
+        "service/kafka"
+    ]
+}

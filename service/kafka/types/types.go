@@ -18,6 +18,18 @@ type AmazonMskCluster struct {
 	noSmithyDocumentSerde
 }
 
+// Information regarding UpdateBrokerCount.
+type BrokerCountUpdateInfo struct {
+
+	// Kafka Broker IDs of brokers being created.
+	CreatedBrokerIds []float64
+
+	// Kafka Broker IDs of brokers being deleted.
+	DeletedBrokerIds []float64
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the EBS volume upgrade information. The broker identifier must be set
 // to the keyword ALL. This means the changes apply to all the brokers in the
 // cluster.
@@ -800,6 +812,9 @@ type LoggingInfo struct {
 
 // Information about cluster attributes that can be updated via update APIs.
 type MutableClusterInfo struct {
+
+	// Describes brokers being changed during a broker count update.
+	BrokerCountUpdateInfo *BrokerCountUpdateInfo
 
 	// Specifies the size of the EBS volume and the ID of the associated broker.
 	BrokerEBSVolumeInfo []BrokerEBSVolumeInfo

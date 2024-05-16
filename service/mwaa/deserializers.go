@@ -1849,6 +1849,19 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				return err
 			}
 
+		case "MaxWebservers":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxWebservers to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxWebservers = ptr.Int32(int32(i64))
+			}
+
 		case "MaxWorkers":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1860,6 +1873,19 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 					return err
 				}
 				sv.MaxWorkers = ptr.Int32(int32(i64))
+			}
+
+		case "MinWebservers":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MinWebservers to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinWebservers = ptr.Int32(int32(i64))
 			}
 
 		case "MinWorkers":

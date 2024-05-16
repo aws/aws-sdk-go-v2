@@ -962,6 +962,18 @@ func TestCheckSnapshot_DescribeIpRestriction(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeKeyRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeKeyRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeKeyRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeNamespace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeNamespace(context.Background(), nil, func(o *Options) {
@@ -1939,6 +1951,18 @@ func TestCheckSnapshot_UpdateIpRestriction(t *testing.T) {
 	_, err := svc.UpdateIpRestriction(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateIpRestriction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateKeyRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateKeyRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateKeyRegistration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3025,6 +3049,18 @@ func TestUpdateSnapshot_DescribeIpRestriction(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeKeyRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeKeyRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeKeyRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeNamespace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeNamespace(context.Background(), nil, func(o *Options) {
@@ -4002,6 +4038,18 @@ func TestUpdateSnapshot_UpdateIpRestriction(t *testing.T) {
 	_, err := svc.UpdateIpRestriction(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateIpRestriction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateKeyRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateKeyRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateKeyRegistration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

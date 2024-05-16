@@ -5608,6 +5608,35 @@ type ExportWithHiddenFieldsOption struct {
 	noSmithyDocumentSerde
 }
 
+// An entry that appears when a KeyRegistration update to Amazon QuickSight fails.
+type FailedKeyRegistrationEntry struct {
+
+	// A message that provides information about why a FailedKeyRegistrationEntry
+	// error occurred.
+	//
+	// This member is required.
+	Message *string
+
+	// A boolean that indicates whether a FailedKeyRegistrationEntry resulted from
+	// user error. If the value of this property is True , the error was caused by user
+	// error. If the value of this property is False , the error occurred on the
+	// backend. If your job continues fail and with a False SenderFault value, contact
+	// Amazon Web Services Support.
+	//
+	// This member is required.
+	SenderFault bool
+
+	// The HTTP status of a FailedKeyRegistrationEntry error.
+	//
+	// This member is required.
+	StatusCode int32
+
+	// The ARN of the KMS key that failed to update.
+	KeyArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The setup for the detailed tooltip.
 type FieldBasedTooltip struct {
 
@@ -10659,15 +10688,6 @@ type RdsParameters struct {
 // [GetClusterCredentials]: https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html
 type RedshiftIAMParameters struct {
 
-	// The user whose permissions and group memberships will be used by Amazon
-	// QuickSight to access the cluster. If this user already exists in your database,
-	// Amazon QuickSight is granted the same permissions that the user has. If the user
-	// doesn't exist, set the value of AutoCreateDatabaseUser to True to create a new
-	// user with PUBLIC permissions.
-	//
-	// This member is required.
-	DatabaseUser *string
-
 	// Use the RoleArn structure to allow Amazon QuickSight to call
 	// redshift:GetClusterCredentials on your cluster. The calling principal must have
 	// iam:PassRole access to pass the role to Amazon QuickSight. The role's trust
@@ -10688,6 +10708,13 @@ type RedshiftIAMParameters struct {
 	// to Amazon QuickSight by the DatabaseUser . If you choose to include this
 	// parameter, the RoleArn must grant access to redshift:JoinGroup .
 	DatabaseGroups []string
+
+	// The user whose permissions and group memberships will be used by Amazon
+	// QuickSight to access the cluster. If this user already exists in your database,
+	// Amazon QuickSight is granted the same permissions that the user has. If the user
+	// doesn't exist, set the value of AutoCreateDatabaseUser to True to create a new
+	// user with PUBLIC permissions.
+	DatabaseUser *string
 
 	noSmithyDocumentSerde
 }
@@ -10975,6 +11002,26 @@ type RefreshSchedule struct {
 	// Time after which the refresh schedule can be started, expressed in
 	// YYYY-MM-DDTHH:MM:SS format.
 	StartAfterDateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A customer managed key structure that contains the information listed below:
+//
+//   - KeyArn - The ARN of a KMS key that is registered to a Amazon QuickSight
+//     account for encryption and decryption use.
+//
+//   - DefaultKey - Indicates whether the current key is set as the default key for
+//     encryption and decryption use.
+type RegisteredCustomerManagedKey struct {
+
+	// Indicates whether a RegisteredCustomerManagedKey is set as the default key for
+	// encryption and decryption use.
+	DefaultKey bool
+
+	// The ARN of the KMS key that is registered to a Amazon QuickSight account for
+	// encryption and decryption use.
+	KeyArn *string
 
 	noSmithyDocumentSerde
 }
@@ -12862,6 +12909,24 @@ type SubtotalOptions struct {
 
 	// The cell styling options for the subtotals of value cells.
 	ValueCellStyle *TableCellStyle
+
+	noSmithyDocumentSerde
+}
+
+// A success entry that occurs when a KeyRegistration job is successfully applied
+// to the Amazon QuickSight account.
+type SuccessfulKeyRegistrationEntry struct {
+
+	// The ARN of the KMS key that is associated with the
+	// SuccessfulKeyRegistrationEntry entry.
+	//
+	// This member is required.
+	KeyArn *string
+
+	// The HTTP status of a SuccessfulKeyRegistrationEntry entry.
+	//
+	// This member is required.
+	StatusCode int32
 
 	noSmithyDocumentSerde
 }
@@ -15089,8 +15154,8 @@ type User struct {
 	//   QuickSight settings.
 	//
 	//   - READER_PRO : Reader Pro adds Generative BI capabilities to the Reader role.
-	//   Reader Pros have access to Amazon Q Business, can build stories with Amazon Q,
-	//   and can generate executive summaries from dashboards.
+	//   Reader Pros have access to Amazon Q in Amazon QuickSight, can build stories with
+	//   Amazon Q, and can generate executive summaries from dashboards.
 	//
 	//   - AUTHOR_PRO : Author Pro adds Generative BI capabilities to the Author role.
 	//   Author Pros can author dashboards with natural language with Amazon Q, build

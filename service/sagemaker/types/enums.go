@@ -2124,6 +2124,25 @@ func (EdgePresetDeploymentType) Values() []EdgePresetDeploymentType {
 	}
 }
 
+type EnabledOrDisabled string
+
+// Enum values for EnabledOrDisabled
+const (
+	EnabledOrDisabledEnabled  EnabledOrDisabled = "Enabled"
+	EnabledOrDisabledDisabled EnabledOrDisabled = "Disabled"
+)
+
+// Values returns all known values for EnabledOrDisabled. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EnabledOrDisabled) Values() []EnabledOrDisabled {
+	return []EnabledOrDisabled{
+		"Enabled",
+		"Disabled",
+	}
+}
+
 type EndpointConfigSortKey string
 
 // Enum values for EndpointConfigSortKey

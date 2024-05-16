@@ -51528,6 +51528,55 @@ func awsAwsjson11_deserializeDocumentIamIdentity(v **types.IamIdentity, value in
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentIamPolicyConstraints(v **types.IamPolicyConstraints, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IamPolicyConstraints
+	if *v == nil {
+		sv = &types.IamPolicyConstraints{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SourceIp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnabledOrDisabled to be of type string, got %T instead", value)
+				}
+				sv.SourceIp = types.EnabledOrDisabled(jtv)
+			}
+
+		case "VpcSourceIp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnabledOrDisabled to be of type string, got %T instead", value)
+				}
+				sv.VpcSourceIp = types.EnabledOrDisabled(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentIdentityProviderOAuthSetting(v **types.IdentityProviderOAuthSetting, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -70033,6 +70082,42 @@ func awsAwsjson11_deserializeDocumentS3ModelDataSource(v **types.S3ModelDataSour
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentS3Presign(v **types.S3Presign, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3Presign
+	if *v == nil {
+		sv = &types.S3Presign{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IamPolicyConstraints":
+			if err := awsAwsjson11_deserializeDocumentIamPolicyConstraints(&sv.IamPolicyConstraints, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentS3StorageConfig(v **types.S3StorageConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -77517,6 +77602,42 @@ func awsAwsjson11_deserializeDocumentWarmPoolStatus(v **types.WarmPoolStatus, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentWorkerAccessConfiguration(v **types.WorkerAccessConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WorkerAccessConfiguration
+	if *v == nil {
+		sv = &types.WorkerAccessConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "S3Presign":
+			if err := awsAwsjson11_deserializeDocumentS3Presign(&sv.S3Presign, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentWorkforce(v **types.Workforce, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -77944,6 +78065,11 @@ func awsAwsjson11_deserializeDocumentWorkteam(v **types.Workteam, value interfac
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.SubDomain = ptr.String(jtv)
+			}
+
+		case "WorkerAccessConfiguration":
+			if err := awsAwsjson11_deserializeDocumentWorkerAccessConfiguration(&sv.WorkerAccessConfiguration, value); err != nil {
+				return err
 			}
 
 		case "WorkforceArn":

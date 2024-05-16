@@ -98,7 +98,7 @@ type RotateSecretInput struct {
 	//
 	// By default, Secrets Manager rotates the secret immediately.
 	//
-	// [testSecret step]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html
+	// [testSecret step]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_lambda-functions.html#rotate-secrets_lambda-functions-code
 	RotateImmediately *bool
 
 	// For secrets that use a Lambda rotation function to rotate, the ARN of the

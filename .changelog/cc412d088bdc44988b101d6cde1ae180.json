@@ -1,0 +1,8 @@
+{
+    "id": "cc412d08-8bdc-4498-8b10-1d6cde1ae180",
+    "type": "feature",
+    "description": "This release adds DescribeKeyRegistration and UpdateKeyRegistration APIs to manage QuickSight Customer Managed Keys (CMK).",
+    "modules": [
+        "service/quicksight"
+    ]
+}

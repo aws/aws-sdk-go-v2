@@ -38,7 +38,7 @@ type Environment struct {
 
 	// The Apache Airflow version on your environment.
 	//
-	// Valid values: 1.10.12 , 2.0.2 , 2.2.2 , 2.4.3 , 2.5.1 , 2.6.3 , 2.7.2 .
+	// Valid values: 1.10.12 , 2.0.2 , 2.2.2 , 2.4.3 , 2.5.1 , 2.6.3 , 2.7.2 , 2.8.1 .
 	AirflowVersion *string
 
 	// The Amazon Resource Name (ARN) of the Amazon MWAA environment.
@@ -69,8 +69,8 @@ type Environment struct {
 	// CUSTOMER , you must create, and manage, the VPC endpoints in your VPC.
 	EndpointManagement EndpointManagement
 
-	// The environment class type. Valid values: mw1.small , mw1.medium , mw1.large .
-	// For more information, see [Amazon MWAA environment class].
+	// The environment class type. Valid values: mw1.small , mw1.medium , mw1.large ,
+	// mw1.xlarge , and mw1.2xlarge . For more information, see [Amazon MWAA environment class].
 	//
 	// [Amazon MWAA environment class]: https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html
 	EnvironmentClass *string
@@ -91,8 +91,32 @@ type Environment struct {
 	// The Apache Airflow logs published to CloudWatch Logs.
 	LoggingConfiguration *LoggingConfiguration
 
+	//  The maximum number of web servers that you want to run in your environment.
+	// Amazon MWAA scales the number of Apache Airflow web servers up to the number you
+	// specify for MaxWebservers when you interact with your Apache Airflow
+	// environment using Apache Airflow REST API, or the Apache Airflow CLI. For
+	// example, in scenarios where your workload requires network calls to the Apache
+	// Airflow REST API with a high transaction-per-second (TPS) rate, Amazon MWAA will
+	// increase the number of web servers up to the number set in MaxWebserers . As TPS
+	// rates decrease Amazon MWAA disposes of the additional web servers, and scales
+	// down to the number set in MinxWebserers .
+	//
+	// Valid values: Accepts between 2 and 5 . Defaults to 2 .
+	MaxWebservers *int32
+
 	// The maximum number of workers that run in your environment. For example, 20 .
 	MaxWorkers *int32
+
+	//  The minimum number of web servers that you want to run in your environment.
+	// Amazon MWAA scales the number of Apache Airflow web servers up to the number you
+	// specify for MaxWebservers when you interact with your Apache Airflow
+	// environment using Apache Airflow REST API, or the Apache Airflow CLI. As the
+	// transaction-per-second rate, and the network load, decrease, Amazon MWAA
+	// disposes of the additional web servers, and scales down to the number set in
+	// MinxWebserers .
+	//
+	// Valid values: Accepts between 2 and 5 . Defaults to 2 .
+	MinWebservers *int32
 
 	// The minimum number of workers that run in your environment. For example, 2 .
 	MinWorkers *int32

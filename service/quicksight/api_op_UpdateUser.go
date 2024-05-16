@@ -58,8 +58,8 @@ type UpdateUserInput struct {
 	//   settings.
 	//
 	//   - READER_PRO : Reader Pro adds Generative BI capabilities to the Reader role.
-	//   Reader Pros have access to Amazon Q Business, can build stories with Amazon Q,
-	//   and can generate executive summaries from dashboards.
+	//   Reader Pros have access to Amazon Q in Amazon QuickSight, can build stories with
+	//   Amazon Q, and can generate executive summaries from dashboards.
 	//
 	//   - AUTHOR_PRO : Author Pro adds Generative BI capabilities to the Author role.
 	//   Author Pros can author dashboards with natural language with Amazon Q, build

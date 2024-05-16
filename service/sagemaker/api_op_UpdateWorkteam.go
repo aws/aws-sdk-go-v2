@@ -65,6 +65,11 @@ type UpdateWorkteamInput struct {
 	// Configures SNS topic notifications for available or expiring work items
 	NotificationConfiguration *types.NotificationConfiguration
 
+	// Use this optional parameter to constrain access to an Amazon S3 resource based
+	// on the IP address using supported IAM global condition keys. The Amazon S3
+	// resource is accessed in the worker portal using a Amazon S3 presigned URL.
+	WorkerAccessConfiguration *types.WorkerAccessConfiguration
+
 	noSmithyDocumentSerde
 }
 

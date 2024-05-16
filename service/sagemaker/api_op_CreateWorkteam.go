@@ -79,6 +79,11 @@ type CreateWorkteamInput struct {
 	// [Using Cost Allocation Tags]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
 	Tags []types.Tag
 
+	// Use this optional parameter to constrain access to an Amazon S3 resource based
+	// on the IP address using supported IAM global condition keys. The Amazon S3
+	// resource is accessed in the worker portal using a Amazon S3 presigned URL.
+	WorkerAccessConfiguration *types.WorkerAccessConfiguration
+
 	// The name of the workforce.
 	WorkforceName *string
 
