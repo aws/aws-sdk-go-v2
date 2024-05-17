@@ -97,6 +97,9 @@
                     "target": "com.amazonaws.lakeformation#GetDataCellsFilter"
                 },
                 {
+                    "target": "com.amazonaws.lakeformation#GetDataLakePrincipal"
+                },
+                {
                     "target": "com.amazonaws.lakeformation#GetDataLakeSettings"
                 },
                 {
@@ -3593,6 +3596,55 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lakeformation#GetDataLakePrincipal": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#GetDataLakePrincipalRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#GetDataLakePrincipalResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the identity of the invoking principal.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetDataLakePrincipal",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetDataLakePrincipalRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lakeformation#GetDataLakePrincipalResponse": {
+            "type": "structure",
+            "members": {
+                "Identity": {
+                    "target": "com.amazonaws.lakeformation#IdentityString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the invoking principal.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lakeformation#GetDataLakeSettings": {
             "type": "operation",
             "input": {
@@ -4773,6 +4825,9 @@
             }
         },
         "com.amazonaws.lakeformation#IdentityCenterInstanceArn": {
+            "type": "string"
+        },
+        "com.amazonaws.lakeformation#IdentityString": {
             "type": "string"
         },
         "com.amazonaws.lakeformation#InternalServiceException": {

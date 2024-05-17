@@ -686,7 +686,7 @@
                 "timeoutInMinutes": {
                     "target": "com.amazonaws.codebuild#WrapperInt",
                     "traits": {
-                        "smithy.api#documentation": "<p>How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before timing out this build if it does not\n            get marked as completed.</p>"
+                        "smithy.api#documentation": "<p>How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before timing out this build if it does not\n            get marked as completed.</p>"
                     }
                 },
                 "queuedTimeoutInMinutes": {
@@ -1392,6 +1392,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains summary information about a batch build group.</p>"
+            }
+        },
+        "com.amazonaws.codebuild#BuildTimeOut": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 5,
+                    "max": 2160
+                }
             }
         },
         "com.amazonaws.codebuild#Builds": {
@@ -3016,9 +3025,9 @@
                     }
                 },
                 "timeoutInMinutes": {
-                    "target": "com.amazonaws.codebuild#TimeOut",
+                    "target": "com.amazonaws.codebuild#BuildTimeOut",
                     "traits": {
-                        "smithy.api#documentation": "<p>How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before it times out\n      any build that has not been marked as completed. The default is 60 minutes.</p>"
+                        "smithy.api#documentation": "<p>How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before it times out\n      any build that has not been marked as completed. The default is 60 minutes.</p>"
                     }
                 },
                 "queuedTimeoutInMinutes": {
@@ -5898,9 +5907,9 @@
                     }
                 },
                 "timeoutInMinutes": {
-                    "target": "com.amazonaws.codebuild#TimeOut",
+                    "target": "com.amazonaws.codebuild#BuildTimeOut",
                     "traits": {
-                        "smithy.api#documentation": "<p>How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before timing out any\n      related build that did not get marked as completed. The default is 60 minutes.</p>"
+                        "smithy.api#documentation": "<p>How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before timing out any\n      related build that did not get marked as completed. The default is 60 minutes.</p>"
                     }
                 },
                 "queuedTimeoutInMinutes": {
@@ -7790,7 +7799,7 @@
                     }
                 },
                 "buildTimeoutInMinutesOverride": {
-                    "target": "com.amazonaws.codebuild#TimeOut",
+                    "target": "com.amazonaws.codebuild#BuildTimeOut",
                     "traits": {
                         "smithy.api#documentation": "<p>Overrides the build timeout specified in the batch build project.</p>"
                     }
@@ -8005,9 +8014,9 @@
                     }
                 },
                 "timeoutInMinutesOverride": {
-                    "target": "com.amazonaws.codebuild#TimeOut",
+                    "target": "com.amazonaws.codebuild#BuildTimeOut",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of build timeout minutes, from 5 to 480 (8 hours), that overrides, for this\n            build only, the latest setting already defined in the build project.</p>"
+                        "smithy.api#documentation": "<p>The number of build timeout minutes, from 5 to 2160 (36 hours), that overrides, for this\n            build only, the latest setting already defined in the build project.</p>"
                     }
                 },
                 "queuedTimeoutInMinutesOverride": {
@@ -8597,9 +8606,9 @@
                     }
                 },
                 "timeoutInMinutes": {
-                    "target": "com.amazonaws.codebuild#TimeOut",
+                    "target": "com.amazonaws.codebuild#BuildTimeOut",
                     "traits": {
-                        "smithy.api#documentation": "<p>The replacement value in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before\n      timing out any related build that did not get marked as completed.</p>"
+                        "smithy.api#documentation": "<p>The replacement value in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before\n      timing out any related build that did not get marked as completed.</p>"
                     }
                 },
                 "queuedTimeoutInMinutes": {

@@ -1287,7 +1287,7 @@
                 "IpAddressType": {
                     "target": "com.amazonaws.elasticloadbalancingv2#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of IP addresses used by the subnets for your load balancer. The possible values\n      are <code>ipv4</code> (for IPv4 addresses) and <code>dualstack</code> (for IPv4 and IPv6\n      addresses). </p>"
+                        "smithy.api#documentation": "<p>Note: Internal load balancers must use the <code>ipv4</code> IP address type.</p>\n         <p>[Application Load Balancers] The IP address type. The possible values are \n      <code>ipv4</code> (for only IPv4 addresses), <code>dualstack</code> (for IPv4 and \n      IPv6 addresses), and <code>dualstack-without-public-ipv4</code> (for IPv6 only public \n      addresses, with private IPv4 and IPv6 addresses).</p>\n         <p>[Network Load Balancers] The IP address type. The possible values are \n      <code>ipv4</code> (for only IPv4 addresses) and <code>dualstack</code> \n      (for IPv4 and IPv6 addresses). You can’t specify <code>dualstack</code> \n      for a load balancer with a UDP or TCP_UDP listener.</p>\n         <p>[Gateway Load Balancers] The IP address type. The possible values are \n      <code>ipv4</code> (for only IPv4 addresses) and <code>dualstack</code> \n      (for IPv4 and IPv6 addresses).</p>"
                     }
                 },
                 "CustomerOwnedIpv4Pool": {
@@ -3825,7 +3825,7 @@
                     "sdkId": "Elastic Load Balancing v2",
                     "arnNamespace": "elasticloadbalancing",
                     "cloudFormationName": "ElasticLoadBalancingV2",
-                    "cloudTrailEventSource": "elasticloadbalancingv2.amazonaws.com",
+                    "cloudTrailEventSource": "elasticloadbalancing.amazonaws.com",
                     "docId": "elasticloadbalancingv2-2015-12-01",
                     "endpointPrefix": "elasticloadbalancing"
                 },
@@ -5340,6 +5340,12 @@
                     "traits": {
                         "smithy.api#enumValue": "dualstack"
                     }
+                },
+                "DUALSTACK_WITHOUT_PUBLIC_IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dualstack-without-public-ipv4"
+                    }
                 }
             }
         },
@@ -5550,7 +5556,7 @@
                 "IpAddressType": {
                     "target": "com.amazonaws.elasticloadbalancingv2#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of IP addresses used by the subnets for your load balancer. The possible values\n      are <code>ipv4</code> (for IPv4 addresses) and <code>dualstack</code> (for IPv4 and IPv6\n      addresses).</p>"
+                        "smithy.api#documentation": "<p>[Application Load Balancers] The type of IP addresses used for public or private \n      connections by the subnets attached to your load balancer. The possible values are \n      <code>ipv4</code> (for only IPv4 addresses), <code>dualstack</code> (for IPv4 and \n      IPv6 addresses), and <code>dualstack-without-public-ipv4</code> (for IPv6 only public \n      addresses, with private IPv4 and IPv6 addresses).</p>\n         <p>[Network Load Balancers and Gateway Load Balancers] The type of IP addresses \n      used for public or private connections by the subnets attached to your load \n      balancer. The possible values are <code>ipv4</code> (for only IPv4 addresses) \n      and <code>dualstack</code> (for IPv4 and IPv6 addresses).</p>"
                     }
                 },
                 "CustomerOwnedIpv4Pool": {
@@ -7594,7 +7600,7 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#IpAddressType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The IP address type. The possible values are <code>ipv4</code> (for IPv4 addresses) and\n        <code>dualstack</code> (for IPv4 and IPv6 addresses).  You can’t specify <code>dualstack</code> for a load balancer\n      with a UDP or TCP_UDP listener.</p>",
+                        "smithy.api#documentation": "<p>Note: Internal load balancers must use the <code>ipv4</code> IP address type.</p>\n         <p>[Application Load Balancers] The IP address type. The possible values are \n      <code>ipv4</code> (for only IPv4 addresses), <code>dualstack</code> (for IPv4 and \n      IPv6 addresses), and <code>dualstack-without-public-ipv4</code> (for IPv6 only public \n      addresses, with private IPv4 and IPv6 addresses).</p>\n         <p>[Network Load Balancers] The IP address type. The possible values are \n      <code>ipv4</code> (for only IPv4 addresses) and <code>dualstack</code> \n      (for IPv4 and IPv6 addresses). You can’t specify <code>dualstack</code> \n      for a load balancer with a UDP or TCP_UDP listener.</p>\n         <p>[Gateway Load Balancers] The IP address type. The possible values are \n      <code>ipv4</code> (for only IPv4 addresses) and <code>dualstack</code> \n      (for IPv4 and IPv6 addresses).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7880,7 +7886,7 @@
                 "IpAddressType": {
                     "target": "com.amazonaws.elasticloadbalancingv2#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>[Network Load Balancers] The type of IP addresses used by the subnets for your load\n      balancer. The possible values are <code>ipv4</code> (for IPv4 addresses) and\n        <code>dualstack</code> (for IPv4 and IPv6 addresses). You can’t specify\n        <code>dualstack</code> for a load balancer with a UDP or TCP_UDP listener.</p>\n         <p>[Gateway Load Balancers] The type of IP addresses used by the subnets for your load\n      balancer. The possible values are <code>ipv4</code> (for IPv4 addresses) and\n      <code>dualstack</code> (for IPv4 and IPv6 addresses).</p>"
+                        "smithy.api#documentation": "<p>[Application Load Balancers] The IP address type. The possible values are \n      <code>ipv4</code> (for only IPv4 addresses), <code>dualstack</code> (for IPv4 and \n      IPv6 addresses), and <code>dualstack-without-public-ipv4</code> (for IPv6 only public \n      addresses, with private IPv4 and IPv6 addresses).</p>\n         <p>[Network Load Balancers] The type of IP addresses used by the subnets for your load\n      balancer. The possible values are <code>ipv4</code> (for IPv4 addresses) and\n        <code>dualstack</code> (for IPv4 and IPv6 addresses). You can’t specify\n        <code>dualstack</code> for a load balancer with a UDP or TCP_UDP listener.</p>\n         <p>[Gateway Load Balancers] The type of IP addresses used by the subnets for your load\n      balancer. The possible values are <code>ipv4</code> (for IPv4 addresses) and\n      <code>dualstack</code> (for IPv4 and IPv6 addresses).</p>"
                     }
                 }
             },
@@ -7900,7 +7906,7 @@
                 "IpAddressType": {
                     "target": "com.amazonaws.elasticloadbalancingv2#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>[Network Load Balancers] The IP address type.</p>\n         <p>[Gateway Load Balancers] The IP address type.</p>"
+                        "smithy.api#documentation": "<p>[Application Load Balancers] The IP address type.</p>\n         <p>[Network Load Balancers] The IP address type.</p>\n         <p>[Gateway Load Balancers] The IP address type.</p>"
                     }
                 }
             },
