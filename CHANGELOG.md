@@ -1,3 +1,15 @@
+# Release (2024-05-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.36.0](service/codebuild/CHANGELOG.md#v1360-2024-05-17)
+  * **Feature**: Aws CodeBuild now supports 36 hours build timeout
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.31.0](service/elasticloadbalancingv2/CHANGELOG.md#v1310-2024-05-17)
+  * **Feature**: This release adds dualstack-without-public-ipv4 IP address type for ALB.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.33.0](service/lakeformation/CHANGELOG.md#v1330-2024-05-17)
+  * **Feature**: Introduces a new API, GetDataLakePrincipal, that returns the identity of the invoking principal
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.48.0](service/transfer/CHANGELOG.md#v1480-2024-05-17)
+  * **Feature**: Enable use of CloudFormation traits in Smithy model to improve generated CloudFormation schema from the Smithy API model.
+
 # Release (2024-05-16)
 
 ## General Highlights

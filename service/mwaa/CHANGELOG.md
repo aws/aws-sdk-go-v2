@@ -1,3 +1,7 @@
+# v1.27.1 (2024-05-17)
+
+* No change notes available for this release.
+
 # v1.27.0 (2024-05-16)
 
 * **Feature**: Amazon MWAA now supports Airflow web server auto scaling to automatically handle increased demand from REST APIs, Command Line Interface (CLI), or more Airflow User Interface (UI) users. Customers can specify maximum and minimum web server instances during environment creation and update workflow.

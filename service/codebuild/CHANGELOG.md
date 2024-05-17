@@ -1,3 +1,7 @@
+# v1.36.0 (2024-05-17)
+
+* **Feature**: Aws CodeBuild now supports 36 hours build timeout
+
 # v1.35.1 (2024-05-16)
 
 * **Dependency Update**: Updated to the latest SDK module versions

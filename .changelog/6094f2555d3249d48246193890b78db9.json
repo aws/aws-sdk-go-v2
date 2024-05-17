@@ -1,8 +1,0 @@
-{
-    "id": "6094f255-5d32-49d4-8246-193890b78db9",
-    "type": "feature",
-    "description": "This release adds dualstack-without-public-ipv4 IP address type for ALB.",
-    "modules": [
-        "service/elasticloadbalancingv2"
-    ]
-}

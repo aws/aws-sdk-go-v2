@@ -1,8 +1,0 @@
-{
-    "id": "76974381-9479-4de9-9b94-d18eb7d6b91f",
-    "type": "feature",
-    "description": "Introduces a new API, GetDataLakePrincipal, that returns the identity of the invoking principal",
-    "modules": [
-        "service/lakeformation"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.33.0 (2024-05-17)
+
+* **Feature**: Introduces a new API, GetDataLakePrincipal, that returns the identity of the invoking principal
+
 # v1.32.3 (2024-05-16)
 
 * **Dependency Update**: Updated to the latest SDK module versions
