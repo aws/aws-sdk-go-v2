@@ -1,0 +1,8 @@
+{
+    "id": "3ccf754e-12c0-4c3f-a019-3191df2f88be",
+    "type": "feature",
+    "description": "Aws CodeBuild now supports 36 hours build timeout",
+    "modules": [
+        "service/codebuild"
+    ]
+}

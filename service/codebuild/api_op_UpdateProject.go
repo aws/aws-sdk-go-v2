@@ -144,7 +144,7 @@ type UpdateProjectInput struct {
 	// CodeBuild build project tags.
 	Tags []types.Tag
 
-	// The replacement value in minutes, from 5 to 480 (8 hours), for CodeBuild to
+	// The replacement value in minutes, from 5 to 2160 (36 hours), for CodeBuild to
 	// wait before timing out any related build that did not get marked as completed.
 	TimeoutInMinutes *int32
 

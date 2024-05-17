@@ -234,7 +234,7 @@ type StartBuildInput struct {
 	// [Source Version Sample with CodeBuild]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html
 	SourceVersion *string
 
-	// The number of build timeout minutes, from 5 to 480 (8 hours), that overrides,
+	// The number of build timeout minutes, from 5 to 2160 (36 hours), that overrides,
 	// for this build only, the latest setting already defined in the build project.
 	TimeoutInMinutesOverride *int32
 

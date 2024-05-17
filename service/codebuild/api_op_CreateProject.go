@@ -145,8 +145,8 @@ type CreateProjectInput struct {
 	// CodeBuild build project tags.
 	Tags []types.Tag
 
-	// How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before it
-	// times out any build that has not been marked as completed. The default is 60
+	// How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before
+	// it times out any build that has not been marked as completed. The default is 60
 	// minutes.
 	TimeoutInMinutes *int32
 

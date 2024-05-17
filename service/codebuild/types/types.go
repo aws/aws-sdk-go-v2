@@ -183,7 +183,7 @@ type Build struct {
 	// When the build process started, expressed in Unix time format.
 	StartTime *time.Time
 
-	// How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before
+	// How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before
 	// timing out this build if it does not get marked as completed.
 	TimeoutInMinutes *int32
 
@@ -1266,7 +1266,7 @@ type Project struct {
 	// CodeBuild build project tags.
 	Tags []Tag
 
-	// How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before
+	// How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before
 	// timing out any related build that did not get marked as completed. The default
 	// is 60 minutes.
 	TimeoutInMinutes *int32

@@ -314,6 +314,18 @@ func TestCheckSnapshot_GetDataCellsFilter(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDataLakePrincipal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataLakePrincipal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataLakePrincipal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDataLakeSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataLakeSettings(context.Background(), nil, func(o *Options) {
@@ -954,6 +966,18 @@ func TestUpdateSnapshot_GetDataCellsFilter(t *testing.T) {
 	_, err := svc.GetDataCellsFilter(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDataCellsFilter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDataLakePrincipal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataLakePrincipal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataLakePrincipal")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

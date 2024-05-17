@@ -441,7 +441,13 @@ type DescribedCertificate struct {
 	// CERTIFICATE .
 	Type CertificateType
 
-	// Specifies whether this certificate is used for signing or encryption.
+	// Specifies how this certificate is used. It can be used in the following ways:
+	//
+	//   - SIGNING : For signing AS2 messages
+	//
+	//   - ENCRYPTION : For encrypting AS2 messages
+	//
+	//   - TLS : For securing AS2 communications sent over HTTPS
 	Usage CertificateUsageType
 
 	noSmithyDocumentSerde
@@ -705,6 +711,8 @@ type DescribedServer struct {
 	Certificate *string
 
 	// Specifies the domain of the storage system that is used for file transfers.
+	// There are two domains available: Amazon Simple Storage Service (Amazon S3) and
+	// Amazon Elastic File System (Amazon EFS). The default value is S3.
 	Domain Domain
 
 	// The virtual private cloud (VPC) endpoint settings that are configured for your
@@ -1383,7 +1391,13 @@ type ListedCertificate struct {
 	// key, the type is CERTIFICATE .
 	Type CertificateType
 
-	// Specifies whether this certificate is used for signing or encryption.
+	// Specifies how this certificate is used. It can be used in the following ways:
+	//
+	//   - SIGNING : For signing AS2 messages
+	//
+	//   - ENCRYPTION : For encrypting AS2 messages
+	//
+	//   - TLS : For securing AS2 communications sent over HTTPS
 	Usage CertificateUsageType
 
 	noSmithyDocumentSerde
@@ -1499,6 +1513,8 @@ type ListedServer struct {
 	Arn *string
 
 	// Specifies the domain of the storage system that is used for file transfers.
+	// There are two domains available: Amazon Simple Storage Service (Amazon S3) and
+	// Amazon Elastic File System (Amazon EFS). The default value is S3.
 	Domain Domain
 
 	// Specifies the type of VPC endpoint that your server is connected to. If your

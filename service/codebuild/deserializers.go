@@ -9228,7 +9228,7 @@ func awsAwsjson11_deserializeDocumentProject(v **types.Project, value interface{
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected TimeOut to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected BuildTimeOut to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {

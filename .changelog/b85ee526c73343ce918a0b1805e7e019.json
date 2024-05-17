@@ -1,0 +1,8 @@
+{
+    "id": "b85ee526-c733-43ce-918a-0b1805e7e019",
+    "type": "feature",
+    "description": "Enable use of CloudFormation traits in Smithy model to improve generated CloudFormation schema from the Smithy API model.",
+    "modules": [
+        "service/transfer"
+    ]
+}
