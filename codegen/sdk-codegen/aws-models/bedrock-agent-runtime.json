@@ -1515,6 +1515,62 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentruntime#GuardrailAction": {
+            "type": "enum",
+            "members": {
+                "INTERVENED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERVENED"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailAssessment": {
+            "type": "structure",
+            "members": {
+                "topicPolicy": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailTopicPolicyAssessment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Topic policy details of the Guardrail.</p>"
+                    }
+                },
+                "contentPolicy": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailContentPolicyAssessment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Content policy details of the Guardrail.</p>"
+                    }
+                },
+                "wordPolicy": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailWordPolicyAssessment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Word policy details of the Guardrail.</p>"
+                    }
+                },
+                "sensitiveInformationPolicy": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailSensitiveInformationPolicyAssessment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sensitive Information policy details of Guardrail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Assessment details of the content analyzed by Guardrails.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailAssessmentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#GuardrailAssessment"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#GuardrailConfiguration": {
             "type": "structure",
             "members": {
@@ -1544,6 +1600,660 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration details for the guardrail.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailContentFilter": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailContentFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of content detected in the filter by the Guardrail.</p>"
+                    }
+                },
+                "confidence": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailContentFilterConfidence",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The confidence level regarding the content detected in the filter by the Guardrail.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailContentPolicyAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action placed on the content by the Guardrail filter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the content filter used in the Guardrail.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailContentFilterConfidence": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIUM"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailContentFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#GuardrailContentFilter"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailContentFilterType": {
+            "type": "enum",
+            "members": {
+                "INSULTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSULTS"
+                    }
+                },
+                "HATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HATE"
+                    }
+                },
+                "SEXUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEXUAL"
+                    }
+                },
+                "VIOLENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIOLENCE"
+                    }
+                },
+                "MISCONDUCT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISCONDUCT"
+                    }
+                },
+                "PROMPT_ATTACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROMPT_ATTACK"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailContentPolicyAction": {
+            "type": "enum",
+            "members": {
+                "BLOCKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLOCKED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailContentPolicyAssessment": {
+            "type": "structure",
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailContentFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter details of the policy assessment used in the Guardrails filter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the policy assessment in the Guardrails filter.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailCustomWord": {
+            "type": "structure",
+            "members": {
+                "match": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The match details for the custom word filter in the Guardrail.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailWordPolicyAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action details for the custom word filter in the Guardrail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The custom word details for the filter in the Guardrail.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailCustomWordList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#GuardrailCustomWord"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailManagedWord": {
+            "type": "structure",
+            "members": {
+                "match": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The match details for the managed word filter in the Guardrail.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailManagedWordType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type details for the managed word filter in the Guardrail.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailWordPolicyAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action details for the managed word filter in the Guardrail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The managed word details for the filter in the Guardrail.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailManagedWordList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#GuardrailManagedWord"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailManagedWordType": {
+            "type": "enum",
+            "members": {
+                "PROFANITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROFANITY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailPiiEntityFilter": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailPiiEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of PII the Guardrail filter has identified and removed.</p>"
+                    }
+                },
+                "match": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The match to settings in the Guardrail filter to identify and remove PII.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailSensitiveInformationPolicyAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action of the Guardrail filter to identify and remove PII.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Guardrail filter to identify and remove personally identifiable information (PII).</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailPiiEntityFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#GuardrailPiiEntityFilter"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailPiiEntityType": {
+            "type": "enum",
+            "members": {
+                "ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDRESS"
+                    }
+                },
+                "AGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGE"
+                    }
+                },
+                "AWS_ACCESS_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_ACCESS_KEY"
+                    }
+                },
+                "AWS_SECRET_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SECRET_KEY"
+                    }
+                },
+                "CA_HEALTH_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CA_HEALTH_NUMBER"
+                    }
+                },
+                "CA_SOCIAL_INSURANCE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CA_SOCIAL_INSURANCE_NUMBER"
+                    }
+                },
+                "CREDIT_DEBIT_CARD_CVV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDIT_DEBIT_CARD_CVV"
+                    }
+                },
+                "CREDIT_DEBIT_CARD_EXPIRY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDIT_DEBIT_CARD_EXPIRY"
+                    }
+                },
+                "CREDIT_DEBIT_CARD_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDIT_DEBIT_CARD_NUMBER"
+                    }
+                },
+                "DRIVER_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVER_ID"
+                    }
+                },
+                "EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL"
+                    }
+                },
+                "INTERNATIONAL_BANK_ACCOUNT_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNATIONAL_BANK_ACCOUNT_NUMBER"
+                    }
+                },
+                "IP_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP_ADDRESS"
+                    }
+                },
+                "LICENSE_PLATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LICENSE_PLATE"
+                    }
+                },
+                "MAC_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAC_ADDRESS"
+                    }
+                },
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NAME"
+                    }
+                },
+                "PASSWORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSWORD"
+                    }
+                },
+                "PHONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PHONE"
+                    }
+                },
+                "PIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PIN"
+                    }
+                },
+                "SWIFT_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SWIFT_CODE"
+                    }
+                },
+                "UK_NATIONAL_HEALTH_SERVICE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UK_NATIONAL_HEALTH_SERVICE_NUMBER"
+                    }
+                },
+                "UK_NATIONAL_INSURANCE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UK_NATIONAL_INSURANCE_NUMBER"
+                    }
+                },
+                "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+                    }
+                },
+                "URL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "URL"
+                    }
+                },
+                "USERNAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USERNAME"
+                    }
+                },
+                "US_BANK_ACCOUNT_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "US_BANK_ACCOUNT_NUMBER"
+                    }
+                },
+                "US_BANK_ROUTING_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "US_BANK_ROUTING_NUMBER"
+                    }
+                },
+                "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"
+                    }
+                },
+                "US_PASSPORT_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "US_PASSPORT_NUMBER"
+                    }
+                },
+                "US_SOCIAL_SECURITY_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "US_SOCIAL_SECURITY_NUMBER"
+                    }
+                },
+                "VEHICLE_IDENTIFICATION_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VEHICLE_IDENTIFICATION_NUMBER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailRegexFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name details for the regex filter used in the Guardrail.</p>"
+                    }
+                },
+                "regex": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The regex details for the regex filter used in the Guardrail.</p>"
+                    }
+                },
+                "match": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The match details for the regex filter used in the Guardrail.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailSensitiveInformationPolicyAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action details for the regex filter used in the Guardrail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details for the regex filter used in the Guardrail.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailRegexFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#GuardrailRegexFilter"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailSensitiveInformationPolicyAction": {
+            "type": "enum",
+            "members": {
+                "BLOCKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLOCKED"
+                    }
+                },
+                "ANONYMIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANONYMIZED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailSensitiveInformationPolicyAssessment": {
+            "type": "structure",
+            "members": {
+                "piiEntities": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailPiiEntityFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the PII entities used in the sensitive policy assessment for the Guardrail.</p>"
+                    }
+                },
+                "regexes": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailRegexFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the regexes used in the sensitive policy assessment for the Guardrail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the sensitive policy assessment used in the Guardrail.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailTopic": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name details on a specific topic in the Guardrail.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailTopicType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type details on a specific topic in the Guardrail.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailTopicPolicyAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action details on a specific topic in the Guardrail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details for a specific topic defined in the Guardrail.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailTopicList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#GuardrailTopic"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailTopicPolicyAction": {
+            "type": "enum",
+            "members": {
+                "BLOCKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLOCKED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailTopicPolicyAssessment": {
+            "type": "structure",
+            "members": {
+                "topics": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailTopicList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The topic details of the policy assessment used in the Guardrail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the policy assessment used in the Guardrail.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailTopicType": {
+            "type": "enum",
+            "members": {
+                "DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailTrace": {
+            "type": "structure",
+            "members": {
+                "action": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trace action details used with the Guardrail.</p>"
+                    }
+                },
+                "traceId": {
+                    "target": "com.amazonaws.bedrockagentruntime#TraceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the trace Id used in the Guardrail Trace.</p>"
+                    }
+                },
+                "inputAssessments": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailAssessmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the input assessments used in the Guardrail Trace.</p>"
+                    }
+                },
+                "outputAssessments": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailAssessmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the output assessments used in the Guardrail Trace.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The trace details used in the Guardrail.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailWordPolicyAction": {
+            "type": "enum",
+            "members": {
+                "BLOCKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLOCKED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GuardrailWordPolicyAssessment": {
+            "type": "structure",
+            "members": {
+                "customWords": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailCustomWordList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom word details for words defined in the Guardrail filter.</p>"
+                    }
+                },
+                "managedWordLists": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailManagedWordList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The managed word lists for words defined in the Guardrail filter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The assessment details for words defined in the Guardrail filter.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockagentruntime#Identifier": {
@@ -3577,6 +4287,12 @@
         "com.amazonaws.bedrockagentruntime#Trace": {
             "type": "union",
             "members": {
+                "guardrailTrace": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailTrace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trace details for a trace defined in the Guardrail filter.</p>"
+                    }
+                },
                 "preProcessingTrace": {
                     "target": "com.amazonaws.bedrockagentruntime#PreProcessingTrace",
                     "traits": {
