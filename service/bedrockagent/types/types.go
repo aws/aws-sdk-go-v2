@@ -159,6 +159,9 @@ type Agent struct {
 	// The foundation model used for orchestration by the agent.
 	FoundationModel *string
 
+	// The guardrails configuration assigned to the agent.
+	GuardrailConfiguration *GuardrailConfiguration
+
 	// Instructions that tell the agent what it should do and how it should interact
 	// with users.
 	Instruction *string
@@ -502,6 +505,9 @@ type AgentSummary struct {
 	// The description of the agent.
 	Description *string
 
+	// The details of the guardrails configuration in the agent summary.
+	GuardrailConfiguration *GuardrailConfiguration
+
 	// The latest version of the agent.
 	LatestAgentVersion *string
 
@@ -574,6 +580,9 @@ type AgentVersion struct {
 	// The foundation model that the version invokes.
 	FoundationModel *string
 
+	// The guardrails configuration assigned to the agent version.
+	GuardrailConfiguration *GuardrailConfiguration
+
 	// The instructions provided to the agent.
 	Instruction *string
 
@@ -620,6 +629,9 @@ type AgentVersionSummary struct {
 
 	// The description of the version of the agent.
 	Description *string
+
+	// The details of the guardrails configuration in the agent version summary.
+	GuardrailConfiguration *GuardrailConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -890,6 +902,18 @@ type FunctionSchemaMemberFunctions struct {
 }
 
 func (*FunctionSchemaMemberFunctions) isFunctionSchema() {}
+
+// The details of the guardrails configuration.
+type GuardrailConfiguration struct {
+
+	// The guardrails identifier assigned to the guardrails configuration.
+	GuardrailIdentifier *string
+
+	// The guardrails version assigned to the guardrails configuration.
+	GuardrailVersion *string
+
+	noSmithyDocumentSerde
+}
 
 // Contains inference parameters to use when the agent invokes a foundation model
 // in the part of the agent sequence defined by the promptType . For more
@@ -1421,8 +1445,9 @@ type PromptConfiguration struct {
 
 	// Defines the prompt template with which to replace the default prompt template.
 	// You can use placeholder variables in the base prompt template to customize the
-	// prompt. For more information, see [Prompt template placeholder variables].
+	// prompt. For more information, see [Prompt template placeholder variables]. For more information, see [Configure the prompt templates].
 	//
+	// [Configure the prompt templates]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts-configure.html
 	// [Prompt template placeholder variables]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html
 	BasePromptTemplate *string
 
@@ -1483,7 +1508,9 @@ type PromptOverrideConfiguration struct {
 	// The ARN of the Lambda function to use when parsing the raw foundation model
 	// output in parts of the agent sequence. If you specify this field, at least one
 	// of the promptConfigurations must contain a parserMode value that is set to
-	// OVERRIDDEN .
+	// OVERRIDDEN . For more information, see [Parser Lambda function in Agents for Amazon Bedrock].
+	//
+	// [Parser Lambda function in Agents for Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/lambda-parser.html
 	OverrideLambda *string
 
 	noSmithyDocumentSerde

@@ -11,7 +11,9 @@ import (
 )
 
 // Retrieve details about an existing Baseline resource by specifying its
-// identifier.
+// identifier. For usage examples, see [the Amazon Web Services Control Tower User Guide].
+//
+// [the Amazon Web Services Control Tower User Guide]: https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html
 func (c *Client) GetBaseline(ctx context.Context, params *GetBaselineInput, optFns ...func(*Options)) (*GetBaselineOutput, error) {
 	if params == nil {
 		params = &GetBaselineInput{}

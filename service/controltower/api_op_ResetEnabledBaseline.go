@@ -11,7 +11,10 @@ import (
 )
 
 // Re-enables an EnabledBaseline resource. For example, this API can re-apply the
-// existing Baseline after a new member account is moved to the target OU.
+// existing Baseline after a new member account is moved to the target OU. For
+// usage examples, see [the Amazon Web Services Control Tower User Guide].
+//
+// [the Amazon Web Services Control Tower User Guide]: https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html
 func (c *Client) ResetEnabledBaseline(ctx context.Context, params *ResetEnabledBaselineInput, optFns ...func(*Options)) (*ResetEnabledBaselineOutput, error) {
 	if params == nil {
 		params = &ResetEnabledBaselineInput{}

@@ -122,7 +122,8 @@ type CreateEventSubscriptionInput struct {
 	// specified, all events are returned.
 	//
 	// Valid Values: db-instance | db-cluster | db-parameter-group | db-security-group
-	// | db-snapshot | db-cluster-snapshot | db-proxy
+	// | db-snapshot | db-cluster-snapshot | db-proxy | zero-etl |
+	// custom-engine-version | blue-green-deployment
 	SourceType *string
 
 	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.

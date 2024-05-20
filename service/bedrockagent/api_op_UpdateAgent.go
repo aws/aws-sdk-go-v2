@@ -56,6 +56,9 @@ type UpdateAgentInput struct {
 	// Specifies a new description of the agent.
 	Description *string
 
+	// The unique Guardrail configuration assigned to the agent when it is updated.
+	GuardrailConfiguration *types.GuardrailConfiguration
+
 	// The number of seconds for which Amazon Bedrock keeps information about a user's
 	// conversation with the agent.
 	//

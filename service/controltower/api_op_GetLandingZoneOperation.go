@@ -12,7 +12,7 @@ import (
 )
 
 // Returns the status of the specified landing zone operation. Details for an
-// operation are available for 60 days.
+// operation are available for 90 days.
 func (c *Client) GetLandingZoneOperation(ctx context.Context, params *GetLandingZoneOperationInput, optFns ...func(*Options)) (*GetLandingZoneOperationOutput, error) {
 	if params == nil {
 		params = &GetLandingZoneOperationInput{}

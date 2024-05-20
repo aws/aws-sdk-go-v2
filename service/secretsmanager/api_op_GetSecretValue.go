@@ -54,8 +54,7 @@ func (c *Client) GetSecretValue(ctx context.Context, params *GetSecretValueInput
 
 type GetSecretValueInput struct {
 
-	// The ARN or name of the secret to retrieve. To retrieve a secret from another
-	// account, you must use an ARN.
+	// The ARN or name of the secret to retrieve.
 	//
 	// For an ARN, we recommend that you specify a complete ARN rather than a partial
 	// ARN. See [Finding a secret from a partial ARN].

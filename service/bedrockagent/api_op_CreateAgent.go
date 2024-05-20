@@ -77,6 +77,9 @@ type CreateAgentInput struct {
 	// The foundation model to be used for orchestration by the agent you create.
 	FoundationModel *string
 
+	// The unique Guardrail configuration assigned to the agent when it is created.
+	GuardrailConfiguration *types.GuardrailConfiguration
+
 	// The number of seconds for which Amazon Bedrock keeps information about a user's
 	// conversation with the agent.
 	//

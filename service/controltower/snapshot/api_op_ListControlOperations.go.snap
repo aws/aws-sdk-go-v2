@@ -1,4 +1,4 @@
-ListEnabledControls
+ListControlOperations
 	Initialize stack step
 		RegisterServiceMetadata
 		legacyEndpointContextSetter

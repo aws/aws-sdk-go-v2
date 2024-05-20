@@ -11706,6 +11706,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 		objectKey.String(*v.Engine)
 	}
 
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
+	}
+
 	if v.EngineMode != nil {
 		objectKey := object.Key("EngineMode")
 		objectKey.String(*v.EngineMode)
@@ -12070,6 +12075,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 	if v.Engine != nil {
 		objectKey := object.Key("Engine")
 		objectKey.String(*v.Engine)
+	}
+
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
 	}
 
 	if v.EngineVersion != nil {
@@ -12814,6 +12824,11 @@ func awsAwsquery_serializeOpDocumentCreateGlobalClusterInput(v *CreateGlobalClus
 	if v.Engine != nil {
 		objectKey := object.Key("Engine")
 		objectKey.String(*v.Engine)
+	}
+
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
 	}
 
 	if v.EngineVersion != nil {
@@ -16463,6 +16478,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromS3Input(v *RestoreDBClus
 		objectKey.String(*v.Engine)
 	}
 
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
+	}
+
 	if v.EngineVersion != nil {
 		objectKey := object.Key("EngineVersion")
 		objectKey.String(*v.EngineVersion)
@@ -16655,6 +16675,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromSnapshotInput(v *Restore
 		objectKey.String(*v.Engine)
 	}
 
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
+	}
+
 	if v.EngineMode != nil {
 		objectKey := object.Key("EngineMode")
 		objectKey.String(*v.EngineMode)
@@ -16802,6 +16827,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *Restor
 	if v.EnableIAMDatabaseAuthentication != nil {
 		objectKey := object.Key("EnableIAMDatabaseAuthentication")
 		objectKey.Boolean(*v.EnableIAMDatabaseAuthentication)
+	}
+
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
 	}
 
 	if v.EngineMode != nil {
@@ -17045,6 +17075,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromDBSnapshotInput(v *Rest
 		objectKey.String(*v.Engine)
 	}
 
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
+	}
+
 	if v.Iops != nil {
 		objectKey := object.Key("Iops")
 		objectKey.Integer(*v.Iops)
@@ -17225,6 +17260,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromS3Input(v *RestoreDBIns
 	if v.Engine != nil {
 		objectKey := object.Key("Engine")
 		objectKey.String(*v.Engine)
+	}
+
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
 	}
 
 	if v.EngineVersion != nil {
@@ -17517,6 +17557,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceToPointInTimeInput(v *Resto
 	if v.Engine != nil {
 		objectKey := object.Key("Engine")
 		objectKey.String(*v.Engine)
+	}
+
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
 	}
 
 	if v.Iops != nil {

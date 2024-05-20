@@ -1133,6 +1133,93 @@ func awsRestjson1_serializeOpDocumentListBaselinesInput(v *ListBaselinesInput, v
 	return nil
 }
 
+type awsRestjson1_serializeOpListControlOperations struct {
+}
+
+func (*awsRestjson1_serializeOpListControlOperations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListControlOperations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListControlOperationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/list-control-operations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListControlOperationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListControlOperationsInput(v *ListControlOperationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListControlOperationsInput(v *ListControlOperationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filter != nil {
+		ok := object.Key("filter")
+		if err := awsRestjson1_serializeDocumentControlOperationFilter(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListEnabledBaselines struct {
 }
 
@@ -1286,6 +1373,13 @@ func awsRestjson1_serializeOpHttpBindingsListEnabledControlsInput(v *ListEnabled
 func awsRestjson1_serializeOpDocumentListEnabledControlsInput(v *ListEnabledControlsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Filter != nil {
+		ok := object.Key("filter")
+		if err := awsRestjson1_serializeDocumentEnabledControlFilter(v.Filter, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
@@ -2017,6 +2111,92 @@ func awsRestjson1_serializeOpDocumentUpdateLandingZoneInput(v *UpdateLandingZone
 	return nil
 }
 
+func awsRestjson1_serializeDocumentControlIdentifiers(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentControlOperationFilter(v *types.ControlOperationFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ControlIdentifiers != nil {
+		ok := object.Key("controlIdentifiers")
+		if err := awsRestjson1_serializeDocumentControlIdentifiers(v.ControlIdentifiers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ControlOperationTypes != nil {
+		ok := object.Key("controlOperationTypes")
+		if err := awsRestjson1_serializeDocumentControlOperationTypes(v.ControlOperationTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EnabledControlIdentifiers != nil {
+		ok := object.Key("enabledControlIdentifiers")
+		if err := awsRestjson1_serializeDocumentEnabledControlIdentifiers(v.EnabledControlIdentifiers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Statuses != nil {
+		ok := object.Key("statuses")
+		if err := awsRestjson1_serializeDocumentControlOperationStatuses(v.Statuses, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetIdentifiers != nil {
+		ok := object.Key("targetIdentifiers")
+		if err := awsRestjson1_serializeDocumentTargetIdentifiers(v.TargetIdentifiers, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentControlOperationStatuses(v []types.ControlOperationStatus, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentControlOperationTypes(v []types.ControlOperationType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDriftStatuses(v []types.DriftStatus, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEnabledBaselineBaselineIdentifiers(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2107,6 +2287,45 @@ func awsRestjson1_serializeDocumentEnabledBaselineTargetIdentifiers(v []string, 
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEnabledControlFilter(v *types.EnabledControlFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ControlIdentifiers != nil {
+		ok := object.Key("controlIdentifiers")
+		if err := awsRestjson1_serializeDocumentControlIdentifiers(v.ControlIdentifiers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DriftStatuses != nil {
+		ok := object.Key("driftStatuses")
+		if err := awsRestjson1_serializeDocumentDriftStatuses(v.DriftStatuses, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Statuses != nil {
+		ok := object.Key("statuses")
+		if err := awsRestjson1_serializeDocumentEnablementStatuses(v.Statuses, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEnabledControlIdentifiers(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEnabledControlParameter(v *types.EnabledControlParameter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2139,6 +2358,17 @@ func awsRestjson1_serializeDocumentEnabledControlParameters(v []types.EnabledCon
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEnablementStatuses(v []types.EnablementStatus, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentManifest(v document.Interface, value smithyjson.Value) error {
 	if v == nil {
 		return nil
@@ -2161,6 +2391,17 @@ func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTargetIdentifiers(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

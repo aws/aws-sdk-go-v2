@@ -31,10 +31,10 @@ func (c *Client) CreateLandingZone(ctx context.Context, params *CreateLandingZon
 
 type CreateLandingZoneInput struct {
 
-	// The manifest.yaml file is a text file that describes your Amazon Web Services
-	// resources. For examples, review [The manifest file].
+	// The manifest JSON file is a text file that describes your Amazon Web Services
+	// resources. For examples, review [Launch your landing zone].
 	//
-	// [The manifest file]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
+	// [Launch your landing zone]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
 	//
 	// This member is required.
 	Manifest document.Interface

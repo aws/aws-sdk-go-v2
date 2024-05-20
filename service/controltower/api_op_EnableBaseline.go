@@ -12,7 +12,10 @@ import (
 )
 
 // Enable (apply) a Baseline to a Target. This API starts an asynchronous
-// operation to deploy resources specified by the Baseline to the specified Target.
+// operation to deploy resources specified by the Baseline to the specified
+// Target. For usage examples, see [the Amazon Web Services Control Tower User Guide].
+//
+// [the Amazon Web Services Control Tower User Guide]: https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html
 func (c *Client) EnableBaseline(ctx context.Context, params *EnableBaselineInput, optFns ...func(*Options)) (*EnableBaselineOutput, error) {
 	if params == nil {
 		params = &EnableBaselineInput{}

@@ -33,13 +33,9 @@ func (c *Client) ListEnabledControls(ctx context.Context, params *ListEnabledCon
 
 type ListEnabledControlsInput struct {
 
-	// The ARN of the organizational unit. For information on how to find the
-	// targetIdentifier , see [the overview page].
-	//
-	// [the overview page]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
-	//
-	// This member is required.
-	TargetIdentifier *string
+	// An input filter for the ListCEnabledControls API that lets you select the types
+	// of control operations to view.
+	Filter *types.EnabledControlFilter
 
 	// How many results to return per API call.
 	MaxResults *int32
@@ -47,6 +43,12 @@ type ListEnabledControlsInput struct {
 	// The token to continue the list from a previous API call with the same
 	// parameters.
 	NextToken *string
+
+	// The ARN of the organizational unit. For information on how to find the
+	// targetIdentifier , see [the overview page].
+	//
+	// [the overview page]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
+	TargetIdentifier *string
 
 	noSmithyDocumentSerde
 }
@@ -122,9 +124,6 @@ func (c *Client) addOperationListEnabledControlsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpListEnabledControlsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEnabledControls(options.Region), middleware.Before); err != nil {

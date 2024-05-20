@@ -213,6 +213,9 @@ func ExampleTrace_outputUsage() {
 	case *types.TraceMemberFailureTrace:
 		_ = v.Value // Value is types.FailureTrace
 
+	case *types.TraceMemberGuardrailTrace:
+		_ = v.Value // Value is types.GuardrailTrace
+
 	case *types.TraceMemberOrchestrationTrace:
 		_ = v.Value // Value is types.OrchestrationTrace
 
@@ -232,6 +235,7 @@ func ExampleTrace_outputUsage() {
 }
 
 var _ *types.FailureTrace
+var _ *types.GuardrailTrace
 var _ types.PreProcessingTrace
 var _ types.PostProcessingTrace
 var _ types.OrchestrationTrace

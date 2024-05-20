@@ -219,6 +219,13 @@ func awsRestjson1_serializeOpDocumentCreateAgentInput(v *CreateAgentInput, value
 		ok.String(*v.FoundationModel)
 	}
 
+	if v.GuardrailConfiguration != nil {
+		ok := object.Key("guardrailConfiguration")
+		if err := awsRestjson1_serializeDocumentGuardrailConfiguration(v.GuardrailConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IdleSessionTTLInSeconds != nil {
 		ok := object.Key("idleSessionTTLInSeconds")
 		ok.Integer(*v.IdleSessionTTLInSeconds)
@@ -3119,6 +3126,13 @@ func awsRestjson1_serializeOpDocumentUpdateAgentInput(v *UpdateAgentInput, value
 		ok.String(*v.FoundationModel)
 	}
 
+	if v.GuardrailConfiguration != nil {
+		ok := object.Key("guardrailConfiguration")
+		if err := awsRestjson1_serializeDocumentGuardrailConfiguration(v.GuardrailConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IdleSessionTTLInSeconds != nil {
 		ok := object.Key("idleSessionTTLInSeconds")
 		ok.Integer(*v.IdleSessionTTLInSeconds)
@@ -3920,6 +3934,23 @@ func awsRestjson1_serializeDocumentFunctionSchema(v types.FunctionSchema, value 
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailConfiguration(v *types.GuardrailConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GuardrailIdentifier != nil {
+		ok := object.Key("guardrailIdentifier")
+		ok.String(*v.GuardrailIdentifier)
+	}
+
+	if v.GuardrailVersion != nil {
+		ok := object.Key("guardrailVersion")
+		ok.String(*v.GuardrailVersion)
+	}
+
 	return nil
 }
 

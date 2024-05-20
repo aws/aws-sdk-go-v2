@@ -61,8 +61,7 @@ type ValidateResourcePolicyInput struct {
 	// This member is required.
 	ResourcePolicy *string
 
-	// The ARN or name of the secret with the resource-based policy you want to
-	// validate.
+	// This field is reserved for internal use.
 	SecretId *string
 
 	noSmithyDocumentSerde

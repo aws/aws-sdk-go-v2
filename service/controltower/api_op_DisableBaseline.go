@@ -12,7 +12,10 @@ import (
 
 // Disable an EnabledBaseline resource on the specified Target. This API starts an
 // asynchronous operation to remove all resources deployed as part of the baseline
-// enablement. The resource will vary depending on the enabled baseline.
+// enablement. The resource will vary depending on the enabled baseline. For usage
+// examples, see [the Amazon Web Services Control Tower User Guide].
+//
+// [the Amazon Web Services Control Tower User Guide]: https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html
 func (c *Client) DisableBaseline(ctx context.Context, params *DisableBaselineInput, optFns ...func(*Options)) (*DisableBaselineOutput, error) {
 	if params == nil {
 		params = &DisableBaselineInput{}

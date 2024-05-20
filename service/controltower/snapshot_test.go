@@ -230,6 +230,18 @@ func TestCheckSnapshot_ListBaselines(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListControlOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListControlOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListControlOperations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListEnabledBaselines(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEnabledBaselines(context.Background(), nil, func(o *Options) {
@@ -522,6 +534,18 @@ func TestUpdateSnapshot_ListBaselines(t *testing.T) {
 	_, err := svc.ListBaselines(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListBaselines")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListControlOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListControlOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListControlOperations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

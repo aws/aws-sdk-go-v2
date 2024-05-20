@@ -703,6 +703,11 @@ type DBCluster struct {
 	// The database engine used for this DB cluster.
 	Engine *string
 
+	// The life cycle type for the DB cluster.
+	//
+	// For more information, see CreateDBCluster.
+	EngineLifecycleSupport *string
+
 	// The DB engine mode of the DB cluster, either provisioned or serverless .
 	//
 	// For more information, see [CreateDBCluster].
@@ -1767,6 +1772,11 @@ type DBInstance struct {
 
 	// The database engine used for this DB instance.
 	Engine *string
+
+	// The life cycle type for the DB instance.
+	//
+	// For more information, see CreateDBInstance.
+	EngineLifecycleSupport *string
 
 	// The version of the database engine.
 	EngineVersion *string
@@ -3368,6 +3378,11 @@ type GlobalCluster struct {
 	// The Aurora database engine used by the global database cluster.
 	Engine *string
 
+	// The life cycle type for the global cluster.
+	//
+	// For more information, see CreateGlobalCluster.
+	EngineLifecycleSupport *string
+
 	// Indicates the database engine version.
 	EngineVersion *string
 
@@ -4106,8 +4121,13 @@ type PendingCloudwatchLogsExports struct {
 type PendingMaintenanceAction struct {
 
 	// The type of pending maintenance action that is available for the resource.
-	// Valid actions are system-update , db-upgrade , hardware-maintenance , and
-	// ca-certificate-rotation .
+	//
+	// For more information about maintenance actions, see [Maintaining a DB instance].
+	//
+	// Valid Values: system-update | db-upgrade | hardware-maintenance |
+	// ca-certificate-rotation
+	//
+	// [Maintaining a DB instance]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html
 	Action *string
 
 	// The date of the maintenance window when the action is applied. The maintenance
@@ -5009,6 +5029,8 @@ type UpgradeTarget struct {
 
 	// Indicates whether the target version is applied to any source DB instances that
 	// have AutoMinorVersionUpgrade set to true.
+	//
+	// This parameter is dynamic, and is set by RDS.
 	AutoUpgrade *bool
 
 	// The version of the database engine that a DB instance can be upgraded to.

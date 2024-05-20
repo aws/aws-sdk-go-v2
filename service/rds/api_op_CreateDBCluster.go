@@ -73,7 +73,19 @@ type CreateDBClusterInput struct {
 	//
 	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	//
-	// Valid Values: aurora-mysql | aurora-postgresql | mysql | postgres
+	// Valid Values:
+	//
+	//   - aurora-mysql
+	//
+	//   - aurora-postgresql
+	//
+	//   - mysql
+	//
+	//   - postgres
+	//
+	//   - neptune - For information about using Amazon Neptune, see the [Amazon Neptune User Guide].
+	//
+	// [Amazon Neptune User Guide]: https://docs.aws.amazon.com/neptune/latest/userguide/intro.html
 	//
 	// This member is required.
 	Engine *string
@@ -93,15 +105,18 @@ type CreateDBClusterInput struct {
 	// Valid for Cluster Type: Multi-AZ DB clusters only
 	AutoMinorVersionUpgrade *bool
 
-	// A list of Availability Zones (AZs) where DB instances in the DB cluster can be
-	// created.
+	// A list of Availability Zones (AZs) where you specifically want to create DB
+	// instances in the DB cluster.
 	//
-	// For information on Amazon Web Services Regions and Availability Zones, see [Choosing the Regions and Availability Zones] in
-	// the Amazon Aurora User Guide.
+	// For information on AZs, see [Availability Zones] in the Amazon Aurora User Guide.
 	//
 	// Valid for Cluster Type: Aurora DB clusters only
 	//
-	// [Choosing the Regions and Availability Zones]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html
+	// Constraints:
+	//
+	//   - Can't specify more than three AZs.
+	//
+	// [Availability Zones]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.AvailabilityZones
 	AvailabilityZones []string
 
 	// The target backtrack window, in seconds. To disable backtracking, set this
@@ -312,6 +327,34 @@ type CreateDBClusterInput struct {
 	//
 	// [Using Amazon Performance Insights]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
 	EnablePerformanceInsights *bool
+
+	// The life cycle type for this DB cluster.
+	//
+	// By default, this value is set to open-source-rds-extended-support , which
+	// enrolls your DB cluster into Amazon RDS Extended Support. At the end of standard
+	// support, you can avoid charges for Extended Support by setting the value to
+	// open-source-rds-extended-support-disabled . In this case, creating the DB
+	// cluster will fail if the DB major version is past its end of standard support
+	// date.
+	//
+	// You can use this setting to enroll your DB cluster into Amazon RDS Extended
+	// Support. With RDS Extended Support, you can run the selected major engine
+	// version on your DB cluster past the end of standard support for that engine
+	// version. For more information, see the following sections:
+	//
+	//   - Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended Support]in the Amazon Aurora User Guide
+	//
+	//   - Amazon RDS - [Using Amazon RDS Extended Support]in the Amazon RDS User Guide
+	//
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+	//
+	// Valid Values: open-source-rds-extended-support |
+	// open-source-rds-extended-support-disabled
+	//
+	// Default: open-source-rds-extended-support
+	//
+	// [Using Amazon RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+	EngineLifecycleSupport *string
 
 	// The DB engine mode of the DB cluster, either provisioned or serverless .
 	//

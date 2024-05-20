@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a summary list of all available baselines.
+// Returns a summary list of all available baselines. For usage examples, see [the Amazon Web Services Control Tower User Guide].
+//
+// [the Amazon Web Services Control Tower User Guide]: https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html
 func (c *Client) ListBaselines(ctx context.Context, params *ListBaselinesInput, optFns ...func(*Options)) (*ListBaselinesOutput, error) {
 	if params == nil {
 		params = &ListBaselinesInput{}

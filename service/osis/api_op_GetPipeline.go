@@ -29,7 +29,7 @@ func (c *Client) GetPipeline(ctx context.Context, params *GetPipelineInput, optF
 
 type GetPipelineInput struct {
 
-	// The name of the pipeline to get information about.
+	// The name of the pipeline.
 	//
 	// This member is required.
 	PipelineName *string

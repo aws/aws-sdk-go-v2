@@ -1,0 +1,8 @@
+{
+    "id": "fc331d7c-47cf-43e3-82fd-da88ee39fb21",
+    "type": "feature",
+    "description": "This release adds support for using Guardrails with Bedrock Agents.",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

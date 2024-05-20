@@ -59,6 +59,32 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Exception is thrown when an operation has been disabled.
+type DisabledOperationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DisabledOperationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DisabledOperationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DisabledOperationException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DisabledOperationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DisabledOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request failed because of an unknown error, exception, or failure (the
 // failure is internal to the service).
 type InternalException struct {

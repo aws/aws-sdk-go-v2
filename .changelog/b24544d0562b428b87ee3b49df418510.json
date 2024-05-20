@@ -1,0 +1,8 @@
+{
+    "id": "b24544d0-562b-428b-87ee-3b49df418510",
+    "type": "feature",
+    "description": "Add support for creating an OpenSearch Ingestion pipeline that is attached to a provided VPC. Add information about the destinations of an OpenSearch Ingestion pipeline to the GetPipeline and ListPipelines APIs.",
+    "modules": [
+        "service/osis"
+    ]
+}

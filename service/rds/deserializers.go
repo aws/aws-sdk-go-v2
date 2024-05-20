@@ -28003,6 +28003,19 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 				sv.Engine = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("EngineLifecycleSupport", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.EngineLifecycleSupport = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("EngineMode", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -32589,6 +32602,19 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 			{
 				xtv := string(val)
 				sv.Engine = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("EngineLifecycleSupport", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.EngineLifecycleSupport = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("EngineVersion", t.Name.Local):
@@ -41672,6 +41698,19 @@ func awsAwsquery_deserializeDocumentGlobalCluster(v **types.GlobalCluster, decod
 			{
 				xtv := string(val)
 				sv.Engine = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("EngineLifecycleSupport", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.EngineLifecycleSupport = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("EngineVersion", t.Name.Local):

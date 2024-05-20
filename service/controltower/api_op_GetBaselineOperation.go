@@ -14,7 +14,9 @@ import (
 // Returns the details of an asynchronous baseline operation, as initiated by any
 // of these APIs: EnableBaseline , DisableBaseline , UpdateEnabledBaseline ,
 // ResetEnabledBaseline . A status message is displayed in case of operation
-// failure.
+// failure. For usage examples, see [the Amazon Web Services Control Tower User Guide].
+//
+// [the Amazon Web Services Control Tower User Guide]: https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html
 func (c *Client) GetBaselineOperation(ctx context.Context, params *GetBaselineOperationInput, optFns ...func(*Options)) (*GetBaselineOperationOutput, error) {
 	if params == nil {
 		params = &GetBaselineOperationInput{}

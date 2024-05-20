@@ -11,32 +11,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of summaries describing EnabledBaseline resources. You can
-// filter the list by the corresponding Baseline or Target of the EnabledBaseline
-// resources. For usage examples, see [the Amazon Web Services Control Tower User Guide].
-//
-// [the Amazon Web Services Control Tower User Guide]: https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html
-func (c *Client) ListEnabledBaselines(ctx context.Context, params *ListEnabledBaselinesInput, optFns ...func(*Options)) (*ListEnabledBaselinesOutput, error) {
+// Provides a list of operations in progress or queued.
+func (c *Client) ListControlOperations(ctx context.Context, params *ListControlOperationsInput, optFns ...func(*Options)) (*ListControlOperationsOutput, error) {
 	if params == nil {
-		params = &ListEnabledBaselinesInput{}
+		params = &ListControlOperationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEnabledBaselines", params, optFns, c.addOperationListEnabledBaselinesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListControlOperations", params, optFns, c.addOperationListControlOperationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListEnabledBaselinesOutput)
+	out := result.(*ListControlOperationsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListEnabledBaselinesInput struct {
+type ListControlOperationsInput struct {
 
-	// A filter applied on the ListEnabledBaseline operation. Allowed filters are
-	// baselineIdentifiers and targetIdentifiers . The filter can be applied for
-	// either, or both.
-	Filter *types.EnabledBaselineFilter
+	// An input filter for the ListControlOperations API that lets you select the
+	// types of control operations to view.
+	Filter *types.ControlOperationFilter
 
 	// The maximum number of results to be shown.
 	MaxResults *int32
@@ -47,12 +42,12 @@ type ListEnabledBaselinesInput struct {
 	noSmithyDocumentSerde
 }
 
-type ListEnabledBaselinesOutput struct {
+type ListControlOperationsOutput struct {
 
-	// Retuens a list of summaries of EnabledBaseline resources.
+	// Returns a list of output from control operations. PLACEHOLDER
 	//
 	// This member is required.
-	EnabledBaselines []types.EnabledBaselineSummary
+	ControlOperations []types.ControlOperationSummary
 
 	// A pagination token.
 	NextToken *string
@@ -63,19 +58,19 @@ type ListEnabledBaselinesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListEnabledBaselinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListControlOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEnabledBaselines{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListControlOperations{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEnabledBaselines{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListControlOperations{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEnabledBaselines"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ListControlOperations"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -118,7 +113,7 @@ func (c *Client) addOperationListEnabledBaselinesMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEnabledBaselines(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListControlOperations(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -139,17 +134,17 @@ func (c *Client) addOperationListEnabledBaselinesMiddlewares(stack *middleware.S
 	return nil
 }
 
-// ListEnabledBaselinesAPIClient is a client that implements the
-// ListEnabledBaselines operation.
-type ListEnabledBaselinesAPIClient interface {
-	ListEnabledBaselines(context.Context, *ListEnabledBaselinesInput, ...func(*Options)) (*ListEnabledBaselinesOutput, error)
+// ListControlOperationsAPIClient is a client that implements the
+// ListControlOperations operation.
+type ListControlOperationsAPIClient interface {
+	ListControlOperations(context.Context, *ListControlOperationsInput, ...func(*Options)) (*ListControlOperationsOutput, error)
 }
 
-var _ ListEnabledBaselinesAPIClient = (*Client)(nil)
+var _ ListControlOperationsAPIClient = (*Client)(nil)
 
-// ListEnabledBaselinesPaginatorOptions is the paginator options for
-// ListEnabledBaselines
-type ListEnabledBaselinesPaginatorOptions struct {
+// ListControlOperationsPaginatorOptions is the paginator options for
+// ListControlOperations
+type ListControlOperationsPaginatorOptions struct {
 	// The maximum number of results to be shown.
 	Limit int32
 
@@ -158,22 +153,22 @@ type ListEnabledBaselinesPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// ListEnabledBaselinesPaginator is a paginator for ListEnabledBaselines
-type ListEnabledBaselinesPaginator struct {
-	options   ListEnabledBaselinesPaginatorOptions
-	client    ListEnabledBaselinesAPIClient
-	params    *ListEnabledBaselinesInput
+// ListControlOperationsPaginator is a paginator for ListControlOperations
+type ListControlOperationsPaginator struct {
+	options   ListControlOperationsPaginatorOptions
+	client    ListControlOperationsAPIClient
+	params    *ListControlOperationsInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewListEnabledBaselinesPaginator returns a new ListEnabledBaselinesPaginator
-func NewListEnabledBaselinesPaginator(client ListEnabledBaselinesAPIClient, params *ListEnabledBaselinesInput, optFns ...func(*ListEnabledBaselinesPaginatorOptions)) *ListEnabledBaselinesPaginator {
+// NewListControlOperationsPaginator returns a new ListControlOperationsPaginator
+func NewListControlOperationsPaginator(client ListControlOperationsAPIClient, params *ListControlOperationsInput, optFns ...func(*ListControlOperationsPaginatorOptions)) *ListControlOperationsPaginator {
 	if params == nil {
-		params = &ListEnabledBaselinesInput{}
+		params = &ListControlOperationsInput{}
 	}
 
-	options := ListEnabledBaselinesPaginatorOptions{}
+	options := ListControlOperationsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -182,7 +177,7 @@ func NewListEnabledBaselinesPaginator(client ListEnabledBaselinesAPIClient, para
 		fn(&options)
 	}
 
-	return &ListEnabledBaselinesPaginator{
+	return &ListControlOperationsPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -192,12 +187,12 @@ func NewListEnabledBaselinesPaginator(client ListEnabledBaselinesAPIClient, para
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListEnabledBaselinesPaginator) HasMorePages() bool {
+func (p *ListControlOperationsPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next ListEnabledBaselines page.
-func (p *ListEnabledBaselinesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListEnabledBaselinesOutput, error) {
+// NextPage retrieves the next ListControlOperations page.
+func (p *ListControlOperationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListControlOperationsOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -211,7 +206,7 @@ func (p *ListEnabledBaselinesPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
-	result, err := p.client.ListEnabledBaselines(ctx, &params, optFns...)
+	result, err := p.client.ListControlOperations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -230,10 +225,10 @@ func (p *ListEnabledBaselinesPaginator) NextPage(ctx context.Context, optFns ...
 	return result, nil
 }
 
-func newServiceMetadataMiddleware_opListEnabledBaselines(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListControlOperations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "ListEnabledBaselines",
+		OperationName: "ListControlOperations",
 	}
 }

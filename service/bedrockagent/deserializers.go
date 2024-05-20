@@ -6997,6 +6997,11 @@ func awsRestjson1_deserializeDocumentAgent(v **types.Agent, value interface{}) e
 				sv.FoundationModel = ptr.String(jtv)
 			}
 
+		case "guardrailConfiguration":
+			if err := awsRestjson1_deserializeDocumentGuardrailConfiguration(&sv.GuardrailConfiguration, value); err != nil {
+				return err
+			}
+
 		case "idleSessionTTLInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7953,6 +7958,11 @@ func awsRestjson1_deserializeDocumentAgentSummary(v **types.AgentSummary, value 
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "guardrailConfiguration":
+			if err := awsRestjson1_deserializeDocumentGuardrailConfiguration(&sv.GuardrailConfiguration, value); err != nil {
+				return err
+			}
+
 		case "latestAgentVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8094,6 +8104,11 @@ func awsRestjson1_deserializeDocumentAgentVersion(v **types.AgentVersion, value 
 					return fmt.Errorf("expected ModelIdentifier to be of type string, got %T instead", value)
 				}
 				sv.FoundationModel = ptr.String(jtv)
+			}
+
+		case "guardrailConfiguration":
+			if err := awsRestjson1_deserializeDocumentGuardrailConfiguration(&sv.GuardrailConfiguration, value); err != nil {
+				return err
 			}
 
 		case "idleSessionTTLInSeconds":
@@ -8262,6 +8277,11 @@ func awsRestjson1_deserializeDocumentAgentVersionSummary(v **types.AgentVersionS
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "guardrailConfiguration":
+			if err := awsRestjson1_deserializeDocumentGuardrailConfiguration(&sv.GuardrailConfiguration, value); err != nil {
+				return err
 			}
 
 		case "updatedAt":
@@ -8938,6 +8958,55 @@ loop:
 		}
 	}
 	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGuardrailConfiguration(v **types.GuardrailConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GuardrailConfiguration
+	if *v == nil {
+		sv = &types.GuardrailConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "guardrailIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailIdentifier to be of type string, got %T instead", value)
+				}
+				sv.GuardrailIdentifier = ptr.String(jtv)
+			}
+
+		case "guardrailVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailVersion to be of type string, got %T instead", value)
+				}
+				sv.GuardrailVersion = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

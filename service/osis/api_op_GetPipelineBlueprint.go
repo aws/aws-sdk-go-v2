@@ -38,6 +38,9 @@ type GetPipelineBlueprintInput struct {
 	// This member is required.
 	BlueprintName *string
 
+	// The format format of the blueprint to retrieve.
+	Format *string
+
 	noSmithyDocumentSerde
 }
 
@@ -45,6 +48,9 @@ type GetPipelineBlueprintOutput struct {
 
 	// The requested blueprint in YAML format.
 	Blueprint *types.PipelineBlueprint
+
+	// The format of the blueprint.
+	Format *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

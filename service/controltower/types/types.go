@@ -58,8 +58,17 @@ type BaselineSummary struct {
 // An operation performed by the control.
 type ControlOperation struct {
 
+	// The controlIdentifier of the control for the operation.
+	ControlIdentifier *string
+
+	// The controlIdentifier of the enabled control.
+	EnabledControlIdentifier *string
+
 	// The time that the operation finished.
 	EndTime *time.Time
+
+	// The identifier of the specified operation.
+	OperationIdentifier *string
 
 	// One of ENABLE_CONTROL or DISABLE_CONTROL .
 	OperationType ControlOperationType
@@ -73,6 +82,63 @@ type ControlOperation struct {
 	// If the operation result is FAILED , this string contains a message explaining
 	// why the operation failed.
 	StatusMessage *string
+
+	// The target upon which the control operation is working.
+	TargetIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter object that lets you call ListCOntrolOperations with a specific filter.
+type ControlOperationFilter struct {
+
+	// The set of controlIdentifier returned by the filter.
+	ControlIdentifiers []string
+
+	// The set of ControlOperation objects returned by the filter.
+	ControlOperationTypes []ControlOperationType
+
+	// The set controlIdentifier of enabled controls selected by the filter.
+	EnabledControlIdentifiers []string
+
+	// Lists the status of control operations.
+	Statuses []ControlOperationStatus
+
+	// The set of targetIdentifier objects returned by the filter.
+	TargetIdentifiers []string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of information about the specified control operation.
+type ControlOperationSummary struct {
+
+	// The controlIdentifier of a control.
+	ControlIdentifier *string
+
+	// The controlIdentifier of an enabled control.
+	EnabledControlIdentifier *string
+
+	// The time at which the control operation was completed.
+	EndTime *time.Time
+
+	// The unique identifier of a control operation.
+	OperationIdentifier *string
+
+	// The type of operation.
+	OperationType ControlOperationType
+
+	// The time at which a control operation began.
+	StartTime *time.Time
+
+	// The status of the specified control operation.
+	Status ControlOperationStatus
+
+	// A speficic message displayed as part of the control status.
+	StatusMessage *string
+
+	// The unique identifier of the target of a control operation.
+	TargetIdentifier *string
 
 	noSmithyDocumentSerde
 }
@@ -245,6 +311,22 @@ type EnabledControlDetails struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that returns a set of control identifiers, the control status for
+// each control in the set, and the drift status for each control in the set.
+type EnabledControlFilter struct {
+
+	// The set of controlIdentifier returned by the filter.
+	ControlIdentifiers []string
+
+	// A list of DriftStatus items.
+	DriftStatuses []DriftStatus
+
+	// A list of EnablementStatus items.
+	Statuses []EnablementStatus
+
+	noSmithyDocumentSerde
+}
+
 // A key/value pair, where Key is of type String and Value is of type Document .
 type EnabledControlParameter struct {
 
@@ -321,7 +403,7 @@ type EnablementStatusSummary struct {
 // Information about the landing zone.
 type LandingZoneDetail struct {
 
-	// The landing zone manifest.yaml text file that specifies the landing zone
+	// The landing zone manifest JSON text file that specifies the landing zone
 	// configurations.
 	//
 	// This member is required.

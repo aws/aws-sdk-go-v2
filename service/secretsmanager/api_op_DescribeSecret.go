@@ -129,8 +129,7 @@ type DescribeSecretOutput struct {
 	//   - InSync , which indicates that the replica was created.
 	ReplicationStatus []types.ReplicationStatusType
 
-	// Specifies whether automatic rotation is turned on for this secret. If the
-	// secret has never been configured for rotation, Secrets Manager returns null.
+	// Specifies whether automatic rotation is turned on for this secret.
 	//
 	// To turn on rotation, use RotateSecret. To turn off rotation, use CancelRotateSecret.
 	RotationEnabled *bool

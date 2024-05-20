@@ -270,26 +270,6 @@ func (m *validateOpGetLandingZoneOperation) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpListEnabledControls struct {
-}
-
-func (*validateOpListEnabledControls) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpListEnabledControls) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ListEnabledControlsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpListEnabledControlsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpListTagsForResource struct {
 }
 
@@ -500,10 +480,6 @@ func addOpGetLandingZoneValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetLandingZoneOperationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLandingZoneOperation{}, middleware.After)
-}
-
-func addOpListEnabledControlsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpListEnabledControls{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -820,21 +796,6 @@ func validateOpGetLandingZoneOperationInput(v *GetLandingZoneOperationInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "GetLandingZoneOperationInput"}
 	if v.OperationIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OperationIdentifier"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpListEnabledControlsInput(v *ListEnabledControlsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListEnabledControlsInput"}
-	if v.TargetIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

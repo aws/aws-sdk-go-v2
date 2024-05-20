@@ -457,6 +457,24 @@ type GenerationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Assessment details of the content analyzed by Guardrails.
+type GuardrailAssessment struct {
+
+	// Content policy details of the Guardrail.
+	ContentPolicy *GuardrailContentPolicyAssessment
+
+	// Sensitive Information policy details of Guardrail.
+	SensitiveInformationPolicy *GuardrailSensitiveInformationPolicyAssessment
+
+	// Topic policy details of the Guardrail.
+	TopicPolicy *GuardrailTopicPolicyAssessment
+
+	// Word policy details of the Guardrail.
+	WordPolicy *GuardrailWordPolicyAssessment
+
+	noSmithyDocumentSerde
+}
+
 // The configuration details for the guardrail.
 type GuardrailConfiguration struct {
 
@@ -469,6 +487,160 @@ type GuardrailConfiguration struct {
 	//
 	// This member is required.
 	GuardrailVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Details of the content filter used in the Guardrail.
+type GuardrailContentFilter struct {
+
+	// The action placed on the content by the Guardrail filter.
+	Action GuardrailContentPolicyAction
+
+	// The confidence level regarding the content detected in the filter by the
+	// Guardrail.
+	Confidence GuardrailContentFilterConfidence
+
+	// The type of content detected in the filter by the Guardrail.
+	Type GuardrailContentFilterType
+
+	noSmithyDocumentSerde
+}
+
+// The details of the policy assessment in the Guardrails filter.
+type GuardrailContentPolicyAssessment struct {
+
+	// The filter details of the policy assessment used in the Guardrails filter.
+	Filters []GuardrailContentFilter
+
+	noSmithyDocumentSerde
+}
+
+// The custom word details for the filter in the Guardrail.
+type GuardrailCustomWord struct {
+
+	// The action details for the custom word filter in the Guardrail.
+	Action GuardrailWordPolicyAction
+
+	// The match details for the custom word filter in the Guardrail.
+	Match *string
+
+	noSmithyDocumentSerde
+}
+
+// The managed word details for the filter in the Guardrail.
+type GuardrailManagedWord struct {
+
+	// The action details for the managed word filter in the Guardrail.
+	Action GuardrailWordPolicyAction
+
+	// The match details for the managed word filter in the Guardrail.
+	Match *string
+
+	// The type details for the managed word filter in the Guardrail.
+	Type GuardrailManagedWordType
+
+	noSmithyDocumentSerde
+}
+
+// The Guardrail filter to identify and remove personally identifiable information
+// (PII).
+type GuardrailPiiEntityFilter struct {
+
+	// The action of the Guardrail filter to identify and remove PII.
+	Action GuardrailSensitiveInformationPolicyAction
+
+	// The match to settings in the Guardrail filter to identify and remove PII.
+	Match *string
+
+	// The type of PII the Guardrail filter has identified and removed.
+	Type GuardrailPiiEntityType
+
+	noSmithyDocumentSerde
+}
+
+// The details for the regex filter used in the Guardrail.
+type GuardrailRegexFilter struct {
+
+	// The action details for the regex filter used in the Guardrail.
+	Action GuardrailSensitiveInformationPolicyAction
+
+	// The match details for the regex filter used in the Guardrail.
+	Match *string
+
+	// The name details for the regex filter used in the Guardrail.
+	Name *string
+
+	// The regex details for the regex filter used in the Guardrail.
+	Regex *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the sensitive policy assessment used in the Guardrail.
+type GuardrailSensitiveInformationPolicyAssessment struct {
+
+	// The details of the PII entities used in the sensitive policy assessment for the
+	// Guardrail.
+	PiiEntities []GuardrailPiiEntityFilter
+
+	// The details of the regexes used in the sensitive policy assessment for the
+	// Guardrail.
+	Regexes []GuardrailRegexFilter
+
+	noSmithyDocumentSerde
+}
+
+// The details for a specific topic defined in the Guardrail.
+type GuardrailTopic struct {
+
+	// The action details on a specific topic in the Guardrail.
+	Action GuardrailTopicPolicyAction
+
+	// The name details on a specific topic in the Guardrail.
+	Name *string
+
+	// The type details on a specific topic in the Guardrail.
+	Type GuardrailTopicType
+
+	noSmithyDocumentSerde
+}
+
+// The details of the policy assessment used in the Guardrail.
+type GuardrailTopicPolicyAssessment struct {
+
+	// The topic details of the policy assessment used in the Guardrail.
+	Topics []GuardrailTopic
+
+	noSmithyDocumentSerde
+}
+
+// The trace details used in the Guardrail.
+type GuardrailTrace struct {
+
+	// The trace action details used with the Guardrail.
+	Action GuardrailAction
+
+	// The details of the input assessments used in the Guardrail Trace.
+	InputAssessments []GuardrailAssessment
+
+	// The details of the output assessments used in the Guardrail Trace.
+	OutputAssessments []GuardrailAssessment
+
+	// The details of the trace Id used in the Guardrail Trace.
+	TraceId *string
+
+	noSmithyDocumentSerde
+}
+
+// The assessment details for words defined in the Guardrail filter.
+type GuardrailWordPolicyAssessment struct {
+
+	// The custom word details for words defined in the Guardrail filter.
+	CustomWords []GuardrailCustomWord
+
+	// The managed word lists for words defined in the Guardrail filter.
+	ManagedWordLists []GuardrailManagedWord
 
 	noSmithyDocumentSerde
 }
@@ -1800,6 +1972,7 @@ type TextResponsePart struct {
 // The following types satisfy this interface:
 //
 //	TraceMemberFailureTrace
+//	TraceMemberGuardrailTrace
 //	TraceMemberOrchestrationTrace
 //	TraceMemberPostProcessingTrace
 //	TraceMemberPreProcessingTrace
@@ -1817,6 +1990,15 @@ type TraceMemberFailureTrace struct {
 }
 
 func (*TraceMemberFailureTrace) isTrace() {}
+
+// The trace details for a trace defined in the Guardrail filter.
+type TraceMemberGuardrailTrace struct {
+	Value GuardrailTrace
+
+	noSmithyDocumentSerde
+}
+
+func (*TraceMemberGuardrailTrace) isTrace() {}
 
 // Details about the orchestration step, in which the agent determines the order
 // in which actions are executed and which knowledge bases are retrieved.

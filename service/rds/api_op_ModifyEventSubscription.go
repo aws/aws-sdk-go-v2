@@ -63,7 +63,8 @@ type ModifyEventSubscriptionInput struct {
 	// specified, all events are returned.
 	//
 	// Valid Values: db-instance | db-cluster | db-parameter-group | db-security-group
-	// | db-snapshot | db-cluster-snapshot | db-proxy
+	// | db-snapshot | db-cluster-snapshot | db-proxy | zero-etl |
+	// custom-engine-version | blue-green-deployment
 	SourceType *string
 
 	noSmithyDocumentSerde

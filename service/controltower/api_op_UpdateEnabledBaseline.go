@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an EnabledBaseline resource's applied parameters or version.
+// Updates an EnabledBaseline resource's applied parameters or version. For usage
+// examples, see [the Amazon Web Services Control Tower User Guide].
+//
+// [the Amazon Web Services Control Tower User Guide]: https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html
 func (c *Client) UpdateEnabledBaseline(ctx context.Context, params *UpdateEnabledBaselineInput, optFns ...func(*Options)) (*UpdateEnabledBaselineOutput, error) {
 	if params == nil {
 		params = &UpdateEnabledBaselineInput{}
