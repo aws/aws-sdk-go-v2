@@ -1,3 +1,19 @@
+# Release (2024-05-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.11.0](service/bedrockagent/CHANGELOG.md#v1110-2024-05-20)
+  * **Feature**: This release adds support for using Guardrails with Bedrock Agents.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.11.0](service/bedrockagentruntime/CHANGELOG.md#v1110-2024-05-20)
+  * **Feature**: This release adds support for using Guardrails with Bedrock Agents.
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.14.0](service/controltower/CHANGELOG.md#v1140-2024-05-20)
+  * **Feature**: Added ListControlOperations API and filtering support for ListEnabledControls API. Updates also includes added metadata for enabled controls and control operations.
+* `github.com/aws/aws-sdk-go-v2/service/osis`: [v1.9.0](service/osis/CHANGELOG.md#v190-2024-05-20)
+  * **Feature**: Add support for creating an OpenSearch Ingestion pipeline that is attached to a provided VPC. Add information about the destinations of an OpenSearch Ingestion pipeline to the GetPipeline and ListPipelines APIs.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.79.0](service/rds/CHANGELOG.md#v1790-2024-05-20)
+  * **Feature**: This release adds support for EngineLifecycleSupport on DBInstances, DBClusters, and GlobalClusters.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.29.0](service/secretsmanager/CHANGELOG.md#v1290-2024-05-20)
+  * **Feature**: add v2 smoke tests and smithy smokeTests trait for SDK testing
+
 # Release (2024-05-17)
 
 ## Module Highlights

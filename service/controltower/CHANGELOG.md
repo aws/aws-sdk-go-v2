@@ -1,3 +1,7 @@
+# v1.14.0 (2024-05-20)
+
+* **Feature**: Added ListControlOperations API and filtering support for ListEnabledControls API. Updates also includes added metadata for enabled controls and control operations.
+
 # v1.13.9 (2024-05-16)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -61,7 +61,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.22.7
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.19.8
 	github.com/aws/aws-sdk-go-v2/service/polly v1.40.2
-	github.com/aws/aws-sdk-go-v2/service/rds v1.78.3
+	github.com/aws/aws-sdk-go-v2/service/rds v1.79.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.44.3
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.40.3
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.40.7
@@ -69,7 +69,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.28.4
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.54.2
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.44.9
-	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.28.9
+	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.29.0
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.28.7
 	github.com/aws/aws-sdk-go-v2/service/ses v1.22.8
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.27.3

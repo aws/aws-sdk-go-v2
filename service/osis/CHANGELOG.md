@@ -1,3 +1,7 @@
+# v1.9.0 (2024-05-20)
+
+* **Feature**: Add support for creating an OpenSearch Ingestion pipeline that is attached to a provided VPC. Add information about the destinations of an OpenSearch Ingestion pipeline to the GetPipeline and ListPipelines APIs.
+
 # v1.8.7 (2024-05-16)
 
 * **Dependency Update**: Updated to the latest SDK module versions

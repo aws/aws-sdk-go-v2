@@ -1,3 +1,7 @@
+# v1.79.0 (2024-05-20)
+
+* **Feature**: This release adds support for EngineLifecycleSupport on DBInstances, DBClusters, and GlobalClusters.
+
 # v1.78.3 (2024-05-16)
 
 * **Dependency Update**: Updated to the latest SDK module versions

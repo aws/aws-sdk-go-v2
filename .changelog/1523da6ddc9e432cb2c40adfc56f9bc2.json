@@ -1,8 +1,0 @@
-{
-    "id": "1523da6d-dc9e-432c-b2c4-0adfc56f9bc2",
-    "type": "feature",
-    "description": "Added ListControlOperations API and filtering support for ListEnabledControls API. Updates also includes added metadata for enabled controls and control operations.",
-    "modules": [
-        "service/controltower"
-    ]
-}

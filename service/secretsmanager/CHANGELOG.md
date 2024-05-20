@@ -1,3 +1,7 @@
+# v1.29.0 (2024-05-20)
+
+* **Feature**: add v2 smoke tests and smithy smokeTests trait for SDK testing
+
 # v1.28.9 (2024-05-16)
 
 * **Documentation**: Documentation updates for AWS Secrets Manager

@@ -1,8 +1,0 @@
-{
-    "id": "fb533752-901f-4198-99df-9cf3883af4f7",
-    "type": "feature",
-    "description": "This release adds support for EngineLifecycleSupport on DBInstances, DBClusters, and GlobalClusters.",
-    "modules": [
-        "service/rds"
-    ]
-}

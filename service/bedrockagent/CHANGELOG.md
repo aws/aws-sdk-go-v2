@@ -1,3 +1,7 @@
+# v1.11.0 (2024-05-20)
+
+* **Feature**: This release adds support for using Guardrails with Bedrock Agents.
+
 # v1.10.3 (2024-05-16)
 
 * **Dependency Update**: Updated to the latest SDK module versions
