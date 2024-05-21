@@ -87,7 +87,7 @@
                 "GatewayTimezone": {
                     "target": "com.amazonaws.storagegateway#GatewayTimezone",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates the time zone you want to set for the gateway. The time zone is\n         of the format \"GMT-hr:mm\" or \"GMT+hr:mm\". For example, GMT-4:00 indicates the time is 4\n         hours behind GMT. GMT+2:00 indicates the time is 2 hours ahead of GMT. The time zone is\n         used, for example, for scheduling snapshots and your gateway's maintenance\n         schedule.</p>",
+                        "smithy.api#documentation": "<p>A value that indicates the time zone you want to set for the gateway. The time zone is\n         of the format \"GMT\", \"GMT-hr:mm\", or \"GMT+hr:mm\". For example, GMT indicates Greenwich Mean\n         Time without any offset. GMT-4:00 indicates the time is 4 hours behind GMT. GMT+2:00\n         indicates the time is 2 hours ahead of GMT. The time zone is used, for example, for\n         scheduling snapshots and your gateway's maintenance schedule.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -101,7 +101,7 @@
                 "GatewayType": {
                     "target": "com.amazonaws.storagegateway#GatewayType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that defines the type of gateway to activate. The type specified is critical to\n         all later functions of the gateway and cannot be changed after activation. The default\n         value is <code>CACHED</code>.</p>\n         <p>Valid Values: <code>STORED</code> | <code>CACHED</code> | <code>VTL</code> |\n            <code>VTL_SNOW</code> | <code>FILE_S3</code> | <code>FILE_FSX_SMB</code>\n         </p>"
+                        "smithy.api#documentation": "<p>A value that defines the type of gateway to activate. The type specified is critical to\n         all later functions of the gateway and cannot be changed after activation. The default\n         value is <code>CACHED</code>.</p>\n         <p>Valid Values: <code>STORED</code> | <code>CACHED</code> | <code>VTL</code>\n         | <code>FILE_S3</code> |\n         <code>FILE_FSX_SMB</code>\n         </p>"
                     }
                 },
                 "TapeDriveType": {
@@ -3721,7 +3721,7 @@
                 "HostEnvironment": {
                     "target": "com.amazonaws.storagegateway#HostEnvironment",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of hardware or software platform on which the gateway is running.</p>"
+                        "smithy.api#documentation": "<p>The type of hardware or software platform on which the gateway is running.</p>\n         <note>\n            <p>Tape Gateway is no longer available on Snow Family devices.</p>\n         </note>"
                     }
                 },
                 "EndpointType": {
@@ -4028,7 +4028,7 @@
                 "SMBSecurityStrategy": {
                     "target": "com.amazonaws.storagegateway#SMBSecurityStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of security strategy that was specified for file gateway.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ClientSpecified</code>: If you use this option, requests are established\n               based on what is negotiated by the client. This option is recommended when you want\n               to maximize compatibility across different clients in your environment. Only\n               supported for S3 File Gateways.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MandatorySigning</code>: If you use this option, file gateway only allows\n               connections from SMBv2 or SMBv3 clients that have signing enabled. This option works\n               with SMB clients on Microsoft Windows Vista, Windows Server 2008 or newer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MandatoryEncryption</code>: If you use this option, file gateway only allows\n               connections from SMBv3 clients that have encryption enabled. This option is highly\n               recommended for environments that handle sensitive data. This option works with SMB\n               clients on Microsoft Windows 8, Windows Server 2012 or newer.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of security strategy that was specified for file gateway.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ClientSpecified</code>: If you choose this option, requests are established\n               based on what is negotiated by the client. This option is recommended when you want\n               to maximize compatibility across different clients in your environment. Supported\n               only for S3 File Gateway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MandatorySigning</code>: If you use this option, File Gateway only allows\n               connections from SMBv2 or SMBv3 clients that have signing turned on. This option\n               works with SMB clients on Microsoft Windows Vista, Windows Server 2008, or later.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <code>MandatoryEncryption</code>: If you use this option, File Gateway only allows\n               connections from SMBv3 clients that have encryption turned on. Both 256-bit and\n               128-bit algorithms are allowed. This option is recommended for environments that\n               handle sensitive data. It works with SMB clients on Microsoft Windows 8, Windows\n               Server 2012, or later.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EnforceEncryption</code>: If you use this option, File Gateway only allows\n               connections from SMBv3 clients that use 256-bit AES encryption algorithms. 128-bit\n               algorithms are not allowed. This option is recommended for environments that handle\n               sensitive data. It works with SMB clients on Microsoft Windows 8, Windows Server\n               2012, or later.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "FileSharesVisible": {
@@ -5971,7 +5971,7 @@
                 "HostEnvironment": {
                     "target": "com.amazonaws.storagegateway#HostEnvironment",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of hardware or software platform on which the gateway is running.</p>"
+                        "smithy.api#documentation": "<p>The type of hardware or software platform on which the gateway is running.</p>\n         <note>\n            <p>Tape Gateway is no longer available on Snow Family devices.</p>\n         </note>"
                     }
                 },
                 "HostEnvironmentId": {
@@ -7751,7 +7751,7 @@
                 "FolderList": {
                     "target": "com.amazonaws.storagegateway#FolderList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comma-separated list of the paths of folders to refresh in the cache. The default is\n            [<code>\"/\"</code>]. The default refreshes objects and folders at the root of the Amazon S3 bucket. If <code>Recursive</code> is set to <code>true</code>, the entire S3\n         bucket that the file share has access to is refreshed.</p>"
+                        "smithy.api#documentation": "<p>A comma-separated list of the paths of folders to refresh in the cache. The default is\n            [<code>\"/\"</code>]. The default refreshes objects and folders at the root of the Amazon S3 bucket. If <code>Recursive</code> is set to <code>true</code>, the entire S3\n         bucket that the file share has access to is refreshed.</p>\n         <p>Do not include <code>/</code> when specifying folder names. For example, you would\n         specify <code>samplefolder</code> rather than <code>samplefolder/</code>.</p>"
                     }
                 },
                 "Recursive": {
@@ -8320,6 +8320,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MandatoryEncryption"
+                    }
+                },
+                "MandatoryEncryptionNoAes128": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MandatoryEncryptionNoAes128"
                     }
                 }
             }

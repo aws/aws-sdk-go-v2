@@ -43,7 +43,7 @@
         "com.amazonaws.pi#AdditionalMetricsList": {
             "type": "list",
             "member": {
-                "target": "com.amazonaws.pi#RequestString"
+                "target": "com.amazonaws.pi#SanitizedString"
             },
             "traits": {
                 "smithy.api#length": {
@@ -208,6 +208,18 @@
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
                     }
+                }
+            }
+        },
+        "com.amazonaws.pi#AuthorizedActionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pi#FineGrainedAction"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
                 }
             }
         },
@@ -644,14 +656,14 @@
             "type": "structure",
             "members": {
                 "Group": {
-                    "target": "com.amazonaws.pi#RequestString",
+                    "target": "com.amazonaws.pi#SanitizedString",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the dimension group. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>db</code> - The name of the database to which the client is connected. The following values are permitted:</p>\n               <ul>\n                  <li>\n                     <p>Aurora PostgreSQL</p>\n                  </li>\n                  <li>\n                     <p>Amazon RDS PostgreSQL</p>\n                  </li>\n                  <li>\n                     <p>Aurora MySQL</p>\n                  </li>\n                  <li>\n                     <p>Amazon RDS MySQL</p>\n                  </li>\n                  <li>\n                     <p>Amazon RDS MariaDB</p>\n                  </li>\n                  <li>\n                     <p>Amazon DocumentDB</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>db.application</code> - The name of the application that is connected to the database. The following values are\n                    permitted:</p>\n               <ul>\n                  <li>\n                     <p>Aurora PostgreSQL</p>\n                  </li>\n                  <li>\n                     <p>Amazon RDS PostgreSQL</p>\n                  </li>\n                  <li>\n                     <p>Amazon DocumentDB</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>db.host</code> - The host name of the connected client (all engines).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.query</code> - The query that is currently running (only Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.query_tokenized</code> - The digest query (only Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.session_type</code> - The type of the current session (only Aurora PostgreSQL and RDS PostgreSQL).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql</code> - The text of the SQL statement that is currently running (all engines except Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql_tokenized</code> - The SQL digest (all engines except Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.user</code> - The user logged in to the database (all engines except Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.wait_event</code> - The event for which the database backend is waiting (all engines except Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.wait_event_type</code> - The type of event for which the database backend is waiting (all engines except Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.wait_state</code> - The event for which the database backend is waiting (only Amazon DocumentDB).</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "Dimensions": {
-                    "target": "com.amazonaws.pi#RequestStringList",
+                    "target": "com.amazonaws.pi#SanitizedStringList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of specific dimensions from a dimension group. If this parameter is not present,\n            then it signifies that all of the dimensions in the group were requested, or are present in\n            the response.</p>\n         <p>Valid values for elements in the <code>Dimensions</code> array are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>db.application.name</code> - The name of the application that is connected to the database. Valid values are as follows: </p>\n               <ul>\n                  <li>\n                     <p>Aurora PostgreSQL</p>\n                  </li>\n                  <li>\n                     <p>Amazon RDS PostgreSQL</p>\n                  </li>\n                  <li>\n                     <p>Amazon DocumentDB</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>db.host.id</code> - The host ID of the connected client (all engines).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.host.name</code> - The host name of the connected client (all engines).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.name</code> - The name of the database to which the client is connected. Valid values are as follows:</p>\n               <ul>\n                  <li>\n                     <p>Aurora PostgreSQL</p>\n                  </li>\n                  <li>\n                     <p>Amazon RDS PostgreSQL</p>\n                  </li>\n                  <li>\n                     <p>Aurora MySQL</p>\n                  </li>\n                  <li>\n                     <p>Amazon RDS MySQL</p>\n                  </li>\n                  <li>\n                     <p>Amazon RDS MariaDB</p>\n                  </li>\n                  <li>\n                     <p>Amazon DocumentDB</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>db.query.id</code> - The query ID generated by Performance Insights (only Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.query.db_id</code> - The query ID generated by the database (only Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.query.statement</code> - The text of the query that is being run (only Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.query.tokenized_id</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db.query.tokenized.id</code> - The query digest ID generated by Performance Insights (only Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.query.tokenized.db_id</code> - The query digest ID generated by Performance Insights (only Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.query.tokenized.statement</code> - The text of the query digest (only Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.session_type.name</code> - The type of the current session (only Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql.id</code> - The hash of the full, non-tokenized SQL statement generated by Performance Insights (all engines except Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql.db_id</code> - Either the SQL ID generated by the database engine, or a value generated by Performance Insights that begins with\n                        <code>pi-</code> (all engines except Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql.statement</code> - The full text of the SQL statement that is running, as in <code>SELECT * FROM employees</code>\n                    (all engines except Amazon DocumentDB)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql.tokenized_id</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql_tokenized.id</code> - The hash of the SQL digest generated by Performance Insights (all engines except Amazon DocumentDB). In the console,\n                        <code>db.sql_tokenized.id</code> is called the Support ID because Amazon Web Services Support can look at this data to help you troubleshoot\n                    database issues.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql_tokenized.db_id</code> - Either the native database ID used to refer to the SQL statement, or a synthetic ID such as\n                        <code>pi-2372568224</code> that Performance Insights generates if the native database ID isn't available (all engines except Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql_tokenized.statement</code> - The text of the SQL digest, as in <code>SELECT * FROM employees WHERE employee_id =\n                        ?</code> (all engines except Amazon DocumentDB)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.user.id</code> - The ID of the user logged in to the database (all engines except Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.user.name</code> - The name of the user logged in to the database (all engines except Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.wait_event.name</code> - The event for which the backend is waiting (all engines except Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.wait_event.type</code> - The type of event for which the backend is waiting (all engines except Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.wait_event_type.name</code> - The name of the event type for which the backend is waiting (all engines except\n                    Amazon DocumentDB).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.wait_state.name</code> - The event for which the backend is waiting (only Amazon DocumentDB).</p>\n            </li>\n         </ul>"
                     }
@@ -775,7 +787,7 @@
         "com.amazonaws.pi#DimensionsMetricList": {
             "type": "list",
             "member": {
-                "target": "com.amazonaws.pi#RequestString"
+                "target": "com.amazonaws.pi#SanitizedString"
             },
             "traits": {
                 "smithy.api#length": {
@@ -850,6 +862,29 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "UNKNOWN"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.pi#FineGrainedAction": {
+            "type": "enum",
+            "members": {
+                "DESCRIBE_DIMENSION_KEYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DescribeDimensionKeys"
+                    }
+                },
+                "GET_DIMENSION_KEY_DETAILS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GetDimensionKeyDetails"
+                    }
+                },
+                "GET_RESOURCE_METRICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GetResourceMetrics"
                     }
                 }
             }
@@ -1402,6 +1437,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, \n            the response includes only records beyond the token, up to the value specified by <code>MaxRecords</code>.\n        </p>"
                     }
+                },
+                "AuthorizedActions": {
+                    "target": "com.amazonaws.pi#AuthorizedActionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The actions to discover the dimensions you are authorized to access. If you specify multiple actions, then the response will\n        contain the dimensions common for all the actions.</p>\n         <p>When you don't specify this request parameter or provide an empty list, the response contains all the \n            available dimensions for the target database engine whether or not you are authorized to access them.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1740,7 +1781,7 @@
             "type": "structure",
             "members": {
                 "Metric": {
-                    "target": "com.amazonaws.pi#RequestString",
+                    "target": "com.amazonaws.pi#SanitizedString",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of a Performance Insights metric to be measured.</p>\n         <p>Valid values for <code>Metric</code> are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>db.load.avg</code> - A scaled representation of the number of active sessions for the \n                    database engine.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sampledload.avg</code> - The raw number of active sessions for the database engine.</p>\n            </li>\n            <li>\n               <p>The counter metrics listed in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS\">Performance Insights\n                        operating system counters</a> in the <i>Amazon Aurora User Guide</i>.</p>\n            </li>\n            <li>\n               <p>The counter metrics listed in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS\">Performance Insights\n                    operating system counters</a> in the <i>Amazon RDS User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code> and <code>db.sampledload.avg</code> are the same\n            value. If the number of active sessions is greater than the internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code> showing the\n            scaled values, <code>db.sampledload.avg</code> showing the raw values, and <code>db.sampledload.avg</code> less than\n                <code>db.load.avg</code>. For most use cases, you can query <code>db.load.avg</code> only.</p>",
                         "smithy.api#required": {}
@@ -1766,7 +1807,7 @@
         "com.amazonaws.pi#MetricQueryFilterMap": {
             "type": "map",
             "key": {
-                "target": "com.amazonaws.pi#RequestString"
+                "target": "com.amazonaws.pi#SanitizedString"
             },
             "value": {
                 "target": "com.amazonaws.pi#RequestString"
@@ -1787,7 +1828,7 @@
         "com.amazonaws.pi#MetricTypeList": {
             "type": "list",
             "member": {
-                "target": "com.amazonaws.pi#RequestString"
+                "target": "com.amazonaws.pi#SanitizedString"
             }
         },
         "com.amazonaws.pi#MetricValuesList": {
@@ -2867,22 +2908,10 @@
                 "smithy.api#pattern": "\\S"
             }
         },
-        "com.amazonaws.pi#RequestStringList": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.pi#RequestString"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 10
-                }
-            }
-        },
         "com.amazonaws.pi#RequestedDimensionList": {
             "type": "list",
             "member": {
-                "target": "com.amazonaws.pi#RequestString"
+                "target": "com.amazonaws.pi#SanitizedString"
             },
             "traits": {
                 "smithy.api#length": {
@@ -2963,6 +2992,29 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.pi#ResponseResourceMetric"
+            }
+        },
+        "com.amazonaws.pi#SanitizedString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A generic string type that forbids characters that could expose our service (or services downstream)\n    to security risks around injections.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_\\.:/*)( ]+$"
+            }
+        },
+        "com.amazonaws.pi#SanitizedStringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pi#SanitizedString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.pi#ServiceType": {

@@ -1229,7 +1229,7 @@
                 "blueprintId": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the virtual private server image (<code>app_wordpress_4_4</code> or\n        <code>app_lamp_7_0</code>).</p>"
+                        "smithy.api#documentation": "<p>The ID for the virtual private server image (<code>app_wordpress_x_x</code> or\n        <code>app_lamp_x_x</code>).</p>"
                     }
                 },
                 "name": {
@@ -1271,7 +1271,7 @@
                 "version": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the operating system, application, or stack (\n        <code>2016.03.0</code>).</p>"
+                        "smithy.api#documentation": "<p>The version number of the operating system, application, or stack (\n      <code>2016.03.0</code>).</p>"
                     }
                 },
                 "versionCode": {
@@ -1600,13 +1600,13 @@
                 "bundleId": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bundle ID (<code>micro_1_0</code>).</p>"
+                        "smithy.api#documentation": "<p>The bundle ID (<code>micro_x_x</code>).</p>"
                     }
                 },
                 "instanceType": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EC2 instance type (<code>t2.micro</code>).</p>"
+                        "smithy.api#documentation": "<p>The instance type (<code>micro</code>).</p>"
                     }
                 },
                 "isActive": {
@@ -1624,7 +1624,7 @@
                 "power": {
                     "target": "com.amazonaws.lightsail#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>A numeric value that represents the power of the bundle (<code>500</code>). You can\n      use the bundle's power value in conjunction with a blueprint's minimum power value to\n      determine whether the blueprint will run on the bundle. For example, you need a bundle with a\n      power value of 500 or more to create an instance that uses a blueprint with a minimum power\n      value of 500.</p>"
+                        "smithy.api#documentation": "<p>A numeric value that represents the power of the bundle (<code>500</code>). You can use\n      the bundle's power value in conjunction with a blueprint's minimum power value to determine\n      whether the blueprint will run on the bundle. For example, you need a bundle with a power\n      value of 500 or more to create an instance that uses a blueprint with a minimum power value of\n      500.</p>"
                     }
                 },
                 "ramSizeInGb": {
@@ -1654,7 +1654,7 @@
                 "publicIpv4AddressCount": {
                     "target": "com.amazonaws.lightsail#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>An integer that indicates the public ipv4 address count included in the bundle, the value is either 0 or 1.</p>"
+                        "smithy.api#documentation": "<p>An integer that indicates the public ipv4 address count included in the bundle, the value\n      is either 0 or 1.</p>"
                     }
                 }
             },
@@ -1800,7 +1800,7 @@
                 "subjectAlternativeNames": {
                     "target": "com.amazonaws.lightsail#SubjectAlternativeNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of strings that specify the alternate domains (<code>example2.com</code>)\n      and subdomains (<code>blog.example.com</code>) of the certificate.</p>"
+                        "smithy.api#documentation": "<p>An array of strings that specify the alternate domains (<code>example2.com</code>) and\n      subdomains (<code>blog.example.com</code>) of the certificate.</p>"
                     }
                 },
                 "domainValidationRecords": {
@@ -3524,7 +3524,7 @@
                 "subjectAlternativeNames": {
                     "target": "com.amazonaws.lightsail#SubjectAlternativeNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of strings that specify the alternate domains (<code>example2.com</code>)\n      and subdomains (<code>blog.example.com</code>) for the certificate.</p>\n         <p>You can specify a maximum of nine alternate domains (in addition to the primary domain\n      name).</p>\n         <p>Wildcard domain entries (<code>*.example.com</code>) are not supported.</p>"
+                        "smithy.api#documentation": "<p>An array of strings that specify the alternate domains (<code>example2.com</code>) and\n      subdomains (<code>blog.example.com</code>) for the certificate.</p>\n         <p>You can specify a maximum of nine alternate domains (in addition to the primary domain\n      name).</p>\n         <p>Wildcard domain entries (<code>*.example.com</code>) are not supported.</p>"
                     }
                 },
                 "tags": {
@@ -4004,7 +4004,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting\n      disk can be attached to an Amazon Lightsail instance in the same Availability Zone (<code>us-east-2a</code>).</p>\n         <p>The <code>create disk from snapshot</code> operation supports tag-based access control via\n      request tags and resource tags applied to the resource identified by <code>disk snapshot\n        name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting\n      disk can be attached to an Amazon Lightsail instance in the same Availability Zone\n        (<code>us-east-2a</code>).</p>\n         <p>The <code>create disk from snapshot</code> operation supports tag-based access control via\n      request tags and resource tags applied to the resource identified by <code>disk snapshot\n        name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/CreateDiskFromSnapshot",
@@ -4025,13 +4025,13 @@
                 "diskSnapshotName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the disk snapshot (<code>my-snapshot</code>) from which to create the\n      new storage disk.</p>\n         <p>Constraint:</p>\n         <ul>\n            <li>\n               <p>This parameter cannot be defined together with the <code>source disk name</code>\n          parameter. The <code>disk snapshot name</code> and <code>source disk name</code>\n          parameters are mutually exclusive.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the disk snapshot (<code>my-snapshot</code>) from which to create the new\n      storage disk.</p>\n         <p>Constraint:</p>\n         <ul>\n            <li>\n               <p>This parameter cannot be defined together with the <code>source disk name</code>\n          parameter. The <code>disk snapshot name</code> and <code>source disk name</code>\n          parameters are mutually exclusive.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "availabilityZone": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Availability Zone where you want to create the disk (<code>us-east-2a</code>).\n      Choose the same Availability Zone as the Lightsail instance where you want to create the\n      disk.</p>\n         <p>Use the GetRegions operation to list the Availability Zones where Lightsail is currently\n      available.</p>",
+                        "smithy.api#documentation": "<p>The Availability Zone where you want to create the disk (<code>us-east-2a</code>). Choose\n      the same Availability Zone as the Lightsail instance where you want to create the\n      disk.</p>\n         <p>Use the GetRegions operation to list the Availability Zones where Lightsail is currently\n      available.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4104,7 +4104,7 @@
                 "availabilityZone": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Availability Zone where you want to create the disk (<code>us-east-2a</code>).\n      Use the same Availability Zone as the Lightsail instance to which you want to attach the\n      disk.</p>\n         <p>Use the <code>get regions</code> operation to list the Availability Zones where\n      Lightsail is currently available.</p>",
+                        "smithy.api#documentation": "<p>The Availability Zone where you want to create the disk (<code>us-east-2a</code>). Use the\n      same Availability Zone as the Lightsail instance to which you want to attach the\n      disk.</p>\n         <p>Use the <code>get regions</code> operation to list the Availability Zones where\n      Lightsail is currently available.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4198,14 +4198,14 @@
                 "diskSnapshotName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the destination disk snapshot (<code>my-disk-snapshot</code>) based on\n      the source disk.</p>",
+                        "smithy.api#documentation": "<p>The name of the destination disk snapshot (<code>my-disk-snapshot</code>) based on the\n      source disk.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "instanceName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique name of the source instance (<code>Amazon_Linux-512MB-Virginia-1</code>).\n      When this is defined, a snapshot of the instance's system volume is created.</p>\n         <note>\n            <p>This parameter cannot be defined together with the <code>disk name</code> parameter. The\n          <code>instance name</code> and <code>disk name</code> parameters are mutually\n        exclusive.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The unique name of the source instance (<code>Amazon_Linux-512MB-Virginia-1</code>). When\n      this is defined, a snapshot of the instance's system volume is created.</p>\n         <note>\n            <p>This parameter cannot be defined together with the <code>disk name</code> parameter. The\n          <code>instance name</code> and <code>disk name</code> parameters are mutually\n        exclusive.</p>\n         </note>"
                     }
                 },
                 "tags": {
@@ -4328,7 +4328,7 @@
                 "certificateName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the SSL/TLS certificate that you want to attach to the distribution.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetCertificates.html\">GetCertificates</a> action to get a list of certificate names that you can specify.</p>"
+                        "smithy.api#documentation": "<p>The name of the SSL/TLS certificate that you want to attach to the distribution.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetCertificates.html\">GetCertificates</a>\n      action to get a list of certificate names that you can specify.</p>"
                     }
                 },
                 "viewerMinimumTlsProtocolVersion": {
@@ -4794,7 +4794,7 @@
                 "bundleId": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bundle of specification information for your virtual private server (or\n        <i>instance</i>), including the pricing plan (<code>micro_1_0</code>).</p>",
+                        "smithy.api#documentation": "<p>The bundle of specification information for your virtual private server (or\n        <i>instance</i>), including the pricing plan (<code>micro_x_x</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4825,7 +4825,7 @@
                 "ipAddressType": {
                     "target": "com.amazonaws.lightsail#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address type for the instance.</p>\n         <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for\n      IPv4 and IPv6.</p>\n         <p>The default value is <code>dualstack</code>.</p>"
+                        "smithy.api#documentation": "<p>The IP address type for the instance.</p>\n         <p>The possible values are <code>ipv4</code> for IPv4 only, <code>ipv6</code> for IPv6 only,\n      and <code>dualstack</code> for IPv4 and IPv6.</p>\n         <p>The default value is <code>dualstack</code>.</p>"
                     }
                 },
                 "sourceInstanceName": {
@@ -4892,14 +4892,14 @@
                 "blueprintId": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for a virtual private server image (<code>app_wordpress_4_4</code> or\n        <code>app_lamp_7_0</code>). Use the <code>get blueprints</code> operation to return a list\n      of available images (or <i>blueprints</i>).</p>\n         <note>\n            <p>Use active blueprints when creating new instances. Inactive blueprints are listed to\n        support customers with existing instances and are not necessarily available to create new\n        instances. Blueprints are marked inactive when they become outdated due to operating system\n        updates or new application releases.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The ID for a virtual private server image (<code>app_wordpress_x_x</code> or\n        <code>app_lamp_x_x</code>). Use the <code>get blueprints</code> operation to return a list\n      of available images (or <i>blueprints</i>).</p>\n         <note>\n            <p>Use active blueprints when creating new instances. Inactive blueprints are listed to\n        support customers with existing instances and are not necessarily available to create new\n        instances. Blueprints are marked inactive when they become outdated due to operating system\n        updates or new application releases.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "bundleId": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bundle of specification information for your virtual private server (or\n        <i>instance</i>), including the pricing plan (<code>micro_1_0</code>).</p>",
+                        "smithy.api#documentation": "<p>The bundle of specification information for your virtual private server (or\n        <i>instance</i>), including the pricing plan (<code>medium_x_x</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4930,7 +4930,7 @@
                 "ipAddressType": {
                     "target": "com.amazonaws.lightsail#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address type for the instance.</p>\n         <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for\n      IPv4 and IPv6.</p>\n         <p>The default value is <code>dualstack</code>.</p>"
+                        "smithy.api#documentation": "<p>The IP address type for the instance.</p>\n         <p>The possible values are <code>ipv4</code> for IPv4 only, <code>ipv6</code> for IPv6 only,\n      and <code>dualstack</code> for IPv4 and IPv6.</p>\n         <p>The default value is <code>dualstack</code>.</p>"
                     }
                 }
             },
@@ -5118,13 +5118,13 @@
                 "certificateDomainName": {
                     "target": "com.amazonaws.lightsail#DomainName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain name with which your certificate is associated (<code>example.com</code>).</p>\n         <p>If you specify <code>certificateDomainName</code>, then <code>certificateName</code> is\n      required (and vice-versa).</p>"
+                        "smithy.api#documentation": "<p>The domain name with which your certificate is associated\n      (<code>example.com</code>).</p>\n         <p>If you specify <code>certificateDomainName</code>, then <code>certificateName</code> is\n      required (and vice-versa).</p>"
                     }
                 },
                 "certificateAlternativeNames": {
                     "target": "com.amazonaws.lightsail#DomainNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional alternative domains and subdomains to use with your SSL/TLS certificate\n      (<code>www.example.com</code>, <code>example.com</code>, <code>m.example.com</code>,\n        <code>blog.example.com</code>).</p>"
+                        "smithy.api#documentation": "<p>The optional alternative domains and subdomains to use with your SSL/TLS certificate\n        (<code>www.example.com</code>, <code>example.com</code>, <code>m.example.com</code>,\n        <code>blog.example.com</code>).</p>"
                     }
                 },
                 "tags": {
@@ -5136,7 +5136,7 @@
                 "ipAddressType": {
                     "target": "com.amazonaws.lightsail#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address type for the load balancer.</p>\n         <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for\n      IPv4 and IPv6.</p>\n         <p>The default value is <code>dualstack</code>.</p>"
+                        "smithy.api#documentation": "<p>The IP address type for the load balancer.</p>\n         <p>The possible values are <code>ipv4</code> for IPv4 only, <code>ipv6</code> for IPv6 only,\n      and <code>dualstack</code> for IPv4 and IPv6.</p>\n         <p>The default value is <code>dualstack</code>.</p>"
                     }
                 },
                 "tlsPolicyName": {
@@ -5231,7 +5231,7 @@
                 "certificateAlternativeNames": {
                     "target": "com.amazonaws.lightsail#DomainNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of strings listing alternative domains and subdomains for your SSL/TLS\n      certificate. Lightsail will de-dupe the names for you. You can have a maximum of 9\n      alternative names (in addition to the 1 primary domain). We do not support wildcards (<code>*.example.com</code>).</p>"
+                        "smithy.api#documentation": "<p>An array of strings listing alternative domains and subdomains for your SSL/TLS\n      certificate. Lightsail will de-dupe the names for you. You can have a maximum of 9\n      alternative names (in addition to the 1 primary domain). We do not support wildcards\n        (<code>*.example.com</code>).</p>"
                     }
                 },
                 "tags": {
@@ -7206,7 +7206,7 @@
                 "diskName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique name of the disk you want to detach from your instance (<code>my-disk</code>).</p>",
+                        "smithy.api#documentation": "<p>The unique name of the disk you want to detach from your instance\n      (<code>my-disk</code>).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7963,7 +7963,7 @@
                 "arn": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the domain recordset (<code>arn:aws:lightsail:global:123456789101:Domain/824cede0-abc7-4f84-8dbc-12345EXAMPLE</code>).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the domain recordset\n        (<code>arn:aws:lightsail:global:123456789101:Domain/824cede0-abc7-4f84-8dbc-12345EXAMPLE</code>).</p>"
                     }
                 },
                 "supportCode": {
@@ -8031,7 +8031,7 @@
                 "target": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target IP address (<code>192.0.2.0</code>), or AWS name server (<code>ns-111.awsdns-22.com.</code>).</p>\n         <p>For Lightsail load balancers, the value looks like\n        <code>ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com</code>. For\n      Lightsail distributions, the value looks like <code>exampled1182ne.cloudfront.net</code>.\n      For Lightsail container services, the value looks like\n        <code>container-service-1.example23scljs.us-west-2.cs.amazonlightsail.com</code>. Be sure to\n      also set <code>isAlias</code> to <code>true</code> when setting up an A record for a\n      Lightsail load balancer, distribution, or container service.</p>"
+                        "smithy.api#documentation": "<p>The target IP address (<code>192.0.2.0</code>), or AWS name server\n        (<code>ns-111.awsdns-22.com.</code>).</p>\n         <p>For Lightsail load balancers, the value looks like\n        <code>ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com</code>. For\n      Lightsail distributions, the value looks like <code>exampled1182ne.cloudfront.net</code>.\n      For Lightsail container services, the value looks like\n        <code>container-service-1.example23scljs.us-west-2.cs.amazonlightsail.com</code>. Be sure to\n      also set <code>isAlias</code> to <code>true</code> when setting up an A record for a\n      Lightsail load balancer, distribution, or container service.</p>"
                     }
                 },
                 "isAlias": {
@@ -8481,7 +8481,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.lightsail#ExportSnapshotRecordSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Lightsail resource type (<code>InstanceSnapshot</code> or\n        <code>DiskSnapshot</code>).</p>"
+                        "smithy.api#documentation": "<p>The Lightsail resource type (<code>InstanceSnapshot</code> or\n      <code>DiskSnapshot</code>).</p>"
                     }
                 },
                 "createdAt": {
@@ -8821,7 +8821,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.lightsail#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type of the automatic snapshot. The possible values are <code>Instance</code>, and <code>Disk</code>.</p>"
+                        "smithy.api#documentation": "<p>The resource type of the automatic snapshot. The possible values are\n      <code>Instance</code>, and <code>Disk</code>.</p>"
                     }
                 },
                 "autoSnapshots": {
@@ -12394,7 +12394,7 @@
                 "includeRelationalDatabaseAvailabilityZones": {
                     "target": "com.amazonaws.lightsail#boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value indicating whether to also include Availability Zones for databases in\n      your get regions request. Availability Zones are indicated with a letter (<code>us-east-2a</code>).</p>"
+                        "smithy.api#documentation": "<p>A Boolean value indicating whether to also include Availability Zones for databases in\n      your get regions request. Availability Zones are indicated with a letter\n        (<code>us-east-2a</code>).</p>"
                     }
                 }
             },
@@ -13429,7 +13429,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns detailed information for five of the most recent <code>SetupInstanceHttps</code> requests that were ran on the target instance.</p>",
+                "smithy.api#documentation": "<p>Returns detailed information for five of the most recent <code>SetupInstanceHttps</code>\n      requests that were ran on the target instance.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/get-setup-history",
@@ -13450,7 +13450,7 @@
                 "pageToken": {
                     "target": "com.amazonaws.lightsail#SetupHistoryPageToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetSetupHistory</code> request. If your results\n      are paginated, the response will return a next page token that you can specify as the page\n      token in a subsequent request.</p>"
+                        "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetSetupHistory</code> request. If your\n      results are paginated, the response will return a next page token that you can specify as the\n      page token in a subsequent request.</p>"
                     }
                 }
             },
@@ -13470,7 +13470,7 @@
                 "nextPageToken": {
                     "target": "com.amazonaws.lightsail#SetupHistoryPageToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetSetupHistory</code> request and specify\n      the next page token using the pageToken parameter.</p>"
+                        "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetSetupHistory</code> request and\n      specify the next page token using the pageToken parameter.</p>"
                     }
                 }
             },
@@ -13972,12 +13972,12 @@
                 "responseTimeout": {
                     "target": "com.amazonaws.lightsail#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time, in seconds, that the distribution waits for a response after forwarding a request to the origin.\n    The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 30 seconds.</p>"
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, that the distribution waits for a response after\n      forwarding a request to the origin. The minimum timeout is 1 second, the maximum is 60\n      seconds, and the default (if you don't specify otherwise) is 30 seconds.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the origin resource of an Amazon Lightsail content delivery network (CDN)\n      distribution.</p>\n         <p>An origin can be a Lightsail instance, bucket, container service, or load balancer. A distribution pulls\n      content from an origin, caches it, and serves it to viewers via a worldwide network of edge\n      servers.</p>"
+                "smithy.api#documentation": "<p>Describes the origin resource of an Amazon Lightsail content delivery network (CDN)\n      distribution.</p>\n         <p>An origin can be a Lightsail instance, bucket, container service, or load balancer. A\n      distribution pulls content from an origin, caches it, and serves it to viewers via a worldwide\n      network of edge servers.</p>"
             }
         },
         "com.amazonaws.lightsail#Instance": {
@@ -13986,13 +13986,13 @@
                 "name": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name the user gave the instance (<code>Amazon_Linux-1GB-Ohio-1</code>).</p>"
+                        "smithy.api#documentation": "<p>The name the user gave the instance (<code>Amazon_Linux_2023-1</code>).</p>"
                     }
                 },
                 "arn": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the instance (<code>arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE</code>).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the instance\n        (<code>arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE</code>).</p>"
                     }
                 },
                 "supportCode": {
@@ -14004,7 +14004,7 @@
                 "createdAt": {
                     "target": "com.amazonaws.lightsail#IsoDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the instance was created (<code>1479734909.17</code>) in Unix\n      time format.</p>"
+                        "smithy.api#documentation": "<p>The timestamp when the instance was created (<code>1479734909.17</code>) in Unix time\n      format.</p>"
                     }
                 },
                 "location": {
@@ -14028,19 +14028,19 @@
                 "blueprintId": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The blueprint ID (<code>os_amlinux_2016_03</code>).</p>"
+                        "smithy.api#documentation": "<p>The blueprint ID (<code>amazon_linux_2023</code>).</p>"
                     }
                 },
                 "blueprintName": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The friendly name of the blueprint (<code>Amazon Linux</code>).</p>"
+                        "smithy.api#documentation": "<p>The friendly name of the blueprint (<code>Amazon Linux 2023</code>).</p>"
                     }
                 },
                 "bundleId": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bundle for the instance (<code>micro_1_0</code>).</p>"
+                        "smithy.api#documentation": "<p>The bundle for the instance (<code>micro_x_x</code>).</p>"
                     }
                 },
                 "addOns": {
@@ -14076,7 +14076,7 @@
                 "ipAddressType": {
                     "target": "com.amazonaws.lightsail#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address type of the instance.</p>\n         <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for\n      IPv4 and IPv6.</p>"
+                        "smithy.api#documentation": "<p>The IP address type of the instance.</p>\n         <p>The possible values are <code>ipv4</code> for IPv4 only, <code>ipv6</code> for IPv6 only,\n      and <code>dualstack</code> for IPv4 and IPv6.</p>"
                     }
                 },
                 "hardware": {
@@ -14106,7 +14106,7 @@
                 "sshKeyName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the SSH key being used to connect to the instance (<code>LightsailDefaultKeyPair</code>).</p>"
+                        "smithy.api#documentation": "<p>The name of the SSH key being used to connect to the instance\n        (<code>LightsailDefaultKeyPair</code>).</p>"
                     }
                 },
                 "metadataOptions": {
@@ -14162,7 +14162,7 @@
                 "privateKey": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>For SSH access, the temporary private key. For OpenSSH clients (command line SSH),\n      you should save this value to <code>tempkey</code>).</p>"
+                        "smithy.api#documentation": "<p>For SSH access, the temporary private key. For OpenSSH clients (command line SSH), you\n      should save this value to <code>tempkey</code>).</p>"
                     }
                 },
                 "protocol": {
@@ -14612,7 +14612,7 @@
                 "protocol": {
                     "target": "com.amazonaws.lightsail#NetworkProtocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP protocol name.</p>\n         <p>The name can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and\n          error-checked delivery of streamed data between applications running on hosts\n          communicating by an IP network. If you have an application that doesn't require reliable\n          data stream service, use UDP instead.</p>\n            </li>\n            <li>\n               <p>\n                  <code>all</code> - All transport layer protocol types. For more general information,\n          see <a href=\"https://en.wikipedia.org/wiki/Transport_layer\">Transport layer</a> on\n            <i>Wikipedia</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send\n          messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior\n          communications are not required to set up transmission channels or data paths.\n          Applications that don't require reliable data stream service can use UDP, which provides a\n          connectionless datagram service that emphasizes reduced latency over reliability. If you\n          do require reliable data stream service, use TCP instead.</p>\n            </li>\n            <li>\n               <p>\n                  <code>icmp</code> - Internet Control Message Protocol (ICMP) is used to send error\n          messages and operational information indicating success or failure when communicating with\n          an instance. For example, an error is indicated when an instance could not be reached.\n          When you specify <code>icmp</code> as the <code>protocol</code>, you must specify the ICMP\n          type using the <code>fromPort</code> parameter, and ICMP code using the\n            <code>toPort</code> parameter.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The IP protocol name.</p>\n         <p>The name can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and\n          error-checked delivery of streamed data between applications running on hosts\n          communicating by an IP network. If you have an application that doesn't require reliable\n          data stream service, use UDP instead.</p>\n            </li>\n            <li>\n               <p>\n                  <code>all</code> - All transport layer protocol types. For more general information,\n          see <a href=\"https://en.wikipedia.org/wiki/Transport_layer\">Transport layer</a> on\n            <i>Wikipedia</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send\n          messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior\n          communications are not required to set up transmission channels or data paths.\n          Applications that don't require reliable data stream service can use UDP, which provides a\n          connectionless datagram service that emphasizes reduced latency over reliability. If you\n          do require reliable data stream service, use TCP instead.</p>\n            </li>\n            <li>\n               <p>\n                  <code>icmp</code> - Internet Control Message Protocol (ICMP) is used to send error\n          messages and operational information indicating success or failure when communicating with\n          an instance. For example, an error is indicated when an instance could not be reached.\n          When you specify <code>icmp</code> as the <code>protocol</code>, you must specify the ICMP\n          type using the <code>fromPort</code> parameter, and ICMP code using the\n            <code>toPort</code> parameter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>icmp6</code> - Internet Control Message Protocol (ICMP) for IPv6. When you\n          specify <code>icmp6</code> as the <code>protocol</code>, you must specify the ICMP type\n          using the <code>fromPort</code> parameter, and ICMP code using the <code>toPort</code>\n          parameter.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "accessFrom": {
@@ -14688,7 +14688,7 @@
                 "protocol": {
                     "target": "com.amazonaws.lightsail#NetworkProtocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP protocol name.</p>\n         <p>The name can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and\n          error-checked delivery of streamed data between applications running on hosts\n          communicating by an IP network. If you have an application that doesn't require reliable\n          data stream service, use UDP instead.</p>\n            </li>\n            <li>\n               <p>\n                  <code>all</code> - All transport layer protocol types. For more general information,\n          see <a href=\"https://en.wikipedia.org/wiki/Transport_layer\">Transport layer</a> on\n            <i>Wikipedia</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send\n          messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior\n          communications are not required to set up transmission channels or data paths.\n          Applications that don't require reliable data stream service can use UDP, which provides a\n          connectionless datagram service that emphasizes reduced latency over reliability. If you\n          do require reliable data stream service, use TCP instead.</p>\n            </li>\n            <li>\n               <p>\n                  <code>icmp</code> - Internet Control Message Protocol (ICMP) is used to send error\n          messages and operational information indicating success or failure when communicating with\n          an instance. For example, an error is indicated when an instance could not be reached.\n          When you specify <code>icmp</code> as the <code>protocol</code>, you must specify the ICMP\n          type using the <code>fromPort</code> parameter, and ICMP code using the\n            <code>toPort</code> parameter.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The IP protocol name.</p>\n         <p>The name can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and\n          error-checked delivery of streamed data between applications running on hosts\n          communicating by an IP network. If you have an application that doesn't require reliable\n          data stream service, use UDP instead.</p>\n            </li>\n            <li>\n               <p>\n                  <code>all</code> - All transport layer protocol types. For more general information,\n          see <a href=\"https://en.wikipedia.org/wiki/Transport_layer\">Transport layer</a> on\n            <i>Wikipedia</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send\n          messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior\n          communications are not required to set up transmission channels or data paths.\n          Applications that don't require reliable data stream service can use UDP, which provides a\n          connectionless datagram service that emphasizes reduced latency over reliability. If you\n          do require reliable data stream service, use TCP instead.</p>\n            </li>\n            <li>\n               <p>\n                  <code>icmp</code> - Internet Control Message Protocol (ICMP) is used to send error\n          messages and operational information indicating success or failure when communicating with\n          an instance. For example, an error is indicated when an instance could not be reached.\n          When you specify <code>icmp</code> as the <code>protocol</code>, you must specify the ICMP\n          type using the <code>fromPort</code> parameter, and ICMP code using the\n            <code>toPort</code> parameter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>icmp6</code> - Internet Control Message Protocol (ICMP) for IPv6. When you\n          specify <code>icmp6</code> as the <code>protocol</code>, you must specify the ICMP type\n          using the <code>fromPort</code> parameter, and ICMP code using the <code>toPort</code>\n          parameter.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "state": {
@@ -14738,7 +14738,7 @@
                 "arn": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the snapshot (<code>arn:aws:lightsail:us-east-2:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE</code>).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the snapshot\n        (<code>arn:aws:lightsail:us-east-2:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE</code>).</p>"
                     }
                 },
                 "supportCode": {
@@ -14798,19 +14798,19 @@
                 "fromInstanceArn": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the instance from which the snapshot was created (<code>arn:aws:lightsail:us-east-2:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE</code>).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the instance from which the snapshot was created\n        (<code>arn:aws:lightsail:us-east-2:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE</code>).</p>"
                     }
                 },
                 "fromBlueprintId": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The blueprint ID from which you created the snapshot (<code>os_debian_8_3</code>). A\n      blueprint is a virtual private server (or <i>instance</i>) image used to create\n      instances quickly.</p>"
+                        "smithy.api#documentation": "<p>The blueprint ID from which you created the snapshot (<code>amazon_linux_2023</code>). A\n      blueprint is a virtual private server (or <i>instance</i>) image used to create\n      instances quickly.</p>"
                     }
                 },
                 "fromBundleId": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bundle ID from which you created the snapshot (<code>micro_1_0</code>).</p>"
+                        "smithy.api#documentation": "<p>The bundle ID from which you created the snapshot (<code>micro_x_x</code>).</p>"
                     }
                 },
                 "isFromAutoSnapshot": {
@@ -14836,13 +14836,13 @@
                 "fromBundleId": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bundle ID from which the source instance was created (<code>micro_1_0</code>).</p>"
+                        "smithy.api#documentation": "<p>The bundle ID from which the source instance was created (<code>micro_x_x</code>).</p>"
                     }
                 },
                 "fromBlueprintId": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The blueprint ID from which the source instance (<code>os_debian_8_3</code>).</p>"
+                        "smithy.api#documentation": "<p>The blueprint ID from which the source instance (<code>amazon_linux_2023</code>).</p>"
                     }
                 },
                 "fromDiskInfo": {
@@ -14947,6 +14947,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ipv4"
                     }
+                },
+                "IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv6"
+                    }
                 }
             }
         },
@@ -15044,7 +15050,7 @@
                 "arn": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the key pair (<code>arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE</code>).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the key pair\n        (<code>arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE</code>).</p>"
                     }
                 },
                 "supportCode": {
@@ -15220,7 +15226,7 @@
                 "viewerMinimumTlsProtocolVersion": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum TLS protocol version that the distribution can use to communicate with viewers.</p>"
+                        "smithy.api#documentation": "<p>The minimum TLS protocol version that the distribution can use to communicate with\n      viewers.</p>"
                     }
                 }
             },
@@ -16559,7 +16565,7 @@
                 "location": {
                     "target": "com.amazonaws.lightsail#ResourceLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region where your load balancer was created (<code>us-east-2a</code>).\n      Lightsail automatically creates your load balancer across Availability Zones.</p>"
+                        "smithy.api#documentation": "<p>The AWS Region where your load balancer was created (<code>us-east-2a</code>). Lightsail\n      automatically creates your load balancer across Availability Zones.</p>"
                     }
                 },
                 "resourceType": {
@@ -16631,7 +16637,7 @@
                 "ipAddressType": {
                     "target": "com.amazonaws.lightsail#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address type of the load balancer.</p>\n         <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for\n      IPv4 and IPv6.</p>"
+                        "smithy.api#documentation": "<p>The IP address type of the load balancer.</p>\n         <p>The possible values are <code>ipv4</code> for IPv4 only, <code>ipv6</code> for IPv6 only,\n      and <code>dualstack</code> for IPv4 and IPv6.</p>"
                     }
                 },
                 "httpsRedirectionEnabled": {
@@ -16980,7 +16986,7 @@
                 "subjectAlternativeNames": {
                     "target": "com.amazonaws.lightsail#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of strings that specify the alternate domains (<code>example2.com</code>)\n      and subdomains (<code>blog.example.com</code>) for the certificate.</p>"
+                        "smithy.api#documentation": "<p>An array of strings that specify the alternate domains (<code>example2.com</code>) and\n      subdomains (<code>blog.example.com</code>) for the certificate.</p>"
                     }
                 }
             },
@@ -17977,6 +17983,12 @@
                     "traits": {
                         "smithy.api#enumValue": "icmp"
                     }
+                },
+                "ICMPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "icmpv6"
+                    }
                 }
             }
         },
@@ -18766,7 +18778,7 @@
                 "responseTimeout": {
                     "target": "com.amazonaws.lightsail#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time, in seconds, that the distribution waits for a response after forwarding a request to the origin.\n    The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 30 seconds.</p>"
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, that the distribution waits for a response after\n      forwarding a request to the origin. The minimum timeout is 1 second, the maximum is 60\n      seconds, and the default (if you don't specify otherwise) is 30 seconds.</p>"
                     }
                 }
             },
@@ -18989,7 +19001,7 @@
                 "protocol": {
                     "target": "com.amazonaws.lightsail#NetworkProtocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP protocol name.</p>\n         <p>The name can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and\n          error-checked delivery of streamed data between applications running on hosts\n          communicating by an IP network. If you have an application that doesn't require reliable\n          data stream service, use UDP instead.</p>\n            </li>\n            <li>\n               <p>\n                  <code>all</code> - All transport layer protocol types. For more general information,\n          see <a href=\"https://en.wikipedia.org/wiki/Transport_layer\">Transport layer</a> on\n            <i>Wikipedia</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send\n          messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior\n          communications are not required to set up transmission channels or data paths.\n          Applications that don't require reliable data stream service can use UDP, which provides a\n          connectionless datagram service that emphasizes reduced latency over reliability. If you\n          do require reliable data stream service, use TCP instead.</p>\n            </li>\n            <li>\n               <p>\n                  <code>icmp</code> - Internet Control Message Protocol (ICMP) is used to send error\n          messages and operational information indicating success or failure when communicating with\n          an instance. For example, an error is indicated when an instance could not be reached.\n          When you specify <code>icmp</code> as the <code>protocol</code>, you must specify the ICMP\n          type using the <code>fromPort</code> parameter, and ICMP code using the\n            <code>toPort</code> parameter.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The IP protocol name.</p>\n         <p>The name can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and\n          error-checked delivery of streamed data between applications running on hosts\n          communicating by an IP network. If you have an application that doesn't require reliable\n          data stream service, use UDP instead.</p>\n            </li>\n            <li>\n               <p>\n                  <code>all</code> - All transport layer protocol types. For more general information,\n          see <a href=\"https://en.wikipedia.org/wiki/Transport_layer\">Transport layer</a> on\n            <i>Wikipedia</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send\n          messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior\n          communications are not required to set up transmission channels or data paths.\n          Applications that don't require reliable data stream service can use UDP, which provides a\n          connectionless datagram service that emphasizes reduced latency over reliability. If you\n          do require reliable data stream service, use TCP instead.</p>\n            </li>\n            <li>\n               <p>\n                  <code>icmp</code> - Internet Control Message Protocol (ICMP) is used to send error\n          messages and operational information indicating success or failure when communicating with\n          an instance. For example, an error is indicated when an instance could not be reached.\n          When you specify <code>icmp</code> as the <code>protocol</code>, you must specify the ICMP\n          type using the <code>fromPort</code> parameter, and ICMP code using the\n            <code>toPort</code> parameter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>icmp6</code> - Internet Control Message Protocol (ICMP) for IPv6. When you\n          specify <code>icmp6</code> as the <code>protocol</code>, you must specify the ICMP type\n          using the <code>fromPort</code> parameter, and ICMP code using the <code>toPort</code>\n          parameter.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "cidrs": {
@@ -19594,7 +19606,7 @@
                 "description": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the Amazon Web Services Region (<code>This region is recommended\n        to serve users in the eastern United States and eastern Canada</code>).</p>"
+                        "smithy.api#documentation": "<p>The description of the Amazon Web Services Region (<code>This region is recommended to\n        serve users in the eastern United States and eastern Canada</code>).</p>"
                     }
                 },
                 "displayName": {
@@ -21120,8 +21132,14 @@
                 "ipAddressType": {
                     "target": "com.amazonaws.lightsail#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address type to set for the specified resource.</p>\n         <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for\n      IPv4 and IPv6.</p>",
+                        "smithy.api#documentation": "<p>The IP address type to set for the specified resource.</p>\n         <p>The possible values are <code>ipv4</code> for IPv4 only, <code>ipv6</code> for IPv6 only,\n      and <code>dualstack</code> for IPv4 and IPv6.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "acceptBundleUpdate": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required parameter to accept the instance bundle update when changing to, and from,\n      IPv6-only.</p>\n         <note>\n            <p>An instance bundle will change when switching from <code>dual-stack</code> or\n          <code>ipv4</code>, to <code>ipv6</code>. It also changes when switching from\n          <code>ipv6</code>, to <code>dual-stack</code> or <code>ipv4</code>.</p>\n            <p>You must include this parameter in the command to update the bundle. For example, if you\n        switch from <code>dual-stack</code> to <code>ipv6</code>, the bundle will be updated, and\n        billing for the IPv6-only instance bundle begins immediately.</p>\n         </note>"
                     }
                 }
             },
@@ -21407,7 +21425,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an SSL/TLS certificate that secures traffic for your website. After the\n      certificate is created, it is installed on the specified Lightsail instance.</p>\n         <p>If you provide more than one domain name in the request, at least one name must be less than or equal to 63 characters in length.</p>",
+                "smithy.api#documentation": "<p>Creates an SSL/TLS certificate that secures traffic for your website. After the\n      certificate is created, it is installed on the specified Lightsail instance.</p>\n         <p>If you provide more than one domain name in the request, at least one name must be less\n      than or equal to 63 characters in length.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/setup-instance-https",
@@ -21488,7 +21506,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns information that was submitted during the <code>SetupInstanceHttps</code> request. Email\n      information is redacted for privacy.</p>"
+                "smithy.api#documentation": "<p>Returns information that was submitted during the <code>SetupInstanceHttps</code> request.\n      Email information is redacted for privacy.</p>"
             }
         },
         "com.amazonaws.lightsail#SetupStatus": {
@@ -21727,7 +21745,7 @@
                 "arn": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the static IP (<code>arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE</code>).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the static IP\n        (<code>arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE</code>).</p>"
                     }
                 },
                 "supportCode": {
@@ -21763,7 +21781,7 @@
                 "attachedTo": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance where the static IP is attached (<code>Amazon_Linux-1GB-Ohio-1</code>).</p>"
+                        "smithy.api#documentation": "<p>The instance where the static IP is attached\n      (<code>Amazon_Linux-1GB-Ohio-1</code>).</p>"
                     }
                 },
                 "isAttached": {
@@ -22940,19 +22958,19 @@
                 "viewerMinimumTlsProtocolVersion": {
                     "target": "com.amazonaws.lightsail#ViewerMinimumTlsProtocolVersionEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this parameter to update the minimum TLS protocol version for the SSL/TLS certificate that's attached to the distribution.</p>"
+                        "smithy.api#documentation": "<p>Use this parameter to update the minimum TLS protocol version for the SSL/TLS certificate\n      that's attached to the distribution.</p>"
                     }
                 },
                 "certificateName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the SSL/TLS certificate that you want to attach to the distribution.</p>\n         <p>Only certificates with a status of <code>ISSUED</code> can be attached to a distribution.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetCertificates.html\">GetCertificates</a> action to get a list of certificate names that you can specify.</p>"
+                        "smithy.api#documentation": "<p>The name of the SSL/TLS certificate that you want to attach to the distribution.</p>\n         <p>Only certificates with a status of <code>ISSUED</code> can be attached to a\n      distribution.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetCertificates.html\">GetCertificates</a>\n      action to get a list of certificate names that you can specify.</p>"
                     }
                 },
                 "useDefaultCertificate": {
                     "target": "com.amazonaws.lightsail#boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the default SSL/TLS certificate is attached to the distribution. The default value is <code>true</code>. When <code>true</code>, the distribution uses the default domain name such as <code>d111111abcdef8.cloudfront.net</code>.</p>\n         <p> Set this value to <code>false</code> to attach a new certificate to the distribution.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the default SSL/TLS certificate is attached to the distribution. The\n      default value is <code>true</code>. When <code>true</code>, the distribution uses the default\n      domain name such as <code>d111111abcdef8.cloudfront.net</code>.</p>\n         <p> Set this value to <code>false</code> to attach a new certificate to the\n      distribution.</p>"
                     }
                 }
             },
@@ -23189,7 +23207,7 @@
                 "loadBalancerName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the load balancer that you want to modify (<code>my-load-balancer</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the load balancer that you want to modify\n      (<code>my-load-balancer</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },

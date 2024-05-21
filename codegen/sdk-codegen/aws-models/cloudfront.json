@@ -10755,7 +10755,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of cache policies that you want in the response.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -10820,7 +10820,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of origin access identities you want in the response body.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -10965,7 +10965,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of continuous deployment policies that you want returned in the\n\t\t\tresponse.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -11058,7 +11058,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of distribution IDs that you want in the response.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -11128,7 +11128,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of distribution IDs that you want in the response.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -11200,7 +11200,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of distribution IDs that you want in the response.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -11266,7 +11266,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of distributions that you want in the response.</p>"
                     }
@@ -11341,7 +11341,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of distribution IDs that you want to get in the response.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -11410,7 +11410,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of distributions that you want CloudFront to return in the response body.\n\t\t\tThe maximum and default values are both 100.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -11457,7 +11457,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of distributions you want in the response body.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -11518,7 +11518,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of field-level encryption configurations you want in the response\n\t\t\tbody.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -11577,7 +11577,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of field-level encryption profiles you want in the response body.\n\t\t</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -11639,7 +11639,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of functions that you want in the response.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -11725,7 +11725,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of invalidation batches that you want in the response body.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -11786,7 +11786,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of key groups that you want in the response.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -11857,7 +11857,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of items in the key value stores list.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -11923,7 +11923,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of origin access controls that you want in the response.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -11995,7 +11995,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of origin request policies that you want in the response.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -12054,7 +12054,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of public keys you want in the response body.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -12112,7 +12112,7 @@
             "type": "structure",
             "members": {
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of real-time log configurations that you want in the\n\t\t\tresponse.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -12191,7 +12191,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of response headers policies that you want to get in the\n\t\t\tresponse.</p>",
                         "smithy.api#httpQuery": "MaxItems"
@@ -12256,7 +12256,7 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The value that you provided for the <code>MaxItems</code> request parameter.</p>",
                         "smithy.api#httpQuery": "MaxItems"
