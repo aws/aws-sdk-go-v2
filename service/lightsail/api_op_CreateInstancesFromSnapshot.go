@@ -47,7 +47,7 @@ type CreateInstancesFromSnapshotInput struct {
 	AvailabilityZone *string
 
 	// The bundle of specification information for your virtual private server (or
-	// instance), including the pricing plan ( micro_1_0 ).
+	// instance), including the pricing plan ( micro_x_x ).
 	//
 	// This member is required.
 	BundleId *string
@@ -76,7 +76,8 @@ type CreateInstancesFromSnapshotInput struct {
 
 	// The IP address type for the instance.
 	//
-	// The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6.
+	// The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack
+	// for IPv4 and IPv6.
 	//
 	// The default value is dualstack .
 	IpAddressType types.IpAddressType

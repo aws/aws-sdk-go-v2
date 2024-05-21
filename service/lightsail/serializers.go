@@ -12573,6 +12573,11 @@ func awsAwsjson11_serializeOpDocumentSetIpAddressTypeInput(v *SetIpAddressTypeIn
 	object := value.Object()
 	defer object.Close()
 
+	if v.AcceptBundleUpdate != nil {
+		ok := object.Key("acceptBundleUpdate")
+		ok.Boolean(*v.AcceptBundleUpdate)
+	}
+
 	if len(v.IpAddressType) > 0 {
 		ok := object.Key("ipAddressType")
 		ok.String(string(v.IpAddressType))

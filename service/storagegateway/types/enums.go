@@ -351,9 +351,10 @@ type SMBSecurityStrategy string
 
 // Enum values for SMBSecurityStrategy
 const (
-	SMBSecurityStrategyClientSpecified     SMBSecurityStrategy = "ClientSpecified"
-	SMBSecurityStrategyMandatorySigning    SMBSecurityStrategy = "MandatorySigning"
-	SMBSecurityStrategyMandatoryEncryption SMBSecurityStrategy = "MandatoryEncryption"
+	SMBSecurityStrategyClientSpecified             SMBSecurityStrategy = "ClientSpecified"
+	SMBSecurityStrategyMandatorySigning            SMBSecurityStrategy = "MandatorySigning"
+	SMBSecurityStrategyMandatoryEncryption         SMBSecurityStrategy = "MandatoryEncryption"
+	SMBSecurityStrategyMandatoryEncryptionNoAes128 SMBSecurityStrategy = "MandatoryEncryptionNoAes128"
 )
 
 // Values returns all known values for SMBSecurityStrategy. Note that this can be
@@ -365,6 +366,7 @@ func (SMBSecurityStrategy) Values() []SMBSecurityStrategy {
 		"ClientSpecified",
 		"MandatorySigning",
 		"MandatoryEncryption",
+		"MandatoryEncryptionNoAes128",
 	}
 }
 

@@ -4286,6 +4286,15 @@ type Job struct {
 	// This field is reserved for future use.
 	LogUri *string
 
+	// This field specifies a day of the week and hour for a maintenance window for
+	// streaming jobs. Glue periodically performs maintenance activities. During these
+	// maintenance windows, Glue will need to restart your streaming jobs.
+	//
+	// Glue will restart the job within 3 hours of the specified maintenance window.
+	// For instance, if you set up the maintenance window for Monday at 10:00AM GMT,
+	// your jobs will be restarted between 10:00AM GMT to 1:00PM GMT.
+	MaintenanceWindow *string
+
 	// For Glue version 1.0 or earlier jobs, using the standard worker type, the
 	// number of Glue data processing units (DPUs) that can be allocated when this job
 	// runs. A DPU is a relative measure of processing power that consists of 4 vCPUs
@@ -4508,13 +4517,14 @@ type JobRun struct {
 	// The date and time that this job run completed.
 	CompletedOn *time.Time
 
-	// This field populates only for Auto Scaling job runs, and represents the total
-	// time each executor ran during the lifecycle of a job run in seconds, multiplied
-	// by a DPU factor (1 for G.1X , 2 for G.2X , or 0.25 for G.025X workers). This
-	// value may be different than the executionEngineRuntime * MaxCapacity as in the
-	// case of Auto Scaling jobs, as the number of executors running at a given time
-	// may be less than the MaxCapacity . Therefore, it is possible that the value of
-	// DPUSeconds is less than executionEngineRuntime * MaxCapacity .
+	// This field can be set for either job runs with execution class FLEX or when
+	// Auto Scaling is enabled, and represents the total time each executor ran during
+	// the lifecycle of a job run in seconds, multiplied by a DPU factor (1 for G.1X ,
+	// 2 for G.2X , or 0.25 for G.025X workers). This value may be different than the
+	// executionEngineRuntime * MaxCapacity as in the case of Auto Scaling jobs, as
+	// the number of executors running at a given time may be less than the MaxCapacity
+	// . Therefore, it is possible that the value of DPUSeconds is less than
+	// executionEngineRuntime * MaxCapacity .
 	DPUSeconds *float64
 
 	// An error message associated with this job run.
@@ -4574,6 +4584,15 @@ type JobRun struct {
 	// configuration is used to encrypt the log group.
 	LogGroupName *string
 
+	// This field specifies a day of the week and hour for a maintenance window for
+	// streaming jobs. Glue periodically performs maintenance activities. During these
+	// maintenance windows, Glue will need to restart your streaming jobs.
+	//
+	// Glue will restart the job within 3 hours of the specified maintenance window.
+	// For instance, if you set up the maintenance window for Monday at 10:00AM GMT,
+	// your jobs will be restarted between 10:00AM GMT to 1:00PM GMT.
+	MaintenanceWindow *string
+
 	// For Glue version 1.0 or earlier jobs, using the standard worker type, the
 	// number of Glue data processing units (DPUs) that can be allocated when this job
 	// runs. A DPU is a relative measure of processing power that consists of 4 vCPUs
@@ -4623,8 +4642,17 @@ type JobRun struct {
 	// consume resources before it is terminated and enters TIMEOUT status. This value
 	// overrides the timeout value set in the parent job.
 	//
-	// Streaming jobs do not have a timeout. The default for non-streaming jobs is
-	// 2,880 minutes (48 hours).
+	// The maximum value for timeout for batch jobs is 7 days or 10080 minutes. The
+	// default is 2880 minutes (48 hours) for batch jobs.
+	//
+	// Any existing Glue jobs that have a greater timeout value are defaulted to 7
+	// days. For instance you have specified a timeout of 20 days for a batch job, it
+	// will be stopped on the 7th day.
+	//
+	// Streaming jobs must have timeout values less than 7 days or 10080 minutes. When
+	// the value is left blank, the job will be restarted after 7 days based if you
+	// have not setup a maintenance window. If you have setup maintenance window, it
+	// will be restarted during the maintenance window after 7 days.
 	Timeout *int32
 
 	// The name of the trigger that started this job run.
@@ -4761,6 +4789,15 @@ type JobUpdate struct {
 
 	// This field is reserved for future use.
 	LogUri *string
+
+	// This field specifies a day of the week and hour for a maintenance window for
+	// streaming jobs. Glue periodically performs maintenance activities. During these
+	// maintenance windows, Glue will need to restart your streaming jobs.
+	//
+	// Glue will restart the job within 3 hours of the specified maintenance window.
+	// For instance, if you set up the maintenance window for Monday at 10:00AM GMT,
+	// your jobs will be restarted between 10:00AM GMT to 1:00PM GMT.
+	MaintenanceWindow *string
 
 	// For Glue version 1.0 or earlier jobs, using the standard worker type, the
 	// number of Glue data processing units (DPUs) that can be allocated when this job

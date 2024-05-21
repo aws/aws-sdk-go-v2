@@ -1116,6 +1116,7 @@ const (
 	JobRunStateTimeout   JobRunState = "TIMEOUT"
 	JobRunStateError     JobRunState = "ERROR"
 	JobRunStateWaiting   JobRunState = "WAITING"
+	JobRunStateExpired   JobRunState = "EXPIRED"
 )
 
 // Values returns all known values for JobRunState. Note that this can be expanded
@@ -1133,6 +1134,7 @@ func (JobRunState) Values() []JobRunState {
 		"TIMEOUT",
 		"ERROR",
 		"WAITING",
+		"EXPIRED",
 	}
 }
 

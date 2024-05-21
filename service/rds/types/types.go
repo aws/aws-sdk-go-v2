@@ -1821,7 +1821,7 @@ type DBInstance struct {
 	LatestRestorableTime *time.Time
 
 	// The license model information for this DB instance. This setting doesn't apply
-	// to RDS Custom DB instances.
+	// to Amazon Aurora or RDS Custom DB instances.
 	LicenseModel *string
 
 	// The listener connection endpoint for SQL Server Always On.

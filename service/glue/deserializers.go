@@ -40470,6 +40470,15 @@ func awsAwsjson11_deserializeDocumentJob(v **types.Job, value interface{}) error
 				sv.LogUri = ptr.String(jtv)
 			}
 
+		case "MaintenanceWindow":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MaintenanceWindow to be of type string, got %T instead", value)
+				}
+				sv.MaintenanceWindow = ptr.String(jtv)
+			}
+
 		case "MaxCapacity":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -41124,6 +41133,15 @@ func awsAwsjson11_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
 				}
 				sv.LogGroupName = ptr.String(jtv)
+			}
+
+		case "MaintenanceWindow":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MaintenanceWindow to be of type string, got %T instead", value)
+				}
+				sv.MaintenanceWindow = ptr.String(jtv)
 			}
 
 		case "MaxCapacity":

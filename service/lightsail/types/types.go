@@ -489,7 +489,7 @@ type Blueprint struct {
 	// This parameter only applies to Lightsail for Research resources.
 	AppCategory AppCategory
 
-	// The ID for the virtual private server image ( app_wordpress_4_4 or app_lamp_7_0
+	// The ID for the virtual private server image ( app_wordpress_x_x or app_lamp_x_x
 	// ).
 	BlueprintId *string
 
@@ -714,7 +714,7 @@ type BucketState struct {
 // server (or instance).
 type Bundle struct {
 
-	// The bundle ID ( micro_1_0 ).
+	// The bundle ID ( micro_x_x ).
 	BundleId *string
 
 	// The number of vCPUs included in the bundle ( 2 ).
@@ -723,7 +723,7 @@ type Bundle struct {
 	// The size of the SSD ( 30 ).
 	DiskSizeInGb *int32
 
-	// The Amazon EC2 instance type ( t2.micro ).
+	// The instance type ( micro ).
 	InstanceType *string
 
 	// A Boolean value indicating whether the bundle is active.
@@ -2255,13 +2255,13 @@ type Instance struct {
 	// ).
 	Arn *string
 
-	// The blueprint ID ( os_amlinux_2016_03 ).
+	// The blueprint ID ( amazon_linux_2023 ).
 	BlueprintId *string
 
-	// The friendly name of the blueprint ( Amazon Linux ).
+	// The friendly name of the blueprint ( Amazon Linux 2023 ).
 	BlueprintName *string
 
-	// The bundle for the instance ( micro_1_0 ).
+	// The bundle for the instance ( micro_x_x ).
 	BundleId *string
 
 	// The timestamp when the instance was created ( 1479734909.17 ) in Unix time
@@ -2273,7 +2273,8 @@ type Instance struct {
 
 	// The IP address type of the instance.
 	//
-	// The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6.
+	// The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack
+	// for IPv4 and IPv6.
 	IpAddressType IpAddressType
 
 	// The IPv6 addresses of the instance.
@@ -2288,7 +2289,7 @@ type Instance struct {
 	// The metadata options for the Amazon Lightsail instance.
 	MetadataOptions *InstanceMetadataOptions
 
-	// The name the user gave the instance ( Amazon_Linux-1GB-Ohio-1 ).
+	// The name the user gave the instance ( Amazon_Linux_2023-1 ).
 	Name *string
 
 	// Information about the public ports and monthly data transfer rates for the
@@ -2685,6 +2686,10 @@ type InstancePortInfo struct {
 	//   must specify the ICMP type using the fromPort parameter, and ICMP code using
 	//   the toPort parameter.
 	//
+	//   - icmp6 - Internet Control Message Protocol (ICMP) for IPv6. When you specify
+	//   icmp6 as the protocol , you must specify the ICMP type using the fromPort
+	//   parameter, and ICMP code using the toPort parameter.
+	//
 	// [Transport layer]: https://en.wikipedia.org/wiki/Transport_layer
 	Protocol NetworkProtocol
 
@@ -2789,6 +2794,10 @@ type InstancePortState struct {
 	//   must specify the ICMP type using the fromPort parameter, and ICMP code using
 	//   the toPort parameter.
 	//
+	//   - icmp6 - Internet Control Message Protocol (ICMP) for IPv6. When you specify
+	//   icmp6 as the protocol , you must specify the ICMP type using the fromPort
+	//   parameter, and ICMP code using the toPort parameter.
+	//
 	// [Transport layer]: https://en.wikipedia.org/wiki/Transport_layer
 	Protocol NetworkProtocol
 
@@ -2832,12 +2841,12 @@ type InstanceSnapshot struct {
 	// An array of disk objects containing information about all block storage disks.
 	FromAttachedDisks []Disk
 
-	// The blueprint ID from which you created the snapshot ( os_debian_8_3 ). A
+	// The blueprint ID from which you created the snapshot ( amazon_linux_2023 ). A
 	// blueprint is a virtual private server (or instance) image used to create
 	// instances quickly.
 	FromBlueprintId *string
 
-	// The bundle ID from which you created the snapshot ( micro_1_0 ).
+	// The bundle ID from which you created the snapshot ( micro_x_x ).
 	FromBundleId *string
 
 	// The Amazon Resource Name (ARN) of the instance from which the snapshot was
@@ -2890,10 +2899,10 @@ type InstanceSnapshot struct {
 // Describes an instance snapshot.
 type InstanceSnapshotInfo struct {
 
-	// The blueprint ID from which the source instance ( os_debian_8_3 ).
+	// The blueprint ID from which the source instance ( amazon_linux_2023 ).
 	FromBlueprintId *string
 
-	// The bundle ID from which the source instance was created ( micro_1_0 ).
+	// The bundle ID from which the source instance was created ( micro_x_x ).
 	FromBundleId *string
 
 	// A list of objects describing the disks that were attached to the source
@@ -3076,7 +3085,8 @@ type LoadBalancer struct {
 
 	// The IP address type of the load balancer.
 	//
-	// The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6.
+	// The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack
+	// for IPv4 and IPv6.
 	IpAddressType IpAddressType
 
 	// The AWS Region where your load balancer was created ( us-east-2a ). Lightsail
@@ -3757,6 +3767,10 @@ type PortInfo struct {
 	//   instance could not be reached. When you specify icmp as the protocol , you
 	//   must specify the ICMP type using the fromPort parameter, and ICMP code using
 	//   the toPort parameter.
+	//
+	//   - icmp6 - Internet Control Message Protocol (ICMP) for IPv6. When you specify
+	//   icmp6 as the protocol , you must specify the ICMP type using the fromPort
+	//   parameter, and ICMP code using the toPort parameter.
 	//
 	// [Transport layer]: https://en.wikipedia.org/wiki/Transport_layer
 	Protocol NetworkProtocol

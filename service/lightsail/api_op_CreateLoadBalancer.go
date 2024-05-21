@@ -78,7 +78,8 @@ type CreateLoadBalancerInput struct {
 
 	// The IP address type for the load balancer.
 	//
-	// The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6.
+	// The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack
+	// for IPv4 and IPv6.
 	//
 	// The default value is dualstack .
 	IpAddressType types.IpAddressType

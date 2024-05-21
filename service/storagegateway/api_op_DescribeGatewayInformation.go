@@ -93,6 +93,8 @@ type DescribeGatewayInformationOutput struct {
 	GatewayType *string
 
 	// The type of hardware or software platform on which the gateway is running.
+	//
+	// Tape Gateway is no longer available on Snow Family devices.
 	HostEnvironment types.HostEnvironment
 
 	// A unique identifier for the specific instance of the host platform running the

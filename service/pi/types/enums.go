@@ -107,6 +107,27 @@ func (FeatureStatus) Values() []FeatureStatus {
 	}
 }
 
+type FineGrainedAction string
+
+// Enum values for FineGrainedAction
+const (
+	FineGrainedActionDescribeDimensionKeys  FineGrainedAction = "DescribeDimensionKeys"
+	FineGrainedActionGetDimensionKeyDetails FineGrainedAction = "GetDimensionKeyDetails"
+	FineGrainedActionGetResourceMetrics     FineGrainedAction = "GetResourceMetrics"
+)
+
+// Values returns all known values for FineGrainedAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FineGrainedAction) Values() []FineGrainedAction {
+	return []FineGrainedAction{
+		"DescribeDimensionKeys",
+		"GetDimensionKeyDetails",
+		"GetResourceMetrics",
+	}
+}
+
 type PeriodAlignment string
 
 // Enum values for PeriodAlignment

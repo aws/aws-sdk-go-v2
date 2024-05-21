@@ -16110,6 +16110,11 @@ func awsAwsjson11_serializeDocumentJobUpdate(v *types.JobUpdate, value smithyjso
 		ok.String(*v.LogUri)
 	}
 
+	if v.MaintenanceWindow != nil {
+		ok := object.Key("MaintenanceWindow")
+		ok.String(*v.MaintenanceWindow)
+	}
+
 	if v.MaxCapacity != nil {
 		ok := object.Key("MaxCapacity")
 		switch {
@@ -21255,6 +21260,11 @@ func awsAwsjson11_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 	if v.LogUri != nil {
 		ok := object.Key("LogUri")
 		ok.String(*v.LogUri)
+	}
+
+	if v.MaintenanceWindow != nil {
+		ok := object.Key("MaintenanceWindow")
+		ok.String(*v.MaintenanceWindow)
 	}
 
 	if v.MaxCapacity != nil {

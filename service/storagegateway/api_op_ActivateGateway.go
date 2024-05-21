@@ -86,10 +86,11 @@ type ActivateGatewayInput struct {
 	GatewayRegion *string
 
 	// A value that indicates the time zone you want to set for the gateway. The time
-	// zone is of the format "GMT-hr:mm" or "GMT+hr:mm". For example, GMT-4:00
-	// indicates the time is 4 hours behind GMT. GMT+2:00 indicates the time is 2 hours
-	// ahead of GMT. The time zone is used, for example, for scheduling snapshots and
-	// your gateway's maintenance schedule.
+	// zone is of the format "GMT", "GMT-hr:mm", or "GMT+hr:mm". For example, GMT
+	// indicates Greenwich Mean Time without any offset. GMT-4:00 indicates the time is
+	// 4 hours behind GMT. GMT+2:00 indicates the time is 2 hours ahead of GMT. The
+	// time zone is used, for example, for scheduling snapshots and your gateway's
+	// maintenance schedule.
 	//
 	// This member is required.
 	GatewayTimezone *string
@@ -98,7 +99,7 @@ type ActivateGatewayInput struct {
 	// critical to all later functions of the gateway and cannot be changed after
 	// activation. The default value is CACHED .
 	//
-	// Valid Values: STORED | CACHED | VTL | VTL_SNOW | FILE_S3 | FILE_FSX_SMB
+	// Valid Values: STORED | CACHED | VTL | FILE_S3 | FILE_FSX_SMB
 	GatewayType *string
 
 	// The value that indicates the type of medium changer to use for tape gateway.

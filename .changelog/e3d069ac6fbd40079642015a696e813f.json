@@ -1,0 +1,8 @@
+{
+    "id": "e3d069ac-6fbd-4007-9642-015a696e813f",
+    "type": "feature",
+    "description": "Add Maintenance window to CreateJob and UpdateJob APIs and JobRun response. Add a new Job Run State for EXPIRED.",
+    "modules": [
+        "service/glue"
+    ]
+}

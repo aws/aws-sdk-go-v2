@@ -1006,6 +1006,7 @@ type IpAddressType string
 const (
 	IpAddressTypeDualstack IpAddressType = "dualstack"
 	IpAddressTypeIpv4      IpAddressType = "ipv4"
+	IpAddressTypeIpv6      IpAddressType = "ipv6"
 )
 
 // Values returns all known values for IpAddressType. Note that this can be
@@ -1016,6 +1017,7 @@ func (IpAddressType) Values() []IpAddressType {
 	return []IpAddressType{
 		"dualstack",
 		"ipv4",
+		"ipv6",
 	}
 }
 
@@ -1475,10 +1477,11 @@ type NetworkProtocol string
 
 // Enum values for NetworkProtocol
 const (
-	NetworkProtocolTcp  NetworkProtocol = "tcp"
-	NetworkProtocolAll  NetworkProtocol = "all"
-	NetworkProtocolUdp  NetworkProtocol = "udp"
-	NetworkProtocolIcmp NetworkProtocol = "icmp"
+	NetworkProtocolTcp    NetworkProtocol = "tcp"
+	NetworkProtocolAll    NetworkProtocol = "all"
+	NetworkProtocolUdp    NetworkProtocol = "udp"
+	NetworkProtocolIcmp   NetworkProtocol = "icmp"
+	NetworkProtocolIcmpv6 NetworkProtocol = "icmpv6"
 )
 
 // Values returns all known values for NetworkProtocol. Note that this can be
@@ -1491,6 +1494,7 @@ func (NetworkProtocol) Values() []NetworkProtocol {
 		"all",
 		"udp",
 		"icmp",
+		"icmpv6",
 	}
 }
 

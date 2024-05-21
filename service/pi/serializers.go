@@ -741,13 +741,24 @@ func awsAwsjson11_serializeDocumentAdditionalMetricsList(v []string, value smith
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAuthorizedActionsList(v []types.FineGrainedAction, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDimensionGroup(v *types.DimensionGroup, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	if v.Dimensions != nil {
 		ok := object.Key("Dimensions")
-		if err := awsAwsjson11_serializeDocumentRequestStringList(v.Dimensions, ok); err != nil {
+		if err := awsAwsjson11_serializeDocumentSanitizedStringList(v.Dimensions, ok); err != nil {
 			return err
 		}
 	}
@@ -848,7 +859,7 @@ func awsAwsjson11_serializeDocumentRequestedDimensionList(v []string, value smit
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRequestStringList(v []string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentSanitizedStringList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -1171,6 +1182,13 @@ func awsAwsjson11_serializeOpDocumentGetResourceMetricsInput(v *GetResourceMetri
 func awsAwsjson11_serializeOpDocumentListAvailableResourceDimensionsInput(v *ListAvailableResourceDimensionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AuthorizedActions != nil {
+		ok := object.Key("AuthorizedActions")
+		if err := awsAwsjson11_serializeDocumentAuthorizedActionsList(v.AuthorizedActions, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Identifier != nil {
 		ok := object.Key("Identifier")

@@ -124,6 +124,15 @@ type CreateJobInput struct {
 	// This field is reserved for future use.
 	LogUri *string
 
+	// This field specifies a day of the week and hour for a maintenance window for
+	// streaming jobs. Glue periodically performs maintenance activities. During these
+	// maintenance windows, Glue will need to restart your streaming jobs.
+	//
+	// Glue will restart the job within 3 hours of the specified maintenance window.
+	// For instance, if you set up the maintenance window for Monday at 10:00AM GMT,
+	// your jobs will be restarted between 10:00AM GMT to 1:00PM GMT.
+	MaintenanceWindow *string
+
 	// For Glue version 1.0 or earlier jobs, using the standard worker type, the
 	// number of Glue data processing units (DPUs) that can be allocated when this job
 	// runs. A DPU is a relative measure of processing power that consists of 4 vCPUs

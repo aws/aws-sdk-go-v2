@@ -35,7 +35,8 @@ type SetIpAddressTypeInput struct {
 
 	// The IP address type to set for the specified resource.
 	//
-	// The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6.
+	// The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack
+	// for IPv4 and IPv6.
 	//
 	// This member is required.
 	IpAddressType types.IpAddressType
@@ -55,6 +56,17 @@ type SetIpAddressTypeInput struct {
 	//
 	// This member is required.
 	ResourceType types.ResourceType
+
+	// Required parameter to accept the instance bundle update when changing to, and
+	// from, IPv6-only.
+	//
+	// An instance bundle will change when switching from dual-stack or ipv4 , to ipv6
+	// . It also changes when switching from ipv6 , to dual-stack or ipv4 .
+	//
+	// You must include this parameter in the command to update the bundle. For
+	// example, if you switch from dual-stack to ipv6 , the bundle will be updated, and
+	// billing for the IPv6-only instance bundle begins immediately.
+	AcceptBundleUpdate *bool
 
 	noSmithyDocumentSerde
 }

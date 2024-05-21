@@ -44,7 +44,7 @@ type CreateInstancesInput struct {
 	// This member is required.
 	AvailabilityZone *string
 
-	// The ID for a virtual private server image ( app_wordpress_4_4 or app_lamp_7_0 ).
+	// The ID for a virtual private server image ( app_wordpress_x_x or app_lamp_x_x ).
 	// Use the get blueprints operation to return a list of available images (or
 	// blueprints).
 	//
@@ -57,7 +57,7 @@ type CreateInstancesInput struct {
 	BlueprintId *string
 
 	// The bundle of specification information for your virtual private server (or
-	// instance), including the pricing plan ( micro_1_0 ).
+	// instance), including the pricing plan ( medium_x_x ).
 	//
 	// This member is required.
 	BundleId *string
@@ -82,7 +82,8 @@ type CreateInstancesInput struct {
 
 	// The IP address type for the instance.
 	//
-	// The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6.
+	// The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack
+	// for IPv4 and IPv6.
 	//
 	// The default value is dualstack .
 	IpAddressType types.IpAddressType

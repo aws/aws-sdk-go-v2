@@ -49,6 +49,15 @@ type ListAvailableResourceDimensionsInput struct {
 	// This member is required.
 	ServiceType types.ServiceType
 
+	// The actions to discover the dimensions you are authorized to access. If you
+	// specify multiple actions, then the response will contain the dimensions common
+	// for all the actions.
+	//
+	// When you don't specify this request parameter or provide an empty list, the
+	// response contains all the available dimensions for the target database engine
+	// whether or not you are authorized to access them.
+	AuthorizedActions []types.FineGrainedAction
+
 	// The maximum number of items to return in the response. If more items exist than
 	// the specified MaxRecords value, a pagination token is included in the response
 	// so that the remaining results can be retrieved.
