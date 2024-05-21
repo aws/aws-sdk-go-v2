@@ -449,7 +449,11 @@ func (s *httpSigner) buildCanonicalHeaders(host string, rule v4Internal.Rule, he
 		if headers[i] == hostHeader {
 			canonicalHeaders.WriteString(hostHeader)
 			canonicalHeaders.WriteRune(colon)
-			canonicalHeaders.WriteString(v4Internal.StripExcessSpaces(host))
+			rHost := header.Get(hostHeader)
+			if rHost == "" {
+				rHost = host
+			}
+			canonicalHeaders.WriteString(v4Internal.StripExcessSpaces(rHost))
 		} else {
 			canonicalHeaders.WriteString(headers[i])
 			canonicalHeaders.WriteRune(colon)
