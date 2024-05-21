@@ -1,3 +1,7 @@
+# v1.81.0 (2024-05-21)
+
+* **Feature**: Add Maintenance window to CreateJob and UpdateJob APIs and JobRun response. Add a new Job Run State for EXPIRED.
+
 # v1.80.3 (2024-05-16)
 
 * **Dependency Update**: Updated to the latest SDK module versions

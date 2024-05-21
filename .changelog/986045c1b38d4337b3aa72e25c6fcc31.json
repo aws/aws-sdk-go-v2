@@ -1,8 +1,0 @@
-{
-    "id": "986045c1-b38d-4337-b3aa-72e25c6fcc31",
-    "type": "documentation",
-    "description": "Updates Amazon RDS documentation for Db2 license through AWS Marketplace.",
-    "modules": [
-        "service/rds"
-    ]
-}

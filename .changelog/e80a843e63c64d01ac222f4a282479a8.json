@@ -1,8 +1,0 @@
-{
-    "id": "e80a843e-63c6-4d01-ac22-2f4a282479a8",
-    "type": "feature",
-    "description": "Model update; no change to SDK functionality.",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

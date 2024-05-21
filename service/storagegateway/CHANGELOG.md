@@ -1,3 +1,7 @@
+# v1.28.0 (2024-05-21)
+
+* **Feature**: Added new SMBSecurityStrategy enum named MandatoryEncryptionNoAes128, new mode enforces encryption and disables AES 128-bit algorithums.
+
 # v1.27.7 (2024-05-16)
 
 * **Dependency Update**: Updated to the latest SDK module versions

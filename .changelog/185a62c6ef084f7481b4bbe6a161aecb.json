@@ -1,8 +1,0 @@
-{
-    "id": "185a62c6-ef08-4f74-81b4-bbe6a161aecb",
-    "type": "feature",
-    "description": "Added new SMBSecurityStrategy enum named MandatoryEncryptionNoAes128, new mode enforces encryption and disables AES 128-bit algorithums.",
-    "modules": [
-        "service/storagegateway"
-    ]
-}

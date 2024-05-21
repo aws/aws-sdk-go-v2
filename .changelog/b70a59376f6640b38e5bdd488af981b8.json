@@ -1,8 +1,0 @@
-{
-    "id": "b70a5937-6f66-40b3-8e5b-dd488af981b8",
-    "type": "feature",
-    "description": "Performance Insights added a new input parameter called AuthorizedActions to support the fine-grained access feature. Performance Insights also restricted the acceptable input characters.",
-    "modules": [
-        "service/pi"
-    ]
-}

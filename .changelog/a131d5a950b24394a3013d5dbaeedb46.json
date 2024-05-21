@@ -1,8 +1,0 @@
-{
-    "id": "a131d5a9-50b2-4394-a301-3d5dbaeedb46",
-    "type": "feature",
-    "description": "This release adds support for Amazon Lightsail instances to switch between dual-stack or IPv4 only and IPv6-only public IP address types.",
-    "modules": [
-        "service/lightsail"
-    ]
-}

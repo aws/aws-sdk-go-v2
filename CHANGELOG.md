@@ -1,3 +1,20 @@
+# Release (2024-05-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.81.0](service/glue/CHANGELOG.md#v1810-2024-05-21)
+  * **Feature**: Add Maintenance window to CreateJob and UpdateJob APIs and JobRun response. Add a new Job Run State for EXPIRED.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.38.0](service/lightsail/CHANGELOG.md#v1380-2024-05-21)
+  * **Feature**: This release adds support for Amazon Lightsail instances to switch between dual-stack or IPv4 only and IPv6-only public IP address types.
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.0.0](service/mailmanager/CHANGELOG.md#v100-2024-05-21)
+  * **Release**: New AWS service client module
+  * **Feature**: This release includes a new Amazon SES feature called Mail Manager, which is a set of email gateway capabilities designed to help customers strengthen their organization's email infrastructure, simplify email workflow management, and streamline email compliance control.
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.25.0](service/pi/CHANGELOG.md#v1250-2024-05-21)
+  * **Feature**: Performance Insights added a new input parameter called AuthorizedActions to support the fine-grained access feature. Performance Insights also restricted the acceptable input characters.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.79.1](service/rds/CHANGELOG.md#v1791-2024-05-21)
+  * **Documentation**: Updates Amazon RDS documentation for Db2 license through AWS Marketplace.
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.28.0](service/storagegateway/CHANGELOG.md#v1280-2024-05-21)
+  * **Feature**: Added new SMBSecurityStrategy enum named MandatoryEncryptionNoAes128, new mode enforces encryption and disables AES 128-bit algorithums.
+
 # Release (2024-05-20)
 
 ## Module Highlights

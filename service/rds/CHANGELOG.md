@@ -1,3 +1,7 @@
+# v1.79.1 (2024-05-21)
+
+* **Documentation**: Updates Amazon RDS documentation for Db2 license through AWS Marketplace.
+
 # v1.79.0 (2024-05-20)
 
 * **Feature**: This release adds support for EngineLifecycleSupport on DBInstances, DBClusters, and GlobalClusters.

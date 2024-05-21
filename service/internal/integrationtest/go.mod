@@ -47,7 +47,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.28.9
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.31.3
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.22.7
-	github.com/aws/aws-sdk-go-v2/service/glue v1.80.3
+	github.com/aws/aws-sdk-go-v2/service/glue v1.81.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.24.7
 	github.com/aws/aws-sdk-go-v2/service/iam v1.32.3
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.21.7
@@ -55,13 +55,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.27.7
 	github.com/aws/aws-sdk-go-v2/service/kms v1.31.3
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.54.3
-	github.com/aws/aws-sdk-go-v2/service/lightsail v1.37.3
+	github.com/aws/aws-sdk-go-v2/service/lightsail v1.38.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.20.7
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.31.9
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.22.7
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.19.8
 	github.com/aws/aws-sdk-go-v2/service/polly v1.40.2
-	github.com/aws/aws-sdk-go-v2/service/rds v1.79.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.79.1
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.44.3
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.40.3
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.40.7
