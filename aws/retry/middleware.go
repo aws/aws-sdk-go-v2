@@ -2,6 +2,7 @@ package retry
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws/middleware/private/metrics"
 	"strconv"
@@ -85,6 +86,9 @@ func (r *Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeIn
 			MaxAttempts:      maxAttempts,
 			AttemptClockSkew: attemptClockSkew,
 		})
+
+		// Setting clock skew to be used on other context (like signing)
+		ctx = awsmiddle.SetAttemptSkewContext(ctx, attemptClockSkew)
 
 		var attemptResult AttemptResult
 		out, attemptResult, releaseRetryToken, err = r.handleAttempt(attemptCtx, attemptInput, releaseRetryToken, next)
@@ -185,6 +189,8 @@ func (r *Attempt) handleAttempt(
 		return out, attemptResult, nopRelease, err
 	}
 
+	err = wrapAsClockSkew(ctx, err)
+
 	//------------------------------
 	// Is Retryable and Should Retry
 	//------------------------------
@@ -245,6 +251,32 @@ func (r *Attempt) handleAttempt(
 	attemptResult.Retried = true
 
 	return out, attemptResult, releaseRetryToken, err
+}
+
+// Note that there are errors that are known to be definitely caused by clock
+// skew, which are defined on the list of retryable errors
+var possibleSkewCodes = map[string]struct{}{
+	"InvalidSignatureException": {},
+	"SignatureDoesNotMatch":     {},
+	"AuthFailure":               {},
+}
+
+// wrapAsClockSkew checks if this error could be related to a clock skew
+// error and if so, wrap the error.
+func wrapAsClockSkew(ctx context.Context, err error) error {
+	var v interface{ ErrorCode() string }
+	if !errors.As(err, &v) {
+		return err
+	}
+	_, ok := possibleSkewCodes[v.ErrorCode()]
+	if !ok {
+		return err
+	}
+	skew := awsmiddle.GetAttemptSkewContext(ctx)
+	if !(skew > 4*time.Minute) {
+		return err
+	}
+	return &ProbClockSkewError{Err: err}
 }
 
 // MetricsHeader attaches SDK request metric header for retries to the transport

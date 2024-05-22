@@ -4,6 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	awsmiddle "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/aws/middleware/private/metrics/testutils"
 	"net/http"
 	"reflect"
 	"strconv"
@@ -482,6 +484,77 @@ func TestAttemptReleaseRetryLock(t *testing.T) {
 	_, err = standard.GetRetryToken(context.Background(), errors.New("retryme"))
 	if err != nil {
 		t.Fatal(err)
+	}
+}
+
+type errorCodeImplementer struct {
+	errorCode string
+}
+
+func (e errorCodeImplementer) Error() string {
+	return e.errorCode
+}
+
+func (e errorCodeImplementer) ErrorCode() string {
+	return e.errorCode
+}
+
+func TestClockSkew(t *testing.T) {
+	cases := map[string]struct {
+		skew        time.Duration
+		err         error
+		shouldRetry bool
+	}{
+		"no skew and any error no retry": {
+			skew:        time.Duration(0),
+			err:         fmt.Errorf("any error"),
+			shouldRetry: false,
+		},
+		"no skew wrong error code no retry": {
+			skew:        time.Duration(0),
+			err:         errorCodeImplementer{"any"},
+			shouldRetry: false,
+		},
+		"skewed retryable error code does retry": {
+			skew:        5 * time.Minute,
+			err:         errorCodeImplementer{"SignatureDoesNotMatch"},
+			shouldRetry: true,
+		},
+		"low skew retryable error code no retry": {
+			skew:        3 * time.Minute,
+			err:         errorCodeImplementer{"SignatureDoesNotMatch"},
+			shouldRetry: false,
+		},
+	}
+	for name, tt := range cases {
+		t.Run(name, func(t *testing.T) {
+			am := NewAttemptMiddleware(NewStandard(func(s *StandardOptions) {
+			}), testutils.NoopRequestCloner)
+			ctx := awsmiddle.SetAttemptSkewContext(context.Background(), tt.skew)
+			_, metadata, err := am.HandleFinalize(ctx, middleware.FinalizeInput{}, middleware.FinalizeHandlerFunc(
+				func(ctx context.Context, in middleware.FinalizeInput) (
+					out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+				) {
+					return out, metadata, tt.err
+				}))
+			if err == nil {
+				t.Errorf("Exected return from next middleware, got none")
+			}
+			attemptResults, ok := GetAttemptResults(metadata)
+			if !ok {
+				t.Errorf("Got no expected results from metadata. Metadata was %v", metadata)
+			}
+			if len(attemptResults.Results) == 0 {
+				t.Errorf("Expected attempt results, got no results. Attempt was %v", attemptResults)
+			}
+			wasRetried := attemptResults.Results[0].Retried
+			if tt.shouldRetry && !wasRetried {
+				t.Errorf("Expected retries, found none %v", attemptResults.Results)
+			}
+			if !tt.shouldRetry && wasRetried {
+				t.Errorf("Expected retries, found none. Results %v", attemptResults.Results)
+			}
+		})
 	}
 }
 

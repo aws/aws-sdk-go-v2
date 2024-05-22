@@ -2,11 +2,11 @@ package retry
 
 import (
 	"errors"
+	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"net"
 	"net/url"
 	"strings"
-
-	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
 // IsErrorRetryable provides the interface of an implementation to determine if
@@ -198,4 +198,24 @@ func (r RetryableErrorCode) IsErrorRetryable(err error) aws.Ternary {
 	}
 
 	return aws.TrueTernary
+}
+
+// ProbClockSkewError marks errors that "could" be caused by clock skew
+// (difference between server time and client time).
+// This is returned when there's certain confidence that adjusting the client time
+// could allow a retry to succeed
+type ProbClockSkewError struct{ Err error }
+
+func (e *ProbClockSkewError) Error() string {
+	return fmt.Sprintf("Probable clock skew error: %v", e.Err)
+}
+
+// Unwrap returns the wrapped error.
+func (e *ProbClockSkewError) Unwrap() error {
+	return e.Err
+}
+
+// RetryableError allows the retryer to retry this request
+func (e *ProbClockSkewError) RetryableError() bool {
+	return true
 }

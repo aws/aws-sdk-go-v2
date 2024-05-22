@@ -51,8 +51,11 @@ var DefaultRetryableHTTPStatusCodes = map[int]struct{}{
 // DefaultRetryableErrorCodes provides the set of API error codes that should
 // be retried.
 var DefaultRetryableErrorCodes = map[string]struct{}{
+	"RequestExpired":          {},
+	"RequestInTheFuture":      {},
 	"RequestTimeout":          {},
 	"RequestTimeoutException": {},
+	"RequestTimeTooSkewed":    {},
 }
 
 // DefaultThrottleErrorCodes provides the set of API error codes that are
