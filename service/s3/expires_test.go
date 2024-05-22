@@ -67,7 +67,7 @@ func TestValidExpires(t *testing.T) {
 	}
 
 	if aws.ToTime(out.Expires) != ext {
-		t.Errorf("out.Expires should be nil, is %s", *out.Expires)
+		t.Errorf("out.Expires should be %s, is %s", ext, *out.Expires)
 	}
 	if aws.ToString(out.ExpiresString) != exs {
 		t.Errorf("out.ExpiresString should be %s, is %s", exs, *out.ExpiresString)
