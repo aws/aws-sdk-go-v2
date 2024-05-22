@@ -3669,6 +3669,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A description of the data source.</p>"
                     }
+                },
+                "Status": {
+                    "target": "com.amazonaws.opensearch#DataSourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the data source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3689,6 +3695,23 @@
                     "max": 80
                 },
                 "smithy.api#pattern": "^[a-z][a-z0-9_]+$"
+            }
+        },
+        "com.amazonaws.opensearch#DataSourceStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.opensearch#DataSourceType": {
@@ -6210,7 +6233,7 @@
                 "DomainEndpointV2HostedZoneId": {
                     "target": "com.amazonaws.opensearch#HostedZoneId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DualStack Hosted Zone Id for the domain. </p>"
+                        "smithy.api#documentation": "<p>The dual stack hosted zone ID for the domain. </p>"
                     }
                 },
                 "Processing": {
@@ -6855,6 +6878,12 @@
                     "target": "com.amazonaws.opensearch#DataSourceDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>A description of the data source.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.opensearch#DataSourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the data source response.</p>"
                     }
                 }
             },
@@ -11914,6 +11943,12 @@
                     "target": "com.amazonaws.opensearch#DataSourceDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>A new description of the data source.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.opensearch#DataSourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the data source update request.</p>"
                     }
                 }
             },

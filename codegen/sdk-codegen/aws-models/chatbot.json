@@ -49,6 +49,16 @@
                 "smithy.api#documentation": "Preferences which apply for AWS Chatbot usage in the calling AWS account."
             }
         },
+        "com.amazonaws.chatbot#AmazonResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:aws:(wheatley|chatbot):[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
+            }
+        },
         "com.amazonaws.chatbot#Arn": {
             "type": "string",
             "traits": {
@@ -123,6 +133,12 @@
                     "target": "com.amazonaws.chatbot#CustomerCwLogLevel",
                     "traits": {
                         "smithy.api#documentation": "Specifies the logging level for this configuration. This property affects the log entries pushed to Amazon CloudWatch Logs.Logging levels include ERROR, INFO, or NONE."
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chatbot#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "A list of tags applied to the configuration."
                     }
                 }
             },
@@ -302,6 +318,12 @@
                     "traits": {
                         "smithy.api#documentation": "Logging levels include ERROR, INFO, or NONE."
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chatbot#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "A list of tags to apply to the configuration."
+                    }
                 }
             },
             "traits": {
@@ -463,6 +485,12 @@
                     "traits": {
                         "smithy.api#documentation": "Enables use of a user role requirement in your chat configuration."
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chatbot#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "A list of tags to apply to the configuration."
+                    }
                 }
             },
             "traits": {
@@ -568,6 +596,12 @@
                     "target": "com.amazonaws.chatbot#BooleanAccountPreference",
                     "traits": {
                         "smithy.api#documentation": "Enables use of a user role requirement in your chat configuration."
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chatbot#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "A list of tags to apply to the configuration."
                     }
                 }
             },
@@ -1574,6 +1608,19 @@
                 "target": "com.amazonaws.chatbot#GuardrailPolicyArn"
             }
         },
+        "com.amazonaws.chatbot#InternalServiceError": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Customer/consumer-facing internal service exception.\n        https://w.amazon.com/index.php/AWS/API_Standards/Exceptions#InternalServiceError",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
         "com.amazonaws.chatbot#InvalidParameterException": {
             "type": "structure",
             "members": {
@@ -1824,6 +1871,63 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.chatbot#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Retrieves the list of tags applied to a configuration.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/list-tags-for-resource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chatbot#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.chatbot#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the configuration.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.chatbot#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "A list of tags applied to the configuration."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.chatbot#ListTeamsChannelConfigurationsException": {
             "type": "structure",
             "members": {
@@ -1915,6 +2019,19 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.chatbot#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
         "com.amazonaws.chatbot#SlackChannelConfiguration": {
             "type": "structure",
             "members": {
@@ -1989,6 +2106,12 @@
                     "target": "com.amazonaws.chatbot#BooleanAccountPreference",
                     "traits": {
                         "smithy.api#documentation": "Enables use of a user role requirement in your chat configuration."
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chatbot#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "A list of tags applied to the configuration."
                     }
                 }
             },
@@ -2135,6 +2258,136 @@
         "com.amazonaws.chatbot#String": {
             "type": "string"
         },
+        "com.amazonaws.chatbot#Tag": {
+            "type": "structure",
+            "members": {
+                "TagKey": {
+                    "target": "com.amazonaws.chatbot#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "The tag key.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagValue": {
+                    "target": "com.amazonaws.chatbot#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "The tag value.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A tag applied to the configuration."
+            }
+        },
+        "com.amazonaws.chatbot#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.chatbot#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.chatbot#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.chatbot#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#TooManyTagsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Applies the supplied tags to a configuration.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tag-resource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chatbot#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.chatbot#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the configuration.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chatbot#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "A list of tags to apply to the configuration.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.chatbot#Tags": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#Tag"
+            }
+        },
         "com.amazonaws.chatbot#TeamChannelConfigurationsList": {
             "type": "list",
             "member": {
@@ -2231,6 +2484,12 @@
                     "traits": {
                         "smithy.api#documentation": "Enables use of a user role requirement in your chat configuration."
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chatbot#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "A list of tags applied to the configuration."
+                    }
                 }
             },
             "traits": {
@@ -2316,6 +2575,19 @@
                 "smithy.api#documentation": "Identifes a user level permission for a channel configuration."
             }
         },
+        "com.amazonaws.chatbot#TooManyTagsException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The supplied list of tags contains too many tags.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.chatbot#UUID": {
             "type": "string",
             "traits": {
@@ -2324,6 +2596,63 @@
                     "max": 36
                 },
                 "smithy.api#pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
+            }
+        },
+        "com.amazonaws.chatbot#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Removes the supplied tags from a configuration",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/untag-resource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chatbot#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.chatbot#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the configuration.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.chatbot#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "A list of tag keys to remove from the configuration.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.chatbot#UpdateAccountPreferences": {
@@ -2796,6 +3125,15 @@
                 },
                 {
                     "target": "com.amazonaws.chatbot#ListMicrosoftTeamsUserIdentities"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#UntagResource"
                 },
                 {
                     "target": "com.amazonaws.chatbot#UpdateAccountPreferences"

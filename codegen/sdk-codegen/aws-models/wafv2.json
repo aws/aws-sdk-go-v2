@@ -1901,7 +1901,7 @@
                 "SearchString": {
                     "target": "com.amazonaws.wafv2#SearchString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string value that you want WAF to search for. WAF searches only in the part of\n         web requests that you designate for inspection in <a>FieldToMatch</a>. The\n         maximum length of the value is 200 bytes.</p>\n         <p>Valid values depend on the component that you specify for inspection in\n            <code>FieldToMatch</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Method</code>: The HTTP method that you want WAF to search for. This\n               indicates the type of operation specified in the request. </p>\n            </li>\n            <li>\n               <p>\n                  <code>UriPath</code>: The value that you want WAF to search for in the URI path,\n               for example, <code>/images/daily-ad.jpg</code>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>JA3Fingerprint</code>: Match against the request's JA3 fingerprint. The JA3 fingerprint is a 32-character hash derived from the TLS Client Hello of an incoming request. This fingerprint serves as a unique identifier for the client's TLS configuration. You can use this choice only with a string match <code>ByteMatchStatement</code> with the <code>PositionalConstraint</code> set to \n       <code>EXACTLY</code>. </p>\n               <p>You can obtain the JA3 fingerprint for client requests from the web ACL logs. \n\t\t\t\t\t\tIf WAF is able to calculate the fingerprint, it includes it in the logs.  \n\t\t\t\t\t\tFor information about the logging fields, \nsee <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html\">Log fields</a> in the <i>WAF Developer Guide</i>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>HeaderOrder</code>: The list of header names to match for. WAF creates a \n                 string that contains the ordered list of header names, from the headers in the web request, and then matches against that string. </p>\n            </li>\n         </ul>\n         <p>If <code>SearchString</code> includes alphabetic characters A-Z and a-z, note that the\n         value is case sensitive.</p>\n         <p>\n            <b>If you're using the WAF API</b>\n         </p>\n         <p>Specify a base64-encoded version of the value. The maximum length of the value before\n         you base64-encode it is 200 bytes.</p>\n         <p>For example, suppose the value of <code>Type</code> is <code>HEADER</code> and the value\n         of <code>Data</code> is <code>User-Agent</code>. If you want to search the\n            <code>User-Agent</code> header for the value <code>BadBot</code>, you base64-encode\n            <code>BadBot</code> using MIME base64-encoding and include the resulting value,\n            <code>QmFkQm90</code>, in the value of <code>SearchString</code>.</p>\n         <p>\n            <b>If you're using the CLI or one of the Amazon Web Services SDKs</b>\n         </p>\n         <p>The value that you want WAF to search for. The SDK automatically base64 encodes the\n         value.</p>",
+                        "smithy.api#documentation": "<p>A string value that you want WAF to search for. WAF searches only in the part of\n         web requests that you designate for inspection in <a>FieldToMatch</a>. The\n         maximum length of the value is 200 bytes.</p>\n         <p>Valid values depend on the component that you specify for inspection in\n            <code>FieldToMatch</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Method</code>: The HTTP method that you want WAF to search for. This\n               indicates the type of operation specified in the request. </p>\n            </li>\n            <li>\n               <p>\n                  <code>UriPath</code>: The value that you want WAF to search for in the URI path,\n               for example, <code>/images/daily-ad.jpg</code>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>JA3Fingerprint</code>: Available for use with Amazon CloudFront distributions and Application Load Balancers. Match against the request's JA3 fingerprint. The JA3 fingerprint is a 32-character hash derived from the TLS Client Hello of an incoming request. This fingerprint serves as a unique identifier for the client's TLS configuration. You can use this choice only with a string match <code>ByteMatchStatement</code> with the <code>PositionalConstraint</code> set to \n       <code>EXACTLY</code>. </p>\n               <p>You can obtain the JA3 fingerprint for client requests from the web ACL logs. \n\t\t\t\t\t\tIf WAF is able to calculate the fingerprint, it includes it in the logs.  \n\t\t\t\t\t\tFor information about the logging fields, \nsee <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html\">Log fields</a> in the <i>WAF Developer Guide</i>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>HeaderOrder</code>: The list of header names to match for. WAF creates a \n                 string that contains the ordered list of header names, from the headers in the web request, and then matches against that string. </p>\n            </li>\n         </ul>\n         <p>If <code>SearchString</code> includes alphabetic characters A-Z and a-z, note that the\n         value is case sensitive.</p>\n         <p>\n            <b>If you're using the WAF API</b>\n         </p>\n         <p>Specify a base64-encoded version of the value. The maximum length of the value before\n         you base64-encode it is 200 bytes.</p>\n         <p>For example, suppose the value of <code>Type</code> is <code>HEADER</code> and the value\n         of <code>Data</code> is <code>User-Agent</code>. If you want to search the\n            <code>User-Agent</code> header for the value <code>BadBot</code>, you base64-encode\n            <code>BadBot</code> using MIME base64-encoding and include the resulting value,\n            <code>QmFkQm90</code>, in the value of <code>SearchString</code>.</p>\n         <p>\n            <b>If you're using the CLI or one of the Amazon Web Services SDKs</b>\n         </p>\n         <p>The value that you want WAF to search for. The SDK automatically base64 encodes the\n         value.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4739,6 +4739,18 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the web ACL from which you want to delete the <a>LoggingConfiguration</a>.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "LogType": {
+                    "target": "com.amazonaws.wafv2#LogType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to distinguish between various logging options. Currently, there is one option.</p>\n         <p>Default: <code>WAF_LOGS</code>\n         </p>"
+                    }
+                },
+                "LogScope": {
+                    "target": "com.amazonaws.wafv2#LogScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the logging configuration, which must be set to <code>CUSTOMER</code> for the configurations that you manage. </p>\n         <p>The log scope <code>SECURITY_LAKE</code> indicates a configuration that is managed through Amazon Security Lake. You can use Security Lake to collect log and event data from various sources for normalization, analysis, and management. For information, see \n       <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Collecting data from Amazon Web Services services</a>\n       in the <i>Amazon Security Lake user guide</i>. </p>\n         <p>Default: <code>CUSTOMER</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -5554,12 +5566,12 @@
                 "JA3Fingerprint": {
                     "target": "com.amazonaws.wafv2#JA3Fingerprint",
                     "traits": {
-                        "smithy.api#documentation": "<p>Match against the request's JA3 fingerprint. The JA3 fingerprint is a 32-character hash derived from the TLS Client Hello of an incoming request. This fingerprint serves as a unique identifier for the client's TLS configuration. WAF calculates and logs this fingerprint for each\n\t\t\t\t\t\trequest that has enough TLS Client Hello information for the calculation. Almost \n                        all web requests include this information.</p>\n         <note>\n            <p>You can use this choice only with a string match <code>ByteMatchStatement</code> with the <code>PositionalConstraint</code> set to \n       <code>EXACTLY</code>.  </p>\n         </note>\n         <p>You can obtain the JA3 fingerprint for client requests from the web ACL logs. \n\t\t\t\t\t\tIf WAF is able to calculate the fingerprint, it includes it in the logs.  \n\t\t\t\t\t\tFor information about the logging fields, \nsee <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html\">Log fields</a> in the <i>WAF Developer Guide</i>. </p>\n         <p>Provide the JA3 fingerprint string from the logs in your string match statement\n\t\t\t\t\t\t\tspecification, to match with any future requests that have the same TLS configuration.</p>"
+                        "smithy.api#documentation": "<p>Available for use with Amazon CloudFront distributions and Application Load Balancers. Match against the request's JA3 fingerprint. The JA3 fingerprint is a 32-character hash derived from the TLS Client Hello of an incoming request. This fingerprint serves as a unique identifier for the client's TLS configuration. WAF calculates and logs this fingerprint for each\n\t\t\t\t\t\trequest that has enough TLS Client Hello information for the calculation. Almost \n                        all web requests include this information.</p>\n         <note>\n            <p>You can use this choice only with a string match <code>ByteMatchStatement</code> with the <code>PositionalConstraint</code> set to \n       <code>EXACTLY</code>.  </p>\n         </note>\n         <p>You can obtain the JA3 fingerprint for client requests from the web ACL logs. \n\t\t\t\t\t\tIf WAF is able to calculate the fingerprint, it includes it in the logs.  \n\t\t\t\t\t\tFor information about the logging fields, \nsee <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html\">Log fields</a> in the <i>WAF Developer Guide</i>. </p>\n         <p>Provide the JA3 fingerprint string from the logs in your string match statement\n\t\t\t\t\t\t\tspecification, to match with any future requests that have the same TLS configuration.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a web request component to be used in a rule match statement or in a logging configuration. </p>\n         <ul>\n            <li>\n               <p>In a rule statement, this is the part of the web request that you want WAF to inspect. Include the single\n                    <code>FieldToMatch</code> type that you want to inspect, with additional specifications\n                 as needed, according to the type. You specify a single request component in\n                    <code>FieldToMatch</code> for each rule statement that requires it. To inspect more than\n                 one component of the web request, create a separate rule statement for each\n                 component.</p>\n               <p>Example JSON for a <code>QueryString</code> field to match: </p>\n               <p>\n                  <code> \"FieldToMatch\": { \"QueryString\": {} }</code>\n               </p>\n               <p>Example JSON for a <code>Method</code> field to match specification:</p>\n               <p>\n                  <code> \"FieldToMatch\": { \"Method\": { \"Name\": \"DELETE\" } }</code>\n               </p>\n            </li>\n            <li>\n               <p>In a logging configuration, this is used in the <code>RedactedFields</code> property to specify a field to \n              redact from the logging records. For this use case, note the following: </p>\n               <ul>\n                  <li>\n                     <p>Even though all <code>FieldToMatch</code> settings \n                  are available, the only valid settings for field redaction are <code>UriPath</code>, <code>QueryString</code>, <code>SingleHeader</code>, and <code>Method</code>.</p>\n                  </li>\n                  <li>\n                     <p>In this documentation, the descriptions of the individual fields talk about specifying the web request component to inspect, \n                      but for field redaction, you are specifying the component type to redact from the logs. </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Specifies a web request component to be used in a rule match statement or in a logging configuration. </p>\n         <ul>\n            <li>\n               <p>In a rule statement, this is the part of the web request that you want WAF to inspect. Include the single\n                    <code>FieldToMatch</code> type that you want to inspect, with additional specifications\n                 as needed, according to the type. You specify a single request component in\n                    <code>FieldToMatch</code> for each rule statement that requires it. To inspect more than\n                 one component of the web request, create a separate rule statement for each\n                 component.</p>\n               <p>Example JSON for a <code>QueryString</code> field to match: </p>\n               <p>\n                  <code> \"FieldToMatch\": { \"QueryString\": {} }</code>\n               </p>\n               <p>Example JSON for a <code>Method</code> field to match specification:</p>\n               <p>\n                  <code> \"FieldToMatch\": { \"Method\": { \"Name\": \"DELETE\" } }</code>\n               </p>\n            </li>\n            <li>\n               <p>In a logging configuration, this is used in the <code>RedactedFields</code> property to specify a field to \n              redact from the logging records. For this use case, note the following: </p>\n               <ul>\n                  <li>\n                     <p>Even though all <code>FieldToMatch</code> settings \n                  are available, the only valid settings for field redaction are <code>UriPath</code>, <code>QueryString</code>, <code>SingleHeader</code>, and <code>Method</code>.</p>\n                  </li>\n                  <li>\n                     <p>In this documentation, the descriptions of the individual fields talk about specifying the web request component to inspect, \n                      but for field redaction, you are specifying the component type to redact from the logs. </p>\n                  </li>\n                  <li>\n                     <p>If you have request sampling enabled, the redacted fields configuration for logging has no impact on sampling. \n                  The only way to exclude fields from request sampling is by disabling sampling in the web ACL visibility configuration. </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.wafv2#FieldToMatchData": {
@@ -6033,6 +6045,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the web ACL for which you want to get the <a>LoggingConfiguration</a>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "LogType": {
+                    "target": "com.amazonaws.wafv2#LogType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to distinguish between various logging options. Currently, there is one option.</p>\n         <p>Default: <code>WAF_LOGS</code>\n         </p>"
+                    }
+                },
+                "LogScope": {
+                    "target": "com.amazonaws.wafv2#LogScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the logging configuration, which must be set to <code>CUSTOMER</code> for the configurations that you manage. </p>\n         <p>The log scope <code>SECURITY_LAKE</code> indicates a configuration that is managed through Amazon Security Lake. You can use Security Lake to collect log and event data from various sources for normalization, analysis, and management. For information, see \n       <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Collecting data from Amazon Web Services services</a>\n       in the <i>Amazon Security Lake user guide</i>. </p>\n         <p>Default: <code>CUSTOMER</code>\n         </p>"
                     }
                 }
             },
@@ -7106,7 +7130,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Match against the request's JA3 fingerprint. The JA3 fingerprint is a 32-character hash derived from the TLS Client Hello of an incoming request. This fingerprint serves as a unique identifier for the client's TLS configuration. WAF calculates and logs this fingerprint for each\n\t\t\t\t\t\trequest that has enough TLS Client Hello information for the calculation. Almost \n                        all web requests include this information.</p>\n         <note>\n            <p>You can use this choice only with a string match <code>ByteMatchStatement</code> with the <code>PositionalConstraint</code> set to \n       <code>EXACTLY</code>.  </p>\n         </note>\n         <p>You can obtain the JA3 fingerprint for client requests from the web ACL logs. \n\t\t\t\t\t\tIf WAF is able to calculate the fingerprint, it includes it in the logs.  \n\t\t\t\t\t\tFor information about the logging fields, \nsee <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html\">Log fields</a> in the <i>WAF Developer Guide</i>. </p>\n         <p>Provide the JA3 fingerprint string from the logs in your string match statement\n\t\t\t\t\t\t\tspecification, to match with any future requests that have the same TLS configuration.</p>"
+                "smithy.api#documentation": "<p>Available for use with Amazon CloudFront distributions and Application Load Balancers. Match against the request's JA3 fingerprint. The JA3 fingerprint is a 32-character hash derived from the TLS Client Hello of an incoming request. This fingerprint serves as a unique identifier for the client's TLS configuration. WAF calculates and logs this fingerprint for each\n\t\t\t\t\t\trequest that has enough TLS Client Hello information for the calculation. Almost \n                        all web requests include this information.</p>\n         <note>\n            <p>You can use this choice only with a string match <code>ByteMatchStatement</code> with the <code>PositionalConstraint</code> set to \n       <code>EXACTLY</code>.  </p>\n         </note>\n         <p>You can obtain the JA3 fingerprint for client requests from the web ACL logs. \n\t\t\t\t\t\tIf WAF is able to calculate the fingerprint, it includes it in the logs.  \n\t\t\t\t\t\tFor information about the logging fields, \nsee <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html\">Log fields</a> in the <i>WAF Developer Guide</i>. </p>\n         <p>Provide the JA3 fingerprint string from the logs in your string match statement\n\t\t\t\t\t\t\tspecification, to match with any future requests that have the same TLS configuration.</p>"
             }
         },
         "com.amazonaws.wafv2#JsonBody": {
@@ -7688,6 +7712,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of objects that you want WAF to return for this request. If more \n          objects are available, in the response, WAF provides a \n         <code>NextMarker</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
                     }
+                },
+                "LogScope": {
+                    "target": "com.amazonaws.wafv2#LogScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the logging configuration, which must be set to <code>CUSTOMER</code> for the configurations that you manage. </p>\n         <p>The log scope <code>SECURITY_LAKE</code> indicates a configuration that is managed through Amazon Security Lake. You can use Security Lake to collect log and event data from various sources for normalization, analysis, and management. For information, see \n       <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Collecting data from Amazon Web Services services</a>\n       in the <i>Amazon Security Lake user guide</i>. </p>\n         <p>Default: <code>CUSTOMER</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -8251,6 +8281,34 @@
                 }
             }
         },
+        "com.amazonaws.wafv2#LogScope": {
+            "type": "enum",
+            "members": {
+                "CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER"
+                    }
+                },
+                "SECURITY_LAKE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECURITY_LAKE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wafv2#LogType": {
+            "type": "enum",
+            "members": {
+                "WAF_LOGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WAF_LOGS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.wafv2#LoggingConfiguration": {
             "type": "structure",
             "members": {
@@ -8271,7 +8329,7 @@
                 "RedactedFields": {
                     "target": "com.amazonaws.wafv2#RedactedFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parts of the request that you want to keep out of the logs.</p>\n         <p>For example, if you\n         redact the <code>SingleHeader</code> field, the <code>HEADER</code> field in the logs will\n         be <code>REDACTED</code> for all rules that use the <code>SingleHeader</code>\n            <code>FieldToMatch</code> setting. </p>\n         <p>Redaction applies only to the component that's specified in the rule's <code>FieldToMatch</code> setting, so the <code>SingleHeader</code> redaction \n         doesn't apply to rules that use the <code>Headers</code>\n            <code>FieldToMatch</code>.</p>\n         <note>\n            <p>You can specify only the following fields for redaction: <code>UriPath</code>,\n         <code>QueryString</code>, <code>SingleHeader</code>, and <code>Method</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The parts of the request that you want to keep out of the logs.</p>\n         <p>For example, if you\n         redact the <code>SingleHeader</code> field, the <code>HEADER</code> field in the logs will\n         be <code>REDACTED</code> for all rules that use the <code>SingleHeader</code>\n            <code>FieldToMatch</code> setting. </p>\n         <p>Redaction applies only to the component that's specified in the rule's <code>FieldToMatch</code> setting, so the <code>SingleHeader</code> redaction \n         doesn't apply to rules that use the <code>Headers</code>\n            <code>FieldToMatch</code>.</p>\n         <note>\n            <p>You can specify only the following fields for redaction: <code>UriPath</code>,\n         <code>QueryString</code>, <code>SingleHeader</code>, and <code>Method</code>.</p>\n         </note>\n         <note>\n            <p>This setting has no impact on request sampling. With request sampling, \n                the only way to exclude fields is by disabling sampling in the web ACL visibility configuration. </p>\n         </note>"
                     }
                 },
                 "ManagedByFirewallManager": {
@@ -8285,6 +8343,18 @@
                     "target": "com.amazonaws.wafv2#LoggingFilter",
                     "traits": {
                         "smithy.api#documentation": "<p>Filtering that specifies which web requests are kept in the logs and which are dropped.\n         You can filter on the rule action and on the web request labels that were applied by\n         matching rules during web ACL evaluation. </p>"
+                    }
+                },
+                "LogType": {
+                    "target": "com.amazonaws.wafv2#LogType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to distinguish between various logging options. Currently, there is one option.</p>\n         <p>Default: <code>WAF_LOGS</code>\n         </p>"
+                    }
+                },
+                "LogScope": {
+                    "target": "com.amazonaws.wafv2#LogScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the logging configuration, which must be set to <code>CUSTOMER</code> for the configurations that you manage. </p>\n         <p>The log scope <code>SECURITY_LAKE</code> indicates a configuration that is managed through Amazon Security Lake. You can use Security Lake to collect log and event data from various sources for normalization, analysis, and management. For information, see \n       <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Collecting data from Amazon Web Services services</a>\n       in the <i>Amazon Security Lake user guide</i>. </p>\n         <p>Default: <code>CUSTOMER</code>\n         </p>"
                     }
                 }
             },
@@ -12533,7 +12603,7 @@
                     "target": "com.amazonaws.wafv2#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Indicates whether WAF should store a sampling of the web requests that\n         match the rules. You can view the sampled requests through the WAF console. </p>",
+                        "smithy.api#documentation": "<p>Indicates whether WAF should store a sampling of the web requests that\n         match the rules. You can view the sampled requests through the WAF console. </p>\n         <note>\n            <p>Request sampling doesn't provide a field redaction option, and any field redaction that you specify in your logging configuration doesn't affect sampling. \n                  The only way to exclude fields from request sampling is by disabling sampling in the web ACL visibility configuration. </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
