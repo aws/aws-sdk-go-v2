@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +54,15 @@ type DeleteStackInput struct {
 	// assigned the same token in the following format:
 	// Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002 .
 	ClientRequestToken *string
+
+	// Specifies the deletion mode for the stack. Possible values are:
+	//
+	//   - STANDARD - Use the standard behavior. Specifying this value is the same as
+	//   not specifying this parameter.
+	//
+	//   - FORCE_DELETE_STACK - Delete the stack if it's stuck in a DELETE_FAILED state
+	//   due to resource deletion failure.
+	DeletionMode types.DeletionMode
 
 	// For stacks in the DELETE_FAILED state, a list of resource logical IDs that are
 	// associated with the resources you want to retain. During deletion,

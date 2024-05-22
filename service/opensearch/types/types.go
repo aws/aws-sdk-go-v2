@@ -660,6 +660,9 @@ type DataSourceDetails struct {
 	// The name of the data source.
 	Name *string
 
+	// The status of the data source.
+	Status DataSourceStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -994,7 +997,7 @@ type DomainStatus struct {
 	// for all traffic.
 	DomainEndpointOptions *DomainEndpointOptions
 
-	// The DualStack Hosted Zone Id for the domain.
+	// The dual stack hosted zone ID for the domain.
 	DomainEndpointV2HostedZoneId *string
 
 	// The status of any changes that are currently in progress for the domain.

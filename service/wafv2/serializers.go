@@ -4026,6 +4026,16 @@ func awsAwsjson11_serializeDocumentLoggingConfiguration(v *types.LoggingConfigur
 		}
 	}
 
+	if len(v.LogScope) > 0 {
+		ok := object.Key("LogScope")
+		ok.String(string(v.LogScope))
+	}
+
+	if len(v.LogType) > 0 {
+		ok := object.Key("LogType")
+		ok.String(string(v.LogType))
+	}
+
 	if v.ManagedByFirewallManager {
 		ok := object.Key("ManagedByFirewallManager")
 		ok.Boolean(v.ManagedByFirewallManager)
@@ -5851,6 +5861,16 @@ func awsAwsjson11_serializeOpDocumentDeleteLoggingConfigurationInput(v *DeleteLo
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.LogScope) > 0 {
+		ok := object.Key("LogScope")
+		ok.String(string(v.LogScope))
+	}
+
+	if len(v.LogType) > 0 {
+		ok := object.Key("LogType")
+		ok.String(string(v.LogType))
+	}
+
 	if v.ResourceArn != nil {
 		ok := object.Key("ResourceArn")
 		ok.String(*v.ResourceArn)
@@ -6079,6 +6099,16 @@ func awsAwsjson11_serializeOpDocumentGetIPSetInput(v *GetIPSetInput, value smith
 func awsAwsjson11_serializeOpDocumentGetLoggingConfigurationInput(v *GetLoggingConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.LogScope) > 0 {
+		ok := object.Key("LogScope")
+		ok.String(string(v.LogScope))
+	}
+
+	if len(v.LogType) > 0 {
+		ok := object.Key("LogType")
+		ok.String(string(v.LogType))
+	}
 
 	if v.ResourceArn != nil {
 		ok := object.Key("ResourceArn")
@@ -6393,6 +6423,11 @@ func awsAwsjson11_serializeOpDocumentListLoggingConfigurationsInput(v *ListLoggi
 	if v.Limit != nil {
 		ok := object.Key("Limit")
 		ok.Integer(*v.Limit)
+	}
+
+	if len(v.LogScope) > 0 {
+		ok := object.Key("LogScope")
+		ok.String(string(v.LogScope))
 	}
 
 	if v.NextMarker != nil {

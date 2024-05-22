@@ -61,6 +61,9 @@ type ChimeWebhookConfiguration struct {
 	// or NONE.
 	LoggingLevel *string
 
+	// A list of tags applied to the configuration.
+	Tags []Tag
+
 	noSmithyDocumentSerde
 }
 
@@ -139,6 +142,9 @@ type SlackChannelConfiguration struct {
 	// Logging levels include ERROR, INFO, or NONE.
 	LoggingLevel *string
 
+	// A list of tags applied to the configuration.
+	Tags []Tag
+
 	// Enables use of a user role requirement in your chat configuration.
 	UserAuthorizationRequired *bool
 
@@ -189,6 +195,22 @@ type SlackWorkspace struct {
 	//
 	// This member is required.
 	SlackTeamName *string
+
+	noSmithyDocumentSerde
+}
+
+// A tag applied to the configuration.
+type Tag struct {
+
+	// The tag key.
+	//
+	// This member is required.
+	TagKey *string
+
+	// The tag value.
+	//
+	// This member is required.
+	TagValue *string
 
 	noSmithyDocumentSerde
 }
@@ -244,6 +266,9 @@ type TeamsChannelConfiguration struct {
 
 	// Logging levels include ERROR, INFO, or NONE.
 	LoggingLevel *string
+
+	// A list of tags applied to the configuration.
+	Tags []Tag
 
 	// The name of the Microsoft Teams Team.
 	TeamName *string

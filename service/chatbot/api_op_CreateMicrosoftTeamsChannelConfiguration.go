@@ -73,6 +73,9 @@ type CreateMicrosoftTeamsChannelConfigurationInput struct {
 	// The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
 	SnsTopicArns []string
 
+	// A list of tags to apply to the configuration.
+	Tags []types.Tag
+
 	// The name of the Microsoft Teams Team.
 	TeamName *string
 

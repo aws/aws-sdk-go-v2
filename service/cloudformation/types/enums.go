@@ -289,6 +289,25 @@ func (ConcurrencyMode) Values() []ConcurrencyMode {
 	}
 }
 
+type DeletionMode string
+
+// Enum values for DeletionMode
+const (
+	DeletionModeStandard         DeletionMode = "STANDARD"
+	DeletionModeForceDeleteStack DeletionMode = "FORCE_DELETE_STACK"
+)
+
+// Values returns all known values for DeletionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeletionMode) Values() []DeletionMode {
+	return []DeletionMode{
+		"STANDARD",
+		"FORCE_DELETE_STACK",
+	}
+}
+
 type DeprecatedStatus string
 
 // Enum values for DeprecatedStatus

@@ -34,6 +34,25 @@ type GetLoggingConfigurationInput struct {
 	// This member is required.
 	ResourceArn *string
 
+	// The owner of the logging configuration, which must be set to CUSTOMER for the
+	// configurations that you manage.
+	//
+	// The log scope SECURITY_LAKE indicates a configuration that is managed through
+	// Amazon Security Lake. You can use Security Lake to collect log and event data
+	// from various sources for normalization, analysis, and management. For
+	// information, see [Collecting data from Amazon Web Services services]in the Amazon Security Lake user guide.
+	//
+	// Default: CUSTOMER
+	//
+	// [Collecting data from Amazon Web Services services]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+	LogScope types.LogScope
+
+	// Used to distinguish between various logging options. Currently, there is one
+	// option.
+	//
+	// Default: WAF_LOGS
+	LogType types.LogType
+
 	noSmithyDocumentSerde
 }
 

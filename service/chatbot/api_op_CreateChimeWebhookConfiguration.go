@@ -60,6 +60,9 @@ type CreateChimeWebhookConfigurationInput struct {
 	// Logging levels include ERROR, INFO, or NONE.
 	LoggingLevel *string
 
+	// A list of tags to apply to the configuration.
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

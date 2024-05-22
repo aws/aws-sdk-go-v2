@@ -1090,6 +1090,15 @@ type Stack struct {
 	// The unique ID of the change set.
 	ChangeSetId *string
 
+	// Specifies the deletion mode for the stack. Possible values are:
+	//
+	//   - STANDARD - Use the standard behavior. Specifying this value is the same as
+	//   not specifying this parameter.
+	//
+	//   - FORCE_DELETE_STACK - Delete the stack if it's stuck in a DELETE_FAILED state
+	//   due to resource deletion failure.
+	DeletionMode DeletionMode
+
 	// The time the stack was deleted.
 	DeletionTime *time.Time
 
@@ -2276,8 +2285,8 @@ type StackSetOperationPreferences struct {
 	//   level to ensure the number of failed accounts never exceeds the value of
 	//   FailureToleranceCount +1. The initial actual concurrency is set to the lower
 	//   of either the value of the MaxConcurrentCount , or the value of
-	//   MaxConcurrentCount +1. The actual concurrency is then reduced proportionally
-	//   by the number of failures. This is the default behavior.
+	//   FailureToleranceCount +1. The actual concurrency is then reduced
+	//   proportionally by the number of failures. This is the default behavior.
 	//
 	// If failure tolerance or Maximum concurrent accounts are set to percentages, the
 	//   behavior is similar.

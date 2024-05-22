@@ -6514,6 +6514,11 @@ func awsAwsquery_serializeOpDocumentDeleteStackInput(v *DeleteStackInput, value 
 		objectKey.String(*v.ClientRequestToken)
 	}
 
+	if len(v.DeletionMode) > 0 {
+		objectKey := object.Key("DeletionMode")
+		objectKey.String(string(v.DeletionMode))
+	}
+
 	if v.RetainResources != nil {
 		objectKey := object.Key("RetainResources")
 		if err := awsAwsquery_serializeDocumentRetainResources(v.RetainResources, objectKey); err != nil {

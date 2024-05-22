@@ -66,6 +66,9 @@ type CreateSlackChannelConfigurationInput struct {
 	// The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
 	SnsTopicArns []string
 
+	// A list of tags to apply to the configuration.
+	Tags []types.Tag
+
 	// Enables use of a user role requirement in your chat configuration.
 	UserAuthorizationRequired *bool
 

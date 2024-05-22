@@ -113,8 +113,8 @@ type ListStackInstanceResourceDriftsOutput struct {
 	// previous response object's NextToken parameter is set to null .
 	NextToken *string
 
-	// A list of StackInstanceResourceDriftSummary structures that contain information
-	// about the specified stack instances.
+	// A list of StackInstanceResourceDriftsSummary structures that contain
+	// information about the specified stack instances.
 	Summaries []types.StackInstanceResourceDriftsSummary
 
 	// Metadata pertaining to the operation's result.

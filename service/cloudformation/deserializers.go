@@ -15994,6 +15994,19 @@ func awsAwsquery_deserializeDocumentStack(v **types.Stack, decoder smithyxml.Nod
 				sv.CreationTime = ptr.Time(t)
 			}
 
+		case strings.EqualFold("DeletionMode", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DeletionMode = types.DeletionMode(xtv)
+			}
+
 		case strings.EqualFold("DeletionTime", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

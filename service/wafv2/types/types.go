@@ -433,7 +433,8 @@ type ByteMatchStatement struct {
 	//   - UriPath : The value that you want WAF to search for in the URI path, for
 	//   example, /images/daily-ad.jpg .
 	//
-	//   - JA3Fingerprint : Match against the request's JA3 fingerprint. The JA3
+	//   - JA3Fingerprint : Available for use with Amazon CloudFront distributions and
+	//   Application Load Balancers. Match against the request's JA3 fingerprint. The JA3
 	//   fingerprint is a 32-character hash derived from the TLS Client Hello of an
 	//   incoming request. This fingerprint serves as a unique identifier for the
 	//   client's TLS configuration. You can use this choice only with a string match
@@ -951,6 +952,10 @@ type ExcludedRule struct {
 //   - In this documentation, the descriptions of the individual fields talk about
 //     specifying the web request component to inspect, but for field redaction, you
 //     are specifying the component type to redact from the logs.
+//
+//   - If you have request sampling enabled, the redacted fields configuration for
+//     logging has no impact on sampling. The only way to exclude fields from request
+//     sampling is by disabling sampling in the web ACL visibility configuration.
 type FieldToMatch struct {
 
 	// Inspect all query arguments.
@@ -1007,7 +1012,8 @@ type FieldToMatch struct {
 	// the underlying host service.
 	Headers *Headers
 
-	// Match against the request's JA3 fingerprint. The JA3 fingerprint is a
+	// Available for use with Amazon CloudFront distributions and Application Load
+	// Balancers. Match against the request's JA3 fingerprint. The JA3 fingerprint is a
 	// 32-character hash derived from the TLS Client Hello of an incoming request. This
 	// fingerprint serves as a unique identifier for the client's TLS configuration.
 	// WAF calculates and logs this fingerprint for each request that has enough TLS
@@ -1642,7 +1648,8 @@ type IPSetSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Match against the request's JA3 fingerprint. The JA3 fingerprint is a
+// Available for use with Amazon CloudFront distributions and Application Load
+// Balancers. Match against the request's JA3 fingerprint. The JA3 fingerprint is a
 // 32-character hash derived from the TLS Client Hello of an incoming request. This
 // fingerprint serves as a unique identifier for the client's TLS configuration.
 // WAF calculates and logs this fingerprint for each request that has enough TLS
@@ -1933,6 +1940,25 @@ type LoggingConfiguration struct {
 	// This member is required.
 	ResourceArn *string
 
+	// The owner of the logging configuration, which must be set to CUSTOMER for the
+	// configurations that you manage.
+	//
+	// The log scope SECURITY_LAKE indicates a configuration that is managed through
+	// Amazon Security Lake. You can use Security Lake to collect log and event data
+	// from various sources for normalization, analysis, and management. For
+	// information, see [Collecting data from Amazon Web Services services]in the Amazon Security Lake user guide.
+	//
+	// Default: CUSTOMER
+	//
+	// [Collecting data from Amazon Web Services services]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+	LogScope LogScope
+
+	// Used to distinguish between various logging options. Currently, there is one
+	// option.
+	//
+	// Default: WAF_LOGS
+	LogType LogType
+
 	// Filtering that specifies which web requests are kept in the logs and which are
 	// dropped. You can filter on the rule action and on the web request labels that
 	// were applied by matching rules during web ACL evaluation.
@@ -1954,6 +1980,10 @@ type LoggingConfiguration struct {
 	//
 	// You can specify only the following fields for redaction: UriPath , QueryString ,
 	// SingleHeader , and Method .
+	//
+	// This setting has no impact on request sampling. With request sampling, the only
+	// way to exclude fields is by disabling sampling in the web ACL visibility
+	// configuration.
 	RedactedFields []FieldToMatch
 
 	noSmithyDocumentSerde
@@ -4597,6 +4627,11 @@ type VisibilityConfig struct {
 
 	// Indicates whether WAF should store a sampling of the web requests that match
 	// the rules. You can view the sampled requests through the WAF console.
+	//
+	// Request sampling doesn't provide a field redaction option, and any field
+	// redaction that you specify in your logging configuration doesn't affect
+	// sampling. The only way to exclude fields from request sampling is by disabling
+	// sampling in the web ACL visibility configuration.
 	//
 	// This member is required.
 	SampledRequestsEnabled bool

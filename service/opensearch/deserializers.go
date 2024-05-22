@@ -5739,6 +5739,15 @@ func awsRestjson1_deserializeOpDocumentGetDataSourceOutput(v **GetDataSourceOutp
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSourceStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.DataSourceStatus(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -12967,6 +12976,15 @@ func awsRestjson1_deserializeDocumentDataSourceDetails(v **types.DataSourceDetai
 					return fmt.Errorf("expected DataSourceName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSourceStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.DataSourceStatus(jtv)
 			}
 
 		default:

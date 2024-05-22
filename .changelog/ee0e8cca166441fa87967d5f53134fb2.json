@@ -1,0 +1,8 @@
+{
+    "id": "ee0e8cca-1664-41fa-8796-7d5f53134fb2",
+    "type": "feature",
+    "description": "Added DeletionMode FORCE_DELETE_STACK for deleting a stack that is stuck in DELETE_FAILED state due to resource deletion failure.",
+    "modules": [
+        "service/cloudformation"
+    ]
+}

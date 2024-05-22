@@ -10467,6 +10467,24 @@ func awsAwsjson11_deserializeDocumentLoggingConfiguration(v **types.LoggingConfi
 				return err
 			}
 
+		case "LogScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogScope to be of type string, got %T instead", value)
+				}
+				sv.LogScope = types.LogScope(jtv)
+			}
+
+		case "LogType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogType to be of type string, got %T instead", value)
+				}
+				sv.LogType = types.LogType(jtv)
+			}
+
 		case "ManagedByFirewallManager":
 			if value != nil {
 				jtv, ok := value.(bool)

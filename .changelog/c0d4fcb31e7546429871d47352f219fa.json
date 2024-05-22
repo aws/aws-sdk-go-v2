@@ -1,0 +1,8 @@
+{
+    "id": "c0d4fcb3-1e75-4642-9871-d47352f219fa",
+    "type": "feature",
+    "description": "This release includes feature to import customer's asymmetric (RSA, ECC and SM2) and HMAC keys into KMS in China.",
+    "modules": [
+        "service/kms"
+    ]
+}

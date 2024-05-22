@@ -796,6 +796,42 @@ func (LabelMatchScope) Values() []LabelMatchScope {
 	}
 }
 
+type LogScope string
+
+// Enum values for LogScope
+const (
+	LogScopeCustomer     LogScope = "CUSTOMER"
+	LogScopeSecurityLake LogScope = "SECURITY_LAKE"
+)
+
+// Values returns all known values for LogScope. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LogScope) Values() []LogScope {
+	return []LogScope{
+		"CUSTOMER",
+		"SECURITY_LAKE",
+	}
+}
+
+type LogType string
+
+// Enum values for LogType
+const (
+	LogTypeWafLogs LogType = "WAF_LOGS"
+)
+
+// Values returns all known values for LogType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LogType) Values() []LogType {
+	return []LogType{
+		"WAF_LOGS",
+	}
+}
+
 type MapMatchScope string
 
 // Enum values for MapMatchScope

@@ -398,6 +398,55 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "ca-west-1",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control.ca-west-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname:          "s3-control-fips.ca-west-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control-fips.dualstack.ca-west-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-west-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control.dualstack.ca-west-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "ca-west-1-fips",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control-fips.ca-west-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "eu-central-1",
 			}: endpoints.Endpoint{
 				Hostname:          "s3-control.eu-central-1.amazonaws.com",

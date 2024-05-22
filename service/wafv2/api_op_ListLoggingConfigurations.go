@@ -51,6 +51,19 @@ type ListLoggingConfigurationsInput struct {
 	// that you can use in a subsequent call to get the next batch of objects.
 	Limit *int32
 
+	// The owner of the logging configuration, which must be set to CUSTOMER for the
+	// configurations that you manage.
+	//
+	// The log scope SECURITY_LAKE indicates a configuration that is managed through
+	// Amazon Security Lake. You can use Security Lake to collect log and event data
+	// from various sources for normalization, analysis, and management. For
+	// information, see [Collecting data from Amazon Web Services services]in the Amazon Security Lake user guide.
+	//
+	// Default: CUSTOMER
+	//
+	// [Collecting data from Amazon Web Services services]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+	LogScope types.LogScope
+
 	// When you request a list of objects with a Limit setting, if the number of
 	// objects that are still available for retrieval exceeds the limit, WAF returns a
 	// NextMarker value in the response. To retrieve the next batch of objects, provide
