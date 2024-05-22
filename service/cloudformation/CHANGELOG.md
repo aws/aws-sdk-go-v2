@@ -1,3 +1,7 @@
+# v1.51.0 (2024-05-22)
+
+* **Feature**: Added DeletionMode FORCE_DELETE_STACK for deleting a stack that is stuck in DELETE_FAILED state due to resource deletion failure.
+
 # v1.50.3 (2024-05-16)
 
 * **Dependency Update**: Updated to the latest SDK module versions

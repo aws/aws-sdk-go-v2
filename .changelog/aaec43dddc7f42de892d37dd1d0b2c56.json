@@ -1,8 +1,0 @@
-{
-    "id": "aaec43dd-dc7f-42de-892d-37dd1d0b2c56",
-    "type": "feature",
-    "description": "This change adds support for tagging Chatbot configurations.",
-    "modules": [
-        "service/chatbot"
-    ]
-}

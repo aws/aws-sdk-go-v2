@@ -12,7 +12,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/athena v1.40.7
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.40.8
 	github.com/aws/aws-sdk-go-v2/service/batch v1.37.3
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.50.3
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.51.0
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.36.3
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.21.7
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.22.7
@@ -53,7 +53,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.21.7
 	github.com/aws/aws-sdk-go-v2/service/iot v1.53.6
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.27.7
-	github.com/aws/aws-sdk-go-v2/service/kms v1.31.3
+	github.com/aws/aws-sdk-go-v2/service/kms v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.54.3
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.38.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.20.7
@@ -68,7 +68,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.23.7
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.28.4
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.54.2
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.44.9
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.44.10
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.29.0
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.28.7
 	github.com/aws/aws-sdk-go-v2/service/ses v1.22.8
@@ -84,7 +84,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.17.7
 	github.com/aws/aws-sdk-go-v2/service/waf v1.20.7
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.21.7
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.48.6
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.49.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.39.3
 	github.com/aws/smithy-go v1.20.2
 )

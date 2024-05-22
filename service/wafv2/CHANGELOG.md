@@ -1,3 +1,7 @@
+# v1.49.0 (2024-05-22)
+
+* **Feature**: You can now use Security Lake to collect web ACL traffic data.
+
 # v1.48.6 (2024-05-16)
 
 * **Dependency Update**: Updated to the latest SDK module versions

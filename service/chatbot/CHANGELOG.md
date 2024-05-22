@@ -1,3 +1,7 @@
+# v1.2.0 (2024-05-22)
+
+* **Feature**: This change adds support for tagging Chatbot configurations.
+
 # v1.1.8 (2024-05-16)
 
 * **Dependency Update**: Updated to the latest SDK module versions

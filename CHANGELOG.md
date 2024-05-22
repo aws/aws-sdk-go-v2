@@ -1,3 +1,17 @@
+# Release (2024-05-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chatbot`: [v1.2.0](service/chatbot/CHANGELOG.md#v120-2024-05-22)
+  * **Feature**: This change adds support for tagging Chatbot configurations.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.51.0](service/cloudformation/CHANGELOG.md#v1510-2024-05-22)
+  * **Feature**: Added DeletionMode FORCE_DELETE_STACK for deleting a stack that is stuck in DELETE_FAILED state due to resource deletion failure.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.32.0](service/kms/CHANGELOG.md#v1320-2024-05-22)
+  * **Feature**: This release includes feature to import customer's asymmetric (RSA, ECC and SM2) and HMAC keys into KMS in China.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.34.0](service/opensearch/CHANGELOG.md#v1340-2024-05-22)
+  * **Feature**: This release adds support for enabling or disabling a data source configured as part of Zero-ETL integration with Amazon S3, by setting its status.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.49.0](service/wafv2/CHANGELOG.md#v1490-2024-05-22)
+  * **Feature**: You can now use Security Lake to collect web ACL traffic data.
+
 # Release (2024-05-21)
 
 ## Module Highlights
