@@ -1,3 +1,7 @@
+# v1.0.1 (2024-05-23)
+
+* No change notes available for this release.
+
 # v1.0.0 (2024-05-21)
 
 * **Release**: New AWS service client module

@@ -1,3 +1,7 @@
+# v1.32.1 (2024-05-23)
+
+* No change notes available for this release.
+
 # v1.32.0 (2024-05-16)
 
 * **Feature**: AWS MSK support for Broker Removal.

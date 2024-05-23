@@ -1,3 +1,7 @@
+# v1.33.1 (2024-05-23)
+
+* No change notes available for this release.
+
 # v1.33.0 (2024-05-17)
 
 * **Feature**: Introduces a new API, GetDataLakePrincipal, that returns the identity of the invoking principal

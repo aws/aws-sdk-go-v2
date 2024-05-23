@@ -1,3 +1,7 @@
+# v1.51.1 (2024-05-23)
+
+* No change notes available for this release.
+
 # v1.51.0 (2024-05-22)
 
 * **Feature**: Added DeletionMode FORCE_DELETE_STACK for deleting a stack that is stuck in DELETE_FAILED state due to resource deletion failure.

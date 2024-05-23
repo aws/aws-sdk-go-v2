@@ -1,3 +1,7 @@
+# v1.2.1 (2024-05-23)
+
+* No change notes available for this release.
+
 # v1.2.0 (2024-05-22)
 
 * **Feature**: This change adds support for tagging Chatbot configurations.

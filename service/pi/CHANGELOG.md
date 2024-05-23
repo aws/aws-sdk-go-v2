@@ -1,3 +1,7 @@
+# v1.25.1 (2024-05-23)
+
+* No change notes available for this release.
+
 # v1.25.0 (2024-05-21)
 
 * **Feature**: Performance Insights added a new input parameter called AuthorizedActions to support the fine-grained access feature. Performance Insights also restricted the acceptable input characters.

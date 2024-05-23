@@ -1,8 +1,0 @@
-{
-    "id": "422e9744-4e83-499e-abfe-e55a6d263189",
-    "type": "documentation",
-    "description": "Documentation-only update for OpsWorks Stacks.",
-    "modules": [
-        "service/opsworks"
-    ]
-}

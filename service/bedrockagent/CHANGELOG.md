@@ -1,3 +1,7 @@
+# v1.11.1 (2024-05-23)
+
+* No change notes available for this release.
+
 # v1.11.0 (2024-05-20)
 
 * **Feature**: This release adds support for using Guardrails with Bedrock Agents.

@@ -1,3 +1,7 @@
+# v1.79.2 (2024-05-23)
+
+* No change notes available for this release.
+
 # v1.79.1 (2024-05-21)
 
 * **Documentation**: Updates Amazon RDS documentation for Db2 license through AWS Marketplace.

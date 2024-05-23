@@ -1,3 +1,7 @@
+# v1.64.1 (2024-05-23)
+
+* No change notes available for this release.
+
 # v1.64.0 (2024-05-16)
 
 * **Feature**: This release adds DescribeKeyRegistration and UpdateKeyRegistration APIs to manage QuickSight Customer Managed Keys (CMK).

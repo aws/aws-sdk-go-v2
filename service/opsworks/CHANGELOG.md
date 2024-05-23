@@ -1,3 +1,7 @@
+# v1.22.8 (2024-05-23)
+
+* **Documentation**: Documentation-only update for OpsWorks Stacks.
+
 # v1.22.7 (2024-05-16)
 
 * **Dependency Update**: Updated to the latest SDK module versions

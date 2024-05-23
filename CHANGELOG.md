@@ -1,3 +1,16 @@
+# Release (2024-05-23)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.20.0](service/emrserverless/CHANGELOG.md#v1200-2024-05-23)
+  * **Feature**: This release adds the capability to run interactive workloads using Apache Livy Endpoint.
+* `github.com/aws/aws-sdk-go-v2/service/opsworks`: [v1.22.8](service/opsworks/CHANGELOG.md#v1228-2024-05-23)
+  * **Documentation**: Documentation-only update for OpsWorks Stacks.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.54.3](service/s3/CHANGELOG.md#v1543-2024-05-23)
+  * **Bug Fix**: Prevent parsing failures for nonstandard `Expires` values in responses. If the SDK cannot parse the value set in the response header for this field it will now be returned as `nil`. A new field, `ExpiresString`, has been added that will retain the unparsed value from the response (regardless of whether it came back in a format recognized by the SDK).
+
 # Release (2024-05-22)
 
 ## Module Highlights

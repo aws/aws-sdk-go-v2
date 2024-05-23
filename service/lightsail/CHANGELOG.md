@@ -1,3 +1,7 @@
+# v1.38.1 (2024-05-23)
+
+* No change notes available for this release.
+
 # v1.38.0 (2024-05-21)
 
 * **Feature**: This release adds support for Amazon Lightsail instances to switch between dual-stack or IPv4 only and IPv6-only public IP address types.

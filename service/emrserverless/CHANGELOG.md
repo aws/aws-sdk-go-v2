@@ -1,3 +1,7 @@
+# v1.20.0 (2024-05-23)
+
+* **Feature**: This release adds the capability to run interactive workloads using Apache Livy Endpoint.
+
 # v1.19.4 (2024-05-16)
 
 * **Dependency Update**: Updated to the latest SDK module versions
