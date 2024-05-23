@@ -128,6 +128,12 @@
                 },
                 "monitoringConfiguration": {
                     "target": "com.amazonaws.emrserverless#MonitoringConfiguration"
+                },
+                "interactiveConfiguration": {
+                    "target": "com.amazonaws.emrserverless#InteractiveConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interactive configuration object that enables the interactive use cases for an application.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1474,6 +1480,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration setting for monitoring.</p>"
                     }
+                },
+                "interactiveConfiguration": {
+                    "target": "com.amazonaws.emrserverless#InteractiveConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interactive configuration object that enables the interactive use cases \n      to use when running an application.</p>"
+                    }
                 }
             }
         },
@@ -1953,6 +1965,26 @@
                     "min": 0,
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.emrserverless#InteractiveConfiguration": {
+            "type": "structure",
+            "members": {
+                "studioEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables you to connect an application to Amazon EMR Studio to run interactive workloads in a notebook.</p>"
+                    }
+                },
+                "livyEndpointEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables an Apache Livy endpoint that you can connect to and run interactive jobs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration to use to enable the different types of interactive use cases in an application.</p>"
             }
         },
         "com.amazonaws.emrserverless#InternalServerException": {
@@ -3480,6 +3512,12 @@
                     "target": "com.amazonaws.emrserverless#WorkerTypeSpecificationInputMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The key-value pairs that specify worker type to\n            <code>WorkerTypeSpecificationInput</code>. This parameter must contain all valid worker\n         types for a Spark or Hive application. Valid worker types include <code>Driver</code> and\n            <code>Executor</code> for Spark applications and <code>HiveDriver</code> and\n            <code>TezTask</code> for Hive applications. You can either set image details in this\n         parameter for each worker type, or in <code>imageConfiguration</code> for all worker\n         types.</p>"
+                    }
+                },
+                "interactiveConfiguration": {
+                    "target": "com.amazonaws.emrserverless#InteractiveConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interactive configuration object that contains new interactive use cases \n         when the application is updated.</p>"
                     }
                 },
                 "releaseLabel": {
