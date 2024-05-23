@@ -40,14 +40,14 @@ type UpdateInstanceInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The default AWS OpsWorks Stacks agent version. You have the following options:
+	// The default OpsWorks Stacks agent version. You have the following options:
 	//
 	//   - INHERIT - Use the stack's default agent version setting.
 	//
 	//   - version_number - Use the specified agent version. This value overrides the
 	//   stack's default setting. To update the agent version, you must edit the instance
-	//   configuration and specify a new version. AWS OpsWorks Stacks then automatically
-	//   installs that version on the instance.
+	//   configuration and specify a new version. OpsWorks Stacks installs that version
+	//   on the instance.
 	//
 	// The default setting is INHERIT . To specify an agent version, you must use the
 	// complete version number, not the abbreviated number shown on the console. For a
@@ -76,7 +76,12 @@ type UpdateInstanceInput struct {
 	// This property cannot be updated.
 	EbsOptimized *bool
 
-	// The instance host name.
+	// The instance host name. The following are character limits for instance host
+	// names.
+	//
+	//   - Linux-based instances: 63 characters
+	//
+	//   - Windows-based instances: 15 characters
 	Hostname *string
 
 	// Whether to install operating system and package updates when the instance
@@ -105,12 +110,12 @@ type UpdateInstanceInput struct {
 	// cannot update an instance that is using a custom AMI.
 	//
 	//   - A supported Linux operating system: An Amazon Linux version, such as Amazon
-	//   Linux 2018.03 , Amazon Linux 2017.09 , Amazon Linux 2017.03 , Amazon Linux
-	//   2016.09 , Amazon Linux 2016.03 , Amazon Linux 2015.09 , or Amazon Linux
-	//   2015.03 .
+	//   Linux 2 , Amazon Linux 2018.03 , Amazon Linux 2017.09 , Amazon Linux 2017.03 ,
+	//   Amazon Linux 2016.09 , Amazon Linux 2016.03 , Amazon Linux 2015.09 , or
+	//   Amazon Linux 2015.03 .
 	//
-	//   - A supported Ubuntu operating system, such as Ubuntu 16.04 LTS , Ubuntu
-	//   14.04 LTS , or Ubuntu 12.04 LTS .
+	//   - A supported Ubuntu operating system, such as Ubuntu 18.04 LTS , Ubuntu
+	//   16.04 LTS , Ubuntu 14.04 LTS , or Ubuntu 12.04 LTS .
 	//
 	//   - CentOS Linux 7
 	//
@@ -121,19 +126,19 @@ type UpdateInstanceInput struct {
 	//   Microsoft Windows Server 2012 R2 with SQL Server Standard , or Microsoft
 	//   Windows Server 2012 R2 with SQL Server Web .
 	//
-	// For more information about supported operating systems, see [AWS OpsWorks Stacks Operating Systems].
+	// Not all operating systems are supported with all versions of Chef. For more
+	// information about supported operating systems, see [OpsWorks Stacks Operating Systems].
 	//
 	// The default option is the current Amazon Linux version. If you set this
 	// parameter to Custom , you must use the AmiId parameter to specify the custom AMI
-	// that you want to use. For more information about supported operating systems,
-	// see [Operating Systems]. For more information about how to use custom AMIs with OpsWorks, see [Using Custom AMIs].
+	// that you want to use. For more information about how to use custom AMIs with
+	// OpsWorks, see [Using Custom AMIs].
 	//
 	// You can specify a different Linux operating system for the updated stack, but
 	// you cannot change from Linux to Windows or Windows to Linux.
 	//
-	// [AWS OpsWorks Stacks Operating Systems]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
 	// [Using Custom AMIs]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
-	// [Operating Systems]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+	// [OpsWorks Stacks Operating Systems]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
 	Os *string
 
 	// The instance's Amazon EC2 key name.

@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches an Elastic Load Balancing load balancer to a specified layer. AWS
-// OpsWorks Stacks does not support Application Load Balancer. You can only use
-// Classic Load Balancer with AWS OpsWorks Stacks. For more information, see [Elastic Load Balancing].
+// Attaches an Elastic Load Balancing load balancer to a specified layer. OpsWorks
+// Stacks does not support Application Load Balancer. You can only use Classic Load
+// Balancer with OpsWorks Stacks. For more information, see [Elastic Load Balancing].
 //
 // You must create the Elastic Load Balancing instance separately, by using the
-// Elastic Load Balancing console, API, or CLI. For more information, see [Elastic Load Balancing Developer Guide].
+// Elastic Load Balancing console, API, or CLI. For more information, see the [Elastic Load Balancing Developer Guide].
 //
 // Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants

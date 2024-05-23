@@ -36,7 +36,11 @@ func (c *Client) DescribeStacks(ctx context.Context, params *DescribeStacksInput
 type DescribeStacksInput struct {
 
 	// An array of stack IDs that specify the stacks to be described. If you omit this
-	// parameter, DescribeStacks returns a description of every stack.
+	// parameter, and have permissions to get information about all stacks,
+	// DescribeStacks returns a description of every stack. If the IAM policy that is
+	// attached to an IAM user limits the DescribeStacks action to specific stack
+	// ARNs, this parameter is required, and the user must specify a stack ARN that is
+	// allowed by the policy. Otherwise, DescribeStacks returns an AccessDenied error.
 	StackIds []string
 
 	noSmithyDocumentSerde

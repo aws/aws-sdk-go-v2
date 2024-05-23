@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the available AWS OpsWorks Stacks agent versions. You must specify a
+// Describes the available OpsWorks Stacks agent versions. You must specify a
 // stack ID or a configuration manager. DescribeAgentVersions returns a list of
 // available agent versions for the specified stack or configuration manager.
 func (c *Client) DescribeAgentVersions(ctx context.Context, params *DescribeAgentVersionsInput, optFns ...func(*Options)) (*DescribeAgentVersionsOutput, error) {

@@ -40,16 +40,15 @@ type UpdateStackInput struct {
 	// This member is required.
 	StackId *string
 
-	// The default AWS OpsWorks Stacks agent version. You have the following options:
+	// The default OpsWorks Stacks agent version. You have the following options:
 	//
-	//   - Auto-update - Set this parameter to LATEST . AWS OpsWorks Stacks
-	//   automatically installs new agent versions on the stack's instances as soon as
-	//   they are available.
+	//   - Auto-update - Set this parameter to LATEST . OpsWorks Stacks automatically
+	//   installs new agent versions on the stack's instances as soon as they are
+	//   available.
 	//
 	//   - Fixed version - Set this parameter to your preferred agent version. To
 	//   update the agent version, you must edit the stack configuration and specify a
-	//   new version. AWS OpsWorks Stacks then automatically installs that version on the
-	//   stack's instances.
+	//   new version. OpsWorks Stacks installs that version on the stack's instances.
 	//
 	// The default setting is LATEST . To specify an agent version, you must use the
 	// complete version number, not the abbreviated number shown on the console. For a
@@ -109,12 +108,12 @@ type UpdateStackInput struct {
 	// The stack's operating system, which must be set to one of the following:
 	//
 	//   - A supported Linux operating system: An Amazon Linux version, such as Amazon
-	//   Linux 2018.03 , Amazon Linux 2017.09 , Amazon Linux 2017.03 , Amazon Linux
-	//   2016.09 , Amazon Linux 2016.03 , Amazon Linux 2015.09 , or Amazon Linux
-	//   2015.03 .
+	//   Linux 2 , Amazon Linux 2018.03 , Amazon Linux 2017.09 , Amazon Linux 2017.03 ,
+	//   Amazon Linux 2016.09 , Amazon Linux 2016.03 , Amazon Linux 2015.09 , or
+	//   Amazon Linux 2015.03 .
 	//
-	//   - A supported Ubuntu operating system, such as Ubuntu 16.04 LTS , Ubuntu
-	//   14.04 LTS , or Ubuntu 12.04 LTS .
+	//   - A supported Ubuntu operating system, such as Ubuntu 18.04 LTS , Ubuntu
+	//   16.04 LTS , Ubuntu 14.04 LTS , or Ubuntu 12.04 LTS .
 	//
 	//   - CentOS Linux 7
 	//
@@ -129,11 +128,12 @@ type UpdateStackInput struct {
 	//   create instances. For more information about how to use custom AMIs with
 	//   OpsWorks, see [Using Custom AMIs].
 	//
-	// The default option is the stack's current operating system. For more
-	// information about supported operating systems, see [AWS OpsWorks Stacks Operating Systems].
+	// The default option is the stack's current operating system. Not all operating
+	// systems are supported with all versions of Chef. For more information about
+	// supported operating systems, see [OpsWorks Stacks Operating Systems].
 	//
-	// [AWS OpsWorks Stacks Operating Systems]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
 	// [Using Custom AMIs]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+	// [OpsWorks Stacks Operating Systems]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
 	DefaultOs *string
 
 	// The default root device type. This value is used by default for all instances
@@ -144,10 +144,10 @@ type UpdateStackInput struct {
 	DefaultRootDeviceType types.RootDeviceType
 
 	// A default Amazon EC2 key-pair name. The default value is none . If you specify a
-	// key-pair name, AWS OpsWorks Stacks installs the public key on the instance and
-	// you can use the private key with an SSH client to log in to the instance. For
-	// more information, see [Using SSH to Communicate with an Instance]and [Managing SSH Access]. You can override this setting by specifying a
-	// different key pair, or no key pair, when you [create an instance].
+	// key-pair name, OpsWorks Stacks installs the public key on the instance and you
+	// can use the private key with an SSH client to log in to the instance. For more
+	// information, see [Using SSH to Communicate with an Instance]and [Managing SSH Access]. You can override this setting by specifying a different
+	// key pair, or no key pair, when you [create an instance].
 	//
 	// [Using SSH to Communicate with an Instance]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
 	// [Managing SSH Access]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
@@ -193,7 +193,7 @@ type UpdateStackInput struct {
 	// host name based on the current theme.
 	HostnameTheme *string
 
-	// The stack's new name.
+	// The stack's new name. Stack names can be a maximum of 64 characters.
 	Name *string
 
 	// Do not use this parameter. You cannot update a stack's service role.
@@ -202,25 +202,25 @@ type UpdateStackInput struct {
 	// Whether the stack uses custom cookbooks.
 	UseCustomCookbooks *bool
 
-	// Whether to associate the AWS OpsWorks Stacks built-in security groups with the
+	// Whether to associate the OpsWorks Stacks built-in security groups with the
 	// stack's layers.
 	//
-	// AWS OpsWorks Stacks provides a standard set of built-in security groups, one
-	// for each layer, which are associated with layers by default.
+	// OpsWorks Stacks provides a standard set of built-in security groups, one for
+	// each layer, which are associated with layers by default.
 	// UseOpsworksSecurityGroups allows you to provide your own custom security groups
 	// instead of using the built-in groups. UseOpsworksSecurityGroups has the
 	// following settings:
 	//
-	//   - True - AWS OpsWorks Stacks automatically associates the appropriate
-	//   built-in security group with each layer (default setting). You can associate
-	//   additional security groups with a layer after you create it, but you cannot
-	//   delete the built-in security group.
+	//   - True - OpsWorks Stacks automatically associates the appropriate built-in
+	//   security group with each layer (default setting). You can associate additional
+	//   security groups with a layer after you create it, but you cannot delete the
+	//   built-in security group.
 	//
-	//   - False - AWS OpsWorks Stacks does not associate built-in security groups
-	//   with layers. You must create appropriate EC2 security groups and associate a
-	//   security group with each layer that you create. However, you can still manually
-	//   associate a built-in security group with a layer on. Custom security groups are
-	//   required only for those layers that need custom settings.
+	//   - False - OpsWorks Stacks does not associate built-in security groups with
+	//   layers. You must create appropriate EC2 security groups and associate a security
+	//   group with each layer that you create. However, you can still manually associate
+	//   a built-in security group with a layer on. Custom security groups are required
+	//   only for those layers that need custom settings.
 	//
 	// For more information, see [Create a New Stack].
 	//

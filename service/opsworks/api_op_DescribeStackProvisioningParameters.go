@@ -45,7 +45,7 @@ type DescribeStackProvisioningParametersInput struct {
 // Contains the response to a DescribeStackProvisioningParameters request.
 type DescribeStackProvisioningParametersOutput struct {
 
-	// The AWS OpsWorks Stacks agent installer's URL.
+	// The OpsWorks Stacks agent installer's URL.
 	AgentInstallerUrl *string
 
 	// An embedded object that contains the provisioning parameters.

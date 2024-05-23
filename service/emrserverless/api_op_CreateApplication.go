@@ -62,6 +62,10 @@ type CreateApplicationInput struct {
 	// The capacity to initialize when the application is created.
 	InitialCapacity map[string]types.InitialCapacityConfig
 
+	// The interactive configuration object that enables the interactive use cases to
+	// use when running an application.
+	InteractiveConfiguration *types.InteractiveConfiguration
+
 	// The maximum capacity to allocate when the application is created. This is
 	// cumulative across all workers at any given point in time, not just when an
 	// application is created. No new resources will be created once any one of the

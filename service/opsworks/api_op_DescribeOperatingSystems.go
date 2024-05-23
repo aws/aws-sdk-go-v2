@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the operating systems that are supported by AWS OpsWorks Stacks.
+// Describes the operating systems that are supported by OpsWorks Stacks.
 func (c *Client) DescribeOperatingSystems(ctx context.Context, params *DescribeOperatingSystemsInput, optFns ...func(*Options)) (*DescribeOperatingSystemsOutput, error) {
 	if params == nil {
 		params = &DescribeOperatingSystemsInput{}

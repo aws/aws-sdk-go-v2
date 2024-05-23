@@ -13,7 +13,7 @@ import (
 
 // Describes Amazon ECS clusters that are registered with a stack. If you specify
 // only a stack ID, you can use the MaxResults and NextToken parameters to
-// paginate the response. However, AWS OpsWorks Stacks currently supports only one
+// paginate the response. However, OpsWorks Stacks currently supports only one
 // cluster per layer, so the result set has a maximum of one element.
 //
 // Required Permissions: To use this action, an IAM user must have a Show, Deploy,

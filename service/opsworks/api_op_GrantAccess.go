@@ -31,15 +31,15 @@ func (c *Client) GrantAccess(ctx context.Context, params *GrantAccessInput, optF
 
 type GrantAccessInput struct {
 
-	// The instance's AWS OpsWorks Stacks ID.
+	// The instance's OpsWorks Stacks ID.
 	//
 	// This member is required.
 	InstanceId *string
 
 	// The length of time (in minutes) that the grant is valid. When the grant expires
 	// at the end of this period, the user will no longer be able to use the
-	// credentials to log in. If the user is logged in at the time, he or she
-	// automatically will be logged out.
+	// credentials to log in. If the user is logged in at the time, they are logged
+	// out.
 	ValidForInMinutes *int32
 
 	noSmithyDocumentSerde

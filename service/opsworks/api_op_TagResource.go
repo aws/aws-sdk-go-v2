@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Apply cost-allocation tags to a specified stack or layer in AWS OpsWorks
-// Stacks. For more information about how tagging works, see [Tags]in the AWS OpsWorks
-// User Guide.
+// Apply cost-allocation tags to a specified stack or layer in OpsWorks Stacks.
+// For more information about how tagging works, see [Tags]in the OpsWorks User Guide.
 //
 // [Tags]: https://docs.aws.amazon.com/opsworks/latest/userguide/tagging.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {

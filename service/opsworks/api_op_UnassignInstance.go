@@ -13,7 +13,7 @@ import (
 // Unassigns a registered instance from all layers that are using the instance.
 // The instance remains in the stack as an unassigned instance, and can be assigned
 // to another layer as needed. You cannot use this action with instances that were
-// created with AWS OpsWorks Stacks.
+// created with OpsWorks Stacks.
 //
 // Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack or an attached policy that explicitly grants

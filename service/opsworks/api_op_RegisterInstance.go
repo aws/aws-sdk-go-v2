@@ -11,15 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers instances that were created outside of AWS OpsWorks Stacks with a
+// Registers instances that were created outside of OpsWorks Stacks with a
 // specified stack.
 //
 // We do not recommend using this action to register instances. The complete
-// registration operation includes two tasks: installing the AWS OpsWorks Stacks
-// agent on the instance, and registering the instance with the stack.
-// RegisterInstance handles only the second step. You should instead use the AWS
-// CLI register command, which performs the entire registration operation. For
-// more information, see [Registering an Instance with an AWS OpsWorks Stacks Stack].
+// registration operation includes two tasks: installing the OpsWorks Stacks agent
+// on the instance, and registering the instance with the stack. RegisterInstance
+// handles only the second step. You should instead use the CLI register command,
+// which performs the entire registration operation. For more information, see [Registering an Instance with an OpsWorks Stacks Stack].
 //
 // Registered instances have the same requirements as instances that are created
 // by using the CreateInstanceAPI. For example, registered instances must be running a supported
@@ -32,7 +31,7 @@ import (
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
 // [Preparing the Instance]: https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register-registering-preparer.html
-// [Registering an Instance with an AWS OpsWorks Stacks Stack]: https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register.html
+// [Registering an Instance with an OpsWorks Stacks Stack]: https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register.html
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) RegisterInstance(ctx context.Context, params *RegisterInstanceInput, optFns ...func(*Options)) (*RegisterInstanceOutput, error) {
 	if params == nil {
@@ -56,7 +55,12 @@ type RegisterInstanceInput struct {
 	// This member is required.
 	StackId *string
 
-	// The instance's hostname.
+	// The instance's host name. The following are character limits for instance host
+	// names.
+	//
+	//   - Linux-based instances: 63 characters
+	//
+	//   - Windows-based instances: 15 characters
 	Hostname *string
 
 	// An InstanceIdentity object that contains the instance's identity.
@@ -81,7 +85,7 @@ type RegisterInstanceInput struct {
 // Contains the response to a RegisterInstanceResult request.
 type RegisterInstanceOutput struct {
 
-	// The registered instance's AWS OpsWorks Stacks ID.
+	// The registered instance's OpsWorks Stacks ID.
 	InstanceId *string
 
 	// Metadata pertaining to the operation's result.

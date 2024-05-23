@@ -49,10 +49,10 @@ type UpdateUserProfileInput struct {
 	SshPublicKey *string
 
 	// The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9],
-	// '-', and '_'. If the specified name includes other punctuation marks, AWS
-	// OpsWorks Stacks removes them. For example, my.name will be changed to myname .
-	// If you do not specify an SSH user name, AWS OpsWorks Stacks generates one from
-	// the IAM user name.
+	// '-', and '_'. If the specified name includes other punctuation marks, OpsWorks
+	// Stacks removes them. For example, my.name will be changed to myname . If you do
+	// not specify an SSH user name, OpsWorks Stacks generates one from the IAM user
+	// name.
 	SshUsername *string
 
 	noSmithyDocumentSerde

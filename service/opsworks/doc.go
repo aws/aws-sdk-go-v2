@@ -3,41 +3,41 @@
 // Package opsworks provides the API client, operations, and parameter types for
 // AWS OpsWorks.
 //
-// # AWS OpsWorks
+// # OpsWorks
 //
-// Welcome to the AWS OpsWorks Stacks API Reference. This guide provides
-// descriptions, syntax, and usage examples for AWS OpsWorks Stacks actions and
-// data types, including common parameters and error codes.
+// Welcome to the OpsWorks Stacks API Reference. This guide provides descriptions,
+// syntax, and usage examples for OpsWorks Stacks actions and data types, including
+// common parameters and error codes.
 //
-// AWS OpsWorks Stacks is an application management service that provides an
-// integrated experience for overseeing the complete application lifecycle. For
-// information about this product, go to the [AWS OpsWorks]details page.
+// OpsWorks Stacks is an application management service that provides an
+// integrated experience for managing the complete application lifecycle. For
+// information about OpsWorks, see the [OpsWorks]information page.
 //
 // # SDKs and CLI
 //
-// The most common way to use the AWS OpsWorks Stacks API is by using the AWS
-// Command Line Interface (CLI) or by using one of the AWS SDKs to implement
-// applications in your preferred language. For more information, see:
+// Use the OpsWorks Stacks API by using the Command Line Interface (CLI) or by
+// using one of the Amazon Web Services SDKs to implement applications in your
+// preferred language. For more information, see:
 //
-// [AWS CLI]
+// [CLI]
 //
-// [AWS SDK for Java]
+// [SDK for Java]
 //
-// [AWS SDK for .NET]
+// [SDK for .NET]
 //
-// [AWS SDK for PHP 2]
+// [SDK for PHP]
 //
-// [AWS SDK for Ruby]
+// [SDK for Ruby]
 //
-// [AWS SDK for Node.js]
+// [Amazon Web Services SDK for Node.js]
 //
-// [AWS SDK for Python(Boto)]
+// [SDK for Python (Boto)]
 //
 // # Endpoints
 //
-// AWS OpsWorks Stacks supports the following endpoints, all HTTPS. You must
-// connect to one of the following endpoints. Stacks can only be accessed or
-// managed within the endpoint in which they are created.
+// OpsWorks Stacks supports the following endpoints, all HTTPS. You must connect
+// to one of the following endpoints. Stacks can only be accessed or managed within
+// the endpoint in which they are created.
 //
 //   - opsworks.us-east-1.amazonaws.com
 //
@@ -47,8 +47,8 @@
 //
 //   - opsworks.us-west-2.amazonaws.com
 //
-//   - opsworks.ca-central-1.amazonaws.com (API only; not available in the AWS
-//     console)
+//   - opsworks.ca-central-1.amazonaws.com (API only; not available in the Amazon
+//     Web Services Management Console)
 //
 //   - opsworks.eu-west-1.amazonaws.com
 //
@@ -79,13 +79,13 @@
 // You can specify Chef 12, 11.10, or 11.4 for your Linux stack. We recommend
 // migrating your existing Linux stacks to Chef 12 as soon as possible.
 //
-// [AWS OpsWorks]: http://aws.amazon.com/opsworks/
-// [AWS SDK for PHP 2]: https://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.OpsWorks.OpsWorksClient.html
-// [AWS SDK for Ruby]: http://docs.aws.amazon.com/sdkforruby/api/
-// [AWS SDK for Java]: https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/opsworks/AWSOpsWorksClient.html
-// [AWS SDK for .NET]: https://docs.aws.amazon.com/sdkfornet/latest/apidocs/html/N_Amazon_OpsWorks.htm
-// [AWS SDK for Node.js]: http://aws.amazon.com/documentation/sdkforjavascript/
-// [AWS CLI]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html
-// [AWS SDK for Python(Boto)]: http://docs.pythonboto.org/en/latest/ref/opsworks.html
+// [CLI]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html
+// [OpsWorks]: http://aws.amazon.com/opsworks/
+// [SDK for Python (Boto)]: http://docs.pythonboto.org/en/latest/ref/opsworks.html
+// [SDK for Java]: https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/opsworks/AWSOpsWorksClient.html
+// [SDK for .NET]: https://docs.aws.amazon.com/sdkfornet/v3/apidocs/items/OpsWorks/NOpsWorks.html
+// [Amazon Web Services SDK for Node.js]: http://aws.amazon.com/documentation/sdkforjavascript/
+// [SDK for PHP]: https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.OpsWorks.OpsWorksClient.html
+// [SDK for Ruby]: http://docs.aws.amazon.com/sdkforruby/api/
 // [Chef Versions]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-chef11.html
 package opsworks

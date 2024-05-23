@@ -62,6 +62,10 @@ type Application struct {
 	// The initial capacity of the application.
 	InitialCapacity map[string]InitialCapacityConfig
 
+	// The interactive configuration object that enables the interactive use cases for
+	// an application.
+	InteractiveConfiguration *InteractiveConfiguration
+
 	// The maximum capacity of the application. This is cumulative across all workers
 	// at any given point in time during the lifespan of the application is created. No
 	// new resources will be created once any one of the defined limits is hit.
@@ -294,6 +298,21 @@ type InitialCapacityConfig struct {
 
 	// The resource configuration of the initial capacity configuration.
 	WorkerConfiguration *WorkerResourceConfig
+
+	noSmithyDocumentSerde
+}
+
+// The configuration to use to enable the different types of interactive use cases
+// in an application.
+type InteractiveConfiguration struct {
+
+	// Enables an Apache Livy endpoint that you can connect to and run interactive
+	// jobs.
+	LivyEndpointEnabled *bool
+
+	// Enables you to connect an application to Amazon EMR Studio to run interactive
+	// workloads in a notebook.
+	StudioEnabled *bool
 
 	noSmithyDocumentSerde
 }

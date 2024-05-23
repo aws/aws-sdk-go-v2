@@ -18,7 +18,16 @@ import (
 	"io"
 	"math"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpCancelJobRun struct {
 }
@@ -2342,6 +2351,11 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 				return err
 			}
 
+		case "interactiveConfiguration":
+			if err := awsRestjson1_deserializeDocumentInteractiveConfiguration(&sv.InteractiveConfiguration, value); err != nil {
+				return err
+			}
+
 		case "maximumCapacity":
 			if err := awsRestjson1_deserializeDocumentMaximumAllowedResources(&sv.MaximumCapacity, value); err != nil {
 				return err
@@ -3165,6 +3179,55 @@ func awsRestjson1_deserializeDocumentInitialCapacityConfigMap(v *map[string]type
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInteractiveConfiguration(v **types.InteractiveConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InteractiveConfiguration
+	if *v == nil {
+		sv = &types.InteractiveConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "livyEndpointEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.LivyEndpointEnabled = ptr.Bool(jtv)
+			}
+
+		case "studioEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.StudioEnabled = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

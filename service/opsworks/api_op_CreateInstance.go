@@ -57,14 +57,14 @@ type CreateInstanceInput struct {
 	// This member is required.
 	StackId *string
 
-	// The default AWS OpsWorks Stacks agent version. You have the following options:
+	// The default OpsWorks Stacks agent version. You have the following options:
 	//
 	//   - INHERIT - Use the stack's default agent version setting.
 	//
 	//   - version_number - Use the specified agent version. This value overrides the
 	//   stack's default setting. To update the agent version, edit the instance
-	//   configuration and specify a new version. AWS OpsWorks Stacks then automatically
-	//   installs that version on the instance.
+	//   configuration and specify a new version. OpsWorks Stacks installs that version
+	//   on the instance.
 	//
 	// The default setting is INHERIT . To specify an agent version, you must use the
 	// complete version number, not the abbreviated number shown on the console. For a
@@ -106,7 +106,12 @@ type CreateInstanceInput struct {
 	// Whether to create an Amazon EBS-optimized instance.
 	EbsOptimized *bool
 
-	// The instance host name.
+	// The instance host name. The following are character limits for instance host
+	// names.
+	//
+	//   - Linux-based instances: 63 characters
+	//
+	//   - Windows-based instances: 15 characters
 	Hostname *string
 
 	// Whether to install operating system and package updates when the instance
@@ -122,12 +127,12 @@ type CreateInstanceInput struct {
 	// The instance's operating system, which must be set to one of the following.
 	//
 	//   - A supported Linux operating system: An Amazon Linux version, such as Amazon
-	//   Linux 2018.03 , Amazon Linux 2017.09 , Amazon Linux 2017.03 , Amazon Linux
-	//   2016.09 , Amazon Linux 2016.03 , Amazon Linux 2015.09 , or Amazon Linux
-	//   2015.03 .
+	//   Linux 2 , Amazon Linux 2018.03 , Amazon Linux 2017.09 , Amazon Linux 2017.03 ,
+	//   Amazon Linux 2016.09 , Amazon Linux 2016.03 , Amazon Linux 2015.09 , or
+	//   Amazon Linux 2015.03 .
 	//
-	//   - A supported Ubuntu operating system, such as Ubuntu 16.04 LTS , Ubuntu
-	//   14.04 LTS , or Ubuntu 12.04 LTS .
+	//   - A supported Ubuntu operating system, such as Ubuntu 18.04 LTS , Ubuntu
+	//   16.04 LTS , Ubuntu 14.04 LTS , or Ubuntu 12.04 LTS .
 	//
 	//   - CentOS Linux 7
 	//
@@ -140,18 +145,17 @@ type CreateInstanceInput struct {
 	//
 	//   - A custom AMI: Custom .
 	//
-	// For more information about the supported operating systems, see [AWS OpsWorks Stacks Operating Systems].
+	// Not all operating systems are supported with all versions of Chef. For more
+	// information about the supported operating systems, see [OpsWorks Stacks Operating Systems].
 	//
 	// The default option is the current Amazon Linux version. If you set this
 	// parameter to Custom , you must use the CreateInstance action's AmiId parameter to specify the
 	// custom AMI that you want to use. Block device mappings are not supported if the
-	// value is Custom . For more information about supported operating systems, see [Operating Systems]
-	// For more information about how to use custom AMIs with AWS OpsWorks Stacks, see [Using Custom AMIs]
-	// .
+	// value is Custom . For more information about how to use custom AMIs with
+	// OpsWorks Stacks, see [Using Custom AMIs].
 	//
-	// [AWS OpsWorks Stacks Operating Systems]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
 	// [Using Custom AMIs]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
-	// [Operating Systems]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+	// [OpsWorks Stacks Operating Systems]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
 	Os *string
 
 	// The instance root device type. For more information, see [Storage for the Root Device].
@@ -163,7 +167,7 @@ type CreateInstanceInput struct {
 	SshKeyName *string
 
 	// The ID of the instance's subnet. If the stack is running in a VPC, you can use
-	// this parameter to override the stack's default subnet ID value and direct AWS
+	// this parameter to override the stack's default subnet ID value and direct
 	// OpsWorks Stacks to launch the instance in a different subnet.
 	SubnetId *string
 

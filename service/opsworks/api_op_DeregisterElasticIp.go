@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deregisters a specified Elastic IP address. The address can then be registered
-// by another stack. For more information, see [Resource Management].
+// Deregisters a specified Elastic IP address. The address can be registered by
+// another stack after it is deregistered. For more information, see [Resource Management].
 //
 // Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants

@@ -16,10 +16,10 @@ import (
 //
 //   - You can assign registered Amazon EC2 instances only to custom layers.
 //
-//   - You cannot use this action with instances that were created with AWS
-//     OpsWorks Stacks.
+//   - You cannot use this action with instances that were created with OpsWorks
+//     Stacks.
 //
-// Required Permissions: To use this action, an AWS Identity and Access Management
+// Required Permissions: To use this action, an Identity and Access Management
 // (IAM) user must have a Manage permissions level for the stack or an attached
 // policy that explicitly grants permissions. For more information on user
 // permissions, see [Managing User Permissions].

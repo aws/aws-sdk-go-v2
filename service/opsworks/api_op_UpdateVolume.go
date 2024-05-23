@@ -43,7 +43,7 @@ type UpdateVolumeInput struct {
 	// The new mount point.
 	MountPoint *string
 
-	// The new name.
+	// The new name. Volume names can be a maximum of 128 characters.
 	Name *string
 
 	noSmithyDocumentSerde

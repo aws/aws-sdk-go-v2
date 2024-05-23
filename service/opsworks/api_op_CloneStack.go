@@ -37,12 +37,12 @@ func (c *Client) CloneStack(ctx context.Context, params *CloneStackInput, optFns
 
 type CloneStackInput struct {
 
-	// The stack AWS Identity and Access Management (IAM) role, which allows AWS
-	// OpsWorks Stacks to work with AWS resources on your behalf. You must set this
-	// parameter to the Amazon Resource Name (ARN) for an existing IAM role. If you
-	// create a stack by using the AWS OpsWorks Stacks console, it creates the role for
-	// you. You can obtain an existing stack's IAM ARN programmatically by calling DescribePermissions.
-	// For more information about IAM ARNs, see [Using Identifiers].
+	// The stack Identity and Access Management (IAM) role, which allows OpsWorks
+	// Stacks to work with Amazon Web Services resources on your behalf. You must set
+	// this parameter to the Amazon Resource Name (ARN) for an existing IAM role. If
+	// you create a stack by using the OpsWorkss Stacks console, it creates the role
+	// for you. You can obtain an existing stack's IAM ARN programmatically by calling DescribePermissions
+	// . For more information about IAM ARNs, see [Using Identifiers].
 	//
 	// You must set this parameter to a valid service role ARN or the action will
 	// fail; there is no default value. You can specify the source stack's service role
@@ -58,16 +58,16 @@ type CloneStackInput struct {
 	// This member is required.
 	SourceStackId *string
 
-	// The default AWS OpsWorks Stacks agent version. You have the following options:
+	// The default OpsWorks Stacks agent version. You have the following options:
 	//
-	//   - Auto-update - Set this parameter to LATEST . AWS OpsWorks Stacks
-	//   automatically installs new agent versions on the stack's instances as soon as
-	//   they are available.
+	//   - Auto-update - Set this parameter to LATEST . OpsWorks Stacks automatically
+	//   installs new agent versions on the stack's instances as soon as they are
+	//   available.
 	//
 	//   - Fixed version - Set this parameter to your preferred agent version. To
 	//   update the agent version, you must edit the stack configuration and specify a
-	//   new version. AWS OpsWorks Stacks then automatically installs that version on the
-	//   stack's instances.
+	//   new version. OpsWorks Stacks automatically installs that version on the stack's
+	//   instances.
 	//
 	// The default setting is LATEST . To specify an agent version, you must use the
 	// complete version number, not the abbreviated number shown on the console. For a
@@ -135,12 +135,12 @@ type CloneStackInput struct {
 	// The stack's operating system, which must be set to one of the following.
 	//
 	//   - A supported Linux operating system: An Amazon Linux version, such as Amazon
-	//   Linux 2018.03 , Amazon Linux 2017.09 , Amazon Linux 2017.03 , Amazon Linux
-	//   2016.09 , Amazon Linux 2016.03 , Amazon Linux 2015.09 , or Amazon Linux
-	//   2015.03 .
+	//   Linux 2 , Amazon Linux 2018.03 , Amazon Linux 2017.09 , Amazon Linux 2017.03 ,
+	//   Amazon Linux 2016.09 , Amazon Linux 2016.03 , Amazon Linux 2015.09 , or
+	//   Amazon Linux 2015.03 .
 	//
-	//   - A supported Ubuntu operating system, such as Ubuntu 16.04 LTS , Ubuntu
-	//   14.04 LTS , or Ubuntu 12.04 LTS .
+	//   - A supported Ubuntu operating system, such as Ubuntu 18.04 LTS , Ubuntu
+	//   16.04 LTS , Ubuntu 14.04 LTS , or Ubuntu 12.04 LTS .
 	//
 	//   - CentOS Linux 7
 	//
@@ -154,14 +154,15 @@ type CloneStackInput struct {
 	//   create instances. For more information about how to use custom AMIs with
 	//   OpsWorks, see [Using Custom AMIs].
 	//
-	// The default option is the parent stack's operating system. For more information
-	// about supported operating systems, see [AWS OpsWorks Stacks Operating Systems].
+	// The default option is the parent stack's operating system. Not all operating
+	// systems are supported with all versions of Chef. For more information about
+	// supported operating systems, see [OpsWorks Stacks Operating Systems].
 	//
 	// You can specify a different Linux operating system for the cloned stack, but
 	// you cannot change from Linux to Windows or Windows to Linux.
 	//
-	// [AWS OpsWorks Stacks Operating Systems]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
 	// [Using Custom AMIs]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+	// [OpsWorks Stacks Operating Systems]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
 	DefaultOs *string
 
 	// The default root device type. This value is used by default for all instances
@@ -172,8 +173,8 @@ type CloneStackInput struct {
 	DefaultRootDeviceType types.RootDeviceType
 
 	// A default Amazon EC2 key pair name. The default value is none. If you specify a
-	// key pair name, AWS OpsWorks installs the public key on the instance and you can
-	// use the private key with an SSH client to log in to the instance. For more
+	// key pair name, OpsWorks installs the public key on the instance and you can use
+	// the private key with an SSH client to log in to the instance. For more
 	// information, see [Using SSH to Communicate with an Instance]and [Managing SSH Access]. You can override this setting by specifying a different
 	// key pair, or no key pair, when you [create an instance].
 	//
@@ -221,11 +222,11 @@ type CloneStackInput struct {
 	// host name based on the current theme.
 	HostnameTheme *string
 
-	// The cloned stack name.
+	// The cloned stack name. Stack names can be a maximum of 64 characters.
 	Name *string
 
-	// The cloned stack AWS region, such as "ap-northeast-2". For more information
-	// about AWS regions, see [Regions and Endpoints].
+	// The cloned stack Amazon Web Services Region, such as ap-northeast-2 . For more
+	// information about Amazon Web Services Regions, see [Regions and Endpoints].
 	//
 	// [Regions and Endpoints]: https://docs.aws.amazon.com/general/latest/gr/rande.html
 	Region *string
@@ -233,25 +234,24 @@ type CloneStackInput struct {
 	// Whether to use custom cookbooks.
 	UseCustomCookbooks *bool
 
-	// Whether to associate the AWS OpsWorks Stacks built-in security groups with the
+	// Whether to associate the OpsWorks Stacks built-in security groups with the
 	// stack's layers.
 	//
-	// AWS OpsWorks Stacks provides a standard set of built-in security groups, one
-	// for each layer, which are associated with layers by default. With
-	// UseOpsworksSecurityGroups you can instead provide your own custom security
-	// groups. UseOpsworksSecurityGroups has the following settings:
+	// OpsWorks Stacks provides a standard set of security groups, one for each layer,
+	// which are associated with layers by default. With UseOpsworksSecurityGroups you
+	// can instead provide your own custom security groups. UseOpsworksSecurityGroups
+	// has the following settings:
 	//
-	//   - True - AWS OpsWorks Stacks automatically associates the appropriate
-	//   built-in security group with each layer (default setting). You can associate
-	//   additional security groups with a layer after you create it but you cannot
-	//   delete the built-in security group.
+	//   - True - OpsWorks Stacks automatically associates the appropriate built-in
+	//   security group with each layer (default setting). You can associate additional
+	//   security groups with a layer after you create it but you cannot delete the
+	//   built-in security group.
 	//
-	//   - False - AWS OpsWorks Stacks does not associate built-in security groups
-	//   with layers. You must create appropriate Amazon Elastic Compute Cloud (Amazon
-	//   EC2) security groups and associate a security group with each layer that you
-	//   create. However, you can still manually associate a built-in security group with
-	//   a layer on creation; custom security groups are required only for those layers
-	//   that need custom settings.
+	//   - False - OpsWorks Stacks does not associate built-in security groups with
+	//   layers. You must create appropriate Amazon EC2 security groups and associate a
+	//   security group with each layer that you create. However, you can still manually
+	//   associate a built-in security group with a layer on creation; custom security
+	//   groups are required only for those layers that need custom settings.
 	//
 	// For more information, see [Create a New Stack].
 	//
@@ -268,11 +268,10 @@ type CloneStackInput struct {
 	//   default VPC for the specified region.
 	//
 	// If the VPC ID corresponds to a default VPC and you have specified either the
-	// DefaultAvailabilityZone or the DefaultSubnetId parameter only, AWS OpsWorks
-	// Stacks infers the value of the other parameter. If you specify neither
-	// parameter, AWS OpsWorks Stacks sets these parameters to the first valid
-	// Availability Zone for the specified region and the corresponding default VPC
-	// subnet ID, respectively.
+	// DefaultAvailabilityZone or the DefaultSubnetId parameter only, OpsWorks Stacks
+	// infers the value of the other parameter. If you specify neither parameter,
+	// OpsWorks Stacks sets these parameters to the first valid Availability Zone for
+	// the specified region and the corresponding default VPC subnet ID, respectively.
 	//
 	// If you specify a nondefault VPC ID, note the following:
 	//
@@ -280,7 +279,7 @@ type CloneStackInput struct {
 	//
 	//   - You must specify a value for DefaultSubnetId .
 	//
-	// For more information about how to use AWS OpsWorks Stacks with a VPC, see [Running a Stack in a VPC]. For
+	// For more information about how to use OpsWorks Stacks with a VPC, see [Running a Stack in a VPC]. For
 	// more information about default VPC and EC2 Classic, see [Supported Platforms].
 	//
 	// [Supported Platforms]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html

@@ -95,22 +95,23 @@ type UpdateLayerInput struct {
 	//
 	LifecycleEventConfiguration *types.LifecycleEventConfiguration
 
-	// The layer name, which is used by the console.
+	// The layer name, which is used by the console. Layer names can be a maximum of
+	// 32 characters.
 	Name *string
 
 	// An array of Package objects that describe the layer's packages.
 	Packages []string
 
 	// For custom layers only, use this parameter to specify the layer's short name,
-	// which is used internally by AWS OpsWorks Stacks and by Chef. The short name is
-	// also used as the name for the directory where your app files are installed. It
-	// can have a maximum of 200 characters and must be in the following format:
+	// which is used internally by OpsWorks Stacks and by Chef. The short name is also
+	// used as the name for the directory where your app files are installed. It can
+	// have a maximum of 32 characters and must be in the following format:
 	// /\A[a-z0-9\-\_\.]+\Z/.
 	//
-	// The built-in layers' short names are defined by AWS OpsWorks Stacks. For more
-	// information, see the [Layer Reference]
+	// Built-in layer short names are defined by OpsWorks Stacks. For more
+	// information, see the [Layer reference]in the OpsWorks User Guide.
 	//
-	// [Layer Reference]: https://docs.aws.amazon.com/opsworks/latest/userguide/layers.html
+	// [Layer reference]: https://docs.aws.amazon.com/opsworks/latest/userguide/layers.html
 	Shortname *string
 
 	// Whether to use Amazon EBS-optimized instances.

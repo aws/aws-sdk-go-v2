@@ -79,34 +79,34 @@ type App struct {
 }
 
 // Describes a load-based auto scaling upscaling or downscaling threshold
-// configuration, which specifies when AWS OpsWorks Stacks starts or stops
-// load-based instances.
+// configuration, which specifies when OpsWorks Stacks starts or stops load-based
+// instances.
 type AutoScalingThresholds struct {
 
-	// Custom Cloudwatch auto scaling alarms, to be used as thresholds. This parameter
+	// Custom CloudWatch auto scaling alarms, to be used as thresholds. This parameter
 	// takes a list of up to five alarm names, which are case sensitive and must be in
 	// the same region as the stack.
 	//
 	// To use custom alarms, you must update your service role to allow
-	// cloudwatch:DescribeAlarms . You can either have AWS OpsWorks Stacks update the
-	// role for you when you first use this feature or you can edit the role manually.
-	// For more information, see [Allowing AWS OpsWorks Stacks to Act on Your Behalf].
+	// cloudwatch:DescribeAlarms . You can either have OpsWorks Stacks update the role
+	// for you when you first use this feature or you can edit the role manually. For
+	// more information, see [Allowing OpsWorks Stacks to Act on Your Behalf].
 	//
-	// [Allowing AWS OpsWorks Stacks to Act on Your Behalf]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-servicerole.html
+	// [Allowing OpsWorks Stacks to Act on Your Behalf]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-servicerole.html
 	Alarms []string
 
 	// The CPU utilization threshold, as a percent of the available CPU. A value of -1
 	// disables the threshold.
 	CpuThreshold *float64
 
-	// The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks
+	// The amount of time (in minutes) after a scaling event occurs that OpsWorks
 	// Stacks should ignore metrics and suppress additional scaling events. For
-	// example, AWS OpsWorks Stacks adds new instances following an upscaling event but
-	// the instances won't start reducing the load until they have been booted and
+	// example, OpsWorks Stacks adds new instances following an upscaling event but the
+	// instances won't start reducing the load until they have been booted and
 	// configured. There is no point in raising additional scaling events during that
 	// operation, which typically takes several minutes. IgnoreMetricsTime allows you
-	// to direct AWS OpsWorks Stacks to suppress scaling events long enough to get the
-	// new instances online.
+	// to direct OpsWorks Stacks to suppress scaling events long enough to get the new
+	// instances online.
 	IgnoreMetricsTime *int32
 
 	// The number of instances to add or remove when the load exceeds a threshold.
@@ -137,7 +137,7 @@ type BlockDeviceMapping struct {
 
 	// The device name that is exposed to the instance, such as /dev/sdh . For the root
 	// device, you can use the explicit device name or you can set this parameter to
-	// ROOT_DEVICE and AWS OpsWorks Stacks will provide the correct device name.
+	// ROOT_DEVICE and OpsWorks Stacks will provide the correct device name.
 	DeviceName *string
 
 	// An EBSBlockDevice that defines how to configure an Amazon EBS volume when the
@@ -167,7 +167,7 @@ type ChefConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the Amazon CloudWatch logs configuration for a layer.
+// Describes the Amazon CloudWatch Logs configuration for a layer.
 type CloudWatchLogsConfiguration struct {
 
 	// Whether CloudWatch Logs is enabled for a layer.
@@ -179,7 +179,7 @@ type CloudWatchLogsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the Amazon CloudWatch logs configuration for a layer. For detailed
+// Describes the CloudWatch Logs configuration for a layer. For detailed
 // information about members of this data type, see the [CloudWatch Logs Agent Reference].
 //
 // [CloudWatch Logs Agent Reference]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html
@@ -419,8 +419,8 @@ type DeploymentCommand struct {
 	//   default setting is {"migrate":["false"]}.
 	//
 	//   - rollback Roll the app back to the previous version. When you update an app,
-	//   AWS OpsWorks Stacks stores the previous version, up to a maximum of five
-	//   versions. You can use this command to roll an app back as many as four versions.
+	//   OpsWorks Stacks stores the previous version, up to a maximum of five versions.
+	//   You can use this command to roll an app back as many as four versions.
 	//
 	//   - start : Start the app's web or application server.
 	//
@@ -441,18 +441,18 @@ type DeploymentCommand struct {
 	//
 	// The update_dependencies command takes two arguments:
 	//
-	//   - upgrade_os_to - Specifies the desired Amazon Linux version for instances
-	//   whose OS you want to upgrade, such as Amazon Linux 2016.09 . You must also set
-	//   the allow_reboot argument to true.
+	//   - upgrade_os_to - Specifies the Amazon Linux version that you want instances
+	//   to run, such as Amazon Linux 2 . You must also set the allow_reboot argument
+	//   to true.
 	//
-	//   - allow_reboot - Specifies whether to allow AWS OpsWorks Stacks to reboot the
+	//   - allow_reboot - Specifies whether to allow OpsWorks Stacks to reboot the
 	//   instances if necessary, after installing the updates. This argument can be set
 	//   to either true or false . The default value is false .
 	//
-	// For example, to upgrade an instance to Amazon Linux 2016.09, set Args to the
+	// For example, to upgrade an instance to Amazon Linux 2018.03, set Args to the
 	// following.
 	//
-	//     { "upgrade_os_to":["Amazon Linux 2016.09"], "allow_reboot":["true"] }
+	//     { "upgrade_os_to":["Amazon Linux 2018.03"], "allow_reboot":["true"] }
 	Args map[string][]string
 
 	noSmithyDocumentSerde
@@ -487,8 +487,8 @@ type EbsBlockDevice struct {
 	//
 	// If you specify the io1 volume type, you must also specify a value for the Iops
 	// attribute. The maximum ratio of provisioned IOPS to requested volume size (in
-	// GiB) is 50:1. AWS uses the default volume size (in GiB) specified in the AMI
-	// attributes to set IOPS to 50 x (volume size).
+	// GiB) is 50:1. Amazon Web Services uses the default volume size (in GiB)
+	// specified in the AMI attributes to set IOPS to 50 x (volume size).
 	VolumeType VolumeType
 
 	noSmithyDocumentSerde
@@ -524,10 +524,10 @@ type ElasticIp struct {
 	// The IP address.
 	Ip *string
 
-	// The name.
+	// The name, which can be a maximum of 32 characters.
 	Name *string
 
-	// The AWS region. For more information, see [Regions and Endpoints].
+	// The Amazon Web Services Region. For more information, see [Regions and Endpoints].
 	//
 	// [Regions and Endpoints]: https://docs.aws.amazon.com/general/latest/gr/rande.html
 	Region *string
@@ -544,20 +544,20 @@ type ElasticLoadBalancer struct {
 	// The instance's public DNS name.
 	DnsName *string
 
-	// A list of the EC2 instances that the Elastic Load Balancing instance is
-	// managing traffic for.
+	// A list of the EC2 instances for which the Elastic Load Balancing instance is
+	// managing traffic.
 	Ec2InstanceIds []string
 
-	// The Elastic Load Balancing instance's name.
+	// The Elastic Load Balancing instance name.
 	ElasticLoadBalancerName *string
 
-	// The ID of the layer that the instance is attached to.
+	// The ID of the layer to which the instance is attached.
 	LayerId *string
 
-	// The instance's AWS region.
+	// The instance's Amazon Web Services Region.
 	Region *string
 
-	// The ID of the stack that the instance is associated with.
+	// The ID of the stack with which the instance is associated.
 	StackId *string
 
 	// A list of subnet IDs, if the stack is running in a VPC.
@@ -587,10 +587,10 @@ type EnvironmentVariable struct {
 	// This member is required.
 	Value *string
 
-	// (Optional) Whether the variable's value will be returned by the DescribeApps action. To
-	// conceal an environment variable's value, set Secure to true . DescribeApps then
-	// returns *****FILTERED***** instead of the actual value. The default value for
-	// Secure is false .
+	// (Optional) Whether the variable's value is returned by the DescribeApps action. To hide an
+	// environment variable's value, set Secure to true . DescribeApps returns
+	// *****FILTERED***** instead of the actual value. The default value for Secure is
+	// false .
 	Secure *bool
 
 	noSmithyDocumentSerde
@@ -646,19 +646,23 @@ type Instance struct {
 	// [Elastic IP address]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
 	ElasticIp *string
 
-	// The instance host name.
+	// The instance host name. The following are character limits for instance host
+	// names.
+	//
+	//   - Linux-based instances: 63 characters
+	//
+	//   - Windows-based instances: 15 characters
 	Hostname *string
 
 	// For registered instances, the infrastructure class: ec2 or on-premises .
 	InfrastructureClass *string
 
 	// Whether to install operating system and package updates when the instance
-	// boots. The default value is true . If this value is set to false , you must then
-	// update your instances manually by using CreateDeploymentto run the update_dependencies stack
-	// command or by manually running yum (Amazon Linux) or apt-get (Ubuntu) on the
-	// instances.
+	// boots. The default value is true . If this value is set to false , you must
+	// update instances manually by using CreateDeploymentto run the update_dependencies stack command
+	// or by manually running yum (Amazon Linux) or apt-get (Ubuntu) on the instances.
 	//
-	// We strongly recommend using the default value of true , to ensure that your
+	// We strongly recommend using the default value of true to ensure that your
 	// instances have the latest security updates.
 	InstallUpdatesOnBoot *bool
 
@@ -701,7 +705,7 @@ type Instance struct {
 	// For registered instances, who performed the registration.
 	RegisteredBy *string
 
-	// The instance's reported AWS OpsWorks Stacks agent version.
+	// The instance's reported OpsWorks Stacks agent version.
 	ReportedAgentVersion *string
 
 	// For registered instances, the reported operating system.
@@ -865,11 +869,11 @@ type Layer struct {
 	// The layer attributes.
 	//
 	// For the HaproxyStatsPassword , MysqlRootPassword , and GangliaPassword
-	// attributes, AWS OpsWorks Stacks returns *****FILTERED***** instead of the
-	// actual value
+	// attributes, OpsWorks Stacks returns *****FILTERED***** instead of the actual
+	// value
 	//
-	// For an ECS Cluster layer, AWS OpsWorks Stacks the EcsClusterArn attribute is
-	// set to the cluster's ARN.
+	// For an ECS Cluster layer, OpsWorks Stacks the EcsClusterArn attribute is set to
+	// the cluster's ARN.
 	Attributes map[string]string
 
 	// Whether to automatically assign an [Elastic IP address] to the layer's instances. For more
@@ -907,12 +911,12 @@ type Layer struct {
 	// An array containing the layer's custom security group IDs.
 	CustomSecurityGroupIds []string
 
-	// AWS OpsWorks Stacks supports five lifecycle events: setup, configuration,
-	// deploy, undeploy, and shutdown. For each layer, AWS OpsWorks Stacks runs a set
-	// of standard recipes for each event. You can also provide custom recipes for any
-	// or all layers and events. AWS OpsWorks Stacks runs custom event recipes after
-	// the standard recipes. LayerCustomRecipes specifies the custom recipes for a
-	// particular layer to be run in response to each of the five events.
+	// OpsWorks Stacks supports five lifecycle events: setup, configuration, deploy,
+	// undeploy, and shutdown. For each layer, OpsWorks Stacks runs a set of standard
+	// recipes for each event. You can also provide custom recipes for any or all
+	// layers and events. OpsWorks Stacks runs custom event recipes after the standard
+	// recipes. LayerCustomRecipes specifies the custom recipes for a particular layer
+	// to be run in response to each of the five events.
 	//
 	// To specify a recipe, use the cookbook's directory name in the repository
 	// followed by two colons and the recipe name, which is the recipe's file name
@@ -943,7 +947,7 @@ type Layer struct {
 	// configuration.
 	LifecycleEventConfiguration *LifecycleEventConfiguration
 
-	// The layer name.
+	// The layer name. Layer names can be a maximum of 32 characters.
 	Name *string
 
 	// An array of Package objects that describe the layer's packages.
@@ -981,7 +985,7 @@ type LifecycleEventConfiguration struct {
 type LoadBasedAutoScalingConfiguration struct {
 
 	// An AutoScalingThresholds object that describes the downscaling configuration,
-	// which defines how and when AWS OpsWorks Stacks reduces the number of instances.
+	// which defines how and when OpsWorks Stacks reduces the number of instances.
 	DownScaling *AutoScalingThresholds
 
 	// Whether load-based auto scaling is enabled for the layer.
@@ -991,24 +995,23 @@ type LoadBasedAutoScalingConfiguration struct {
 	LayerId *string
 
 	// An AutoScalingThresholds object that describes the upscaling configuration,
-	// which defines how and when AWS OpsWorks Stacks increases the number of
-	// instances.
+	// which defines how and when OpsWorks Stacks increases the number of instances.
 	UpScaling *AutoScalingThresholds
 
 	noSmithyDocumentSerde
 }
 
-// Describes supported operating systems in AWS OpsWorks Stacks.
+// Describes supported operating systems in OpsWorks Stacks.
 type OperatingSystem struct {
 
-	// Supported configuration manager name and versions for an AWS OpsWorks Stacks
+	// Supported configuration manager name and versions for an OpsWorks Stacks
 	// operating system.
 	ConfigurationManagers []OperatingSystemConfigurationManager
 
-	// The ID of a supported operating system, such as Amazon Linux 2018.03 .
+	// The ID of a supported operating system, such as Amazon Linux 2 .
 	Id *string
 
-	// The name of the operating system, such as Amazon Linux 2018.03 .
+	// The name of the operating system, such as Amazon Linux 2 .
 	Name *string
 
 	// A short name for the operating system manufacturer.
@@ -1051,7 +1054,7 @@ type Permission struct {
 	// Whether the user can use sudo.
 	AllowSudo *bool
 
-	// The Amazon Resource Name (ARN) for an AWS Identity and Access Management (IAM)
+	// The Amazon Resource Name (ARN) for an Identity and Access Management (IAM)
 	// role. For more information about IAM ARNs, see [Using Identifiers].
 	//
 	// [Using Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
@@ -1135,10 +1138,10 @@ type RdsDbInstance struct {
 	// The instance's address.
 	Address *string
 
-	// The DB instance identifier.
+	// The database instance identifier.
 	DbInstanceIdentifier *string
 
-	// AWS OpsWorks Stacks returns *****FILTERED***** instead of the actual value.
+	// OpsWorks Stacks returns *****FILTERED***** instead of the actual value.
 	DbPassword *string
 
 	// The master user name.
@@ -1147,16 +1150,15 @@ type RdsDbInstance struct {
 	// The instance's database engine.
 	Engine *string
 
-	// Set to true if AWS OpsWorks Stacks is unable to discover the Amazon RDS
-	// instance. AWS OpsWorks Stacks attempts to discover the instance only once. If
-	// this value is set to true , you must deregister the instance, and then register
-	// it again.
+	// Set to true if OpsWorks Stacks is unable to discover the Amazon RDS instance.
+	// OpsWorks Stacks attempts to discover the instance only once. If this value is
+	// set to true , you must deregister the instance, and then register it again.
 	MissingOnRds *bool
 
 	// The instance's ARN.
 	RdsDbInstanceArn *string
 
-	// The instance's AWS region.
+	// The instance's Amazon Web Services Region.
 	Region *string
 
 	// The ID of the stack with which the instance is registered.
@@ -1165,12 +1167,12 @@ type RdsDbInstance struct {
 	noSmithyDocumentSerde
 }
 
-// AWS OpsWorks Stacks supports five lifecycle events: setup, configuration,
-// deploy, undeploy, and shutdown. For each layer, AWS OpsWorks Stacks runs a set
-// of standard recipes for each event. In addition, you can provide custom recipes
-// for any or all layers and events. AWS OpsWorks Stacks runs custom event recipes
-// after the standard recipes. LayerCustomRecipes specifies the custom recipes for
-// a particular layer to be run in response to each of the five events.
+// OpsWorks Stacks supports five lifecycle events: setup, configuration, deploy,
+// undeploy, and shutdown. For each layer, OpsWorks Stacks runs a set of standard
+// recipes for each event. In addition, you can provide custom recipes for any or
+// all layers and events. OpsWorks Stacks runs custom event recipes after the
+// standard recipes. LayerCustomRecipes specifies the custom recipes for a
+// particular layer to be run in response to each of the five events.
 //
 // To specify a recipe, use the cookbook's directory name in the repository
 // followed by two colons and the recipe name, which is the recipe's file name
@@ -1229,7 +1231,7 @@ type SelfUserProfile struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an AWS OpsWorks Stacks service error.
+// Describes an OpsWorks Stacks service error.
 type ServiceError struct {
 
 	// When the error occurred.
@@ -1262,8 +1264,8 @@ type ShutdownEventConfiguration struct {
 	// [Connection Draining]: https://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#conn-drain
 	DelayUntilElbConnectionsDrained *bool
 
-	// The time, in seconds, that AWS OpsWorks Stacks will wait after triggering a
-	// Shutdown event before shutting down an instance.
+	// The time, in seconds, that OpsWorks Stacks waits after triggering a Shutdown
+	// event before shutting down an instance.
 	ExecutionTimeout *int32
 
 	noSmithyDocumentSerde
@@ -1284,13 +1286,13 @@ type Source struct {
 	//
 	// For more information on how to safely handle IAM credentials, see [https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html].
 	//
-	// In responses, AWS OpsWorks Stacks returns *****FILTERED***** instead of the
-	// actual value.
+	// In responses, OpsWorks Stacks returns *****FILTERED***** instead of the actual
+	// value.
 	//
 	// [https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html]: https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html
 	Password *string
 
-	// The application's version. AWS OpsWorks Stacks enables you to easily deploy new
+	// The application's version. OpsWorks Stacks enables you to easily deploy new
 	// versions of an application. One of the simplest approaches is to have branches
 	// or revisions in your repository that represent different versions that can
 	// potentially be deployed.
@@ -1298,8 +1300,8 @@ type Source struct {
 
 	// In requests, the repository's SSH key.
 	//
-	// In responses, AWS OpsWorks Stacks returns *****FILTERED***** instead of the
-	// actual value.
+	// In responses, OpsWorks Stacks returns *****FILTERED***** instead of the actual
+	// value.
 	SshKey *string
 
 	// The repository type.
@@ -1415,16 +1417,16 @@ type Stack struct {
 	// The stack host name theme, with spaces replaced by underscores.
 	HostnameTheme *string
 
-	// The stack name.
+	// The stack name. Stack names can be a maximum of 64 characters.
 	Name *string
 
-	// The stack AWS region, such as "ap-northeast-2". For more information about AWS
-	// regions, see [Regions and Endpoints].
+	// The stack Amazon Web Services Region, such as ap-northeast-2 . For more
+	// information about Amazon Web Services Regions, see [Regions and Endpoints].
 	//
 	// [Regions and Endpoints]: https://docs.aws.amazon.com/general/latest/gr/rande.html
 	Region *string
 
-	// The stack AWS Identity and Access Management (IAM) role.
+	// The stack Identity and Access Management (IAM) role.
 	ServiceRoleArn *string
 
 	// The stack ID.
@@ -1433,7 +1435,7 @@ type Stack struct {
 	// Whether the stack uses custom cookbooks.
 	UseCustomCookbooks *bool
 
-	// Whether the stack automatically associates the AWS OpsWorks Stacks built-in
+	// Whether the stack automatically associates the OpsWorks Stacks built-in
 	// security groups with the stack's layers.
 	UseOpsworksSecurityGroups *bool
 
@@ -1446,12 +1448,12 @@ type Stack struct {
 // Describes the configuration manager.
 type StackConfigurationManager struct {
 
-	// The name. This parameter must be set to "Chef".
+	// The name. This parameter must be set to Chef .
 	Name *string
 
 	// The Chef version. This parameter must be set to 12, 11.10, or 11.4 for Linux
 	// stacks, and to 12.2 for Windows stacks. The default value for Linux stacks is
-	// 11.4.
+	// 12.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -1485,7 +1487,7 @@ type StackSummary struct {
 // Connection to log in to the instance.
 type TemporaryCredential struct {
 
-	// The instance's AWS OpsWorks Stacks ID.
+	// The instance's OpsWorks Stacks ID.
 	InstanceId *string
 
 	// The password.
@@ -1496,8 +1498,8 @@ type TemporaryCredential struct {
 
 	// The length of time (in minutes) that the grant is valid. When the grant
 	// expires, at the end of this period, the user will no longer be able to use the
-	// credentials to log in. If they are logged in at the time, they will be
-	// automatically logged out.
+	// credentials to log in. If they are logged in at the time, they are automatically
+	// logged out.
 	ValidForInMinutes *int32
 
 	noSmithyDocumentSerde
@@ -1567,13 +1569,14 @@ type Volume struct {
 	// The volume mount point. For example, "/mnt/disk1".
 	MountPoint *string
 
-	// The volume name.
+	// The volume name. Volume names are a maximum of 128 characters.
 	Name *string
 
 	// The RAID array ID.
 	RaidArrayId *string
 
-	// The AWS region. For more information about AWS regions, see [Regions and Endpoints].
+	// The Amazon Web Services Region. For more information about Amazon Web Services
+	// Regions, see [Regions and Endpoints].
 	//
 	// [Regions and Endpoints]: https://docs.aws.amazon.com/general/latest/gr/rande.html
 	Region *string
@@ -1601,9 +1604,9 @@ type Volume struct {
 	//   size of 1 GiB and a maximum size of 16384 GiB.
 	//
 	//   - st1 - Throughput Optimized hard disk drive (HDD). Throughput optimized HDD
-	//   volumes must have a minimum size of 500 GiB and a maximum size of 16384 GiB.
+	//   volumes must have a minimum size of 125 GiB and a maximum size of 16384 GiB.
 	//
-	//   - sc1 - Cold HDD. Cold HDD volumes must have a minimum size of 500 GiB and a
+	//   - sc1 - Cold HDD. Cold HDD volumes must have a minimum size of 125 GiB and a
 	//   maximum size of 16384 GiB.
 	//
 	// [Amazon EBS Volume Types]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
@@ -1655,9 +1658,9 @@ type VolumeConfiguration struct {
 	//   size of 1 GiB and a maximum size of 16384 GiB.
 	//
 	//   - st1 - Throughput Optimized hard disk drive (HDD). Throughput optimized HDD
-	//   volumes must have a minimum size of 500 GiB and a maximum size of 16384 GiB.
+	//   volumes must have a minimum size of 125 GiB and a maximum size of 16384 GiB.
 	//
-	//   - sc1 - Cold HDD. Cold HDD volumes must have a minimum size of 500 GiB and a
+	//   - sc1 - Cold HDD. Cold HDD volumes must have a minimum size of 125 GiB and a
 	//   maximum size of 16384 GiB.
 	//
 	// [Amazon EBS Volume Types]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html

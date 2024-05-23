@@ -48,7 +48,7 @@ type SetLoadBasedAutoScalingInput struct {
 	LayerId *string
 
 	// An AutoScalingThresholds object with the downscaling threshold configuration.
-	// If the load falls below these thresholds for a specified amount of time, AWS
+	// If the load falls below these thresholds for a specified amount of time,
 	// OpsWorks Stacks stops a specified number of instances.
 	DownScaling *types.AutoScalingThresholds
 
@@ -56,7 +56,7 @@ type SetLoadBasedAutoScalingInput struct {
 	Enable *bool
 
 	// An AutoScalingThresholds object with the upscaling threshold configuration. If
-	// the load exceeds these thresholds for a specified amount of time, AWS OpsWorks
+	// the load exceeds these thresholds for a specified amount of time, OpsWorks
 	// Stacks starts a specified number of instances.
 	UpScaling *types.AutoScalingThresholds
 

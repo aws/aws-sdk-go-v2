@@ -1,0 +1,8 @@
+{
+    "id": "46836310-b70c-46d3-9746-2b1844505ea0",
+    "type": "feature",
+    "description": "This release adds the capability to run interactive workloads using Apache Livy Endpoint.",
+    "modules": [
+        "service/emrserverless"
+    ]
+}

@@ -59,6 +59,10 @@ type UpdateApplicationInput struct {
 	// The capacity to initialize when the application is updated.
 	InitialCapacity map[string]types.InitialCapacityConfig
 
+	// The interactive configuration object that contains new interactive use cases
+	// when the application is updated.
+	InteractiveConfiguration *types.InteractiveConfiguration
+
 	// The maximum capacity to allocate when the application is updated. This is
 	// cumulative across all workers at any given point in time during the lifespan of
 	// the application. No new resources will be created once any one of the defined

@@ -40,7 +40,7 @@ type UpdateElasticIpInput struct {
 	// This member is required.
 	ElasticIp *string
 
-	// The new name.
+	// The new name, which can be a maximum of 32 characters.
 	Name *string
 
 	noSmithyDocumentSerde

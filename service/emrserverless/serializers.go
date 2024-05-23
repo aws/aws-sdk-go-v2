@@ -194,6 +194,13 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 		}
 	}
 
+	if v.InteractiveConfiguration != nil {
+		ok := object.Key("interactiveConfiguration")
+		if err := awsRestjson1_serializeDocumentInteractiveConfiguration(v.InteractiveConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaximumCapacity != nil {
 		ok := object.Key("maximumCapacity")
 		if err := awsRestjson1_serializeDocumentMaximumAllowedResources(v.MaximumCapacity, ok); err != nil {
@@ -1287,6 +1294,13 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 		}
 	}
 
+	if v.InteractiveConfiguration != nil {
+		ok := object.Key("interactiveConfiguration")
+		if err := awsRestjson1_serializeDocumentInteractiveConfiguration(v.InteractiveConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaximumCapacity != nil {
 		ok := object.Key("maximumCapacity")
 		if err := awsRestjson1_serializeDocumentMaximumAllowedResources(v.MaximumCapacity, ok); err != nil {
@@ -1528,6 +1542,23 @@ func awsRestjson1_serializeDocumentInitialCapacityConfigMap(v map[string]types.I
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInteractiveConfiguration(v *types.InteractiveConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LivyEndpointEnabled != nil {
+		ok := object.Key("livyEndpointEnabled")
+		ok.Boolean(*v.LivyEndpointEnabled)
+	}
+
+	if v.StudioEnabled != nil {
+		ok := object.Key("studioEnabled")
+		ok.Boolean(*v.StudioEnabled)
+	}
+
 	return nil
 }
 
