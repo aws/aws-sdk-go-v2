@@ -13,9 +13,8 @@ import (
 
 // Updates auto scaling settings on your global tables at once.
 //
-// This operation only applies to [Version 2019.11.21 (Current)] of global tables.
-//
-// [Version 2019.11.21 (Current)]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
+// For global tables, this operation only applies to global tables using Version
+// 2019.11.21 (Current version).
 func (c *Client) UpdateTableReplicaAutoScaling(ctx context.Context, params *UpdateTableReplicaAutoScalingInput, optFns ...func(*Options)) (*UpdateTableReplicaAutoScalingOutput, error) {
 	if params == nil {
 		params = &UpdateTableReplicaAutoScalingInput{}

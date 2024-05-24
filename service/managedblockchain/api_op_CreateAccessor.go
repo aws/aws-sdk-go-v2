@@ -49,16 +49,21 @@ type CreateAccessorInput struct {
 
 	// The blockchain network that the Accessor token is created for.
 	//
-	// We recommend using the appropriate networkType value for the blockchain network
-	// that you are creating the Accessor token for. You cannnot use the value
-	// ETHEREUM_MAINNET_AND_GOERLI to specify a networkType for your Accessor token.
+	//   - Use the actual networkType value for the blockchain network that you are
+	//   creating the Accessor token for.
 	//
-	// The default value of ETHEREUM_MAINNET_AND_GOERLI is only applied:
+	//   - With the shut down of the Ethereum Goerli and Polygon Mumbai Testnet
+	//   networks the following networkType values are no longer available for
+	//   selection and use.
 	//
-	//   - when the CreateAccessor action does not set a networkType .
+	//   - ETHEREUM_MAINNET_AND_GOERLI
 	//
-	//   - to all existing Accessor tokens that were created before the networkType
-	//   property was introduced.
+	//   - ETHEREUM_GOERLI
+	//
+	//   - POLYGON_MUMBAI
+	//
+	// However, your existing Accessor tokens with these networkType values will remain
+	//   unchanged.
 	NetworkType types.AccessorNetworkType
 
 	// Tags to assign to the Accessor.

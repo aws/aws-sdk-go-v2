@@ -14,15 +14,13 @@ import (
 
 // Updates settings for a global table.
 //
-// This operation only applies to [Version 2017.11.29 (Legacy)] of global tables. We recommend using [Version 2019.11.21 (Current)] when
-// creating new global tables, as it provides greater flexibility, higher
+// For global tables, this operation only applies to global tables using Version
+// 2019.11.21 (Current version), as it provides greater flexibility, higher
 // efficiency and consumes less write capacity than 2017.11.29 (Legacy). To
 // determine which version you are using, see [Determining the version]. To update existing global tables
 // from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [Updating global tables].
 //
 // [Updating global tables]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
-// [Version 2019.11.21 (Current)]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
-// [Version 2017.11.29 (Legacy)]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
 // [Determining the version]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
 func (c *Client) UpdateGlobalTableSettings(ctx context.Context, params *UpdateGlobalTableSettingsInput, optFns ...func(*Options)) (*UpdateGlobalTableSettingsOutput, error) {
 	if params == nil {
@@ -50,13 +48,13 @@ type UpdateGlobalTableSettingsInput struct {
 	// specified, the global table defaults to PROVISIONED capacity billing mode.
 	//
 	//   - PROVISIONED - We recommend using PROVISIONED for predictable workloads.
-	//   PROVISIONED sets the billing mode to [Provisioned Mode].
+	//   PROVISIONED sets the billing mode to [Provisioned capacity mode].
 	//
 	//   - PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable
-	//   workloads. PAY_PER_REQUEST sets the billing mode to [On-Demand Mode].
+	//   workloads. PAY_PER_REQUEST sets the billing mode to [On-demand capacity mode].
 	//
-	// [On-Demand Mode]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
-	// [Provisioned Mode]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
+	// [Provisioned capacity mode]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
+	// [On-demand capacity mode]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html
 	GlobalTableBillingMode types.BillingMode
 
 	// Represents the settings of a global secondary index for a global table that

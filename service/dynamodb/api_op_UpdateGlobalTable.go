@@ -18,14 +18,15 @@ import (
 // DynamoDB Streams enabled, and have the same provisioned and maximum write
 // capacity units.
 //
-// This operation only applies to [Version 2017.11.29 (Legacy)] of global tables. We recommend using [Version 2019.11.21 (Current)] when
-// creating new global tables, as it provides greater flexibility, higher
+// For global tables, this operation only applies to global tables using Version
+// 2019.11.21 (Current version), as it provides greater flexibility, higher
 // efficiency and consumes less write capacity than 2017.11.29 (Legacy). To
 // determine which version you are using, see [Determining the version]. To update existing global tables
 // from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [Updating global tables].
 //
-// This operation only applies to [Version 2017.11.29] of global tables. If you are using global
-// tables [Version 2019.11.21]you can use [UpdateTable] instead.
+// For global tables, this operation only applies to global tables using Version
+// 2019.11.21 (Current version). If you are using global tables [Version 2019.11.21]you can use [UpdateTable]
+// instead.
 //
 // Although you can use UpdateGlobalTable to add replicas and remove replicas in a
 // single request, for simplicity we recommend that you issue separate requests for
@@ -44,10 +45,7 @@ import (
 //
 // [Updating global tables]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
 // [UpdateTable]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html
-// [Version 2019.11.21 (Current)]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
-// [Version 2017.11.29 (Legacy)]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
-// [Version 2017.11.29]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
-// [Version 2019.11.21]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
+// [Version 2019.11.21]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html
 // [Determining the version]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
 func (c *Client) UpdateGlobalTable(ctx context.Context, params *UpdateGlobalTableInput, optFns ...func(*Options)) (*UpdateGlobalTableOutput, error) {
 	if params == nil {

@@ -15,7 +15,8 @@ import (
 // Modifies the provisioned throughput settings, global secondary indexes, or
 // DynamoDB Streams settings for a given table.
 //
-// This operation only applies to [Version 2019.11.21 (Current)] of global tables.
+// For global tables, this operation only applies to global tables using Version
+// 2019.11.21 (Current version).
 //
 // You can only perform one of the following operations at once:
 //
@@ -30,8 +31,6 @@ import (
 // status changes from ACTIVE to UPDATING . While it's UPDATING , you can't issue
 // another UpdateTable request. When the table returns to the ACTIVE state, the
 // UpdateTable operation is complete.
-//
-// [Version 2019.11.21 (Current)]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
 func (c *Client) UpdateTable(ctx context.Context, params *UpdateTableInput, optFns ...func(*Options)) (*UpdateTableOutput, error) {
 	if params == nil {
 		params = &UpdateTableInput{}
@@ -68,13 +67,13 @@ type UpdateTableInput struct {
 	// global secondary indexes over the past 30 minutes.
 	//
 	//   - PROVISIONED - We recommend using PROVISIONED for predictable workloads.
-	//   PROVISIONED sets the billing mode to [Provisioned Mode].
+	//   PROVISIONED sets the billing mode to [Provisioned capacity mode].
 	//
 	//   - PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable
-	//   workloads. PAY_PER_REQUEST sets the billing mode to [On-Demand Mode].
+	//   workloads. PAY_PER_REQUEST sets the billing mode to [On-demand capacity mode].
 	//
-	// [On-Demand Mode]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
-	// [Provisioned Mode]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
+	// [Provisioned capacity mode]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
+	// [On-demand capacity mode]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html
 	BillingMode types.BillingMode
 
 	// Indicates whether deletion protection is to be enabled (true) or disabled
@@ -109,9 +108,8 @@ type UpdateTableInput struct {
 
 	// A list of replica update actions (create, delete, or update) for the table.
 	//
-	// This property only applies to [Version 2019.11.21 (Current)] of global tables.
-	//
-	// [Version 2019.11.21 (Current)]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
+	// For global tables, this property only applies to global tables using Version
+	// 2019.11.21 (Current version).
 	ReplicaUpdates []types.ReplicationGroupUpdate
 
 	// The new server-side encryption settings for the specified table.

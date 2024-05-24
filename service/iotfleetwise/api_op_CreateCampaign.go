@@ -50,8 +50,8 @@ type CreateCampaignInput struct {
 	// This member is required.
 	Name *string
 
-	// (Optional) The Amazon Resource Name (ARN) of the signal catalog to associate
-	// with the campaign.
+	// The Amazon Resource Name (ARN) of the signal catalog to associate with the
+	// campaign.
 	//
 	// This member is required.
 	SignalCatalogArn *string

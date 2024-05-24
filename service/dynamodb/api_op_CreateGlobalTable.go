@@ -16,8 +16,8 @@ import (
 // replication relationship between two or more DynamoDB tables with the same table
 // name in the provided Regions.
 //
-// This operation only applies to [Version 2017.11.29 (Legacy)] of global tables. We recommend using [Version 2019.11.21 (Current)] when
-// creating new global tables, as it provides greater flexibility, higher
+// For global tables, this operation only applies to global tables using Version
+// 2019.11.21 (Current version), as it provides greater flexibility, higher
 // efficiency and consumes less write capacity than 2017.11.29 (Legacy). To
 // determine which version you are using, see [Determining the version]. To update existing global tables
 // from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [Updating global tables].
@@ -61,8 +61,6 @@ import (
 // across your global table.
 //
 // [Updating global tables]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
-// [Version 2019.11.21 (Current)]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
-// [Version 2017.11.29 (Legacy)]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
 // [Determining the version]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
 func (c *Client) CreateGlobalTable(ctx context.Context, params *CreateGlobalTableInput, optFns ...func(*Options)) (*CreateGlobalTableOutput, error) {
 	if params == nil {

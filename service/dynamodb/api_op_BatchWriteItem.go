@@ -87,6 +87,10 @@ import (
 //
 //   - The total request size exceeds 16 MB.
 //
+//   - Any individual items with keys exceeding the key length limits. For a
+//     partition key, the limit is 2048 bytes and for a sort key, the limit is 1024
+//     bytes.
+//
 // [Batch Operations and Error Handling]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#Programming.Errors.BatchOperations
 // [Naming Rules and Data Types]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html
 func (c *Client) BatchWriteItem(ctx context.Context, params *BatchWriteItemInput, optFns ...func(*Options)) (*BatchWriteItemOutput, error) {

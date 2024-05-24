@@ -301,9 +301,9 @@ type UpdateItemOutput struct {
 	// includes the total provisioned throughput consumed, along with statistics for
 	// the table and any indexes involved in the operation. ConsumedCapacity is only
 	// returned if the ReturnConsumedCapacity parameter was specified. For more
-	// information, see [Provisioned Throughput]in the Amazon DynamoDB Developer Guide.
+	// information, see [Capacity unity consumption for write operations]in the Amazon DynamoDB Developer Guide.
 	//
-	// [Provisioned Throughput]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html#ItemSizeCalculations.Reads
+	// [Capacity unity consumption for write operations]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html#write-operation-consumption
 	ConsumedCapacity *types.ConsumedCapacity
 
 	// Information about item collections, if any, that were affected by the UpdateItem

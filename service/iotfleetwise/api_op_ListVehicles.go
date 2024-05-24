@@ -32,6 +32,16 @@ func (c *Client) ListVehicles(ctx context.Context, params *ListVehiclesInput, op
 
 type ListVehiclesInput struct {
 
+	// The fully qualified names of the attributes. For example, the fully qualified
+	// name of an attribute might be Vehicle.Body.Engine.Type .
+	AttributeNames []string
+
+	// Static information about a vehicle attribute value in string format. For
+	// example:
+	//
+	//     "1.3 L R2"
+	AttributeValues []string
+
 	//  The maximum number of items to return, between 1 and 100, inclusive.
 	MaxResults *int32
 

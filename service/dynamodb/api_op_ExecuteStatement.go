@@ -101,10 +101,10 @@ type ExecuteStatementOutput struct {
 	// The capacity units consumed by an operation. The data returned includes the
 	// total provisioned throughput consumed, along with statistics for the table and
 	// any indexes involved in the operation. ConsumedCapacity is only returned if the
-	// request asked for it. For more information, see [Provisioned Throughput]in the Amazon DynamoDB
+	// request asked for it. For more information, see [Provisioned capacity mode]in the Amazon DynamoDB
 	// Developer Guide.
 	//
-	// [Provisioned Throughput]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
+	// [Provisioned capacity mode]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
 	ConsumedCapacity *types.ConsumedCapacity
 
 	// If a read operation was used, this property will contain the result of the read

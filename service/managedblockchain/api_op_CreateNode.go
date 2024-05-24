@@ -46,8 +46,6 @@ type CreateNodeInput struct {
 	//
 	//   - n-ethereum-mainnet
 	//
-	//   - n-ethereum-goerli
-	//
 	// This member is required.
 	NetworkId *string
 
