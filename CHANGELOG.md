@@ -1,3 +1,16 @@
+# Release (2024-05-24)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.32.5](service/dynamodb/CHANGELOG.md#v1325-2024-05-24)
+  * **Documentation**: Documentation only updates for DynamoDB.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.15.0](service/iotfleetwise/CHANGELOG.md#v1150-2024-05-24)
+  * **Feature**: AWS IoT FleetWise now supports listing vehicles with attributes filter, ListVehicles API is updated to support additional attributes filter.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchain`: [v1.22.9](service/managedblockchain/CHANGELOG.md#v1229-2024-05-24)
+  * **Documentation**: This is a minor documentation update to address the impact of the shut down of the Goerli and Polygon networks.
+
 # Release (2024-05-23)
 
 ## General Highlights

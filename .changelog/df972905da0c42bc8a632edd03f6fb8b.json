@@ -1,8 +1,0 @@
-{
-    "id": "df972905-da0c-42bc-8a63-2edd03f6fb8b",
-    "type": "documentation",
-    "description": "This is a minor documentation update to address the impact of the shut down of the Goerli and Polygon networks.",
-    "modules": [
-        "service/managedblockchain"
-    ]
-}

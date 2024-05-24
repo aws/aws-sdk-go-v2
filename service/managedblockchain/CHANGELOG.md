@@ -1,3 +1,7 @@
+# v1.22.9 (2024-05-24)
+
+* **Documentation**: This is a minor documentation update to address the impact of the shut down of the Goerli and Polygon networks.
+
 # v1.22.8 (2024-05-23)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.32.5 (2024-05-24)
+
+* **Documentation**: Documentation only updates for DynamoDB.
+
 # v1.32.4 (2024-05-23)
 
 * No change notes available for this release.

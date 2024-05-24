@@ -1,3 +1,7 @@
+# v1.15.0 (2024-05-24)
+
+* **Feature**: AWS IoT FleetWise now supports listing vehicles with attributes filter, ListVehicles API is updated to support additional attributes filter.
+
 # v1.14.8 (2024-05-23)
 
 * No change notes available for this release.
