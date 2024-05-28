@@ -1523,6 +1523,21 @@
                 "smithy.api#documentation": "<p>Details about consumer group replication.</p>"
             }
         },
+        "com.amazonaws.kafka#ControllerNodeInfo": {
+            "type": "structure",
+            "members": {
+                "Endpoints": {
+                    "target": "com.amazonaws.kafka#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Endpoints for accessing the Controller.</p>",
+                        "smithy.api#jsonName": "endpoints"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controller node information.</p>"
+            }
+        },
         "com.amazonaws.kafka#CreateCluster": {
             "type": "operation",
             "input": {
@@ -6459,6 +6474,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The broker node info.</p>",
                         "smithy.api#jsonName": "brokerNodeInfo"
+                    }
+                },
+                "ControllerNodeInfo": {
+                    "target": "com.amazonaws.kafka#ControllerNodeInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ControllerNodeInfo.</p>",
+                        "smithy.api#jsonName": "controllerNodeInfo"
                     }
                 },
                 "InstanceType": {
