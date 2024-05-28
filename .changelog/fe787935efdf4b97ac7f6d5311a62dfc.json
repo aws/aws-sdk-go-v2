@@ -1,8 +1,0 @@
-{
-    "id": "fe787935-efdf-4b97-ac7f-6d5311a62dfc",
-    "type": "documentation",
-    "description": "Doc-only update for DynamoDB. Specified the IAM actions needed to authorize a user to create a table with a resource-based policy.",
-    "modules": [
-        "service/dynamodb"
-    ]
-}

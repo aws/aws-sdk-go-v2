@@ -1,8 +1,0 @@
-{
-    "id": "901d86fb-c79e-463f-b405-4900951be200",
-    "type": "feature",
-    "description": "Adds ControllerNodeInfo in ListNodes response to support Raft mode for MSK",
-    "modules": [
-        "service/kafka"
-    ]
-}

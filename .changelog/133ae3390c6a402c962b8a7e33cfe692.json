@@ -1,8 +1,0 @@
-{
-    "id": "133ae339-0c6a-402c-962b-8a7e33cfe692",
-    "type": "feature",
-    "description": "Providing support to accept BgpAsnExtended attribute",
-    "modules": [
-        "service/ec2"
-    ]
-}

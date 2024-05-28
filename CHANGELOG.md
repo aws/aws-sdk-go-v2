@@ -1,3 +1,18 @@
+# Release (2024-05-28)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.32.6](service/dynamodb/CHANGELOG.md#v1326-2024-05-28)
+  * **Documentation**: Doc-only update for DynamoDB. Specified the IAM actions needed to authorize a user to create a table with a resource-based policy.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.162.0](service/ec2/CHANGELOG.md#v11620-2024-05-28)
+  * **Feature**: Providing support to accept BgpAsnExtended attribute
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.33.0](service/kafka/CHANGELOG.md#v1330-2024-05-28)
+  * **Feature**: Adds ControllerNodeInfo in ListNodes response to support Raft mode for MSK
+* `github.com/aws/aws-sdk-go-v2/service/swf`: [v1.23.0](service/swf/CHANGELOG.md#v1230-2024-05-28)
+  * **Feature**: This release adds new APIs for deleting activity type and workflow type resources.
+
 # Release (2024-05-24)
 
 ## General Highlights
