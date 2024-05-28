@@ -12,6 +12,8 @@
         "api_op_CountOpenWorkflowExecutions.go",
         "api_op_CountPendingActivityTasks.go",
         "api_op_CountPendingDecisionTasks.go",
+        "api_op_DeleteActivityType.go",
+        "api_op_DeleteWorkflowType.go",
         "api_op_DeprecateActivityType.go",
         "api_op_DeprecateDomain.go",
         "api_op_DeprecateWorkflowType.go",

@@ -90,6 +90,46 @@ func (m *validateOpCountPendingDecisionTasks) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteActivityType struct {
+}
+
+func (*validateOpDeleteActivityType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteActivityType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteActivityTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteActivityTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteWorkflowType struct {
+}
+
+func (*validateOpDeleteWorkflowType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteWorkflowType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteWorkflowTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteWorkflowTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeprecateActivityType struct {
 }
 
@@ -764,6 +804,14 @@ func addOpCountPendingActivityTasksValidationMiddleware(stack *middleware.Stack)
 
 func addOpCountPendingDecisionTasksValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCountPendingDecisionTasks{}, middleware.After)
+}
+
+func addOpDeleteActivityTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteActivityType{}, middleware.After)
+}
+
+func addOpDeleteWorkflowTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteWorkflowType{}, middleware.After)
 }
 
 func addOpDeprecateActivityTypeValidationMiddleware(stack *middleware.Stack) error {
@@ -1458,6 +1506,50 @@ func validateOpCountPendingDecisionTasksInput(v *CountPendingDecisionTasksInput)
 	} else if v.TaskList != nil {
 		if err := validateTaskList(v.TaskList); err != nil {
 			invalidParams.AddNested("TaskList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteActivityTypeInput(v *DeleteActivityTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteActivityTypeInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.ActivityType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActivityType"))
+	} else if v.ActivityType != nil {
+		if err := validateActivityType(v.ActivityType); err != nil {
+			invalidParams.AddNested("ActivityType", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteWorkflowTypeInput(v *DeleteWorkflowTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteWorkflowTypeInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.WorkflowType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowType"))
+	} else if v.WorkflowType != nil {
+		if err := validateWorkflowType(v.WorkflowType); err != nil {
+			invalidParams.AddNested("WorkflowType", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -15,9 +15,6 @@ import (
 // deprecated, you cannot create new tasks of that activity type. Tasks of this
 // type that were scheduled before the type was deprecated continue to run.
 //
-// This operation is eventually consistent. The results are best effort and may
-// not exactly reflect recent updates and changes.
-//
 // # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF

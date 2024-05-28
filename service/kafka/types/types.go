@@ -615,6 +615,15 @@ type ConsumerGroupReplicationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+// Controller node information.
+type ControllerNodeInfo struct {
+
+	// Endpoints for accessing the Controller.
+	Endpoints []string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the EBS storage volumes attached to Apache Kafka
 // broker nodes.
 type EBSStorageInfo struct {
@@ -887,6 +896,9 @@ type NodeInfo struct {
 
 	// The broker node info.
 	BrokerNodeInfo *BrokerNodeInfo
+
+	// The ControllerNodeInfo.
+	ControllerNodeInfo *ControllerNodeInfo
 
 	// The instance type.
 	InstanceType *string

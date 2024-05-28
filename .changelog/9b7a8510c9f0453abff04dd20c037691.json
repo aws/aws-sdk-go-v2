@@ -1,0 +1,8 @@
+{
+    "id": "9b7a8510-c9f0-453a-bff0-4dd20c037691",
+    "type": "feature",
+    "description": "This release adds new APIs for deleting activity type and workflow type resources.",
+    "modules": [
+        "service/swf"
+    ]
+}

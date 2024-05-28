@@ -110,6 +110,30 @@ func TestCheckSnapshot_CountPendingDecisionTasks(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteActivityType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteActivityType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteActivityType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteWorkflowType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteWorkflowType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteWorkflowType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeprecateActivityType(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeprecateActivityType(context.Background(), nil, func(o *Options) {
@@ -546,6 +570,30 @@ func TestUpdateSnapshot_CountPendingDecisionTasks(t *testing.T) {
 	_, err := svc.CountPendingDecisionTasks(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CountPendingDecisionTasks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteActivityType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteActivityType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteActivityType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteWorkflowType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteWorkflowType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteWorkflowType")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

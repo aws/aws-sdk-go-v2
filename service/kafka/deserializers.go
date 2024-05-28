@@ -12068,6 +12068,42 @@ func awsRestjson1_deserializeDocumentConsumerGroupReplication(v **types.Consumer
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentControllerNodeInfo(v **types.ControllerNodeInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ControllerNodeInfo
+	if *v == nil {
+		sv = &types.ControllerNodeInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "endpoints":
+			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.Endpoints, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEBSStorageInfo(v **types.EBSStorageInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13017,6 +13053,11 @@ func awsRestjson1_deserializeDocumentNodeInfo(v **types.NodeInfo, value interfac
 
 		case "brokerNodeInfo":
 			if err := awsRestjson1_deserializeDocumentBrokerNodeInfo(&sv.BrokerNodeInfo, value); err != nil {
+				return err
+			}
+
+		case "controllerNodeInfo":
+			if err := awsRestjson1_deserializeDocumentControllerNodeInfo(&sv.ControllerNodeInfo, value); err != nil {
 				return err
 			}
 

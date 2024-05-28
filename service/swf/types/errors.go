@@ -232,6 +232,32 @@ func (e *TypeDeprecatedFault) ErrorCode() string {
 }
 func (e *TypeDeprecatedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Returned when the resource type has not been deprecated.
+type TypeNotDeprecatedFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TypeNotDeprecatedFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TypeNotDeprecatedFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TypeNotDeprecatedFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "TypeNotDeprecatedFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *TypeNotDeprecatedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Returned when the named resource cannot be found with in the scope of this
 // operation (region or domain). This could happen if the named resource was never
 // created or is no longer available for this operation.
