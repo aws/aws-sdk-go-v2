@@ -1,0 +1,8 @@
+{
+    "id": "4aa6b06a-0f06-4481-898f-6334ebf23857",
+    "type": "feature",
+    "description": "This release includes changes to DescribeContact API's response by including ConnectedToSystemTimestamp, RoutingCriteria, Customer, Campaign, AnsweringMachineDetectionStatus, CustomerVoiceActivity, QualityMetrics, DisconnectDetails, and SegmentAttributes information from a contact in Amazon Connect.",
+    "modules": [
+        "service/connect"
+    ]
+}

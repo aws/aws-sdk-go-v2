@@ -683,6 +683,7 @@ type TargetType string
 const (
 	TargetTypeAccount            TargetType = "ACCOUNT"
 	TargetTypeOrganizationalUnit TargetType = "ORGANIZATIONAL_UNIT"
+	TargetTypeRoot               TargetType = "ROOT"
 )
 
 // Values returns all known values for TargetType. Note that this can be expanded
@@ -693,6 +694,7 @@ func (TargetType) Values() []TargetType {
 	return []TargetType{
 		"ACCOUNT",
 		"ORGANIZATIONAL_UNIT",
+		"ROOT",
 	}
 }
 

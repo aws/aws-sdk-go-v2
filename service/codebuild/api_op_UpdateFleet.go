@@ -112,7 +112,10 @@ type UpdateFleetInput struct {
 	// [Build environment compute types]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
 	EnvironmentType types.EnvironmentType
 
-	// The service role associated with the compute fleet.
+	// The service role associated with the compute fleet. For more information, see [Allow a user to add a permission policy for a fleet service role]
+	// in the CodeBuild User Guide.
+	//
+	// [Allow a user to add a permission policy for a fleet service role]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-permission-policy-fleet-service-role.html
 	FleetServiceRole *string
 
 	// The compute fleet overflow behavior.

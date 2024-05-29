@@ -40454,6 +40454,15 @@ func awsAwsjson11_deserializeDocumentJob(v **types.Job, value interface{}) error
 				sv.GlueVersion = ptr.String(jtv)
 			}
 
+		case "JobMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobMode to be of type string, got %T instead", value)
+				}
+				sv.JobMode = types.JobMode(jtv)
+			}
+
 		case "LastModifiedOn":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -41099,6 +41108,15 @@ func awsAwsjson11_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 					return fmt.Errorf("expected IdString to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "JobMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobMode to be of type string, got %T instead", value)
+				}
+				sv.JobMode = types.JobMode(jtv)
 			}
 
 		case "JobName":

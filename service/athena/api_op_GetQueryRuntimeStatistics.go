@@ -12,10 +12,13 @@ import (
 )
 
 // Returns query execution runtime statistics related to a single execution of a
-// query if you have access to the workgroup in which the query ran. Query
-// execution runtime statistics are returned only when QueryExecutionStatus$Stateis in a SUCCEEDED or FAILED
-// state. Stage-level input and output row count and data size statistics are not
-// shown when a query has row-level filters defined in Lake Formation.
+// query if you have access to the workgroup in which the query ran. Statistics
+// from the Timeline section of the response object are available as soon as QueryExecutionStatus$State is
+// in a SUCCEEDED or FAILED state. The remaining non-timeline statistics in the
+// response (like stage-level input and output row count and data size) are updated
+// asynchronously and may not be available immediately after a query completes. The
+// non-timeline statistics are also not included when a query has row-level filters
+// defined in Lake Formation.
 func (c *Client) GetQueryRuntimeStatistics(ctx context.Context, params *GetQueryRuntimeStatisticsInput, optFns ...func(*Options)) (*GetQueryRuntimeStatisticsOutput, error) {
 	if params == nil {
 		params = &GetQueryRuntimeStatisticsInput{}

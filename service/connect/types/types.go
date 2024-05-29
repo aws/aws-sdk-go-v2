@@ -64,6 +64,15 @@ type AgentContactReference struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an agent hierarchy group.
+type AgentHierarchyGroup struct {
+
+	// The Amazon Resource Name (ARN) of the group.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
 // A structure that defines search criteria for contacts using agent hierarchy
 // group levels. For more information about agent hierarchies, see [Set Up Agent Hierarchies]in the Amazon
 // Connect Administrator Guide.
@@ -95,11 +104,30 @@ type AgentInfo struct {
 	// Agent pause duration for a contact in seconds.
 	AgentPauseDurationInSeconds *int32
 
+	// The configuration for the allowed capabilities for participants present over
+	// the call.
+	Capabilities *ParticipantCapabilities
+
 	// The timestamp when the contact was connected to the agent.
 	ConnectedToAgentTimestamp *time.Time
 
+	// Information regarding Agent’s device.
+	DeviceInfo *DeviceInfo
+
+	// The agent hierarchy groups for the agent.
+	HierarchyGroups *HierarchyGroups
+
 	// The identifier of the agent who accepted the contact.
 	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the quality of the Agent's media connection
+type AgentQualityMetrics struct {
+
+	// Information about the audio quality of the Agent
+	Audio *AudioQualityMetricsInfo
 
 	noSmithyDocumentSerde
 }
@@ -375,11 +403,44 @@ type AttributeAndCondition struct {
 	noSmithyDocumentSerde
 }
 
+// An object to specify the predefined attribute condition.
+type AttributeCondition struct {
+
+	// The operator of the condition.
+	ComparisonOperator *string
+
+	// The name of predefined attribute.
+	Name *string
+
+	// The proficiency level of the condition.
+	ProficiencyLevel *float32
+
+	// The value of predefined attribute.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Has audio-specific configurations as the operating parameter for Echo Reduction.
 type AudioFeatures struct {
 
 	// Makes echo reduction available to clients who connect to the meeting.
 	EchoReduction MeetingFeatureStatus
+
+	noSmithyDocumentSerde
+}
+
+// Contains information for score and potential quality issues for Audio
+type AudioQualityMetricsInfo struct {
+
+	// List of potential issues causing degradation of quality on a media connection.
+	// If the service did not detect any potential quality issues the list is empty.
+	//
+	// Valid values: HighPacketLoss | HighRoundTripTime | HighJitterBuffer
+	PotentialQualityIssues []string
+
+	// Number measuring the estimated quality of the media connection.
+	QualityScore float32
 
 	noSmithyDocumentSerde
 }
@@ -592,14 +653,35 @@ type Contact struct {
 	// Information about the agent who accepted the contact.
 	AgentInfo *AgentInfo
 
+	// Indicates how an [outbound campaign] call is actually disposed if the contact is connected to
+	// Amazon Connect.
+	//
+	// [outbound campaign]: https://docs.aws.amazon.com/connect/latest/adminguide/how-to-create-campaigns.html
+	AnsweringMachineDetectionStatus AnsweringMachineDetectionStatus
+
 	// The Amazon Resource Name (ARN) for the contact.
 	Arn *string
+
+	// Information associated with a campaign.
+	Campaign *Campaign
 
 	// How the contact reached your contact center.
 	Channel Channel
 
+	// The timestamp when customer endpoint connected to Amazon Connect.
+	ConnectedToSystemTimestamp *time.Time
+
+	// Information about the Customer on the contact.
+	Customer *Customer
+
+	// Information about customer’s voice activity.
+	CustomerVoiceActivity *CustomerVoiceActivity
+
 	// The description of the contact.
 	Description *string
+
+	// Information about the call disconnect experience.
+	DisconnectDetails *DisconnectDetails
 
 	// The timestamp when the customer endpoint disconnected from Amazon Connect.
 	DisconnectTimestamp *time.Time
@@ -639,6 +721,9 @@ type Contact struct {
 	// contact.
 	PreviousContactId *string
 
+	// Information about the quality of the participant's media connection.
+	QualityMetrics *QualityMetrics
+
 	// If this contact was queued, this contains information about the queue.
 	QueueInfo *QueueInfo
 
@@ -659,9 +744,19 @@ type Contact struct {
 	// [related]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html#relatedcontactid
 	RelatedContactId *string
 
+	// Latest routing criteria on the contact.
+	RoutingCriteria *RoutingCriteria
+
 	// The timestamp, in Unix epoch time format, at which to start running the inbound
 	// flow.
 	ScheduledTimestamp *time.Time
+
+	// A set of system defined key-value pairs stored on individual contact segments
+	// using an attribute map. The attributes are standard Amazon Connect attributes
+	// and can be accessed in flows. Attribute keys can include only alphanumeric, -,
+	// and _ characters. This field can be used to show channel subtype. For example,
+	// connect:Guide or connect:SMS .
+	SegmentAttributes map[string]SegmentAttributeValue
 
 	// Tags associated with the contact. This contains both Amazon Web Services
 	// generated and user-defined tags.
@@ -1176,6 +1271,42 @@ type CurrentMetricSortCriteria struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the Customer on the contact.
+type Customer struct {
+
+	// The configuration for the allowed capabilities for participants present over
+	// the call.
+	Capabilities *ParticipantCapabilities
+
+	// Information regarding Customer’s device.
+	DeviceInfo *DeviceInfo
+
+	noSmithyDocumentSerde
+}
+
+// Information about the quality of the Customer's media connection
+type CustomerQualityMetrics struct {
+
+	// Information about the audio quality of the Customer
+	Audio *AudioQualityMetricsInfo
+
+	noSmithyDocumentSerde
+}
+
+// Information about customer’s voice activity.
+type CustomerVoiceActivity struct {
+
+	// Timestamp that measures the end of the customer greeting from an outbound voice
+	// call.
+	GreetingEndTimestamp *time.Time
+
+	// Timestamp that measures the beginning of the customer greeting from an outbound
+	// voice call.
+	GreetingStartTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Information about a reference when the referenceType is DATE . Otherwise, null.
 type DateReference struct {
 
@@ -1220,6 +1351,21 @@ type DefaultVocabulary struct {
 	noSmithyDocumentSerde
 }
 
+// Information regarding the device.
+type DeviceInfo struct {
+
+	// Operating system that the participant used for the call.
+	OperatingSystem *string
+
+	// Name of the platform that the participant used for the call.
+	PlatformName *string
+
+	// Version of the platform that the participant used for the call.
+	PlatformVersion *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the dimensions for a set of metrics.
 type Dimensions struct {
 
@@ -1234,6 +1380,16 @@ type Dimensions struct {
 
 	// The expression of a step in a routing criteria.
 	RoutingStepExpression *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the call disconnect experience.
+type DisconnectDetails struct {
+
+	// Indicates the potential disconnection issues for a call. This field is not
+	// populated if the service does not detect potential issues.
+	PotentialDisconnectIssue *string
 
 	noSmithyDocumentSerde
 }
@@ -2073,6 +2229,33 @@ type EventBridgeActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// An object to specify the expiration of a routing step.
+type Expiry struct {
+
+	// The number of seconds to wait before expiring the routing step.
+	DurationInSeconds *int32
+
+	// The timestamp indicating when the routing step expires.
+	ExpiryTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A tagged union to specify expression for a routing step.
+type Expression struct {
+
+	// List of routing expressions which will be AND-ed together.
+	AndExpression []Expression
+
+	// An object to specify the predefined attribute condition.
+	AttributeCondition *AttributeCondition
+
+	// List of routing expressions which will be OR-ed together.
+	OrExpression []Expression
+
+	noSmithyDocumentSerde
+}
+
 // Request for which contact failed to be generated.
 type FailedRequest struct {
 
@@ -2216,6 +2399,28 @@ type HierarchyGroupCondition struct {
 
 	// The value in the hierarchy group condition.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the agent hierarchy. Hierarchies can be configured with up to
+// five levels.
+type HierarchyGroups struct {
+
+	// The group at level one of the agent hierarchy.
+	Level1 *AgentHierarchyGroup
+
+	// The group at level two of the agent hierarchy.
+	Level2 *AgentHierarchyGroup
+
+	// The group at level three of the agent hierarchy.
+	Level3 *AgentHierarchyGroup
+
+	// The group at level four of the agent hierarchy.
+	Level4 *AgentHierarchyGroup
+
+	// The group at level five of the agent hierarchy.
+	Level5 *AgentHierarchyGroup
 
 	noSmithyDocumentSerde
 }
@@ -3533,6 +3738,18 @@ type PropertyValidationExceptionProperty struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the quality of the participant's media connection.
+type QualityMetrics struct {
+
+	// Information about the quality of Agent media connection.
+	Agent *AgentQualityMetrics
+
+	// Information about the quality of Customer media connection.
+	Customer *CustomerQualityMetrics
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a queue.
 type Queue struct {
 
@@ -4238,6 +4455,28 @@ type ResourceTagsSearchCriteria struct {
 
 	// The search criteria to be used to return tags.
 	TagSearchCondition *TagSearchCondition
+
+	noSmithyDocumentSerde
+}
+
+// Latest routing criteria on the contact.
+type RoutingCriteria struct {
+
+	// The timestamp indicating when the routing criteria is set to active. A routing
+	// criteria is activated when contact is transferred to a queue.
+	// ActivationTimestamp will be set on routing criteria for contacts in agent queue
+	// even though Routing criteria is never activated for contacts in agent queue.
+	ActivationTimestamp *time.Time
+
+	// Information about the index of the routing criteria.
+	Index *int32
+
+	// List of routing steps. When Amazon Connect does not find an available agent
+	// meeting the requirements in a step for a given step duration, the routing
+	// criteria will move on to the next step sequentially until a join is completed
+	// with an agent. When all steps are exhausted, the contact will be offered to any
+	// agent in the queue.
+	Steps []Step
 
 	noSmithyDocumentSerde
 }
@@ -4997,6 +5236,21 @@ type Sort struct {
 	//
 	// This member is required.
 	Order SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// Step signifies the criteria to be used for routing to an agent
+type Step struct {
+
+	// An object to specify the expiration of a routing step.
+	Expiry *Expiry
+
+	// A tagged union to specify expression for a routing step.
+	Expression *Expression
+
+	// Represents status of the Routing step.
+	Status RoutingCriteriaStepStatus
 
 	noSmithyDocumentSerde
 }

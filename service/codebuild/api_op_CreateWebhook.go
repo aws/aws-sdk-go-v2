@@ -64,6 +64,14 @@ type CreateWebhookInput struct {
 	// array must pass. For a filter group to pass, each of its filters must pass.
 	FilterGroups [][]types.WebhookFilter
 
+	// If manualCreation is true, CodeBuild doesn't create a webhook in GitHub and
+	// instead returns payloadUrl and secret values for the webhook. The payloadUrl
+	// and secret values in the output can be used to manually create a webhook within
+	// GitHub.
+	//
+	// manualCreation is only available for GitHub webhooks.
+	ManualCreation *bool
+
 	noSmithyDocumentSerde
 }
 

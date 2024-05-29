@@ -957,7 +957,10 @@ type Fleet struct {
 	// [Build environment compute types]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
 	EnvironmentType EnvironmentType
 
-	// The service role associated with the compute fleet.
+	// The service role associated with the compute fleet. For more information, see [Allow a user to add a permission policy for a fleet service role]
+	// in the CodeBuild User Guide.
+	//
+	// [Allow a user to add a permission policy for a fleet service role]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-permission-policy-fleet-service-role.html
 	FleetServiceRole *string
 
 	// The ID of the compute fleet.
@@ -2495,6 +2498,14 @@ type Webhook struct {
 	// A timestamp that indicates the last time a repository's secret token was
 	// modified.
 	LastModifiedSecret *time.Time
+
+	// If manualCreation is true, CodeBuild doesn't create a webhook in GitHub and
+	// instead returns payloadUrl and secret values for the webhook. The payloadUrl
+	// and secret values in the output can be used to manually create a webhook within
+	// GitHub.
+	//
+	// manualCreation is only available for GitHub webhooks.
+	ManualCreation *bool
 
 	// The CodeBuild endpoint where webhook events are sent.
 	PayloadUrl *string

@@ -20,6 +20,10 @@ import (
 //
 //   - QUEUE_TRANSFER
 //
+//   - EXTERNAL_OUTBOUND
+//
+//   - MONITOR
+//
 // Chat and task contacts can be terminated in any state, regardless of initiation
 // method.
 func (c *Client) StopContact(ctx context.Context, params *StopContactInput, optFns ...func(*Options)) (*StopContactOutput, error) {

@@ -92,6 +92,50 @@ func (AgentStatusType) Values() []AgentStatusType {
 	}
 }
 
+type AnsweringMachineDetectionStatus string
+
+// Enum values for AnsweringMachineDetectionStatus
+const (
+	AnsweringMachineDetectionStatusAnswered             AnsweringMachineDetectionStatus = "ANSWERED"
+	AnsweringMachineDetectionStatusUndetected           AnsweringMachineDetectionStatus = "UNDETECTED"
+	AnsweringMachineDetectionStatusError                AnsweringMachineDetectionStatus = "ERROR"
+	AnsweringMachineDetectionStatusHumanAnswered        AnsweringMachineDetectionStatus = "HUMAN_ANSWERED"
+	AnsweringMachineDetectionStatusSitToneDetected      AnsweringMachineDetectionStatus = "SIT_TONE_DETECTED"
+	AnsweringMachineDetectionStatusSitToneBusy          AnsweringMachineDetectionStatus = "SIT_TONE_BUSY"
+	AnsweringMachineDetectionStatusSitToneInvalidNumber AnsweringMachineDetectionStatus = "SIT_TONE_INVALID_NUMBER"
+	AnsweringMachineDetectionStatusFaxMachineDetected   AnsweringMachineDetectionStatus = "FAX_MACHINE_DETECTED"
+	AnsweringMachineDetectionStatusVoicemailBeep        AnsweringMachineDetectionStatus = "VOICEMAIL_BEEP"
+	AnsweringMachineDetectionStatusVoicemailNoBeep      AnsweringMachineDetectionStatus = "VOICEMAIL_NO_BEEP"
+	AnsweringMachineDetectionStatusAmdUnresolved        AnsweringMachineDetectionStatus = "AMD_UNRESOLVED"
+	AnsweringMachineDetectionStatusAmdUnanswered        AnsweringMachineDetectionStatus = "AMD_UNANSWERED"
+	AnsweringMachineDetectionStatusAmdError             AnsweringMachineDetectionStatus = "AMD_ERROR"
+	AnsweringMachineDetectionStatusAmdNotApplicable     AnsweringMachineDetectionStatus = "AMD_NOT_APPLICABLE"
+)
+
+// Values returns all known values for AnsweringMachineDetectionStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnsweringMachineDetectionStatus) Values() []AnsweringMachineDetectionStatus {
+	return []AnsweringMachineDetectionStatus{
+		"ANSWERED",
+		"UNDETECTED",
+		"ERROR",
+		"HUMAN_ANSWERED",
+		"SIT_TONE_DETECTED",
+		"SIT_TONE_BUSY",
+		"SIT_TONE_INVALID_NUMBER",
+		"FAX_MACHINE_DETECTED",
+		"VOICEMAIL_BEEP",
+		"VOICEMAIL_NO_BEEP",
+		"AMD_UNRESOLVED",
+		"AMD_UNANSWERED",
+		"AMD_ERROR",
+		"AMD_NOT_APPLICABLE",
+	}
+}
+
 type ArtifactStatus string
 
 // Enum values for ArtifactStatus
@@ -2077,6 +2121,29 @@ func (ResourceType) Values() []ResourceType {
 		"HIERARCHY_GROUP",
 		"USER",
 		"PHONE_NUMBER",
+	}
+}
+
+type RoutingCriteriaStepStatus string
+
+// Enum values for RoutingCriteriaStepStatus
+const (
+	RoutingCriteriaStepStatusActive   RoutingCriteriaStepStatus = "ACTIVE"
+	RoutingCriteriaStepStatusInactive RoutingCriteriaStepStatus = "INACTIVE"
+	RoutingCriteriaStepStatusJoined   RoutingCriteriaStepStatus = "JOINED"
+	RoutingCriteriaStepStatusExpired  RoutingCriteriaStepStatus = "EXPIRED"
+)
+
+// Values returns all known values for RoutingCriteriaStepStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RoutingCriteriaStepStatus) Values() []RoutingCriteriaStepStatus {
+	return []RoutingCriteriaStepStatus{
+		"ACTIVE",
+		"INACTIVE",
+		"JOINED",
+		"EXPIRED",
 	}
 }
 

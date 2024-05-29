@@ -1,0 +1,8 @@
+{
+    "id": "9ebb5440-cc89-4c42-a07c-f97103fd0fb7",
+    "type": "feature",
+    "description": "Add optional field JobMode to CreateJob and UpdateJob APIs.",
+    "modules": [
+        "service/glue"
+    ]
+}

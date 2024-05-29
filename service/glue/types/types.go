@@ -4280,6 +4280,18 @@ type Job struct {
 	// [Glue version]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
 	GlueVersion *string
 
+	// A mode that describes how a job was created. Valid values are:
+	//
+	//   - SCRIPT - The job was created using the Glue Studio script editor.
+	//
+	//   - VISUAL - The job was created using the Glue Studio visual editor.
+	//
+	//   - NOTEBOOK - The job was created using an interactive sessions notebook.
+	//
+	// When the JobMode field is missing or null, SCRIPT is assigned as the default
+	// value.
+	JobMode JobMode
+
 	// The last point in time when this job definition was modified.
 	LastModifiedOn *time.Time
 
@@ -4564,6 +4576,18 @@ type JobRun struct {
 	// The ID of this job run.
 	Id *string
 
+	// A mode that describes how a job was created. Valid values are:
+	//
+	//   - SCRIPT - The job was created using the Glue Studio script editor.
+	//
+	//   - VISUAL - The job was created using the Glue Studio visual editor.
+	//
+	//   - NOTEBOOK - The job was created using an interactive sessions notebook.
+	//
+	// When the JobMode field is missing or null, SCRIPT is assigned as the default
+	// value.
+	JobMode JobMode
+
 	// The name of the job definition being used in this run.
 	JobName *string
 
@@ -4786,6 +4810,18 @@ type JobUpdate struct {
 	//
 	// [Glue version]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
 	GlueVersion *string
+
+	// A mode that describes how a job was created. Valid values are:
+	//
+	//   - SCRIPT - The job was created using the Glue Studio script editor.
+	//
+	//   - VISUAL - The job was created using the Glue Studio visual editor.
+	//
+	//   - NOTEBOOK - The job was created using an interactive sessions notebook.
+	//
+	// When the JobMode field is missing or null, SCRIPT is assigned as the default
+	// value.
+	JobMode JobMode
 
 	// This field is reserved for future use.
 	LogUri *string

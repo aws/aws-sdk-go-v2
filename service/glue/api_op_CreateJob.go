@@ -121,6 +121,18 @@ type CreateJobInput struct {
 	// [Glue version]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
 	GlueVersion *string
 
+	// A mode that describes how a job was created. Valid values are:
+	//
+	//   - SCRIPT - The job was created using the Glue Studio script editor.
+	//
+	//   - VISUAL - The job was created using the Glue Studio visual editor.
+	//
+	//   - NOTEBOOK - The job was created using an interactive sessions notebook.
+	//
+	// When the JobMode field is missing or null, SCRIPT is assigned as the default
+	// value.
+	JobMode types.JobMode
+
 	// This field is reserved for future use.
 	LogUri *string
 

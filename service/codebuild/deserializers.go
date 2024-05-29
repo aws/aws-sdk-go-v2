@@ -12015,6 +12015,15 @@ func awsAwsjson11_deserializeDocumentWebhook(v **types.Webhook, value interface{
 				}
 			}
 
+		case "manualCreation":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected WrapperBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.ManualCreation = ptr.Bool(jtv)
+			}
+
 		case "payloadUrl":
 			if value != nil {
 				jtv, ok := value.(string)

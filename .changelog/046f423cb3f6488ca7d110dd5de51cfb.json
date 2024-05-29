@@ -1,0 +1,8 @@
+{
+    "id": "046f423c-b3f6-488c-a7d1-10dd5de51cfb",
+    "type": "feature",
+    "description": "Add ROOT type for TargetType model",
+    "modules": [
+        "service/securityhub"
+    ]
+}

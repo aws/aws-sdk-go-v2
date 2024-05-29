@@ -4026,6 +4026,11 @@ func awsAwsjson11_serializeOpDocumentCreateWebhookInput(v *CreateWebhookInput, v
 		}
 	}
 
+	if v.ManualCreation != nil {
+		ok := object.Key("manualCreation")
+		ok.Boolean(*v.ManualCreation)
+	}
+
 	if v.ProjectName != nil {
 		ok := object.Key("projectName")
 		ok.String(*v.ProjectName)

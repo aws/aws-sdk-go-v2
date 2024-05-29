@@ -1103,6 +1103,27 @@ func (JobBookmarksEncryptionMode) Values() []JobBookmarksEncryptionMode {
 	}
 }
 
+type JobMode string
+
+// Enum values for JobMode
+const (
+	JobModeScript   JobMode = "SCRIPT"
+	JobModeVisual   JobMode = "VISUAL"
+	JobModeNotebook JobMode = "NOTEBOOK"
+)
+
+// Values returns all known values for JobMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobMode) Values() []JobMode {
+	return []JobMode{
+		"SCRIPT",
+		"VISUAL",
+		"NOTEBOOK",
+	}
+}
+
 type JobRunState string
 
 // Enum values for JobRunState

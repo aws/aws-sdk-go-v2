@@ -16105,6 +16105,11 @@ func awsAwsjson11_serializeDocumentJobUpdate(v *types.JobUpdate, value smithyjso
 		ok.String(*v.GlueVersion)
 	}
 
+	if len(v.JobMode) > 0 {
+		ok := object.Key("JobMode")
+		ok.String(string(v.JobMode))
+	}
+
 	if v.LogUri != nil {
 		ok := object.Key("LogUri")
 		ok.String(*v.LogUri)
@@ -21255,6 +21260,11 @@ func awsAwsjson11_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 	if v.GlueVersion != nil {
 		ok := object.Key("GlueVersion")
 		ok.String(*v.GlueVersion)
+	}
+
+	if len(v.JobMode) > 0 {
+		ok := object.Key("JobMode")
+		ok.String(string(v.JobMode))
 	}
 
 	if v.LogUri != nil {

@@ -1002,11 +1002,9 @@ type ResultConfiguration struct {
 	// such as s3://path/to/query/bucket/ . To run the query, you must specify the
 	// query results location using one of the ways: either for individual queries
 	// using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration. If none
-	// of them is set, Athena issues an error that no output location is provided. For
-	// more information, see [Working with query results, recent queries, and output files]. If workgroup settings override client-side settings,
-	// then the query uses the settings specified for the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
-	//
-	// [Working with query results, recent queries, and output files]: https://docs.aws.amazon.com/athena/latest/ug/querying.html
+	// of them is set, Athena issues an error that no output location is provided. If
+	// workgroup settings override client-side settings, then the query uses the
+	// settings specified for the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 	OutputLocation *string
 
 	noSmithyDocumentSerde
@@ -1037,13 +1035,11 @@ type ResultConfigurationUpdates struct {
 	ExpectedBucketOwner *string
 
 	// The location in Amazon S3 where your query and calculation results are stored,
-	// such as s3://path/to/query/bucket/ . For more information, see [Working with query results, recent queries, and output files]. If workgroup
-	// settings override client-side settings, then the query uses the location for the
-	// query results and the encryption configuration that are specified for the
-	// workgroup. The "workgroup settings override" is specified in
-	// EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration . See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
-	//
-	// [Working with query results, recent queries, and output files]: https://docs.aws.amazon.com/athena/latest/ug/querying.html
+	// such as s3://path/to/query/bucket/ . If workgroup settings override client-side
+	// settings, then the query uses the location for the query results and the
+	// encryption configuration that are specified for the workgroup. The "workgroup
+	// settings override" is specified in EnforceWorkGroupConfiguration (true/false)
+	// in the WorkGroupConfiguration . See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 	OutputLocation *string
 
 	// If set to true , indicates that the previously-specified ACL configuration for
@@ -1484,10 +1480,7 @@ type WorkGroupConfiguration struct {
 	// any, used for query and calculation results. To run the query, you must specify
 	// the query results location using one of the ways: either in the workgroup using
 	// this setting, or for individual queries (client-side), using ResultConfiguration$OutputLocation. If none of them
-	// is set, Athena issues an error that no output location is provided. For more
-	// information, see [Working with query results, recent queries, and output files].
-	//
-	// [Working with query results, recent queries, and output files]: https://docs.aws.amazon.com/athena/latest/ug/querying.html
+	// is set, Athena issues an error that no output location is provided.
 	ResultConfiguration *ResultConfiguration
 
 	noSmithyDocumentSerde
