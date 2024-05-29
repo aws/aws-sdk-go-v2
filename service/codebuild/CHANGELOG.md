@@ -1,3 +1,7 @@
+# v1.37.0 (2024-05-29)
+
+* **Feature**: AWS CodeBuild now supports manually creating GitHub webhooks
+
 # v1.36.1 (2024-05-23)
 
 * No change notes available for this release.

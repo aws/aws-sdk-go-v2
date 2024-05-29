@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.27.8
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.24.8
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.34.8
-	github.com/aws/aws-sdk-go-v2/service/athena v1.40.8
+	github.com/aws/aws-sdk-go-v2/service/athena v1.41.0
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.40.9
 	github.com/aws/aws-sdk-go-v2/service/batch v1.37.4
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.51.1
@@ -18,7 +18,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.22.8
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.39.6
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.38.4
-	github.com/aws/aws-sdk-go-v2/service/codebuild v1.36.1
+	github.com/aws/aws-sdk-go-v2/service/codebuild v1.37.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.22.8
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.25.8
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.27.4
@@ -47,7 +47,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.28.10
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.31.4
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.22.8
-	github.com/aws/aws-sdk-go-v2/service/glue v1.81.1
+	github.com/aws/aws-sdk-go-v2/service/glue v1.82.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.24.8
 	github.com/aws/aws-sdk-go-v2/service/iam v1.32.4
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.21.8

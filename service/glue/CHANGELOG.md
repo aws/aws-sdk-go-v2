@@ -1,3 +1,7 @@
+# v1.82.0 (2024-05-29)
+
+* **Feature**: Add optional field JobMode to CreateJob and UpdateJob APIs.
+
 # v1.81.1 (2024-05-23)
 
 * No change notes available for this release.

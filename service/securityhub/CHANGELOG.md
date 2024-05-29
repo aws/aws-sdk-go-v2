@@ -1,3 +1,7 @@
+# v1.49.0 (2024-05-29)
+
+* **Feature**: Add ROOT type for TargetType model
+
 # v1.48.4 (2024-05-23)
 
 * No change notes available for this release.

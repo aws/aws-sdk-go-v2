@@ -1,3 +1,7 @@
+# v1.99.0 (2024-05-29)
+
+* **Feature**: This release includes changes to DescribeContact API's response by including ConnectedToSystemTimestamp, RoutingCriteria, Customer, Campaign, AnsweringMachineDetectionStatus, CustomerVoiceActivity, QualityMetrics, DisconnectDetails, and SegmentAttributes information from a contact in Amazon Connect.
+
 # v1.98.3 (2024-05-23)
 
 * No change notes available for this release.

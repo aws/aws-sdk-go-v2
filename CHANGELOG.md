@@ -1,3 +1,17 @@
+# Release (2024-05-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.41.0](service/athena/CHANGELOG.md#v1410-2024-05-29)
+  * **Feature**: Throwing validation errors on CreateNotebook with Name containing `/`,`:`,`\`
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.37.0](service/codebuild/CHANGELOG.md#v1370-2024-05-29)
+  * **Feature**: AWS CodeBuild now supports manually creating GitHub webhooks
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.99.0](service/connect/CHANGELOG.md#v1990-2024-05-29)
+  * **Feature**: This release includes changes to DescribeContact API's response by including ConnectedToSystemTimestamp, RoutingCriteria, Customer, Campaign, AnsweringMachineDetectionStatus, CustomerVoiceActivity, QualityMetrics, DisconnectDetails, and SegmentAttributes information from a contact in Amazon Connect.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.82.0](service/glue/CHANGELOG.md#v1820-2024-05-29)
+  * **Feature**: Add optional field JobMode to CreateJob and UpdateJob APIs.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.49.0](service/securityhub/CHANGELOG.md#v1490-2024-05-29)
+  * **Feature**: Add ROOT type for TargetType model
+
 # Release (2024-05-28)
 
 ## General Highlights

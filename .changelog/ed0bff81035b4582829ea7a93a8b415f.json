@@ -1,8 +1,0 @@
-{
-    "id": "ed0bff81-035b-4582-829e-a7a93a8b415f",
-    "type": "feature",
-    "description": "Throwing validation errors on CreateNotebook with Name containing `/`,`:`,`\\`",
-    "modules": [
-        "service/athena"
-    ]
-}

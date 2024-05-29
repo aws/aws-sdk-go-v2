@@ -1,3 +1,7 @@
+# v1.41.0 (2024-05-29)
+
+* **Feature**: Throwing validation errors on CreateNotebook with Name containing `/`,`:`,`\`
+
 # v1.40.8 (2024-05-23)
 
 * No change notes available for this release.

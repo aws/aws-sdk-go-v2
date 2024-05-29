@@ -1,8 +1,0 @@
-{
-    "id": "f10fce0a-18a2-4fc9-9caa-f8f52bda5910",
-    "type": "feature",
-    "description": "AWS CodeBuild now supports manually creating GitHub webhooks",
-    "modules": [
-        "service/codebuild"
-    ]
-}
