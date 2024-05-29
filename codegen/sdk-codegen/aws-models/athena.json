@@ -4188,7 +4188,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns query execution runtime statistics related to a single execution of a query if\n            you have access to the workgroup in which the query ran. Query execution runtime\n            statistics are returned only when <a>QueryExecutionStatus$State</a> is in a\n            SUCCEEDED or FAILED state. Stage-level input and output row count and data size\n            statistics are not shown when a query has row-level filters defined in Lake\n            Formation.</p>"
+                "smithy.api#documentation": "<p>Returns query execution runtime statistics related to a single execution of a query if\n            you have access to the workgroup in which the query ran. Statistics from the\n                <code>Timeline</code> section of the response object are available as soon as <a>QueryExecutionStatus$State</a> is in a SUCCEEDED or FAILED state. The\n            remaining non-timeline statistics in the response (like stage-level input and output row\n            count and data size) are updated asynchronously and may not be available immediately\n            after a query completes. The non-timeline statistics are also not included when a query\n            has row-level filters defined in Lake Formation.</p>"
             }
         },
         "com.amazonaws.athena#GetQueryRuntimeStatisticsInput": {
@@ -4568,7 +4568,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Imports a single <code>ipynb</code> file to a Spark enabled workgroup. To import the\n            notebook, the request must specify a value for either <code>Payload</code> or <code>NoteBookS3LocationUri</code>. If neither is specified or both are specified, an\n            <code>InvalidRequestException</code> occurs. The maximum file size that can be imported is 10\n            megabytes. If an <code>ipynb</code> file with the same name already exists in the\n            workgroup, throws an error.</p>"
+                "smithy.api#documentation": "<p>Imports a single <code>ipynb</code> file to a Spark enabled workgroup. To import the\n            notebook, the request must specify a value for either <code>Payload</code> or\n                <code>NoteBookS3LocationUri</code>. If neither is specified or both are specified,\n            an <code>InvalidRequestException</code> occurs. The maximum file size that can be\n            imported is 10 megabytes. If an <code>ipynb</code> file with the same name already\n            exists in the workgroup, throws an error.</p>"
             }
         },
         "com.amazonaws.athena#ImportNotebookInput": {
@@ -4591,7 +4591,7 @@
                 "Payload": {
                     "target": "com.amazonaws.athena#Payload",
                     "traits": {
-                        "smithy.api#documentation": "<p>The notebook content to be imported. The payload must be in <code>ipynb</code> format.</p>"
+                        "smithy.api#documentation": "<p>The notebook content to be imported. The payload must be in <code>ipynb</code>\n            format.</p>"
                     }
                 },
                 "Type": {
@@ -4604,7 +4604,7 @@
                 "NotebookS3LocationUri": {
                     "target": "com.amazonaws.athena#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URI that specifies the Amazon S3 location of a notebook file in <code>ipynb</code> format.</p>"
+                        "smithy.api#documentation": "<p>A URI that specifies the Amazon S3 location of a notebook file in\n                <code>ipynb</code> format.</p>"
                     }
                 },
                 "ClientRequestToken": {
@@ -6212,7 +6212,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]+$"
+                "smithy.api#pattern": "^(?!.*[/:\\\\])[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]+$"
             }
         },
         "com.amazonaws.athena#NotebookSessionSummary": {
@@ -6950,7 +6950,7 @@
                 "OutputLocation": {
                     "target": "com.amazonaws.athena#ResultOutputLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location in Amazon S3 where your query and calculation results are stored,\n            such as <code>s3://path/to/query/bucket/</code>. To run the query, you must specify the\n            query results location using one of the ways: either for individual queries using either\n            this setting (client-side), or in the workgroup, using <a>WorkGroupConfiguration</a>. If none of them is set, Athena\n            issues an error that no output location is provided. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/querying.html\">Working with query\n                results, recent queries, and output files</a>. If workgroup settings override\n            client-side settings, then the query uses the settings specified for the workgroup. See\n                <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>"
+                        "smithy.api#documentation": "<p>The location in Amazon S3 where your query and calculation results are stored,\n            such as <code>s3://path/to/query/bucket/</code>. To run the query, you must specify the\n            query results location using one of the ways: either for individual queries using either\n            this setting (client-side), or in the workgroup, using <a>WorkGroupConfiguration</a>. If none of them is set, Athena\n            issues an error that no output location is provided. If workgroup settings override\n            client-side settings, then the query uses the settings specified for the workgroup. See\n                <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>"
                     }
                 },
                 "EncryptionConfiguration": {
@@ -6982,7 +6982,7 @@
                 "OutputLocation": {
                     "target": "com.amazonaws.athena#ResultOutputLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location in Amazon S3 where your query and calculation results are stored,\n            such as <code>s3://path/to/query/bucket/</code>. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/querying.html\">Working with query\n                results, recent queries, and output files</a>. If workgroup settings override\n            client-side settings, then the query uses the location for the query results and the\n            encryption configuration that are specified for the workgroup. The \"workgroup settings\n            override\" is specified in <code>EnforceWorkGroupConfiguration</code> (true/false) in the\n                <code>WorkGroupConfiguration</code>. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>"
+                        "smithy.api#documentation": "<p>The location in Amazon S3 where your query and calculation results are stored,\n            such as <code>s3://path/to/query/bucket/</code>. If workgroup settings override\n            client-side settings, then the query uses the location for the query results and the\n            encryption configuration that are specified for the workgroup. The \"workgroup settings\n            override\" is specified in <code>EnforceWorkGroupConfiguration</code> (true/false) in the\n                <code>WorkGroupConfiguration</code>. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>"
                     }
                 },
                 "RemoveOutputLocation": {
@@ -8720,7 +8720,7 @@
                 "ResultConfiguration": {
                     "target": "com.amazonaws.athena#ResultConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for the workgroup, which includes the location in Amazon S3\n            where query and calculation results are stored and the encryption option, if any, used\n            for query and calculation results. To run the query, you must specify the query results\n            location using one of the ways: either in the workgroup using this setting, or for\n            individual queries (client-side), using <a>ResultConfiguration$OutputLocation</a>. If none of them is set, Athena issues an error that no output location is provided. For more\n            information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/querying.html\">Working with query results, recent queries, and output files</a>.</p>"
+                        "smithy.api#documentation": "<p>The configuration for the workgroup, which includes the location in Amazon S3\n            where query and calculation results are stored and the encryption option, if any, used\n            for query and calculation results. To run the query, you must specify the query results\n            location using one of the ways: either in the workgroup using this setting, or for\n            individual queries (client-side), using <a>ResultConfiguration$OutputLocation</a>. If none of them is set, Athena issues an error that no output location is provided.</p>"
                     }
                 },
                 "EnforceWorkGroupConfiguration": {

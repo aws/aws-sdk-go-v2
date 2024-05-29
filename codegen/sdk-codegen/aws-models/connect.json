@@ -326,6 +326,20 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.connect#AgentHierarchyGroup": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an agent hierarchy group.</p>"
+            }
+        },
         "com.amazonaws.connect#AgentHierarchyGroups": {
             "type": "structure",
             "members": {
@@ -384,6 +398,21 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Agent pause duration for a contact in seconds.</p>"
                     }
+                },
+                "HierarchyGroups": {
+                    "target": "com.amazonaws.connect#HierarchyGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent hierarchy groups for the agent.</p>"
+                    }
+                },
+                "DeviceInfo": {
+                    "target": "com.amazonaws.connect#DeviceInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information regarding Agent’s device.</p>"
+                    }
+                },
+                "Capabilities": {
+                    "target": "com.amazonaws.connect#ParticipantCapabilities"
                 }
             },
             "traits": {
@@ -406,6 +435,20 @@
                 "smithy.api#range": {
                     "min": 0
                 }
+            }
+        },
+        "com.amazonaws.connect#AgentQualityMetrics": {
+            "type": "structure",
+            "members": {
+                "Audio": {
+                    "target": "com.amazonaws.connect#AudioQualityMetricsInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the audio quality of the Agent</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the quality of the Agent's media connection</p>"
             }
         },
         "com.amazonaws.connect#AgentResourceId": {
@@ -2359,6 +2402,95 @@
                 "smithy.api#documentation": "<p>Configuration of the answering machine detection.</p>"
             }
         },
+        "com.amazonaws.connect#AnsweringMachineDetectionStatus": {
+            "type": "enum",
+            "members": {
+                "ANSWERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANSWERED"
+                    }
+                },
+                "UNDETECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNDETECTED"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "HUMAN_ANSWERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HUMAN_ANSWERED"
+                    }
+                },
+                "SIT_TONE_DETECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIT_TONE_DETECTED"
+                    }
+                },
+                "SIT_TONE_BUSY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIT_TONE_BUSY"
+                    }
+                },
+                "SIT_TONE_INVALID_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIT_TONE_INVALID_NUMBER"
+                    }
+                },
+                "FAX_MACHINE_DETECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAX_MACHINE_DETECTED"
+                    }
+                },
+                "VOICEMAIL_BEEP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOICEMAIL_BEEP"
+                    }
+                },
+                "VOICEMAIL_NO_BEEP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOICEMAIL_NO_BEEP"
+                    }
+                },
+                "AMD_UNRESOLVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMD_UNRESOLVED"
+                    }
+                },
+                "AMD_UNANSWERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMD_UNANSWERED"
+                    }
+                },
+                "AMD_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMD_ERROR"
+                    }
+                },
+                "AMD_NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMD_NOT_APPLICABLE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#Application": {
             "type": "structure",
             "members": {
@@ -3680,6 +3812,38 @@
                 "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>AND</code>\n   condition.</p>"
             }
         },
+        "com.amazonaws.connect#AttributeCondition": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#PredefinedAttributeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of predefined attribute.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.connect#ProficiencyValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of predefined attribute.</p>"
+                    }
+                },
+                "ProficiencyLevel": {
+                    "target": "com.amazonaws.connect#ProficiencyLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proficiency level of the condition.</p>"
+                    }
+                },
+                "ComparisonOperator": {
+                    "target": "com.amazonaws.connect#ComparisonOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator of the condition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object to specify the predefined attribute condition.</p>"
+            }
+        },
         "com.amazonaws.connect#AttributeName": {
             "type": "string",
             "traits": {
@@ -3731,6 +3895,33 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Has audio-specific configurations as the operating parameter for Echo Reduction.</p>"
+            }
+        },
+        "com.amazonaws.connect#AudioQualityMetricsInfo": {
+            "type": "structure",
+            "members": {
+                "QualityScore": {
+                    "target": "com.amazonaws.connect#AudioQualityScore",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Number measuring the estimated quality of the media connection.</p>"
+                    }
+                },
+                "PotentialQualityIssues": {
+                    "target": "com.amazonaws.connect#PotentialAudioQualityIssues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of potential issues causing degradation of quality on a media connection. If the service did not detect any potential quality issues the list is empty.</p>\n         <p>Valid values: <code>HighPacketLoss</code> | <code>HighRoundTripTime</code> | <code>HighJitterBuffer</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information for score and potential quality issues for Audio</p>"
+            }
+        },
+        "com.amazonaws.connect#AudioQualityScore": {
+            "type": "float",
+            "traits": {
+                "smithy.api#default": 0
             }
         },
         "com.amazonaws.connect#AutoAccept": {
@@ -4487,7 +4678,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Claims an available phone number to your Amazon Connect instance or traffic distribution\n   group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created.</p>\n         <p>For more information about how to use this operation, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-number.html\">Claim a phone number in your\n    country</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-numbers-traffic-distribution-groups.html\">Claim phone\n    numbers to traffic distribution groups</a> in the <i>Amazon Connect Administrator\n    Guide</i>. </p>\n         <important>\n            <p>You can call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchAvailablePhoneNumbers.html\">SearchAvailablePhoneNumbers</a> API for available phone numbers that you can claim. Call\n    the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API to verify the status of a previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html\">ClaimPhoneNumber</a>\n    operation.</p>\n         </important>\n         <p>If you plan to claim and release numbers frequently during a 30 day period,\n                contact us for a service quota exception. Otherwise, it is possible you will be blocked from\n                claiming and releasing any more numbers until 30 days past the oldest number\n                released has expired.</p>\n         <p>By default you can claim and release up to 200% of your maximum number of active\n                phone numbers during any 30 day period. If you claim and release phone numbers using\n                the UI or API during a rolling 30 day cycle that exceeds 200% of your phone number\n                service level quota, you will be blocked from claiming any more numbers until 30\n                days past the oldest number released has expired. </p>\n         <p>For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 30\n                day period you release 99, claim 99, and then release 99, you will have exceeded the\n                200% limit. At that point you are blocked from claiming any more numbers until you\n                open an Amazon Web Services support ticket.</p>",
+                "smithy.api#documentation": "<p>Claims an available phone number to your Amazon Connect instance or traffic distribution\n   group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created.</p>\n         <p>For more information about how to use this operation, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-number.html\">Claim a phone number in your\n    country</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-numbers-traffic-distribution-groups.html\">Claim phone\n    numbers to traffic distribution groups</a> in the <i>Amazon Connect Administrator\n    Guide</i>. </p>\n         <important>\n            <p>You can call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchAvailablePhoneNumbers.html\">SearchAvailablePhoneNumbers</a> API for available phone numbers that you can claim. Call\n    the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API to verify the status of a previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html\">ClaimPhoneNumber</a>\n    operation.</p>\n         </important>\n         <p>If you plan to claim and release numbers frequently,\n                contact us for a service quota exception. Otherwise, it is possible you will be blocked from\n                claiming and releasing any more numbers until up to 180 days past the oldest number\n                released has expired.</p>\n         <p>By default you can claim and release up to 200% of your maximum number of active\n                phone numbers. If you claim and release phone numbers using\n                the UI or API during a rolling 180 day cycle that exceeds 200% of your phone number\n                service level quota, you will be blocked from claiming any more numbers until 180\n                days past the oldest number released has expired. </p>\n         <p>For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 180\n                day period you release 99, claim 99, and then release 99, you will have exceeded the\n                200% limit. At that point you are blocked from claiming any more numbers until you\n                open an Amazon Web Services support ticket.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/phone-number/claim",
@@ -4661,6 +4852,15 @@
                     "traits": {
                         "smithy.api#enumValue": "LT"
                     }
+                }
+            }
+        },
+        "com.amazonaws.connect#ComparisonOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 127
                 }
             }
         },
@@ -4920,6 +5120,57 @@
                     "target": "com.amazonaws.connect#ContactTagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Tags associated with the contact. This contains both Amazon Web Services generated and\n   user-defined tags.</p>"
+                    }
+                },
+                "ConnectedToSystemTimestamp": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when customer endpoint connected to Amazon Connect.</p>"
+                    }
+                },
+                "RoutingCriteria": {
+                    "target": "com.amazonaws.connect#RoutingCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Latest routing criteria on the contact.</p>"
+                    }
+                },
+                "Customer": {
+                    "target": "com.amazonaws.connect#Customer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Customer on the contact.</p>"
+                    }
+                },
+                "Campaign": {
+                    "target": "com.amazonaws.connect#Campaign"
+                },
+                "AnsweringMachineDetectionStatus": {
+                    "target": "com.amazonaws.connect#AnsweringMachineDetectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates how an <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/how-to-create-campaigns.html\">outbound campaign</a> call is actually disposed if the contact is connected to Amazon Connect.</p>"
+                    }
+                },
+                "CustomerVoiceActivity": {
+                    "target": "com.amazonaws.connect#CustomerVoiceActivity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about customer’s voice activity.</p>"
+                    }
+                },
+                "QualityMetrics": {
+                    "target": "com.amazonaws.connect#QualityMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the quality of the participant's media connection.</p>"
+                    }
+                },
+                "DisconnectDetails": {
+                    "target": "com.amazonaws.connect#DisconnectDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the call disconnect experience.</p>"
+                    }
+                },
+                "SegmentAttributes": {
+                    "target": "com.amazonaws.connect#SegmentAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of system defined key-value pairs stored on individual contact segments using an attribute map. The attributes are standard Amazon Connect attributes and can be accessed in flows. Attribute keys can include only alphanumeric, -, and _ characters. This field can be used to show channel subtype. For example, <code>connect:Guide</code> or <code>connect:SMS</code>.</p>"
                     }
                 }
             },
@@ -6276,7 +6527,7 @@
                 "Status": {
                     "target": "com.amazonaws.connect#ContactFlowStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the flow status as either <code>SAVED</code> or <code>PUBLISHED</code>. The\n   <code>PUBLISHED</code> status will initiate validation on the content. the <code>SAVED</code>\n   status does not initiate validation of the content. <code>SAVED</code> |\n   <code>PUBLISHED</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates the flow status as either <code>SAVED</code> or <code>PUBLISHED</code>. The\n    <code>PUBLISHED</code> status will initiate validation on the content. the <code>SAVED</code>\n   status does not initiate validation of the content. <code>SAVED</code> |\n   <code>PUBLISHED</code>.</p>"
                     }
                 },
                 "Tags": {
@@ -8841,6 +9092,57 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#CurrentMetric"
+            }
+        },
+        "com.amazonaws.connect#Customer": {
+            "type": "structure",
+            "members": {
+                "DeviceInfo": {
+                    "target": "com.amazonaws.connect#DeviceInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information regarding Customer’s device.</p>"
+                    }
+                },
+                "Capabilities": {
+                    "target": "com.amazonaws.connect#ParticipantCapabilities"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the Customer on the contact.</p>"
+            }
+        },
+        "com.amazonaws.connect#CustomerQualityMetrics": {
+            "type": "structure",
+            "members": {
+                "Audio": {
+                    "target": "com.amazonaws.connect#AudioQualityMetricsInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the audio quality of the Customer</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the quality of the Customer's media connection</p>"
+            }
+        },
+        "com.amazonaws.connect#CustomerVoiceActivity": {
+            "type": "structure",
+            "members": {
+                "GreetingStartTimestamp": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp that measures the beginning of the customer greeting from an outbound voice call.</p>"
+                    }
+                },
+                "GreetingEndTimestamp": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp that measures the end of the customer greeting from an outbound voice call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about customer’s voice activity.</p>"
             }
         },
         "com.amazonaws.connect#DataSetId": {
@@ -12256,6 +12558,32 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.connect#DeviceInfo": {
+            "type": "structure",
+            "members": {
+                "PlatformName": {
+                    "target": "com.amazonaws.connect#PlatformName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the platform that the participant used for the call.</p>"
+                    }
+                },
+                "PlatformVersion": {
+                    "target": "com.amazonaws.connect#PlatformVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Version of the platform that the participant used for the call.</p>"
+                    }
+                },
+                "OperatingSystem": {
+                    "target": "com.amazonaws.connect#OperatingSystem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Operating system that the participant used for the call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information regarding the device.</p>"
+            }
+        },
         "com.amazonaws.connect#Dimensions": {
             "type": "structure",
             "members": {
@@ -13178,6 +13506,20 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.connect#DisconnectDetails": {
+            "type": "structure",
+            "members": {
+                "PotentialDisconnectIssue": {
+                    "target": "com.amazonaws.connect#PotentialDisconnectIssue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the potential disconnection issues for a call. This field is not populated if the service does not detect potential issues.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the call disconnect experience.</p>"
+            }
+        },
         "com.amazonaws.connect#DisconnectReason": {
             "type": "structure",
             "members": {
@@ -13343,6 +13685,9 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
+        },
+        "com.amazonaws.connect#DurationInSeconds": {
+            "type": "integer"
         },
         "com.amazonaws.connect#Email": {
             "type": "string",
@@ -14897,6 +15242,58 @@
                         "smithy.api#enumValue": "OnCaseUpdate"
                     }
                 }
+            }
+        },
+        "com.amazonaws.connect#Expiry": {
+            "type": "structure",
+            "members": {
+                "DurationInSeconds": {
+                    "target": "com.amazonaws.connect#DurationInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds to wait before expiring the routing step.</p>"
+                    }
+                },
+                "ExpiryTimestamp": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp indicating when the routing step expires.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object to specify the expiration of a routing step.</p>"
+            }
+        },
+        "com.amazonaws.connect#Expression": {
+            "type": "structure",
+            "members": {
+                "AttributeCondition": {
+                    "target": "com.amazonaws.connect#AttributeCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object to specify the predefined attribute condition.</p>"
+                    }
+                },
+                "AndExpression": {
+                    "target": "com.amazonaws.connect#Expressions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of routing expressions which will be AND-ed together.</p>"
+                    }
+                },
+                "OrExpression": {
+                    "target": "com.amazonaws.connect#Expressions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of routing expressions which will be OR-ed together.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A tagged union to specify expression for a routing step.</p>"
+            }
+        },
+        "com.amazonaws.connect#Expressions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#Expression"
             }
         },
         "com.amazonaws.connect#FailedRequest": {
@@ -16712,6 +17109,44 @@
                 "smithy.api#documentation": "<p>Information about the hierarchy group.</p>"
             }
         },
+        "com.amazonaws.connect#HierarchyGroups": {
+            "type": "structure",
+            "members": {
+                "Level1": {
+                    "target": "com.amazonaws.connect#AgentHierarchyGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group at level one of the agent hierarchy.</p>"
+                    }
+                },
+                "Level2": {
+                    "target": "com.amazonaws.connect#AgentHierarchyGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group at level two of the agent hierarchy.</p>"
+                    }
+                },
+                "Level3": {
+                    "target": "com.amazonaws.connect#AgentHierarchyGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group at level three of the agent hierarchy.</p>"
+                    }
+                },
+                "Level4": {
+                    "target": "com.amazonaws.connect#AgentHierarchyGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group at level four of the agent hierarchy.</p>"
+                    }
+                },
+                "Level5": {
+                    "target": "com.amazonaws.connect#AgentHierarchyGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group at level five of the agent hierarchy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the agent hierarchy. Hierarchies can be configured with up to five levels.</p>"
+            }
+        },
         "com.amazonaws.connect#HierarchyLevel": {
             "type": "structure",
             "members": {
@@ -17604,6 +18039,9 @@
         },
         "com.amazonaws.connect#InboundCallsEnabled": {
             "type": "boolean"
+        },
+        "com.amazonaws.connect#Index": {
+            "type": "integer"
         },
         "com.amazonaws.connect#InitiationMethodList": {
             "type": "list",
@@ -23605,6 +24043,15 @@
                 "smithy.api#documentation": "<p>Information about the property value used in automation of a numeric questions. Label values\n   are associated with minimum and maximum values for the numeric question.</p>\n         <ul>\n            <li>\n               <p>Sentiment scores have a minimum value of -5 and maximum value of 5.</p>\n            </li>\n            <li>\n               <p> Duration labels, such as <code>NON_TALK_TIME</code>, <code>CONTACT_DURATION</code>,\n      <code>AGENT_INTERACTION_DURATION</code>, <code>CUSTOMER_HOLD_TIME</code> have a minimum value\n     of 0 and maximum value of 28800.</p>\n            </li>\n            <li>\n               <p>Percentages have a minimum value of 0 and maximum value of 100. </p>\n            </li>\n            <li>\n               <p>\n                  <code>NUMBER_OF_INTERRUPTIONS</code> has a minimum value of 0 and maximum value of\n     1000.</p>\n            </li>\n         </ul>"
             }
         },
+        "com.amazonaws.connect#OperatingSystem": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
         "com.amazonaws.connect#Origin": {
             "type": "string",
             "traits": {
@@ -25708,6 +26155,54 @@
                 }
             }
         },
+        "com.amazonaws.connect#PlatformName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.connect#PlatformVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.connect#PotentialAudioQualityIssue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.connect#PotentialAudioQualityIssues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#PotentialAudioQualityIssue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.connect#PotentialDisconnectIssue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
         "com.amazonaws.connect#PredefinedAttribute": {
             "type": "structure",
             "members": {
@@ -25910,6 +26405,15 @@
                 "smithy.api#range": {
                     "min": 1.0,
                     "max": 5.0
+                }
+            }
+        },
+        "com.amazonaws.connect#ProficiencyValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
                 }
             }
         },
@@ -26260,6 +26764,26 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#QualityMetrics": {
+            "type": "structure",
+            "members": {
+                "Agent": {
+                    "target": "com.amazonaws.connect#AgentQualityMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the quality of Agent media connection.</p>"
+                    }
+                },
+                "Customer": {
+                    "target": "com.amazonaws.connect#CustomerQualityMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the quality of Customer media connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the quality of the participant's media connection.</p>"
             }
         },
         "com.amazonaws.connect#Queue": {
@@ -27772,7 +28296,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You\n   can call this API only in the Amazon Web Services Region where the number was claimed.</p>\n         <important>\n            <p>To release phone numbers from a traffic distribution group, use the <code>ReleasePhoneNumber</code> API, not the\n    Amazon Connect admin website.</p>\n            <p>After releasing a phone number, the phone number enters into a cooldown period of 30 days.\n    It cannot be searched for or claimed again until the period has ended. If you accidentally\n    release a phone number, contact Amazon Web Services Support.</p>\n         </important>\n         <p>If you plan to claim and release numbers frequently during a 30 day period,\n                contact us for a service quota exception. Otherwise, it is possible you will be blocked from\n                claiming and releasing any more numbers until 30 days past the oldest number\n                released has expired.</p>\n         <p>By default you can claim and release up to 200% of your maximum number of active\n                phone numbers during any 30 day period. If you claim and release phone numbers using\n                the UI or API during a rolling 30 day cycle that exceeds 200% of your phone number\n                service level quota, you will be blocked from claiming any more numbers until 30\n                days past the oldest number released has expired. </p>\n         <p>For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 30\n                day period you release 99, claim 99, and then release 99, you will have exceeded the\n                200% limit. At that point you are blocked from claiming any more numbers until you\n                open an Amazon Web Services support ticket.</p>",
+                "smithy.api#documentation": "<p>Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You\n   can call this API only in the Amazon Web Services Region where the number was claimed.</p>\n         <important>\n            <p>To release phone numbers from a traffic distribution group, use the <code>ReleasePhoneNumber</code> API, not the\n    Amazon Connect admin website.</p>\n            <p>After releasing a phone number, the phone number enters into a cooldown period for up to\n    180 days. It cannot be searched for or claimed again until the period has ended. If you\n    accidentally release a phone number, contact Amazon Web Services Support.</p>\n         </important>\n         <p>If you plan to claim and release numbers frequently,\n                contact us for a service quota exception. Otherwise, it is possible you will be blocked from\n                claiming and releasing any more numbers until up to 180 days past the oldest number\n                released has expired.</p>\n         <p>By default you can claim and release up to 200% of your maximum number of active\n                phone numbers. If you claim and release phone numbers using\n                the UI or API during a rolling 180 day cycle that exceeds 200% of your phone number\n                service level quota, you will be blocked from claiming any more numbers until 180\n                days past the oldest number released has expired. </p>\n         <p>For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 180\n                day period you release 99, claim 99, and then release 99, you will have exceeded the\n                200% limit. At that point you are blocked from claiming any more numbers until you\n                open an Amazon Web Services support ticket.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/phone-number/{PhoneNumberId}",
@@ -28228,6 +28752,61 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#RoutingCriteria": {
+            "type": "structure",
+            "members": {
+                "Steps": {
+                    "target": "com.amazonaws.connect#Steps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of routing steps. When Amazon Connect does not find an available agent meeting the requirements in a step for a given step duration, the routing criteria will move on to the next step sequentially until a join is completed with an agent. When all steps are exhausted, the contact will be offered to any agent in the queue.</p>"
+                    }
+                },
+                "ActivationTimestamp": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp indicating when the routing criteria is set to active. A routing criteria is activated when contact is transferred to a queue. ActivationTimestamp will be set on routing criteria for contacts in agent queue even though Routing criteria is never activated for contacts in agent queue.</p>"
+                    }
+                },
+                "Index": {
+                    "target": "com.amazonaws.connect#Index",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the index of the routing criteria.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Latest routing criteria on the contact.</p>"
+            }
+        },
+        "com.amazonaws.connect#RoutingCriteriaStepStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                },
+                "JOINED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JOINED"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                }
             }
         },
         "com.amazonaws.connect#RoutingExpression": {
@@ -32369,6 +32948,38 @@
                 }
             }
         },
+        "com.amazonaws.connect#Step": {
+            "type": "structure",
+            "members": {
+                "Expiry": {
+                    "target": "com.amazonaws.connect#Expiry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object to specify the expiration of a routing step.</p>"
+                    }
+                },
+                "Expression": {
+                    "target": "com.amazonaws.connect#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tagged union to specify expression for a routing step.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#RoutingCriteriaStepStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents status of the Routing step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Step signifies the criteria to be used for routing to an agent</p>"
+            }
+        },
+        "com.amazonaws.connect#Steps": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#Step"
+            }
+        },
         "com.amazonaws.connect#StopContact": {
             "type": "operation",
             "input": {
@@ -32395,7 +33006,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Ends the specified contact. Use this API to stop queued callbacks. It does not work for\n   voice contacts that use the following initiation methods:</p>\n         <ul>\n            <li>\n               <p>DISCONNECT</p>\n            </li>\n            <li>\n               <p>TRANSFER</p>\n            </li>\n            <li>\n               <p>QUEUE_TRANSFER</p>\n            </li>\n         </ul>\n         <p>Chat and task contacts can be terminated in any state, regardless of initiation\n   method.</p>",
+                "smithy.api#documentation": "<p>Ends the specified contact. Use this API to stop queued callbacks. It does not work for\n   voice contacts that use the following initiation methods:</p>\n         <ul>\n            <li>\n               <p>DISCONNECT</p>\n            </li>\n            <li>\n               <p>TRANSFER</p>\n            </li>\n            <li>\n               <p>QUEUE_TRANSFER</p>\n            </li>\n            <li>\n               <p>EXTERNAL_OUTBOUND</p>\n            </li>\n            <li>\n               <p>MONITOR</p>\n            </li>\n         </ul>\n         <p>Chat and task contacts can be terminated in any state, regardless of initiation\n   method.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/stop",
@@ -35111,7 +35722,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Updates routing priority and age on the contact (<b>QueuePriority</b> and <b>QueueTimeAdjustmentInSeconds</b>).\n   These properties can be used to change a customer's position in the queue. For example, you can\n   move a contact to the back of the queue by setting a lower routing priority relative to other\n   contacts in queue; or you can move a contact to the front of the queue by increasing the routing\n   age which will make the contact look artificially older and therefore higher up in the\n   first-in-first-out routing order. Note that adjusting the routing age of a contact affects only\n   its position in queue, and not its actual queue wait time as reported through metrics. These\n   properties can also be updated by using <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/change-routing-priority.html\">the Set routing priority / age flow\n    block</a>.</p>",
+                "smithy.api#documentation": "<p>Updates routing priority and age on the contact (<b>QueuePriority</b> and <b>QueueTimeAdjustmentInSeconds</b>).\n   These properties can be used to change a customer's position in the queue. For example, you can\n   move a contact to the back of the queue by setting a lower routing priority relative to other\n   contacts in queue; or you can move a contact to the front of the queue by increasing the routing\n   age which will make the contact look artificially older and therefore higher up in the\n   first-in-first-out routing order. Note that adjusting the routing age of a contact affects only\n   its position in queue, and not its actual queue wait time as reported through metrics. These\n   properties can also be updated by using <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/change-routing-priority.html\">the Set routing priority / age flow\n    block</a>.</p>\n         <note>\n            <p>Either <b>QueuePriority</b> or <b>QueueTimeAdjustmentInSeconds</b> should be provided within the request body, but not\n    both.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contacts/{InstanceId}/{ContactId}/routing-data",

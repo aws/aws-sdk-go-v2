@@ -8643,6 +8643,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "JobMode": {
+                    "target": "com.amazonaws.glue#JobMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mode that describes how a job was created. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SCRIPT</code> - The job was created using the Glue Studio script editor.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VISUAL</code> - The job was created using the Glue Studio visual editor.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOTEBOOK</code> - The job was created using an interactive sessions notebook.</p>\n            </li>\n         </ul>\n         <p>When the <code>JobMode</code> field is missing or null, <code>SCRIPT</code> is assigned as the default value.</p>"
+                    }
+                },
                 "Description": {
                     "target": "com.amazonaws.glue#DescriptionString",
                     "traits": {
@@ -21907,6 +21913,12 @@
                         "smithy.api#documentation": "<p>The name you assign to this job definition.</p>"
                     }
                 },
+                "JobMode": {
+                    "target": "com.amazonaws.glue#JobMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mode that describes how a job was created. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SCRIPT</code> - The job was created using the Glue Studio script editor.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VISUAL</code> - The job was created using the Glue Studio visual editor.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOTEBOOK</code> - The job was created using an interactive sessions notebook.</p>\n            </li>\n         </ul>\n         <p>When the <code>JobMode</code> field is missing or null, <code>SCRIPT</code> is assigned as the default value.</p>"
+                    }
+                },
                 "Description": {
                     "target": "com.amazonaws.glue#DescriptionString",
                     "traits": {
@@ -22183,6 +22195,29 @@
                 "target": "com.amazonaws.glue#Job"
             }
         },
+        "com.amazonaws.glue#JobMode": {
+            "type": "enum",
+            "members": {
+                "SCRIPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCRIPT"
+                    }
+                },
+                "VISUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VISUAL"
+                    }
+                },
+                "NOTEBOOK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOTEBOOK"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#JobName": {
             "type": "string"
         },
@@ -22238,6 +22273,12 @@
                     "target": "com.amazonaws.glue#NameString",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the job definition being used in this run.</p>"
+                    }
+                },
+                "JobMode": {
+                    "target": "com.amazonaws.glue#JobMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mode that describes how a job was created. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SCRIPT</code> - The job was created using the Glue Studio script editor.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VISUAL</code> - The job was created using the Glue Studio visual editor.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOTEBOOK</code> - The job was created using an interactive sessions notebook.</p>\n            </li>\n         </ul>\n         <p>When the <code>JobMode</code> field is missing or null, <code>SCRIPT</code> is assigned as the default value.</p>"
                     }
                 },
                 "StartedOn": {
@@ -22444,6 +22485,12 @@
         "com.amazonaws.glue#JobUpdate": {
             "type": "structure",
             "members": {
+                "JobMode": {
+                    "target": "com.amazonaws.glue#JobMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mode that describes how a job was created. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SCRIPT</code> - The job was created using the Glue Studio script editor.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VISUAL</code> - The job was created using the Glue Studio visual editor.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOTEBOOK</code> - The job was created using an interactive sessions notebook.</p>\n            </li>\n         </ul>\n         <p>When the <code>JobMode</code> field is missing or null, <code>SCRIPT</code> is assigned as the default value.</p>"
+                    }
+                },
                 "Description": {
                     "target": "com.amazonaws.glue#DescriptionString",
                     "traits": {

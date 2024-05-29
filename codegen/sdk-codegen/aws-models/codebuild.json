@@ -2899,7 +2899,7 @@
                 "fleetServiceRole": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service role associated with the compute fleet.</p>"
+                        "smithy.api#documentation": "<p>The service role associated with the compute fleet. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-permission-policy-fleet-service-role.html\">\n            Allow a user to add a permission policy for a fleet service role</a> in the <i>CodeBuild User Guide</i>.</p>"
                     }
                 },
                 "tags": {
@@ -3227,6 +3227,12 @@
                     "target": "com.amazonaws.codebuild#WebhookBuildType",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the type of build this webhook will trigger.</p>"
+                    }
+                },
+                "manualCreation": {
+                    "target": "com.amazonaws.codebuild#WrapperBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If manualCreation is true, CodeBuild doesn't create a webhook in GitHub and instead returns <code>payloadUrl</code> and \n      <code>secret</code> values for the webhook. The <code>payloadUrl</code> and <code>secret</code> values in the output can be \n      used to manually create a webhook within GitHub.</p>\n         <note>\n            <p>manualCreation is only available for GitHub webhooks.</p>\n         </note>"
                     }
                 }
             },
@@ -4118,7 +4124,7 @@
                 "fleetServiceRole": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service role associated with the compute fleet.</p>"
+                        "smithy.api#documentation": "<p>The service role associated with the compute fleet. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-permission-policy-fleet-service-role.html\">\n            Allow a user to add a permission policy for a fleet service role</a> in the <i>CodeBuild User Guide</i>.</p>"
                     }
                 },
                 "tags": {
@@ -8487,7 +8493,7 @@
                 "fleetServiceRole": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service role associated with the compute fleet.</p>"
+                        "smithy.api#documentation": "<p>The service role associated with the compute fleet. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-permission-policy-fleet-service-role.html\">\n            Allow a user to add a permission policy for a fleet service role</a> in the <i>CodeBuild User Guide</i>.</p>"
                     }
                 },
                 "tags": {
@@ -8962,6 +8968,12 @@
                     "target": "com.amazonaws.codebuild#WebhookBuildType",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the type of build this webhook will trigger.</p>"
+                    }
+                },
+                "manualCreation": {
+                    "target": "com.amazonaws.codebuild#WrapperBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If manualCreation is true, CodeBuild doesn't create a webhook in GitHub and instead returns <code>payloadUrl</code> and \n      <code>secret</code> values for the webhook. The <code>payloadUrl</code> and <code>secret</code> values in the output can \n      be used to manually create a webhook within GitHub.</p>\n         <note>\n            <p>manualCreation is only available for GitHub webhooks.</p>\n         </note>"
                     }
                 },
                 "lastModifiedSecret": {

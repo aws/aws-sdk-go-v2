@@ -34485,6 +34485,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ORGANIZATIONAL_UNIT"
                     }
+                },
+                "ROOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROOT"
+                    }
                 }
             }
         },
