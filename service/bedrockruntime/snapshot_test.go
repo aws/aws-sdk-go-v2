@@ -62,6 +62,30 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_Converse(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.Converse(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "Converse")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ConverseStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ConverseStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ConverseStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_InvokeModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.InvokeModel(context.Background(), nil, func(o *Options) {
@@ -85,6 +109,30 @@ func TestCheckSnapshot_InvokeModelWithResponseStream(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_Converse(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.Converse(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "Converse")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ConverseStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ConverseStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ConverseStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_InvokeModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.InvokeModel(context.Background(), nil, func(o *Options) {

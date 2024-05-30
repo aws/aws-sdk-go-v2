@@ -44,6 +44,9 @@ type ListJobRunsInput struct {
 	// The maximum number of job runs that can be listed.
 	MaxResults *int32
 
+	// The mode of the job runs to list.
+	Mode types.JobRunMode
+
 	// The token for the next set of job run results.
 	NextToken *string
 

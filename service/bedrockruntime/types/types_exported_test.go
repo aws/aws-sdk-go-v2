@@ -4,8 +4,153 @@ package types_test
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/document"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
 )
+
+func ExampleContentBlock_outputUsage() {
+	var union types.ContentBlock
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ContentBlockMemberImage:
+		_ = v.Value // Value is types.ImageBlock
+
+	case *types.ContentBlockMemberText:
+		_ = v.Value // Value is string
+
+	case *types.ContentBlockMemberToolResult:
+		_ = v.Value // Value is types.ToolResultBlock
+
+	case *types.ContentBlockMemberToolUse:
+		_ = v.Value // Value is types.ToolUseBlock
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *types.ImageBlock
+var _ *types.ToolResultBlock
+var _ *types.ToolUseBlock
+
+func ExampleContentBlockDelta_outputUsage() {
+	var union types.ContentBlockDelta
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ContentBlockDeltaMemberText:
+		_ = v.Value // Value is string
+
+	case *types.ContentBlockDeltaMemberToolUse:
+		_ = v.Value // Value is types.ToolUseBlockDelta
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ToolUseBlockDelta
+var _ *string
+
+func ExampleContentBlockStart_outputUsage() {
+	var union types.ContentBlockStart
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ContentBlockStartMemberToolUse:
+		_ = v.Value // Value is types.ToolUseBlockStart
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ToolUseBlockStart
+
+func ExampleConverseOutput_outputUsage() {
+	var union types.ConverseOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ConverseOutputMemberMessage:
+		_ = v.Value // Value is types.Message
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.Message
+
+func ExampleConverseStreamOutput_outputUsage() {
+	var union types.ConverseStreamOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ConverseStreamOutputMemberContentBlockDelta:
+		_ = v.Value // Value is types.ContentBlockDeltaEvent
+
+	case *types.ConverseStreamOutputMemberContentBlockStart:
+		_ = v.Value // Value is types.ContentBlockStartEvent
+
+	case *types.ConverseStreamOutputMemberContentBlockStop:
+		_ = v.Value // Value is types.ContentBlockStopEvent
+
+	case *types.ConverseStreamOutputMemberMessageStart:
+		_ = v.Value // Value is types.MessageStartEvent
+
+	case *types.ConverseStreamOutputMemberMessageStop:
+		_ = v.Value // Value is types.MessageStopEvent
+
+	case *types.ConverseStreamOutputMemberMetadata:
+		_ = v.Value // Value is types.ConverseStreamMetadataEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MessageStartEvent
+var _ *types.ContentBlockStopEvent
+var _ *types.MessageStopEvent
+var _ *types.ContentBlockDeltaEvent
+var _ *types.ContentBlockStartEvent
+var _ *types.ConverseStreamMetadataEvent
+
+func ExampleImageSource_outputUsage() {
+	var union types.ImageSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ImageSourceMemberBytes:
+		_ = v.Value // Value is []byte
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []byte
 
 func ExampleResponseStream_outputUsage() {
 	var union types.ResponseStream
@@ -24,3 +169,109 @@ func ExampleResponseStream_outputUsage() {
 }
 
 var _ *types.PayloadPart
+
+func ExampleSystemContentBlock_outputUsage() {
+	var union types.SystemContentBlock
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SystemContentBlockMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleTool_outputUsage() {
+	var union types.Tool
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ToolMemberToolSpec:
+		_ = v.Value // Value is types.ToolSpecification
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ToolSpecification
+
+func ExampleToolChoice_outputUsage() {
+	var union types.ToolChoice
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ToolChoiceMemberAny:
+		_ = v.Value // Value is types.AnyToolChoice
+
+	case *types.ToolChoiceMemberAuto:
+		_ = v.Value // Value is types.AutoToolChoice
+
+	case *types.ToolChoiceMemberTool:
+		_ = v.Value // Value is types.SpecificToolChoice
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AutoToolChoice
+var _ *types.SpecificToolChoice
+var _ *types.AnyToolChoice
+
+func ExampleToolInputSchema_outputUsage() {
+	var union types.ToolInputSchema
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ToolInputSchemaMemberJson:
+		_ = v.Value // Value is document.Interface
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ document.Interface
+
+func ExampleToolResultContentBlock_outputUsage() {
+	var union types.ToolResultContentBlock
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ToolResultContentBlockMemberImage:
+		_ = v.Value // Value is types.ImageBlock
+
+	case *types.ToolResultContentBlockMemberJson:
+		_ = v.Value // Value is document.Interface
+
+	case *types.ToolResultContentBlockMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ document.Interface
+var _ *types.ImageBlock

@@ -37823,6 +37823,42 @@ func awsRestjson1_deserializeDocumentAssignContactCategoryActionDefinition(v **t
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAssociatedQueueIdList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected QueueId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAttachedFile(v **types.AttachedFile, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -51652,6 +51688,11 @@ func awsRestjson1_deserializeDocumentRoutingProfile(v **types.RoutingProfile, va
 					return fmt.Errorf("expected AgentAvailabilityTimer to be of type string, got %T instead", value)
 				}
 				sv.AgentAvailabilityTimer = types.AgentAvailabilityTimer(jtv)
+			}
+
+		case "AssociatedQueueIds":
+			if err := awsRestjson1_deserializeDocumentAssociatedQueueIdList(&sv.AssociatedQueueIds, value); err != nil {
+				return err
 			}
 
 		case "DefaultOutboundQueueId":

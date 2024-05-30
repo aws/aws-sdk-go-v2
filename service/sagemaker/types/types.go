@@ -1442,15 +1442,18 @@ type AthenaDatasetDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// The collection of algorithms run on a dataset for training the model candidates
-// of an Autopilot job.
+// The selection of algorithms trained on your dataset to generate the model
+// candidates for an Autopilot job.
 type AutoMLAlgorithmConfig struct {
 
-	// The selection of algorithms run on a dataset to train the model candidates of
-	// an Autopilot job.
+	// The selection of algorithms trained on your dataset to generate the model
+	// candidates for an Autopilot job.
+	//
+	//   - For the tabular problem type TabularJobConfig :
 	//
 	// Selected algorithms must belong to the list corresponding to the training mode
-	// set in [AutoMLJobConfig.Mode]( ENSEMBLING or HYPERPARAMETER_TUNING ). Choose a minimum of 1 algorithm.
+	//   set in [AutoMLJobConfig.Mode]( ENSEMBLING or HYPERPARAMETER_TUNING ). Choose a minimum of 1
+	//   algorithm.
 	//
 	//   - In ENSEMBLING mode:
 	//
@@ -1477,6 +1480,23 @@ type AutoMLAlgorithmConfig struct {
 	//   - "mlp"
 	//
 	//   - "xgboost"
+	//
+	//   - For the time-series forecasting problem type TimeSeriesForecastingJobConfig
+	//   :
+	//
+	//   - Choose your algorithms from this list.
+	//
+	//   - "cnn-qr"
+	//
+	//   - "deepar"
+	//
+	//   - "prophet"
+	//
+	//   - "arima"
+	//
+	//   - "npts"
+	//
+	//   - "ets"
 	//
 	// [AutoMLJobConfig.Mode]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html#sagemaker-Type-AutoMLJobConfig-Mode
 	//
@@ -1548,30 +1568,30 @@ type AutoMLCandidate struct {
 // (optional).
 type AutoMLCandidateGenerationConfig struct {
 
-	// Stores the configuration information for the selection of algorithms used to
-	// train the model candidates.
+	// Stores the configuration information for the selection of algorithms trained on
+	// tabular data.
 	//
 	// The list of available algorithms to choose from depends on the training mode
-	// set in [AutoMLJobConfig.Mode]AutoMLJobConfig.Mode .
+	// set in [TabularJobConfig.Mode]TabularJobConfig.Mode .
 	//
-	//   - AlgorithmsConfig should not be set in AUTO training mode.
+	//   - AlgorithmsConfig should not be set if the training mode is set on AUTO .
 	//
 	//   - When AlgorithmsConfig is provided, one AutoMLAlgorithms attribute must be
 	//   set and one only.
 	//
 	// If the list of algorithms provided as values for AutoMLAlgorithms is empty,
-	//   AutoMLCandidateGenerationConfig uses the full set of algorithms for the given
+	//   CandidateGenerationConfig uses the full set of algorithms for the given
 	//   training mode.
 	//
-	//   - When AlgorithmsConfig is not provided, AutoMLCandidateGenerationConfig uses
-	//   the full set of algorithms for the given training mode.
+	//   - When AlgorithmsConfig is not provided, CandidateGenerationConfig uses the
+	//   full set of algorithms for the given training mode.
 	//
-	// For the list of all algorithms per training mode, see [AutoMLAlgorithmConfig].
+	// For the list of all algorithms per problem type and training mode, see [AutoMLAlgorithmConfig].
 	//
 	// For more information on each algorithm, see the [Algorithm support] section in Autopilot developer
 	// guide.
 	//
-	// [AutoMLJobConfig.Mode]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html
+	// [TabularJobConfig.Mode]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TabularJobConfig.html
 	// [Algorithm support]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support
 	// [AutoMLAlgorithmConfig]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html
 	AlgorithmsConfig []AutoMLAlgorithmConfig
@@ -2533,13 +2553,19 @@ type CandidateArtifactLocations struct {
 // using an AutoML job V2.
 type CandidateGenerationConfig struct {
 
-	// Stores the configuration information for the selection of algorithms used to
-	// train model candidates on tabular data.
+	// Your Autopilot job trains a default set of algorithms on your dataset. For
+	// tabular and time-series data, you can customize the algorithm list by selecting
+	// a subset of algorithms for your problem type.
 	//
-	// The list of available algorithms to choose from depends on the training mode
-	// set in [TabularJobConfig.Mode]TabularJobConfig.Mode .
+	// AlgorithmsConfig stores the customized selection of algorithms to train on your
+	// data.
 	//
-	//   - AlgorithmsConfig should not be set in AUTO training mode.
+	//   - For the tabular problem type TabularJobConfig , the list of available
+	//   algorithms to choose from depends on the training mode set in [AutoMLJobConfig.Mode]
+	//   AutoMLJobConfig.Mode .
+	//
+	//   - AlgorithmsConfig should not be set when the training mode
+	//   AutoMLJobConfig.Mode is set to AUTO .
 	//
 	//   - When AlgorithmsConfig is provided, one AutoMLAlgorithms attribute must be
 	//   set and one only.
@@ -2551,14 +2577,31 @@ type CandidateGenerationConfig struct {
 	//   - When AlgorithmsConfig is not provided, CandidateGenerationConfig uses the
 	//   full set of algorithms for the given training mode.
 	//
-	// For the list of all algorithms per problem type and training mode, see [AutoMLAlgorithmConfig].
+	// For the list of all algorithms per training mode, see [AlgorithmConfig].
 	//
-	// For more information on each algorithm, see the [Algorithm support] section in Autopilot developer
-	// guide.
+	// For more information on each algorithm, see the [Algorithm support]section in the Autopilot
+	//   developer guide.
 	//
-	// [TabularJobConfig.Mode]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TabularJobConfig.html
+	//   - For the time-series forecasting problem type TimeSeriesForecastingJobConfig
+	//   , choose your algorithms from the list provided in [AlgorithmConfig].
+	//
+	// For more information on each algorithm, see the [Algorithms support for time-series forecasting]section in the Autopilot
+	//   developer guide.
+	//
+	//   - When AlgorithmsConfig is provided, one AutoMLAlgorithms attribute must be
+	//   set and one only.
+	//
+	// If the list of algorithms provided as values for AutoMLAlgorithms is empty,
+	//   CandidateGenerationConfig uses the full set of algorithms for time-series
+	//   forecasting.
+	//
+	//   - When AlgorithmsConfig is not provided, CandidateGenerationConfig uses the
+	//   full set of algorithms for time-series forecasting.
+	//
+	// [AlgorithmConfig]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html
+	// [Algorithms support for time-series forecasting]: https://docs.aws.amazon.com/sagemaker/latest/dg/timeseries-forecasting-algorithms.html
+	// [AutoMLJobConfig.Mode]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html
 	// [Algorithm support]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support
-	// [AutoMLAlgorithmConfig]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html
 	AlgorithmsConfig []AutoMLAlgorithmConfig
 
 	noSmithyDocumentSerde
@@ -10736,6 +10779,17 @@ type ModelPackage struct {
 	//   - PENDING_MANUAL_APPROVAL - The model is waiting for manual approval.
 	ModelApprovalStatus ModelApprovalStatus
 
+	// The model card associated with the model package. Since ModelPackageModelCard
+	// is tied to a model package, it is a specific usage of a model card and its
+	// schema is simplified compared to the schema of ModelCard . The
+	// ModelPackageModelCard schema does not include model_package_details , and
+	// model_overview is composed of the model_creator and model_artifact properties.
+	// For more information about the model card associated with the model package, see
+	// [View the Details of a Model Version].
+	//
+	// [View the Details of a Model Version]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+	ModelCard *ModelPackageModelCard
+
 	// Metrics for the model.
 	ModelMetrics *ModelMetrics
 
@@ -10773,6 +10827,10 @@ type ModelPackage struct {
 	// The Amazon Simple Storage Service path where the sample payload are stored.
 	// This path must point to a single gzip compressed tar archive (.tar.gz suffix).
 	SamplePayloadUrl *string
+
+	// An optional Key Management Service key to encrypt, decrypt, and re-encrypt
+	// model package information for regulated workloads with highly sensitive data.
+	SecurityConfig *ModelPackageSecurityConfig
 
 	// Indicates if you want to skip model validation.
 	SkipModelValidation SkipModelValidation
@@ -10931,6 +10989,49 @@ type ModelPackageGroupSummary struct {
 
 	// A description of the model group.
 	ModelPackageGroupDescription *string
+
+	noSmithyDocumentSerde
+}
+
+// The model card associated with the model package. Since ModelPackageModelCard
+// is tied to a model package, it is a specific usage of a model card and its
+// schema is simplified compared to the schema of ModelCard . The
+// ModelPackageModelCard schema does not include model_package_details , and
+// model_overview is composed of the model_creator and model_artifact properties.
+// For more information about the model card associated with the model package, see
+// [View the Details of a Model Version].
+//
+// [View the Details of a Model Version]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+type ModelPackageModelCard struct {
+
+	// The content of the model card.
+	ModelCardContent *string
+
+	// The approval status of the model card within your organization. Different
+	// organizations might have different criteria for model card review and approval.
+	//
+	//   - Draft : The model card is a work in progress.
+	//
+	//   - PendingReview : The model card is pending review.
+	//
+	//   - Approved : The model card is approved.
+	//
+	//   - Archived : The model card is archived. No more updates can be made to the
+	//   model card content. If you try to update the model card content, you will
+	//   receive the message Model Card is in Archived state .
+	ModelCardStatus ModelCardStatus
+
+	noSmithyDocumentSerde
+}
+
+// An optional Key Management Service key to encrypt, decrypt, and re-encrypt
+// model package information for regulated workloads with highly sensitive data.
+type ModelPackageSecurityConfig struct {
+
+	// The KMS Key ID ( KMSKeyId ) used for encryption of model package information.
+	//
+	// This member is required.
+	KmsKeyId *string
 
 	noSmithyDocumentSerde
 }
@@ -16700,6 +16801,10 @@ type TimeSeriesForecastingJobConfig struct {
 	//
 	// This member is required.
 	TimeSeriesConfig *TimeSeriesConfig
+
+	// Stores the configuration information for how model candidates are generated
+	// using an AutoML job V2.
+	CandidateGenerationConfig *CandidateGenerationConfig
 
 	// How long a job is allowed to run, or how many candidates a job is allowed to
 	// generate.

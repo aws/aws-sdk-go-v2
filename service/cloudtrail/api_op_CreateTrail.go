@@ -49,9 +49,10 @@ type CreateTrailInput struct {
 	Name *string
 
 	// Specifies the name of the Amazon S3 bucket designated for publishing log files.
-	// See [Amazon S3 Bucket Naming Requirements].
+	// For information about bucket naming rules, see [Bucket naming rules]in the Amazon Simple Storage
+	// Service User Guide.
 	//
-	// [Amazon S3 Bucket Naming Requirements]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+	// [Bucket naming rules]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
 	//
 	// This member is required.
 	S3BucketName *string
@@ -121,7 +122,7 @@ type CreateTrailInput struct {
 	// have designated for log file delivery. For more information, see [Finding Your CloudTrail Log Files]. The maximum
 	// length is 200 characters.
 	//
-	// [Finding Your CloudTrail Log Files]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+	// [Finding Your CloudTrail Log Files]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/get-and-view-cloudtrail-log-files.html#cloudtrail-find-log-files
 	S3KeyPrefix *string
 
 	// Specifies the name of the Amazon SNS topic defined for notification of log file
@@ -174,7 +175,7 @@ type CreateTrailOutput struct {
 	// Specifies the Amazon S3 key prefix that comes after the name of the bucket you
 	// have designated for log file delivery. For more information, see [Finding Your CloudTrail Log Files].
 	//
-	// [Finding Your CloudTrail Log Files]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+	// [Finding Your CloudTrail Log Files]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/get-and-view-cloudtrail-log-files.html#cloudtrail-find-log-files
 	S3KeyPrefix *string
 
 	// Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send

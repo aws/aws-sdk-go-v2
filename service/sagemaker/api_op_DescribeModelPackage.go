@@ -15,8 +15,13 @@ import (
 // Returns a description of the specified model package, which is used to create
 // SageMaker models or list them on Amazon Web Services Marketplace.
 //
+// If you provided a KMS Key ID when you created your model package, you will see
+// the [KMS Decrypt]API call in your CloudTrail logs when you use this API.
+//
 // To create models in SageMaker, buyers can subscribe to model packages listed on
 // Amazon Web Services Marketplace.
+//
+// [KMS Decrypt]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html
 func (c *Client) DescribeModelPackage(ctx context.Context, params *DescribeModelPackageInput, optFns ...func(*Options)) (*DescribeModelPackageOutput, error) {
 	if params == nil {
 		params = &DescribeModelPackageInput{}
@@ -120,6 +125,17 @@ type DescribeModelPackageOutput struct {
 	// The approval status of the model package.
 	ModelApprovalStatus types.ModelApprovalStatus
 
+	// The model card associated with the model package. Since ModelPackageModelCard
+	// is tied to a model package, it is a specific usage of a model card and its
+	// schema is simplified compared to the schema of ModelCard . The
+	// ModelPackageModelCard schema does not include model_package_details , and
+	// model_overview is composed of the model_creator and model_artifact properties.
+	// For more information about the model card associated with the model package, see
+	// [View the Details of a Model Version].
+	//
+	// [View the Details of a Model Version]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+	ModelCard *types.ModelPackageModelCard
+
 	// Metrics for the model.
 	ModelMetrics *types.ModelMetrics
 
@@ -137,6 +153,9 @@ type DescribeModelPackageOutput struct {
 	// stored. This path points to a single gzip compressed tar archive (.tar.gz
 	// suffix).
 	SamplePayloadUrl *string
+
+	// The KMS Key ID ( KMSKeyId ) used for encryption of model package information.
+	SecurityConfig *types.ModelPackageSecurityConfig
 
 	// Indicates if you want to skip model validation.
 	SkipModelValidation types.SkipModelValidation

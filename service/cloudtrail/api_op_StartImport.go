@@ -19,7 +19,7 @@ import (
 // CloudTrail prefix, and does not check prefixes for other Amazon Web Services
 // services. If you want to import CloudTrail events contained in another prefix,
 // you must include the prefix in the S3LocationUri . For more considerations about
-// importing trail events, see [Considerations].
+// importing trail events, see [Considerations for copying trail events]in the CloudTrail User Guide.
 //
 // When you start a new import, the Destinations and ImportSource parameters are
 // required. Before starting a new import, disable any access control lists (ACLs)
@@ -32,7 +32,7 @@ import (
 // management account to import trail events. You cannot use the delegated
 // administrator account for the organization.
 //
-// [Considerations]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-copy-trail-to-lake.html#cloudtrail-trail-copy-considerations
+// [Considerations for copying trail events]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-copy-trail-to-lake.html#cloudtrail-trail-copy-considerations
 // [Controlling ownership of objects and disabling ACLs for your bucket]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
 func (c *Client) StartImport(ctx context.Context, params *StartImportInput, optFns ...func(*Options)) (*StartImportOutput, error) {
 	if params == nil {

@@ -100,6 +100,17 @@ type CreateModelPackageInput struct {
 	// deploy the model.
 	ModelApprovalStatus types.ModelApprovalStatus
 
+	// The model card associated with the model package. Since ModelPackageModelCard
+	// is tied to a model package, it is a specific usage of a model card and its
+	// schema is simplified compared to the schema of ModelCard . The
+	// ModelPackageModelCard schema does not include model_package_details , and
+	// model_overview is composed of the model_creator and model_artifact properties.
+	// For more information about the model card associated with the model package, see
+	// [View the Details of a Model Version].
+	//
+	// [View the Details of a Model Version]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+	ModelCard *types.ModelPackageModelCard
+
 	// A structure that contains model metrics reports.
 	ModelMetrics *types.ModelMetrics
 
@@ -128,6 +139,9 @@ type CreateModelPackageInput struct {
 	//
 	// [InvokeEndpoint]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html#API_runtime_InvokeEndpoint_RequestSyntax
 	SamplePayloadUrl *string
+
+	// The KMS Key ID ( KMSKeyId ) used for encryption of model package information.
+	SecurityConfig *types.ModelPackageSecurityConfig
 
 	// Indicates if you want to skip model validation.
 	SkipModelValidation types.SkipModelValidation

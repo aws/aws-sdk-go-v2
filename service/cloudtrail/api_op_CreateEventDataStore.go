@@ -46,12 +46,12 @@ type CreateEventDataStoreInput struct {
 	// Guide.
 	//
 	// For more information about how to use advanced event selectors to include
-	// non-Amazon Web Services events in your event data store, see [Create an integration to log events from outside Amazon Web Services]in the CloudTrail
-	// User Guide.
+	// events outside of Amazon Web Services events in your event data store, see [Create an integration to log events from outside Amazon Web Services]in
+	// the CloudTrail User Guide.
 	//
-	// [Create an event data store for Config configuration items]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-eds-config
+	// [Create an event data store for Config configuration items]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-eds-cli.html#lake-cli-create-eds-config
 	// [Log events by using advanced event selectors]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced
-	// [Create an integration to log events from outside Amazon Web Services]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-integration
+	// [Create an integration to log events from outside Amazon Web Services]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-integrations-cli.html#lake-cli-create-integration
 	AdvancedEventSelectors []types.AdvancedEventSelector
 
 	// The billing mode for the event data store determines the cost for ingesting

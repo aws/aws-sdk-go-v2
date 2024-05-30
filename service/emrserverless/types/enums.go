@@ -50,6 +50,25 @@ func (Architecture) Values() []Architecture {
 	}
 }
 
+type JobRunMode string
+
+// Enum values for JobRunMode
+const (
+	JobRunModeBatch     JobRunMode = "BATCH"
+	JobRunModeStreaming JobRunMode = "STREAMING"
+)
+
+// Values returns all known values for JobRunMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobRunMode) Values() []JobRunMode {
+	return []JobRunMode{
+		"BATCH",
+		"STREAMING",
+	}
+}
+
 type JobRunState string
 
 // Enum values for JobRunState

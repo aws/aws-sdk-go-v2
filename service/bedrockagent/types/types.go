@@ -675,6 +675,16 @@ type APISchemaMemberS3 struct {
 
 func (*APISchemaMemberS3) isAPISchema() {}
 
+// The vector configuration details for the Bedrock embeddings model.
+type BedrockEmbeddingModelConfiguration struct {
+
+	// The dimensions details for the vector configuration used on the Bedrock
+	// embeddings model.
+	Dimensions *int32
+
+	noSmithyDocumentSerde
+}
+
 // Details about how to chunk the documents in the data source. A chunk refers to
 // an excerpt from a data source that is returned when the knowledge base that it
 // belongs to is queried.
@@ -809,6 +819,15 @@ type DataSourceSummary struct {
 
 	// The description of the data source.
 	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details for the embeddings model.
+type EmbeddingModelConfiguration struct {
+
+	// The vector configuration details on the Bedrock embeddings model.
+	BedrockEmbeddingModelConfiguration *BedrockEmbeddingModelConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1747,6 +1766,10 @@ type VectorKnowledgeBaseConfiguration struct {
 	//
 	// This member is required.
 	EmbeddingModelArn *string
+
+	// The embeddings model configuration details for the vector model used in
+	// Knowledge Base.
+	EmbeddingModelConfiguration *EmbeddingModelConfiguration
 
 	noSmithyDocumentSerde
 }

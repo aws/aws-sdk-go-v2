@@ -15,9 +15,10 @@ import (
 // cost allocation reporting to track cost associated with Amazon RDS resources, or
 // used in a Condition statement in an IAM policy for Amazon RDS.
 //
-// For an overview on tagging Amazon RDS resources, see [Tagging Amazon RDS Resources].
+// For an overview on tagging your relational database resources, see [Tagging Amazon RDS Resources] or [Tagging Amazon Aurora and Amazon RDS Resources].
 //
-// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html
+// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+// [Tagging Amazon Aurora and Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
 func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {
 	if params == nil {
 		params = &AddTagsToResourceInput{}

@@ -58535,6 +58535,11 @@ func awsAwsjson11_deserializeDocumentModelPackage(v **types.ModelPackage, value 
 				sv.ModelApprovalStatus = types.ModelApprovalStatus(jtv)
 			}
 
+		case "ModelCard":
+			if err := awsAwsjson11_deserializeDocumentModelPackageModelCard(&sv.ModelCard, value); err != nil {
+				return err
+			}
+
 		case "ModelMetrics":
 			if err := awsAwsjson11_deserializeDocumentModelMetrics(&sv.ModelMetrics, value); err != nil {
 				return err
@@ -58610,6 +58615,11 @@ func awsAwsjson11_deserializeDocumentModelPackage(v **types.ModelPackage, value 
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.SamplePayloadUrl = ptr.String(jtv)
+			}
+
+		case "SecurityConfig":
+			if err := awsAwsjson11_deserializeDocumentModelPackageSecurityConfig(&sv.SecurityConfig, value); err != nil {
+				return err
 			}
 
 		case "SkipModelValidation":
@@ -59027,6 +59037,95 @@ func awsAwsjson11_deserializeDocumentModelPackageGroupSummaryList(v *[]types.Mod
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentModelPackageModelCard(v **types.ModelPackageModelCard, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelPackageModelCard
+	if *v == nil {
+		sv = &types.ModelPackageModelCard{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ModelCardContent":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelCardContent to be of type string, got %T instead", value)
+				}
+				sv.ModelCardContent = ptr.String(jtv)
+			}
+
+		case "ModelCardStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelCardStatus to be of type string, got %T instead", value)
+				}
+				sv.ModelCardStatus = types.ModelCardStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentModelPackageSecurityConfig(v **types.ModelPackageSecurityConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelPackageSecurityConfig
+	if *v == nil {
+		sv = &types.ModelPackageSecurityConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -73090,6 +73189,11 @@ func awsAwsjson11_deserializeDocumentTimeSeriesForecastingJobConfig(v **types.Ti
 
 	for key, value := range shape {
 		switch key {
+		case "CandidateGenerationConfig":
+			if err := awsAwsjson11_deserializeDocumentCandidateGenerationConfig(&sv.CandidateGenerationConfig, value); err != nil {
+				return err
+			}
+
 		case "CompletionCriteria":
 			if err := awsAwsjson11_deserializeDocumentAutoMLJobCompletionCriteria(&sv.CompletionCriteria, value); err != nil {
 				return err
@@ -86814,6 +86918,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeModelPackageOutput(v **DescribeMo
 				sv.ModelApprovalStatus = types.ModelApprovalStatus(jtv)
 			}
 
+		case "ModelCard":
+			if err := awsAwsjson11_deserializeDocumentModelPackageModelCard(&sv.ModelCard, value); err != nil {
+				return err
+			}
+
 		case "ModelMetrics":
 			if err := awsAwsjson11_deserializeDocumentModelMetrics(&sv.ModelMetrics, value); err != nil {
 				return err
@@ -86889,6 +86998,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeModelPackageOutput(v **DescribeMo
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.SamplePayloadUrl = ptr.String(jtv)
+			}
+
+		case "SecurityConfig":
+			if err := awsAwsjson11_deserializeDocumentModelPackageSecurityConfig(&sv.SecurityConfig, value); err != nil {
+				return err
 			}
 
 		case "SkipModelValidation":

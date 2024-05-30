@@ -9819,6 +9819,21 @@ func validateModelPackageContainerDefinitionList(v []types.ModelPackageContainer
 	}
 }
 
+func validateModelPackageSecurityConfig(v *types.ModelPackageSecurityConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelPackageSecurityConfig"}
+	if v.KmsKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateModelPackageValidationProfile(v *types.ModelPackageValidationProfile) error {
 	if v == nil {
 		return nil
@@ -11828,6 +11843,11 @@ func validateTimeSeriesForecastingJobConfig(v *types.TimeSeriesForecastingJobCon
 			invalidParams.AddNested("TimeSeriesConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CandidateGenerationConfig != nil {
+		if err := validateCandidateGenerationConfig(v.CandidateGenerationConfig); err != nil {
+			invalidParams.AddNested("CandidateGenerationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -13723,6 +13743,11 @@ func validateOpCreateModelPackageInput(v *CreateModelPackageInput) error {
 	if v.AdditionalInferenceSpecifications != nil {
 		if err := validateAdditionalInferenceSpecifications(v.AdditionalInferenceSpecifications); err != nil {
 			invalidParams.AddNested("AdditionalInferenceSpecifications", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SecurityConfig != nil {
+		if err := validateModelPackageSecurityConfig(v.SecurityConfig); err != nil {
+			invalidParams.AddNested("SecurityConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

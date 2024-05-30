@@ -342,9 +342,9 @@ type CreateDBInstanceInput struct {
 	//   - Can't be a word reserved by the database engine.
 	//
 	// Amazon Aurora PostgreSQL The name of the database to create when the primary DB
-	// instance of the Aurora PostgreSQL DB cluster is created. If this parameter isn't
-	// specified for an Aurora PostgreSQL DB cluster, a database named postgres is
-	// created in the DB cluster.
+	// instance of the Aurora PostgreSQL DB cluster is created. A database named
+	// postgres is always created. If this parameter is specified, an additional
+	// database with this name is created.
 	//
 	// Constraints:
 	//
@@ -422,8 +422,8 @@ type CreateDBInstanceInput struct {
 	//   - Can't be longer than 8 characters.
 	//
 	// RDS for PostgreSQL The name of the database to create when the DB instance is
-	// created. If this parameter isn't specified, a database named postgres is
-	// created in the DB instance.
+	// created. A database named postgres is always created. If this parameter is
+	// specified, an additional database with this name is created.
 	//
 	// Constraints:
 	//

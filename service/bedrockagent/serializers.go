@@ -3827,6 +3827,18 @@ func awsRestjson1_serializeDocumentAPISchema(v types.APISchema, value smithyjson
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBedrockEmbeddingModelConfiguration(v *types.BedrockEmbeddingModelConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Dimensions != nil {
+		ok := object.Key("dimensions")
+		ok.Integer(*v.Dimensions)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentChunkingConfiguration(v *types.ChunkingConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3860,6 +3872,20 @@ func awsRestjson1_serializeDocumentDataSourceConfiguration(v *types.DataSourceCo
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEmbeddingModelConfiguration(v *types.EmbeddingModelConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BedrockEmbeddingModelConfiguration != nil {
+		ok := object.Key("bedrockEmbeddingModelConfiguration")
+		if err := awsRestjson1_serializeDocumentBedrockEmbeddingModelConfiguration(v.BedrockEmbeddingModelConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -4629,6 +4655,13 @@ func awsRestjson1_serializeDocumentVectorKnowledgeBaseConfiguration(v *types.Vec
 	if v.EmbeddingModelArn != nil {
 		ok := object.Key("embeddingModelArn")
 		ok.String(*v.EmbeddingModelArn)
+	}
+
+	if v.EmbeddingModelConfiguration != nil {
+		ok := object.Key("embeddingModelConfiguration")
+		if err := awsRestjson1_serializeDocumentEmbeddingModelConfiguration(v.EmbeddingModelConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

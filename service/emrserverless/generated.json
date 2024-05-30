@@ -15,6 +15,7 @@
         "api_op_GetDashboardForJobRun.go",
         "api_op_GetJobRun.go",
         "api_op_ListApplications.go",
+        "api_op_ListJobRunAttempts.go",
         "api_op_ListJobRuns.go",
         "api_op_ListTagsForResource.go",
         "api_op_StartApplication.go",

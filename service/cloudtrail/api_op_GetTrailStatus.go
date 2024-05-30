@@ -73,11 +73,12 @@ type GetTrailStatusOutput struct {
 	// Amazon S3 API Reference.
 	//
 	// This error occurs only when there is a problem with the destination S3 bucket,
-	// and does not occur for requests that time out. To resolve the issue, create a
-	// new bucket, and then call UpdateTrail to specify the new bucket; or fix the
-	// existing objects so that CloudTrail can again write to the bucket.
+	// and does not occur for requests that time out. To resolve the issue, fix the [bucket policy]so
+	// that CloudTrail can write to the bucket; or create a new bucket and call
+	// UpdateTrail to specify the new bucket.
 	//
 	// [Error Responses]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
+	// [bucket policy]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-s3-bucket-policy-for-cloudtrail.html
 	LatestDeliveryError *string
 
 	// Specifies the date and time that CloudTrail last delivered log files to an
@@ -89,11 +90,12 @@ type GetTrailStatusOutput struct {
 	// the Amazon S3 API Reference.
 	//
 	// This error occurs only when there is a problem with the destination S3 bucket,
-	// and does not occur for requests that time out. To resolve the issue, create a
-	// new bucket, and then call UpdateTrail to specify the new bucket; or fix the
-	// existing objects so that CloudTrail can again write to the bucket.
+	// and does not occur for requests that time out. To resolve the issue, fix the [bucket policy]so
+	// that CloudTrail can write to the bucket; or create a new bucket and call
+	// UpdateTrail to specify the new bucket.
 	//
 	// [Error Responses]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
+	// [bucket policy]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-s3-bucket-policy-for-cloudtrail.html
 	LatestDigestDeliveryError *string
 
 	// Specifies the date and time that CloudTrail last delivered a digest file to an

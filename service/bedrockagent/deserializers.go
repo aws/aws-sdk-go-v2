@@ -8367,6 +8367,50 @@ loop:
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBedrockEmbeddingModelConfiguration(v **types.BedrockEmbeddingModelConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BedrockEmbeddingModelConfiguration
+	if *v == nil {
+		sv = &types.BedrockEmbeddingModelConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dimensions":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Dimensions to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Dimensions = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentChunkingConfiguration(v **types.ChunkingConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8740,6 +8784,42 @@ func awsRestjson1_deserializeDocumentDataSourceSummary(v **types.DataSourceSumma
 					return err
 				}
 				sv.UpdatedAt = ptr.Time(t)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEmbeddingModelConfiguration(v **types.EmbeddingModelConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EmbeddingModelConfiguration
+	if *v == nil {
+		sv = &types.EmbeddingModelConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bedrockEmbeddingModelConfiguration":
+			if err := awsRestjson1_deserializeDocumentBedrockEmbeddingModelConfiguration(&sv.BedrockEmbeddingModelConfiguration, value); err != nil {
+				return err
 			}
 
 		default:
@@ -11399,6 +11479,11 @@ func awsRestjson1_deserializeDocumentVectorKnowledgeBaseConfiguration(v **types.
 					return fmt.Errorf("expected BedrockEmbeddingModelArn to be of type string, got %T instead", value)
 				}
 				sv.EmbeddingModelArn = ptr.String(jtv)
+			}
+
+		case "embeddingModelConfiguration":
+			if err := awsRestjson1_deserializeDocumentEmbeddingModelConfiguration(&sv.EmbeddingModelConfiguration, value); err != nil {
+				return err
 			}
 
 		default:

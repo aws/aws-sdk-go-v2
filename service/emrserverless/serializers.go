@@ -453,6 +453,10 @@ func awsRestjson1_serializeOpHttpBindingsGetDashboardForJobRunInput(v *GetDashbo
 		}
 	}
 
+	if v.Attempt != nil {
+		encoder.SetQuery("attempt").Integer(*v.Attempt)
+	}
+
 	if v.JobRunId == nil || len(*v.JobRunId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member jobRunId must not be empty")}
 	}
@@ -525,6 +529,10 @@ func awsRestjson1_serializeOpHttpBindingsGetJobRunInput(v *GetJobRunInput, encod
 		if err := encoder.SetURI("applicationId").String(*v.ApplicationId); err != nil {
 			return err
 		}
+	}
+
+	if v.Attempt != nil {
+		encoder.SetQuery("attempt").Integer(*v.Attempt)
 	}
 
 	if v.JobRunId == nil || len(*v.JobRunId) == 0 {
@@ -609,6 +617,88 @@ func awsRestjson1_serializeOpHttpBindingsListApplicationsInput(v *ListApplicatio
 	return nil
 }
 
+type awsRestjson1_serializeOpListJobRunAttempts struct {
+}
+
+func (*awsRestjson1_serializeOpListJobRunAttempts) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListJobRunAttempts) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListJobRunAttemptsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/applications/{applicationId}/jobruns/{jobRunId}/attempts")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListJobRunAttemptsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListJobRunAttemptsInput(v *ListJobRunAttemptsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ApplicationId == nil || len(*v.ApplicationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member applicationId must not be empty")}
+	}
+	if v.ApplicationId != nil {
+		if err := encoder.SetURI("applicationId").String(*v.ApplicationId); err != nil {
+			return err
+		}
+	}
+
+	if v.JobRunId == nil || len(*v.JobRunId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member jobRunId must not be empty")}
+	}
+	if v.JobRunId != nil {
+		if err := encoder.SetURI("jobRunId").String(*v.JobRunId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListJobRuns struct {
 }
 
@@ -681,6 +771,10 @@ func awsRestjson1_serializeOpHttpBindingsListJobRunsInput(v *ListJobRunsInput, e
 
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if len(v.Mode) > 0 {
+		encoder.SetQuery("mode").String(string(v.Mode))
 	}
 
 	if v.NextToken != nil {
@@ -935,9 +1029,21 @@ func awsRestjson1_serializeOpDocumentStartJobRunInput(v *StartJobRunInput, value
 		}
 	}
 
+	if len(v.Mode) > 0 {
+		ok := object.Key("mode")
+		ok.String(string(v.Mode))
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.RetryPolicy != nil {
+		ok := object.Key("retryPolicy")
+		if err := awsRestjson1_serializeDocumentRetryPolicy(v.RetryPolicy, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Tags != nil {
@@ -1715,6 +1821,23 @@ func awsRestjson1_serializeDocumentPrometheusMonitoringConfiguration(v *types.Pr
 	if v.RemoteWriteUrl != nil {
 		ok := object.Key("remoteWriteUrl")
 		ok.String(*v.RemoteWriteUrl)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRetryPolicy(v *types.RetryPolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxAttempts != nil {
+		ok := object.Key("maxAttempts")
+		ok.Integer(*v.MaxAttempts)
+	}
+
+	if v.MaxFailedAttemptsPerHour != nil {
+		ok := object.Key("maxFailedAttemptsPerHour")
+		ok.Integer(*v.MaxFailedAttemptsPerHour)
 	}
 
 	return nil

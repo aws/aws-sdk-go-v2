@@ -47,6 +47,10 @@ type GetDashboardForJobRunInput struct {
 	// This member is required.
 	JobRunId *string
 
+	// An optimal parameter that indicates the amount of attempts for the job. If not
+	// specified, this value defaults to the attempt of the latest job.
+	Attempt *int32
+
 	noSmithyDocumentSerde
 }
 

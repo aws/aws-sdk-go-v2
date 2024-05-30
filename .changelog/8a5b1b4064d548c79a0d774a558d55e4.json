@@ -1,0 +1,8 @@
+{
+    "id": "8a5b1b40-64d5-48c7-9a0d-774a558d55e4",
+    "type": "feature",
+    "description": "Adding associatedQueueIds as a SearchCriteria and response field to the SearchRoutingProfiles API",
+    "modules": [
+        "service/connect"
+    ]
+}

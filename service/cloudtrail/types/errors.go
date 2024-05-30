@@ -305,10 +305,11 @@ func (e *ChannelNotFoundException) ErrorCode() string {
 func (e *ChannelNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when trusted access has not been enabled between
-// CloudTrail and Organizations. For more information, see [Enabling Trusted Access with Other Amazon Web Services Services]and [Prepare For Creating a Trail For Your Organization].
+// CloudTrail and Organizations. For more information, see [How to enable or disable trusted access]in the Organizations
+// User Guide and [Prepare For Creating a Trail For Your Organization]in the CloudTrail User Guide.
 //
+// [How to enable or disable trusted access]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_how-to-enable-disable-trusted-access
 // [Prepare For Creating a Trail For Your Organization]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html
-// [Enabling Trusted Access with Other Amazon Web Services Services]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
 type CloudTrailAccessNotEnabledException struct {
 	Message *string
 
@@ -1893,10 +1894,10 @@ func (e *NotOrganizationManagementAccountException) ErrorFault() smithy.ErrorFau
 // This exception is thrown when the Amazon Web Services account making the
 // request to create or update an organization trail or event data store is not the
 // management account for an organization in Organizations. For more information,
-// see [Prepare For Creating a Trail For Your Organization]or [Create an event data store].
+// see [Prepare For Creating a Trail For Your Organization]or [Organization event data stores].
 //
+// [Organization event data stores]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-organizations.html
 // [Prepare For Creating a Trail For Your Organization]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html
-// [Create an event data store]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-event-data-store.html
 type NotOrganizationMasterAccountException struct {
 	Message *string
 

@@ -405,6 +405,15 @@ type JobRun struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The attempt of the job run.
+	Attempt *int32
+
+	// The date and time of when the job run attempt was created.
+	AttemptCreatedAt *time.Time
+
+	// The date and time of when the job run attempt was last updated.
+	AttemptUpdatedAt *time.Time
+
 	// The aggregate vCPU, memory, and storage that Amazon Web Services has billed for
 	// the job run. The billed resources include a 1-minute minimum usage for workers,
 	// plus additional storage over 20 GB per worker. Note that billed resources do not
@@ -418,11 +427,17 @@ type JobRun struct {
 	// specified, then it returns the default timeout of 720 minutes.
 	ExecutionTimeoutMinutes *int64
 
+	// The mode of the job run.
+	Mode JobRunMode
+
 	// The optional job run name. This doesn't have to be unique.
 	Name *string
 
 	// The network configuration for customer VPC connectivity.
 	NetworkConfiguration *NetworkConfiguration
+
+	// The retry policy of the job run.
+	RetryPolicy *RetryPolicy
 
 	// The tags assigned to the job run.
 	Tags map[string]string
@@ -435,6 +450,79 @@ type JobRun struct {
 	// starts to execute, until the time the job terminates, rounded up to the nearest
 	// second.
 	TotalResourceUtilization *TotalResourceUtilization
+
+	noSmithyDocumentSerde
+}
+
+// The summary of attributes associated with a job run attempt.
+type JobRunAttemptSummary struct {
+
+	// The ID of the application the job is running on.
+	//
+	// This member is required.
+	ApplicationId *string
+
+	// The Amazon Resource Name (ARN) of the job run.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time when the job run attempt was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The user who created the job run.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The Amazon Resource Name (ARN) of the execution role of the job run..
+	//
+	// This member is required.
+	ExecutionRole *string
+
+	// The ID of the job run attempt.
+	//
+	// This member is required.
+	Id *string
+
+	// The date and time of when the job run was created.
+	//
+	// This member is required.
+	JobCreatedAt *time.Time
+
+	// The Amazon EMR release label of the job run attempt.
+	//
+	// This member is required.
+	ReleaseLabel *string
+
+	// The state of the job run attempt.
+	//
+	// This member is required.
+	State JobRunState
+
+	// The state details of the job run attempt.
+	//
+	// This member is required.
+	StateDetails *string
+
+	// The date and time of when the job run attempt was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The attempt number of the job run execution.
+	Attempt *int32
+
+	// The mode of the job run attempt.
+	Mode JobRunMode
+
+	// The name of the job run attempt.
+	Name *string
+
+	// The type of the job run, such as Spark or Hive.
+	Type *string
 
 	noSmithyDocumentSerde
 }
@@ -491,6 +579,18 @@ type JobRunSummary struct {
 	//
 	// This member is required.
 	UpdatedAt *time.Time
+
+	// The attempt number of the job run execution.
+	Attempt *int32
+
+	// The date and time of when the job run attempt was created.
+	AttemptCreatedAt *time.Time
+
+	// The date and time of when the job run attempt was last updated.
+	AttemptUpdatedAt *time.Time
+
+	// The mode of the job run.
+	Mode JobRunMode
 
 	// The optional job run name. This doesn't have to be unique.
 	Name *string
@@ -591,6 +691,20 @@ type ResourceUtilization struct {
 	// The aggregated vCPU used per hour from the time the job starts executing until
 	// the job is terminated.
 	VCPUHour *float64
+
+	noSmithyDocumentSerde
+}
+
+// The retry policy to use for a job run.
+type RetryPolicy struct {
+
+	// Maximum number of attempts for the job run. This parameter is only applicable
+	// for BATCH mode.
+	MaxAttempts *int32
+
+	// Maximum number of failed attempts per hour. This [arameter is only applicable
+	// for STREAMING mode.
+	MaxFailedAttemptsPerHour *int32
 
 	noSmithyDocumentSerde
 }

@@ -146,6 +146,18 @@ func TestCheckSnapshot_ListApplications(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListJobRunAttempts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListJobRunAttempts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListJobRunAttempts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListJobRuns(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListJobRuns(context.Background(), nil, func(o *Options) {
@@ -318,6 +330,18 @@ func TestUpdateSnapshot_ListApplications(t *testing.T) {
 	_, err := svc.ListApplications(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListApplications")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListJobRunAttempts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListJobRunAttempts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListJobRunAttempts")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

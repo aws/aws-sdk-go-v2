@@ -32,7 +32,7 @@ type ListSpacesInput struct {
 	// A parameter to search for the domain ID.
 	DomainIdEquals *string
 
-	// This parameter defines the maximum number of results that can be returned in a
+	// This parameter defines the maximum number of results that can be return in a
 	// single response. The MaxResults parameter is an upper bound, not a target. If
 	// there are more results available than the value specified, a NextToken is
 	// provided in the response. The NextToken indicates that the user should get the
@@ -156,7 +156,7 @@ var _ ListSpacesAPIClient = (*Client)(nil)
 
 // ListSpacesPaginatorOptions is the paginator options for ListSpaces
 type ListSpacesPaginatorOptions struct {
-	// This parameter defines the maximum number of results that can be returned in a
+	// This parameter defines the maximum number of results that can be return in a
 	// single response. The MaxResults parameter is an upper bound, not a target. If
 	// there are more results available than the value specified, a NextToken is
 	// provided in the response. The NextToken indicates that the user should get the

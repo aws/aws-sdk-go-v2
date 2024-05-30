@@ -738,6 +738,12 @@ const (
 	AutoMLAlgorithmExtraTrees    AutoMLAlgorithm = "extra-trees"
 	AutoMLAlgorithmNnTorch       AutoMLAlgorithm = "nn-torch"
 	AutoMLAlgorithmFastai        AutoMLAlgorithm = "fastai"
+	AutoMLAlgorithmCnnQr         AutoMLAlgorithm = "cnn-qr"
+	AutoMLAlgorithmDeepar        AutoMLAlgorithm = "deepar"
+	AutoMLAlgorithmProphet       AutoMLAlgorithm = "prophet"
+	AutoMLAlgorithmNpts          AutoMLAlgorithm = "npts"
+	AutoMLAlgorithmArima         AutoMLAlgorithm = "arima"
+	AutoMLAlgorithmEts           AutoMLAlgorithm = "ets"
 )
 
 // Values returns all known values for AutoMLAlgorithm. Note that this can be
@@ -755,6 +761,12 @@ func (AutoMLAlgorithm) Values() []AutoMLAlgorithm {
 		"extra-trees",
 		"nn-torch",
 		"fastai",
+		"cnn-qr",
+		"deepar",
+		"prophet",
+		"npts",
+		"arima",
+		"ets",
 	}
 }
 

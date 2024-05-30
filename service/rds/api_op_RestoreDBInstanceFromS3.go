@@ -76,8 +76,11 @@ type RestoreDBInstanceFromS3Input struct {
 	// This member is required.
 	S3BucketName *string
 
-	// An Amazon Web Services Identity and Access Management (IAM) role to allow
-	// Amazon RDS to access your Amazon S3 bucket.
+	// An Amazon Web Services Identity and Access Management (IAM) role with a trust
+	// policy and a permissions policy that allows Amazon RDS to access your Amazon S3
+	// bucket. For information about this role, see [Creating an IAM role manually]in the Amazon RDS User Guide.
+	//
+	// [Creating an IAM role manually]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html#MySQL.Procedural.Importing.Enabling.IAM
 	//
 	// This member is required.
 	S3IngestionRoleArn *string

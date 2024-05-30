@@ -171,6 +171,8 @@ type AdvancedFieldSelector struct {
 	//
 	//   - AWS::PCAConnectorAD::Connector
 	//
+	//   - AWS::QApps:QApp
+	//
 	//   - AWS::QBusiness::Application
 	//
 	//   - AWS::QBusiness::DataSource
@@ -203,11 +205,13 @@ type AdvancedFieldSelector struct {
 	//
 	//   - AWS::SNS::Topic
 	//
-	//   - AWS::SWF::Domain
-	//
 	//   - AWS::SQS::Queue
 	//
+	//   - AWS::SSM::ManagedNode
+	//
 	//   - AWS::SSMMessages::ControlChannel
+	//
+	//   - AWS::SWF::Domain
 	//
 	//   - AWS::ThinClient::Device
 	//
@@ -219,14 +223,22 @@ type AdvancedFieldSelector struct {
 	//
 	//   - AWS::VerifiedPermissions::PolicyStore
 	//
+	//   - AWS::XRay::Trace
+	//
 	// You can have only one resources.type ﬁeld per selector. To log data events on
 	//   more than one resource type, add another selector.
 	//
 	//   - resources.ARN - You can use any operator with resources.ARN , but if you use
 	//   Equals or NotEquals , the value must exactly match the ARN of a valid resource
-	//   of the type you've speciﬁed in the template as the value of resources.type. For
-	//   example, if resources.type equals AWS::S3::Object , the ARN must be in one of
-	//   the following formats. To log all data events for all objects in a specific S3
+	//   of the type you've speciﬁed in the template as the value of resources.type.
+	//
+	// You can't use the resources.ARN field to filter resource types that do not have
+	//   ARNs.
+	//
+	// The resources.ARN field can be set one of the following.
+	//
+	// If resources.type equals AWS::S3::Object , the ARN must be in one of the
+	//   following formats. To log all data events for all objects in a specific S3
 	//   bucket, use the StartsWith operator, and include only the bucket ARN as the
 	//   matching value.
 	//
@@ -403,6 +415,11 @@ type AdvancedFieldSelector struct {
 	//
 	//   - arn::pca-connector-ad:::connector/
 	//
+	// When resources.type equals AWS::QApps:QApp , and the operator is set to Equals
+	//   or NotEquals , the ARN must be in the following format:
+	//
+	//   - arn::qapps:::application//qapp/
+	//
 	// When resources.type equals AWS::QBusiness::Application , and the operator is set
 	//   to Equals or NotEquals , the ARN must be in the following format:
 	//
@@ -489,20 +506,27 @@ type AdvancedFieldSelector struct {
 	//
 	//   - arn::sns:::
 	//
-	// When resources.type equals AWS::SWF::Domain , and the operator is set to Equals
-	//   or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::swf:::domain/
-	//
 	// When resources.type equals AWS::SQS::Queue , and the operator is set to Equals
 	//   or NotEquals , the ARN must be in the following format:
 	//
 	//   - arn::sqs:::
 	//
+	// When resources.type equals AWS::SSM::ManagedNode , and the operator is set to
+	//   Equals or NotEquals , the ARN must be in one of the following formats:
+	//
+	//   - arn::ssm:::managed-instance/
+	//
+	//   - arn::ec2:::instance/
+	//
 	// When resources.type equals AWS::SSMMessages::ControlChannel , and the operator
 	//   is set to Equals or NotEquals , the ARN must be in the following format:
 	//
 	//   - arn::ssmmessages:::control-channel/
+	//
+	// When resources.type equals AWS::SWF::Domain , and the operator is set to Equals
+	//   or NotEquals , the ARN must be in the following format:
+	//
+	//   - arn::swf:::domain/
 	//
 	// When resources.type equals AWS::ThinClient::Device , and the operator is set to
 	//   Equals or NotEquals , the ARN must be in the following format:
@@ -576,11 +600,21 @@ type Channel struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon S3 buckets, Lambda functions, or Amazon DynamoDB tables that you
-// specify in your event selectors for your trail to log data events. Data events
-// provide information about the resource operations performed on or within a
-// resource itself. These are also known as data plane operations. You can specify
-// up to 250 data resources for a trail.
+// Data events provide information about the resource operations performed on or
+// within a resource itself. These are also known as data plane operations. You can
+// specify up to 250 data resources for a trail.
+//
+// Configure the DataResource to specify the resource type and resource ARNs for
+// which you want to log data events.
+//
+// You can specify the following resource types in your event selectors for your
+// trail:
+//
+//   - AWS::DynamoDB::Table
+//
+//   - AWS::Lambda::Function
+//
+//   - AWS::S3::Object
 //
 // The total number of allowed data resources is 250. This number can be
 // distributed between 1 and 5 event selectors, but the total cannot exceed 250
@@ -640,7 +674,7 @@ type DataResource struct {
 	Type *string
 
 	// An array of Amazon Resource Name (ARN) strings or partial ARN strings for the
-	// specified objects.
+	// specified resource type.
 	//
 	//   - To log data events for all objects in all S3 buckets in your Amazon Web
 	//   Services account, specify the prefix as arn:aws:s3 .
@@ -740,7 +774,7 @@ type Event struct {
 // queries. An event data store can include events that you have logged on your
 // account. To select events for an event data store, use [advanced event selectors].
 //
-// [advanced event selectors]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced
+// [advanced event selectors]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-concepts.html#adv-event-selectors
 type EventDataStore struct {
 
 	// The advanced event selectors that were used to select events for the data store.
@@ -994,6 +1028,22 @@ type LookupAttribute struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a partition key for an event data store.
+type PartitionKey struct {
+
+	// The name of the partition key.
+	//
+	// This member is required.
+	Name *string
+
+	// The data type of the partition key. For example, bigint or string .
+	//
+	// This member is required.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a returned public key.
 type PublicKey struct {
 
@@ -1198,16 +1248,16 @@ type Trail struct {
 	Name *string
 
 	// Name of the Amazon S3 bucket into which CloudTrail delivers your trail files.
-	// See [Amazon S3 Bucket Naming Requirements].
+	// See [Amazon S3 Bucket naming rules].
 	//
-	// [Amazon S3 Bucket Naming Requirements]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+	// [Amazon S3 Bucket naming rules]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
 	S3BucketName *string
 
 	// Specifies the Amazon S3 key prefix that comes after the name of the bucket you
 	// have designated for log file delivery. For more information, see [Finding Your CloudTrail Log Files]. The maximum
 	// length is 200 characters.
 	//
-	// [Finding Your CloudTrail Log Files]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+	// [Finding Your CloudTrail Log Files]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/get-and-view-cloudtrail-log-files.html#cloudtrail-find-log-files
 	S3KeyPrefix *string
 
 	// Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send

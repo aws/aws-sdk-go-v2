@@ -55,8 +55,14 @@ type StartJobRunInput struct {
 	// The job driver for the job run.
 	JobDriver types.JobDriver
 
+	// The mode of the job run when it starts.
+	Mode types.JobRunMode
+
 	// The optional job run name. This doesn't have to be unique.
 	Name *string
+
+	// The retry policy when job run starts.
+	RetryPolicy *types.RetryPolicy
 
 	// The tags assigned to the job run.
 	Tags map[string]string

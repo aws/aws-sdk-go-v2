@@ -4488,6 +4488,9 @@ type RoutingProfile struct {
 	// calculated based on time since their last inbound contact or longest idle time.
 	AgentAvailabilityTimer AgentAvailabilityTimer
 
+	// The IDs of the associated queue.
+	AssociatedQueueIds []string
+
 	// The identifier of the default outbound queue for this routing profile.
 	DefaultOutboundQueueId *string
 
@@ -4651,8 +4654,8 @@ type RoutingProfileSearchCriteria struct {
 
 	// A leaf node condition which can be used to specify a string condition.
 	//
-	// The currently supported values for FieldName are name , description , and
-	// resourceID .
+	// The currently supported values for FieldName are associatedQueueIds , name ,
+	// description , and resourceID .
 	StringCondition *StringCondition
 
 	noSmithyDocumentSerde

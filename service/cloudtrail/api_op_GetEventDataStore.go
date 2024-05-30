@@ -82,6 +82,11 @@ type GetEventDataStoreOutput struct {
 	// organization in Organizations.
 	OrganizationEnabled *bool
 
+	// The partition keys for the event data store. To improve query performance and
+	// efficiency, CloudTrail Lake organizes event data into partitions based on values
+	// derived from partition keys.
+	PartitionKeys []types.PartitionKey
+
 	// The retention period of the event data store, in days.
 	RetentionPeriod *int32
 

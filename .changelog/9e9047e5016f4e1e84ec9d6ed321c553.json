@@ -1,0 +1,8 @@
+{
+    "id": "9e9047e5-016f-4e1e-84ec-9d6ed321c553",
+    "type": "feature",
+    "description": "With this release, Knowledge bases for Bedrock adds support for Titan Text Embedding v2.",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

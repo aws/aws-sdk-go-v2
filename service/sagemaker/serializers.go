@@ -23660,6 +23660,35 @@ func awsAwsjson11_serializeDocumentModelPackageContainerDefinitionList(v []types
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentModelPackageModelCard(v *types.ModelPackageModelCard, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModelCardContent != nil {
+		ok := object.Key("ModelCardContent")
+		ok.String(*v.ModelCardContent)
+	}
+
+	if len(v.ModelCardStatus) > 0 {
+		ok := object.Key("ModelCardStatus")
+		ok.String(string(v.ModelCardStatus))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentModelPackageSecurityConfig(v *types.ModelPackageSecurityConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentModelPackageValidationProfile(v *types.ModelPackageValidationProfile, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -27320,6 +27349,13 @@ func awsAwsjson11_serializeDocumentTimeSeriesForecastingJobConfig(v *types.TimeS
 	object := value.Object()
 	defer object.Close()
 
+	if v.CandidateGenerationConfig != nil {
+		ok := object.Key("CandidateGenerationConfig")
+		if err := awsAwsjson11_serializeDocumentCandidateGenerationConfig(v.CandidateGenerationConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CompletionCriteria != nil {
 		ok := object.Key("CompletionCriteria")
 		if err := awsAwsjson11_serializeDocumentAutoMLJobCompletionCriteria(v.CompletionCriteria, ok); err != nil {
@@ -30315,6 +30351,13 @@ func awsAwsjson11_serializeOpDocumentCreateModelPackageInput(v *CreateModelPacka
 		ok.String(string(v.ModelApprovalStatus))
 	}
 
+	if v.ModelCard != nil {
+		ok := object.Key("ModelCard")
+		if err := awsAwsjson11_serializeDocumentModelPackageModelCard(v.ModelCard, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ModelMetrics != nil {
 		ok := object.Key("ModelMetrics")
 		if err := awsAwsjson11_serializeDocumentModelMetrics(v.ModelMetrics, ok); err != nil {
@@ -30340,6 +30383,13 @@ func awsAwsjson11_serializeOpDocumentCreateModelPackageInput(v *CreateModelPacka
 	if v.SamplePayloadUrl != nil {
 		ok := object.Key("SamplePayloadUrl")
 		ok.String(*v.SamplePayloadUrl)
+	}
+
+	if v.SecurityConfig != nil {
+		ok := object.Key("SecurityConfig")
+		if err := awsAwsjson11_serializeDocumentModelPackageSecurityConfig(v.SecurityConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.SkipModelValidation) > 0 {
@@ -37895,6 +37945,13 @@ func awsAwsjson11_serializeOpDocumentUpdateModelPackageInput(v *UpdateModelPacka
 	if len(v.ModelApprovalStatus) > 0 {
 		ok := object.Key("ModelApprovalStatus")
 		ok.String(string(v.ModelApprovalStatus))
+	}
+
+	if v.ModelCard != nil {
+		ok := object.Key("ModelCard")
+		if err := awsAwsjson11_serializeDocumentModelPackageModelCard(v.ModelCard, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ModelPackageArn != nil {
