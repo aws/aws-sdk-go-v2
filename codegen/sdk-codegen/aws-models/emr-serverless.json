@@ -351,6 +351,14 @@
                 ]
             }
         },
+        "com.amazonaws.emrserverless#AttemptNumber": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.emrserverless#AutoStartConfig": {
             "type": "structure",
             "members": {
@@ -1739,6 +1747,13 @@
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "jobRunId"
                     }
+                },
+                "attempt": {
+                    "target": "com.amazonaws.emrserverless#AttemptNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optimal parameter that indicates the amount of attempts for the job. If not specified,\n         this value defaults to the attempt of the latest job.</p>",
+                        "smithy.api#httpQuery": "attempt"
+                    }
                 }
             }
         },
@@ -1800,6 +1815,13 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "jobRunId"
+                    }
+                },
+                "attempt": {
+                    "target": "com.amazonaws.emrserverless#AttemptNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optimal parameter that indicates the amount of attempts for the job. If not specified,\n      this value defaults to the attempt of the latest job.</p>",
+                        "smithy.api#httpQuery": "attempt"
                     }
                 }
             }
@@ -2160,10 +2182,157 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The aggregate vCPU, memory, and storage that Amazon Web Services has billed for the job\n         run. The billed resources include a 1-minute minimum usage for workers, plus additional\n         storage over 20 GB per worker. Note that billed resources do not include usage for idle\n         pre-initialized workers.</p>"
                     }
+                },
+                "mode": {
+                    "target": "com.amazonaws.emrserverless#JobRunMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode of the job run.</p>"
+                    }
+                },
+                "retryPolicy": {
+                    "target": "com.amazonaws.emrserverless#RetryPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retry policy of the job run.</p>"
+                    }
+                },
+                "attempt": {
+                    "target": "com.amazonaws.emrserverless#AttemptNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attempt of the job run.</p>"
+                    }
+                },
+                "attemptCreatedAt": {
+                    "target": "com.amazonaws.emrserverless#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time of when the job run attempt was created.</p>"
+                    }
+                },
+                "attemptUpdatedAt": {
+                    "target": "com.amazonaws.emrserverless#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time of when the job run attempt was last updated.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about a job run. A job run is a unit of work, such as a Spark JAR, Hive\n         query, or SparkSQL query, that you submit to an Amazon EMR Serverless\n         application.</p>"
+            }
+        },
+        "com.amazonaws.emrserverless#JobRunAttemptSummary": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.emrserverless#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the application the job is running on.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "applicationId"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.emrserverless#JobRunId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job run attempt.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "jobRunId"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.emrserverless#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the job run attempt.</p>"
+                    }
+                },
+                "mode": {
+                    "target": "com.amazonaws.emrserverless#JobRunMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode of the job run attempt.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.emrserverless#JobArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the job run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.emrserverless#RequestIdentityUserArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the job run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobCreatedAt": {
+                    "target": "com.amazonaws.emrserverless#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time of when the job run was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.emrserverless#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the job run attempt was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.emrserverless#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time of when the job run attempt was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "executionRole": {
+                    "target": "com.amazonaws.emrserverless#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the execution role of the job run..</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.emrserverless#JobRunState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the job run attempt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stateDetails": {
+                    "target": "com.amazonaws.emrserverless#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state details of the job run attempt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "releaseLabel": {
+                    "target": "com.amazonaws.emrserverless#ReleaseLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EMR release label of the job run attempt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.emrserverless#JobRunType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the job run, such as Spark or Hive.</p>"
+                    }
+                },
+                "attempt": {
+                    "target": "com.amazonaws.emrserverless#AttemptNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attempt number of the job run execution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of attributes associated with a job run attempt.</p>"
+            }
+        },
+        "com.amazonaws.emrserverless#JobRunAttempts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emrserverless#JobRunAttemptSummary"
             }
         },
         "com.amazonaws.emrserverless#JobRunId": {
@@ -2174,6 +2343,21 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[0-9a-z]+$"
+            }
+        },
+        "com.amazonaws.emrserverless#JobRunMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "BATCH",
+                        "name": "BATCH"
+                    },
+                    {
+                        "value": "STREAMING",
+                        "name": "STREAMING"
+                    }
+                ]
             }
         },
         "com.amazonaws.emrserverless#JobRunResource": {
@@ -2201,6 +2385,9 @@
             "operations": [
                 {
                     "target": "com.amazonaws.emrserverless#GetDashboardForJobRun"
+                },
+                {
+                    "target": "com.amazonaws.emrserverless#ListJobRunAttempts"
                 }
             ]
         },
@@ -2281,6 +2468,12 @@
                         "smithy.api#documentation": "<p>The optional job run name. This doesn't have to be unique.</p>"
                     }
                 },
+                "mode": {
+                    "target": "com.amazonaws.emrserverless#JobRunMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode of the job run.</p>"
+                    }
+                },
                 "arn": {
                     "target": "com.amazonaws.emrserverless#JobArn",
                     "traits": {
@@ -2341,6 +2534,24 @@
                     "target": "com.amazonaws.emrserverless#JobRunType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of job run, such as Spark or Hive.</p>"
+                    }
+                },
+                "attempt": {
+                    "target": "com.amazonaws.emrserverless#AttemptNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attempt number of the job run execution.</p>"
+                    }
+                },
+                "attemptCreatedAt": {
+                    "target": "com.amazonaws.emrserverless#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time of when the job run attempt was created.</p>"
+                    }
+                },
+                "attemptUpdatedAt": {
+                    "target": "com.amazonaws.emrserverless#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time of when the job run attempt was last updated.</p>"
                     }
                 }
             },
@@ -2437,6 +2648,106 @@
                 }
             }
         },
+        "com.amazonaws.emrserverless#ListJobRunAttempts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrserverless#ListJobRunAttemptsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrserverless#ListJobRunAttemptsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.emrserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all attempt of a job run.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/applications/{applicationId}/jobruns/{jobRunId}/attempts"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "jobRunAttempts"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.emrserverless#ListJobRunAttemptsRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.emrserverless#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the application for which to list job runs.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "applicationId"
+                    }
+                },
+                "jobRunId": {
+                    "target": "com.amazonaws.emrserverless#JobRunId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job run to list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "jobRunId"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.emrserverless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of job run attempt results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of job run attempts to list.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.emrserverless#ListJobRunAttemptsResponse": {
+            "type": "structure",
+            "members": {
+                "jobRunAttempts": {
+                    "target": "com.amazonaws.emrserverless#JobRunAttempts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The array of the listed job run attempt objects.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.emrserverless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output displays the token for the next set of application results. \n         This is required for pagination and is available as a response of the previous request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.emrserverless#ListJobRuns": {
             "type": "operation",
             "input": {
@@ -2518,6 +2829,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An optional filter for job run states. Note that if this filter contains multiple\n         states, the resulting list will be grouped by the state.</p>",
                         "smithy.api#httpQuery": "states"
+                    }
+                },
+                "mode": {
+                    "target": "com.amazonaws.emrserverless#JobRunMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode of the job runs to list.</p>",
+                        "smithy.api#httpQuery": "mode"
                     }
                 }
             }
@@ -2877,6 +3195,30 @@
                 "smithy.api#documentation": "<p>The resource utilization for memory, storage, and vCPU for jobs.</p>"
             }
         },
+        "com.amazonaws.emrserverless#RetryPolicy": {
+            "type": "structure",
+            "members": {
+                "maxAttempts": {
+                    "target": "com.amazonaws.emrserverless#AttemptNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of attempts for the job run. This parameter is only applicable for <code>BATCH</code> mode.</p>"
+                    }
+                },
+                "maxFailedAttemptsPerHour": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Maximum number of failed attempts per hour. This [arameter is only applicable for <code>STREAMING</code> mode.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The retry policy to use for a job run.</p>"
+            }
+        },
         "com.amazonaws.emrserverless#S3MonitoringConfiguration": {
             "type": "structure",
             "members": {
@@ -3125,6 +3467,18 @@
                     "target": "com.amazonaws.emrserverless#String256",
                     "traits": {
                         "smithy.api#documentation": "<p>The optional job run name. This doesn't have to be unique.</p>"
+                    }
+                },
+                "mode": {
+                    "target": "com.amazonaws.emrserverless#JobRunMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode of the job run when it starts.</p>"
+                    }
+                },
+                "retryPolicy": {
+                    "target": "com.amazonaws.emrserverless#RetryPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retry policy when job run starts.</p>"
                     }
                 }
             }

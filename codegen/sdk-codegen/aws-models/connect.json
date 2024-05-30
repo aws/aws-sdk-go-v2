@@ -3573,6 +3573,12 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.connect#AssociatedQueueIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#QueueId"
+            }
+        },
         "com.amazonaws.connect#AssociationId": {
             "type": "string",
             "traits": {
@@ -28917,6 +28923,12 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether this a default routing profile.</p>"
                     }
+                },
+                "AssociatedQueueIds": {
+                    "target": "com.amazonaws.connect#AssociatedQueueIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the associated queue.</p>"
+                    }
                 }
             },
             "traits": {
@@ -29121,7 +29133,7 @@
                 "StringCondition": {
                     "target": "com.amazonaws.connect#StringCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition.</p>\n         <note>\n            <p>The currently supported values for <code>FieldName</code> are <code>name</code>,\n     <code>description</code>, and <code>resourceID</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition.</p>\n         <note>\n            <p>The currently supported values for <code>FieldName</code> are\n     <code>associatedQueueIds</code>, <code>name</code>, <code>description</code>, and <code>resourceID</code>.</p>\n         </note>"
                     }
                 }
             },

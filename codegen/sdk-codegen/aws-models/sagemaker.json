@@ -2906,6 +2906,42 @@
                     "traits": {
                         "smithy.api#enumValue": "fastai"
                     }
+                },
+                "CNN_QR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cnn-qr"
+                    }
+                },
+                "DEEPAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deepar"
+                    }
+                },
+                "PROPHET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "prophet"
+                    }
+                },
+                "NPTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "npts"
+                    }
+                },
+                "ARIMA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "arima"
+                    }
+                },
+                "ETS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ets"
+                    }
                 }
             }
         },
@@ -2916,13 +2952,13 @@
                     "target": "com.amazonaws.sagemaker#AutoMLAlgorithms",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The selection of algorithms run on a dataset to train the model candidates of an Autopilot\n         job. </p>\n         <note>\n            <p>Selected algorithms must belong to the list corresponding to the training mode set in\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html#sagemaker-Type-AutoMLJobConfig-Mode\">AutoMLJobConfig.Mode</a> (<code>ENSEMBLING</code> or\n               <code>HYPERPARAMETER_TUNING</code>). Choose a minimum of 1 algorithm. </p>\n         </note>\n         <ul>\n            <li>\n               <p>In <code>ENSEMBLING</code> mode:</p>\n               <ul>\n                  <li>\n                     <p>\"catboost\"</p>\n                  </li>\n                  <li>\n                     <p>\"extra-trees\"</p>\n                  </li>\n                  <li>\n                     <p>\"fastai\"</p>\n                  </li>\n                  <li>\n                     <p>\"lightgbm\"</p>\n                  </li>\n                  <li>\n                     <p>\"linear-learner\"</p>\n                  </li>\n                  <li>\n                     <p>\"nn-torch\"</p>\n                  </li>\n                  <li>\n                     <p>\"randomforest\"</p>\n                  </li>\n                  <li>\n                     <p>\"xgboost\"</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>In <code>HYPERPARAMETER_TUNING</code> mode:</p>\n               <ul>\n                  <li>\n                     <p>\"linear-learner\"</p>\n                  </li>\n                  <li>\n                     <p>\"mlp\"</p>\n                  </li>\n                  <li>\n                     <p>\"xgboost\"</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The selection of algorithms trained on your dataset to generate the model candidates for\n         an Autopilot job.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>For the tabular problem type <code>TabularJobConfig</code>:</b>\n               </p>\n               <note>\n                  <p>Selected algorithms must belong to the list corresponding to the training mode\n                  set in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html#sagemaker-Type-AutoMLJobConfig-Mode\">AutoMLJobConfig.Mode</a> (<code>ENSEMBLING</code> or\n                     <code>HYPERPARAMETER_TUNING</code>). Choose a minimum of 1 algorithm.</p>\n               </note>\n               <ul>\n                  <li>\n                     <p>In <code>ENSEMBLING</code> mode:</p>\n                     <ul>\n                        <li>\n                           <p>\"catboost\"</p>\n                        </li>\n                        <li>\n                           <p>\"extra-trees\"</p>\n                        </li>\n                        <li>\n                           <p>\"fastai\"</p>\n                        </li>\n                        <li>\n                           <p>\"lightgbm\"</p>\n                        </li>\n                        <li>\n                           <p>\"linear-learner\"</p>\n                        </li>\n                        <li>\n                           <p>\"nn-torch\"</p>\n                        </li>\n                        <li>\n                           <p>\"randomforest\"</p>\n                        </li>\n                        <li>\n                           <p>\"xgboost\"</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>In <code>HYPERPARAMETER_TUNING</code> mode:</p>\n                     <ul>\n                        <li>\n                           <p>\"linear-learner\"</p>\n                        </li>\n                        <li>\n                           <p>\"mlp\"</p>\n                        </li>\n                        <li>\n                           <p>\"xgboost\"</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>For the time-series forecasting problem type <code>TimeSeriesForecastingJobConfig</code>:</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Choose your algorithms from this list.</p>\n                     <ul>\n                        <li>\n                           <p>\"cnn-qr\"</p>\n                        </li>\n                        <li>\n                           <p>\"deepar\"</p>\n                        </li>\n                        <li>\n                           <p>\"prophet\"</p>\n                        </li>\n                        <li>\n                           <p>\"arima\"</p>\n                        </li>\n                        <li>\n                           <p>\"npts\"</p>\n                        </li>\n                        <li>\n                           <p>\"ets\"</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The collection of algorithms run on a dataset for training the model candidates of an\n         Autopilot job.</p>"
+                "smithy.api#documentation": "<p>The selection of algorithms trained on your dataset to generate the model candidates for\n         an Autopilot job.</p>"
             }
         },
         "com.amazonaws.sagemaker#AutoMLAlgorithms": {
@@ -3044,13 +3080,13 @@
                 "FeatureSpecificationS3Uri": {
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL to the Amazon S3 data source containing selected features from the input data source to\n         run an Autopilot job. You can input <code>FeatureAttributeNames</code> (optional) in JSON\n         format as shown below: </p>\n         <p>\n            <code>{ \"FeatureAttributeNames\":[\"col1\", \"col2\", ...] }</code>.</p>\n         <p>You can also specify the data type of the feature (optional) in the format shown\n         below:</p>\n         <p>\n            <code>{ \"FeatureDataTypes\":{\"col1\":\"numeric\", \"col2\":\"categorical\" ... } }</code>\n         </p>\n         <note>\n            <p>These column keys may not include the target column.</p>\n         </note>\n         <p>In ensembling mode, Autopilot only supports the following data types: <code>numeric</code>,\n            <code>categorical</code>, <code>text</code>, and <code>datetime</code>. In HPO mode,\n         Autopilot can support <code>numeric</code>, <code>categorical</code>, <code>text</code>,\n            <code>datetime</code>, and <code>sequence</code>.</p>\n         <p>If only <code>FeatureDataTypes</code> is provided, the column keys (<code>col1</code>,\n            <code>col2</code>,..) should be a subset of the column names in the input data. </p>\n         <p>If both <code>FeatureDataTypes</code> and <code>FeatureAttributeNames</code> are\n         provided, then the column keys should be a subset of the column names provided in\n            <code>FeatureAttributeNames</code>. </p>\n         <p>The key name <code>FeatureAttributeNames</code> is fixed. The values listed in\n            <code>[\"col1\", \"col2\", ...]</code> are case sensitive and should be a list of strings\n         containing unique values that are a subset of the column names in the input data. The list\n         of columns provided must not include the target column.</p>"
+                        "smithy.api#documentation": "<p>A URL to the Amazon S3 data source containing selected features from the input\n         data source to run an Autopilot job. You can input <code>FeatureAttributeNames</code>\n         (optional) in JSON format as shown below: </p>\n         <p>\n            <code>{ \"FeatureAttributeNames\":[\"col1\", \"col2\", ...] }</code>.</p>\n         <p>You can also specify the data type of the feature (optional) in the format shown\n         below:</p>\n         <p>\n            <code>{ \"FeatureDataTypes\":{\"col1\":\"numeric\", \"col2\":\"categorical\" ... } }</code>\n         </p>\n         <note>\n            <p>These column keys may not include the target column.</p>\n         </note>\n         <p>In ensembling mode, Autopilot only supports the following data types: <code>numeric</code>,\n            <code>categorical</code>, <code>text</code>, and <code>datetime</code>. In HPO mode,\n         Autopilot can support <code>numeric</code>, <code>categorical</code>, <code>text</code>,\n            <code>datetime</code>, and <code>sequence</code>.</p>\n         <p>If only <code>FeatureDataTypes</code> is provided, the column keys (<code>col1</code>,\n            <code>col2</code>,..) should be a subset of the column names in the input data. </p>\n         <p>If both <code>FeatureDataTypes</code> and <code>FeatureAttributeNames</code> are\n         provided, then the column keys should be a subset of the column names provided in\n            <code>FeatureAttributeNames</code>. </p>\n         <p>The key name <code>FeatureAttributeNames</code> is fixed. The values listed in\n            <code>[\"col1\", \"col2\", ...]</code> are case sensitive and should be a list of strings\n         containing unique values that are a subset of the column names in the input data. The list\n         of columns provided must not include the target column.</p>"
                     }
                 },
                 "AlgorithmsConfig": {
                     "target": "com.amazonaws.sagemaker#AutoMLAlgorithmsConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Stores the configuration information for the selection of algorithms used to train the\n         model candidates.</p>\n         <p>The list of available algorithms to choose from depends on the training mode set in\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html\">\n               <code>AutoMLJobConfig.Mode</code>\n            </a>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AlgorithmsConfig</code> should not be set in <code>AUTO</code> training\n               mode.</p>\n            </li>\n            <li>\n               <p>When <code>AlgorithmsConfig</code> is provided, one <code>AutoMLAlgorithms</code>\n               attribute must be set and one only.</p>\n               <p>If the list of algorithms provided as values for <code>AutoMLAlgorithms</code> is\n               empty, <code>AutoMLCandidateGenerationConfig</code> uses the full set of algorithms\n               for the given training mode.</p>\n            </li>\n            <li>\n               <p>When <code>AlgorithmsConfig</code> is not provided,\n                  <code>AutoMLCandidateGenerationConfig</code> uses the full set of algorithms for\n               the given training mode.</p>\n            </li>\n         </ul>\n         <p>For the list of all algorithms per training mode, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html\">\n            AutoMLAlgorithmConfig</a>.</p>\n         <p>For more information on each algorithm, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support\">Algorithm support</a> section in Autopilot developer guide.</p>"
+                        "smithy.api#documentation": "<p>Stores the configuration information for the selection of algorithms trained on tabular data.</p>\n         <p>The list of available algorithms to choose from depends on the training mode set in\n         <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TabularJobConfig.html\">\n               <code>TabularJobConfig.Mode</code>\n            </a>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AlgorithmsConfig</code> should not be set if the training mode is set on <code>AUTO</code>.</p>\n            </li>\n            <li>\n               <p>When <code>AlgorithmsConfig</code> is provided, one <code>AutoMLAlgorithms</code>\n               attribute must be set and one only.</p>\n               <p>If the list of algorithms provided as values for <code>AutoMLAlgorithms</code> is\n               empty, <code>CandidateGenerationConfig</code> uses the full set of algorithms for the\n               given training mode.</p>\n            </li>\n            <li>\n               <p>When <code>AlgorithmsConfig</code> is not provided,\n               <code>CandidateGenerationConfig</code> uses the full set of algorithms for the\n               given training mode.</p>\n            </li>\n         </ul>\n         <p>For the list of all algorithms per problem type and training mode, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html\">\n         AutoMLAlgorithmConfig</a>.</p>\n         <p>For more information on each algorithm, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support\">Algorithm support</a> section in Autopilot developer guide.</p>"
                     }
                 }
             },
@@ -3429,7 +3465,7 @@
                     "target": "com.amazonaws.sagemaker#AutoMLMetricEnum",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the objective metric used to measure the predictive quality of a machine\n         learning system. During training, the model's parameters are updated iteratively to\n         optimize its performance based on the feedback provided by the objective metric when\n         evaluating the model on the validation dataset.</p>\n         <p>The list of available metrics supported by Autopilot and the default metric applied when you\n         do not specify a metric name explicitly depend on the problem type.</p>\n         <ul>\n            <li>\n               <p>For tabular problem types:</p>\n               <ul>\n                  <li>\n                     <p>List of available metrics: </p>\n                     <ul>\n                        <li>\n                           <p> Regression: <code>MAE</code>,\n                              <code>MSE</code>, <code>R2</code>, <code>RMSE</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p> Binary classification: <code>Accuracy</code>, <code>AUC</code>,\n                              <code>BalancedAccuracy</code>, <code>F1</code>,\n                              <code>Precision</code>, <code>Recall</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p> Multiclass classification: <code>Accuracy</code>,\n                              <code>BalancedAccuracy</code>, <code>F1macro</code>,\n                              <code>PrecisionMacro</code>, <code>RecallMacro</code>\n                           </p>\n                        </li>\n                     </ul>\n                     <p>For a description of each metric, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics\">Autopilot metrics for classification and regression</a>.</p>\n                  </li>\n                  <li>\n                     <p>Default objective metrics:</p>\n                     <ul>\n                        <li>\n                           <p>Regression: <code>MSE</code>.</p>\n                        </li>\n                        <li>\n                           <p>Binary classification: <code>F1</code>.</p>\n                        </li>\n                        <li>\n                           <p>Multiclass classification: <code>Accuracy</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For image or text classification problem types:</p>\n               <ul>\n                  <li>\n                     <p>List of available metrics: <code>Accuracy</code>\n                     </p>\n                     <p>For a description of each metric, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/text-classification-data-format-and-metric.html\">Autopilot metrics for text and image classification</a>.</p>\n                  </li>\n                  <li>\n                     <p>Default objective metrics: <code>Accuracy</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For time-series forecasting problem types:</p>\n               <ul>\n                  <li>\n                     <p>List of available metrics: <code>RMSE</code>, <code>wQL</code>,\n                        <code>Average wQL</code>, <code>MASE</code>, <code>MAPE</code>,\n                        <code>WAPE</code>\n                     </p>\n                     <p>For a description of each metric, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/timeseries-objective-metric.html\">Autopilot metrics for\n                        time-series forecasting</a>.</p>\n                  </li>\n                  <li>\n                     <p>Default objective metrics: <code>AverageWeightedQuantileLoss</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For text generation problem types (LLMs fine-tuning): \n                  Fine-tuning language models in Autopilot does not\n                  require setting the <code>AutoMLJobObjective</code> field. Autopilot fine-tunes LLMs\n                  without requiring multiple candidates to be trained and evaluated.                   \n                  Instead, using your dataset, Autopilot directly fine-tunes your target model to enhance a\n                  default objective metric, the cross-entropy loss. After fine-tuning a language model,\n                  you can evaluate the quality of its generated text using different metrics.                \n                  For a list of the available metrics, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-llms-finetuning-metrics.html\">Metrics for\n                        fine-tuning LLMs in Autopilot</a>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the objective metric used to measure the predictive quality of a machine\n         learning system. During training, the model's parameters are updated iteratively to\n         optimize its performance based on the feedback provided by the objective metric when\n         evaluating the model on the validation dataset.</p>\n         <p>The list of available metrics supported by Autopilot and the default metric applied when you\n         do not specify a metric name explicitly depend on the problem type.</p>\n         <ul>\n            <li>\n               <p>For tabular problem types:</p>\n               <ul>\n                  <li>\n                     <p>List of available metrics: </p>\n                     <ul>\n                        <li>\n                           <p> Regression: <code>MAE</code>, <code>MSE</code>, <code>R2</code>,\n                              <code>RMSE</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p> Binary classification: <code>Accuracy</code>, <code>AUC</code>,\n                              <code>BalancedAccuracy</code>, <code>F1</code>,\n                           <code>Precision</code>, <code>Recall</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p> Multiclass classification: <code>Accuracy</code>,\n                              <code>BalancedAccuracy</code>, <code>F1macro</code>,\n                              <code>PrecisionMacro</code>, <code>RecallMacro</code>\n                           </p>\n                        </li>\n                     </ul>\n                     <p>For a description of each metric, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics\">Autopilot metrics for classification and regression</a>.</p>\n                  </li>\n                  <li>\n                     <p>Default objective metrics:</p>\n                     <ul>\n                        <li>\n                           <p>Regression: <code>MSE</code>.</p>\n                        </li>\n                        <li>\n                           <p>Binary classification: <code>F1</code>.</p>\n                        </li>\n                        <li>\n                           <p>Multiclass classification: <code>Accuracy</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For image or text classification problem types:</p>\n               <ul>\n                  <li>\n                     <p>List of available metrics: <code>Accuracy</code>\n                     </p>\n                     <p>For a description of each metric, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/text-classification-data-format-and-metric.html\">Autopilot metrics for text and image classification</a>.</p>\n                  </li>\n                  <li>\n                     <p>Default objective metrics: <code>Accuracy</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For time-series forecasting problem types:</p>\n               <ul>\n                  <li>\n                     <p>List of available metrics: <code>RMSE</code>, <code>wQL</code>,\n                        <code>Average wQL</code>, <code>MASE</code>, <code>MAPE</code>,\n                        <code>WAPE</code>\n                     </p>\n                     <p>For a description of each metric, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/timeseries-objective-metric.html\">Autopilot metrics for\n                        time-series forecasting</a>.</p>\n                  </li>\n                  <li>\n                     <p>Default objective metrics: <code>AverageWeightedQuantileLoss</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For text generation problem types (LLMs fine-tuning): \n                  Fine-tuning language models in Autopilot does not\n                  require setting the <code>AutoMLJobObjective</code> field. Autopilot fine-tunes LLMs\n                  without requiring multiple candidates to be trained and evaluated.                   \n                  Instead, using your dataset, Autopilot directly fine-tunes your target model to enhance a\n                  default objective metric, the cross-entropy loss. After fine-tuning a language model,\n                  you can evaluate the quality of its generated text using different metrics.                \n                  For a list of the available metrics, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-llms-finetuning-metrics.html\">Metrics for\n                        fine-tuning LLMs in Autopilot</a>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4207,7 +4243,7 @@
                     "target": "com.amazonaws.sagemaker#AutoMLS3DataType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The data type. </p>\n         <ul>\n            <li>\n               <p>If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name\n               prefix. SageMaker uses all objects that match the specified key name prefix for model\n               training.</p>\n               <p>The <code>S3Prefix</code> should have the following format:</p>\n               <p>\n                  <code>s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER-OR-FILE</code>\n               </p>\n            </li>\n            <li>\n               <p>If you choose <code>ManifestFile</code>, <code>S3Uri</code> identifies an object\n               that is a manifest file containing a list of object keys that you want SageMaker to use\n               for model training.</p>\n               <p>A <code>ManifestFile</code> should have the format shown below:</p>\n               <p>\n                  <code>[ {\"prefix\":\n                  \"s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/\"}, </code>\n               </p>\n               <p>\n                  <code>\"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-1\",</code>\n               </p>\n               <p>\n                  <code>\"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-2\",</code>\n               </p>\n               <p>\n                  <code>... \"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-N\" ]</code>\n               </p>\n            </li>\n            <li>\n               <p>If you choose <code>AugmentedManifestFile</code>, <code>S3Uri</code> identifies an\n               object that is an augmented manifest file in JSON lines format. This file contains\n               the data you want to use for model training. <code>AugmentedManifestFile</code> is\n               available for V2 API jobs only (for example, for jobs created by calling\n                  <code>CreateAutoMLJobV2</code>).</p>\n               <p>Here is a minimal, single-record example of an\n               <code>AugmentedManifestFile</code>:</p>\n               <p>\n                  <code>{\"source-ref\":\n                  \"s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/cats/cat.jpg\",</code>\n               </p>\n               <p>\n                  <code>\"label-metadata\": {\"class-name\": \"cat\"</code> }</p>\n               <p>For more information on <code>AugmentedManifestFile</code>, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/augmented-manifest.html\">Provide\n                  Dataset Metadata to Training Jobs with an Augmented Manifest File</a>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The data type. </p>\n         <ul>\n            <li>\n               <p>If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name\n               prefix. SageMaker uses all objects that match the specified key name prefix\n               for model training.</p>\n               <p>The <code>S3Prefix</code> should have the following format:</p>\n               <p>\n                  <code>s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER-OR-FILE</code>\n               </p>\n            </li>\n            <li>\n               <p>If you choose <code>ManifestFile</code>, <code>S3Uri</code> identifies an object\n               that is a manifest file containing a list of object keys that you want SageMaker to use for model training.</p>\n               <p>A <code>ManifestFile</code> should have the format shown below:</p>\n               <p>\n                  <code>[ {\"prefix\":\n                  \"s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/\"}, </code>\n               </p>\n               <p>\n                  <code>\"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-1\",</code>\n               </p>\n               <p>\n                  <code>\"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-2\",</code>\n               </p>\n               <p>\n                  <code>... \"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-N\" ]</code>\n               </p>\n            </li>\n            <li>\n               <p>If you choose <code>AugmentedManifestFile</code>, <code>S3Uri</code> identifies an\n               object that is an augmented manifest file in JSON lines format. This file contains\n               the data you want to use for model training. <code>AugmentedManifestFile</code> is\n               available for V2 API jobs only (for example, for jobs created by calling\n                  <code>CreateAutoMLJobV2</code>).</p>\n               <p>Here is a minimal, single-record example of an\n               <code>AugmentedManifestFile</code>:</p>\n               <p>\n                  <code>{\"source-ref\":\n                  \"s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/cats/cat.jpg\",</code>\n               </p>\n               <p>\n                  <code>\"label-metadata\": {\"class-name\": \"cat\"</code> }</p>\n               <p>For more information on <code>AugmentedManifestFile</code>, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/augmented-manifest.html\">Provide\n                  Dataset Metadata to Training Jobs with an Augmented Manifest File</a>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4215,7 +4251,7 @@
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The URL to the Amazon S3 data source. The Uri refers to the Amazon S3 prefix or ManifestFile\n         depending on the data type.</p>",
+                        "smithy.api#documentation": "<p>The URL to the Amazon S3 data source. The Uri refers to the Amazon S3\n         prefix or ManifestFile depending on the data type.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4891,13 +4927,13 @@
                 "ModelInsights": {
                     "target": "com.amazonaws.sagemaker#ModelInsightsLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 prefix to the model insight artifacts generated for the AutoML candidate.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 prefix to the model insight artifacts generated for the AutoML\n         candidate.</p>"
                     }
                 },
                 "BacktestResults": {
                     "target": "com.amazonaws.sagemaker#BacktestResultsLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 prefix to the accuracy metrics and the inference results observed over the\n         testing window. Available only for the time-series forecasting problem type.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 prefix to the accuracy metrics and the inference results observed\n         over the testing window. Available only for the time-series forecasting problem\n         type.</p>"
                     }
                 }
             },
@@ -4919,7 +4955,7 @@
                 "AlgorithmsConfig": {
                     "target": "com.amazonaws.sagemaker#AutoMLAlgorithmsConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Stores the configuration information for the selection of algorithms used to train model\n         candidates on tabular data.</p>\n         <p>The list of available algorithms to choose from depends on the training mode set in\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TabularJobConfig.html\">\n               <code>TabularJobConfig.Mode</code>\n            </a>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AlgorithmsConfig</code> should not be set in <code>AUTO</code> training\n               mode.</p>\n            </li>\n            <li>\n               <p>When <code>AlgorithmsConfig</code> is provided, one <code>AutoMLAlgorithms</code>\n               attribute must be set and one only.</p>\n               <p>If the list of algorithms provided as values for <code>AutoMLAlgorithms</code> is\n               empty, <code>CandidateGenerationConfig</code> uses the full set of algorithms for the\n               given training mode.</p>\n            </li>\n            <li>\n               <p>When <code>AlgorithmsConfig</code> is not provided,\n                  <code>CandidateGenerationConfig</code> uses the full set of algorithms for the\n               given training mode.</p>\n            </li>\n         </ul>\n         <p>For the list of all algorithms per problem type and training mode, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html\">\n            AutoMLAlgorithmConfig</a>.</p>\n         <p>For more information on each algorithm, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support\">Algorithm support</a> section in Autopilot developer guide.</p>"
+                        "smithy.api#documentation": "<p>Your Autopilot job trains a default set of algorithms on your dataset. For tabular and\n         time-series data, you can customize the algorithm list by selecting a subset of algorithms\n         for your problem type.</p>\n         <p>\n            <code>AlgorithmsConfig</code> stores the customized selection of algorithms to train on\n         your data.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>For the tabular problem type <code>TabularJobConfig</code>,</b>\n            the list of available algorithms to choose from depends on the training mode set\n               in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html\">\n                     <code>AutoMLJobConfig.Mode</code>\n                  </a>.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>AlgorithmsConfig</code> should not be set when the training mode\n                        <code>AutoMLJobConfig.Mode</code> is set to <code>AUTO</code>.</p>\n                  </li>\n                  <li>\n                     <p>When <code>AlgorithmsConfig</code> is provided, one\n                        <code>AutoMLAlgorithms</code> attribute must be set and one only.</p>\n                     <p>If the list of algorithms provided as values for\n                        <code>AutoMLAlgorithms</code> is empty,\n                        <code>CandidateGenerationConfig</code> uses the full set of algorithms for\n                     the given training mode.</p>\n                  </li>\n                  <li>\n                     <p>When <code>AlgorithmsConfig</code> is not provided,\n                        <code>CandidateGenerationConfig</code> uses the full set of algorithms for\n                     the given training mode.</p>\n                  </li>\n               </ul>\n               <p>For the list of all algorithms per training mode, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html\">\n                  AlgorithmConfig</a>.</p>\n               <p>For more information on each algorithm, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support\">Algorithm support</a> section in the Autopilot developer guide.</p>\n            </li>\n            <li>\n               <p>\n                  <b>For the time-series forecasting problem type <code>TimeSeriesForecastingJobConfig</code>,</b>\n            choose your algorithms from the list provided in\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html\">\n                  AlgorithmConfig</a>.</p>\n               <p>For more information on each algorithm, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/timeseries-forecasting-algorithms.html\">Algorithms support for time-series forecasting</a> section in the Autopilot developer guide.</p>\n               <ul>\n                  <li>\n                     <p>When <code>AlgorithmsConfig</code> is provided, one\n                        <code>AutoMLAlgorithms</code> attribute must be set and one only.</p>\n                     <p>If the list of algorithms provided as values for\n                        <code>AutoMLAlgorithms</code> is empty,\n                        <code>CandidateGenerationConfig</code> uses the full set of algorithms for\n                     time-series forecasting.</p>\n                  </li>\n                  <li>\n                     <p>When <code>AlgorithmsConfig</code> is not provided,\n                        <code>CandidateGenerationConfig</code> uses the full set of algorithms for\n                     time-series forecasting.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -8660,7 +8696,7 @@
                     "target": "com.amazonaws.sagemaker#AutoMLOutputDataConfig",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Provides information about encryption and the Amazon S3 output path needed to store artifacts\n         from an AutoML job. Format(s) supported: CSV.</p>",
+                        "smithy.api#documentation": "<p>Provides information about encryption and the Amazon S3 output path needed to\n         store artifacts from an AutoML job. Format(s) supported: CSV.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8772,7 +8808,7 @@
                     "target": "com.amazonaws.sagemaker#AutoMLOutputDataConfig",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Provides information about encryption and the Amazon S3 output path needed to store artifacts\n         from an AutoML job.</p>",
+                        "smithy.api#documentation": "<p>Provides information about encryption and the Amazon S3 output path needed to\n         store artifacts from an AutoML job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11631,6 +11667,18 @@
                     "target": "com.amazonaws.sagemaker#ModelPackageSourceUri",
                     "traits": {
                         "smithy.api#documentation": "<p>The URI of the source for the model package. If you want to clone a model package,\n                set it to the model package Amazon Resource Name (ARN). If you want to register a model,\n                set it to the model ARN.</p>"
+                    }
+                },
+                "SecurityConfig": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageSecurityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS Key ID (<code>KMSKeyId</code>) used for encryption of model package information.</p>"
+                    }
+                },
+                "ModelCard": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageModelCard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n           tied to a model package, it is a specific usage of a model card and its schema is\n           simplified compared to the schema of <code>ModelCard</code>. The \n           <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n           and <code>model_overview</code> is composed of the <code>model_creator</code> and\n           <code>model_artifact</code> properties. For more information about\n           the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n               the Details of a Model Version</a>.</p>"
                     }
                 }
             },
@@ -17083,7 +17131,7 @@
                 "BestCandidate": {
                     "target": "com.amazonaws.sagemaker#AutoMLCandidate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The best model candidate selected by SageMaker Autopilot using both the best objective metric and\n         lowest <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html\">InferenceLatency</a> for\n         an experiment.</p>"
+                        "smithy.api#documentation": "<p>The best model candidate selected by SageMaker Autopilot using both the best\n         objective metric and lowest <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html\">InferenceLatency</a> for\n         an experiment.</p>"
                     }
                 },
                 "AutoMLJobStatus": {
@@ -17209,7 +17257,7 @@
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The ARN of the IAM role that has read permission to the input data location and\n         write permission to the output data location in Amazon S3.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that has read permission to the input data\n         location and write permission to the output data location in Amazon S3.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17317,7 +17365,7 @@
                 "SecurityConfig": {
                     "target": "com.amazonaws.sagemaker#AutoMLSecurityConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the security configuration for traffic encryption or Amazon VPC settings.</p>"
+                        "smithy.api#documentation": "<p>Returns the security configuration for traffic encryption or Amazon VPC\n         settings.</p>"
                     }
                 }
             },
@@ -21551,7 +21599,7 @@
                 "target": "com.amazonaws.sagemaker#DescribeModelPackageOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns a description of the specified model package, which is used to create SageMaker\n            models or list them on Amazon Web Services Marketplace.</p>\n         <p>To create models in SageMaker, buyers can subscribe to model packages listed on Amazon Web Services\n            Marketplace.</p>"
+                "smithy.api#documentation": "<p>Returns a description of the specified model package, which is used to create SageMaker\n            models or list them on Amazon Web Services Marketplace.</p>\n         <important>\n            <p>If you provided a KMS Key ID when you created your model package,\n            you will see the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html\">KMS\n                Decrypt</a> API call in your CloudTrail logs when you use this API.</p>\n         </important>\n         <p>To create models in SageMaker, buyers can subscribe to model packages listed on Amazon Web Services\n            Marketplace.</p>"
             }
         },
         "com.amazonaws.sagemaker#DescribeModelPackageGroup": {
@@ -21815,6 +21863,18 @@
                     "target": "com.amazonaws.sagemaker#ModelPackageSourceUri",
                     "traits": {
                         "smithy.api#documentation": "<p>The URI of the source for the model package.</p>"
+                    }
+                },
+                "SecurityConfig": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageSecurityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS Key ID (<code>KMSKeyId</code>) used for encryption of model package information.</p>"
+                    }
+                },
+                "ModelCard": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageModelCard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n            tied to a model package, it is a specific usage of a model card and its schema is\n            simplified compared to the schema of <code>ModelCard</code>. The \n            <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n            and <code>model_overview</code> is composed of the <code>model_creator</code> and\n            <code>model_artifact</code> properties. For more information about\n            the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n                the Details of a Model Version</a>.</p>"
                     }
                 }
             },
@@ -35196,7 +35256,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.sagemaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter defines the maximum number of results that can be returned in a single response. The <code>MaxResults</code> parameter is an upper bound, not a target. If there are\n          more results available than the value specified, a <code>NextToken</code>\n        is provided in the response. The <code>NextToken</code> indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for <code>MaxResults</code> is 10.</p>"
+                        "smithy.api#documentation": "<p>This parameter defines the maximum number of results that can be return in a single response. The <code>MaxResults</code> parameter is an upper bound, not a target. If there are\n          more results available than the value specified, a <code>NextToken</code>\n        is provided in the response. The <code>NextToken</code> indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for <code>MaxResults</code> is 10.</p>"
                     }
                 },
                 "SortOrder": {
@@ -36521,7 +36581,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.sagemaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter defines the maximum number of results that can be returned in a single response. The <code>MaxResults</code> parameter is an upper bound, not a target. If there are\n      more results available than the value specified, a <code>NextToken</code>\n      is provided in the response. The <code>NextToken</code> indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for <code>MaxResults</code> is 10.</p>"
+                        "smithy.api#documentation": "<p>This parameter defines the maximum number of results that can be return in a single response. The <code>MaxResults</code> parameter is an upper bound, not a target. If there are\n      more results available than the value specified, a <code>NextToken</code>\n      is provided in the response. The <code>NextToken</code> indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for <code>MaxResults</code> is 10.</p>"
                     }
                 }
             },
@@ -41047,7 +41107,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.sagemaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter defines the maximum number of results that can be returned in a single response. The <code>MaxResults</code> parameter is an upper bound, not a target. If there are\n      more results available than the value specified, a <code>NextToken</code>\n      is provided in the response. The <code>NextToken</code> indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for <code>MaxResults</code> is 10.</p>"
+                        "smithy.api#documentation": "<p>This parameter defines the maximum number of results that can be return in a single response. The <code>MaxResults</code> parameter is an upper bound, not a target. If there are\n      more results available than the value specified, a <code>NextToken</code>\n      is provided in the response. The <code>NextToken</code> indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for <code>MaxResults</code> is 10.</p>"
                     }
                 },
                 "SortOrder": {
@@ -41985,7 +42045,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.sagemaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter defines the maximum number of results that can be returned in a single response. The <code>MaxResults</code> parameter is an upper bound, not a target. If there are\n        more results available than the value specified, a <code>NextToken</code>\n        is provided in the response. The <code>NextToken</code> indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for <code>MaxResults</code> is 10.</p>"
+                        "smithy.api#documentation": "<p>This parameter defines the maximum number of results that can be return in a single response. The <code>MaxResults</code> parameter is an upper bound, not a target. If there are\n        more results available than the value specified, a <code>NextToken</code>\n        is provided in the response. The <code>NextToken</code> indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for <code>MaxResults</code> is 10.</p>"
                     }
                 },
                 "SortOrder": {
@@ -44395,6 +44455,12 @@
                         "smithy.api#documentation": "<p>The URI of the source for the model package.</p>"
                     }
                 },
+                "SecurityConfig": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageSecurityConfig"
+                },
+                "ModelCard": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageModelCard"
+                },
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
@@ -44715,6 +44781,42 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.sagemaker#ModelPackageGroupSummary"
+            }
+        },
+        "com.amazonaws.sagemaker#ModelPackageModelCard": {
+            "type": "structure",
+            "members": {
+                "ModelCardContent": {
+                    "target": "com.amazonaws.sagemaker#ModelCardContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the model card.</p>"
+                    }
+                },
+                "ModelCardStatus": {
+                    "target": "com.amazonaws.sagemaker#ModelCardStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approval status of the model card within your organization. Different organizations might have different criteria for model card review and approval.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Draft</code>: The model card is a work in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PendingReview</code>: The model card is pending review.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Approved</code>: The model card is approved.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Archived</code>: The model card is archived. No more updates can be made to the model\n               card content. If you try to update the model card content, you will receive the message <code>Model Card\n \t       is in Archived state</code>.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n            tied to a model package, it is a specific usage of a model card and its schema is\n            simplified compared to the schema of <code>ModelCard</code>. The \n            <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n            and <code>model_overview</code> is composed of the <code>model_creator</code> and\n            <code>model_artifact</code> properties. For more information about\n            the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n                the Details of a Model Version</a>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ModelPackageSecurityConfig": {
+            "type": "structure",
+            "members": {
+                "KmsKeyId": {
+                    "target": "com.amazonaws.sagemaker#KmsKeyId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The KMS Key ID (<code>KMSKeyId</code>) used for encryption of model package information.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An optional Key Management Service\n         key to encrypt, decrypt, and re-encrypt model package information for regulated workloads with\n         highly sensitive data.</p>"
             }
         },
         "com.amazonaws.sagemaker#ModelPackageSortBy": {
@@ -59807,7 +59909,7 @@
                 "FeatureSpecificationS3Uri": {
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL to the Amazon S3 data source containing selected features from the input data source to\n         run an Autopilot job V2. You can input <code>FeatureAttributeNames</code> (optional) in JSON\n         format as shown below: </p>\n         <p>\n            <code>{ \"FeatureAttributeNames\":[\"col1\", \"col2\", ...] }</code>.</p>\n         <p>You can also specify the data type of the feature (optional) in the format shown\n         below:</p>\n         <p>\n            <code>{ \"FeatureDataTypes\":{\"col1\":\"numeric\", \"col2\":\"categorical\" ... } }</code>\n         </p>\n         <note>\n            <p>These column keys may not include the target column.</p>\n         </note>\n         <p>In ensembling mode, Autopilot only supports the following data types: <code>numeric</code>,\n            <code>categorical</code>, <code>text</code>, and <code>datetime</code>. In HPO mode,\n         Autopilot can support <code>numeric</code>, <code>categorical</code>, <code>text</code>,\n            <code>datetime</code>, and <code>sequence</code>.</p>\n         <p>If only <code>FeatureDataTypes</code> is provided, the column keys (<code>col1</code>,\n            <code>col2</code>,..) should be a subset of the column names in the input data. </p>\n         <p>If both <code>FeatureDataTypes</code> and <code>FeatureAttributeNames</code> are\n         provided, then the column keys should be a subset of the column names provided in\n            <code>FeatureAttributeNames</code>. </p>\n         <p>The key name <code>FeatureAttributeNames</code> is fixed. The values listed in\n            <code>[\"col1\", \"col2\", ...]</code> are case sensitive and should be a list of strings\n         containing unique values that are a subset of the column names in the input data. The list\n         of columns provided must not include the target column.</p>"
+                        "smithy.api#documentation": "<p>A URL to the Amazon S3 data source containing selected features from the input\n         data source to run an Autopilot job V2. You can input <code>FeatureAttributeNames</code>\n         (optional) in JSON format as shown below: </p>\n         <p>\n            <code>{ \"FeatureAttributeNames\":[\"col1\", \"col2\", ...] }</code>.</p>\n         <p>You can also specify the data type of the feature (optional) in the format shown\n         below:</p>\n         <p>\n            <code>{ \"FeatureDataTypes\":{\"col1\":\"numeric\", \"col2\":\"categorical\" ... } }</code>\n         </p>\n         <note>\n            <p>These column keys may not include the target column.</p>\n         </note>\n         <p>In ensembling mode, Autopilot only supports the following data types: <code>numeric</code>,\n            <code>categorical</code>, <code>text</code>, and <code>datetime</code>. In HPO mode,\n         Autopilot can support <code>numeric</code>, <code>categorical</code>, <code>text</code>,\n            <code>datetime</code>, and <code>sequence</code>.</p>\n         <p>If only <code>FeatureDataTypes</code> is provided, the column keys (<code>col1</code>,\n            <code>col2</code>,..) should be a subset of the column names in the input data. </p>\n         <p>If both <code>FeatureDataTypes</code> and <code>FeatureAttributeNames</code> are\n         provided, then the column keys should be a subset of the column names provided in\n            <code>FeatureAttributeNames</code>. </p>\n         <p>The key name <code>FeatureAttributeNames</code> is fixed. The values listed in\n            <code>[\"col1\", \"col2\", ...]</code> are case sensitive and should be a list of strings\n         containing unique values that are a subset of the column names in the input data. The list\n         of columns provided must not include the target column.</p>"
                     }
                 },
                 "Mode": {
@@ -60726,7 +60828,7 @@
                 "FeatureSpecificationS3Uri": {
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL to the Amazon S3 data source containing additional selected features that complement\n         the target, itemID, timestamp, and grouped columns set in <code>TimeSeriesConfig</code>.\n         When not provided, the AutoML job V2 includes all the columns from the original dataset\n         that are not already declared in <code>TimeSeriesConfig</code>. If provided, the AutoML job\n         V2 only considers these additional columns as a complement to the ones declared in\n            <code>TimeSeriesConfig</code>.</p>\n         <p>You can input <code>FeatureAttributeNames</code> (optional) in JSON format as shown\n         below: </p>\n         <p>\n            <code>{ \"FeatureAttributeNames\":[\"col1\", \"col2\", ...] }</code>.</p>\n         <p>You can also specify the data type of the feature (optional) in the format shown\n         below:</p>\n         <p>\n            <code>{ \"FeatureDataTypes\":{\"col1\":\"numeric\", \"col2\":\"categorical\" ... } }</code>\n         </p>\n         <p>Autopilot supports the following data types: <code>numeric</code>, <code>categorical</code>,\n            <code>text</code>, and <code>datetime</code>.</p>\n         <note>\n            <p>These column keys must not include any column set in\n            <code>TimeSeriesConfig</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A URL to the Amazon S3 data source containing additional selected features that\n         complement the target, itemID, timestamp, and grouped columns set in\n            <code>TimeSeriesConfig</code>. When not provided, the AutoML job V2 includes all the\n         columns from the original dataset that are not already declared in\n            <code>TimeSeriesConfig</code>. If provided, the AutoML job V2 only considers these\n         additional columns as a complement to the ones declared in\n         <code>TimeSeriesConfig</code>.</p>\n         <p>You can input <code>FeatureAttributeNames</code> (optional) in JSON format as shown\n         below: </p>\n         <p>\n            <code>{ \"FeatureAttributeNames\":[\"col1\", \"col2\", ...] }</code>.</p>\n         <p>You can also specify the data type of the feature (optional) in the format shown\n         below:</p>\n         <p>\n            <code>{ \"FeatureDataTypes\":{\"col1\":\"numeric\", \"col2\":\"categorical\" ... } }</code>\n         </p>\n         <p>Autopilot supports the following data types: <code>numeric</code>, <code>categorical</code>,\n            <code>text</code>, and <code>datetime</code>.</p>\n         <note>\n            <p>These column keys must not include any column set in\n            <code>TimeSeriesConfig</code>.</p>\n         </note>"
                     }
                 },
                 "CompletionCriteria": {
@@ -60773,6 +60875,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The collection of holiday featurization attributes used to incorporate national holiday\n         information into your forecasting model.</p>"
                     }
+                },
+                "CandidateGenerationConfig": {
+                    "target": "com.amazonaws.sagemaker#CandidateGenerationConfig"
                 }
             },
             "traits": {
@@ -65663,6 +65768,12 @@
                     "target": "com.amazonaws.sagemaker#ModelPackageSourceUri",
                     "traits": {
                         "smithy.api#documentation": "<p>The URI of the source for the model package.</p>"
+                    }
+                },
+                "ModelCard": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageModelCard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n            tied to a model package, it is a specific usage of a model card and its schema is\n            simplified compared to the schema of <code>ModelCard</code>. The \n            <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n            and <code>model_overview</code> is composed of the <code>model_creator</code> and\n            <code>model_artifact</code> properties. For more information about\n            the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n                the Details of a Model Version</a>.</p>"
                     }
                 }
             },

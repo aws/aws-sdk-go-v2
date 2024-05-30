@@ -1968,6 +1968,20 @@
                 "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)$"
             }
         },
+        "com.amazonaws.bedrockagent#BedrockEmbeddingModelConfiguration": {
+            "type": "structure",
+            "members": {
+                "dimensions": {
+                    "target": "com.amazonaws.bedrockagent#Dimensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimensions details for the vector configuration used on the Bedrock embeddings model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The vector configuration details for the Bedrock embeddings model.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#BucketOwnerAccountId": {
             "type": "string",
             "traits": {
@@ -3469,6 +3483,15 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagent#Dimensions": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 4096
+                }
+            }
+        },
         "com.amazonaws.bedrockagent#DisassociateAgentKnowledgeBase": {
             "type": "operation",
             "input": {
@@ -3557,6 +3580,20 @@
                     "max": 5
                 },
                 "smithy.api#pattern": "^DRAFT$"
+            }
+        },
+        "com.amazonaws.bedrockagent#EmbeddingModelConfiguration": {
+            "type": "structure",
+            "members": {
+                "bedrockEmbeddingModelConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#BedrockEmbeddingModelConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vector configuration details on the Bedrock embeddings model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details for the embeddings model.</p>"
             }
         },
         "com.amazonaws.bedrockagent#FailureReason": {
@@ -8089,6 +8126,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model used to create vector embeddings for the knowledge base.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "embeddingModelConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#EmbeddingModelConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The embeddings model configuration details for the vector model used in Knowledge Base.</p>"
                     }
                 }
             },
