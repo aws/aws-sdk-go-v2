@@ -1,8 +1,0 @@
-{
-    "id": "55b09c99-8374-49be-a010-a0fc4118955c",
-    "type": "feature",
-    "description": "This release adds Converse and ConverseStream APIs to Bedrock Runtime",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}

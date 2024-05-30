@@ -1,8 +1,0 @@
-{
-    "id": "2aefd55f-c33d-4f8c-bc10-ef8446951b26",
-    "type": "feature",
-    "description": "Adds Model Card information as a new component to Model Package. Autopilot launches algorithm selection for TimeSeries modality to generate AutoML candidates per algorithm.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

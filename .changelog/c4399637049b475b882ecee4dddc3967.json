@@ -1,8 +1,0 @@
-{
-    "id": "c4399637-049b-475b-882e-cee4dddc3967",
-    "type": "feature",
-    "description": "The release adds support for spark structured streaming.",
-    "modules": [
-        "service/emrserverless"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.142.0 (2024-05-30)
+
+* **Feature**: Adds Model Card information as a new component to Model Package. Autopilot launches algorithm selection for TimeSeries modality to generate AutoML candidates per algorithm.
+
 # v1.141.1 (2024-05-23)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.26.0 (2024-05-30)
+
+* **Feature**: add v2 smoke tests and smithy smokeTests trait for SDK testing.
+
 # v1.25.8 (2024-05-23)
 
 * No change notes available for this release.

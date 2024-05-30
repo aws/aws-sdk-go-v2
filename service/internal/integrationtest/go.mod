@@ -4,7 +4,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.27.0
 	github.com/aws/aws-sdk-go-v2/config v1.27.16
 	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.16.21
-	github.com/aws/aws-sdk-go-v2/service/acm v1.25.8
+	github.com/aws/aws-sdk-go-v2/service/acm v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.23.10
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.27.8
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.24.8
@@ -16,7 +16,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.36.4
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.21.8
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.22.8
-	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.39.6
+	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.40.0
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.38.4
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.37.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.22.8
@@ -61,7 +61,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.22.8
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.19.9
 	github.com/aws/aws-sdk-go-v2/service/polly v1.40.3
-	github.com/aws/aws-sdk-go-v2/service/rds v1.79.2
+	github.com/aws/aws-sdk-go-v2/service/rds v1.79.3
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.44.4
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.40.4
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.40.8

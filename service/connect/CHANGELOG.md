@@ -1,3 +1,7 @@
+# v1.100.0 (2024-05-30)
+
+* **Feature**: Adding associatedQueueIds as a SearchCriteria and response field to the SearchRoutingProfiles API
+
 # v1.99.0 (2024-05-29)
 
 * **Feature**: This release includes changes to DescribeContact API's response by including ConnectedToSystemTimestamp, RoutingCriteria, Customer, Campaign, AnsweringMachineDetectionStatus, CustomerVoiceActivity, QualityMetrics, DisconnectDetails, and SegmentAttributes information from a contact in Amazon Connect.

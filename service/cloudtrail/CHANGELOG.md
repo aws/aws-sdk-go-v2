@@ -1,3 +1,7 @@
+# v1.40.0 (2024-05-30)
+
+* **Feature**: CloudTrail Lake returns PartitionKeys in the GetEventDataStore API response. Events are grouped into partitions based on these keys for better query performance. For example, the calendarday key groups events by day, while combining the calendarday key with the hour key groups them by day and hour.
+
 # v1.39.6 (2024-05-23)
 
 * No change notes available for this release.

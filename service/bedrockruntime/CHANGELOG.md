@@ -1,3 +1,7 @@
+# v1.9.0 (2024-05-30)
+
+* **Feature**: This release adds Converse and ConverseStream APIs to Bedrock Runtime
+
 # v1.8.4 (2024-05-23)
 
 * No change notes available for this release.

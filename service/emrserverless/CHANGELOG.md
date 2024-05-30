@@ -1,3 +1,7 @@
+# v1.21.0 (2024-05-30)
+
+* **Feature**: The release adds support for spark structured streaming.
+
 # v1.20.0 (2024-05-23)
 
 * **Feature**: This release adds the capability to run interactive workloads using Apache Livy Endpoint.

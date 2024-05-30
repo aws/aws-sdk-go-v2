@@ -1,3 +1,7 @@
+# v1.79.3 (2024-05-30)
+
+* **Documentation**: Updates Amazon RDS documentation for Aurora Postgres DBname.
+
 # v1.79.2 (2024-05-23)
 
 * No change notes available for this release.

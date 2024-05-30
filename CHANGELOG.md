@@ -1,3 +1,23 @@
+# Release (2024-05-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.26.0](service/acm/CHANGELOG.md#v1260-2024-05-30)
+  * **Feature**: add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.12.0](service/bedrockagent/CHANGELOG.md#v1120-2024-05-30)
+  * **Feature**: With this release, Knowledge bases for Bedrock adds support for Titan Text Embedding v2.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.9.0](service/bedrockruntime/CHANGELOG.md#v190-2024-05-30)
+  * **Feature**: This release adds Converse and ConverseStream APIs to Bedrock Runtime
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.40.0](service/cloudtrail/CHANGELOG.md#v1400-2024-05-30)
+  * **Feature**: CloudTrail Lake returns PartitionKeys in the GetEventDataStore API response. Events are grouped into partitions based on these keys for better query performance. For example, the calendarday key groups events by day, while combining the calendarday key with the hour key groups them by day and hour.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.100.0](service/connect/CHANGELOG.md#v11000-2024-05-30)
+  * **Feature**: Adding associatedQueueIds as a SearchCriteria and response field to the SearchRoutingProfiles API
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.21.0](service/emrserverless/CHANGELOG.md#v1210-2024-05-30)
+  * **Feature**: The release adds support for spark structured streaming.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.79.3](service/rds/CHANGELOG.md#v1793-2024-05-30)
+  * **Documentation**: Updates Amazon RDS documentation for Aurora Postgres DBname.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.142.0](service/sagemaker/CHANGELOG.md#v11420-2024-05-30)
+  * **Feature**: Adds Model Card information as a new component to Model Package. Autopilot launches algorithm selection for TimeSeries modality to generate AutoML candidates per algorithm.
+
 # Release (2024-05-29)
 
 ## Module Highlights

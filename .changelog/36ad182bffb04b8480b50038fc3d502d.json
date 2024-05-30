@@ -1,8 +1,0 @@
-{
-    "id": "36ad182b-ffb0-4b84-80b5-0038fc3d502d",
-    "type": "documentation",
-    "description": "Updates Amazon RDS documentation for Aurora Postgres DBname.",
-    "modules": [
-        "service/rds"
-    ]
-}
