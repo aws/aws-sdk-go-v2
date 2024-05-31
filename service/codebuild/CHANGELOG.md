@@ -1,3 +1,7 @@
+# v1.37.1 (2024-05-31)
+
+* **Documentation**: AWS CodeBuild now supports Self-hosted GitHub Actions runners for Github Enterprise
+
 # v1.37.0 (2024-05-29)
 
 * **Feature**: AWS CodeBuild now supports manually creating GitHub webhooks

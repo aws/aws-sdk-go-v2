@@ -1,8 +1,0 @@
-{
-    "id": "1d5b802f-a732-4634-a9fd-73d60386bb5a",
-    "type": "feature",
-    "description": "This release includes minor model updates and documentation updates.",
-    "modules": [
-        "service/codegurusecurity"
-    ]
-}

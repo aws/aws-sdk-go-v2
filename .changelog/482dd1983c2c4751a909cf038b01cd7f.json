@@ -1,8 +1,0 @@
-{
-    "id": "482dd198-3c2c-4751-a909-cf038b01cd7f",
-    "type": "feature",
-    "description": "This release adds support for describing workload deployment specifications, deploying additional workload types, and managing tags for Launch Wizard resources with API operations.",
-    "modules": [
-        "service/launchwizard"
-    ]
-}

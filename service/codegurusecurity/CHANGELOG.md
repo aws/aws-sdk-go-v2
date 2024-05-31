@@ -1,3 +1,7 @@
+# v1.8.0 (2024-05-31)
+
+* **Feature**: This release includes minor model updates and documentation updates.
+
 # v1.7.8 (2024-05-23)
 
 * No change notes available for this release.

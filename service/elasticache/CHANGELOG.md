@@ -1,3 +1,7 @@
+# v1.38.6 (2024-05-31)
+
+* **Documentation**: Update to attributes of TestFailover and minor revisions.
+
 # v1.38.5 (2024-05-23)
 
 * No change notes available for this release.

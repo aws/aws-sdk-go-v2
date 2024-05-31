@@ -1,3 +1,15 @@
+# Release (2024-05-31)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.37.1](service/codebuild/CHANGELOG.md#v1371-2024-05-31)
+  * **Documentation**: AWS CodeBuild now supports Self-hosted GitHub Actions runners for Github Enterprise
+* `github.com/aws/aws-sdk-go-v2/service/codegurusecurity`: [v1.8.0](service/codegurusecurity/CHANGELOG.md#v180-2024-05-31)
+  * **Feature**: This release includes minor model updates and documentation updates.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.38.6](service/elasticache/CHANGELOG.md#v1386-2024-05-31)
+  * **Documentation**: Update to attributes of TestFailover and minor revisions.
+* `github.com/aws/aws-sdk-go-v2/service/launchwizard`: [v1.4.0](service/launchwizard/CHANGELOG.md#v140-2024-05-31)
+  * **Feature**: This release adds support for describing workload deployment specifications, deploying additional workload types, and managing tags for Launch Wizard resources with API operations.
+
 # Release (2024-05-30)
 
 ## Module Highlights

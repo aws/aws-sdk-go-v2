@@ -1,8 +1,0 @@
-{
-    "id": "b8ac093b-cd40-4871-86b6-717e2d848eab",
-    "type": "documentation",
-    "description": "Update to attributes of TestFailover and minor revisions.",
-    "modules": [
-        "service/elasticache"
-    ]
-}

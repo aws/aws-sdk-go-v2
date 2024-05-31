@@ -1,3 +1,7 @@
+# v1.4.0 (2024-05-31)
+
+* **Feature**: This release adds support for describing workload deployment specifications, deploying additional workload types, and managing tags for Launch Wizard resources with API operations.
+
 # v1.3.8 (2024-05-23)
 
 * No change notes available for this release.

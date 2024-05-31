@@ -1,8 +1,0 @@
-{
-    "id": "34ab2ec0-2867-43a7-9465-2eb7f45a03e8",
-    "type": "documentation",
-    "description": "AWS CodeBuild now supports Self-hosted GitHub Actions runners for Github Enterprise",
-    "modules": [
-        "service/codebuild"
-    ]
-}
