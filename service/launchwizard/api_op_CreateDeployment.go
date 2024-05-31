@@ -44,18 +44,22 @@ type CreateDeploymentInput struct {
 	// This member is required.
 	Name *string
 
-	// The settings specified for the deployment. For more information on the
-	// specifications required for creating a deployment, see [Workload specifications].
+	// The settings specified for the deployment. These settings define how to deploy
+	// and configure your resources created by the deployment. For more information
+	// about the specifications required for creating a deployment for a SAP workload,
+	// see [SAP deployment specifications]. To retrieve the specifications required to create a deployment for other
+	// workloads, use the [GetWorkloadDeploymentPattern]GetWorkloadDeploymentPattern operation.
 	//
-	// [Workload specifications]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications.html
+	// [GetWorkloadDeploymentPattern]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html
+	// [SAP deployment specifications]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications-sap.html
 	//
 	// This member is required.
 	Specifications map[string]string
 
-	// The name of the workload. You can use the [ListWorkloadDeploymentPatterns]ListWorkloadDeploymentPatterns
-	// operation to discover supported values for this parameter.
+	// The name of the workload. You can use the [ListWorkloads]ListWorkloads operation to discover
+	// supported values for this parameter.
 	//
-	// [ListWorkloadDeploymentPatterns]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html
+	// [ListWorkloads]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html
 	//
 	// This member is required.
 	WorkloadName *string
@@ -65,6 +69,9 @@ type CreateDeploymentInput struct {
 	// required permissions, the error response is DryRunOperation . Otherwise, it is
 	// UnauthorizedOperation .
 	DryRun bool
+
+	// The tags to add to the deployment.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

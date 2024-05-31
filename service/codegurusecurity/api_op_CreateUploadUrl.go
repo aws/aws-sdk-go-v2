@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates a pre-signed URL and request headers used to upload a code resource.
+// Generates a pre-signed URL, request headers used to upload a code resource, and
+// code artifact identifier for the uploaded resource.
 //
-// You can upload your code resource to the URL and add the request headers using
-// any HTTP client.
+// You can upload your code resource to the URL with the request headers using any
+// HTTP client.
 func (c *Client) CreateUploadUrl(ctx context.Context, params *CreateUploadUrlInput, optFns ...func(*Options)) (*CreateUploadUrlOutput, error) {
 	if params == nil {
 		params = &CreateUploadUrlInput{}
@@ -44,7 +45,8 @@ type CreateUploadUrlInput struct {
 
 type CreateUploadUrlOutput struct {
 
-	// The identifier for the uploaded code resource.
+	// The identifier for the uploaded code resource. Pass this to CreateScan to use
+	// the uploaded resources.
 	//
 	// This member is required.
 	CodeArtifactId *string
@@ -55,7 +57,7 @@ type CreateUploadUrlOutput struct {
 	// This member is required.
 	RequestHeaders map[string]string
 
-	// A pre-signed S3 URL. You can upload the code file you want to scan and add the
+	// A pre-signed S3 URL. You can upload the code file you want to scan with the
 	// required requestHeaders using any HTTP client.
 	//
 	// This member is required.

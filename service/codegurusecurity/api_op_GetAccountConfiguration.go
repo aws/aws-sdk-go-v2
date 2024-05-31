@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use to get account level configuration.
+// Use to get the encryption configuration for an account.
 func (c *Client) GetAccountConfiguration(ctx context.Context, params *GetAccountConfigurationInput, optFns ...func(*Options)) (*GetAccountConfigurationOutput, error) {
 	if params == nil {
 		params = &GetAccountConfigurationInput{}
@@ -33,9 +33,10 @@ type GetAccountConfigurationInput struct {
 
 type GetAccountConfigurationOutput struct {
 
-	// An EncryptionConfig object that contains the KMS key ARN to use for encryption.
-	// By default, CodeGuru Security uses an AWS-managed key for encryption. To specify
-	// your own key, call UpdateAccountConfiguration .
+	// An EncryptionConfig object that contains the KMS key ARN that is used for
+	// encryption. By default, CodeGuru Security uses an AWS-managed key for
+	// encryption. To specify your own key, call UpdateAccountConfiguration . If you do
+	// not specify a customer-managed key, returns empty.
 	//
 	// This member is required.
 	EncryptionConfig *types.EncryptionConfig

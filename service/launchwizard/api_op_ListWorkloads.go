@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the workloads.
+// Lists the available workload names. You can use the [ListWorkloadDeploymentPatterns] operation to discover the
+// available deployment patterns for a given workload.
+//
+// [ListWorkloadDeploymentPatterns]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html
 func (c *Client) ListWorkloads(ctx context.Context, params *ListWorkloadsInput, optFns ...func(*Options)) (*ListWorkloadsOutput, error) {
 	if params == nil {
 		params = &ListWorkloadsInput{}

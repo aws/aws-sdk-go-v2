@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use to create a scan using code uploaded to an S3 bucket.
+// Use to create a scan using code uploaded to an Amazon S3 bucket.
 func (c *Client) CreateScan(ctx context.Context, params *CreateScanInput, optFns ...func(*Options)) (*CreateScanOutput, error) {
 	if params == nil {
 		params = &CreateScanInput{}
@@ -29,14 +29,13 @@ func (c *Client) CreateScan(ctx context.Context, params *CreateScanInput, optFns
 
 type CreateScanInput struct {
 
-	// The identifier for an input resource used to create a scan.
+	// The identifier for the resource object to be scanned.
 	//
 	// This member is required.
 	ResourceId types.ResourceId
 
 	// The unique name that CodeGuru Security uses to track revisions across multiple
-	// scans of the same resource. Only allowed for a STANDARD scan type. If not
-	// specified, it will be auto generated.
+	// scans of the same resource. Only allowed for a STANDARD scan type.
 	//
 	// This member is required.
 	ScanName *string

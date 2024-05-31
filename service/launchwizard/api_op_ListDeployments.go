@@ -31,9 +31,11 @@ type ListDeploymentsInput struct {
 
 	// Filters to scope the results. The following filters are supported:
 	//
-	//   - WORKLOAD_NAME
+	//   - WORKLOAD_NAME - The name used in deployments.
 	//
-	//   - DEPLOYMENT_STATUS
+	//   - DEPLOYMENT_STATUS - COMPLETED | CREATING | DELETE_IN_PROGRESS |
+	//   DELETE_INITIATING | DELETE_FAILED | DELETED | FAILED | IN_PROGRESS |
+	//   VALIDATING
 	Filters []types.DeploymentFilter
 
 	// The maximum number of items to return for this request. To get the next page of

@@ -2551,8 +2551,8 @@ type WebhookFilter struct {
 	//   PULL_REQUEST_UPDATED filters all push, pull request created, and pull request
 	//   updated events.
 	//
-	// The PULL_REQUEST_REOPENED works with GitHub and GitHub Enterprise only. The
-	//   RELEASED , PRERELEASED , and WORKFLOW_JOB_QUEUED work with GitHub only.
+	// Types PULL_REQUEST_REOPENED and WORKFLOW_JOB_QUEUED work with GitHub and GitHub
+	//   Enterprise only. Types RELEASED and PRERELEASED work with GitHub only.
 	//
 	//   - ACTOR_ACCOUNT_ID
 	//

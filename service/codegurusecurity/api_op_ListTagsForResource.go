@@ -28,8 +28,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The ARN of the ScanName object. You can retrieve this ARN by calling ListScans
-	// or GetScan .
+	// The ARN of the ScanName object. You can retrieve this ARN by calling CreateScan
+	// , ListScans , or GetScan .
 	//
 	// This member is required.
 	ResourceArn *string

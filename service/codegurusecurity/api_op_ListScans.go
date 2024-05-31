@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all the standard scans in an account. Does not return express
-// scans.
+// Returns a list of all scans in an account. Does not return EXPRESS scans.
 func (c *Client) ListScans(ctx context.Context, params *ListScansInput, optFns ...func(*Options)) (*ListScansOutput, error) {
 	if params == nil {
 		params = &ListScansInput{}
@@ -33,7 +32,8 @@ type ListScansInput struct {
 	// The maximum number of results to return in the response. Use this parameter
 	// when paginating results. If additional results exist beyond the number you
 	// specify, the nextToken element is returned in the response. Use nextToken in a
-	// subsequent request to retrieve additional results.
+	// subsequent request to retrieve additional results. If not specified, returns 100
+	// results.
 	MaxResults *int32
 
 	// A token to use for paginating results that are returned in the response. Set
@@ -148,7 +148,8 @@ type ListScansPaginatorOptions struct {
 	// The maximum number of results to return in the response. Use this parameter
 	// when paginating results. If additional results exist beyond the number you
 	// specify, the nextToken element is returned in the response. Use nextToken in a
-	// subsequent request to retrieve additional results.
+	// subsequent request to retrieve additional results. If not specified, returns 100
+	// results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

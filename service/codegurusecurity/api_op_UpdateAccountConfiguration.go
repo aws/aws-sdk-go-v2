@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use to update account-level configuration with an encryption key.
+// Use to update the encryption configuration for an account.
 func (c *Client) UpdateAccountConfiguration(ctx context.Context, params *UpdateAccountConfigurationInput, optFns ...func(*Options)) (*UpdateAccountConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateAccountConfigurationInput{}
@@ -29,8 +29,10 @@ func (c *Client) UpdateAccountConfiguration(ctx context.Context, params *UpdateA
 
 type UpdateAccountConfigurationInput struct {
 
-	// The KMS key ARN you want to use for encryption. Defaults to service-side
-	// encryption if missing.
+	// The customer-managed KMS key ARN you want to use for encryption. If not
+	// specified, CodeGuru Security will use an AWS-managed key for encryption. If you
+	// previously specified a customer-managed KMS key and want CodeGuru Security to
+	// use an AWS-managed key for encryption instead, pass nothing.
 	//
 	// This member is required.
 	EncryptionConfig *types.EncryptionConfig
@@ -40,7 +42,9 @@ type UpdateAccountConfigurationInput struct {
 
 type UpdateAccountConfigurationOutput struct {
 
-	// An EncryptionConfig object that contains the KMS key ARN to use for encryption.
+	// An EncryptionConfig object that contains the KMS key ARN that is used for
+	// encryption. If you did not specify a customer-managed KMS key in the request,
+	// returns empty.
 	//
 	// This member is required.
 	EncryptionConfig *types.EncryptionConfig

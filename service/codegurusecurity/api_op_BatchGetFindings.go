@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all requested findings.
+// Returns a list of requested findings from standard scans.
 func (c *Client) BatchGetFindings(ctx context.Context, params *BatchGetFindingsInput, optFns ...func(*Options)) (*BatchGetFindingsOutput, error) {
 	if params == nil {
 		params = &BatchGetFindingsInput{}
@@ -47,7 +47,7 @@ type BatchGetFindingsOutput struct {
 	// This member is required.
 	FailedFindings []types.BatchGetFindingsError
 
-	//  A list of all requested findings.
+	//  A list of all findings which were successfully fetched.
 	//
 	// This member is required.
 	Findings []types.Finding

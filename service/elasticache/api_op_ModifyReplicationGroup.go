@@ -77,9 +77,11 @@ type ModifyReplicationGroupInput struct {
 	// Specifies the strategy to use to update the AUTH token. This parameter must be
 	// specified with the auth-token parameter. Possible values:
 	//
-	//   - Rotate
+	//   - ROTATE - default, if no update strategy is provided
 	//
-	//   - Set
+	//   - SET - allowed only after ROTATE
+	//
+	//   - DELETE - allowed only when transitioning to RBAC
 	//
 	// For more information, see [Authenticating Users with Redis AUTH]
 	//

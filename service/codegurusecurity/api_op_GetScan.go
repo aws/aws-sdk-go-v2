@@ -67,10 +67,14 @@ type GetScanOutput struct {
 	// This member is required.
 	ScanName *string
 
-	// The current state of the scan. Pass either InProgress , Successful , or Failed .
+	// The current state of the scan. Returns either InProgress , Successful , or
+	// Failed .
 	//
 	// This member is required.
 	ScanState types.ScanState
+
+	// Details about the error that causes a scan to fail to be retrieved.
+	ErrorMessage *string
 
 	// The number of times a scan has been re-run on a revised resource.
 	NumberOfRevisions *int64

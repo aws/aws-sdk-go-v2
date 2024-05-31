@@ -7,6 +7,23 @@ import (
 	"time"
 )
 
+// A field that details a condition of the specifications for a deployment.
+type DeploymentConditionalField struct {
+
+	// The comparator of the condition.
+	//
+	// Valid values: Equal | NotEqual
+	Comparator *string
+
+	// The name of the deployment condition.
+	Name *string
+
+	// The value of the condition.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // The data associated with a deployment.
 type DeploymentData struct {
 
@@ -15,6 +32,9 @@ type DeploymentData struct {
 
 	// The time the deployment was deleted.
 	DeletedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the deployment.
+	DeploymentArn *string
 
 	// The ID of the deployment.
 	Id *string
@@ -28,14 +48,21 @@ type DeploymentData struct {
 	// The resource group of the deployment.
 	ResourceGroup *string
 
-	// The specifications of the deployment. For more information on specifications
-	// for each deployment, see [Workload specifications].
+	// The settings specified for the deployment. These settings define how to deploy
+	// and configure your resources created by the deployment. For more information
+	// about the specifications required for creating a deployment for a SAP workload,
+	// see [SAP deployment specifications]. To retrieve the specifications required to create a deployment for other
+	// workloads, use the [GetWorkloadDeploymentPattern]GetWorkloadDeploymentPattern operation.
 	//
-	// [Workload specifications]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications.html
+	// [GetWorkloadDeploymentPattern]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html
+	// [SAP deployment specifications]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications-sap.html
 	Specifications map[string]string
 
 	// The status of the deployment.
 	Status DeploymentStatus
+
+	// Information about the tags attached to a deployment.
+	Tags map[string]string
 
 	// The name of the workload.
 	WorkloadName *string
@@ -104,6 +131,27 @@ type DeploymentFilter struct {
 	noSmithyDocumentSerde
 }
 
+// A field that details a specification of a deployment pattern.
+type DeploymentSpecificationsField struct {
+
+	// The allowed values of the deployment specification.
+	AllowedValues []string
+
+	// The conditionals used for the deployment specification.
+	Conditionals []DeploymentConditionalField
+
+	// The description of the deployment specification.
+	Description *string
+
+	// The name of the deployment specification.
+	Name *string
+
+	// Indicates if the deployment specification is required.
+	Required *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a workload.
 type WorkloadData struct {
 
@@ -139,6 +187,43 @@ type WorkloadDataSummary struct {
 
 	// The name of the workload.
 	WorkloadName *string
+
+	noSmithyDocumentSerde
+}
+
+// The data that details a workload deployment pattern.
+type WorkloadDeploymentPatternData struct {
+
+	// The name of the deployment pattern.
+	DeploymentPatternName *string
+
+	// The description of the deployment pattern.
+	Description *string
+
+	// The display name of the deployment pattern.
+	DisplayName *string
+
+	// The settings specified for the deployment. These settings define how to deploy
+	// and configure your resources created by the deployment. For more information
+	// about the specifications required for creating a deployment for a SAP workload,
+	// see [SAP deployment specifications]. To retrieve the specifications required to create a deployment for other
+	// workloads, use the [GetWorkloadDeploymentPattern]GetWorkloadDeploymentPattern operation.
+	//
+	// [GetWorkloadDeploymentPattern]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html
+	// [SAP deployment specifications]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications-sap.html
+	Specifications []DeploymentSpecificationsField
+
+	// The status of the deployment pattern.
+	Status WorkloadDeploymentPatternStatus
+
+	// The status message of the deployment pattern.
+	StatusMessage *string
+
+	// The workload name of the deployment pattern.
+	WorkloadName *string
+
+	// The workload version name of the deployment pattern.
+	WorkloadVersionName *string
 
 	noSmithyDocumentSerde
 }

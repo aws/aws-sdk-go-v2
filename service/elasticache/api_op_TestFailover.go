@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Represents the input of a TestFailover operation which test automatic failover
+// Represents the input of a TestFailover operation which tests automatic failover
 // on a specified node group (called shard in the console) in a replication group
 // (called cluster in the console).
 //
@@ -23,7 +23,7 @@ import (
 //
 // Note the following
 //
-//   - A customer can use this operation to test automatic failover on up to 5
+//   - A customer can use this operation to test automatic failover on up to 15
 //     shards (called node groups in the ElastiCache API and Amazon CLI) in any rolling
 //     24-hour period.
 //
@@ -82,7 +82,7 @@ type TestFailoverInput struct {
 
 	// The name of the node group (called shard in the console) in this replication
 	// group on which automatic failover is to be tested. You may test automatic
-	// failover on up to 5 node groups in any rolling 24-hour period.
+	// failover on up to 15 node groups in any rolling 24-hour period.
 	//
 	// This member is required.
 	NodeGroupId *string

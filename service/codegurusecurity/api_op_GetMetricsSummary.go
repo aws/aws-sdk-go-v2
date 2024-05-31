@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Returns top level metrics about an account from a specified date, including
+// Returns a summary of metrics for an account from a specified date, including
 // number of open findings, the categories with most findings, the scans with most
 // open findings, and scans with most open critical findings.
 func (c *Client) GetMetricsSummary(ctx context.Context, params *GetMetricsSummaryInput, optFns ...func(*Options)) (*GetMetricsSummaryOutput, error) {
@@ -33,9 +33,7 @@ func (c *Client) GetMetricsSummary(ctx context.Context, params *GetMetricsSummar
 type GetMetricsSummaryInput struct {
 
 	// The date you want to retrieve summary metrics from, rounded to the nearest day.
-	// The date must be within the past two years since metrics data is only stored for
-	// two years. If a date outside of this range is passed, the response will be
-	// empty.
+	// The date must be within the past two years.
 	//
 	// This member is required.
 	Date *time.Time
