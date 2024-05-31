@@ -1,6 +1,12 @@
 {
     "smithy": "2.0",
     "shapes": {
+        "com.amazonaws.launchwizard#AllowedValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.launchwizard#ValueString"
+            }
+        },
         "com.amazonaws.launchwizard#CreateDeployment": {
             "type": "operation",
             "input": {
@@ -49,6 +55,34 @@
                         "output": {
                             "deploymentId": "4c1b59c1-659c-467f-b6e9-6ef6f9d28e1d"
                         }
+                    },
+                    {
+                        "title": "Deploy a given workload with given settings and passing tags for Launch Wizard deployment resource.",
+                        "input": {
+                            "workloadName": "SAP",
+                            "deploymentPatternName": "SapHanaSingle",
+                            "name": "SapHanaSingleForTest",
+                            "dryRun": false,
+                            "specifications": {
+                                "applicationName": "SapHanaSingleForTest",
+                                "deploymentScenario": "SapHanaSingle",
+                                "DisableDeploymentRollback": "true",
+                                "saveDeploymentArtifacts": "Yes",
+                                "saveArtifactsS3Uri": "s3://testbucket",
+                                "KeyName": "testLinuxInstance",
+                                "VPCID": "vpc-1234567",
+                                "environmentType": "production",
+                                "SAPTZ": "America/Vancouver",
+                                "Encryption": "Yes"
+                            },
+                            "tags": {
+                                "key1": "val1",
+                                "key2": "val2"
+                            }
+                        },
+                        "output": {
+                            "deploymentId": "1111111-1111-1111-1111-111111111111"
+                        }
                     }
                 ],
                 "smithy.api#http": {
@@ -64,7 +98,7 @@
                 "workloadName": {
                     "target": "com.amazonaws.launchwizard#WorkloadName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the workload. You can use the <a href=\"https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html\">\n               <code>ListWorkloadDeploymentPatterns</code>\n            </a> operation to discover supported\n         values for this parameter.</p>",
+                        "smithy.api#documentation": "<p>The name of the workload. You can use the <a href=\"https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html\">\n               <code>ListWorkloads</code>\n            </a> operation to discover supported\n         values for this parameter.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -85,7 +119,7 @@
                 "specifications": {
                     "target": "com.amazonaws.launchwizard#DeploymentSpecifications",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings specified for the deployment. For more information on the specifications\n         required for creating a deployment, see <a href=\"https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications.html\">Workload specifications</a>.</p>",
+                        "smithy.api#documentation": "<p>The settings specified for the deployment. These settings define how to deploy and configure your\n         resources created by the deployment. For more information about the specifications\n         required for creating a deployment for a SAP workload, see <a href=\"https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications-sap.html\">SAP deployment\n         specifications</a>. To retrieve the specifications required to create a deployment for other workloads,\n         use the <a href=\"https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html\">\n               <code>GetWorkloadDeploymentPattern</code>\n            </a> operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -94,6 +128,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making\n         the request, and provides an error response. If you have the required permissions, the\n         error response is <code>DryRunOperation</code>. Otherwise, it is\n            <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.launchwizard#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to add to the deployment.</p>"
                     }
                 }
             },
@@ -126,6 +166,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.launchwizard#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ResourceLimitException"
                 },
                 {
                     "target": "com.amazonaws.launchwizard#ResourceNotFoundException"
@@ -216,6 +259,32 @@
                 }
             ]
         },
+        "com.amazonaws.launchwizard#DeploymentConditionalField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the deployment condition.</p>"
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the condition.</p>"
+                    }
+                },
+                "comparator": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparator of the condition.</p>\n         <p>Valid values: <code>Equal | NotEqual</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A field that details a condition of the specifications for a deployment.</p>"
+            }
+        },
         "com.amazonaws.launchwizard#DeploymentData": {
             "type": "structure",
             "members": {
@@ -258,7 +327,7 @@
                 "specifications": {
                     "target": "com.amazonaws.launchwizard#DeploymentSpecifications",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specifications of the deployment. For more information on specifications for each\n         deployment, see <a href=\"https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications.html\">Workload specifications</a>.</p>"
+                        "smithy.api#documentation": "<p>The settings specified for the deployment. These settings define how to deploy and configure your\n         resources created by the deployment. For more information about the specifications\n         required for creating a deployment for a SAP workload, see <a href=\"https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications-sap.html\">SAP deployment\n         specifications</a>. To retrieve the specifications required to create a deployment for other workloads,\n         use the <a href=\"https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html\">\n               <code>GetWorkloadDeploymentPattern</code>\n            </a> operation.</p>"
                     }
                 },
                 "resourceGroup": {
@@ -271,6 +340,18 @@
                     "target": "smithy.api#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time the deployment was deleted.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.launchwizard#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the tags attached to a deployment.</p>"
+                    }
+                },
+                "deploymentArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the deployment.</p>"
                     }
                 }
             },
@@ -461,9 +542,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 25
+                    "max": 50
                 },
-                "smithy.api#pattern": "^[A-Za-z0-9_\\s\\.-]+$"
+                "smithy.api#pattern": "^[A-Za-z0-9_\\.-]+$"
             }
         },
         "com.amazonaws.launchwizard#DeploymentPatternName": {
@@ -473,7 +554,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+                "smithy.api#pattern": "^[A-Za-z0-9][a-zA-Z0-9-]*$"
             }
         },
         "com.amazonaws.launchwizard#DeploymentSpecifications": {
@@ -490,6 +571,56 @@
                     "max": 100
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentSpecificationsData": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.launchwizard#DeploymentSpecificationsField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentSpecificationsField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the deployment specification.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the deployment specification.</p>"
+                    }
+                },
+                "allowedValues": {
+                    "target": "com.amazonaws.launchwizard#AllowedValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The allowed values of the deployment specification.</p>"
+                    }
+                },
+                "required": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if the deployment specification is required.</p>"
+                    }
+                },
+                "conditionals": {
+                    "target": "com.amazonaws.launchwizard#SpecificationsConditionalData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditionals used for the deployment specification.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A field that details a specification of a deployment pattern.</p>"
             }
         },
         "com.amazonaws.launchwizard#DeploymentStatus": {
@@ -638,12 +769,12 @@
                     {
                         "title": "Get details about a given deployment.",
                         "input": {
-                            "deploymentId": "4c1b59c1-659c-467f-b6e9-6ef6f9d28e1d"
+                            "deploymentId": "1111111-1111-1111-1111-111111111111"
                         },
                         "output": {
                             "deployment": {
                                 "name": "SapHanaSingleForTest",
-                                "id": "4c1b59c1-659c-467f-b6e9-6ef6f9d28e1d",
+                                "id": "1111111-1111-1111-1111-111111111111",
                                 "workloadName": "SapHanaSingle",
                                 "status": "FAILED",
                                 "createdAt": "2023-04-24T13:10:09.857Z",
@@ -658,6 +789,11 @@
                                     "environmentType": "production",
                                     "SAPTZ": "America/Vancouver",
                                     "Encryption": "Yes"
+                                },
+                                "deploymentArn": "arn:aws:launchwizard:us-east-1:123456789012:deployment/1111111-1111-1111-1111-111111111111",
+                                "tags": {
+                                    "key1": "val1",
+                                    "key2": "val2"
                                 }
                             }
                         }
@@ -747,6 +883,107 @@
                 "smithy.api#readonly": {}
             }
         },
+        "com.amazonaws.launchwizard#GetWorkloadDeploymentPattern": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.launchwizard#GetWorkloadDeploymentPatternInput"
+            },
+            "output": {
+                "target": "com.amazonaws.launchwizard#GetWorkloadDeploymentPatternOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.launchwizard#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns details for a given workload and deployment pattern, including the available\n         specifications. You can use the <a href=\"https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html\">ListWorkloads</a>\n         operation to discover the available workload names and the <a href=\"https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html\">ListWorkloadDeploymentPatterns</a> operation to discover the available deployment\n         pattern names of a given workload.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get details about a specific Workload deployment pattern",
+                        "input": {
+                            "workloadName": "MicrosoftActiveDirectory",
+                            "deploymentPatternName": "adSelfManagedNewVpc"
+                        },
+                        "output": {
+                            "workloadDeploymentPattern": {
+                                "workloadName": "MicrosoftActiveDirectory",
+                                "deploymentPatternName": "adSelfManagedNewVpc",
+                                "workloadVersionName": "2024-03-19-14-00-09",
+                                "displayName": "Self-managed AD - new VPC",
+                                "description": "Builds a new AWS environment (VPC and other components), and deploys AD DS into this new VPC.",
+                                "status": "ACTIVE",
+                                "specifications": [
+                                    {
+                                        "name": "NumberOfAZs",
+                                        "description": "Number of Availability Zones to use in the VPC.",
+                                        "required": "Yes"
+                                    },
+                                    {
+                                        "name": "AvailabilityZones",
+                                        "description": "List of Availability Zones (AZs) to use for the subnets in the VPC.",
+                                        "required": "Yes"
+                                    },
+                                    {
+                                        "name": "VPCCIDR",
+                                        "description": "CIDR block for the VPC.",
+                                        "required": "Yes"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/getWorkloadDeploymentPattern"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.launchwizard#GetWorkloadDeploymentPatternInput": {
+            "type": "structure",
+            "members": {
+                "workloadName": {
+                    "target": "com.amazonaws.launchwizard#WorkloadName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workload.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deploymentPatternName": {
+                    "target": "com.amazonaws.launchwizard#DeploymentPatternName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the deployment pattern.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.launchwizard#GetWorkloadDeploymentPatternOutput": {
+            "type": "structure",
+            "members": {
+                "workloadDeploymentPattern": {
+                    "target": "com.amazonaws.launchwizard#WorkloadDeploymentPatternData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the workload deployment pattern.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.launchwizard#GetWorkloadInput": {
             "type": "structure",
             "members": {
@@ -802,6 +1039,17 @@
         "com.amazonaws.launchwizard#LaunchWizard": {
             "type": "service",
             "version": "2018-05-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.launchwizard#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#UntagResource"
+                }
+            ],
             "resources": [
                 {
                     "target": "com.amazonaws.launchwizard#Deployment"
@@ -1488,17 +1736,6 @@
                             "expect": {
                                 "error": "Invalid Configuration: Missing Region"
                             }
-                        },
-                        {
-                            "documentation": "Partition doesn't support DualStack",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
                         }
                     ],
                     "version": "1.0"
@@ -1679,7 +1916,7 @@
                 "filters": {
                     "target": "com.amazonaws.launchwizard#DeploymentFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters to scope the results. The following filters are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>WORKLOAD_NAME</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPLOYMENT_STATUS</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Filters to scope the results. The following filters are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>WORKLOAD_NAME</code> - The name used in deployments.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPLOYMENT_STATUS</code> - <code>COMPLETED</code> | <code>CREATING</code> |\n                  <code>DELETE_IN_PROGRESS</code> | <code>DELETE_INITIATING</code> |\n                  <code>DELETE_FAILED</code> | <code>DELETED</code> | <code>FAILED</code> |\n                  <code>IN_PROGRESS</code> | <code>VALIDATING</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "maxResults": {
@@ -1720,6 +1957,78 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.launchwizard#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.launchwizard#ListTagsForResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.launchwizard#ListTagsForResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.launchwizard#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the tags associated with a specified resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Listing tags on a Launch Wizard deployment resource.",
+                        "input": {
+                            "resourceArn": "arn:aws:launchwizard:us-east-1:123456789012:deployment/11111111-1111-1111-1111-111111111111"
+                        },
+                        "output": {
+                            "tags": {
+                                "key1": "value1",
+                                "key2": "value2"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.launchwizard#ListTagsForResourceInput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.launchwizard#ListTagsForResourceOutput": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.launchwizard#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the tags.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.launchwizard#ListWorkloadDeploymentPatterns": {
             "type": "operation",
             "input": {
@@ -1740,7 +2049,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the workload deployment patterns.</p>",
+                "smithy.api#documentation": "<p>Lists the workload deployment patterns for a given workload name. You can use the <a href=\"https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html\">ListWorkloads</a> operation to discover the available workload names.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "List all available workloads supported by AWS Launch Wizard.",
@@ -1848,7 +2157,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the workloads.</p>",
+                "smithy.api#documentation": "<p>Lists the available workload names. You can use the <a href=\"https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html\">ListWorkloadDeploymentPatterns</a> operation to discover the available deployment patterns for a given workload.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "List all available workloads supported by AWS Launch Wizard.",
@@ -2007,6 +2316,206 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9-]{2,50}$"
             }
         },
+        "com.amazonaws.launchwizard#SpecificationsConditionalData": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.launchwizard#DeploymentConditionalField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+            }
+        },
+        "com.amazonaws.launchwizard#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.launchwizard#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.launchwizard#TagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.launchwizard#TagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.launchwizard#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds the specified tags to the given resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Adding tags to a Launch Wizard deployment resource.",
+                        "input": {
+                            "resourceArn": "arn:aws:launchwizard:us-east-1:123456789012:deployment/11111111-1111-1111-1111-111111111111",
+                            "tags": {
+                                "key1": "value1",
+                                "key2": "value2"
+                            }
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}"
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#TagResourceInput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.launchwizard#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tags to attach to the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.launchwizard#TagResourceOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.launchwizard#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#Tags": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.launchwizard#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.launchwizard#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.launchwizard#UntagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.launchwizard#UntagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.launchwizard#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the specified tags from the given resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Removing tags on a Launch Wizard deployment resource.",
+                        "input": {
+                            "resourceArn": "arn:aws:launchwizard:us-east-1:123456789012:deployment/11111111-1111-1111-1111-111111111111",
+                            "tagKeys": [
+                                "key1",
+                                "key2"
+                            ]
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.launchwizard#UntagResourceInput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.launchwizard#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Keys identifying the tags to remove.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.launchwizard#UntagResourceOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.launchwizard#ValidationException": {
             "type": "structure",
             "members": {
@@ -2134,8 +2643,67 @@
                     "target": "com.amazonaws.launchwizard#DeploymentPatternName"
                 }
             },
+            "read": {
+                "target": "com.amazonaws.launchwizard#GetWorkloadDeploymentPattern"
+            },
             "list": {
                 "target": "com.amazonaws.launchwizard#ListWorkloadDeploymentPatterns"
+            }
+        },
+        "com.amazonaws.launchwizard#WorkloadDeploymentPatternData": {
+            "type": "structure",
+            "members": {
+                "workloadName": {
+                    "target": "com.amazonaws.launchwizard#WorkloadName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workload name of the deployment pattern.</p>"
+                    }
+                },
+                "deploymentPatternName": {
+                    "target": "com.amazonaws.launchwizard#DeploymentPatternName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the deployment pattern.</p>"
+                    }
+                },
+                "workloadVersionName": {
+                    "target": "com.amazonaws.launchwizard#WorkloadVersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workload version name of the deployment pattern.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the deployment pattern.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the deployment pattern.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.launchwizard#WorkloadDeploymentPatternStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the deployment pattern.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message of the deployment pattern.</p>"
+                    }
+                },
+                "specifications": {
+                    "target": "com.amazonaws.launchwizard#DeploymentSpecificationsData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings specified for the deployment. These settings define how to deploy and configure your\n         resources created by the deployment. For more information about the specifications\n         required for creating a deployment for a SAP workload, see <a href=\"https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications-sap.html\">SAP deployment\n         specifications</a>. To retrieve the specifications required to create a deployment for other workloads,\n         use the <a href=\"https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html\">\n               <code>GetWorkloadDeploymentPattern</code>\n            </a> operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data that details a workload deployment pattern.</p>"
             }
         },
         "com.amazonaws.launchwizard#WorkloadDeploymentPatternDataSummary": {
@@ -2228,9 +2796,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 256
+                    "max": 100
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+                "smithy.api#pattern": "^[A-Za-z][a-zA-Z0-9-_]*$"
             }
         },
         "com.amazonaws.launchwizard#WorkloadStatus": {
@@ -2269,7 +2837,7 @@
                     "min": 5,
                     "max": 30
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+                "smithy.api#pattern": "^[A-Za-z0-9][a-zA-Z0-9-]*$"
             }
         }
     }
