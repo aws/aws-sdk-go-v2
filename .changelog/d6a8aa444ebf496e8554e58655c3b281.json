@@ -1,0 +1,8 @@
+{
+    "id": "d6a8aa44-4ebf-496e-8554-e58655c3b281",
+    "type": "bugfix",
+    "description": "Re-enable hoisting of `X-Amz-Expected-Bucket-Owner` in presigning, but in lowercase form, such that it is correctly enforced.",
+    "modules": [
+        "."
+    ]
+}
