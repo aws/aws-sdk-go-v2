@@ -1,0 +1,8 @@
+{
+    "id": "a7a833ea-4c9c-42bc-becc-39d0597c7b88",
+    "type": "feature",
+    "description": "Add codec options to use encoding.Text/Binary(Un)Marshaler when present on targets.",
+    "modules": [
+        "feature/dynamodb/attributevalue"
+    ]
+}
