@@ -45,12 +45,12 @@ import (
 // In most cases, it takes several minutes to create a cluster. After you create
 // an Amazon EKS cluster, you must configure your Kubernetes tooling to communicate
 // with the API server and launch nodes into your cluster. For more information,
-// see [Managing Cluster Authentication]and [Launching Amazon EKS nodes] in the Amazon EKS User Guide.
+// see [Allowing users to access your cluster]and [Launching Amazon EKS nodes] in the Amazon EKS User Guide.
 //
+// [Allowing users to access your cluster]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-auth.html
 // [CloudWatch Pricing]: http://aws.amazon.com/cloudwatch/pricing/
 // [Amazon EKS Cluster Control Plane Logs]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
 // [Amazon EKS Cluster Endpoint Access Control]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
-// [Managing Cluster Authentication]: https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html
 // [Launching Amazon EKS nodes]: https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html
 func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, optFns ...func(*Options)) (*CreateClusterOutput, error) {
 	if params == nil {

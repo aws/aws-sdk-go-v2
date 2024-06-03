@@ -141,6 +141,14 @@ type Addon struct {
 	// The owner of the add-on.
 	Owner *string
 
+	// An array of Pod Identity Assocations owned by the Addon. Each EKS Pod Identity
+	// association maps a role to a service account in a namespace in the cluster.
+	//
+	// For more information, see [Attach an IAM Role to an Amazon EKS add-on using Pod Identity] in the EKS User Guide.
+	//
+	// [Attach an IAM Role to an Amazon EKS add-on using Pod Identity]: https://docs.aws.amazon.com/eks/latest/userguide/add-ons-iam.html
+	PodIdentityAssociations []string
+
 	// The publisher of the add-on.
 	Publisher *string
 
@@ -208,6 +216,41 @@ type AddonIssue struct {
 	noSmithyDocumentSerde
 }
 
+// A type of Pod Identity Association owned by an Amazon EKS Add-on.
+//
+// Each EKS Pod Identity Association maps a role to a service account in a
+// namespace in the cluster.
+//
+// For more information, see [Attach an IAM Role to an Amazon EKS add-on using Pod Identity] in the EKS User Guide.
+//
+// [Attach an IAM Role to an Amazon EKS add-on using Pod Identity]: https://docs.aws.amazon.com/eks/latest/userguide/add-ons-iam.html
+type AddonPodIdentityAssociations struct {
+
+	// The ARN of an IAM Role.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The name of a Kubernetes Service Account.
+	//
+	// This member is required.
+	ServiceAccount *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about how to configure IAM for an Addon.
+type AddonPodIdentityConfiguration struct {
+
+	// A suggested IAM Policy for the addon.
+	RecommendedManagedPolicies []string
+
+	// The Kubernetes Service Account name used by the addon.
+	ServiceAccount *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about an add-on version.
 type AddonVersionInfo struct {
 
@@ -222,6 +265,10 @@ type AddonVersionInfo struct {
 
 	// Whether the add-on requires configuration.
 	RequiresConfiguration bool
+
+	// Indicates if the Addon requires IAM Permissions to operate, such as networking
+	// permissions.
+	RequiresIamPermissions bool
 
 	noSmithyDocumentSerde
 }
@@ -308,9 +355,7 @@ type Cluster struct {
 	// The endpoint for your Kubernetes API server.
 	Endpoint *string
 
-	// An object representing the health of your local Amazon EKS cluster on an Amazon
-	// Web Services Outpost. This object isn't available for clusters on the Amazon Web
-	// Services cloud.
+	// An object representing the health of your Amazon EKS cluster.
 	Health *ClusterHealth
 
 	// The ID of your local Amazon EKS cluster on an Amazon Web Services Outpost. This
@@ -371,21 +416,16 @@ type Cluster struct {
 	noSmithyDocumentSerde
 }
 
-// An object representing the health of your local Amazon EKS cluster on an Amazon
-// Web Services Outpost. You can't use this API with an Amazon EKS cluster on the
-// Amazon Web Services cloud.
+// An object representing the health of your Amazon EKS cluster.
 type ClusterHealth struct {
 
-	// An object representing the health issues of your local Amazon EKS cluster on an
-	// Amazon Web Services Outpost.
+	// An object representing the health issues of your Amazon EKS cluster.
 	Issues []ClusterIssue
 
 	noSmithyDocumentSerde
 }
 
-// An issue with your local Amazon EKS cluster on an Amazon Web Services Outpost.
-// You can't use this API with an Amazon EKS cluster on the Amazon Web Services
-// cloud.
+// An issue with your Amazon EKS cluster.
 type ClusterIssue struct {
 
 	// The error code of the issue.
@@ -1006,15 +1046,15 @@ type KubernetesNetworkConfigResponse struct {
 // HibernationOptions , or [TerminateInstances]TerminateInstances , or the node group deployment or
 // update will fail. For more information about launch templates, see [CreateLaunchTemplate]
 // CreateLaunchTemplate in the Amazon EC2 API Reference. For more information about
-// using launch templates with Amazon EKS, see [Launch template support]in the Amazon EKS User Guide.
+// using launch templates with Amazon EKS, see [Customizing managed nodes with launch templates]in the Amazon EKS User Guide.
 //
 // You must specify either the launch template ID or the launch template name in
 // the request, but not both.
 //
 // [HibernationOptions]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_HibernationOptionsRequest.html
+// [Customizing managed nodes with launch templates]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
 // [CreateLaunchTemplate]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html
 // [RequestSpotInstances]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html
-// [Launch template support]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
 // [IamInstanceProfile]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html
 // [SubnetId]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html
 // [TerminateInstances]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TerminateInstances.html
@@ -1477,6 +1517,9 @@ type PodIdentityAssociation struct {
 	// must be in this namespace.
 	Namespace *string
 
+	// If defined, the Pod Identity Association is owned by an Amazon EKS Addon.
+	OwnerArn *string
+
 	// The Amazon Resource Name (ARN) of the IAM role to associate with the service
 	// account. The EKS Pod Identity agent manages credentials to assume this role for
 	// applications in the containers in the pods that use this service account.
@@ -1543,6 +1586,9 @@ type PodIdentityAssociationSummary struct {
 	// association in. The service account and the pods that use the service account
 	// must be in this namespace.
 	Namespace *string
+
+	// If defined, the Pod Identity Association is owned by an Amazon EKS Addon.
+	OwnerArn *string
 
 	// The name of the Kubernetes service account inside the cluster to associate the
 	// IAM credentials with.

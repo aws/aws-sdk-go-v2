@@ -186,7 +186,11 @@ type AutoBranchCreationConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the backend properties associated with an Amplify Branch .
+// Describes the backend associated with an Amplify Branch .
+//
+// This property is available to Amplify Gen 2 apps only. When you deploy an
+// application with Amplify Gen 2, you provision the app's backend infrastructure
+// using Typescript code.
 type Backend struct {
 
 	// The Amazon Resource Name (ARN) for the CloudFormation stack.
@@ -195,7 +199,9 @@ type Backend struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the backend environment for an Amplify app.
+// Describes the backend environment associated with a Branch of a Gen 1 Amplify
+// app. Amplify Gen 1 applications are created using Amplify Studio or the Amplify
+// command line interface (CLI).
 type BackendEnvironment struct {
 
 	// The Amazon Resource Name (ARN) for a backend environment that is part of an
@@ -321,11 +327,19 @@ type Branch struct {
 	//  A list of custom resources that are linked to this branch.
 	AssociatedResources []string
 
-	// Describes the backend properties associated with an Amplify Branch .
+	// Describes the backend associated with an Amplify Branch .
+	//
+	// This property is available to Amplify Gen 2 apps only. When you deploy an
+	// application with Amplify Gen 2, you provision the app's backend infrastructure
+	// using Typescript code.
 	Backend *Backend
 
 	//  The Amazon Resource Name (ARN) for a backend environment that is part of an
 	// Amplify app.
+	//
+	// This property is available to Amplify Gen 1 apps only. When you deploy an
+	// application with Amplify Gen 2, you provision the app's backend infrastructure
+	// using Typescript code.
 	BackendEnvironmentArn *string
 
 	//  The basic authorization credentials for a branch of an Amplify app. You must

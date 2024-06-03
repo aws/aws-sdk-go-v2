@@ -218,6 +218,18 @@ func TestCheckSnapshot_DescribeSchedulingPolicies(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetJobQueueSnapshot(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetJobQueueSnapshot(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetJobQueueSnapshot")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListJobs(context.Background(), nil, func(o *Options) {
@@ -498,6 +510,18 @@ func TestUpdateSnapshot_DescribeSchedulingPolicies(t *testing.T) {
 	_, err := svc.DescribeSchedulingPolicies(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeSchedulingPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetJobQueueSnapshot(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetJobQueueSnapshot(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetJobQueueSnapshot")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

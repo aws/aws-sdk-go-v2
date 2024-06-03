@@ -1,0 +1,8 @@
+{
+    "id": "10e2652f-364e-4c15-9163-b4e90b9d56f0",
+    "type": "feature",
+    "description": "This release adds support for the AWS Batch GetJobQueueSnapshot API operation.",
+    "modules": [
+        "service/batch"
+    ]
+}

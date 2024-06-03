@@ -2547,6 +2547,36 @@ type FargatePlatformConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains a list of the first 100 RUNNABLE jobs associated to a single job queue.
+type FrontOfQueueDetail struct {
+
+	// The Amazon Resource Names (ARNs) of the first 100 RUNNABLE jobs in a named job
+	// queue. For first-in-first-out (FIFO) job queues, jobs are ordered based on their
+	// submission time. For fair share scheduling (FSS) job queues, jobs are ordered
+	// based on their job priority and share usage.
+	Jobs []FrontOfQueueJobSummary
+
+	// The Unix timestamp (in milliseconds) for when each of the first 100 RUNNABLE
+	// jobs were last updated.
+	LastUpdatedAt *int64
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents summary details for the first 100 RUNNABLE jobs in a
+// job queue.
+type FrontOfQueueJobSummary struct {
+
+	// The Unix timestamp (in milliseconds) for when the job transitioned to its
+	// current position in the job queue.
+	EarliestTimeAtPosition *int64
+
+	// The ARN for a job in a named job queue.
+	JobArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Determine whether your data volume persists on the host container instance and
 // where it's stored. If this parameter is empty, then the Docker daemon assigns a
 // host path for your data volume. However, the data isn't guaranteed to persist

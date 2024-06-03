@@ -210,6 +210,26 @@ func (m *validateOpDescribeSchedulingPolicies) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetJobQueueSnapshot struct {
+}
+
+func (*validateOpGetJobQueueSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetJobQueueSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetJobQueueSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetJobQueueSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -428,6 +448,10 @@ func addOpDescribeJobsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeSchedulingPoliciesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSchedulingPolicies{}, middleware.After)
+}
+
+func addOpGetJobQueueSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetJobQueueSnapshot{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1889,6 +1913,21 @@ func validateOpDescribeSchedulingPoliciesInput(v *DescribeSchedulingPoliciesInpu
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeSchedulingPoliciesInput"}
 	if v.Arns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetJobQueueSnapshotInput(v *GetJobQueueSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetJobQueueSnapshotInput"}
+	if v.JobQueue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobQueue"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

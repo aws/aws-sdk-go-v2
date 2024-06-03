@@ -1,0 +1,8 @@
+{
+    "id": "3ee78f64-6b9a-41c5-8f5e-5d6f3b9b6793",
+    "type": "feature",
+    "description": "Support RESET_VALUE UpdateType for PropertyUpdates to reset property value to default or null",
+    "modules": [
+        "service/iottwinmaker"
+    ]
+}

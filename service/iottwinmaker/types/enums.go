@@ -285,9 +285,10 @@ type PropertyUpdateType string
 
 // Enum values for PropertyUpdateType
 const (
-	PropertyUpdateTypeUpdate PropertyUpdateType = "UPDATE"
-	PropertyUpdateTypeDelete PropertyUpdateType = "DELETE"
-	PropertyUpdateTypeCreate PropertyUpdateType = "CREATE"
+	PropertyUpdateTypeUpdate     PropertyUpdateType = "UPDATE"
+	PropertyUpdateTypeDelete     PropertyUpdateType = "DELETE"
+	PropertyUpdateTypeCreate     PropertyUpdateType = "CREATE"
+	PropertyUpdateTypeResetValue PropertyUpdateType = "RESET_VALUE"
 )
 
 // Values returns all known values for PropertyUpdateType. Note that this can be
@@ -299,6 +300,7 @@ func (PropertyUpdateType) Values() []PropertyUpdateType {
 		"UPDATE",
 		"DELETE",
 		"CREATE",
+		"RESET_VALUE",
 	}
 }
 

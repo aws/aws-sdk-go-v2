@@ -33,6 +33,8 @@ const (
 	AddonIssueCodeAdmissionRequestDenied       AddonIssueCode = "AdmissionRequestDenied"
 	AddonIssueCodeUnsupportedAddonModification AddonIssueCode = "UnsupportedAddonModification"
 	AddonIssueCodeK8sResourceNotFound          AddonIssueCode = "K8sResourceNotFound"
+	AddonIssueCodeAddonSubscriptionNeeded      AddonIssueCode = "AddonSubscriptionNeeded"
+	AddonIssueCodeAddonPermissionFailure       AddonIssueCode = "AddonPermissionFailure"
 )
 
 // Values returns all known values for AddonIssueCode. Note that this can be
@@ -49,6 +51,8 @@ func (AddonIssueCode) Values() []AddonIssueCode {
 		"AdmissionRequestDenied",
 		"UnsupportedAddonModification",
 		"K8sResourceNotFound",
+		"AddonSubscriptionNeeded",
+		"AddonPermissionFailure",
 	}
 }
 
@@ -709,6 +713,7 @@ const (
 	UpdateParamTypeSecurityGroups           UpdateParamType = "SecurityGroups"
 	UpdateParamTypeSubnets                  UpdateParamType = "Subnets"
 	UpdateParamTypeAuthenticationMode       UpdateParamType = "AuthenticationMode"
+	UpdateParamTypePodIdentityAssociations  UpdateParamType = "PodIdentityAssociations"
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
@@ -744,6 +749,7 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"SecurityGroups",
 		"Subnets",
 		"AuthenticationMode",
+		"PodIdentityAssociations",
 	}
 }
 

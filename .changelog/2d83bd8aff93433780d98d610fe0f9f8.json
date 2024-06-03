@@ -1,0 +1,8 @@
+{
+    "id": "2d83bd8a-ff93-4337-80d9-8d610fe0f9f8",
+    "type": "documentation",
+    "description": "This doc-only update identifies fields that are specific to Gen 1 and Gen 2 applications.",
+    "modules": [
+        "service/amplify"
+    ]
+}

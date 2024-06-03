@@ -21,6 +21,7 @@
         "api_op_DescribeJobQueues.go",
         "api_op_DescribeJobs.go",
         "api_op_DescribeSchedulingPolicies.go",
+        "api_op_GetJobQueueSnapshot.go",
         "api_op_ListJobs.go",
         "api_op_ListSchedulingPolicies.go",
         "api_op_ListTagsForResource.go",

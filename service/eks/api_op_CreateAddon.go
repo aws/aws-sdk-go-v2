@@ -61,6 +61,14 @@ type CreateAddonInput struct {
 	// DescribeAddonConfiguration .
 	ConfigurationValues *string
 
+	// An array of Pod Identity Assocations to be created. Each EKS Pod Identity
+	// association maps a Kubernetes service account to an IAM Role.
+	//
+	// For more information, see [Attach an IAM Role to an Amazon EKS add-on using Pod Identity] in the EKS User Guide.
+	//
+	// [Attach an IAM Role to an Amazon EKS add-on using Pod Identity]: https://docs.aws.amazon.com/eks/latest/userguide/add-ons-iam.html
+	PodIdentityAssociations []types.AddonPodIdentityAssociations
+
 	// How to resolve field value conflicts for an Amazon EKS add-on. Conflicts are
 	// handled based on the value you choose:
 	//

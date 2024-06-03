@@ -90,11 +90,11 @@ type UpdateNodegroupVersionInput struct {
 	//
 	// If you specify launchTemplate , and your launch template uses a custom AMI, then
 	// don't specify releaseVersion , or the node group update will fail. For more
-	// information about using launch templates with Amazon EKS, see [Launch template support]in the Amazon EKS
+	// information about using launch templates with Amazon EKS, see [Customizing managed nodes with launch templates]in the Amazon EKS
 	// User Guide.
 	//
+	// [Customizing managed nodes with launch templates]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
 	// [Amazon EKS optimized Amazon Linux AMI versions]: https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html
-	// [Launch template support]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
 	// [Amazon EKS optimized Windows AMI versions]: https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html
 	ReleaseVersion *string
 
@@ -104,9 +104,9 @@ type UpdateNodegroupVersionInput struct {
 	// version of the cluster's Kubernetes version. If you specify launchTemplate , and
 	// your launch template uses a custom AMI, then don't specify version , or the node
 	// group update will fail. For more information about using launch templates with
-	// Amazon EKS, see [Launch template support]in the Amazon EKS User Guide.
+	// Amazon EKS, see [Customizing managed nodes with launch templates]in the Amazon EKS User Guide.
 	//
-	// [Launch template support]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
+	// [Customizing managed nodes with launch templates]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
 	Version *string
 
 	noSmithyDocumentSerde

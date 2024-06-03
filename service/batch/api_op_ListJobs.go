@@ -90,13 +90,22 @@ type ListJobsInput struct {
 	// returned.
 	JobStatus types.JobStatus
 
-	// The maximum number of results returned by ListJobs in paginated output. When
-	// this parameter is used, ListJobs only returns maxResults results in a single
-	// page and a nextToken response element. The remaining results of the initial
-	// request can be seen by sending another ListJobs request with the returned
-	// nextToken value. This value can be between 1 and 100. If this parameter isn't
-	// used, then ListJobs returns up to 100 results and a nextToken value if
-	// applicable.
+	// The maximum number of results returned by ListJobs in a paginated output. When
+	// this parameter is used, ListJobs returns up to maxResults results in a single
+	// page and a nextToken response element, if applicable. The remaining results of
+	// the initial request can be seen by sending another ListJobs request with the
+	// returned nextToken value.
+	//
+	// The following outlines key parameters and limitations:
+	//
+	//   - The minimum value is 1.
+	//
+	//   - When --job-status is used, Batch returns up to 1000 values.
+	//
+	//   - When --filters is used, Batch returns up to 100 values.
+	//
+	//   - If neither parameter is used, then ListJobs returns up to 1000 results (jobs
+	//   that are in the RUNNING status) and a nextToken value, if applicable.
 	MaxResults *int32
 
 	// The job ID for a multi-node parallel job. Specifying a multi-node parallel job
@@ -220,13 +229,22 @@ var _ ListJobsAPIClient = (*Client)(nil)
 
 // ListJobsPaginatorOptions is the paginator options for ListJobs
 type ListJobsPaginatorOptions struct {
-	// The maximum number of results returned by ListJobs in paginated output. When
-	// this parameter is used, ListJobs only returns maxResults results in a single
-	// page and a nextToken response element. The remaining results of the initial
-	// request can be seen by sending another ListJobs request with the returned
-	// nextToken value. This value can be between 1 and 100. If this parameter isn't
-	// used, then ListJobs returns up to 100 results and a nextToken value if
-	// applicable.
+	// The maximum number of results returned by ListJobs in a paginated output. When
+	// this parameter is used, ListJobs returns up to maxResults results in a single
+	// page and a nextToken response element, if applicable. The remaining results of
+	// the initial request can be seen by sending another ListJobs request with the
+	// returned nextToken value.
+	//
+	// The following outlines key parameters and limitations:
+	//
+	//   - The minimum value is 1.
+	//
+	//   - When --job-status is used, Batch returns up to 1000 values.
+	//
+	//   - When --filters is used, Batch returns up to 100 values.
+	//
+	//   - If neither parameter is used, then ListJobs returns up to 1000 results (jobs
+	//   that are in the RUNNING status) and a nextToken value, if applicable.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

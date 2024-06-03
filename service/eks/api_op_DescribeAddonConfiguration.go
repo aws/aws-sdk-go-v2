@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +60,10 @@ type DescribeAddonConfigurationOutput struct {
 	// A JSON schema that's used to validate the configuration values you provide when
 	// an add-on is created or updated.
 	ConfigurationSchema *string
+
+	// The Kubernetes service account name used by the addon, and any suggested IAM
+	// policies. Use this information to create an IAM Role for the Addon.
+	PodIdentityConfiguration []types.AddonPodIdentityConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
