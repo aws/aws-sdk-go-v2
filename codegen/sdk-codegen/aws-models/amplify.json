@@ -1436,7 +1436,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the backend properties associated with an Amplify\n            <code>Branch</code>.</p>"
+                "smithy.api#documentation": "<p>Describes the backend associated with an Amplify\n            <code>Branch</code>.</p>\n         <p>This property is available to Amplify Gen 2 apps only. When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>"
             }
         },
         "com.amazonaws.amplify#BackendEnvironment": {
@@ -1484,7 +1484,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the backend environment for an Amplify app. </p>"
+                "smithy.api#documentation": "<p>Describes the backend environment associated with a <code>Branch</code> of a Gen 1\n                Amplify app. Amplify Gen 1 applications are created\n            using Amplify Studio or the Amplify command line\n            interface (CLI).</p>"
             }
         },
         "com.amazonaws.amplify#BackendEnvironmentArn": {
@@ -1706,7 +1706,7 @@
                 "backendEnvironmentArn": {
                     "target": "com.amazonaws.amplify#BackendEnvironmentArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify\n            app. </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. </p>\n         <p>This property is available to Amplify Gen 1 apps only. When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>"
                     }
                 },
                 "backend": {
@@ -2082,7 +2082,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new backend environment for an Amplify app. </p>\n         <p>This API is available only to Amplify Gen 1 applications where the\n            backend is created using Amplify Studio or the Amplify\n            command line interface (CLI). This API isn’t available to applications created using the\n            Amplify Gen 2 public preview. When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>",
+                "smithy.api#documentation": "<p>Creates a new backend environment for an Amplify app. </p>\n         <p>This API is available only to Amplify Gen 1 applications where the\n            backend is created using Amplify Studio or the Amplify\n            command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. \n            When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/apps/{appId}/backendenvironments",
@@ -2290,13 +2290,13 @@
                 "backendEnvironmentArn": {
                     "target": "com.amazonaws.amplify#BackendEnvironmentArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify\n            app. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a backend environment that is part of a Gen 1 Amplify\n            app. </p>\n         <p>This field is available to Amplify Gen 1 apps only where the\n            backend is created using Amplify Studio or the Amplify\n            command line interface (CLI).</p>"
                     }
                 },
                 "backend": {
                     "target": "com.amazonaws.amplify#Backend",
                     "traits": {
-                        "smithy.api#documentation": "<p>The backend for a <code>Branch</code> of an Amplify app. Use for a\n            backend created from an CloudFormation stack.</p>"
+                        "smithy.api#documentation": "<p>The backend for a <code>Branch</code> of an Amplify app. Use for a\n            backend created from an CloudFormation stack.</p>\n         <p>This field is available to Amplify Gen 2 apps only. When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>"
                     }
                 }
             },
@@ -2787,7 +2787,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a backend environment for an Amplify app. </p>\n         <p>This API is available only to Amplify Gen 1 applications where the\n            backend was created using Amplify Studio or the Amplify\n            command line interface (CLI). This API isn’t available to applications created using the\n            Amplify Gen 2 public preview. When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>",
+                "smithy.api#documentation": "<p>Deletes a backend environment for an Amplify app. </p>\n         <p>This API is available only to Amplify Gen 1 applications where the\n            backend is created using Amplify Studio or the Amplify\n            command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. \n            When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/apps/{appId}/backendenvironments/{environmentName}",
@@ -3719,7 +3719,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a backend environment for an Amplify app. </p>\n         <p>This API is available only to Amplify Gen 1 applications where the\n            backend was created using Amplify Studio or the Amplify\n            command line interface (CLI). This API isn’t available to applications created using the\n            Amplify Gen 2 public preview. When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>",
+                "smithy.api#documentation": "<p>Returns a backend environment for an Amplify app. </p>\n         <p>This API is available only to Amplify Gen 1 applications where the\n            backend is created using Amplify Studio or the Amplify\n            command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. \n            When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/apps/{appId}/backendenvironments/{environmentName}",
@@ -4497,7 +4497,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the backend environments for an Amplify app. </p>\n         <p>This API is available only to Amplify Gen 1 applications where the\n            backend was created using Amplify Studio or the Amplify\n            command line interface (CLI). This API isn’t available to applications created using the\n                Amplify Gen 2 public preview. When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>",
+                "smithy.api#documentation": "<p>Lists the backend environments for an Amplify app. </p>\n         <p>This API is available only to Amplify Gen 1 applications where the\n            backend is created using Amplify Studio or the Amplify\n            command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. \n            When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/apps/{appId}/backendenvironments",
@@ -6324,13 +6324,13 @@
                 "backendEnvironmentArn": {
                     "target": "com.amazonaws.amplify#BackendEnvironmentArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify\n            app. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a backend environment that is part of a Gen 1 Amplify\n            app. </p>\n         <p>This field is available to Amplify Gen 1 apps only where the\n            backend is created using Amplify Studio or the Amplify\n            command line interface (CLI).</p>"
                     }
                 },
                 "backend": {
                     "target": "com.amazonaws.amplify#Backend",
                     "traits": {
-                        "smithy.api#documentation": "<p>The backend for a <code>Branch</code> of an Amplify app. Use for a\n            backend created from an CloudFormation stack.</p>"
+                        "smithy.api#documentation": "<p>The backend for a <code>Branch</code> of an Amplify app. Use for a\n            backend created from an CloudFormation stack.</p>\n         <p>This field is available to Amplify Gen 2 apps only. When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>"
                     }
                 }
             },

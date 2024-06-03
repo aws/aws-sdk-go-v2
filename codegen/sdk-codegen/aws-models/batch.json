@@ -73,6 +73,9 @@
                     "target": "com.amazonaws.batch#DescribeSchedulingPolicies"
                 },
                 {
+                    "target": "com.amazonaws.batch#GetJobQueueSnapshot"
+                },
+                {
                     "target": "com.amazonaws.batch#ListJobs"
                 },
                 {
@@ -4843,6 +4846,107 @@
         "com.amazonaws.batch#Float": {
             "type": "float"
         },
+        "com.amazonaws.batch#FrontOfQueueDetail": {
+            "type": "structure",
+            "members": {
+                "jobs": {
+                    "target": "com.amazonaws.batch#FrontOfQueueJobSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the first 100 <code>RUNNABLE</code> jobs in a named job queue. For first-in-first-out (FIFO) job queues, jobs are ordered based on their submission time. For fair share scheduling (FSS) job queues, jobs are ordered based on their job priority and share usage.</p>"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.batch#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp (in milliseconds) for when each of the first 100 <code>RUNNABLE</code> jobs were last updated. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a list of the first 100 <code>RUNNABLE</code> jobs associated to a single job queue.</p>"
+            }
+        },
+        "com.amazonaws.batch#FrontOfQueueJobSummary": {
+            "type": "structure",
+            "members": {
+                "jobArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for a job in a named job queue.</p>"
+                    }
+                },
+                "earliestTimeAtPosition": {
+                    "target": "com.amazonaws.batch#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp (in milliseconds) for when the job transitioned to its current position in the job queue.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents summary details for the first 100 <code>RUNNABLE</code> jobs in a job queue.</p>"
+            }
+        },
+        "com.amazonaws.batch#FrontOfQueueJobSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#FrontOfQueueJobSummary"
+            }
+        },
+        "com.amazonaws.batch#GetJobQueueSnapshot": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.batch#GetJobQueueSnapshotRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.batch#GetJobQueueSnapshotResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.batch#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.batch#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a list of the first 100 <code>RUNNABLE</code> jobs associated to a single job queue.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/getjobqueuesnapshot",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.batch#GetJobQueueSnapshotRequest": {
+            "type": "structure",
+            "members": {
+                "jobQueue": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The job queue’s name or full queue Amazon Resource Name (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.batch#GetJobQueueSnapshotResponse": {
+            "type": "structure",
+            "members": {
+                "frontOfQueue": {
+                    "target": "com.amazonaws.batch#FrontOfQueueDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of the first 100 <code>RUNNABLE</code> jobs in each job queue. For first-in-first-out (FIFO) job queues, jobs are ordered based on their submission time. For fair share scheduling (FSS) job queues, jobs are ordered based on their job priority and share usage.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.batch#Host": {
             "type": "structure",
             "members": {
@@ -5880,7 +5984,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results returned by <code>ListJobs</code> in paginated output. When\n      this parameter is used, <code>ListJobs</code> only returns <code>maxResults</code> results in\n      a single page and a <code>nextToken</code> response element. The remaining results of the\n      initial request can be seen by sending another <code>ListJobs</code> request with the returned\n        <code>nextToken</code> value. This value can be between 1 and\n      100. If this parameter isn't used, then <code>ListJobs</code> returns up to\n      100 results and a <code>nextToken</code> value if applicable.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results returned by <code>ListJobs</code> in a paginated output. When this parameter is used, <code>ListJobs</code> returns up to <code>maxResults</code> results in a single page and a <code>nextToken</code> response element, if applicable. The remaining results of the initial request can be seen by sending another <code>ListJobs</code> request with the returned <code>nextToken</code> value.</p>\n         <p>The following outlines key parameters and limitations:</p>\n         <ul>\n            <li>\n               <p>The minimum value is 1. </p>\n            </li>\n            <li>\n               <p>When <code>--job-status</code> is used, Batch returns up to 1000 values. </p>\n            </li>\n            <li>\n               <p>When <code>--filters</code> is used, Batch returns up to 100 values.</p>\n            </li>\n            <li>\n               <p>If neither parameter is used, then <code>ListJobs</code> returns up to\n      1000 results (jobs that are in the <code>RUNNING</code> status) and a <code>nextToken</code> value, if applicable.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "nextToken": {
