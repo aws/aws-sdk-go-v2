@@ -1,3 +1,7 @@
+# v1.37.2 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.1 (2024-05-31)
 
 * **Documentation**: AWS CodeBuild now supports Self-hosted GitHub Actions runners for Github Enterprise

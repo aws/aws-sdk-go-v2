@@ -1,3 +1,7 @@
+# v1.142.1 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.142.0 (2024-05-30)
 
 * **Feature**: Adds Model Card information as a new component to Model Package. Autopilot launches algorithm selection for TimeSeries modality to generate AutoML candidates per algorithm.

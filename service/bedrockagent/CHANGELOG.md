@@ -1,3 +1,7 @@
+# v1.12.1 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2024-05-30)
 
 * **Feature**: With this release, Knowledge bases for Bedrock adds support for Titan Text Embedding v2.

@@ -1,3 +1,23 @@
+# Release (2024-06-03)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.27.1
+  * **Bug Fix**: Re-enable hoisting of `X-Amz-Expected-Bucket-Owner` in presigning, but in lowercase form, such that it is correctly enforced.
+  * **Documentation**: Add deprecation docs to global endpoint resolution interfaces. These APIs were previously deprecated with the introduction of service-specific endpoint resolution (EndpointResolverV2 and BaseEndpoint on service client options).
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.27.17](config/CHANGELOG.md#v12717-2024-06-03)
+  * **Documentation**: Add deprecation docs to global endpoint resolution interfaces. These APIs were previously deprecated with the introduction of service-specific endpoint resolution (EndpointResolverV2 and BaseEndpoint on service client options).
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.21.10](service/amplify/CHANGELOG.md#v12110-2024-06-03)
+  * **Documentation**: This doc-only update identifies fields that are specific to Gen 1 and Gen 2 applications.
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.38.0](service/batch/CHANGELOG.md#v1380-2024-06-03)
+  * **Feature**: This release adds support for the AWS Batch GetJobQueueSnapshot API operation.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.43.0](service/eks/CHANGELOG.md#v1430-2024-06-03)
+  * **Feature**: Adds support for EKS add-ons pod identity associations integration
+* `github.com/aws/aws-sdk-go-v2/service/iottwinmaker`: [v1.20.0](service/iottwinmaker/CHANGELOG.md#v1200-2024-06-03)
+  * **Feature**: Support RESET_VALUE UpdateType for PropertyUpdates to reset property value to default or null
+
 # Release (2024-05-31)
 
 ## Module Highlights

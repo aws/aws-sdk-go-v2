@@ -1,3 +1,7 @@
+# v1.38.7 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.6 (2024-05-31)
 
 * **Documentation**: Update to attributes of TestFailover and minor revisions.

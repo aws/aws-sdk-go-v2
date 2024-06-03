@@ -1,3 +1,7 @@
+# v1.100.1 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.100.0 (2024-05-30)
 
 * **Feature**: Adding associatedQueueIds as a SearchCriteria and response field to the SearchRoutingProfiles API

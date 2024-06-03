@@ -1,3 +1,7 @@
+# v1.4.1 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.4.0 (2024-05-31)
 
 * **Feature**: This release adds support for describing workload deployment specifications, deploying additional workload types, and managing tags for Launch Wizard resources with API operations.

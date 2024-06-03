@@ -1,8 +1,0 @@
-{
-    "id": "01b2fbcc-0cd5-4a0e-a0ec-4c389d36fd97",
-    "type": "feature",
-    "description": "Adds support for EKS add-ons pod identity associations integration",
-    "modules": [
-        "service/eks"
-    ]
-}

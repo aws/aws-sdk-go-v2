@@ -1,3 +1,8 @@
+# v1.43.0 (2024-06-03)
+
+* **Feature**: Adds support for EKS add-ons pod identity associations integration
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.5 (2024-05-23)
 
 * No change notes available for this release.

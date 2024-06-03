@@ -1,3 +1,8 @@
+# v1.20.0 (2024-06-03)
+
+* **Feature**: Support RESET_VALUE UpdateType for PropertyUpdates to reset property value to default or null
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.8 (2024-05-23)
 
 * No change notes available for this release.

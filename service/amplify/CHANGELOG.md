@@ -1,3 +1,8 @@
+# v1.21.10 (2024-06-03)
+
+* **Documentation**: This doc-only update identifies fields that are specific to Gen 1 and Gen 2 applications.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.9 (2024-05-23)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.162.1 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.162.0 (2024-05-28)
 
 * **Feature**: Providing support to accept BgpAsnExtended attribute

@@ -1,3 +1,7 @@
+# v1.0.0-preview.27 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0-preview.26 (2024-05-23)
 
 * No change notes available for this release.

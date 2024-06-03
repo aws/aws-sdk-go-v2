@@ -1,3 +1,7 @@
+# v1.23.1 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2024-05-28)
 
 * **Feature**: This release adds new APIs for deleting activity type and workflow type resources.

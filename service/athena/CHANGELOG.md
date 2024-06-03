@@ -1,3 +1,7 @@
+# v1.41.1 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.0 (2024-05-29)
 
 * **Feature**: Throwing validation errors on CreateNotebook with Name containing `/`,`:`,`\`

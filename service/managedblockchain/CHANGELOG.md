@@ -1,3 +1,7 @@
+# v1.22.10 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.9 (2024-05-24)
 
 * **Documentation**: This is a minor documentation update to address the impact of the shut down of the Goerli and Polygon networks.

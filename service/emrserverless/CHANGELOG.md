@@ -1,3 +1,7 @@
+# v1.21.1 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2024-05-30)
 
 * **Feature**: The release adds support for spark structured streaming.

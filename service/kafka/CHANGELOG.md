@@ -1,3 +1,7 @@
+# v1.33.1 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2024-05-28)
 
 * **Feature**: Adds ControllerNodeInfo in ListNodes response to support Raft mode for MSK

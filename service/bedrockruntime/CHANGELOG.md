@@ -1,3 +1,7 @@
+# v1.9.1 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2024-05-30)
 
 * **Feature**: This release adds Converse and ConverseStream APIs to Bedrock Runtime

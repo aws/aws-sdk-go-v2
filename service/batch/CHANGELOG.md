@@ -1,3 +1,8 @@
+# v1.38.0 (2024-06-03)
+
+* **Feature**: This release adds support for the AWS Batch GetJobQueueSnapshot API operation.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.4 (2024-05-23)
 
 * No change notes available for this release.

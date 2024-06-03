@@ -1,3 +1,7 @@
+# v1.15.1 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2024-05-24)
 
 * **Feature**: AWS IoT FleetWise now supports listing vehicles with attributes filter, ListVehicles API is updated to support additional attributes filter.
