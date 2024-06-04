@@ -2,11 +2,14 @@ package s3
 
 import (
 	"context"
+	"errors"
+	"io"
 	"net/http"
 	"strings"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 // This file replicates the tests in https://github.com/smithy-lang/smithy/blob/main/smithy-aws-protocol-tests/model/restXml/services/s3.smithy,
@@ -156,18 +159,19 @@ func TestS3Protocol_ListObjectsV2_Request(t *testing.T) {
 				t.Fatal("captured request is nil")
 			}
 
-			if tt.ExpectMethod != r.r.Method {
-				t.Errorf("expect method: %v != %v", tt.ExpectMethod, r.r.Method)
+			req := r.r
+			if tt.ExpectMethod != req.Method {
+				t.Errorf("expect method: %v != %v", tt.ExpectMethod, req.Method)
 			}
-			if tt.ExpectHost != r.r.URL.Host {
-				t.Errorf("expect host: %v != %v", tt.ExpectHost, r.r.URL.Host)
+			if tt.ExpectHost != req.URL.Host {
+				t.Errorf("expect host: %v != %v", tt.ExpectHost, req.URL.Host)
 			}
-			if tt.ExpectPath != r.r.URL.RawPath {
-				t.Errorf("expect path: %v != %v", tt.ExpectPath, r.r.URL.RawPath)
+			if tt.ExpectPath != req.URL.RawPath {
+				t.Errorf("expect path: %v != %v", tt.ExpectPath, req.URL.RawPath)
 			}
 			for _, q := range tt.ExpectQuery {
-				if !strings.Contains(r.r.URL.RawQuery, q) {
-					t.Errorf("query %v is missing %v", r.r.URL.RawQuery, q)
+				if !strings.Contains(req.URL.RawQuery, q) {
+					t.Errorf("query %v is missing %v", req.URL.RawQuery, q)
 				}
 			}
 		})
@@ -225,18 +229,19 @@ func TestS3Protocol_DeleteObjectTagging_Request(t *testing.T) {
 				t.Fatal("captured request is nil")
 			}
 
-			if tt.ExpectMethod != r.r.Method {
-				t.Errorf("expect method: %v != %v", tt.ExpectMethod, r.r.Method)
+			req := r.r
+			if tt.ExpectMethod != req.Method {
+				t.Errorf("expect method: %v != %v", tt.ExpectMethod, req.Method)
 			}
-			if tt.ExpectHost != r.r.URL.Host {
-				t.Errorf("expect host: %v != %v", tt.ExpectHost, r.r.URL.Host)
+			if tt.ExpectHost != req.URL.Host {
+				t.Errorf("expect host: %v != %v", tt.ExpectHost, req.URL.Host)
 			}
-			if tt.ExpectPath != r.r.URL.RawPath {
-				t.Errorf("expect path: %v != %v", tt.ExpectPath, r.r.URL.RawPath)
+			if tt.ExpectPath != req.URL.RawPath {
+				t.Errorf("expect path: %v != %v", tt.ExpectPath, req.URL.RawPath)
 			}
 			for _, q := range tt.ExpectQuery {
-				if !strings.Contains(r.r.URL.RawQuery, q) {
-					t.Errorf("query %v is missing %v", r.r.URL.RawQuery, q)
+				if !strings.Contains(req.URL.RawQuery, q) {
+					t.Errorf("query %v is missing %v", req.URL.RawQuery, q)
 				}
 			}
 		})
@@ -295,19 +300,104 @@ func TestS3Protocol_GetObject_Request(t *testing.T) {
 				t.Fatal("captured request is nil")
 			}
 
-			if tt.ExpectMethod != r.r.Method {
-				t.Errorf("expect method: %v != %v", tt.ExpectMethod, r.r.Method)
+			req := r.r
+			if tt.ExpectMethod != req.Method {
+				t.Errorf("expect method: %v != %v", tt.ExpectMethod, req.Method)
 			}
-			if tt.ExpectHost != r.r.URL.Host {
-				t.Errorf("expect host: %v != %v", tt.ExpectHost, r.r.URL.Host)
+			if tt.ExpectHost != req.URL.Host {
+				t.Errorf("expect host: %v != %v", tt.ExpectHost, req.URL.Host)
 			}
-			if tt.ExpectPath != r.r.URL.RawPath {
-				t.Errorf("expect path: %v != %v", tt.ExpectPath, r.r.URL.RawPath)
+			if tt.ExpectPath != req.URL.RawPath {
+				t.Errorf("expect path: %v != %v", tt.ExpectPath, req.URL.RawPath)
 			}
 			for _, q := range tt.ExpectQuery {
-				if !strings.Contains(r.r.URL.RawQuery, q) {
-					t.Errorf("query %v is missing %v", r.r.URL.RawQuery, q)
+				if !strings.Contains(req.URL.RawQuery, q) {
+					t.Errorf("query %v is missing %v", req.URL.RawQuery, q)
 				}
+			}
+		})
+	}
+
+}
+
+type mockHTTPResponse struct {
+	resp *http.Response
+}
+
+func (m *mockHTTPResponse) Do(r *http.Request) (*http.Response, error) {
+	return m.resp, nil
+}
+
+func TestS3Protocol_GetBucketLocation_Response(t *testing.T) {
+	for name, tt := range map[string]struct {
+		Response *http.Response
+		Expect   *GetBucketLocationOutput
+	}{
+		"GetBucketLocationUnwrappedOutput": {
+			Response: &http.Response{
+				StatusCode: 200,
+				Body:       io.NopCloser(strings.NewReader("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<LocationConstraint xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">us-west-2</LocationConstraint>")),
+			},
+			Expect: &GetBucketLocationOutput{
+				LocationConstraint: types.BucketLocationConstraintUsWest2,
+			},
+		},
+	} {
+		t.Run(name, func(t *testing.T) {
+			svc := New(Options{
+				Region:     "us-west-2",
+				HTTPClient: &mockHTTPResponse{tt.Response},
+			})
+
+			out, err := svc.GetBucketLocation(context.Background(), &GetBucketLocationInput{
+				Bucket: aws.String("bucket"),
+			})
+			if err != nil {
+				t.Fatalf("get bucket location: %v", err)
+			}
+
+			if tt.Expect.LocationConstraint != out.LocationConstraint {
+				t.Errorf("LocationConstraint %v != %v", tt.Expect.LocationConstraint, out.LocationConstraint)
+			}
+		})
+	}
+}
+
+func TestS3Protocol_Error_NoSuchBucket(t *testing.T) {
+	for name, tt := range map[string]struct {
+		Response *http.Response
+	}{
+		"GetBucketLocationUnwrappedOutput": {
+			Response: &http.Response{
+				StatusCode: 400,
+				Body:       io.NopCloser(strings.NewReader("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error>\n\t<Type>Sender</Type>\n\t<Code>NoSuchBucket</Code>\n</Error>")),
+			},
+		},
+	} {
+		t.Run(name, func(t *testing.T) {
+			svc := New(Options{
+				Region:     "us-west-2",
+				HTTPClient: &mockHTTPResponse{tt.Response},
+			})
+
+			_, err := svc.GetObject(context.Background(), &GetObjectInput{
+				Bucket: aws.String("bucket"),
+				Key:    aws.String("key"),
+			})
+			if err == nil {
+				t.Fatal("call operation: expected error, got none")
+			}
+
+			// of note: we don't actually return a *types.NoSuchBucket in this
+			// case, but we DO capture the right error code
+			var terr interface {
+				ErrorCode() string
+			}
+			if !errors.As(err, &terr) {
+				t.Errorf("error does not implement ErrorCode(), was %v", err)
+			}
+			if actual := terr.ErrorCode(); actual != "NoSuchBucket" {
+				t.Errorf("error code, expected NoSuchBucket, was %v", actual)
 			}
 		})
 	}
