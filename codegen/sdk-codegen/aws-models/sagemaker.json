@@ -6443,6 +6443,18 @@
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:cluster/[a-z0-9]{12}$"
             }
         },
+        "com.amazonaws.sagemaker#ClusterAvailabilityZone": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-z]{2}-[a-z]+-\\d[a-z]$"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterAvailabilityZoneId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-z]{3}\\d-az\\d$"
+            }
+        },
         "com.amazonaws.sagemaker#ClusterInstanceCount": {
             "type": "integer",
             "traits": {
@@ -6581,6 +6593,26 @@
                     "min": 1,
                     "max": 20
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterInstancePlacement": {
+            "type": "structure",
+            "members": {
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.sagemaker#ClusterAvailabilityZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone where the node in the SageMaker HyperPod cluster is launched.</p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.sagemaker#ClusterAvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (ID) of the Availability Zone where the node in the SageMaker HyperPod cluster\n         is launched.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the placement details for the node in the SageMaker HyperPod cluster, including the\n         Availability Zone and the unique identifier (ID) of the Availability Zone.</p>"
             }
         },
         "com.amazonaws.sagemaker#ClusterInstanceStatus": {
@@ -6971,6 +7003,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of threads per CPU core you specified under\n         <code>CreateCluster</code>.</p>"
                     }
+                },
+                "PrivatePrimaryIp": {
+                    "target": "com.amazonaws.sagemaker#ClusterPrivatePrimaryIp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private primary IP address of the SageMaker HyperPod cluster node.</p>"
+                    }
+                },
+                "PrivateDnsHostname": {
+                    "target": "com.amazonaws.sagemaker#ClusterPrivateDnsHostname",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private DNS hostname of the SageMaker HyperPod cluster node.</p>"
+                    }
+                },
+                "Placement": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstancePlacement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The placement details of the SageMaker HyperPod cluster node.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7047,6 +7097,18 @@
                 "smithy.api#range": {
                     "min": 0
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterPrivateDnsHostname": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^ip-((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)-?\\b){4}\\..*$"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterPrivatePrimaryIp": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$"
             }
         },
         "com.amazonaws.sagemaker#ClusterSortBy": {
@@ -17404,7 +17466,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information of an instance (also called a <i>node</i>\n         interchangeably) of a SageMaker HyperPod cluster.</p>"
+                "smithy.api#documentation": "<p>Retrieves information of a node (also called a <i>instance</i>\n         interchangeably) of a SageMaker HyperPod cluster.</p>"
             }
         },
         "com.amazonaws.sagemaker#DescribeClusterNodeRequest": {
@@ -17414,7 +17476,7 @@
                     "target": "com.amazonaws.sagemaker#ClusterNameOrArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The string name or the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster in which the instance is.</p>",
+                        "smithy.api#documentation": "<p>The string name or the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster in which the node is.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17422,7 +17484,7 @@
                     "target": "com.amazonaws.sagemaker#ClusterNodeId",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The ID of the instance.</p>",
+                        "smithy.api#documentation": "<p>The ID of the SageMaker HyperPod cluster node.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -17438,7 +17500,7 @@
                     "target": "com.amazonaws.sagemaker#ClusterNodeDetails",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The details of the instance.</p>",
+                        "smithy.api#documentation": "<p>The details of the SageMaker HyperPod cluster node.</p>",
                         "smithy.api#required": {}
                     }
                 }
