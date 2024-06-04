@@ -1,3 +1,16 @@
+# Release (2024-06-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.163.0](service/ec2/CHANGELOG.md#v11630-2024-06-04)
+  * **Feature**: U7i instances with up to 32 TiB of DDR5 memory and 896 vCPUs are now available. C7i-flex instances are launched and are lower-priced variants of the Amazon EC2 C7i instances that offer a baseline level of CPU performance with the ability to scale up to the full compute performance 95% of the time.
+* `github.com/aws/aws-sdk-go-v2/service/pipes`: [v1.12.0](service/pipes/CHANGELOG.md#v1120-2024-06-04)
+  * **Feature**: This release adds Timestream for LiveAnalytics as a supported target in EventBridge Pipes
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.143.0](service/sagemaker/CHANGELOG.md#v11430-2024-06-04)
+  * **Feature**: Extend DescribeClusterNode response with private DNS hostname and IP address, and placement information about availability zone and availability zone ID.
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.0.0](service/taxsettings/CHANGELOG.md#v100-2024-06-04)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of AWS Tax Settings API
+
 # Release (2024-06-03)
 
 ## General Highlights

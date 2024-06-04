@@ -1,8 +1,0 @@
-{
-    "id": "e79229d4-1281-44a7-a5c7-c35dc2f762d7",
-    "type": "feature",
-    "description": "This release adds Timestream for LiveAnalytics as a supported target in EventBridge Pipes",
-    "modules": [
-        "service/pipes"
-    ]
-}

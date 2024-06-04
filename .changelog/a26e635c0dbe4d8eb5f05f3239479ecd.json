@@ -1,8 +1,0 @@
-{
-    "id": "a26e635c-0dbe-4d8e-b5f0-5f3239479ecd",
-    "type": "feature",
-    "description": "Initial release of AWS Tax Settings API",
-    "modules": [
-        "service/taxsettings"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.143.0 (2024-06-04)
+
+* **Feature**: Extend DescribeClusterNode response with private DNS hostname and IP address, and placement information about availability zone and availability zone ID.
+
 # v1.142.1 (2024-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

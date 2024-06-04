@@ -1,3 +1,7 @@
+# v1.12.0 (2024-06-04)
+
+* **Feature**: This release adds Timestream for LiveAnalytics as a supported target in EventBridge Pipes
+
 # v1.11.9 (2024-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions
