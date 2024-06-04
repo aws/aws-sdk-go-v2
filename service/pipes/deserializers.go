@@ -2905,6 +2905,98 @@ func awsRestjson1_deserializeDocumentDeadLetterConfig(v **types.DeadLetterConfig
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDimensionMapping(v **types.DimensionMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DimensionMapping
+	if *v == nil {
+		sv = &types.DimensionMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DimensionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DimensionName to be of type string, got %T instead", value)
+				}
+				sv.DimensionName = ptr.String(jtv)
+			}
+
+		case "DimensionValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DimensionValue to be of type string, got %T instead", value)
+				}
+				sv.DimensionValue = ptr.String(jtv)
+			}
+
+		case "DimensionValueType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DimensionValueType to be of type string, got %T instead", value)
+				}
+				sv.DimensionValueType = types.DimensionValueType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDimensionMappings(v *[]types.DimensionMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DimensionMapping
+	if *v == nil {
+		cv = []types.DimensionMapping{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DimensionMapping
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentDimensionMapping(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEcsContainerOverride(v **types.EcsContainerOverride, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3936,6 +4028,177 @@ loop:
 		}
 	}
 	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMultiMeasureAttributeMapping(v **types.MultiMeasureAttributeMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MultiMeasureAttributeMapping
+	if *v == nil {
+		sv = &types.MultiMeasureAttributeMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MeasureValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MeasureValue to be of type string, got %T instead", value)
+				}
+				sv.MeasureValue = ptr.String(jtv)
+			}
+
+		case "MeasureValueType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MeasureValueType to be of type string, got %T instead", value)
+				}
+				sv.MeasureValueType = types.MeasureValueType(jtv)
+			}
+
+		case "MultiMeasureAttributeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MultiMeasureAttributeName to be of type string, got %T instead", value)
+				}
+				sv.MultiMeasureAttributeName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMultiMeasureAttributeMappings(v *[]types.MultiMeasureAttributeMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MultiMeasureAttributeMapping
+	if *v == nil {
+		cv = []types.MultiMeasureAttributeMapping{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MultiMeasureAttributeMapping
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMultiMeasureAttributeMapping(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMultiMeasureMapping(v **types.MultiMeasureMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MultiMeasureMapping
+	if *v == nil {
+		sv = &types.MultiMeasureMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MultiMeasureAttributeMappings":
+			if err := awsRestjson1_deserializeDocumentMultiMeasureAttributeMappings(&sv.MultiMeasureAttributeMappings, value); err != nil {
+				return err
+			}
+
+		case "MultiMeasureName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MultiMeasureName to be of type string, got %T instead", value)
+				}
+				sv.MultiMeasureName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMultiMeasureMappings(v *[]types.MultiMeasureMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MultiMeasureMapping
+	if *v == nil {
+		cv = []types.MultiMeasureMapping{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MultiMeasureMapping
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMultiMeasureMapping(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -5654,6 +5917,11 @@ func awsRestjson1_deserializeDocumentPipeTargetParameters(v **types.PipeTargetPa
 				return err
 			}
 
+		case "TimestreamParameters":
+			if err := awsRestjson1_deserializeDocumentPipeTargetTimestreamParameters(&sv.TimestreamParameters, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5858,6 +6126,97 @@ func awsRestjson1_deserializeDocumentPipeTargetStateMachineParameters(v **types.
 					return fmt.Errorf("expected PipeTargetInvocationType to be of type string, got %T instead", value)
 				}
 				sv.InvocationType = types.PipeTargetInvocationType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPipeTargetTimestreamParameters(v **types.PipeTargetTimestreamParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PipeTargetTimestreamParameters
+	if *v == nil {
+		sv = &types.PipeTargetTimestreamParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DimensionMappings":
+			if err := awsRestjson1_deserializeDocumentDimensionMappings(&sv.DimensionMappings, value); err != nil {
+				return err
+			}
+
+		case "EpochTimeUnit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EpochTimeUnit to be of type string, got %T instead", value)
+				}
+				sv.EpochTimeUnit = types.EpochTimeUnit(jtv)
+			}
+
+		case "MultiMeasureMappings":
+			if err := awsRestjson1_deserializeDocumentMultiMeasureMappings(&sv.MultiMeasureMappings, value); err != nil {
+				return err
+			}
+
+		case "SingleMeasureMappings":
+			if err := awsRestjson1_deserializeDocumentSingleMeasureMappings(&sv.SingleMeasureMappings, value); err != nil {
+				return err
+			}
+
+		case "TimeFieldType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimeFieldType to be of type string, got %T instead", value)
+				}
+				sv.TimeFieldType = types.TimeFieldType(jtv)
+			}
+
+		case "TimestampFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimestampFormat to be of type string, got %T instead", value)
+				}
+				sv.TimestampFormat = ptr.String(jtv)
+			}
+
+		case "TimeValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimeValue to be of type string, got %T instead", value)
+				}
+				sv.TimeValue = ptr.String(jtv)
+			}
+
+		case "VersionValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VersionValue to be of type string, got %T instead", value)
+				}
+				sv.VersionValue = ptr.String(jtv)
 			}
 
 		default:
@@ -6485,6 +6844,98 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSingleMeasureMapping(v **types.SingleMeasureMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SingleMeasureMapping
+	if *v == nil {
+		sv = &types.SingleMeasureMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MeasureName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MeasureName to be of type string, got %T instead", value)
+				}
+				sv.MeasureName = ptr.String(jtv)
+			}
+
+		case "MeasureValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MeasureValue to be of type string, got %T instead", value)
+				}
+				sv.MeasureValue = ptr.String(jtv)
+			}
+
+		case "MeasureValueType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MeasureValueType to be of type string, got %T instead", value)
+				}
+				sv.MeasureValueType = types.MeasureValueType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSingleMeasureMappings(v *[]types.SingleMeasureMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SingleMeasureMapping
+	if *v == nil {
+		cv = []types.SingleMeasureMapping{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SingleMeasureMapping
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSingleMeasureMapping(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

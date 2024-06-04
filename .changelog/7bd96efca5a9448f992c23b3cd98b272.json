@@ -1,0 +1,8 @@
+{
+    "id": "7bd96efc-a5a9-448f-992c-23b3cd98b272",
+    "type": "feature",
+    "description": "Extend DescribeClusterNode response with private DNS hostname and IP address, and placement information about availability zone and availability zone ID.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

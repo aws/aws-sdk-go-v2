@@ -3208,6 +3208,22 @@ type ClusterInstanceGroupSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the placement details for the node in the SageMaker HyperPod cluster,
+// including the Availability Zone and the unique identifier (ID) of the
+// Availability Zone.
+type ClusterInstancePlacement struct {
+
+	// The Availability Zone where the node in the SageMaker HyperPod cluster is
+	// launched.
+	AvailabilityZone *string
+
+	// The unique identifier (ID) of the Availability Zone where the node in the
+	// SageMaker HyperPod cluster is launched.
+	AvailabilityZoneId *string
+
+	noSmithyDocumentSerde
+}
+
 // Details of an instance in a SageMaker HyperPod cluster.
 type ClusterInstanceStatusDetails struct {
 
@@ -3267,6 +3283,15 @@ type ClusterNodeDetails struct {
 
 	// The LifeCycle configuration applied to the instance.
 	LifeCycleConfig *ClusterLifeCycleConfig
+
+	// The placement details of the SageMaker HyperPod cluster node.
+	Placement *ClusterInstancePlacement
+
+	// The private DNS hostname of the SageMaker HyperPod cluster node.
+	PrivateDnsHostname *string
+
+	// The private primary IP address of the SageMaker HyperPod cluster node.
+	PrivatePrimaryIp *string
 
 	// The number of threads per CPU core you specified under CreateCluster .
 	ThreadsPerCore *int32

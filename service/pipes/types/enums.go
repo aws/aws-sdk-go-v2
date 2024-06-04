@@ -62,6 +62,23 @@ func (BatchResourceRequirementType) Values() []BatchResourceRequirementType {
 	}
 }
 
+type DimensionValueType string
+
+// Enum values for DimensionValueType
+const (
+	DimensionValueTypeVarchar DimensionValueType = "VARCHAR"
+)
+
+// Values returns all known values for DimensionValueType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DimensionValueType) Values() []DimensionValueType {
+	return []DimensionValueType{
+		"VARCHAR",
+	}
+}
+
 type DynamoDBStreamStartPosition string
 
 // Enum values for DynamoDBStreamStartPosition
@@ -114,6 +131,29 @@ func (EcsResourceRequirementType) Values() []EcsResourceRequirementType {
 	return []EcsResourceRequirementType{
 		"GPU",
 		"InferenceAccelerator",
+	}
+}
+
+type EpochTimeUnit string
+
+// Enum values for EpochTimeUnit
+const (
+	EpochTimeUnitMilliseconds EpochTimeUnit = "MILLISECONDS"
+	EpochTimeUnitSeconds      EpochTimeUnit = "SECONDS"
+	EpochTimeUnitMicroseconds EpochTimeUnit = "MICROSECONDS"
+	EpochTimeUnitNanoseconds  EpochTimeUnit = "NANOSECONDS"
+)
+
+// Values returns all known values for EpochTimeUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EpochTimeUnit) Values() []EpochTimeUnit {
+	return []EpochTimeUnit{
+		"MILLISECONDS",
+		"SECONDS",
+		"MICROSECONDS",
+		"NANOSECONDS",
 	}
 }
 
@@ -196,6 +236,31 @@ func (LogLevel) Values() []LogLevel {
 		"ERROR",
 		"INFO",
 		"TRACE",
+	}
+}
+
+type MeasureValueType string
+
+// Enum values for MeasureValueType
+const (
+	MeasureValueTypeDouble    MeasureValueType = "DOUBLE"
+	MeasureValueTypeBigint    MeasureValueType = "BIGINT"
+	MeasureValueTypeVarchar   MeasureValueType = "VARCHAR"
+	MeasureValueTypeBoolean   MeasureValueType = "BOOLEAN"
+	MeasureValueTypeTimestamp MeasureValueType = "TIMESTAMP"
+)
+
+// Values returns all known values for MeasureValueType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MeasureValueType) Values() []MeasureValueType {
+	return []MeasureValueType{
+		"DOUBLE",
+		"BIGINT",
+		"VARCHAR",
+		"BOOLEAN",
+		"TIMESTAMP",
 	}
 }
 
@@ -436,5 +501,24 @@ func (SelfManagedKafkaStartPosition) Values() []SelfManagedKafkaStartPosition {
 	return []SelfManagedKafkaStartPosition{
 		"TRIM_HORIZON",
 		"LATEST",
+	}
+}
+
+type TimeFieldType string
+
+// Enum values for TimeFieldType
+const (
+	TimeFieldTypeEpoch           TimeFieldType = "EPOCH"
+	TimeFieldTypeTimestampFormat TimeFieldType = "TIMESTAMP_FORMAT"
+)
+
+// Values returns all known values for TimeFieldType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TimeFieldType) Values() []TimeFieldType {
+	return []TimeFieldType{
+		"EPOCH",
+		"TIMESTAMP_FORMAT",
 	}
 }

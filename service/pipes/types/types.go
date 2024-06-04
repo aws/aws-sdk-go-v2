@@ -288,6 +288,34 @@ type DeadLetterConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Maps source data to a dimension in the target Timestream for LiveAnalytics
+// table.
+//
+// For more information, see [Amazon Timestream for LiveAnalytics concepts]
+//
+// [Amazon Timestream for LiveAnalytics concepts]: https://docs.aws.amazon.com/timestream/latest/developerguide/concepts.html
+type DimensionMapping struct {
+
+	// The metadata attributes of the time series. For example, the name and
+	// Availability Zone of an Amazon EC2 instance or the name of the manufacturer of a
+	// wind turbine are dimensions.
+	//
+	// This member is required.
+	DimensionName *string
+
+	// Dynamic path to the dimension value in the source event.
+	//
+	// This member is required.
+	DimensionValue *string
+
+	// The data type of the dimension for the time-series data.
+	//
+	// This member is required.
+	DimensionValueType DimensionValueType
+
+	noSmithyDocumentSerde
+}
+
 // The overrides that are sent to a container. An empty container override can be
 // passed in. An example of an empty container override is {"containerOverrides":
 // [ ] } . If a non-empty container override is specified, the name parameter must
@@ -529,21 +557,21 @@ type FilterCriteria struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon Kinesis Data Firehose logging configuration settings for the pipe.
+// The Amazon Data Firehose logging configuration settings for the pipe.
 type FirehoseLogDestination struct {
 
-	// The Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery stream to
-	// which EventBridge delivers the pipe log records.
+	// The Amazon Resource Name (ARN) of the Firehose delivery stream to which
+	// EventBridge delivers the pipe log records.
 	DeliveryStreamArn *string
 
 	noSmithyDocumentSerde
 }
 
-// The Amazon Kinesis Data Firehose logging configuration settings for the pipe.
+// The Amazon Data Firehose logging configuration settings for the pipe.
 type FirehoseLogDestinationParameters struct {
 
-	// Specifies the Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery
-	// stream to which EventBridge delivers the pipe log records.
+	// Specifies the Amazon Resource Name (ARN) of the Firehose delivery stream to
+	// which EventBridge delivers the pipe log records.
 	//
 	// This member is required.
 	DeliveryStreamArn *string
@@ -596,6 +624,50 @@ type MSKAccessCredentialsMemberSaslScram512Auth struct {
 }
 
 func (*MSKAccessCredentialsMemberSaslScram512Auth) isMSKAccessCredentials() {}
+
+// A mapping of a source event data field to a measure in a Timestream for
+// LiveAnalytics record.
+type MultiMeasureAttributeMapping struct {
+
+	// Dynamic path to the measurement attribute in the source event.
+	//
+	// This member is required.
+	MeasureValue *string
+
+	// Data type of the measurement attribute in the source event.
+	//
+	// This member is required.
+	MeasureValueType MeasureValueType
+
+	// Target measure name to be used.
+	//
+	// This member is required.
+	MultiMeasureAttributeName *string
+
+	noSmithyDocumentSerde
+}
+
+// Maps multiple measures from the source event to the same Timestream for
+// LiveAnalytics record.
+//
+// For more information, see [Amazon Timestream for LiveAnalytics concepts]
+//
+// [Amazon Timestream for LiveAnalytics concepts]: https://docs.aws.amazon.com/timestream/latest/developerguide/concepts.html
+type MultiMeasureMapping struct {
+
+	// Mappings that represent multiple source event fields mapped to measures in the
+	// same Timestream for LiveAnalytics record.
+	//
+	// This member is required.
+	MultiMeasureAttributeMappings []MultiMeasureAttributeMapping
+
+	// The name of the multiple measurements per record (multi-measure).
+	//
+	// This member is required.
+	MultiMeasureName *string
+
+	noSmithyDocumentSerde
+}
 
 // This structure specifies the network configuration for an Amazon ECS task.
 type NetworkConfiguration struct {
@@ -699,7 +771,7 @@ type PipeLogConfiguration struct {
 	// The Amazon CloudWatch Logs logging configuration settings for the pipe.
 	CloudwatchLogsLogDestination *CloudwatchLogsLogDestination
 
-	// The Amazon Kinesis Data Firehose logging configuration settings for the pipe.
+	// The Amazon Data Firehose logging configuration settings for the pipe.
 	FirehoseLogDestination *FirehoseLogDestination
 
 	// Whether the execution data (specifically, the payload , awsRequest , and
@@ -732,12 +804,12 @@ type PipeLogConfiguration struct {
 // S3LogDestinationParameters ), EventBridge sets that field to its system-default
 // value during the update.
 //
-// For example, suppose when you created the pipe you specified a Kinesis Data
-// Firehose stream log destination. You then update the pipe to add an Amazon S3
-// log destination. In addition to specifying the S3LogDestinationParameters for
-// the new log destination, you must also specify the fields in the
-// FirehoseLogDestinationParameters object in order to retain the Kinesis Data
-// Firehose stream log destination.
+// For example, suppose when you created the pipe you specified a Firehose stream
+// log destination. You then update the pipe to add an Amazon S3 log destination.
+// In addition to specifying the S3LogDestinationParameters for the new log
+// destination, you must also specify the fields in the
+// FirehoseLogDestinationParameters object in order to retain the Firehose stream
+// log destination.
 //
 // For more information on generating pipe log records, see Log EventBridge Pipes in the Amazon
 // EventBridge User Guide.
@@ -756,17 +828,17 @@ type PipeLogConfigurationParameters struct {
 	// The Amazon CloudWatch Logs logging configuration settings for the pipe.
 	CloudwatchLogsLogDestination *CloudwatchLogsLogDestinationParameters
 
-	// The Amazon Kinesis Data Firehose logging configuration settings for the pipe.
+	// The Amazon Data Firehose logging configuration settings for the pipe.
 	FirehoseLogDestination *FirehoseLogDestinationParameters
 
-	// Specify ON to include the execution data (specifically, the payload and
-	// awsRequest fields) in the log messages for this pipe.
+	// Specify ALL to include the execution data (specifically, the payload ,
+	// awsRequest , and awsResponse fields) in the log messages for this pipe.
 	//
 	// This applies to all log destinations for the pipe.
 	//
 	// For more information, see [Including execution data in logs] in the Amazon EventBridge User Guide.
 	//
-	// The default is OFF .
+	// By default, execution data is not included.
 	//
 	// [Including execution data in logs]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-execution-data
 	IncludeExecutionData []IncludeExecutionDataOption
@@ -938,6 +1010,16 @@ type PipeSourceParameters struct {
 	RabbitMQBrokerParameters *PipeSourceRabbitMQBrokerParameters
 
 	// The parameters for using a self-managed Apache Kafka stream as a source.
+	//
+	// A self managed cluster refers to any Apache Kafka cluster not hosted by Amazon
+	// Web Services. This includes both clusters you manage yourself, as well as those
+	// hosted by a third-party provider, such as [Confluent Cloud], [CloudKarafka], or [Redpanda]. For more information, see [Apache Kafka streams as a source]
+	// in the Amazon EventBridge User Guide.
+	//
+	// [CloudKarafka]: https://www.cloudkarafka.com/
+	// [Apache Kafka streams as a source]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kafka.html
+	// [Confluent Cloud]: https://www.confluent.io/
+	// [Redpanda]: https://redpanda.com/
 	SelfManagedKafkaParameters *PipeSourceSelfManagedKafkaParameters
 
 	// The parameters for using a Amazon SQS stream as a source.
@@ -972,6 +1054,16 @@ type PipeSourceRabbitMQBrokerParameters struct {
 }
 
 // The parameters for using a self-managed Apache Kafka stream as a source.
+//
+// A self managed cluster refers to any Apache Kafka cluster not hosted by Amazon
+// Web Services. This includes both clusters you manage yourself, as well as those
+// hosted by a third-party provider, such as [Confluent Cloud], [CloudKarafka], or [Redpanda]. For more information, see [Apache Kafka streams as a source]
+// in the Amazon EventBridge User Guide.
+//
+// [CloudKarafka]: https://www.cloudkarafka.com/
+// [Apache Kafka streams as a source]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kafka.html
+// [Confluent Cloud]: https://www.confluent.io/
+// [Redpanda]: https://redpanda.com/
 type PipeSourceSelfManagedKafkaParameters struct {
 
 	// The name of the topic that the pipe will read from.
@@ -1309,6 +1401,9 @@ type PipeTargetParameters struct {
 	// The parameters for using a Step Functions state machine as a target.
 	StepFunctionStateMachineParameters *PipeTargetStateMachineParameters
 
+	// The parameters for using a Timestream for LiveAnalytics table as a target.
+	TimestreamParameters *PipeTargetTimestreamParameters
+
 	noSmithyDocumentSerde
 }
 
@@ -1390,6 +1485,71 @@ type PipeTargetStateMachineParameters struct {
 	// [StartSyncExecution]: https://docs.aws.amazon.com/step-functions/latest/apireference/API_StartSyncExecution.html
 	// [Invocation types]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html#pipes-invocation
 	InvocationType PipeTargetInvocationType
+
+	noSmithyDocumentSerde
+}
+
+// The parameters for using a Timestream for LiveAnalytics table as a target.
+type PipeTargetTimestreamParameters struct {
+
+	// Map source data to dimensions in the target Timestream for LiveAnalytics table.
+	//
+	// For more information, see [Amazon Timestream for LiveAnalytics concepts]
+	//
+	// [Amazon Timestream for LiveAnalytics concepts]: https://docs.aws.amazon.com/timestream/latest/developerguide/concepts.html
+	//
+	// This member is required.
+	DimensionMappings []DimensionMapping
+
+	// Dynamic path to the source data field that represents the time value for your
+	// data.
+	//
+	// This member is required.
+	TimeValue *string
+
+	// 64 bit version value or source data field that represents the version value for
+	// your data.
+	//
+	// Write requests with a higher version number will update the existing measure
+	// values of the record and version. In cases where the measure value is the same,
+	// the version will still be updated.
+	//
+	// Default value is 1.
+	//
+	// Timestream for LiveAnalytics does not support updating partial measure values
+	// in a record.
+	//
+	// Write requests for duplicate data with a higher version number will update the
+	// existing measure value and version. In cases where the measure value is the
+	// same, Version will still be updated. Default value is 1 .
+	//
+	// Version must be 1 or greater, or you will receive a ValidationException error.
+	//
+	// This member is required.
+	VersionValue *string
+
+	// The granularity of the time units used. Default is MILLISECONDS .
+	//
+	// Required if TimeFieldType is specified as EPOCH .
+	EpochTimeUnit EpochTimeUnit
+
+	// Maps multiple measures from the source event to the same record in the
+	// specified Timestream for LiveAnalytics table.
+	MultiMeasureMappings []MultiMeasureMapping
+
+	// Mappings of single source data fields to individual records in the specified
+	// Timestream for LiveAnalytics table.
+	SingleMeasureMappings []SingleMeasureMapping
+
+	// The type of time value used.
+	//
+	// The default is EPOCH .
+	TimeFieldType TimeFieldType
+
+	// How to format the timestamps. For example, YYYY-MM-DDThh:mm:ss.sssTZD .
+	//
+	// Required if TimeFieldType is specified as TIMESTAMP_FORMAT .
+	TimestampFormat *string
 
 	noSmithyDocumentSerde
 }
@@ -1599,6 +1759,32 @@ type SelfManagedKafkaAccessConfigurationVpc struct {
 	noSmithyDocumentSerde
 }
 
+// Maps a single source data field to a single record in the specified Timestream
+// for LiveAnalytics table.
+//
+// For more information, see [Amazon Timestream for LiveAnalytics concepts]
+//
+// [Amazon Timestream for LiveAnalytics concepts]: https://docs.aws.amazon.com/timestream/latest/developerguide/concepts.html
+type SingleMeasureMapping struct {
+
+	// Target measure name for the measurement attribute in the Timestream table.
+	//
+	// This member is required.
+	MeasureName *string
+
+	// Dynamic path of the source field to map to the measure in the record.
+	//
+	// This member is required.
+	MeasureValue *string
+
+	// Data type of the source field.
+	//
+	// This member is required.
+	MeasureValueType MeasureValueType
+
+	noSmithyDocumentSerde
+}
+
 // A key-value pair associated with an Amazon Web Services resource. In
 // EventBridge, rules and event buses support tagging.
 type Tag struct {
@@ -1748,6 +1934,16 @@ type UpdatePipeSourceParameters struct {
 	RabbitMQBrokerParameters *UpdatePipeSourceRabbitMQBrokerParameters
 
 	// The parameters for using a self-managed Apache Kafka stream as a source.
+	//
+	// A self managed cluster refers to any Apache Kafka cluster not hosted by Amazon
+	// Web Services. This includes both clusters you manage yourself, as well as those
+	// hosted by a third-party provider, such as [Confluent Cloud], [CloudKarafka], or [Redpanda]. For more information, see [Apache Kafka streams as a source]
+	// in the Amazon EventBridge User Guide.
+	//
+	// [CloudKarafka]: https://www.cloudkarafka.com/
+	// [Apache Kafka streams as a source]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kafka.html
+	// [Confluent Cloud]: https://www.confluent.io/
+	// [Redpanda]: https://redpanda.com/
 	SelfManagedKafkaParameters *UpdatePipeSourceSelfManagedKafkaParameters
 
 	// The parameters for using a Amazon SQS stream as a source.
@@ -1774,6 +1970,16 @@ type UpdatePipeSourceRabbitMQBrokerParameters struct {
 }
 
 // The parameters for using a self-managed Apache Kafka stream as a source.
+//
+// A self managed cluster refers to any Apache Kafka cluster not hosted by Amazon
+// Web Services. This includes both clusters you manage yourself, as well as those
+// hosted by a third-party provider, such as [Confluent Cloud], [CloudKarafka], or [Redpanda]. For more information, see [Apache Kafka streams as a source]
+// in the Amazon EventBridge User Guide.
+//
+// [CloudKarafka]: https://www.cloudkarafka.com/
+// [Apache Kafka streams as a source]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kafka.html
+// [Confluent Cloud]: https://www.confluent.io/
+// [Redpanda]: https://redpanda.com/
 type UpdatePipeSourceSelfManagedKafkaParameters struct {
 
 	// The maximum number of records to include in each batch.

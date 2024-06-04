@@ -340,6 +340,44 @@ func validateCloudwatchLogsLogDestinationParameters(v *types.CloudwatchLogsLogDe
 	}
 }
 
+func validateDimensionMapping(v *types.DimensionMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DimensionMapping"}
+	if v.DimensionValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DimensionValue"))
+	}
+	if len(v.DimensionValueType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DimensionValueType"))
+	}
+	if v.DimensionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DimensionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDimensionMappings(v []types.DimensionMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DimensionMappings"}
+	for i := range v {
+		if err := validateDimensionMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEcsContainerOverride(v *types.EcsContainerOverride) error {
 	if v == nil {
 		return nil
@@ -493,6 +531,83 @@ func validateFirehoseLogDestinationParameters(v *types.FirehoseLogDestinationPar
 	invalidParams := smithy.InvalidParamsError{Context: "FirehoseLogDestinationParameters"}
 	if v.DeliveryStreamArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeliveryStreamArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMultiMeasureAttributeMapping(v *types.MultiMeasureAttributeMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MultiMeasureAttributeMapping"}
+	if v.MeasureValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MeasureValue"))
+	}
+	if len(v.MeasureValueType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MeasureValueType"))
+	}
+	if v.MultiMeasureAttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MultiMeasureAttributeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMultiMeasureAttributeMappings(v []types.MultiMeasureAttributeMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MultiMeasureAttributeMappings"}
+	for i := range v {
+		if err := validateMultiMeasureAttributeMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMultiMeasureMapping(v *types.MultiMeasureMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MultiMeasureMapping"}
+	if v.MultiMeasureName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MultiMeasureName"))
+	}
+	if v.MultiMeasureAttributeMappings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MultiMeasureAttributeMappings"))
+	} else if v.MultiMeasureAttributeMappings != nil {
+		if err := validateMultiMeasureAttributeMappings(v.MultiMeasureAttributeMappings); err != nil {
+			invalidParams.AddNested("MultiMeasureAttributeMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMultiMeasureMappings(v []types.MultiMeasureMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MultiMeasureMappings"}
+	for i := range v {
+		if err := validateMultiMeasureMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -789,6 +904,11 @@ func validatePipeTargetParameters(v *types.PipeTargetParameters) error {
 			invalidParams.AddNested("SageMakerPipelineParameters", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TimestreamParameters != nil {
+		if err := validatePipeTargetTimestreamParameters(v.TimestreamParameters); err != nil {
+			invalidParams.AddNested("TimestreamParameters", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -822,6 +942,41 @@ func validatePipeTargetSageMakerPipelineParameters(v *types.PipeTargetSageMakerP
 	if v.PipelineParameterList != nil {
 		if err := validateSageMakerPipelineParameterList(v.PipelineParameterList); err != nil {
 			invalidParams.AddNested("PipelineParameterList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePipeTargetTimestreamParameters(v *types.PipeTargetTimestreamParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PipeTargetTimestreamParameters"}
+	if v.TimeValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeValue"))
+	}
+	if v.VersionValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionValue"))
+	}
+	if v.DimensionMappings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DimensionMappings"))
+	} else if v.DimensionMappings != nil {
+		if err := validateDimensionMappings(v.DimensionMappings); err != nil {
+			invalidParams.AddNested("DimensionMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SingleMeasureMappings != nil {
+		if err := validateSingleMeasureMappings(v.SingleMeasureMappings); err != nil {
+			invalidParams.AddNested("SingleMeasureMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MultiMeasureMappings != nil {
+		if err := validateMultiMeasureMappings(v.MultiMeasureMappings); err != nil {
+			invalidParams.AddNested("MultiMeasureMappings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -874,6 +1029,44 @@ func validateSageMakerPipelineParameterList(v []types.SageMakerPipelineParameter
 	invalidParams := smithy.InvalidParamsError{Context: "SageMakerPipelineParameterList"}
 	for i := range v {
 		if err := validateSageMakerPipelineParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSingleMeasureMapping(v *types.SingleMeasureMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SingleMeasureMapping"}
+	if v.MeasureValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MeasureValue"))
+	}
+	if len(v.MeasureValueType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MeasureValueType"))
+	}
+	if v.MeasureName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MeasureName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSingleMeasureMappings(v []types.SingleMeasureMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SingleMeasureMappings"}
+	for i := range v {
+		if err := validateSingleMeasureMapping(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

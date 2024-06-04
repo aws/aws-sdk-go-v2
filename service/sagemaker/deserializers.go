@@ -39482,6 +39482,55 @@ func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetailsList(v *[]types.
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentClusterInstancePlacement(v **types.ClusterInstancePlacement, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterInstancePlacement
+	if *v == nil {
+		sv = &types.ClusterInstancePlacement{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterAvailabilityZone to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityZone = ptr.String(jtv)
+			}
+
+		case "AvailabilityZoneId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterAvailabilityZoneId to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityZoneId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentClusterInstanceStatusDetails(v **types.ClusterInstanceStatusDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -39653,6 +39702,29 @@ func awsAwsjson11_deserializeDocumentClusterNodeDetails(v **types.ClusterNodeDet
 		case "LifeCycleConfig":
 			if err := awsAwsjson11_deserializeDocumentClusterLifeCycleConfig(&sv.LifeCycleConfig, value); err != nil {
 				return err
+			}
+
+		case "Placement":
+			if err := awsAwsjson11_deserializeDocumentClusterInstancePlacement(&sv.Placement, value); err != nil {
+				return err
+			}
+
+		case "PrivateDnsHostname":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterPrivateDnsHostname to be of type string, got %T instead", value)
+				}
+				sv.PrivateDnsHostname = ptr.String(jtv)
+			}
+
+		case "PrivatePrimaryIp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterPrivatePrimaryIp to be of type string, got %T instead", value)
+				}
+				sv.PrivatePrimaryIp = ptr.String(jtv)
 			}
 
 		case "ThreadsPerCore":

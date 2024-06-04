@@ -1112,6 +1112,41 @@ func awsRestjson1_serializeDocumentDeadLetterConfig(v *types.DeadLetterConfig, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDimensionMapping(v *types.DimensionMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DimensionName != nil {
+		ok := object.Key("DimensionName")
+		ok.String(*v.DimensionName)
+	}
+
+	if v.DimensionValue != nil {
+		ok := object.Key("DimensionValue")
+		ok.String(*v.DimensionValue)
+	}
+
+	if len(v.DimensionValueType) > 0 {
+		ok := object.Key("DimensionValueType")
+		ok.String(string(v.DimensionValueType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDimensionMappings(v []types.DimensionMapping, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentDimensionMapping(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEcsContainerOverride(v *types.EcsContainerOverride, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1487,6 +1522,73 @@ func awsRestjson1_serializeDocumentMSKAccessCredentials(v types.MSKAccessCredent
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMultiMeasureAttributeMapping(v *types.MultiMeasureAttributeMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MeasureValue != nil {
+		ok := object.Key("MeasureValue")
+		ok.String(*v.MeasureValue)
+	}
+
+	if len(v.MeasureValueType) > 0 {
+		ok := object.Key("MeasureValueType")
+		ok.String(string(v.MeasureValueType))
+	}
+
+	if v.MultiMeasureAttributeName != nil {
+		ok := object.Key("MultiMeasureAttributeName")
+		ok.String(*v.MultiMeasureAttributeName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMultiMeasureAttributeMappings(v []types.MultiMeasureAttributeMapping, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMultiMeasureAttributeMapping(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMultiMeasureMapping(v *types.MultiMeasureMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MultiMeasureAttributeMappings != nil {
+		ok := object.Key("MultiMeasureAttributeMappings")
+		if err := awsRestjson1_serializeDocumentMultiMeasureAttributeMappings(v.MultiMeasureAttributeMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MultiMeasureName != nil {
+		ok := object.Key("MultiMeasureName")
+		ok.String(*v.MultiMeasureName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMultiMeasureMappings(v []types.MultiMeasureMapping, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMultiMeasureMapping(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -2281,6 +2383,13 @@ func awsRestjson1_serializeDocumentPipeTargetParameters(v *types.PipeTargetParam
 		}
 	}
 
+	if v.TimestreamParameters != nil {
+		ok := object.Key("TimestreamParameters")
+		if err := awsRestjson1_serializeDocumentPipeTargetTimestreamParameters(v.TimestreamParameters, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2361,6 +2470,59 @@ func awsRestjson1_serializeDocumentPipeTargetStateMachineParameters(v *types.Pip
 	if len(v.InvocationType) > 0 {
 		ok := object.Key("InvocationType")
 		ok.String(string(v.InvocationType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPipeTargetTimestreamParameters(v *types.PipeTargetTimestreamParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DimensionMappings != nil {
+		ok := object.Key("DimensionMappings")
+		if err := awsRestjson1_serializeDocumentDimensionMappings(v.DimensionMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.EpochTimeUnit) > 0 {
+		ok := object.Key("EpochTimeUnit")
+		ok.String(string(v.EpochTimeUnit))
+	}
+
+	if v.MultiMeasureMappings != nil {
+		ok := object.Key("MultiMeasureMappings")
+		if err := awsRestjson1_serializeDocumentMultiMeasureMappings(v.MultiMeasureMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SingleMeasureMappings != nil {
+		ok := object.Key("SingleMeasureMappings")
+		if err := awsRestjson1_serializeDocumentSingleMeasureMappings(v.SingleMeasureMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.TimeFieldType) > 0 {
+		ok := object.Key("TimeFieldType")
+		ok.String(string(v.TimeFieldType))
+	}
+
+	if v.TimestampFormat != nil {
+		ok := object.Key("TimestampFormat")
+		ok.String(*v.TimestampFormat)
+	}
+
+	if v.TimeValue != nil {
+		ok := object.Key("TimeValue")
+		ok.String(*v.TimeValue)
+	}
+
+	if v.VersionValue != nil {
+		ok := object.Key("VersionValue")
+		ok.String(*v.VersionValue)
 	}
 
 	return nil
@@ -2562,6 +2724,41 @@ func awsRestjson1_serializeDocumentSelfManagedKafkaAccessConfigurationVpc(v *typ
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSingleMeasureMapping(v *types.SingleMeasureMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MeasureName != nil {
+		ok := object.Key("MeasureName")
+		ok.String(*v.MeasureName)
+	}
+
+	if v.MeasureValue != nil {
+		ok := object.Key("MeasureValue")
+		ok.String(*v.MeasureValue)
+	}
+
+	if len(v.MeasureValueType) > 0 {
+		ok := object.Key("MeasureValueType")
+		ok.String(string(v.MeasureValueType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSingleMeasureMappings(v []types.SingleMeasureMapping, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSingleMeasureMapping(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
