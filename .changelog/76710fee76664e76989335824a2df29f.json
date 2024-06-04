@@ -1,0 +1,8 @@
+{
+    "id": "76710fee-7666-4e76-9893-35824a2df29f",
+    "type": "bugfix",
+    "description": "Add S3-specific smithy protocol tests.",
+    "modules": [
+        "service/s3"
+    ]
+}
