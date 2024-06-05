@@ -110,6 +110,12 @@ func (c *Client) addOperationStopMeetingTranscriptionMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopMeetingTranscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}

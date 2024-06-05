@@ -119,6 +119,12 @@ func (c *Client) addOperationConfirmSubscriptionMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpConfirmSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}

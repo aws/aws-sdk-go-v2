@@ -123,6 +123,12 @@ func (c *Client) addOperationUpdateApplicationComponentConfigMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateApplicationComponentConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

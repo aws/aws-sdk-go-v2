@@ -129,6 +129,12 @@ func (c *Client) addOperationDeleteBucketOwnershipControlsMiddlewares(stack *mid
 	if err = addPutBucketContextMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteBucketOwnershipControlsValidationMiddleware(stack); err != nil {
 		return err
 	}

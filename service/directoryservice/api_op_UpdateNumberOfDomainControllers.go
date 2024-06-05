@@ -109,6 +109,12 @@ func (c *Client) addOperationUpdateNumberOfDomainControllersMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateNumberOfDomainControllersValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -117,6 +117,12 @@ func (c *Client) addOperationCreateInvalidationMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateInvalidationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -160,6 +160,12 @@ func (c *Client) addOperationRedriveExecutionMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opRedriveExecutionMiddleware(stack, options); err != nil {
 		return err
 	}

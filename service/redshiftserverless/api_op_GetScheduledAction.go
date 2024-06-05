@@ -103,6 +103,12 @@ func (c *Client) addOperationGetScheduledActionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetScheduledActionValidationMiddleware(stack); err != nil {
 		return err
 	}

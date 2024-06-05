@@ -108,6 +108,12 @@ func (c *Client) addOperationDescribeImageAssociationsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeImageAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}

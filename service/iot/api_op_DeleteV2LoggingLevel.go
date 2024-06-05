@@ -108,6 +108,12 @@ func (c *Client) addOperationDeleteV2LoggingLevelMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteV2LoggingLevelValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -151,6 +151,12 @@ func (c *Client) addOperationListAccessPointsForObjectLambdaMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListAccessPointsForObjectLambdaMiddleware(stack); err != nil {
 		return err
 	}

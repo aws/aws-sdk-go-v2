@@ -106,6 +106,12 @@ func (c *Client) addOperationDeleteCertificateProviderMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteCertificateProviderValidationMiddleware(stack); err != nil {
 		return err
 	}

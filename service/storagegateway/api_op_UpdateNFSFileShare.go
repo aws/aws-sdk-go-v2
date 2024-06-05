@@ -219,6 +219,12 @@ func (c *Client) addOperationUpdateNFSFileShareMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateNFSFileShareValidationMiddleware(stack); err != nil {
 		return err
 	}

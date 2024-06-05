@@ -178,6 +178,12 @@ func (c *Client) addOperationCreateTLSInspectionConfigurationMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateTLSInspectionConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

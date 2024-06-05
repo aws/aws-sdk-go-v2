@@ -134,6 +134,12 @@ func (c *Client) addOperationCancelFlowExecutionsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelFlowExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}

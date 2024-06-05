@@ -103,6 +103,12 @@ func (c *Client) addOperationGetSecurityConfigurationMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSecurityConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

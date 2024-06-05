@@ -114,6 +114,12 @@ func (c *Client) addOperationDeleteRepositoryPolicyMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteRepositoryPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

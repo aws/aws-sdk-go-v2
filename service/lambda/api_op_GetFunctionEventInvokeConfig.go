@@ -144,6 +144,12 @@ func (c *Client) addOperationGetFunctionEventInvokeConfigMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetFunctionEventInvokeConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

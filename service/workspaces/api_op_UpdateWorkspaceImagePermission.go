@@ -136,6 +136,12 @@ func (c *Client) addOperationUpdateWorkspaceImagePermissionMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateWorkspaceImagePermissionValidationMiddleware(stack); err != nil {
 		return err
 	}

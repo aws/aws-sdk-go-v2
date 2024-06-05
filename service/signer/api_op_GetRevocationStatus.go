@@ -144,6 +144,12 @@ func (c *Client) addOperationGetRevocationStatusMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetRevocationStatusMiddleware(stack); err != nil {
 		return err
 	}

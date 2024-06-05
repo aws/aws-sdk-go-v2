@@ -108,6 +108,12 @@ func (c *Client) addOperationRevokeVpcEndpointAccessMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRevokeVpcEndpointAccessValidationMiddleware(stack); err != nil {
 		return err
 	}

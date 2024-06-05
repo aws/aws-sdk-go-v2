@@ -113,6 +113,12 @@ func (c *Client) addOperationUpdateTrustedTokenIssuerMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateTrustedTokenIssuerValidationMiddleware(stack); err != nil {
 		return err
 	}

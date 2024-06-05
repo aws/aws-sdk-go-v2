@@ -144,6 +144,12 @@ func (c *Client) addOperationCreateProtectConfigurationMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateProtectConfigurationMiddleware(stack, options); err != nil {
 		return err
 	}

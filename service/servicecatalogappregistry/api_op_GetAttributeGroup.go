@@ -134,6 +134,12 @@ func (c *Client) addOperationGetAttributeGroupMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetAttributeGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

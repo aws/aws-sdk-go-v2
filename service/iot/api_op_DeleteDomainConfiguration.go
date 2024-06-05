@@ -102,6 +102,12 @@ func (c *Client) addOperationDeleteDomainConfigurationMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDomainConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

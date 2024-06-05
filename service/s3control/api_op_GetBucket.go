@@ -172,6 +172,12 @@ func (c *Client) addOperationGetBucketMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetBucketMiddleware(stack); err != nil {
 		return err
 	}

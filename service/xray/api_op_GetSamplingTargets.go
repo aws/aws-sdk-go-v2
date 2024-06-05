@@ -117,6 +117,12 @@ func (c *Client) addOperationGetSamplingTargetsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSamplingTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -120,6 +120,12 @@ func (c *Client) addOperationNotifyWorkersMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpNotifyWorkersValidationMiddleware(stack); err != nil {
 		return err
 	}

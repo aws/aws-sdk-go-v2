@@ -155,6 +155,12 @@ func (c *Client) addOperationDescribeEdgePackagingJobMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeEdgePackagingJobValidationMiddleware(stack); err != nil {
 		return err
 	}

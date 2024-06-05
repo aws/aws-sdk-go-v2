@@ -152,6 +152,12 @@ func (c *Client) addOperationGetMetricStreamMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetMetricStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

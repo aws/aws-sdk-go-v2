@@ -105,6 +105,12 @@ func (c *Client) addOperationUpdateEmergencyContactSettingsMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateEmergencyContactSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

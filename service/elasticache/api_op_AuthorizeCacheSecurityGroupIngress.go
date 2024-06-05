@@ -128,6 +128,12 @@ func (c *Client) addOperationAuthorizeCacheSecurityGroupIngressMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAuthorizeCacheSecurityGroupIngressValidationMiddleware(stack); err != nil {
 		return err
 	}

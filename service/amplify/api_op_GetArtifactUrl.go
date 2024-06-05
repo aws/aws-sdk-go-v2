@@ -111,6 +111,12 @@ func (c *Client) addOperationGetArtifactUrlMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetArtifactUrlValidationMiddleware(stack); err != nil {
 		return err
 	}

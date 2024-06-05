@@ -145,6 +145,12 @@ func (c *Client) addOperationModifySnapshotCopyRetentionPeriodMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifySnapshotCopyRetentionPeriodValidationMiddleware(stack); err != nil {
 		return err
 	}

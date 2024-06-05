@@ -139,6 +139,12 @@ func (c *Client) addOperationDenyCustomRoutingTrafficMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDenyCustomRoutingTrafficValidationMiddleware(stack); err != nil {
 		return err
 	}

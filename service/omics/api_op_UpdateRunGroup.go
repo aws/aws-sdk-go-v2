@@ -113,6 +113,12 @@ func (c *Client) addOperationUpdateRunGroupMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opUpdateRunGroupMiddleware(stack); err != nil {
 		return err
 	}

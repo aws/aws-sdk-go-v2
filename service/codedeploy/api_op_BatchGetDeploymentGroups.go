@@ -114,6 +114,12 @@ func (c *Client) addOperationBatchGetDeploymentGroupsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchGetDeploymentGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}

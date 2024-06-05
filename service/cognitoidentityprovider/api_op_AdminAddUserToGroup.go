@@ -128,6 +128,12 @@ func (c *Client) addOperationAdminAddUserToGroupMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAdminAddUserToGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

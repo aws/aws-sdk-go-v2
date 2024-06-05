@@ -139,6 +139,12 @@ func (c *Client) addOperationCreateChannelFlowMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateChannelFlowMiddleware(stack, options); err != nil {
 		return err
 	}

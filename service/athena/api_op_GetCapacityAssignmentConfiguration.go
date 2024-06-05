@@ -108,6 +108,12 @@ func (c *Client) addOperationGetCapacityAssignmentConfigurationMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetCapacityAssignmentConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

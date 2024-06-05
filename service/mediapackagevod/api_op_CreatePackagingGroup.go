@@ -131,6 +131,12 @@ func (c *Client) addOperationCreatePackagingGroupMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreatePackagingGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

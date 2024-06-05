@@ -127,6 +127,12 @@ func (c *Client) addOperationUpdateVirtualGatewayMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateVirtualGatewayMiddleware(stack, options); err != nil {
 		return err
 	}

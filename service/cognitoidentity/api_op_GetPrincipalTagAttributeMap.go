@@ -120,6 +120,12 @@ func (c *Client) addOperationGetPrincipalTagAttributeMapMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetPrincipalTagAttributeMapValidationMiddleware(stack); err != nil {
 		return err
 	}

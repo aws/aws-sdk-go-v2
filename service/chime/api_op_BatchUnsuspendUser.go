@@ -118,6 +118,12 @@ func (c *Client) addOperationBatchUnsuspendUserMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchUnsuspendUserValidationMiddleware(stack); err != nil {
 		return err
 	}

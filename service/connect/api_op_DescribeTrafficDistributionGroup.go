@@ -105,6 +105,12 @@ func (c *Client) addOperationDescribeTrafficDistributionGroupMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeTrafficDistributionGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

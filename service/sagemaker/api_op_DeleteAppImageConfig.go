@@ -98,6 +98,12 @@ func (c *Client) addOperationDeleteAppImageConfigMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteAppImageConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

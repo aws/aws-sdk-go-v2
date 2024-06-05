@@ -102,6 +102,12 @@ func (c *Client) addOperationDeleteConformancePackMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteConformancePackValidationMiddleware(stack); err != nil {
 		return err
 	}

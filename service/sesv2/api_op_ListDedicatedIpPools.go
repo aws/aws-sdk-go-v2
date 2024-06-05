@@ -116,6 +116,12 @@ func (c *Client) addOperationListDedicatedIpPoolsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDedicatedIpPools(options.Region), middleware.Before); err != nil {
 		return err
 	}

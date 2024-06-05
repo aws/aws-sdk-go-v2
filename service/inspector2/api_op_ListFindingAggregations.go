@@ -134,6 +134,12 @@ func (c *Client) addOperationListFindingAggregationsMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListFindingAggregationsValidationMiddleware(stack); err != nil {
 		return err
 	}

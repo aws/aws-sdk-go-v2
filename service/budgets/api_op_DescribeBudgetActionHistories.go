@@ -131,6 +131,12 @@ func (c *Client) addOperationDescribeBudgetActionHistoriesMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeBudgetActionHistoriesValidationMiddleware(stack); err != nil {
 		return err
 	}

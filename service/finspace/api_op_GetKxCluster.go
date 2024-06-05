@@ -248,6 +248,12 @@ func (c *Client) addOperationGetKxClusterMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetKxClusterValidationMiddleware(stack); err != nil {
 		return err
 	}

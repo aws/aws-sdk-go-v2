@@ -130,6 +130,12 @@ func (c *Client) addOperationListJournalS3ExportsForLedgerMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListJournalS3ExportsForLedgerValidationMiddleware(stack); err != nil {
 		return err
 	}

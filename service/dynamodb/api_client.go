@@ -28,6 +28,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"sync/atomic"
 	"time"
 )
 
@@ -40,6 +41,9 @@ type Client struct {
 
 	// cache used to store discovered endpoints
 	endpointCache *internalEndpointDiscovery.EndpointCache
+
+	// Difference between the time reported by the server and the client
+	timeOffset *atomic.Int64
 }
 
 // New returns an initialized Client based on the functional options. Provide
@@ -83,6 +87,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	}
 
 	resolveEndpointCache(client)
+
+	initializeTimeOffsetResolver(client)
 
 	return client
 }
@@ -588,6 +594,16 @@ func (c *Client) handleEndpointDiscoveryFromService(ctx context.Context, input *
 
 	c.endpointCache.Add(endpoint)
 	return endpoint, nil
+}
+
+func addTimeOffsetBuild(stack *middleware.Stack, c *Client) error {
+	return stack.Build.Add(&awsmiddleware.AddTimeOffsetBuildMiddleware{Offset: c.timeOffset}, middleware.After)
+}
+func addTimeOffsetDeserializer(stack *middleware.Stack, c *Client) error {
+	return stack.Deserialize.Insert(&awsmiddleware.AddTimeOffsetDeserializeMiddleware{Offset: c.timeOffset}, "RecordResponseTiming", middleware.Before)
+}
+func initializeTimeOffsetResolver(c *Client) {
+	c.timeOffset = new(atomic.Int64)
 }
 
 // IdempotencyTokenProvider interface for providing idempotency token

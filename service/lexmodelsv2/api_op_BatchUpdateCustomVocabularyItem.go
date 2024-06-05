@@ -140,6 +140,12 @@ func (c *Client) addOperationBatchUpdateCustomVocabularyItemMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchUpdateCustomVocabularyItemValidationMiddleware(stack); err != nil {
 		return err
 	}

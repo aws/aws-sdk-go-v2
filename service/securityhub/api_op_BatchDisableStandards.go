@@ -107,6 +107,12 @@ func (c *Client) addOperationBatchDisableStandardsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchDisableStandardsValidationMiddleware(stack); err != nil {
 		return err
 	}

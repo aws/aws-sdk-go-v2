@@ -116,6 +116,12 @@ func (c *Client) addOperationCancelOpenCypherQueryMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelOpenCypherQueryValidationMiddleware(stack); err != nil {
 		return err
 	}

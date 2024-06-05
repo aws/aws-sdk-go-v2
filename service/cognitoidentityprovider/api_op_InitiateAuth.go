@@ -318,6 +318,12 @@ func (c *Client) addOperationInitiateAuthMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpInitiateAuthValidationMiddleware(stack); err != nil {
 		return err
 	}

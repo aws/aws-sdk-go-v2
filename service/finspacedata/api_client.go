@@ -24,6 +24,7 @@ import (
 	"net"
 	"net/http"
 	"strings"
+	"sync/atomic"
 	"time"
 )
 
@@ -33,6 +34,9 @@ const ServiceAPIVersion = "2020-07-13"
 // Client provides the API client to make operations call for FinSpace Public API.
 type Client struct {
 	options Options
+
+	// Difference between the time reported by the server and the client
+	timeOffset *atomic.Int64
 }
 
 // New returns an initialized Client based on the functional options. Provide
@@ -72,6 +76,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	client := &Client{
 		options: options,
 	}
+
+	initializeTimeOffsetResolver(client)
 
 	return client
 }
@@ -524,6 +530,16 @@ func (m *customizeRestJsonContentType) HandleSerialize(ctx context.Context, in m
 
 func addRestJsonContentTypeCustomization(stack *middleware.Stack) error {
 	return stack.Serialize.Insert(&customizeRestJsonContentType{}, "OperationSerializer", middleware.After)
+}
+
+func addTimeOffsetBuild(stack *middleware.Stack, c *Client) error {
+	return stack.Build.Add(&awsmiddleware.AddTimeOffsetBuildMiddleware{Offset: c.timeOffset}, middleware.After)
+}
+func addTimeOffsetDeserializer(stack *middleware.Stack, c *Client) error {
+	return stack.Deserialize.Insert(&awsmiddleware.AddTimeOffsetDeserializeMiddleware{Offset: c.timeOffset}, "RecordResponseTiming", middleware.Before)
+}
+func initializeTimeOffsetResolver(c *Client) {
+	c.timeOffset = new(atomic.Int64)
 }
 
 // IdempotencyTokenProvider interface for providing idempotency token

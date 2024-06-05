@@ -125,6 +125,12 @@ func (c *Client) addOperationSearchQuickConnectsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSearchQuickConnectsValidationMiddleware(stack); err != nil {
 		return err
 	}

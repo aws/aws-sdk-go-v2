@@ -179,6 +179,12 @@ func (c *Client) addOperationStartSentimentDetectionJobMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartSentimentDetectionJobMiddleware(stack, options); err != nil {
 		return err
 	}

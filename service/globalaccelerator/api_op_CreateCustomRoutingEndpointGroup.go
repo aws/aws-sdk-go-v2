@@ -124,6 +124,12 @@ func (c *Client) addOperationCreateCustomRoutingEndpointGroupMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateCustomRoutingEndpointGroupMiddleware(stack, options); err != nil {
 		return err
 	}

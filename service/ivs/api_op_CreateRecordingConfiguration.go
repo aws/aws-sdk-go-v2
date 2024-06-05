@@ -139,6 +139,12 @@ func (c *Client) addOperationCreateRecordingConfigurationMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateRecordingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

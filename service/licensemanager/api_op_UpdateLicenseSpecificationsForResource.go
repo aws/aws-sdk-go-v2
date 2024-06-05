@@ -111,6 +111,12 @@ func (c *Client) addOperationUpdateLicenseSpecificationsForResourceMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateLicenseSpecificationsForResourceValidationMiddleware(stack); err != nil {
 		return err
 	}

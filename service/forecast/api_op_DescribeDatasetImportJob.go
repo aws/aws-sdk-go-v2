@@ -204,6 +204,12 @@ func (c *Client) addOperationDescribeDatasetImportJobMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDatasetImportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -98,6 +98,12 @@ func (c *Client) addOperationDisassociateWirelessDeviceFromThingMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateWirelessDeviceFromThingValidationMiddleware(stack); err != nil {
 		return err
 	}

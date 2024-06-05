@@ -118,6 +118,12 @@ func (c *Client) addOperationListAnnotationStoreVersionsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListAnnotationStoreVersionsMiddleware(stack); err != nil {
 		return err
 	}

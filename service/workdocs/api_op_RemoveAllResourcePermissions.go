@@ -102,6 +102,12 @@ func (c *Client) addOperationRemoveAllResourcePermissionsMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRemoveAllResourcePermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

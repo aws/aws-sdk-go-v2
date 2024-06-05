@@ -180,6 +180,12 @@ func (c *Client) addOperationDescribeStackDriftDetectionStatusMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeStackDriftDetectionStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

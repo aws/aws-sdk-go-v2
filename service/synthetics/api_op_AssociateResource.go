@@ -108,6 +108,12 @@ func (c *Client) addOperationAssociateResourceMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateResourceValidationMiddleware(stack); err != nil {
 		return err
 	}

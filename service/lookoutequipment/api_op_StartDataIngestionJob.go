@@ -125,6 +125,12 @@ func (c *Client) addOperationStartDataIngestionJobMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartDataIngestionJobMiddleware(stack, options); err != nil {
 		return err
 	}

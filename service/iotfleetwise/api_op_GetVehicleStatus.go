@@ -121,6 +121,12 @@ func (c *Client) addOperationGetVehicleStatusMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetVehicleStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -110,6 +110,12 @@ func (c *Client) addOperationUpdateApprovalRuleTemplateNameMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateApprovalRuleTemplateNameValidationMiddleware(stack); err != nil {
 		return err
 	}

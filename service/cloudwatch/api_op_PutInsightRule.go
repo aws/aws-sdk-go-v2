@@ -135,6 +135,12 @@ func (c *Client) addOperationPutInsightRuleMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutInsightRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

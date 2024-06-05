@@ -136,6 +136,12 @@ func (c *Client) addOperationCreateTemplateSyncConfigMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateTemplateSyncConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

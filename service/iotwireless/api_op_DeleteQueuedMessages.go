@@ -109,6 +109,12 @@ func (c *Client) addOperationDeleteQueuedMessagesMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteQueuedMessagesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -131,6 +131,12 @@ func (c *Client) addOperationCreateUserImportJobMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateUserImportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

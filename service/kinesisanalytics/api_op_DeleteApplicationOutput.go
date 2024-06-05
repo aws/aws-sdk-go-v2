@@ -128,6 +128,12 @@ func (c *Client) addOperationDeleteApplicationOutputMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteApplicationOutputValidationMiddleware(stack); err != nil {
 		return err
 	}

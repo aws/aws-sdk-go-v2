@@ -126,6 +126,12 @@ func (c *Client) addOperationGetNetworkInsightsAccessScopeAnalysisFindingsMiddle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetNetworkInsightsAccessScopeAnalysisFindingsValidationMiddleware(stack); err != nil {
 		return err
 	}

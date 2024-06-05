@@ -101,6 +101,12 @@ func (c *Client) addOperationDeleteDirectoryRegistrationMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDirectoryRegistrationValidationMiddleware(stack); err != nil {
 		return err
 	}

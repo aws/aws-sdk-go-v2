@@ -156,6 +156,12 @@ func (c *Client) addOperationDeleteSubscriptionGrantMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteSubscriptionGrantValidationMiddleware(stack); err != nil {
 		return err
 	}

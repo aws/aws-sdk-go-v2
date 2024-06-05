@@ -101,6 +101,12 @@ func (c *Client) addOperationCancelExportJobMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelExportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

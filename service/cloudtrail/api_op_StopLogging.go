@@ -113,6 +113,12 @@ func (c *Client) addOperationStopLoggingMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopLoggingValidationMiddleware(stack); err != nil {
 		return err
 	}

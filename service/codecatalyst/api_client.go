@@ -23,6 +23,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net"
 	"net/http"
+	"sync/atomic"
 )
 
 const ServiceID = "CodeCatalyst"
@@ -31,6 +32,9 @@ const ServiceAPIVersion = "2022-09-28"
 // Client provides the API client to make operations call for Amazon CodeCatalyst.
 type Client struct {
 	options Options
+
+	// Difference between the time reported by the server and the client
+	timeOffset *atomic.Int64
 }
 
 // New returns an initialized Client based on the functional options. Provide
@@ -68,6 +72,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	client := &Client{
 		options: options,
 	}
+
+	initializeTimeOffsetResolver(client)
 
 	return client
 }
@@ -463,6 +469,16 @@ func resolveBearerAuthSigner(o *Options) {
 }
 func newDefaultBearerAuthSigner(o Options) bearer.Signer {
 	return bearer.NewSignHTTPSMessage()
+}
+
+func addTimeOffsetBuild(stack *middleware.Stack, c *Client) error {
+	return stack.Build.Add(&awsmiddleware.AddTimeOffsetBuildMiddleware{Offset: c.timeOffset}, middleware.After)
+}
+func addTimeOffsetDeserializer(stack *middleware.Stack, c *Client) error {
+	return stack.Deserialize.Insert(&awsmiddleware.AddTimeOffsetDeserializeMiddleware{Offset: c.timeOffset}, "RecordResponseTiming", middleware.Before)
+}
+func initializeTimeOffsetResolver(c *Client) {
+	c.timeOffset = new(atomic.Int64)
 }
 
 // IdempotencyTokenProvider interface for providing idempotency token

@@ -99,6 +99,12 @@ func (c *Client) addOperationDeleteUsagePlanMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteUsagePlanValidationMiddleware(stack); err != nil {
 		return err
 	}

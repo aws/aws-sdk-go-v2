@@ -143,6 +143,12 @@ func (c *Client) addOperationGetPartnershipMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetPartnershipValidationMiddleware(stack); err != nil {
 		return err
 	}

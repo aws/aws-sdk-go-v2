@@ -107,6 +107,12 @@ func (c *Client) addOperationAssociateDRTLogBucketMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateDRTLogBucketValidationMiddleware(stack); err != nil {
 		return err
 	}

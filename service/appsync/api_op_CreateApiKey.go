@@ -112,6 +112,12 @@ func (c *Client) addOperationCreateApiKeyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateApiKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

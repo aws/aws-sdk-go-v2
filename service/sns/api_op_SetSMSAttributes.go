@@ -184,6 +184,12 @@ func (c *Client) addOperationSetSMSAttributesMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetSMSAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -128,6 +128,12 @@ func (c *Client) addOperationStartSuiteRunMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartSuiteRunValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -113,6 +113,12 @@ func (c *Client) addOperationDescribeReturnShippingLabelMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeReturnShippingLabelValidationMiddleware(stack); err != nil {
 		return err
 	}

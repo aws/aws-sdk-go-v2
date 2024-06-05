@@ -146,6 +146,12 @@ func (c *Client) addOperationDeletePrincipalMappingMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeletePrincipalMappingValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -707,6 +707,12 @@ func (c *Client) addOperationPutObjectMiddlewares(stack *middleware.Stack, optio
 	if err = addPutBucketContextMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutObjectValidationMiddleware(stack); err != nil {
 		return err
 	}

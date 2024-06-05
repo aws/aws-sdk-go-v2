@@ -126,6 +126,12 @@ func (c *Client) addOperationBatchDeleteTableMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchDeleteTableValidationMiddleware(stack); err != nil {
 		return err
 	}

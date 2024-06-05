@@ -128,6 +128,12 @@ func (c *Client) addOperationListProfileResourceAssociationsMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListProfileResourceAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -134,6 +134,12 @@ func (c *Client) addOperationUpdateBudgetMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opUpdateBudgetMiddleware(stack); err != nil {
 		return err
 	}

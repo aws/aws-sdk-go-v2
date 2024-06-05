@@ -166,6 +166,12 @@ func (c *Client) addOperationUpdateUserPoolDomainMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateUserPoolDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

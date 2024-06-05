@@ -493,6 +493,12 @@ func (c *Client) addOperationRestoreDBClusterFromS3Middlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRestoreDBClusterFromS3ValidationMiddleware(stack); err != nil {
 		return err
 	}

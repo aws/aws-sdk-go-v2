@@ -201,6 +201,12 @@ func (c *Client) addOperationChangeResourceRecordSetsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpChangeResourceRecordSetsValidationMiddleware(stack); err != nil {
 		return err
 	}

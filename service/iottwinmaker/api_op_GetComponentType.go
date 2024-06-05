@@ -174,6 +174,12 @@ func (c *Client) addOperationGetComponentTypeMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetComponentTypeMiddleware(stack); err != nil {
 		return err
 	}

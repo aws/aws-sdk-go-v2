@@ -128,6 +128,12 @@ func (c *Client) addOperationGetSqlInjectionMatchSetMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSqlInjectionMatchSetValidationMiddleware(stack); err != nil {
 		return err
 	}

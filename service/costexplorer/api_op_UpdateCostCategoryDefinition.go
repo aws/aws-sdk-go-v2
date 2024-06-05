@@ -134,6 +134,12 @@ func (c *Client) addOperationUpdateCostCategoryDefinitionMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateCostCategoryDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

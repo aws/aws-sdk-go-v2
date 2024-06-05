@@ -159,6 +159,12 @@ func (c *Client) addOperationUpdatePracticeRunConfigurationMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdatePracticeRunConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

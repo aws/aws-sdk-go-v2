@@ -142,6 +142,12 @@ func (c *Client) addOperationUpdateLensReviewMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateLensReviewValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -119,6 +119,12 @@ func (c *Client) addOperationGetKxConnectionStringMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetKxConnectionStringValidationMiddleware(stack); err != nil {
 		return err
 	}

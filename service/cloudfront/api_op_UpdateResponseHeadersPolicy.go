@@ -130,6 +130,12 @@ func (c *Client) addOperationUpdateResponseHeadersPolicyMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateResponseHeadersPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -116,6 +116,12 @@ func (c *Client) addOperationUpdateKnowledgeBaseTemplateUriMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateKnowledgeBaseTemplateUriValidationMiddleware(stack); err != nil {
 		return err
 	}

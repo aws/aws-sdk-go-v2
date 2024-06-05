@@ -128,6 +128,12 @@ func (c *Client) addOperationDescribeConnectionsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeConnectionsValidationMiddleware(stack); err != nil {
 		return err
 	}

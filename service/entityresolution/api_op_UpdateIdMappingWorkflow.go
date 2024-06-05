@@ -161,6 +161,12 @@ func (c *Client) addOperationUpdateIdMappingWorkflowMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateIdMappingWorkflowValidationMiddleware(stack); err != nil {
 		return err
 	}

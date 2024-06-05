@@ -130,6 +130,12 @@ func (c *Client) addOperationListResourceInventoryMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListResourceInventoryValidationMiddleware(stack); err != nil {
 		return err
 	}

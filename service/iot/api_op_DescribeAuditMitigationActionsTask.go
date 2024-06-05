@@ -129,6 +129,12 @@ func (c *Client) addOperationDescribeAuditMitigationActionsTaskMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeAuditMitigationActionsTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

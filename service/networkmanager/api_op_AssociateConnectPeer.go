@@ -121,6 +121,12 @@ func (c *Client) addOperationAssociateConnectPeerMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateConnectPeerValidationMiddleware(stack); err != nil {
 		return err
 	}

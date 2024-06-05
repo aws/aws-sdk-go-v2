@@ -111,6 +111,12 @@ func (c *Client) addOperationUpdatePricingPlanMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opUpdatePricingPlanMiddleware(stack); err != nil {
 		return err
 	}

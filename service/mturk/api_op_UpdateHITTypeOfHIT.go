@@ -107,6 +107,12 @@ func (c *Client) addOperationUpdateHITTypeOfHITMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateHITTypeOfHITValidationMiddleware(stack); err != nil {
 		return err
 	}

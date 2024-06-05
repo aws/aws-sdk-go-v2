@@ -161,6 +161,12 @@ func (c *Client) addOperationUpdateFirewallPolicyChangeProtectionMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateFirewallPolicyChangeProtectionValidationMiddleware(stack); err != nil {
 		return err
 	}

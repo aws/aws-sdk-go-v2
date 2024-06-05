@@ -1071,6 +1071,12 @@ func (c *Client) addOperationGetMetricDataV2Middlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetMetricDataV2ValidationMiddleware(stack); err != nil {
 		return err
 	}

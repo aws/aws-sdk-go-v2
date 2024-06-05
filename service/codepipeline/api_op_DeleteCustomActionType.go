@@ -119,6 +119,12 @@ func (c *Client) addOperationDeleteCustomActionTypeMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteCustomActionTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

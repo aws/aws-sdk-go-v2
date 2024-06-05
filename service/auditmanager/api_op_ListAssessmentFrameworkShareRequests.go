@@ -115,6 +115,12 @@ func (c *Client) addOperationListAssessmentFrameworkShareRequestsMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListAssessmentFrameworkShareRequestsValidationMiddleware(stack); err != nil {
 		return err
 	}

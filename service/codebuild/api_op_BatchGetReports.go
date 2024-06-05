@@ -107,6 +107,12 @@ func (c *Client) addOperationBatchGetReportsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchGetReportsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -114,6 +114,12 @@ func (c *Client) addOperationUpdateApnsChannelMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateApnsChannelValidationMiddleware(stack); err != nil {
 		return err
 	}

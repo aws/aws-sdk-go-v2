@@ -102,6 +102,12 @@ func (c *Client) addOperationDeleteCustomEntityTypeMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteCustomEntityTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

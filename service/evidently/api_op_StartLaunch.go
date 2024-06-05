@@ -112,6 +112,12 @@ func (c *Client) addOperationStartLaunchMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartLaunchValidationMiddleware(stack); err != nil {
 		return err
 	}

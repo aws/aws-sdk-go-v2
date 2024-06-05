@@ -128,6 +128,12 @@ func (c *Client) addOperationCreateMetricAttributionMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateMetricAttributionValidationMiddleware(stack); err != nil {
 		return err
 	}

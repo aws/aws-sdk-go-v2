@@ -119,6 +119,12 @@ func (c *Client) addOperationListDistributionsByKeyGroupMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListDistributionsByKeyGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

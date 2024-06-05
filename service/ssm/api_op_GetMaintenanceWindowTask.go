@@ -194,6 +194,12 @@ func (c *Client) addOperationGetMaintenanceWindowTaskMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetMaintenanceWindowTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

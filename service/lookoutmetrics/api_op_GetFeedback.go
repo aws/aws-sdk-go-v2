@@ -118,6 +118,12 @@ func (c *Client) addOperationGetFeedbackMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetFeedbackValidationMiddleware(stack); err != nil {
 		return err
 	}

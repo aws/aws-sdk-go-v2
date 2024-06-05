@@ -115,6 +115,12 @@ func (c *Client) addOperationDescribeInstanceAccessControlAttributeConfiguration
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeInstanceAccessControlAttributeConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

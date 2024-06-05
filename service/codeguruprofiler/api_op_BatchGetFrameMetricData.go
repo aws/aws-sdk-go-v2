@@ -188,6 +188,12 @@ func (c *Client) addOperationBatchGetFrameMetricDataMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchGetFrameMetricDataValidationMiddleware(stack); err != nil {
 		return err
 	}

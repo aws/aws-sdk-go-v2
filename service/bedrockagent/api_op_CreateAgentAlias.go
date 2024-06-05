@@ -126,6 +126,12 @@ func (c *Client) addOperationCreateAgentAliasMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateAgentAliasMiddleware(stack, options); err != nil {
 		return err
 	}

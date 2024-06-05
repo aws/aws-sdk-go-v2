@@ -112,6 +112,12 @@ func (c *Client) addOperationCreateJourneyMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateJourneyValidationMiddleware(stack); err != nil {
 		return err
 	}

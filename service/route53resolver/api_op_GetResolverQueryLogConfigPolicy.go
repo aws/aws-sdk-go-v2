@@ -106,6 +106,12 @@ func (c *Client) addOperationGetResolverQueryLogConfigPolicyMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetResolverQueryLogConfigPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

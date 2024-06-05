@@ -144,6 +144,12 @@ func (c *Client) addOperationTagRoleMiddlewares(stack *middleware.Stack, options
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTagRoleValidationMiddleware(stack); err != nil {
 		return err
 	}

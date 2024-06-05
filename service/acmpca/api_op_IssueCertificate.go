@@ -226,6 +226,12 @@ func (c *Client) addOperationIssueCertificateMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpIssueCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -125,6 +125,12 @@ func (c *Client) addOperationDeleteAgentVersionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteAgentVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

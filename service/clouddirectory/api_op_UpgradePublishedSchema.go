@@ -120,6 +120,12 @@ func (c *Client) addOperationUpgradePublishedSchemaMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpgradePublishedSchemaValidationMiddleware(stack); err != nil {
 		return err
 	}

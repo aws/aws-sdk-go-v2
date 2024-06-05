@@ -142,6 +142,12 @@ func (c *Client) addOperationStartTextDetectionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartTextDetectionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -119,6 +119,12 @@ func (c *Client) addOperationListEnvironmentsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListEnvironmentsMiddleware(stack); err != nil {
 		return err
 	}

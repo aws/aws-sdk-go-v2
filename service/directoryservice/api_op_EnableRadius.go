@@ -107,6 +107,12 @@ func (c *Client) addOperationEnableRadiusMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpEnableRadiusValidationMiddleware(stack); err != nil {
 		return err
 	}

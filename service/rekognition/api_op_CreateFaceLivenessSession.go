@@ -129,6 +129,12 @@ func (c *Client) addOperationCreateFaceLivenessSessionMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateFaceLivenessSessionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -116,6 +116,12 @@ func (c *Client) addOperationSwitchoverReadReplicaMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSwitchoverReadReplicaValidationMiddleware(stack); err != nil {
 		return err
 	}

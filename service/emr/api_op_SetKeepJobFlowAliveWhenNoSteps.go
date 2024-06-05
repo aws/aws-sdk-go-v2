@@ -117,6 +117,12 @@ func (c *Client) addOperationSetKeepJobFlowAliveWhenNoStepsMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetKeepJobFlowAliveWhenNoStepsValidationMiddleware(stack); err != nil {
 		return err
 	}

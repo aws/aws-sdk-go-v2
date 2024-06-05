@@ -109,6 +109,12 @@ func (c *Client) addOperationDeleteDataLakeMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDataLakeValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -171,6 +171,12 @@ func (c *Client) addOperationDescribeAssetCompositeModelMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribeAssetCompositeModelMiddleware(stack); err != nil {
 		return err
 	}

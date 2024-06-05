@@ -98,6 +98,12 @@ func (c *Client) addOperationDeleteRegistryMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteRegistryValidationMiddleware(stack); err != nil {
 		return err
 	}

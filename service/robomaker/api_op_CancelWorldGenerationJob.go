@@ -98,6 +98,12 @@ func (c *Client) addOperationCancelWorldGenerationJobMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelWorldGenerationJobValidationMiddleware(stack); err != nil {
 		return err
 	}

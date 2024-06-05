@@ -128,6 +128,12 @@ func (c *Client) addOperationRenderUiTemplateMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRenderUiTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

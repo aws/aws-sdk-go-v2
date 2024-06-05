@@ -120,6 +120,12 @@ func (c *Client) addOperationProvisionPermissionSetMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpProvisionPermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}

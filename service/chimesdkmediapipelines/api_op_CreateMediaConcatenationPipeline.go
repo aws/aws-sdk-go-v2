@@ -116,6 +116,12 @@ func (c *Client) addOperationCreateMediaConcatenationPipelineMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateMediaConcatenationPipelineMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -120,6 +120,12 @@ func (c *Client) addOperationDetachInstancesFromLoadBalancerMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDetachInstancesFromLoadBalancerValidationMiddleware(stack); err != nil {
 		return err
 	}

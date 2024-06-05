@@ -126,6 +126,12 @@ func (c *Client) addOperationListAgentActionGroupsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListAgentActionGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}

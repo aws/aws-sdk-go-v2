@@ -109,6 +109,12 @@ func (c *Client) addOperationPutCommentReactionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutCommentReactionValidationMiddleware(stack); err != nil {
 		return err
 	}

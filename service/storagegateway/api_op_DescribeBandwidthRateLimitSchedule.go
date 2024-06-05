@@ -128,6 +128,12 @@ func (c *Client) addOperationDescribeBandwidthRateLimitScheduleMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeBandwidthRateLimitScheduleValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -134,6 +134,12 @@ func (c *Client) addOperationCreateStreamingURLMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateStreamingURLValidationMiddleware(stack); err != nil {
 		return err
 	}

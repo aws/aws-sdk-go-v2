@@ -130,6 +130,12 @@ func (c *Client) addOperationUpdateParallelDataMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateParallelDataMiddleware(stack, options); err != nil {
 		return err
 	}

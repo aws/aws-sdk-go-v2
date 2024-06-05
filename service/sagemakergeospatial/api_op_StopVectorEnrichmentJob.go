@@ -98,6 +98,12 @@ func (c *Client) addOperationStopVectorEnrichmentJobMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopVectorEnrichmentJobValidationMiddleware(stack); err != nil {
 		return err
 	}

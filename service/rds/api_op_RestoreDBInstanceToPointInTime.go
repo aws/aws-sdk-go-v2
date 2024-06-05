@@ -630,6 +630,12 @@ func (c *Client) addOperationRestoreDBInstanceToPointInTimeMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRestoreDBInstanceToPointInTimeValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -104,6 +104,12 @@ func (c *Client) addOperationGetRelationalDatabaseLogStreamsMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetRelationalDatabaseLogStreamsValidationMiddleware(stack); err != nil {
 		return err
 	}

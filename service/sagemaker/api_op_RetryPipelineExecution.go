@@ -113,6 +113,12 @@ func (c *Client) addOperationRetryPipelineExecutionMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opRetryPipelineExecutionMiddleware(stack, options); err != nil {
 		return err
 	}

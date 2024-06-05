@@ -120,6 +120,12 @@ func (c *Client) addOperationDescribeWorkerConfigurationMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeWorkerConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

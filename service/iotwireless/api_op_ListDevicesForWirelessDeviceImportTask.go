@@ -122,6 +122,12 @@ func (c *Client) addOperationListDevicesForWirelessDeviceImportTaskMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListDevicesForWirelessDeviceImportTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

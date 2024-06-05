@@ -115,6 +115,12 @@ func (c *Client) addOperationDescribeRepositoryMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeRepositoryValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -163,6 +163,12 @@ func (c *Client) addOperationDescribeTrialComponentMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeTrialComponentValidationMiddleware(stack); err != nil {
 		return err
 	}

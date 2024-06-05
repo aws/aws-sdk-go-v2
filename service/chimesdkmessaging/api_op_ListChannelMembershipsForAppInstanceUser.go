@@ -123,6 +123,12 @@ func (c *Client) addOperationListChannelMembershipsForAppInstanceUserMiddlewares
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListChannelMembershipsForAppInstanceUserValidationMiddleware(stack); err != nil {
 		return err
 	}

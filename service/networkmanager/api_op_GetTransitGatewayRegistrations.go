@@ -117,6 +117,12 @@ func (c *Client) addOperationGetTransitGatewayRegistrationsMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetTransitGatewayRegistrationsValidationMiddleware(stack); err != nil {
 		return err
 	}

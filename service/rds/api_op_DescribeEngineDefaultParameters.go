@@ -223,6 +223,12 @@ func (c *Client) addOperationDescribeEngineDefaultParametersMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeEngineDefaultParametersValidationMiddleware(stack); err != nil {
 		return err
 	}

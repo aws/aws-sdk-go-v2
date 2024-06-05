@@ -209,6 +209,12 @@ func (c *Client) addOperationDescribeNotebookInstanceMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeNotebookInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

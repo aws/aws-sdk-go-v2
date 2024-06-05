@@ -203,6 +203,12 @@ func (c *Client) addOperationAdminUpdateUserAttributesMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAdminUpdateUserAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

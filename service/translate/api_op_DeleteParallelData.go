@@ -106,6 +106,12 @@ func (c *Client) addOperationDeleteParallelDataMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteParallelDataValidationMiddleware(stack); err != nil {
 		return err
 	}

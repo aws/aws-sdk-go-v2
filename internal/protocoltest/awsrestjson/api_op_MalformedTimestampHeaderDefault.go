@@ -96,6 +96,12 @@ func (c *Client) addOperationMalformedTimestampHeaderDefaultMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpMalformedTimestampHeaderDefaultValidationMiddleware(stack); err != nil {
 		return err
 	}

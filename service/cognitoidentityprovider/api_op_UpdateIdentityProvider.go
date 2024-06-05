@@ -225,6 +225,12 @@ func (c *Client) addOperationUpdateIdentityProviderMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateIdentityProviderValidationMiddleware(stack); err != nil {
 		return err
 	}

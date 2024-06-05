@@ -132,6 +132,12 @@ func (c *Client) addOperationDeleteBucketCorsMiddlewares(stack *middleware.Stack
 	if err = addPutBucketContextMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteBucketCorsValidationMiddleware(stack); err != nil {
 		return err
 	}

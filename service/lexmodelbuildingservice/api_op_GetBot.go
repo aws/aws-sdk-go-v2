@@ -212,6 +212,12 @@ func (c *Client) addOperationGetBotMiddlewares(stack *middleware.Stack, options 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetBotValidationMiddleware(stack); err != nil {
 		return err
 	}

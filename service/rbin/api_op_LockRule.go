@@ -148,6 +148,12 @@ func (c *Client) addOperationLockRuleMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpLockRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

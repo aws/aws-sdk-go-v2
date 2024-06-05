@@ -110,6 +110,12 @@ func (c *Client) addOperationDeletePortfolioMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeletePortfolioValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -120,6 +120,12 @@ func (c *Client) addOperationGetResourceSyncStatusMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetResourceSyncStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

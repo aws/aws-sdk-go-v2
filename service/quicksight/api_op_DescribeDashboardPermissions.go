@@ -129,6 +129,12 @@ func (c *Client) addOperationDescribeDashboardPermissionsMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
+	if err = addTimeOffsetDeserializer(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDashboardPermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}
