@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.27.1
 	github.com/aws/aws-sdk-go-v2/config v1.27.17
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.16.22
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.16.23
 	github.com/aws/aws-sdk-go-v2/service/acm v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.23.11
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.27.9
@@ -28,7 +28,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.23.9
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.38.9
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.22.9
-	github.com/aws/aws-sdk-go-v2/service/directconnect v1.24.9
+	github.com/aws/aws-sdk-go-v2/service/directconnect v1.24.10
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.24.9
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.34.6
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.32.7
@@ -47,7 +47,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.28.11
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.31.5
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.22.9
-	github.com/aws/aws-sdk-go-v2/service/glue v1.82.1
+	github.com/aws/aws-sdk-go-v2/service/glue v1.83.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.24.9
 	github.com/aws/aws-sdk-go-v2/service/iam v1.32.5
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.21.9
@@ -67,7 +67,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.40.9
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.23.9
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.28.6
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.54.4
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.55.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.44.12
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.29.2
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.28.9

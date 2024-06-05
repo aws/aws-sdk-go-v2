@@ -1,3 +1,19 @@
+# Release (2024-06-05)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`: [v1.14.0](feature/dynamodb/attributevalue/CHANGELOG.md#v1140-2024-06-05)
+  * **Feature**: Add codec options to use encoding.Text/Binary(Un)Marshaler when present on targets.
+* `github.com/aws/aws-sdk-go-v2/service/globalaccelerator`: [v1.24.0](service/globalaccelerator/CHANGELOG.md#v1240-2024-06-05)
+  * **Feature**: This release contains a new optional ip-addresses input field for the update accelerator and update custom routing accelerator apis. This input enables consumers to replace IPv4 addresses on existing accelerators with addresses provided in the input.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.83.0](service/glue/CHANGELOG.md#v1830-2024-06-05)
+  * **Feature**: AWS Glue now supports native SaaS connectivity: Salesforce connector available now
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.55.0](service/s3/CHANGELOG.md#v1550-2024-06-05)
+  * **Feature**: Added new params copySource and key to copyObject API for supporting S3 Access Grants plugin. These changes will not change any of the existing S3 API functionality.
+  * **Bug Fix**: Add S3-specific smithy protocol tests.
+
 # Release (2024-06-04)
 
 ## Module Highlights

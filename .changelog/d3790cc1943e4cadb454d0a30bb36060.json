@@ -1,8 +1,0 @@
-{
-    "id": "d3790cc1-943e-4cad-b454-d0a30bb36060",
-    "type": "feature",
-    "description": "AWS Glue now supports native SaaS connectivity: Salesforce connector available now",
-    "modules": [
-        "service/glue"
-    ]
-}
