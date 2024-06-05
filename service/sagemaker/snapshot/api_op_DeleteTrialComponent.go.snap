@@ -12,6 +12,7 @@ DeleteTrialComponent
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
+		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		ResolveAuthScheme
@@ -30,5 +31,6 @@ DeleteTrialComponent
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
+		AddTimeOffsetDeserializeMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

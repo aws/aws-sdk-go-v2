@@ -12,6 +12,7 @@ ModifyCacheParameterGroup
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
+		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		ResolveAuthScheme
@@ -30,5 +31,6 @@ ModifyCacheParameterGroup
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
+		AddTimeOffsetDeserializeMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

@@ -12,6 +12,7 @@ ListUserPoolClients
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
+		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		ResolveAuthScheme
@@ -30,5 +31,6 @@ ListUserPoolClients
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
+		AddTimeOffsetDeserializeMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

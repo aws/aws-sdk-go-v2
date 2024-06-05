@@ -12,6 +12,7 @@ GetEmailIdentity
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
+		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		ResolveAuthScheme
@@ -30,5 +31,6 @@ GetEmailIdentity
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
+		AddTimeOffsetDeserializeMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

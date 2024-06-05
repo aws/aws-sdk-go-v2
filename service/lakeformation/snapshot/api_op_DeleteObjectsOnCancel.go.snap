@@ -12,6 +12,7 @@ DeleteObjectsOnCancel
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
+		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		ResolveAuthScheme
@@ -30,5 +31,6 @@ DeleteObjectsOnCancel
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
+		AddTimeOffsetDeserializeMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

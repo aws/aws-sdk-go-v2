@@ -20,6 +20,7 @@ PutObjectRetention
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
+		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		DisableAcceptEncodingGzip
@@ -42,5 +43,6 @@ PutObjectRetention
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer
+		AddTimeOffsetDeserializeMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

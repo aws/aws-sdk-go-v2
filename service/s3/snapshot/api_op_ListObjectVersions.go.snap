@@ -19,6 +19,7 @@ ListObjectVersions
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
+		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		DisableAcceptEncodingGzip
@@ -39,5 +40,6 @@ ListObjectVersions
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer
+		AddTimeOffsetDeserializeMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

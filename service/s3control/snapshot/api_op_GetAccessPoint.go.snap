@@ -18,6 +18,7 @@ GetAccessPoint
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
+		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		ResolveAuthScheme
@@ -39,5 +40,6 @@ GetAccessPoint
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer
+		AddTimeOffsetDeserializeMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

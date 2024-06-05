@@ -18,6 +18,7 @@ DeleteStorageLensGroup
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
+		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		ResolveAuthScheme
@@ -39,5 +40,6 @@ DeleteStorageLensGroup
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer
+		AddTimeOffsetDeserializeMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

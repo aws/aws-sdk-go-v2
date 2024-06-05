@@ -11,6 +11,7 @@ StartMedicalStreamTranscription
 	Build stack step
 		ClientRequestID
 		UserAgent
+		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		ComputePayloadHash
@@ -31,5 +32,6 @@ StartMedicalStreamTranscription
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
+		AddTimeOffsetDeserializeMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

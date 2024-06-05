@@ -11,6 +11,7 @@ StartStreamTranscription
 	Build stack step
 		ClientRequestID
 		UserAgent
+		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		ComputePayloadHash
@@ -31,5 +32,6 @@ StartStreamTranscription
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
+		AddTimeOffsetDeserializeMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

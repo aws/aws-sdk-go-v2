@@ -20,6 +20,7 @@ UploadPart
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
+		AddTimeOffsetMiddleware
 		S3100Continue
 		RecursionDetection
 	Finalize stack step
@@ -43,5 +44,6 @@ UploadPart
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer
+		AddTimeOffsetDeserializeMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

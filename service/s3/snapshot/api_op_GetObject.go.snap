@@ -20,6 +20,7 @@ GetObject
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
+		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		DisableAcceptEncodingGzip
@@ -39,6 +40,7 @@ GetObject
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer
+		AddTimeOffsetDeserializeMiddleware
 		RecordResponseTiming
 		AWSChecksum:ValidateOutputPayloadChecksum
 		RequestResponseLogger
