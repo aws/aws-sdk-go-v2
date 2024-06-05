@@ -199,7 +199,12 @@ type CreateJobInput struct {
 
 	// The job timeout in minutes. This is the maximum time that a job run can consume
 	// resources before it is terminated and enters TIMEOUT status. The default is
-	// 2,880 minutes (48 hours).
+	// 2,880 minutes (48 hours) for batch jobs.
+	//
+	// Streaming jobs must have timeout values less than 7 days or 10080 minutes. When
+	// the value is left blank, the job will be restarted after 7 days based if you
+	// have not setup a maintenance window. If you have setup maintenance window, it
+	// will be restarted during the maintenance window after 7 days.
 	Timeout *int32
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a

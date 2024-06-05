@@ -1,0 +1,8 @@
+{
+    "id": "8e1bf54e-e9c5-4a05-b900-fcae96c40f9e",
+    "type": "feature",
+    "description": "This release contains a new optional ip-addresses input field for the update accelerator and update custom routing accelerator apis. This input enables consumers to replace IPv4 addresses on existing accelerators with addresses provided in the input.",
+    "modules": [
+        "service/globalaccelerator"
+    ]
+}

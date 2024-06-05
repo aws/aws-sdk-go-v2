@@ -66,6 +66,27 @@ func (AggFunction) Values() []AggFunction {
 	}
 }
 
+type AuthenticationType string
+
+// Enum values for AuthenticationType
+const (
+	AuthenticationTypeBasic  AuthenticationType = "BASIC"
+	AuthenticationTypeOauth2 AuthenticationType = "OAUTH2"
+	AuthenticationTypeCustom AuthenticationType = "CUSTOM"
+)
+
+// Values returns all known values for AuthenticationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuthenticationType) Values() []AuthenticationType {
+	return []AuthenticationType{
+		"BASIC",
+		"OAUTH2",
+		"CUSTOM",
+	}
+}
+
 type BackfillErrorCode string
 
 // Enum values for BackfillErrorCode
@@ -352,6 +373,7 @@ const (
 	ConnectionPropertyKeyKafkaSaslGssapiKrb5Conf              ConnectionPropertyKey = "KAFKA_SASL_GSSAPI_KRB5_CONF"
 	ConnectionPropertyKeyKafkaSaslGssapiService               ConnectionPropertyKey = "KAFKA_SASL_GSSAPI_SERVICE"
 	ConnectionPropertyKeyKafkaSaslGssapiPrincipal             ConnectionPropertyKey = "KAFKA_SASL_GSSAPI_PRINCIPAL"
+	ConnectionPropertyKeyRoleArn                              ConnectionPropertyKey = "ROLE_ARN"
 )
 
 // Values returns all known values for ConnectionPropertyKey. Note that this can
@@ -402,6 +424,28 @@ func (ConnectionPropertyKey) Values() []ConnectionPropertyKey {
 		"KAFKA_SASL_GSSAPI_KRB5_CONF",
 		"KAFKA_SASL_GSSAPI_SERVICE",
 		"KAFKA_SASL_GSSAPI_PRINCIPAL",
+		"ROLE_ARN",
+	}
+}
+
+type ConnectionStatus string
+
+// Enum values for ConnectionStatus
+const (
+	ConnectionStatusReady      ConnectionStatus = "READY"
+	ConnectionStatusInProgress ConnectionStatus = "IN_PROGRESS"
+	ConnectionStatusFailed     ConnectionStatus = "FAILED"
+)
+
+// Values returns all known values for ConnectionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionStatus) Values() []ConnectionStatus {
+	return []ConnectionStatus{
+		"READY",
+		"IN_PROGRESS",
+		"FAILED",
 	}
 }
 
@@ -416,6 +460,7 @@ const (
 	ConnectionTypeNetwork     ConnectionType = "NETWORK"
 	ConnectionTypeMarketplace ConnectionType = "MARKETPLACE"
 	ConnectionTypeCustom      ConnectionType = "CUSTOM"
+	ConnectionTypeSalesforce  ConnectionType = "SALESFORCE"
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
@@ -431,6 +476,7 @@ func (ConnectionType) Values() []ConnectionType {
 		"NETWORK",
 		"MARKETPLACE",
 		"CUSTOM",
+		"SALESFORCE",
 	}
 }
 
@@ -749,10 +795,15 @@ type FederationSourceErrorCode string
 
 // Enum values for FederationSourceErrorCode
 const (
+	FederationSourceErrorCodeAccessDeniedException          FederationSourceErrorCode = "AccessDeniedException"
+	FederationSourceErrorCodeEntityNotFoundException        FederationSourceErrorCode = "EntityNotFoundException"
+	FederationSourceErrorCodeInvalidCredentialsException    FederationSourceErrorCode = "InvalidCredentialsException"
+	FederationSourceErrorCodeInvalidInputException          FederationSourceErrorCode = "InvalidInputException"
 	FederationSourceErrorCodeInvalidResponseException       FederationSourceErrorCode = "InvalidResponseException"
 	FederationSourceErrorCodeOperationTimeoutException      FederationSourceErrorCode = "OperationTimeoutException"
 	FederationSourceErrorCodeOperationNotSupportedException FederationSourceErrorCode = "OperationNotSupportedException"
 	FederationSourceErrorCodeInternalServiceException       FederationSourceErrorCode = "InternalServiceException"
+	FederationSourceErrorCodePartialFailureException        FederationSourceErrorCode = "PartialFailureException"
 	FederationSourceErrorCodeThrottlingException            FederationSourceErrorCode = "ThrottlingException"
 )
 
@@ -762,10 +813,15 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (FederationSourceErrorCode) Values() []FederationSourceErrorCode {
 	return []FederationSourceErrorCode{
+		"AccessDeniedException",
+		"EntityNotFoundException",
+		"InvalidCredentialsException",
+		"InvalidInputException",
 		"InvalidResponseException",
 		"OperationTimeoutException",
 		"OperationNotSupportedException",
 		"InternalServiceException",
+		"PartialFailureException",
 		"ThrottlingException",
 	}
 }
@@ -1317,6 +1373,27 @@ func (NodeType) Values() []NodeType {
 		"CRAWLER",
 		"JOB",
 		"TRIGGER",
+	}
+}
+
+type OAuth2GrantType string
+
+// Enum values for OAuth2GrantType
+const (
+	OAuth2GrantTypeAuthorizationCode OAuth2GrantType = "AUTHORIZATION_CODE"
+	OAuth2GrantTypeClientCredentials OAuth2GrantType = "CLIENT_CREDENTIALS"
+	OAuth2GrantTypeJwtBearer         OAuth2GrantType = "JWT_BEARER"
+)
+
+// Values returns all known values for OAuth2GrantType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OAuth2GrantType) Values() []OAuth2GrantType {
+	return []OAuth2GrantType{
+		"AUTHORIZATION_CODE",
+		"CLIENT_CREDENTIALS",
+		"JWT_BEARER",
 	}
 }
 

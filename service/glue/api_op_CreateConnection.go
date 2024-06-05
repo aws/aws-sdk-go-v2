@@ -48,6 +48,12 @@ type CreateConnectionInput struct {
 }
 
 type CreateConnectionOutput struct {
+
+	// The status of the connection creation request. The request can take some time
+	// for certain authentication types, for example when creating an OAuth connection
+	// with token exchange over VPC.
+	CreateConnectionStatus types.ConnectionStatus
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

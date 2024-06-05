@@ -27214,6 +27214,60 @@ func awsAwsjson11_deserializeDocumentAthenaConnectorSource(v **types.AthenaConne
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAuthenticationConfiguration(v **types.AuthenticationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AuthenticationConfiguration
+	if *v == nil {
+		sv = &types.AuthenticationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AuthenticationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AuthenticationType to be of type string, got %T instead", value)
+				}
+				sv.AuthenticationType = types.AuthenticationType(jtv)
+			}
+
+		case "OAuth2Properties":
+			if err := awsAwsjson11_deserializeDocumentOAuth2Properties(&sv.OAuth2Properties, value); err != nil {
+				return err
+			}
+
+		case "SecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentBackfillError(v **types.BackfillError, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -31456,6 +31510,11 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "AuthenticationConfiguration":
+			if err := awsAwsjson11_deserializeDocumentAuthenticationConfiguration(&sv.AuthenticationConfiguration, value); err != nil {
+				return err
+			}
+
 		case "ConnectionProperties":
 			if err := awsAwsjson11_deserializeDocumentConnectionProperties(&sv.ConnectionProperties, value); err != nil {
 				return err
@@ -31493,6 +31552,22 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 					return fmt.Errorf("expected DescriptionString to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "LastConnectionValidationTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastConnectionValidationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "LastUpdatedBy":
@@ -31537,6 +31612,24 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 		case "PhysicalConnectionRequirements":
 			if err := awsAwsjson11_deserializeDocumentPhysicalConnectionRequirements(&sv.PhysicalConnectionRequirements, value); err != nil {
 				return err
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ConnectionStatus(jtv)
+			}
+
+		case "StatusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongValueString to be of type string, got %T instead", value)
+				}
+				sv.StatusReason = ptr.String(jtv)
 			}
 
 		default:
@@ -44292,6 +44385,114 @@ func awsAwsjson11_deserializeDocumentNullValueFields(v *[]types.NullValueField, 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentOAuth2ClientApplication(v **types.OAuth2ClientApplication, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OAuth2ClientApplication
+	if *v == nil {
+		sv = &types.OAuth2ClientApplication{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AWSManagedClientApplicationReference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AWSManagedClientApplicationReference to be of type string, got %T instead", value)
+				}
+				sv.AWSManagedClientApplicationReference = ptr.String(jtv)
+			}
+
+		case "UserManagedClientApplicationClientId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserManagedClientApplicationClientId to be of type string, got %T instead", value)
+				}
+				sv.UserManagedClientApplicationClientId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOAuth2Properties(v **types.OAuth2Properties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OAuth2Properties
+	if *v == nil {
+		sv = &types.OAuth2Properties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "OAuth2ClientApplication":
+			if err := awsAwsjson11_deserializeDocumentOAuth2ClientApplication(&sv.OAuth2ClientApplication, value); err != nil {
+				return err
+			}
+
+		case "OAuth2GrantType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OAuth2GrantType to be of type string, got %T instead", value)
+				}
+				sv.OAuth2GrantType = types.OAuth2GrantType(jtv)
+			}
+
+		case "TokenUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TokenUrl to be of type string, got %T instead", value)
+				}
+				sv.TokenUrl = ptr.String(jtv)
+			}
+
+		case "TokenUrlParametersMap":
+			if err := awsAwsjson11_deserializeDocumentTokenUrlParametersMap(&sv.TokenUrlParametersMap, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentOneInput(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -52417,6 +52618,42 @@ func awsAwsjson11_deserializeDocumentTaskRunProperties(v **types.TaskRunProperti
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTokenUrlParametersMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected TokenUrlParameterValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTransformConfigParameter(v **types.TransformConfigParameter, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -55265,6 +55502,15 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 
 	for key, value := range shape {
 		switch key {
+		case "CreateConnectionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionStatus to be of type string, got %T instead", value)
+				}
+				sv.CreateConnectionStatus = types.ConnectionStatus(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

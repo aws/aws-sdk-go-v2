@@ -94,6 +94,95 @@ func (m customBoolStringMarshaler) MarshalDynamoDBStreamsAttributeValue() (types
 	return &types.AttributeValueMemberS{Value: string(m)}, nil
 }
 
+type customTextMarshaler struct {
+	I, J int
+}
+
+func (v customTextMarshaler) MarshalText() ([]byte, error) {
+	text := fmt.Sprintf("{I: %d, J: %d}", v.I, v.J)
+	return []byte(text), nil
+}
+
+type customBinaryMarshaler struct {
+	I, J byte
+}
+
+func (v customBinaryMarshaler) MarshalBinary() ([]byte, error) {
+	return []byte{v.I, v.J}, nil
+}
+
+type customAVAndTextMarshaler struct {
+	I, J int
+}
+
+func (v customAVAndTextMarshaler) MarshalDynamoDBStreamsAttributeValue() (types.AttributeValue, error) {
+	return &types.AttributeValueMemberNS{Value: []string{
+		fmt.Sprintf("%d", v.I),
+		fmt.Sprintf("%d", v.J),
+	}}, nil
+}
+
+func (v customAVAndTextMarshaler) MarshalText() ([]byte, error) {
+	return []byte("should never happen"), nil
+}
+
+func TestEncodingMarshalers(t *testing.T) {
+	cases := []struct {
+		input         any
+		expected      types.AttributeValue
+		useMarshalers bool
+	}{
+		{
+			input: customTextMarshaler{1, 2},
+			expected: &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{
+				"I": &types.AttributeValueMemberN{Value: "1"},
+				"J": &types.AttributeValueMemberN{Value: "2"},
+			}},
+			useMarshalers: false,
+		},
+		{
+			input:         customTextMarshaler{1, 2},
+			expected:      &types.AttributeValueMemberS{Value: "{I: 1, J: 2}"},
+			useMarshalers: true,
+		},
+		{
+			input: customBinaryMarshaler{1, 2},
+			expected: &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{
+				"I": &types.AttributeValueMemberN{Value: "1"},
+				"J": &types.AttributeValueMemberN{Value: "2"},
+			}},
+			useMarshalers: false,
+		},
+		{
+			input:         customBinaryMarshaler{1, 2},
+			expected:      &types.AttributeValueMemberB{Value: []byte{1, 2}},
+			useMarshalers: true,
+		},
+		{
+			input:         customAVAndTextMarshaler{1, 2},
+			expected:      &types.AttributeValueMemberNS{Value: []string{"1", "2"}},
+			useMarshalers: false,
+		},
+		{
+			input:         customAVAndTextMarshaler{1, 2},
+			expected:      &types.AttributeValueMemberNS{Value: []string{"1", "2"}},
+			useMarshalers: true,
+		},
+	}
+
+	for _, testCase := range cases {
+		actual, err := MarshalWithOptions(testCase.input, func(o *EncoderOptions) {
+			o.UseEncodingMarshalers = testCase.useMarshalers
+		})
+		if err != nil {
+			t.Errorf("got unexpected error %v for input %v", err, testCase.input)
+		}
+		if diff := cmpDiff(testCase.expected, actual); len(diff) != 0 {
+			t.Errorf("expected match but got: %s", diff)
+		}
+	}
+}
+
 func TestCustomStringMarshaler(t *testing.T) {
 	cases := []struct {
 		expected types.AttributeValue

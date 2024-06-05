@@ -308,6 +308,56 @@ type AuditContext struct {
 	noSmithyDocumentSerde
 }
 
+// A structure containing the authentication configuration.
+type AuthenticationConfiguration struct {
+
+	// A structure containing the authentication configuration.
+	AuthenticationType AuthenticationType
+
+	// The properties for OAuth2 authentication.
+	OAuth2Properties *OAuth2Properties
+
+	// The secret manager ARN to store credentials.
+	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure containing the authentication configuration in the CreateConnection
+// request.
+type AuthenticationConfigurationInput struct {
+
+	// A structure containing the authentication configuration in the CreateConnection
+	// request.
+	AuthenticationType AuthenticationType
+
+	// The properties for OAuth2 authentication in the CreateConnection request.
+	OAuth2Properties *OAuth2PropertiesInput
+
+	// The secret manager ARN to store credentials in the CreateConnection request.
+	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The set of properties required for the the OAuth2 AUTHORIZATION_CODE grant type
+// workflow.
+type AuthorizationCodeProperties struct {
+
+	// An authorization code to be used in the third leg of the AUTHORIZATION_CODE
+	// grant workflow. This is a single-use code which becomes invalid once exchanged
+	// for an access token, thus it is acceptable to have this value as a request
+	// parameter.
+	AuthorizationCode *string
+
+	// The redirect URI where the user gets redirected to by authorization server when
+	// issuing an authorization code. The URI is subsequently used when the
+	// authorization code is exchanged for an access token.
+	RedirectUri *string
+
+	noSmithyDocumentSerde
+}
+
 // A list of errors that can occur when registering partition indexes for an
 // existing table.
 //
@@ -1446,6 +1496,9 @@ type ConfusionMatrix struct {
 // Defines a connection to a data source.
 type Connection struct {
 
+	// The authentication properties of the connection.
+	AuthenticationConfiguration *AuthenticationConfiguration
+
 	// These key-value pairs define parameters for the connection:
 	//
 	//   - HOST - The host URI: either the fully qualified domain name (FQDN) or the
@@ -1593,16 +1646,19 @@ type Connection struct {
 	// The type of the connection. Currently, SFTP is not supported.
 	ConnectionType ConnectionType
 
-	// The time that this connection definition was created.
+	// The timestamp of the time that this connection definition was created.
 	CreationTime *time.Time
 
 	// The description of the connection.
 	Description *string
 
+	// A timestamp of the time this connection was last validated.
+	LastConnectionValidationTime *time.Time
+
 	// The user, group, or role that last updated this connection definition.
 	LastUpdatedBy *string
 
-	// The last time that this connection definition was updated.
+	// The timestamp of the last time the connection definition was updated.
 	LastUpdatedTime *time.Time
 
 	// A list of criteria that can be used in selecting this connection.
@@ -1611,9 +1667,15 @@ type Connection struct {
 	// The name of the connection definition.
 	Name *string
 
-	// A map of physical connection requirements, such as virtual private cloud (VPC)
-	// and SecurityGroup , that are needed to make this connection successfully.
+	// The physical connection requirements, such as virtual private cloud (VPC) and
+	// SecurityGroup , that are needed to make this connection successfully.
 	PhysicalConnectionRequirements *PhysicalConnectionRequirements
+
+	// The status of the connection. Can be one of: READY , IN_PROGRESS , or FAILED .
+	Status ConnectionStatus
+
+	// The reason for the connection status.
+	StatusReason *string
 
 	noSmithyDocumentSerde
 }
@@ -1675,6 +1737,10 @@ type ConnectionInput struct {
 	//
 	//   - Required: All of ( USERNAME , PASSWORD ) or SECRET_ID .
 	//
+	//   - SALESFORCE - Designates a connection to Salesforce using OAuth authencation.
+	//
+	//   - Requires the AuthenticationConfiguration member to be configured.
+	//
 	//   - NETWORK - Designates a network connection to a data source within an Amazon
 	//   Virtual Private Cloud environment (Amazon VPC).
 	//
@@ -1710,11 +1776,14 @@ type ConnectionInput struct {
 	// This member is required.
 	ConnectionType ConnectionType
 
-	// The name of the connection. Connection will not function as expected without a
-	// name.
+	// The name of the connection.
 	//
 	// This member is required.
 	Name *string
+
+	// The authentication properties of the connection. Used for a Salesforce
+	// connection.
+	AuthenticationConfiguration *AuthenticationConfigurationInput
 
 	// The description of the connection.
 	Description *string
@@ -1722,9 +1791,13 @@ type ConnectionInput struct {
 	// A list of criteria that can be used in selecting this connection.
 	MatchCriteria []string
 
-	// A map of physical connection requirements, such as virtual private cloud (VPC)
-	// and SecurityGroup , that are needed to successfully make this connection.
+	// The physical connection requirements, such as virtual private cloud (VPC) and
+	// SecurityGroup , that are needed to successfully make this connection.
 	PhysicalConnectionRequirements *PhysicalConnectionRequirements
+
+	// A flag to validate the credentials during create connection. Used for a
+	// Salesforce connection. Default is true.
+	ValidateCredentials bool
 
 	noSmithyDocumentSerde
 }
@@ -4361,7 +4434,12 @@ type Job struct {
 
 	// The job timeout in minutes. This is the maximum time that a job run can consume
 	// resources before it is terminated and enters TIMEOUT status. The default is
-	// 2,880 minutes (48 hours).
+	// 2,880 minutes (48 hours) for batch jobs.
+	//
+	// Streaming jobs must have timeout values less than 7 days or 10080 minutes. When
+	// the value is left blank, the job will be restarted after 7 days based if you
+	// have not setup a maintenance window. If you have setup maintenance window, it
+	// will be restarted during the maintenance window after 7 days.
 	Timeout *int32
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a
@@ -4666,13 +4744,6 @@ type JobRun struct {
 	// consume resources before it is terminated and enters TIMEOUT status. This value
 	// overrides the timeout value set in the parent job.
 	//
-	// The maximum value for timeout for batch jobs is 7 days or 10080 minutes. The
-	// default is 2880 minutes (48 hours) for batch jobs.
-	//
-	// Any existing Glue jobs that have a greater timeout value are defaulted to 7
-	// days. For instance you have specified a timeout of 20 days for a batch job, it
-	// will be stopped on the 7th day.
-	//
 	// Streaming jobs must have timeout values less than 7 days or 10080 minutes. When
 	// the value is left blank, the job will be restarted after 7 days based if you
 	// have not setup a maintenance window. If you have setup maintenance window, it
@@ -4887,7 +4958,12 @@ type JobUpdate struct {
 
 	// The job timeout in minutes. This is the maximum time that a job run can consume
 	// resources before it is terminated and enters TIMEOUT status. The default is
-	// 2,880 minutes (48 hours).
+	// 2,880 minutes (48 hours) for batch jobs.
+	//
+	// Streaming jobs must have timeout values less than 7 days or 10080 minutes. When
+	// the value is left blank, the job will be restarted after 7 days based if you
+	// have not setup a maintenance window. If you have setup maintenance window, it
+	// will be restarted during the maintenance window after 7 days.
 	Timeout *int32
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a
@@ -5827,6 +5903,62 @@ type NullValueField struct {
 	noSmithyDocumentSerde
 }
 
+// The OAuth2 client app used for the connection.
+type OAuth2ClientApplication struct {
+
+	// The reference to the SaaS-side client app that is Amazon Web Services managed.
+	AWSManagedClientApplicationReference *string
+
+	// The client application clientID if the ClientAppType is USER_MANAGED .
+	UserManagedClientApplicationClientId *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure containing properties for OAuth2 authentication.
+type OAuth2Properties struct {
+
+	// The client application type. For example, AWS_MANAGED or USER_MANAGED.
+	OAuth2ClientApplication *OAuth2ClientApplication
+
+	// The OAuth2 grant type. For example, AUTHORIZATION_CODE , JWT_BEARER , or
+	// CLIENT_CREDENTIALS .
+	OAuth2GrantType OAuth2GrantType
+
+	// The URL of the provider's authentication server, to exchange an authorization
+	// code for an access token.
+	TokenUrl *string
+
+	// A map of parameters that are added to the token GET request.
+	TokenUrlParametersMap map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A structure containing properties for OAuth2 in the CreateConnection request.
+type OAuth2PropertiesInput struct {
+
+	// The set of properties required for the the OAuth2 AUTHORIZATION_CODE grant type.
+	AuthorizationCodeProperties *AuthorizationCodeProperties
+
+	// The client application type in the CreateConnection request. For example,
+	// AWS_MANAGED or USER_MANAGED .
+	OAuth2ClientApplication *OAuth2ClientApplication
+
+	// The OAuth2 grant type in the CreateConnection request. For example,
+	// AUTHORIZATION_CODE , JWT_BEARER , or CLIENT_CREDENTIALS .
+	OAuth2GrantType OAuth2GrantType
+
+	// The URL of the provider's authentication server, to exchange an authorization
+	// code for an access token.
+	TokenUrl *string
+
+	// A map of parameters that are added to the token GET request.
+	TokenUrlParametersMap map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // A structure representing an open format table.
 type OpenTableFormatInput struct {
 
@@ -6066,12 +6198,10 @@ type PartitionValueList struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the physical requirements for a connection.
+// The OAuth client app in GetConnection response.
 type PhysicalConnectionRequirements struct {
 
-	// The connection's Availability Zone. This field is redundant because the
-	// specified subnet implies the Availability Zone to be used. Currently the field
-	// must be populated, but it will be deprecated in the future.
+	// The connection's Availability Zone.
 	AvailabilityZone *string
 
 	// The security group ID list used by the connection.
@@ -8880,7 +9010,8 @@ type ViewRepresentation struct {
 	// query on a view. Engines may perform operations during view creation to
 	// transform ViewOriginalText to ViewExpandedText . For example:
 	//
-	//   - Fully qualify identifiers: SELECT * from table1 → SELECT * from db1.table1
+	//   - Fully qualified identifiers: SELECT * from table1 -> SELECT * from
+	//   db1.table1
 	ViewExpandedText *string
 
 	// The SELECT query provided by the customer during CREATE VIEW DDL . This SQL is

@@ -1,0 +1,8 @@
+{
+    "id": "3e8f46be-f063-4ecc-a6d7-9ce47de3e1b1",
+    "type": "feature",
+    "description": "Added new params copySource and key to copyObject API for supporting S3 Access Grants plugin. These changes will not change any of the existing S3 API functionality.",
+    "modules": [
+        "service/s3"
+    ]
+}
