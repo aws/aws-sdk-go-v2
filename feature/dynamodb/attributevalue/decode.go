@@ -231,6 +231,18 @@ type DecoderOptions struct {
 	// Default string parsing format is time.RFC3339
 	// Default number parsing format is seconds since January 1, 1970 UTC
 	DecodeTime DecodeTimeAttributes
+
+	// When enabled, the decoder will use implementations of
+	// encoding.TextUnmarshaler and encoding.BinaryUnmarshaler when present on
+	// unmarshaling targets.
+	//
+	// If a target implements [Unmarshaler], encoding unmarshaler
+	// implementations are ignored.
+	//
+	// If the attributevalue is a string, its underlying value will be used to
+	// call UnmarshalText on the target. If the attributevalue is a binary, its
+	// value will be used to call UnmarshalBinary.
+	UseEncodingUnmarshalers bool
 }
 
 // A Decoder provides unmarshaling AttributeValues to Go value types.
@@ -288,16 +300,29 @@ func (d *Decoder) decode(av types.AttributeValue, v reflect.Value, fieldTag tag)
 	var u Unmarshaler
 	_, isNull := av.(*types.AttributeValueMemberNULL)
 	if av == nil || isNull {
-		u, v = indirect(v, indirectOptions{decodeNull: true})
+		u, v = indirect[Unmarshaler](v, indirectOptions{decodeNull: true})
 		if u != nil {
 			return u.UnmarshalDynamoDBAttributeValue(av)
 		}
 		return d.decodeNull(v)
 	}
 
-	u, v = indirect(v, indirectOptions{})
+	v0 := v
+	u, v = indirect[Unmarshaler](v, indirectOptions{})
 	if u != nil {
 		return u.UnmarshalDynamoDBAttributeValue(av)
+	}
+	if d.options.UseEncodingUnmarshalers {
+		if s, ok := av.(*types.AttributeValueMemberS); ok {
+			if u, _ := indirect[encoding.TextUnmarshaler](v0, indirectOptions{}); u != nil {
+				return u.UnmarshalText([]byte(s.Value))
+			}
+		}
+		if b, ok := av.(*types.AttributeValueMemberB); ok {
+			if u, _ := indirect[encoding.BinaryUnmarshaler](v0, indirectOptions{}); u != nil {
+				return u.UnmarshalBinary(b.Value)
+			}
+		}
 	}
 
 	switch tv := av.(type) {
@@ -420,7 +445,7 @@ func (d *Decoder) decodeBinarySet(bs [][]byte, v reflect.Value) error {
 		if !isArray {
 			v.SetLen(i + 1)
 		}
-		u, elem := indirect(v.Index(i), indirectOptions{})
+		u, elem := indirect[Unmarshaler](v.Index(i), indirectOptions{})
 		if u != nil {
 			return u.UnmarshalDynamoDBAttributeValue(&types.AttributeValueMemberBS{Value: bs})
 		}
@@ -555,7 +580,7 @@ func (d *Decoder) decodeNumberSet(ns []string, v reflect.Value) error {
 		if !isArray {
 			v.SetLen(i + 1)
 		}
-		u, elem := indirect(v.Index(i), indirectOptions{})
+		u, elem := indirect[Unmarshaler](v.Index(i), indirectOptions{})
 		if u != nil {
 			return u.UnmarshalDynamoDBAttributeValue(&types.AttributeValueMemberNS{Value: ns})
 		}
@@ -634,7 +659,7 @@ func (d *Decoder) decodeMap(avMap map[string]types.AttributeValue, v reflect.Val
 		for k, av := range avMap {
 			key := reflect.New(keyType).Elem()
 			// handle pointer keys
-			_, indirectKey := indirect(key, indirectOptions{skipUnmarshaler: true})
+			_, indirectKey := indirect[Unmarshaler](key, indirectOptions{skipUnmarshaler: true})
 			if err := decodeMapKey(k, indirectKey, tag{}); err != nil {
 				return &UnmarshalTypeError{
 					Value: fmt.Sprintf("map key %q", k),
@@ -777,7 +802,7 @@ func (d *Decoder) decodeStringSet(ss []string, v reflect.Value) error {
 		if !isArray {
 			v.SetLen(i + 1)
 		}
-		u, elem := indirect(v.Index(i), indirectOptions{})
+		u, elem := indirect[Unmarshaler](v.Index(i), indirectOptions{})
 		if u != nil {
 			return u.UnmarshalDynamoDBAttributeValue(&types.AttributeValueMemberSS{Value: ss})
 		}
@@ -825,7 +850,7 @@ type indirectOptions struct {
 //
 // Based on the enoding/json type reflect value type indirection in Go Stdlib
 // https://golang.org/src/encoding/json/decode.go indirect func.
-func indirect(v reflect.Value, opts indirectOptions) (Unmarshaler, reflect.Value) {
+func indirect[U any](v reflect.Value, opts indirectOptions) (U, reflect.Value) {
 	// Issue #24153 indicates that it is generally not a guaranteed property
 	// that you may round-trip a reflect.Value by calling Value.Addr().Elem()
 	// and expect the value to still be settable for values derived from
@@ -859,7 +884,8 @@ func indirect(v reflect.Value, opts indirectOptions) (Unmarshaler, reflect.Value
 				continue
 			}
 			if e.Kind() != reflect.Ptr && e.IsValid() {
-				return nil, e
+				var u U
+				return u, e
 			}
 		}
 		if v.Kind() != reflect.Ptr {
@@ -880,7 +906,7 @@ func indirect(v reflect.Value, opts indirectOptions) (Unmarshaler, reflect.Value
 			v.Set(reflect.New(v.Type().Elem()))
 		}
 		if !opts.skipUnmarshaler && v.Type().NumMethod() > 0 && v.CanInterface() {
-			if u, ok := v.Interface().(Unmarshaler); ok {
+			if u, ok := v.Interface().(U); ok {
 				return u, reflect.Value{}
 			}
 		}
@@ -893,7 +919,8 @@ func indirect(v reflect.Value, opts indirectOptions) (Unmarshaler, reflect.Value
 		}
 	}
 
-	return nil, v
+	var u U
+	return u, v
 }
 
 // A Number represents a Attributevalue number literal.
