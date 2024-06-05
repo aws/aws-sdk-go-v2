@@ -5860,6 +5860,12 @@
                         "smithy.api#documentation": "<p>The IP address type that an accelerator supports. For a standard accelerator, the value can be IPV4 or DUAL_STACK.</p>"
                     }
                 },
+                "IpAddresses": {
+                    "target": "com.amazonaws.globalaccelerator#IpAddresses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP addresses for an accelerator.</p>"
+                    }
+                },
                 "Enabled": {
                     "target": "com.amazonaws.globalaccelerator#GenericBoolean",
                     "traits": {
@@ -6092,6 +6098,12 @@
                     "target": "com.amazonaws.globalaccelerator#IpAddressType",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address type that an accelerator supports. For a custom routing accelerator, the value must be IPV4.</p>"
+                    }
+                },
+                "IpAddresses": {
+                    "target": "com.amazonaws.globalaccelerator#IpAddresses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP addresses for an accelerator.</p>"
                     }
                 },
                 "Enabled": {

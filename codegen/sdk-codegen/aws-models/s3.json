@@ -647,6 +647,11 @@
                             "documentation": "The S3 Prefix used to send the request. This is an optional parameter that will be set automatically for operations that are scoped to an S3 Prefix.",
                             "type": "String"
                         },
+                        "CopySource": {
+                            "required": false,
+                            "documentation": "The Copy Source used for Copy Object request. This is an optional parameter that will be set automatically for operations that are scoped to Copy Source.",
+                            "type": "String"
+                        },
                         "DisableAccessPoints": {
                             "required": false,
                             "documentation": "Internal parameter to disable Access Point Buckets",
@@ -10664,6 +10669,33 @@
                             }
                         },
                         {
+                            "documentation": "virtual addressing, aws-global region with Copy Source, and Key uses the global endpoint. Copy Source and Key parameters should not be used in endpoint evaluation.",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "s3",
+                                                "signingRegion": "us-east-1",
+                                                "disableDoubleEncoding": true
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://bucket-name.s3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "aws-global",
+                                "Bucket": "bucket-name",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Accelerate": false,
+                                "CopySource": "/copy/source",
+                                "Key": "key"
+                            }
+                        },
+                        {
                             "documentation": "virtual addressing, aws-global region with fips uses the regional fips endpoint",
                             "expect": {
                                 "endpoint": {
@@ -18844,7 +18876,10 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the source object for the copy operation. The source object \n         can be up to 5 GB. If the source object is an object that was uploaded by using a multipart upload, the object copy will be a single part object after the source object is copied to the destination bucket.</p>\n         <p>You specify the value of the copy source in one of two\n         formats, depending on whether you want to access the source object through an <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html\">access point</a>:</p>\n         <ul>\n            <li>\n               <p>For objects not accessed through an access point, specify the name of the source bucket\n               and the key of the source object, separated by a slash (/). For example, to copy the\n               object <code>reports/january.pdf</code> from the general purpose bucket \n               <code>awsexamplebucket</code>, use <code>awsexamplebucket/reports/january.pdf</code>.\n               The value must be URL-encoded. To copy the\n               object <code>reports/january.pdf</code> from the directory bucket \n               <code>awsexamplebucket--use1-az5--x-s3</code>, use <code>awsexamplebucket--use1-az5--x-s3/reports/january.pdf</code>.\n               The value must be URL-encoded.</p>\n            </li>\n            <li>\n               <p>For objects accessed through access points, specify the Amazon Resource Name (ARN) of the object as accessed through the access point, in the format <code>arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key></code>. For example, to copy the object <code>reports/january.pdf</code> through access point <code>my-access-point</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf</code>. The value must be URL encoded.</p>\n               <note>\n                  <ul>\n                     <li>\n                        <p>Amazon S3 supports copy operations using Access points only when the source and destination buckets are in the same Amazon Web Services Region.</p>\n                     </li>\n                     <li>\n                        <p>Access points are not supported by directory buckets.</p>\n                     </li>\n                  </ul>\n               </note>\n               <p>Alternatively, for objects accessed through Amazon S3 on Outposts, specify the ARN of the object as accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/object/<key></code>. For example, to copy the object <code>reports/january.pdf</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf</code>. The value must be URL-encoded.  </p>\n            </li>\n         </ul>\n         <p>If your source bucket versioning is enabled, the <code>x-amz-copy-source</code> header by default identifies the current\n         version of an object to copy. If the current version is a delete marker, Amazon S3\n         behaves as if the object was deleted. To copy a different version, use the\n         <code>versionId</code> query parameter. Specifically, append <code>?versionId=<version-id></code>\n         to the value (for example,\n         <code>awsexamplebucket/reports/january.pdf?versionId=QUpfdndhfd8438MNFDN93jdnJFkdmqnh893</code>).\n         If you don't specify a version ID, Amazon S3 copies the latest version of the source\n         object.</p>\n         <p>If you enable versioning on the destination bucket, Amazon S3 generates a unique version\n         ID for the copied object. This version ID is different from the version ID\n         of the source object. Amazon S3 returns the version ID of the copied object in the\n         <code>x-amz-version-id</code> response header in the response.</p>\n         <p>If you do not enable versioning or suspend it on the destination bucket, the version\n         ID that Amazon S3 generates in the\n         <code>x-amz-version-id</code> response header is always null.</p>\n         <note>\n            <p>\n               <b>Directory buckets</b> - S3 Versioning isn't enabled and supported for directory buckets.</p>\n         </note>",
                         "smithy.api#httpHeader": "x-amz-copy-source",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "CopySource"
+                        }
                     }
                 },
                 "CopySourceIfMatch": {
@@ -18915,7 +18950,10 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The key of the destination object.</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Key"
+                        }
                     }
                 },
                 "Metadata": {
@@ -30612,19 +30650,31 @@
                 "smithy.api#documentation": "<p>Adds an object to a bucket.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Amazon S3 never adds partial objects; if you receive a success response, Amazon S3 added the\n               entire object to the bucket. You cannot use <code>PutObject</code> to only update a\n               single piece of metadata for an existing object. You must put the entire object with\n               updated metadata if you want to update some values.</p>\n               </li>\n               <li>\n                  <p>If your bucket uses the bucket owner enforced setting for Object Ownership, ACLs are disabled and no longer affect permissions. All\n                  objects written to the bucket by any account will be owned by the bucket owner.</p>\n               </li>\n               <li>\n                  <p>\n                     <b>Directory buckets</b> - For directory buckets, you must make requests for this API operation to the Zonal endpoint. These endpoints support virtual-hosted-style requests in the format <code>https://<i>bucket_name</i>.s3express-<i>az_id</i>.<i>region</i>.amazonaws.com/<i>key-name</i>\n                     </code>. Path-style requests are not supported. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html\">Regional and Zonal endpoints</a> in the\n    <i>Amazon S3 User Guide</i>.</p>\n               </li>\n            </ul>\n         </note>\n         <p>Amazon S3 is a distributed system. If it receives multiple write requests for the same object\n         simultaneously, it overwrites all but the last object written. However, Amazon S3 provides features that can modify this behavior:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>S3 Object Lock</b> - To prevent objects from\n            being deleted or overwritten, you can use <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html\">Amazon S3 Object\n               Lock</a> in the <i>Amazon S3 User Guide</i>.</p>\n               <note>\n                  <p>This functionality is not supported for directory buckets.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <b>S3 Versioning</b> - When you enable\n            versioning for a bucket, if Amazon S3 receives multiple write requests for the same object\n            simultaneously, it stores all versions of the objects. For each write request that is made to the same object, Amazon S3 automatically generates a unique version ID\n            of that object being stored in Amazon S3. \n           You can retrieve, replace, or delete any version of the object. For more information about versioning, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html\">Adding Objects to\n               Versioning-Enabled Buckets</a> in the <i>Amazon S3\n                  User Guide</i>. For information about returning the versioning state\n            of a bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html\">GetBucketVersioning</a>. </p>\n               <note>\n                  <p>This functionality is not supported for directory buckets.</p>\n               </note>\n            </li>\n         </ul>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <b>General purpose bucket permissions</b> - The following permissions are required in your policies when your \n                        <code>PutObject</code> request includes specific headers.</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <b>\n                                 <code>s3:PutObject</code>\n                              </b> - To successfully complete the <code>PutObject</code> request, you must always have the <code>s3:PutObject</code> permission on a bucket to add an object\n                                 to it.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <b>\n                                 <code>s3:PutObjectAcl</code>\n                              </b> - To successfully change the objects ACL of your <code>PutObject</code> request, you must have the <code>s3:PutObjectAcl</code>.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <b>\n                                 <code>s3:PutObjectTagging</code>\n                              </b> - To successfully set the tag-set with your <code>PutObject</code> request, you\n                                 must have the <code>s3:PutObjectTagging</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Directory bucket permissions</b> - To grant access to this API operation on a directory bucket, we recommend that you use the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html\">\n                           <code>CreateSession</code>\n                        </a> API operation for session-based authorization. Specifically, you grant the <code>s3express:CreateSession</code> permission to the directory bucket in a bucket policy or an IAM identity-based policy. Then, you make the <code>CreateSession</code> API call on the bucket to obtain a session token. With the session token in your request header, you can make API requests to this operation. After the session token expires, you make another <code>CreateSession</code> API call to generate a new session token for use. \nAmazon Web Services CLI or SDKs create session and refresh the session token automatically to avoid service interruptions when a session expires. For more information about authorization, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html\">\n                           <code>CreateSession</code>\n                        </a>.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Data integrity with Content-MD5</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <b>General purpose bucket</b> - To ensure that data is not corrupted traversing the network, use the\n                    <code>Content-MD5</code> header. When you use this header, Amazon S3 checks the object\n                    against the provided MD5 value and, if they do not match, Amazon S3 returns an error. Alternatively, when the object's ETag is its MD5 digest, \n                    you can calculate the MD5 while putting the object to Amazon S3 and compare the returned ETag to\n                    the calculated MD5 value.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Directory bucket</b> - This functionality is not supported for directory buckets.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>HTTP Host header syntax</dt>\n            <dd>\n               <p>\n                  <b>Directory buckets </b> - The HTTP Host header syntax is <code>\n                     <i>Bucket_name</i>.s3express-<i>az_id</i>.<i>region</i>.amazonaws.com</code>.</p>\n            </dd>\n         </dl>\n         <p>For more information about related Amazon S3 APIs, see the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html\">CopyObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html\">DeleteObject</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#examples": [
                     {
-                        "title": "To upload object and specify user-defined metadata",
-                        "documentation": "The following example creates an object. The request also specifies optional metadata. If the bucket is versioning enabled, S3 returns version ID in response.",
+                        "title": "To upload an object and specify server-side encryption and object tags",
+                        "documentation": "The following example uploads an object. The request specifies the optional server-side encryption option. The request also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.",
                         "input": {
                             "Body": "filetoupload",
                             "Bucket": "examplebucket",
                             "Key": "exampleobject",
-                            "Metadata": {
-                                "metadata1": "value1",
-                                "metadata2": "value2"
-                            }
+                            "ServerSideEncryption": "AES256",
+                            "Tagging": "key1=value1&key2=value2"
                         },
                         "output": {
-                            "VersionId": "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0",
+                            "VersionId": "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt",
+                            "ETag": "\"6805f2cfc46c0f04559748bb039d69ae\"",
+                            "ServerSideEncryption": "AES256"
+                        }
+                    },
+                    {
+                        "title": "To create an object.",
+                        "documentation": "The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.",
+                        "input": {
+                            "Body": "filetoupload",
+                            "Bucket": "examplebucket",
+                            "Key": "objectkey"
+                        },
+                        "output": {
+                            "VersionId": "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ",
                             "ETag": "\"6805f2cfc46c0f04559748bb039d69ae\""
                         }
                     },
@@ -30659,28 +30709,19 @@
                         }
                     },
                     {
-                        "title": "To create an object.",
-                        "documentation": "The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.",
+                        "title": "To upload object and specify user-defined metadata",
+                        "documentation": "The following example creates an object. The request also specifies optional metadata. If the bucket is versioning enabled, S3 returns version ID in response.",
                         "input": {
                             "Body": "filetoupload",
                             "Bucket": "examplebucket",
-                            "Key": "objectkey"
+                            "Key": "exampleobject",
+                            "Metadata": {
+                                "metadata1": "value1",
+                                "metadata2": "value2"
+                            }
                         },
                         "output": {
-                            "VersionId": "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ",
-                            "ETag": "\"6805f2cfc46c0f04559748bb039d69ae\""
-                        }
-                    },
-                    {
-                        "title": "To upload an object",
-                        "documentation": "The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file syntax. S3 returns VersionId of the newly created object.",
-                        "input": {
-                            "Body": "HappyFace.jpg",
-                            "Bucket": "examplebucket",
-                            "Key": "HappyFace.jpg"
-                        },
-                        "output": {
-                            "VersionId": "tpf3zF08nBplQK1XLOefGskR7mGDwcDk",
+                            "VersionId": "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0",
                             "ETag": "\"6805f2cfc46c0f04559748bb039d69ae\""
                         }
                     },
@@ -30699,19 +30740,16 @@
                         }
                     },
                     {
-                        "title": "To upload an object and specify server-side encryption and object tags",
-                        "documentation": "The following example uploads an object. The request specifies the optional server-side encryption option. The request also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.",
+                        "title": "To upload an object",
+                        "documentation": "The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file syntax. S3 returns VersionId of the newly created object.",
                         "input": {
-                            "Body": "filetoupload",
+                            "Body": "HappyFace.jpg",
                             "Bucket": "examplebucket",
-                            "Key": "exampleobject",
-                            "ServerSideEncryption": "AES256",
-                            "Tagging": "key1=value1&key2=value2"
+                            "Key": "HappyFace.jpg"
                         },
                         "output": {
-                            "VersionId": "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt",
-                            "ETag": "\"6805f2cfc46c0f04559748bb039d69ae\"",
-                            "ServerSideEncryption": "AES256"
+                            "VersionId": "tpf3zF08nBplQK1XLOefGskR7mGDwcDk",
+                            "ETag": "\"6805f2cfc46c0f04559748bb039d69ae\""
                         }
                     }
                 ],
