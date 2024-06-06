@@ -1,3 +1,7 @@
+# v1.29.0 (2024-06-06)
+
+* **Feature**: Adds integration with Secrets Manager for Redshift, Splunk, HttpEndpoint, and Snowflake destinations
+
 # v1.28.11 (2024-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

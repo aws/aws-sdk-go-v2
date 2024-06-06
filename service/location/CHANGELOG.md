@@ -1,3 +1,7 @@
+# v1.38.0 (2024-06-06)
+
+* **Feature**: Added two new APIs, VerifyDevicePosition and ForecastGeofenceEvents. Added support for putting larger geofences up to 100,000 vertices with Geobuf fields.
+
 # v1.37.9 (2024-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

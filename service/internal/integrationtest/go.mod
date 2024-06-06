@@ -44,10 +44,10 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.22.9
 	github.com/aws/aws-sdk-go-v2/service/emr v1.39.10
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.31.4
-	github.com/aws/aws-sdk-go-v2/service/firehose v1.28.11
+	github.com/aws/aws-sdk-go-v2/service/firehose v1.29.0
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.31.5
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.22.9
-	github.com/aws/aws-sdk-go-v2/service/glue v1.83.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.84.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.24.9
 	github.com/aws/aws-sdk-go-v2/service/iam v1.32.5
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.21.9
@@ -75,8 +75,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.27.5
 	github.com/aws/aws-sdk-go-v2/service/shield v1.25.9
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.26.11
-	github.com/aws/aws-sdk-go-v2/service/sns v1.29.9
-	github.com/aws/aws-sdk-go-v2/service/sqs v1.32.4
+	github.com/aws/aws-sdk-go-v2/service/sns v1.29.10
+	github.com/aws/aws-sdk-go-v2/service/sqs v1.32.5
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.50.5
 	github.com/aws/aws-sdk-go-v2/service/sts v1.28.11
 	github.com/aws/aws-sdk-go-v2/service/support v1.22.5

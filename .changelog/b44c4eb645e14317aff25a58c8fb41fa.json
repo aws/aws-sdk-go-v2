@@ -1,8 +1,0 @@
-{
-    "id": "b44c4eb6-45e1-4317-aff2-5a58c8fb41fa",
-    "type": "documentation",
-    "description": "Doc only updates for SQS. These updates include customer-reported issues and TCX3 modifications.",
-    "modules": [
-        "service/sqs"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "c898d457-4b64-418f-9626-550dbaccb355",
-    "type": "feature",
-    "description": "Adds support for wireless device to be in Conflict FUOTA Device Status due to a FUOTA Task, so it couldn't be attached to a new one.",
-    "modules": [
-        "service/iotwireless"
-    ]
-}

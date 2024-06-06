@@ -1,3 +1,7 @@
+# v1.39.0 (2024-06-06)
+
+* **Feature**: Adds support for wireless device to be in Conflict FUOTA Device Status due to a FUOTA Task, so it couldn't be attached to a new one.
+
 # v1.38.5 (2024-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

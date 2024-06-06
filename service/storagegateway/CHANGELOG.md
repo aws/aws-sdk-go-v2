@@ -1,3 +1,7 @@
+# v1.29.0 (2024-06-06)
+
+* **Feature**: Adds SoftwareUpdatePreferences to DescribeMaintenanceStartTime and UpdateMaintenanceStartTime, a structure which contains AutomaticUpdatePolicy.
+
 # v1.28.2 (2024-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions
