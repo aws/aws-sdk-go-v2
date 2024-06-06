@@ -3,10 +3,11 @@ package retry
 import (
 	"errors"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"net"
 	"net/url"
 	"strings"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
 // IsErrorRetryable provides the interface of an implementation to determine if

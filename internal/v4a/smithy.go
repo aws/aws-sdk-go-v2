@@ -3,8 +3,9 @@ package v4a
 import (
 	"context"
 	"fmt"
-	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
 	"time"
+
+	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
 
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
