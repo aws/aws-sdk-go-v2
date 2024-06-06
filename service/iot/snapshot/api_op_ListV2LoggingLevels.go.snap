@@ -30,6 +30,6 @@ ListV2LoggingLevels
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetDeserializeMiddleware
+		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

@@ -30,6 +30,6 @@ ListEntityRecognizerSummaries
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetDeserializeMiddleware
+		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

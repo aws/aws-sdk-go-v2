@@ -30,6 +30,6 @@ TerminateEnvironment
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetDeserializeMiddleware
+		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

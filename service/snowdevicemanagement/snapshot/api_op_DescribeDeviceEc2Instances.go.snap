@@ -31,6 +31,6 @@ DescribeDeviceEc2Instances
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetDeserializeMiddleware
+		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

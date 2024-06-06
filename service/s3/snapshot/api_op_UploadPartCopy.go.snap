@@ -41,6 +41,6 @@ UploadPartCopy
 		S3MetadataRetriever
 		OperationDeserializer
 		S3:ProcessResponseFor200Error
-		AddTimeOffsetDeserializeMiddleware
+		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

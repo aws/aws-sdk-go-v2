@@ -31,6 +31,6 @@ InferICD10CM
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetDeserializeMiddleware
+		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

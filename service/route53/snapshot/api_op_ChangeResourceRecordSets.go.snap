@@ -33,6 +33,6 @@ ChangeResourceRecordSets
 		RequestIDRetriever
 		OperationDeserializer
 		Route53:ProcessResponseForCustomErrorResponse
-		AddTimeOffsetDeserializeMiddleware
+		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

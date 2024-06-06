@@ -40,7 +40,7 @@ GetObject
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer
-		AddTimeOffsetDeserializeMiddleware
+		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		AWSChecksum:ValidateOutputPayloadChecksum
 		RequestResponseLogger

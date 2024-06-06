@@ -31,7 +31,7 @@ GetRecords
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetDeserializeMiddleware
+		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		ReadResponseTimeout
 		RequestResponseLogger

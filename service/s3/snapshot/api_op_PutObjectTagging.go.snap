@@ -43,6 +43,6 @@ PutObjectTagging
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer
-		AddTimeOffsetDeserializeMiddleware
+		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

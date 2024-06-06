@@ -32,7 +32,7 @@ DescribeExport
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetDeserializeMiddleware
+		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		DynamoDB:ResponseChecksumValidation
 		RequestResponseLogger

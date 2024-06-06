@@ -33,7 +33,7 @@ UpdateTimeToLive
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetDeserializeMiddleware
+		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		DynamoDB:ResponseChecksumValidation
 		RequestResponseLogger
