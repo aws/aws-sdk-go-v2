@@ -200,22 +200,22 @@ func (r RetryableErrorCode) IsErrorRetryable(err error) aws.Ternary {
 	return aws.TrueTernary
 }
 
-// ProbClockSkewError marks errors that "could" be caused by clock skew
+// retryableClockSkewError marks errors that can be caused by clock skew
 // (difference between server time and client time).
 // This is returned when there's certain confidence that adjusting the client time
 // could allow a retry to succeed
-type ProbClockSkewError struct{ Err error }
+type retryableClockSkewError struct{ Err error }
 
-func (e *ProbClockSkewError) Error() string {
+func (e *retryableClockSkewError) Error() string {
 	return fmt.Sprintf("Probable clock skew error: %v", e.Err)
 }
 
 // Unwrap returns the wrapped error.
-func (e *ProbClockSkewError) Unwrap() error {
+func (e *retryableClockSkewError) Unwrap() error {
 	return e.Err
 }
 
 // RetryableError allows the retryer to retry this request
-func (e *ProbClockSkewError) RetryableError() bool {
+func (e *retryableClockSkewError) RetryableError() bool {
 	return true
 }

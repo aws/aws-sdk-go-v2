@@ -3,8 +3,8 @@ package smithy
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws/middleware"
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/auth"
@@ -40,7 +40,7 @@ func (v *V4SignerAdapter) SignRequest(ctx context.Context, r *smithyhttp.Request
 
 	hash := v4.GetPayloadHash(ctx)
 	signingTime := sdk.NowTime()
-	skew := middleware.GetAttemptSkewContext(ctx)
+	skew := internalcontext.GetAttemptSkewContext(ctx)
 	signingTime = signingTime.Add(skew)
 	err := v.Signer.SignHTTP(ctx, ca.Credentials, r.Request, hash, name, region, signingTime, func(o *v4.SignerOptions) {
 		o.DisableURIPathEscaping, _ = smithyhttp.GetDisableDoubleEncoding(&props)

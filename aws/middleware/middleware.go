@@ -3,7 +3,6 @@ package middleware
 import (
 	"context"
 	"fmt"
-	"sync/atomic"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/internal/rand"
@@ -125,19 +124,6 @@ func setAttemptSkew(metadata *middleware.Metadata, v time.Duration) {
 	metadata.Set(attemptSkewKey{}, v)
 }
 
-type clockSkew struct{}
-
-// SetAttemptSkewContext sets the clock skew value on the context
-func SetAttemptSkewContext(ctx context.Context, v time.Duration) context.Context {
-	return middleware.WithStackValue(ctx, clockSkew{}, v)
-}
-
-// GetAttemptSkewContext gets the clock skew value from the context
-func GetAttemptSkewContext(ctx context.Context) time.Duration {
-	x, _ := middleware.GetStackValue(ctx, clockSkew{}).(time.Duration)
-	return x
-}
-
 // AddClientRequestIDMiddleware adds ClientRequestID to the middleware stack
 func AddClientRequestIDMiddleware(stack *middleware.Stack) error {
 	return stack.Build.Add(&ClientRequestID{}, middleware.After)
@@ -179,46 +165,4 @@ func AddRawResponseToMetadata(stack *middleware.Stack) error {
 // GetRawResponse returns raw response set on metadata
 func GetRawResponse(metadata middleware.Metadata) interface{} {
 	return metadata.Get(rawResponseKey{})
-}
-
-// AddTimeOffsetBuildMiddleware sets a value representing clock skew on the request context.
-// This can be read by other operations (such as signing) to correct the date value they send
-// on the request
-type AddTimeOffsetBuildMiddleware struct {
-	Offset *atomic.Int64
-}
-
-// ID the identifier for AddTimeOffsetBuildMiddleware
-func (m *AddTimeOffsetBuildMiddleware) ID() string { return "AddTimeOffsetMiddleware" }
-
-// HandleBuild sets a value for attemptSkew on the request context if one is set on the client.
-func (m AddTimeOffsetBuildMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
-	out middleware.BuildOutput, metadata middleware.Metadata, err error,
-) {
-	if m.Offset != nil {
-		offset := time.Duration(m.Offset.Load())
-		ctx = SetAttemptSkewContext(ctx, offset)
-	}
-	return next.HandleBuild(ctx, in)
-}
-
-// AddTimeOffsetDeserializeMiddleware sets the clock skew on the client if it's present on the context
-// at the end of the request
-type AddTimeOffsetDeserializeMiddleware struct {
-	Offset *atomic.Int64
-}
-
-// ID the identifier for AddTimeOffsetDeserializeMiddleware
-func (m *AddTimeOffsetDeserializeMiddleware) ID() string { return "AddTimeOffsetDeserializeMiddleware" }
-
-// HandleDeserialize gets the clock skew context from the context, and if set, sets it on the pointer
-// held by AddTimeOffsetDeserializeMiddleware
-func (m *AddTimeOffsetDeserializeMiddleware) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	v := GetAttemptSkewContext(ctx)
-	if v != 0 {
-		m.Offset.Store(v.Nanoseconds())
-	}
-	return next.HandleDeserialize(ctx, in)
 }

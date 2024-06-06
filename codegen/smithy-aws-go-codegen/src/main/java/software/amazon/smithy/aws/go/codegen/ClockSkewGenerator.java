@@ -9,7 +9,10 @@ import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.utils.ListUtils;
 
 import java.util.List;
+import java.util.Map;
 
+import static software.amazon.smithy.aws.go.codegen.AwsGoDependency.INTERNAL_MIDDLEWARE;
+import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
 import static software.amazon.smithy.go.codegen.SmithyGoDependency.ATOMIC;
 
 /**
@@ -19,11 +22,64 @@ import static software.amazon.smithy.go.codegen.SmithyGoDependency.ATOMIC;
 public class ClockSkewGenerator implements GoIntegration {
     private static final String TIME_OFFSET = "timeOffset";
     private static final String ADD_CLOCK_SKEW_BUILD = "addTimeOffsetBuild";
-    private static final String ADD_CLOCK_SKEW_BUILD_MIDDLEWARE = "AddTimeOffsetBuildMiddleware";
-    private static final String ADD_CLOCK_SKEW_DESERIALIZER = "addTimeOffsetDeserializer";
-    private static final String ADD_CLOCK_SKEW_DESERIALIZE_MIDDLEWARE = "AddTimeOffsetDeserializeMiddleware";
+    private static final String ADD_CLOCK_SKEW_BUILD_MIDDLEWARE = "AddTimeOffsetMiddleware";
+
     private static final Symbol TIME_OFFSET_RESOLVER = SymbolUtils.createValueSymbolBuilder(
             "initializeTimeOffsetResolver").build();
+
+    private static final GoWriter.Writable CLOCK_SKEW_INSERT_TEMPLATE = goTemplate("""
+                    $dep:D
+                    func $fn:L(stack $stack:P, c *Client) error {
+                        mw := $depalias:L.$middleware:L{Offset: c.$off:L}
+                        if err := stack.Build.Add(&mw, middleware.After); err != nil {
+                            return err
+                        }
+                        return stack.Deserialize.Insert(&mw, "$after:L", middleware.Before)
+                    }
+                    """,
+            Map.of(
+                    "fn", ADD_CLOCK_SKEW_BUILD,
+                    "stack", SmithyGoDependency.SMITHY_MIDDLEWARE.struct("Stack"),
+                    "depalias", INTERNAL_MIDDLEWARE.getAlias(),
+                    "middleware", ADD_CLOCK_SKEW_BUILD_MIDDLEWARE,
+                    "after", "RecordResponseTiming",
+                    "off", TIME_OFFSET,
+                    "dep", INTERNAL_MIDDLEWARE
+            ));
+    private static final GoWriter.Writable TIME_OFFSET_RESOLVER_TEMPLATE = goTemplate(
+            """
+                    $import:D
+                    func $fn:L(c *Client) {
+                        c.$off:L = new(atomic.Int64)
+                    }
+                    """,
+            Map.of(
+                    "import", ATOMIC,
+                    "fn", TIME_OFFSET_RESOLVER,
+                    "off", TIME_OFFSET
+            )
+    );
+
+    private static final ClientMember TIME_OFFSET_MEMBER = ClientMember.builder()
+            .name(TIME_OFFSET)
+            .type(ATOMIC.struct("Int64"))
+            .documentation("Difference between the time reported by the server and the client")
+            .build();
+    private static final ClientMemberResolver TIME_OFFSET_MEMBER_RESOLVER = ClientMemberResolver.builder()
+            .resolver(TIME_OFFSET_RESOLVER)
+            .build();
+    private static final MiddlewareRegistrar MIDDLEWARE = MiddlewareRegistrar.builder()
+            .resolvedFunction(SymbolUtils.createValueSymbolBuilder(ADD_CLOCK_SKEW_BUILD).build())
+            .functionArguments(ListUtils.of(
+                    SymbolUtils.createValueSymbolBuilder("c").build()
+            )).build();
+    private static final List<RuntimeClientPlugin> CLIENT_PLUGINS = List.of(
+            RuntimeClientPlugin.builder()
+                    .addClientMember(TIME_OFFSET_MEMBER)
+                    .addClientMemberResolver(TIME_OFFSET_MEMBER_RESOLVER)
+                    .registerMiddleware(MIDDLEWARE)
+                    .build()
+    );
 
     @Override
     public void writeAdditionalFiles(
@@ -37,66 +93,13 @@ public class ClockSkewGenerator implements GoIntegration {
 
         // generate code specific to service client
         goDelegator.useShapeWriter(service, writer -> {
-            generateClockSkewInsertMiddleware(writer);
-            generateClockSkewDeserializeMiddleware(writer);
-            generateTimeOffsetResolver(writer);
+            writer.write(CLOCK_SKEW_INSERT_TEMPLATE);
+            writer.write(TIME_OFFSET_RESOLVER_TEMPLATE);
         });
     }
 
     @Override
     public List<RuntimeClientPlugin> getClientPlugins() {
-        ClientMember timeOffset = ClientMember.builder()
-                .name(TIME_OFFSET)
-                .type(ATOMIC.struct("Int64"))
-                .documentation("Difference between the time reported by the server and the client")
-                .build();
-        ClientMemberResolver resolver = ClientMemberResolver.builder()
-                .resolver(TIME_OFFSET_RESOLVER)
-                .build();
-        MiddlewareRegistrar initializeMiddleware = MiddlewareRegistrar.builder()
-                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(ADD_CLOCK_SKEW_BUILD).build())
-                .functionArguments(ListUtils.of(
-                        SymbolUtils.createValueSymbolBuilder("c").build()
-                )).build();
-        MiddlewareRegistrar finalizeMiddleware = MiddlewareRegistrar.builder()
-                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(ADD_CLOCK_SKEW_DESERIALIZER).build())
-                .functionArguments(ListUtils.of(
-                        SymbolUtils.createValueSymbolBuilder("c").build()
-                )).build();
-        return List.of(
-                RuntimeClientPlugin.builder()
-                        .addClientMember(timeOffset)
-                        .addClientMemberResolver(resolver)
-                        .registerMiddleware(initializeMiddleware)
-                        .build(),
-                RuntimeClientPlugin.builder()
-                        .registerMiddleware(finalizeMiddleware)
-                        .build()
-        );
-    }
-
-    private void generateClockSkewInsertMiddleware(GoWriter writer) {
-        Symbol stackSymbol = SymbolUtils.createPointableSymbolBuilder("Stack", SmithyGoDependency.SMITHY_MIDDLEWARE)
-                .build();
-        writer.openBlock("func $L(stack $P, c *Client) error{", "}", ADD_CLOCK_SKEW_BUILD, stackSymbol, () -> {
-            writer.write("return stack.Build.Add(&awsmiddleware.$L{Offset: c.$L}, middleware.After)",
-                    ADD_CLOCK_SKEW_BUILD_MIDDLEWARE, TIME_OFFSET);
-        });
-    }
-
-    private void generateClockSkewDeserializeMiddleware(GoWriter writer) {
-        Symbol stackSymbol = SymbolUtils.createPointableSymbolBuilder("Stack", SmithyGoDependency.SMITHY_MIDDLEWARE)
-                .build();
-        writer.openBlock("func $L(stack $P, c *Client) error{", "}", ADD_CLOCK_SKEW_DESERIALIZER, stackSymbol, () ->
-                writer.write("return stack.Deserialize.Insert(&awsmiddleware.$L{Offset: c.$L}, \"RecordResponseTiming\", middleware.Before)",
-                        ADD_CLOCK_SKEW_DESERIALIZE_MIDDLEWARE, TIME_OFFSET)
-        );
-    }
-
-    private void generateTimeOffsetResolver(GoWriter writer) {
-        writer.openBlock("func $L(c *Client) {", "}", TIME_OFFSET_RESOLVER, () -> {
-            Symbol atomic = SymbolUtils.createValueSymbolBuilder("Int64", ATOMIC).build();
-            writer.write("c.$L = new($P)", TIME_OFFSET, atomic);
-        });
+        return CLIENT_PLUGINS;
     }
 }

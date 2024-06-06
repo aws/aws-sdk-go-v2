@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	awsmiddle "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/middleware/private/metrics/testutils"
+	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
 	"net/http"
 	"reflect"
 	"strconv"
@@ -530,7 +530,7 @@ func TestClockSkew(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			am := NewAttemptMiddleware(NewStandard(func(s *StandardOptions) {
 			}), testutils.NoopRequestCloner)
-			ctx := awsmiddle.SetAttemptSkewContext(context.Background(), tt.skew)
+			ctx := internalcontext.SetAttemptSkewContext(context.Background(), tt.skew)
 			_, metadata, err := am.HandleFinalize(ctx, middleware.FinalizeInput{}, middleware.FinalizeHandlerFunc(
 				func(ctx context.Context, in middleware.FinalizeInput) (
 					out middleware.FinalizeOutput, metadata middleware.Metadata, err error,

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws/middleware/private/metrics"
+	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
 	"strconv"
 	"strings"
 	"time"
@@ -39,6 +40,10 @@ type Attempt struct {
 	retryer       aws.RetryerV2
 	requestCloner RequestCloner
 }
+
+// define the threshold at which we will consider certain kind of errors to be probably
+// caused by clock skew
+const skewThreshold = 4 * time.Minute
 
 // NewAttemptMiddleware returns a new Attempt retry middleware.
 func NewAttemptMiddleware(retryer aws.Retryer, requestCloner RequestCloner, optFns ...func(*Attempt)) *Attempt {
@@ -88,7 +93,7 @@ func (r *Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeIn
 		})
 
 		// Setting clock skew to be used on other context (like signing)
-		ctx = awsmiddle.SetAttemptSkewContext(ctx, attemptClockSkew)
+		ctx = internalcontext.SetAttemptSkewContext(ctx, attemptClockSkew)
 
 		var attemptResult AttemptResult
 		out, attemptResult, releaseRetryToken, err = r.handleAttempt(attemptCtx, attemptInput, releaseRetryToken, next)
@@ -253,12 +258,18 @@ func (r *Attempt) handleAttempt(
 	return out, attemptResult, releaseRetryToken, err
 }
 
-// Note that there are errors that are known to be definitely caused by clock
-// skew, which are defined on the list of retryable errors
+// errors that, if detected when we know there's a clock skew,
+// can be retried and have a high chance of success
 var possibleSkewCodes = map[string]struct{}{
 	"InvalidSignatureException": {},
 	"SignatureDoesNotMatch":     {},
 	"AuthFailure":               {},
+}
+
+var definiteSkewCodes = map[string]struct{}{
+	"RequestExpired":       {},
+	"RequestInTheFuture":   {},
+	"RequestTimeTooSkewed": {},
 }
 
 // wrapAsClockSkew checks if this error could be related to a clock skew
@@ -268,15 +279,14 @@ func wrapAsClockSkew(ctx context.Context, err error) error {
 	if !errors.As(err, &v) {
 		return err
 	}
-	_, ok := possibleSkewCodes[v.ErrorCode()]
-	if !ok {
-		return err
+	if _, ok := definiteSkewCodes[v.ErrorCode()]; ok {
+		return &retryableClockSkewError{Err: err}
 	}
-	skew := awsmiddle.GetAttemptSkewContext(ctx)
-	if !(skew > 4*time.Minute) {
-		return err
+	_, isPossibleSkewCode := possibleSkewCodes[v.ErrorCode()]
+	if skew := internalcontext.GetAttemptSkewContext(ctx); skew > skewThreshold && isPossibleSkewCode {
+		return &retryableClockSkewError{Err: err}
 	}
-	return &ProbClockSkewError{Err: err}
+	return err
 }
 
 // MetricsHeader attaches SDK request metric header for retries to the transport
