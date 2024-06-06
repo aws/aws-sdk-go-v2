@@ -75,8 +75,11 @@ type ContactInformation struct {
 	// The district or county of the primary contact address, if any.
 	DistrictOrCounty *string
 
-	// The state or region of the primary contact address. This field is required in
-	// selected countries.
+	// The state or region of the primary contact address. If the mailing address is
+	// within the United States (US), the value in this field can be either a two
+	// character state code (for example, NJ ) or the full state name (for example,
+	// New Jersey ). This field is required in the following countries: US , CA , GB ,
+	// DE , JP , IN , and BR .
 	StateOrRegion *string
 
 	// The URL of the website associated with the primary contact information, if any.

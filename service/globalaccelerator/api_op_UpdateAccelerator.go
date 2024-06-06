@@ -66,6 +66,9 @@ type UpdateAcceleratorInput struct {
 	// the value can be IPV4 or DUAL_STACK.
 	IpAddressType types.IpAddressType
 
+	// The IP addresses for an accelerator.
+	IpAddresses []string
+
 	// The name of the accelerator. The name can have a maximum of 64 characters, must
 	// contain only alphanumeric characters, periods (.), or hyphens (-), and must not
 	// begin or end with a hyphen or period.

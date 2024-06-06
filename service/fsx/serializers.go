@@ -2716,6 +2716,13 @@ func awsAwsjson11_serializeDocumentCreateFileSystemLustreConfiguration(v *types.
 		}
 	}
 
+	if v.MetadataConfiguration != nil {
+		ok := object.Key("MetadataConfiguration")
+		if err := awsAwsjson11_serializeDocumentCreateFileSystemLustreMetadataConfiguration(v.MetadataConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PerUnitStorageThroughput != nil {
 		ok := object.Key("PerUnitStorageThroughput")
 		ok.Integer(*v.PerUnitStorageThroughput)
@@ -2731,6 +2738,23 @@ func awsAwsjson11_serializeDocumentCreateFileSystemLustreConfiguration(v *types.
 	if v.WeeklyMaintenanceStartTime != nil {
 		ok := object.Key("WeeklyMaintenanceStartTime")
 		ok.String(*v.WeeklyMaintenanceStartTime)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCreateFileSystemLustreMetadataConfiguration(v *types.CreateFileSystemLustreMetadataConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Iops != nil {
+		ok := object.Key("Iops")
+		ok.Integer(*v.Iops)
+	}
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("Mode")
+		ok.String(string(v.Mode))
 	}
 
 	return nil
@@ -4182,6 +4206,13 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemLustreConfiguration(v *types.
 		}
 	}
 
+	if v.MetadataConfiguration != nil {
+		ok := object.Key("MetadataConfiguration")
+		if err := awsAwsjson11_serializeDocumentUpdateFileSystemLustreMetadataConfiguration(v.MetadataConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PerUnitStorageThroughput != nil {
 		ok := object.Key("PerUnitStorageThroughput")
 		ok.Integer(*v.PerUnitStorageThroughput)
@@ -4197,6 +4228,23 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemLustreConfiguration(v *types.
 	if v.WeeklyMaintenanceStartTime != nil {
 		ok := object.Key("WeeklyMaintenanceStartTime")
 		ok.String(*v.WeeklyMaintenanceStartTime)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUpdateFileSystemLustreMetadataConfiguration(v *types.UpdateFileSystemLustreMetadataConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Iops != nil {
+		ok := object.Key("Iops")
+		ok.Integer(*v.Iops)
+	}
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("Mode")
+		ok.String(string(v.Mode))
 	}
 
 	return nil

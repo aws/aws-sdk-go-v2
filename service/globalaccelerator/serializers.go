@@ -4455,6 +4455,13 @@ func awsAwsjson11_serializeOpDocumentUpdateAcceleratorInput(v *UpdateAccelerator
 		ok.Boolean(*v.Enabled)
 	}
 
+	if v.IpAddresses != nil {
+		ok := object.Key("IpAddresses")
+		if err := awsAwsjson11_serializeDocumentIpAddresses(v.IpAddresses, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.IpAddressType) > 0 {
 		ok := object.Key("IpAddressType")
 		ok.String(string(v.IpAddressType))
@@ -4552,6 +4559,13 @@ func awsAwsjson11_serializeOpDocumentUpdateCustomRoutingAcceleratorInput(v *Upda
 	if v.Enabled != nil {
 		ok := object.Key("Enabled")
 		ok.Boolean(*v.Enabled)
+	}
+
+	if v.IpAddresses != nil {
+		ok := object.Key("IpAddresses")
+		if err := awsAwsjson11_serializeDocumentIpAddresses(v.IpAddresses, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.IpAddressType) > 0 {

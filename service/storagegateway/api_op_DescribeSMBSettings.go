@@ -91,22 +91,22 @@ type DescribeSMBSettingsOutput struct {
 	//   maximize compatibility across different clients in your environment. Supported
 	//   only for S3 File Gateway.
 	//
-	//   - MandatorySigning : If you use this option, File Gateway only allows
+	//   - MandatorySigning : If you choose this option, File Gateway only allows
 	//   connections from SMBv2 or SMBv3 clients that have signing turned on. This option
 	//   works with SMB clients on Microsoft Windows Vista, Windows Server 2008, or
 	//   later.
 	//
-	//   - MandatoryEncryption : If you use this option, File Gateway only allows
+	//   - MandatoryEncryption : If you choose this option, File Gateway only allows
 	//   connections from SMBv3 clients that have encryption turned on. Both 256-bit and
 	//   128-bit algorithms are allowed. This option is recommended for environments that
 	//   handle sensitive data. It works with SMB clients on Microsoft Windows 8, Windows
 	//   Server 2012, or later.
 	//
-	//   - EnforceEncryption : If you use this option, File Gateway only allows
-	//   connections from SMBv3 clients that use 256-bit AES encryption algorithms.
-	//   128-bit algorithms are not allowed. This option is recommended for environments
-	//   that handle sensitive data. It works with SMB clients on Microsoft Windows 8,
-	//   Windows Server 2012, or later.
+	//   - MandatoryEncryptionNoAes128 : If you choose this option, File Gateway only
+	//   allows connections from SMBv3 clients that use 256-bit AES encryption
+	//   algorithms. 128-bit algorithms are not allowed. This option is recommended for
+	//   environments that handle sensitive data. It works with SMB clients on Microsoft
+	//   Windows 8, Windows Server 2012, or later.
 	SMBSecurityStrategy types.SMBSecurityStrategy
 
 	// Metadata pertaining to the operation's result.

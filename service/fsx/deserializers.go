@@ -9925,6 +9925,59 @@ func awsAwsjson11_deserializeDocumentFileSystemFailureDetails(v **types.FileSyst
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentFileSystemLustreMetadataConfiguration(v **types.FileSystemLustreMetadataConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FileSystemLustreMetadataConfiguration
+	if *v == nil {
+		sv = &types.FileSystemLustreMetadataConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Iops":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MetadataIops to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Iops = ptr.Int32(int32(i64))
+			}
+
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MetadataConfigurationMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.MetadataConfigurationMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentFileSystemMaintenanceOperations(v *[]types.FileSystemMaintenanceOperation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10638,6 +10691,11 @@ func awsAwsjson11_deserializeDocumentLustreFileSystemConfiguration(v **types.Lus
 
 		case "LogConfiguration":
 			if err := awsAwsjson11_deserializeDocumentLustreLogConfiguration(&sv.LogConfiguration, value); err != nil {
+				return err
+			}
+
+		case "MetadataConfiguration":
+			if err := awsAwsjson11_deserializeDocumentFileSystemLustreMetadataConfiguration(&sv.MetadataConfiguration, value); err != nil {
 				return err
 			}
 

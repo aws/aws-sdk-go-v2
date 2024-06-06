@@ -1,3 +1,7 @@
+# v1.17.0 (2024-06-06)
+
+* **Feature**: This release adds 3 new APIs (AcceptPrimaryEmailUpdate, GetPrimaryEmail, and StartPrimaryEmailUpdate) used to centrally manage the root user email address of member accounts within an AWS organization.
+
 # v1.16.9 (2024-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

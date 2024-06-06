@@ -932,6 +932,26 @@ func validateCreateFileSystemLustreConfiguration(v *types.CreateFileSystemLustre
 			invalidParams.AddNested("LogConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MetadataConfiguration != nil {
+		if err := validateCreateFileSystemLustreMetadataConfiguration(v.MetadataConfiguration); err != nil {
+			invalidParams.AddNested("MetadataConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateFileSystemLustreMetadataConfiguration(v *types.CreateFileSystemLustreMetadataConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFileSystemLustreMetadataConfiguration"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

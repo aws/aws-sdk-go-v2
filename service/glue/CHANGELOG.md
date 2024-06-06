@@ -1,3 +1,11 @@
+# v1.84.0 (2024-06-06)
+
+* **Feature**: This release adds support for creating and updating Glue Data Catalog Views.
+
+# v1.83.0 (2024-06-05)
+
+* **Feature**: AWS Glue now supports native SaaS connectivity: Salesforce connector available now
+
 # v1.82.1 (2024-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -41,11 +41,14 @@ type PutGeofenceInput struct {
 	// This member is required.
 	GeofenceId *string
 
-	// Contains the details to specify the position of the geofence. Can be either a
-	// polygon or a circle. Including both will return a validation error.
+	// Contains the details to specify the position of the geofence. Can be a polygon,
+	// a circle or a polygon encoded in Geobuf format. Including multiple selections
+	// will return a validation error.
 	//
-	// Each [geofence polygon] can have a maximum of 1,000 vertices.
+	// The [geofence polygon] format supports a maximum of 1,000 vertices. The [Geofence Geobuf] format supports a
+	// maximum of 100,000 vertices.
 	//
+	// [Geofence Geobuf]: https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html
 	// [geofence polygon]: https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html
 	//
 	// This member is required.

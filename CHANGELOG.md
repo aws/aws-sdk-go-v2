@@ -1,3 +1,41 @@
+# Release (2024-06-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.17.0](service/account/CHANGELOG.md#v1170-2024-06-06)
+  * **Feature**: This release adds 3 new APIs (AcceptPrimaryEmailUpdate, GetPrimaryEmail, and StartPrimaryEmailUpdate) used to centrally manage the root user email address of member accounts within an AWS organization.
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.29.0](service/firehose/CHANGELOG.md#v1290-2024-06-06)
+  * **Feature**: Adds integration with Secrets Manager for Redshift, Splunk, HttpEndpoint, and Snowflake destinations
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.44.0](service/fsx/CHANGELOG.md#v1440-2024-06-06)
+  * **Feature**: This release adds support to increase metadata performance on FSx for Lustre file systems beyond the default level provisioned when a file system is created. This can be done by specifying MetadataConfiguration during the creation of Persistent_2 file systems or by updating it on demand.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.84.0](service/glue/CHANGELOG.md#v1840-2024-06-06)
+  * **Feature**: This release adds support for creating and updating Glue Data Catalog Views.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.39.0](service/iotwireless/CHANGELOG.md#v1390-2024-06-06)
+  * **Feature**: Adds support for wireless device to be in Conflict FUOTA Device Status due to a FUOTA Task, so it couldn't be attached to a new one.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.38.0](service/location/CHANGELOG.md#v1380-2024-06-06)
+  * **Feature**: Added two new APIs, VerifyDevicePosition and ForecastGeofenceEvents. Added support for putting larger geofences up to 100,000 vertices with Geobuf fields.
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.29.10](service/sns/CHANGELOG.md#v12910-2024-06-06)
+  * **Documentation**: Doc-only update for SNS. These changes include customer-reported issues and TXC3 updates.
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.32.5](service/sqs/CHANGELOG.md#v1325-2024-06-06)
+  * **Documentation**: Doc only updates for SQS. These updates include customer-reported issues and TCX3 modifications.
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.29.0](service/storagegateway/CHANGELOG.md#v1290-2024-06-06)
+  * **Feature**: Adds SoftwareUpdatePreferences to DescribeMaintenanceStartTime and UpdateMaintenanceStartTime, a structure which contains AutomaticUpdatePolicy.
+
+# Release (2024-06-05)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`: [v1.14.0](feature/dynamodb/attributevalue/CHANGELOG.md#v1140-2024-06-05)
+  * **Feature**: Add codec options to use encoding.Text/Binary(Un)Marshaler when present on targets.
+* `github.com/aws/aws-sdk-go-v2/service/globalaccelerator`: [v1.24.0](service/globalaccelerator/CHANGELOG.md#v1240-2024-06-05)
+  * **Feature**: This release contains a new optional ip-addresses input field for the update accelerator and update custom routing accelerator apis. This input enables consumers to replace IPv4 addresses on existing accelerators with addresses provided in the input.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.83.0](service/glue/CHANGELOG.md#v1830-2024-06-05)
+  * **Feature**: AWS Glue now supports native SaaS connectivity: Salesforce connector available now
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.55.0](service/s3/CHANGELOG.md#v1550-2024-06-05)
+  * **Feature**: Added new params copySource and key to copyObject API for supporting S3 Access Grants plugin. These changes will not change any of the existing S3 API functionality.
+  * **Bug Fix**: Add S3-specific smithy protocol tests.
+
 # Release (2024-06-04)
 
 ## Module Highlights

@@ -12859,6 +12859,46 @@ func awsAwsjson11_deserializeDocumentSMBLocalGroups(v **types.SMBLocalGroups, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentSoftwareUpdatePreferences(v **types.SoftwareUpdatePreferences, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SoftwareUpdatePreferences
+	if *v == nil {
+		sv = &types.SoftwareUpdatePreferences{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AutomaticUpdatePolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomaticUpdatePolicy to be of type string, got %T instead", value)
+				}
+				sv.AutomaticUpdatePolicy = types.AutomaticUpdatePolicy(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentStorageGatewayError(v **types.StorageGatewayError, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16491,6 +16531,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeMaintenanceStartTimeOutput(v **De
 					return err
 				}
 				sv.MinuteOfHour = ptr.Int32(int32(i64))
+			}
+
+		case "SoftwareUpdatePreferences":
+			if err := awsAwsjson11_deserializeDocumentSoftwareUpdatePreferences(&sv.SoftwareUpdatePreferences, value); err != nil {
+				return err
 			}
 
 		case "Timezone":

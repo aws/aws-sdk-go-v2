@@ -37,8 +37,8 @@ type GetContactInformationInput struct {
 	// that you want to access or modify with this operation. If you don't specify this
 	// parameter, it defaults to the Amazon Web Services account of the identity used
 	// to call the operation. To use this parameter, the caller must be an identity in
-	// the [organization's management account]or a delegated administrator account. The specified account ID must also be
-	// a member account in the same organization. The organization must have [all features enabled], and the
+	// the [organization's management account]or a delegated administrator account. The specified account ID must be a
+	// member account in the same organization. The organization must have [all features enabled], and the
 	// organization must have [trusted access]enabled for the Account Management service, and
 	// optionally a [delegated admin]account assigned.
 	//

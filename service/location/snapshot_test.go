@@ -398,6 +398,18 @@ func TestCheckSnapshot_DisassociateTrackerConsumer(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ForecastGeofenceEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ForecastGeofenceEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ForecastGeofenceEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDevicePosition(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDevicePosition(context.Background(), nil, func(o *Options) {
@@ -757,6 +769,18 @@ func TestCheckSnapshot_UpdateTracker(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_VerifyDevicePosition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.VerifyDevicePosition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "VerifyDevicePosition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_AssociateTrackerConsumer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateTrackerConsumer(context.Background(), nil, func(o *Options) {
@@ -1086,6 +1110,18 @@ func TestUpdateSnapshot_DisassociateTrackerConsumer(t *testing.T) {
 	_, err := svc.DisassociateTrackerConsumer(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisassociateTrackerConsumer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ForecastGeofenceEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ForecastGeofenceEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ForecastGeofenceEvents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1446,6 +1482,18 @@ func TestUpdateSnapshot_UpdateTracker(t *testing.T) {
 	_, err := svc.UpdateTracker(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateTracker")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_VerifyDevicePosition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.VerifyDevicePosition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "VerifyDevicePosition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

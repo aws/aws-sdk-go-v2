@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"reflect"
 	"strconv"
+	"strings"
 	"testing"
 	"time"
 
@@ -1172,4 +1173,98 @@ func TestUnmarshalMap_keyPtrTypes(t *testing.T) {
 		}
 	}
 
+}
+
+type textUnmarshalerString string
+
+func (v *textUnmarshalerString) UnmarshalText(text []byte) error {
+	*v = textUnmarshalerString("[[" + string(text) + "]]")
+	return nil
+}
+
+func TestUnmarshalTextString(t *testing.T) {
+	in := &types.AttributeValueMemberS{Value: "foo"}
+
+	var actual textUnmarshalerString
+	err := UnmarshalWithOptions(in, &actual, func(o *DecoderOptions) {
+		o.UseEncodingUnmarshalers = true
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if string(actual) != "[[foo]]" {
+		t.Errorf("expected [[foo]], got %s", actual)
+	}
+}
+
+func TestUnmarshalTextStringDisabled(t *testing.T) {
+	in := &types.AttributeValueMemberS{Value: "foo"}
+
+	var actual textUnmarshalerString
+	err := UnmarshalWithOptions(in, &actual, func(o *DecoderOptions) {
+		o.UseEncodingUnmarshalers = false
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if string(actual) != "foo" {
+		t.Errorf("expected foo, got %s", actual)
+	}
+}
+
+type textUnmarshalerStruct struct {
+	I, J string
+}
+
+func (v *textUnmarshalerStruct) UnmarshalText(text []byte) error {
+	parts := strings.Split(string(text), ";")
+	v.I = parts[0]
+	v.J = parts[1]
+	return nil
+}
+
+func TestUnmarshalTextStruct(t *testing.T) {
+	in := &types.AttributeValueMemberS{Value: "foo;bar"}
+
+	var actual textUnmarshalerStruct
+	err := UnmarshalWithOptions(in, &actual, func(o *DecoderOptions) {
+		o.UseEncodingUnmarshalers = true
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	expected := textUnmarshalerStruct{"foo", "bar"}
+	if actual != expected {
+		t.Errorf("expected %v, got %v", expected, actual)
+	}
+}
+
+type binaryUnmarshaler struct {
+	I, J byte
+}
+
+func (v *binaryUnmarshaler) UnmarshalBinary(b []byte) error {
+	v.I = b[0]
+	v.J = b[1]
+	return nil
+}
+
+func TestUnmarshalBinary(t *testing.T) {
+	in := &types.AttributeValueMemberB{Value: []byte{1, 2}}
+
+	var actual binaryUnmarshaler
+	err := UnmarshalWithOptions(in, &actual, func(o *DecoderOptions) {
+		o.UseEncodingUnmarshalers = true
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	expected := binaryUnmarshaler{1, 2}
+	if actual != expected {
+		t.Errorf("expected %v, got %v", expected, actual)
+	}
 }

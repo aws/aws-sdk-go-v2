@@ -1372,8 +1372,8 @@ type HttpEndpointDestinationConfiguration struct {
 	// Describes a data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
 
-	// The configuration of the requeste sent to the HTTP endpoint specified as the
-	// destination.
+	// The configuration of the request sent to the HTTP endpoint that is specified as
+	// the destination.
 	RequestConfiguration *HttpEndpointRequestConfiguration
 
 	// Describes the retry behavior in case Firehose is unable to deliver data to the
@@ -1390,6 +1390,10 @@ type HttpEndpointDestinationConfiguration struct {
 	// the documents that Firehose could not deliver to the specified HTTP endpoint
 	// destination ( FailedDataOnly ).
 	S3BackupMode HttpEndpointS3BackupMode
+
+	//  The configuration that defines how you access secrets for HTTP Endpoint
+	// destination.
+	SecretsManagerConfiguration *SecretsManagerConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1435,6 +1439,10 @@ type HttpEndpointDestinationDescription struct {
 	// Describes a destination in Amazon S3.
 	S3DestinationDescription *S3DestinationDescription
 
+	//  The configuration that defines how you access secrets for HTTP Endpoint
+	// destination.
+	SecretsManagerConfiguration *SecretsManagerConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -1478,6 +1486,10 @@ type HttpEndpointDestinationUpdate struct {
 
 	// Describes an update for a destination in Amazon S3.
 	S3Update *S3DestinationUpdate
+
+	//  The configuration that defines how you access secrets for HTTP Endpoint
+	// destination.
+	SecretsManagerConfiguration *SecretsManagerConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1734,7 +1746,7 @@ type OutputFormatConfiguration struct {
 // A serializer to use for converting data to the Parquet format before storing it
 // in Amazon S3. For more information, see [Apache Parquet].
 //
-// [Apache Parquet]: https://parquet.apache.org/documentation/latest/
+// [Apache Parquet]: https://parquet.apache.org/docs/
 type ParquetSerDe struct {
 
 	// The Hadoop Distributed File System (HDFS) block size. This is useful if you
@@ -1862,11 +1874,6 @@ type RedshiftDestinationConfiguration struct {
 	// This member is required.
 	CopyCommand *CopyCommand
 
-	// The user password.
-	//
-	// This member is required.
-	Password *string
-
 	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
 	// information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
 	//
@@ -1886,13 +1893,11 @@ type RedshiftDestinationConfiguration struct {
 	// This member is required.
 	S3Configuration *S3DestinationConfiguration
 
-	// The name of the user.
-	//
-	// This member is required.
-	Username *string
-
 	// The CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+
+	// The user password.
+	Password *string
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
@@ -1908,6 +1913,12 @@ type RedshiftDestinationConfiguration struct {
 	// it to enable Amazon S3 backup if it is disabled. If backup is enabled, you can't
 	// update the delivery stream to disable it.
 	S3BackupMode RedshiftS3BackupMode
+
+	//  The configuration that defines how you access secrets for Amazon Redshift.
+	SecretsManagerConfiguration *SecretsManagerConfiguration
+
+	// The name of the user.
+	Username *string
 
 	noSmithyDocumentSerde
 }
@@ -1938,11 +1949,6 @@ type RedshiftDestinationDescription struct {
 	// This member is required.
 	S3DestinationDescription *S3DestinationDescription
 
-	// The name of the user.
-	//
-	// This member is required.
-	Username *string
-
 	// The Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
@@ -1958,6 +1964,12 @@ type RedshiftDestinationDescription struct {
 
 	// The Amazon S3 backup mode.
 	S3BackupMode RedshiftS3BackupMode
+
+	//  The configuration that defines how you access secrets for Amazon Redshift.
+	SecretsManagerConfiguration *SecretsManagerConfiguration
+
+	// The name of the user.
+	Username *string
 
 	noSmithyDocumentSerde
 }
@@ -2003,6 +2015,9 @@ type RedshiftDestinationUpdate struct {
 	// RedshiftDestinationUpdate.S3Update because the Amazon Redshift COPY operation
 	// that reads from the S3 bucket doesn't support these compression formats.
 	S3Update *S3DestinationUpdate
+
+	//  The configuration that defines how you access secrets for Amazon Redshift.
+	SecretsManagerConfiguration *SecretsManagerConfiguration
 
 	// The name of the user.
 	Username *string
@@ -2235,6 +2250,33 @@ type SchemaConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The structure that defines how Firehose accesses the secret.
+type SecretsManagerConfiguration struct {
+
+	// Specifies whether you want to use the the secrets manager feature. When set as
+	// True the secrets manager configuration overwrites the existing secrets in the
+	// destination configuration. When it's set to False Firehose falls back to the
+	// credentials in the destination configuration.
+	//
+	// This member is required.
+	Enabled *bool
+
+	//  Specifies the role that Firehose assumes when calling the Secrets Manager API
+	// operation. When you provide the role, it overrides any destination specific role
+	// defined in the destination configuration. If you do not provide the then we use
+	// the destination specific role. This parameter is required for Splunk.
+	RoleARN *string
+
+	// The ARN of the secret that stores your credentials. It must be in the same
+	// region as the Firehose stream and the role. The secret ARN can reside in a
+	// different account than the delivery stream and role as Firehose supports
+	// cross-account secret access. This parameter is required when Enabled is set to
+	// True .
+	SecretARN *string
+
+	noSmithyDocumentSerde
+}
+
 // The serializer that you want Firehose to use to convert data to the target
 // format before writing it to Amazon S3. Firehose supports two types of
 // serializers: the [ORC SerDe]and the [Parquet SerDe].
@@ -2274,13 +2316,6 @@ type SnowflakeDestinationConfiguration struct {
 	// This member is required.
 	Database *string
 
-	// The private key used to encrypt your Snowflake client. For information, see [Using Key Pair Authentication & Key Rotation].
-	//
-	// [Using Key Pair Authentication & Key Rotation]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation
-	//
-	// This member is required.
-	PrivateKey *string
-
 	// The Amazon Resource Name (ARN) of the Snowflake role
 	//
 	// This member is required.
@@ -2303,11 +2338,6 @@ type SnowflakeDestinationConfiguration struct {
 	// This member is required.
 	Table *string
 
-	// User login name for the Snowflake account.
-	//
-	// This member is required.
-	User *string
-
 	// Describes the Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
@@ -2328,6 +2358,11 @@ type SnowflakeDestinationConfiguration struct {
 	// The name of the record metadata column
 	MetaDataColumnName *string
 
+	// The private key used to encrypt your Snowflake client. For information, see [Using Key Pair Authentication & Key Rotation].
+	//
+	// [Using Key Pair Authentication & Key Rotation]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation
+	PrivateKey *string
+
 	// Describes a data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
 
@@ -2338,6 +2373,9 @@ type SnowflakeDestinationConfiguration struct {
 	// Choose an S3 backup mode
 	S3BackupMode SnowflakeS3BackupMode
 
+	//  The configuration that defines how you access secrets for Snowflake.
+	SecretsManagerConfiguration *SecretsManagerConfiguration
+
 	// Optionally configure a Snowflake role. Otherwise the default user role will be
 	// used.
 	SnowflakeRoleConfiguration *SnowflakeRoleConfiguration
@@ -2347,6 +2385,9 @@ type SnowflakeDestinationConfiguration struct {
 	//
 	// [Amazon PrivateLink & Snowflake]: https://docs.snowflake.com/en/user-guide/admin-security-privatelink
 	SnowflakeVpcConfiguration *SnowflakeVpcConfiguration
+
+	// User login name for the Snowflake account.
+	User *string
 
 	noSmithyDocumentSerde
 }
@@ -2396,6 +2437,9 @@ type SnowflakeDestinationDescription struct {
 	// Each database consists of one or more schemas, which are logical groupings of
 	// database objects, such as tables and views
 	Schema *string
+
+	//  The configuration that defines how you access secrets for Snowflake.
+	SecretsManagerConfiguration *SecretsManagerConfiguration
 
 	// Optionally configure a Snowflake role. Otherwise the default user role will be
 	// used.
@@ -2491,6 +2535,9 @@ type SnowflakeDestinationUpdate struct {
 	// Each database consists of one or more schemas, which are logical groupings of
 	// database objects, such as tables and views
 	Schema *string
+
+	//  Describes the Secrets Manager configuration in Snowflake.
+	SecretsManagerConfiguration *SecretsManagerConfiguration
 
 	// Optionally configure a Snowflake role. Otherwise the default user role will be
 	// used.
@@ -2604,12 +2651,6 @@ type SplunkDestinationConfiguration struct {
 	// This member is required.
 	HECEndpointType HECEndpointType
 
-	// This is a GUID that you obtain from your Splunk cluster when you create a new
-	// HEC endpoint.
-	//
-	// This member is required.
-	HECToken *string
-
 	// The configuration for the backup Amazon S3 location.
 	//
 	// This member is required.
@@ -2627,6 +2668,10 @@ type SplunkDestinationConfiguration struct {
 	// to send the data again or considers it an error, based on your retry settings.
 	HECAcknowledgmentTimeoutInSeconds *int32
 
+	// This is a GUID that you obtain from your Splunk cluster when you create a new
+	// HEC endpoint.
+	HECToken *string
+
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
 
@@ -2643,6 +2688,9 @@ type SplunkDestinationConfiguration struct {
 	// You can update this backup mode from FailedEventsOnly to AllEvents . You can't
 	// update it from AllEvents to FailedEventsOnly .
 	S3BackupMode SplunkS3BackupMode
+
+	//  The configuration that defines how you access secrets for Splunk.
+	SecretsManagerConfiguration *SecretsManagerConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2687,6 +2735,9 @@ type SplunkDestinationDescription struct {
 
 	// The Amazon S3 destination.>
 	S3DestinationDescription *S3DestinationDescription
+
+	//  The configuration that defines how you access secrets for Splunk.
+	SecretsManagerConfiguration *SecretsManagerConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2735,6 +2786,9 @@ type SplunkDestinationUpdate struct {
 
 	// Your update to the configuration of the backup Amazon S3 location.
 	S3Update *S3DestinationUpdate
+
+	//  The configuration that defines how you access secrets for Splunk.
+	SecretsManagerConfiguration *SecretsManagerConfiguration
 
 	noSmithyDocumentSerde
 }

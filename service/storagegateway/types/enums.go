@@ -31,6 +31,25 @@ func (ActiveDirectoryStatus) Values() []ActiveDirectoryStatus {
 	}
 }
 
+type AutomaticUpdatePolicy string
+
+// Enum values for AutomaticUpdatePolicy
+const (
+	AutomaticUpdatePolicyAllVersions           AutomaticUpdatePolicy = "ALL_VERSIONS"
+	AutomaticUpdatePolicyEmergencyVersionsOnly AutomaticUpdatePolicy = "EMERGENCY_VERSIONS_ONLY"
+)
+
+// Values returns all known values for AutomaticUpdatePolicy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomaticUpdatePolicy) Values() []AutomaticUpdatePolicy {
+	return []AutomaticUpdatePolicy{
+		"ALL_VERSIONS",
+		"EMERGENCY_VERSIONS_ONLY",
+	}
+}
+
 type AvailabilityMonitorTestStatus string
 
 // Enum values for AvailabilityMonitorTestStatus

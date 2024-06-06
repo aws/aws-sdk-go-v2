@@ -1,3 +1,7 @@
+# v1.29.10 (2024-06-06)
+
+* **Documentation**: Doc-only update for SNS. These changes include customer-reported issues and TXC3 updates.
+
 # v1.29.9 (2024-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

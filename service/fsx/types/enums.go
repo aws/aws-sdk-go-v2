@@ -654,6 +654,25 @@ func (LustreDeploymentType) Values() []LustreDeploymentType {
 	}
 }
 
+type MetadataConfigurationMode string
+
+// Enum values for MetadataConfigurationMode
+const (
+	MetadataConfigurationModeAutomatic       MetadataConfigurationMode = "AUTOMATIC"
+	MetadataConfigurationModeUserProvisioned MetadataConfigurationMode = "USER_PROVISIONED"
+)
+
+// Values returns all known values for MetadataConfigurationMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetadataConfigurationMode) Values() []MetadataConfigurationMode {
+	return []MetadataConfigurationMode{
+		"AUTOMATIC",
+		"USER_PROVISIONED",
+	}
+}
+
 type NfsVersion string
 
 // Enum values for NfsVersion

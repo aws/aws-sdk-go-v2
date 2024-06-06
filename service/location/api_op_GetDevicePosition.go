@@ -52,7 +52,7 @@ type GetDevicePositionOutput struct {
 	// This member is required.
 	Position []float64
 
-	// The timestamp for when the tracker resource received the device position in [ISO 8601]
+	// The timestamp for when the tracker resource received the device position. Uses [ISO 8601]
 	// format: YYYY-MM-DDThh:mm:ss.sssZ .
 	//
 	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html

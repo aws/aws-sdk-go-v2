@@ -81,7 +81,7 @@ type CreateFileSystemInput struct {
 	// configure depends on the value that you set for StorageType and the Lustre
 	// DeploymentType , as follows:
 	//
-	//   - For SCRATCH_2 , PERSISTENT_2 and PERSISTENT_1 deployment types using SSD
+	//   - For SCRATCH_2 , PERSISTENT_2 , and PERSISTENT_1 deployment types using SSD
 	//   storage type, the valid values are 1200 GiB, 2400 GiB, and increments of 2400
 	//   GiB.
 	//
@@ -134,19 +134,24 @@ type CreateFileSystemInput struct {
 	// Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
-	// (Optional) For FSx for Lustre file systems, sets the Lustre version for the
-	// file system that you're creating. Valid values are 2.10 , 2.12 , and 2.15 :
+	// For FSx for Lustre file systems, sets the Lustre version for the file system
+	// that you're creating. Valid values are 2.10 , 2.12 , and 2.15 :
 	//
 	//   - 2.10 is supported by the Scratch and Persistent_1 Lustre deployment types.
 	//
-	//   - 2.12 and 2.15 are supported by all Lustre deployment types. 2.12 or 2.15 is
-	//   required when setting FSx for Lustre DeploymentType to PERSISTENT_2 .
+	//   - 2.12 is supported by all Lustre deployment types, except for PERSISTENT_2
+	//   with a metadata configuration mode.
 	//
-	// Default value = 2.10 , except when DeploymentType is set to PERSISTENT_2 , then
-	// the default is 2.12 .
+	//   - 2.15 is supported by all Lustre deployment types and is recommended for all
+	//   new file systems.
 	//
-	// If you set FileSystemTypeVersion to 2.10 for a PERSISTENT_2 Lustre deployment
-	// type, the CreateFileSystem operation fails.
+	// Default value is 2.10 , except for the following deployments:
+	//
+	//   - Default value is 2.12 when DeploymentType is set to PERSISTENT_2 without a
+	//   metadata configuration mode.
+	//
+	//   - Default value is 2.15 when DeploymentType is set to PERSISTENT_2 with a
+	//   metadata configuration mode.
 	FileSystemTypeVersion *string
 
 	// Specifies the ID of the Key Management Service (KMS) key to use for encrypting

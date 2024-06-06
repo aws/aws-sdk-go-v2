@@ -1,3 +1,7 @@
+# v1.24.0 (2024-06-05)
+
+* **Feature**: This release contains a new optional ip-addresses input field for the update accelerator and update custom routing accelerator apis. This input enables consumers to replace IPv4 addresses on existing accelerators with addresses provided in the input.
+
 # v1.23.6 (2024-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

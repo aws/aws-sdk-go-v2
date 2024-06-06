@@ -215,11 +215,14 @@ type BatchPutGeofenceRequestEntry struct {
 	// This member is required.
 	GeofenceId *string
 
-	// Contains the details of the position of the geofence. Can be either a polygon
-	// or a circle. Including both will return a validation error.
+	// Contains the details to specify the position of the geofence. Can be a polygon,
+	// a circle or a polygon encoded in Geobuf format. Including multiple selections
+	// will return a validation error.
 	//
-	// Each [geofence polygon] can have a maximum of 1,000 vertices.
+	// The [geofence polygon] format supports a maximum of 1,000 vertices. The [Geofence geobuf] format supports a
+	// maximum of 100,000 vertices.
 	//
+	// [Geofence geobuf]: https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html
 	// [geofence polygon]: https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html
 	//
 	// This member is required.
@@ -443,6 +446,18 @@ type CalculateRouteTruckModeOptions struct {
 	noSmithyDocumentSerde
 }
 
+// The cellular network communication infrastructure that the device uses.
+type CellSignals struct {
+
+	// Information about the Long-Term Evolution (LTE) network the device is connected
+	// to.
+	//
+	// This member is required.
+	LteCellDetails []LteCellDetails
+
+	noSmithyDocumentSerde
+}
+
 // A circle on the earth, as defined by a center point and a radius.
 type Circle struct {
 
@@ -565,10 +580,111 @@ type DevicePositionUpdate struct {
 	noSmithyDocumentSerde
 }
 
+// The device's position, IP address, and Wi-Fi access points.
+type DeviceState struct {
+
+	// The device identifier.
+	//
+	// This member is required.
+	DeviceId *string
+
+	// The last known device position.
+	//
+	// This member is required.
+	Position []float64
+
+	// The timestamp at which the device's position was determined. Uses [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
+	//
+	// This member is required.
+	SampleTime *time.Time
+
+	// Defines the level of certainty of the position.
+	Accuracy *PositionalAccuracy
+
+	// The cellular network infrastructure that the device is connected to.
+	CellSignals *CellSignals
+
+	// The device's Ipv4 address.
+	Ipv4Address *string
+
+	// The Wi-Fi access points the device is using.
+	WiFiAccessPoints []WiFiAccessPoint
+
+	noSmithyDocumentSerde
+}
+
+// A forecasted event represents a geofence event in relation to the requested
+// device state, that may occur given the provided device state and time horizon.
+type ForecastedEvent struct {
+
+	// The forecasted event identifier.
+	//
+	// This member is required.
+	EventId *string
+
+	// The event type, forecasting three states for which a device can be in relative
+	// to a geofence:
+	//
+	// ENTER : If a device is outside of a geofence, but would breach the fence if the
+	// device is moving at its current speed within time horizon window.
+	//
+	// EXIT : If a device is inside of a geofence, but would breach the fence if the
+	// device is moving at its current speed within time horizon window.
+	//
+	// IDLE : If a device is inside of a geofence, and the device is not moving.
+	//
+	// This member is required.
+	EventType ForecastedGeofenceEventType
+
+	// The geofence identifier pertaining to the forecasted event.
+	//
+	// This member is required.
+	GeofenceId *string
+
+	// Indicates if the device is located within the geofence.
+	//
+	// This member is required.
+	IsDeviceInGeofence *bool
+
+	// The closest distance from the device's position to the geofence.
+	//
+	// This member is required.
+	NearestDistance float64
+
+	// The forecasted time the device will breach the geofence in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
+	ForecastedBreachTime *time.Time
+
+	// The geofence properties.
+	GeofenceProperties map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The device's position, IP address, and WiFi access points.
+type ForecastGeofenceEventsDeviceState struct {
+
+	// The device's position.
+	//
+	// This member is required.
+	Position []float64
+
+	// The device's speed.
+	Speed *float64
+
+	noSmithyDocumentSerde
+}
+
 // Contains the geofence geometry details.
 //
-// A geofence geometry is made up of either a polygon or a circle. Can be either a
-// polygon or a circle. Including both will return a validation error.
+// A geofence geometry is made up of either a polygon or a circle. Can be a
+// polygon, a circle or a polygon encoded in Geobuf format. Including multiple
+// selections will return a validation error.
 //
 // Amazon Location doesn't currently support polygons with holes, multipolygons,
 // polygons that are wound clockwise, or that cross the antimeridian.
@@ -576,6 +692,12 @@ type GeofenceGeometry struct {
 
 	// A circle on the earth, as defined by a center point and a radius.
 	Circle *Circle
+
+	// Geobuf is a compact binary encoding for geographic data that provides lossless
+	// compression of GeoJSON polygons. The Geobuf must be Base64-encoded.
+	//
+	// A polygon in Geobuf format can have up to 100,000 vertices.
+	Geobuf []byte
 
 	// A polygon is a list of linear rings which are each made up of a list of
 	// vertices.
@@ -595,6 +717,29 @@ type GeofenceGeometry struct {
 	//
 	// A linear ring for use in geofences can consist of between 4 and 1,000 vertices.
 	Polygon [][][]float64
+
+	noSmithyDocumentSerde
+}
+
+// The inferred state of the device, given the provided position, IP address,
+// cellular signals, and Wi-Fi- access points.
+type InferredState struct {
+
+	// Indicates if a proxy was used.
+	//
+	// This member is required.
+	ProxyDetected *bool
+
+	// The level of certainty of the inferred position.
+	Accuracy *PositionalAccuracy
+
+	// The distance between the inferred position and the device's self-reported
+	// position.
+	DeviationDistance *float64
+
+	// The device position inferred by the provided position, IP address, cellular
+	// signals, and Wi-Fi- access points.
+	Position []float64
 
 	noSmithyDocumentSerde
 }
@@ -716,6 +861,9 @@ type ListDevicePositionsResponseEntry struct {
 }
 
 // Contains the geofence collection details.
+//
+// The returned geometry will always match the geometry format used when the
+// geofence was created.
 type ListGeofenceCollectionsResponseEntry struct {
 
 	// The name of the geofence collection.
@@ -758,6 +906,9 @@ type ListGeofenceCollectionsResponseEntry struct {
 }
 
 // Contains a list of geofences stored in a given geofence collection.
+//
+// The returned geometry will always match the geometry format used when the
+// geofence was created.
 type ListGeofenceResponseEntry struct {
 
 	// The timestamp for when the geofence was stored in a geofence collection in [ISO 8601]
@@ -1049,6 +1200,95 @@ type ListTrackersResponseEntry struct {
 	noSmithyDocumentSerde
 }
 
+// Details about the Long-Term Evolution (LTE) network.
+type LteCellDetails struct {
+
+	// The E-UTRAN Cell Identifier (ECI).
+	//
+	// This member is required.
+	CellId int32
+
+	// The Mobile Country Code (MCC).
+	//
+	// This member is required.
+	Mcc *int32
+
+	// The Mobile Network Code (MNC)
+	//
+	// This member is required.
+	Mnc *int32
+
+	// The LTE local identification information (local ID).
+	LocalId *LteLocalId
+
+	// The network measurements.
+	NetworkMeasurements []LteNetworkMeasurements
+
+	// Indicates whether the LTE object is capable of supporting NR (new radio).
+	NrCapable *bool
+
+	// Signal power of the reference signal received, measured in decibel-milliwatts
+	// (dBm).
+	Rsrp *int32
+
+	// Signal quality of the reference Signal received, measured in decibels (dB).
+	Rsrq *float32
+
+	// LTE Tracking Area Code (TAC).
+	Tac *int32
+
+	// Timing Advance (TA).
+	TimingAdvance *int32
+
+	noSmithyDocumentSerde
+}
+
+// LTE local identification information (local ID).
+type LteLocalId struct {
+
+	// E-UTRA (Evolved Universal Terrestrial Radio Access) absolute radio frequency
+	// channel number (EARFCN).
+	//
+	// This member is required.
+	Earfcn int32
+
+	// Physical Cell ID (PCI).
+	//
+	// This member is required.
+	Pci int32
+
+	noSmithyDocumentSerde
+}
+
+// LTE network measurements.
+type LteNetworkMeasurements struct {
+
+	// E-UTRAN Cell Identifier (ECI).
+	//
+	// This member is required.
+	CellId int32
+
+	// E-UTRA (Evolved Universal Terrestrial Radio Access) absolute radio frequency
+	// channel number (EARFCN).
+	//
+	// This member is required.
+	Earfcn int32
+
+	// Physical Cell ID (PCI).
+	//
+	// This member is required.
+	Pci int32
+
+	// Signal power of the reference signal received, measured in dBm
+	// (decibel-milliwatts).
+	Rsrp *int32
+
+	// Signal quality of the reference Signal received, measured in decibels (dB).
+	Rsrq *float32
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the map tile style selected from an available provider.
 type MapConfiguration struct {
 
@@ -1056,12 +1296,9 @@ type MapConfiguration struct {
 	//
 	// Valid [Esri map styles]:
 	//
-	//   - VectorEsriNavigation – The Esri Navigation map style, which provides a
-	//   detailed basemap for the world symbolized with a custom navigation map style
-	//   that's designed for use during the day in mobile devices. It also includes a
-	//   richer set of places, such as shops, services, restaurants, attractions, and
-	//   other points of interest. Enable the POI layer by setting it in CustomLayers
-	//   to leverage the additional places data.
+	//   - VectorEsriDarkGrayCanvas – The Esri Dark Gray Canvas map style. A vector
+	//   basemap with a dark gray, neutral background with minimal colors, labels, and
+	//   features that's designed to draw attention to your thematic content.
 	//
 	//   - RasterEsriImagery – The Esri Imagery map style. A raster basemap that
 	//   provides one meter or better satellite and aerial imagery in many parts of the
@@ -1080,15 +1317,27 @@ type MapConfiguration struct {
 	//   The vector tile layer is similar in content and style to the World Street Map
 	//   raster map.
 	//
-	//   - VectorEsriDarkGrayCanvas – The Esri Dark Gray Canvas map style. A vector
-	//   basemap with a dark gray, neutral background with minimal colors, labels, and
-	//   features that's designed to draw attention to your thematic content.
+	//   - VectorEsriNavigation – The Esri Navigation map style, which provides a
+	//   detailed basemap for the world symbolized with a custom navigation map style
+	//   that's designed for use during the day in mobile devices.
 	//
 	// Valid [HERE Technologies map styles]:
+	//
+	//   - VectorHereContrast – The HERE Contrast (Berlin) map style is a high contrast
+	//   detailed base map of the world that blends 3D and 2D rendering.
+	//
+	// The VectorHereContrast style has been renamed from VectorHereBerlin .
+	//   VectorHereBerlin has been deprecated, but will continue to work in
+	//   applications that use it.
 	//
 	//   - VectorHereExplore – A default HERE map style containing a neutral, global
 	//   map and its features including roads, buildings, landmarks, and water features.
 	//   It also now includes a fully designed map of Japan.
+	//
+	//   - VectorHereExploreTruck – A global map containing truck restrictions and
+	//   attributes (e.g. width / height / HAZMAT) symbolized with highlighted segments
+	//   and icons on top of HERE Explore to support use cases within transport and
+	//   logistics.
 	//
 	//   - RasterHereExploreSatellite – A global map containing high resolution
 	//   satellite imagery.
@@ -1101,18 +1350,6 @@ type MapConfiguration struct {
 	// Hybrid styles use both vector and raster tiles when rendering the map that you
 	//   see. This means that more tiles are retrieved than when using either vector or
 	//   raster tiles alone. Your charges will include all tiles retrieved.
-	//
-	//   - VectorHereContrast – The HERE Contrast (Berlin) map style is a high contrast
-	//   detailed base map of the world that blends 3D and 2D rendering.
-	//
-	// The VectorHereContrast style has been renamed from VectorHereBerlin .
-	//   VectorHereBerlin has been deprecated, but will continue to work in
-	//   applications that use it.
-	//
-	//   - VectorHereExploreTruck – A global map containing truck restrictions and
-	//   attributes (e.g. width / height / HAZMAT) symbolized with highlighted segments
-	//   and icons on top of HERE Explore to support use cases within transport and
-	//   logistics.
 	//
 	// Valid [GrabMaps map styles]:
 	//
@@ -1162,10 +1399,8 @@ type MapConfiguration struct {
 	// layer, or, for styles that support custom layers, you can enable layer(s), such
 	// as POI layer for the VectorEsriNavigation style. Default is unset .
 	//
-	// Currenlty only VectorEsriNavigation supports CustomLayers. For more
-	// information, see [Custom Layers].
-	//
-	// [Custom Layers]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#map-custom-layers
+	// Not all map resources or styles support custom layers. See Custom Layers for
+	// more information.
 	CustomLayers []string
 
 	// Specifies the political view for the style. Leave unset to not use a political
@@ -1190,10 +1425,8 @@ type MapConfigurationUpdate struct {
 	// layer, or, for styles that support custom layers, you can enable layer(s), such
 	// as POI layer for the VectorEsriNavigation style. Default is unset .
 	//
-	// Currenlty only VectorEsriNavigation supports CustomLayers. For more
-	// information, see [Custom Layers].
-	//
-	// [Custom Layers]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#map-custom-layers
+	// Not all map resources or styles support custom layers. See Custom Layers for
+	// more information.
 	CustomLayers []string
 
 	// Specifies the political view for the style. Set to an empty string to not use a
@@ -1270,15 +1503,11 @@ type Place struct {
 	// .
 	Street *string
 
-	// An area that's part of a larger municipality. For example, Blissville is a
+	// An area that's part of a larger municipality. For example, Blissville  is a
 	// submunicipality in the Queen County in New York.
 	//
-	// This property is only returned for a place index that uses Esri as a data
-	// provider. The property is represented as a district .
-	//
-	// For more information about data providers, see [Amazon Location Service data providers].
-	//
-	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+	// This property supported by Esri and OpenData. The Esri property is district ,
+	// and the OpenData property is borough .
 	SubMunicipality *string
 
 	// A county, or an area that's part of a larger region. For example, Metro
@@ -1296,14 +1525,13 @@ type Place struct {
 	// For addresses with multiple units, the unit identifier. Can include numbers and
 	// letters, for example 3B or Unit 123 .
 	//
-	// This property is returned only for a place index that uses Esri or Grab as a
-	// data provider. It is not returned for SearchPlaceIndexForPosition .
+	// Returned only for a place index that uses Esri or Grab as a data provider. Is
+	// not returned for SearchPlaceIndexForPosition .
 	UnitNumber *string
 
 	// For addresses with a UnitNumber , the type of unit. For example, Apartment .
 	//
-	// This property is returned only for a place index that uses Esri as a data
-	// provider.
+	// Returned only for a place index that uses Esri as a data provider.
 	UnitType *string
 
 	noSmithyDocumentSerde
@@ -1441,34 +1669,6 @@ type SearchForSuggestionsResult struct {
 	//
 	// For SearchPlaceIndexForSuggestions operations, the PlaceId is returned by place
 	// indexes that use Esri, Grab, or HERE as data providers.
-	//
-	// While you can use PlaceID in subsequent requests, PlaceID is not intended to be
-	// a permanent identifier and the ID can change between consecutive API calls.
-	// Please see the following PlaceID behaviour for each data provider:
-	//
-	//   - Esri: Place IDs will change every quarter at a minimum. The typical time
-	//   period for these changes would be March, June, September, and December. Place
-	//   IDs might also change between the typical quarterly change but that will be much
-	//   less frequent.
-	//
-	//   - HERE: We recommend that you cache data for no longer than a week to keep
-	//   your data data fresh. You can assume that less than 1% ID shifts will release
-	//   over release which is approximately 1 - 2 times per week.
-	//
-	//   - Grab: Place IDs can expire or become invalid in the following situations.
-	//
-	//   - Data operations: The POI may be removed from Grab POI database by Grab Map
-	//   Ops based on the ground-truth, such as being closed in the real world, being
-	//   detected as a duplicate POI, or having incorrect information. Grab will
-	//   synchronize data to the Waypoint environment on weekly basis.
-	//
-	//   - Interpolated POI: Interpolated POI is a temporary POI generated in real
-	//   time when serving a request, and it will be marked as derived in the
-	//   place.result_type field in the response. The information of interpolated POIs
-	//   will be retained for at least 30 days, which means that within 30 days, you are
-	//   able to obtain POI details by Place ID from Place Details API. After 30 days,
-	//   the interpolated POIs(both Place ID and details) may expire and inaccessible
-	//   from the Places Details API.
 	PlaceId *string
 
 	// Categories from the data provider that describe the Place that are not mapped
@@ -1803,6 +2003,22 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Wi-Fi access point.
+type WiFiAccessPoint struct {
+
+	// Medium access control address (Mac).
+	//
+	// This member is required.
+	MacAddress *string
+
+	// Received signal strength (dBm) of the WLAN measurement data.
+	//
+	// This member is required.
+	Rss *int32
 
 	noSmithyDocumentSerde
 }

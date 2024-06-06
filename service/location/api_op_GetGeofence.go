@@ -13,6 +13,9 @@ import (
 )
 
 // Retrieves the geofence details from a geofence collection.
+//
+// The returned geometry will always match the geometry format used when the
+// geofence was created.
 func (c *Client) GetGeofence(ctx context.Context, params *GetGeofenceInput, optFns ...func(*Options)) (*GetGeofenceOutput, error) {
 	if params == nil {
 		params = &GetGeofenceInput{}

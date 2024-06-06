@@ -102,7 +102,7 @@ type UpdateDestinationInput struct {
 	// Deprecated: This member has been deprecated.
 	S3DestinationUpdate *types.S3DestinationUpdate
 
-	// Update to the Snowflake destination condiguration settings
+	// Update to the Snowflake destination configuration settings.
 	SnowflakeDestinationUpdate *types.SnowflakeDestinationUpdate
 
 	// Describes an update for a destination in Splunk.

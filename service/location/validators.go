@@ -570,6 +570,26 @@ func (m *validateOpDisassociateTrackerConsumer) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpForecastGeofenceEvents struct {
+}
+
+func (*validateOpForecastGeofenceEvents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpForecastGeofenceEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ForecastGeofenceEventsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpForecastGeofenceEventsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDevicePositionHistory struct {
 }
 
@@ -1050,6 +1070,26 @@ func (m *validateOpUpdateTracker) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpVerifyDevicePosition struct {
+}
+
+func (*validateOpVerifyDevicePosition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpVerifyDevicePosition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*VerifyDevicePositionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpVerifyDevicePositionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociateTrackerConsumerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateTrackerConsumer{}, middleware.After)
 }
@@ -1162,6 +1202,10 @@ func addOpDisassociateTrackerConsumerValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpDisassociateTrackerConsumer{}, middleware.After)
 }
 
+func addOpForecastGeofenceEventsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpForecastGeofenceEvents{}, middleware.After)
+}
+
 func addOpGetDevicePositionHistoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDevicePositionHistory{}, middleware.After)
 }
@@ -1258,6 +1302,10 @@ func addOpUpdateTrackerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTracker{}, middleware.After)
 }
 
+func addOpVerifyDevicePositionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpVerifyDevicePosition{}, middleware.After)
+}
+
 func validateApiKeyRestrictions(v *types.ApiKeyRestrictions) error {
 	if v == nil {
 		return nil
@@ -1306,6 +1354,25 @@ func validateBatchPutGeofenceRequestEntryList(v []types.BatchPutGeofenceRequestE
 	for i := range v {
 		if err := validateBatchPutGeofenceRequestEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCellSignals(v *types.CellSignals) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CellSignals"}
+	if v.LteCellDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LteCellDetails"))
+	} else if v.LteCellDetails != nil {
+		if err := validateLteCellDetailsList(v.LteCellDetails); err != nil {
+			invalidParams.AddNested("LteCellDetails", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1376,6 +1443,57 @@ func validateDevicePositionUpdateList(v []types.DevicePositionUpdate) error {
 	}
 }
 
+func validateDeviceState(v *types.DeviceState) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeviceState"}
+	if v.DeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
+	}
+	if v.SampleTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SampleTime"))
+	}
+	if v.Position == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Position"))
+	}
+	if v.Accuracy != nil {
+		if err := validatePositionalAccuracy(v.Accuracy); err != nil {
+			invalidParams.AddNested("Accuracy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WiFiAccessPoints != nil {
+		if err := validateWiFiAccessPointList(v.WiFiAccessPoints); err != nil {
+			invalidParams.AddNested("WiFiAccessPoints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CellSignals != nil {
+		if err := validateCellSignals(v.CellSignals); err != nil {
+			invalidParams.AddNested("CellSignals", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateForecastGeofenceEventsDeviceState(v *types.ForecastGeofenceEventsDeviceState) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ForecastGeofenceEventsDeviceState"}
+	if v.Position == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Position"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGeofenceGeometry(v *types.GeofenceGeometry) error {
 	if v == nil {
 		return nil
@@ -1384,6 +1502,92 @@ func validateGeofenceGeometry(v *types.GeofenceGeometry) error {
 	if v.Circle != nil {
 		if err := validateCircle(v.Circle); err != nil {
 			invalidParams.AddNested("Circle", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLteCellDetails(v *types.LteCellDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LteCellDetails"}
+	if v.Mcc == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Mcc"))
+	}
+	if v.Mnc == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Mnc"))
+	}
+	if v.LocalId != nil {
+		if err := validateLteLocalId(v.LocalId); err != nil {
+			invalidParams.AddNested("LocalId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NetworkMeasurements != nil {
+		if err := validateLteNetworkMeasurementsList(v.NetworkMeasurements); err != nil {
+			invalidParams.AddNested("NetworkMeasurements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLteCellDetailsList(v []types.LteCellDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LteCellDetailsList"}
+	for i := range v {
+		if err := validateLteCellDetails(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLteLocalId(v *types.LteLocalId) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LteLocalId"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLteNetworkMeasurements(v *types.LteNetworkMeasurements) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LteNetworkMeasurements"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLteNetworkMeasurementsList(v []types.LteNetworkMeasurements) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LteNetworkMeasurementsList"}
+	for i := range v {
+		if err := validateLteNetworkMeasurements(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1415,6 +1619,41 @@ func validatePositionalAccuracy(v *types.PositionalAccuracy) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PositionalAccuracy"}
 	if v.Horizontal == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Horizontal"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWiFiAccessPoint(v *types.WiFiAccessPoint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WiFiAccessPoint"}
+	if v.MacAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MacAddress"))
+	}
+	if v.Rss == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rss"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWiFiAccessPointList(v []types.WiFiAccessPoint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WiFiAccessPointList"}
+	for i := range v {
+		if err := validateWiFiAccessPoint(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1911,6 +2150,28 @@ func validateOpDisassociateTrackerConsumerInput(v *DisassociateTrackerConsumerIn
 	}
 }
 
+func validateOpForecastGeofenceEventsInput(v *ForecastGeofenceEventsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ForecastGeofenceEventsInput"}
+	if v.CollectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollectionName"))
+	}
+	if v.DeviceState == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceState"))
+	} else if v.DeviceState != nil {
+		if err := validateForecastGeofenceEventsDeviceState(v.DeviceState); err != nil {
+			invalidParams.AddNested("DeviceState", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDevicePositionHistoryInput(v *GetDevicePositionHistoryInput) error {
 	if v == nil {
 		return nil
@@ -2323,6 +2584,28 @@ func validateOpUpdateTrackerInput(v *UpdateTrackerInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTrackerInput"}
 	if v.TrackerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrackerName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpVerifyDevicePositionInput(v *VerifyDevicePositionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VerifyDevicePositionInput"}
+	if v.TrackerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrackerName"))
+	}
+	if v.DeviceState == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceState"))
+	} else if v.DeviceState != nil {
+		if err := validateDeviceState(v.DeviceState); err != nil {
+			invalidParams.AddNested("DeviceState", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

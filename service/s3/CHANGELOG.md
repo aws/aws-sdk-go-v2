@@ -1,3 +1,8 @@
+# v1.55.0 (2024-06-05)
+
+* **Feature**: Added new params copySource and key to copyObject API for supporting S3 Access Grants plugin. These changes will not change any of the existing S3 API functionality.
+* **Bug Fix**: Add S3-specific smithy protocol tests.
+
 # v1.54.4 (2024-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions
