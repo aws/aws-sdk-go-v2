@@ -4479,6 +4479,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Successful"
                     }
+                },
+                "Device_exist_in_conflict_fuota_task": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Device_exist_in_conflict_fuota_task"
+                    }
                 }
             },
             "traits": {

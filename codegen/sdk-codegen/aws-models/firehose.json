@@ -2614,7 +2614,7 @@
                     "name": "firehose"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Amazon Data Firehose</fullname>\n         <note>\n            <p>Amazon Data Firehose was previously known as Amazon Kinesis Data Firehose.</p>\n         </note>\n         <p>Amazon Data Firehose is a fully managed service that delivers real-time\n         streaming data to destinations such as Amazon Simple Storage Service (Amazon S3), Amazon\n         OpenSearch Service, Amazon Redshift, Splunk, and various other supportd\n         destinations.</p>",
+                "smithy.api#documentation": "<fullname>Amazon Data Firehose</fullname>\n         <note>\n            <p>Amazon Data Firehose was previously known as Amazon Kinesis Data Firehose.</p>\n         </note>\n         <p>Amazon Data Firehose is a fully managed service that delivers real-time streaming\n         data to destinations such as Amazon Simple Storage Service (Amazon S3), Amazon OpenSearch\n         Service, Amazon Redshift, Splunk, and various other supported destinations.</p>",
                 "smithy.api#title": "Amazon Kinesis Firehose",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://firehose.amazonaws.com/doc/2015-08-04"
@@ -3834,7 +3834,7 @@
                 "RequestConfiguration": {
                     "target": "com.amazonaws.firehose#HttpEndpointRequestConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of the requeste sent to the HTTP endpoint specified as the\n         destination.</p>"
+                        "smithy.api#documentation": "<p>The configuration of the request sent to the HTTP endpoint that is specified as the\n         destination.</p>"
                     }
                 },
                 "ProcessingConfiguration": {
@@ -3862,6 +3862,12 @@
                     "target": "com.amazonaws.firehose#S3DestinationConfiguration",
                     "traits": {
                         "smithy.api#required": {}
+                    }
+                },
+                "SecretsManagerConfiguration": {
+                    "target": "com.amazonaws.firehose#SecretsManagerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n       The configuration that defines how you access secrets for HTTP Endpoint destination.\n      </p>"
                     }
                 }
             },
@@ -3916,6 +3922,12 @@
                 },
                 "S3DestinationDescription": {
                     "target": "com.amazonaws.firehose#S3DestinationDescription"
+                },
+                "SecretsManagerConfiguration": {
+                    "target": "com.amazonaws.firehose#SecretsManagerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The configuration that defines how you access secrets for HTTP Endpoint destination.\n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -3969,6 +3981,12 @@
                 },
                 "S3Update": {
                     "target": "com.amazonaws.firehose#S3DestinationUpdate"
+                },
+                "SecretsManagerConfiguration": {
+                    "target": "com.amazonaws.firehose#SecretsManagerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The configuration that defines how you access secrets for HTTP Endpoint destination.\n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -4769,7 +4787,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A serializer to use for converting data to the Parquet format before storing it in\n         Amazon S3. For more information, see <a href=\"https://parquet.apache.org/documentation/latest/\">Apache Parquet</a>.</p>"
+                "smithy.api#documentation": "<p>A serializer to use for converting data to the Parquet format before storing it in\n         Amazon S3. For more information, see <a href=\"https://parquet.apache.org/docs/\">Apache Parquet</a>.</p>"
             }
         },
         "com.amazonaws.firehose#ParquetWriterVersion": {
@@ -5267,15 +5285,13 @@
                 "Username": {
                     "target": "com.amazonaws.firehose#Username",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the user.</p>"
                     }
                 },
                 "Password": {
                     "target": "com.amazonaws.firehose#Password",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user password.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The user password.</p>"
                     }
                 },
                 "RetryOptions": {
@@ -5314,6 +5330,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The CloudWatch logging options for your delivery stream.</p>"
                     }
+                },
+                "SecretsManagerConfiguration": {
+                    "target": "com.amazonaws.firehose#SecretsManagerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The configuration that defines how you access secrets for Amazon Redshift.\n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -5347,8 +5369,7 @@
                 "Username": {
                     "target": "com.amazonaws.firehose#Username",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the user.</p>"
                     }
                 },
                 "RetryOptions": {
@@ -5386,6 +5407,12 @@
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+                    }
+                },
+                "SecretsManagerConfiguration": {
+                    "target": "com.amazonaws.firehose#SecretsManagerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The configuration that defines how you access secrets for Amazon Redshift.\n      </p>"
                     }
                 }
             },
@@ -5460,6 +5487,12 @@
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+                    }
+                },
+                "SecretsManagerConfiguration": {
+                    "target": "com.amazonaws.firehose#SecretsManagerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The configuration that defines how you access secrets for Amazon Redshift.\n      </p>"
                     }
                 }
             },
@@ -5806,6 +5839,43 @@
                 "smithy.api#documentation": "<p>Specifies the schema to which you want Firehose to configure your data\n         before it writes it to Amazon S3. This parameter is required if <code>Enabled</code> is set\n         to true.</p>"
             }
         },
+        "com.amazonaws.firehose#SecretARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:"
+            }
+        },
+        "com.amazonaws.firehose#SecretsManagerConfiguration": {
+            "type": "structure",
+            "members": {
+                "SecretARN": {
+                    "target": "com.amazonaws.firehose#SecretARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the secret that stores your credentials. It must be in the same region as the\n         Firehose stream and the role. The secret ARN can reside in a different account than the delivery stream and role as Firehose supports cross-account secret access. This parameter is required when <b>Enabled</b> is set to <code>True</code>.</p>"
+                    }
+                },
+                "RoleARN": {
+                    "target": "com.amazonaws.firehose#RoleARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Specifies the role that Firehose assumes when calling the Secrets Manager API operation. When you provide the role, it overrides any destination specific role defined in the destination configuration. If you do not provide the then we use the destination specific role. This parameter is required for Splunk.\n      </p>"
+                    }
+                },
+                "Enabled": {
+                    "target": "com.amazonaws.firehose#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether you want to use the the secrets manager feature. When set as\n            <code>True</code> the secrets manager configuration overwrites the existing secrets in\n         the destination configuration. When it's set to <code>False</code> Firehose falls back to\n         the credentials in the destination configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure that defines how Firehose accesses the secret.</p>"
+            }
+        },
         "com.amazonaws.firehose#SecurityGroupIdList": {
             "type": "list",
             "member": {
@@ -5930,8 +6000,7 @@
                 "PrivateKey": {
                     "target": "com.amazonaws.firehose#SnowflakePrivateKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The private key used to encrypt your Snowflake client. For information, see <a href=\"https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation\">Using Key Pair Authentication & Key Rotation</a>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The private key used to encrypt your Snowflake client. For information, see <a href=\"https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation\">Using Key Pair Authentication & Key Rotation</a>.</p>"
                     }
                 },
                 "KeyPassphrase": {
@@ -5943,8 +6012,7 @@
                 "User": {
                     "target": "com.amazonaws.firehose#SnowflakeUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>User login name for the Snowflake account.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>User login name for the Snowflake account.</p>"
                     }
                 },
                 "Database": {
@@ -6027,6 +6095,12 @@
                     "target": "com.amazonaws.firehose#S3DestinationConfiguration",
                     "traits": {
                         "smithy.api#required": {}
+                    }
+                },
+                "SecretsManagerConfiguration": {
+                    "target": "com.amazonaws.firehose#SecretsManagerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The configuration that defines how you access secrets for Snowflake.\n      </p>"
                     }
                 }
             },
@@ -6123,6 +6197,12 @@
                 },
                 "S3DestinationDescription": {
                     "target": "com.amazonaws.firehose#S3DestinationDescription"
+                },
+                "SecretsManagerConfiguration": {
+                    "target": "com.amazonaws.firehose#SecretsManagerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The configuration that defines how you access secrets for Snowflake.\n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -6224,6 +6304,12 @@
                 },
                 "S3Update": {
                     "target": "com.amazonaws.firehose#S3DestinationUpdate"
+                },
+                "SecretsManagerConfiguration": {
+                    "target": "com.amazonaws.firehose#SecretsManagerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Describes the Secrets Manager configuration in Snowflake.\n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -6465,8 +6551,7 @@
                 "HECToken": {
                     "target": "com.amazonaws.firehose#HECToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is a GUID that you obtain from your Splunk cluster when you create a new HEC\n         endpoint.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>This is a GUID that you obtain from your Splunk cluster when you create a new HEC\n         endpoint.</p>"
                     }
                 },
                 "HECAcknowledgmentTimeoutInSeconds": {
@@ -6510,6 +6595,12 @@
                     "target": "com.amazonaws.firehose#SplunkBufferingHints",
                     "traits": {
                         "smithy.api#documentation": "<p>The buffering options. If no value is specified, the default values for Splunk are used.</p>"
+                    }
+                },
+                "SecretsManagerConfiguration": {
+                    "target": "com.amazonaws.firehose#SecretsManagerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The configuration that defines how you access secrets for Splunk.\n      </p>"
                     }
                 }
             },
@@ -6579,6 +6670,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The buffering options. If no value is specified, the default values for Splunk are used.</p>"
                     }
+                },
+                "SecretsManagerConfiguration": {
+                    "target": "com.amazonaws.firehose#SecretsManagerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The configuration that defines how you access secrets for Splunk.\n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -6646,6 +6743,12 @@
                     "target": "com.amazonaws.firehose#SplunkBufferingHints",
                     "traits": {
                         "smithy.api#documentation": "<p>The buffering options. If no value is specified, the default values for Splunk are used.</p>"
+                    }
+                },
+                "SecretsManagerConfiguration": {
+                    "target": "com.amazonaws.firehose#SecretsManagerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The configuration that defines how you access secrets for Splunk.\n      </p>"
                     }
                 }
             },
@@ -6719,7 +6822,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables server-side encryption (SSE) for the delivery stream. </p>\n         <p>This operation is asynchronous. It returns immediately. When you invoke it, Firehose first sets the encryption status of the stream to <code>ENABLING</code>, and then\n         to <code>ENABLED</code>. The encryption status of a delivery stream is the\n            <code>Status</code> property in <a>DeliveryStreamEncryptionConfiguration</a>.\n         If the operation fails, the encryption status changes to <code>ENABLING_FAILED</code>. You\n         can continue to read and write data to your delivery stream while the encryption status is\n            <code>ENABLING</code>, but the data is not encrypted. It can take up to 5 seconds after\n         the encryption status changes to <code>ENABLED</code> before all records written to the\n         delivery stream are encrypted. To find out whether a record or a batch of records was\n         encrypted, check the response elements <a>PutRecordOutput$Encrypted</a> and\n            <a>PutRecordBatchOutput$Encrypted</a>, respectively.</p>\n         <p>To check the encryption status of a delivery stream, use <a>DescribeDeliveryStream</a>.</p>\n         <p>Even if encryption is currently enabled for a delivery stream, you can still invoke this\n         operation on it to change the ARN of the CMK or both its type and ARN. If you invoke this\n         method to change the CMK, and the old CMK is of type <code>CUSTOMER_MANAGED_CMK</code>,\n         Firehose schedules the grant it had on the old CMK for retirement. If the new\n         CMK is of type <code>CUSTOMER_MANAGED_CMK</code>, Firehose creates a grant\n         that enables it to use the new CMK to encrypt and decrypt data and to manage the\n         grant.</p>\n         <p>For the KMS grant creation to be successful, Firehose APIs <code>StartDeliveryStreamEncryption</code> and <code>CreateDeliveryStream</code> should not be called with session credentials that are more than 6 hours old.</p>\n         <p>If a delivery stream already has encryption enabled and then you invoke this operation\n         to change the ARN of the CMK or both its type and ARN and you get\n            <code>ENABLING_FAILED</code>, this only means that the attempt to change the CMK failed.\n         In this case, encryption remains enabled with the old CMK.</p>\n         <p>If the encryption status of your delivery stream is <code>ENABLING_FAILED</code>, you\n         can invoke this operation again with a valid CMK. The CMK must be enabled and the key\n         policy mustn't explicitly deny the permission for Firehose to invoke KMS\n         encrypt and decrypt operations.</p>\n         <p>You can enable SSE for a delivery stream only if it's a delivery stream that uses\n            <code>DirectPut</code> as its source. </p>\n         <p>The <code>StartDeliveryStreamEncryption</code> and\n            <code>StopDeliveryStreamEncryption</code> operations have a combined limit of 25 calls\n         per delivery stream per 24 hours. For example, you reach the limit if you call\n            <code>StartDeliveryStreamEncryption</code> 13 times and\n            <code>StopDeliveryStreamEncryption</code> 12 times for the same delivery stream in a\n         24-hour period.</p>"
+                "smithy.api#documentation": "<p>Enables server-side encryption (SSE) for the delivery stream. </p>\n         <p>This operation is asynchronous. It returns immediately. When you invoke it, Firehose first sets the encryption status of the stream to <code>ENABLING</code>, and then\n         to <code>ENABLED</code>. The encryption status of a delivery stream is the\n            <code>Status</code> property in <a>DeliveryStreamEncryptionConfiguration</a>.\n         If the operation fails, the encryption status changes to <code>ENABLING_FAILED</code>. You\n         can continue to read and write data to your delivery stream while the encryption status is\n            <code>ENABLING</code>, but the data is not encrypted. It can take up to 5 seconds after\n         the encryption status changes to <code>ENABLED</code> before all records written to the\n         delivery stream are encrypted. To find out whether a record or a batch of records was\n         encrypted, check the response elements <a>PutRecordOutput$Encrypted</a> and\n            <a>PutRecordBatchOutput$Encrypted</a>, respectively.</p>\n         <p>To check the encryption status of a delivery stream, use <a>DescribeDeliveryStream</a>.</p>\n         <p>Even if encryption is currently enabled for a delivery stream, you can still invoke this\n         operation on it to change the ARN of the CMK or both its type and ARN. If you invoke this\n         method to change the CMK, and the old CMK is of type <code>CUSTOMER_MANAGED_CMK</code>,\n         Firehose schedules the grant it had on the old CMK for retirement. If the new\n         CMK is of type <code>CUSTOMER_MANAGED_CMK</code>, Firehose creates a grant\n         that enables it to use the new CMK to encrypt and decrypt data and to manage the\n         grant.</p>\n         <p>For the KMS grant creation to be successful, the Firehose API operations\n            <code>StartDeliveryStreamEncryption</code> and <code>CreateDeliveryStream</code> should\n         not be called with session credentials that are more than 6 hours old.</p>\n         <p>If a delivery stream already has encryption enabled and then you invoke this operation\n         to change the ARN of the CMK or both its type and ARN and you get\n            <code>ENABLING_FAILED</code>, this only means that the attempt to change the CMK failed.\n         In this case, encryption remains enabled with the old CMK.</p>\n         <p>If the encryption status of your delivery stream is <code>ENABLING_FAILED</code>, you\n         can invoke this operation again with a valid CMK. The CMK must be enabled and the key\n         policy mustn't explicitly deny the permission for Firehose to invoke KMS\n         encrypt and decrypt operations.</p>\n         <p>You can enable SSE for a delivery stream only if it's a delivery stream that uses\n            <code>DirectPut</code> as its source. </p>\n         <p>The <code>StartDeliveryStreamEncryption</code> and\n            <code>StopDeliveryStreamEncryption</code> operations have a combined limit of 25 calls\n         per delivery stream per 24 hours. For example, you reach the limit if you call\n            <code>StartDeliveryStreamEncryption</code> 13 times and\n            <code>StopDeliveryStreamEncryption</code> 12 times for the same delivery stream in a\n         24-hour period.</p>"
             }
         },
         "com.amazonaws.firehose#StartDeliveryStreamEncryptionInput": {
@@ -7100,7 +7203,7 @@
                 "SnowflakeDestinationUpdate": {
                     "target": "com.amazonaws.firehose#SnowflakeDestinationUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Update to the Snowflake destination condiguration settings</p>"
+                        "smithy.api#documentation": "<p>Update to the Snowflake destination configuration settings.</p>"
                     }
                 }
             },
