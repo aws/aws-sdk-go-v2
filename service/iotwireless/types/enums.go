@@ -289,17 +289,18 @@ type FuotaDeviceStatus string
 
 // Enum values for FuotaDeviceStatus
 const (
-	FuotaDeviceStatusInitial              FuotaDeviceStatus = "Initial"
-	FuotaDeviceStatusPackageNotSupported  FuotaDeviceStatus = "Package_Not_Supported"
-	FuotaDeviceStatusFragAlgoUnsupported  FuotaDeviceStatus = "FragAlgo_unsupported"
-	FuotaDeviceStatusNotEnoughMemory      FuotaDeviceStatus = "Not_enough_memory"
-	FuotaDeviceStatusFragIndexUnsupported FuotaDeviceStatus = "FragIndex_unsupported"
-	FuotaDeviceStatusWrongDescriptor      FuotaDeviceStatus = "Wrong_descriptor"
-	FuotaDeviceStatusSessionCntReplay     FuotaDeviceStatus = "SessionCnt_replay"
-	FuotaDeviceStatusMissingFrag          FuotaDeviceStatus = "MissingFrag"
-	FuotaDeviceStatusMemoryError          FuotaDeviceStatus = "MemoryError"
-	FuotaDeviceStatusMICError             FuotaDeviceStatus = "MICError"
-	FuotaDeviceStatusSuccessful           FuotaDeviceStatus = "Successful"
+	FuotaDeviceStatusInitial                        FuotaDeviceStatus = "Initial"
+	FuotaDeviceStatusPackageNotSupported            FuotaDeviceStatus = "Package_Not_Supported"
+	FuotaDeviceStatusFragAlgoUnsupported            FuotaDeviceStatus = "FragAlgo_unsupported"
+	FuotaDeviceStatusNotEnoughMemory                FuotaDeviceStatus = "Not_enough_memory"
+	FuotaDeviceStatusFragIndexUnsupported           FuotaDeviceStatus = "FragIndex_unsupported"
+	FuotaDeviceStatusWrongDescriptor                FuotaDeviceStatus = "Wrong_descriptor"
+	FuotaDeviceStatusSessionCntReplay               FuotaDeviceStatus = "SessionCnt_replay"
+	FuotaDeviceStatusMissingFrag                    FuotaDeviceStatus = "MissingFrag"
+	FuotaDeviceStatusMemoryError                    FuotaDeviceStatus = "MemoryError"
+	FuotaDeviceStatusMICError                       FuotaDeviceStatus = "MICError"
+	FuotaDeviceStatusSuccessful                     FuotaDeviceStatus = "Successful"
+	FuotaDeviceStatusDeviceExistInConflictFuotaTask FuotaDeviceStatus = "Device_exist_in_conflict_fuota_task"
 )
 
 // Values returns all known values for FuotaDeviceStatus. Note that this can be
@@ -319,6 +320,7 @@ func (FuotaDeviceStatus) Values() []FuotaDeviceStatus {
 		"MemoryError",
 		"MICError",
 		"Successful",
+		"Device_exist_in_conflict_fuota_task",
 	}
 }
 

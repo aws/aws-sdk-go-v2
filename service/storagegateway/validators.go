@@ -3439,12 +3439,6 @@ func validateOpUpdateMaintenanceStartTimeInput(v *UpdateMaintenanceStartTimeInpu
 	if v.GatewayARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
 	}
-	if v.HourOfDay == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HourOfDay"))
-	}
-	if v.MinuteOfHour == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MinuteOfHour"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

@@ -49,6 +49,8 @@ import (
 //
 //   - LustreRootSquashConfiguration
 //
+//   - MetadataConfiguration
+//
 //   - PerUnitStorageThroughput
 //
 //   - StorageCapacity

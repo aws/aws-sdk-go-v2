@@ -44,6 +44,10 @@ type UpdateTableInput struct {
 	// Amazon Web Services account ID is used by default.
 	CatalogId *string
 
+	// A flag that can be set to true to ignore matching storage descriptor and
+	// subobject matching requirements.
+	Force bool
+
 	// By default, UpdateTable always creates an archived version of the table before
 	// updating it. However, if skipArchive is set to true, UpdateTable does not
 	// create the archived version.
@@ -54,6 +58,9 @@ type UpdateTableInput struct {
 
 	// The version ID at which to update the table contents.
 	VersionId *string
+
+	// The operation to be performed when updating the view.
+	ViewUpdateAction types.ViewUpdateAction
 
 	noSmithyDocumentSerde
 }

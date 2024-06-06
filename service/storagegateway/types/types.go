@@ -932,6 +932,19 @@ type SMBLocalGroups struct {
 	noSmithyDocumentSerde
 }
 
+// A set of variables indicating the software update preferences for the gateway.
+type SoftwareUpdatePreferences struct {
+
+	// Indicates the automatic update policy for a gateway.
+	//
+	// ALL_VERSIONS - Enables regular gateway maintenance updates.
+	//
+	// EMERGENCY_VERSIONS_ONLY - Disables regular gateway maintenance updates.
+	AutomaticUpdatePolicy AutomaticUpdatePolicy
+
+	noSmithyDocumentSerde
+}
+
 // Provides additional information about an error that was returned by the
 // service. See the errorCode and errorDetails members for more information about
 // the error.

@@ -1,0 +1,8 @@
+{
+    "id": "b6d7f31e-2b96-4528-b65a-945ffba06b71",
+    "type": "documentation",
+    "description": "Doc-only update for SNS. These changes include customer-reported issues and TXC3 updates.",
+    "modules": [
+        "service/sns"
+    ]
+}

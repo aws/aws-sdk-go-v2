@@ -6,12 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns your gateway's weekly maintenance start time including the day and time
-// of the week. Note that values are in terms of the gateway's time zone.
+// Returns your gateway's maintenance window schedule information, with values for
+// monthly or weekly cadence, specific day and time to begin maintenance, and which
+// types of updates to apply. Time values returned are for the gateway's time zone.
 func (c *Client) DescribeMaintenanceStartTime(ctx context.Context, params *DescribeMaintenanceStartTimeInput, optFns ...func(*Options)) (*DescribeMaintenanceStartTimeOutput, error) {
 	if params == nil {
 		params = &DescribeMaintenanceStartTimeInput{}
@@ -41,6 +43,8 @@ type DescribeMaintenanceStartTimeInput struct {
 
 // A JSON object containing the following fields:
 //
+// # DescribeMaintenanceStartTimeOutput$SoftwareUpdatePreferences
+//
 // # DescribeMaintenanceStartTimeOutput$DayOfMonth
 //
 // # DescribeMaintenanceStartTimeOutput$DayOfWeek
@@ -53,8 +57,8 @@ type DescribeMaintenanceStartTimeInput struct {
 type DescribeMaintenanceStartTimeOutput struct {
 
 	// The day of the month component of the maintenance start time represented as an
-	// ordinal number from 1 to 28, where 1 represents the first day of the month and
-	// 28 represents the last day of the month.
+	// ordinal number from 1 to 28, where 1 represents the first day of the month. It
+	// is not possible to set the maintenance schedule to start on days 29 through 31.
 	DayOfMonth *int32
 
 	// An ordinal number between 0 and 6 that represents the day of the week, where 0
@@ -74,6 +78,15 @@ type DescribeMaintenanceStartTimeOutput struct {
 	// is the minute (0 to 59). The minute of the hour is in the time zone of the
 	// gateway.
 	MinuteOfHour *int32
+
+	// A set of variables indicating the software update preferences for the gateway.
+	//
+	// Includes AutomaticUpdatePolicy field with the following inputs:
+	//
+	// ALL_VERSIONS - Enables regular gateway maintenance updates.
+	//
+	// EMERGENCY_VERSIONS_ONLY - Disables regular gateway maintenance updates.
+	SoftwareUpdatePreferences *types.SoftwareUpdatePreferences
 
 	// A value that indicates the time zone that is set for the gateway. The start
 	// time and day of week specified should be in the time zone of the gateway.

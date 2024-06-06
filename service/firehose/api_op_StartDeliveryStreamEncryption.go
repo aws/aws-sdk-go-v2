@@ -33,7 +33,7 @@ import (
 // grant that enables it to use the new CMK to encrypt and decrypt data and to
 // manage the grant.
 //
-// For the KMS grant creation to be successful, Firehose APIs
+// For the KMS grant creation to be successful, the Firehose API operations
 // StartDeliveryStreamEncryption and CreateDeliveryStream should not be called
 // with session credentials that are more than 6 hours old.
 //

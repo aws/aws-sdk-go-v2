@@ -18,17 +18,17 @@ import (
 // PlatformPrincipal and PlatformCredential are received from the notification
 // service.
 //
-//   - For ADM , PlatformPrincipal is client id and PlatformCredential is client
+//   - For ADM, PlatformPrincipal is client id and PlatformCredential is client
 //     secret .
-//
-//   - For Baidu , PlatformPrincipal is API key and PlatformCredential is secret
-//     key .
 //
 //   - For APNS and APNS_SANDBOX using certificate credentials, PlatformPrincipal
 //     is SSL certificate and PlatformCredential is private key .
 //
 //   - For APNS and APNS_SANDBOX using token credentials, PlatformPrincipal is
 //     signing key ID and PlatformCredential is signing key .
+//
+//   - For Baidu, PlatformPrincipal is API key and PlatformCredential is secret key
+//     .
 //
 //   - For GCM (Firebase Cloud Messaging) using key credentials, there is no
 //     PlatformPrincipal . The PlatformCredential is API key .
@@ -40,10 +40,10 @@ import (
 //     recommends using the following command: SERVICE_JSON=`jq @json <<< cat
 //     service.json` .
 //
-//   - For MPNS , PlatformPrincipal is TLS certificate and PlatformCredential is
+//   - For MPNS, PlatformPrincipal is TLS certificate and PlatformCredential is
 //     private key .
 //
-//   - For WNS , PlatformPrincipal is Package Security Identifier and
+//   - For WNS, PlatformPrincipal is Package Security Identifier and
 //     PlatformCredential is secret key .
 //
 // You can use the returned PlatformApplicationArn as an attribute for the

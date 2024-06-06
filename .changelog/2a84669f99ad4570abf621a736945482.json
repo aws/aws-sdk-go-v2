@@ -1,0 +1,8 @@
+{
+    "id": "2a84669f-99ad-4570-abf6-21a736945482",
+    "type": "feature",
+    "description": "Adds SoftwareUpdatePreferences to DescribeMaintenanceStartTime and UpdateMaintenanceStartTime, a structure which contains AutomaticUpdatePolicy.",
+    "modules": [
+        "service/storagegateway"
+    ]
+}

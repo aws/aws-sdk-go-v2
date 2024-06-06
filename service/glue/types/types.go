@@ -8363,6 +8363,10 @@ type TableInput struct {
 	// A TableIdentifier structure that describes a target table for resource linking.
 	TargetTable *TableIdentifier
 
+	// A structure that contains all the information that defines the view, including
+	// the dialect or dialects for the view, and the query.
+	ViewDefinition *ViewDefinitionInput
+
 	// Included for Apache Hive compatibility. Not used in the normal course of Glue
 	// operations.
 	ViewExpandedText *string
@@ -8992,6 +8996,28 @@ type ViewDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// A structure containing details for creating or updating an Glue view.
+type ViewDefinitionInput struct {
+
+	// The definer of a view in SQL.
+	Definer *string
+
+	// You can set this flag as true to instruct the engine not to push user-provided
+	// operations into the logical plan of the view during query planning. However,
+	// setting this flag does not guarantee that the engine will comply. Refer to the
+	// engine's documentation to understand the guarantees provided, if any.
+	IsProtected *bool
+
+	// A list of structures that contains the dialect of the view, and the query that
+	// defines the view.
+	Representations []ViewRepresentationInput
+
+	// A list of base table ARNs that make up the view.
+	SubObjects []string
+
+	noSmithyDocumentSerde
+}
+
 // A structure that contains the dialect of the view, and the query that defines
 // the view.
 type ViewRepresentation struct {
@@ -9006,6 +9032,10 @@ type ViewRepresentation struct {
 	// can be queried in their respective query engines.
 	IsStale *bool
 
+	// The name of the connection to be used to validate the specific representation
+	// of the view.
+	ValidationConnection *string
+
 	// The expanded SQL for the view. This SQL is used by engines while processing a
 	// query on a view. Engines may perform operations during view creation to
 	// transform ViewOriginalText to ViewExpandedText . For example:
@@ -9018,6 +9048,31 @@ type ViewRepresentation struct {
 	// not used during a query on a view ( ViewExpandedText is used instead).
 	// ViewOriginalText is used for cases like SHOW CREATE VIEW where users want to
 	// see the original DDL command that created the view.
+	ViewOriginalText *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure containing details of a representation to update or create a Lake
+// Formation view.
+type ViewRepresentationInput struct {
+
+	// A parameter that specifies the engine type of a specific representation.
+	Dialect ViewDialect
+
+	// A parameter that specifies the version of the engine of a specific
+	// representation.
+	DialectVersion *string
+
+	// The name of the connection to be used to validate the specific representation
+	// of the view.
+	ValidationConnection *string
+
+	// A string that represents the SQL query that describes the view with expanded
+	// resource ARNs
+	ViewExpandedText *string
+
+	// A string that represents the original SQL query that describes the view.
 	ViewOriginalText *string
 
 	noSmithyDocumentSerde

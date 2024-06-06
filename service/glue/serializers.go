@@ -19909,6 +19909,13 @@ func awsAwsjson11_serializeDocumentTableInput(v *types.TableInput, value smithyj
 		}
 	}
 
+	if v.ViewDefinition != nil {
+		ok := object.Key("ViewDefinition")
+		if err := awsAwsjson11_serializeDocumentViewDefinitionInput(v.ViewDefinition, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ViewExpandedText != nil {
 		ok := object.Key("ViewExpandedText")
 		ok.String(*v.ViewExpandedText)
@@ -20483,6 +20490,93 @@ func awsAwsjson11_serializeDocumentUserDefinedFunctionInput(v *types.UserDefined
 }
 
 func awsAwsjson11_serializeDocumentValueStringList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentViewDefinitionInput(v *types.ViewDefinitionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Definer != nil {
+		ok := object.Key("Definer")
+		ok.String(*v.Definer)
+	}
+
+	if v.IsProtected != nil {
+		ok := object.Key("IsProtected")
+		ok.Boolean(*v.IsProtected)
+	}
+
+	if v.Representations != nil {
+		ok := object.Key("Representations")
+		if err := awsAwsjson11_serializeDocumentViewRepresentationInputList(v.Representations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SubObjects != nil {
+		ok := object.Key("SubObjects")
+		if err := awsAwsjson11_serializeDocumentViewSubObjectsList(v.SubObjects, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentViewRepresentationInput(v *types.ViewRepresentationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Dialect) > 0 {
+		ok := object.Key("Dialect")
+		ok.String(string(v.Dialect))
+	}
+
+	if v.DialectVersion != nil {
+		ok := object.Key("DialectVersion")
+		ok.String(*v.DialectVersion)
+	}
+
+	if v.ValidationConnection != nil {
+		ok := object.Key("ValidationConnection")
+		ok.String(*v.ValidationConnection)
+	}
+
+	if v.ViewExpandedText != nil {
+		ok := object.Key("ViewExpandedText")
+		ok.String(*v.ViewExpandedText)
+	}
+
+	if v.ViewOriginalText != nil {
+		ok := object.Key("ViewOriginalText")
+		ok.String(*v.ViewOriginalText)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentViewRepresentationInputList(v []types.ViewRepresentationInput, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentViewRepresentationInput(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentViewSubObjectsList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -26094,6 +26188,11 @@ func awsAwsjson11_serializeOpDocumentUpdateTableInput(v *UpdateTableInput, value
 		ok.String(*v.DatabaseName)
 	}
 
+	if v.Force {
+		ok := object.Key("Force")
+		ok.Boolean(v.Force)
+	}
+
 	if v.SkipArchive != nil {
 		ok := object.Key("SkipArchive")
 		ok.Boolean(*v.SkipArchive)
@@ -26114,6 +26213,11 @@ func awsAwsjson11_serializeOpDocumentUpdateTableInput(v *UpdateTableInput, value
 	if v.VersionId != nil {
 		ok := object.Key("VersionId")
 		ok.String(*v.VersionId)
+	}
+
+	if len(v.ViewUpdateAction) > 0 {
+		ok := object.Key("ViewUpdateAction")
+		ok.String(string(v.ViewUpdateAction))
 	}
 
 	return nil

@@ -45,6 +45,20 @@ func (DistanceUnit) Values() []DistanceUnit {
 	}
 }
 
+type ForecastedGeofenceEventType string
+
+// Values returns all known values for ForecastedGeofenceEventType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ForecastedGeofenceEventType) Values() []ForecastedGeofenceEventType {
+	return []ForecastedGeofenceEventType{
+		"ENTER",
+		"EXIT",
+		"IDLE",
+	}
+}
+
 type IntendedUse string
 
 // Values returns all known values for IntendedUse. Note that this can be expanded
@@ -113,6 +127,19 @@ func (RouteMatrixErrorCode) Values() []RouteMatrixErrorCode {
 		"DestinationPositionNotFound",
 		"DeparturePositionNotFound",
 		"OtherValidationError",
+	}
+}
+
+type SpeedUnit string
+
+// Values returns all known values for SpeedUnit. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SpeedUnit) Values() []SpeedUnit {
+	return []SpeedUnit{
+		"KilometersPerHour",
+		"MilesPerHour",
 	}
 }
 

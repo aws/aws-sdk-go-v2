@@ -3704,6 +3704,11 @@ func awsAwsjson11_deserializeDocumentHttpEndpointDestinationDescription(v **type
 				return err
 			}
 
+		case "SecretsManagerConfiguration":
+			if err := awsAwsjson11_deserializeDocumentSecretsManagerConfiguration(&sv.SecretsManagerConfiguration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5066,6 +5071,11 @@ func awsAwsjson11_deserializeDocumentRedshiftDestinationDescription(v **types.Re
 				return err
 			}
 
+		case "SecretsManagerConfiguration":
+			if err := awsAwsjson11_deserializeDocumentSecretsManagerConfiguration(&sv.SecretsManagerConfiguration, value); err != nil {
+				return err
+			}
+
 		case "Username":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5428,6 +5438,64 @@ func awsAwsjson11_deserializeDocumentSchemaConfiguration(v **types.SchemaConfigu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentSecretsManagerConfiguration(v **types.SecretsManagerConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SecretsManagerConfiguration
+	if *v == nil {
+		sv = &types.SecretsManagerConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		case "RoleARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleARN to be of type string, got %T instead", value)
+				}
+				sv.RoleARN = ptr.String(jtv)
+			}
+
+		case "SecretARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretARN to be of type string, got %T instead", value)
+				}
+				sv.SecretARN = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSecurityGroupIdList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5657,6 +5725,11 @@ func awsAwsjson11_deserializeDocumentSnowflakeDestinationDescription(v **types.S
 					return fmt.Errorf("expected SnowflakeSchema to be of type string, got %T instead", value)
 				}
 				sv.Schema = ptr.String(jtv)
+			}
+
+		case "SecretsManagerConfiguration":
+			if err := awsAwsjson11_deserializeDocumentSecretsManagerConfiguration(&sv.SecretsManagerConfiguration, value); err != nil {
+				return err
 			}
 
 		case "SnowflakeRoleConfiguration":
@@ -6020,6 +6093,11 @@ func awsAwsjson11_deserializeDocumentSplunkDestinationDescription(v **types.Splu
 
 		case "S3DestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentS3DestinationDescription(&sv.S3DestinationDescription, value); err != nil {
+				return err
+			}
+
+		case "SecretsManagerConfiguration":
+			if err := awsAwsjson11_deserializeDocumentSecretsManagerConfiguration(&sv.SecretsManagerConfiguration, value); err != nil {
 				return err
 			}
 

@@ -5232,6 +5232,18 @@ func awsAwsjson11_serializeDocumentSMBLocalGroups(v *types.SMBLocalGroups, value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSoftwareUpdatePreferences(v *types.SoftwareUpdatePreferences, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AutomaticUpdatePolicy) > 0 {
+		ok := object.Key("AutomaticUpdatePolicy")
+		ok.String(string(v.AutomaticUpdatePolicy))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7268,6 +7280,13 @@ func awsAwsjson11_serializeOpDocumentUpdateMaintenanceStartTimeInput(v *UpdateMa
 	if v.MinuteOfHour != nil {
 		ok := object.Key("MinuteOfHour")
 		ok.Integer(*v.MinuteOfHour)
+	}
+
+	if v.SoftwareUpdatePreferences != nil {
+		ok := object.Key("SoftwareUpdatePreferences")
+		if err := awsAwsjson11_serializeDocumentSoftwareUpdatePreferences(v.SoftwareUpdatePreferences, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

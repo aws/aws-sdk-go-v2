@@ -2303,6 +2303,29 @@ func (ViewDialect) Values() []ViewDialect {
 	}
 }
 
+type ViewUpdateAction string
+
+// Enum values for ViewUpdateAction
+const (
+	ViewUpdateActionAdd          ViewUpdateAction = "ADD"
+	ViewUpdateActionReplace      ViewUpdateAction = "REPLACE"
+	ViewUpdateActionAddOrReplace ViewUpdateAction = "ADD_OR_REPLACE"
+	ViewUpdateActionDrop         ViewUpdateAction = "DROP"
+)
+
+// Values returns all known values for ViewUpdateAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ViewUpdateAction) Values() []ViewUpdateAction {
+	return []ViewUpdateAction{
+		"ADD",
+		"REPLACE",
+		"ADD_OR_REPLACE",
+		"DROP",
+	}
+}
+
 type WorkerType string
 
 // Enum values for WorkerType

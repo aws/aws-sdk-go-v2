@@ -1,0 +1,8 @@
+{
+    "id": "fdbddcd9-066a-48a5-afba-7ec1071ea3f4",
+    "type": "feature",
+    "description": "Added two new APIs, VerifyDevicePosition and ForecastGeofenceEvents. Added support for putting larger geofences up to 100,000 vertices with Geobuf fields.",
+    "modules": [
+        "service/location"
+    ]
+}

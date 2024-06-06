@@ -53779,6 +53779,15 @@ func awsAwsjson11_deserializeDocumentViewRepresentation(v **types.ViewRepresenta
 				sv.IsStale = ptr.Bool(jtv)
 			}
 
+		case "ValidationConnection":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
+				}
+				sv.ValidationConnection = ptr.String(jtv)
+			}
+
 		case "ViewExpandedText":
 			if value != nil {
 				jtv, ok := value.(string)

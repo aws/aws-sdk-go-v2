@@ -620,16 +620,18 @@ type CreateFileSystemLustreConfiguration struct {
 	//
 	// Choose PERSISTENT_2 for longer-term storage and for latency-sensitive workloads
 	// that require the highest levels of IOPS/throughput. PERSISTENT_2 supports SSD
-	// storage, and offers higher PerUnitStorageThroughput (up to 1000 MB/s/TiB).
-	// PERSISTENT_2 is available in a limited number of Amazon Web Services Regions.
-	// For more information, and an up-to-date list of Amazon Web Services Regions in
-	// which PERSISTENT_2 is available, see [File system deployment options for FSx for Lustre] in the Amazon FSx for Lustre User Guide.
+	// storage, and offers higher PerUnitStorageThroughput (up to 1000 MB/s/TiB). You
+	// can optionally specify a metadata configuration mode for PERSISTENT_2 which
+	// supports increasing metadata performance. PERSISTENT_2 is available in a
+	// limited number of Amazon Web Services Regions. For more information, and an
+	// up-to-date list of Amazon Web Services Regions in which PERSISTENT_2 is
+	// available, see [File system deployment options for FSx for Lustre]in the Amazon FSx for Lustre User Guide.
 	//
 	// If you choose PERSISTENT_2 , and you set FileSystemTypeVersion to 2.10 , the
 	// CreateFileSystem operation fails.
 	//
 	// Encryption of data in transit is automatically turned on when you access
-	// SCRATCH_2 , PERSISTENT_1 and PERSISTENT_2 file systems from Amazon EC2
+	// SCRATCH_2 , PERSISTENT_1 , and PERSISTENT_2 file systems from Amazon EC2
 	// instances that support automatic encryption in the Amazon Web Services Regions
 	// where they are available. For more information about encryption in transit for
 	// FSx for Lustre file systems, see [Encrypting data in transit]in the Amazon FSx for Lustre User Guide.
@@ -696,6 +698,10 @@ type CreateFileSystemLustreConfiguration struct {
 	// data repositories associated with your file system to Amazon CloudWatch Logs.
 	LogConfiguration *LustreLogCreateConfiguration
 
+	// The Lustre metadata performance configuration for the creation of an FSx for
+	// Lustre file system using a PERSISTENT_2 deployment type.
+	MetadataConfiguration *CreateFileSystemLustreMetadataConfiguration
+
 	// Required with PERSISTENT_1 and PERSISTENT_2 deployment types, provisions the
 	// amount of read and write throughput for each 1 tebibyte (TiB) of file system
 	// storage capacity, in MB/s/TiB. File system throughput capacity is calculated by
@@ -722,6 +728,44 @@ type CreateFileSystemLustreConfiguration struct {
 	// d:HH:MM in the UTC time zone, where d is the weekday number, from 1 through 7,
 	// beginning with Monday and ending with Sunday.
 	WeeklyMaintenanceStartTime *string
+
+	noSmithyDocumentSerde
+}
+
+// The Lustre metadata performance configuration for the creation of an Amazon FSx
+// for Lustre file system using a PERSISTENT_2 deployment type. The configuration
+// uses a Metadata IOPS value to set the maximum rate of metadata disk IOPS
+// supported by the file system.
+//
+// After creation, the file system supports increasing metadata performance. For
+// more information on Metadata IOPS, see [Lustre metadata performance configuration]in the Amazon FSx for Lustre User Guide.
+//
+// [Lustre metadata performance configuration]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-metadata-performance.html#metadata-configuration
+type CreateFileSystemLustreMetadataConfiguration struct {
+
+	// The metadata configuration mode for provisioning Metadata IOPS for an FSx for
+	// Lustre file system using a PERSISTENT_2 deployment type.
+	//
+	//   - In AUTOMATIC mode, FSx for Lustre automatically provisions and scales the
+	//   number of Metadata IOPS for your file system based on your file system storage
+	//   capacity.
+	//
+	//   - In USER_PROVISIONED mode, you specify the number of Metadata IOPS to
+	//   provision for your file system.
+	//
+	// This member is required.
+	Mode MetadataConfigurationMode
+
+	// (USER_PROVISIONED mode only) Specifies the number of Metadata IOPS to provision
+	// for the file system. This parameter sets the maximum rate of metadata disk IOPS
+	// supported by the file system. Valid values are 1500 , 3000 , 6000 , 12000 , and
+	// multiples of 12000 up to a maximum of 192000 .
+	//
+	// Iops doesn’t have a default value. If you're using USER_PROVISIONED mode, you
+	// can choose to specify a valid value. If you're using AUTOMATIC mode, you cannot
+	// specify a value because FSx for Lustre automatically sets the value based on
+	// your file system storage capacity.
+	Iops *int32
 
 	noSmithyDocumentSerde
 }
@@ -789,7 +833,7 @@ type CreateFileSystemOntapConfiguration struct {
 	//   - The value of HAPairs is greater than 1 and the value of DeploymentType is
 	//   SINGLE_AZ_1 or MULTI_AZ_1 .
 	//
-	// [High-availability (HA) pairs]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/HA-pairs.html
+	// [High-availability (HA) pairs]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/administering-file-systems.html#HA-pairs
 	HAPairs *int32
 
 	// Required when DeploymentType is set to MULTI_AZ_1 . This specifies the subnet in
@@ -1140,14 +1184,13 @@ type CreateOntapVolumeConfiguration struct {
 	//
 	// For more information, see [Volume types] in the Amazon FSx for NetApp ONTAP User Guide.
 	//
-	// [Volume types]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-types
+	// [Volume types]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-volumes.html#volume-types
 	OntapVolumeType InputOntapVolumeType
 
 	// Specifies the security style for the volume. If a volume's security style is
 	// not specified, it is automatically set to the root volume's security style. The
 	// security style determines the type of permissions that FSx for ONTAP uses to
-	// control data access. For more information, see [Volume security style]in the Amazon FSx for NetApp
-	// ONTAP User Guide. Specify one of the following values:
+	// control data access. Specify one of the following values:
 	//
 	//   - UNIX if the file system is managed by a UNIX administrator, the majority of
 	//   users are NFS clients, and an application accessing the data uses a UNIX user as
@@ -1163,7 +1206,7 @@ type CreateOntapVolumeConfiguration struct {
 	// For more information, see [Volume security style] in the FSx for ONTAP User Guide.
 	//
 	// [What the security styles and their effects are]: https://docs.netapp.com/us-en/ontap/nfs-admin/security-styles-their-effects-concept.html
-	// [Volume security style]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-security-style.html
+	// [Volume security style]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-volumes.html#volume-security-style
 	SecurityStyle SecurityStyle
 
 	// Specifies the configured size of the volume, in bytes.
@@ -1231,7 +1274,7 @@ type CreateOntapVolumeConfiguration struct {
 	// volumes that you can use for different purposes, FlexVol and FlexGroup volumes.
 	// For more information, see [Volume styles]in the Amazon FSx for NetApp ONTAP User Guide.
 	//
-	// [Volume styles]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-styles.html
+	// [Volume styles]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-volumes.html#volume-styles
 	VolumeStyle VolumeStyle
 
 	noSmithyDocumentSerde
@@ -2281,7 +2324,7 @@ type FileCacheDataRepositoryAssociation struct {
 	//
 	//   - If you are not using the DataRepositorySubdirectories parameter, the path is
 	//   to an NFS Export directory (or one of its subdirectories) in the format
-	//   nsf://nfs-domain-name/exportpath . You can therefore link a single NFS Export
+	//   nfs://nfs-domain-name/exportpath . You can therefore link a single NFS Export
 	//   to a single data repository association.
 	//
 	//   - If you are using the DataRepositorySubdirectories parameter, the path is the
@@ -2586,6 +2629,31 @@ type FileSystemFailureDetails struct {
 	noSmithyDocumentSerde
 }
 
+// The Lustre metadata performance configuration of an Amazon FSx for Lustre file
+// system using a PERSISTENT_2 deployment type. The configuration enables the file
+// system to support increasing metadata performance.
+type FileSystemLustreMetadataConfiguration struct {
+
+	// The metadata configuration mode for provisioning Metadata IOPS for the file
+	// system.
+	//
+	//   - In AUTOMATIC mode, FSx for Lustre automatically provisions and scales the
+	//   number of Metadata IOPS on your file system based on your file system storage
+	//   capacity.
+	//
+	//   - In USER_PROVISIONED mode, you can choose to specify the number of Metadata
+	//   IOPS to provision for your file system.
+	//
+	// This member is required.
+	Mode MetadataConfigurationMode
+
+	// The number of Metadata IOPS provisioned for the file system. Valid values are
+	// 1500 , 3000 , 6000 , 12000 , and multiples of 12000 up to a maximum of 192000 .
+	Iops *int32
+
+	noSmithyDocumentSerde
+}
+
 // A filter used to restrict the results of describe calls. You can use multiple
 // filters to return results that meet all applied filter requirements.
 type Filter struct {
@@ -2681,6 +2749,10 @@ type LustreFileSystemConfiguration struct {
 	// The Lustre logging configuration. Lustre logging writes the enabled log events
 	// for your file system to Amazon CloudWatch Logs.
 	LogConfiguration *LustreLogConfiguration
+
+	// The Lustre metadata performance configuration for an Amazon FSx for Lustre file
+	// system using a PERSISTENT_2 deployment type.
+	MetadataConfiguration *FileSystemLustreMetadataConfiguration
 
 	// You use the MountName value when mounting the file system.
 	//
@@ -3618,32 +3690,35 @@ type SelfManagedActiveDirectoryConfiguration struct {
 }
 
 // Specifies changes you are making to the self-managed Microsoft Active Directory
-// (AD) configuration to which an FSx for Windows File Server file system or an FSx
-// for ONTAP SVM is joined.
+// configuration to which an FSx for Windows File Server file system or an FSx for
+// ONTAP SVM is joined.
 type SelfManagedActiveDirectoryConfigurationUpdates struct {
 
 	// A list of up to three DNS server or domain controller IP addresses in your
-	// self-managed AD domain.
+	// self-managed Active Directory domain.
 	DnsIps []string
 
-	// Specifies an updated fully qualified domain name of your self-managed AD
-	// configuration.
+	// Specifies an updated fully qualified domain name of your self-managed Active
+	// Directory configuration.
 	DomainName *string
 
-	// Specifies the updated name of the self-managed AD domain group whose members
-	// are granted administrative privileges for the Amazon FSx resource.
+	// For FSx for ONTAP file systems only - Specifies the updated name of the
+	// self-managed Active Directory domain group whose members are granted
+	// administrative privileges for the Amazon FSx resource.
 	FileSystemAdministratorsGroup *string
 
 	// Specifies an updated fully qualified distinguished name of the organization
-	// unit within your self-managed AD.
+	// unit within your self-managed Active Directory.
 	OrganizationalUnitDistinguishedName *string
 
-	// Specifies the updated password for the service account on your self-managed AD
-	// domain. Amazon FSx uses this account to join to your self-managed AD domain.
+	// Specifies the updated password for the service account on your self-managed
+	// Active Directory domain. Amazon FSx uses this account to join to your
+	// self-managed Active Directory domain.
 	Password *string
 
-	// Specifies the updated user name for the service account on your self-managed AD
-	// domain. Amazon FSx uses this account to join to your self-managed AD domain.
+	// Specifies the updated user name for the service account on your self-managed
+	// Active Directory domain. Amazon FSx uses this account to join to your
+	// self-managed Active Directory domain.
 	//
 	// This account must have the permissions required to join computers to the domain
 	// in the organizational unit provided in OrganizationalUnitDistinguishedName .
@@ -4086,6 +4161,11 @@ type UpdateFileSystemLustreConfiguration struct {
 	// data repositories associated with your file system to Amazon CloudWatch Logs.
 	LogConfiguration *LustreLogCreateConfiguration
 
+	// The Lustre metadata performance configuration for an Amazon FSx for Lustre file
+	// system using a PERSISTENT_2 deployment type. When this configuration is
+	// enabled, the file system supports increasing metadata performance.
+	MetadataConfiguration *UpdateFileSystemLustreMetadataConfiguration
+
 	// The throughput of an Amazon FSx for Lustre Persistent SSD-based file system,
 	// measured in megabytes per second per tebibyte (MB/s/TiB). You can increase or
 	// decrease your file system's throughput. Valid values depend on the deployment
@@ -4111,6 +4191,42 @@ type UpdateFileSystemLustreConfiguration struct {
 	// d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7,
 	// beginning with Monday and ending with Sunday.
 	WeeklyMaintenanceStartTime *string
+
+	noSmithyDocumentSerde
+}
+
+// The Lustre metadata performance configuration update for an Amazon FSx for
+// Lustre file system using a PERSISTENT_2 deployment type. You can request an
+// increase in your file system's Metadata IOPS and/or switch your file system's
+// metadata configuration mode. For more information, see [Managing metadata performance]in the Amazon FSx for
+// Lustre User Guide.
+//
+// [Managing metadata performance]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-metadata-performance.html
+type UpdateFileSystemLustreMetadataConfiguration struct {
+
+	// (USER_PROVISIONED mode only) Specifies the number of Metadata IOPS to provision
+	// for your file system. Valid values are 1500 , 3000 , 6000 , 12000 , and
+	// multiples of 12000 up to a maximum of 192000 .
+	//
+	// The value you provide must be greater than or equal to the current number of
+	// Metadata IOPS provisioned for the file system.
+	Iops *int32
+
+	// The metadata configuration mode for provisioning Metadata IOPS for an FSx for
+	// Lustre file system using a PERSISTENT_2 deployment type.
+	//
+	//   - To increase the Metadata IOPS or to switch from AUTOMATIC mode, specify
+	//   USER_PROVISIONED as the value for this parameter. Then use the Iops parameter
+	//   to provide a Metadata IOPS value that is greater than or equal to the current
+	//   number of Metadata IOPS provisioned for the file system.
+	//
+	//   - To switch from USER_PROVISIONED mode, specify AUTOMATIC as the value for
+	//   this parameter, but do not input a value for Iops.
+	//
+	// If you request to switch from USER_PROVISIONED to AUTOMATIC mode and the
+	//   current Metadata IOPS value is greater than the automated default, FSx for
+	//   Lustre rejects the request because downscaling Metadata IOPS is not supported.
+	Mode MetadataConfigurationMode
 
 	noSmithyDocumentSerde
 }
@@ -4506,8 +4622,8 @@ type UpdateSvmActiveDirectoryConfiguration struct {
 	NetBiosName *string
 
 	// Specifies changes you are making to the self-managed Microsoft Active Directory
-	// (AD) configuration to which an FSx for Windows File Server file system or an FSx
-	// for ONTAP SVM is joined.
+	// configuration to which an FSx for Windows File Server file system or an FSx for
+	// ONTAP SVM is joined.
 	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfigurationUpdates
 
 	noSmithyDocumentSerde

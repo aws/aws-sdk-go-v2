@@ -1,0 +1,8 @@
+{
+    "id": "20488357-4b18-46bf-b152-c1d6e29a76d0",
+    "type": "feature",
+    "description": "This release adds support to increase metadata performance on FSx for Lustre file systems beyond the default level provisioned when a file system is created. This can be done by specifying MetadataConfiguration during the creation of Persistent_2 file systems or by updating it on demand.",
+    "modules": [
+        "service/fsx"
+    ]
+}

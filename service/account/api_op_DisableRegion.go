@@ -11,6 +11,9 @@ import (
 )
 
 // Disables (opts-out) a particular Region for an account.
+//
+// The act of disabling a Region will remove all IAM access to any resources that
+// reside in that Region.
 func (c *Client) DisableRegion(ctx context.Context, params *DisableRegionInput, optFns ...func(*Options)) (*DisableRegionOutput, error) {
 	if params == nil {
 		params = &DisableRegionInput{}
@@ -42,8 +45,8 @@ type DisableRegionInput struct {
 	// that you want to access or modify with this operation. If you don't specify this
 	// parameter, it defaults to the Amazon Web Services account of the identity used
 	// to call the operation. To use this parameter, the caller must be an identity in
-	// the [organization's management account]or a delegated administrator account. The specified account ID must also be
-	// a member account in the same organization. The organization must have [all features enabled], and the
+	// the [organization's management account]or a delegated administrator account. The specified account ID must be a
+	// member account in the same organization. The organization must have [all features enabled], and the
 	// organization must have [trusted access]enabled for the Account Management service, and
 	// optionally a [delegated admin]account assigned.
 	//

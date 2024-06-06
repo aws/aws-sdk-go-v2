@@ -61,20 +61,20 @@ type SetSubscriptionAttributesInput struct {
 	//   becomes unavailable) are held in the dead-letter queue for further analysis or
 	//   reprocessing.
 	//
-	// The following attribute applies only to Amazon Kinesis Data Firehose delivery
-	// stream subscriptions:
+	// The following attribute applies only to Amazon Data Firehose delivery stream
+	// subscriptions:
 	//
 	//   - SubscriptionRoleArn – The ARN of the IAM role that has the following:
 	//
-	//   - Permission to write to the Kinesis Data Firehose delivery stream
+	//   - Permission to write to the Firehose delivery stream
 	//
 	//   - Amazon SNS listed as a trusted entity
 	//
-	// Specifying a valid ARN for this attribute is required for Kinesis Data Firehose
-	//   delivery stream subscriptions. For more information, see [Fanout to Kinesis Data Firehose delivery streams]in the Amazon SNS
-	//   Developer Guide.
+	// Specifying a valid ARN for this attribute is required for Firehose delivery
+	//   stream subscriptions. For more information, see [Fanout to Firehose delivery streams]in the Amazon SNS Developer
+	//   Guide.
 	//
-	// [Fanout to Kinesis Data Firehose delivery streams]: https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html
+	// [Fanout to Firehose delivery streams]: https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html
 	//
 	// This member is required.
 	AttributeName *string

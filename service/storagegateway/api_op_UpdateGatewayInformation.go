@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a gateway's metadata, which includes the gateway's name and time zone.
-// To specify which gateway to update, use the Amazon Resource Name (ARN) of the
-// gateway in your request.
+// Updates a gateway's metadata, which includes the gateway's name, time zone, and
+// metadata cache size. To specify which gateway to update, use the Amazon Resource
+// Name (ARN) of the gateway in your request.
 //
 // For gateways activated after September 2, 2015, the gateway's ARN contains the
 // gateway ID rather than the gateway name. However, changing the name of the
@@ -49,7 +49,11 @@ type UpdateGatewayInformationInput struct {
 	// [What is Amazon CloudWatch Logs?]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html
 	CloudWatchLogGroupARN *string
 
-	// Specifies the size of the gateway's metadata cache.
+	// Specifies the size of the gateway's metadata cache. This setting impacts
+	// gateway performance and hardware recommendations. For more information, see [Performance guidance for gateways with multiple file shares]in
+	// the Amazon S3 File Gateway User Guide.
+	//
+	// [Performance guidance for gateways with multiple file shares]: https://docs.aws.amazon.com/filegateway/latest/files3/performance-multiple-file-shares.html
 	GatewayCapacity types.GatewayCapacity
 
 	// The name you configured for your gateway.

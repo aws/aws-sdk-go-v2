@@ -1,0 +1,8 @@
+{
+    "id": "2c37614a-2925-4b7e-8c13-19270c9ddce2",
+    "type": "feature",
+    "description": "Adds integration with Secrets Manager for Redshift, Splunk, HttpEndpoint, and Snowflake destinations",
+    "modules": [
+        "service/firehose"
+    ]
+}

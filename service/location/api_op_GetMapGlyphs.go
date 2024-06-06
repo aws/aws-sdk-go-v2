@@ -44,8 +44,7 @@ type GetMapGlyphsInput struct {
 	//
 	//   - VectorEsriStreets – Arial Regular | Arial Italic | Arial Bold
 	//
-	//   - VectorEsriNavigation – Arial Regular | Arial Italic | Arial Bold | Arial
-	//   Unicode MS Bold | Arial Unicode MS Regular
+	//   - VectorEsriNavigation – Arial Regular | Arial Italic | Arial Bold
 	//
 	// Valid font stacks for [HERE Technologies] styles:
 	//

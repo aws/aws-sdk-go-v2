@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AcceptPrimaryEmailUpdate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptPrimaryEmailUpdate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AcceptPrimaryEmailUpdate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteAlternateContact(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAlternateContact(context.Background(), nil, func(o *Options) {
@@ -122,6 +134,18 @@ func TestCheckSnapshot_GetContactInformation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetPrimaryEmail(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPrimaryEmail(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPrimaryEmail")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetRegionOptStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRegionOptStatus(context.Background(), nil, func(o *Options) {
@@ -169,6 +193,30 @@ func TestCheckSnapshot_PutContactInformation(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_StartPrimaryEmailUpdate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartPrimaryEmailUpdate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartPrimaryEmailUpdate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+func TestUpdateSnapshot_AcceptPrimaryEmailUpdate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptPrimaryEmailUpdate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AcceptPrimaryEmailUpdate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteAlternateContact(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAlternateContact(context.Background(), nil, func(o *Options) {
@@ -229,6 +277,18 @@ func TestUpdateSnapshot_GetContactInformation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetPrimaryEmail(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPrimaryEmail(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPrimaryEmail")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetRegionOptStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRegionOptStatus(context.Background(), nil, func(o *Options) {
@@ -270,6 +330,18 @@ func TestUpdateSnapshot_PutContactInformation(t *testing.T) {
 	_, err := svc.PutContactInformation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutContactInformation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartPrimaryEmailUpdate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartPrimaryEmailUpdate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartPrimaryEmailUpdate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
