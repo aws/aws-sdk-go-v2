@@ -221,9 +221,6 @@ func (c *Client) addOperationSignUpMiddlewares(stack *middleware.Stack, options 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpSignUpValidationMiddleware(stack); err != nil {
 		return err
 	}

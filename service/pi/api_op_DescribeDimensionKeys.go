@@ -237,9 +237,6 @@ func (c *Client) addOperationDescribeDimensionKeysMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeDimensionKeysValidationMiddleware(stack); err != nil {
 		return err
 	}

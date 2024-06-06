@@ -129,9 +129,6 @@ func (c *Client) addOperationPutContactInformationMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutContactInformationValidationMiddleware(stack); err != nil {
 		return err
 	}

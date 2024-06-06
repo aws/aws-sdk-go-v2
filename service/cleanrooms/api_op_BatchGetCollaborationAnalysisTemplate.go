@@ -123,9 +123,6 @@ func (c *Client) addOperationBatchGetCollaborationAnalysisTemplateMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpBatchGetCollaborationAnalysisTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

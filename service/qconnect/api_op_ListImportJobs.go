@@ -120,9 +120,6 @@ func (c *Client) addOperationListImportJobsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListImportJobsValidationMiddleware(stack); err != nil {
 		return err
 	}

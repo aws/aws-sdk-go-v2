@@ -106,9 +106,6 @@ func (c *Client) addOperationGetRelationalDatabaseSnapshotMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetRelationalDatabaseSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}

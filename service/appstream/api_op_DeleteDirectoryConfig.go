@@ -103,9 +103,6 @@ func (c *Client) addOperationDeleteDirectoryConfigMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteDirectoryConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

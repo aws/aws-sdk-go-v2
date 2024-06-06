@@ -119,9 +119,6 @@ func (c *Client) addOperationValidateAssessmentReportIntegrityMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpValidateAssessmentReportIntegrityValidationMiddleware(stack); err != nil {
 		return err
 	}

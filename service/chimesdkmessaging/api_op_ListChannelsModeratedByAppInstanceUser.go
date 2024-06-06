@@ -124,9 +124,6 @@ func (c *Client) addOperationListChannelsModeratedByAppInstanceUserMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListChannelsModeratedByAppInstanceUserValidationMiddleware(stack); err != nil {
 		return err
 	}

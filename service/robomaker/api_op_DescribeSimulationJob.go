@@ -209,9 +209,6 @@ func (c *Client) addOperationDescribeSimulationJobMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeSimulationJobValidationMiddleware(stack); err != nil {
 		return err
 	}

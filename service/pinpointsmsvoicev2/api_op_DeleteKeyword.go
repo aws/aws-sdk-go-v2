@@ -133,9 +133,6 @@ func (c *Client) addOperationDeleteKeywordMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteKeywordValidationMiddleware(stack); err != nil {
 		return err
 	}

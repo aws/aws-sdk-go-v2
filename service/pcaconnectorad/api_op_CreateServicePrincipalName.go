@@ -115,9 +115,6 @@ func (c *Client) addOperationCreateServicePrincipalNameMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateServicePrincipalNameMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -157,9 +157,6 @@ func (c *Client) addOperationGetCustomDataIdentifierMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetCustomDataIdentifierValidationMiddleware(stack); err != nil {
 		return err
 	}

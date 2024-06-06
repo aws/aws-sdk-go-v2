@@ -139,9 +139,6 @@ func (c *Client) addOperationDescribeInstanceRefreshesMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeInstanceRefreshesValidationMiddleware(stack); err != nil {
 		return err
 	}

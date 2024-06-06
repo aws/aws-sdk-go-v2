@@ -134,9 +134,6 @@ func (c *Client) addOperationDescribeMitigationActionMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeMitigationActionValidationMiddleware(stack); err != nil {
 		return err
 	}

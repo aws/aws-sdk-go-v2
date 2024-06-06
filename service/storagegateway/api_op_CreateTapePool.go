@@ -137,9 +137,6 @@ func (c *Client) addOperationCreateTapePoolMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateTapePoolValidationMiddleware(stack); err != nil {
 		return err
 	}

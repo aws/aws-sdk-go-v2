@@ -134,9 +134,6 @@ func (c *Client) addOperationListUserGroupsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListUserGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -149,9 +149,6 @@ func (c *Client) addOperationDescribeParametersMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeParametersValidationMiddleware(stack); err != nil {
 		return err
 	}

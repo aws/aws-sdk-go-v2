@@ -108,9 +108,6 @@ func (c *Client) addOperationResumeClusterMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpResumeClusterValidationMiddleware(stack); err != nil {
 		return err
 	}

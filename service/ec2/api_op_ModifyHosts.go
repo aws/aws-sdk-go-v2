@@ -152,9 +152,6 @@ func (c *Client) addOperationModifyHostsMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpModifyHostsValidationMiddleware(stack); err != nil {
 		return err
 	}

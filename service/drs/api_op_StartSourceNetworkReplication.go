@@ -107,9 +107,6 @@ func (c *Client) addOperationStartSourceNetworkReplicationMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartSourceNetworkReplicationValidationMiddleware(stack); err != nil {
 		return err
 	}

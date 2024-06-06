@@ -171,9 +171,6 @@ func (c *Client) addOperationGetProviderServiceMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetProviderServiceValidationMiddleware(stack); err != nil {
 		return err
 	}

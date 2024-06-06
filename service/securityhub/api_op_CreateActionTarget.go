@@ -121,9 +121,6 @@ func (c *Client) addOperationCreateActionTargetMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateActionTargetValidationMiddleware(stack); err != nil {
 		return err
 	}

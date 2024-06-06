@@ -122,9 +122,6 @@ func (c *Client) addOperationUpdateFileSystemAssociationMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateFileSystemAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -186,9 +186,6 @@ func (c *Client) addOperationDescribeAccountCustomizationMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeAccountCustomizationValidationMiddleware(stack); err != nil {
 		return err
 	}

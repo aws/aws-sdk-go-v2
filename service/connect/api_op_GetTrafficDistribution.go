@@ -124,9 +124,6 @@ func (c *Client) addOperationGetTrafficDistributionMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetTrafficDistributionValidationMiddleware(stack); err != nil {
 		return err
 	}

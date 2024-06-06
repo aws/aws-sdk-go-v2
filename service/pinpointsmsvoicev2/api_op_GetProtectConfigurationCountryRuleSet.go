@@ -136,9 +136,6 @@ func (c *Client) addOperationGetProtectConfigurationCountryRuleSetMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetProtectConfigurationCountryRuleSetValidationMiddleware(stack); err != nil {
 		return err
 	}

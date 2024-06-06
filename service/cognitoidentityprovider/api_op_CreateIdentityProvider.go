@@ -236,9 +236,6 @@ func (c *Client) addOperationCreateIdentityProviderMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateIdentityProviderValidationMiddleware(stack); err != nil {
 		return err
 	}

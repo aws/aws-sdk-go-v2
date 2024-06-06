@@ -159,9 +159,6 @@ func (c *Client) addOperationCreateDhcpOptionsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateDhcpOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}

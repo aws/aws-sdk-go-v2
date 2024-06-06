@@ -110,9 +110,6 @@ func (c *Client) addOperationBatchDeleteAutomationRulesMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpBatchDeleteAutomationRulesValidationMiddleware(stack); err != nil {
 		return err
 	}

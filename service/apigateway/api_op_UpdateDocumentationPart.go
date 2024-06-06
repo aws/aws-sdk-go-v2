@@ -134,9 +134,6 @@ func (c *Client) addOperationUpdateDocumentationPartMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateDocumentationPartValidationMiddleware(stack); err != nil {
 		return err
 	}

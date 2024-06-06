@@ -188,9 +188,6 @@ func (c *Client) addOperationGetImportTaskMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetImportTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

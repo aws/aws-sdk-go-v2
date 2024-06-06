@@ -193,9 +193,6 @@ func (c *Client) addOperationDescribeAutoPredictorMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeAutoPredictorValidationMiddleware(stack); err != nil {
 		return err
 	}

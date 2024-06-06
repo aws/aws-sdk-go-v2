@@ -119,9 +119,6 @@ func (c *Client) addOperationTagDeliveryStreamMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpTagDeliveryStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

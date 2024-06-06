@@ -106,9 +106,6 @@ func (c *Client) addOperationGetDeviceMethodsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetDeviceMethodsValidationMiddleware(stack); err != nil {
 		return err
 	}

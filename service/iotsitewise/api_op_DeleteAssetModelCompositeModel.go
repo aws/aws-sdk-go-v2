@@ -127,9 +127,6 @@ func (c *Client) addOperationDeleteAssetModelCompositeModelMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDeleteAssetModelCompositeModelMiddleware(stack); err != nil {
 		return err
 	}

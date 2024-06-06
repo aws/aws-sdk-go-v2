@@ -126,9 +126,6 @@ func (c *Client) addOperationDescribeEngineDefaultClusterParametersMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeEngineDefaultClusterParametersValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -113,9 +113,6 @@ func (c *Client) addOperationDescribeSecurityConfigurationMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeSecurityConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

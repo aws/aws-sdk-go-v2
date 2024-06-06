@@ -154,9 +154,6 @@ func (c *Client) addOperationCreateStudioComponentMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateStudioComponentMiddleware(stack, options); err != nil {
 		return err
 	}

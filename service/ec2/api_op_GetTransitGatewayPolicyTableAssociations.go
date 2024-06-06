@@ -125,9 +125,6 @@ func (c *Client) addOperationGetTransitGatewayPolicyTableAssociationsMiddlewares
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetTransitGatewayPolicyTableAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -128,9 +128,6 @@ func (c *Client) addOperationListFleetMembersMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opListFleetMembersMiddleware(stack); err != nil {
 		return err
 	}

@@ -170,9 +170,6 @@ func (c *Client) addOperationDescribeSigningJobMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeSigningJobValidationMiddleware(stack); err != nil {
 		return err
 	}

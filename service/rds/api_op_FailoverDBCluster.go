@@ -167,9 +167,6 @@ func (c *Client) addOperationFailoverDBClusterMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpFailoverDBClusterValidationMiddleware(stack); err != nil {
 		return err
 	}

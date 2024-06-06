@@ -152,9 +152,6 @@ func (c *Client) addOperationUpdateVoiceTemplateMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateVoiceTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

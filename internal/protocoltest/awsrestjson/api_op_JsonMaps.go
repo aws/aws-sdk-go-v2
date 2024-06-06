@@ -116,9 +116,6 @@ func (c *Client) addOperationJsonMapsMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opJsonMaps(options.Region), middleware.Before); err != nil {
 		return err
 	}

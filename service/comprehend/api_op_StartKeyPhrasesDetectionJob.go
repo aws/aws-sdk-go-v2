@@ -182,9 +182,6 @@ func (c *Client) addOperationStartKeyPhrasesDetectionJobMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opStartKeyPhrasesDetectionJobMiddleware(stack, options); err != nil {
 		return err
 	}

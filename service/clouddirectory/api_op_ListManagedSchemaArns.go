@@ -115,9 +115,6 @@ func (c *Client) addOperationListManagedSchemaArnsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListManagedSchemaArns(options.Region), middleware.Before); err != nil {
 		return err
 	}

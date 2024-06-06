@@ -140,9 +140,6 @@ func (c *Client) addOperationUpdateMedicalVocabularyMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateMedicalVocabularyValidationMiddleware(stack); err != nil {
 		return err
 	}

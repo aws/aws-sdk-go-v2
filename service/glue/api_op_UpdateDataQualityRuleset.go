@@ -119,9 +119,6 @@ func (c *Client) addOperationUpdateDataQualityRulesetMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateDataQualityRulesetValidationMiddleware(stack); err != nil {
 		return err
 	}

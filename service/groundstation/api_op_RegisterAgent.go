@@ -113,9 +113,6 @@ func (c *Client) addOperationRegisterAgentMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRegisterAgentValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -129,9 +129,6 @@ func (c *Client) addOperationAttachInstancesToLoadBalancerMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAttachInstancesToLoadBalancerValidationMiddleware(stack); err != nil {
 		return err
 	}

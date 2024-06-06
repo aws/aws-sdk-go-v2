@@ -146,9 +146,6 @@ func (c *Client) addOperationGetAutoMergingPreviewMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetAutoMergingPreviewValidationMiddleware(stack); err != nil {
 		return err
 	}

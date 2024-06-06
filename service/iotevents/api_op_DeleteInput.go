@@ -101,9 +101,6 @@ func (c *Client) addOperationDeleteInputMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteInputValidationMiddleware(stack); err != nil {
 		return err
 	}

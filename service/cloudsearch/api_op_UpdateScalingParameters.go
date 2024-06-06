@@ -129,9 +129,6 @@ func (c *Client) addOperationUpdateScalingParametersMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateScalingParametersValidationMiddleware(stack); err != nil {
 		return err
 	}

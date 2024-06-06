@@ -130,9 +130,6 @@ func (c *Client) addOperationStartTransformerJobMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opStartTransformerJobMiddleware(stack, options); err != nil {
 		return err
 	}

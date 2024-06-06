@@ -120,9 +120,6 @@ func (c *Client) addOperationUpdateGcmChannelMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateGcmChannelValidationMiddleware(stack); err != nil {
 		return err
 	}

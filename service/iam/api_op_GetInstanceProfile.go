@@ -124,9 +124,6 @@ func (c *Client) addOperationGetInstanceProfileMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetInstanceProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

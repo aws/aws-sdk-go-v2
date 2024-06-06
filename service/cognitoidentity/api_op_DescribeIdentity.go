@@ -120,9 +120,6 @@ func (c *Client) addOperationDescribeIdentityMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeIdentityValidationMiddleware(stack); err != nil {
 		return err
 	}

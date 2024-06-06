@@ -112,9 +112,6 @@ func (c *Client) addOperationRejectTransitGatewayPeeringAttachmentMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRejectTransitGatewayPeeringAttachmentValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -106,9 +106,6 @@ func (c *Client) addOperationGetCompositionMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetCompositionValidationMiddleware(stack); err != nil {
 		return err
 	}

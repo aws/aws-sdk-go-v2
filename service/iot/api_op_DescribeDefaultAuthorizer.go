@@ -104,9 +104,6 @@ func (c *Client) addOperationDescribeDefaultAuthorizerMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDefaultAuthorizer(options.Region), middleware.Before); err != nil {
 		return err
 	}

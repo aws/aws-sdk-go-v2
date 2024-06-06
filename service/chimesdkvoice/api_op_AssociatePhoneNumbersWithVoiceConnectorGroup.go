@@ -119,9 +119,6 @@ func (c *Client) addOperationAssociatePhoneNumbersWithVoiceConnectorGroupMiddlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAssociatePhoneNumbersWithVoiceConnectorGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

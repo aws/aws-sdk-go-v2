@@ -105,9 +105,6 @@ func (c *Client) addOperationStartFuotaTaskMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartFuotaTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

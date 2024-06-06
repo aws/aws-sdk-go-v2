@@ -116,9 +116,6 @@ func (c *Client) addOperationDescribeDocumentMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeDocumentValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -115,9 +115,6 @@ func (c *Client) addOperationBatchGetUserAccessTasksMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpBatchGetUserAccessTasksValidationMiddleware(stack); err != nil {
 		return err
 	}

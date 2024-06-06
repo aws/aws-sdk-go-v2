@@ -118,9 +118,6 @@ func (c *Client) addOperationDisassociateResolverEndpointIpAddressMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDisassociateResolverEndpointIpAddressValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -100,9 +100,6 @@ func (c *Client) addOperationGetInvitationsCountMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetInvitationsCount(options.Region), middleware.Before); err != nil {
 		return err
 	}

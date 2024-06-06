@@ -126,9 +126,6 @@ func (c *Client) addOperationUpdateAccessPolicyMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opUpdateAccessPolicyMiddleware(stack); err != nil {
 		return err
 	}

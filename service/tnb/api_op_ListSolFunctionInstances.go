@@ -113,9 +113,6 @@ func (c *Client) addOperationListSolFunctionInstancesMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSolFunctionInstances(options.Region), middleware.Before); err != nil {
 		return err
 	}

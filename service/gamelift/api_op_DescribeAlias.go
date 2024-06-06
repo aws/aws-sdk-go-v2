@@ -117,9 +117,6 @@ func (c *Client) addOperationDescribeAliasMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeAliasValidationMiddleware(stack); err != nil {
 		return err
 	}

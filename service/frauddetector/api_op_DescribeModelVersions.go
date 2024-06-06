@@ -121,9 +121,6 @@ func (c *Client) addOperationDescribeModelVersionsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeModelVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}

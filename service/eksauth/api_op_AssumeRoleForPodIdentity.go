@@ -149,9 +149,6 @@ func (c *Client) addOperationAssumeRoleForPodIdentityMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAssumeRoleForPodIdentityValidationMiddleware(stack); err != nil {
 		return err
 	}

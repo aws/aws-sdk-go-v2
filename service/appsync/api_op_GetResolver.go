@@ -116,9 +116,6 @@ func (c *Client) addOperationGetResolverMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetResolverValidationMiddleware(stack); err != nil {
 		return err
 	}

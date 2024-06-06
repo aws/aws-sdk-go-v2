@@ -114,9 +114,6 @@ func (c *Client) addOperationDisableVgwRoutePropagationMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDisableVgwRoutePropagationValidationMiddleware(stack); err != nil {
 		return err
 	}

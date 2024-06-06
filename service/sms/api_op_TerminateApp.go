@@ -99,9 +99,6 @@ func (c *Client) addOperationTerminateAppMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTerminateApp(options.Region), middleware.Before); err != nil {
 		return err
 	}

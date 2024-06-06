@@ -107,9 +107,6 @@ func (c *Client) addOperationDeprecateSystemTemplateMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeprecateSystemTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -123,9 +123,6 @@ func (c *Client) addOperationGetReservedNodeExchangeOfferingsMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetReservedNodeExchangeOfferingsValidationMiddleware(stack); err != nil {
 		return err
 	}

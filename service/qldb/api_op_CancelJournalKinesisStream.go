@@ -116,9 +116,6 @@ func (c *Client) addOperationCancelJournalKinesisStreamMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCancelJournalKinesisStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

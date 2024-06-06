@@ -195,9 +195,6 @@ func (c *Client) addOperationCreateMaintenanceWindowMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateMaintenanceWindowMiddleware(stack, options); err != nil {
 		return err
 	}

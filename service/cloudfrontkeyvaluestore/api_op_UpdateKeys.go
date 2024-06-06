@@ -137,9 +137,6 @@ func (c *Client) addOperationUpdateKeysMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateKeysValidationMiddleware(stack); err != nil {
 		return err
 	}

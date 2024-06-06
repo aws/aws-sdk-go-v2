@@ -114,9 +114,6 @@ func (c *Client) addOperationUpdateArtifactMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateArtifactValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -151,9 +151,6 @@ func (c *Client) addOperationValidatePolicyMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpValidatePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -128,9 +128,6 @@ func (c *Client) addOperationListAccessPreviewFindingsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListAccessPreviewFindingsValidationMiddleware(stack); err != nil {
 		return err
 	}

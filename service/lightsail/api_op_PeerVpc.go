@@ -102,9 +102,6 @@ func (c *Client) addOperationPeerVpcMiddlewares(stack *middleware.Stack, options
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPeerVpc(options.Region), middleware.Before); err != nil {
 		return err
 	}

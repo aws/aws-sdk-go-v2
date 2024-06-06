@@ -108,9 +108,6 @@ func (c *Client) addOperationGetAutomationExecutionMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetAutomationExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -168,9 +168,6 @@ func (c *Client) addOperationVerifyCardValidationDataMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpVerifyCardValidationDataValidationMiddleware(stack); err != nil {
 		return err
 	}

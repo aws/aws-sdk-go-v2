@@ -143,9 +143,6 @@ func (c *Client) addOperationUnsubscribeFromDatasetMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUnsubscribeFromDatasetValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -111,9 +111,6 @@ func (c *Client) addOperationDeleteTrafficMirrorSessionMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteTrafficMirrorSessionValidationMiddleware(stack); err != nil {
 		return err
 	}

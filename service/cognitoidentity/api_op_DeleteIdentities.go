@@ -112,9 +112,6 @@ func (c *Client) addOperationDeleteIdentitiesMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteIdentitiesValidationMiddleware(stack); err != nil {
 		return err
 	}

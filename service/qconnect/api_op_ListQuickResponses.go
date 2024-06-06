@@ -120,9 +120,6 @@ func (c *Client) addOperationListQuickResponsesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListQuickResponsesValidationMiddleware(stack); err != nil {
 		return err
 	}

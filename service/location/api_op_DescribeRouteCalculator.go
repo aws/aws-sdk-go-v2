@@ -167,9 +167,6 @@ func (c *Client) addOperationDescribeRouteCalculatorMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDescribeRouteCalculatorMiddleware(stack); err != nil {
 		return err
 	}

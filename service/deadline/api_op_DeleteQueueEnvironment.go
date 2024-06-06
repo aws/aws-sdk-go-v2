@@ -111,9 +111,6 @@ func (c *Client) addOperationDeleteQueueEnvironmentMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDeleteQueueEnvironmentMiddleware(stack); err != nil {
 		return err
 	}

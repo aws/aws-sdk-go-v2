@@ -150,9 +150,6 @@ func (c *Client) addOperationStartReplayMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartReplayValidationMiddleware(stack); err != nil {
 		return err
 	}

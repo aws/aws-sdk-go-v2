@@ -124,9 +124,6 @@ func (c *Client) addOperationNotifyUpdateProvisionedProductEngineWorkflowResultM
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opNotifyUpdateProvisionedProductEngineWorkflowResultMiddleware(stack, options); err != nil {
 		return err
 	}

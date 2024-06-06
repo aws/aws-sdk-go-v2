@@ -175,9 +175,6 @@ func (c *Client) addOperationCreateSubscriptionGrantMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateSubscriptionGrantMiddleware(stack, options); err != nil {
 		return err
 	}

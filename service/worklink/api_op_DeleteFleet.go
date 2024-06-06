@@ -104,9 +104,6 @@ func (c *Client) addOperationDeleteFleetMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteFleetValidationMiddleware(stack); err != nil {
 		return err
 	}

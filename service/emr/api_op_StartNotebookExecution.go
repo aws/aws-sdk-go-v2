@@ -154,9 +154,6 @@ func (c *Client) addOperationStartNotebookExecutionMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartNotebookExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}

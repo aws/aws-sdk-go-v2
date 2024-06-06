@@ -400,9 +400,6 @@ func (c *Client) addOperationAssumeRoleWithSAMLMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAssumeRoleWithSAMLValidationMiddleware(stack); err != nil {
 		return err
 	}

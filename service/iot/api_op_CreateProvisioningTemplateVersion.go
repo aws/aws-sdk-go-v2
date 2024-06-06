@@ -127,9 +127,6 @@ func (c *Client) addOperationCreateProvisioningTemplateVersionMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateProvisioningTemplateVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

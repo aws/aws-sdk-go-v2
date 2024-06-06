@@ -151,9 +151,6 @@ func (c *Client) addOperationPutEnvironmentBlueprintConfigurationMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutEnvironmentBlueprintConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

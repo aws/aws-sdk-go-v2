@@ -113,9 +113,6 @@ func (c *Client) addOperationListStorageSystemsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opListStorageSystemsMiddleware(stack); err != nil {
 		return err
 	}

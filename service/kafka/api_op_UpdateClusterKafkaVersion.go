@@ -122,9 +122,6 @@ func (c *Client) addOperationUpdateClusterKafkaVersionMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateClusterKafkaVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

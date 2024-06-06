@@ -151,9 +151,6 @@ func (c *Client) addOperationGetLensVersionDifferenceMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetLensVersionDifferenceValidationMiddleware(stack); err != nil {
 		return err
 	}

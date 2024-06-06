@@ -117,9 +117,6 @@ func (c *Client) addOperationDisassociateTransitGatewayRouteTableMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDisassociateTransitGatewayRouteTableValidationMiddleware(stack); err != nil {
 		return err
 	}

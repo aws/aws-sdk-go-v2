@@ -125,9 +125,6 @@ func (c *Client) addOperationUpdateVolumeMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opUpdateVolumeMiddleware(stack, options); err != nil {
 		return err
 	}

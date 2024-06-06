@@ -124,9 +124,6 @@ func (c *Client) addOperationCreateTaskMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateTaskMiddleware(stack, options); err != nil {
 		return err
 	}

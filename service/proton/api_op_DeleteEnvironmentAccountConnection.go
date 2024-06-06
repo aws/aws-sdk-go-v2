@@ -116,9 +116,6 @@ func (c *Client) addOperationDeleteEnvironmentAccountConnectionMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteEnvironmentAccountConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

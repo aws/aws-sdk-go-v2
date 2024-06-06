@@ -119,9 +119,6 @@ func (c *Client) addOperationGetConfiguredAudienceModelPolicyMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetConfiguredAudienceModelPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -111,9 +111,6 @@ func (c *Client) addOperationUpdateDeletionProtectionMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opUpdateDeletionProtectionMiddleware(stack, options); err != nil {
 		return err
 	}

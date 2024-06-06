@@ -141,9 +141,6 @@ func (c *Client) addOperationDescribeRescoreExecutionPlanMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeRescoreExecutionPlanValidationMiddleware(stack); err != nil {
 		return err
 	}

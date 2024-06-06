@@ -202,9 +202,6 @@ func (c *Client) addOperationCreateDBParameterGroupMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateDBParameterGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

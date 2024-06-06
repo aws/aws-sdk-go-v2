@@ -126,9 +126,6 @@ func (c *Client) addOperationListWorkspaceServiceAccountsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListWorkspaceServiceAccountsValidationMiddleware(stack); err != nil {
 		return err
 	}

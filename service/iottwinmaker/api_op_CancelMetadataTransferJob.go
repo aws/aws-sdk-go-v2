@@ -127,9 +127,6 @@ func (c *Client) addOperationCancelMetadataTransferJobMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opCancelMetadataTransferJobMiddleware(stack); err != nil {
 		return err
 	}

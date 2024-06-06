@@ -113,9 +113,6 @@ func (c *Client) addOperationDeleteTransitGatewayConnectMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteTransitGatewayConnectValidationMiddleware(stack); err != nil {
 		return err
 	}

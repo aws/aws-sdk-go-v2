@@ -138,9 +138,6 @@ func (c *Client) addOperationSearchInsightsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpSearchInsightsValidationMiddleware(stack); err != nil {
 		return err
 	}

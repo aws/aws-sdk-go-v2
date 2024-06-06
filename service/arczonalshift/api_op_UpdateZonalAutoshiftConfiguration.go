@@ -128,9 +128,6 @@ func (c *Client) addOperationUpdateZonalAutoshiftConfigurationMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateZonalAutoshiftConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

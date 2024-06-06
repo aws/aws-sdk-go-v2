@@ -112,9 +112,6 @@ func (c *Client) addOperationReadJobMiddlewares(stack *middleware.Stack, options
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpReadJobValidationMiddleware(stack); err != nil {
 		return err
 	}

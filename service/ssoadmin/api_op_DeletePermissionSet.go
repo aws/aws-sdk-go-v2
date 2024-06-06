@@ -108,9 +108,6 @@ func (c *Client) addOperationDeletePermissionSetMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeletePermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -129,9 +129,6 @@ func (c *Client) addOperationCreateAssistantAssociationMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateAssistantAssociationMiddleware(stack, options); err != nil {
 		return err
 	}

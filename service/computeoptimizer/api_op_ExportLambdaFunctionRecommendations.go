@@ -185,9 +185,6 @@ func (c *Client) addOperationExportLambdaFunctionRecommendationsMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpExportLambdaFunctionRecommendationsValidationMiddleware(stack); err != nil {
 		return err
 	}

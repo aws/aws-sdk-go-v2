@@ -129,9 +129,6 @@ func (c *Client) addOperationGetGatewayResponsesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetGatewayResponsesValidationMiddleware(stack); err != nil {
 		return err
 	}

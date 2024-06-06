@@ -222,9 +222,6 @@ func (c *Client) addOperationCreateDeploymentGroupMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateDeploymentGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

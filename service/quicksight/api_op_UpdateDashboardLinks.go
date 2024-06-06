@@ -125,9 +125,6 @@ func (c *Client) addOperationUpdateDashboardLinksMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateDashboardLinksValidationMiddleware(stack); err != nil {
 		return err
 	}

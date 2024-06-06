@@ -118,9 +118,6 @@ func (c *Client) addOperationDeleteRepositoryMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteRepositoryValidationMiddleware(stack); err != nil {
 		return err
 	}

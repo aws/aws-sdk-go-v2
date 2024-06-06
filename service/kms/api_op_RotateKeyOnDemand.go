@@ -186,9 +186,6 @@ func (c *Client) addOperationRotateKeyOnDemandMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRotateKeyOnDemandValidationMiddleware(stack); err != nil {
 		return err
 	}

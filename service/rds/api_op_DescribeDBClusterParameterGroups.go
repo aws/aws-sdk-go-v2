@@ -141,9 +141,6 @@ func (c *Client) addOperationDescribeDBClusterParameterGroupsMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeDBClusterParameterGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}

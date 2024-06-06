@@ -121,9 +121,6 @@ func (c *Client) addOperationListWebsiteAuthorizationProvidersMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListWebsiteAuthorizationProvidersValidationMiddleware(stack); err != nil {
 		return err
 	}

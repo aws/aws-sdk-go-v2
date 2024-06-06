@@ -117,9 +117,6 @@ func (c *Client) addOperationUpdateApnsSandboxChannelMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateApnsSandboxChannelValidationMiddleware(stack); err != nil {
 		return err
 	}

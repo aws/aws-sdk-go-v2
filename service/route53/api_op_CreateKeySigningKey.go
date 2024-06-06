@@ -171,9 +171,6 @@ func (c *Client) addOperationCreateKeySigningKeyMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateKeySigningKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

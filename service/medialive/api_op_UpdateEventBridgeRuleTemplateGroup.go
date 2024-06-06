@@ -132,9 +132,6 @@ func (c *Client) addOperationUpdateEventBridgeRuleTemplateGroupMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateEventBridgeRuleTemplateGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

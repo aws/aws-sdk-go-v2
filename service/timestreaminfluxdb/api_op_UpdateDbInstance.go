@@ -176,9 +176,6 @@ func (c *Client) addOperationUpdateDbInstanceMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateDbInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

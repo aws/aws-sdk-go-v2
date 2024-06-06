@@ -139,9 +139,6 @@ func (c *Client) addOperationListFHIRExportJobsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListFHIRExportJobsValidationMiddleware(stack); err != nil {
 		return err
 	}

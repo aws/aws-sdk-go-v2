@@ -102,9 +102,6 @@ func (c *Client) addOperationActivateEventSourceMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpActivateEventSourceValidationMiddleware(stack); err != nil {
 		return err
 	}

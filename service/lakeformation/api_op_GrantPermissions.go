@@ -139,9 +139,6 @@ func (c *Client) addOperationGrantPermissionsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGrantPermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

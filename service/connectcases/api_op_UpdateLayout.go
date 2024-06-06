@@ -123,9 +123,6 @@ func (c *Client) addOperationUpdateLayoutMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateLayoutValidationMiddleware(stack); err != nil {
 		return err
 	}

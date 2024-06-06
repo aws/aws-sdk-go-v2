@@ -108,9 +108,6 @@ func (c *Client) addOperationAssociateServiceRoleToAccountMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAssociateServiceRoleToAccountValidationMiddleware(stack); err != nil {
 		return err
 	}

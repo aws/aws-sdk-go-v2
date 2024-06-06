@@ -113,9 +113,6 @@ func (c *Client) addOperationVerifyOTPMessageMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpVerifyOTPMessageValidationMiddleware(stack); err != nil {
 		return err
 	}

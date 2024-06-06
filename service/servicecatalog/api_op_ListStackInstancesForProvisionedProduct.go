@@ -127,9 +127,6 @@ func (c *Client) addOperationListStackInstancesForProvisionedProductMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListStackInstancesForProvisionedProductValidationMiddleware(stack); err != nil {
 		return err
 	}

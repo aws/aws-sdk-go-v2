@@ -112,9 +112,6 @@ func (c *Client) addOperationDeleteKxClusterMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opDeleteKxClusterMiddleware(stack, options); err != nil {
 		return err
 	}

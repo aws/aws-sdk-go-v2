@@ -136,9 +136,6 @@ func (c *Client) addOperationListMetadataGenerationRunsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListMetadataGenerationRunsValidationMiddleware(stack); err != nil {
 		return err
 	}

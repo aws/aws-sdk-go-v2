@@ -134,9 +134,6 @@ func (c *Client) addOperationGetFilterMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetFilterValidationMiddleware(stack); err != nil {
 		return err
 	}

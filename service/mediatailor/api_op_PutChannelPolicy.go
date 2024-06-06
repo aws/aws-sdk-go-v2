@@ -107,9 +107,6 @@ func (c *Client) addOperationPutChannelPolicyMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutChannelPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

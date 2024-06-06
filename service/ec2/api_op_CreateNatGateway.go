@@ -187,9 +187,6 @@ func (c *Client) addOperationCreateNatGatewayMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateNatGatewayMiddleware(stack, options); err != nil {
 		return err
 	}

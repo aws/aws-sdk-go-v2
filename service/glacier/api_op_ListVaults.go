@@ -149,9 +149,6 @@ func (c *Client) addOperationListVaultsMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListVaultsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -107,9 +107,6 @@ func (c *Client) addOperationUnregisterConnectorMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUnregisterConnectorValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -118,9 +118,6 @@ func (c *Client) addOperationRemoveLayerVersionPermissionMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRemoveLayerVersionPermissionValidationMiddleware(stack); err != nil {
 		return err
 	}

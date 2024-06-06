@@ -121,9 +121,6 @@ func (c *Client) addOperationGetJobUnlockCodeMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetJobUnlockCodeValidationMiddleware(stack); err != nil {
 		return err
 	}

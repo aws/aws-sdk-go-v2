@@ -134,9 +134,6 @@ func (c *Client) addOperationGetPositionEstimateMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetPositionEstimateValidationMiddleware(stack); err != nil {
 		return err
 	}

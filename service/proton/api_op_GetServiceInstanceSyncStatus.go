@@ -117,9 +117,6 @@ func (c *Client) addOperationGetServiceInstanceSyncStatusMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetServiceInstanceSyncStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

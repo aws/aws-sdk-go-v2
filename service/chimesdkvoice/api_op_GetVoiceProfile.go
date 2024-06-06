@@ -106,9 +106,6 @@ func (c *Client) addOperationGetVoiceProfileMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetVoiceProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

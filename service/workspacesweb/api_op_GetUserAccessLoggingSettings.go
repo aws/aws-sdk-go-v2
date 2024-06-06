@@ -106,9 +106,6 @@ func (c *Client) addOperationGetUserAccessLoggingSettingsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetUserAccessLoggingSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

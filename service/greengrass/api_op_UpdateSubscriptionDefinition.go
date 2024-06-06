@@ -104,9 +104,6 @@ func (c *Client) addOperationUpdateSubscriptionDefinitionMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateSubscriptionDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

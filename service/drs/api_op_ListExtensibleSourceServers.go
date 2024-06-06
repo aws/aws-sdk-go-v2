@@ -118,9 +118,6 @@ func (c *Client) addOperationListExtensibleSourceServersMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListExtensibleSourceServersValidationMiddleware(stack); err != nil {
 		return err
 	}

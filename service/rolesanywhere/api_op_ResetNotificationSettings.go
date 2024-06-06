@@ -116,9 +116,6 @@ func (c *Client) addOperationResetNotificationSettingsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpResetNotificationSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

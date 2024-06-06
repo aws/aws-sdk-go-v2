@@ -126,9 +126,6 @@ func (c *Client) addOperationPutVoiceConnectorEmergencyCallingConfigurationMiddl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutVoiceConnectorEmergencyCallingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -129,9 +129,6 @@ func (c *Client) addOperationListEnvironmentBlueprintConfigurationsMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListEnvironmentBlueprintConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}

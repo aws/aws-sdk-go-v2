@@ -15,6 +15,7 @@ import (
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
+	internalmiddleware "github.com/aws/aws-sdk-go-v2/internal/middleware"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
@@ -610,10 +611,11 @@ func (c *Client) handleEndpointDiscoveryFromService(ctx context.Context, input *
 }
 
 func addTimeOffsetBuild(stack *middleware.Stack, c *Client) error {
-	return stack.Build.Add(&awsmiddleware.AddTimeOffsetBuildMiddleware{Offset: c.timeOffset}, middleware.After)
-}
-func addTimeOffsetDeserializer(stack *middleware.Stack, c *Client) error {
-	return stack.Deserialize.Insert(&awsmiddleware.AddTimeOffsetDeserializeMiddleware{Offset: c.timeOffset}, "RecordResponseTiming", middleware.Before)
+	mw := internalmiddleware.AddTimeOffsetMiddleware{Offset: c.timeOffset}
+	if err := stack.Build.Add(&mw, middleware.After); err != nil {
+		return err
+	}
+	return stack.Deserialize.Insert(&mw, "RecordResponseTiming", middleware.Before)
 }
 func initializeTimeOffsetResolver(c *Client) {
 	c.timeOffset = new(atomic.Int64)

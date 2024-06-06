@@ -128,9 +128,6 @@ func (c *Client) addOperationDeleteResourcePolicyStatementMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteResourcePolicyStatementValidationMiddleware(stack); err != nil {
 		return err
 	}

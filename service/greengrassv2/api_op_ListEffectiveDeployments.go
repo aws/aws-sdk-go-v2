@@ -117,9 +117,6 @@ func (c *Client) addOperationListEffectiveDeploymentsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListEffectiveDeploymentsValidationMiddleware(stack); err != nil {
 		return err
 	}

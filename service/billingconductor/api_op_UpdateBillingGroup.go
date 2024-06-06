@@ -152,9 +152,6 @@ func (c *Client) addOperationUpdateBillingGroupMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateBillingGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -115,9 +115,6 @@ func (c *Client) addOperationStartMetadataModelExportToTargetMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartMetadataModelExportToTargetValidationMiddleware(stack); err != nil {
 		return err
 	}

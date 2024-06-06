@@ -132,9 +132,6 @@ func (c *Client) addOperationBatchDetectSyntaxMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpBatchDetectSyntaxValidationMiddleware(stack); err != nil {
 		return err
 	}

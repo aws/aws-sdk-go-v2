@@ -106,9 +106,6 @@ func (c *Client) addOperationDeleteLoggingConfigurationMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opDeleteLoggingConfigurationMiddleware(stack, options); err != nil {
 		return err
 	}

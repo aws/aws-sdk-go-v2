@@ -102,9 +102,6 @@ func (c *Client) addOperationDeregisterOnPremisesInstanceMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeregisterOnPremisesInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

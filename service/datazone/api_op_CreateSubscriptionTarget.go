@@ -218,9 +218,6 @@ func (c *Client) addOperationCreateSubscriptionTargetMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateSubscriptionTargetMiddleware(stack, options); err != nil {
 		return err
 	}

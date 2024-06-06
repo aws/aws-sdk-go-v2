@@ -182,9 +182,6 @@ func (c *Client) addOperationDeleteSecretMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteSecretValidationMiddleware(stack); err != nil {
 		return err
 	}

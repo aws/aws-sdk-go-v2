@@ -126,9 +126,6 @@ func (c *Client) addOperationBatchDisassociateApprovalRuleTemplateFromRepositori
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpBatchDisassociateApprovalRuleTemplateFromRepositoriesValidationMiddleware(stack); err != nil {
 		return err
 	}

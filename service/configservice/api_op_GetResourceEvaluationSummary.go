@@ -140,9 +140,6 @@ func (c *Client) addOperationGetResourceEvaluationSummaryMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetResourceEvaluationSummaryValidationMiddleware(stack); err != nil {
 		return err
 	}

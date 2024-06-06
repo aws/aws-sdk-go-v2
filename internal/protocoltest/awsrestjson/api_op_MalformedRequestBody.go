@@ -98,9 +98,6 @@ func (c *Client) addOperationMalformedRequestBodyMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMalformedRequestBody(options.Region), middleware.Before); err != nil {
 		return err
 	}

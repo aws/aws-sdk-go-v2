@@ -113,9 +113,6 @@ func (c *Client) addOperationListWirelessDeviceImportTasksMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWirelessDeviceImportTasks(options.Region), middleware.Before); err != nil {
 		return err
 	}

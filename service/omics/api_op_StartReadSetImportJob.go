@@ -143,9 +143,6 @@ func (c *Client) addOperationStartReadSetImportJobMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opStartReadSetImportJobMiddleware(stack); err != nil {
 		return err
 	}

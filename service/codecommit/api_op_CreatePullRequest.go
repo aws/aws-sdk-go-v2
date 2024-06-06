@@ -129,9 +129,6 @@ func (c *Client) addOperationCreatePullRequestMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreatePullRequestMiddleware(stack, options); err != nil {
 		return err
 	}

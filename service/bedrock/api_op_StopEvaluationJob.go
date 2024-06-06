@@ -101,9 +101,6 @@ func (c *Client) addOperationStopEvaluationJobMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStopEvaluationJobValidationMiddleware(stack); err != nil {
 		return err
 	}

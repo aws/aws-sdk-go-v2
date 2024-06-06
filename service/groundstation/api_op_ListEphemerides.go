@@ -131,9 +131,6 @@ func (c *Client) addOperationListEphemeridesMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListEphemeridesValidationMiddleware(stack); err != nil {
 		return err
 	}

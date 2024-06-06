@@ -111,9 +111,6 @@ func (c *Client) addOperationRedactConversationMessageMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRedactConversationMessageValidationMiddleware(stack); err != nil {
 		return err
 	}

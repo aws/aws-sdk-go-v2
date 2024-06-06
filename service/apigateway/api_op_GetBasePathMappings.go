@@ -118,9 +118,6 @@ func (c *Client) addOperationGetBasePathMappingsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetBasePathMappingsValidationMiddleware(stack); err != nil {
 		return err
 	}

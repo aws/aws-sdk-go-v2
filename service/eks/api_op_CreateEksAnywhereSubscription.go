@@ -145,9 +145,6 @@ func (c *Client) addOperationCreateEksAnywhereSubscriptionMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateEksAnywhereSubscriptionMiddleware(stack, options); err != nil {
 		return err
 	}

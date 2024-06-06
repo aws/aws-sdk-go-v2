@@ -132,9 +132,6 @@ func (c *Client) addOperationGetAccessPointPolicyStatusForObjectLambdaMiddleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opGetAccessPointPolicyStatusForObjectLambdaMiddleware(stack); err != nil {
 		return err
 	}

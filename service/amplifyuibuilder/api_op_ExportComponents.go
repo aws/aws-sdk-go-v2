@@ -120,9 +120,6 @@ func (c *Client) addOperationExportComponentsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpExportComponentsValidationMiddleware(stack); err != nil {
 		return err
 	}

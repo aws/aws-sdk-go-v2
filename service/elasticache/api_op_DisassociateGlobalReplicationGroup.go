@@ -125,9 +125,6 @@ func (c *Client) addOperationDisassociateGlobalReplicationGroupMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDisassociateGlobalReplicationGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

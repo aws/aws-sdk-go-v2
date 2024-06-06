@@ -115,9 +115,6 @@ func (c *Client) addOperationBatchDisassociateScramSecretMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpBatchDisassociateScramSecretValidationMiddleware(stack); err != nil {
 		return err
 	}

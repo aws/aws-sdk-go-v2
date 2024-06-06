@@ -118,9 +118,6 @@ func (c *Client) addOperationAssociateTransitGatewayRouteTableMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAssociateTransitGatewayRouteTableValidationMiddleware(stack); err != nil {
 		return err
 	}

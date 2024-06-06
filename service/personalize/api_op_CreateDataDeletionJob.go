@@ -169,9 +169,6 @@ func (c *Client) addOperationCreateDataDeletionJobMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateDataDeletionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

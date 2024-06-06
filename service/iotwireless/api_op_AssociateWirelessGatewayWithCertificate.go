@@ -110,9 +110,6 @@ func (c *Client) addOperationAssociateWirelessGatewayWithCertificateMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAssociateWirelessGatewayWithCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}

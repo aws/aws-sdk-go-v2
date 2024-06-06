@@ -131,9 +131,6 @@ func (c *Client) addOperationCreateBackendStorageMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateBackendStorageValidationMiddleware(stack); err != nil {
 		return err
 	}

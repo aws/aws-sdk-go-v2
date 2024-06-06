@@ -171,9 +171,6 @@ func (c *Client) addOperationPutPrincipalMappingMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutPrincipalMappingValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -176,9 +176,6 @@ func (c *Client) addOperationCreateHealthCheckMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateHealthCheckValidationMiddleware(stack); err != nil {
 		return err
 	}

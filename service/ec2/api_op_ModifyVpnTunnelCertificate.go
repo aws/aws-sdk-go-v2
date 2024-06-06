@@ -117,9 +117,6 @@ func (c *Client) addOperationModifyVpnTunnelCertificateMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpModifyVpnTunnelCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}

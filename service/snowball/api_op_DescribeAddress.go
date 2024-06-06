@@ -108,9 +108,6 @@ func (c *Client) addOperationDescribeAddressMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeAddressValidationMiddleware(stack); err != nil {
 		return err
 	}

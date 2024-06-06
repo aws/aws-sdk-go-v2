@@ -129,9 +129,6 @@ func (c *Client) addOperationPutCodeBindingMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutCodeBindingValidationMiddleware(stack); err != nil {
 		return err
 	}

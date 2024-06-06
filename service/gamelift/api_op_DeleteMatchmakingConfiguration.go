@@ -104,9 +104,6 @@ func (c *Client) addOperationDeleteMatchmakingConfigurationMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteMatchmakingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

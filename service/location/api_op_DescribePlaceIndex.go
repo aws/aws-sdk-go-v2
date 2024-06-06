@@ -166,9 +166,6 @@ func (c *Client) addOperationDescribePlaceIndexMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDescribePlaceIndexMiddleware(stack); err != nil {
 		return err
 	}

@@ -165,9 +165,6 @@ func (c *Client) addOperationGetVectorEnrichmentJobMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetVectorEnrichmentJobValidationMiddleware(stack); err != nil {
 		return err
 	}

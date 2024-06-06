@@ -165,9 +165,6 @@ func (c *Client) addOperationRegisterContainerInstanceMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRegisterContainerInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

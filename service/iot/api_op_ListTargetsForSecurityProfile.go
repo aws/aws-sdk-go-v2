@@ -121,9 +121,6 @@ func (c *Client) addOperationListTargetsForSecurityProfileMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListTargetsForSecurityProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -105,9 +105,6 @@ func (c *Client) addOperationStopEngagementMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStopEngagementValidationMiddleware(stack); err != nil {
 		return err
 	}

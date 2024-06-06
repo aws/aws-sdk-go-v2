@@ -110,9 +110,6 @@ func (c *Client) addOperationCloseTunnelMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCloseTunnelValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -103,9 +103,6 @@ func (c *Client) addOperationRemoveRegionMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRemoveRegionValidationMiddleware(stack); err != nil {
 		return err
 	}

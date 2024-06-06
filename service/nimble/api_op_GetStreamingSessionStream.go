@@ -126,9 +126,6 @@ func (c *Client) addOperationGetStreamingSessionStreamMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetStreamingSessionStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

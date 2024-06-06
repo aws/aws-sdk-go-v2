@@ -120,9 +120,6 @@ func (c *Client) addOperationGetCustomDomainAssociationMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetCustomDomainAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

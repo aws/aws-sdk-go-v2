@@ -115,9 +115,6 @@ func (c *Client) addOperationGetBillOfMaterialsImportJobMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetBillOfMaterialsImportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

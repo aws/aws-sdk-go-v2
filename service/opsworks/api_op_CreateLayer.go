@@ -216,9 +216,6 @@ func (c *Client) addOperationCreateLayerMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateLayerValidationMiddleware(stack); err != nil {
 		return err
 	}

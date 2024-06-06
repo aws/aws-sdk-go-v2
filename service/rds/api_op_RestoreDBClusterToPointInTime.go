@@ -523,9 +523,6 @@ func (c *Client) addOperationRestoreDBClusterToPointInTimeMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRestoreDBClusterToPointInTimeValidationMiddleware(stack); err != nil {
 		return err
 	}

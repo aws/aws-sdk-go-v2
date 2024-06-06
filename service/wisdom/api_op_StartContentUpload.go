@@ -141,9 +141,6 @@ func (c *Client) addOperationStartContentUploadMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartContentUploadValidationMiddleware(stack); err != nil {
 		return err
 	}

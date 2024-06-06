@@ -201,9 +201,6 @@ func (c *Client) addOperationCreateDocumentClassifierMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateDocumentClassifierMiddleware(stack, options); err != nil {
 		return err
 	}

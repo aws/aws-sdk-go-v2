@@ -103,9 +103,6 @@ func (c *Client) addOperationDeleteRecoveryInstanceMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteRecoveryInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

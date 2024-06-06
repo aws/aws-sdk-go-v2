@@ -162,9 +162,6 @@ func (c *Client) addOperationCreateChannelGroupMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateChannelGroupMiddleware(stack, options); err != nil {
 		return err
 	}

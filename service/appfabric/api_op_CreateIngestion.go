@@ -168,9 +168,6 @@ func (c *Client) addOperationCreateIngestionMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateIngestionMiddleware(stack, options); err != nil {
 		return err
 	}

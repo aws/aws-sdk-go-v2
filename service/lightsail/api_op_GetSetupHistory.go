@@ -122,9 +122,6 @@ func (c *Client) addOperationGetSetupHistoryMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetSetupHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}

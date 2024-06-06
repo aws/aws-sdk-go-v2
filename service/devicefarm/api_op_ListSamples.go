@@ -117,9 +117,6 @@ func (c *Client) addOperationListSamplesMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListSamplesValidationMiddleware(stack); err != nil {
 		return err
 	}

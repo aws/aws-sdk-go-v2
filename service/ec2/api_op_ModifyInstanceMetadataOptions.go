@@ -176,9 +176,6 @@ func (c *Client) addOperationModifyInstanceMetadataOptionsMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpModifyInstanceMetadataOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}

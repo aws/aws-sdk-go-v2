@@ -143,9 +143,6 @@ func (c *Client) addOperationListAccountsForParentMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListAccountsForParentValidationMiddleware(stack); err != nil {
 		return err
 	}

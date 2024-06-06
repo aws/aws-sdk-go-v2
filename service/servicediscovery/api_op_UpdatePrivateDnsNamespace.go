@@ -120,9 +120,6 @@ func (c *Client) addOperationUpdatePrivateDnsNamespaceMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opUpdatePrivateDnsNamespaceMiddleware(stack, options); err != nil {
 		return err
 	}

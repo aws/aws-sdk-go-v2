@@ -135,9 +135,6 @@ func (c *Client) addOperationGetLicenseEndpointMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opGetLicenseEndpointMiddleware(stack); err != nil {
 		return err
 	}

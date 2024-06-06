@@ -106,9 +106,6 @@ func (c *Client) addOperationGetSiteMiddlewares(stack *middleware.Stack, options
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetSiteValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -124,9 +124,6 @@ func (c *Client) addOperationCreateResourcePolicyMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateResourcePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -124,9 +124,6 @@ func (c *Client) addOperationModifyVerifiedAccessGroupMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opModifyVerifiedAccessGroupMiddleware(stack, options); err != nil {
 		return err
 	}

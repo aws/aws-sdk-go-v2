@@ -106,9 +106,6 @@ func (c *Client) addOperationDeleteLiveSourceMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteLiveSourceValidationMiddleware(stack); err != nil {
 		return err
 	}

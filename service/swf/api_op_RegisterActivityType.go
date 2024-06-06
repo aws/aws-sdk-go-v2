@@ -211,9 +211,6 @@ func (c *Client) addOperationRegisterActivityTypeMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRegisterActivityTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -145,9 +145,6 @@ func (c *Client) addOperationAddDraftAppVersionResourceMappingsMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAddDraftAppVersionResourceMappingsValidationMiddleware(stack); err != nil {
 		return err
 	}

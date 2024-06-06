@@ -107,9 +107,6 @@ func (c *Client) addOperationDescribeDocumentClassifierMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeDocumentClassifierValidationMiddleware(stack); err != nil {
 		return err
 	}

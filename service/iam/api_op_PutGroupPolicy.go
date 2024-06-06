@@ -160,9 +160,6 @@ func (c *Client) addOperationPutGroupPolicyMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutGroupPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -103,9 +103,6 @@ func (c *Client) addOperationDisableImportFindingsForProductMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDisableImportFindingsForProductValidationMiddleware(stack); err != nil {
 		return err
 	}

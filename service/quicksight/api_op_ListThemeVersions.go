@@ -127,9 +127,6 @@ func (c *Client) addOperationListThemeVersionsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListThemeVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -109,9 +109,6 @@ func (c *Client) addOperationGetComponentPolicyMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetComponentPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

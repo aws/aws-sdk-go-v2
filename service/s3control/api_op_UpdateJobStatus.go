@@ -160,9 +160,6 @@ func (c *Client) addOperationUpdateJobStatusMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opUpdateJobStatusMiddleware(stack); err != nil {
 		return err
 	}

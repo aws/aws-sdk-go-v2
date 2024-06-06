@@ -99,9 +99,6 @@ func (c *Client) addOperationMalformedTimestampQueryHttpDateMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpMalformedTimestampQueryHttpDateValidationMiddleware(stack); err != nil {
 		return err
 	}

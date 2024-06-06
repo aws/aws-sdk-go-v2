@@ -152,9 +152,6 @@ func (c *Client) addOperationCreateUpdatedImageMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateUpdatedImageValidationMiddleware(stack); err != nil {
 		return err
 	}

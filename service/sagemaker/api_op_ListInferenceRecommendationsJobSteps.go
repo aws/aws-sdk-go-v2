@@ -129,9 +129,6 @@ func (c *Client) addOperationListInferenceRecommendationsJobStepsMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListInferenceRecommendationsJobStepsValidationMiddleware(stack); err != nil {
 		return err
 	}

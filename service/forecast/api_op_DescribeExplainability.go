@@ -171,9 +171,6 @@ func (c *Client) addOperationDescribeExplainabilityMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeExplainabilityValidationMiddleware(stack); err != nil {
 		return err
 	}

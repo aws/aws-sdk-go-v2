@@ -166,9 +166,6 @@ func (c *Client) addOperationImportLensMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opImportLensMiddleware(stack, options); err != nil {
 		return err
 	}

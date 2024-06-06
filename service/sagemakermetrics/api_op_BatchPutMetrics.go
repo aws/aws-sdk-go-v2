@@ -112,9 +112,6 @@ func (c *Client) addOperationBatchPutMetricsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpBatchPutMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}

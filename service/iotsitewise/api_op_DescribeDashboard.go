@@ -148,9 +148,6 @@ func (c *Client) addOperationDescribeDashboardMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDescribeDashboardMiddleware(stack); err != nil {
 		return err
 	}

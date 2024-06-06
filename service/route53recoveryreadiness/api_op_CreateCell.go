@@ -127,9 +127,6 @@ func (c *Client) addOperationCreateCellMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateCellValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -108,9 +108,6 @@ func (c *Client) addOperationDeleteImageRecipeMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteImageRecipeValidationMiddleware(stack); err != nil {
 		return err
 	}

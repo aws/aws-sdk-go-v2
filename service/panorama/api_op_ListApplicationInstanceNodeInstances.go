@@ -116,9 +116,6 @@ func (c *Client) addOperationListApplicationInstanceNodeInstancesMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListApplicationInstanceNodeInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}

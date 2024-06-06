@@ -114,9 +114,6 @@ func (c *Client) addOperationDescribeCachediSCSIVolumesMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeCachediSCSIVolumesValidationMiddleware(stack); err != nil {
 		return err
 	}

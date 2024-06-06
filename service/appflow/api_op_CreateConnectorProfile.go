@@ -156,9 +156,6 @@ func (c *Client) addOperationCreateConnectorProfileMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateConnectorProfileMiddleware(stack, options); err != nil {
 		return err
 	}

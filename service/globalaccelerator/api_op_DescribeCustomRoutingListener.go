@@ -106,9 +106,6 @@ func (c *Client) addOperationDescribeCustomRoutingListenerMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeCustomRoutingListenerValidationMiddleware(stack); err != nil {
 		return err
 	}

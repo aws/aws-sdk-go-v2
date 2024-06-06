@@ -139,9 +139,6 @@ func (c *Client) addOperationDescribeDBSecurityGroupsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeDBSecurityGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}

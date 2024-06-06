@@ -138,9 +138,6 @@ func (c *Client) addOperationDeleteXssMatchSetMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteXssMatchSetValidationMiddleware(stack); err != nil {
 		return err
 	}

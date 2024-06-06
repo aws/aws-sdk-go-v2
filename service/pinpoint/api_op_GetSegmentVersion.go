@@ -121,9 +121,6 @@ func (c *Client) addOperationGetSegmentVersionMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetSegmentVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

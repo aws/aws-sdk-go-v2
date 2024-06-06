@@ -126,9 +126,6 @@ func (c *Client) addOperationGetSystemTemplateRevisionsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetSystemTemplateRevisionsValidationMiddleware(stack); err != nil {
 		return err
 	}

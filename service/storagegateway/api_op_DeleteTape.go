@@ -121,9 +121,6 @@ func (c *Client) addOperationDeleteTapeMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteTapeValidationMiddleware(stack); err != nil {
 		return err
 	}

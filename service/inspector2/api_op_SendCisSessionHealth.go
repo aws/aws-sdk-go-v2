@@ -110,9 +110,6 @@ func (c *Client) addOperationSendCisSessionHealthMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpSendCisSessionHealthValidationMiddleware(stack); err != nil {
 		return err
 	}

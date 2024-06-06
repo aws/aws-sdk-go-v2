@@ -130,9 +130,6 @@ func (c *Client) addOperationUpdateRotationMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateRotationValidationMiddleware(stack); err != nil {
 		return err
 	}

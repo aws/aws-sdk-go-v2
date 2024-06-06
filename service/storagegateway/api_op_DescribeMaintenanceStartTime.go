@@ -143,9 +143,6 @@ func (c *Client) addOperationDescribeMaintenanceStartTimeMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeMaintenanceStartTimeValidationMiddleware(stack); err != nil {
 		return err
 	}

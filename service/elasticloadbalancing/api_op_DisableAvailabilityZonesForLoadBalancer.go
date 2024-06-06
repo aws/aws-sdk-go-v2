@@ -125,9 +125,6 @@ func (c *Client) addOperationDisableAvailabilityZonesForLoadBalancerMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDisableAvailabilityZonesForLoadBalancerValidationMiddleware(stack); err != nil {
 		return err
 	}

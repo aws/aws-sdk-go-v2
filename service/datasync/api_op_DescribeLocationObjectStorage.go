@@ -135,9 +135,6 @@ func (c *Client) addOperationDescribeLocationObjectStorageMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeLocationObjectStorageValidationMiddleware(stack); err != nil {
 		return err
 	}

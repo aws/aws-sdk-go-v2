@@ -141,9 +141,6 @@ func (c *Client) addOperationGetGeneratedTemplateMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetGeneratedTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

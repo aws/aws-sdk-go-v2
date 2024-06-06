@@ -119,9 +119,6 @@ func (c *Client) addOperationResetUserPasswordMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opResetUserPasswordMiddleware(stack, options); err != nil {
 		return err
 	}

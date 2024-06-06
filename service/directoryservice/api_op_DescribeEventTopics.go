@@ -118,9 +118,6 @@ func (c *Client) addOperationDescribeEventTopicsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEventTopics(options.Region), middleware.Before); err != nil {
 		return err
 	}

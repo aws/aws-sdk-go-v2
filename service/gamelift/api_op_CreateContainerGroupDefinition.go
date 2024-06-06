@@ -206,9 +206,6 @@ func (c *Client) addOperationCreateContainerGroupDefinitionMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateContainerGroupDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

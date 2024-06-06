@@ -132,9 +132,6 @@ func (c *Client) addOperationDeleteTimeSeriesMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDeleteTimeSeriesMiddleware(stack); err != nil {
 		return err
 	}

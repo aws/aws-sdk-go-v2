@@ -122,9 +122,6 @@ func (c *Client) addOperationCancelEnvironmentDeploymentMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCancelEnvironmentDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}

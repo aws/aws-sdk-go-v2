@@ -180,9 +180,6 @@ func (c *Client) addOperationCreateEventBusMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateEventBusValidationMiddleware(stack); err != nil {
 		return err
 	}

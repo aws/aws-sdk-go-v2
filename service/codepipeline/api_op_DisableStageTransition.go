@@ -126,9 +126,6 @@ func (c *Client) addOperationDisableStageTransitionMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDisableStageTransitionValidationMiddleware(stack); err != nil {
 		return err
 	}

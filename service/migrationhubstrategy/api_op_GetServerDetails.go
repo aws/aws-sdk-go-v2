@@ -124,9 +124,6 @@ func (c *Client) addOperationGetServerDetailsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetServerDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}

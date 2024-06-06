@@ -193,9 +193,6 @@ func (c *Client) addOperationUpdateGuardrailMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateGuardrailValidationMiddleware(stack); err != nil {
 		return err
 	}

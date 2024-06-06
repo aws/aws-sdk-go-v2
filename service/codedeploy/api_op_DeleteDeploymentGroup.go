@@ -119,9 +119,6 @@ func (c *Client) addOperationDeleteDeploymentGroupMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteDeploymentGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

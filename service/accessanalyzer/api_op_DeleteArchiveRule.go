@@ -110,9 +110,6 @@ func (c *Client) addOperationDeleteArchiveRuleMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opDeleteArchiveRuleMiddleware(stack, options); err != nil {
 		return err
 	}

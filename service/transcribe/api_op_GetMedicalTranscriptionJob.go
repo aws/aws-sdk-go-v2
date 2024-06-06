@@ -116,9 +116,6 @@ func (c *Client) addOperationGetMedicalTranscriptionJobMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetMedicalTranscriptionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -103,9 +103,6 @@ func (c *Client) addOperationCreateDataCellsFilterMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateDataCellsFilterValidationMiddleware(stack); err != nil {
 		return err
 	}

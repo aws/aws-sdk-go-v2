@@ -131,9 +131,6 @@ func (c *Client) addOperationDescribeDocumentVersionsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeDocumentVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

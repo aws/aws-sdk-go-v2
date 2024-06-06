@@ -190,9 +190,6 @@ func (c *Client) addOperationCreateAssetModelCompositeModelMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opCreateAssetModelCompositeModelMiddleware(stack); err != nil {
 		return err
 	}

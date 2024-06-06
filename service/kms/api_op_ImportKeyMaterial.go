@@ -270,9 +270,6 @@ func (c *Client) addOperationImportKeyMaterialMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpImportKeyMaterialValidationMiddleware(stack); err != nil {
 		return err
 	}

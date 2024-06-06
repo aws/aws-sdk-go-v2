@@ -139,9 +139,6 @@ func (c *Client) addOperationGetAccuracyMetricsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetAccuracyMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}

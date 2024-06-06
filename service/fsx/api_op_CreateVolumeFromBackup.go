@@ -124,9 +124,6 @@ func (c *Client) addOperationCreateVolumeFromBackupMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateVolumeFromBackupMiddleware(stack, options); err != nil {
 		return err
 	}

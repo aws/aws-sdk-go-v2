@@ -174,9 +174,6 @@ func (c *Client) addOperationUpdateLaunchConfigurationMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateLaunchConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

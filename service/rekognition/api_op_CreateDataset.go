@@ -145,9 +145,6 @@ func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateDatasetValidationMiddleware(stack); err != nil {
 		return err
 	}

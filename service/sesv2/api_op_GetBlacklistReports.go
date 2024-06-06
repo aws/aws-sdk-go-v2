@@ -114,9 +114,6 @@ func (c *Client) addOperationGetBlacklistReportsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetBlacklistReportsValidationMiddleware(stack); err != nil {
 		return err
 	}

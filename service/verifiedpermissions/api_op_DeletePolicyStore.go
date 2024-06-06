@@ -104,9 +104,6 @@ func (c *Client) addOperationDeletePolicyStoreMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeletePolicyStoreValidationMiddleware(stack); err != nil {
 		return err
 	}

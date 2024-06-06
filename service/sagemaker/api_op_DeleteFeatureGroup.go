@@ -111,9 +111,6 @@ func (c *Client) addOperationDeleteFeatureGroupMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteFeatureGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

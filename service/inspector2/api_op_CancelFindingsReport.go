@@ -107,9 +107,6 @@ func (c *Client) addOperationCancelFindingsReportMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCancelFindingsReportValidationMiddleware(stack); err != nil {
 		return err
 	}

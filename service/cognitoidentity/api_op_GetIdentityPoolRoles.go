@@ -120,9 +120,6 @@ func (c *Client) addOperationGetIdentityPoolRolesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetIdentityPoolRolesValidationMiddleware(stack); err != nil {
 		return err
 	}

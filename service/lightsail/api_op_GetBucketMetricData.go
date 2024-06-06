@@ -193,9 +193,6 @@ func (c *Client) addOperationGetBucketMetricDataMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetBucketMetricDataValidationMiddleware(stack); err != nil {
 		return err
 	}

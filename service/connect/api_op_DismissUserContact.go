@@ -117,9 +117,6 @@ func (c *Client) addOperationDismissUserContactMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDismissUserContactValidationMiddleware(stack); err != nil {
 		return err
 	}

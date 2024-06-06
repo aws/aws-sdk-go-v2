@@ -117,9 +117,6 @@ func (c *Client) addOperationGetAssociatedEnclaveCertificateIamRolesMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetAssociatedEnclaveCertificateIamRolesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -120,9 +120,6 @@ func (c *Client) addOperationUpdateCompanyNetworkConfigurationMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateCompanyNetworkConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

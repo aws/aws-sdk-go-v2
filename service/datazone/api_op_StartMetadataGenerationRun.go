@@ -152,9 +152,6 @@ func (c *Client) addOperationStartMetadataGenerationRunMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opStartMetadataGenerationRunMiddleware(stack, options); err != nil {
 		return err
 	}

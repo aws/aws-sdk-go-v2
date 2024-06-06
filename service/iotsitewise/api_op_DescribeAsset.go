@@ -180,9 +180,6 @@ func (c *Client) addOperationDescribeAssetMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDescribeAssetMiddleware(stack); err != nil {
 		return err
 	}

@@ -102,9 +102,6 @@ func (c *Client) addOperationDeleteSinkMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteSinkValidationMiddleware(stack); err != nil {
 		return err
 	}

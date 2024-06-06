@@ -113,9 +113,6 @@ func (c *Client) addOperationCancelElasticsearchServiceSoftwareUpdateMiddlewares
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCancelElasticsearchServiceSoftwareUpdateValidationMiddleware(stack); err != nil {
 		return err
 	}

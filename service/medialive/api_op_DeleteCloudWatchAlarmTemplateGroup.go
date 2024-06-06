@@ -105,9 +105,6 @@ func (c *Client) addOperationDeleteCloudWatchAlarmTemplateGroupMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteCloudWatchAlarmTemplateGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

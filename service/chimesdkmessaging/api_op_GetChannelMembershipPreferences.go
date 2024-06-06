@@ -131,9 +131,6 @@ func (c *Client) addOperationGetChannelMembershipPreferencesMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetChannelMembershipPreferencesValidationMiddleware(stack); err != nil {
 		return err
 	}

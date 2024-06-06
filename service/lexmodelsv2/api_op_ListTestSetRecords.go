@@ -122,9 +122,6 @@ func (c *Client) addOperationListTestSetRecordsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListTestSetRecordsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -121,9 +121,6 @@ func (c *Client) addOperationCreateTestSetDiscrepancyReportMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateTestSetDiscrepancyReportValidationMiddleware(stack); err != nil {
 		return err
 	}

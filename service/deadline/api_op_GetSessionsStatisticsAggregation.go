@@ -140,9 +140,6 @@ func (c *Client) addOperationGetSessionsStatisticsAggregationMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opGetSessionsStatisticsAggregationMiddleware(stack); err != nil {
 		return err
 	}

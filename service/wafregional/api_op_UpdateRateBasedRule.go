@@ -172,9 +172,6 @@ func (c *Client) addOperationUpdateRateBasedRuleMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateRateBasedRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

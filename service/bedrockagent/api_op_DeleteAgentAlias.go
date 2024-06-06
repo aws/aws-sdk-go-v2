@@ -123,9 +123,6 @@ func (c *Client) addOperationDeleteAgentAliasMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteAgentAliasValidationMiddleware(stack); err != nil {
 		return err
 	}

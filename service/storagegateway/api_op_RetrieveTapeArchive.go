@@ -127,9 +127,6 @@ func (c *Client) addOperationRetrieveTapeArchiveMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRetrieveTapeArchiveValidationMiddleware(stack); err != nil {
 		return err
 	}

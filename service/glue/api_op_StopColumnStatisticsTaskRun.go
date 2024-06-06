@@ -106,9 +106,6 @@ func (c *Client) addOperationStopColumnStatisticsTaskRunMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStopColumnStatisticsTaskRunValidationMiddleware(stack); err != nil {
 		return err
 	}

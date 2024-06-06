@@ -106,9 +106,6 @@ func (c *Client) addOperationStopRxNormInferenceJobMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStopRxNormInferenceJobValidationMiddleware(stack); err != nil {
 		return err
 	}

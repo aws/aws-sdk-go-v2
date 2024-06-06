@@ -120,9 +120,6 @@ func (c *Client) addOperationGetTrafficPolicyMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetTrafficPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

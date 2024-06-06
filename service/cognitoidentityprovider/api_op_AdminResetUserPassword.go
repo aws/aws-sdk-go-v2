@@ -189,9 +189,6 @@ func (c *Client) addOperationAdminResetUserPasswordMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAdminResetUserPasswordValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -125,9 +125,6 @@ func (c *Client) addOperationDescribeDiscoveryJobMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDescribeDiscoveryJobMiddleware(stack); err != nil {
 		return err
 	}

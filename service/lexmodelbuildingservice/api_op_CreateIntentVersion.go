@@ -186,9 +186,6 @@ func (c *Client) addOperationCreateIntentVersionMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateIntentVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

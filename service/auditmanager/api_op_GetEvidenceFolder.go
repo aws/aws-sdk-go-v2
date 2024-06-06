@@ -116,9 +116,6 @@ func (c *Client) addOperationGetEvidenceFolderMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetEvidenceFolderValidationMiddleware(stack); err != nil {
 		return err
 	}

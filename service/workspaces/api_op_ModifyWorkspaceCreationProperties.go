@@ -107,9 +107,6 @@ func (c *Client) addOperationModifyWorkspaceCreationPropertiesMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpModifyWorkspaceCreationPropertiesValidationMiddleware(stack); err != nil {
 		return err
 	}

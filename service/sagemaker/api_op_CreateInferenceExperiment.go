@@ -225,9 +225,6 @@ func (c *Client) addOperationCreateInferenceExperimentMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateInferenceExperimentValidationMiddleware(stack); err != nil {
 		return err
 	}

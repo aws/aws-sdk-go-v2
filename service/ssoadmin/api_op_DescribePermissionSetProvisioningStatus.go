@@ -114,9 +114,6 @@ func (c *Client) addOperationDescribePermissionSetProvisioningStatusMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribePermissionSetProvisioningStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

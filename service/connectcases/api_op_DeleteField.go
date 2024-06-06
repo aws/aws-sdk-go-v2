@@ -143,9 +143,6 @@ func (c *Client) addOperationDeleteFieldMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteFieldValidationMiddleware(stack); err != nil {
 		return err
 	}

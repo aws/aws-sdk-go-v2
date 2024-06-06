@@ -103,9 +103,6 @@ func (c *Client) addOperationFlushApiCacheMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpFlushApiCacheValidationMiddleware(stack); err != nil {
 		return err
 	}

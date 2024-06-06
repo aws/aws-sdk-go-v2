@@ -125,9 +125,6 @@ func (c *Client) addOperationListExperienceEntitiesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListExperienceEntitiesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -187,9 +187,6 @@ func (c *Client) addOperationGetBatchPredictionMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetBatchPredictionValidationMiddleware(stack); err != nil {
 		return err
 	}

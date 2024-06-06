@@ -104,9 +104,6 @@ func (c *Client) addOperationMalformedFloatMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpMalformedFloatValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -211,9 +211,6 @@ func (c *Client) addOperationSearchPlaceIndexForSuggestionsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opSearchPlaceIndexForSuggestionsMiddleware(stack); err != nil {
 		return err
 	}

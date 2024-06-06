@@ -119,9 +119,6 @@ func (c *Client) addOperationListPipelineParametersForExecutionMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListPipelineParametersForExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}

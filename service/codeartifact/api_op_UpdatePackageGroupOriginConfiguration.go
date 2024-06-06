@@ -139,9 +139,6 @@ func (c *Client) addOperationUpdatePackageGroupOriginConfigurationMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdatePackageGroupOriginConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

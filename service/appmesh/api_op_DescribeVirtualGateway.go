@@ -120,9 +120,6 @@ func (c *Client) addOperationDescribeVirtualGatewayMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeVirtualGatewayValidationMiddleware(stack); err != nil {
 		return err
 	}

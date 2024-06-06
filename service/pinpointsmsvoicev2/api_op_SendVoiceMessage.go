@@ -154,9 +154,6 @@ func (c *Client) addOperationSendVoiceMessageMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpSendVoiceMessageValidationMiddleware(stack); err != nil {
 		return err
 	}

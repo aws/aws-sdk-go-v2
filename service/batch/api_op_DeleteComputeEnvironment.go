@@ -108,9 +108,6 @@ func (c *Client) addOperationDeleteComputeEnvironmentMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteComputeEnvironmentValidationMiddleware(stack); err != nil {
 		return err
 	}

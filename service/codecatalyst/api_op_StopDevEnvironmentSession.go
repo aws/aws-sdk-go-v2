@@ -135,9 +135,6 @@ func (c *Client) addOperationStopDevEnvironmentSessionMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStopDevEnvironmentSessionValidationMiddleware(stack); err != nil {
 		return err
 	}

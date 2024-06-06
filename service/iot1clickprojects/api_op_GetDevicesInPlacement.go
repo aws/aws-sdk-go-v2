@@ -112,9 +112,6 @@ func (c *Client) addOperationGetDevicesInPlacementMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetDevicesInPlacementValidationMiddleware(stack); err != nil {
 		return err
 	}

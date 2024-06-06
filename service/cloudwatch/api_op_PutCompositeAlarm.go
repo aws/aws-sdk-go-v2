@@ -322,9 +322,6 @@ func (c *Client) addOperationPutCompositeAlarmMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutCompositeAlarmValidationMiddleware(stack); err != nil {
 		return err
 	}

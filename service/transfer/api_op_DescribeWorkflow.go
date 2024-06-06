@@ -108,9 +108,6 @@ func (c *Client) addOperationDescribeWorkflowMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeWorkflowValidationMiddleware(stack); err != nil {
 		return err
 	}

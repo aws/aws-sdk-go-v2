@@ -117,9 +117,6 @@ func (c *Client) addOperationListEnvironmentVpcsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListEnvironmentVpcsValidationMiddleware(stack); err != nil {
 		return err
 	}

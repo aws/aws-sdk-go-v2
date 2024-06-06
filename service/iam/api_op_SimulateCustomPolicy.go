@@ -337,9 +337,6 @@ func (c *Client) addOperationSimulateCustomPolicyMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpSimulateCustomPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

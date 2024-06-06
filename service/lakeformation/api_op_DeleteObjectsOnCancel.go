@@ -131,9 +131,6 @@ func (c *Client) addOperationDeleteObjectsOnCancelMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteObjectsOnCancelValidationMiddleware(stack); err != nil {
 		return err
 	}

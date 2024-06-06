@@ -113,9 +113,6 @@ func (c *Client) addOperationBatchDeleteDetectorMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpBatchDeleteDetectorValidationMiddleware(stack); err != nil {
 		return err
 	}

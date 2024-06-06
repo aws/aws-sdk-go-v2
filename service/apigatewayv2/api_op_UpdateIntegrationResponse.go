@@ -196,9 +196,6 @@ func (c *Client) addOperationUpdateIntegrationResponseMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateIntegrationResponseValidationMiddleware(stack); err != nil {
 		return err
 	}

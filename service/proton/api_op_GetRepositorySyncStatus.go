@@ -131,9 +131,6 @@ func (c *Client) addOperationGetRepositorySyncStatusMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetRepositorySyncStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

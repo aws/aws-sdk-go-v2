@@ -111,9 +111,6 @@ func (c *Client) addOperationDeleteHoursOfOperationMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteHoursOfOperationValidationMiddleware(stack); err != nil {
 		return err
 	}

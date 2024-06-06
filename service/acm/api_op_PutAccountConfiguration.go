@@ -116,9 +116,6 @@ func (c *Client) addOperationPutAccountConfigurationMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutAccountConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

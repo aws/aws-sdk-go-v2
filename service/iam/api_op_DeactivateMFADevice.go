@@ -125,9 +125,6 @@ func (c *Client) addOperationDeactivateMFADeviceMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeactivateMFADeviceValidationMiddleware(stack); err != nil {
 		return err
 	}

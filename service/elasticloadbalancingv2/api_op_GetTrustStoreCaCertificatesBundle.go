@@ -107,9 +107,6 @@ func (c *Client) addOperationGetTrustStoreCaCertificatesBundleMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetTrustStoreCaCertificatesBundleValidationMiddleware(stack); err != nil {
 		return err
 	}

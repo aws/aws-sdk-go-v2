@@ -122,9 +122,6 @@ func (c *Client) addOperationCopyServerlessCacheSnapshotMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCopyServerlessCacheSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}

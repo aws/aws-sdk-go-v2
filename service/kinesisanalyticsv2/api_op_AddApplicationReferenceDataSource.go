@@ -137,9 +137,6 @@ func (c *Client) addOperationAddApplicationReferenceDataSourceMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAddApplicationReferenceDataSourceValidationMiddleware(stack); err != nil {
 		return err
 	}

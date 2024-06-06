@@ -156,9 +156,6 @@ func (c *Client) addOperationDescribeJobTemplateMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeJobTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

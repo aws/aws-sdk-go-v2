@@ -126,9 +126,6 @@ func (c *Client) addOperationDescribeImagePermissionsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeImagePermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -125,9 +125,6 @@ func (c *Client) addOperationUpdateAgentStatusMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateAgentStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

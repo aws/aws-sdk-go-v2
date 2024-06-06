@@ -138,9 +138,6 @@ func (c *Client) addOperationGetBotChannelAssociationsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetBotChannelAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}

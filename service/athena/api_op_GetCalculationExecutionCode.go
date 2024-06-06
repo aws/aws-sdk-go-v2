@@ -105,9 +105,6 @@ func (c *Client) addOperationGetCalculationExecutionCodeMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetCalculationExecutionCodeValidationMiddleware(stack); err != nil {
 		return err
 	}

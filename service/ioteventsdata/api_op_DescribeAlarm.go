@@ -112,9 +112,6 @@ func (c *Client) addOperationDescribeAlarmMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeAlarmValidationMiddleware(stack); err != nil {
 		return err
 	}

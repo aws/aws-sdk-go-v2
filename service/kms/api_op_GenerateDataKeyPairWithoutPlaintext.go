@@ -251,9 +251,6 @@ func (c *Client) addOperationGenerateDataKeyPairWithoutPlaintextMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGenerateDataKeyPairWithoutPlaintextValidationMiddleware(stack); err != nil {
 		return err
 	}

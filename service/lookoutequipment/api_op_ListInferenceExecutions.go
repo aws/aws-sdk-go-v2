@@ -137,9 +137,6 @@ func (c *Client) addOperationListInferenceExecutionsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListInferenceExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}

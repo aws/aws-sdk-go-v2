@@ -118,9 +118,6 @@ func (c *Client) addOperationUpdateStorageVirtualMachineMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opUpdateStorageVirtualMachineMiddleware(stack, options); err != nil {
 		return err
 	}

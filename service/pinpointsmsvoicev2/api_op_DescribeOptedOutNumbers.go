@@ -140,9 +140,6 @@ func (c *Client) addOperationDescribeOptedOutNumbersMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeOptedOutNumbersValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -167,9 +167,6 @@ func (c *Client) addOperationDescribeStateMachineForExecutionMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeStateMachineForExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}

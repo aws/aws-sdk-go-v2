@@ -129,9 +129,6 @@ func (c *Client) addOperationListTableStorageOptimizersMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListTableStorageOptimizersValidationMiddleware(stack); err != nil {
 		return err
 	}

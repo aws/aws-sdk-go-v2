@@ -129,9 +129,6 @@ func (c *Client) addOperationListAccountsForProvisionedPermissionSetMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListAccountsForProvisionedPermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -137,9 +137,6 @@ func (c *Client) addOperationDescribeCertificateAuthorityAuditReportMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeCertificateAuthorityAuditReportValidationMiddleware(stack); err != nil {
 		return err
 	}

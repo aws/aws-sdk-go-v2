@@ -130,9 +130,6 @@ func (c *Client) addOperationListResourcesForWebACLMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListResourcesForWebACLValidationMiddleware(stack); err != nil {
 		return err
 	}

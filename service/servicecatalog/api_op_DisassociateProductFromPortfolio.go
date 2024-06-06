@@ -115,9 +115,6 @@ func (c *Client) addOperationDisassociateProductFromPortfolioMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDisassociateProductFromPortfolioValidationMiddleware(stack); err != nil {
 		return err
 	}

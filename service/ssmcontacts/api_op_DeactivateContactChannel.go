@@ -102,9 +102,6 @@ func (c *Client) addOperationDeactivateContactChannelMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeactivateContactChannelValidationMiddleware(stack); err != nil {
 		return err
 	}

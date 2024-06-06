@@ -131,9 +131,6 @@ func (c *Client) addOperationRegisterToWorkMailMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRegisterToWorkMailValidationMiddleware(stack); err != nil {
 		return err
 	}

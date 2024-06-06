@@ -146,9 +146,6 @@ func (c *Client) addOperationPutGroupMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

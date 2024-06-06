@@ -110,9 +110,6 @@ func (c *Client) addOperationUpdateExpirationForHITMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateExpirationForHITValidationMiddleware(stack); err != nil {
 		return err
 	}

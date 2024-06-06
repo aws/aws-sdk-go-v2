@@ -198,9 +198,6 @@ func (c *Client) addOperationGetCelebrityRecognitionMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetCelebrityRecognitionValidationMiddleware(stack); err != nil {
 		return err
 	}

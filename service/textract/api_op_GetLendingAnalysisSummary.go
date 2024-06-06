@@ -138,9 +138,6 @@ func (c *Client) addOperationGetLendingAnalysisSummaryMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetLendingAnalysisSummaryValidationMiddleware(stack); err != nil {
 		return err
 	}

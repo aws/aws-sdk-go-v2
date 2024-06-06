@@ -114,9 +114,6 @@ func (c *Client) addOperationPutManagedInsightRulesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutManagedInsightRulesValidationMiddleware(stack); err != nil {
 		return err
 	}

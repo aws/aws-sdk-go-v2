@@ -129,9 +129,6 @@ func (c *Client) addOperationListSharedEndpointsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListSharedEndpointsValidationMiddleware(stack); err != nil {
 		return err
 	}

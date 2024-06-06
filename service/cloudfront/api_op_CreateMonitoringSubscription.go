@@ -118,9 +118,6 @@ func (c *Client) addOperationCreateMonitoringSubscriptionMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateMonitoringSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}

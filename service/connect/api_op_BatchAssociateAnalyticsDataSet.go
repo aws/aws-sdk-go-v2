@@ -128,9 +128,6 @@ func (c *Client) addOperationBatchAssociateAnalyticsDataSetMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpBatchAssociateAnalyticsDataSetValidationMiddleware(stack); err != nil {
 		return err
 	}

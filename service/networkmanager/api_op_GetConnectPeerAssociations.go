@@ -118,9 +118,6 @@ func (c *Client) addOperationGetConnectPeerAssociationsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetConnectPeerAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}

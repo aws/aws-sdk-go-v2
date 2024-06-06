@@ -143,9 +143,6 @@ func (c *Client) addOperationUpdateRestoreTestingPlanMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateRestoreTestingPlanValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -165,9 +165,6 @@ func (c *Client) addOperationRefreshCacheMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRefreshCacheValidationMiddleware(stack); err != nil {
 		return err
 	}

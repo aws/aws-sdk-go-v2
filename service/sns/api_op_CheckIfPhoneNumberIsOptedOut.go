@@ -118,9 +118,6 @@ func (c *Client) addOperationCheckIfPhoneNumberIsOptedOutMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCheckIfPhoneNumberIsOptedOutValidationMiddleware(stack); err != nil {
 		return err
 	}

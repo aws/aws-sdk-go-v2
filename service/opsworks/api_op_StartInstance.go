@@ -108,9 +108,6 @@ func (c *Client) addOperationStartInstanceMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

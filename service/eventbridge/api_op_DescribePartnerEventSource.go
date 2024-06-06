@@ -113,9 +113,6 @@ func (c *Client) addOperationDescribePartnerEventSourceMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribePartnerEventSourceValidationMiddleware(stack); err != nil {
 		return err
 	}

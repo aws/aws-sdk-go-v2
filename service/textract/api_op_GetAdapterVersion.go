@@ -170,9 +170,6 @@ func (c *Client) addOperationGetAdapterVersionMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetAdapterVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

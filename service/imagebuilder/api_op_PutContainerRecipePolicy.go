@@ -122,9 +122,6 @@ func (c *Client) addOperationPutContainerRecipePolicyMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutContainerRecipePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

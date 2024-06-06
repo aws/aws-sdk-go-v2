@@ -132,9 +132,6 @@ func (c *Client) addOperationListAWSDefaultServiceQuotasMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListAWSDefaultServiceQuotasValidationMiddleware(stack); err != nil {
 		return err
 	}

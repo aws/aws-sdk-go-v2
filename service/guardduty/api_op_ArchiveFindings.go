@@ -110,9 +110,6 @@ func (c *Client) addOperationArchiveFindingsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpArchiveFindingsValidationMiddleware(stack); err != nil {
 		return err
 	}

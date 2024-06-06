@@ -136,9 +136,6 @@ func (c *Client) addOperationStartWorkflowRunMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opStartWorkflowRunMiddleware(stack, options); err != nil {
 		return err
 	}

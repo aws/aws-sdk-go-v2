@@ -102,9 +102,6 @@ func (c *Client) addOperationDisableDomainAutoRenewMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDisableDomainAutoRenewValidationMiddleware(stack); err != nil {
 		return err
 	}

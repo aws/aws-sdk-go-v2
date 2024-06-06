@@ -108,9 +108,6 @@ func (c *Client) addOperationAssociateSigninDelegateGroupsWithAccountMiddlewares
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAssociateSigninDelegateGroupsWithAccountValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -224,9 +224,6 @@ func (c *Client) addOperationPutMetricStreamMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutMetricStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

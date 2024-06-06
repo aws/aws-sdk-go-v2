@@ -135,9 +135,6 @@ func (c *Client) addOperationDescribeRegistrationVersionsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeRegistrationVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

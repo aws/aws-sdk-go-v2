@@ -147,9 +147,6 @@ func (c *Client) addOperationSignalWorkflowExecutionMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpSignalWorkflowExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -113,9 +113,6 @@ func (c *Client) addOperationDeregisterPatchBaselineForPatchGroupMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeregisterPatchBaselineForPatchGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

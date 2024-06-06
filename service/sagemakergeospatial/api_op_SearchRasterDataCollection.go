@@ -130,9 +130,6 @@ func (c *Client) addOperationSearchRasterDataCollectionMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpSearchRasterDataCollectionValidationMiddleware(stack); err != nil {
 		return err
 	}

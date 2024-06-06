@@ -118,9 +118,6 @@ func (c *Client) addOperationDeleteCustomRoutingAcceleratorMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteCustomRoutingAcceleratorValidationMiddleware(stack); err != nil {
 		return err
 	}

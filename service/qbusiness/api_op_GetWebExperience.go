@@ -164,9 +164,6 @@ func (c *Client) addOperationGetWebExperienceMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetWebExperienceValidationMiddleware(stack); err != nil {
 		return err
 	}

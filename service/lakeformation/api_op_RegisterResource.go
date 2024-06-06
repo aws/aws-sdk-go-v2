@@ -137,9 +137,6 @@ func (c *Client) addOperationRegisterResourceMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRegisterResourceValidationMiddleware(stack); err != nil {
 		return err
 	}

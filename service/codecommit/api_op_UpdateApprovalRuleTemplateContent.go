@@ -121,9 +121,6 @@ func (c *Client) addOperationUpdateApprovalRuleTemplateContentMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateApprovalRuleTemplateContentValidationMiddleware(stack); err != nil {
 		return err
 	}

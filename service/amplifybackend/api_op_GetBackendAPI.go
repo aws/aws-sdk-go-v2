@@ -132,9 +132,6 @@ func (c *Client) addOperationGetBackendAPIMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetBackendAPIValidationMiddleware(stack); err != nil {
 		return err
 	}

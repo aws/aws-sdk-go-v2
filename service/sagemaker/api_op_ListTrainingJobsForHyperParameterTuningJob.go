@@ -139,9 +139,6 @@ func (c *Client) addOperationListTrainingJobsForHyperParameterTuningJobMiddlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListTrainingJobsForHyperParameterTuningJobValidationMiddleware(stack); err != nil {
 		return err
 	}

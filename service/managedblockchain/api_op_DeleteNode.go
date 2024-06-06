@@ -118,9 +118,6 @@ func (c *Client) addOperationDeleteNodeMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteNodeValidationMiddleware(stack); err != nil {
 		return err
 	}

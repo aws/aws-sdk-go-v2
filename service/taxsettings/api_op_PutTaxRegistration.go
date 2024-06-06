@@ -235,9 +235,6 @@ func (c *Client) addOperationPutTaxRegistrationMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutTaxRegistrationValidationMiddleware(stack); err != nil {
 		return err
 	}

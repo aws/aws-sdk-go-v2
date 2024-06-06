@@ -145,9 +145,6 @@ func (c *Client) addOperationPutRemediationConfigurationsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutRemediationConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}

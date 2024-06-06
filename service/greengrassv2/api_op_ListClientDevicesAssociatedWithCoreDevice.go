@@ -118,9 +118,6 @@ func (c *Client) addOperationListClientDevicesAssociatedWithCoreDeviceMiddleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListClientDevicesAssociatedWithCoreDeviceValidationMiddleware(stack); err != nil {
 		return err
 	}

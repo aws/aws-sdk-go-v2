@@ -126,9 +126,6 @@ func (c *Client) addOperationGetAssetPropertyValueMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opGetAssetPropertyValueMiddleware(stack); err != nil {
 		return err
 	}

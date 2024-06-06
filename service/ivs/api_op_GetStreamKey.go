@@ -106,9 +106,6 @@ func (c *Client) addOperationGetStreamKeyMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetStreamKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

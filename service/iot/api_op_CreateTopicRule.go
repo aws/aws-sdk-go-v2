@@ -124,9 +124,6 @@ func (c *Client) addOperationCreateTopicRuleMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateTopicRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

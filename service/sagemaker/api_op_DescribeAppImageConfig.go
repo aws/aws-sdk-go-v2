@@ -125,9 +125,6 @@ func (c *Client) addOperationDescribeAppImageConfigMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeAppImageConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

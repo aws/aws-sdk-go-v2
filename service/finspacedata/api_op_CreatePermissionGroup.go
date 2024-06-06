@@ -147,9 +147,6 @@ func (c *Client) addOperationCreatePermissionGroupMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreatePermissionGroupMiddleware(stack, options); err != nil {
 		return err
 	}

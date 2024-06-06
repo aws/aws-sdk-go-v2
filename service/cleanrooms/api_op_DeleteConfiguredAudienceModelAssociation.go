@@ -109,9 +109,6 @@ func (c *Client) addOperationDeleteConfiguredAudienceModelAssociationMiddlewares
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteConfiguredAudienceModelAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

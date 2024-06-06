@@ -107,9 +107,6 @@ func (c *Client) addOperationDeletePreparedStatementMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeletePreparedStatementValidationMiddleware(stack); err != nil {
 		return err
 	}

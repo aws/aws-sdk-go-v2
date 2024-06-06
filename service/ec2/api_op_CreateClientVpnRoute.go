@@ -146,9 +146,6 @@ func (c *Client) addOperationCreateClientVpnRouteMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateClientVpnRouteMiddleware(stack, options); err != nil {
 		return err
 	}

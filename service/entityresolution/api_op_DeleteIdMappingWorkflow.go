@@ -108,9 +108,6 @@ func (c *Client) addOperationDeleteIdMappingWorkflowMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteIdMappingWorkflowValidationMiddleware(stack); err != nil {
 		return err
 	}

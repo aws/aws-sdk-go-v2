@@ -109,9 +109,6 @@ func (c *Client) addOperationGetJobQueueSnapshotMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetJobQueueSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}

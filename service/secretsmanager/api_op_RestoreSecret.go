@@ -125,9 +125,6 @@ func (c *Client) addOperationRestoreSecretMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRestoreSecretValidationMiddleware(stack); err != nil {
 		return err
 	}

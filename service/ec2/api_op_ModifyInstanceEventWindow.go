@@ -154,9 +154,6 @@ func (c *Client) addOperationModifyInstanceEventWindowMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpModifyInstanceEventWindowValidationMiddleware(stack); err != nil {
 		return err
 	}

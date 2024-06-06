@@ -162,9 +162,6 @@ func (c *Client) addOperationCreateLocationFsxWindowsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateLocationFsxWindowsValidationMiddleware(stack); err != nil {
 		return err
 	}

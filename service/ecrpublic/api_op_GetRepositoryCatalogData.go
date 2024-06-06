@@ -112,9 +112,6 @@ func (c *Client) addOperationGetRepositoryCatalogDataMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetRepositoryCatalogDataValidationMiddleware(stack); err != nil {
 		return err
 	}

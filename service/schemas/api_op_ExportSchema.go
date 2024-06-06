@@ -121,9 +121,6 @@ func (c *Client) addOperationExportSchemaMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpExportSchemaValidationMiddleware(stack); err != nil {
 		return err
 	}

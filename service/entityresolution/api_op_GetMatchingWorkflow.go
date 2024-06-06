@@ -158,9 +158,6 @@ func (c *Client) addOperationGetMatchingWorkflowMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetMatchingWorkflowValidationMiddleware(stack); err != nil {
 		return err
 	}

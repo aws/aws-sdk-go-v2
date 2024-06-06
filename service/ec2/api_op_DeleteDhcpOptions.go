@@ -110,9 +110,6 @@ func (c *Client) addOperationDeleteDhcpOptionsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteDhcpOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}

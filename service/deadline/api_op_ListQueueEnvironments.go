@@ -128,9 +128,6 @@ func (c *Client) addOperationListQueueEnvironmentsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opListQueueEnvironmentsMiddleware(stack); err != nil {
 		return err
 	}

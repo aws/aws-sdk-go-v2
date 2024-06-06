@@ -104,9 +104,6 @@ func (c *Client) addOperationGetTaxRegistrationMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTaxRegistration(options.Region), middleware.Before); err != nil {
 		return err
 	}

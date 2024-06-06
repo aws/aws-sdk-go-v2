@@ -119,9 +119,6 @@ func (c *Client) addOperationGetOriginRequestPolicyConfigMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetOriginRequestPolicyConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

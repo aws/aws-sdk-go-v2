@@ -152,9 +152,6 @@ func (c *Client) addOperationDisableFastLaunchMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDisableFastLaunchValidationMiddleware(stack); err != nil {
 		return err
 	}

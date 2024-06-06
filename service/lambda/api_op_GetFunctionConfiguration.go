@@ -270,9 +270,6 @@ func (c *Client) addOperationGetFunctionConfigurationMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetFunctionConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

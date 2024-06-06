@@ -113,9 +113,6 @@ func (c *Client) addOperationDescribeValidDBInstanceModificationsMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeValidDBInstanceModificationsValidationMiddleware(stack); err != nil {
 		return err
 	}

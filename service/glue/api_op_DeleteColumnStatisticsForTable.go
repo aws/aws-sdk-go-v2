@@ -118,9 +118,6 @@ func (c *Client) addOperationDeleteColumnStatisticsForTableMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteColumnStatisticsForTableValidationMiddleware(stack); err != nil {
 		return err
 	}

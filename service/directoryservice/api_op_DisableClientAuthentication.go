@@ -108,9 +108,6 @@ func (c *Client) addOperationDisableClientAuthenticationMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDisableClientAuthenticationValidationMiddleware(stack); err != nil {
 		return err
 	}

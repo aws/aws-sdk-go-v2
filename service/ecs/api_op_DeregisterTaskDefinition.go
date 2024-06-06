@@ -128,9 +128,6 @@ func (c *Client) addOperationDeregisterTaskDefinitionMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeregisterTaskDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

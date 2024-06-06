@@ -117,9 +117,6 @@ func (c *Client) addOperationListCalculatedAttributeDefinitionsMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListCalculatedAttributeDefinitionsValidationMiddleware(stack); err != nil {
 		return err
 	}

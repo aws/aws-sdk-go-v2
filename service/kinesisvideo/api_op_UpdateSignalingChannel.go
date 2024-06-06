@@ -116,9 +116,6 @@ func (c *Client) addOperationUpdateSignalingChannelMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateSignalingChannelValidationMiddleware(stack); err != nil {
 		return err
 	}

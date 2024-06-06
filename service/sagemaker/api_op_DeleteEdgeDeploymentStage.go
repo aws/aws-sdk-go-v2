@@ -107,9 +107,6 @@ func (c *Client) addOperationDeleteEdgeDeploymentStageMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteEdgeDeploymentStageValidationMiddleware(stack); err != nil {
 		return err
 	}

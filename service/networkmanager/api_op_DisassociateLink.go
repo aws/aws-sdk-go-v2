@@ -117,9 +117,6 @@ func (c *Client) addOperationDisassociateLinkMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDisassociateLinkValidationMiddleware(stack); err != nil {
 		return err
 	}

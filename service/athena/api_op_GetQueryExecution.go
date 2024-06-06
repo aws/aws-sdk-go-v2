@@ -108,9 +108,6 @@ func (c *Client) addOperationGetQueryExecutionMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetQueryExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}

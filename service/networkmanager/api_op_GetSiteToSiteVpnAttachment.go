@@ -106,9 +106,6 @@ func (c *Client) addOperationGetSiteToSiteVpnAttachmentMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetSiteToSiteVpnAttachmentValidationMiddleware(stack); err != nil {
 		return err
 	}

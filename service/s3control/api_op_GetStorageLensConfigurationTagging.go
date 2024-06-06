@@ -134,9 +134,6 @@ func (c *Client) addOperationGetStorageLensConfigurationTaggingMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opGetStorageLensConfigurationTaggingMiddleware(stack); err != nil {
 		return err
 	}

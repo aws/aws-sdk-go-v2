@@ -125,9 +125,6 @@ func (c *Client) addOperationModifyClusterMaintenanceMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpModifyClusterMaintenanceValidationMiddleware(stack); err != nil {
 		return err
 	}

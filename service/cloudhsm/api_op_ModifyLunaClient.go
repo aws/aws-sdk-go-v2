@@ -127,9 +127,6 @@ func (c *Client) addOperationModifyLunaClientMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpModifyLunaClientValidationMiddleware(stack); err != nil {
 		return err
 	}

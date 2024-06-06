@@ -124,9 +124,6 @@ func (c *Client) addOperationDescribeTopicRefreshMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeTopicRefreshValidationMiddleware(stack); err != nil {
 		return err
 	}

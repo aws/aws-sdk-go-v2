@@ -120,9 +120,6 @@ func (c *Client) addOperationListTemplateStepsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListTemplateStepsValidationMiddleware(stack); err != nil {
 		return err
 	}

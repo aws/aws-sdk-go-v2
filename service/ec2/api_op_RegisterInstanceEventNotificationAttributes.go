@@ -117,9 +117,6 @@ func (c *Client) addOperationRegisterInstanceEventNotificationAttributesMiddlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRegisterInstanceEventNotificationAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

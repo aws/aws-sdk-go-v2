@@ -117,9 +117,6 @@ func (c *Client) addOperationListIdentityProvidersMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListIdentityProvidersValidationMiddleware(stack); err != nil {
 		return err
 	}

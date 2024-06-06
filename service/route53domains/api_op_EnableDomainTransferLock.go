@@ -112,9 +112,6 @@ func (c *Client) addOperationEnableDomainTransferLockMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpEnableDomainTransferLockValidationMiddleware(stack); err != nil {
 		return err
 	}

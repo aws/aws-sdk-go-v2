@@ -132,9 +132,6 @@ func (c *Client) addOperationUpdateInferenceSchedulerMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateInferenceSchedulerValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -127,9 +127,6 @@ func (c *Client) addOperationListAssessmentControlInsightsByControlDomainMiddlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListAssessmentControlInsightsByControlDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

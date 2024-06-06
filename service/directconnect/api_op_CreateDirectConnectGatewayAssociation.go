@@ -124,9 +124,6 @@ func (c *Client) addOperationCreateDirectConnectGatewayAssociationMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateDirectConnectGatewayAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

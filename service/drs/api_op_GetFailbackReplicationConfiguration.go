@@ -118,9 +118,6 @@ func (c *Client) addOperationGetFailbackReplicationConfigurationMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetFailbackReplicationConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

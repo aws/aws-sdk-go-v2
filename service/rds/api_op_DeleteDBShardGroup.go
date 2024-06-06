@@ -151,9 +151,6 @@ func (c *Client) addOperationDeleteDBShardGroupMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteDBShardGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

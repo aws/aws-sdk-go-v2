@@ -146,9 +146,6 @@ func (c *Client) addOperationGetSuiteRunMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetSuiteRunValidationMiddleware(stack); err != nil {
 		return err
 	}

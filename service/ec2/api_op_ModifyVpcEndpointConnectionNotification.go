@@ -120,9 +120,6 @@ func (c *Client) addOperationModifyVpcEndpointConnectionNotificationMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpModifyVpcEndpointConnectionNotificationValidationMiddleware(stack); err != nil {
 		return err
 	}

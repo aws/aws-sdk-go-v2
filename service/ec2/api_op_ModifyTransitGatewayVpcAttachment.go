@@ -122,9 +122,6 @@ func (c *Client) addOperationModifyTransitGatewayVpcAttachmentMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpModifyTransitGatewayVpcAttachmentValidationMiddleware(stack); err != nil {
 		return err
 	}

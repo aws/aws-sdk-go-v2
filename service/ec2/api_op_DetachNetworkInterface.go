@@ -125,9 +125,6 @@ func (c *Client) addOperationDetachNetworkInterfaceMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDetachNetworkInterfaceValidationMiddleware(stack); err != nil {
 		return err
 	}

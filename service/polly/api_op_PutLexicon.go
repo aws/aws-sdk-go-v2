@@ -115,9 +115,6 @@ func (c *Client) addOperationPutLexiconMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutLexiconValidationMiddleware(stack); err != nil {
 		return err
 	}

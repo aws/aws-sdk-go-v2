@@ -116,9 +116,6 @@ func (c *Client) addOperationGetPatchBaselineForPatchGroupMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetPatchBaselineForPatchGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

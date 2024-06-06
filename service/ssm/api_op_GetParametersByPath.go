@@ -150,9 +150,6 @@ func (c *Client) addOperationGetParametersByPathMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetParametersByPathValidationMiddleware(stack); err != nil {
 		return err
 	}

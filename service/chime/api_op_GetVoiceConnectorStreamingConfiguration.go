@@ -121,9 +121,6 @@ func (c *Client) addOperationGetVoiceConnectorStreamingConfigurationMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetVoiceConnectorStreamingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

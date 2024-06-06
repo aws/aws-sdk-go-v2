@@ -103,9 +103,6 @@ func (c *Client) addOperationDeleteTranscriptionJobMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteTranscriptionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

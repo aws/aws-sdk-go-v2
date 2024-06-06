@@ -113,9 +113,6 @@ func (c *Client) addOperationBatchGetTriggersMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpBatchGetTriggersValidationMiddleware(stack); err != nil {
 		return err
 	}

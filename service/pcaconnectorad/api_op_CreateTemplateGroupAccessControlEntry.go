@@ -127,9 +127,6 @@ func (c *Client) addOperationCreateTemplateGroupAccessControlEntryMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateTemplateGroupAccessControlEntryMiddleware(stack, options); err != nil {
 		return err
 	}

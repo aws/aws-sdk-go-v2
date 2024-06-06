@@ -122,9 +122,6 @@ func (c *Client) addOperationUntagServerCertificateMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUntagServerCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}

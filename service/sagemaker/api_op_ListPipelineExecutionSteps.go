@@ -123,9 +123,6 @@ func (c *Client) addOperationListPipelineExecutionStepsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPipelineExecutionSteps(options.Region), middleware.Before); err != nil {
 		return err
 	}

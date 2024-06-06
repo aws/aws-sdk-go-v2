@@ -130,9 +130,6 @@ func (c *Client) addOperationPurchaseScheduledInstancesMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opPurchaseScheduledInstancesMiddleware(stack, options); err != nil {
 		return err
 	}

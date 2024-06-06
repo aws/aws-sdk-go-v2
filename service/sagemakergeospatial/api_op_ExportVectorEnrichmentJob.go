@@ -145,9 +145,6 @@ func (c *Client) addOperationExportVectorEnrichmentJobMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opExportVectorEnrichmentJobMiddleware(stack, options); err != nil {
 		return err
 	}

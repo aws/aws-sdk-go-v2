@@ -138,9 +138,6 @@ func (c *Client) addOperationCreateOriginRequestPolicyMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateOriginRequestPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

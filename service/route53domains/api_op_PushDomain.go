@@ -111,9 +111,6 @@ func (c *Client) addOperationPushDomainMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPushDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -191,9 +191,6 @@ func (c *Client) addOperationUpdateNotebookInstanceMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateNotebookInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

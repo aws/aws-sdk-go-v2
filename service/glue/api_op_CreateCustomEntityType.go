@@ -127,9 +127,6 @@ func (c *Client) addOperationCreateCustomEntityTypeMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateCustomEntityTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

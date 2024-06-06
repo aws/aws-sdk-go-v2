@@ -151,9 +151,6 @@ func (c *Client) addOperationDescribeStorageConfigurationMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDescribeStorageConfigurationMiddleware(stack); err != nil {
 		return err
 	}

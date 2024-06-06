@@ -133,9 +133,6 @@ func (c *Client) addOperationRenewDomainMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRenewDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

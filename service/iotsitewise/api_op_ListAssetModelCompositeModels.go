@@ -124,9 +124,6 @@ func (c *Client) addOperationListAssetModelCompositeModelsMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opListAssetModelCompositeModelsMiddleware(stack); err != nil {
 		return err
 	}

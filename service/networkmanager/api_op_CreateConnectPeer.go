@@ -131,9 +131,6 @@ func (c *Client) addOperationCreateConnectPeerMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateConnectPeerMiddleware(stack, options); err != nil {
 		return err
 	}

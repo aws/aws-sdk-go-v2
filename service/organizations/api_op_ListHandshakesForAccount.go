@@ -145,9 +145,6 @@ func (c *Client) addOperationListHandshakesForAccountMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHandshakesForAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}

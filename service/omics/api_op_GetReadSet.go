@@ -117,9 +117,6 @@ func (c *Client) addOperationGetReadSetMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opGetReadSetMiddleware(stack); err != nil {
 		return err
 	}

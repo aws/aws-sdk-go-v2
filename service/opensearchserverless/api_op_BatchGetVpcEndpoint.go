@@ -112,9 +112,6 @@ func (c *Client) addOperationBatchGetVpcEndpointMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpBatchGetVpcEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}

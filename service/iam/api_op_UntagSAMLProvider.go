@@ -118,9 +118,6 @@ func (c *Client) addOperationUntagSAMLProviderMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUntagSAMLProviderValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -154,9 +154,6 @@ func (c *Client) addOperationListMonitoringSchedulesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMonitoringSchedules(options.Region), middleware.Before); err != nil {
 		return err
 	}

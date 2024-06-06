@@ -115,9 +115,6 @@ func (c *Client) addOperationRemoveSourceIdentifierFromSubscriptionMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRemoveSourceIdentifierFromSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}

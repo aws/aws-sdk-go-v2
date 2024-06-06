@@ -101,9 +101,6 @@ func (c *Client) addOperationDeleteRedshiftIdcApplicationMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteRedshiftIdcApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -112,9 +112,6 @@ func (c *Client) addOperationUpdateSubscriberNotificationMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateSubscriberNotificationValidationMiddleware(stack); err != nil {
 		return err
 	}

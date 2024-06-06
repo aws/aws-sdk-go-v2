@@ -173,9 +173,6 @@ func (c *Client) addOperationCreateEndpointGroupMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateEndpointGroupMiddleware(stack, options); err != nil {
 		return err
 	}

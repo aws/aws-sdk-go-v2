@@ -120,9 +120,6 @@ func (c *Client) addOperationGetLogRecordMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetLogRecordValidationMiddleware(stack); err != nil {
 		return err
 	}

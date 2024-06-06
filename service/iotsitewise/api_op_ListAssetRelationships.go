@@ -134,9 +134,6 @@ func (c *Client) addOperationListAssetRelationshipsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opListAssetRelationshipsMiddleware(stack); err != nil {
 		return err
 	}

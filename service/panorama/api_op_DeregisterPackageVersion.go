@@ -117,9 +117,6 @@ func (c *Client) addOperationDeregisterPackageVersionMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeregisterPackageVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

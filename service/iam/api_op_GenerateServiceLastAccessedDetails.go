@@ -177,9 +177,6 @@ func (c *Client) addOperationGenerateServiceLastAccessedDetailsMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGenerateServiceLastAccessedDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -118,9 +118,6 @@ func (c *Client) addOperationUpdateManagedInstanceRoleMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateManagedInstanceRoleValidationMiddleware(stack); err != nil {
 		return err
 	}

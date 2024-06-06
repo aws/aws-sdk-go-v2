@@ -112,9 +112,6 @@ func (c *Client) addOperationCreateTestGridProjectMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateTestGridProjectValidationMiddleware(stack); err != nil {
 		return err
 	}

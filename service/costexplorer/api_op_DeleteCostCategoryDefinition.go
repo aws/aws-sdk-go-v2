@@ -110,9 +110,6 @@ func (c *Client) addOperationDeleteCostCategoryDefinitionMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteCostCategoryDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -105,9 +105,6 @@ func (c *Client) addOperationStopInputDeviceMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStopInputDeviceValidationMiddleware(stack); err != nil {
 		return err
 	}

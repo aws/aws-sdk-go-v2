@@ -113,9 +113,6 @@ func (c *Client) addOperationGetAgentVersionMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetAgentVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

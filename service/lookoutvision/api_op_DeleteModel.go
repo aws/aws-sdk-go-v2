@@ -133,9 +133,6 @@ func (c *Client) addOperationDeleteModelMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opDeleteModelMiddleware(stack, options); err != nil {
 		return err
 	}

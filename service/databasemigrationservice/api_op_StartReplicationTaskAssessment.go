@@ -122,9 +122,6 @@ func (c *Client) addOperationStartReplicationTaskAssessmentMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartReplicationTaskAssessmentValidationMiddleware(stack); err != nil {
 		return err
 	}

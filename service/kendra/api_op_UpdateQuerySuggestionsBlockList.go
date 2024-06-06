@@ -142,9 +142,6 @@ func (c *Client) addOperationUpdateQuerySuggestionsBlockListMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateQuerySuggestionsBlockListValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -118,9 +118,6 @@ func (c *Client) addOperationGetDataRetrievalPolicyMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetDataRetrievalPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

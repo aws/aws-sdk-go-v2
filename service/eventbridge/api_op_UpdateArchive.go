@@ -125,9 +125,6 @@ func (c *Client) addOperationUpdateArchiveMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateArchiveValidationMiddleware(stack); err != nil {
 		return err
 	}

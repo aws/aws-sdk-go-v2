@@ -121,9 +121,6 @@ func (c *Client) addOperationListPartnerEventSourceAccountsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListPartnerEventSourceAccountsValidationMiddleware(stack); err != nil {
 		return err
 	}

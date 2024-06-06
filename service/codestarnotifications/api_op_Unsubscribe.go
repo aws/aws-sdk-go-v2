@@ -115,9 +115,6 @@ func (c *Client) addOperationUnsubscribeMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUnsubscribeValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -131,9 +131,6 @@ func (c *Client) addOperationAttachDiskMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAttachDiskValidationMiddleware(stack); err != nil {
 		return err
 	}

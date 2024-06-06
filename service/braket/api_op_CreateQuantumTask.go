@@ -149,9 +149,6 @@ func (c *Client) addOperationCreateQuantumTaskMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateQuantumTaskMiddleware(stack, options); err != nil {
 		return err
 	}

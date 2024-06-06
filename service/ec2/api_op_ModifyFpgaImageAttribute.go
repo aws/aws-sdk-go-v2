@@ -139,9 +139,6 @@ func (c *Client) addOperationModifyFpgaImageAttributeMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpModifyFpgaImageAttributeValidationMiddleware(stack); err != nil {
 		return err
 	}

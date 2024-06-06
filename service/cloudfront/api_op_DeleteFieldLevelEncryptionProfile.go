@@ -105,9 +105,6 @@ func (c *Client) addOperationDeleteFieldLevelEncryptionProfileMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteFieldLevelEncryptionProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

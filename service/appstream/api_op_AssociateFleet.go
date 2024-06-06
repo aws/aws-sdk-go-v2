@@ -106,9 +106,6 @@ func (c *Client) addOperationAssociateFleetMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAssociateFleetValidationMiddleware(stack); err != nil {
 		return err
 	}

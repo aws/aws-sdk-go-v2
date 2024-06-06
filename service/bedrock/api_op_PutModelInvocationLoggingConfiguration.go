@@ -102,9 +102,6 @@ func (c *Client) addOperationPutModelInvocationLoggingConfigurationMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutModelInvocationLoggingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

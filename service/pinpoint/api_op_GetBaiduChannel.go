@@ -111,9 +111,6 @@ func (c *Client) addOperationGetBaiduChannelMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetBaiduChannelValidationMiddleware(stack); err != nil {
 		return err
 	}

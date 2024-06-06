@@ -123,9 +123,6 @@ func (c *Client) addOperationUpdateInstanceCustomHealthStatusMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateInstanceCustomHealthStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -106,9 +106,6 @@ func (c *Client) addOperationDeleteCorsPolicyMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteCorsPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

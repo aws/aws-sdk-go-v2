@@ -103,9 +103,6 @@ func (c *Client) addOperationStopAccessLoggingMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStopAccessLoggingValidationMiddleware(stack); err != nil {
 		return err
 	}

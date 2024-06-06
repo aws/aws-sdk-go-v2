@@ -180,9 +180,6 @@ func (c *Client) addOperationDescribeTrackerMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDescribeTrackerMiddleware(stack); err != nil {
 		return err
 	}

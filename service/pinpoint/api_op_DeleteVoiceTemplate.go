@@ -136,9 +136,6 @@ func (c *Client) addOperationDeleteVoiceTemplateMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteVoiceTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -164,9 +164,6 @@ func (c *Client) addOperationUpdateFirewallDeleteProtectionMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateFirewallDeleteProtectionValidationMiddleware(stack); err != nil {
 		return err
 	}

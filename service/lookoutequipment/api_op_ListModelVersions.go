@@ -148,9 +148,6 @@ func (c *Client) addOperationListModelVersionsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListModelVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

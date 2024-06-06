@@ -116,9 +116,6 @@ func (c *Client) addOperationAddFacetToObjectMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAddFacetToObjectValidationMiddleware(stack); err != nil {
 		return err
 	}

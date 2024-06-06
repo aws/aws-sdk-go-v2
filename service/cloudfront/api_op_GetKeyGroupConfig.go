@@ -116,9 +116,6 @@ func (c *Client) addOperationGetKeyGroupConfigMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetKeyGroupConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

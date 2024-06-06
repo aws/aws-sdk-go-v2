@@ -111,9 +111,6 @@ func (c *Client) addOperationContinueDeploymentMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opContinueDeployment(options.Region), middleware.Before); err != nil {
 		return err
 	}

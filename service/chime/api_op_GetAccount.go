@@ -107,9 +107,6 @@ func (c *Client) addOperationGetAccountMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetAccountValidationMiddleware(stack); err != nil {
 		return err
 	}

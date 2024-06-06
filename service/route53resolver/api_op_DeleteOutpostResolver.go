@@ -107,9 +107,6 @@ func (c *Client) addOperationDeleteOutpostResolverMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteOutpostResolverValidationMiddleware(stack); err != nil {
 		return err
 	}

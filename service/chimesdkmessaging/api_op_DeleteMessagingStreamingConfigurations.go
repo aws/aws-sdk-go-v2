@@ -104,9 +104,6 @@ func (c *Client) addOperationDeleteMessagingStreamingConfigurationsMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteMessagingStreamingConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}

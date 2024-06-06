@@ -105,9 +105,6 @@ func (c *Client) addOperationGetRawMessageContentMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetRawMessageContentValidationMiddleware(stack); err != nil {
 		return err
 	}

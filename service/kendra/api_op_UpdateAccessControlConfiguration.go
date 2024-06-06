@@ -148,9 +148,6 @@ func (c *Client) addOperationUpdateAccessControlConfigurationMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateAccessControlConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

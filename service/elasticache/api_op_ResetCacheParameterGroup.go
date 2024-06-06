@@ -128,9 +128,6 @@ func (c *Client) addOperationResetCacheParameterGroupMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpResetCacheParameterGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

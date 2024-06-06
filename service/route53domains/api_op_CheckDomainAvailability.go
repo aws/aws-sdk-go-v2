@@ -161,9 +161,6 @@ func (c *Client) addOperationCheckDomainAvailabilityMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCheckDomainAvailabilityValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -154,9 +154,6 @@ func (c *Client) addOperationStartMatchmakingMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartMatchmakingValidationMiddleware(stack); err != nil {
 		return err
 	}

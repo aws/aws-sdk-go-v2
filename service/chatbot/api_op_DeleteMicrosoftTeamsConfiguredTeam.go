@@ -107,9 +107,6 @@ func (c *Client) addOperationDeleteMicrosoftTeamsConfiguredTeamMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteMicrosoftTeamsConfiguredTeamValidationMiddleware(stack); err != nil {
 		return err
 	}

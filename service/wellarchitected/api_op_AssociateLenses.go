@@ -121,9 +121,6 @@ func (c *Client) addOperationAssociateLensesMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAssociateLensesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -138,9 +138,6 @@ func (c *Client) addOperationGetSolNetworkOperationMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetSolNetworkOperationValidationMiddleware(stack); err != nil {
 		return err
 	}

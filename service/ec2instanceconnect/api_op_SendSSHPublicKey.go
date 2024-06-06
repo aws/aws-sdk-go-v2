@@ -127,9 +127,6 @@ func (c *Client) addOperationSendSSHPublicKeyMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpSendSSHPublicKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

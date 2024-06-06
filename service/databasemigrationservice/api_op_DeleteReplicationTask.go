@@ -106,9 +106,6 @@ func (c *Client) addOperationDeleteReplicationTaskMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteReplicationTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

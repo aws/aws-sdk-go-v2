@@ -152,9 +152,6 @@ func (c *Client) addOperationGetScalingConfigurationRecommendationMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetScalingConfigurationRecommendationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -124,9 +124,6 @@ func (c *Client) addOperationDescribeIAMPolicyAssignmentMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeIAMPolicyAssignmentValidationMiddleware(stack); err != nil {
 		return err
 	}

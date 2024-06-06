@@ -130,9 +130,6 @@ func (c *Client) addOperationStartConnectionMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -141,9 +141,6 @@ func (c *Client) addOperationDecodeAuthorizationMessageMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDecodeAuthorizationMessageValidationMiddleware(stack); err != nil {
 		return err
 	}

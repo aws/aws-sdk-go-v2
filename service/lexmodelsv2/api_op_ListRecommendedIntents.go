@@ -156,9 +156,6 @@ func (c *Client) addOperationListRecommendedIntentsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListRecommendedIntentsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -120,9 +120,6 @@ func (c *Client) addOperationDeleteDiskMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteDiskValidationMiddleware(stack); err != nil {
 		return err
 	}

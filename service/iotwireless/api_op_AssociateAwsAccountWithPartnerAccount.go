@@ -124,9 +124,6 @@ func (c *Client) addOperationAssociateAwsAccountWithPartnerAccountMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opAssociateAwsAccountWithPartnerAccountMiddleware(stack, options); err != nil {
 		return err
 	}

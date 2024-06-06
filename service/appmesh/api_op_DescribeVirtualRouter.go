@@ -120,9 +120,6 @@ func (c *Client) addOperationDescribeVirtualRouterMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeVirtualRouterValidationMiddleware(stack); err != nil {
 		return err
 	}

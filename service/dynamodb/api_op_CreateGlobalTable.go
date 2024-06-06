@@ -164,9 +164,6 @@ func (c *Client) addOperationCreateGlobalTableMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateGlobalTableValidationMiddleware(stack); err != nil {
 		return err
 	}

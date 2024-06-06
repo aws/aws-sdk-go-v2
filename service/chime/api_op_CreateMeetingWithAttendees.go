@@ -157,9 +157,6 @@ func (c *Client) addOperationCreateMeetingWithAttendeesMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateMeetingWithAttendeesMiddleware(stack, options); err != nil {
 		return err
 	}

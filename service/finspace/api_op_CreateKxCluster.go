@@ -370,9 +370,6 @@ func (c *Client) addOperationCreateKxClusterMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateKxClusterMiddleware(stack, options); err != nil {
 		return err
 	}

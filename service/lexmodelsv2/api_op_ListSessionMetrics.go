@@ -195,9 +195,6 @@ func (c *Client) addOperationListSessionMetricsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListSessionMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}

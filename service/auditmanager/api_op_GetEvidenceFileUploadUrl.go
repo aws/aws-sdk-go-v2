@@ -128,9 +128,6 @@ func (c *Client) addOperationGetEvidenceFileUploadUrlMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetEvidenceFileUploadUrlValidationMiddleware(stack); err != nil {
 		return err
 	}

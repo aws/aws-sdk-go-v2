@@ -133,9 +133,6 @@ func (c *Client) addOperationDescribeFleetMetadataMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeFleetMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}

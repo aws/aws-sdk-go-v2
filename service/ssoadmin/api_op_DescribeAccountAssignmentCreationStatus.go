@@ -113,9 +113,6 @@ func (c *Client) addOperationDescribeAccountAssignmentCreationStatusMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeAccountAssignmentCreationStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

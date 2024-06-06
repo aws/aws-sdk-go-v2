@@ -147,9 +147,6 @@ func (c *Client) addOperationDescribeCustomDomainsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeCustomDomainsValidationMiddleware(stack); err != nil {
 		return err
 	}

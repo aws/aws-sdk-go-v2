@@ -121,9 +121,6 @@ func (c *Client) addOperationStartNextPendingJobExecutionMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartNextPendingJobExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}

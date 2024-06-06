@@ -111,9 +111,6 @@ func (c *Client) addOperationDeleteConfigurationTemplateMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteConfigurationTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -117,9 +117,6 @@ func (c *Client) addOperationBatchGetTracesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpBatchGetTracesValidationMiddleware(stack); err != nil {
 		return err
 	}

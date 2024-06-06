@@ -117,9 +117,6 @@ func (c *Client) addOperationCreateInputMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateInputValidationMiddleware(stack); err != nil {
 		return err
 	}

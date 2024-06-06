@@ -177,9 +177,6 @@ func (c *Client) addOperationStartTaskExecutionMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartTaskExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}

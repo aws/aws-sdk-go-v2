@@ -121,9 +121,6 @@ func (c *Client) addOperationListApplicationGrantsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListApplicationGrantsValidationMiddleware(stack); err != nil {
 		return err
 	}

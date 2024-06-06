@@ -148,9 +148,6 @@ func (c *Client) addOperationCreateRecommendationTemplateMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateRecommendationTemplateMiddleware(stack, options); err != nil {
 		return err
 	}

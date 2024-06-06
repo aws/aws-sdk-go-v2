@@ -125,9 +125,6 @@ func (c *Client) addOperationCreateVpcAttachmentMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateVpcAttachmentMiddleware(stack, options); err != nil {
 		return err
 	}

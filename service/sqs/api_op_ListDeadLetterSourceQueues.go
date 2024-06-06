@@ -137,9 +137,6 @@ func (c *Client) addOperationListDeadLetterSourceQueuesMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListDeadLetterSourceQueuesValidationMiddleware(stack); err != nil {
 		return err
 	}

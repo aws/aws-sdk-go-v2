@@ -125,9 +125,6 @@ func (c *Client) addOperationGetEffectivePermissionsForPathMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetEffectivePermissionsForPathValidationMiddleware(stack); err != nil {
 		return err
 	}

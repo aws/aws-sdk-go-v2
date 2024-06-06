@@ -106,9 +106,6 @@ func (c *Client) addOperationGetGraphqlApiMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetGraphqlApiValidationMiddleware(stack); err != nil {
 		return err
 	}

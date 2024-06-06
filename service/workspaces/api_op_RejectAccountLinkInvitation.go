@@ -109,9 +109,6 @@ func (c *Client) addOperationRejectAccountLinkInvitationMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRejectAccountLinkInvitationValidationMiddleware(stack); err != nil {
 		return err
 	}

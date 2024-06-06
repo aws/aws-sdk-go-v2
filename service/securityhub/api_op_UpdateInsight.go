@@ -111,9 +111,6 @@ func (c *Client) addOperationUpdateInsightMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateInsightValidationMiddleware(stack); err != nil {
 		return err
 	}

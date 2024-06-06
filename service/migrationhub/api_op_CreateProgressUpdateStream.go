@@ -109,9 +109,6 @@ func (c *Client) addOperationCreateProgressUpdateStreamMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateProgressUpdateStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

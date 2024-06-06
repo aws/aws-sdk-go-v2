@@ -110,9 +110,6 @@ func (c *Client) addOperationConfirmTopicRuleDestinationMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpConfirmTopicRuleDestinationValidationMiddleware(stack); err != nil {
 		return err
 	}

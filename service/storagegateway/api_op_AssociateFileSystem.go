@@ -151,9 +151,6 @@ func (c *Client) addOperationAssociateFileSystemMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAssociateFileSystemValidationMiddleware(stack); err != nil {
 		return err
 	}

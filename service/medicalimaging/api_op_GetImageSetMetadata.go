@@ -120,9 +120,6 @@ func (c *Client) addOperationGetImageSetMetadataMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opGetImageSetMetadataMiddleware(stack); err != nil {
 		return err
 	}

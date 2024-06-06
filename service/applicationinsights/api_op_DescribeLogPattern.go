@@ -125,9 +125,6 @@ func (c *Client) addOperationDescribeLogPatternMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeLogPatternValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -209,9 +209,6 @@ func (c *Client) addOperationUpdateCloudWatchAlarmTemplateMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateCloudWatchAlarmTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

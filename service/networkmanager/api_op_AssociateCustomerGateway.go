@@ -131,9 +131,6 @@ func (c *Client) addOperationAssociateCustomerGatewayMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAssociateCustomerGatewayValidationMiddleware(stack); err != nil {
 		return err
 	}

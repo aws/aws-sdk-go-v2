@@ -119,9 +119,6 @@ func (c *Client) addOperationDescribeCopyProductStatusMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeCopyProductStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

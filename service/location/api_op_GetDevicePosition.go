@@ -141,9 +141,6 @@ func (c *Client) addOperationGetDevicePositionMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opGetDevicePositionMiddleware(stack); err != nil {
 		return err
 	}

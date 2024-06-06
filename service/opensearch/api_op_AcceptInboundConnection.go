@@ -111,9 +111,6 @@ func (c *Client) addOperationAcceptInboundConnectionMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAcceptInboundConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

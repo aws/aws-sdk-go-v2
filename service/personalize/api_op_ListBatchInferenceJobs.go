@@ -117,9 +117,6 @@ func (c *Client) addOperationListBatchInferenceJobsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBatchInferenceJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}

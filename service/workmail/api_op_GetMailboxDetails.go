@@ -124,9 +124,6 @@ func (c *Client) addOperationGetMailboxDetailsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetMailboxDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}

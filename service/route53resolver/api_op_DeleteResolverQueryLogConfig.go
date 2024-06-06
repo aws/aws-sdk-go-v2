@@ -123,9 +123,6 @@ func (c *Client) addOperationDeleteResolverQueryLogConfigMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteResolverQueryLogConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

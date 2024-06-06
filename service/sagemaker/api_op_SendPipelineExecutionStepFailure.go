@@ -115,9 +115,6 @@ func (c *Client) addOperationSendPipelineExecutionStepFailureMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opSendPipelineExecutionStepFailureMiddleware(stack, options); err != nil {
 		return err
 	}

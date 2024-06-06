@@ -143,9 +143,6 @@ func (c *Client) addOperationCreateWhatIfForecastMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateWhatIfForecastValidationMiddleware(stack); err != nil {
 		return err
 	}

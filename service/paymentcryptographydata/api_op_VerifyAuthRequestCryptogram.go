@@ -189,9 +189,6 @@ func (c *Client) addOperationVerifyAuthRequestCryptogramMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpVerifyAuthRequestCryptogramValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -104,9 +104,6 @@ func (c *Client) addOperationDeleteDedicatedIpPoolMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteDedicatedIpPoolValidationMiddleware(stack); err != nil {
 		return err
 	}

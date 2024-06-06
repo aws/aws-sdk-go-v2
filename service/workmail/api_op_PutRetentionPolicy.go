@@ -118,9 +118,6 @@ func (c *Client) addOperationPutRetentionPolicyMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutRetentionPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

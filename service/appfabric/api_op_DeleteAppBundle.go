@@ -102,9 +102,6 @@ func (c *Client) addOperationDeleteAppBundleMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteAppBundleValidationMiddleware(stack); err != nil {
 		return err
 	}

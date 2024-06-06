@@ -129,9 +129,6 @@ func (c *Client) addOperationCreateRequestValidatorMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateRequestValidatorValidationMiddleware(stack); err != nil {
 		return err
 	}

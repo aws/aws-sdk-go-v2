@@ -126,9 +126,6 @@ func (c *Client) addOperationImportHostKeyMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpImportHostKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -135,9 +135,6 @@ func (c *Client) addOperationGetQueryMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opGetQueryMiddleware(stack); err != nil {
 		return err
 	}

@@ -116,9 +116,6 @@ func (c *Client) addOperationDeleteAgentActionGroupMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteAgentActionGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -128,9 +128,6 @@ func (c *Client) addOperationDescribeMatchmakingMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeMatchmakingValidationMiddleware(stack); err != nil {
 		return err
 	}

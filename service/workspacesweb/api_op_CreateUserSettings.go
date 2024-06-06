@@ -167,9 +167,6 @@ func (c *Client) addOperationCreateUserSettingsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateUserSettingsMiddleware(stack, options); err != nil {
 		return err
 	}

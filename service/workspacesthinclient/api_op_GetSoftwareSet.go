@@ -106,9 +106,6 @@ func (c *Client) addOperationGetSoftwareSetMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opGetSoftwareSetMiddleware(stack); err != nil {
 		return err
 	}

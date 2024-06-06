@@ -125,9 +125,6 @@ func (c *Client) addOperationListManagedPoliciesInPermissionSetMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListManagedPoliciesInPermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}

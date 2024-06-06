@@ -110,9 +110,6 @@ func (c *Client) addOperationCreateLabelsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateLabelsValidationMiddleware(stack); err != nil {
 		return err
 	}

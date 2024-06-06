@@ -110,9 +110,6 @@ func (c *Client) addOperationDescribeDetectMitigationActionsTaskMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeDetectMitigationActionsTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

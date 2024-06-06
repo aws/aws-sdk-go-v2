@@ -137,9 +137,6 @@ func (c *Client) addOperationModifyMigrationProjectMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpModifyMigrationProjectValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -113,9 +113,6 @@ func (c *Client) addOperationEnableDelegatedAdminAccountMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opEnableDelegatedAdminAccountMiddleware(stack, options); err != nil {
 		return err
 	}

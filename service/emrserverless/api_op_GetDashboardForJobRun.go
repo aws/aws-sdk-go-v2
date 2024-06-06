@@ -123,9 +123,6 @@ func (c *Client) addOperationGetDashboardForJobRunMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetDashboardForJobRunValidationMiddleware(stack); err != nil {
 		return err
 	}

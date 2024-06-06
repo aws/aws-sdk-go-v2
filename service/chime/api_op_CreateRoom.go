@@ -114,9 +114,6 @@ func (c *Client) addOperationCreateRoomMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateRoomMiddleware(stack, options); err != nil {
 		return err
 	}

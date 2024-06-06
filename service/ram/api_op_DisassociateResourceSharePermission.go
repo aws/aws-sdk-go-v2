@@ -140,9 +140,6 @@ func (c *Client) addOperationDisassociateResourceSharePermissionMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDisassociateResourceSharePermissionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -132,9 +132,6 @@ func (c *Client) addOperationDescribeDBProxyTargetsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeDBProxyTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}

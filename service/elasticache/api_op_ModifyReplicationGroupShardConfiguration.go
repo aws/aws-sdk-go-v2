@@ -149,9 +149,6 @@ func (c *Client) addOperationModifyReplicationGroupShardConfigurationMiddlewares
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpModifyReplicationGroupShardConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

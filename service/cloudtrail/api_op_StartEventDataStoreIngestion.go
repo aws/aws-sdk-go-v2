@@ -105,9 +105,6 @@ func (c *Client) addOperationStartEventDataStoreIngestionMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartEventDataStoreIngestionValidationMiddleware(stack); err != nil {
 		return err
 	}

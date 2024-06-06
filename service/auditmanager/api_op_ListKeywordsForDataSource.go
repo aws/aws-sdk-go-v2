@@ -117,9 +117,6 @@ func (c *Client) addOperationListKeywordsForDataSourceMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListKeywordsForDataSourceValidationMiddleware(stack); err != nil {
 		return err
 	}

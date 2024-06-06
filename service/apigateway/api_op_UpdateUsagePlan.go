@@ -142,9 +142,6 @@ func (c *Client) addOperationUpdateUsagePlanMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateUsagePlanValidationMiddleware(stack); err != nil {
 		return err
 	}

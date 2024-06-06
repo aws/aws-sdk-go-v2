@@ -167,9 +167,6 @@ func (c *Client) addOperationCreatePolicyStoreMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreatePolicyStoreMiddleware(stack, options); err != nil {
 		return err
 	}

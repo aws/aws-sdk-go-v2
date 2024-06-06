@@ -113,9 +113,6 @@ func (c *Client) addOperationDiscoverInstancesRevisionMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDiscoverInstancesRevisionMiddleware(stack); err != nil {
 		return err
 	}

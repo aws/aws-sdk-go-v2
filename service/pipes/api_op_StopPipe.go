@@ -124,9 +124,6 @@ func (c *Client) addOperationStopPipeMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStopPipeValidationMiddleware(stack); err != nil {
 		return err
 	}

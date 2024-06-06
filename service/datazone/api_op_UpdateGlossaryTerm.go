@@ -162,9 +162,6 @@ func (c *Client) addOperationUpdateGlossaryTermMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateGlossaryTermValidationMiddleware(stack); err != nil {
 		return err
 	}

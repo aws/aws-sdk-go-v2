@@ -137,9 +137,6 @@ func (c *Client) addOperationDescribeFolderResolvedPermissionsMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeFolderResolvedPermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

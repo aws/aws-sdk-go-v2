@@ -187,9 +187,6 @@ func (c *Client) addOperationImportRestApiMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpImportRestApiValidationMiddleware(stack); err != nil {
 		return err
 	}

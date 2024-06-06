@@ -170,9 +170,6 @@ func (c *Client) addOperationCreateAppMonitorMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateAppMonitorValidationMiddleware(stack); err != nil {
 		return err
 	}

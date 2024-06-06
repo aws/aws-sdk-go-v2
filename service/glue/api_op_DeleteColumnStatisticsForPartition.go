@@ -123,9 +123,6 @@ func (c *Client) addOperationDeleteColumnStatisticsForPartitionMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteColumnStatisticsForPartitionValidationMiddleware(stack); err != nil {
 		return err
 	}

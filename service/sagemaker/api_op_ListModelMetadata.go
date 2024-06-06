@@ -121,9 +121,6 @@ func (c *Client) addOperationListModelMetadataMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListModelMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}

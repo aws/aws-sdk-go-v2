@@ -119,9 +119,6 @@ func (c *Client) addOperationListRemoteAccessSessionsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListRemoteAccessSessionsValidationMiddleware(stack); err != nil {
 		return err
 	}

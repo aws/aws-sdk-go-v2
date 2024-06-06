@@ -140,9 +140,6 @@ func (c *Client) addOperationUpdateLicenseManagerReportGeneratorMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateLicenseManagerReportGeneratorValidationMiddleware(stack); err != nil {
 		return err
 	}

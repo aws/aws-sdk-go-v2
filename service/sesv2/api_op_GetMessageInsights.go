@@ -128,9 +128,6 @@ func (c *Client) addOperationGetMessageInsightsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetMessageInsightsValidationMiddleware(stack); err != nil {
 		return err
 	}

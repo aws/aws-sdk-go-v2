@@ -101,9 +101,6 @@ func (c *Client) addOperationDeleteDataCatalogMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteDataCatalogValidationMiddleware(stack); err != nil {
 		return err
 	}

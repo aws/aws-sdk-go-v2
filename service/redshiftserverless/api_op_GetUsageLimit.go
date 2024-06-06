@@ -106,9 +106,6 @@ func (c *Client) addOperationGetUsageLimitMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetUsageLimitValidationMiddleware(stack); err != nil {
 		return err
 	}

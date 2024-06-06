@@ -126,9 +126,6 @@ func (c *Client) addOperationExchangeCodeForTokenMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpExchangeCodeForTokenValidationMiddleware(stack); err != nil {
 		return err
 	}

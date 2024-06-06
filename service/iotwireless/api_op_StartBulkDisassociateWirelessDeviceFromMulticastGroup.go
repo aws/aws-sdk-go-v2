@@ -111,9 +111,6 @@ func (c *Client) addOperationStartBulkDisassociateWirelessDeviceFromMulticastGro
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartBulkDisassociateWirelessDeviceFromMulticastGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

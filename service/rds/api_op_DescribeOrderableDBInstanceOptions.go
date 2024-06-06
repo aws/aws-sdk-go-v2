@@ -200,9 +200,6 @@ func (c *Client) addOperationDescribeOrderableDBInstanceOptionsMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeOrderableDBInstanceOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}

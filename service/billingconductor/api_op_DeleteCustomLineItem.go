@@ -111,9 +111,6 @@ func (c *Client) addOperationDeleteCustomLineItemMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteCustomLineItemValidationMiddleware(stack); err != nil {
 		return err
 	}

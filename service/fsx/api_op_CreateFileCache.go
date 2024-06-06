@@ -193,9 +193,6 @@ func (c *Client) addOperationCreateFileCacheMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateFileCacheMiddleware(stack, options); err != nil {
 		return err
 	}

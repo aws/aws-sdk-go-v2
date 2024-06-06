@@ -106,9 +106,6 @@ func (c *Client) addOperationDeleteRotationOverrideMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteRotationOverrideValidationMiddleware(stack); err != nil {
 		return err
 	}

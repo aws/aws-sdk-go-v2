@@ -116,9 +116,6 @@ func (c *Client) addOperationUpdateDeviceMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opUpdateDeviceMiddleware(stack); err != nil {
 		return err
 	}

@@ -112,9 +112,6 @@ func (c *Client) addOperationDeleteWirelessGatewayMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteWirelessGatewayValidationMiddleware(stack); err != nil {
 		return err
 	}

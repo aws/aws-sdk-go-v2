@@ -119,9 +119,6 @@ func (c *Client) addOperationUpdateGatewayInstanceMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateGatewayInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

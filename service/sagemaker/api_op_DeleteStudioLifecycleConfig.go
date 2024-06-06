@@ -104,9 +104,6 @@ func (c *Client) addOperationDeleteStudioLifecycleConfigMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteStudioLifecycleConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

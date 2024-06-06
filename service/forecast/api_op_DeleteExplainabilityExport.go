@@ -101,9 +101,6 @@ func (c *Client) addOperationDeleteExplainabilityExportMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteExplainabilityExportValidationMiddleware(stack); err != nil {
 		return err
 	}

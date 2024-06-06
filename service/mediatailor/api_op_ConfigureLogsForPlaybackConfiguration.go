@@ -126,9 +126,6 @@ func (c *Client) addOperationConfigureLogsForPlaybackConfigurationMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpConfigureLogsForPlaybackConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

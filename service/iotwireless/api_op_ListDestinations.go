@@ -112,9 +112,6 @@ func (c *Client) addOperationListDestinationsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDestinations(options.Region), middleware.Before); err != nil {
 		return err
 	}

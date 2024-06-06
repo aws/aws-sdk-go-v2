@@ -129,9 +129,6 @@ func (c *Client) addOperationUpdateVirtualNodeMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opUpdateVirtualNodeMiddleware(stack, options); err != nil {
 		return err
 	}

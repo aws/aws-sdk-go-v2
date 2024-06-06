@@ -111,9 +111,6 @@ func (c *Client) addOperationUpdateReplicationSetMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opUpdateReplicationSetMiddleware(stack, options); err != nil {
 		return err
 	}

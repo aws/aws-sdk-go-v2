@@ -113,9 +113,6 @@ func (c *Client) addOperationGetPullRequestApprovalStatesMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetPullRequestApprovalStatesValidationMiddleware(stack); err != nil {
 		return err
 	}

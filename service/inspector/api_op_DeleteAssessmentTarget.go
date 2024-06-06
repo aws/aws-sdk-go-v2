@@ -102,9 +102,6 @@ func (c *Client) addOperationDeleteAssessmentTargetMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteAssessmentTargetValidationMiddleware(stack); err != nil {
 		return err
 	}

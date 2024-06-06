@@ -124,9 +124,6 @@ func (c *Client) addOperationSearchSchemasMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpSearchSchemasValidationMiddleware(stack); err != nil {
 		return err
 	}

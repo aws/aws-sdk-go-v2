@@ -117,9 +117,6 @@ func (c *Client) addOperationListImpersonationRolesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListImpersonationRolesValidationMiddleware(stack); err != nil {
 		return err
 	}

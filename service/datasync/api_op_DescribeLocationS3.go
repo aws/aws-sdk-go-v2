@@ -141,9 +141,6 @@ func (c *Client) addOperationDescribeLocationS3Middlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeLocationS3ValidationMiddleware(stack); err != nil {
 		return err
 	}

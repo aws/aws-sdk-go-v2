@@ -119,9 +119,6 @@ func (c *Client) addOperationDeleteRecommendationTemplateMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opDeleteRecommendationTemplateMiddleware(stack, options); err != nil {
 		return err
 	}

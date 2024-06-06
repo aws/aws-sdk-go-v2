@@ -131,9 +131,6 @@ func (c *Client) addOperationListBackendEnvironmentsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListBackendEnvironmentsValidationMiddleware(stack); err != nil {
 		return err
 	}

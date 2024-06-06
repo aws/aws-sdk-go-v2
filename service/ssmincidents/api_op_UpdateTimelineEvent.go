@@ -134,9 +134,6 @@ func (c *Client) addOperationUpdateTimelineEventMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opUpdateTimelineEventMiddleware(stack, options); err != nil {
 		return err
 	}

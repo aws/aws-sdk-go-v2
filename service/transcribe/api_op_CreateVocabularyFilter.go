@@ -199,9 +199,6 @@ func (c *Client) addOperationCreateVocabularyFilterMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateVocabularyFilterValidationMiddleware(stack); err != nil {
 		return err
 	}

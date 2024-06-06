@@ -233,9 +233,6 @@ func (c *Client) addOperationGetLabelDetectionMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetLabelDetectionValidationMiddleware(stack); err != nil {
 		return err
 	}

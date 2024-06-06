@@ -142,9 +142,6 @@ func (c *Client) addOperationGetShardIteratorMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetShardIteratorValidationMiddleware(stack); err != nil {
 		return err
 	}

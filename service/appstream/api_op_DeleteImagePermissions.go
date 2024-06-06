@@ -109,9 +109,6 @@ func (c *Client) addOperationDeleteImagePermissionsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteImagePermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

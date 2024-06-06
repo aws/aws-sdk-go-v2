@@ -101,9 +101,6 @@ func (c *Client) addOperationDeleteInferenceComponentMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteInferenceComponentValidationMiddleware(stack); err != nil {
 		return err
 	}

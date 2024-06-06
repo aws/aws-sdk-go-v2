@@ -118,9 +118,6 @@ func (c *Client) addOperationGetConfigurationSetEventDestinationsMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetConfigurationSetEventDestinationsValidationMiddleware(stack); err != nil {
 		return err
 	}

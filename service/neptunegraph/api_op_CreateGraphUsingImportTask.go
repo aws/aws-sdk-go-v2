@@ -225,9 +225,6 @@ func (c *Client) addOperationCreateGraphUsingImportTaskMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateGraphUsingImportTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

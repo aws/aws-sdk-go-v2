@@ -120,9 +120,6 @@ func (c *Client) addOperationModifyDBProxyTargetGroupMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpModifyDBProxyTargetGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

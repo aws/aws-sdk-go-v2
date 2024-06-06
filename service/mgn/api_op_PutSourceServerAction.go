@@ -186,9 +186,6 @@ func (c *Client) addOperationPutSourceServerActionMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutSourceServerActionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -140,9 +140,6 @@ func (c *Client) addOperationCreateCustomVerificationEmailTemplateMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateCustomVerificationEmailTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

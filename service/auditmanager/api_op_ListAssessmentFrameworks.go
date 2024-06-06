@@ -118,9 +118,6 @@ func (c *Client) addOperationListAssessmentFrameworksMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListAssessmentFrameworksValidationMiddleware(stack); err != nil {
 		return err
 	}

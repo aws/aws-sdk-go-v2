@@ -122,9 +122,6 @@ func (c *Client) addOperationListNamedShadowsForThingMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListNamedShadowsForThingValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -115,9 +115,6 @@ func (c *Client) addOperationListPageReceiptsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListPageReceiptsValidationMiddleware(stack); err != nil {
 		return err
 	}

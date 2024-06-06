@@ -114,9 +114,6 @@ func (c *Client) addOperationValidateMatchmakingRuleSetMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpValidateMatchmakingRuleSetValidationMiddleware(stack); err != nil {
 		return err
 	}

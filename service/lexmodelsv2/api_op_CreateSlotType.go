@@ -200,9 +200,6 @@ func (c *Client) addOperationCreateSlotTypeMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateSlotTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -158,9 +158,6 @@ func (c *Client) addOperationUpdateGameServerMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateGameServerValidationMiddleware(stack); err != nil {
 		return err
 	}

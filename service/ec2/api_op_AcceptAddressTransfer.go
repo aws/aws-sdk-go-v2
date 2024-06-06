@@ -121,9 +121,6 @@ func (c *Client) addOperationAcceptAddressTransferMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAcceptAddressTransferValidationMiddleware(stack); err != nil {
 		return err
 	}

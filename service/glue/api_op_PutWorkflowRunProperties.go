@@ -113,9 +113,6 @@ func (c *Client) addOperationPutWorkflowRunPropertiesMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutWorkflowRunPropertiesValidationMiddleware(stack); err != nil {
 		return err
 	}

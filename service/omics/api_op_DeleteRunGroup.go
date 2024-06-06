@@ -101,9 +101,6 @@ func (c *Client) addOperationDeleteRunGroupMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDeleteRunGroupMiddleware(stack); err != nil {
 		return err
 	}

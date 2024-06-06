@@ -122,9 +122,6 @@ func (c *Client) addOperationDisassociateTransitGatewayMulticastDomainMiddleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDisassociateTransitGatewayMulticastDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

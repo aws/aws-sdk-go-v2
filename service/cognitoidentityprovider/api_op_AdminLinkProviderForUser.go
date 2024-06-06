@@ -183,9 +183,6 @@ func (c *Client) addOperationAdminLinkProviderForUserMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAdminLinkProviderForUserValidationMiddleware(stack); err != nil {
 		return err
 	}

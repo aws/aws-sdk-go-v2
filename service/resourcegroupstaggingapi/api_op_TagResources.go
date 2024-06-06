@@ -155,9 +155,6 @@ func (c *Client) addOperationTagResourcesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpTagResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}

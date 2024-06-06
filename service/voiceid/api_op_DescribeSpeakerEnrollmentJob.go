@@ -111,9 +111,6 @@ func (c *Client) addOperationDescribeSpeakerEnrollmentJobMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeSpeakerEnrollmentJobValidationMiddleware(stack); err != nil {
 		return err
 	}

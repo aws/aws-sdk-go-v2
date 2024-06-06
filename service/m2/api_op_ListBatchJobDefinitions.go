@@ -126,9 +126,6 @@ func (c *Client) addOperationListBatchJobDefinitionsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListBatchJobDefinitionsValidationMiddleware(stack); err != nil {
 		return err
 	}

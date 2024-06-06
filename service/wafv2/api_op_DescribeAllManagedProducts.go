@@ -120,9 +120,6 @@ func (c *Client) addOperationDescribeAllManagedProductsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeAllManagedProductsValidationMiddleware(stack); err != nil {
 		return err
 	}

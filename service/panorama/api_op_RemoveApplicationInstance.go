@@ -101,9 +101,6 @@ func (c *Client) addOperationRemoveApplicationInstanceMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRemoveApplicationInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

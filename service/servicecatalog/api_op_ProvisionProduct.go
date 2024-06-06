@@ -173,9 +173,6 @@ func (c *Client) addOperationProvisionProductMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opProvisionProductMiddleware(stack, options); err != nil {
 		return err
 	}

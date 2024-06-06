@@ -117,9 +117,6 @@ func (c *Client) addOperationPutVoiceConnectorTerminationCredentialsMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutVoiceConnectorTerminationCredentialsValidationMiddleware(stack); err != nil {
 		return err
 	}

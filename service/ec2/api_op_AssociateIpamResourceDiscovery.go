@@ -126,9 +126,6 @@ func (c *Client) addOperationAssociateIpamResourceDiscoveryMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opAssociateIpamResourceDiscoveryMiddleware(stack, options); err != nil {
 		return err
 	}

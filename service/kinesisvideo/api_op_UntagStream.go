@@ -111,9 +111,6 @@ func (c *Client) addOperationUntagStreamMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUntagStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

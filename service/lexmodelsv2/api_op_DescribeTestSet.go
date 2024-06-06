@@ -135,9 +135,6 @@ func (c *Client) addOperationDescribeTestSetMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeTestSetValidationMiddleware(stack); err != nil {
 		return err
 	}

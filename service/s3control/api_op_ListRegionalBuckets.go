@@ -147,9 +147,6 @@ func (c *Client) addOperationListRegionalBucketsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opListRegionalBucketsMiddleware(stack); err != nil {
 		return err
 	}

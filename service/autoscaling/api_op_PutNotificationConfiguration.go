@@ -123,9 +123,6 @@ func (c *Client) addOperationPutNotificationConfigurationMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutNotificationConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

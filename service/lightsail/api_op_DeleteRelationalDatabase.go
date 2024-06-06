@@ -137,9 +137,6 @@ func (c *Client) addOperationDeleteRelationalDatabaseMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteRelationalDatabaseValidationMiddleware(stack); err != nil {
 		return err
 	}

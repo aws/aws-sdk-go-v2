@@ -172,9 +172,6 @@ func (c *Client) addOperationStartModelPackagingJobMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opStartModelPackagingJobMiddleware(stack, options); err != nil {
 		return err
 	}

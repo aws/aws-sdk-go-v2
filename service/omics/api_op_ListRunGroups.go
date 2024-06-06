@@ -114,9 +114,6 @@ func (c *Client) addOperationListRunGroupsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opListRunGroupsMiddleware(stack); err != nil {
 		return err
 	}

@@ -151,9 +151,6 @@ func (c *Client) addOperationUpdateRecipeJobMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateRecipeJobValidationMiddleware(stack); err != nil {
 		return err
 	}

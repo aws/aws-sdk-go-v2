@@ -112,9 +112,6 @@ func (c *Client) addOperationUpdateDataLakeMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateDataLakeValidationMiddleware(stack); err != nil {
 		return err
 	}

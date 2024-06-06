@@ -133,9 +133,6 @@ func (c *Client) addOperationCreateAssessmentReportMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateAssessmentReportValidationMiddleware(stack); err != nil {
 		return err
 	}

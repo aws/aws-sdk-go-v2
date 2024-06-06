@@ -101,9 +101,6 @@ func (c *Client) addOperationDeleteControlPanelMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteControlPanelValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -129,9 +129,6 @@ func (c *Client) addOperationReplaceRouteTableAssociationMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpReplaceRouteTableAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

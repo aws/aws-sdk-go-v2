@@ -113,9 +113,6 @@ func (c *Client) addOperationUnlinkIdentityMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUnlinkIdentityValidationMiddleware(stack); err != nil {
 		return err
 	}

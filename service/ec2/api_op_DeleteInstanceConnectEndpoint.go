@@ -112,9 +112,6 @@ func (c *Client) addOperationDeleteInstanceConnectEndpointMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteInstanceConnectEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}

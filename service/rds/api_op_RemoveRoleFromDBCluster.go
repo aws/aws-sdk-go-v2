@@ -121,9 +121,6 @@ func (c *Client) addOperationRemoveRoleFromDBClusterMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRemoveRoleFromDBClusterValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -209,9 +209,6 @@ func (c *Client) addOperationUpdateRuleGroupMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateRuleGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

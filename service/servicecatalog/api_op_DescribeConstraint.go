@@ -119,9 +119,6 @@ func (c *Client) addOperationDescribeConstraintMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeConstraintValidationMiddleware(stack); err != nil {
 		return err
 	}

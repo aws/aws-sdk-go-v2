@@ -124,9 +124,6 @@ func (c *Client) addOperationUpdatePublicSharingSettingsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdatePublicSharingSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

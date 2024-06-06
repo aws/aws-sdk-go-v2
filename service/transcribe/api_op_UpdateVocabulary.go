@@ -180,9 +180,6 @@ func (c *Client) addOperationUpdateVocabularyMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateVocabularyValidationMiddleware(stack); err != nil {
 		return err
 	}

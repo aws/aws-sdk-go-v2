@@ -131,9 +131,6 @@ func (c *Client) addOperationUpdateDataSetPermissionsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateDataSetPermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -128,9 +128,6 @@ func (c *Client) addOperationCreateTargetAccountConfigurationMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateTargetAccountConfigurationMiddleware(stack, options); err != nil {
 		return err
 	}

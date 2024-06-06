@@ -117,9 +117,6 @@ func (c *Client) addOperationDescribeFlowExecutionRecordsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeFlowExecutionRecordsValidationMiddleware(stack); err != nil {
 		return err
 	}

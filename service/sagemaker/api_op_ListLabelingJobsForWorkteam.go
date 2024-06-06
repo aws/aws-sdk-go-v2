@@ -140,9 +140,6 @@ func (c *Client) addOperationListLabelingJobsForWorkteamMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListLabelingJobsForWorkteamValidationMiddleware(stack); err != nil {
 		return err
 	}

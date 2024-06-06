@@ -114,9 +114,6 @@ func (c *Client) addOperationCreateDistributionMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateDistributionValidationMiddleware(stack); err != nil {
 		return err
 	}

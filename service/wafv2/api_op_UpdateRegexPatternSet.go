@@ -181,9 +181,6 @@ func (c *Client) addOperationUpdateRegexPatternSetMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateRegexPatternSetValidationMiddleware(stack); err != nil {
 		return err
 	}

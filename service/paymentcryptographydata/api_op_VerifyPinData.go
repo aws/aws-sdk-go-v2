@@ -202,9 +202,6 @@ func (c *Client) addOperationVerifyPinDataMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpVerifyPinDataValidationMiddleware(stack); err != nil {
 		return err
 	}

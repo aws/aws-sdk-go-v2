@@ -131,9 +131,6 @@ func (c *Client) addOperationImportCrlMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpImportCrlValidationMiddleware(stack); err != nil {
 		return err
 	}

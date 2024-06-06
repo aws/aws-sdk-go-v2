@@ -107,9 +107,6 @@ func (c *Client) addOperationCancelMetadataGenerationRunMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCancelMetadataGenerationRunValidationMiddleware(stack); err != nil {
 		return err
 	}

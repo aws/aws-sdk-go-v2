@@ -122,9 +122,6 @@ func (c *Client) addOperationInferICD10CMMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpInferICD10CMValidationMiddleware(stack); err != nil {
 		return err
 	}

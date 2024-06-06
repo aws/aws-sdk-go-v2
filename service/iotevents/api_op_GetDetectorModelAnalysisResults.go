@@ -119,9 +119,6 @@ func (c *Client) addOperationGetDetectorModelAnalysisResultsMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetDetectorModelAnalysisResultsValidationMiddleware(stack); err != nil {
 		return err
 	}

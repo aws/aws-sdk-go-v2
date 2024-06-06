@@ -108,9 +108,6 @@ func (c *Client) addOperationExportBackupPlanTemplateMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpExportBackupPlanTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

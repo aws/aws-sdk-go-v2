@@ -142,9 +142,6 @@ func (c *Client) addOperationAssociateTrunkInterfaceMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opAssociateTrunkInterfaceMiddleware(stack, options); err != nil {
 		return err
 	}

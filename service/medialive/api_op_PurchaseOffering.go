@@ -131,9 +131,6 @@ func (c *Client) addOperationPurchaseOfferingMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opPurchaseOfferingMiddleware(stack, options); err != nil {
 		return err
 	}

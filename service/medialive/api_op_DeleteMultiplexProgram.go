@@ -128,9 +128,6 @@ func (c *Client) addOperationDeleteMultiplexProgramMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteMultiplexProgramValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -140,9 +140,6 @@ func (c *Client) addOperationPutMetricFilterMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutMetricFilterValidationMiddleware(stack); err != nil {
 		return err
 	}

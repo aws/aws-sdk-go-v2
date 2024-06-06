@@ -132,9 +132,6 @@ func (c *Client) addOperationDescribeAssociationExecutionTargetsMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeAssociationExecutionTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}

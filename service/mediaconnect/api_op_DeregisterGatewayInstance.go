@@ -116,9 +116,6 @@ func (c *Client) addOperationDeregisterGatewayInstanceMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeregisterGatewayInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

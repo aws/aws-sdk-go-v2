@@ -141,9 +141,6 @@ func (c *Client) addOperationListContainerGroupDefinitionsMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListContainerGroupDefinitions(options.Region), middleware.Before); err != nil {
 		return err
 	}

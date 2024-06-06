@@ -168,9 +168,6 @@ func (c *Client) addOperationDescribeDBInstanceAutomatedBackupsMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeDBInstanceAutomatedBackupsValidationMiddleware(stack); err != nil {
 		return err
 	}

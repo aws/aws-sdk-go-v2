@@ -110,9 +110,6 @@ func (c *Client) addOperationDeleteVpnConnectionRouteMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteVpnConnectionRouteValidationMiddleware(stack); err != nil {
 		return err
 	}

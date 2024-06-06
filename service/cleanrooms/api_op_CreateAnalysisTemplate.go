@@ -136,9 +136,6 @@ func (c *Client) addOperationCreateAnalysisTemplateMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateAnalysisTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

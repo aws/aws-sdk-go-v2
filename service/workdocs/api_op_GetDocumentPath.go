@@ -126,9 +126,6 @@ func (c *Client) addOperationGetDocumentPathMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetDocumentPathValidationMiddleware(stack); err != nil {
 		return err
 	}

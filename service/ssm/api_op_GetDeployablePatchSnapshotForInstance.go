@@ -136,9 +136,6 @@ func (c *Client) addOperationGetDeployablePatchSnapshotForInstanceMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetDeployablePatchSnapshotForInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -111,9 +111,6 @@ func (c *Client) addOperationDeleteTemplateSyncConfigMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteTemplateSyncConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

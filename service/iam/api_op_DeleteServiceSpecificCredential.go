@@ -118,9 +118,6 @@ func (c *Client) addOperationDeleteServiceSpecificCredentialMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteServiceSpecificCredentialValidationMiddleware(stack); err != nil {
 		return err
 	}

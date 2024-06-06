@@ -122,9 +122,6 @@ func (c *Client) addOperationUpdateMailboxQuotaMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateMailboxQuotaValidationMiddleware(stack); err != nil {
 		return err
 	}

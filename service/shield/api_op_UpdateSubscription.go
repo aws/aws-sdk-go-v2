@@ -109,9 +109,6 @@ func (c *Client) addOperationUpdateSubscriptionMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSubscription(options.Region), middleware.Before); err != nil {
 		return err
 	}

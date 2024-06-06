@@ -131,9 +131,6 @@ func (c *Client) addOperationUpdateUserProfileMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateUserProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

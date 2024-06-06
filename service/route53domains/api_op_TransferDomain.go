@@ -248,9 +248,6 @@ func (c *Client) addOperationTransferDomainMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpTransferDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

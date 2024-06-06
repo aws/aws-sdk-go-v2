@@ -216,9 +216,6 @@ func (c *Client) addOperationCreateGameSessionMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateGameSessionValidationMiddleware(stack); err != nil {
 		return err
 	}

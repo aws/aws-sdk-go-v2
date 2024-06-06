@@ -179,9 +179,6 @@ func (c *Client) addOperationStartSupportDataExportMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartSupportDataExportValidationMiddleware(stack); err != nil {
 		return err
 	}

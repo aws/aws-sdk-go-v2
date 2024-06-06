@@ -135,9 +135,6 @@ func (c *Client) addOperationCreateChimeWebhookConfigurationMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateChimeWebhookConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -110,9 +110,6 @@ func (c *Client) addOperationBatchResetAlarmMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpBatchResetAlarmValidationMiddleware(stack); err != nil {
 		return err
 	}

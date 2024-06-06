@@ -108,9 +108,6 @@ func (c *Client) addOperationDeleteMatchingWorkflowMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteMatchingWorkflowValidationMiddleware(stack); err != nil {
 		return err
 	}

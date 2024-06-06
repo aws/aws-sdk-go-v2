@@ -122,9 +122,6 @@ func (c *Client) addOperationCreateDistributionWithTagsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateDistributionWithTagsValidationMiddleware(stack); err != nil {
 		return err
 	}

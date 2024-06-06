@@ -194,9 +194,6 @@ func (c *Client) addOperationConnectCustomKeyStoreMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpConnectCustomKeyStoreValidationMiddleware(stack); err != nil {
 		return err
 	}

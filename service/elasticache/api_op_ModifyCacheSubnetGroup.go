@@ -121,9 +121,6 @@ func (c *Client) addOperationModifyCacheSubnetGroupMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpModifyCacheSubnetGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

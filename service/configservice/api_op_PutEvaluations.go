@@ -122,9 +122,6 @@ func (c *Client) addOperationPutEvaluationsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutEvaluationsValidationMiddleware(stack); err != nil {
 		return err
 	}

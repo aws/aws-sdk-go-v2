@@ -117,9 +117,6 @@ func (c *Client) addOperationPreviewPrivacyImpactMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPreviewPrivacyImpactValidationMiddleware(stack); err != nil {
 		return err
 	}

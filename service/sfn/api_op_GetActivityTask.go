@@ -132,9 +132,6 @@ func (c *Client) addOperationGetActivityTaskMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetActivityTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

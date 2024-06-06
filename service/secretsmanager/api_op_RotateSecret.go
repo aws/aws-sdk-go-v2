@@ -191,9 +191,6 @@ func (c *Client) addOperationRotateSecretMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opRotateSecretMiddleware(stack, options); err != nil {
 		return err
 	}

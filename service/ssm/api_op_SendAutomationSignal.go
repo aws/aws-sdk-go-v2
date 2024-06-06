@@ -128,9 +128,6 @@ func (c *Client) addOperationSendAutomationSignalMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpSendAutomationSignalValidationMiddleware(stack); err != nil {
 		return err
 	}

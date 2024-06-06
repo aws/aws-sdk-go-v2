@@ -126,9 +126,6 @@ func (c *Client) addOperationRevokePermissionsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRevokePermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

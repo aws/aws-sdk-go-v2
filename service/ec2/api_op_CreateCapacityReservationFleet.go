@@ -209,9 +209,6 @@ func (c *Client) addOperationCreateCapacityReservationFleetMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateCapacityReservationFleetMiddleware(stack, options); err != nil {
 		return err
 	}

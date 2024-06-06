@@ -151,9 +151,6 @@ func (c *Client) addOperationUpdateCalculatedAttributeDefinitionMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateCalculatedAttributeDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -124,9 +124,6 @@ func (c *Client) addOperationUpdateRepositoryEncryptionKeyMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateRepositoryEncryptionKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

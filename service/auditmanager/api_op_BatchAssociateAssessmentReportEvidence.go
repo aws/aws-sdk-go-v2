@@ -121,9 +121,6 @@ func (c *Client) addOperationBatchAssociateAssessmentReportEvidenceMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpBatchAssociateAssessmentReportEvidenceValidationMiddleware(stack); err != nil {
 		return err
 	}

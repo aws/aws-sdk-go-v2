@@ -125,9 +125,6 @@ func (c *Client) addOperationDescribeIpamPoolsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeIpamPools(options.Region), middleware.Before); err != nil {
 		return err
 	}

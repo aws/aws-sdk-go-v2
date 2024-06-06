@@ -142,9 +142,6 @@ func (c *Client) addOperationPutStorageLensConfigurationMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opPutStorageLensConfigurationMiddleware(stack); err != nil {
 		return err
 	}

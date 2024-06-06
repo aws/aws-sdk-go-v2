@@ -130,9 +130,6 @@ func (c *Client) addOperationStopActivityStreamMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStopActivityStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

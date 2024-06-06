@@ -147,9 +147,6 @@ func (c *Client) addOperationPutChunkMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutChunkValidationMiddleware(stack); err != nil {
 		return err
 	}

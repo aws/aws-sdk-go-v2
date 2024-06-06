@@ -108,9 +108,6 @@ func (c *Client) addOperationDeleteFileSystemPolicyMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteFileSystemPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

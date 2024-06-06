@@ -106,9 +106,6 @@ func (c *Client) addOperationDisassociateConfigurationItemsFromApplicationMiddle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDisassociateConfigurationItemsFromApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -326,9 +326,6 @@ func (c *Client) addOperationGenerateDataKeyMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGenerateDataKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

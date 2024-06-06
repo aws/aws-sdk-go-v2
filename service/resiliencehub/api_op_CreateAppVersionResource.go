@@ -177,9 +177,6 @@ func (c *Client) addOperationCreateAppVersionResourceMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateAppVersionResourceMiddleware(stack, options); err != nil {
 		return err
 	}

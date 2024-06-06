@@ -121,9 +121,6 @@ func (c *Client) addOperationCreateTransitGatewayRouteTableAttachmentMiddlewares
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateTransitGatewayRouteTableAttachmentMiddleware(stack, options); err != nil {
 		return err
 	}

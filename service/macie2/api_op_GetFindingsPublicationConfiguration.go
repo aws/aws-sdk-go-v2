@@ -101,9 +101,6 @@ func (c *Client) addOperationGetFindingsPublicationConfigurationMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFindingsPublicationConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}

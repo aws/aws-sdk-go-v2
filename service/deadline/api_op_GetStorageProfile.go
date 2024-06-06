@@ -143,9 +143,6 @@ func (c *Client) addOperationGetStorageProfileMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opGetStorageProfileMiddleware(stack); err != nil {
 		return err
 	}

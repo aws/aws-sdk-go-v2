@@ -119,9 +119,6 @@ func (c *Client) addOperationListKxScalingGroupsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListKxScalingGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}

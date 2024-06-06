@@ -105,9 +105,6 @@ func (c *Client) addOperationVerifyEmailAddressMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpVerifyEmailAddressValidationMiddleware(stack); err != nil {
 		return err
 	}

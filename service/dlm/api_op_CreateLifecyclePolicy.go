@@ -214,9 +214,6 @@ func (c *Client) addOperationCreateLifecyclePolicyMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateLifecyclePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

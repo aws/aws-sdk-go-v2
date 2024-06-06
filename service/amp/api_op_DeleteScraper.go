@@ -120,9 +120,6 @@ func (c *Client) addOperationDeleteScraperMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opDeleteScraperMiddleware(stack, options); err != nil {
 		return err
 	}

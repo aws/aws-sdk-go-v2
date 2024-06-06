@@ -121,9 +121,6 @@ func (c *Client) addOperationGetOutpostInstanceTypesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetOutpostInstanceTypesValidationMiddleware(stack); err != nil {
 		return err
 	}

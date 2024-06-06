@@ -130,9 +130,6 @@ func (c *Client) addOperationCreateAttributeGroupMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateAttributeGroupMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -180,9 +180,6 @@ func (c *Client) addOperationUploadMultipartPartMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUploadMultipartPartValidationMiddleware(stack); err != nil {
 		return err
 	}

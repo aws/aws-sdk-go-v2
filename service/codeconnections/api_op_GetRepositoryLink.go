@@ -109,9 +109,6 @@ func (c *Client) addOperationGetRepositoryLinkMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetRepositoryLinkValidationMiddleware(stack); err != nil {
 		return err
 	}

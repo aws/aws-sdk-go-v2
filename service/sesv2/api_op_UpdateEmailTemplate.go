@@ -120,9 +120,6 @@ func (c *Client) addOperationUpdateEmailTemplateMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateEmailTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

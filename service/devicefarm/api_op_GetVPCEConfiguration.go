@@ -108,9 +108,6 @@ func (c *Client) addOperationGetVPCEConfigurationMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetVPCEConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

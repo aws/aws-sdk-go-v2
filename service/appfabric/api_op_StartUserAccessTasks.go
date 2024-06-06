@@ -115,9 +115,6 @@ func (c *Client) addOperationStartUserAccessTasksMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartUserAccessTasksValidationMiddleware(stack); err != nil {
 		return err
 	}

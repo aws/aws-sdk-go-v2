@@ -139,9 +139,6 @@ func (c *Client) addOperationGetHostedZoneLimitMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetHostedZoneLimitValidationMiddleware(stack); err != nil {
 		return err
 	}

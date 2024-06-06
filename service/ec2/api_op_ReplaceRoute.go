@@ -162,9 +162,6 @@ func (c *Client) addOperationReplaceRouteMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpReplaceRouteValidationMiddleware(stack); err != nil {
 		return err
 	}

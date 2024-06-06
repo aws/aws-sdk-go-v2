@@ -176,9 +176,6 @@ func (c *Client) addOperationCreatePodIdentityAssociationMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreatePodIdentityAssociationMiddleware(stack, options); err != nil {
 		return err
 	}

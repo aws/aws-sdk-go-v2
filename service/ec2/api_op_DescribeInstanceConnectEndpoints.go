@@ -152,9 +152,6 @@ func (c *Client) addOperationDescribeInstanceConnectEndpointsMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInstanceConnectEndpoints(options.Region), middleware.Before); err != nil {
 		return err
 	}

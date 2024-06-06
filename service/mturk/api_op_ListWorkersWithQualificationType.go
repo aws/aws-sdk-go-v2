@@ -126,9 +126,6 @@ func (c *Client) addOperationListWorkersWithQualificationTypeMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListWorkersWithQualificationTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -136,9 +136,6 @@ func (c *Client) addOperationStartContactStreamingMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opStartContactStreamingMiddleware(stack, options); err != nil {
 		return err
 	}

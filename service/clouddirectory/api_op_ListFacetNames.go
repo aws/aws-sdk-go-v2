@@ -114,9 +114,6 @@ func (c *Client) addOperationListFacetNamesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListFacetNamesValidationMiddleware(stack); err != nil {
 		return err
 	}

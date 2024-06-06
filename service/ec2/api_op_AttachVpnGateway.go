@@ -125,9 +125,6 @@ func (c *Client) addOperationAttachVpnGatewayMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAttachVpnGatewayValidationMiddleware(stack); err != nil {
 		return err
 	}

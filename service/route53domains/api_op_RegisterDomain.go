@@ -253,9 +253,6 @@ func (c *Client) addOperationRegisterDomainMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRegisterDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

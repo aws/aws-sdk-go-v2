@@ -129,9 +129,6 @@ func (c *Client) addOperationDisableKinesisStreamingDestinationMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDisableKinesisStreamingDestinationValidationMiddleware(stack); err != nil {
 		return err
 	}

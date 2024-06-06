@@ -175,9 +175,6 @@ func (c *Client) addOperationListRestoreJobSummariesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRestoreJobSummaries(options.Region), middleware.Before); err != nil {
 		return err
 	}

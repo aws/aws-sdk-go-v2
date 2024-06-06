@@ -116,9 +116,6 @@ func (c *Client) addOperationGetHypervisorPropertyMappingsMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetHypervisorPropertyMappingsValidationMiddleware(stack); err != nil {
 		return err
 	}

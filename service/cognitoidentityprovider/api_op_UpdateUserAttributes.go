@@ -186,9 +186,6 @@ func (c *Client) addOperationUpdateUserAttributesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateUserAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

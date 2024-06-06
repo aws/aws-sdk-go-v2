@@ -221,9 +221,6 @@ func (c *Client) addOperationDescribeClusterSnapshotsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeClusterSnapshotsValidationMiddleware(stack); err != nil {
 		return err
 	}

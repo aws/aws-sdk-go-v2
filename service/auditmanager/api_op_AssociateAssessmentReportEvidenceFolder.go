@@ -108,9 +108,6 @@ func (c *Client) addOperationAssociateAssessmentReportEvidenceFolderMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAssociateAssessmentReportEvidenceFolderValidationMiddleware(stack); err != nil {
 		return err
 	}

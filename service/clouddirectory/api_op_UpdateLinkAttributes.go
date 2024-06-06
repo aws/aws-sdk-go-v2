@@ -117,9 +117,6 @@ func (c *Client) addOperationUpdateLinkAttributesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateLinkAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

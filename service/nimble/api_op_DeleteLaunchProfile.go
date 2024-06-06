@@ -117,9 +117,6 @@ func (c *Client) addOperationDeleteLaunchProfileMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opDeleteLaunchProfileMiddleware(stack, options); err != nil {
 		return err
 	}

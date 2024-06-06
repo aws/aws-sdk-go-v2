@@ -114,9 +114,6 @@ func (c *Client) addOperationGetMappingMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetMappingValidationMiddleware(stack); err != nil {
 		return err
 	}

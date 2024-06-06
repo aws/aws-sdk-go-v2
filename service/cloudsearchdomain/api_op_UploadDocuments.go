@@ -150,9 +150,6 @@ func (c *Client) addOperationUploadDocumentsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUploadDocumentsValidationMiddleware(stack); err != nil {
 		return err
 	}

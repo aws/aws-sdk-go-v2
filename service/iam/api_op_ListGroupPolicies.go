@@ -160,9 +160,6 @@ func (c *Client) addOperationListGroupPoliciesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListGroupPoliciesValidationMiddleware(stack); err != nil {
 		return err
 	}

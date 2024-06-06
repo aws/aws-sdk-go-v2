@@ -191,9 +191,6 @@ func (c *Client) addOperationStartDocumentClassificationJobMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opStartDocumentClassificationJobMiddleware(stack, options); err != nil {
 		return err
 	}

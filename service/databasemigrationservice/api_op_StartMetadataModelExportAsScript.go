@@ -120,9 +120,6 @@ func (c *Client) addOperationStartMetadataModelExportAsScriptMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartMetadataModelExportAsScriptValidationMiddleware(stack); err != nil {
 		return err
 	}

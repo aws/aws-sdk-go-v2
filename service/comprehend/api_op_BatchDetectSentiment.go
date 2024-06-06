@@ -128,9 +128,6 @@ func (c *Client) addOperationBatchDetectSentimentMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpBatchDetectSentimentValidationMiddleware(stack); err != nil {
 		return err
 	}

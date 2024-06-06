@@ -110,9 +110,6 @@ func (c *Client) addOperationDeleteInferenceExperimentMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteInferenceExperimentValidationMiddleware(stack); err != nil {
 		return err
 	}

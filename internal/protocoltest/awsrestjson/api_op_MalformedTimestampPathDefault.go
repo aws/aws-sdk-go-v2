@@ -99,9 +99,6 @@ func (c *Client) addOperationMalformedTimestampPathDefaultMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpMalformedTimestampPathDefaultValidationMiddleware(stack); err != nil {
 		return err
 	}

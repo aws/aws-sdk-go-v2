@@ -118,9 +118,6 @@ func (c *Client) addOperationRejectCertificateTransferMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpRejectCertificateTransferValidationMiddleware(stack); err != nil {
 		return err
 	}

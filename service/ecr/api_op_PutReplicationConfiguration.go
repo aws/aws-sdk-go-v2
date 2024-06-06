@@ -116,9 +116,6 @@ func (c *Client) addOperationPutReplicationConfigurationMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPutReplicationConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

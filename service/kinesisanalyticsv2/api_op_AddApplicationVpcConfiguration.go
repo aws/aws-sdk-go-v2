@@ -142,9 +142,6 @@ func (c *Client) addOperationAddApplicationVpcConfigurationMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAddApplicationVpcConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

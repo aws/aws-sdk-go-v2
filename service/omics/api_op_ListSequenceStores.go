@@ -116,9 +116,6 @@ func (c *Client) addOperationListSequenceStoresMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opListSequenceStoresMiddleware(stack); err != nil {
 		return err
 	}

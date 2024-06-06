@@ -233,9 +233,6 @@ func (c *Client) addOperationPollForDecisionTaskMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPollForDecisionTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

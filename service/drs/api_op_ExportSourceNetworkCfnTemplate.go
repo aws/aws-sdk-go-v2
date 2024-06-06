@@ -105,9 +105,6 @@ func (c *Client) addOperationExportSourceNetworkCfnTemplateMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpExportSourceNetworkCfnTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

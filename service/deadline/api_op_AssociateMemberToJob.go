@@ -132,9 +132,6 @@ func (c *Client) addOperationAssociateMemberToJobMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opAssociateMemberToJobMiddleware(stack); err != nil {
 		return err
 	}

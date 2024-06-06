@@ -129,9 +129,6 @@ func (c *Client) addOperationStartSpeakerSearchTaskMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartSpeakerSearchTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

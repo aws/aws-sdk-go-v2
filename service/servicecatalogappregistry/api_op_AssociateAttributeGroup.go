@@ -119,9 +119,6 @@ func (c *Client) addOperationAssociateAttributeGroupMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAssociateAttributeGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -103,9 +103,6 @@ func (c *Client) addOperationGetPortfolioSummaryMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPortfolioSummary(options.Region), middleware.Before); err != nil {
 		return err
 	}

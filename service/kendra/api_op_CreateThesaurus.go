@@ -143,9 +143,6 @@ func (c *Client) addOperationCreateThesaurusMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateThesaurusMiddleware(stack, options); err != nil {
 		return err
 	}

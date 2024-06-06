@@ -129,9 +129,6 @@ func (c *Client) addOperationCreateVpcConnectorMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateVpcConnectorValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -114,9 +114,6 @@ func (c *Client) addOperationProvideAnomalyFeedbackMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpProvideAnomalyFeedbackValidationMiddleware(stack); err != nil {
 		return err
 	}

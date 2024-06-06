@@ -166,9 +166,6 @@ func (c *Client) addOperationListAttachedRolePoliciesMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListAttachedRolePoliciesValidationMiddleware(stack); err != nil {
 		return err
 	}

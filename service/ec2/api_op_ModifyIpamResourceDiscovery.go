@@ -125,9 +125,6 @@ func (c *Client) addOperationModifyIpamResourceDiscoveryMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpModifyIpamResourceDiscoveryValidationMiddleware(stack); err != nil {
 		return err
 	}

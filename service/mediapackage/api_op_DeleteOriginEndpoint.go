@@ -101,9 +101,6 @@ func (c *Client) addOperationDeleteOriginEndpointMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteOriginEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}

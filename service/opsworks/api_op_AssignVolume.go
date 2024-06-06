@@ -114,9 +114,6 @@ func (c *Client) addOperationAssignVolumeMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpAssignVolumeValidationMiddleware(stack); err != nil {
 		return err
 	}

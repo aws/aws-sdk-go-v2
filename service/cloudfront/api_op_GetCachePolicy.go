@@ -122,9 +122,6 @@ func (c *Client) addOperationGetCachePolicyMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetCachePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

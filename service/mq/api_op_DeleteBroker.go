@@ -105,9 +105,6 @@ func (c *Client) addOperationDeleteBrokerMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteBrokerValidationMiddleware(stack); err != nil {
 		return err
 	}

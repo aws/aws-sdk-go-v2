@@ -272,9 +272,6 @@ func (c *Client) addOperationDescribeRecoveryPointMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeRecoveryPointValidationMiddleware(stack); err != nil {
 		return err
 	}

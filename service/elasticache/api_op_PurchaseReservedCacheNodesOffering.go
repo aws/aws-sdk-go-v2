@@ -131,9 +131,6 @@ func (c *Client) addOperationPurchaseReservedCacheNodesOfferingMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpPurchaseReservedCacheNodesOfferingValidationMiddleware(stack); err != nil {
 		return err
 	}

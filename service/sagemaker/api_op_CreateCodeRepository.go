@@ -131,9 +131,6 @@ func (c *Client) addOperationCreateCodeRepositoryMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateCodeRepositoryValidationMiddleware(stack); err != nil {
 		return err
 	}

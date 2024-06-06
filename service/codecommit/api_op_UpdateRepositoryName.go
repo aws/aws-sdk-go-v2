@@ -113,9 +113,6 @@ func (c *Client) addOperationUpdateRepositoryNameMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpUpdateRepositoryNameValidationMiddleware(stack); err != nil {
 		return err
 	}

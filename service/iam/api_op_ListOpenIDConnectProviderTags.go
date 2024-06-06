@@ -154,9 +154,6 @@ func (c *Client) addOperationListOpenIDConnectProviderTagsMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListOpenIDConnectProviderTagsValidationMiddleware(stack); err != nil {
 		return err
 	}

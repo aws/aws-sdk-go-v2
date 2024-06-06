@@ -156,9 +156,6 @@ func (c *Client) addOperationDescribeThesaurusMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeThesaurusValidationMiddleware(stack); err != nil {
 		return err
 	}

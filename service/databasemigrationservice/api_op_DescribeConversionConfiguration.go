@@ -109,9 +109,6 @@ func (c *Client) addOperationDescribeConversionConfigurationMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDescribeConversionConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

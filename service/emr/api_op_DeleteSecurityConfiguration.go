@@ -101,9 +101,6 @@ func (c *Client) addOperationDeleteSecurityConfigurationMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteSecurityConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

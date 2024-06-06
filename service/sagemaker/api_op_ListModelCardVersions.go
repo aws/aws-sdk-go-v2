@@ -137,9 +137,6 @@ func (c *Client) addOperationListModelCardVersionsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListModelCardVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

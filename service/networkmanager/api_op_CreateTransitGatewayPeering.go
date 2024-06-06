@@ -117,9 +117,6 @@ func (c *Client) addOperationCreateTransitGatewayPeeringMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateTransitGatewayPeeringMiddleware(stack, options); err != nil {
 		return err
 	}

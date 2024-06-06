@@ -120,9 +120,6 @@ func (c *Client) addOperationCreateConfiguredTableAnalysisRuleMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateConfiguredTableAnalysisRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

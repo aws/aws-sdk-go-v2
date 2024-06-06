@@ -124,9 +124,6 @@ func (c *Client) addOperationApplySecurityGroupsToClientVpnTargetNetworkMiddlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpApplySecurityGroupsToClientVpnTargetNetworkValidationMiddleware(stack); err != nil {
 		return err
 	}

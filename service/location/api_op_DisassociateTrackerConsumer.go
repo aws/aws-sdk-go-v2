@@ -114,9 +114,6 @@ func (c *Client) addOperationDisassociateTrackerConsumerMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDisassociateTrackerConsumerMiddleware(stack); err != nil {
 		return err
 	}

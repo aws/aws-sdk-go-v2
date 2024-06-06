@@ -116,9 +116,6 @@ func (c *Client) addOperationDeleteFunctionUrlConfigMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteFunctionUrlConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

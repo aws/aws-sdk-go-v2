@@ -123,9 +123,6 @@ func (c *Client) addOperationStartPipelineExecutionMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opStartPipelineExecutionMiddleware(stack, options); err != nil {
 		return err
 	}

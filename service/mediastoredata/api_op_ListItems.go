@@ -130,9 +130,6 @@ func (c *Client) addOperationListItemsMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListItems(options.Region), middleware.Before); err != nil {
 		return err
 	}

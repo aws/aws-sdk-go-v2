@@ -118,9 +118,6 @@ func (c *Client) addOperationDeleteTransitGatewayPrefixListReferenceMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteTransitGatewayPrefixListReferenceValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -121,9 +121,6 @@ func (c *Client) addOperationOpenInstancePublicPortsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpOpenInstancePublicPortsValidationMiddleware(stack); err != nil {
 		return err
 	}

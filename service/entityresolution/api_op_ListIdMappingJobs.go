@@ -115,9 +115,6 @@ func (c *Client) addOperationListIdMappingJobsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListIdMappingJobsValidationMiddleware(stack); err != nil {
 		return err
 	}

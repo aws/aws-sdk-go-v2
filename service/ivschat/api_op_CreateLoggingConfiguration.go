@@ -150,9 +150,6 @@ func (c *Client) addOperationCreateLoggingConfigurationMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateLoggingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

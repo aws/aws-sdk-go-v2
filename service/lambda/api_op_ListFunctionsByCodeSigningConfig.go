@@ -117,9 +117,6 @@ func (c *Client) addOperationListFunctionsByCodeSigningConfigMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListFunctionsByCodeSigningConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

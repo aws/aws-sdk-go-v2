@@ -157,9 +157,6 @@ func (c *Client) addOperationCreateFleetLocationsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateFleetLocationsValidationMiddleware(stack); err != nil {
 		return err
 	}

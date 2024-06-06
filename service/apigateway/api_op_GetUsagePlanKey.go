@@ -123,9 +123,6 @@ func (c *Client) addOperationGetUsagePlanKeyMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpGetUsagePlanKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

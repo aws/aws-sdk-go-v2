@@ -147,9 +147,6 @@ func (c *Client) addOperationCreateTrafficMirrorTargetMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateTrafficMirrorTargetMiddleware(stack, options); err != nil {
 		return err
 	}

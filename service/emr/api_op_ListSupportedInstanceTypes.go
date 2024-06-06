@@ -121,9 +121,6 @@ func (c *Client) addOperationListSupportedInstanceTypesMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpListSupportedInstanceTypesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -289,9 +289,6 @@ func (c *Client) addOperationStartExportTaskMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpStartExportTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -114,9 +114,6 @@ func (c *Client) addOperationCreateAuthenticationProfileMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpCreateAuthenticationProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -107,9 +107,6 @@ func (c *Client) addOperationDeleteServiceNetworkMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = addOpDeleteServiceNetworkValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -117,9 +117,6 @@ func (c *Client) addOperationGetDomainsMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addTimeOffsetDeserializer(stack, c); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDomains(options.Region), middleware.Before); err != nil {
 		return err
 	}
