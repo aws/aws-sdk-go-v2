@@ -12,6 +12,7 @@ GetThirdPartyFirewallAssociationStatus
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
+		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		ResolveAuthScheme
@@ -30,5 +31,6 @@ GetThirdPartyFirewallAssociationStatus
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
+		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

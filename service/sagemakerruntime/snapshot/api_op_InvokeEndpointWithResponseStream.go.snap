@@ -12,6 +12,7 @@ InvokeEndpointWithResponseStream
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
+		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		ResolveAuthScheme
@@ -29,5 +30,6 @@ InvokeEndpointWithResponseStream
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
+		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

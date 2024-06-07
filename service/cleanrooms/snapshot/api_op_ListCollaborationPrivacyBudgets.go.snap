@@ -12,6 +12,7 @@ ListCollaborationPrivacyBudgets
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
+		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		ResolveAuthScheme
@@ -30,5 +31,6 @@ ListCollaborationPrivacyBudgets
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
+		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

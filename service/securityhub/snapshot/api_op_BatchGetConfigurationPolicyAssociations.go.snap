@@ -12,6 +12,7 @@ BatchGetConfigurationPolicyAssociations
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
+		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		ResolveAuthScheme
@@ -30,5 +31,6 @@ BatchGetConfigurationPolicyAssociations
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
+		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

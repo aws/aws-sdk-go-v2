@@ -121,6 +121,9 @@ func (c *Client) addOperationPutServiceQuotaIncreaseRequestIntoTemplateMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutServiceQuotaIncreaseRequestIntoTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -116,6 +116,9 @@ func (c *Client) addOperationCompleteAttachedFileUploadMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCompleteAttachedFileUploadValidationMiddleware(stack); err != nil {
 		return err
 	}

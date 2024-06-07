@@ -116,6 +116,9 @@ func (c *Client) addOperationCreateStreamKeyMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateStreamKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -112,6 +112,9 @@ func (c *Client) addOperationGetInlinePolicyForPermissionSetMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetInlinePolicyForPermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}

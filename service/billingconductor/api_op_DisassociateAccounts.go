@@ -109,6 +109,9 @@ func (c *Client) addOperationDisassociateAccountsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateAccountsValidationMiddleware(stack); err != nil {
 		return err
 	}

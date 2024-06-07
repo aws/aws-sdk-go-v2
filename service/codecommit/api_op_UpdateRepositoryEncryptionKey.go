@@ -121,6 +121,9 @@ func (c *Client) addOperationUpdateRepositoryEncryptionKeyMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateRepositoryEncryptionKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

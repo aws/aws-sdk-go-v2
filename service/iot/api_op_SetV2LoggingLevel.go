@@ -108,6 +108,9 @@ func (c *Client) addOperationSetV2LoggingLevelMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetV2LoggingLevelValidationMiddleware(stack); err != nil {
 		return err
 	}

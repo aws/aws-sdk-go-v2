@@ -110,6 +110,9 @@ func (c *Client) addOperationDeletePermissionGroupMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeletePermissionGroupMiddleware(stack, options); err != nil {
 		return err
 	}

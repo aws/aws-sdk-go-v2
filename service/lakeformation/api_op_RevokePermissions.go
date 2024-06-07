@@ -123,6 +123,9 @@ func (c *Client) addOperationRevokePermissionsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRevokePermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

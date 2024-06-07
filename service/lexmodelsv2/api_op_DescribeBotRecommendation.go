@@ -162,6 +162,9 @@ func (c *Client) addOperationDescribeBotRecommendationMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeBotRecommendationValidationMiddleware(stack); err != nil {
 		return err
 	}

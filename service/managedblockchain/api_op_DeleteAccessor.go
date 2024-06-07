@@ -105,6 +105,9 @@ func (c *Client) addOperationDeleteAccessorMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteAccessorValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -126,6 +126,9 @@ func (c *Client) addOperationListTableStorageOptimizersMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListTableStorageOptimizersValidationMiddleware(stack); err != nil {
 		return err
 	}

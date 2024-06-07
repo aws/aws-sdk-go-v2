@@ -123,6 +123,9 @@ func (c *Client) addOperationUpdateLogAnomalyDetectorMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateLogAnomalyDetectorValidationMiddleware(stack); err != nil {
 		return err
 	}

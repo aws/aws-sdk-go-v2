@@ -137,6 +137,9 @@ func (c *Client) addOperationListForecastExportJobsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListForecastExportJobsValidationMiddleware(stack); err != nil {
 		return err
 	}

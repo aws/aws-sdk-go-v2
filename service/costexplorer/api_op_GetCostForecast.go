@@ -194,6 +194,9 @@ func (c *Client) addOperationGetCostForecastMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetCostForecastValidationMiddleware(stack); err != nil {
 		return err
 	}

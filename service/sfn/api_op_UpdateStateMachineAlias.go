@@ -140,6 +140,9 @@ func (c *Client) addOperationUpdateStateMachineAliasMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateStateMachineAliasValidationMiddleware(stack); err != nil {
 		return err
 	}

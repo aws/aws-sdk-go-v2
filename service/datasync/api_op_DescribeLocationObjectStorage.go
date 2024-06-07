@@ -132,6 +132,9 @@ func (c *Client) addOperationDescribeLocationObjectStorageMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeLocationObjectStorageValidationMiddleware(stack); err != nil {
 		return err
 	}

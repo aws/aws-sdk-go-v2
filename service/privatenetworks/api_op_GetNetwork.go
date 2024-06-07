@@ -108,6 +108,9 @@ func (c *Client) addOperationGetNetworkMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetNetworkValidationMiddleware(stack); err != nil {
 		return err
 	}

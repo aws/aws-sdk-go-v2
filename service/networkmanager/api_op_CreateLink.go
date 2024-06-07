@@ -133,6 +133,9 @@ func (c *Client) addOperationCreateLinkMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateLinkValidationMiddleware(stack); err != nil {
 		return err
 	}

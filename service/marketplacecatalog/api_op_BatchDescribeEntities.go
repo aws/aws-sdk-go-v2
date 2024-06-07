@@ -108,6 +108,9 @@ func (c *Client) addOperationBatchDescribeEntitiesMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchDescribeEntitiesValidationMiddleware(stack); err != nil {
 		return err
 	}

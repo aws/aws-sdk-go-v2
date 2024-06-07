@@ -119,6 +119,9 @@ func (c *Client) addOperationStartReplicationTaskAssessmentMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartReplicationTaskAssessmentValidationMiddleware(stack); err != nil {
 		return err
 	}

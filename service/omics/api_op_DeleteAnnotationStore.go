@@ -108,6 +108,9 @@ func (c *Client) addOperationDeleteAnnotationStoreMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteAnnotationStoreMiddleware(stack); err != nil {
 		return err
 	}

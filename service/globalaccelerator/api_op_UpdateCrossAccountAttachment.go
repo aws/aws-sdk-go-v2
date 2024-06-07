@@ -144,6 +144,9 @@ func (c *Client) addOperationUpdateCrossAccountAttachmentMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateCrossAccountAttachmentValidationMiddleware(stack); err != nil {
 		return err
 	}

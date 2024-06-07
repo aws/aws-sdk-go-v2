@@ -134,6 +134,9 @@ func (c *Client) addOperationDescribeFolderResolvedPermissionsMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeFolderResolvedPermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

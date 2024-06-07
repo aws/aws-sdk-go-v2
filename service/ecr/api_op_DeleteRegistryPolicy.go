@@ -99,6 +99,9 @@ func (c *Client) addOperationDeleteRegistryPolicyMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRegistryPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}

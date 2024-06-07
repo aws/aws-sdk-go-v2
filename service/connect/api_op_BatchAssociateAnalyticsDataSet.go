@@ -125,6 +125,9 @@ func (c *Client) addOperationBatchAssociateAnalyticsDataSetMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchAssociateAnalyticsDataSetValidationMiddleware(stack); err != nil {
 		return err
 	}

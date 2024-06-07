@@ -128,6 +128,9 @@ func (c *Client) addOperationCreateBackendStorageMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateBackendStorageValidationMiddleware(stack); err != nil {
 		return err
 	}

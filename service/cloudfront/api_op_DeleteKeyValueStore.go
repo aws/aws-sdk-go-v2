@@ -103,6 +103,9 @@ func (c *Client) addOperationDeleteKeyValueStoreMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteKeyValueStoreValidationMiddleware(stack); err != nil {
 		return err
 	}

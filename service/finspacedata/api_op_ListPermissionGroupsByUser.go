@@ -119,6 +119,9 @@ func (c *Client) addOperationListPermissionGroupsByUserMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListPermissionGroupsByUserValidationMiddleware(stack); err != nil {
 		return err
 	}

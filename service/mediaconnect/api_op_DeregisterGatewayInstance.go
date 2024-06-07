@@ -113,6 +113,9 @@ func (c *Client) addOperationDeregisterGatewayInstanceMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeregisterGatewayInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

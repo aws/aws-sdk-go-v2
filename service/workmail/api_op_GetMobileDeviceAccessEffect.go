@@ -124,6 +124,9 @@ func (c *Client) addOperationGetMobileDeviceAccessEffectMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetMobileDeviceAccessEffectValidationMiddleware(stack); err != nil {
 		return err
 	}

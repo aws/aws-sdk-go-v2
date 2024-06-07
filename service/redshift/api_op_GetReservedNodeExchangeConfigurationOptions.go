@@ -134,6 +134,9 @@ func (c *Client) addOperationGetReservedNodeExchangeConfigurationOptionsMiddlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetReservedNodeExchangeConfigurationOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}

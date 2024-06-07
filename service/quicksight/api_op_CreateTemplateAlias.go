@@ -127,6 +127,9 @@ func (c *Client) addOperationCreateTemplateAliasMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateTemplateAliasValidationMiddleware(stack); err != nil {
 		return err
 	}

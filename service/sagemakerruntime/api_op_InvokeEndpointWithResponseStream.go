@@ -221,6 +221,9 @@ func (c *Client) addOperationInvokeEndpointWithResponseStreamMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpInvokeEndpointWithResponseStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

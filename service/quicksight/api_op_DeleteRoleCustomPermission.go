@@ -118,6 +118,9 @@ func (c *Client) addOperationDeleteRoleCustomPermissionMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteRoleCustomPermissionValidationMiddleware(stack); err != nil {
 		return err
 	}

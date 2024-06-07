@@ -106,6 +106,9 @@ func (c *Client) addOperationDisassociateWebsiteCertificateAuthorityMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateWebsiteCertificateAuthorityValidationMiddleware(stack); err != nil {
 		return err
 	}

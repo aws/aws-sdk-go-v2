@@ -109,6 +109,9 @@ func (c *Client) addOperationGetRepositoryCatalogDataMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetRepositoryCatalogDataValidationMiddleware(stack); err != nil {
 		return err
 	}

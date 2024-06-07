@@ -127,6 +127,9 @@ func (c *Client) addOperationListVocabularyFiltersMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVocabularyFilters(options.Region), middleware.Before); err != nil {
 		return err
 	}

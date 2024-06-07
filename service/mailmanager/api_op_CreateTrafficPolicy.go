@@ -129,6 +129,9 @@ func (c *Client) addOperationCreateTrafficPolicyMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateTrafficPolicyMiddleware(stack, options); err != nil {
 		return err
 	}

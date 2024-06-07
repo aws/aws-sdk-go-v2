@@ -193,6 +193,9 @@ func (c *Client) addOperationRestoreGraphFromSnapshotMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRestoreGraphFromSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}

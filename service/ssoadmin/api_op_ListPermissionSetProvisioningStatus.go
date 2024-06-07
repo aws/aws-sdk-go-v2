@@ -120,6 +120,9 @@ func (c *Client) addOperationListPermissionSetProvisioningStatusMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListPermissionSetProvisioningStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

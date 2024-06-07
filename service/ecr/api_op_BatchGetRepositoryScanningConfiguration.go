@@ -106,6 +106,9 @@ func (c *Client) addOperationBatchGetRepositoryScanningConfigurationMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchGetRepositoryScanningConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

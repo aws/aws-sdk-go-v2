@@ -161,6 +161,9 @@ func (c *Client) addOperationPutRemediationExceptionsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutRemediationExceptionsValidationMiddleware(stack); err != nil {
 		return err
 	}

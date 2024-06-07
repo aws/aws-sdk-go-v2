@@ -146,6 +146,9 @@ func (c *Client) addOperationDisablePolicyTypeMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisablePolicyTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -101,6 +101,9 @@ func (c *Client) addOperationRegisterDataLakeDelegatedAdministratorMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRegisterDataLakeDelegatedAdministratorValidationMiddleware(stack); err != nil {
 		return err
 	}

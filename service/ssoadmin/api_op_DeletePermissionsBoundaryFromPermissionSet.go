@@ -104,6 +104,9 @@ func (c *Client) addOperationDeletePermissionsBoundaryFromPermissionSetMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeletePermissionsBoundaryFromPermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -110,6 +110,9 @@ func (c *Client) addOperationSetDefaultAuthorizerMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetDefaultAuthorizerValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -119,6 +119,9 @@ func (c *Client) addOperationCancelEnvironmentDeploymentMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelEnvironmentDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}

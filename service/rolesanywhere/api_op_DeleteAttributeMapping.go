@@ -114,6 +114,9 @@ func (c *Client) addOperationDeleteAttributeMappingMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteAttributeMappingValidationMiddleware(stack); err != nil {
 		return err
 	}

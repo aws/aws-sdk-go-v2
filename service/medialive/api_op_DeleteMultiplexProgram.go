@@ -125,6 +125,9 @@ func (c *Client) addOperationDeleteMultiplexProgramMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteMultiplexProgramValidationMiddleware(stack); err != nil {
 		return err
 	}

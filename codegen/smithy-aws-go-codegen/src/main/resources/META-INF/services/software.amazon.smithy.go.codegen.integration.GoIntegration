@@ -76,3 +76,4 @@ software.amazon.smithy.aws.go.codegen.customization.CloudFrontKVSSigV4a
 software.amazon.smithy.aws.go.codegen.customization.BackfillProtocolTestServiceTrait
 software.amazon.smithy.go.codegen.integration.MiddlewareStackSnapshotTests
 software.amazon.smithy.aws.go.codegen.customization.s3.S3ExpiresShapeCustomization
+software.amazon.smithy.aws.go.codegen.ClockSkewGenerator

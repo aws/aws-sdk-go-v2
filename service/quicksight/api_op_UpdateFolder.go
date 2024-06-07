@@ -121,6 +121,9 @@ func (c *Client) addOperationUpdateFolderMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateFolderValidationMiddleware(stack); err != nil {
 		return err
 	}

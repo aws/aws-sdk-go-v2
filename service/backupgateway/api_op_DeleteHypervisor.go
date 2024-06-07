@@ -102,6 +102,9 @@ func (c *Client) addOperationDeleteHypervisorMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteHypervisorValidationMiddleware(stack); err != nil {
 		return err
 	}

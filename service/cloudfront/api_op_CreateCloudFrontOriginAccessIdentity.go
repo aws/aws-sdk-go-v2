@@ -122,6 +122,9 @@ func (c *Client) addOperationCreateCloudFrontOriginAccessIdentityMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateCloudFrontOriginAccessIdentityValidationMiddleware(stack); err != nil {
 		return err
 	}

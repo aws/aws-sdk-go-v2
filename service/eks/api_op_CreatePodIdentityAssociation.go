@@ -173,6 +173,9 @@ func (c *Client) addOperationCreatePodIdentityAssociationMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreatePodIdentityAssociationMiddleware(stack, options); err != nil {
 		return err
 	}

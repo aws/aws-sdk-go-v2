@@ -103,6 +103,9 @@ func (c *Client) addOperationDeleteRotationOverrideMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteRotationOverrideValidationMiddleware(stack); err != nil {
 		return err
 	}

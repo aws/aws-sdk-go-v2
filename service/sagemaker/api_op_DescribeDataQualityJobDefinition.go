@@ -152,6 +152,9 @@ func (c *Client) addOperationDescribeDataQualityJobDefinitionMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDataQualityJobDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

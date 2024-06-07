@@ -152,6 +152,9 @@ func (c *Client) addOperationDescribePageMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribePageValidationMiddleware(stack); err != nil {
 		return err
 	}

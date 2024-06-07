@@ -117,6 +117,9 @@ func (c *Client) addOperationReloadReplicationTablesMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpReloadReplicationTablesValidationMiddleware(stack); err != nil {
 		return err
 	}

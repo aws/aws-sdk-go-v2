@@ -153,6 +153,9 @@ func (c *Client) addOperationUpdateCapabilityMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateCapabilityValidationMiddleware(stack); err != nil {
 		return err
 	}

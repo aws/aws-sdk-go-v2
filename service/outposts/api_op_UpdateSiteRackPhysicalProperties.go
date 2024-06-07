@@ -197,6 +197,9 @@ func (c *Client) addOperationUpdateSiteRackPhysicalPropertiesMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateSiteRackPhysicalPropertiesValidationMiddleware(stack); err != nil {
 		return err
 	}

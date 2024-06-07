@@ -110,6 +110,9 @@ func (c *Client) addOperationUpdateRepositoryNameMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateRepositoryNameValidationMiddleware(stack); err != nil {
 		return err
 	}

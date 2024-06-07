@@ -125,6 +125,9 @@ func (c *Client) addOperationGetMessageInsightsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetMessageInsightsValidationMiddleware(stack); err != nil {
 		return err
 	}

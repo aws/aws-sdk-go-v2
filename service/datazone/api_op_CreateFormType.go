@@ -152,6 +152,9 @@ func (c *Client) addOperationCreateFormTypeMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateFormTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

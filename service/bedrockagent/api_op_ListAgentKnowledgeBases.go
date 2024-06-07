@@ -129,6 +129,9 @@ func (c *Client) addOperationListAgentKnowledgeBasesMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListAgentKnowledgeBasesValidationMiddleware(stack); err != nil {
 		return err
 	}

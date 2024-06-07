@@ -110,6 +110,9 @@ func (c *Client) addOperationDeleteApplicationSnapshotMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteApplicationSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}

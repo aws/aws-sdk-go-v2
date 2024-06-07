@@ -135,6 +135,9 @@ func (c *Client) addOperationGetImportFileTaskMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetImportFileTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -133,6 +133,9 @@ func (c *Client) addOperationListVirtualGatewaysMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListVirtualGatewaysValidationMiddleware(stack); err != nil {
 		return err
 	}

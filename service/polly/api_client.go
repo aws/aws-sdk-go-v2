@@ -15,6 +15,7 @@ import (
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
+	internalmiddleware "github.com/aws/aws-sdk-go-v2/internal/middleware"
 	acceptencodingcust "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding"
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	smithy "github.com/aws/smithy-go"
@@ -24,6 +25,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net"
 	"net/http"
+	"sync/atomic"
 	"time"
 )
 
@@ -33,6 +35,9 @@ const ServiceAPIVersion = "2016-06-10"
 // Client provides the API client to make operations call for Amazon Polly.
 type Client struct {
 	options Options
+
+	// Difference between the time reported by the server and the client
+	timeOffset *atomic.Int64
 }
 
 // New returns an initialized Client based on the functional options. Provide
@@ -70,6 +75,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	client := &Client{
 		options: options,
 	}
+
+	initializeTimeOffsetResolver(client)
 
 	return client
 }
@@ -485,6 +492,17 @@ func resolveUseFIPSEndpoint(cfg aws.Config, o *Options) error {
 		o.EndpointOptions.UseFIPSEndpoint = value
 	}
 	return nil
+}
+
+func addTimeOffsetBuild(stack *middleware.Stack, c *Client) error {
+	mw := internalmiddleware.AddTimeOffsetMiddleware{Offset: c.timeOffset}
+	if err := stack.Build.Add(&mw, middleware.After); err != nil {
+		return err
+	}
+	return stack.Deserialize.Insert(&mw, "RecordResponseTiming", middleware.Before)
+}
+func initializeTimeOffsetResolver(c *Client) {
+	c.timeOffset = new(atomic.Int64)
 }
 
 func addRecursionDetection(stack *middleware.Stack) error {

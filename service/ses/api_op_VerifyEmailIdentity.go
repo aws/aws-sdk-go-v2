@@ -107,6 +107,9 @@ func (c *Client) addOperationVerifyEmailIdentityMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpVerifyEmailIdentityValidationMiddleware(stack); err != nil {
 		return err
 	}

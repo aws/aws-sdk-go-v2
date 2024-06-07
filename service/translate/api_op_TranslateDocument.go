@@ -191,6 +191,9 @@ func (c *Client) addOperationTranslateDocumentMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTranslateDocumentValidationMiddleware(stack); err != nil {
 		return err
 	}

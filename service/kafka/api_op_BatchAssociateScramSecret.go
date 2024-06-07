@@ -112,6 +112,9 @@ func (c *Client) addOperationBatchAssociateScramSecretMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchAssociateScramSecretValidationMiddleware(stack); err != nil {
 		return err
 	}

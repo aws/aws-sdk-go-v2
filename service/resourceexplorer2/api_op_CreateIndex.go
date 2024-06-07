@@ -173,6 +173,9 @@ func (c *Client) addOperationCreateIndexMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateIndexMiddleware(stack, options); err != nil {
 		return err
 	}

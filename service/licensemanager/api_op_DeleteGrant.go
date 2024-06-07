@@ -117,6 +117,9 @@ func (c *Client) addOperationDeleteGrantMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteGrantValidationMiddleware(stack); err != nil {
 		return err
 	}

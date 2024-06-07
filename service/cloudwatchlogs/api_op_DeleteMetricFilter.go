@@ -103,6 +103,9 @@ func (c *Client) addOperationDeleteMetricFilterMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteMetricFilterValidationMiddleware(stack); err != nil {
 		return err
 	}

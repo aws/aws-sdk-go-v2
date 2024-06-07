@@ -179,6 +179,9 @@ func (c *Client) addOperationStartKeyPhrasesDetectionJobMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartKeyPhrasesDetectionJobMiddleware(stack, options); err != nil {
 		return err
 	}

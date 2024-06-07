@@ -175,6 +175,9 @@ func (c *Client) addOperationCreateDataIntegrationMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateDataIntegrationMiddleware(stack, options); err != nil {
 		return err
 	}

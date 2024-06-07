@@ -132,6 +132,9 @@ func (c *Client) addOperationListIndexesForMembersMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListIndexesForMembersValidationMiddleware(stack); err != nil {
 		return err
 	}

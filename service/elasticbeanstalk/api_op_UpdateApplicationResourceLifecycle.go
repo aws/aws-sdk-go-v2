@@ -111,6 +111,9 @@ func (c *Client) addOperationUpdateApplicationResourceLifecycleMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateApplicationResourceLifecycleValidationMiddleware(stack); err != nil {
 		return err
 	}

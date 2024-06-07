@@ -143,6 +143,9 @@ func (c *Client) addOperationRegisterSlackWorkspaceForOrganizationMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRegisterSlackWorkspaceForOrganizationValidationMiddleware(stack); err != nil {
 		return err
 	}

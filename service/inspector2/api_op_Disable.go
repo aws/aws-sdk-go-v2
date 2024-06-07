@@ -112,6 +112,9 @@ func (c *Client) addOperationDisableMiddlewares(stack *middleware.Stack, options
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisable(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -117,6 +117,9 @@ func (c *Client) addOperationPutAppInstanceUserExpirationSettingsMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutAppInstanceUserExpirationSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

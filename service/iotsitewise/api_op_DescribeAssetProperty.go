@@ -155,6 +155,9 @@ func (c *Client) addOperationDescribeAssetPropertyMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribeAssetPropertyMiddleware(stack); err != nil {
 		return err
 	}

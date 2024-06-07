@@ -117,6 +117,9 @@ func (c *Client) addOperationUpdateProvisionedModelThroughputMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateProvisionedModelThroughputValidationMiddleware(stack); err != nil {
 		return err
 	}

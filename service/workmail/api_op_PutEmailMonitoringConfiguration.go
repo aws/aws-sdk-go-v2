@@ -111,6 +111,9 @@ func (c *Client) addOperationPutEmailMonitoringConfigurationMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutEmailMonitoringConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

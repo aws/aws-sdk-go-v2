@@ -103,6 +103,9 @@ func (c *Client) addOperationGetTransitGatewayPeeringMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetTransitGatewayPeeringValidationMiddleware(stack); err != nil {
 		return err
 	}

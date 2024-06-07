@@ -146,6 +146,9 @@ func (c *Client) addOperationCreateWorkspaceServiceAccountTokenMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateWorkspaceServiceAccountTokenValidationMiddleware(stack); err != nil {
 		return err
 	}

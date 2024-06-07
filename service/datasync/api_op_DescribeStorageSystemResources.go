@@ -137,6 +137,9 @@ func (c *Client) addOperationDescribeStorageSystemResourcesMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribeStorageSystemResourcesMiddleware(stack); err != nil {
 		return err
 	}

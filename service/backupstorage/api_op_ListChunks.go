@@ -119,6 +119,9 @@ func (c *Client) addOperationListChunksMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListChunksValidationMiddleware(stack); err != nil {
 		return err
 	}

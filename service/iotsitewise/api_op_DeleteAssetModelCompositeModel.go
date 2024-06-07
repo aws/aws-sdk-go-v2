@@ -124,6 +124,9 @@ func (c *Client) addOperationDeleteAssetModelCompositeModelMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteAssetModelCompositeModelMiddleware(stack); err != nil {
 		return err
 	}

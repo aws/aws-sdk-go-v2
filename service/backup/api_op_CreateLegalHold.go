@@ -147,6 +147,9 @@ func (c *Client) addOperationCreateLegalHoldMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateLegalHoldValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -173,6 +173,9 @@ func (c *Client) addOperationGetFindingV2Middlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetFindingV2ValidationMiddleware(stack); err != nil {
 		return err
 	}

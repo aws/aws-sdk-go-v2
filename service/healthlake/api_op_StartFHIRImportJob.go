@@ -136,6 +136,9 @@ func (c *Client) addOperationStartFHIRImportJobMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartFHIRImportJobMiddleware(stack, options); err != nil {
 		return err
 	}

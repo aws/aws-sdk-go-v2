@@ -136,6 +136,9 @@ func (c *Client) addOperationDescribeComponentMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeComponentValidationMiddleware(stack); err != nil {
 		return err
 	}

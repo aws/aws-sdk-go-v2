@@ -177,6 +177,9 @@ func (c *Client) addOperationGetGuardrailMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetGuardrailValidationMiddleware(stack); err != nil {
 		return err
 	}

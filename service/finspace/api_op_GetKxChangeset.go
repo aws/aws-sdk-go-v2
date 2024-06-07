@@ -156,6 +156,9 @@ func (c *Client) addOperationGetKxChangesetMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetKxChangesetValidationMiddleware(stack); err != nil {
 		return err
 	}

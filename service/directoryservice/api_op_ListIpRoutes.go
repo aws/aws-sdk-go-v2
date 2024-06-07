@@ -116,6 +116,9 @@ func (c *Client) addOperationListIpRoutesMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListIpRoutesValidationMiddleware(stack); err != nil {
 		return err
 	}

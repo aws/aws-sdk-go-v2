@@ -110,6 +110,9 @@ func (c *Client) addOperationDescribeDeliveryDestinationsMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDeliveryDestinations(options.Region), middleware.Before); err != nil {
 		return err
 	}

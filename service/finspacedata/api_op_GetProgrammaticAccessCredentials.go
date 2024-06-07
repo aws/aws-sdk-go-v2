@@ -119,6 +119,9 @@ func (c *Client) addOperationGetProgrammaticAccessCredentialsMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetProgrammaticAccessCredentialsValidationMiddleware(stack); err != nil {
 		return err
 	}

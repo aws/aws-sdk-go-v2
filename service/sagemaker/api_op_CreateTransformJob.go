@@ -238,6 +238,9 @@ func (c *Client) addOperationCreateTransformJobMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateTransformJobValidationMiddleware(stack); err != nil {
 		return err
 	}

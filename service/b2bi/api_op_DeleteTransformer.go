@@ -99,6 +99,9 @@ func (c *Client) addOperationDeleteTransformerMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteTransformerValidationMiddleware(stack); err != nil {
 		return err
 	}

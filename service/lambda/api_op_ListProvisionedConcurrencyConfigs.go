@@ -124,6 +124,9 @@ func (c *Client) addOperationListProvisionedConcurrencyConfigsMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListProvisionedConcurrencyConfigsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -119,6 +119,9 @@ func (c *Client) addOperationUpdateSPICECapacityConfigurationMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateSPICECapacityConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

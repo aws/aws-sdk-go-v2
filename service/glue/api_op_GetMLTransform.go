@@ -196,6 +196,9 @@ func (c *Client) addOperationGetMLTransformMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetMLTransformValidationMiddleware(stack); err != nil {
 		return err
 	}

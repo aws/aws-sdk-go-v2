@@ -122,6 +122,9 @@ func (c *Client) addOperationDeleteGatewayRouteMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteGatewayRouteValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -99,6 +99,9 @@ func (c *Client) addOperationPutLoggingOptionsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opPutLoggingOptionsMiddleware(stack); err != nil {
 		return err
 	}

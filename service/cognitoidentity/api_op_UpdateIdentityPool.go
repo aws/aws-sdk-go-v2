@@ -183,6 +183,9 @@ func (c *Client) addOperationUpdateIdentityPoolMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateIdentityPoolValidationMiddleware(stack); err != nil {
 		return err
 	}

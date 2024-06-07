@@ -120,6 +120,9 @@ func (c *Client) addOperationCreateCustomRoutingListenerMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateCustomRoutingListenerMiddleware(stack, options); err != nil {
 		return err
 	}

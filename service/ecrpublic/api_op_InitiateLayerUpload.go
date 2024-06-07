@@ -119,6 +119,9 @@ func (c *Client) addOperationInitiateLayerUploadMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpInitiateLayerUploadValidationMiddleware(stack); err != nil {
 		return err
 	}

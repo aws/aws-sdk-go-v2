@@ -151,6 +151,9 @@ func (c *Client) addOperationUpdateSourceServerReplicationTypeMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateSourceServerReplicationTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

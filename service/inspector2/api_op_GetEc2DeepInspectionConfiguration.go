@@ -108,6 +108,9 @@ func (c *Client) addOperationGetEc2DeepInspectionConfigurationMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEc2DeepInspectionConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}

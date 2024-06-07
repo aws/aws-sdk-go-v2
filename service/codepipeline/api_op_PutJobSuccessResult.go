@@ -122,6 +122,9 @@ func (c *Client) addOperationPutJobSuccessResultMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutJobSuccessResultValidationMiddleware(stack); err != nil {
 		return err
 	}

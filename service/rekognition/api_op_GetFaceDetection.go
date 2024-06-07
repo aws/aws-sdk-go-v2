@@ -167,6 +167,9 @@ func (c *Client) addOperationGetFaceDetectionMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetFaceDetectionValidationMiddleware(stack); err != nil {
 		return err
 	}

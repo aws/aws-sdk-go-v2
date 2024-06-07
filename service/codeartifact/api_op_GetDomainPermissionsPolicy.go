@@ -112,6 +112,9 @@ func (c *Client) addOperationGetDomainPermissionsPolicyMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetDomainPermissionsPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

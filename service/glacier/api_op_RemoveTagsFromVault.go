@@ -116,6 +116,9 @@ func (c *Client) addOperationRemoveTagsFromVaultMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRemoveTagsFromVaultValidationMiddleware(stack); err != nil {
 		return err
 	}

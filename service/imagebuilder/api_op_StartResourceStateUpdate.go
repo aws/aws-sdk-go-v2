@@ -137,6 +137,9 @@ func (c *Client) addOperationStartResourceStateUpdateMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartResourceStateUpdateMiddleware(stack, options); err != nil {
 		return err
 	}

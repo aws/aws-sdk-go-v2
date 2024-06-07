@@ -104,6 +104,9 @@ func (c *Client) addOperationListResourcePoliciesMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResourcePolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}

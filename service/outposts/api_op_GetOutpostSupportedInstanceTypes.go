@@ -119,6 +119,9 @@ func (c *Client) addOperationGetOutpostSupportedInstanceTypesMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetOutpostSupportedInstanceTypesValidationMiddleware(stack); err != nil {
 		return err
 	}

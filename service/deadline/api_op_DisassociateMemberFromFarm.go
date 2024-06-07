@@ -103,6 +103,9 @@ func (c *Client) addOperationDisassociateMemberFromFarmMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDisassociateMemberFromFarmMiddleware(stack); err != nil {
 		return err
 	}

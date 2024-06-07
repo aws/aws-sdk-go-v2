@@ -112,6 +112,9 @@ func (c *Client) addOperationGrantFlowEntitlementsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGrantFlowEntitlementsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -199,6 +199,9 @@ func (c *Client) addOperationCreateDBParameterGroupMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDBParameterGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

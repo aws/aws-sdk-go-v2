@@ -124,6 +124,9 @@ func (c *Client) addOperationGetDataQualityRulesetMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetDataQualityRulesetValidationMiddleware(stack); err != nil {
 		return err
 	}

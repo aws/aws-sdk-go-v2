@@ -125,6 +125,9 @@ func (c *Client) addOperationUpdateVoiceConnectorMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateVoiceConnectorValidationMiddleware(stack); err != nil {
 		return err
 	}

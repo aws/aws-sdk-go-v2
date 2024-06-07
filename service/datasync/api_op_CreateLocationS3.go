@@ -174,6 +174,9 @@ func (c *Client) addOperationCreateLocationS3Middlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateLocationS3ValidationMiddleware(stack); err != nil {
 		return err
 	}

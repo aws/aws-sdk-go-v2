@@ -104,6 +104,9 @@ func (c *Client) addOperationUnregisterConnectorMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUnregisterConnectorValidationMiddleware(stack); err != nil {
 		return err
 	}

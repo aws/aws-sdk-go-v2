@@ -107,6 +107,9 @@ func (c *Client) addOperationDeleteCostCategoryDefinitionMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteCostCategoryDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

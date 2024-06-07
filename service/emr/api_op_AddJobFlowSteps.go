@@ -142,6 +142,9 @@ func (c *Client) addOperationAddJobFlowStepsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddJobFlowStepsValidationMiddleware(stack); err != nil {
 		return err
 	}

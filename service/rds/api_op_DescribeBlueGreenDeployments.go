@@ -156,6 +156,9 @@ func (c *Client) addOperationDescribeBlueGreenDeploymentsMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeBlueGreenDeploymentsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -123,6 +123,9 @@ func (c *Client) addOperationGetCalculationExecutionMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetCalculationExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}

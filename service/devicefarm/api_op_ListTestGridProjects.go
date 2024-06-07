@@ -107,6 +107,9 @@ func (c *Client) addOperationListTestGridProjectsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTestGridProjects(options.Region), middleware.Before); err != nil {
 		return err
 	}

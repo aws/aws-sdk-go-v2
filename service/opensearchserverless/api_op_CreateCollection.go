@@ -121,6 +121,9 @@ func (c *Client) addOperationCreateCollectionMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateCollectionMiddleware(stack, options); err != nil {
 		return err
 	}

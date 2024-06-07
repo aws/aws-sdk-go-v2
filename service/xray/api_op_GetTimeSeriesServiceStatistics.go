@@ -138,6 +138,9 @@ func (c *Client) addOperationGetTimeSeriesServiceStatisticsMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetTimeSeriesServiceStatisticsValidationMiddleware(stack); err != nil {
 		return err
 	}

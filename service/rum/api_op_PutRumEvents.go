@@ -125,6 +125,9 @@ func (c *Client) addOperationPutRumEventsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opPutRumEventsMiddleware(stack); err != nil {
 		return err
 	}

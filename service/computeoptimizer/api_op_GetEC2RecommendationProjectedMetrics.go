@@ -137,6 +137,9 @@ func (c *Client) addOperationGetEC2RecommendationProjectedMetricsMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetEC2RecommendationProjectedMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}

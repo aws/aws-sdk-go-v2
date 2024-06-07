@@ -115,6 +115,9 @@ func (c *Client) addOperationDeleteCustomRoutingAcceleratorMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteCustomRoutingAcceleratorValidationMiddleware(stack); err != nil {
 		return err
 	}

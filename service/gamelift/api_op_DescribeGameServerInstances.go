@@ -145,6 +145,9 @@ func (c *Client) addOperationDescribeGameServerInstancesMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeGameServerInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -192,6 +192,9 @@ func (c *Client) addOperationListSessionMetricsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListSessionMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}

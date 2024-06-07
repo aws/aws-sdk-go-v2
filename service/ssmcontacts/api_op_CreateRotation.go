@@ -146,6 +146,9 @@ func (c *Client) addOperationCreateRotationMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateRotationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -119,6 +119,9 @@ func (c *Client) addOperationDescribeNamespaceMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeNamespaceValidationMiddleware(stack); err != nil {
 		return err
 	}

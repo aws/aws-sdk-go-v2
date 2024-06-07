@@ -103,6 +103,9 @@ func (c *Client) addOperationDeleteCustomLogSourceMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteCustomLogSourceValidationMiddleware(stack); err != nil {
 		return err
 	}

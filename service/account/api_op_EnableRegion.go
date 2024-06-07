@@ -125,6 +125,9 @@ func (c *Client) addOperationEnableRegionMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpEnableRegionValidationMiddleware(stack); err != nil {
 		return err
 	}

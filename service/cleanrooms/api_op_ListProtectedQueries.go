@@ -121,6 +121,9 @@ func (c *Client) addOperationListProtectedQueriesMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListProtectedQueriesValidationMiddleware(stack); err != nil {
 		return err
 	}

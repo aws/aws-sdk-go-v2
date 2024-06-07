@@ -140,6 +140,9 @@ func (c *Client) addOperationStartReadSetImportJobMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opStartReadSetImportJobMiddleware(stack); err != nil {
 		return err
 	}

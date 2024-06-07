@@ -115,6 +115,9 @@ func (c *Client) addOperationListRepositoriesForApprovalRuleTemplateMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListRepositoriesForApprovalRuleTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

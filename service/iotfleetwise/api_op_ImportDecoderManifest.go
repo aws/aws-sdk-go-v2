@@ -117,6 +117,9 @@ func (c *Client) addOperationImportDecoderManifestMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpImportDecoderManifestValidationMiddleware(stack); err != nil {
 		return err
 	}

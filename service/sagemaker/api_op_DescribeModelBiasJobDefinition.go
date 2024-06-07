@@ -154,6 +154,9 @@ func (c *Client) addOperationDescribeModelBiasJobDefinitionMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeModelBiasJobDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

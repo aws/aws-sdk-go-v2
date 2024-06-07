@@ -98,6 +98,9 @@ func (c *Client) addOperationDeleteIngressPointMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteIngressPointValidationMiddleware(stack); err != nil {
 		return err
 	}

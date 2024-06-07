@@ -140,6 +140,9 @@ func (c *Client) addOperationUpdateFileSystemProtectionMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateFileSystemProtectionValidationMiddleware(stack); err != nil {
 		return err
 	}

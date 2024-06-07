@@ -108,6 +108,9 @@ func (c *Client) addOperationDeleteSmsChannelMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteSmsChannelValidationMiddleware(stack); err != nil {
 		return err
 	}

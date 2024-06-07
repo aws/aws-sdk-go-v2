@@ -233,6 +233,9 @@ func (c *Client) addOperationRestoreTableMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRestoreTableValidationMiddleware(stack); err != nil {
 		return err
 	}

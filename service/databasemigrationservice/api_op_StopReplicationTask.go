@@ -103,6 +103,9 @@ func (c *Client) addOperationStopReplicationTaskMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopReplicationTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

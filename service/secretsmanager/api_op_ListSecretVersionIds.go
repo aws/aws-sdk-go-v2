@@ -153,6 +153,9 @@ func (c *Client) addOperationListSecretVersionIdsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListSecretVersionIdsValidationMiddleware(stack); err != nil {
 		return err
 	}

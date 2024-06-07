@@ -140,6 +140,9 @@ func (c *Client) addOperationCreateWorkspaceApiKeyMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateWorkspaceApiKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

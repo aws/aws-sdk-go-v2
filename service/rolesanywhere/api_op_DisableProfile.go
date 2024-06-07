@@ -106,6 +106,9 @@ func (c *Client) addOperationDisableProfileMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisableProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

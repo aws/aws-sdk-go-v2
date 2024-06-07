@@ -160,6 +160,9 @@ func (c *Client) addOperationListApplicationRevisionsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListApplicationRevisionsValidationMiddleware(stack); err != nil {
 		return err
 	}

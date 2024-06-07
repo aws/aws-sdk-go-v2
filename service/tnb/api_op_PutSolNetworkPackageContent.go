@@ -147,6 +147,9 @@ func (c *Client) addOperationPutSolNetworkPackageContentMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutSolNetworkPackageContentValidationMiddleware(stack); err != nil {
 		return err
 	}

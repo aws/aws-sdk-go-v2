@@ -117,6 +117,9 @@ func (c *Client) addOperationUntagCertificateAuthorityMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUntagCertificateAuthorityValidationMiddleware(stack); err != nil {
 		return err
 	}

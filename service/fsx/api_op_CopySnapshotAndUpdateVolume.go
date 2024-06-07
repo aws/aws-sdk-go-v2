@@ -159,6 +159,9 @@ func (c *Client) addOperationCopySnapshotAndUpdateVolumeMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCopySnapshotAndUpdateVolumeMiddleware(stack, options); err != nil {
 		return err
 	}

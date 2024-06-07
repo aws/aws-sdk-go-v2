@@ -146,6 +146,9 @@ func (c *Client) addOperationRespondDecisionTaskCompletedMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRespondDecisionTaskCompletedValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -125,6 +125,9 @@ func (c *Client) addOperationListSourceRepositoryBranchesMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListSourceRepositoryBranchesValidationMiddleware(stack); err != nil {
 		return err
 	}

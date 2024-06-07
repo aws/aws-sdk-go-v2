@@ -129,6 +129,9 @@ func (c *Client) addOperationCreateMeetingDialOutMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateMeetingDialOutValidationMiddleware(stack); err != nil {
 		return err
 	}

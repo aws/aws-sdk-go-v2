@@ -115,6 +115,9 @@ func (c *Client) addOperationCreateAwsLogSourceMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateAwsLogSourceValidationMiddleware(stack); err != nil {
 		return err
 	}

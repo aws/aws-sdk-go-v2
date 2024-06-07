@@ -151,6 +151,9 @@ func (c *Client) addOperationCreateStudioComponentMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateStudioComponentMiddleware(stack, options); err != nil {
 		return err
 	}

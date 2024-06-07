@@ -99,6 +99,9 @@ func (c *Client) addOperationDeleteVPCEConfigurationMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteVPCEConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

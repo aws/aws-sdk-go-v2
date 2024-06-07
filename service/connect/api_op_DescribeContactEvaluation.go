@@ -118,6 +118,9 @@ func (c *Client) addOperationDescribeContactEvaluationMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeContactEvaluationValidationMiddleware(stack); err != nil {
 		return err
 	}

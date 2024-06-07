@@ -144,6 +144,9 @@ func (c *Client) addOperationGetExecutionHistoryMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetExecutionHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -135,6 +135,9 @@ func (c *Client) addOperationGetBotChannelAssociationsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetBotChannelAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}

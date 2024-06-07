@@ -93,6 +93,9 @@ func (c *Client) addOperationDisassociateDRTRoleMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateDRTRole(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -127,6 +127,9 @@ func (c *Client) addOperationUpdateCustomVerificationEmailTemplateMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateCustomVerificationEmailTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

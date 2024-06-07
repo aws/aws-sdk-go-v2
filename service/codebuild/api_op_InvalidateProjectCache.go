@@ -98,6 +98,9 @@ func (c *Client) addOperationInvalidateProjectCacheMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpInvalidateProjectCacheValidationMiddleware(stack); err != nil {
 		return err
 	}

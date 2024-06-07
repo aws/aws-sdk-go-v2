@@ -104,6 +104,9 @@ func (c *Client) addOperationDeleteLogStreamMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteLogStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

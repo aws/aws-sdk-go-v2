@@ -137,6 +137,9 @@ func (c *Client) addOperationGetLensReviewReportMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetLensReviewReportValidationMiddleware(stack); err != nil {
 		return err
 	}

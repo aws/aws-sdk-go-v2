@@ -108,6 +108,9 @@ func (c *Client) addOperationDescribeUserProfilesMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeUserProfiles(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -117,6 +117,9 @@ func (c *Client) addOperationGetCustomDomainAssociationMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetCustomDomainAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -142,6 +142,9 @@ func (c *Client) addOperationListTimelineEventsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListTimelineEventsValidationMiddleware(stack); err != nil {
 		return err
 	}

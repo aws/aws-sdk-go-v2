@@ -118,6 +118,9 @@ func (c *Client) addOperationGetOpenIdTokenMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetOpenIdTokenValidationMiddleware(stack); err != nil {
 		return err
 	}

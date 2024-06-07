@@ -140,6 +140,9 @@ func (c *Client) addOperationGetStorageProfileMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetStorageProfileMiddleware(stack); err != nil {
 		return err
 	}

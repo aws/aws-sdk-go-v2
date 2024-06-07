@@ -126,6 +126,9 @@ func (c *Client) addOperationIncreaseStreamRetentionPeriodMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpIncreaseStreamRetentionPeriodValidationMiddleware(stack); err != nil {
 		return err
 	}

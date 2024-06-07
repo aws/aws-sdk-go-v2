@@ -126,6 +126,9 @@ func (c *Client) addOperationListEnvironmentBlueprintConfigurationsMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListEnvironmentBlueprintConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}

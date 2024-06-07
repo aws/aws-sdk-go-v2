@@ -107,6 +107,9 @@ func (c *Client) addOperationPutCapacityAssignmentConfigurationMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutCapacityAssignmentConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

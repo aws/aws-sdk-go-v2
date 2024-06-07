@@ -133,6 +133,9 @@ func (c *Client) addOperationGetSchemaByDefinitionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSchemaByDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

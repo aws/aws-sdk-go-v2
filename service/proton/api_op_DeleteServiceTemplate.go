@@ -104,6 +104,9 @@ func (c *Client) addOperationDeleteServiceTemplateMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteServiceTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

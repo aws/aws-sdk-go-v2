@@ -114,6 +114,9 @@ func (c *Client) addOperationDeleteContainerImageMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteContainerImageValidationMiddleware(stack); err != nil {
 		return err
 	}

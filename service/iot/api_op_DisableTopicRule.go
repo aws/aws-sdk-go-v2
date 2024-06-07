@@ -103,6 +103,9 @@ func (c *Client) addOperationDisableTopicRuleMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisableTopicRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

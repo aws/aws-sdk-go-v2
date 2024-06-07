@@ -106,6 +106,9 @@ func (c *Client) addOperationDeleteDocumentClassifierMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDocumentClassifierValidationMiddleware(stack); err != nil {
 		return err
 	}

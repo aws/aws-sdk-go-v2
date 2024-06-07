@@ -112,6 +112,9 @@ func (c *Client) addOperationSendUsersMessagesMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSendUsersMessagesValidationMiddleware(stack); err != nil {
 		return err
 	}

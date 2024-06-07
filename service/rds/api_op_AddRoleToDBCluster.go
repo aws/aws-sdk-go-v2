@@ -108,6 +108,9 @@ func (c *Client) addOperationAddRoleToDBClusterMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddRoleToDBClusterValidationMiddleware(stack); err != nil {
 		return err
 	}

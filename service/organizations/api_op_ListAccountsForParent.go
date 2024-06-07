@@ -140,6 +140,9 @@ func (c *Client) addOperationListAccountsForParentMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListAccountsForParentValidationMiddleware(stack); err != nil {
 		return err
 	}

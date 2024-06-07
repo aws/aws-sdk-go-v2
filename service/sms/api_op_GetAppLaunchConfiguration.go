@@ -113,6 +113,9 @@ func (c *Client) addOperationGetAppLaunchConfigurationMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAppLaunchConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}

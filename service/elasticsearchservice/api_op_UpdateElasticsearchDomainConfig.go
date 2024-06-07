@@ -171,6 +171,9 @@ func (c *Client) addOperationUpdateElasticsearchDomainConfigMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateElasticsearchDomainConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

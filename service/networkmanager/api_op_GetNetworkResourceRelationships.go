@@ -162,6 +162,9 @@ func (c *Client) addOperationGetNetworkResourceRelationshipsMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetNetworkResourceRelationshipsValidationMiddleware(stack); err != nil {
 		return err
 	}

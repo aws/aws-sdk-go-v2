@@ -136,6 +136,9 @@ func (c *Client) addOperationCreateBudgetMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateBudgetMiddleware(stack); err != nil {
 		return err
 	}

@@ -98,6 +98,9 @@ func (c *Client) addOperationDeleteDataQualityRulesetMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDataQualityRulesetValidationMiddleware(stack); err != nil {
 		return err
 	}

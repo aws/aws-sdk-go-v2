@@ -148,6 +148,9 @@ func (c *Client) addOperationUpdateCalculatedAttributeDefinitionMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateCalculatedAttributeDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

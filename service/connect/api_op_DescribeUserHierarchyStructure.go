@@ -106,6 +106,9 @@ func (c *Client) addOperationDescribeUserHierarchyStructureMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeUserHierarchyStructureValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -120,6 +120,9 @@ func (c *Client) addOperationTerminateSolNetworkInstanceMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTerminateSolNetworkInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

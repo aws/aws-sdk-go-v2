@@ -120,6 +120,9 @@ func (c *Client) addOperationUpdateHostKeyMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateHostKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -139,6 +139,9 @@ func (c *Client) addOperationGetTimeSeriesDataPointMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetTimeSeriesDataPointValidationMiddleware(stack); err != nil {
 		return err
 	}

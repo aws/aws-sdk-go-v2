@@ -106,6 +106,9 @@ func (c *Client) addOperationDescribeSentimentDetectionJobMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeSentimentDetectionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

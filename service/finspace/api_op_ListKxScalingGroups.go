@@ -116,6 +116,9 @@ func (c *Client) addOperationListKxScalingGroupsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListKxScalingGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}

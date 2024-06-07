@@ -169,6 +169,9 @@ func (c *Client) addOperationUpdateRateBasedRuleMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateRateBasedRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

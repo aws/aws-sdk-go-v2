@@ -117,6 +117,9 @@ func (c *Client) addOperationListControlDomainInsightsByAssessmentMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListControlDomainInsightsByAssessmentValidationMiddleware(stack); err != nil {
 		return err
 	}

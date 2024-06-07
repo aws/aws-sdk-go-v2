@@ -101,6 +101,9 @@ func (c *Client) addOperationDeleteBackupVaultAccessPolicyMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteBackupVaultAccessPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -163,6 +163,9 @@ func (c *Client) addOperationCreateUnreferencedMergeCommitMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateUnreferencedMergeCommitValidationMiddleware(stack); err != nil {
 		return err
 	}

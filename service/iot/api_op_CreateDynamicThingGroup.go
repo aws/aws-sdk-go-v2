@@ -148,6 +148,9 @@ func (c *Client) addOperationCreateDynamicThingGroupMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDynamicThingGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

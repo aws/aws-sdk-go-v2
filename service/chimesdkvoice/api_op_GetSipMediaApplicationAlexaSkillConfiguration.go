@@ -112,6 +112,9 @@ func (c *Client) addOperationGetSipMediaApplicationAlexaSkillConfigurationMiddle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSipMediaApplicationAlexaSkillConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

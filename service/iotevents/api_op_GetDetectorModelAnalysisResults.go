@@ -116,6 +116,9 @@ func (c *Client) addOperationGetDetectorModelAnalysisResultsMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetDetectorModelAnalysisResultsValidationMiddleware(stack); err != nil {
 		return err
 	}

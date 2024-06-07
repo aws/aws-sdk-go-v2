@@ -116,6 +116,9 @@ func (c *Client) addOperationListChannelsAssociatedWithChannelFlowMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListChannelsAssociatedWithChannelFlowValidationMiddleware(stack); err != nil {
 		return err
 	}

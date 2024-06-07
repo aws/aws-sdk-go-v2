@@ -103,6 +103,9 @@ func (c *Client) addOperationDeleteStorageConfigurationMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteStorageConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -119,6 +119,9 @@ func (c *Client) addOperationListVoiceConnectorsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVoiceConnectors(options.Region), middleware.Before); err != nil {
 		return err
 	}

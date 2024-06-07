@@ -132,6 +132,9 @@ func (c *Client) addOperationUpdateGatewayResponseMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateGatewayResponseValidationMiddleware(stack); err != nil {
 		return err
 	}

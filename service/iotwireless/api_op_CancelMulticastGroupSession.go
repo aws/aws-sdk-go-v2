@@ -98,6 +98,9 @@ func (c *Client) addOperationCancelMulticastGroupSessionMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelMulticastGroupSessionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -166,6 +166,9 @@ func (c *Client) addOperationUpdateDomainContactPrivacyMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateDomainContactPrivacyValidationMiddleware(stack); err != nil {
 		return err
 	}

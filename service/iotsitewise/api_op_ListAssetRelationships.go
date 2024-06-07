@@ -131,6 +131,9 @@ func (c *Client) addOperationListAssetRelationshipsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListAssetRelationshipsMiddleware(stack); err != nil {
 		return err
 	}

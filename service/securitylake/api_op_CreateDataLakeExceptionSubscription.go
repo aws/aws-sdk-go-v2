@@ -108,6 +108,9 @@ func (c *Client) addOperationCreateDataLakeExceptionSubscriptionMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDataLakeExceptionSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}

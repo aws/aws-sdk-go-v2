@@ -102,6 +102,9 @@ func (c *Client) addOperationStopEntitiesDetectionV2JobMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopEntitiesDetectionV2JobValidationMiddleware(stack); err != nil {
 		return err
 	}

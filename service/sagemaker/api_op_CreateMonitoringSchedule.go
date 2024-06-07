@@ -119,6 +119,9 @@ func (c *Client) addOperationCreateMonitoringScheduleMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateMonitoringScheduleValidationMiddleware(stack); err != nil {
 		return err
 	}

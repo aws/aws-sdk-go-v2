@@ -147,6 +147,9 @@ func (c *Client) addOperationGetLatestConfigurationMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetLatestConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -113,6 +113,9 @@ func (c *Client) addOperationDeleteFunctionUrlConfigMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteFunctionUrlConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

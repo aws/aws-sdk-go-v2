@@ -146,6 +146,9 @@ func (c *Client) addOperationListHandshakesForOrganizationMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHandshakesForOrganization(options.Region), middleware.Before); err != nil {
 		return err
 	}

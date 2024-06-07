@@ -127,6 +127,9 @@ func (c *Client) addOperationGetGroupMembershipIdMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetGroupMembershipIdValidationMiddleware(stack); err != nil {
 		return err
 	}

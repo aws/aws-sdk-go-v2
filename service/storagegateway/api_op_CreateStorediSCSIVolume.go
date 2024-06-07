@@ -200,6 +200,9 @@ func (c *Client) addOperationCreateStorediSCSIVolumeMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateStorediSCSIVolumeValidationMiddleware(stack); err != nil {
 		return err
 	}

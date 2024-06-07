@@ -143,6 +143,9 @@ func (c *Client) addOperationDescribeReplicatorMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeReplicatorValidationMiddleware(stack); err != nil {
 		return err
 	}

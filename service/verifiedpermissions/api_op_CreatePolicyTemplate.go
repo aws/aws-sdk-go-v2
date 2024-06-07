@@ -160,6 +160,9 @@ func (c *Client) addOperationCreatePolicyTemplateMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreatePolicyTemplateMiddleware(stack, options); err != nil {
 		return err
 	}

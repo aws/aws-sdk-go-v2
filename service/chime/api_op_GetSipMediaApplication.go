@@ -116,6 +116,9 @@ func (c *Client) addOperationGetSipMediaApplicationMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSipMediaApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}

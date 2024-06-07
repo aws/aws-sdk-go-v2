@@ -111,6 +111,9 @@ func (c *Client) addOperationGetEnvironmentAccountConnectionMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetEnvironmentAccountConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

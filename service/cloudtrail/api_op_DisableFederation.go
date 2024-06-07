@@ -114,6 +114,9 @@ func (c *Client) addOperationDisableFederationMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisableFederationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -107,6 +107,9 @@ func (c *Client) addOperationDescribeSMBFileSharesMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeSMBFileSharesValidationMiddleware(stack); err != nil {
 		return err
 	}

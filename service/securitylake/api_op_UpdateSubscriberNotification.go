@@ -109,6 +109,9 @@ func (c *Client) addOperationUpdateSubscriberNotificationMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateSubscriberNotificationValidationMiddleware(stack); err != nil {
 		return err
 	}

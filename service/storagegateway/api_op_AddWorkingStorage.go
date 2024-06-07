@@ -125,6 +125,9 @@ func (c *Client) addOperationAddWorkingStorageMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddWorkingStorageValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -107,6 +107,9 @@ func (c *Client) addOperationDeleteSolNetworkPackageMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteSolNetworkPackageValidationMiddleware(stack); err != nil {
 		return err
 	}

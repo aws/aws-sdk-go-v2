@@ -116,6 +116,9 @@ func (c *Client) addOperationListBulkImportJobsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListBulkImportJobsMiddleware(stack); err != nil {
 		return err
 	}

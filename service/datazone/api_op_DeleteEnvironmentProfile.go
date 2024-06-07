@@ -104,6 +104,9 @@ func (c *Client) addOperationDeleteEnvironmentProfileMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteEnvironmentProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

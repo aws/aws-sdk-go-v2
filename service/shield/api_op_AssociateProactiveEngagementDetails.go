@@ -123,6 +123,9 @@ func (c *Client) addOperationAssociateProactiveEngagementDetailsMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateProactiveEngagementDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}

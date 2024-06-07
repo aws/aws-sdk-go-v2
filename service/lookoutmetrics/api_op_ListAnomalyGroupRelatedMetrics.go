@@ -124,6 +124,9 @@ func (c *Client) addOperationListAnomalyGroupRelatedMetricsMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListAnomalyGroupRelatedMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}

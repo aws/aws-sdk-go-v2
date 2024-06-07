@@ -118,6 +118,9 @@ func (c *Client) addOperationUpdateMediaStorageConfigurationMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateMediaStorageConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

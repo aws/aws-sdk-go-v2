@@ -101,6 +101,9 @@ func (c *Client) addOperationDeleteVerifiedEmailAddressMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteVerifiedEmailAddressValidationMiddleware(stack); err != nil {
 		return err
 	}

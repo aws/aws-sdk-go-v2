@@ -122,6 +122,9 @@ func (c *Client) addOperationListDomainsForPackageMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListDomainsForPackageValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -114,6 +114,9 @@ func (c *Client) addOperationCreateVoiceTemplateMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateVoiceTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

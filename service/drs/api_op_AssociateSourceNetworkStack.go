@@ -110,6 +110,9 @@ func (c *Client) addOperationAssociateSourceNetworkStackMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateSourceNetworkStackValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -121,6 +121,9 @@ func (c *Client) addOperationUpdateHypervisorMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateHypervisorValidationMiddleware(stack); err != nil {
 		return err
 	}

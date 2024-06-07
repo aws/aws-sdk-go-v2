@@ -119,6 +119,9 @@ func (c *Client) addOperationListManagedInsightRulesMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListManagedInsightRulesValidationMiddleware(stack); err != nil {
 		return err
 	}

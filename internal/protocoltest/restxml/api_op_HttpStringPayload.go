@@ -95,6 +95,9 @@ func (c *Client) addOperationHttpStringPayloadMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpStringPayload(options.Region), middleware.Before); err != nil {
 		return err
 	}

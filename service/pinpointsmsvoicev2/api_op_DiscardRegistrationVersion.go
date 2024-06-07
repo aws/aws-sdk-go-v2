@@ -144,6 +144,9 @@ func (c *Client) addOperationDiscardRegistrationVersionMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDiscardRegistrationVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

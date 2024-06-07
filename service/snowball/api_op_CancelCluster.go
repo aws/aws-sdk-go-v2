@@ -101,6 +101,9 @@ func (c *Client) addOperationCancelClusterMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelClusterValidationMiddleware(stack); err != nil {
 		return err
 	}

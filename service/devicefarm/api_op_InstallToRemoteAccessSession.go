@@ -115,6 +115,9 @@ func (c *Client) addOperationInstallToRemoteAccessSessionMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpInstallToRemoteAccessSessionValidationMiddleware(stack); err != nil {
 		return err
 	}

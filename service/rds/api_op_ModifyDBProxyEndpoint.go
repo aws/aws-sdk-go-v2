@@ -115,6 +115,9 @@ func (c *Client) addOperationModifyDBProxyEndpointMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyDBProxyEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}

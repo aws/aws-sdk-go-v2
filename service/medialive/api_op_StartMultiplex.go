@@ -133,6 +133,9 @@ func (c *Client) addOperationStartMultiplexMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartMultiplexValidationMiddleware(stack); err != nil {
 		return err
 	}

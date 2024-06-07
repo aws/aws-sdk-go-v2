@@ -117,6 +117,9 @@ func (c *Client) addOperationExportThemesMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpExportThemesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -106,6 +106,9 @@ func (c *Client) addOperationDeleteApprovalRuleTemplateMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteApprovalRuleTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

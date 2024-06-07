@@ -115,6 +115,9 @@ func (c *Client) addOperationPutConfigurationSetSuppressionOptionsMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutConfigurationSetSuppressionOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -108,6 +108,9 @@ func (c *Client) addOperationDescribeSpeakerEnrollmentJobMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeSpeakerEnrollmentJobValidationMiddleware(stack); err != nil {
 		return err
 	}

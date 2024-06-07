@@ -124,6 +124,9 @@ func (c *Client) addOperationListLicenseConfigurationsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLicenseConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}

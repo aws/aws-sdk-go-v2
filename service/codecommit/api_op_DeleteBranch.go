@@ -112,6 +112,9 @@ func (c *Client) addOperationDeleteBranchMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteBranchValidationMiddleware(stack); err != nil {
 		return err
 	}

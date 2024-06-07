@@ -130,6 +130,9 @@ func (c *Client) addOperationListRealtimeContactAnalysisSegmentsMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListRealtimeContactAnalysisSegmentsValidationMiddleware(stack); err != nil {
 		return err
 	}

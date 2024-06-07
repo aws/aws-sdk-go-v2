@@ -129,6 +129,9 @@ func (c *Client) addOperationCreateLabelGroupMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateLabelGroupMiddleware(stack, options); err != nil {
 		return err
 	}

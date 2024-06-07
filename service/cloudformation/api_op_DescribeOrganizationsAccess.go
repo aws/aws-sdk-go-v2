@@ -119,6 +119,9 @@ func (c *Client) addOperationDescribeOrganizationsAccessMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOrganizationsAccess(options.Region), middleware.Before); err != nil {
 		return err
 	}

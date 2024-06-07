@@ -112,6 +112,9 @@ func (c *Client) addOperationRebootNodeMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRebootNodeValidationMiddleware(stack); err != nil {
 		return err
 	}

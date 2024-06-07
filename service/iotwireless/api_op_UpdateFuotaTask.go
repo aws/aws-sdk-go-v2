@@ -134,6 +134,9 @@ func (c *Client) addOperationUpdateFuotaTaskMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateFuotaTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

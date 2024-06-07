@@ -124,6 +124,9 @@ func (c *Client) addOperationDeregisterDelegatedAdministratorMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeregisterDelegatedAdministratorValidationMiddleware(stack); err != nil {
 		return err
 	}

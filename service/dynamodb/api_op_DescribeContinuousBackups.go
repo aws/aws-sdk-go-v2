@@ -124,6 +124,9 @@ func (c *Client) addOperationDescribeContinuousBackupsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeContinuousBackupsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -117,6 +117,9 @@ func (c *Client) addOperationGetMapStyleDescriptorMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetMapStyleDescriptorMiddleware(stack); err != nil {
 		return err
 	}

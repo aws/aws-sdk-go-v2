@@ -131,6 +131,9 @@ func (c *Client) addOperationStartSingleWirelessDeviceImportTaskMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartSingleWirelessDeviceImportTaskMiddleware(stack, options); err != nil {
 		return err
 	}

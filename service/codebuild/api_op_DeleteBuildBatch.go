@@ -111,6 +111,9 @@ func (c *Client) addOperationDeleteBuildBatchMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteBuildBatchValidationMiddleware(stack); err != nil {
 		return err
 	}

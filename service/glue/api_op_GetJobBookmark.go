@@ -118,6 +118,9 @@ func (c *Client) addOperationGetJobBookmarkMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetJobBookmarkValidationMiddleware(stack); err != nil {
 		return err
 	}

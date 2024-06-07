@@ -244,6 +244,9 @@ func (c *Client) addOperationDescribeClassificationJobMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeClassificationJobValidationMiddleware(stack); err != nil {
 		return err
 	}

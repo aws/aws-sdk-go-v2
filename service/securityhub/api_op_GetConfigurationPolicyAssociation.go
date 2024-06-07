@@ -134,6 +134,9 @@ func (c *Client) addOperationGetConfigurationPolicyAssociationMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetConfigurationPolicyAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

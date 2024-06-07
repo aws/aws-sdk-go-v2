@@ -112,6 +112,9 @@ func (c *Client) addOperationListFailuresForLicenseConfigurationOperationsMiddle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListFailuresForLicenseConfigurationOperationsValidationMiddleware(stack); err != nil {
 		return err
 	}

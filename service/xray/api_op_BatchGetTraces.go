@@ -114,6 +114,9 @@ func (c *Client) addOperationBatchGetTracesMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchGetTracesValidationMiddleware(stack); err != nil {
 		return err
 	}

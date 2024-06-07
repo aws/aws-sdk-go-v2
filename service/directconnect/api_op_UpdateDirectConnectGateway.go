@@ -109,6 +109,9 @@ func (c *Client) addOperationUpdateDirectConnectGatewayMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateDirectConnectGatewayValidationMiddleware(stack); err != nil {
 		return err
 	}

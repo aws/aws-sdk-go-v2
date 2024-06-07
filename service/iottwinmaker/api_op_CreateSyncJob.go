@@ -132,6 +132,9 @@ func (c *Client) addOperationCreateSyncJobMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateSyncJobMiddleware(stack); err != nil {
 		return err
 	}

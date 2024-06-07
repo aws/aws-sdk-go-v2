@@ -108,6 +108,9 @@ func (c *Client) addOperationGetAppInstanceRetentionSettingsMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetAppInstanceRetentionSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

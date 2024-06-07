@@ -98,6 +98,9 @@ func (c *Client) addOperationCancelDataQualityRulesetEvaluationRunMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelDataQualityRulesetEvaluationRunValidationMiddleware(stack); err != nil {
 		return err
 	}

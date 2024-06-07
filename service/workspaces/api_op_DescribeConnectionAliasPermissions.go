@@ -121,6 +121,9 @@ func (c *Client) addOperationDescribeConnectionAliasPermissionsMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeConnectionAliasPermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

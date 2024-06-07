@@ -109,6 +109,9 @@ func (c *Client) addOperationListDetectorModelsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDetectorModels(options.Region), middleware.Before); err != nil {
 		return err
 	}

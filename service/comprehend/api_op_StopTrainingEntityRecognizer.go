@@ -105,6 +105,9 @@ func (c *Client) addOperationStopTrainingEntityRecognizerMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopTrainingEntityRecognizerValidationMiddleware(stack); err != nil {
 		return err
 	}

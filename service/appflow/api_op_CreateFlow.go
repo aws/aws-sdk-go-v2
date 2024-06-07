@@ -167,6 +167,9 @@ func (c *Client) addOperationCreateFlowMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateFlowMiddleware(stack, options); err != nil {
 		return err
 	}

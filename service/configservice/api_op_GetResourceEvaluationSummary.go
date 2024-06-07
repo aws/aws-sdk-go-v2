@@ -137,6 +137,9 @@ func (c *Client) addOperationGetResourceEvaluationSummaryMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetResourceEvaluationSummaryValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -15,6 +15,7 @@ import (
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
+	internalmiddleware "github.com/aws/aws-sdk-go-v2/internal/middleware"
 	ddbcust "github.com/aws/aws-sdk-go-v2/service/dynamodb/internal/customizations"
 	acceptencodingcust "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
@@ -28,6 +29,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"sync/atomic"
 	"time"
 )
 
@@ -40,6 +42,9 @@ type Client struct {
 
 	// cache used to store discovered endpoints
 	endpointCache *internalEndpointDiscovery.EndpointCache
+
+	// Difference between the time reported by the server and the client
+	timeOffset *atomic.Int64
 }
 
 // New returns an initialized Client based on the functional options. Provide
@@ -83,6 +88,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	}
 
 	resolveEndpointCache(client)
+
+	initializeTimeOffsetResolver(client)
 
 	return client
 }
@@ -588,6 +595,17 @@ func (c *Client) handleEndpointDiscoveryFromService(ctx context.Context, input *
 
 	c.endpointCache.Add(endpoint)
 	return endpoint, nil
+}
+
+func addTimeOffsetBuild(stack *middleware.Stack, c *Client) error {
+	mw := internalmiddleware.AddTimeOffsetMiddleware{Offset: c.timeOffset}
+	if err := stack.Build.Add(&mw, middleware.After); err != nil {
+		return err
+	}
+	return stack.Deserialize.Insert(&mw, "RecordResponseTiming", middleware.Before)
+}
+func initializeTimeOffsetResolver(c *Client) {
+	c.timeOffset = new(atomic.Int64)
 }
 
 // IdempotencyTokenProvider interface for providing idempotency token

@@ -125,6 +125,9 @@ func (c *Client) addOperationGetReferenceStoreMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetReferenceStoreMiddleware(stack); err != nil {
 		return err
 	}

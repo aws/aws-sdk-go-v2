@@ -108,6 +108,9 @@ func (c *Client) addOperationGetStreamingDistributionConfigMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetStreamingDistributionConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -117,6 +117,9 @@ func (c *Client) addOperationDetachPrincipalPolicyMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDetachPrincipalPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

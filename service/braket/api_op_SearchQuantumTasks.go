@@ -119,6 +119,9 @@ func (c *Client) addOperationSearchQuantumTasksMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSearchQuantumTasksValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -118,6 +118,9 @@ func (c *Client) addOperationPurchaseReservedNodeOfferingMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPurchaseReservedNodeOfferingValidationMiddleware(stack); err != nil {
 		return err
 	}

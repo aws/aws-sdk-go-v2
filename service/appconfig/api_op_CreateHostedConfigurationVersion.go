@@ -161,6 +161,9 @@ func (c *Client) addOperationCreateHostedConfigurationVersionMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateHostedConfigurationVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

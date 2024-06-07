@@ -103,6 +103,9 @@ func (c *Client) addOperationAssociateWirelessDeviceWithFuotaTaskMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateWirelessDeviceWithFuotaTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -163,6 +163,9 @@ func (c *Client) addOperationImportLensMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opImportLensMiddleware(stack, options); err != nil {
 		return err
 	}

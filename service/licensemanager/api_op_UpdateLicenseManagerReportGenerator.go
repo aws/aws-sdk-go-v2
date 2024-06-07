@@ -137,6 +137,9 @@ func (c *Client) addOperationUpdateLicenseManagerReportGeneratorMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateLicenseManagerReportGeneratorValidationMiddleware(stack); err != nil {
 		return err
 	}

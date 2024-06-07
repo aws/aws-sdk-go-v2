@@ -144,6 +144,9 @@ func (c *Client) addOperationDescribeMailboxExportJobMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeMailboxExportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -152,6 +152,9 @@ func (c *Client) addOperationCreateReportPlanMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateReportPlanMiddleware(stack, options); err != nil {
 		return err
 	}

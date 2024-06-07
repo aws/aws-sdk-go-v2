@@ -346,6 +346,9 @@ func (c *Client) addOperationGetDASHStreamingSessionURLMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDASHStreamingSessionURL(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -172,6 +172,9 @@ func (c *Client) addOperationCreateTapesMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateTapesValidationMiddleware(stack); err != nil {
 		return err
 	}

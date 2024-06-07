@@ -138,6 +138,9 @@ func (c *Client) addOperationGetJobTaggingMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetJobTaggingMiddleware(stack); err != nil {
 		return err
 	}

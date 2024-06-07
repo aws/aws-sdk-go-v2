@@ -103,6 +103,9 @@ func (c *Client) addOperationPutInboundDmarcSettingsMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutInboundDmarcSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

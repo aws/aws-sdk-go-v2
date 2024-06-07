@@ -103,6 +103,9 @@ func (c *Client) addOperationStopExperimentMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopExperimentValidationMiddleware(stack); err != nil {
 		return err
 	}

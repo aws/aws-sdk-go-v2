@@ -116,6 +116,9 @@ func (c *Client) addOperationDisableSsoMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisableSsoValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -139,6 +139,9 @@ func (c *Client) addOperationSendApiAssetMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opSendApiAssetMiddleware(stack); err != nil {
 		return err
 	}

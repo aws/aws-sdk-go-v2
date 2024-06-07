@@ -208,6 +208,9 @@ func (c *Client) addOperationCreateGraphMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateGraphValidationMiddleware(stack); err != nil {
 		return err
 	}

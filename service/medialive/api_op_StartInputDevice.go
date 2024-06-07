@@ -102,6 +102,9 @@ func (c *Client) addOperationStartInputDeviceMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartInputDeviceValidationMiddleware(stack); err != nil {
 		return err
 	}

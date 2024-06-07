@@ -106,6 +106,9 @@ func (c *Client) addOperationDescribeKeyPhrasesDetectionJobMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeKeyPhrasesDetectionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

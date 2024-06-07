@@ -152,6 +152,9 @@ func (c *Client) addOperationStartStreamEncryptionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartStreamEncryptionValidationMiddleware(stack); err != nil {
 		return err
 	}

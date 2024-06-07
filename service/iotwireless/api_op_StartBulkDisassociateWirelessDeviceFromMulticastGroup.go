@@ -108,6 +108,9 @@ func (c *Client) addOperationStartBulkDisassociateWirelessDeviceFromMulticastGro
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartBulkDisassociateWirelessDeviceFromMulticastGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

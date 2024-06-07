@@ -130,6 +130,9 @@ func (c *Client) addOperationAuthorizeSnapshotAccessMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAuthorizeSnapshotAccessValidationMiddleware(stack); err != nil {
 		return err
 	}

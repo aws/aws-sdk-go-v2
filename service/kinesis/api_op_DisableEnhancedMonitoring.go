@@ -155,6 +155,9 @@ func (c *Client) addOperationDisableEnhancedMonitoringMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisableEnhancedMonitoringValidationMiddleware(stack); err != nil {
 		return err
 	}

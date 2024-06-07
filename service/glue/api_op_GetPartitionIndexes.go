@@ -119,6 +119,9 @@ func (c *Client) addOperationGetPartitionIndexesMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetPartitionIndexesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -128,6 +128,9 @@ func (c *Client) addOperationDescribeApplicationAssignmentMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeApplicationAssignmentValidationMiddleware(stack); err != nil {
 		return err
 	}

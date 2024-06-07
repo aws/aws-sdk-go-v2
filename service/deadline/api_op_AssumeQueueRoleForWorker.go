@@ -118,6 +118,9 @@ func (c *Client) addOperationAssumeQueueRoleForWorkerMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opAssumeQueueRoleForWorkerMiddleware(stack); err != nil {
 		return err
 	}

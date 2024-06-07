@@ -110,6 +110,9 @@ func (c *Client) addOperationDisassociateRecoveryPointFromParentMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateRecoveryPointFromParentValidationMiddleware(stack); err != nil {
 		return err
 	}

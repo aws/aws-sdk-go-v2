@@ -118,6 +118,9 @@ func (c *Client) addOperationVoteOnProposalMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpVoteOnProposalValidationMiddleware(stack); err != nil {
 		return err
 	}

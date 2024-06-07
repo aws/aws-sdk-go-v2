@@ -110,6 +110,9 @@ func (c *Client) addOperationDescribeDeviceEc2InstancesMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDeviceEc2InstancesValidationMiddleware(stack); err != nil {
 		return err
 	}

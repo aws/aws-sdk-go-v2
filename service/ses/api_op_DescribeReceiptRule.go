@@ -121,6 +121,9 @@ func (c *Client) addOperationDescribeReceiptRuleMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeReceiptRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

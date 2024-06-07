@@ -166,6 +166,9 @@ func (c *Client) addOperationCreateDataDeletionJobMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDataDeletionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

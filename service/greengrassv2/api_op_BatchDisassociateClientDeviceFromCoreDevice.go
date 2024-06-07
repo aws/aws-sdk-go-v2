@@ -110,6 +110,9 @@ func (c *Client) addOperationBatchDisassociateClientDeviceFromCoreDeviceMiddlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchDisassociateClientDeviceFromCoreDeviceValidationMiddleware(stack); err != nil {
 		return err
 	}

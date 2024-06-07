@@ -126,6 +126,9 @@ func (c *Client) addOperationDisableKinesisStreamingDestinationMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisableKinesisStreamingDestinationValidationMiddleware(stack); err != nil {
 		return err
 	}

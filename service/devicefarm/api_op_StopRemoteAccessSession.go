@@ -107,6 +107,9 @@ func (c *Client) addOperationStopRemoteAccessSessionMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopRemoteAccessSessionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -110,6 +110,9 @@ func (c *Client) addOperationRemoveSourceIdentifierFromSubscriptionMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRemoveSourceIdentifierFromSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}

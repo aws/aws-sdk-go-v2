@@ -154,6 +154,9 @@ func (c *Client) addOperationCreateServiceNetworkVpcAssociationMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateServiceNetworkVpcAssociationMiddleware(stack, options); err != nil {
 		return err
 	}

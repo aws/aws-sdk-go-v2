@@ -170,6 +170,9 @@ func (c *Client) addOperationCreateEndpointGroupMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateEndpointGroupMiddleware(stack, options); err != nil {
 		return err
 	}

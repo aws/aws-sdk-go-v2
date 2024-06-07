@@ -117,6 +117,9 @@ func (c *Client) addOperationPutWebhookMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutWebhookValidationMiddleware(stack); err != nil {
 		return err
 	}

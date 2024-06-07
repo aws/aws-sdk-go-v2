@@ -168,6 +168,9 @@ func (c *Client) addOperationPutPrincipalMappingMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutPrincipalMappingValidationMiddleware(stack); err != nil {
 		return err
 	}

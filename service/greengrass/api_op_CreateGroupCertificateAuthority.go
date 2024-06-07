@@ -106,6 +106,9 @@ func (c *Client) addOperationCreateGroupCertificateAuthorityMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateGroupCertificateAuthorityValidationMiddleware(stack); err != nil {
 		return err
 	}

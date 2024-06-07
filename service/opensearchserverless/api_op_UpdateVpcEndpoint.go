@@ -123,6 +123,9 @@ func (c *Client) addOperationUpdateVpcEndpointMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateVpcEndpointMiddleware(stack, options); err != nil {
 		return err
 	}

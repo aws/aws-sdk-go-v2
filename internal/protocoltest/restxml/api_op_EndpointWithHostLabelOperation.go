@@ -97,6 +97,9 @@ func (c *Client) addOperationEndpointWithHostLabelOperationMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opEndpointWithHostLabelOperationMiddleware(stack); err != nil {
 		return err
 	}

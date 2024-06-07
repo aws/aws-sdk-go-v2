@@ -112,6 +112,9 @@ func (c *Client) addOperationUpdateDefaultAutoScalingConfigurationMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateDefaultAutoScalingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

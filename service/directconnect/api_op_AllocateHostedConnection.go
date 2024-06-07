@@ -235,6 +235,9 @@ func (c *Client) addOperationAllocateHostedConnectionMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAllocateHostedConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

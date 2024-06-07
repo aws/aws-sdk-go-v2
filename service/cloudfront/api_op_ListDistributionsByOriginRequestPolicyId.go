@@ -120,6 +120,9 @@ func (c *Client) addOperationListDistributionsByOriginRequestPolicyIdMiddlewares
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListDistributionsByOriginRequestPolicyIdValidationMiddleware(stack); err != nil {
 		return err
 	}

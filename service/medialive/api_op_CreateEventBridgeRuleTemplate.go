@@ -158,6 +158,9 @@ func (c *Client) addOperationCreateEventBridgeRuleTemplateMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateEventBridgeRuleTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

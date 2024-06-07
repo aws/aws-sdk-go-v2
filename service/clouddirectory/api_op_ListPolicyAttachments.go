@@ -123,6 +123,9 @@ func (c *Client) addOperationListPolicyAttachmentsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListPolicyAttachmentsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -139,6 +139,9 @@ func (c *Client) addOperationDescribeFolderContentsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeFolderContentsValidationMiddleware(stack); err != nil {
 		return err
 	}

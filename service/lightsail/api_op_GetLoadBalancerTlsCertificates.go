@@ -110,6 +110,9 @@ func (c *Client) addOperationGetLoadBalancerTlsCertificatesMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetLoadBalancerTlsCertificatesValidationMiddleware(stack); err != nil {
 		return err
 	}

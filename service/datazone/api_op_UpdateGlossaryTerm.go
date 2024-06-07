@@ -159,6 +159,9 @@ func (c *Client) addOperationUpdateGlossaryTermMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateGlossaryTermValidationMiddleware(stack); err != nil {
 		return err
 	}

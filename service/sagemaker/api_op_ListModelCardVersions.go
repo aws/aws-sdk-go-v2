@@ -134,6 +134,9 @@ func (c *Client) addOperationListModelCardVersionsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListModelCardVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

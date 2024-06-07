@@ -105,6 +105,9 @@ func (c *Client) addOperationUpdateCampaignDialerConfigMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateCampaignDialerConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

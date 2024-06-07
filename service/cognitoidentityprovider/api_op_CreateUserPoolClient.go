@@ -406,6 +406,9 @@ func (c *Client) addOperationCreateUserPoolClientMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateUserPoolClientValidationMiddleware(stack); err != nil {
 		return err
 	}

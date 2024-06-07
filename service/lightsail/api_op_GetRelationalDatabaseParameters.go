@@ -125,6 +125,9 @@ func (c *Client) addOperationGetRelationalDatabaseParametersMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetRelationalDatabaseParametersValidationMiddleware(stack); err != nil {
 		return err
 	}

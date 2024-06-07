@@ -165,6 +165,9 @@ func (c *Client) addOperationGetTaskMiddlewares(stack *middleware.Stack, options
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetTaskMiddleware(stack); err != nil {
 		return err
 	}

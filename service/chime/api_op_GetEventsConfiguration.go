@@ -109,6 +109,9 @@ func (c *Client) addOperationGetEventsConfigurationMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetEventsConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

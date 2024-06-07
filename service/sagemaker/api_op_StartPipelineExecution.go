@@ -125,6 +125,9 @@ func (c *Client) addOperationStartPipelineExecutionMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartPipelineExecutionMiddleware(stack, options); err != nil {
 		return err
 	}

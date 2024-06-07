@@ -104,6 +104,9 @@ func (c *Client) addOperationDeleteUserProfileMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteUserProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

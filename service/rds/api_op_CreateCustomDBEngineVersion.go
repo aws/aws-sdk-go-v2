@@ -339,6 +339,9 @@ func (c *Client) addOperationCreateCustomDBEngineVersionMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateCustomDBEngineVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

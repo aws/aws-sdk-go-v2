@@ -188,6 +188,9 @@ func (c *Client) addOperationUpdateKxVolumeMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateKxVolumeMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -99,6 +99,9 @@ func (c *Client) addOperationDeleteExtensionAssociationMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteExtensionAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

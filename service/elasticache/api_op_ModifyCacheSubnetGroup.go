@@ -118,6 +118,9 @@ func (c *Client) addOperationModifyCacheSubnetGroupMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyCacheSubnetGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -115,6 +115,9 @@ func (c *Client) addOperationRevokeTokenMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRevokeTokenValidationMiddleware(stack); err != nil {
 		return err
 	}

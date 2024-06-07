@@ -111,6 +111,9 @@ func (c *Client) addOperationCreateDistributionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDistributionValidationMiddleware(stack); err != nil {
 		return err
 	}

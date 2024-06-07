@@ -118,6 +118,9 @@ func (c *Client) addOperationDescribeImageReplicationStatusMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeImageReplicationStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

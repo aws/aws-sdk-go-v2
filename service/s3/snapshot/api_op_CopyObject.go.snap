@@ -19,6 +19,7 @@ CopyObject
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
+		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		DisableAcceptEncodingGzip
@@ -40,5 +41,6 @@ CopyObject
 		S3MetadataRetriever
 		OperationDeserializer
 		S3:ProcessResponseFor200Error
+		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

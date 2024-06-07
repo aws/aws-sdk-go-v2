@@ -105,6 +105,9 @@ func (c *Client) addOperationExportBackupPlanTemplateMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpExportBackupPlanTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

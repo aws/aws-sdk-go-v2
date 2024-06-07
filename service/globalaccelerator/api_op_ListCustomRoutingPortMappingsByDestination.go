@@ -125,6 +125,9 @@ func (c *Client) addOperationListCustomRoutingPortMappingsByDestinationMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListCustomRoutingPortMappingsByDestinationValidationMiddleware(stack); err != nil {
 		return err
 	}

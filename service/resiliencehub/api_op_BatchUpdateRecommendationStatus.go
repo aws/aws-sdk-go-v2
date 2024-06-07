@@ -132,6 +132,9 @@ func (c *Client) addOperationBatchUpdateRecommendationStatusMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchUpdateRecommendationStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

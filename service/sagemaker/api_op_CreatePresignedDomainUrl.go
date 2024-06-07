@@ -159,6 +159,9 @@ func (c *Client) addOperationCreatePresignedDomainUrlMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreatePresignedDomainUrlValidationMiddleware(stack); err != nil {
 		return err
 	}

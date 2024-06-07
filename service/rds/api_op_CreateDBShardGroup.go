@@ -208,6 +208,9 @@ func (c *Client) addOperationCreateDBShardGroupMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDBShardGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

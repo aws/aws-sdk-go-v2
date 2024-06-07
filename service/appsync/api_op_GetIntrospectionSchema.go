@@ -116,6 +116,9 @@ func (c *Client) addOperationGetIntrospectionSchemaMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetIntrospectionSchemaValidationMiddleware(stack); err != nil {
 		return err
 	}

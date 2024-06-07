@@ -128,6 +128,9 @@ func (c *Client) addOperationCheckDomainTransferabilityMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCheckDomainTransferabilityValidationMiddleware(stack); err != nil {
 		return err
 	}

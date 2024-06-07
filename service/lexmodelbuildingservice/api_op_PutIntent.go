@@ -345,6 +345,9 @@ func (c *Client) addOperationPutIntentMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutIntentValidationMiddleware(stack); err != nil {
 		return err
 	}

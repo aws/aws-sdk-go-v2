@@ -134,6 +134,9 @@ func (c *Client) addOperationListAllowedRepositoriesForGroupMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListAllowedRepositoriesForGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

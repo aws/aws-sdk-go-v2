@@ -163,6 +163,9 @@ func (c *Client) addOperationCreateScraperMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateScraperMiddleware(stack, options); err != nil {
 		return err
 	}

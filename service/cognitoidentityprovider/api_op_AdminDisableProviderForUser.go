@@ -146,6 +146,9 @@ func (c *Client) addOperationAdminDisableProviderForUserMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAdminDisableProviderForUserValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -113,6 +113,9 @@ func (c *Client) addOperationDescribeBudgetNotificationsForAccountMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeBudgetNotificationsForAccountValidationMiddleware(stack); err != nil {
 		return err
 	}

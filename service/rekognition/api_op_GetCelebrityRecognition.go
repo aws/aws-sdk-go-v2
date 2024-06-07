@@ -195,6 +195,9 @@ func (c *Client) addOperationGetCelebrityRecognitionMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetCelebrityRecognitionValidationMiddleware(stack); err != nil {
 		return err
 	}

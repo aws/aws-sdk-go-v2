@@ -424,6 +424,9 @@ func (c *Client) addOperationCreateCacheClusterMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateCacheClusterValidationMiddleware(stack); err != nil {
 		return err
 	}

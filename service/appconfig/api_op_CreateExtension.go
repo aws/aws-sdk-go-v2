@@ -172,6 +172,9 @@ func (c *Client) addOperationCreateExtensionMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateExtensionValidationMiddleware(stack); err != nil {
 		return err
 	}

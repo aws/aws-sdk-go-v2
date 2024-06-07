@@ -173,6 +173,9 @@ func (c *Client) addOperationUpdateGameServerGroupMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateGameServerGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

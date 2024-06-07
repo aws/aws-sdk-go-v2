@@ -176,6 +176,9 @@ func (c *Client) addOperationGetMapGlyphsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetMapGlyphsMiddleware(stack); err != nil {
 		return err
 	}

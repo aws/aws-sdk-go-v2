@@ -108,6 +108,9 @@ func (c *Client) addOperationCreateTagOptionMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateTagOptionValidationMiddleware(stack); err != nil {
 		return err
 	}

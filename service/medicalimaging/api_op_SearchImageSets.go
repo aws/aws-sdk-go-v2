@@ -130,6 +130,9 @@ func (c *Client) addOperationSearchImageSetsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opSearchImageSetsMiddleware(stack); err != nil {
 		return err
 	}

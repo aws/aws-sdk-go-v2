@@ -105,6 +105,9 @@ func (c *Client) addOperationDisassociateAssessmentReportEvidenceFolderMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateAssessmentReportEvidenceFolderValidationMiddleware(stack); err != nil {
 		return err
 	}

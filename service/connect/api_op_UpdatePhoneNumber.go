@@ -137,6 +137,9 @@ func (c *Client) addOperationUpdatePhoneNumberMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdatePhoneNumberMiddleware(stack, options); err != nil {
 		return err
 	}

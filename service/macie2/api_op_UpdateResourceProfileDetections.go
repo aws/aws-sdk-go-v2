@@ -105,6 +105,9 @@ func (c *Client) addOperationUpdateResourceProfileDetectionsMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateResourceProfileDetectionsValidationMiddleware(stack); err != nil {
 		return err
 	}

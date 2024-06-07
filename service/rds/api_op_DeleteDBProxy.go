@@ -103,6 +103,9 @@ func (c *Client) addOperationDeleteDBProxyMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDBProxyValidationMiddleware(stack); err != nil {
 		return err
 	}

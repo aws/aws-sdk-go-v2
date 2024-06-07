@@ -145,6 +145,9 @@ func (c *Client) addOperationGetQueueFleetAssociationMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetQueueFleetAssociationMiddleware(stack); err != nil {
 		return err
 	}

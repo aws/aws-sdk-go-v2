@@ -118,6 +118,9 @@ func (c *Client) addOperationPutCorsPolicyMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutCorsPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

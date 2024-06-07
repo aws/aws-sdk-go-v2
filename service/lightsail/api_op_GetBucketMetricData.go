@@ -190,6 +190,9 @@ func (c *Client) addOperationGetBucketMetricDataMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetBucketMetricDataValidationMiddleware(stack); err != nil {
 		return err
 	}

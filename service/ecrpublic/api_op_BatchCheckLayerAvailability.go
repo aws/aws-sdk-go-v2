@@ -124,6 +124,9 @@ func (c *Client) addOperationBatchCheckLayerAvailabilityMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchCheckLayerAvailabilityValidationMiddleware(stack); err != nil {
 		return err
 	}

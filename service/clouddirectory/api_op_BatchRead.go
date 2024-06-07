@@ -113,6 +113,9 @@ func (c *Client) addOperationBatchReadMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchReadValidationMiddleware(stack); err != nil {
 		return err
 	}

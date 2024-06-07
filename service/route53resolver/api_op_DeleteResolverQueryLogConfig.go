@@ -120,6 +120,9 @@ func (c *Client) addOperationDeleteResolverQueryLogConfigMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteResolverQueryLogConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -126,6 +126,9 @@ func (c *Client) addOperationGetPackageVersionHistoryMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetPackageVersionHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -133,6 +133,9 @@ func (c *Client) addOperationPostTimeSeriesDataPointsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opPostTimeSeriesDataPointsMiddleware(stack, options); err != nil {
 		return err
 	}

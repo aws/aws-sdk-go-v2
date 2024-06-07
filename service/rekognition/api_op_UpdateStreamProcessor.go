@@ -119,6 +119,9 @@ func (c *Client) addOperationUpdateStreamProcessorMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateStreamProcessorValidationMiddleware(stack); err != nil {
 		return err
 	}

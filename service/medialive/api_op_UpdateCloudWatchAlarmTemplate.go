@@ -206,6 +206,9 @@ func (c *Client) addOperationUpdateCloudWatchAlarmTemplateMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateCloudWatchAlarmTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

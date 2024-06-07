@@ -104,6 +104,9 @@ func (c *Client) addOperationDeleteInstanceAccessControlAttributeConfigurationMi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteInstanceAccessControlAttributeConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

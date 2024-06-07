@@ -125,6 +125,9 @@ func (c *Client) addOperationDescribeProvisionedProductPlanMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeProvisionedProductPlanValidationMiddleware(stack); err != nil {
 		return err
 	}

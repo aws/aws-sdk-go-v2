@@ -115,6 +115,9 @@ func (c *Client) addOperationGetContainerServiceDeploymentsMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetContainerServiceDeploymentsValidationMiddleware(stack); err != nil {
 		return err
 	}

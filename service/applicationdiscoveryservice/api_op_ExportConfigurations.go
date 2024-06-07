@@ -105,6 +105,9 @@ func (c *Client) addOperationExportConfigurationsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExportConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}

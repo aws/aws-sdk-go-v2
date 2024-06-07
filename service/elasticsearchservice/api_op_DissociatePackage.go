@@ -111,6 +111,9 @@ func (c *Client) addOperationDissociatePackageMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDissociatePackageValidationMiddleware(stack); err != nil {
 		return err
 	}

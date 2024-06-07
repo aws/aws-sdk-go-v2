@@ -119,6 +119,9 @@ func (c *Client) addOperationDeleteKxDataviewMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteKxDataviewMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -128,6 +128,9 @@ func (c *Client) addOperationGetConsolidatedReportMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetConsolidatedReportValidationMiddleware(stack); err != nil {
 		return err
 	}

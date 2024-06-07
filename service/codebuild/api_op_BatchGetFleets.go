@@ -106,6 +106,9 @@ func (c *Client) addOperationBatchGetFleetsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchGetFleetsValidationMiddleware(stack); err != nil {
 		return err
 	}

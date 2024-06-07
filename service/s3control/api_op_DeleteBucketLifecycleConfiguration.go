@@ -164,6 +164,9 @@ func (c *Client) addOperationDeleteBucketLifecycleConfigurationMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteBucketLifecycleConfigurationMiddleware(stack); err != nil {
 		return err
 	}

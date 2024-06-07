@@ -155,6 +155,9 @@ func (c *Client) addOperationDescribeAffectedAccountsForOrganizationMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeAffectedAccountsForOrganizationValidationMiddleware(stack); err != nil {
 		return err
 	}

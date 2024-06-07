@@ -131,6 +131,9 @@ func (c *Client) addOperationUpdateBucketBundleMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateBucketBundleValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -116,6 +116,9 @@ func (c *Client) addOperationStartInferenceSchedulerMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartInferenceSchedulerValidationMiddleware(stack); err != nil {
 		return err
 	}

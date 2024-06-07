@@ -103,6 +103,9 @@ func (c *Client) addOperationCreateSampleFindingsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateSampleFindingsValidationMiddleware(stack); err != nil {
 		return err
 	}

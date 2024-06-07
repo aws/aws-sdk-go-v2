@@ -129,6 +129,9 @@ func (c *Client) addOperationCreateVoiceProfileDomainMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateVoiceProfileDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

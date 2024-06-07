@@ -182,6 +182,9 @@ func (c *Client) addOperationGetSubscriptionTargetMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSubscriptionTargetValidationMiddleware(stack); err != nil {
 		return err
 	}

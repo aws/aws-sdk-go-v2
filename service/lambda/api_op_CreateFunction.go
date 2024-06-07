@@ -440,6 +440,9 @@ func (c *Client) addOperationCreateFunctionMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateFunctionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -254,6 +254,9 @@ func (c *Client) addOperationCreateEventDataStoreMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateEventDataStoreValidationMiddleware(stack); err != nil {
 		return err
 	}

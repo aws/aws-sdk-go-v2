@@ -134,6 +134,9 @@ func (c *Client) addOperationDescribeCertificateAuthorityAuditReportMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeCertificateAuthorityAuditReportValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -131,6 +131,9 @@ func (c *Client) addOperationStartServiceSoftwareUpdateMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartServiceSoftwareUpdateValidationMiddleware(stack); err != nil {
 		return err
 	}

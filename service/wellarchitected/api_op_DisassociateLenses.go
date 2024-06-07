@@ -113,6 +113,9 @@ func (c *Client) addOperationDisassociateLensesMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateLensesValidationMiddleware(stack); err != nil {
 		return err
 	}

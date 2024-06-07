@@ -139,6 +139,9 @@ func (c *Client) addOperationDescribeDBClusterEndpointsMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBClusterEndpointsValidationMiddleware(stack); err != nil {
 		return err
 	}

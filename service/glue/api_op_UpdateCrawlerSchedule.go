@@ -104,6 +104,9 @@ func (c *Client) addOperationUpdateCrawlerScheduleMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateCrawlerScheduleValidationMiddleware(stack); err != nil {
 		return err
 	}

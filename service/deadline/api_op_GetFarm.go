@@ -134,6 +134,9 @@ func (c *Client) addOperationGetFarmMiddlewares(stack *middleware.Stack, options
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetFarmMiddleware(stack); err != nil {
 		return err
 	}

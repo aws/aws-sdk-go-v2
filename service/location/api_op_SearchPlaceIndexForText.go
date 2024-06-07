@@ -213,6 +213,9 @@ func (c *Client) addOperationSearchPlaceIndexForTextMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opSearchPlaceIndexForTextMiddleware(stack); err != nil {
 		return err
 	}

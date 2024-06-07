@@ -108,6 +108,9 @@ func (c *Client) addOperationDescribeFraudsterRegistrationJobMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeFraudsterRegistrationJobValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -119,6 +119,9 @@ func (c *Client) addOperationCreateOriginAccessControlMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateOriginAccessControlValidationMiddleware(stack); err != nil {
 		return err
 	}

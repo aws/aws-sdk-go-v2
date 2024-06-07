@@ -167,6 +167,9 @@ func (c *Client) addOperationGetFunctionUrlConfigMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetFunctionUrlConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

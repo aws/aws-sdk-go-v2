@@ -125,6 +125,9 @@ func (c *Client) addOperationListQueueEnvironmentsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListQueueEnvironmentsMiddleware(stack); err != nil {
 		return err
 	}

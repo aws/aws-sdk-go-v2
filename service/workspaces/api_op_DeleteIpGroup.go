@@ -101,6 +101,9 @@ func (c *Client) addOperationDeleteIpGroupMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteIpGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

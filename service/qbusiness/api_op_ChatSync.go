@@ -185,6 +185,9 @@ func (c *Client) addOperationChatSyncMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opChatSyncMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -108,6 +108,9 @@ func (c *Client) addOperationUpdateScheduledQueryMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateScheduledQueryValidationMiddleware(stack); err != nil {
 		return err
 	}

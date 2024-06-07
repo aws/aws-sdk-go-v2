@@ -166,6 +166,9 @@ func (c *Client) addOperationCreateSlackChannelConfigurationMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateSlackChannelConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

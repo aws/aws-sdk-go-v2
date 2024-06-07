@@ -121,6 +121,9 @@ func (c *Client) addOperationListResourcesForTagOptionMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListResourcesForTagOptionValidationMiddleware(stack); err != nil {
 		return err
 	}

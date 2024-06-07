@@ -103,6 +103,9 @@ func (c *Client) addOperationGetPlaybackRestrictionPolicyMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetPlaybackRestrictionPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -108,6 +108,9 @@ func (c *Client) addOperationPutVerificationStateOnViolationMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutVerificationStateOnViolationValidationMiddleware(stack); err != nil {
 		return err
 	}

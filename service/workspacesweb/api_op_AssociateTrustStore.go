@@ -114,6 +114,9 @@ func (c *Client) addOperationAssociateTrustStoreMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateTrustStoreValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -108,6 +108,9 @@ func (c *Client) addOperationDisassociateDeviceFromPlacementMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateDeviceFromPlacementValidationMiddleware(stack); err != nil {
 		return err
 	}

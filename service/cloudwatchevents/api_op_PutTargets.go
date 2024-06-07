@@ -247,6 +247,9 @@ func (c *Client) addOperationPutTargetsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -99,6 +99,9 @@ func (c *Client) addOperationPutModelInvocationLoggingConfigurationMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutModelInvocationLoggingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

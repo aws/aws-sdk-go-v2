@@ -114,6 +114,9 @@ func (c *Client) addOperationListLoggerDefinitionVersionsMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListLoggerDefinitionVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

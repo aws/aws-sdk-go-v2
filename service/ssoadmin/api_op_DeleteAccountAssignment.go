@@ -137,6 +137,9 @@ func (c *Client) addOperationDeleteAccountAssignmentMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteAccountAssignmentValidationMiddleware(stack); err != nil {
 		return err
 	}

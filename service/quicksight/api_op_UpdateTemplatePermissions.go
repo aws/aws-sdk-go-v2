@@ -126,6 +126,9 @@ func (c *Client) addOperationUpdateTemplatePermissionsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateTemplatePermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -118,6 +118,9 @@ func (c *Client) addOperationRemoveAllBackendsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRemoveAllBackendsValidationMiddleware(stack); err != nil {
 		return err
 	}

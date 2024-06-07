@@ -134,6 +134,9 @@ func (c *Client) addOperationSetIdentityMailFromDomainMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetIdentityMailFromDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

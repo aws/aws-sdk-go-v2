@@ -151,6 +151,9 @@ func (c *Client) addOperationCreateServiceActionMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateServiceActionMiddleware(stack, options); err != nil {
 		return err
 	}

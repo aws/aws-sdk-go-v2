@@ -114,6 +114,9 @@ func (c *Client) addOperationListMulticastGroupsByFuotaTaskMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListMulticastGroupsByFuotaTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

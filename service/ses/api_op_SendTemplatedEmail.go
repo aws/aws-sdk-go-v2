@@ -242,6 +242,9 @@ func (c *Client) addOperationSendTemplatedEmailMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSendTemplatedEmailValidationMiddleware(stack); err != nil {
 		return err
 	}

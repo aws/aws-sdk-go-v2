@@ -130,6 +130,9 @@ func (c *Client) addOperationRotateTunnelAccessTokenMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRotateTunnelAccessTokenValidationMiddleware(stack); err != nil {
 		return err
 	}

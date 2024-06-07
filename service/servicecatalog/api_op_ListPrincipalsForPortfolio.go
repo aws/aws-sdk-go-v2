@@ -123,6 +123,9 @@ func (c *Client) addOperationListPrincipalsForPortfolioMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListPrincipalsForPortfolioValidationMiddleware(stack); err != nil {
 		return err
 	}

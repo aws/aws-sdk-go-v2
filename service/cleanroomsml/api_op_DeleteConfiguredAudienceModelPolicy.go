@@ -99,6 +99,9 @@ func (c *Client) addOperationDeleteConfiguredAudienceModelPolicyMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteConfiguredAudienceModelPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

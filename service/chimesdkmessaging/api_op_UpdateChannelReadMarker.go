@@ -111,6 +111,9 @@ func (c *Client) addOperationUpdateChannelReadMarkerMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateChannelReadMarkerValidationMiddleware(stack); err != nil {
 		return err
 	}

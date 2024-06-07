@@ -135,6 +135,9 @@ func (c *Client) addOperationCreateReplicationSubnetGroupMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateReplicationSubnetGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

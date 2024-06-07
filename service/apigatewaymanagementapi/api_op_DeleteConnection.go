@@ -96,6 +96,9 @@ func (c *Client) addOperationDeleteConnectionMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

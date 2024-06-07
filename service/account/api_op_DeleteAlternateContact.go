@@ -134,6 +134,9 @@ func (c *Client) addOperationDeleteAlternateContactMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteAlternateContactValidationMiddleware(stack); err != nil {
 		return err
 	}

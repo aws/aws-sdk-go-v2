@@ -111,6 +111,9 @@ func (c *Client) addOperationUpdatePullRequestStatusMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdatePullRequestStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

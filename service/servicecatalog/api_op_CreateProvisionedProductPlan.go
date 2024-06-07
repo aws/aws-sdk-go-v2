@@ -181,6 +181,9 @@ func (c *Client) addOperationCreateProvisionedProductPlanMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateProvisionedProductPlanMiddleware(stack, options); err != nil {
 		return err
 	}

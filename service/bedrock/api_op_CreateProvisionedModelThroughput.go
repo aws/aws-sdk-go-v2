@@ -158,6 +158,9 @@ func (c *Client) addOperationCreateProvisionedModelThroughputMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateProvisionedModelThroughputMiddleware(stack, options); err != nil {
 		return err
 	}

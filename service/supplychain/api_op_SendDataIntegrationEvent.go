@@ -130,6 +130,9 @@ func (c *Client) addOperationSendDataIntegrationEventMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opSendDataIntegrationEventMiddleware(stack, options); err != nil {
 		return err
 	}

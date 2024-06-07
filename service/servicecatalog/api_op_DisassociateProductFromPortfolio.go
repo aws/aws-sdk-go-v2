@@ -112,6 +112,9 @@ func (c *Client) addOperationDisassociateProductFromPortfolioMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateProductFromPortfolioValidationMiddleware(stack); err != nil {
 		return err
 	}

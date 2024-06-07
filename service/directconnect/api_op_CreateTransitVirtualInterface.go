@@ -125,6 +125,9 @@ func (c *Client) addOperationCreateTransitVirtualInterfaceMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateTransitVirtualInterfaceValidationMiddleware(stack); err != nil {
 		return err
 	}

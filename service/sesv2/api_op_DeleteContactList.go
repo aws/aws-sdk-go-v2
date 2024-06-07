@@ -98,6 +98,9 @@ func (c *Client) addOperationDeleteContactListMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteContactListValidationMiddleware(stack); err != nil {
 		return err
 	}

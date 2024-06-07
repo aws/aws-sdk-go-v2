@@ -108,6 +108,9 @@ func (c *Client) addOperationDisassociateApprovedOriginMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateApprovedOriginValidationMiddleware(stack); err != nil {
 		return err
 	}

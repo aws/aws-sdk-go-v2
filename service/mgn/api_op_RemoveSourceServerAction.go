@@ -106,6 +106,9 @@ func (c *Client) addOperationRemoveSourceServerActionMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRemoveSourceServerActionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -134,6 +134,9 @@ func (c *Client) addOperationGetUsagePlanMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetUsagePlanValidationMiddleware(stack); err != nil {
 		return err
 	}

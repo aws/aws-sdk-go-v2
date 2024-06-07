@@ -124,6 +124,9 @@ func (c *Client) addOperationListEksAnywhereSubscriptionsMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEksAnywhereSubscriptions(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -111,6 +111,9 @@ func (c *Client) addOperationDeleteVoiceConnectorEmergencyCallingConfigurationMi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteVoiceConnectorEmergencyCallingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

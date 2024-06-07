@@ -129,6 +129,9 @@ func (c *Client) addOperationUpdateMicrosoftTeamsChannelConfigurationMiddlewares
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateMicrosoftTeamsChannelConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

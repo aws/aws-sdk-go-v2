@@ -142,6 +142,9 @@ func (c *Client) addOperationShareDirectoryMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpShareDirectoryValidationMiddleware(stack); err != nil {
 		return err
 	}

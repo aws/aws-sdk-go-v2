@@ -135,6 +135,9 @@ func (c *Client) addOperationUpdateVpcLinkMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateVpcLinkValidationMiddleware(stack); err != nil {
 		return err
 	}

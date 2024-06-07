@@ -146,6 +146,9 @@ func (c *Client) addOperationUpdateRestoreTestingSelectionMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateRestoreTestingSelectionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -104,6 +104,9 @@ func (c *Client) addOperationGetOrganizationCustomRulePolicyMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetOrganizationCustomRulePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

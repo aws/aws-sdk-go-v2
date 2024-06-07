@@ -133,6 +133,9 @@ func (c *Client) addOperationUndeprecateActivityTypeMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUndeprecateActivityTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

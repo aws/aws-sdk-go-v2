@@ -116,6 +116,9 @@ func (c *Client) addOperationPutRawMessageContentMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutRawMessageContentValidationMiddleware(stack); err != nil {
 		return err
 	}

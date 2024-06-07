@@ -210,6 +210,9 @@ func (c *Client) addOperationGetDomainDetailMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetDomainDetailValidationMiddleware(stack); err != nil {
 		return err
 	}

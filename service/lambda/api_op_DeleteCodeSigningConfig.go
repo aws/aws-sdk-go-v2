@@ -99,6 +99,9 @@ func (c *Client) addOperationDeleteCodeSigningConfigMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteCodeSigningConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

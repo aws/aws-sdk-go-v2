@@ -138,6 +138,9 @@ func (c *Client) addOperationCreateCloudFormationTemplateMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateCloudFormationTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

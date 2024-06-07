@@ -115,6 +115,9 @@ func (c *Client) addOperationListDiscoveryJobsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListDiscoveryJobsMiddleware(stack); err != nil {
 		return err
 	}

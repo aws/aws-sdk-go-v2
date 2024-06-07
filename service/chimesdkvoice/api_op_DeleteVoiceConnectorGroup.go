@@ -100,6 +100,9 @@ func (c *Client) addOperationDeleteVoiceConnectorGroupMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteVoiceConnectorGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

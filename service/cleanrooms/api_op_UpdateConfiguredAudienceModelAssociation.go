@@ -119,6 +119,9 @@ func (c *Client) addOperationUpdateConfiguredAudienceModelAssociationMiddlewares
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateConfiguredAudienceModelAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

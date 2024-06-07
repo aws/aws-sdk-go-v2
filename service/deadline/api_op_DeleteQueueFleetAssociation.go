@@ -108,6 +108,9 @@ func (c *Client) addOperationDeleteQueueFleetAssociationMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteQueueFleetAssociationMiddleware(stack); err != nil {
 		return err
 	}

@@ -128,6 +128,9 @@ func (c *Client) addOperationDescribeVpcConnectionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeVpcConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

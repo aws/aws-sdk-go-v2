@@ -127,6 +127,9 @@ func (c *Client) addOperationCreateProfileShareMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateProfileShareMiddleware(stack, options); err != nil {
 		return err
 	}

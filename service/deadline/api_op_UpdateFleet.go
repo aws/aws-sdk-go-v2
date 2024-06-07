@@ -125,6 +125,9 @@ func (c *Client) addOperationUpdateFleetMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opUpdateFleetMiddleware(stack); err != nil {
 		return err
 	}

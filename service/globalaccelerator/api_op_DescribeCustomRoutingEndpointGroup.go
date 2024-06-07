@@ -103,6 +103,9 @@ func (c *Client) addOperationDescribeCustomRoutingEndpointGroupMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeCustomRoutingEndpointGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

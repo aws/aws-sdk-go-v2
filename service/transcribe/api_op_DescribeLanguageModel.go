@@ -122,6 +122,9 @@ func (c *Client) addOperationDescribeLanguageModelMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeLanguageModelValidationMiddleware(stack); err != nil {
 		return err
 	}

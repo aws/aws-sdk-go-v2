@@ -112,6 +112,9 @@ func (c *Client) addOperationUpdateNotebookMetadataMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateNotebookMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}

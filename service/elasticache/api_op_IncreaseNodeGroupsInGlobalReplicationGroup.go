@@ -124,6 +124,9 @@ func (c *Client) addOperationIncreaseNodeGroupsInGlobalReplicationGroupMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpIncreaseNodeGroupsInGlobalReplicationGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

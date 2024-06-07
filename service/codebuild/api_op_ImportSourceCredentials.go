@@ -128,6 +128,9 @@ func (c *Client) addOperationImportSourceCredentialsMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpImportSourceCredentialsValidationMiddleware(stack); err != nil {
 		return err
 	}

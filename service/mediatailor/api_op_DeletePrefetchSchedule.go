@@ -109,6 +109,9 @@ func (c *Client) addOperationDeletePrefetchScheduleMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeletePrefetchScheduleValidationMiddleware(stack); err != nil {
 		return err
 	}

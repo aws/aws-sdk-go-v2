@@ -137,6 +137,9 @@ func (c *Client) addOperationCreateStudioSessionMappingMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateStudioSessionMappingValidationMiddleware(stack); err != nil {
 		return err
 	}

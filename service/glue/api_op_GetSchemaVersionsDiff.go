@@ -129,6 +129,9 @@ func (c *Client) addOperationGetSchemaVersionsDiffMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSchemaVersionsDiffValidationMiddleware(stack); err != nil {
 		return err
 	}

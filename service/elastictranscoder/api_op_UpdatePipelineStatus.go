@@ -121,6 +121,9 @@ func (c *Client) addOperationUpdatePipelineStatusMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdatePipelineStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

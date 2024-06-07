@@ -107,6 +107,9 @@ func (c *Client) addOperationPutLabelMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutLabelValidationMiddleware(stack); err != nil {
 		return err
 	}

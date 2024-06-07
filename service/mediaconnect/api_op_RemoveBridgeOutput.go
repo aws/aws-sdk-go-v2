@@ -107,6 +107,9 @@ func (c *Client) addOperationRemoveBridgeOutputMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRemoveBridgeOutputValidationMiddleware(stack); err != nil {
 		return err
 	}

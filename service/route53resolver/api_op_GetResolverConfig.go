@@ -105,6 +105,9 @@ func (c *Client) addOperationGetResolverConfigMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetResolverConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

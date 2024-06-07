@@ -115,6 +115,9 @@ func (c *Client) addOperationStopRelationalDatabaseMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopRelationalDatabaseValidationMiddleware(stack); err != nil {
 		return err
 	}

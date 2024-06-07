@@ -123,6 +123,9 @@ func (c *Client) addOperationDeleteAppMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteAppMiddleware(stack, options); err != nil {
 		return err
 	}

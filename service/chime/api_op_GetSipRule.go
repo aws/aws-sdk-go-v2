@@ -115,6 +115,9 @@ func (c *Client) addOperationGetSipRuleMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSipRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

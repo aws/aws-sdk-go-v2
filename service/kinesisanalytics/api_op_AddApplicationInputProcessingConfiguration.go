@@ -134,6 +134,9 @@ func (c *Client) addOperationAddApplicationInputProcessingConfigurationMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddApplicationInputProcessingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

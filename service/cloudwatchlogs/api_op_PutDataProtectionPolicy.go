@@ -175,6 +175,9 @@ func (c *Client) addOperationPutDataProtectionPolicyMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutDataProtectionPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

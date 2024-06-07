@@ -116,6 +116,9 @@ func (c *Client) addOperationAssociateUserToPermissionGroupMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opAssociateUserToPermissionGroupMiddleware(stack, options); err != nil {
 		return err
 	}

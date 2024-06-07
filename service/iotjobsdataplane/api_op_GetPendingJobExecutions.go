@@ -106,6 +106,9 @@ func (c *Client) addOperationGetPendingJobExecutionsMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetPendingJobExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}

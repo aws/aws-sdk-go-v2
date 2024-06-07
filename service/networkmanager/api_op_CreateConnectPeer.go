@@ -128,6 +128,9 @@ func (c *Client) addOperationCreateConnectPeerMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateConnectPeerMiddleware(stack, options); err != nil {
 		return err
 	}

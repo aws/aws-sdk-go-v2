@@ -104,6 +104,9 @@ func (c *Client) addOperationGetManagedScalingPolicyMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetManagedScalingPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

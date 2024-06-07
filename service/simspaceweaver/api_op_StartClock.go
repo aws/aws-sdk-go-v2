@@ -98,6 +98,9 @@ func (c *Client) addOperationStartClockMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartClockValidationMiddleware(stack); err != nil {
 		return err
 	}

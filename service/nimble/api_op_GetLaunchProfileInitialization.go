@@ -123,6 +123,9 @@ func (c *Client) addOperationGetLaunchProfileInitializationMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetLaunchProfileInitializationValidationMiddleware(stack); err != nil {
 		return err
 	}

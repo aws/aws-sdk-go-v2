@@ -106,6 +106,9 @@ func (c *Client) addOperationDeleteOutboundCrossClusterSearchConnectionMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteOutboundCrossClusterSearchConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -102,6 +102,9 @@ func (c *Client) addOperationDeleteWorkspaceMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteWorkspaceMiddleware(stack); err != nil {
 		return err
 	}

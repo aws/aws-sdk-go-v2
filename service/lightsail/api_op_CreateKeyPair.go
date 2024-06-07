@@ -130,6 +130,9 @@ func (c *Client) addOperationCreateKeyPairMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateKeyPairValidationMiddleware(stack); err != nil {
 		return err
 	}

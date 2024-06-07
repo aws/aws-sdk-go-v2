@@ -128,6 +128,9 @@ func (c *Client) addOperationGetSignalCatalogMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSignalCatalogValidationMiddleware(stack); err != nil {
 		return err
 	}

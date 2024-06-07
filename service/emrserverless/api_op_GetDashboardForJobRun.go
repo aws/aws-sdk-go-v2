@@ -120,6 +120,9 @@ func (c *Client) addOperationGetDashboardForJobRunMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetDashboardForJobRunValidationMiddleware(stack); err != nil {
 		return err
 	}

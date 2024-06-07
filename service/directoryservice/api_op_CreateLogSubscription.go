@@ -107,6 +107,9 @@ func (c *Client) addOperationCreateLogSubscriptionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateLogSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -127,6 +127,9 @@ func (c *Client) addOperationStartArchiveExportMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartArchiveExportValidationMiddleware(stack); err != nil {
 		return err
 	}

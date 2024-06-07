@@ -120,6 +120,9 @@ func (c *Client) addOperationAcceptPortfolioShareMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAcceptPortfolioShareValidationMiddleware(stack); err != nil {
 		return err
 	}

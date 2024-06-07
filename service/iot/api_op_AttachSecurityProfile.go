@@ -109,6 +109,9 @@ func (c *Client) addOperationAttachSecurityProfileMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAttachSecurityProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

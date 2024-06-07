@@ -139,6 +139,9 @@ func (c *Client) addOperationCreateWebACLMigrationStackMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateWebACLMigrationStackValidationMiddleware(stack); err != nil {
 		return err
 	}

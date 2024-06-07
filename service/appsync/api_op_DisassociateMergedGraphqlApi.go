@@ -113,6 +113,9 @@ func (c *Client) addOperationDisassociateMergedGraphqlApiMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateMergedGraphqlApiValidationMiddleware(stack); err != nil {
 		return err
 	}

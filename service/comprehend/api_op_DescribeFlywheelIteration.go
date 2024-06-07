@@ -111,6 +111,9 @@ func (c *Client) addOperationDescribeFlywheelIterationMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeFlywheelIterationValidationMiddleware(stack); err != nil {
 		return err
 	}

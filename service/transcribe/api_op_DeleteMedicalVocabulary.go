@@ -101,6 +101,9 @@ func (c *Client) addOperationDeleteMedicalVocabularyMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteMedicalVocabularyValidationMiddleware(stack); err != nil {
 		return err
 	}

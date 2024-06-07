@@ -109,6 +109,9 @@ func (c *Client) addOperationUpdateAutomatedDiscoveryConfigurationMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateAutomatedDiscoveryConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

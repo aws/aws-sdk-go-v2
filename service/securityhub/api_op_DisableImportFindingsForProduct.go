@@ -100,6 +100,9 @@ func (c *Client) addOperationDisableImportFindingsForProductMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisableImportFindingsForProductValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -98,6 +98,9 @@ func (c *Client) addOperationDeleteNotebookInstanceLifecycleConfigMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteNotebookInstanceLifecycleConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

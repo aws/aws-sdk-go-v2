@@ -129,6 +129,9 @@ func (c *Client) addOperationGetLicenseConversionTaskMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetLicenseConversionTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

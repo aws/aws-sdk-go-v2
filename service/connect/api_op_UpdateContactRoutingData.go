@@ -131,6 +131,9 @@ func (c *Client) addOperationUpdateContactRoutingDataMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateContactRoutingDataValidationMiddleware(stack); err != nil {
 		return err
 	}

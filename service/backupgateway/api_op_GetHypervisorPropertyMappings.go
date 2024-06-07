@@ -113,6 +113,9 @@ func (c *Client) addOperationGetHypervisorPropertyMappingsMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetHypervisorPropertyMappingsValidationMiddleware(stack); err != nil {
 		return err
 	}

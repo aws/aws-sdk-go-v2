@@ -111,6 +111,9 @@ func (c *Client) addOperationReplaceTopicRuleMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpReplaceTopicRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

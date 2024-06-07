@@ -173,6 +173,9 @@ func (c *Client) addOperationGetIntentMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetIntentValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -118,6 +118,9 @@ func (c *Client) addOperationCancelMLModelTransformJobMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelMLModelTransformJobValidationMiddleware(stack); err != nil {
 		return err
 	}

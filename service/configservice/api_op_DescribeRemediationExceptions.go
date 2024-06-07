@@ -133,6 +133,9 @@ func (c *Client) addOperationDescribeRemediationExceptionsMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeRemediationExceptionsValidationMiddleware(stack); err != nil {
 		return err
 	}

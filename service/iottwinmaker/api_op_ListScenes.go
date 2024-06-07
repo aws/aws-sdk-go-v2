@@ -112,6 +112,9 @@ func (c *Client) addOperationListScenesMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListScenesMiddleware(stack); err != nil {
 		return err
 	}

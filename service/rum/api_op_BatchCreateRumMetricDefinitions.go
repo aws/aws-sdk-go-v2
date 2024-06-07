@@ -179,6 +179,9 @@ func (c *Client) addOperationBatchCreateRumMetricDefinitionsMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchCreateRumMetricDefinitionsValidationMiddleware(stack); err != nil {
 		return err
 	}

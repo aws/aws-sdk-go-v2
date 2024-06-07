@@ -355,6 +355,9 @@ func (c *Client) addOperationCreateFilterMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateFilterMiddleware(stack, options); err != nil {
 		return err
 	}

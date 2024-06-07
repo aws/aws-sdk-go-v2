@@ -183,6 +183,9 @@ func (c *Client) addOperationUpdateManagedRuleSetVersionExpiryDateMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateManagedRuleSetVersionExpiryDateValidationMiddleware(stack); err != nil {
 		return err
 	}
