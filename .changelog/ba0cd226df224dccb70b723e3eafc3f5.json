@@ -1,8 +1,0 @@
-{
-    "id": "ba0cd226-df22-4dcc-b70b-723e3eafc3f5",
-    "type": "feature",
-    "description": "This release introduces a new optional parameter: InferenceAmiVersion, in ProductionVariant.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

@@ -1,3 +1,8 @@
+# v1.12.1 (2024-06-07)
+
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2024-06-04)
 
 * **Feature**: This release adds Timestream for LiveAnalytics as a supported target in EventBridge Pipes

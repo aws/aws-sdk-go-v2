@@ -1,3 +1,9 @@
+# v1.15.0 (2024-06-07)
+
+* **Feature**: This release adds OpenIdConnect (OIDC) configuration support for IdentitySources, allowing for external IDPs to be used in authorization requests.
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.4 (2024-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

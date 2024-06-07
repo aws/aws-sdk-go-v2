@@ -1,3 +1,21 @@
+# Release (2024-06-07)
+
+## General Highlights
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.33.0](service/auditmanager/CHANGELOG.md#v1330-2024-06-07)
+  * **Feature**: New feature: common controls. When creating custom controls, you can now use pre-grouped AWS data sources based on common compliance themes. Also, the awsServices parameter is deprecated because we now manage services in scope for you. If used, the input is ignored and an empty list is returned.
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.28](service/b2bi/CHANGELOG.md#v100-preview28-2024-06-07)
+  * **Feature**: Added exceptions to B2Bi List operations and ConflictException to B2Bi StartTransformerJob operation. Also made capabilities field explicitly required when creating a Partnership.
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.28.0](service/codepipeline/CHANGELOG.md#v1280-2024-06-07)
+  * **Feature**: CodePipeline now supports overriding S3 Source Object Key during StartPipelineExecution, as part of Source Overrides.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.144.0](service/sagemaker/CHANGELOG.md#v11440-2024-06-07)
+  * **Feature**: This release introduces a new optional parameter: InferenceAmiVersion, in ProductionVariant.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.15.0](service/verifiedpermissions/CHANGELOG.md#v1150-2024-06-07)
+  * **Feature**: This release adds OpenIdConnect (OIDC) configuration support for IdentitySources, allowing for external IDPs to be used in authorization requests.
+
 # Release (2024-06-06)
 
 ## Module Highlights

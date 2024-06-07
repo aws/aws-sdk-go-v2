@@ -1,8 +1,0 @@
-{
-    "id": "cb529d48-8702-4732-b24b-6425a7bdb64f",
-    "type": "feature",
-    "description": "This release adds OpenIdConnect (OIDC) configuration support for IdentitySources, allowing for external IDPs to be used in authorization requests.",
-    "modules": [
-        "service/verifiedpermissions"
-    ]
-}

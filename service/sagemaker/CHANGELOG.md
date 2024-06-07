@@ -1,3 +1,9 @@
+# v1.144.0 (2024-06-07)
+
+* **Feature**: This release introduces a new optional parameter: InferenceAmiVersion, in ProductionVariant.
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.143.0 (2024-06-04)
 
 * **Feature**: Extend DescribeClusterNode response with private DNS hostname and IP address, and placement information about availability zone and availability zone ID.

@@ -3,9 +3,9 @@ module github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect
 go 1.20
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.27.1
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.8
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.8
+	github.com/aws/aws-sdk-go-v2 v1.27.2
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.9
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.9
 	github.com/aws/smithy-go v1.20.2
 )
 

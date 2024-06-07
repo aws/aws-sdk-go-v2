@@ -1,3 +1,8 @@
+# v1.84.1 (2024-06-07)
+
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.84.0 (2024-06-06)
 
 * **Feature**: This release adds support for creating and updating Glue Data Catalog Views.

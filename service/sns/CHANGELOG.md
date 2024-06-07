@@ -1,3 +1,8 @@
+# v1.29.11 (2024-06-07)
+
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.10 (2024-06-06)
 
 * **Documentation**: Doc-only update for SNS. These changes include customer-reported issues and TXC3 updates.

@@ -1,3 +1,9 @@
+# v1.28.0 (2024-06-07)
+
+* **Feature**: CodePipeline now supports overriding S3 Source Object Key during StartPipelineExecution, as part of Source Overrides.
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.5 (2024-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

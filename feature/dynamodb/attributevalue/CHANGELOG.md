@@ -1,3 +1,7 @@
+# v1.14.1 (2024-06-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2024-06-05)
 
 * **Feature**: Add codec options to use encoding.Text/Binary(Un)Marshaler when present on targets.

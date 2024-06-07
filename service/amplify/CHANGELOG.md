@@ -1,3 +1,8 @@
+# v1.21.11 (2024-06-07)
+
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.10 (2024-06-03)
 
 * **Documentation**: This doc-only update identifies fields that are specific to Gen 1 and Gen 2 applications.
