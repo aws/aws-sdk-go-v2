@@ -3653,12 +3653,12 @@
                 "result": {
                     "target": "com.amazonaws.codepipeline#Result",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specified result for when the failure conditions are met, such as rolling back the stage.</p>"
+                        "smithy.api#documentation": "<p>The specified result for when the failure conditions are met, such as rolling back the\n            stage.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration that specifies the result, such as rollback, to occur upon stage failure. </p>"
+                "smithy.api#documentation": "<p>The configuration that specifies the result, such as rollback, to occur upon stage\n            failure. </p>"
             }
         },
         "com.amazonaws.codepipeline#FailureDetails": {
@@ -3871,7 +3871,22 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the metadata, structure, stages, and actions of a pipeline. Can be used to\n            return the entire structure of a pipeline in JSON format, which can then be modified and\n            used to update the pipeline structure with <a>UpdatePipeline</a>.</p>"
+                "smithy.api#documentation": "<p>Returns the metadata, structure, stages, and actions of a pipeline. Can be used to\n            return the entire structure of a pipeline in JSON format, which can then be modified and\n            used to update the pipeline structure with <a>UpdatePipeline</a>.</p>",
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetPipelineFailure",
+                        "params": {
+                            "name": "fake-pipeline"
+                        },
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.codepipeline#GetPipelineExecution": {
@@ -4953,7 +4968,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.codepipeline#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining\n            results, make another call with the returned nextToken value. Action execution history\n            is retained for up to 12 months, based on action execution start times. Default value is\n            100. </p>\n         <note>\n            <p>Detailed execution history is available for executions run on or after February\n                21, 2019.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining\n            results, make another call with the returned nextToken value. Action execution history\n            is retained for up to 12 months, based on action execution start times. Default value is\n            100. </p>"
                     }
                 },
                 "nextToken": {
@@ -5081,7 +5096,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a summary of the most recent executions for a pipeline.</p>",
+                "smithy.api#documentation": "<p>Gets a summary of the most recent executions for a pipeline.</p>\n         <note>\n            <p>When applying the filter for pipeline executions that have succeeded in the stage,\n                the operation returns all executions in the current pipeline version beginning on\n                February 1, 2024.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -5168,7 +5183,20 @@
                     "outputToken": "nextToken",
                     "items": "pipelines",
                     "pageSize": "maxResults"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListPipelinesSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.codepipeline#ListPipelinesInput": {
@@ -5828,7 +5856,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified pipeline execution is outdated and cannot be used as a target pipeline execution for rollback.</p>",
+                "smithy.api#documentation": "<p>The specified pipeline execution is outdated and cannot be used as a target pipeline\n            execution for rollback.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -7425,7 +7453,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list that allows you to specify, or override, the source revision for a pipeline\n            execution that's being started. A source revision is the version with all the changes to\n            your application code, or source artifact, for the pipeline execution.</p>"
+                "smithy.api#documentation": "<p>A list that allows you to specify, or override, the source revision for a pipeline\n            execution that's being started. A source revision is the version with all the changes to\n            your application code, or source artifact, for the pipeline execution.</p>\n         <note>\n            <p>For the <code>S3_OBJECT_VERSION_ID</code> and <code>S3_OBJECT_KEY</code> types of source revisions, either\n                of the types can be used independently, or they can be used together to override the\n                source with a specific ObjectKey and VersionID.</p>\n         </note>"
             }
         },
         "com.amazonaws.codepipeline#SourceRevisionOverrideList": {
@@ -7459,6 +7487,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "S3_OBJECT_VERSION_ID"
+                    }
+                },
+                "S3_OBJECT_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3_OBJECT_KEY"
                     }
                 }
             }
@@ -7515,7 +7549,7 @@
                 "onFailure": {
                     "target": "com.amazonaws.codepipeline#FailureConditions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The method to use when a stage has not completed successfully. For example, configuring this field for rollback will roll back a failed stage automatically to the last successful pipeline execution in the stage.</p>"
+                        "smithy.api#documentation": "<p>The method to use when a stage has not completed successfully. For example,\n            configuring this field for rollback will roll back a failed stage automatically to the\n            last successful pipeline execution in the stage.</p>"
                     }
                 }
             },
@@ -7543,7 +7577,7 @@
                 "type": {
                     "target": "com.amazonaws.codepipeline#ExecutionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of pipeline execution for the stage, such as a rollback pipeline execution.</p>"
+                        "smithy.api#documentation": "<p>The type of pipeline execution for the stage, such as a rollback pipeline\n            execution.</p>"
                     }
                 }
             },
@@ -7922,12 +7956,12 @@
                 "stageName": {
                     "target": "com.amazonaws.codepipeline#StageName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the stage for filtering for pipeline executions where the stage was successful in the current pipeline\n            version.</p>"
+                        "smithy.api#documentation": "<p>The name of the stage for filtering for pipeline executions where the stage was\n            successful in the current pipeline version.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Filter for pipeline executions that have successfully completed the stage in the current pipeline version.</p>"
+                "smithy.api#documentation": "<p>Filter for pipeline executions that have successfully completed the stage in the\n            current pipeline version.</p>"
             }
         },
         "com.amazonaws.codepipeline#Tag": {

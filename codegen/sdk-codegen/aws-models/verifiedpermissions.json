@@ -111,6 +111,27 @@
                 "smithy.api#documentation": "<p>The value of an attribute.</p>\n         <p>Contains information about the runtime context for a request for which an\n            authorization decision is made. </p>\n         <p>This data type is used as a member of the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ContextDefinition.html\">ContextDefinition</a> structure\n            which is uses as a request parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a>, <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html\">BatchIsAuthorized</a>, and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a>\n            operations.</p>"
             }
         },
+        "com.amazonaws.verifiedpermissions#Audience": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.verifiedpermissions#Audiences": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.verifiedpermissions#Audience"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
         "com.amazonaws.verifiedpermissions#BatchIsAuthorized": {
             "type": "operation",
             "input": {
@@ -429,6 +450,15 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.verifiedpermissions#Claim": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.verifiedpermissions#ClientId": {
             "type": "string",
             "traits": {
@@ -519,7 +549,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used\n            as an identity provider for Verified Permissions.</p>\n         <p>This data type is used as a field that is part of an <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html\">Configuration</a> structure that is\n            used as a parameter to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>.</p>\n         <p>Example:<code>\"CognitoUserPoolConfiguration\":{\"UserPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"ClientIds\":\n            [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"],\"groupConfiguration\": {\"groupEntityType\": \"MyCorp::Group\"}}</code>\n         </p>"
+                "smithy.api#documentation": "<p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used\n            as an identity provider for Verified Permissions.</p>\n         <p>This data type part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html\">Configuration</a> structure that is\n            used as a parameter to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>.</p>\n         <p>Example:<code>\"CognitoUserPoolConfiguration\":{\"UserPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"ClientIds\":\n            [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"],\"groupConfiguration\": {\"groupEntityType\": \"MyCorp::Group\"}}</code>\n         </p>"
             }
         },
         "com.amazonaws.verifiedpermissions#CognitoUserPoolConfigurationDetail": {
@@ -600,10 +630,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of\n            authenticated identities as entities. It specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of a Amazon Cognito user pool\n            and one or more application client IDs.</p>\n         <p>Example:\n                <code>\"configuration\":{\"cognitoUserPoolConfiguration\":{\"userPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"clientIds\":\n                    [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"],\"groupConfiguration\": {\"groupEntityType\": \"MyCorp::Group\"}}}</code>\n         </p>"
                     }
+                },
+                "openIdConnectConfiguration": {
+                    "target": "com.amazonaws.verifiedpermissions#OpenIdConnectConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details of an OpenID Connect (OIDC) identity provider, or\n         identity source, that Verified Permissions can use to generate entities from authenticated identities. It\n         specifies the issuer URL, token type that you want to use, and policy store entity\n         details.</p>\n         <p>Example:<code>\"configuration\":{\"openIdConnectConfiguration\":{\"issuer\":\"https://auth.example.com\",\"tokenSelection\":{\"accessTokenOnly\":{\"audiences\":[\"https://myapp.example.com\",\"https://myapp2.example.com\"],\"principalIdClaim\":\"sub\"}},\"entityIdPrefix\":\"MyOIDCProvider\",\"groupConfiguration\":{\"groupClaim\":\"groups\",\"groupEntityType\":\"MyCorp::UserGroup\"}}}</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains configuration information used when creating a new identity source.</p>\n         <note>\n            <p>At this time, the only valid member of this structure is a Amazon Cognito user pool\n                configuration.</p>\n            <p>Specifies a <code>userPoolArn</code>, a <code>groupConfiguration</code>, and a\n                    <code>ClientId</code>.</p>\n         </note>\n         <p>This data type is used as a request parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>\n            operation.</p>"
+                "smithy.api#documentation": "<p>Contains configuration information used when creating a new identity source.</p>\n         <p>This data type is used as a request parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>\n            operation.</p>"
             }
         },
         "com.amazonaws.verifiedpermissions#ConfigurationDetail": {
@@ -613,6 +649,12 @@
                     "target": "com.amazonaws.verifiedpermissions#CognitoUserPoolConfigurationDetail",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of\n            authenticated identities as entities. It specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of a Amazon Cognito user pool,\n            the policy store entity that you want to assign to user groups,\n            and one or more application client IDs.</p>\n         <p>Example:\n            <code>\"configuration\":{\"cognitoUserPoolConfiguration\":{\"userPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"clientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"],\"groupConfiguration\": {\"groupEntityType\": \"MyCorp::Group\"}}}</code>\n         </p>"
+                    }
+                },
+                "openIdConnectConfiguration": {
+                    "target": "com.amazonaws.verifiedpermissions#OpenIdConnectConfigurationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details of an OpenID Connect (OIDC) identity provider, or\n         identity source, that Verified Permissions can use to generate entities from authenticated identities. It\n         specifies the issuer URL, token type that you want to use, and policy store entity\n         details.</p>\n         <p>Example:<code>\"configuration\":{\"openIdConnectConfiguration\":{\"issuer\":\"https://auth.example.com\",\"tokenSelection\":{\"accessTokenOnly\":{\"audiences\":[\"https://myapp.example.com\",\"https://myapp2.example.com\"],\"principalIdClaim\":\"sub\"}},\"entityIdPrefix\":\"MyOIDCProvider\",\"groupConfiguration\":{\"groupClaim\":\"groups\",\"groupEntityType\":\"MyCorp::UserGroup\"}}}</code>\n         </p>"
                     }
                 }
             },
@@ -627,6 +669,12 @@
                     "target": "com.amazonaws.verifiedpermissions#CognitoUserPoolConfigurationItem",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of\n            authenticated identities as entities. It specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of a Amazon Cognito user pool,\n            the policy store entity that you want to assign to user groups,\n            and one or more application client IDs.</p>\n         <p>Example:\n            <code>\"configuration\":{\"cognitoUserPoolConfiguration\":{\"userPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"clientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"],\"groupConfiguration\": {\"groupEntityType\": \"MyCorp::Group\"}}}</code>\n         </p>"
+                    }
+                },
+                "openIdConnectConfiguration": {
+                    "target": "com.amazonaws.verifiedpermissions#OpenIdConnectConfigurationItem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details of an OpenID Connect (OIDC) identity provider, or\n         identity source, that Verified Permissions can use to generate entities from authenticated identities. It\n         specifies the issuer URL, token type that you want to use, and policy store entity\n         details.</p>\n         <p>Example:<code>\"configuration\":{\"openIdConnectConfiguration\":{\"issuer\":\"https://auth.example.com\",\"tokenSelection\":{\"accessTokenOnly\":{\"audiences\":[\"https://myapp.example.com\",\"https://myapp2.example.com\"],\"principalIdClaim\":\"sub\"}},\"entityIdPrefix\":\"MyOIDCProvider\",\"groupConfiguration\":{\"groupClaim\":\"groups\",\"groupEntityType\":\"MyCorp::UserGroup\"}}}</code>\n         </p>"
                     }
                 }
             },
@@ -678,6 +726,9 @@
             },
             "value": {
                 "target": "com.amazonaws.verifiedpermissions#AttributeValue"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.verifiedpermissions#CreateIdentitySource": {
@@ -703,7 +754,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create a reference to an external identity provider (IdP) that is compatible with OpenID Connect (OIDC) authentication protocol, such as Amazon Cognito"
                 },
-                "smithy.api#documentation": "<p>Creates a reference to an Amazon Cognito user pool as an external identity provider (IdP).\n            </p>\n         <p>After you create an identity source, you can use the identities provided by the IdP as proxies\n            for the principal in authorization queries that use the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a>\n            operation. These identities take the form of tokens that contain claims about the user,\n            such as IDs, attributes and group memberships. Amazon Cognito provides both identity tokens and\n            access tokens, and Verified Permissions can use either or both. Any combination of identity and access\n            tokens results in the same Cedar principal. Verified Permissions automatically translates the\n            information about the identities into the standard Cedar attributes that can be\n            evaluated by your policies. Because the Amazon Cognito identity and access tokens can contain\n            different information, the tokens you choose to use determine which principal attributes\n            are available to access when evaluating Cedar policies.</p>\n         <important>\n            <p>If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire.</p>\n         </important>\n         <note>\n            <p>To reference a user from this identity source in your Cedar policies, use the following\n                syntax.</p>\n            <p>\n               <i>IdentityType::\"&lt;CognitoUserPoolIdentifier&gt;|&lt;CognitoClientId&gt;</i>\n            </p>\n            <p>Where <code>IdentityType</code> is the string that you provide to the\n                    <code>PrincipalEntityType</code> parameter for this operation. The\n                    <code>CognitoUserPoolId</code> and <code>CognitoClientId</code> are defined by\n                the Amazon Cognito user pool.</p>\n         </note>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Adds an identity source to a policy store–an Amazon Cognito user pool or OpenID Connect\n            (OIDC) identity provider (IdP).\n            </p>\n         <p>After you create an identity source, you can use the identities provided by the IdP as proxies\n            for the principal in authorization queries that use the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a> or\n                <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorizedWithToken.html\">BatchIsAuthorizedWithToken</a> API operations. These identities take the form\n            of tokens that contain claims about the user, such as IDs, attributes and group\n            memberships. Identity sources provide identity (ID) tokens and access tokens. Verified Permissions\n            derives information about your user and session from token claims. Access tokens provide\n            action <code>context</code> to your policies, and ID tokens provide principal\n            <code>Attributes</code>.</p>\n         <important>\n            <p>Tokens from an identity source user continue to be usable until they expire. \n    Token revocation and resource deletion have no effect on the validity of a token in your policy store</p>\n         </important>\n         <note>\n            <p>To reference a user from this identity source in your Cedar policies, refer to the\n                following syntax examples.</p>\n            <ul>\n               <li>\n                  <p>Amazon Cognito user pool: <code>Namespace::[Entity type]::[User pool ID]|[user\n                            principal attribute]</code>, for example\n                            <code>MyCorp::User::us-east-1_EXAMPLE|a1b2c3d4-5678-90ab-cdef-EXAMPLE11111</code>.</p>\n               </li>\n               <li>\n                  <p>OpenID Connect (OIDC) provider: <code>Namespace::[Entity\n                            type]::[principalIdClaim]|[user principal attribute]</code>, for example\n                            <code>MyCorp::User::MyOIDCProvider|a1b2c3d4-5678-90ab-cdef-EXAMPLE22222</code>.</p>\n               </li>\n            </ul>\n         </note>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -727,7 +778,7 @@
                 "configuration": {
                     "target": "com.amazonaws.verifiedpermissions#Configuration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the details required to communicate with the identity provider (IdP)\n            associated with this identity source.</p>\n         <note>\n            <p>At this time, the only valid member of this structure is a Amazon Cognito user pool\n                configuration.</p>\n            <p>You must specify a <code>UserPoolArn</code>, and optionally, a\n                    <code>ClientId</code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Specifies the details required to communicate with the identity provider (IdP)\n            associated with this identity source.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1369,6 +1420,16 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.verifiedpermissions#EntityIdPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.verifiedpermissions#EntityIdentifier": {
             "type": "structure",
             "members": {
@@ -1410,7 +1471,7 @@
                 "parents": {
                     "target": "com.amazonaws.verifiedpermissions#ParentList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parents in the hierarchy that contains the entity.</p>"
+                        "smithy.api#documentation": "<p>The parent entities in the hierarchy that contains the entity. A principal or resource\n            entity can be defined with at most 99 <i>transitive parents</i> per\n            authorization request. </p>\n         <p>A transitive parent is an entity in the hierarchy of entities including all direct\n            parents, and parents of parents. For example, a user can be a member of 91 groups if one\n            of those groups is a member of eight groups, for a total of 100: one entity, 91 entity\n            parents, and eight parents of parents. </p>"
                     }
                 }
             },
@@ -1537,7 +1598,6 @@
                 "details": {
                     "target": "com.amazonaws.verifiedpermissions#IdentitySourceDetails",
                     "traits": {
-                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#deprecated": {
                             "message": "This attribute has been replaced by configuration.cognitoUserPoolConfiguration"
                         },
@@ -1655,12 +1715,14 @@
                 "principal": {
                     "target": "com.amazonaws.verifiedpermissions#EntityIdentifier",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The principal specified in the policy's scope. This element isn't included in the\n            response when <code>Principal</code> isn't present in the policy content.</p>"
                     }
                 },
                 "resource": {
                     "target": "com.amazonaws.verifiedpermissions#EntityIdentifier",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The resource specified in the policy's scope. This element isn't included in the\n            response when <code>Resource</code> isn't present in the policy content.</p>"
                     }
                 },
@@ -2341,7 +2403,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to make an authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source"
                 },
-                "smithy.api#documentation": "<p>Makes an authorization decision about a service request described in the parameters.\n            The principal in this request comes from an external identity source in the form of an identity\n            token formatted as a <a href=\"https://wikipedia.org/wiki/JSON_Web_Token\">JSON web\n                token (JWT)</a>. The information in the parameters can also define additional\n            context that Verified Permissions can include in the evaluation. The request is evaluated against all\n            matching policies in the specified policy store. The result of the decision is either\n                <code>Allow</code> or <code>Deny</code>, along with a list of the policies that\n            resulted in the decision.</p>\n         <p>At this time, Verified Permissions accepts tokens from only Amazon Cognito.</p>\n         <p>Verified Permissions validates each token that is specified in a request by checking its expiration\n            date and its signature.</p>\n         <important>\n            <p>If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Makes an authorization decision about a service request described in the parameters.\n            The principal in this request comes from an external identity source in the form of an identity\n            token formatted as a <a href=\"https://wikipedia.org/wiki/JSON_Web_Token\">JSON web\n                token (JWT)</a>. The information in the parameters can also define additional\n            context that Verified Permissions can include in the evaluation. The request is evaluated against all\n            matching policies in the specified policy store. The result of the decision is either\n                <code>Allow</code> or <code>Deny</code>, along with a list of the policies that\n            resulted in the decision.</p>\n         <p>At this time, Verified Permissions accepts tokens from only Amazon Cognito.</p>\n         <p>Verified Permissions validates each token that is specified in a request by checking its expiration\n            date and its signature.</p>\n         <important>\n            <p>Tokens from an identity source user continue to be usable until they expire. \n    Token revocation and resource deletion have no effect on the validity of a token in your policy store</p>\n         </important>",
                 "smithy.api#readonly": {}
             }
         },
@@ -2790,6 +2852,360 @@
                 "smithy.api#pattern": "^[A-Za-z0-9-_=+/\\.]*$"
             }
         },
+        "com.amazonaws.verifiedpermissions#OpenIdConnectAccessTokenConfiguration": {
+            "type": "structure",
+            "members": {
+                "principalIdClaim": {
+                    "target": "com.amazonaws.verifiedpermissions#Claim",
+                    "traits": {
+                        "smithy.api#default": "sub",
+                        "smithy.api#documentation": "<p>The claim that determines the principal in OIDC access tokens. For example,\n            <code>sub</code>.</p>"
+                    }
+                },
+                "audiences": {
+                    "target": "com.amazonaws.verifiedpermissions#Audiences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access token <code>aud</code> claim values that you want to accept in your policy\n         store. For example, <code>https://myapp.example.com, https://myapp2.example.com</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of an OpenID Connect (OIDC) identity source for handling access token\n         claims. Contains the claim that you want to identify as the principal in an authorization\n         request, and the values of the <code>aud</code> claim, or audiences, that you want to\n         accept.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelection.html\">OpenIdConnectTokenSelection</a> structure, which is a parameter of <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#OpenIdConnectAccessTokenConfigurationDetail": {
+            "type": "structure",
+            "members": {
+                "principalIdClaim": {
+                    "target": "com.amazonaws.verifiedpermissions#Claim",
+                    "traits": {
+                        "smithy.api#default": "sub",
+                        "smithy.api#documentation": "<p>The claim that determines the principal in OIDC access tokens. For example,\n            <code>sub</code>.</p>"
+                    }
+                },
+                "audiences": {
+                    "target": "com.amazonaws.verifiedpermissions#Audiences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access token <code>aud</code> claim values that you want to accept in your policy\n         store. For example, <code>https://myapp.example.com, https://myapp2.example.com</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of an OpenID Connect (OIDC) identity source for handling access token\n         claims. Contains the claim that you want to identify as the principal in an authorization\n         request, and the values of the <code>aud</code> claim, or audiences, that you want to\n         accept.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelectionDetail.html\">OpenIdConnectTokenSelectionDetail</a> structure, which is a parameter of <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html\">GetIdentitySource</a>.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#OpenIdConnectAccessTokenConfigurationItem": {
+            "type": "structure",
+            "members": {
+                "principalIdClaim": {
+                    "target": "com.amazonaws.verifiedpermissions#Claim",
+                    "traits": {
+                        "smithy.api#default": "sub",
+                        "smithy.api#documentation": "<p>The claim that determines the principal in OIDC access tokens. For example,\n            <code>sub</code>.</p>"
+                    }
+                },
+                "audiences": {
+                    "target": "com.amazonaws.verifiedpermissions#Audiences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access token <code>aud</code> claim values that you want to accept in your policy\n         store. For example, <code>https://myapp.example.com, https://myapp2.example.com</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of an OpenID Connect (OIDC) identity source for handling access token\n         claims. Contains the claim that you want to identify as the principal in an authorization\n         request, and the values of the <code>aud</code> claim, or audiences, that you want to\n         accept.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelectionItem.html\">OpenIdConnectTokenSelectionItem</a> structure, which is a parameter of <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html\">ListIdentitySources</a>.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#OpenIdConnectConfiguration": {
+            "type": "structure",
+            "members": {
+                "issuer": {
+                    "target": "com.amazonaws.verifiedpermissions#Issuer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The issuer URL of an OIDC identity provider. This URL must have an OIDC discovery\n         endpoint at the path <code>.well-known/openid-configuration</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityIdPrefix": {
+                    "target": "com.amazonaws.verifiedpermissions#EntityIdPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A descriptive string that you want to prefix to user entities from your OIDC identity\n         provider. For example, if you set an <code>entityIdPrefix</code> of\n            <code>MyOIDCProvider</code>, you can reference principals in your policies in the format\n            <code>MyCorp::User::MyOIDCProvider|Carlos</code>.</p>"
+                    }
+                },
+                "groupConfiguration": {
+                    "target": "com.amazonaws.verifiedpermissions#OpenIdConnectGroupConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The claim in OIDC identity provider tokens that indicates a user's group membership, and\n         the entity type that you want to map it to. For example, this object can map the contents\n         of a <code>groups</code> claim to <code>MyCorp::UserGroup</code>.</p>"
+                    }
+                },
+                "tokenSelection": {
+                    "target": "com.amazonaws.verifiedpermissions#OpenIdConnectTokenSelection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token type that you want to process from your OIDC identity provider. Your policy\n         store can process either identity (ID) or access tokens from a given OIDC identity\n         source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration details of an OpenID Connect (OIDC) identity provider, or\n         identity source, that Verified Permissions can use to generate entities from authenticated identities. It\n         specifies the issuer URL, token type that you want to use, and policy store entity\n         details.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html\">Configuration</a> structure, which is a\n            parameter to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#OpenIdConnectConfigurationDetail": {
+            "type": "structure",
+            "members": {
+                "issuer": {
+                    "target": "com.amazonaws.verifiedpermissions#Issuer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The issuer URL of an OIDC identity provider. This URL must have an OIDC discovery\n         endpoint at the path <code>.well-known/openid-configuration</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityIdPrefix": {
+                    "target": "com.amazonaws.verifiedpermissions#EntityIdPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A descriptive string that you want to prefix to user entities from your OIDC identity\n         provider. For example, if you set an <code>entityIdPrefix</code> of\n            <code>MyOIDCProvider</code>, you can reference principals in your policies in the format\n            <code>MyCorp::User::MyOIDCProvider|Carlos</code>.</p>"
+                    }
+                },
+                "groupConfiguration": {
+                    "target": "com.amazonaws.verifiedpermissions#OpenIdConnectGroupConfigurationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The claim in OIDC identity provider tokens that indicates a user's group membership, and\n         the entity type that you want to map it to. For example, this object can map the contents\n         of a <code>groups</code> claim to <code>MyCorp::UserGroup</code>.</p>"
+                    }
+                },
+                "tokenSelection": {
+                    "target": "com.amazonaws.verifiedpermissions#OpenIdConnectTokenSelectionDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token type that you want to process from your OIDC identity provider. Your policy\n         store can process either identity (ID) or access tokens from a given OIDC identity\n         source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration details of an OpenID Connect (OIDC) identity provider, or\n         identity source, that Verified Permissions can use to generate entities from authenticated identities. It\n         specifies the issuer URL, token type that you want to use, and policy store entity\n         details.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html\">ConfigurationDetail</a> structure,\n            which is a parameter to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html\">GetIdentitySource</a>.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#OpenIdConnectConfigurationItem": {
+            "type": "structure",
+            "members": {
+                "issuer": {
+                    "target": "com.amazonaws.verifiedpermissions#Issuer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The issuer URL of an OIDC identity provider. This URL must have an OIDC discovery\n         endpoint at the path <code>.well-known/openid-configuration</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityIdPrefix": {
+                    "target": "com.amazonaws.verifiedpermissions#EntityIdPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A descriptive string that you want to prefix to user entities from your OIDC identity\n         provider. For example, if you set an <code>entityIdPrefix</code> of\n            <code>MyOIDCProvider</code>, you can reference principals in your policies in the format\n            <code>MyCorp::User::MyOIDCProvider|Carlos</code>.</p>"
+                    }
+                },
+                "groupConfiguration": {
+                    "target": "com.amazonaws.verifiedpermissions#OpenIdConnectGroupConfigurationItem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The claim in OIDC identity provider tokens that indicates a user's group membership, and\n         the entity type that you want to map it to. For example, this object can map the contents\n         of a <code>groups</code> claim to <code>MyCorp::UserGroup</code>.</p>"
+                    }
+                },
+                "tokenSelection": {
+                    "target": "com.amazonaws.verifiedpermissions#OpenIdConnectTokenSelectionItem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token type that you want to process from your OIDC identity provider. Your policy\n         store can process either identity (ID) or access tokens from a given OIDC identity\n         source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration details of an OpenID Connect (OIDC) identity provider, or\n         identity source, that Verified Permissions can use to generate entities from authenticated identities. It\n         specifies the issuer URL, token type that you want to use, and policy store entity\n         details.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html\">ConfigurationItem</a> structure,\n            which is a parameter to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html\">ListIdentitySources</a>.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#OpenIdConnectGroupConfiguration": {
+            "type": "structure",
+            "members": {
+                "groupClaim": {
+                    "target": "com.amazonaws.verifiedpermissions#Claim",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token claim that you want Verified Permissions to interpret as group membership. For example,\n            <code>groups</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "groupEntityType": {
+                    "target": "com.amazonaws.verifiedpermissions#GroupEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy store entity type that you want to map your users' group claim to. For example,\n            <code>MyCorp::UserGroup</code>. A group entity type is an entity that can have a user\n         entity type as a member.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The claim in OIDC identity provider tokens that indicates a user's group membership, and\n         the entity type that you want to map it to. For example, this object can map the contents\n         of a <code>groups</code> claim to <code>MyCorp::UserGroup</code>.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfiguration.html\">OpenIdConnectConfiguration</a> structure, which is a parameter of <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#OpenIdConnectGroupConfigurationDetail": {
+            "type": "structure",
+            "members": {
+                "groupClaim": {
+                    "target": "com.amazonaws.verifiedpermissions#Claim",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token claim that you want Verified Permissions to interpret as group membership. For example,\n            <code>groups</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "groupEntityType": {
+                    "target": "com.amazonaws.verifiedpermissions#GroupEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy store entity type that you want to map your users' group claim to. For example,\n            <code>MyCorp::UserGroup</code>. A group entity type is an entity that can have a user\n         entity type as a member.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The claim in OIDC identity provider tokens that indicates a user's group membership, and\n         the entity type that you want to map it to. For example, this object can map the contents\n         of a <code>groups</code> claim to <code>MyCorp::UserGroup</code>.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationDetail.html\">OpenIdConnectConfigurationDetail</a> structure, which is a parameter of <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html\">GetIdentitySource</a>.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#OpenIdConnectGroupConfigurationItem": {
+            "type": "structure",
+            "members": {
+                "groupClaim": {
+                    "target": "com.amazonaws.verifiedpermissions#Claim",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token claim that you want Verified Permissions to interpret as group membership. For example,\n            <code>groups</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "groupEntityType": {
+                    "target": "com.amazonaws.verifiedpermissions#GroupEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy store entity type that you want to map your users' group claim to. For example,\n            <code>MyCorp::UserGroup</code>. A group entity type is an entity that can have a user\n         entity type as a member.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The claim in OIDC identity provider tokens that indicates a user's group membership, and\n         the entity type that you want to map it to. For example, this object can map the contents\n         of a <code>groups</code> claim to <code>MyCorp::UserGroup</code>.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationItem.html\">OpenIdConnectConfigurationItem</a> structure, which is a parameter of <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html\">ListIdentitySourcea</a>.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#OpenIdConnectIdentityTokenConfiguration": {
+            "type": "structure",
+            "members": {
+                "principalIdClaim": {
+                    "target": "com.amazonaws.verifiedpermissions#Claim",
+                    "traits": {
+                        "smithy.api#default": "sub",
+                        "smithy.api#documentation": "<p>The claim that determines the principal in OIDC access tokens. For example,\n            <code>sub</code>.</p>"
+                    }
+                },
+                "clientIds": {
+                    "target": "com.amazonaws.verifiedpermissions#ClientIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID token audience, or client ID, claim values that you want to accept in your policy\n         store from an OIDC identity provider. For example, <code>1example23456789,\n            2example10111213</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of an OpenID Connect (OIDC) identity source for handling identity (ID)\n         token claims. Contains the claim that you want to identify as the principal in an\n         authorization request, and the values of the  <code>aud</code> claim, or audiences, that\n         you want to accept.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelection.html\">OpenIdConnectTokenSelection</a> structure, which is a parameter of <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#OpenIdConnectIdentityTokenConfigurationDetail": {
+            "type": "structure",
+            "members": {
+                "principalIdClaim": {
+                    "target": "com.amazonaws.verifiedpermissions#Claim",
+                    "traits": {
+                        "smithy.api#default": "sub",
+                        "smithy.api#documentation": "<p>The claim that determines the principal in OIDC access tokens. For example,\n            <code>sub</code>.</p>"
+                    }
+                },
+                "clientIds": {
+                    "target": "com.amazonaws.verifiedpermissions#ClientIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID token audience, or client ID, claim values that you want to accept in your policy\n         store from an OIDC identity provider. For example, <code>1example23456789,\n            2example10111213</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of an OpenID Connect (OIDC) identity source for handling identity (ID)\n            token claims. Contains the claim that you want to identify as the principal in an\n            authorization request, and the values of the  <code>aud</code> claim, or audiences, that\n            you want to accept.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelectionDetail.html\">OpenIdConnectTokenSelectionDetail</a> structure, which is a parameter of <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html\">GetIdentitySource</a>.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#OpenIdConnectIdentityTokenConfigurationItem": {
+            "type": "structure",
+            "members": {
+                "principalIdClaim": {
+                    "target": "com.amazonaws.verifiedpermissions#Claim",
+                    "traits": {
+                        "smithy.api#default": "sub",
+                        "smithy.api#documentation": "<p>The claim that determines the principal in OIDC access tokens. For example,\n            <code>sub</code>.</p>"
+                    }
+                },
+                "clientIds": {
+                    "target": "com.amazonaws.verifiedpermissions#ClientIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID token audience, or client ID, claim values that you want to accept in your policy\n         store from an OIDC identity provider. For example, <code>1example23456789,\n            2example10111213</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of an OpenID Connect (OIDC) identity source for handling identity (ID)\n            token claims. Contains the claim that you want to identify as the principal in an\n            authorization request, and the values of the  <code>aud</code> claim, or audiences, that\n            you want to accept.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelectionItem.html\">OpenIdConnectTokenSelectionItem</a> structure, which is a parameter of <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html\">ListIdentitySources</a>.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#OpenIdConnectTokenSelection": {
+            "type": "union",
+            "members": {
+                "accessTokenOnly": {
+                    "target": "com.amazonaws.verifiedpermissions#OpenIdConnectAccessTokenConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OIDC configuration for processing access tokens. Contains allowed audience claims,\n         for example <code>https://auth.example.com</code>, and the claim that you want to map to the\n         principal, for example <code>sub</code>.</p>"
+                    }
+                },
+                "identityTokenOnly": {
+                    "target": "com.amazonaws.verifiedpermissions#OpenIdConnectIdentityTokenConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OIDC configuration for processing identity (ID) tokens. Contains allowed client ID\n         claims, for example <code>1example23456789</code>, and the claim that you want to map to\n         the principal, for example <code>sub</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The token type that you want to process from your OIDC identity provider. Your policy\n         store can process either identity (ID) or access tokens from a given OIDC identity\n         source.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfiguration.html\">OpenIdConnectConfiguration</a> structure, which is a parameter of <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#OpenIdConnectTokenSelectionDetail": {
+            "type": "union",
+            "members": {
+                "accessTokenOnly": {
+                    "target": "com.amazonaws.verifiedpermissions#OpenIdConnectAccessTokenConfigurationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OIDC configuration for processing access tokens. Contains allowed audience claims,\n         for example <code>https://auth.example.com</code>, and the claim that you want to map to the\n         principal, for example <code>sub</code>.</p>"
+                    }
+                },
+                "identityTokenOnly": {
+                    "target": "com.amazonaws.verifiedpermissions#OpenIdConnectIdentityTokenConfigurationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OIDC configuration for processing identity (ID) tokens. Contains allowed client ID\n         claims, for example <code>1example23456789</code>, and the claim that you want to map to\n         the principal, for example <code>sub</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The token type that you want to process from your OIDC identity provider. Your policy\n         store can process either identity (ID) or access tokens from a given OIDC identity\n         source.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationDetail.html\">OpenIdConnectConfigurationDetail</a> structure, which is a parameter of <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html\">GetIdentitySource</a>.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#OpenIdConnectTokenSelectionItem": {
+            "type": "union",
+            "members": {
+                "accessTokenOnly": {
+                    "target": "com.amazonaws.verifiedpermissions#OpenIdConnectAccessTokenConfigurationItem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OIDC configuration for processing access tokens. Contains allowed audience claims,\n         for example <code>https://auth.example.com</code>, and the claim that you want to map to the\n         principal, for example <code>sub</code>.</p>"
+                    }
+                },
+                "identityTokenOnly": {
+                    "target": "com.amazonaws.verifiedpermissions#OpenIdConnectIdentityTokenConfigurationItem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OIDC configuration for processing identity (ID) tokens. Contains allowed client ID\n         claims, for example <code>1example23456789</code>, and the claim that you want to map to\n         the principal, for example <code>sub</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The token type that you want to process from your OIDC identity provider. Your policy\n         store can process either identity (ID) or access tokens from a given OIDC identity\n         source.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationItem.html\">OpenIdConnectConfigurationItem</a> structure, which is a parameter of <a href=\"http://amazonaws.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html\">ListIdentitySources</a>.</p>"
+            }
+        },
         "com.amazonaws.verifiedpermissions#OpenIdIssuer": {
             "type": "enum",
             "members": {
@@ -2807,9 +3223,6 @@
                 "target": "com.amazonaws.verifiedpermissions#EntityIdentifier"
             },
             "traits": {
-                "smithy.api#length": {
-                    "max": 100
-                },
                 "smithy.api#uniqueItems": {}
             }
         },
@@ -3830,10 +4243,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains configuration details of a Amazon Cognito user pool.</p>"
                     }
+                },
+                "openIdConnectConfiguration": {
+                    "target": "com.amazonaws.verifiedpermissions#UpdateOpenIdConnectConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details of an OpenID Connect (OIDC) identity provider, or\n         identity source, that Verified Permissions can use to generate entities from authenticated identities. It\n         specifies the issuer URL, token type that you want to use, and policy store entity\n         details.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains an updated configuration to replace the configuration in an existing\n            identity source.</p>\n         <note>\n            <p>At this time, the only valid member of this structure is a Amazon Cognito user pool\n                configuration.</p>\n            <p>You must specify a <code>userPoolArn</code>, and optionally, a\n                    <code>ClientId</code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Contains an update to replace the configuration in an existing\n            identity source.</p>"
             }
         },
         "com.amazonaws.verifiedpermissions#UpdateIdentitySource": {
@@ -3856,7 +4275,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to update the specified identity source to use a new identity provider (IdP) source, or to change the mapping of identities from the IdP to a different principal entity type"
                 },
-                "smithy.api#documentation": "<p>Updates the specified identity source to use a new identity provider (IdP) source, or to change\n            the mapping of identities from the IdP to a different principal entity type.</p>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Updates the specified identity source to use a new identity provider (IdP), or to change\n            the mapping of identities from the IdP to a different principal entity type.</p>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -3930,6 +4349,124 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.verifiedpermissions#UpdateOpenIdConnectAccessTokenConfiguration": {
+            "type": "structure",
+            "members": {
+                "principalIdClaim": {
+                    "target": "com.amazonaws.verifiedpermissions#Claim",
+                    "traits": {
+                        "smithy.api#default": "sub",
+                        "smithy.api#documentation": "<p>The claim that determines the principal in OIDC access tokens. For example,\n            <code>sub</code>.</p>"
+                    }
+                },
+                "audiences": {
+                    "target": "com.amazonaws.verifiedpermissions#Audiences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access token <code>aud</code> claim values that you want to accept in your policy\n         store. For example, <code>https://myapp.example.com, https://myapp2.example.com</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of an OpenID Connect (OIDC) identity source for handling access token\n         claims. Contains the claim that you want to identify as the principal in an authorization\n         request, and the values of the <code>aud</code> claim, or audiences, that you want to\n         accept.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectTokenSelection.html\">UpdateOpenIdConnectTokenSelection</a> structure, which is a parameter to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html\">UpdateIdentitySource</a>.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#UpdateOpenIdConnectConfiguration": {
+            "type": "structure",
+            "members": {
+                "issuer": {
+                    "target": "com.amazonaws.verifiedpermissions#Issuer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The issuer URL of an OIDC identity provider. This URL must have an OIDC discovery\n         endpoint at the path <code>.well-known/openid-configuration</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityIdPrefix": {
+                    "target": "com.amazonaws.verifiedpermissions#EntityIdPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A descriptive string that you want to prefix to user entities from your OIDC identity\n         provider. For example, if you set an <code>entityIdPrefix</code> of\n            <code>MyOIDCProvider</code>, you can reference principals in your policies in the format\n            <code>MyCorp::User::MyOIDCProvider|Carlos</code>.</p>"
+                    }
+                },
+                "groupConfiguration": {
+                    "target": "com.amazonaws.verifiedpermissions#UpdateOpenIdConnectGroupConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The claim in OIDC identity provider tokens that indicates a user's group membership, and\n         the entity type that you want to map it to. For example, this object can map the contents\n         of a <code>groups</code> claim to <code>MyCorp::UserGroup</code>.</p>"
+                    }
+                },
+                "tokenSelection": {
+                    "target": "com.amazonaws.verifiedpermissions#UpdateOpenIdConnectTokenSelection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token type that you want to process from your OIDC identity provider. Your policy\n         store can process either identity (ID) or access tokens from a given OIDC identity\n         source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration details of an OpenID Connect (OIDC) identity provider, or\n         identity source, that Verified Permissions can use to generate entities from authenticated identities. It\n         specifies the issuer URL, token type that you want to use, and policy store entity\n         details.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateConfiguration.html\">UpdateConfiguration</a> structure,\n            which is a parameter to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html\">UpdateIdentitySource</a>.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#UpdateOpenIdConnectGroupConfiguration": {
+            "type": "structure",
+            "members": {
+                "groupClaim": {
+                    "target": "com.amazonaws.verifiedpermissions#Claim",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token claim that you want Verified Permissions to interpret as group membership. For example,\n            <code>groups</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "groupEntityType": {
+                    "target": "com.amazonaws.verifiedpermissions#GroupEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy store entity type that you want to map your users' group claim to. For example,\n            <code>MyCorp::UserGroup</code>. A group entity type is an entity that can have a user\n         entity type as a member.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The claim in OIDC identity provider tokens that indicates a user's group membership, and\n         the entity type that you want to map it to. For example, this object can map the contents\n         of a <code>groups</code> claim to <code>MyCorp::UserGroup</code>.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectConfiguration.html\">UpdateOpenIdConnectConfiguration</a> structure, which is a parameter to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html\">UpdateIdentitySource</a>.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#UpdateOpenIdConnectIdentityTokenConfiguration": {
+            "type": "structure",
+            "members": {
+                "principalIdClaim": {
+                    "target": "com.amazonaws.verifiedpermissions#Claim",
+                    "traits": {
+                        "smithy.api#default": "sub",
+                        "smithy.api#documentation": "<p>The claim that determines the principal in OIDC access tokens. For example,\n            <code>sub</code>.</p>"
+                    }
+                },
+                "clientIds": {
+                    "target": "com.amazonaws.verifiedpermissions#ClientIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID token audience, or client ID, claim values that you want to accept in your policy\n         store from an OIDC identity provider. For example, <code>1example23456789,\n            2example10111213</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of an OpenID Connect (OIDC) identity source for handling identity (ID)\n         token claims. Contains the claim that you want to identify as the principal in an\n         authorization request, and the values of the  <code>aud</code> claim, or audiences, that\n         you want to accept.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectTokenSelection.html\">UpdateOpenIdConnectTokenSelection</a> structure, which is a parameter to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html\">UpdateIdentitySource</a>.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#UpdateOpenIdConnectTokenSelection": {
+            "type": "union",
+            "members": {
+                "accessTokenOnly": {
+                    "target": "com.amazonaws.verifiedpermissions#UpdateOpenIdConnectAccessTokenConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OIDC configuration for processing access tokens. Contains allowed audience claims,\n         for example <code>https://auth.example.com</code>, and the claim that you want to map to the\n         principal, for example <code>sub</code>.</p>"
+                    }
+                },
+                "identityTokenOnly": {
+                    "target": "com.amazonaws.verifiedpermissions#UpdateOpenIdConnectIdentityTokenConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OIDC configuration for processing identity (ID) tokens. Contains allowed client ID\n         claims, for example <code>1example23456789</code>, and the claim that you want to map to\n         the principal, for example <code>sub</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The token type that you want to process from your OIDC identity provider. Your policy\n         store can process either identity (ID) or access tokens from a given OIDC identity\n         source.</p>\n         <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectConfiguration.html\">UpdateOpenIdConnectConfiguration</a> structure, which is a parameter to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html\">UpdateIdentitySource</a>.</p>"
             }
         },
         "com.amazonaws.verifiedpermissions#UpdatePolicy": {

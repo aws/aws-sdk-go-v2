@@ -1242,7 +1242,8 @@
                 "capabilities": {
                     "target": "com.amazonaws.b2bi#PartnershipCapabilities",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a list of the capabilities associated with this partnership.</p>"
+                        "smithy.api#documentation": "<p>Specifies a list of the capabilities associated with this partnership.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "clientToken": {
@@ -2848,6 +2849,20 @@
             "output": {
                 "target": "com.amazonaws.b2bi#ListCapabilitiesResponse"
             },
+            "errors": [
+                {
+                    "target": "com.amazonaws.b2bi#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#ValidationException"
+                }
+            ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists the capabilities associated with your Amazon Web Services account for your current or specified region. A trading capability contains the information required to transform incoming EDI documents into JSON or XML outputs.</p>",
                 "smithy.api#examples": [
@@ -3053,6 +3068,20 @@
             "output": {
                 "target": "com.amazonaws.b2bi#ListProfilesResponse"
             },
+            "errors": [
+                {
+                    "target": "com.amazonaws.b2bi#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#ValidationException"
+                }
+            ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists the profiles associated with your Amazon Web Services account for your current or specified region. A profile is the mechanism used to create the concept of\n   a private network.</p>",
                 "smithy.api#examples": [
@@ -3217,6 +3246,20 @@
             "output": {
                 "target": "com.amazonaws.b2bi#ListTransformersResponse"
             },
+            "errors": [
+                {
+                    "target": "com.amazonaws.b2bi#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#ValidationException"
+                }
+            ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists the available transformers. A transformer\n   describes how to process the incoming EDI documents and extract the necessary\n   information to the output file.</p>",
                 "smithy.api#examples": [
@@ -3738,6 +3781,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.b2bi#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.b2bi#InternalServerException"

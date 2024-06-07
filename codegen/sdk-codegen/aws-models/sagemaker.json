@@ -11740,7 +11740,7 @@
                 "ModelCard": {
                     "target": "com.amazonaws.sagemaker#ModelPackageModelCard",
                     "traits": {
-                        "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n           tied to a model package, it is a specific usage of a model card and its schema is\n           simplified compared to the schema of <code>ModelCard</code>. The \n           <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n           and <code>model_overview</code> is composed of the <code>model_creator</code> and\n           <code>model_artifact</code> properties. For more information about\n           the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n               the Details of a Model Version</a>.</p>"
+                        "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n           tied to a model package, it is a specific usage of a model card and its schema is\n           simplified compared to the schema of <code>ModelCard</code>. The \n           <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n           and <code>model_overview</code> is composed of the <code>model_creator</code> and\n           <code>model_artifact</code> properties. For more information about the model package model\n           card schema, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema\">Model\n               package model card schema</a>. For more information about\n           the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n               the Details of a Model Version</a>.</p>"
                     }
                 }
             },
@@ -21936,7 +21936,7 @@
                 "ModelCard": {
                     "target": "com.amazonaws.sagemaker#ModelPackageModelCard",
                     "traits": {
-                        "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n            tied to a model package, it is a specific usage of a model card and its schema is\n            simplified compared to the schema of <code>ModelCard</code>. The \n            <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n            and <code>model_overview</code> is composed of the <code>model_creator</code> and\n            <code>model_artifact</code> properties. For more information about\n            the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n                the Details of a Model Version</a>.</p>"
+                        "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n            tied to a model package, it is a specific usage of a model card and its schema is\n            simplified compared to the schema of <code>ModelCard</code>. The \n            <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n            and <code>model_overview</code> is composed of the <code>model_creator</code> and\n            <code>model_artifact</code> properties. For more information about the model package model\n            card schema, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema\">Model\n                package model card schema</a>. For more information about\n            the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n                the Details of a Model Version</a>.</p>"
                     }
                 }
             },
@@ -43003,7 +43003,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the location that is configured for storing model\n            artifacts. </p>\n         <p>Model artifacts are outputs that result from training a model. They typically consist\n            of trained parameters, a model definition that describes how to compute inferences, and\n            other metadata. A SageMaker container stores your trained model artifacts in the\n                <code>/opt/ml/model</code> directory. After training has completed, by default, these artifacts\n            are uploaded to your Amazon S3 bucket as compressed files.</p>"
+                "smithy.api#documentation": "<p>Provides information about the location that is configured for storing model\n            artifacts. </p>\n         <p>Model artifacts are outputs that result from training a model. They typically consist\n            of trained parameters, a model definition that describes how to compute inferences, and\n            other metadata. A SageMaker container stores your trained model artifacts in the\n                <code>/opt/ml/model</code> directory. After training has completed, by default,\n            these artifacts are uploaded to your Amazon S3 bucket as compressed files.</p>"
             }
         },
         "com.amazonaws.sagemaker#ModelBiasAppSpecification": {
@@ -44851,7 +44851,7 @@
                 "ModelCardContent": {
                     "target": "com.amazonaws.sagemaker#ModelCardContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the model card.</p>"
+                        "smithy.api#documentation": "<p>The content of the model card. The content must follow the schema described\n           in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema\">Model\n               Package Model Card Schema</a>.</p>"
                     }
                 },
                 "ModelCardStatus": {
@@ -44862,7 +44862,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n            tied to a model package, it is a specific usage of a model card and its schema is\n            simplified compared to the schema of <code>ModelCard</code>. The \n            <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n            and <code>model_overview</code> is composed of the <code>model_creator</code> and\n            <code>model_artifact</code> properties. For more information about\n            the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n                the Details of a Model Version</a>.</p>"
+                "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n            tied to a model package, it is a specific usage of a model card and its schema is\n            simplified compared to the schema of <code>ModelCard</code>. The \n            <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n            and <code>model_overview</code> is composed of the <code>model_creator</code> and\n            <code>model_artifact</code> properties. For more information about the model package model\n            card schema, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema\">Model\n                package model card schema</a>. For more information about\n            the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n                the Details of a Model Version</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#ModelPackageSecurityConfig": {
@@ -50211,6 +50211,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Settings that control how the endpoint routes incoming traffic to the instances that the\n         endpoint hosts.</p>"
                     }
+                },
+                "InferenceAmiVersion": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantInferenceAmiVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an option from a collection of preconfigured Amazon Machine Image (AMI)\n            images. Each image is configured by Amazon Web Services with a set of software and driver\n            versions. Amazon Web Services optimizes these configurations for different machine\n            learning workloads.</p>\n         <p>By selecting an AMI version, you can ensure that your inference environment is\n            compatible with specific software requirements, such as CUDA driver versions, Linux\n            kernel versions, or Amazon Web Services Neuron driver versions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -50287,6 +50293,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies configuration for a core dump from the model container when the process\n            crashes.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ProductionVariantInferenceAmiVersion": {
+            "type": "enum",
+            "members": {
+                "AL2_GPU_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "al2-ami-sagemaker-inference-gpu-2"
+                    }
+                }
             }
         },
         "com.amazonaws.sagemaker#ProductionVariantInstanceType": {
@@ -57741,12 +57758,12 @@
                 "EnableSessionTagChaining": {
                     "target": "com.amazonaws.sagemaker#EnableSessionTagChaining",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>True</code> to allow SageMaker to extract session tags from a \n            training job creation role and reuse these tags when assuming the training \n            job execution role.</p>"
+                        "smithy.api#documentation": "<p>Set to <code>True</code> to allow SageMaker to extract session tags from a training job\n            creation role and reuse these tags when assuming the training job execution role.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about attribute-based access control (ABAC) for a training job.\n            The session chaining configuration uses Amazon Security Token Service (STS) for your\n            training job to request temporary, limited-privilege credentials to tenants. For more\n            information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-access-training-data.html#model-access-training-data-abac\">Attribute-based access control (ABAC) for multi-tenancy\n                training</a>.</p>"
+                "smithy.api#documentation": "<p>Contains information about attribute-based access control (ABAC) for a training job.\n            The session chaining configuration uses Amazon Security Token Service (STS) for your training job to\n            request temporary, limited-privilege credentials to tenants. For more information, see\n                <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-access-training-data.html#model-access-training-data-abac\">Attribute-based access control (ABAC) for multi-tenancy training</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#SessionExpirationDurationInSeconds": {
@@ -65835,7 +65852,7 @@
                 "ModelCard": {
                     "target": "com.amazonaws.sagemaker#ModelPackageModelCard",
                     "traits": {
-                        "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n            tied to a model package, it is a specific usage of a model card and its schema is\n            simplified compared to the schema of <code>ModelCard</code>. The \n            <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n            and <code>model_overview</code> is composed of the <code>model_creator</code> and\n            <code>model_artifact</code> properties. For more information about\n            the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n                the Details of a Model Version</a>.</p>"
+                        "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n            tied to a model package, it is a specific usage of a model card and its schema is\n            simplified compared to the schema of <code>ModelCard</code>. The \n            <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n            and <code>model_overview</code> is composed of the <code>model_creator</code> and\n            <code>model_artifact</code> properties. For more information about the model package model\n            card schema, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema\">Model\n                package model card schema</a>. For more information about\n            the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n                the Details of a Model Version</a>.</p>"
                     }
                 }
             },
@@ -67535,7 +67552,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 10
+                    "max": 20
                 }
             }
         },
