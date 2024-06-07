@@ -407,6 +407,7 @@ const (
 	SourceRevisionTypeCommitId          SourceRevisionType = "COMMIT_ID"
 	SourceRevisionTypeImageDigest       SourceRevisionType = "IMAGE_DIGEST"
 	SourceRevisionTypeS3ObjectVersionId SourceRevisionType = "S3_OBJECT_VERSION_ID"
+	SourceRevisionTypeS3ObjectKey       SourceRevisionType = "S3_OBJECT_KEY"
 )
 
 // Values returns all known values for SourceRevisionType. Note that this can be
@@ -418,6 +419,7 @@ func (SourceRevisionType) Values() []SourceRevisionType {
 		"COMMIT_ID",
 		"IMAGE_DIGEST",
 		"S3_OBJECT_VERSION_ID",
+		"S3_OBJECT_KEY",
 	}
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "e784f679-4959-4674-8187-bb933cf1305a",
+    "type": "feature",
+    "description": "Added exceptions to B2Bi List operations and ConflictException to B2Bi StartTransformerJob operation. Also made capabilities field explicitly required when creating a Partnership.",
+    "modules": [
+        "service/b2bi"
+    ]
+}

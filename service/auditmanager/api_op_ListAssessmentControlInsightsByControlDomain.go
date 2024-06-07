@@ -42,6 +42,13 @@ type ListAssessmentControlInsightsByControlDomainInput struct {
 
 	// The unique identifier for the control domain.
 	//
+	// Audit Manager supports the control domains that are provided by Amazon Web
+	// Services Control Catalog. For information about how to find a list of available
+	// control domains, see [ListDomains]ListDomains in the Amazon Web Services Control Catalog API
+	// Reference.
+	//
+	// [ListDomains]: https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListDomains.html
+	//
 	// This member is required.
 	ControlDomainId *string
 

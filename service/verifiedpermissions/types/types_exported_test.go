@@ -52,6 +52,9 @@ func ExampleConfiguration_outputUsage() {
 	case *types.ConfigurationMemberCognitoUserPoolConfiguration:
 		_ = v.Value // Value is types.CognitoUserPoolConfiguration
 
+	case *types.ConfigurationMemberOpenIdConnectConfiguration:
+		_ = v.Value // Value is types.OpenIdConnectConfiguration
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -62,6 +65,7 @@ func ExampleConfiguration_outputUsage() {
 }
 
 var _ *types.CognitoUserPoolConfiguration
+var _ *types.OpenIdConnectConfiguration
 
 func ExampleConfigurationDetail_outputUsage() {
 	var union types.ConfigurationDetail
@@ -69,6 +73,9 @@ func ExampleConfigurationDetail_outputUsage() {
 	switch v := union.(type) {
 	case *types.ConfigurationDetailMemberCognitoUserPoolConfiguration:
 		_ = v.Value // Value is types.CognitoUserPoolConfigurationDetail
+
+	case *types.ConfigurationDetailMemberOpenIdConnectConfiguration:
+		_ = v.Value // Value is types.OpenIdConnectConfigurationDetail
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -80,6 +87,7 @@ func ExampleConfigurationDetail_outputUsage() {
 }
 
 var _ *types.CognitoUserPoolConfigurationDetail
+var _ *types.OpenIdConnectConfigurationDetail
 
 func ExampleConfigurationItem_outputUsage() {
 	var union types.ConfigurationItem
@@ -87,6 +95,9 @@ func ExampleConfigurationItem_outputUsage() {
 	switch v := union.(type) {
 	case *types.ConfigurationItemMemberCognitoUserPoolConfiguration:
 		_ = v.Value // Value is types.CognitoUserPoolConfigurationItem
+
+	case *types.ConfigurationItemMemberOpenIdConnectConfiguration:
+		_ = v.Value // Value is types.OpenIdConnectConfigurationItem
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -97,6 +108,7 @@ func ExampleConfigurationItem_outputUsage() {
 	}
 }
 
+var _ *types.OpenIdConnectConfigurationItem
 var _ *types.CognitoUserPoolConfigurationItem
 
 func ExampleContextDefinition_outputUsage() {
@@ -156,6 +168,72 @@ func ExampleEntityReference_outputUsage() {
 
 var _ *types.EntityIdentifier
 var _ *bool
+
+func ExampleOpenIdConnectTokenSelection_outputUsage() {
+	var union types.OpenIdConnectTokenSelection
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OpenIdConnectTokenSelectionMemberAccessTokenOnly:
+		_ = v.Value // Value is types.OpenIdConnectAccessTokenConfiguration
+
+	case *types.OpenIdConnectTokenSelectionMemberIdentityTokenOnly:
+		_ = v.Value // Value is types.OpenIdConnectIdentityTokenConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OpenIdConnectIdentityTokenConfiguration
+var _ *types.OpenIdConnectAccessTokenConfiguration
+
+func ExampleOpenIdConnectTokenSelectionDetail_outputUsage() {
+	var union types.OpenIdConnectTokenSelectionDetail
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OpenIdConnectTokenSelectionDetailMemberAccessTokenOnly:
+		_ = v.Value // Value is types.OpenIdConnectAccessTokenConfigurationDetail
+
+	case *types.OpenIdConnectTokenSelectionDetailMemberIdentityTokenOnly:
+		_ = v.Value // Value is types.OpenIdConnectIdentityTokenConfigurationDetail
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OpenIdConnectIdentityTokenConfigurationDetail
+var _ *types.OpenIdConnectAccessTokenConfigurationDetail
+
+func ExampleOpenIdConnectTokenSelectionItem_outputUsage() {
+	var union types.OpenIdConnectTokenSelectionItem
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OpenIdConnectTokenSelectionItemMemberAccessTokenOnly:
+		_ = v.Value // Value is types.OpenIdConnectAccessTokenConfigurationItem
+
+	case *types.OpenIdConnectTokenSelectionItemMemberIdentityTokenOnly:
+		_ = v.Value // Value is types.OpenIdConnectIdentityTokenConfigurationItem
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OpenIdConnectIdentityTokenConfigurationItem
+var _ *types.OpenIdConnectAccessTokenConfigurationItem
 
 func ExamplePolicyDefinition_outputUsage() {
 	var union types.PolicyDefinition
@@ -248,6 +326,9 @@ func ExampleUpdateConfiguration_outputUsage() {
 	case *types.UpdateConfigurationMemberCognitoUserPoolConfiguration:
 		_ = v.Value // Value is types.UpdateCognitoUserPoolConfiguration
 
+	case *types.UpdateConfigurationMemberOpenIdConnectConfiguration:
+		_ = v.Value // Value is types.UpdateOpenIdConnectConfiguration
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -258,6 +339,29 @@ func ExampleUpdateConfiguration_outputUsage() {
 }
 
 var _ *types.UpdateCognitoUserPoolConfiguration
+var _ *types.UpdateOpenIdConnectConfiguration
+
+func ExampleUpdateOpenIdConnectTokenSelection_outputUsage() {
+	var union types.UpdateOpenIdConnectTokenSelection
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.UpdateOpenIdConnectTokenSelectionMemberAccessTokenOnly:
+		_ = v.Value // Value is types.UpdateOpenIdConnectAccessTokenConfiguration
+
+	case *types.UpdateOpenIdConnectTokenSelectionMemberIdentityTokenOnly:
+		_ = v.Value // Value is types.UpdateOpenIdConnectIdentityTokenConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.UpdateOpenIdConnectAccessTokenConfiguration
+var _ *types.UpdateOpenIdConnectIdentityTokenConfiguration
 
 func ExampleUpdatePolicyDefinition_outputUsage() {
 	var union types.UpdatePolicyDefinition

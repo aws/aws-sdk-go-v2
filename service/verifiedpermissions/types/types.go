@@ -297,8 +297,7 @@ type CognitoGroupConfigurationItem struct {
 // The configuration for an identity source that represents a connection to an
 // Amazon Cognito user pool used as an identity provider for Verified Permissions.
 //
-// This data type is used as a field that is part of an [Configuration] structure that is used as
-// a parameter to [CreateIdentitySource].
+// This data type part of a [Configuration] structure that is used as a parameter to [CreateIdentitySource].
 //
 // Example:
 // "CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
@@ -435,16 +434,12 @@ type CognitoUserPoolConfigurationItem struct {
 
 // Contains configuration information used when creating a new identity source.
 //
-// At this time, the only valid member of this structure is a Amazon Cognito user
-// pool configuration.
-//
-// Specifies a userPoolArn , a groupConfiguration , and a ClientId .
-//
 // This data type is used as a request parameter for the [CreateIdentitySource] operation.
 //
 // The following types satisfy this interface:
 //
 //	ConfigurationMemberCognitoUserPoolConfiguration
+//	ConfigurationMemberOpenIdConnectConfiguration
 //
 // [CreateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
 type Configuration interface {
@@ -470,6 +465,21 @@ type ConfigurationMemberCognitoUserPoolConfiguration struct {
 
 func (*ConfigurationMemberCognitoUserPoolConfiguration) isConfiguration() {}
 
+// Contains configuration details of an OpenID Connect (OIDC) identity provider,
+// or identity source, that Verified Permissions can use to generate entities from
+// authenticated identities. It specifies the issuer URL, token type that you want
+// to use, and policy store entity details.
+//
+// Example:
+// "configuration":{"openIdConnectConfiguration":{"issuer":"https://auth.example.com","tokenSelection":{"accessTokenOnly":{"audiences":["https://myapp.example.com","https://myapp2.example.com"],"principalIdClaim":"sub"}},"entityIdPrefix":"MyOIDCProvider","groupConfiguration":{"groupClaim":"groups","groupEntityType":"MyCorp::UserGroup"}}}
+type ConfigurationMemberOpenIdConnectConfiguration struct {
+	Value OpenIdConnectConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationMemberOpenIdConnectConfiguration) isConfiguration() {}
+
 // Contains configuration information about an identity source.
 //
 // This data type is a response parameter to the [GetIdentitySource] operation.
@@ -477,6 +487,7 @@ func (*ConfigurationMemberCognitoUserPoolConfiguration) isConfiguration() {}
 // The following types satisfy this interface:
 //
 //	ConfigurationDetailMemberCognitoUserPoolConfiguration
+//	ConfigurationDetailMemberOpenIdConnectConfiguration
 //
 // [GetIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
 type ConfigurationDetail interface {
@@ -502,6 +513,21 @@ type ConfigurationDetailMemberCognitoUserPoolConfiguration struct {
 
 func (*ConfigurationDetailMemberCognitoUserPoolConfiguration) isConfigurationDetail() {}
 
+// Contains configuration details of an OpenID Connect (OIDC) identity provider,
+// or identity source, that Verified Permissions can use to generate entities from
+// authenticated identities. It specifies the issuer URL, token type that you want
+// to use, and policy store entity details.
+//
+// Example:
+// "configuration":{"openIdConnectConfiguration":{"issuer":"https://auth.example.com","tokenSelection":{"accessTokenOnly":{"audiences":["https://myapp.example.com","https://myapp2.example.com"],"principalIdClaim":"sub"}},"entityIdPrefix":"MyOIDCProvider","groupConfiguration":{"groupClaim":"groups","groupEntityType":"MyCorp::UserGroup"}}}
+type ConfigurationDetailMemberOpenIdConnectConfiguration struct {
+	Value OpenIdConnectConfigurationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationDetailMemberOpenIdConnectConfiguration) isConfigurationDetail() {}
+
 // Contains configuration information about an identity source.
 //
 // This data type is a response parameter to the [ListIdentitySources] operation.
@@ -509,6 +535,7 @@ func (*ConfigurationDetailMemberCognitoUserPoolConfiguration) isConfigurationDet
 // The following types satisfy this interface:
 //
 //	ConfigurationItemMemberCognitoUserPoolConfiguration
+//	ConfigurationItemMemberOpenIdConnectConfiguration
 //
 // [ListIdentitySources]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
 type ConfigurationItem interface {
@@ -533,6 +560,21 @@ type ConfigurationItemMemberCognitoUserPoolConfiguration struct {
 }
 
 func (*ConfigurationItemMemberCognitoUserPoolConfiguration) isConfigurationItem() {}
+
+// Contains configuration details of an OpenID Connect (OIDC) identity provider,
+// or identity source, that Verified Permissions can use to generate entities from
+// authenticated identities. It specifies the issuer URL, token type that you want
+// to use, and policy store entity details.
+//
+// Example:
+// "configuration":{"openIdConnectConfiguration":{"issuer":"https://auth.example.com","tokenSelection":{"accessTokenOnly":{"audiences":["https://myapp.example.com","https://myapp2.example.com"],"principalIdClaim":"sub"}},"entityIdPrefix":"MyOIDCProvider","groupConfiguration":{"groupClaim":"groups","groupEntityType":"MyCorp::UserGroup"}}}
+type ConfigurationItemMemberOpenIdConnectConfiguration struct {
+	Value OpenIdConnectConfigurationItem
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationItemMemberOpenIdConnectConfiguration) isConfigurationItem() {}
 
 // Contains additional details about the context of the request. Verified
 // Permissions evaluates this information in an authorization request as part of
@@ -667,7 +709,14 @@ type EntityItem struct {
 	// A list of attributes for the entity.
 	Attributes map[string]AttributeValue
 
-	// The parents in the hierarchy that contains the entity.
+	// The parent entities in the hierarchy that contains the entity. A principal or
+	// resource entity can be defined with at most 99 transitive parents per
+	// authorization request.
+	//
+	// A transitive parent is an entity in the hierarchy of entities including all
+	// direct parents, and parents of parents. For example, a user can be a member of
+	// 91 groups if one of those groups is a member of eight groups, for a total of
+	// 100: one entity, 91 entity parents, and eight parents of parents.
 	Parents []EntityIdentifier
 
 	noSmithyDocumentSerde
@@ -877,6 +926,446 @@ type IdentitySourceItemDetails struct {
 
 	noSmithyDocumentSerde
 }
+
+// The configuration of an OpenID Connect (OIDC) identity source for handling
+// access token claims. Contains the claim that you want to identify as the
+// principal in an authorization request, and the values of the aud claim, or
+// audiences, that you want to accept.
+//
+// This data type is part of a [OpenIdConnectTokenSelection] structure, which is a parameter of [CreateIdentitySource].
+//
+// [OpenIdConnectTokenSelection]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelection.html
+// [CreateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+type OpenIdConnectAccessTokenConfiguration struct {
+
+	// The access token aud claim values that you want to accept in your policy store.
+	// For example, https://myapp.example.com, https://myapp2.example.com .
+	Audiences []string
+
+	// The claim that determines the principal in OIDC access tokens. For example, sub .
+	PrincipalIdClaim *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of an OpenID Connect (OIDC) identity source for handling
+// access token claims. Contains the claim that you want to identify as the
+// principal in an authorization request, and the values of the aud claim, or
+// audiences, that you want to accept.
+//
+// This data type is part of a [OpenIdConnectTokenSelectionDetail] structure, which is a parameter of [GetIdentitySource].
+//
+// [OpenIdConnectTokenSelectionDetail]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelectionDetail.html
+// [GetIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+type OpenIdConnectAccessTokenConfigurationDetail struct {
+
+	// The access token aud claim values that you want to accept in your policy store.
+	// For example, https://myapp.example.com, https://myapp2.example.com .
+	Audiences []string
+
+	// The claim that determines the principal in OIDC access tokens. For example, sub .
+	PrincipalIdClaim *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of an OpenID Connect (OIDC) identity source for handling
+// access token claims. Contains the claim that you want to identify as the
+// principal in an authorization request, and the values of the aud claim, or
+// audiences, that you want to accept.
+//
+// This data type is part of a [OpenIdConnectTokenSelectionItem] structure, which is a parameter of [ListIdentitySources].
+//
+// [OpenIdConnectTokenSelectionItem]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelectionItem.html
+// [ListIdentitySources]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+type OpenIdConnectAccessTokenConfigurationItem struct {
+
+	// The access token aud claim values that you want to accept in your policy store.
+	// For example, https://myapp.example.com, https://myapp2.example.com .
+	Audiences []string
+
+	// The claim that determines the principal in OIDC access tokens. For example, sub .
+	PrincipalIdClaim *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration details of an OpenID Connect (OIDC) identity provider,
+// or identity source, that Verified Permissions can use to generate entities from
+// authenticated identities. It specifies the issuer URL, token type that you want
+// to use, and policy store entity details.
+//
+// This data type is part of a [Configuration] structure, which is a parameter to [CreateIdentitySource].
+//
+// [Configuration]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html
+// [CreateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+type OpenIdConnectConfiguration struct {
+
+	// The issuer URL of an OIDC identity provider. This URL must have an OIDC
+	// discovery endpoint at the path .well-known/openid-configuration .
+	//
+	// This member is required.
+	Issuer *string
+
+	// The token type that you want to process from your OIDC identity provider. Your
+	// policy store can process either identity (ID) or access tokens from a given OIDC
+	// identity source.
+	//
+	// This member is required.
+	TokenSelection OpenIdConnectTokenSelection
+
+	// A descriptive string that you want to prefix to user entities from your OIDC
+	// identity provider. For example, if you set an entityIdPrefix of MyOIDCProvider ,
+	// you can reference principals in your policies in the format
+	// MyCorp::User::MyOIDCProvider|Carlos .
+	EntityIdPrefix *string
+
+	// The claim in OIDC identity provider tokens that indicates a user's group
+	// membership, and the entity type that you want to map it to. For example, this
+	// object can map the contents of a groups claim to MyCorp::UserGroup .
+	GroupConfiguration *OpenIdConnectGroupConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration details of an OpenID Connect (OIDC) identity provider,
+// or identity source, that Verified Permissions can use to generate entities from
+// authenticated identities. It specifies the issuer URL, token type that you want
+// to use, and policy store entity details.
+//
+// This data type is part of a [ConfigurationDetail] structure, which is a parameter to [GetIdentitySource].
+//
+// [GetIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+// [ConfigurationDetail]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html
+type OpenIdConnectConfigurationDetail struct {
+
+	// The issuer URL of an OIDC identity provider. This URL must have an OIDC
+	// discovery endpoint at the path .well-known/openid-configuration .
+	//
+	// This member is required.
+	Issuer *string
+
+	// The token type that you want to process from your OIDC identity provider. Your
+	// policy store can process either identity (ID) or access tokens from a given OIDC
+	// identity source.
+	//
+	// This member is required.
+	TokenSelection OpenIdConnectTokenSelectionDetail
+
+	// A descriptive string that you want to prefix to user entities from your OIDC
+	// identity provider. For example, if you set an entityIdPrefix of MyOIDCProvider ,
+	// you can reference principals in your policies in the format
+	// MyCorp::User::MyOIDCProvider|Carlos .
+	EntityIdPrefix *string
+
+	// The claim in OIDC identity provider tokens that indicates a user's group
+	// membership, and the entity type that you want to map it to. For example, this
+	// object can map the contents of a groups claim to MyCorp::UserGroup .
+	GroupConfiguration *OpenIdConnectGroupConfigurationDetail
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration details of an OpenID Connect (OIDC) identity provider,
+// or identity source, that Verified Permissions can use to generate entities from
+// authenticated identities. It specifies the issuer URL, token type that you want
+// to use, and policy store entity details.
+//
+// This data type is part of a [ConfigurationItem] structure, which is a parameter to [ListIdentitySources].
+//
+// [ConfigurationItem]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html
+// [ListIdentitySources]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+type OpenIdConnectConfigurationItem struct {
+
+	// The issuer URL of an OIDC identity provider. This URL must have an OIDC
+	// discovery endpoint at the path .well-known/openid-configuration .
+	//
+	// This member is required.
+	Issuer *string
+
+	// The token type that you want to process from your OIDC identity provider. Your
+	// policy store can process either identity (ID) or access tokens from a given OIDC
+	// identity source.
+	//
+	// This member is required.
+	TokenSelection OpenIdConnectTokenSelectionItem
+
+	// A descriptive string that you want to prefix to user entities from your OIDC
+	// identity provider. For example, if you set an entityIdPrefix of MyOIDCProvider ,
+	// you can reference principals in your policies in the format
+	// MyCorp::User::MyOIDCProvider|Carlos .
+	EntityIdPrefix *string
+
+	// The claim in OIDC identity provider tokens that indicates a user's group
+	// membership, and the entity type that you want to map it to. For example, this
+	// object can map the contents of a groups claim to MyCorp::UserGroup .
+	GroupConfiguration *OpenIdConnectGroupConfigurationItem
+
+	noSmithyDocumentSerde
+}
+
+// The claim in OIDC identity provider tokens that indicates a user's group
+// membership, and the entity type that you want to map it to. For example, this
+// object can map the contents of a groups claim to MyCorp::UserGroup .
+//
+// This data type is part of a [OpenIdConnectConfiguration] structure, which is a parameter of [CreateIdentitySource].
+//
+// [OpenIdConnectConfiguration]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfiguration.html
+// [CreateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+type OpenIdConnectGroupConfiguration struct {
+
+	// The token claim that you want Verified Permissions to interpret as group
+	// membership. For example, groups .
+	//
+	// This member is required.
+	GroupClaim *string
+
+	// The policy store entity type that you want to map your users' group claim to.
+	// For example, MyCorp::UserGroup . A group entity type is an entity that can have
+	// a user entity type as a member.
+	//
+	// This member is required.
+	GroupEntityType *string
+
+	noSmithyDocumentSerde
+}
+
+// The claim in OIDC identity provider tokens that indicates a user's group
+// membership, and the entity type that you want to map it to. For example, this
+// object can map the contents of a groups claim to MyCorp::UserGroup .
+//
+// This data type is part of a [OpenIdConnectConfigurationDetail] structure, which is a parameter of [GetIdentitySource].
+//
+// [GetIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+// [OpenIdConnectConfigurationDetail]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationDetail.html
+type OpenIdConnectGroupConfigurationDetail struct {
+
+	// The token claim that you want Verified Permissions to interpret as group
+	// membership. For example, groups .
+	//
+	// This member is required.
+	GroupClaim *string
+
+	// The policy store entity type that you want to map your users' group claim to.
+	// For example, MyCorp::UserGroup . A group entity type is an entity that can have
+	// a user entity type as a member.
+	//
+	// This member is required.
+	GroupEntityType *string
+
+	noSmithyDocumentSerde
+}
+
+// The claim in OIDC identity provider tokens that indicates a user's group
+// membership, and the entity type that you want to map it to. For example, this
+// object can map the contents of a groups claim to MyCorp::UserGroup .
+//
+// This data type is part of a [OpenIdConnectConfigurationItem] structure, which is a parameter of [ListIdentitySourcea].
+//
+// [ListIdentitySourcea]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+// [OpenIdConnectConfigurationItem]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationItem.html
+type OpenIdConnectGroupConfigurationItem struct {
+
+	// The token claim that you want Verified Permissions to interpret as group
+	// membership. For example, groups .
+	//
+	// This member is required.
+	GroupClaim *string
+
+	// The policy store entity type that you want to map your users' group claim to.
+	// For example, MyCorp::UserGroup . A group entity type is an entity that can have
+	// a user entity type as a member.
+	//
+	// This member is required.
+	GroupEntityType *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of an OpenID Connect (OIDC) identity source for handling
+// identity (ID) token claims. Contains the claim that you want to identify as the
+// principal in an authorization request, and the values of the aud claim, or
+// audiences, that you want to accept.
+//
+// This data type is part of a [OpenIdConnectTokenSelection] structure, which is a parameter of [CreateIdentitySource].
+//
+// [OpenIdConnectTokenSelection]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelection.html
+// [CreateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+type OpenIdConnectIdentityTokenConfiguration struct {
+
+	// The ID token audience, or client ID, claim values that you want to accept in
+	// your policy store from an OIDC identity provider. For example,
+	// 1example23456789, 2example10111213 .
+	ClientIds []string
+
+	// The claim that determines the principal in OIDC access tokens. For example, sub .
+	PrincipalIdClaim *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of an OpenID Connect (OIDC) identity source for handling
+// identity (ID) token claims. Contains the claim that you want to identify as the
+// principal in an authorization request, and the values of the aud claim, or
+// audiences, that you want to accept.
+//
+// This data type is part of a [OpenIdConnectTokenSelectionDetail] structure, which is a parameter of [GetIdentitySource].
+//
+// [OpenIdConnectTokenSelectionDetail]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelectionDetail.html
+// [GetIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+type OpenIdConnectIdentityTokenConfigurationDetail struct {
+
+	// The ID token audience, or client ID, claim values that you want to accept in
+	// your policy store from an OIDC identity provider. For example,
+	// 1example23456789, 2example10111213 .
+	ClientIds []string
+
+	// The claim that determines the principal in OIDC access tokens. For example, sub .
+	PrincipalIdClaim *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of an OpenID Connect (OIDC) identity source for handling
+// identity (ID) token claims. Contains the claim that you want to identify as the
+// principal in an authorization request, and the values of the aud claim, or
+// audiences, that you want to accept.
+//
+// This data type is part of a [OpenIdConnectTokenSelectionItem] structure, which is a parameter of [ListIdentitySources].
+//
+// [OpenIdConnectTokenSelectionItem]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelectionItem.html
+// [ListIdentitySources]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+type OpenIdConnectIdentityTokenConfigurationItem struct {
+
+	// The ID token audience, or client ID, claim values that you want to accept in
+	// your policy store from an OIDC identity provider. For example,
+	// 1example23456789, 2example10111213 .
+	ClientIds []string
+
+	// The claim that determines the principal in OIDC access tokens. For example, sub .
+	PrincipalIdClaim *string
+
+	noSmithyDocumentSerde
+}
+
+// The token type that you want to process from your OIDC identity provider. Your
+// policy store can process either identity (ID) or access tokens from a given OIDC
+// identity source.
+//
+// This data type is part of a [OpenIdConnectConfiguration] structure, which is a parameter of [CreateIdentitySource].
+//
+// The following types satisfy this interface:
+//
+//	OpenIdConnectTokenSelectionMemberAccessTokenOnly
+//	OpenIdConnectTokenSelectionMemberIdentityTokenOnly
+//
+// [OpenIdConnectConfiguration]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfiguration.html
+// [CreateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+type OpenIdConnectTokenSelection interface {
+	isOpenIdConnectTokenSelection()
+}
+
+// The OIDC configuration for processing access tokens. Contains allowed audience
+// claims, for example https://auth.example.com , and the claim that you want to
+// map to the principal, for example sub .
+type OpenIdConnectTokenSelectionMemberAccessTokenOnly struct {
+	Value OpenIdConnectAccessTokenConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*OpenIdConnectTokenSelectionMemberAccessTokenOnly) isOpenIdConnectTokenSelection() {}
+
+// The OIDC configuration for processing identity (ID) tokens. Contains allowed
+// client ID claims, for example 1example23456789 , and the claim that you want to
+// map to the principal, for example sub .
+type OpenIdConnectTokenSelectionMemberIdentityTokenOnly struct {
+	Value OpenIdConnectIdentityTokenConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*OpenIdConnectTokenSelectionMemberIdentityTokenOnly) isOpenIdConnectTokenSelection() {}
+
+// The token type that you want to process from your OIDC identity provider. Your
+// policy store can process either identity (ID) or access tokens from a given OIDC
+// identity source.
+//
+// This data type is part of a [OpenIdConnectConfigurationDetail] structure, which is a parameter of [GetIdentitySource].
+//
+// The following types satisfy this interface:
+//
+//	OpenIdConnectTokenSelectionDetailMemberAccessTokenOnly
+//	OpenIdConnectTokenSelectionDetailMemberIdentityTokenOnly
+//
+// [GetIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+// [OpenIdConnectConfigurationDetail]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationDetail.html
+type OpenIdConnectTokenSelectionDetail interface {
+	isOpenIdConnectTokenSelectionDetail()
+}
+
+// The OIDC configuration for processing access tokens. Contains allowed audience
+// claims, for example https://auth.example.com , and the claim that you want to
+// map to the principal, for example sub .
+type OpenIdConnectTokenSelectionDetailMemberAccessTokenOnly struct {
+	Value OpenIdConnectAccessTokenConfigurationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*OpenIdConnectTokenSelectionDetailMemberAccessTokenOnly) isOpenIdConnectTokenSelectionDetail() {
+}
+
+// The OIDC configuration for processing identity (ID) tokens. Contains allowed
+// client ID claims, for example 1example23456789 , and the claim that you want to
+// map to the principal, for example sub .
+type OpenIdConnectTokenSelectionDetailMemberIdentityTokenOnly struct {
+	Value OpenIdConnectIdentityTokenConfigurationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*OpenIdConnectTokenSelectionDetailMemberIdentityTokenOnly) isOpenIdConnectTokenSelectionDetail() {
+}
+
+// The token type that you want to process from your OIDC identity provider. Your
+// policy store can process either identity (ID) or access tokens from a given OIDC
+// identity source.
+//
+// This data type is part of a [OpenIdConnectConfigurationItem] structure, which is a parameter of [ListIdentitySources].
+//
+// The following types satisfy this interface:
+//
+//	OpenIdConnectTokenSelectionItemMemberAccessTokenOnly
+//	OpenIdConnectTokenSelectionItemMemberIdentityTokenOnly
+//
+// [OpenIdConnectConfigurationItem]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationItem.html
+// [ListIdentitySources]: http://amazonaws.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+type OpenIdConnectTokenSelectionItem interface {
+	isOpenIdConnectTokenSelectionItem()
+}
+
+// The OIDC configuration for processing access tokens. Contains allowed audience
+// claims, for example https://auth.example.com , and the claim that you want to
+// map to the principal, for example sub .
+type OpenIdConnectTokenSelectionItemMemberAccessTokenOnly struct {
+	Value OpenIdConnectAccessTokenConfigurationItem
+
+	noSmithyDocumentSerde
+}
+
+func (*OpenIdConnectTokenSelectionItemMemberAccessTokenOnly) isOpenIdConnectTokenSelectionItem() {}
+
+// The OIDC configuration for processing identity (ID) tokens. Contains allowed
+// client ID claims, for example 1example23456789 , and the claim that you want to
+// map to the principal, for example sub .
+type OpenIdConnectTokenSelectionItemMemberIdentityTokenOnly struct {
+	Value OpenIdConnectIdentityTokenConfigurationItem
+
+	noSmithyDocumentSerde
+}
+
+func (*OpenIdConnectTokenSelectionItemMemberIdentityTokenOnly) isOpenIdConnectTokenSelectionItem() {}
 
 // A structure that contains the details for a Cedar policy definition. It
 // includes the policy type, a description, and a policy body. This is a top level
@@ -1334,17 +1823,12 @@ type UpdateCognitoUserPoolConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Contains an updated configuration to replace the configuration in an existing
-// identity source.
-//
-// At this time, the only valid member of this structure is a Amazon Cognito user
-// pool configuration.
-//
-// You must specify a userPoolArn , and optionally, a ClientId .
+// Contains an update to replace the configuration in an existing identity source.
 //
 // The following types satisfy this interface:
 //
 //	UpdateConfigurationMemberCognitoUserPoolConfiguration
+//	UpdateConfigurationMemberOpenIdConnectConfiguration
 type UpdateConfiguration interface {
 	isUpdateConfiguration()
 }
@@ -1357,6 +1841,166 @@ type UpdateConfigurationMemberCognitoUserPoolConfiguration struct {
 }
 
 func (*UpdateConfigurationMemberCognitoUserPoolConfiguration) isUpdateConfiguration() {}
+
+// Contains configuration details of an OpenID Connect (OIDC) identity provider,
+// or identity source, that Verified Permissions can use to generate entities from
+// authenticated identities. It specifies the issuer URL, token type that you want
+// to use, and policy store entity details.
+type UpdateConfigurationMemberOpenIdConnectConfiguration struct {
+	Value UpdateOpenIdConnectConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateConfigurationMemberOpenIdConnectConfiguration) isUpdateConfiguration() {}
+
+// The configuration of an OpenID Connect (OIDC) identity source for handling
+// access token claims. Contains the claim that you want to identify as the
+// principal in an authorization request, and the values of the aud claim, or
+// audiences, that you want to accept.
+//
+// This data type is part of a [UpdateOpenIdConnectTokenSelection] structure, which is a parameter to [UpdateIdentitySource].
+//
+// [UpdateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html
+// [UpdateOpenIdConnectTokenSelection]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectTokenSelection.html
+type UpdateOpenIdConnectAccessTokenConfiguration struct {
+
+	// The access token aud claim values that you want to accept in your policy store.
+	// For example, https://myapp.example.com, https://myapp2.example.com .
+	Audiences []string
+
+	// The claim that determines the principal in OIDC access tokens. For example, sub .
+	PrincipalIdClaim *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration details of an OpenID Connect (OIDC) identity provider,
+// or identity source, that Verified Permissions can use to generate entities from
+// authenticated identities. It specifies the issuer URL, token type that you want
+// to use, and policy store entity details.
+//
+// This data type is part of a [UpdateConfiguration] structure, which is a parameter to [UpdateIdentitySource].
+//
+// [UpdateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html
+// [UpdateConfiguration]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateConfiguration.html
+type UpdateOpenIdConnectConfiguration struct {
+
+	// The issuer URL of an OIDC identity provider. This URL must have an OIDC
+	// discovery endpoint at the path .well-known/openid-configuration .
+	//
+	// This member is required.
+	Issuer *string
+
+	// The token type that you want to process from your OIDC identity provider. Your
+	// policy store can process either identity (ID) or access tokens from a given OIDC
+	// identity source.
+	//
+	// This member is required.
+	TokenSelection UpdateOpenIdConnectTokenSelection
+
+	// A descriptive string that you want to prefix to user entities from your OIDC
+	// identity provider. For example, if you set an entityIdPrefix of MyOIDCProvider ,
+	// you can reference principals in your policies in the format
+	// MyCorp::User::MyOIDCProvider|Carlos .
+	EntityIdPrefix *string
+
+	// The claim in OIDC identity provider tokens that indicates a user's group
+	// membership, and the entity type that you want to map it to. For example, this
+	// object can map the contents of a groups claim to MyCorp::UserGroup .
+	GroupConfiguration *UpdateOpenIdConnectGroupConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The claim in OIDC identity provider tokens that indicates a user's group
+// membership, and the entity type that you want to map it to. For example, this
+// object can map the contents of a groups claim to MyCorp::UserGroup .
+//
+// This data type is part of a [UpdateOpenIdConnectConfiguration] structure, which is a parameter to [UpdateIdentitySource].
+//
+// [UpdateOpenIdConnectConfiguration]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectConfiguration.html
+// [UpdateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html
+type UpdateOpenIdConnectGroupConfiguration struct {
+
+	// The token claim that you want Verified Permissions to interpret as group
+	// membership. For example, groups .
+	//
+	// This member is required.
+	GroupClaim *string
+
+	// The policy store entity type that you want to map your users' group claim to.
+	// For example, MyCorp::UserGroup . A group entity type is an entity that can have
+	// a user entity type as a member.
+	//
+	// This member is required.
+	GroupEntityType *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of an OpenID Connect (OIDC) identity source for handling
+// identity (ID) token claims. Contains the claim that you want to identify as the
+// principal in an authorization request, and the values of the aud claim, or
+// audiences, that you want to accept.
+//
+// This data type is part of a [UpdateOpenIdConnectTokenSelection] structure, which is a parameter to [UpdateIdentitySource].
+//
+// [UpdateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html
+// [UpdateOpenIdConnectTokenSelection]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectTokenSelection.html
+type UpdateOpenIdConnectIdentityTokenConfiguration struct {
+
+	// The ID token audience, or client ID, claim values that you want to accept in
+	// your policy store from an OIDC identity provider. For example,
+	// 1example23456789, 2example10111213 .
+	ClientIds []string
+
+	// The claim that determines the principal in OIDC access tokens. For example, sub .
+	PrincipalIdClaim *string
+
+	noSmithyDocumentSerde
+}
+
+// The token type that you want to process from your OIDC identity provider. Your
+// policy store can process either identity (ID) or access tokens from a given OIDC
+// identity source.
+//
+// This data type is part of a [UpdateOpenIdConnectConfiguration] structure, which is a parameter to [UpdateIdentitySource].
+//
+// The following types satisfy this interface:
+//
+//	UpdateOpenIdConnectTokenSelectionMemberAccessTokenOnly
+//	UpdateOpenIdConnectTokenSelectionMemberIdentityTokenOnly
+//
+// [UpdateOpenIdConnectConfiguration]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectConfiguration.html
+// [UpdateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html
+type UpdateOpenIdConnectTokenSelection interface {
+	isUpdateOpenIdConnectTokenSelection()
+}
+
+// The OIDC configuration for processing access tokens. Contains allowed audience
+// claims, for example https://auth.example.com , and the claim that you want to
+// map to the principal, for example sub .
+type UpdateOpenIdConnectTokenSelectionMemberAccessTokenOnly struct {
+	Value UpdateOpenIdConnectAccessTokenConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateOpenIdConnectTokenSelectionMemberAccessTokenOnly) isUpdateOpenIdConnectTokenSelection() {
+}
+
+// The OIDC configuration for processing identity (ID) tokens. Contains allowed
+// client ID claims, for example 1example23456789 , and the claim that you want to
+// map to the principal, for example sub .
+type UpdateOpenIdConnectTokenSelectionMemberIdentityTokenOnly struct {
+	Value UpdateOpenIdConnectIdentityTokenConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateOpenIdConnectTokenSelectionMemberIdentityTokenOnly) isUpdateOpenIdConnectTokenSelection() {
+}
 
 // Contains information about updates to be applied to a policy.
 //
@@ -1474,16 +2118,20 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAttributeValue()         {}
-func (*UnknownUnionMember) isConfiguration()          {}
-func (*UnknownUnionMember) isConfigurationDetail()    {}
-func (*UnknownUnionMember) isConfigurationItem()      {}
-func (*UnknownUnionMember) isContextDefinition()      {}
-func (*UnknownUnionMember) isEntitiesDefinition()     {}
-func (*UnknownUnionMember) isEntityReference()        {}
-func (*UnknownUnionMember) isPolicyDefinition()       {}
-func (*UnknownUnionMember) isPolicyDefinitionDetail() {}
-func (*UnknownUnionMember) isPolicyDefinitionItem()   {}
-func (*UnknownUnionMember) isSchemaDefinition()       {}
-func (*UnknownUnionMember) isUpdateConfiguration()    {}
-func (*UnknownUnionMember) isUpdatePolicyDefinition() {}
+func (*UnknownUnionMember) isAttributeValue()                    {}
+func (*UnknownUnionMember) isConfiguration()                     {}
+func (*UnknownUnionMember) isConfigurationDetail()               {}
+func (*UnknownUnionMember) isConfigurationItem()                 {}
+func (*UnknownUnionMember) isContextDefinition()                 {}
+func (*UnknownUnionMember) isEntitiesDefinition()                {}
+func (*UnknownUnionMember) isEntityReference()                   {}
+func (*UnknownUnionMember) isOpenIdConnectTokenSelection()       {}
+func (*UnknownUnionMember) isOpenIdConnectTokenSelectionDetail() {}
+func (*UnknownUnionMember) isOpenIdConnectTokenSelectionItem()   {}
+func (*UnknownUnionMember) isPolicyDefinition()                  {}
+func (*UnknownUnionMember) isPolicyDefinitionDetail()            {}
+func (*UnknownUnionMember) isPolicyDefinitionItem()              {}
+func (*UnknownUnionMember) isSchemaDefinition()                  {}
+func (*UnknownUnionMember) isUpdateConfiguration()               {}
+func (*UnknownUnionMember) isUpdateOpenIdConnectTokenSelection() {}
+func (*UnknownUnionMember) isUpdatePolicyDefinition()            {}

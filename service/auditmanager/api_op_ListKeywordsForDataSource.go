@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Returns a list of keywords that are pre-mapped to the specified control data
-//
+// Returns a list of keywords that are pre-mapped to the specified control data
 // source.
 func (c *Client) ListKeywordsForDataSource(ctx context.Context, params *ListKeywordsForDataSourceInput, optFns ...func(*Options)) (*ListKeywordsForDataSourceOutput, error) {
 	if params == nil {
@@ -31,10 +30,10 @@ func (c *Client) ListKeywordsForDataSource(ctx context.Context, params *ListKeyw
 
 type ListKeywordsForDataSourceInput struct {
 
-	//  The control mapping data source that the keywords apply to.
+	// The control mapping data source that the keywords apply to.
 	//
 	// This member is required.
-	Source types.SourceType
+	Source types.DataSourceType
 
 	//  Represents the maximum number of results on a page or for an API request call.
 	MaxResults *int32
@@ -47,7 +46,7 @@ type ListKeywordsForDataSourceInput struct {
 
 type ListKeywordsForDataSourceOutput struct {
 
-	//  The list of keywords for the event mapping source.
+	// The list of keywords for the control mapping source.
 	Keywords []string
 
 	//  The pagination token that's used to fetch the next set of results.

@@ -1503,6 +1503,17 @@ func awsAwsjson10_serializeDocumentAttributeValue(v types.AttributeValue, value 
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentAudiences(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentBatchIsAuthorizedInputItem(v *types.BatchIsAuthorizedInputItem, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1649,6 +1660,12 @@ func awsAwsjson10_serializeDocumentConfiguration(v types.Configuration, value sm
 	case *types.ConfigurationMemberCognitoUserPoolConfiguration:
 		av := object.Key("cognitoUserPoolConfiguration")
 		if err := awsAwsjson10_serializeDocumentCognitoUserPoolConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ConfigurationMemberOpenIdConnectConfiguration:
+		av := object.Key("openIdConnectConfiguration")
+		if err := awsAwsjson10_serializeDocumentOpenIdConnectConfiguration(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -1828,6 +1845,116 @@ func awsAwsjson10_serializeDocumentIdentitySourceFilters(v []types.IdentitySourc
 		if err := awsAwsjson10_serializeDocumentIdentitySourceFilter(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentOpenIdConnectAccessTokenConfiguration(v *types.OpenIdConnectAccessTokenConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Audiences != nil {
+		ok := object.Key("audiences")
+		if err := awsAwsjson10_serializeDocumentAudiences(v.Audiences, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PrincipalIdClaim != nil {
+		ok := object.Key("principalIdClaim")
+		ok.String(*v.PrincipalIdClaim)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentOpenIdConnectConfiguration(v *types.OpenIdConnectConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EntityIdPrefix != nil {
+		ok := object.Key("entityIdPrefix")
+		ok.String(*v.EntityIdPrefix)
+	}
+
+	if v.GroupConfiguration != nil {
+		ok := object.Key("groupConfiguration")
+		if err := awsAwsjson10_serializeDocumentOpenIdConnectGroupConfiguration(v.GroupConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Issuer != nil {
+		ok := object.Key("issuer")
+		ok.String(*v.Issuer)
+	}
+
+	if v.TokenSelection != nil {
+		ok := object.Key("tokenSelection")
+		if err := awsAwsjson10_serializeDocumentOpenIdConnectTokenSelection(v.TokenSelection, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentOpenIdConnectGroupConfiguration(v *types.OpenIdConnectGroupConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GroupClaim != nil {
+		ok := object.Key("groupClaim")
+		ok.String(*v.GroupClaim)
+	}
+
+	if v.GroupEntityType != nil {
+		ok := object.Key("groupEntityType")
+		ok.String(*v.GroupEntityType)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentOpenIdConnectIdentityTokenConfiguration(v *types.OpenIdConnectIdentityTokenConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientIds != nil {
+		ok := object.Key("clientIds")
+		if err := awsAwsjson10_serializeDocumentClientIds(v.ClientIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PrincipalIdClaim != nil {
+		ok := object.Key("principalIdClaim")
+		ok.String(*v.PrincipalIdClaim)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentOpenIdConnectTokenSelection(v types.OpenIdConnectTokenSelection, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.OpenIdConnectTokenSelectionMemberAccessTokenOnly:
+		av := object.Key("accessTokenOnly")
+		if err := awsAwsjson10_serializeDocumentOpenIdConnectAccessTokenConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.OpenIdConnectTokenSelectionMemberIdentityTokenOnly:
+		av := object.Key("identityTokenOnly")
+		if err := awsAwsjson10_serializeDocumentOpenIdConnectIdentityTokenConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }
@@ -2037,6 +2164,122 @@ func awsAwsjson10_serializeDocumentUpdateConfiguration(v types.UpdateConfigurati
 	case *types.UpdateConfigurationMemberCognitoUserPoolConfiguration:
 		av := object.Key("cognitoUserPoolConfiguration")
 		if err := awsAwsjson10_serializeDocumentUpdateCognitoUserPoolConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.UpdateConfigurationMemberOpenIdConnectConfiguration:
+		av := object.Key("openIdConnectConfiguration")
+		if err := awsAwsjson10_serializeDocumentUpdateOpenIdConnectConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentUpdateOpenIdConnectAccessTokenConfiguration(v *types.UpdateOpenIdConnectAccessTokenConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Audiences != nil {
+		ok := object.Key("audiences")
+		if err := awsAwsjson10_serializeDocumentAudiences(v.Audiences, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PrincipalIdClaim != nil {
+		ok := object.Key("principalIdClaim")
+		ok.String(*v.PrincipalIdClaim)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentUpdateOpenIdConnectConfiguration(v *types.UpdateOpenIdConnectConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EntityIdPrefix != nil {
+		ok := object.Key("entityIdPrefix")
+		ok.String(*v.EntityIdPrefix)
+	}
+
+	if v.GroupConfiguration != nil {
+		ok := object.Key("groupConfiguration")
+		if err := awsAwsjson10_serializeDocumentUpdateOpenIdConnectGroupConfiguration(v.GroupConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Issuer != nil {
+		ok := object.Key("issuer")
+		ok.String(*v.Issuer)
+	}
+
+	if v.TokenSelection != nil {
+		ok := object.Key("tokenSelection")
+		if err := awsAwsjson10_serializeDocumentUpdateOpenIdConnectTokenSelection(v.TokenSelection, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentUpdateOpenIdConnectGroupConfiguration(v *types.UpdateOpenIdConnectGroupConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GroupClaim != nil {
+		ok := object.Key("groupClaim")
+		ok.String(*v.GroupClaim)
+	}
+
+	if v.GroupEntityType != nil {
+		ok := object.Key("groupEntityType")
+		ok.String(*v.GroupEntityType)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentUpdateOpenIdConnectIdentityTokenConfiguration(v *types.UpdateOpenIdConnectIdentityTokenConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientIds != nil {
+		ok := object.Key("clientIds")
+		if err := awsAwsjson10_serializeDocumentClientIds(v.ClientIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PrincipalIdClaim != nil {
+		ok := object.Key("principalIdClaim")
+		ok.String(*v.PrincipalIdClaim)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentUpdateOpenIdConnectTokenSelection(v types.UpdateOpenIdConnectTokenSelection, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.UpdateOpenIdConnectTokenSelectionMemberAccessTokenOnly:
+		av := object.Key("accessTokenOnly")
+		if err := awsAwsjson10_serializeDocumentUpdateOpenIdConnectAccessTokenConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.UpdateOpenIdConnectTokenSelectionMemberIdentityTokenOnly:
+		av := object.Key("identityTokenOnly")
+		if err := awsAwsjson10_serializeDocumentUpdateOpenIdConnectIdentityTokenConfiguration(&uv.Value, av); err != nil {
 			return err
 		}
 

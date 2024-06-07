@@ -130,9 +130,10 @@ type DescribeModelPackageOutput struct {
 	// schema is simplified compared to the schema of ModelCard . The
 	// ModelPackageModelCard schema does not include model_package_details , and
 	// model_overview is composed of the model_creator and model_artifact properties.
-	// For more information about the model card associated with the model package, see
-	// [View the Details of a Model Version].
+	// For more information about the model package model card schema, see [Model package model card schema]. For more
+	// information about the model card associated with the model package, see [View the Details of a Model Version].
 	//
+	// [Model package model card schema]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
 	// [View the Details of a Model Version]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
 	ModelCard *types.ModelPackageModelCard
 

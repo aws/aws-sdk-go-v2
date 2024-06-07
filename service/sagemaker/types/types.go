@@ -10809,9 +10809,10 @@ type ModelPackage struct {
 	// schema is simplified compared to the schema of ModelCard . The
 	// ModelPackageModelCard schema does not include model_package_details , and
 	// model_overview is composed of the model_creator and model_artifact properties.
-	// For more information about the model card associated with the model package, see
-	// [View the Details of a Model Version].
+	// For more information about the model package model card schema, see [Model package model card schema]. For more
+	// information about the model card associated with the model package, see [View the Details of a Model Version].
 	//
+	// [Model package model card schema]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
 	// [View the Details of a Model Version]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
 	ModelCard *ModelPackageModelCard
 
@@ -11023,13 +11024,16 @@ type ModelPackageGroupSummary struct {
 // schema is simplified compared to the schema of ModelCard . The
 // ModelPackageModelCard schema does not include model_package_details , and
 // model_overview is composed of the model_creator and model_artifact properties.
-// For more information about the model card associated with the model package, see
-// [View the Details of a Model Version].
+// For more information about the model package model card schema, see [Model package model card schema]. For more
+// information about the model card associated with the model package, see [View the Details of a Model Version].
 //
+// [Model package model card schema]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
 // [View the Details of a Model Version]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
 type ModelPackageModelCard struct {
 
-	// The content of the model card.
+	// The content of the model card. The content must follow the schema described in [Model Package Model Card Schema].
+	//
+	// [Model Package Model Card Schema]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
 	ModelCardContent *string
 
 	// The approval status of the model card within your organization. Different
@@ -13624,6 +13628,16 @@ type ProductionVariant struct {
 	// turn on or turn off SSM access for a production variant behind an existing
 	// endpoint by creating a new endpoint configuration and calling UpdateEndpoint .
 	EnableSSMAccess *bool
+
+	// Specifies an option from a collection of preconfigured Amazon Machine Image
+	// (AMI) images. Each image is configured by Amazon Web Services with a set of
+	// software and driver versions. Amazon Web Services optimizes these configurations
+	// for different machine learning workloads.
+	//
+	// By selecting an AMI version, you can ensure that your inference environment is
+	// compatible with specific software requirements, such as CUDA driver versions,
+	// Linux kernel versions, or Amazon Web Services Neuron driver versions.
+	InferenceAmiVersion ProductionVariantInferenceAmiVersion
 
 	// Number of instances to launch initially.
 	InitialInstanceCount *int32

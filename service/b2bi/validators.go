@@ -684,6 +684,9 @@ func validateOpCreatePartnershipInput(v *CreatePartnershipInput) error {
 	if v.Email == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Email"))
 	}
+	if v.Capabilities == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Capabilities"))
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))

@@ -3631,6 +3631,42 @@ loop:
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentAudiences(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Audience to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentBatchIsAuthorizedInputItem(v **types.BatchIsAuthorizedInputItem, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4170,6 +4206,16 @@ loop:
 			uv = &types.ConfigurationDetailMemberCognitoUserPoolConfiguration{Value: mv}
 			break loop
 
+		case "openIdConnectConfiguration":
+			var mv types.OpenIdConnectConfigurationDetail
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectConfigurationDetail(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfigurationDetailMemberOpenIdConnectConfiguration{Value: mv}
+			break loop
+
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
 			break loop
@@ -4208,6 +4254,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.ConfigurationItemMemberCognitoUserPoolConfiguration{Value: mv}
+			break loop
+
+		case "openIdConnectConfiguration":
+			var mv types.OpenIdConnectConfigurationItem
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectConfigurationItem(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfigurationItemMemberOpenIdConnectConfiguration{Value: mv}
 			break loop
 
 		default:
@@ -4861,6 +4917,502 @@ func awsAwsjson10_deserializeDocumentNamespaceList(v *[]string, value interface{
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectAccessTokenConfigurationDetail(v **types.OpenIdConnectAccessTokenConfigurationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenIdConnectAccessTokenConfigurationDetail
+	if *v == nil {
+		sv = &types.OpenIdConnectAccessTokenConfigurationDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "audiences":
+			if err := awsAwsjson10_deserializeDocumentAudiences(&sv.Audiences, value); err != nil {
+				return err
+			}
+
+		case "principalIdClaim":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Claim to be of type string, got %T instead", value)
+				}
+				sv.PrincipalIdClaim = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectAccessTokenConfigurationItem(v **types.OpenIdConnectAccessTokenConfigurationItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenIdConnectAccessTokenConfigurationItem
+	if *v == nil {
+		sv = &types.OpenIdConnectAccessTokenConfigurationItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "audiences":
+			if err := awsAwsjson10_deserializeDocumentAudiences(&sv.Audiences, value); err != nil {
+				return err
+			}
+
+		case "principalIdClaim":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Claim to be of type string, got %T instead", value)
+				}
+				sv.PrincipalIdClaim = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectConfigurationDetail(v **types.OpenIdConnectConfigurationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenIdConnectConfigurationDetail
+	if *v == nil {
+		sv = &types.OpenIdConnectConfigurationDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "entityIdPrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityIdPrefix to be of type string, got %T instead", value)
+				}
+				sv.EntityIdPrefix = ptr.String(jtv)
+			}
+
+		case "groupConfiguration":
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectGroupConfigurationDetail(&sv.GroupConfiguration, value); err != nil {
+				return err
+			}
+
+		case "issuer":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Issuer to be of type string, got %T instead", value)
+				}
+				sv.Issuer = ptr.String(jtv)
+			}
+
+		case "tokenSelection":
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectTokenSelectionDetail(&sv.TokenSelection, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectConfigurationItem(v **types.OpenIdConnectConfigurationItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenIdConnectConfigurationItem
+	if *v == nil {
+		sv = &types.OpenIdConnectConfigurationItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "entityIdPrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityIdPrefix to be of type string, got %T instead", value)
+				}
+				sv.EntityIdPrefix = ptr.String(jtv)
+			}
+
+		case "groupConfiguration":
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectGroupConfigurationItem(&sv.GroupConfiguration, value); err != nil {
+				return err
+			}
+
+		case "issuer":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Issuer to be of type string, got %T instead", value)
+				}
+				sv.Issuer = ptr.String(jtv)
+			}
+
+		case "tokenSelection":
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectTokenSelectionItem(&sv.TokenSelection, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectGroupConfigurationDetail(v **types.OpenIdConnectGroupConfigurationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenIdConnectGroupConfigurationDetail
+	if *v == nil {
+		sv = &types.OpenIdConnectGroupConfigurationDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "groupClaim":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Claim to be of type string, got %T instead", value)
+				}
+				sv.GroupClaim = ptr.String(jtv)
+			}
+
+		case "groupEntityType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GroupEntityType to be of type string, got %T instead", value)
+				}
+				sv.GroupEntityType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectGroupConfigurationItem(v **types.OpenIdConnectGroupConfigurationItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenIdConnectGroupConfigurationItem
+	if *v == nil {
+		sv = &types.OpenIdConnectGroupConfigurationItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "groupClaim":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Claim to be of type string, got %T instead", value)
+				}
+				sv.GroupClaim = ptr.String(jtv)
+			}
+
+		case "groupEntityType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GroupEntityType to be of type string, got %T instead", value)
+				}
+				sv.GroupEntityType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectIdentityTokenConfigurationDetail(v **types.OpenIdConnectIdentityTokenConfigurationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenIdConnectIdentityTokenConfigurationDetail
+	if *v == nil {
+		sv = &types.OpenIdConnectIdentityTokenConfigurationDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientIds":
+			if err := awsAwsjson10_deserializeDocumentClientIds(&sv.ClientIds, value); err != nil {
+				return err
+			}
+
+		case "principalIdClaim":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Claim to be of type string, got %T instead", value)
+				}
+				sv.PrincipalIdClaim = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectIdentityTokenConfigurationItem(v **types.OpenIdConnectIdentityTokenConfigurationItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenIdConnectIdentityTokenConfigurationItem
+	if *v == nil {
+		sv = &types.OpenIdConnectIdentityTokenConfigurationItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientIds":
+			if err := awsAwsjson10_deserializeDocumentClientIds(&sv.ClientIds, value); err != nil {
+				return err
+			}
+
+		case "principalIdClaim":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Claim to be of type string, got %T instead", value)
+				}
+				sv.PrincipalIdClaim = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectTokenSelectionDetail(v *types.OpenIdConnectTokenSelectionDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.OpenIdConnectTokenSelectionDetail
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "accessTokenOnly":
+			var mv types.OpenIdConnectAccessTokenConfigurationDetail
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectAccessTokenConfigurationDetail(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.OpenIdConnectTokenSelectionDetailMemberAccessTokenOnly{Value: mv}
+			break loop
+
+		case "identityTokenOnly":
+			var mv types.OpenIdConnectIdentityTokenConfigurationDetail
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectIdentityTokenConfigurationDetail(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.OpenIdConnectTokenSelectionDetailMemberIdentityTokenOnly{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectTokenSelectionItem(v *types.OpenIdConnectTokenSelectionItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.OpenIdConnectTokenSelectionItem
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "accessTokenOnly":
+			var mv types.OpenIdConnectAccessTokenConfigurationItem
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectAccessTokenConfigurationItem(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.OpenIdConnectTokenSelectionItemMemberAccessTokenOnly{Value: mv}
+			break loop
+
+		case "identityTokenOnly":
+			var mv types.OpenIdConnectIdentityTokenConfigurationItem
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectIdentityTokenConfigurationItem(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.OpenIdConnectTokenSelectionItemMemberIdentityTokenOnly{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 

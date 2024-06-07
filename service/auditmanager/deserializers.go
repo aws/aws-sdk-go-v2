@@ -1028,6 +1028,9 @@ func awsRestjson1_deserializeOpErrorCreateAssessment(response *smithyhttp.Respon
 	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
 		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
 
@@ -7936,6 +7939,9 @@ func awsRestjson1_deserializeOpErrorUpdateAssessment(response *smithyhttp.Respon
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
 
@@ -11909,6 +11915,15 @@ func awsRestjson1_deserializeDocumentControl(v **types.Control, value interface{
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ControlState to be of type string, got %T instead", value)
+				}
+				sv.State = types.ControlState(jtv)
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
@@ -12084,7 +12099,7 @@ func awsRestjson1_deserializeDocumentControlDomainInsights(v **types.ControlDoma
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ControlDomainId to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
 			}
@@ -12109,7 +12124,7 @@ func awsRestjson1_deserializeDocumentControlDomainInsights(v **types.ControlDoma
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -12278,7 +12293,7 @@ func awsRestjson1_deserializeDocumentControlInsightsMetadataByAssessmentItem(v *
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ControlDomainId to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
 			}
@@ -12303,7 +12318,7 @@ func awsRestjson1_deserializeDocumentControlInsightsMetadataByAssessmentItem(v *
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -12348,7 +12363,7 @@ func awsRestjson1_deserializeDocumentControlInsightsMetadataItem(v **types.Contr
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ControlDomainId to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
 			}
@@ -12373,7 +12388,7 @@ func awsRestjson1_deserializeDocumentControlInsightsMetadataItem(v **types.Contr
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}

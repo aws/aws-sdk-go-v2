@@ -25250,6 +25250,11 @@ func awsAwsjson11_serializeDocumentProductionVariant(v *types.ProductionVariant,
 		ok.Boolean(*v.EnableSSMAccess)
 	}
 
+	if len(v.InferenceAmiVersion) > 0 {
+		ok := object.Key("InferenceAmiVersion")
+		ok.String(string(v.InferenceAmiVersion))
+	}
+
 	if v.InitialInstanceCount != nil {
 		ok := object.Key("InitialInstanceCount")
 		ok.Integer(*v.InitialInstanceCount)

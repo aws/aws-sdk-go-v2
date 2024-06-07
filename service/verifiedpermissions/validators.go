@@ -796,6 +796,11 @@ func validateConfiguration(v types.Configuration) error {
 			invalidParams.AddNested("[cognitoUserPoolConfiguration]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ConfigurationMemberOpenIdConnectConfiguration:
+		if err := validateOpenIdConnectConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[openIdConnectConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -951,6 +956,47 @@ func validateEntityReference(v types.EntityReference) error {
 			invalidParams.AddNested("[identifier]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpenIdConnectConfiguration(v *types.OpenIdConnectConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenIdConnectConfiguration"}
+	if v.Issuer == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Issuer"))
+	}
+	if v.GroupConfiguration != nil {
+		if err := validateOpenIdConnectGroupConfiguration(v.GroupConfiguration); err != nil {
+			invalidParams.AddNested("GroupConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TokenSelection == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenSelection"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpenIdConnectGroupConfiguration(v *types.OpenIdConnectGroupConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenIdConnectGroupConfiguration"}
+	if v.GroupClaim == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupClaim"))
+	}
+	if v.GroupEntityType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupEntityType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1142,6 +1188,52 @@ func validateUpdateConfiguration(v types.UpdateConfiguration) error {
 			invalidParams.AddNested("[cognitoUserPoolConfiguration]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.UpdateConfigurationMemberOpenIdConnectConfiguration:
+		if err := validateUpdateOpenIdConnectConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[openIdConnectConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateOpenIdConnectConfiguration(v *types.UpdateOpenIdConnectConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOpenIdConnectConfiguration"}
+	if v.Issuer == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Issuer"))
+	}
+	if v.GroupConfiguration != nil {
+		if err := validateUpdateOpenIdConnectGroupConfiguration(v.GroupConfiguration); err != nil {
+			invalidParams.AddNested("GroupConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TokenSelection == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenSelection"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateOpenIdConnectGroupConfiguration(v *types.UpdateOpenIdConnectGroupConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOpenIdConnectGroupConfiguration"}
+	if v.GroupClaim == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupClaim"))
+	}
+	if v.GroupEntityType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupEntityType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -156,6 +156,25 @@ func (ControlSetStatus) Values() []ControlSetStatus {
 	}
 }
 
+type ControlState string
+
+// Enum values for ControlState
+const (
+	ControlStateActive       ControlState = "ACTIVE"
+	ControlStateEndOfSupport ControlState = "END_OF_SUPPORT"
+)
+
+// Values returns all known values for ControlState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ControlState) Values() []ControlState {
+	return []ControlState{
+		"ACTIVE",
+		"END_OF_SUPPORT",
+	}
+}
+
 type ControlStatus string
 
 // Enum values for ControlStatus
@@ -183,6 +202,7 @@ type ControlType string
 const (
 	ControlTypeStandard ControlType = "Standard"
 	ControlTypeCustom   ControlType = "Custom"
+	ControlTypeCore     ControlType = "Core"
 )
 
 // Values returns all known values for ControlType. Note that this can be expanded
@@ -193,6 +213,32 @@ func (ControlType) Values() []ControlType {
 	return []ControlType{
 		"Standard",
 		"Custom",
+		"Core",
+	}
+}
+
+type DataSourceType string
+
+// Enum values for DataSourceType
+const (
+	DataSourceTypeAwsCloudtrail  DataSourceType = "AWS_Cloudtrail"
+	DataSourceTypeAwsConfig      DataSourceType = "AWS_Config"
+	DataSourceTypeAwsSecurityHub DataSourceType = "AWS_Security_Hub"
+	DataSourceTypeAwsApiCall     DataSourceType = "AWS_API_Call"
+	DataSourceTypeManual         DataSourceType = "MANUAL"
+)
+
+// Values returns all known values for DataSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataSourceType) Values() []DataSourceType {
+	return []DataSourceType{
+		"AWS_Cloudtrail",
+		"AWS_Config",
+		"AWS_Security_Hub",
+		"AWS_API_Call",
+		"MANUAL",
 	}
 }
 
@@ -534,6 +580,8 @@ const (
 	SourceTypeAwsSecurityHub SourceType = "AWS_Security_Hub"
 	SourceTypeAwsApiCall     SourceType = "AWS_API_Call"
 	SourceTypeManual         SourceType = "MANUAL"
+	SourceTypeCommonControl  SourceType = "Common_Control"
+	SourceTypeCoreControl    SourceType = "Core_Control"
 )
 
 // Values returns all known values for SourceType. Note that this can be expanded
@@ -547,6 +595,8 @@ func (SourceType) Values() []SourceType {
 		"AWS_Security_Hub",
 		"AWS_API_Call",
 		"MANUAL",
+		"Common_Control",
+		"Core_Control",
 	}
 }
 

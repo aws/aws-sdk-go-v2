@@ -601,6 +601,12 @@ type Control struct {
 	//  The name of the control.
 	Name *string
 
+	// The state of the control. The END_OF_SUPPORT state is applicable to standard
+	// controls only. This state indicates that the standard control can still be used
+	// to collect evidence, but Audit Manager is no longer updating or maintaining that
+	// control.
+	State ControlState
+
 	//  The tags associated with the control.
 	Tags map[string]string
 
@@ -645,7 +651,12 @@ type ControlDomainInsights struct {
 	// with the control domain.
 	EvidenceInsights *EvidenceInsights
 
-	// The unique identifier for the control domain.
+	// The unique identifier for the control domain. Audit Manager supports the
+	// control domains that are provided by Amazon Web Services Control Catalog. For
+	// information about how to find a list of available control domains, see [ListDomains]
+	// ListDomains in the Amazon Web Services Control Catalog API Reference.
+	//
+	// [ListDomains]: https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListDomains.html
 	Id *string
 
 	// The time when the control domain insights were last updated.
@@ -751,11 +762,19 @@ type ControlMappingSource struct {
 	//  The name of the source.
 	SourceName *string
 
-	//  The setup option for the data source. This option reflects if the evidence
-	// collection is automated or manual.
+	// The setup option for the data source. This option reflects if the evidence
+	// collection method is automated or manual. If you don’t provide a value for
+	// sourceSetUpOption , Audit Manager automatically infers and populates the correct
+	// value based on the sourceType that you specify.
 	SourceSetUpOption SourceSetUpOption
 
-	//  Specifies one of the five data source types for evidence collection.
+	//  Specifies which type of data source is used to collect evidence.
+	//
+	//   - The source can be an individual data source type, such as AWS_Cloudtrail ,
+	//   AWS_Config , AWS_Security_Hub , AWS_API_Call , or MANUAL .
+	//
+	//   - The source can also be a managed grouping of data sources, such as a
+	//   Core_Control or a Common_Control .
 	SourceType SourceType
 
 	//  The instructions for troubleshooting the control.
@@ -835,8 +854,7 @@ type CreateAssessmentFrameworkControlSet struct {
 	noSmithyDocumentSerde
 }
 
-//	The control mapping fields that represent the source for evidence collection,
-//
+// The mapping attributes that determine the evidence source for a given control,
 // along with related parameters and metadata. This doesn't contain mappingID .
 type CreateControlMappingSource struct {
 
@@ -875,11 +893,19 @@ type CreateControlMappingSource struct {
 	//  The name of the control mapping data source.
 	SourceName *string
 
-	//  The setup option for the data source, which reflects if the evidence
-	// collection is automated or manual.
+	// The setup option for the data source. This option reflects if the evidence
+	// collection method is automated or manual. If you don’t provide a value for
+	// sourceSetUpOption , Audit Manager automatically infers and populates the correct
+	// value based on the sourceType that you specify.
 	SourceSetUpOption SourceSetUpOption
 
-	//  Specifies one of the five types of data sources for evidence collection.
+	//  Specifies which type of data source is used to collect evidence.
+	//
+	//   - The source can be an individual data source type, such as AWS_Cloudtrail ,
+	//   AWS_Config , AWS_Security_Hub , AWS_API_Call , or MANUAL .
+	//
+	//   - The source can also be a managed grouping of data sources, such as a
+	//   Core_Control or a Common_Control .
 	SourceType SourceType
 
 	//  The instructions for troubleshooting the control.
@@ -1479,9 +1505,19 @@ type Role struct {
 	noSmithyDocumentSerde
 }
 
-//	The wrapper that contains the Amazon Web Services accounts and services that
+//	The wrapper that contains the Amazon Web Services accounts that are in scope
 //
-// are in scope for the assessment.
+// for the assessment.
+//
+// You no longer need to specify which Amazon Web Services are in scope when you
+// create or update an assessment. Audit Manager infers the services in scope by
+// examining your assessment controls and their data sources, and then mapping this
+// information to the relevant Amazon Web Services.
+//
+// If an underlying data source changes for your assessment, we automatically
+// update the services scope as needed to reflect the correct Amazon Web Services.
+// This ensures that your assessment collects accurate and comprehensive evidence
+// about all of the relevant services in your AWS environment.
 type Scope struct {
 
 	//  The Amazon Web Services accounts that are included in the scope of the
@@ -1490,6 +1526,15 @@ type Scope struct {
 
 	//  The Amazon Web Services services that are included in the scope of the
 	// assessment.
+	//
+	// This API parameter is no longer supported. If you use this parameter to specify
+	// one or more Amazon Web Services, Audit Manager ignores this input. Instead, the
+	// value for awsServices will show as empty.
+	//
+	// Deprecated: You can't specify services in scope when creating/updating an
+	// assessment. If you use the parameter to specify one or more AWS services, Audit
+	// Manager ignores the input. Instead the value of the parameter will show as empty
+	// indicating that the services are defined and managed by Audit Manager.
 	AwsServices []AWSService
 
 	noSmithyDocumentSerde

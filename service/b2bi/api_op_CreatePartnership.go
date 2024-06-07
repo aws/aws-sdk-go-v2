@@ -33,6 +33,11 @@ func (c *Client) CreatePartnership(ctx context.Context, params *CreatePartnershi
 
 type CreatePartnershipInput struct {
 
+	// Specifies a list of the capabilities associated with this partnership.
+	//
+	// This member is required.
+	Capabilities []string
+
 	// Specifies the email address associated with this trading partner.
 	//
 	// This member is required.
@@ -48,9 +53,6 @@ type CreatePartnershipInput struct {
 	//
 	// This member is required.
 	ProfileId *string
-
-	// Specifies a list of the capabilities associated with this partnership.
-	Capabilities []string
 
 	// Reserved for future use.
 	ClientToken *string

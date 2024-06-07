@@ -11,12 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of all of the Amazon Web Services that you can choose to include in
-// your assessment. When you [create an assessment], specify which of these services you want to include
-// to narrow the assessment's [scope].
+// Gets a list of the Amazon Web Services from which Audit Manager can collect
+// evidence.
 //
-// [create an assessment]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_CreateAssessment.html
-// [scope]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Scope.html
+// Audit Manager defines which Amazon Web Services are in scope for an assessment.
+// Audit Manager infers this scope by examining the assessment’s controls and their
+// data sources, and then mapping this information to one or more of the
+// corresponding Amazon Web Services that are in this list.
+//
+// For information about why it's no longer possible to specify services in scope
+// manually, see [I can't edit the services in scope for my assessment]in the Troubleshooting section of the Audit Manager user guide.
+//
+// [I can't edit the services in scope for my assessment]: https://docs.aws.amazon.com/audit-manager/latest/userguide/evidence-collection-issues.html#unable-to-edit-services
 func (c *Client) GetServicesInScope(ctx context.Context, params *GetServicesInScopeInput, optFns ...func(*Options)) (*GetServicesInScopeOutput, error) {
 	if params == nil {
 		params = &GetServicesInScopeInput{}

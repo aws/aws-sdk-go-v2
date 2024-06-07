@@ -24,8 +24,9 @@ import (
 // Verified Permissions validates each token that is specified in a request by
 // checking its expiration date and its signature.
 //
-// If you delete a Amazon Cognito user pool or user, tokens from that deleted pool
-// or that deleted user continue to be usable until they expire.
+// Tokens from an identity source user continue to be usable until they expire.
+// Token revocation and resource deletion have no effect on the validity of a token
+// in your policy store
 //
 // [JSON web token (JWT)]: https://wikipedia.org/wiki/JSON_Web_Token
 func (c *Client) IsAuthorizedWithToken(ctx context.Context, params *IsAuthorizedWithTokenInput, optFns ...func(*Options)) (*IsAuthorizedWithTokenOutput, error) {

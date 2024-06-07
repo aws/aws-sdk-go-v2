@@ -1,0 +1,8 @@
+{
+    "id": "70d3436e-6b56-48fb-ac39-888c670d4551",
+    "type": "feature",
+    "description": "CodePipeline now supports overriding S3 Source Object Key during StartPipelineExecution, as part of Source Overrides.",
+    "modules": [
+        "service/codepipeline"
+    ]
+}

@@ -41,9 +41,6 @@ type ListActionExecutionsInput struct {
 	// remaining results, make another call with the returned nextToken value. Action
 	// execution history is retained for up to 12 months, based on action execution
 	// start times. Default value is 100.
-	//
-	// Detailed execution history is available for executions run on or after February
-	// 21, 2019.
 	MaxResults *int32
 
 	// The token that was returned from the previous ListActionExecutions call, which
@@ -166,9 +163,6 @@ type ListActionExecutionsPaginatorOptions struct {
 	// remaining results, make another call with the returned nextToken value. Action
 	// execution history is retained for up to 12 months, based on action execution
 	// start times. Default value is 100.
-	//
-	// Detailed execution history is available for executions run on or after February
-	// 21, 2019.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

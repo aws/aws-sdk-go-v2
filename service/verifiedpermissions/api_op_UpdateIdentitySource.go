@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Updates the specified identity source to use a new identity provider (IdP)
-// source, or to change the mapping of identities from the IdP to a different
-// principal entity type.
+// Updates the specified identity source to use a new identity provider (IdP), or
+// to change the mapping of identities from the IdP to a different principal entity
+// type.
 //
 // Verified Permissions is [eventually consistent] . It can take a few seconds for a new or changed
 // element to propagate through the service and be visible in the results of other

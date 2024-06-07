@@ -1748,6 +1748,10 @@ type SourceRevision struct {
 // pipeline execution that's being started. A source revision is the version with
 // all the changes to your application code, or source artifact, for the pipeline
 // execution.
+//
+// For the S3_OBJECT_VERSION_ID and S3_OBJECT_KEY types of source revisions,
+// either of the types can be used independently, or they can be used together to
+// override the source with a specific ObjectKey and VersionID.
 type SourceRevisionOverride struct {
 
 	// The name of the action where the override will be applied.

@@ -5009,6 +5009,24 @@ func (ProductionVariantAcceleratorType) Values() []ProductionVariantAcceleratorT
 	}
 }
 
+type ProductionVariantInferenceAmiVersion string
+
+// Enum values for ProductionVariantInferenceAmiVersion
+const (
+	ProductionVariantInferenceAmiVersionAl2Gpu2 ProductionVariantInferenceAmiVersion = "al2-ami-sagemaker-inference-gpu-2"
+)
+
+// Values returns all known values for ProductionVariantInferenceAmiVersion. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProductionVariantInferenceAmiVersion) Values() []ProductionVariantInferenceAmiVersion {
+	return []ProductionVariantInferenceAmiVersion{
+		"al2-ami-sagemaker-inference-gpu-2",
+	}
+}
+
 type ProductionVariantInstanceType string
 
 // Enum values for ProductionVariantInstanceType

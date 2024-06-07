@@ -66260,6 +66260,15 @@ func awsAwsjson11_deserializeDocumentProductionVariant(v **types.ProductionVaria
 				sv.EnableSSMAccess = ptr.Bool(jtv)
 			}
 
+		case "InferenceAmiVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProductionVariantInferenceAmiVersion to be of type string, got %T instead", value)
+				}
+				sv.InferenceAmiVersion = types.ProductionVariantInferenceAmiVersion(jtv)
+			}
+
 		case "InitialInstanceCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)

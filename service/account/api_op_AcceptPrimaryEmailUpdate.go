@@ -131,6 +131,9 @@ func (c *Client) addOperationAcceptPrimaryEmailUpdateMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAcceptPrimaryEmailUpdateValidationMiddleware(stack); err != nil {
 		return err
 	}

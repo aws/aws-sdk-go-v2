@@ -29,15 +29,37 @@ func (c *Client) ListControls(ctx context.Context, params *ListControlsInput, op
 
 type ListControlsInput struct {
 
-	//  The type of control, such as a standard control or a custom control.
+	// A filter that narrows the list of controls to a specific type.
 	//
 	// This member is required.
 	ControlType types.ControlType
 
-	//  Represents the maximum number of results on a page or for an API request call.
+	// A filter that narrows the list of controls to a specific resource from the
+	// Amazon Web Services Control Catalog.
+	//
+	// To use this parameter, specify the ARN of the Control Catalog resource. You can
+	// specify either a control domain, a control objective, or a common control. For
+	// information about how to find the ARNs for these resources, see [ListDomains]ListDomains , [ListObjectives]
+	// ListObjectives , and [ListCommonControls]ListCommonControls .
+	//
+	// You can only filter by one Control Catalog resource at a time. Specifying
+	// multiple resource ARNs isn’t currently supported. If you want to filter by more
+	// than one ARN, we recommend that you run the ListControls operation separately
+	// for each ARN.
+	//
+	// Alternatively, specify UNCATEGORIZED to list controls that aren't mapped to a
+	// Control Catalog resource. For example, this operation might return a list of
+	// custom controls that don't belong to any control domain or control objective.
+	//
+	// [ListCommonControls]: https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListCommonControls.html
+	// [ListDomains]: https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListDomains.html
+	// [ListObjectives]: https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListObjectives.html
+	ControlCatalogId *string
+
+	// The maximum number of results on a page or for an API request call.
 	MaxResults *int32
 
-	//  The pagination token that's used to fetch the next set of results.
+	// The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -48,7 +70,7 @@ type ListControlsOutput struct {
 	//  A list of metadata that the ListControls API returns for each control.
 	ControlMetadataList []types.ControlMetadata
 
-	//  The pagination token that's used to fetch the next set of results.
+	// The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -148,7 +170,7 @@ var _ ListControlsAPIClient = (*Client)(nil)
 
 // ListControlsPaginatorOptions is the paginator options for ListControls
 type ListControlsPaginatorOptions struct {
-	//  Represents the maximum number of results on a page or for an API request call.
+	// The maximum number of results on a page or for an API request call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
