@@ -1,3 +1,12 @@
+# Release (2024-06-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.0.0](service/applicationsignals/CHANGELOG.md#v100-2024-06-10)
+  * **Release**: New AWS service client module
+  * **Feature**: This is the initial SDK release for Amazon CloudWatch Application Signals. Amazon CloudWatch Application Signals provides curated application performance monitoring for developers to monitor and troubleshoot application health using pre-built dashboards and Service Level Objectives.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.42.0](service/ecs/CHANGELOG.md#v1420-2024-06-10)
+  * **Feature**: This release introduces a new cluster configuration to support the customer-managed keys for ECS managed storage encryption.
+
 # Release (2024-06-07)
 
 ## General Highlights

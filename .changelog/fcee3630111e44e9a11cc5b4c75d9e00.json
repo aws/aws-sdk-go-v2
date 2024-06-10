@@ -1,8 +1,0 @@
-{
-    "id": "fcee3630-111e-44e9-a11c-c5b4c75d9e00",
-    "type": "feature",
-    "description": "This release introduces a new cluster configuration to support the customer-managed keys for ECS managed storage encryption.",
-    "modules": [
-        "service/ecs"
-    ]
-}

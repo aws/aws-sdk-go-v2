@@ -1,3 +1,7 @@
+# v1.42.0 (2024-06-10)
+
+* **Feature**: This release introduces a new cluster configuration to support the customer-managed keys for ECS managed storage encryption.
+
 # v1.41.13 (2024-06-07)
 
 * **Bug Fix**: Add clock skew correction on all service clients
