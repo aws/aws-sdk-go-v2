@@ -19,10 +19,15 @@ import (
 // forcibly stopped. If the container handles the SIGTERM value gracefully and
 // exits within 30 seconds from receiving it, no SIGKILL value is sent.
 //
+// For Windows containers, POSIX signals do not work and runtime stops the
+// container by sending a CTRL_SHUTDOWN_EVENT . For more information, see [Unable to react to graceful shutdown of (Windows) container #25982] on
+// GitHub.
+//
 // The default 30-second timeout can be configured on the Amazon ECS container
 // agent with the ECS_CONTAINER_STOP_TIMEOUT variable. For more information, see [Amazon ECS Container Agent Configuration]
 // in the Amazon Elastic Container Service Developer Guide.
 //
+// [Unable to react to graceful shutdown of (Windows) container #25982]: https://github.com/moby/moby/issues/25982
 // [Amazon ECS Container Agent Configuration]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
 func (c *Client) StopTask(ctx context.Context, params *StopTaskInput, optFns ...func(*Options)) (*StopTaskOutput, error) {
 	if params == nil {

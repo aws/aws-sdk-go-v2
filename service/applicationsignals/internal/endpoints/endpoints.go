@@ -62,7 +62,7 @@ func transformToSharedOptions(options Options) endpoints.Options {
 	}
 }
 
-// Resolver Redshift Serverless endpoint resolver
+// Resolver Application Signals endpoint resolver
 type Resolver struct {
 	partitions endpoints.Partitions
 }
@@ -110,168 +110,34 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "redshift-serverless.{region}.api.aws",
+				Hostname:          "application-signals.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "redshift-serverless-fips.{region}.amazonaws.com",
+				Hostname:          "application-signals-fips.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "redshift-serverless-fips.{region}.api.aws",
+				Hostname:          "application-signals-fips.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "redshift-serverless.{region}.amazonaws.com",
+				Hostname:          "application-signals.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 		},
 		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
-		Endpoints: endpoints.Endpoints{
-			endpoints.EndpointKey{
-				Region: "ap-northeast-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-northeast-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-south-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-southeast-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-southeast-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ca-central-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region:  "ca-central-1",
-				Variant: endpoints.FIPSVariant,
-			}: {
-				Hostname: "redshift-serverless-fips.ca-central-1.amazonaws.com",
-			},
-			endpoints.EndpointKey{
-				Region: "eu-central-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-central-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-north-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-south-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-west-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-west-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-west-3",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "fips-ca-central-1",
-			}: endpoints.Endpoint{
-				Hostname: "redshift-serverless-fips.ca-central-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ca-central-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "fips-us-east-1",
-			}: endpoints.Endpoint{
-				Hostname: "redshift-serverless-fips.us-east-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-east-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "fips-us-east-2",
-			}: endpoints.Endpoint{
-				Hostname: "redshift-serverless-fips.us-east-2.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-east-2",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "fips-us-west-1",
-			}: endpoints.Endpoint{
-				Hostname: "redshift-serverless-fips.us-west-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-west-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "fips-us-west-2",
-			}: endpoints.Endpoint{
-				Hostname: "redshift-serverless-fips.us-west-2.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-west-2",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "me-central-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "sa-east-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "us-east-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region:  "us-east-1",
-				Variant: endpoints.FIPSVariant,
-			}: {
-				Hostname: "redshift-serverless-fips.us-east-1.amazonaws.com",
-			},
-			endpoints.EndpointKey{
-				Region: "us-east-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region:  "us-east-2",
-				Variant: endpoints.FIPSVariant,
-			}: {
-				Hostname: "redshift-serverless-fips.us-east-2.amazonaws.com",
-			},
-			endpoints.EndpointKey{
-				Region: "us-west-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region:  "us-west-1",
-				Variant: endpoints.FIPSVariant,
-			}: {
-				Hostname: "redshift-serverless-fips.us-west-1.amazonaws.com",
-			},
-			endpoints.EndpointKey{
-				Region: "us-west-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region:  "us-west-2",
-				Variant: endpoints.FIPSVariant,
-			}: {
-				Hostname: "redshift-serverless-fips.us-west-2.amazonaws.com",
-			},
-		},
 	},
 	{
 		ID: "aws-cn",
@@ -279,42 +145,34 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "redshift-serverless.{region}.api.amazonwebservices.com.cn",
+				Hostname:          "application-signals.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "redshift-serverless-fips.{region}.amazonaws.com.cn",
+				Hostname:          "application-signals-fips.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "redshift-serverless-fips.{region}.api.amazonwebservices.com.cn",
+				Hostname:          "application-signals-fips.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "redshift-serverless.{region}.amazonaws.com.cn",
+				Hostname:          "application-signals.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsCn,
 		IsRegionalized: true,
-		Endpoints: endpoints.Endpoints{
-			endpoints.EndpointKey{
-				Region: "cn-north-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "cn-northwest-1",
-			}: endpoints.Endpoint{},
-		},
 	},
 	{
 		ID: "aws-iso",
@@ -322,14 +180,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "redshift-serverless-fips.{region}.c2s.ic.gov",
+				Hostname:          "application-signals-fips.{region}.c2s.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "redshift-serverless.{region}.c2s.ic.gov",
+				Hostname:          "application-signals.{region}.c2s.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -343,14 +201,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "redshift-serverless-fips.{region}.sc2s.sgov.gov",
+				Hostname:          "application-signals-fips.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "redshift-serverless.{region}.sc2s.sgov.gov",
+				Hostname:          "application-signals.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -364,14 +222,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "redshift-serverless-fips.{region}.cloud.adc-e.uk",
+				Hostname:          "application-signals-fips.{region}.cloud.adc-e.uk",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "redshift-serverless.{region}.cloud.adc-e.uk",
+				Hostname:          "application-signals.{region}.cloud.adc-e.uk",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -385,14 +243,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "redshift-serverless-fips.{region}.csp.hci.ic.gov",
+				Hostname:          "application-signals-fips.{region}.csp.hci.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "redshift-serverless.{region}.csp.hci.ic.gov",
+				Hostname:          "application-signals.{region}.csp.hci.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -406,28 +264,28 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "redshift-serverless.{region}.api.aws",
+				Hostname:          "application-signals.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "redshift-serverless-fips.{region}.amazonaws.com",
+				Hostname:          "application-signals-fips.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "redshift-serverless-fips.{region}.api.aws",
+				Hostname:          "application-signals-fips.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "redshift-serverless.{region}.amazonaws.com",
+				Hostname:          "application-signals.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},

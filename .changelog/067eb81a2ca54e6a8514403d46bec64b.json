@@ -1,0 +1,8 @@
+{
+    "id": "067eb81a-2ca5-4e6a-8514-403d46bec64b",
+    "type": "feature",
+    "description": "This release updates the regex pattern for Image Builder ARNs.",
+    "modules": [
+        "service/imagebuilder"
+    ]
+}

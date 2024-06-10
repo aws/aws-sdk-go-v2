@@ -265,6 +265,12 @@ type CapacityProvider struct {
 // and only need to be associated with a cluster to be used in a capacity provider
 // strategy.
 //
+// With FARGATE_SPOT , you can run interruption tolerant tasks at a rate that's
+// discounted compared to the FARGATE price. FARGATE_SPOT runs tasks on spare
+// compute capacity. When Amazon Web Services needs the capacity back, your tasks
+// are interrupted with a two-minute warning. FARGATE_SPOT only supports Linux
+// tasks with the X86_64 architecture on platform version 1.3.0 or later.
+//
 // A capacity provider strategy may contain a maximum of 6 capacity providers.
 type CapacityProviderStrategyItem struct {
 
@@ -452,11 +458,14 @@ type Cluster struct {
 	noSmithyDocumentSerde
 }
 
-// The execute command configuration for the cluster.
+// The execute command and managed storage configuration for the cluster.
 type ClusterConfiguration struct {
 
 	// The details of the execute command configuration.
 	ExecuteCommandConfiguration *ExecuteCommandConfiguration
+
+	// The details of the managed storage configuration.
+	ManagedStorageConfiguration *ManagedStorageConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1635,6 +1644,9 @@ type Deployment struct {
 	// failed task count resets to zero and stops being evaluated.
 	FailedTasks int32
 
+	// The Fargate ephemeral storage settings for the deployment.
+	FargateEphemeralStorage *DeploymentEphemeralStorage
+
 	// The ID of the deployment.
 	Id *string
 
@@ -1928,6 +1940,16 @@ type DeploymentController struct {
 	//
 	// This member is required.
 	Type DeploymentControllerType
+
+	noSmithyDocumentSerde
+}
+
+// The amount of ephemeral storage to allocate for the deployment.
+type DeploymentEphemeralStorage struct {
+
+	// Specify an Key Management Service key ID to encrypt the ephemeral storage for
+	// deployment.
+	KmsKeyId *string
 
 	noSmithyDocumentSerde
 }
@@ -2407,12 +2429,14 @@ type FSxWindowsFileServerVolumeConfiguration struct {
 //
 // The following are notes about container health check support:
 //
-//   - When the Amazon ECS agent cannot connect to the Amazon ECS service, the
-//     service reports the container as UNHEALTHY .
-//
-//   - The health check statuses are the "last heard from" response from the
-//     Amazon ECS agent. There are no assumptions made about the status of the
-//     container health checks.
+//   - If the Amazon ECS container agent becomes disconnected from the Amazon ECS
+//     service, this won't cause a container to transition to an UNHEALTHY status.
+//     This is by design, to ensure that containers remain running during agent
+//     restarts or temporary unavailability. The health check status is the "last heard
+//     from" response from the Amazon ECS agent, so if the container was considered
+//     HEALTHY prior to the disconnect, that status will remain until the agent
+//     reconnects and another health check occurs. There are no assumptions made about
+//     the status of the container health checks.
 //
 //   - Container health checks require version 1.17.0 or greater of the Amazon ECS
 //     container agent. For more information, see [Updating the Amazon ECS container agent].
@@ -2979,6 +3003,18 @@ type ManagedScaling struct {
 	noSmithyDocumentSerde
 }
 
+// The managed storage configuration for the cluster.
+type ManagedStorageConfiguration struct {
+
+	// Specify the Key Management Service key ID for the Fargate ephemeral storage.
+	FargateEphemeralStorageKmsKeyId *string
+
+	// Specify a Key Management Service key ID to encrypt the managed storage.
+	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
 // The details for a volume mount point that's used in a container definition.
 type MountPoint struct {
 
@@ -3471,21 +3507,20 @@ type Resource struct {
 // [Working with GPUs on Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html
 type ResourceRequirement struct {
 
-	// The type of resource to assign to a container. The supported values are GPU or
-	// InferenceAccelerator .
+	// The type of resource to assign to a container.
 	//
 	// This member is required.
 	Type ResourceType
 
 	// The value for the specified resource type.
 	//
-	// If the GPU type is used, the value is the number of physical GPUs the Amazon
-	// ECS container agent reserves for the container. The number of GPUs that's
-	// reserved for all containers in a task can't exceed the number of available GPUs
-	// on the container instance that the task is launched on.
+	// When the type is GPU , the value is the number of physical GPUs the Amazon ECS
+	// container agent reserves for the container. The number of GPUs that's reserved
+	// for all containers in a task can't exceed the number of available GPUs on the
+	// container instance that the task is launched on.
 	//
-	// If the InferenceAccelerator type is used, the value matches the deviceName for
-	// an [InferenceAccelerator]specified in a task definition.
+	// When the type is InferenceAccelerator , the value matches the deviceName for an [InferenceAccelerator]
+	// specified in a task definition.
 	//
 	// [InferenceAccelerator]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html
 	//
@@ -3982,8 +4017,7 @@ type ServiceConnectServiceResource struct {
 	noSmithyDocumentSerde
 }
 
-// An object that represents the Amazon Web Services Private Certificate Authority
-// certificate.
+// The certificate root authority that secures your service.
 type ServiceConnectTlsCertificateAuthority struct {
 
 	// The ARN of the Amazon Web Services Private Certificate Authority certificate.
@@ -3992,7 +4026,7 @@ type ServiceConnectTlsCertificateAuthority struct {
 	noSmithyDocumentSerde
 }
 
-// An object that represents the configuration for Service Connect TLS.
+// The key that encrypts and decrypts your resources for Service Connect TLS.
 type ServiceConnectTlsConfiguration struct {
 
 	// The signer certificate authority.
@@ -4450,6 +4484,9 @@ type Task struct {
 
 	// The Unix timestamp for the time when the task execution stopped.
 	ExecutionStoppedAt *time.Time
+
+	// The Fargate ephemeral storage settings for the task.
+	FargateEphemeralStorage *TaskEphemeralStorage
 
 	// The name of the task group that's associated with the task.
 	Group *string
@@ -4940,6 +4977,20 @@ type TaskDefinitionPlacementConstraint struct {
 	noSmithyDocumentSerde
 }
 
+// The amount of ephemeral storage to allocate for the task.
+type TaskEphemeralStorage struct {
+
+	// Specify an Key Management Service key ID to encrypt the ephemeral storage for
+	// the task.
+	KmsKeyId *string
+
+	// The total amount, in GiB, of the ephemeral storage to set for the task. The
+	// minimum supported value is 20 GiB and the maximum supported value is  200 GiB.
+	SizeInGiB int32
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for the Amazon EBS volume that Amazon ECS creates and manages
 // on your behalf. These settings are used to create each Amazon EBS volume, with
 // one volume created for each task.
@@ -5173,6 +5224,9 @@ type TaskSet struct {
 	// service discovery registry, the externalId parameter contains the
 	// ECS_TASK_SET_EXTERNAL_ID Cloud Map attribute.
 	ExternalId *string
+
+	// The Fargate ephemeral storage settings for the task set.
+	FargateEphemeralStorage *DeploymentEphemeralStorage
 
 	// The ID of the task set.
 	Id *string

@@ -8487,6 +8487,11 @@ func awsAwsjson11_deserializeDocumentClusterConfiguration(v **types.ClusterConfi
 				return err
 			}
 
+		case "managedStorageConfiguration":
+			if err := awsAwsjson11_deserializeDocumentManagedStorageConfiguration(&sv.ManagedStorageConfiguration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9997,6 +10002,11 @@ func awsAwsjson11_deserializeDocumentDeployment(v **types.Deployment, value inte
 				sv.FailedTasks = int32(i64)
 			}
 
+		case "fargateEphemeralStorage":
+			if err := awsAwsjson11_deserializeDocumentDeploymentEphemeralStorage(&sv.FargateEphemeralStorage, value); err != nil {
+				return err
+			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10339,6 +10349,46 @@ func awsAwsjson11_deserializeDocumentDeploymentController(v **types.DeploymentCo
 					return fmt.Errorf("expected DeploymentControllerType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.DeploymentControllerType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDeploymentEphemeralStorage(v **types.DeploymentEphemeralStorage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeploymentEphemeralStorage
+	if *v == nil {
+		sv = &types.DeploymentEphemeralStorage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "kmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
 			}
 
 		default:
@@ -12564,6 +12614,55 @@ func awsAwsjson11_deserializeDocumentManagedScaling(v **types.ManagedScaling, va
 					return err
 				}
 				sv.TargetCapacity = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentManagedStorageConfiguration(v **types.ManagedStorageConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedStorageConfiguration
+	if *v == nil {
+		sv = &types.ManagedStorageConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fargateEphemeralStorageKmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FargateEphemeralStorageKmsKeyId = ptr.String(jtv)
+			}
+
+		case "kmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
 			}
 
 		default:
@@ -16191,6 +16290,11 @@ func awsAwsjson11_deserializeDocumentTask(v **types.Task, value interface{}) err
 				}
 			}
 
+		case "fargateEphemeralStorage":
+			if err := awsAwsjson11_deserializeDocumentTaskEphemeralStorage(&sv.FargateEphemeralStorage, value); err != nil {
+				return err
+			}
+
 		case "group":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16758,6 +16862,59 @@ func awsAwsjson11_deserializeDocumentTaskDefinitionPlacementConstraints(v *[]typ
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTaskEphemeralStorage(v **types.TaskEphemeralStorage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TaskEphemeralStorage
+	if *v == nil {
+		sv = &types.TaskEphemeralStorage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "kmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
+			}
+
+		case "sizeInGiB":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SizeInGiB = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTaskOverride(v **types.TaskOverride, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16946,6 +17103,11 @@ func awsAwsjson11_deserializeDocumentTaskSet(v **types.TaskSet, value interface{
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ExternalId = ptr.String(jtv)
+			}
+
+		case "fargateEphemeralStorage":
+			if err := awsAwsjson11_deserializeDocumentDeploymentEphemeralStorage(&sv.FargateEphemeralStorage, value); err != nil {
+				return err
 			}
 
 		case "id":
