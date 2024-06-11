@@ -2847,6 +2847,41 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#AuthenticationRequestExtraParams": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.sagemaker#AuthenticationRequestExtraParamsKey"
+            },
+            "value": {
+                "target": "com.amazonaws.sagemaker#AuthenticationRequestExtraParamsValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#AuthenticationRequestExtraParamsKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.sagemaker#AuthenticationRequestExtraParamsValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
         "com.amazonaws.sagemaker#AutoGenerateEndpointName": {
             "type": "boolean"
         },
@@ -39539,6 +39574,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The sort order for results. The default is <code>Ascending</code>.</p>"
                     }
+                },
+                "CrossAccountFilterOption": {
+                    "target": "com.amazonaws.sagemaker#CrossAccountFilterOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that returns either model groups shared with you or model groups in\n\t  your own account. When the value is <code>CrossAccount</code>, the results show\n\t  the resources made discoverable to you from other accounts. When the value is\n          <code>SameAccount</code> or <code>null</code>, the results show resources from your\n \t  account. The default is <code>SameAccount</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -47582,6 +47623,18 @@
                         "smithy.api#documentation": "<p>The OIDC IdP JSON Web Key Set (Jwks) URI used to configure your private workforce.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Scope": {
+                    "target": "com.amazonaws.sagemaker#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of string identifiers used to refer to the specific pieces of user data or claims that the client application wants to access.</p>"
+                    }
+                },
+                "AuthenticationRequestExtraParams": {
+                    "target": "com.amazonaws.sagemaker#AuthenticationRequestExtraParams",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string to string map of identifiers specific to the custom identity provider (IdP) being used.</p>"
+                    }
                 }
             },
             "traits": {
@@ -47631,6 +47684,18 @@
                     "target": "com.amazonaws.sagemaker#OidcEndpoint",
                     "traits": {
                         "smithy.api#documentation": "<p>The OIDC IdP JSON Web Key Set (Jwks) URI used to configure your private workforce.</p>"
+                    }
+                },
+                "Scope": {
+                    "target": "com.amazonaws.sagemaker#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of string identifiers used to refer to the specific pieces of user data or claims that the client application wants to access.</p>"
+                    }
+                },
+                "AuthenticationRequestExtraParams": {
+                    "target": "com.amazonaws.sagemaker#AuthenticationRequestExtraParams",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string to string map of identifiers specific to the custom identity provider (IdP) being used.</p>"
                     }
                 }
             },
@@ -57019,6 +57084,16 @@
                         "smithy.api#enumValue": "Stopped"
                     }
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#Scope": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[!#-\\[\\]-~]+( [!#-\\[\\]-~]+)*$"
             }
         },
         "com.amazonaws.sagemaker#Search": {

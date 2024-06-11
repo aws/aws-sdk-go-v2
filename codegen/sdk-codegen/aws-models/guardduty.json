@@ -2079,6 +2079,100 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.guardduty#CreateMalwareProtectionPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#CreateMalwareProtectionPlanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#CreateMalwareProtectionPlanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new Malware Protection plan for the protected resource.</p>\n         <p>When you create a Malware Protection plan, the Amazon Web Services service terms for GuardDuty Malware\n      Protection apply. For more information, see <a href=\"http://aws.amazon.com/service-terms/#87._Amazon_GuardDuty\">Amazon Web Services service terms for GuardDuty Malware Protection</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/malware-protection-plan",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#CreateMalwareProtectionPlanRequest": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.guardduty#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The idempotency token for the create request.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#jsonName": "clientToken"
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>IAM role with permissions required to scan and add tags to the associated\n      protected resource.</p>",
+                        "smithy.api#jsonName": "role",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProtectedResource": {
+                    "target": "com.amazonaws.guardduty#CreateProtectedResource",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Information about the protected resource that is associated with the created \n      Malware Protection plan. Presently, <code>S3Bucket</code> is the only supported \n      protected resource.</p>",
+                        "smithy.api#jsonName": "protectedResource",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Actions": {
+                    "target": "com.amazonaws.guardduty#MalwareProtectionPlanActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about whether the tags will be added to the S3 object after scanning.</p>",
+                        "smithy.api#jsonName": "actions"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.guardduty#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags added to the Malware Protection plan resource. </p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#CreateMalwareProtectionPlanResponse": {
+            "type": "structure",
+            "members": {
+                "MalwareProtectionPlanId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier associated with the Malware Protection plan resource.</p>",
+                        "smithy.api#jsonName": "malwareProtectionPlanId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.guardduty#CreateMembers": {
             "type": "operation",
             "input": {
@@ -2145,6 +2239,21 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#CreateProtectedResource": {
+            "type": "structure",
+            "members": {
+                "S3Bucket": {
+                    "target": "com.amazonaws.guardduty#CreateS3BucketResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the protected S3 bucket resource.</p>",
+                        "smithy.api#jsonName": "s3Bucket"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the protected resource that\n      is associated with the created Malware Protection plan.\n      Presently, <code>S3Bucket</code> is the only supported \n      protected resource.</p>"
             }
         },
         "com.amazonaws.guardduty#CreatePublishingDestination": {
@@ -2230,6 +2339,28 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#CreateS3BucketResource": {
+            "type": "structure",
+            "members": {
+                "BucketName": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the S3 bucket.</p>",
+                        "smithy.api#jsonName": "bucketName"
+                    }
+                },
+                "ObjectPrefixes": {
+                    "target": "com.amazonaws.guardduty#MalwareProtectionPlanObjectPrefixesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the specified object prefixes. The S3 object will be scanned only \n      if it belongs to any of the specified object prefixes.</p>",
+                        "smithy.api#jsonName": "objectPrefixes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the protected S3 bucket resource.</p>"
             }
         },
         "com.amazonaws.guardduty#CreateSampleFindings": {
@@ -2996,6 +3127,54 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#DeleteMalwareProtectionPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#DeleteMalwareProtectionPlanRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the Malware Protection plan ID associated with the Malware Protection plan resource.\n      Use this API only when you no longer want to protect the resource associated with this\n      Malware Protection plan ID.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/malware-protection-plan/{MalwareProtectionPlanId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#DeleteMalwareProtectionPlanRequest": {
+            "type": "structure",
+            "members": {
+                "MalwareProtectionPlanId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier associated with Malware Protection plan resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "malwareProtectionPlanId",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.guardduty#DeleteMembers": {
@@ -5853,6 +6032,118 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.guardduty#GetMalwareProtectionPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#GetMalwareProtectionPlanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#GetMalwareProtectionPlanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the Malware Protection plan details associated with a Malware Protection\n      plan ID.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/malware-protection-plan/{MalwareProtectionPlanId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#GetMalwareProtectionPlanRequest": {
+            "type": "structure",
+            "members": {
+                "MalwareProtectionPlanId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier associated with Malware Protection plan resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "malwareProtectionPlanId",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#GetMalwareProtectionPlanResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the protected resource.</p>",
+                        "smithy.api#jsonName": "arn"
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>IAM role that includes the permissions required to scan and \n      add tags to the associated protected resource.</p>",
+                        "smithy.api#jsonName": "role"
+                    }
+                },
+                "ProtectedResource": {
+                    "target": "com.amazonaws.guardduty#CreateProtectedResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the protected resource that is associated with the created \n      Malware Protection plan. Presently, <code>S3Bucket</code> is the only supported \n      protected resource.</p>",
+                        "smithy.api#jsonName": "protectedResource"
+                    }
+                },
+                "Actions": {
+                    "target": "com.amazonaws.guardduty#MalwareProtectionPlanActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about whether the tags will be added to the S3 object after scanning.</p>",
+                        "smithy.api#jsonName": "actions"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the Malware Protection plan resource was created.</p>",
+                        "smithy.api#jsonName": "createdAt"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.guardduty#MalwareProtectionPlanStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Malware Protection plan status.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                },
+                "StatusReasons": {
+                    "target": "com.amazonaws.guardduty#MalwareProtectionPlanStatusReasonsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the issue code and message associated to the status of\n    your Malware Protection plan.</p>",
+                        "smithy.api#jsonName": "statusReasons"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.guardduty#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags added to the Malware Protection plan resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.guardduty#GetMalwareScanSettings": {
             "type": "operation",
             "input": {
@@ -6489,6 +6780,9 @@
                     "target": "com.amazonaws.guardduty#CreateIPSet"
                 },
                 {
+                    "target": "com.amazonaws.guardduty#CreateMalwareProtectionPlan"
+                },
+                {
                     "target": "com.amazonaws.guardduty#CreateMembers"
                 },
                 {
@@ -6514,6 +6808,9 @@
                 },
                 {
                     "target": "com.amazonaws.guardduty#DeleteIPSet"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#DeleteMalwareProtectionPlan"
                 },
                 {
                     "target": "com.amazonaws.guardduty#DeleteMembers"
@@ -6573,6 +6870,9 @@
                     "target": "com.amazonaws.guardduty#GetIPSet"
                 },
                 {
+                    "target": "com.amazonaws.guardduty#GetMalwareProtectionPlan"
+                },
+                {
                     "target": "com.amazonaws.guardduty#GetMalwareScanSettings"
                 },
                 {
@@ -6618,6 +6918,9 @@
                     "target": "com.amazonaws.guardduty#ListIPSets"
                 },
                 {
+                    "target": "com.amazonaws.guardduty#ListMalwareProtectionPlans"
+                },
+                {
                     "target": "com.amazonaws.guardduty#ListMembers"
                 },
                 {
@@ -6661,6 +6964,9 @@
                 },
                 {
                     "target": "com.amazonaws.guardduty#UpdateIPSet"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#UpdateMalwareProtectionPlan"
                 },
                 {
                     "target": "com.amazonaws.guardduty#UpdateMalwareScanSettings"
@@ -8193,6 +8499,34 @@
                 }
             }
         },
+        "com.amazonaws.guardduty#ItemPath": {
+            "type": "structure",
+            "members": {
+                "NestedItemPath": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nested item path where the infected file was found.</p>",
+                        "smithy.api#jsonName": "nestedItemPath"
+                    }
+                },
+                "Hash": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hash value of the infected resource.</p>",
+                        "smithy.api#jsonName": "hash"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the nested item path and hash of the protected\n      resource.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ItemPaths": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#ItemPath"
+            }
+        },
         "com.amazonaws.guardduty#KubernetesApiCallAction": {
             "type": "structure",
             "members": {
@@ -9291,6 +9625,72 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.guardduty#ListMalwareProtectionPlans": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#ListMalwareProtectionPlansRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#ListMalwareProtectionPlansResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the Malware Protection plan IDs associated with the protected\n      resources in your Amazon Web Services account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/malware-protection-plan",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#ListMalwareProtectionPlansRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this parameter when paginating results. Set the value \n      of this parameter to null on your first call to the list action. \n      For subsequent calls to the action, fill nextToken in the request \n      with the value of <code>NextToken</code> from the previous response to \n      continue listing data.</p>",
+                        "smithy.api#httpQuery": "nextToken",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#ListMalwareProtectionPlansResponse": {
+            "type": "structure",
+            "members": {
+                "MalwareProtectionPlans": {
+                    "target": "com.amazonaws.guardduty#MalwareProtectionPlansSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique identifiers associated with each Malware Protection plan.</p>",
+                        "smithy.api#jsonName": "malwareProtectionPlans"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this parameter when paginating results. Set the value \n      of this parameter to null on your first call to the list action. \n      For subsequent calls to the action, fill nextToken in the request \n      with the value of <code>NextToken</code> from the previous response to \n      continue listing data.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.guardduty#ListMembers": {
             "type": "operation",
             "input": {
@@ -9848,6 +10248,158 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides details about Malware Protection when it is enabled as a data source.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#MalwareProtectionPlanActions": {
+            "type": "structure",
+            "members": {
+                "Tagging": {
+                    "target": "com.amazonaws.guardduty#MalwareProtectionPlanTaggingAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the scanned S3 object will have tags about the scan result.</p>",
+                        "smithy.api#jsonName": "tagging"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about whether the tags will be added to the S3 object after scanning.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#MalwareProtectionPlanObjectPrefixesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.guardduty#MalwareProtectionPlanStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "WARNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WARNING"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#MalwareProtectionPlanStatusReason": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Issue code.</p>",
+                        "smithy.api#jsonName": "code"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Issue message that specifies the reason. For information\n      about potential troubleshooting steps, see\n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/troubleshoot-s3-malware-protection-status-errors.html\">Troubleshooting Malware Protection for S3 status issues</a> in the \n      <i>GuardDuty User Guide</i>.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the issue code and message associated to the status of\n      your Malware Protection plan.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#MalwareProtectionPlanStatusReasonsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#MalwareProtectionPlanStatusReason"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.guardduty#MalwareProtectionPlanSummary": {
+            "type": "structure",
+            "members": {
+                "MalwareProtectionPlanId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier associated with Malware Protection plan.</p>",
+                        "smithy.api#jsonName": "malwareProtectionPlanId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the Malware Protection plan resource.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#MalwareProtectionPlanTaggingAction": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.guardduty#MalwareProtectionPlanTaggingActionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether or not the tags will added.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about adding tags to the scanned S3 object after the scan result.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#MalwareProtectionPlanTaggingActionStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#MalwareProtectionPlansSummary": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#MalwareProtectionPlanSummary"
+            }
+        },
+        "com.amazonaws.guardduty#MalwareScanDetails": {
+            "type": "structure",
+            "members": {
+                "Threats": {
+                    "target": "com.amazonaws.guardduty#Threats",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the detected threats associated with the\n      generated GuardDuty finding.</p>",
+                        "smithy.api#jsonName": "threats"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the malware scan that generated a GuardDuty finding.</p>"
             }
         },
         "com.amazonaws.guardduty#ManagementType": {
@@ -11710,7 +12262,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.guardduty#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>InstanceArn that was scanned in the scan entry.</p>",
+                        "smithy.api#documentation": "<p>Instance ARN that was scanned in the scan entry.</p>",
                         "smithy.api#jsonName": "instanceArn"
                     }
                 }
@@ -11723,6 +12275,30 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.guardduty#String"
+            }
+        },
+        "com.amazonaws.guardduty#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error type.</p>",
+                        "smithy.api#jsonName": "__type"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested resource can't be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
             }
         },
         "com.amazonaws.guardduty#ResourceType": {
@@ -12011,6 +12587,13 @@
                         "smithy.api#documentation": "<p>Describes the public access policies that apply to the S3 bucket.</p>",
                         "smithy.api#jsonName": "publicAccess"
                     }
+                },
+                "S3ObjectDetails": {
+                    "target": "com.amazonaws.guardduty#S3ObjectDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the S3 object that was scanned.</p>",
+                        "smithy.api#jsonName": "s3ObjectDetails"
+                    }
                 }
             },
             "traits": {
@@ -12055,6 +12638,55 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes whether S3 data event logs will be enabled as a data source.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#S3ObjectDetail": {
+            "type": "structure",
+            "members": {
+                "ObjectArn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the S3 object.</p>",
+                        "smithy.api#jsonName": "objectArn"
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key of the S3 object.</p>",
+                        "smithy.api#jsonName": "key"
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity tag is a hash of the S3 object. The ETag reflects changes only to the contents of \n    an object, and not its metadata.</p>",
+                        "smithy.api#jsonName": "eTag"
+                    }
+                },
+                "Hash": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Hash of the threat detected in this finding.</p>",
+                        "smithy.api#jsonName": "hash"
+                    }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Version ID of the object.</p>",
+                        "smithy.api#jsonName": "versionId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the S3 object that was scanned</p>"
+            }
+        },
+        "com.amazonaws.guardduty#S3ObjectDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#S3ObjectDetail"
             }
         },
         "com.amazonaws.guardduty#Scan": {
@@ -12316,7 +12948,7 @@
                 "VolumeArn": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>EBS volume Arn details of the infected file.</p>",
+                        "smithy.api#documentation": "<p>EBS volume ARN details of the infected file.</p>",
                         "smithy.api#jsonName": "volumeArn"
                     }
                 },
@@ -12678,6 +13310,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains information about the detected unusual behavior.</p>",
                         "smithy.api#jsonName": "detection"
+                    }
+                },
+                "MalwareScanDetails": {
+                    "target": "com.amazonaws.guardduty#MalwareScanDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns details from the malware scan that generated a GuardDuty finding.</p>",
+                        "smithy.api#jsonName": "malwareScanDetails"
                     }
                 }
             },
@@ -13087,6 +13726,35 @@
                 "target": "com.amazonaws.guardduty#Tag"
             }
         },
+        "com.amazonaws.guardduty#Threat": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the detected threat that caused GuardDuty to generate this finding.</p>",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source of the threat that generated this finding.</p>",
+                        "smithy.api#jsonName": "source"
+                    }
+                },
+                "ItemPaths": {
+                    "target": "com.amazonaws.guardduty#ItemPaths",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the nested item path and \n      hash of the protected resource.</p>",
+                        "smithy.api#jsonName": "itemPaths"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the detected threats associated with the\n      generated finding.</p>"
+            }
+        },
         "com.amazonaws.guardduty#ThreatDetectedByName": {
             "type": "structure",
             "members": {
@@ -13274,6 +13942,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.guardduty#String"
+            }
+        },
+        "com.amazonaws.guardduty#Threats": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#Threat"
             }
         },
         "com.amazonaws.guardduty#ThreatsDetectedItemCount": {
@@ -13839,6 +14513,75 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.guardduty#UpdateMalwareProtectionPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#UpdateMalwareProtectionPlanRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing Malware Protection plan resource.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/malware-protection-plan/{MalwareProtectionPlanId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#UpdateMalwareProtectionPlanRequest": {
+            "type": "structure",
+            "members": {
+                "MalwareProtectionPlanId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier associated with the Malware Protection plan.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "malwareProtectionPlanId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>IAM role with permissions required to scan and add tags to \n      the associated protected resource.</p>",
+                        "smithy.api#jsonName": "role"
+                    }
+                },
+                "Actions": {
+                    "target": "com.amazonaws.guardduty#MalwareProtectionPlanActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about whether the tags will be added to the S3 object after scanning.</p>",
+                        "smithy.api#jsonName": "actions"
+                    }
+                },
+                "ProtectedResource": {
+                    "target": "com.amazonaws.guardduty#UpdateProtectedResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the protected resource that is associated \n      with the created Malware Protection plan. Presently, <code>S3Bucket</code>\n      is the only supported protected resource.</p>",
+                        "smithy.api#jsonName": "protectedResource"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.guardduty#UpdateMalwareScanSettings": {
             "type": "operation",
             "input": {
@@ -14070,6 +14813,21 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.guardduty#UpdateProtectedResource": {
+            "type": "structure",
+            "members": {
+                "S3Bucket": {
+                    "target": "com.amazonaws.guardduty#UpdateS3BucketResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the protected S3 bucket resource.</p>",
+                        "smithy.api#jsonName": "s3Bucket"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the protected resource \n      that is associated with the created Malware Protection plan. \n      Presently, <code>S3Bucket</code> is the only supported protected resource.</p>"
+            }
+        },
         "com.amazonaws.guardduty#UpdatePublishingDestination": {
             "type": "operation",
             "input": {
@@ -14133,6 +14891,21 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#UpdateS3BucketResource": {
+            "type": "structure",
+            "members": {
+                "ObjectPrefixes": {
+                    "target": "com.amazonaws.guardduty#MalwareProtectionPlanObjectPrefixesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the specified object prefixes. The S3 object will be scanned only \n      if it belongs to any of the specified object prefixes.</p>",
+                        "smithy.api#jsonName": "objectPrefixes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the protected S3 bucket resource.</p>"
             }
         },
         "com.amazonaws.guardduty#UpdateThreatIntelSet": {
@@ -14627,7 +15400,7 @@
                 "VolumeArn": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>EBS volume Arn information.</p>",
+                        "smithy.api#documentation": "<p>EBS volume ARN information.</p>",
                         "smithy.api#jsonName": "volumeArn"
                     }
                 },
@@ -14662,14 +15435,14 @@
                 "SnapshotArn": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Snapshot Arn of the EBS volume.</p>",
+                        "smithy.api#documentation": "<p>Snapshot ARN of the EBS volume.</p>",
                         "smithy.api#jsonName": "snapshotArn"
                     }
                 },
                 "KmsKeyArn": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>KMS key Arn used to encrypt the EBS volume.</p>",
+                        "smithy.api#documentation": "<p>KMS key ARN used to encrypt the EBS volume.</p>",
                         "smithy.api#jsonName": "kmsKeyArn"
                     }
                 }

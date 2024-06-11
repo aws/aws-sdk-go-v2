@@ -7,16 +7,27 @@
                 "actions": {
                     "target": "com.amazonaws.accessanalyzer#ActionsList",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": [],
                         "smithy.api#documentation": "<p>A list of actions for the access permissions. Any strings that can be used as an action\n         in an IAM policy can be used in the list of actions to check.</p>",
                         "smithy.api#length": {
                             "max": 100
-                        },
-                        "smithy.api#required": {}
+                        }
+                    }
+                },
+                "resources": {
+                    "target": "com.amazonaws.accessanalyzer#ResourcesList",
+                    "traits": {
+                        "smithy.api#default": [],
+                        "smithy.api#documentation": "<p>A list of resources for the access permissions. Any strings that can be used as a\n         resource in an IAM policy can be used in the list of resources to check.</p>",
+                        "smithy.api#length": {
+                            "max": 100
+                        }
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about actions that define permissions to check against a\n         policy.</p>"
+                "smithy.api#documentation": "<p>Contains information about actions and resources that define permissions to check\n         against a policy.</p>"
             }
         },
         "com.amazonaws.accessanalyzer#AccessAnalyzer": {
@@ -36,7 +47,13 @@
                     "target": "com.amazonaws.accessanalyzer#CheckNoNewAccess"
                 },
                 {
+                    "target": "com.amazonaws.accessanalyzer#CheckNoPublicAccess"
+                },
+                {
                     "target": "com.amazonaws.accessanalyzer#CreateAccessPreview"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#GenerateFindingRecommendation"
                 },
                 {
                     "target": "com.amazonaws.accessanalyzer#GetAccessPreview"
@@ -46,6 +63,9 @@
                 },
                 {
                     "target": "com.amazonaws.accessanalyzer#GetFinding"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#GetFindingRecommendation"
                 },
                 {
                     "target": "com.amazonaws.accessanalyzer#GetFindingV2"
@@ -1156,6 +1176,85 @@
                 ]
             }
         },
+        "com.amazonaws.accessanalyzer#AccessCheckResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWS::DynamoDB::Table",
+                        "name": "DYNAMODB_TABLE"
+                    },
+                    {
+                        "value": "AWS::DynamoDB::Stream",
+                        "name": "DYNAMODB_STREAM"
+                    },
+                    {
+                        "value": "AWS::EFS::FileSystem",
+                        "name": "EFS_FILESYSTEM"
+                    },
+                    {
+                        "value": "AWS::OpenSearchService::Domain",
+                        "name": "OPENSEARCHSERVICE_DOMAIN"
+                    },
+                    {
+                        "value": "AWS::Kinesis::Stream",
+                        "name": "KINESIS_DATA_STREAM"
+                    },
+                    {
+                        "value": "AWS::Kinesis::StreamConsumer",
+                        "name": "KINESIS_STREAM_CONSUMER"
+                    },
+                    {
+                        "value": "AWS::KMS::Key",
+                        "name": "KMS_KEY"
+                    },
+                    {
+                        "value": "AWS::Lambda::Function",
+                        "name": "LAMBDA_FUNCTION"
+                    },
+                    {
+                        "value": "AWS::S3::Bucket",
+                        "name": "S3_BUCKET"
+                    },
+                    {
+                        "value": "AWS::S3::AccessPoint",
+                        "name": "S3_ACCESS_POINT"
+                    },
+                    {
+                        "value": "AWS::S3Express::DirectoryBucket",
+                        "name": "S3EXPRESS_DIRECTORYBUCKET"
+                    },
+                    {
+                        "value": "AWS::S3::Glacier",
+                        "name": "S3_GLACIER"
+                    },
+                    {
+                        "value": "AWS::S3Outposts::Bucket",
+                        "name": "S3_OUTPOSTS_BUCKET"
+                    },
+                    {
+                        "value": "AWS::S3Outposts::AccessPoint",
+                        "name": "S3_OUTPOSTS_ACCESS_POINT"
+                    },
+                    {
+                        "value": "AWS::SecretsManager::Secret",
+                        "name": "SECRETSMANAGER_SECRET"
+                    },
+                    {
+                        "value": "AWS::SNS::Topic",
+                        "name": "SNS_TOPIC"
+                    },
+                    {
+                        "value": "AWS::SQS::Queue",
+                        "name": "SQS_QUEUE"
+                    },
+                    {
+                        "value": "AWS::IAM::AssumeRolePolicyDocument",
+                        "name": "ROLE_TRUST"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.accessanalyzer#AccessDeniedException": {
             "type": "structure",
             "members": {
@@ -2003,6 +2102,69 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Checks whether the specified access isn't allowed by a policy.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Passing check. Restrictive identity policy.",
+                        "input": {
+                            "access": [
+                                {
+                                    "actions": [
+                                        "s3:PutObject"
+                                    ]
+                                }
+                            ],
+                            "policyDocument": "{\"Version\":\"2012-10-17\",\"Id\":\"123\",\"Statement\":[{\"Sid\":\"AllowJohnDoe\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::123456789012:user/JohnDoe\"},\"Action\":\"s3:GetObject\",\"Resource\":\"*\"}]}",
+                            "policyType": "RESOURCE_POLICY"
+                        },
+                        "output": {
+                            "result": "PASS",
+                            "message": "The policy document does not grant access to perform the listed actions or resources."
+                        }
+                    },
+                    {
+                        "title": "Passing check. Restrictive S3 Bucket resource policy.",
+                        "input": {
+                            "access": [
+                                {
+                                    "resources": [
+                                        "arn:aws:s3:::sensitive-bucket/*"
+                                    ]
+                                }
+                            ],
+                            "policyDocument": "{\"Version\":\"2012-10-17\",\"Id\":\"123\",\"Statement\":[{\"Sid\":\"AllowJohnDoe\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::123456789012:user/JohnDoe\"},\"Action\":\"s3:PutObject\",\"Resource\":\"arn:aws:s3:::non-sensitive-bucket/*\"}]}",
+                            "policyType": "RESOURCE_POLICY"
+                        },
+                        "output": {
+                            "result": "PASS",
+                            "message": "The policy document does not grant access to perform the listed actions or resources."
+                        }
+                    },
+                    {
+                        "title": "Failing check. Permissive S3 Bucket resource policy.",
+                        "input": {
+                            "access": [
+                                {
+                                    "resources": [
+                                        "arn:aws:s3:::my-bucket/*"
+                                    ]
+                                }
+                            ],
+                            "policyDocument": "{\"Version\":\"2012-10-17\",\"Id\":\"123\",\"Statement\":[{\"Sid\":\"AllowJohnDoe\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::123456789012:user/JohnDoe\"},\"Action\":\"s3:PutObject\",\"Resource\":\"arn:aws:s3:::my-bucket/*\"}]}",
+                            "policyType": "RESOURCE_POLICY"
+                        },
+                        "output": {
+                            "result": "FAIL",
+                            "message": "The policy document grants access to perform one or more of the listed actions or resources.",
+                            "reasons": [
+                                {
+                                    "description": "One or more of the listed actions or resources in the statement with sid: AllowJohnDoe.",
+                                    "statementIndex": 0,
+                                    "statementId": "AllowJohnDoe"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "uri": "/policy/check-access-not-granted",
                     "method": "POST",
@@ -2027,7 +2189,7 @@
                 "access": {
                     "target": "com.amazonaws.accessanalyzer#AccessList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An access object containing the permissions that shouldn't be granted by the specified\n         policy.</p>",
+                        "smithy.api#documentation": "<p>An access object containing the permissions that shouldn't be granted by the specified\n         policy. If only actions are specified, IAM Access Analyzer checks for access of the actions on\n         all resources in the policy. If only resources are specified, then IAM Access Analyzer checks\n         which actions have access to the specified resources. If both actions and resources are\n         specified, then IAM Access Analyzer checks which of the specified actions have access to the\n         specified resources.</p>",
                         "smithy.api#length": {
                             "max": 1
                         },
@@ -2184,6 +2346,141 @@
             }
         },
         "com.amazonaws.accessanalyzer#CheckNoNewAccessResult": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PASS",
+                        "name": "PASS"
+                    },
+                    {
+                        "value": "FAIL",
+                        "name": "FAIL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.accessanalyzer#CheckNoPublicAccess": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.accessanalyzer#CheckNoPublicAccessRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.accessanalyzer#CheckNoPublicAccessResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#UnprocessableEntityException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Checks whether a resource policy can grant public access to the specified resource\n         type.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Passing check. S3 Bucket policy without public access.",
+                        "input": {
+                            "policyDocument": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Bob\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::111122223333:user/JohnDoe\"},\"Action\":[\"s3:GetObject\"]}]}",
+                            "resourceType": "AWS::S3::Bucket"
+                        },
+                        "output": {
+                            "result": "PASS",
+                            "message": "The resource policy does not grant public access for the given resource type."
+                        }
+                    },
+                    {
+                        "title": "Failing check. S3 Bucket policy with public access.",
+                        "input": {
+                            "policyDocument": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Bob\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":[\"s3:GetObject\"]}]}",
+                            "resourceType": "AWS::S3::Bucket"
+                        },
+                        "output": {
+                            "result": "FAIL",
+                            "message": "The resource policy grants public access for the given resource type.",
+                            "reasons": [
+                                {
+                                    "description": "Public access granted in the following statement with sid: Bob.",
+                                    "statementIndex": 0,
+                                    "statementId": "Bob"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/policy/check-no-public-access",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#suppress": [
+                    "HttpMethodSemantics"
+                ]
+            }
+        },
+        "com.amazonaws.accessanalyzer#CheckNoPublicAccessRequest": {
+            "type": "structure",
+            "members": {
+                "policyDocument": {
+                    "target": "com.amazonaws.accessanalyzer#AccessCheckPolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON policy document to evaluate for public access.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.accessanalyzer#AccessCheckResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource to evaluate for public access. For example, to check for public\n         access to Amazon S3 buckets, you can choose <code>AWS::S3::Bucket</code> for the resource\n         type.</p>\n         <p>For resource types not supported as valid values, IAM Access Analyzer will return an\n         error.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.accessanalyzer#CheckNoPublicAccessResponse": {
+            "type": "structure",
+            "members": {
+                "result": {
+                    "target": "com.amazonaws.accessanalyzer#CheckNoPublicAccessResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result of the check for public access to the specified resource type. If the result\n         is <code>PASS</code>, the policy doesn't allow public access to the specified resource\n         type. If the result is <code>FAIL</code>, the policy might allow public access to the\n         specified resource type.</p>"
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message indicating whether the specified policy allows public access to\n         resources.</p>"
+                    }
+                },
+                "reasons": {
+                    "target": "com.amazonaws.accessanalyzer#ReasonSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of reasons why the specified resource policy grants public access for the\n         resource type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.accessanalyzer#CheckNoPublicAccessResult": {
             "type": "string",
             "traits": {
                 "smithy.api#enum": [
@@ -3478,6 +3775,90 @@
                 "target": "com.amazonaws.accessanalyzer#FindingSummaryV2"
             }
         },
+        "com.amazonaws.accessanalyzer#GenerateFindingRecommendation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.accessanalyzer#GenerateFindingRecommendationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a recommendation for an unused permissions finding.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successfully started generating finding recommendation",
+                        "input": {
+                            "analyzerArn": "arn:aws:access-analyzer:us-east-1:111122223333:analyzer/a",
+                            "id": "finding-id"
+                        },
+                        "output": {}
+                    },
+                    {
+                        "title": "Failed field validation for id value",
+                        "input": {
+                            "analyzerArn": "arn:aws:access-analyzer:us-east-1:111122223333:analyzer/a",
+                            "id": "!"
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.accessanalyzer#ValidationException",
+                            "content": {
+                                "reason": "fieldValidationFailed",
+                                "message": "Invalid id."
+                            }
+                        },
+                        "allowConstraintErrors": true
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/recommendation/{id}",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.accessanalyzer#GenerateFindingRecommendationRequest": {
+            "type": "structure",
+            "members": {
+                "analyzerArn": {
+                    "target": "com.amazonaws.accessanalyzer#AnalyzerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources\">ARN of\n            the analyzer</a> used to generate the finding recommendation.</p>",
+                        "smithy.api#httpQuery": "analyzerArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the finding recommendation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2048
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.accessanalyzer#GeneratedPolicy": {
             "type": "structure",
             "members": {
@@ -3860,6 +4241,234 @@
                     "code": 200
                 },
                 "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.accessanalyzer#GetFindingRecommendation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.accessanalyzer#GetFindingRecommendationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.accessanalyzer#GetFindingRecommendationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about a finding recommendation for the specified analyzer.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successfully fetched finding recommendation",
+                        "input": {
+                            "analyzerArn": "arn:aws:access-analyzer:us-east-1:111122223333:analyzer/a",
+                            "id": "finding-id",
+                            "maxResults": 3,
+                            "nextToken": "token"
+                        },
+                        "output": {
+                            "startedAt": "2000-01-01T00:00:00Z",
+                            "completedAt": "2000-01-01T00:00:01Z",
+                            "resourceArn": "arn:aws:iam::111122223333:role/test",
+                            "recommendedSteps": [
+                                {
+                                    "unusedPermissionsRecommendedStep": {
+                                        "recommendedAction": "DETACH_POLICY",
+                                        "existingPolicyId": "policy-id"
+                                    }
+                                },
+                                {
+                                    "unusedPermissionsRecommendedStep": {
+                                        "recommendedAction": "CREATE_POLICY",
+                                        "existingPolicyId": "policy-id",
+                                        "recommendedPolicy": "policy-content"
+                                    }
+                                }
+                            ],
+                            "recommendationType": "UnusedPermissionRecommendation",
+                            "status": "SUCCEEDED"
+                        }
+                    },
+                    {
+                        "title": "In progress finding recommendation",
+                        "input": {
+                            "analyzerArn": "arn:aws:access-analyzer:us-east-1:111122223333:analyzer/a",
+                            "id": "finding-id",
+                            "maxResults": 3
+                        },
+                        "output": {
+                            "startedAt": "2000-01-01T00:00:00Z",
+                            "resourceArn": "arn:aws:iam::111122223333:role/test",
+                            "recommendationType": "UnusedPermissionRecommendation",
+                            "status": "IN_PROGRESS"
+                        }
+                    },
+                    {
+                        "title": "Failed finding recommendation",
+                        "input": {
+                            "analyzerArn": "arn:aws:access-analyzer:us-east-1:111122223333:analyzer/a",
+                            "id": "finding-id",
+                            "maxResults": 3
+                        },
+                        "output": {
+                            "startedAt": "2000-01-01T00:00:00Z",
+                            "completedAt": "2000-01-01T00:00:01Z",
+                            "error": {
+                                "code": "SERVICE_ERROR",
+                                "message": "Service error. Please try again."
+                            },
+                            "resourceArn": "arn:aws:iam::111122223333:role/test",
+                            "recommendationType": "UnusedPermissionRecommendation",
+                            "status": "FAILED"
+                        }
+                    },
+                    {
+                        "title": "Failed field validation for id value",
+                        "input": {
+                            "analyzerArn": "arn:aws:access-analyzer:us-east-1:111122223333:analyzer/a",
+                            "id": "!"
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.accessanalyzer#ValidationException",
+                            "content": {
+                                "reason": "fieldValidationFailed",
+                                "message": "Invalid id."
+                            }
+                        },
+                        "allowConstraintErrors": true
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/recommendation/{id}",
+                    "method": "GET",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "items": "recommendedSteps",
+                    "pageSize": "maxResults",
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.accessanalyzer#GetFindingRecommendationRequest": {
+            "type": "structure",
+            "members": {
+                "analyzerArn": {
+                    "target": "com.amazonaws.accessanalyzer#AnalyzerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources\">ARN of\n            the analyzer</a> used to generate the finding recommendation.</p>",
+                        "smithy.api#httpQuery": "analyzerArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the finding recommendation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2048
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.accessanalyzer#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used for pagination of results returned.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.accessanalyzer#GetFindingRecommendationResponse": {
+            "type": "structure",
+            "members": {
+                "startedAt": {
+                    "target": "com.amazonaws.accessanalyzer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the retrieval of the finding recommendation was started.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "completedAt": {
+                    "target": "com.amazonaws.accessanalyzer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the retrieval of the finding recommendation was completed.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.accessanalyzer#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used for pagination of results returned.</p>"
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.accessanalyzer#RecommendationError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Detailed information about the reason that the retrieval of a recommendation for the\n         finding failed.</p>"
+                    }
+                },
+                "resourceArn": {
+                    "target": "com.amazonaws.accessanalyzer#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource of the finding.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "recommendedSteps": {
+                    "target": "com.amazonaws.accessanalyzer#RecommendedStepList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A group of recommended steps for the finding.</p>"
+                    }
+                },
+                "recommendationType": {
+                    "target": "com.amazonaws.accessanalyzer#RecommendationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of recommendation for the finding.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.accessanalyzer#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the retrieval of the finding recommendation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.accessanalyzer#GetFindingRequest": {
@@ -5793,10 +6402,86 @@
                 "target": "com.amazonaws.accessanalyzer#ReasonSummary"
             }
         },
+        "com.amazonaws.accessanalyzer#RecommendationError": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for a failed retrieval of a recommendation for a finding.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message for a failed retrieval of a recommendation for a finding.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the reason that the retrieval of a recommendation for a\n         finding failed.</p>"
+            }
+        },
+        "com.amazonaws.accessanalyzer#RecommendationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "UnusedPermissionRecommendation",
+                        "name": "UNUSED_PERMISSION_RECOMMENDATION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.accessanalyzer#RecommendedRemediationAction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATE_POLICY",
+                        "name": "CREATE_POLICY"
+                    },
+                    {
+                        "value": "DETACH_POLICY",
+                        "name": "DETACH_POLICY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.accessanalyzer#RecommendedStep": {
+            "type": "union",
+            "members": {
+                "unusedPermissionsRecommendedStep": {
+                    "target": "com.amazonaws.accessanalyzer#UnusedPermissionsRecommendedStep",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A recommended step for an unused permissions finding.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a recommended step for an unused access analyzer\n         finding.</p>"
+            }
+        },
+        "com.amazonaws.accessanalyzer#RecommendedStepList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.accessanalyzer#RecommendedStep"
+            }
+        },
         "com.amazonaws.accessanalyzer#RegionList": {
             "type": "list",
             "member": {
                 "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.accessanalyzer#Resource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.accessanalyzer#ResourceArn": {
@@ -5904,6 +6589,12 @@
                         "name": "AWS_DYNAMODB_STREAM"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.accessanalyzer#ResourcesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.accessanalyzer#Resource"
             }
         },
         "com.amazonaws.accessanalyzer#RetiringPrincipal": {
@@ -6330,6 +7021,25 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Starts a scan of the policies applied to the specified resource.</p>"
+            }
+        },
+        "com.amazonaws.accessanalyzer#Status": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SUCCEEDED",
+                        "name": "SUCCEEDED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    }
+                ]
             }
         },
         "com.amazonaws.accessanalyzer#StatusReason": {
@@ -6763,12 +7473,45 @@
                 "lastAccessed": {
                     "target": "com.amazonaws.accessanalyzer#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time at which the permission last accessed.</p>"
+                        "smithy.api#documentation": "<p>The time at which the permission was last accessed.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about an unused access finding for a permission. IAM Access Analyzer\n         charges for unused access analysis based on the number of IAM roles and users analyzed\n         per month. For more details on pricing, see <a href=\"https://aws.amazon.com/iam/access-analyzer/pricing\">IAM Access Analyzer\n         pricing</a>.</p>"
+            }
+        },
+        "com.amazonaws.accessanalyzer#UnusedPermissionsRecommendedStep": {
+            "type": "structure",
+            "members": {
+                "policyUpdatedAt": {
+                    "target": "com.amazonaws.accessanalyzer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the existing policy for the unused permissions finding was last\n         updated.</p>"
+                    }
+                },
+                "recommendedAction": {
+                    "target": "com.amazonaws.accessanalyzer#RecommendedRemediationAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A recommendation of whether to create or detach a policy for an unused permissions\n         finding.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "recommendedPolicy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the recommended action for the unused permissions finding is to replace the existing\n         policy, the contents of the recommended policy to replace the policy specified in the\n            <code>existingPolicyId</code> field.</p>"
+                    }
+                },
+                "existingPolicyId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the recommended action for the unused permissions finding is to detach a policy, the\n         ID of an existing policy to be detached.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the action to take for a policy in an unused permissions\n         finding.</p>"
             }
         },
         "com.amazonaws.accessanalyzer#UpdateArchiveRule": {
@@ -7200,6 +7943,10 @@
                     {
                         "value": "other",
                         "name": "OTHER"
+                    },
+                    {
+                        "value": "notSupported",
+                        "name": "NOT_SUPPORTED"
                     }
                 ]
             }
