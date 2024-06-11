@@ -41,19 +41,21 @@ type CreateConnectPeerInput struct {
 	// This member is required.
 	PeerAddress *string
 
-	// The Connect peer BGP options.
+	// The Connect peer BGP options. This only applies only when the protocol is GRE .
 	BgpOptions *types.BgpOptions
 
 	// The client token associated with the request.
 	ClientToken *string
 
-	// A Connect peer core network address.
+	// A Connect peer core network address. This only applies only when the protocol
+	// is GRE .
 	CoreNetworkAddress *string
 
 	// The inside IP addresses used for BGP peering.
 	InsideCidrBlocks []string
 
-	// The subnet ARN for the Connect peer.
+	// The subnet ARN for the Connect peer. This only applies only when the protocol
+	// is NO_ENCAP.
 	SubnetArn *string
 
 	// The tags associated with the peer request.

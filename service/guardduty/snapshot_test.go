@@ -134,6 +134,18 @@ func TestCheckSnapshot_CreateIPSet(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateMalwareProtectionPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateMalwareProtectionPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateMalwareProtectionPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateMembers(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateMembers(context.Background(), nil, func(o *Options) {
@@ -235,6 +247,18 @@ func TestCheckSnapshot_DeleteIPSet(t *testing.T) {
 	_, err := svc.DeleteIPSet(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteIPSet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteMalwareProtectionPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteMalwareProtectionPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteMalwareProtectionPlan")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -470,6 +494,18 @@ func TestCheckSnapshot_GetIPSet(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetMalwareProtectionPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMalwareProtectionPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMalwareProtectionPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetMalwareScanSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMalwareScanSettings(context.Background(), nil, func(o *Options) {
@@ -643,6 +679,18 @@ func TestCheckSnapshot_ListIPSets(t *testing.T) {
 	_, err := svc.ListIPSets(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListIPSets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListMalwareProtectionPlans(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMalwareProtectionPlans(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListMalwareProtectionPlans")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -830,6 +878,18 @@ func TestCheckSnapshot_UpdateIPSet(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateMalwareProtectionPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateMalwareProtectionPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateMalwareProtectionPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateMalwareScanSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateMalwareScanSettings(context.Background(), nil, func(o *Options) {
@@ -961,6 +1021,18 @@ func TestUpdateSnapshot_CreateIPSet(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateMalwareProtectionPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateMalwareProtectionPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateMalwareProtectionPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateMembers(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateMembers(context.Background(), nil, func(o *Options) {
@@ -1062,6 +1134,18 @@ func TestUpdateSnapshot_DeleteIPSet(t *testing.T) {
 	_, err := svc.DeleteIPSet(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteIPSet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteMalwareProtectionPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteMalwareProtectionPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteMalwareProtectionPlan")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1297,6 +1381,18 @@ func TestUpdateSnapshot_GetIPSet(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetMalwareProtectionPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMalwareProtectionPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMalwareProtectionPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetMalwareScanSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMalwareScanSettings(context.Background(), nil, func(o *Options) {
@@ -1477,6 +1573,18 @@ func TestUpdateSnapshot_ListIPSets(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListMalwareProtectionPlans(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMalwareProtectionPlans(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListMalwareProtectionPlans")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListMembers(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListMembers(context.Background(), nil, func(o *Options) {
@@ -1650,6 +1758,18 @@ func TestUpdateSnapshot_UpdateIPSet(t *testing.T) {
 	_, err := svc.UpdateIPSet(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateIPSet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateMalwareProtectionPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateMalwareProtectionPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateMalwareProtectionPlan")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

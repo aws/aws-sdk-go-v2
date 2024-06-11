@@ -21,6 +21,57 @@ func (AccessCheckPolicyType) Values() []AccessCheckPolicyType {
 	}
 }
 
+type AccessCheckResourceType string
+
+// Enum values for AccessCheckResourceType
+const (
+	AccessCheckResourceTypeDynamodbTable            AccessCheckResourceType = "AWS::DynamoDB::Table"
+	AccessCheckResourceTypeDynamodbStream           AccessCheckResourceType = "AWS::DynamoDB::Stream"
+	AccessCheckResourceTypeEfsFilesystem            AccessCheckResourceType = "AWS::EFS::FileSystem"
+	AccessCheckResourceTypeOpensearchserviceDomain  AccessCheckResourceType = "AWS::OpenSearchService::Domain"
+	AccessCheckResourceTypeKinesisDataStream        AccessCheckResourceType = "AWS::Kinesis::Stream"
+	AccessCheckResourceTypeKinesisStreamConsumer    AccessCheckResourceType = "AWS::Kinesis::StreamConsumer"
+	AccessCheckResourceTypeKmsKey                   AccessCheckResourceType = "AWS::KMS::Key"
+	AccessCheckResourceTypeLambdaFunction           AccessCheckResourceType = "AWS::Lambda::Function"
+	AccessCheckResourceTypeS3Bucket                 AccessCheckResourceType = "AWS::S3::Bucket"
+	AccessCheckResourceTypeS3AccessPoint            AccessCheckResourceType = "AWS::S3::AccessPoint"
+	AccessCheckResourceTypeS3expressDirectorybucket AccessCheckResourceType = "AWS::S3Express::DirectoryBucket"
+	AccessCheckResourceTypeS3Glacier                AccessCheckResourceType = "AWS::S3::Glacier"
+	AccessCheckResourceTypeS3OutpostsBucket         AccessCheckResourceType = "AWS::S3Outposts::Bucket"
+	AccessCheckResourceTypeS3OutpostsAccessPoint    AccessCheckResourceType = "AWS::S3Outposts::AccessPoint"
+	AccessCheckResourceTypeSecretsmanagerSecret     AccessCheckResourceType = "AWS::SecretsManager::Secret"
+	AccessCheckResourceTypeSnsTopic                 AccessCheckResourceType = "AWS::SNS::Topic"
+	AccessCheckResourceTypeSqsQueue                 AccessCheckResourceType = "AWS::SQS::Queue"
+	AccessCheckResourceTypeRoleTrust                AccessCheckResourceType = "AWS::IAM::AssumeRolePolicyDocument"
+)
+
+// Values returns all known values for AccessCheckResourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccessCheckResourceType) Values() []AccessCheckResourceType {
+	return []AccessCheckResourceType{
+		"AWS::DynamoDB::Table",
+		"AWS::DynamoDB::Stream",
+		"AWS::EFS::FileSystem",
+		"AWS::OpenSearchService::Domain",
+		"AWS::Kinesis::Stream",
+		"AWS::Kinesis::StreamConsumer",
+		"AWS::KMS::Key",
+		"AWS::Lambda::Function",
+		"AWS::S3::Bucket",
+		"AWS::S3::AccessPoint",
+		"AWS::S3Express::DirectoryBucket",
+		"AWS::S3::Glacier",
+		"AWS::S3Outposts::Bucket",
+		"AWS::S3Outposts::AccessPoint",
+		"AWS::SecretsManager::Secret",
+		"AWS::SNS::Topic",
+		"AWS::SQS::Queue",
+		"AWS::IAM::AssumeRolePolicyDocument",
+	}
+}
+
 type AccessPreviewStatus string
 
 // Enum values for AccessPreviewStatus
@@ -143,6 +194,25 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CheckNoNewAccessResult) Values() []CheckNoNewAccessResult {
 	return []CheckNoNewAccessResult{
+		"PASS",
+		"FAIL",
+	}
+}
+
+type CheckNoPublicAccessResult string
+
+// Enum values for CheckNoPublicAccessResult
+const (
+	CheckNoPublicAccessResultPass CheckNoPublicAccessResult = "PASS"
+	CheckNoPublicAccessResultFail CheckNoPublicAccessResult = "FAIL"
+)
+
+// Values returns all known values for CheckNoPublicAccessResult. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CheckNoPublicAccessResult) Values() []CheckNoPublicAccessResult {
+	return []CheckNoPublicAccessResult{
 		"PASS",
 		"FAIL",
 	}
@@ -444,6 +514,43 @@ func (ReasonCode) Values() []ReasonCode {
 	}
 }
 
+type RecommendationType string
+
+// Enum values for RecommendationType
+const (
+	RecommendationTypeUnusedPermissionRecommendation RecommendationType = "UnusedPermissionRecommendation"
+)
+
+// Values returns all known values for RecommendationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationType) Values() []RecommendationType {
+	return []RecommendationType{
+		"UnusedPermissionRecommendation",
+	}
+}
+
+type RecommendedRemediationAction string
+
+// Enum values for RecommendedRemediationAction
+const (
+	RecommendedRemediationActionCreatePolicy RecommendedRemediationAction = "CREATE_POLICY"
+	RecommendedRemediationActionDetachPolicy RecommendedRemediationAction = "DETACH_POLICY"
+)
+
+// Values returns all known values for RecommendedRemediationAction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendedRemediationAction) Values() []RecommendedRemediationAction {
+	return []RecommendedRemediationAction{
+		"CREATE_POLICY",
+		"DETACH_POLICY",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -488,6 +595,27 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::S3Express::DirectoryBucket",
 		"AWS::DynamoDB::Table",
 		"AWS::DynamoDB::Stream",
+	}
+}
+
+type Status string
+
+// Enum values for Status
+const (
+	StatusSucceeded  Status = "SUCCEEDED"
+	StatusFailed     Status = "FAILED"
+	StatusInProgress Status = "IN_PROGRESS"
+)
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"SUCCEEDED",
+		"FAILED",
+		"IN_PROGRESS",
 	}
 }
 
@@ -572,6 +700,7 @@ const (
 	ValidationExceptionReasonCannotParse           ValidationExceptionReason = "cannotParse"
 	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "fieldValidationFailed"
 	ValidationExceptionReasonOther                 ValidationExceptionReason = "other"
+	ValidationExceptionReasonNotSupported          ValidationExceptionReason = "notSupported"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -584,5 +713,6 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"cannotParse",
 		"fieldValidationFailed",
 		"other",
+		"notSupported",
 	}
 }

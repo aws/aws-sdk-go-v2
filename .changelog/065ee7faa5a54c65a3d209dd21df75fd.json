@@ -1,0 +1,8 @@
+{
+    "id": "065ee7fa-a5a5-4c65-a3d2-09dd21df75fd",
+    "type": "feature",
+    "description": "Added API support for GuardDuty Malware Protection for S3.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

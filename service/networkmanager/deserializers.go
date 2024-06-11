@@ -14180,6 +14180,15 @@ func awsRestjson1_deserializeDocumentAttachment(v **types.Attachment, value inte
 				sv.EdgeLocation = ptr.String(jtv)
 			}
 
+		case "NetworkFunctionGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkFunctionGroupName to be of type string, got %T instead", value)
+				}
+				sv.NetworkFunctionGroupName = ptr.String(jtv)
+			}
+
 		case "OwnerAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14187,6 +14196,11 @@ func awsRestjson1_deserializeDocumentAttachment(v **types.Attachment, value inte
 					return fmt.Errorf("expected AWSAccountId to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccountId = ptr.String(jtv)
+			}
+
+		case "ProposedNetworkFunctionGroupChange":
+			if err := awsRestjson1_deserializeDocumentProposedNetworkFunctionGroupChange(&sv.ProposedNetworkFunctionGroupChange, value); err != nil {
+				return err
 			}
 
 		case "ProposedSegmentChange":
@@ -15424,6 +15438,11 @@ func awsRestjson1_deserializeDocumentCoreNetwork(v **types.CoreNetwork, value in
 				sv.GlobalNetworkId = ptr.String(jtv)
 			}
 
+		case "NetworkFunctionGroups":
+			if err := awsRestjson1_deserializeDocumentCoreNetworkNetworkFunctionGroupList(&sv.NetworkFunctionGroups, value); err != nil {
+				return err
+			}
+
 		case "Segments":
 			if err := awsRestjson1_deserializeDocumentCoreNetworkSegmentList(&sv.Segments, value); err != nil {
 				return err
@@ -15700,6 +15719,15 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeEventValues(v **types.Core
 				sv.EdgeLocation = ptr.String(jtv)
 			}
 
+		case "NetworkFunctionGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConstrainedString to be of type string, got %T instead", value)
+				}
+				sv.NetworkFunctionGroupName = ptr.String(jtv)
+			}
+
 		case "SegmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15815,6 +15843,15 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeValues(v **types.CoreNetwo
 				return err
 			}
 
+		case "NetworkFunctionGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConstrainedString to be of type string, got %T instead", value)
+				}
+				sv.NetworkFunctionGroupName = ptr.String(jtv)
+			}
+
 		case "SegmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15822,6 +15859,11 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeValues(v **types.CoreNetwo
 					return fmt.Errorf("expected ConstrainedString to be of type string, got %T instead", value)
 				}
 				sv.SegmentName = ptr.String(jtv)
+			}
+
+		case "ServiceInsertionActions":
+			if err := awsRestjson1_deserializeDocumentServiceInsertionActionList(&sv.ServiceInsertionActions, value); err != nil {
+				return err
 			}
 
 		case "SharedSegments":
@@ -15920,6 +15962,90 @@ func awsRestjson1_deserializeDocumentCoreNetworkEdgeList(v *[]types.CoreNetworkE
 		var col types.CoreNetworkEdge
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentCoreNetworkEdge(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCoreNetworkNetworkFunctionGroup(v **types.CoreNetworkNetworkFunctionGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CoreNetworkNetworkFunctionGroup
+	if *v == nil {
+		sv = &types.CoreNetworkNetworkFunctionGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EdgeLocations":
+			if err := awsRestjson1_deserializeDocumentExternalRegionCodeList(&sv.EdgeLocations, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConstrainedString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Segments":
+			if err := awsRestjson1_deserializeDocumentServiceInsertionSegments(&sv.Segments, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCoreNetworkNetworkFunctionGroupList(v *[]types.CoreNetworkNetworkFunctionGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CoreNetworkNetworkFunctionGroup
+	if *v == nil {
+		cv = []types.CoreNetworkNetworkFunctionGroup{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CoreNetworkNetworkFunctionGroup
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCoreNetworkNetworkFunctionGroup(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -16869,6 +16995,119 @@ func awsRestjson1_deserializeDocumentDeviceList(v *[]types.Device, value interfa
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEdgeOverride(v **types.EdgeOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EdgeOverride
+	if *v == nil {
+		sv = &types.EdgeOverride{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EdgeSets":
+			if err := awsRestjson1_deserializeDocumentEdgeSetList(&sv.EdgeSets, value); err != nil {
+				return err
+			}
+
+		case "UseEdge":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConstrainedString to be of type string, got %T instead", value)
+				}
+				sv.UseEdge = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEdgeSet(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ConstrainedString to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEdgeSetList(v *[][]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv [][]string
+	if *v == nil {
+		cv = [][]string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col []string
+		if err := awsRestjson1_deserializeDocumentEdgeSet(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentExceptionContextMap(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17438,6 +17677,80 @@ func awsRestjson1_deserializeDocumentLocation(v **types.Location, value interfac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentNetworkFunctionGroup(v **types.NetworkFunctionGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkFunctionGroup
+	if *v == nil {
+		sv = &types.NetworkFunctionGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConstrainedString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkFunctionGroupList(v *[]types.NetworkFunctionGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NetworkFunctionGroup
+	if *v == nil {
+		cv = []types.NetworkFunctionGroup{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NetworkFunctionGroup
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNetworkFunctionGroup(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentNetworkResource(v **types.NetworkResource, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17919,6 +18232,15 @@ func awsRestjson1_deserializeDocumentNetworkRouteDestination(v **types.NetworkRo
 					return fmt.Errorf("expected ExternalRegionCode to be of type string, got %T instead", value)
 				}
 				sv.EdgeLocation = ptr.String(jtv)
+			}
+
+		case "NetworkFunctionGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConstrainedString to be of type string, got %T instead", value)
+				}
+				sv.NetworkFunctionGroupName = ptr.String(jtv)
 			}
 
 		case "ResourceId":
@@ -18489,6 +18811,64 @@ func awsRestjson1_deserializeDocumentPeeringList(v *[]types.Peering, value inter
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentProposedNetworkFunctionGroupChange(v **types.ProposedNetworkFunctionGroupChange, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProposedNetworkFunctionGroupChange
+	if *v == nil {
+		sv = &types.ProposedNetworkFunctionGroupChange{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AttachmentPolicyRuleNumber":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AttachmentPolicyRuleNumber = ptr.Int32(int32(i64))
+			}
+
+		case "NetworkFunctionGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConstrainedString to be of type string, got %T instead", value)
+				}
+				sv.NetworkFunctionGroupName = ptr.String(jtv)
+			}
+
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentProposedSegmentChange(v **types.ProposedSegmentChange, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18991,6 +19371,140 @@ func awsRestjson1_deserializeDocumentRouteAnalysisPath(v **types.RouteAnalysisPa
 
 		case "Path":
 			if err := awsRestjson1_deserializeDocumentPathComponentList(&sv.Path, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceInsertionAction(v **types.ServiceInsertionAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceInsertionAction
+	if *v == nil {
+		sv = &types.ServiceInsertionAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Action":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SegmentActionServiceInsertion to be of type string, got %T instead", value)
+				}
+				sv.Action = types.SegmentActionServiceInsertion(jtv)
+			}
+
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SendViaMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.SendViaMode(jtv)
+			}
+
+		case "Via":
+			if err := awsRestjson1_deserializeDocumentVia(&sv.Via, value); err != nil {
+				return err
+			}
+
+		case "WhenSentTo":
+			if err := awsRestjson1_deserializeDocumentWhenSentTo(&sv.WhenSentTo, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceInsertionActionList(v *[]types.ServiceInsertionAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ServiceInsertionAction
+	if *v == nil {
+		cv = []types.ServiceInsertionAction{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ServiceInsertionAction
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentServiceInsertionAction(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceInsertionSegments(v **types.ServiceInsertionSegments, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceInsertionSegments
+	if *v == nil {
+		sv = &types.ServiceInsertionSegments{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SendTo":
+			if err := awsRestjson1_deserializeDocumentConstrainedStringList(&sv.SendTo, value); err != nil {
+				return err
+			}
+
+		case "SendVia":
+			if err := awsRestjson1_deserializeDocumentConstrainedStringList(&sv.SendVia, value); err != nil {
 				return err
 			}
 
@@ -19924,6 +20438,47 @@ func awsRestjson1_deserializeDocumentValidationExceptionFieldList(v *[]types.Val
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentVia(v **types.Via, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Via
+	if *v == nil {
+		sv = &types.Via{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NetworkFunctionGroups":
+			if err := awsRestjson1_deserializeDocumentNetworkFunctionGroupList(&sv.NetworkFunctionGroups, value); err != nil {
+				return err
+			}
+
+		case "WithEdgeOverrides":
+			if err := awsRestjson1_deserializeDocumentWithEdgeOverridesList(&sv.WithEdgeOverrides, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentVpcAttachment(v **types.VpcAttachment, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20016,5 +20571,111 @@ func awsRestjson1_deserializeDocumentVpcOptions(v **types.VpcOptions, value inte
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhenSentTo(v **types.WhenSentTo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WhenSentTo
+	if *v == nil {
+		sv = &types.WhenSentTo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "WhenSentToSegmentsList":
+			if err := awsRestjson1_deserializeDocumentWhenSentToSegmentsList(&sv.WhenSentToSegmentsList, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhenSentToSegmentsList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ConstrainedString to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWithEdgeOverridesList(v *[]types.EdgeOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EdgeOverride
+	if *v == nil {
+		cv = []types.EdgeOverride{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EdgeOverride
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentEdgeOverride(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }

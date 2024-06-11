@@ -67,11 +67,19 @@ type GetNetworkResourceRelationshipsInput struct {
 	//
 	// The following are the supported resource types for Network Manager:
 	//
+	//   - attachment
+	//
+	//   - connect-peer
+	//
 	//   - connection
+	//
+	//   - core-network
 	//
 	//   - device
 	//
 	//   - link
+	//
+	//   - peering
 	//
 	//   - site
 	//

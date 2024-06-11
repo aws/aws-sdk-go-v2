@@ -12255,11 +12255,23 @@ type OidcConfig struct {
 	// This member is required.
 	UserInfoEndpoint *string
 
+	// A string to string map of identifiers specific to the custom identity provider
+	// (IdP) being used.
+	AuthenticationRequestExtraParams map[string]string
+
+	// An array of string identifiers used to refer to the specific pieces of user
+	// data or claims that the client application wants to access.
+	Scope *string
+
 	noSmithyDocumentSerde
 }
 
 // Your OIDC IdP workforce configuration.
 type OidcConfigForResponse struct {
+
+	// A string to string map of identifiers specific to the custom identity provider
+	// (IdP) being used.
+	AuthenticationRequestExtraParams map[string]string
 
 	// The OIDC IdP authorization endpoint used to configure your private workforce.
 	AuthorizationEndpoint *string
@@ -12276,6 +12288,10 @@ type OidcConfigForResponse struct {
 
 	// The OIDC IdP logout endpoint used to configure your private workforce.
 	LogoutEndpoint *string
+
+	// An array of string identifiers used to refer to the specific pieces of user
+	// data or claims that the client application wants to access.
+	Scope *string
 
 	// The OIDC IdP token endpoint used to configure your private workforce.
 	TokenEndpoint *string

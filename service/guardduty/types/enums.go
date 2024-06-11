@@ -554,6 +554,47 @@ func (IpSetStatus) Values() []IpSetStatus {
 	}
 }
 
+type MalwareProtectionPlanStatus string
+
+// Enum values for MalwareProtectionPlanStatus
+const (
+	MalwareProtectionPlanStatusActive  MalwareProtectionPlanStatus = "ACTIVE"
+	MalwareProtectionPlanStatusWarning MalwareProtectionPlanStatus = "WARNING"
+	MalwareProtectionPlanStatusError   MalwareProtectionPlanStatus = "ERROR"
+)
+
+// Values returns all known values for MalwareProtectionPlanStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MalwareProtectionPlanStatus) Values() []MalwareProtectionPlanStatus {
+	return []MalwareProtectionPlanStatus{
+		"ACTIVE",
+		"WARNING",
+		"ERROR",
+	}
+}
+
+type MalwareProtectionPlanTaggingActionStatus string
+
+// Enum values for MalwareProtectionPlanTaggingActionStatus
+const (
+	MalwareProtectionPlanTaggingActionStatusEnabled  MalwareProtectionPlanTaggingActionStatus = "ENABLED"
+	MalwareProtectionPlanTaggingActionStatusDisabled MalwareProtectionPlanTaggingActionStatus = "DISABLED"
+)
+
+// Values returns all known values for MalwareProtectionPlanTaggingActionStatus.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MalwareProtectionPlanTaggingActionStatus) Values() []MalwareProtectionPlanTaggingActionStatus {
+	return []MalwareProtectionPlanTaggingActionStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ManagementType string
 
 // Enum values for ManagementType

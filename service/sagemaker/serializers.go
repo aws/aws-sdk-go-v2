@@ -18138,6 +18138,17 @@ func awsAwsjson11_serializeDocumentAttributeNames(v []string, value smithyjson.V
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAuthenticationRequestExtraParams(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAutoMLAlgorithmConfig(v *types.AutoMLAlgorithmConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -24572,6 +24583,13 @@ func awsAwsjson11_serializeDocumentOidcConfig(v *types.OidcConfig, value smithyj
 	object := value.Object()
 	defer object.Close()
 
+	if v.AuthenticationRequestExtraParams != nil {
+		ok := object.Key("AuthenticationRequestExtraParams")
+		if err := awsAwsjson11_serializeDocumentAuthenticationRequestExtraParams(v.AuthenticationRequestExtraParams, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AuthorizationEndpoint != nil {
 		ok := object.Key("AuthorizationEndpoint")
 		ok.String(*v.AuthorizationEndpoint)
@@ -24600,6 +24618,11 @@ func awsAwsjson11_serializeDocumentOidcConfig(v *types.OidcConfig, value smithyj
 	if v.LogoutEndpoint != nil {
 		ok := object.Key("LogoutEndpoint")
 		ok.String(*v.LogoutEndpoint)
+	}
+
+	if v.Scope != nil {
+		ok := object.Key("Scope")
+		ok.String(*v.Scope)
 	}
 
 	if v.TokenEndpoint != nil {
@@ -35357,6 +35380,11 @@ func awsAwsjson11_serializeOpDocumentListModelPackageGroupsInput(v *ListModelPac
 	if v.CreationTimeBefore != nil {
 		ok := object.Key("CreationTimeBefore")
 		ok.Double(smithytime.FormatEpochSeconds(*v.CreationTimeBefore))
+	}
+
+	if len(v.CrossAccountFilterOption) > 0 {
+		ok := object.Key("CrossAccountFilterOption")
+		ok.String(string(v.CrossAccountFilterOption))
 	}
 
 	if v.MaxResults != nil {

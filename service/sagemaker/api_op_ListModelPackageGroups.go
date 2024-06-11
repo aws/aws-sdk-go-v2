@@ -36,6 +36,13 @@ type ListModelPackageGroupsInput struct {
 	// A filter that returns only model groups created before the specified time.
 	CreationTimeBefore *time.Time
 
+	// A filter that returns either model groups shared with you or model groups in
+	// your own account. When the value is CrossAccount , the results show the
+	// resources made discoverable to you from other accounts. When the value is
+	// SameAccount or null , the results show resources from your account. The default
+	// is SameAccount .
+	CrossAccountFilterOption types.CrossAccountFilterOption
+
 	// The maximum number of results to return in the response.
 	MaxResults *int32
 

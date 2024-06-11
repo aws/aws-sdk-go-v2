@@ -1,0 +1,8 @@
+{
+    "id": "510ffc21-6846-49bc-b8e8-f53ff8ae1b86",
+    "type": "feature",
+    "description": "This is model changes \u0026 documentation update for Service Insertion feature for AWS Cloud WAN. This feature allows insertion of AWS/3rd party security services on Cloud WAN. This allows to steer inter/intra segment traffic via security appliances and provide visibility to the route updates.",
+    "modules": [
+        "service/networkmanager"
+    ]
+}

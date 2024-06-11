@@ -7,15 +7,17 @@ import (
 	"time"
 )
 
-// Contains information about actions that define permissions to check against a
-// policy.
+// Contains information about actions and resources that define permissions to
+// check against a policy.
 type Access struct {
 
 	// A list of actions for the access permissions. Any strings that can be used as
 	// an action in an IAM policy can be used in the list of actions to check.
-	//
-	// This member is required.
 	Actions []string
+
+	// A list of resources for the access permissions. Any strings that can be used as
+	// a resource in an IAM policy can be used in the list of resources to check.
+	Resources []string
 
 	noSmithyDocumentSerde
 }
@@ -1642,6 +1644,42 @@ type ReasonSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the reason that the retrieval of a recommendation
+// for a finding failed.
+type RecommendationError struct {
+
+	// The error code for a failed retrieval of a recommendation for a finding.
+	//
+	// This member is required.
+	Code *string
+
+	// The error message for a failed retrieval of a recommendation for a finding.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a recommended step for an unused access analyzer
+// finding.
+//
+// The following types satisfy this interface:
+//
+//	RecommendedStepMemberUnusedPermissionsRecommendedStep
+type RecommendedStep interface {
+	isRecommendedStep()
+}
+
+// A recommended step for an unused permissions finding.
+type RecommendedStepMemberUnusedPermissionsRecommendedStep struct {
+	Value UnusedPermissionsRecommendedStep
+
+	noSmithyDocumentSerde
+}
+
+func (*RecommendedStepMemberUnusedPermissionsRecommendedStep) isRecommendedStep() {}
+
 // The configuration for an Amazon S3 access point or multi-region access point
 // for the bucket. You can propose up to 10 access points or multi-region access
 // points per bucket. If the proposed Amazon S3 access point configuration is for
@@ -2031,8 +2069,34 @@ type UnusedPermissionDetails struct {
 	// A list of unused actions for which the unused access finding was generated.
 	Actions []UnusedAction
 
-	// The time at which the permission last accessed.
+	// The time at which the permission was last accessed.
 	LastAccessed *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the action to take for a policy in an unused
+// permissions finding.
+type UnusedPermissionsRecommendedStep struct {
+
+	// A recommendation of whether to create or detach a policy for an unused
+	// permissions finding.
+	//
+	// This member is required.
+	RecommendedAction RecommendedRemediationAction
+
+	// If the recommended action for the unused permissions finding is to detach a
+	// policy, the ID of an existing policy to be detached.
+	ExistingPolicyId *string
+
+	// The time at which the existing policy for the unused permissions finding was
+	// last updated.
+	PolicyUpdatedAt *time.Time
+
+	// If the recommended action for the unused permissions finding is to replace the
+	// existing policy, the contents of the recommended policy to replace the policy
+	// specified in the existingPolicyId field.
+	RecommendedPolicy *string
 
 	noSmithyDocumentSerde
 }
@@ -2133,3 +2197,4 @@ func (*UnknownUnionMember) isNetworkOriginConfiguration()         {}
 func (*UnknownUnionMember) isPathElement()                        {}
 func (*UnknownUnionMember) isRdsDbClusterSnapshotAttributeValue() {}
 func (*UnknownUnionMember) isRdsDbSnapshotAttributeValue()        {}
+func (*UnknownUnionMember) isRecommendedStep()                    {}

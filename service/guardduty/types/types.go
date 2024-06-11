@@ -625,6 +625,30 @@ type CoverageStatistics struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the protected resource that is associated with the created
+// Malware Protection plan. Presently, S3Bucket is the only supported protected
+// resource.
+type CreateProtectedResource struct {
+
+	// Information about the protected S3 bucket resource.
+	S3Bucket *CreateS3BucketResource
+
+	noSmithyDocumentSerde
+}
+
+// Information about the protected S3 bucket resource.
+type CreateS3BucketResource struct {
+
+	// Name of the S3 bucket.
+	BucketName *string
+
+	// Information about the specified object prefixes. The S3 object will be scanned
+	// only if it belongs to any of the specified object prefixes.
+	ObjectPrefixes []string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about which data sources are enabled.
 type DataSourceConfigurations struct {
 
@@ -1359,6 +1383,18 @@ type Invitation struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the nested item path and hash of the protected resource.
+type ItemPath struct {
+
+	// The hash value of the infected resource.
+	Hash *string
+
+	// The nested item path where the infected file was found.
+	NestedItemPath *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the Kubernetes API call action described in this finding.
 type KubernetesApiCallAction struct {
 
@@ -1728,6 +1764,60 @@ type MalwareProtectionDataSourceFreeTrial struct {
 	// Describes whether Malware Protection for EC2 instances with findings is enabled
 	// as a data source.
 	ScanEc2InstanceWithFindings *DataSourceFreeTrial
+
+	noSmithyDocumentSerde
+}
+
+// Information about whether the tags will be added to the S3 object after
+// scanning.
+type MalwareProtectionPlanActions struct {
+
+	// Indicates whether the scanned S3 object will have tags about the scan result.
+	Tagging *MalwareProtectionPlanTaggingAction
+
+	noSmithyDocumentSerde
+}
+
+// Information about the issue code and message associated to the status of your
+// Malware Protection plan.
+type MalwareProtectionPlanStatusReason struct {
+
+	// Issue code.
+	Code *string
+
+	// Issue message that specifies the reason. For information about potential
+	// troubleshooting steps, see [Troubleshooting Malware Protection for S3 status issues]in the GuardDuty User Guide.
+	//
+	// [Troubleshooting Malware Protection for S3 status issues]: https://docs.aws.amazon.com/guardduty/latest/ug/troubleshoot-s3-malware-protection-status-errors.html
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the Malware Protection plan resource.
+type MalwareProtectionPlanSummary struct {
+
+	// A unique identifier associated with Malware Protection plan.
+	MalwareProtectionPlanId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about adding tags to the scanned S3 object after the scan result.
+type MalwareProtectionPlanTaggingAction struct {
+
+	// Indicates whether or not the tags will added.
+	Status MalwareProtectionPlanTaggingActionStatus
+
+	noSmithyDocumentSerde
+}
+
+// Information about the malware scan that generated a GuardDuty finding.
+type MalwareScanDetails struct {
+
+	// Information about the detected threats associated with the generated GuardDuty
+	// finding.
+	Threats []Threat
 
 	noSmithyDocumentSerde
 }
@@ -2634,7 +2724,7 @@ type Resource struct {
 // Represents the resources that were scanned in the scan entry.
 type ResourceDetails struct {
 
-	// InstanceArn that was scanned in the scan entry.
+	// Instance ARN that was scanned in the scan entry.
 	InstanceArn *string
 
 	noSmithyDocumentSerde
@@ -2763,6 +2853,9 @@ type S3BucketDetail struct {
 	// Describes the public access policies that apply to the S3 bucket.
 	PublicAccess *PublicAccess
 
+	// Information about the S3 object that was scanned.
+	S3ObjectDetails []S3ObjectDetail
+
 	// All tags attached to the S3 bucket
 	Tags []Tag
 
@@ -2791,6 +2884,28 @@ type S3LogsConfigurationResult struct {
 	//
 	// This member is required.
 	Status DataSourceStatus
+
+	noSmithyDocumentSerde
+}
+
+// Information about the S3 object that was scanned
+type S3ObjectDetail struct {
+
+	// The entity tag is a hash of the S3 object. The ETag reflects changes only to
+	// the contents of an object, and not its metadata.
+	ETag *string
+
+	// Hash of the threat detected in this finding.
+	Hash *string
+
+	// Key of the S3 object.
+	Key *string
+
+	// Amazon Resource Name (ARN) of the S3 object.
+	ObjectArn *string
+
+	// Version ID of the object.
+	VersionId *string
 
 	noSmithyDocumentSerde
 }
@@ -2926,7 +3041,7 @@ type ScanFilePath struct {
 	// The hash value of the infected file.
 	Hash *string
 
-	// EBS volume Arn details of the infected file.
+	// EBS volume ARN details of the infected file.
 	VolumeArn *string
 
 	noSmithyDocumentSerde
@@ -3053,6 +3168,9 @@ type Service struct {
 	// The name of the feature that generated a finding.
 	FeatureName *string
 
+	// Returns details from the malware scan that generated a GuardDuty finding.
+	MalwareScanDetails *MalwareScanDetails
+
 	// The resource role information for this finding.
 	ResourceRole *string
 
@@ -3102,6 +3220,21 @@ type Tag struct {
 
 	// The EC2 instance tag value.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the detected threats associated with the generated finding.
+type Threat struct {
+
+	// Information about the nested item path and hash of the protected resource.
+	ItemPaths []ItemPath
+
+	// Name of the detected threat that caused GuardDuty to generate this finding.
+	Name *string
+
+	// Source of the threat that generated this finding.
+	Source *string
 
 	noSmithyDocumentSerde
 }
@@ -3197,6 +3330,27 @@ type UnprocessedDataSourcesResult struct {
 	// An object that contains information on the status of all Malware Protection
 	// data sources.
 	MalwareProtection *MalwareProtectionConfigurationResult
+
+	noSmithyDocumentSerde
+}
+
+// Information about the protected resource that is associated with the created
+// Malware Protection plan. Presently, S3Bucket is the only supported protected
+// resource.
+type UpdateProtectedResource struct {
+
+	// Information about the protected S3 bucket resource.
+	S3Bucket *UpdateS3BucketResource
+
+	noSmithyDocumentSerde
+}
+
+// Information about the protected S3 bucket resource.
+type UpdateS3BucketResource struct {
+
+	// Information about the specified object prefixes. The S3 object will be scanned
+	// only if it belongs to any of the specified object prefixes.
+	ObjectPrefixes []string
 
 	noSmithyDocumentSerde
 }
@@ -3348,13 +3502,13 @@ type VolumeDetail struct {
 	// EBS volume encryption type.
 	EncryptionType *string
 
-	// KMS key Arn used to encrypt the EBS volume.
+	// KMS key ARN used to encrypt the EBS volume.
 	KmsKeyArn *string
 
-	// Snapshot Arn of the EBS volume.
+	// Snapshot ARN of the EBS volume.
 	SnapshotArn *string
 
-	// EBS volume Arn information.
+	// EBS volume ARN information.
 	VolumeArn *string
 
 	// EBS volume size in GB.

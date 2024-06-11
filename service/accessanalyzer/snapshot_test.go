@@ -110,6 +110,18 @@ func TestCheckSnapshot_CheckNoNewAccess(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CheckNoPublicAccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CheckNoPublicAccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CheckNoPublicAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAccessPreview(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAccessPreview(context.Background(), nil, func(o *Options) {
@@ -170,6 +182,18 @@ func TestCheckSnapshot_DeleteArchiveRule(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GenerateFindingRecommendation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GenerateFindingRecommendation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GenerateFindingRecommendation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAccessPreview(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAccessPreview(context.Background(), nil, func(o *Options) {
@@ -223,6 +247,18 @@ func TestCheckSnapshot_GetFinding(t *testing.T) {
 	_, err := svc.GetFinding(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetFinding")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetFindingRecommendation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFindingRecommendation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFindingRecommendation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -493,6 +529,18 @@ func TestUpdateSnapshot_CheckNoNewAccess(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CheckNoPublicAccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CheckNoPublicAccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CheckNoPublicAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateAccessPreview(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAccessPreview(context.Background(), nil, func(o *Options) {
@@ -553,6 +601,18 @@ func TestUpdateSnapshot_DeleteArchiveRule(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GenerateFindingRecommendation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GenerateFindingRecommendation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GenerateFindingRecommendation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAccessPreview(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAccessPreview(context.Background(), nil, func(o *Options) {
@@ -606,6 +666,18 @@ func TestUpdateSnapshot_GetFinding(t *testing.T) {
 	_, err := svc.GetFinding(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetFinding")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetFindingRecommendation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFindingRecommendation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFindingRecommendation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

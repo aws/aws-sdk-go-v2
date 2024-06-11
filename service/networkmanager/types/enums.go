@@ -134,6 +134,7 @@ type ChangeType string
 // Enum values for ChangeType
 const (
 	ChangeTypeCoreNetworkSegment              ChangeType = "CORE_NETWORK_SEGMENT"
+	ChangeTypeNetworkFunctionGroup            ChangeType = "NETWORK_FUNCTION_GROUP"
 	ChangeTypeCoreNetworkEdge                 ChangeType = "CORE_NETWORK_EDGE"
 	ChangeTypeAttachmentMapping               ChangeType = "ATTACHMENT_MAPPING"
 	ChangeTypeAttachmentRoutePropagation      ChangeType = "ATTACHMENT_ROUTE_PROPAGATION"
@@ -151,6 +152,7 @@ const (
 func (ChangeType) Values() []ChangeType {
 	return []ChangeType{
 		"CORE_NETWORK_SEGMENT",
+		"NETWORK_FUNCTION_GROUP",
 		"CORE_NETWORK_EDGE",
 		"ATTACHMENT_MAPPING",
 		"ATTACHMENT_ROUTE_PROPAGATION",
@@ -571,6 +573,7 @@ type RouteTableType string
 const (
 	RouteTableTypeTransitGatewayRouteTable RouteTableType = "TRANSIT_GATEWAY_ROUTE_TABLE"
 	RouteTableTypeCoreNetworkSegment       RouteTableType = "CORE_NETWORK_SEGMENT"
+	RouteTableTypeNetworkFunctionGroup     RouteTableType = "NETWORK_FUNCTION_GROUP"
 )
 
 // Values returns all known values for RouteTableType. Note that this can be
@@ -581,6 +584,7 @@ func (RouteTableType) Values() []RouteTableType {
 	return []RouteTableType{
 		"TRANSIT_GATEWAY_ROUTE_TABLE",
 		"CORE_NETWORK_SEGMENT",
+		"NETWORK_FUNCTION_GROUP",
 	}
 }
 
@@ -600,6 +604,45 @@ func (RouteType) Values() []RouteType {
 	return []RouteType{
 		"PROPAGATED",
 		"STATIC",
+	}
+}
+
+type SegmentActionServiceInsertion string
+
+// Enum values for SegmentActionServiceInsertion
+const (
+	SegmentActionServiceInsertionSendVia SegmentActionServiceInsertion = "send-via"
+	SegmentActionServiceInsertionSendTo  SegmentActionServiceInsertion = "send-to"
+)
+
+// Values returns all known values for SegmentActionServiceInsertion. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SegmentActionServiceInsertion) Values() []SegmentActionServiceInsertion {
+	return []SegmentActionServiceInsertion{
+		"send-via",
+		"send-to",
+	}
+}
+
+type SendViaMode string
+
+// Enum values for SendViaMode
+const (
+	SendViaModeDualHop   SendViaMode = "dual-hop"
+	SendViaModeSingleHop SendViaMode = "single-hop"
+)
+
+// Values returns all known values for SendViaMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SendViaMode) Values() []SendViaMode {
+	return []SendViaMode{
+		"dual-hop",
+		"single-hop",
 	}
 }
 

@@ -62,48 +62,43 @@ type GetNetworkResourcesInput struct {
 	//
 	// The following are the supported resource types for Direct Connect:
 	//
-	//   - dxcon - The definition model is [Connection].
+	//   - dxcon
 	//
-	//   - dx-gateway - The definition model is [DirectConnectGateway].
+	//   - dx-gateway
 	//
-	//   - dx-vif - The definition model is [VirtualInterface].
+	//   - dx-vif
 	//
 	// The following are the supported resource types for Network Manager:
 	//
-	//   - connection - The definition model is [Connection].
+	//   - attachment
 	//
-	//   - device - The definition model is [Device].
+	//   - connect-peer
 	//
-	//   - link - The definition model is [Link].
+	//   - connection
 	//
-	//   - site - The definition model is [Site].
+	//   - core-network
+	//
+	//   - device
+	//
+	//   - link
+	//
+	//   - peering
+	//
+	//   - site
 	//
 	// The following are the supported resource types for Amazon VPC:
 	//
-	//   - customer-gateway - The definition model is [CustomerGateway].
+	//   - customer-gateway
 	//
-	//   - transit-gateway - The definition model is [TransitGateway].
+	//   - transit-gateway
 	//
-	//   - transit-gateway-attachment - The definition model is [TransitGatewayAttachment].
+	//   - transit-gateway-attachment
 	//
-	//   - transit-gateway-connect-peer - The definition model is [TransitGatewayConnectPeer].
+	//   - transit-gateway-connect-peer
 	//
-	//   - transit-gateway-route-table - The definition model is [TransitGatewayRouteTable].
+	//   - transit-gateway-route-table
 	//
-	//   - vpn-connection - The definition model is [VpnConnection].
-	//
-	// [Site]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Site.html
-	// [TransitGatewayAttachment]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayAttachment.html
-	// [DirectConnectGateway]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DirectConnectGateway.html
-	// [VirtualInterface]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_VirtualInterface.html
-	// [TransitGatewayRouteTable]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayRouteTable.html
-	// [VpnConnection]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_VpnConnection.html
-	// [Device]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Device.html
-	// [Connection]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Connection.html
-	// [TransitGatewayConnectPeer]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayConnectPeer.html
-	// [CustomerGateway]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CustomerGateway.html
-	// [Link]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Link.html
-	// [TransitGateway]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGateway.html
+	//   - vpn-connection
 	ResourceType *string
 
 	noSmithyDocumentSerde

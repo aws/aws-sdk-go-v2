@@ -237,3 +237,21 @@ func ExampleRdsDbSnapshotAttributeValue_outputUsage() {
 }
 
 var _ []string
+
+func ExampleRecommendedStep_outputUsage() {
+	var union types.RecommendedStep
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RecommendedStepMemberUnusedPermissionsRecommendedStep:
+		_ = v.Value // Value is types.UnusedPermissionsRecommendedStep
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.UnusedPermissionsRecommendedStep
