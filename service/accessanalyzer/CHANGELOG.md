@@ -1,3 +1,7 @@
+# v1.30.0 (2024-06-11)
+
+* **Feature**: IAM Access Analyzer now provides policy recommendations to help resolve unused permissions for IAM roles and users. Additionally, IAM Access Analyzer now extends its custom policy checks to detect when IAM policies grant public access or access to critical resources ahead of deployments.
+
 # v1.29.8 (2024-06-07)
 
 * **Bug Fix**: Add clock skew correction on all service clients

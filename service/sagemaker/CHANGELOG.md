@@ -1,3 +1,7 @@
+# v1.145.0 (2024-06-11)
+
+* **Feature**: Introduced Scope and AuthenticationRequestExtraParams to SageMaker Workforce OIDC configuration; this allows customers to modify these options for their private Workforce IdP integration. Model Registry Cross-account model package groups are discoverable.
+
 # v1.144.0 (2024-06-07)
 
 * **Feature**: This release introduces a new optional parameter: InferenceAmiVersion, in ProductionVariant.

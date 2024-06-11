@@ -1,0 +1,5 @@
+# v1.0.0 (2024-06-11)
+
+* **Release**: New AWS service client module
+* **Feature**: Connector for SCEP allows you to use a managed, cloud CA to enroll mobile devices and networking gear. SCEP is a widely-adopted protocol used by mobile device management (MDM) solutions for enrolling mobile devices. With the connector, you can use AWS Private CA with popular MDM solutions.
+

@@ -1,3 +1,7 @@
+# v1.43.0 (2024-06-11)
+
+* **Feature**: Added API support for GuardDuty Malware Protection for S3.
+
 # v1.42.6 (2024-06-07)
 
 * **Bug Fix**: Add clock skew correction on all service clients

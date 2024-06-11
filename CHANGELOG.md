@@ -1,3 +1,18 @@
+# Release (2024-06-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.30.0](service/accessanalyzer/CHANGELOG.md#v1300-2024-06-11)
+  * **Feature**: IAM Access Analyzer now provides policy recommendations to help resolve unused permissions for IAM roles and users. Additionally, IAM Access Analyzer now extends its custom policy checks to detect when IAM policies grant public access or access to critical resources ahead of deployments.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.43.0](service/guardduty/CHANGELOG.md#v1430-2024-06-11)
+  * **Feature**: Added API support for GuardDuty Malware Protection for S3.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.26.0](service/networkmanager/CHANGELOG.md#v1260-2024-06-11)
+  * **Feature**: This is model changes & documentation update for Service Insertion feature for AWS Cloud WAN. This feature allows insertion of AWS/3rd party security services on Cloud WAN. This allows to steer inter/intra segment traffic via security appliances and provide visibility to the route updates.
+* `github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep`: [v1.0.0](service/pcaconnectorscep/CHANGELOG.md#v100-2024-06-11)
+  * **Release**: New AWS service client module
+  * **Feature**: Connector for SCEP allows you to use a managed, cloud CA to enroll mobile devices and networking gear. SCEP is a widely-adopted protocol used by mobile device management (MDM) solutions for enrolling mobile devices. With the connector, you can use AWS Private CA with popular MDM solutions.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.145.0](service/sagemaker/CHANGELOG.md#v11450-2024-06-11)
+  * **Feature**: Introduced Scope and AuthenticationRequestExtraParams to SageMaker Workforce OIDC configuration; this allows customers to modify these options for their private Workforce IdP integration. Model Registry Cross-account model package groups are discoverable.
+
 # Release (2024-06-10)
 
 ## Module Highlights
