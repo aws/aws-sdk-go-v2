@@ -1773,6 +1773,12 @@
                 "EncryptionAtRestOptions": {
                     "target": "com.amazonaws.osis#EncryptionAtRestOptions"
                 },
+                "VpcEndpointService": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC endpoint service name for the pipeline.</p>"
+                    }
+                },
                 "ServiceVpcEndpoints": {
                     "target": "com.amazonaws.osis#ServiceVpcEndpointsList",
                     "traits": {
@@ -2761,6 +2767,23 @@
                 "smithy.api#documentation": "<p>An OpenSearch Ingestion-managed VPC endpoint that will access one or more\n   pipelines.</p>"
             }
         },
+        "com.amazonaws.osis#VpcEndpointManagement": {
+            "type": "enum",
+            "members": {
+                "CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER"
+                    }
+                },
+                "SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.osis#VpcEndpointServiceName": {
             "type": "enum",
             "members": {
@@ -2798,6 +2821,12 @@
                     "target": "com.amazonaws.osis#VpcAttachmentOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Options for attaching a VPC to a pipeline.</p>"
+                    }
+                },
+                "VpcEndpointManagement": {
+                    "target": "com.amazonaws.osis#VpcEndpointManagement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.</p>"
                     }
                 }
             },

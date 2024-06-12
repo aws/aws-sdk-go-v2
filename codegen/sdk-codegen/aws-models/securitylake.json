@@ -59,7 +59,7 @@
                     "min": 1,
                     "max": 1011
                 },
-                "smithy.api#pattern": "^arn:aws:securitylake:[A-za-z0-9_/.\\-]{0,63}:[A-za-z0-9_/.\\-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.\\-]{0,127}$"
+                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn):securitylake:[A-za-z0-9_/.\\-]{0,63}:[A-za-z0-9_/.\\-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.\\-]{0,127}$"
             }
         },
         "com.amazonaws.securitylake#AwsAccountId": {
@@ -857,7 +857,7 @@
                 "subscriberIdentity": {
                     "target": "com.amazonaws.securitylake#AwsIdentity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS identity used to access your data.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services identity used to access your data.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -985,7 +985,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[\\\\\\w\\-_:/.]*$"
+                "smithy.api#pattern": "^[\\w\\-\\_\\:\\.]*$"
             }
         },
         "com.amazonaws.securitylake#CustomLogSourceProvider": {
@@ -2977,7 +2977,7 @@
         "com.amazonaws.securitylake#Region": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(af|ap|ca|eu|me|sa|us)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-\\d+$"
+                "smithy.api#pattern": "^(us(-gov)?|af|ap|ca|eu|me|sa)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-\\d+$"
             }
         },
         "com.amazonaws.securitylake#RegionList": {
@@ -3981,7 +3981,7 @@
                 "subscriberIdentity": {
                     "target": "com.amazonaws.securitylake#AwsIdentity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS identity used to access your data.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services identity used to access your data.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4038,7 +4038,7 @@
                 "resourceShareArn": {
                     "target": "com.amazonaws.securitylake#ResourceShareArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) which uniquely defines the AWS RAM resource share. Before\n         accepting the RAM resource share invitation, you can view details related to the RAM\n         resource share.</p>\n         <p>This field is available only for Lake Formation subscribers created after March 8, 2023.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) which uniquely defines the Amazon Web Services RAM resource share. Before\n         accepting the RAM resource share invitation, you can view details related to the RAM\n         resource share.</p>\n         <p>This field is available only for Lake Formation subscribers created after March 8, 2023.</p>"
                     }
                 },
                 "resourceShareName": {

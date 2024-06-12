@@ -2814,7 +2814,7 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The node type to be provisioned for the cluster. For information about node types,\n            go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes\"> Working with\n                Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>\n         <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> |\n                <code>dc1.large</code> | <code>dc1.8xlarge</code> | \n                <code>dc2.large</code> | <code>dc2.8xlarge</code> | \n                <code>ra3.xlplus</code> |  <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The node type to be provisioned for the cluster. For information about node types,\n            go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes\"> Working with\n                Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>\n         <p>Valid Values: \n                <code>dc2.large</code> | <code>dc2.8xlarge</code> | \n                <code>ra3.xlplus</code> |  <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2883,7 +2883,7 @@
                 "Port": {
                     "target": "com.amazonaws.redshift#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port number on which the cluster accepts incoming connections.</p>\n         <p>The cluster is accessible only via the JDBC and ODBC connection strings. Part of\n            the connection string requires the port on which the cluster will listen for incoming\n            connections.</p>\n         <p>Default: <code>5439</code>\n         </p>\n         <p>Valid Values:\n        </p>\n         <ul>\n            <li>\n               <p>For clusters with ra3 nodes - Select a port within the ranges <code>5431-5455</code> or <code>8191-8215</code>. (If you have an existing cluster \n                with ra3 nodes, it isn't required that you change the port to these ranges.)</p>\n            </li>\n            <li>\n               <p>For clusters with ds2 or dc2 nodes - Select a port within the range <code>1150-65535</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The port number on which the cluster accepts incoming connections.</p>\n         <p>The cluster is accessible only via the JDBC and ODBC connection strings. Part of\n            the connection string requires the port on which the cluster will listen for incoming\n            connections.</p>\n         <p>Default: <code>5439</code>\n         </p>\n         <p>Valid Values:\n        </p>\n         <ul>\n            <li>\n               <p>For clusters with ra3 nodes - Select a port within the ranges <code>5431-5455</code> or <code>8191-8215</code>. (If you have an existing cluster \n                with ra3 nodes, it isn't required that you change the port to these ranges.)</p>\n            </li>\n            <li>\n               <p>For clusters with dc2 nodes - Select a port within the range <code>1150-65535</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ClusterVersion": {
@@ -11453,7 +11453,7 @@
                 "NodeType": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new node type of the cluster. If you specify a new node type, you must also\n            specify the number of nodes parameter.</p>\n         <p>\nFor more information about resizing clusters, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html\">Resizing Clusters in Amazon Redshift</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>\n         <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> |\n            <code>dc1.large</code> | <code>dc1.8xlarge</code> | \n            <code>dc2.large</code> | <code>dc2.8xlarge</code> | \n            <code>ra3.xlplus</code> |  <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The new node type of the cluster. If you specify a new node type, you must also\n            specify the number of nodes parameter.</p>\n         <p>\nFor more information about resizing clusters, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html\">Resizing Clusters in Amazon Redshift</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>\n         <p>Valid Values: \n            <code>dc2.large</code> | <code>dc2.8xlarge</code> | \n            <code>ra3.xlplus</code> |  <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>\n         </p>"
                     }
                 },
                 "NumberOfNodes": {
@@ -11585,7 +11585,7 @@
                 "Port": {
                     "target": "com.amazonaws.redshift#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The option to change the port of an Amazon Redshift cluster.</p>\n         <p>Valid Values:\n        </p>\n         <ul>\n            <li>\n               <p>For clusters with ra3 nodes - Select a port within the ranges <code>5431-5455</code> or <code>8191-8215</code>. (If you have an existing cluster \n                with ra3 nodes, it isn't required that you change the port to these ranges.)</p>\n            </li>\n            <li>\n               <p>For clusters with ds2 or dc2 nodes - Select a port within the range <code>1150-65535</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The option to change the port of an Amazon Redshift cluster.</p>\n         <p>Valid Values:\n        </p>\n         <ul>\n            <li>\n               <p>For clusters with ra3 nodes - Select a port within the ranges <code>5431-5455</code> or <code>8191-8215</code>. (If you have an existing cluster \n                with ra3 nodes, it isn't required that you change the port to these ranges.)</p>\n            </li>\n            <li>\n               <p>For clusters with dc2 nodes - Select a port within the range <code>1150-65535</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ManageMasterPassword": {
@@ -12508,7 +12508,7 @@
                 "NodeType": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The node type, such as, \"ds2.8xlarge\".</p>"
+                        "smithy.api#documentation": "<p>The node type, such as, \"ra3.4xlarge\".</p>"
                     }
                 },
                 "NumberOfNodes": {
@@ -15412,7 +15412,7 @@
                 "SourceReservedNodeType": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source reserved-node type, for example ds2.xlarge.</p>"
+                        "smithy.api#documentation": "<p>The source reserved-node type, for example ra3.4xlarge.</p>"
                     }
                 },
                 "SourceReservedNodeCount": {
@@ -15789,7 +15789,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Changes the size of the cluster. You can change the cluster's type, or change the\n            number or type of nodes. The default behavior is to use the elastic resize method. With\n            an elastic resize, your cluster is available for read and write operations more quickly\n            than with the classic resize method. </p>\n         <p>Elastic resize operations have the following restrictions:</p>\n         <ul>\n            <li>\n               <p>You can only resize clusters of the following types:</p>\n               <ul>\n                  <li>\n                     <p>dc1.large (if your cluster is in a VPC)</p>\n                  </li>\n                  <li>\n                     <p>dc1.8xlarge (if your cluster is in a VPC)</p>\n                  </li>\n                  <li>\n                     <p>dc2.large</p>\n                  </li>\n                  <li>\n                     <p>dc2.8xlarge</p>\n                  </li>\n                  <li>\n                     <p>ds2.xlarge</p>\n                  </li>\n                  <li>\n                     <p>ds2.8xlarge</p>\n                  </li>\n                  <li>\n                     <p>ra3.xlplus</p>\n                  </li>\n                  <li>\n                     <p>ra3.4xlarge</p>\n                  </li>\n                  <li>\n                     <p>ra3.16xlarge</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The type of nodes that you add must match the node type for the\n                    cluster.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Changes the size of the cluster. You can change the cluster's type, or change the\n            number or type of nodes. The default behavior is to use the elastic resize method. With\n            an elastic resize, your cluster is available for read and write operations more quickly\n            than with the classic resize method. </p>\n         <p>Elastic resize operations have the following restrictions:</p>\n         <ul>\n            <li>\n               <p>You can only resize clusters of the following types:</p>\n               <ul>\n                  <li>\n                     <p>dc2.large</p>\n                  </li>\n                  <li>\n                     <p>dc2.8xlarge</p>\n                  </li>\n                  <li>\n                     <p>ra3.xlplus</p>\n                  </li>\n                  <li>\n                     <p>ra3.4xlarge</p>\n                  </li>\n                  <li>\n                     <p>ra3.16xlarge</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The type of nodes that you add must match the node type for the\n                    cluster.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.redshift#ResizeClusterMessage": {
@@ -16187,7 +16187,7 @@
                 "Port": {
                     "target": "com.amazonaws.redshift#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port number on which the cluster accepts connections.</p>\n         <p>Default: The same port as the original cluster.</p>\n         <p>Valid values: For clusters with ds2 or dc2 nodes, must be within the range <code>1150</code>-<code>65535</code>. For clusters with ra3 nodes, must be \n            within the ranges <code>5431</code>-<code>5455</code> or <code>8191</code>-<code>8215</code>.</p>"
+                        "smithy.api#documentation": "<p>The port number on which the cluster accepts connections.</p>\n         <p>Default: The same port as the original cluster.</p>\n         <p>Valid values: For clusters with DC2 nodes, must be within the range <code>1150</code>-<code>65535</code>. For clusters with ra3 nodes, must be \n            within the ranges <code>5431</code>-<code>5455</code> or <code>8191</code>-<code>8215</code>.</p>"
                     }
                 },
                 "AvailabilityZone": {
@@ -16283,7 +16283,7 @@
                 "NodeType": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The node type that the restored cluster will be provisioned with.</p>\n         <p>Default: The node type of the cluster from which the snapshot was taken. You can\n            modify this if you are using any DS node type. In that case, you can choose to restore\n            into another DS node type of the same size. For example, you can restore ds1.8xlarge\n            into ds2.8xlarge, or ds1.xlarge into ds2.xlarge. If you have a DC instance type, you\n            must restore into that same instance type and size. In other words, you can only restore\n            a dc1.large instance type into another dc1.large instance type or dc2.large instance\n            type. You can't restore dc1.8xlarge to dc2.8xlarge. First restore to a dc1.8xlarge\n            cluster, then resize to a dc2.8large cluster. For more information about node types, see\n                <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes\">\n                About Clusters and Nodes</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>The node type that the restored cluster will be provisioned with.</p>\n         <p>If you have a DC instance type, you\n            must restore into that same instance type and size. In other words, you can only restore\n            a dc2.large node type into another dc2 type. For more information about node types, see \n                <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes\">\n                About Clusters and Nodes</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>"
                     }
                 },
                 "EnhancedVpcRouting": {
@@ -16411,31 +16411,31 @@
                 "CurrentRestoreRateInMegaBytesPerSecond": {
                     "target": "com.amazonaws.redshift#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of megabytes per second being transferred from the backup storage.\n            Returns the average rate for a completed backup.\n            This field is only updated when you restore to DC2 and DS2 node types. </p>"
+                        "smithy.api#documentation": "<p>The number of megabytes per second being transferred from the backup storage.\n            Returns the average rate for a completed backup.\n            This field is only updated when you restore to DC2 node types. </p>"
                     }
                 },
                 "SnapshotSizeInMegaBytes": {
                     "target": "com.amazonaws.redshift#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the set of snapshot data used to restore the cluster.\n            This field is only updated when you restore to DC2 and DS2 node types. </p>"
+                        "smithy.api#documentation": "<p>The size of the set of snapshot data used to restore the cluster.\n            This field is only updated when you restore to DC2 node types. </p>"
                     }
                 },
                 "ProgressInMegaBytes": {
                     "target": "com.amazonaws.redshift#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of megabytes that have been transferred from snapshot storage.\n            This field is only updated when you restore to DC2 and DS2 node types. </p>"
+                        "smithy.api#documentation": "<p>The number of megabytes that have been transferred from snapshot storage.\n            This field is only updated when you restore to DC2 node types. </p>"
                     }
                 },
                 "ElapsedTimeInSeconds": {
                     "target": "com.amazonaws.redshift#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time an in-progress restore has been running, or the amount of time\n            it took a completed restore to finish.\n            This field is only updated when you restore to DC2 and DS2 node types. </p>"
+                        "smithy.api#documentation": "<p>The amount of time an in-progress restore has been running, or the amount of time\n            it took a completed restore to finish.\n            This field is only updated when you restore to DC2 node types. </p>"
                     }
                 },
                 "EstimatedTimeToCompletionInSeconds": {
                     "target": "com.amazonaws.redshift#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimate of the time remaining before the restore will complete. Returns 0 for\n            a completed restore.\n            This field is only updated when you restore to DC2 and DS2 node types. </p>"
+                        "smithy.api#documentation": "<p>The estimate of the time remaining before the restore will complete. Returns 0 for\n            a completed restore.\n            This field is only updated when you restore to DC2 node types. </p>"
                     }
                 }
             },
@@ -17024,7 +17024,7 @@
                 "TargetAction": {
                     "target": "com.amazonaws.redshift#ScheduledActionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A JSON format string of the Amazon Redshift API operation with input parameters. </p>\n         <p>\"<code>{\\\"ResizeCluster\\\":{\\\"NodeType\\\":\\\"ds2.8xlarge\\\",\\\"ClusterIdentifier\\\":\\\"my-test-cluster\\\",\\\"NumberOfNodes\\\":3}}</code>\". </p>"
+                        "smithy.api#documentation": "<p>A JSON format string of the Amazon Redshift API operation with input parameters. </p>\n         <p>\"<code>{\\\"ResizeCluster\\\":{\\\"NodeType\\\":\\\"ra3.4xlarge\\\",\\\"ClusterIdentifier\\\":\\\"my-test-cluster\\\",\\\"NumberOfNodes\\\":3}}</code>\". </p>"
                     }
                 },
                 "Schedule": {

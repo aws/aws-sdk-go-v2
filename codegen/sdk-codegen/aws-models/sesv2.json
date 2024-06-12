@@ -995,7 +995,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create an event destination. <i>Events</i> include message sends,\n            deliveries, opens, clicks, bounces, and complaints. <i>Event\n                destinations</i> are places that you can send information about these events\n            to. For example, you can send event data to Amazon SNS to receive notifications when you\n            receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term\n            storage.</p>\n         <p>A single configuration set can include more than one event destination.</p>",
+                "smithy.api#documentation": "<p>Create an event destination. <i>Events</i> include message sends,\n            deliveries, opens, clicks, bounces, and complaints. <i>Event\n                destinations</i> are places that you can send information about these events\n            to. For example, you can send event data to Amazon EventBridge and associate a rule to send the event\n            to the specified target.</p>\n         <p>A single configuration set can include more than one event destination.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v2/email/configuration-sets/{ConfigurationSetName}/event-destinations",
@@ -2149,7 +2149,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete an event destination.</p>\n         <p>\n            <i>Events</i> include message sends, deliveries, opens, clicks, bounces,\n            and complaints. <i>Event destinations</i> are places that you can send\n            information about these events to. For example, you can send event data to Amazon SNS to\n            receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to\n            stream data to Amazon S3 for long-term storage.</p>",
+                "smithy.api#documentation": "<p>Delete an event destination.</p>\n         <p>\n            <i>Events</i> include message sends, deliveries, opens, clicks, bounces,\n            and complaints. <i>Event destinations</i> are places that you can send\n            information about these events to. For example, you can send event data to Amazon EventBridge and\n            associate a rule to send the event to the specified target.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/v2/email/configuration-sets/{ConfigurationSetName}/event-destinations/{EventDestinationName}",
@@ -3483,6 +3483,21 @@
                 "target": "com.amazonaws.sesv2#Esp"
             }
         },
+        "com.amazonaws.sesv2#EventBridgeDestination": {
+            "type": "structure",
+            "members": {
+                "EventBusArn": {
+                    "target": "com.amazonaws.sesv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon EventBridge bus to publish email events to. Only the default bus is supported. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that defines an Amazon EventBridge destination for email events. You can use Amazon EventBridge to\n            send notifications when certain email events occur.</p>"
+            }
+        },
         "com.amazonaws.sesv2#EventDestination": {
             "type": "structure",
             "members": {
@@ -3522,7 +3537,13 @@
                 "SnsDestination": {
                     "target": "com.amazonaws.sesv2#SnsDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to\n            send notification when certain email events occur.</p>"
+                        "smithy.api#documentation": "<p>An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to\n            send notifications when certain email events occur.</p>"
+                    }
+                },
+                "EventBridgeDestination": {
+                    "target": "com.amazonaws.sesv2#EventBridgeDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that defines an Amazon EventBridge destination for email events. You can use Amazon EventBridge to\n            send notifications when certain email events occur.</p>"
                     }
                 },
                 "PinpointDestination": {
@@ -3567,7 +3588,13 @@
                 "SnsDestination": {
                     "target": "com.amazonaws.sesv2#SnsDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to\n            send notification when certain email events occur.</p>"
+                        "smithy.api#documentation": "<p>An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to\n            send notifications when certain email events occur.</p>"
+                    }
+                },
+                "EventBridgeDestination": {
+                    "target": "com.amazonaws.sesv2#EventBridgeDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that defines an Amazon EventBridge destination for email events. You can use Amazon EventBridge to\n            send notifications when certain email events occur.</p>"
                     }
                 },
                 "PinpointDestination": {
@@ -4122,7 +4149,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieve a list of event destinations that are associated with a configuration\n            set.</p>\n         <p>\n            <i>Events</i> include message sends, deliveries, opens, clicks, bounces,\n            and complaints. <i>Event destinations</i> are places that you can send\n            information about these events to. For example, you can send event data to Amazon SNS to\n            receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to\n            stream data to Amazon S3 for long-term storage.</p>",
+                "smithy.api#documentation": "<p>Retrieve a list of event destinations that are associated with a configuration\n            set.</p>\n         <p>\n            <i>Events</i> include message sends, deliveries, opens, clicks, bounces,\n            and complaints. <i>Event destinations</i> are places that you can send\n            information about these events to. For example, you can send event data to Amazon EventBridge and\n            associate a rule to send the event to the specified target.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v2/email/configuration-sets/{ConfigurationSetName}/event-destinations",
@@ -11369,7 +11396,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to\n            send notification when certain email events occur.</p>"
+                "smithy.api#documentation": "<p>An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to\n            send notifications when certain email events occur.</p>"
             }
         },
         "com.amazonaws.sesv2#Subject": {
@@ -12021,7 +12048,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update the configuration of an event destination for a configuration set.</p>\n         <p>\n            <i>Events</i> include message sends, deliveries, opens, clicks, bounces,\n            and complaints. <i>Event destinations</i> are places that you can send\n            information about these events to. For example, you can send event data to Amazon SNS to\n            receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to\n            stream data to Amazon S3 for long-term storage.</p>",
+                "smithy.api#documentation": "<p>Update the configuration of an event destination for a configuration set.</p>\n         <p>\n            <i>Events</i> include message sends, deliveries, opens, clicks, bounces,\n            and complaints. <i>Event destinations</i> are places that you can send\n            information about these events to. For example, you can send event data to Amazon EventBridge and\n            associate a rule to send the event to the specified target.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v2/email/configuration-sets/{ConfigurationSetName}/event-destinations/{EventDestinationName}",
