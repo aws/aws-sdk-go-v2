@@ -1,8 +1,0 @@
-{
-    "id": "6b95d140-b01f-4f86-8e0b-3e680db2984c",
-    "type": "feature",
-    "description": "This release adds support for Amazon EventBridge as an email sending events destination.",
-    "modules": [
-        "service/sesv2"
-    ]
-}

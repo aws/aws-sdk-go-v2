@@ -1,8 +1,0 @@
-{
-    "id": "f4263abd-fda5-434f-8c87-12e0c210f1a4",
-    "type": "feature",
-    "description": "Remove deprecated `backupstorage` service.",
-    "modules": [
-        "."
-    ]
-}

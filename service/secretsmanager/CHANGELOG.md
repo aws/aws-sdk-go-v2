@@ -1,3 +1,7 @@
+# v1.30.0 (2024-06-12)
+
+* **Feature**: Introducing RotationToken parameter for PutSecretValue API
+
 # v1.29.3 (2024-06-07)
 
 * **Bug Fix**: Add clock skew correction on all service clients

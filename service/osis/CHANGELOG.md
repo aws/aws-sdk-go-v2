@@ -1,3 +1,7 @@
+# v1.10.0 (2024-06-12)
+
+* **Feature**: SDK changes for self-managed vpc endpoint to OpenSearch ingestion pipelines.
+
 # v1.9.3 (2024-06-07)
 
 * **Bug Fix**: Add clock skew correction on all service clients

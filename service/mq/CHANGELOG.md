@@ -1,3 +1,7 @@
+# v1.22.11 (2024-06-12)
+
+* No change notes available for this release.
+
 # v1.22.10 (2024-06-07)
 
 * **Bug Fix**: Add clock skew correction on all service clients

@@ -1,8 +1,0 @@
-{
-    "id": "1211f003-627d-49b4-bcc8-25e28ebb9785",
-    "type": "feature",
-    "description": "This release updates request validation regex to account for non-commercial aws partitions.",
-    "modules": [
-        "service/securitylake"
-    ]
-}

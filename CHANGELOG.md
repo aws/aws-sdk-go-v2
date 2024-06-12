@@ -1,3 +1,22 @@
+# Release (2024-06-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apptest`: [v1.0.0](service/apptest/CHANGELOG.md#v100-2024-06-12)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Mainframe Modernization Application Testing is an AWS Mainframe Modernization service feature that automates functional equivalence testing for mainframe application modernization and migration to AWS, and regression testing.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.164.0](service/ec2/CHANGELOG.md#v11640-2024-06-12)
+  * **Feature**: Tagging support for Traffic Mirroring FilterRule resource
+* `github.com/aws/aws-sdk-go-v2/service/osis`: [v1.10.0](service/osis/CHANGELOG.md#v1100-2024-06-12)
+  * **Feature**: SDK changes for self-managed vpc endpoint to OpenSearch ingestion pipelines.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.44.7](service/redshift/CHANGELOG.md#v1447-2024-06-12)
+  * **Documentation**: Updates to remove DC1 and DS2 node types.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.30.0](service/secretsmanager/CHANGELOG.md#v1300-2024-06-12)
+  * **Feature**: Introducing RotationToken parameter for PutSecretValue API
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.14.0](service/securitylake/CHANGELOG.md#v1140-2024-06-12)
+  * **Feature**: This release updates request validation regex to account for non-commercial aws partitions.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.30.0](service/sesv2/CHANGELOG.md#v1300-2024-06-12)
+  * **Feature**: This release adds support for Amazon EventBridge as an email sending events destination.
+
 # Release (2024-06-11)
 
 ## Module Highlights

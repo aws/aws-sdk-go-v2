@@ -1,3 +1,7 @@
+# v1.44.7 (2024-06-12)
+
+* **Documentation**: Updates to remove DC1 and DS2 node types.
+
 # v1.44.6 (2024-06-07)
 
 * **Bug Fix**: Add clock skew correction on all service clients

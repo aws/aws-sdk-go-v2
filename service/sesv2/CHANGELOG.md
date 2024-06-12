@@ -1,3 +1,7 @@
+# v1.30.0 (2024-06-12)
+
+* **Feature**: This release adds support for Amazon EventBridge as an email sending events destination.
+
 # v1.29.6 (2024-06-07)
 
 * **Bug Fix**: Add clock skew correction on all service clients

@@ -1,8 +1,0 @@
-{
-    "id": "de73f53a-5585-4aa6-a654-52dc28ebad73",
-    "type": "feature",
-    "description": "Introducing RotationToken parameter for PutSecretValue API",
-    "modules": [
-        "service/secretsmanager"
-    ]
-}
