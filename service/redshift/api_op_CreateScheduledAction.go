@@ -127,7 +127,7 @@ type CreateScheduledActionOutput struct {
 	// parameters.
 	//
 	// "
-	// {\"ResizeCluster\":{\"NodeType\":\"ds2.8xlarge\",\"ClusterIdentifier\":\"my-test-cluster\",\"NumberOfNodes\":3}}
+	// {\"ResizeCluster\":{\"NodeType\":\"ra3.4xlarge\",\"ClusterIdentifier\":\"my-test-cluster\",\"NumberOfNodes\":3}}
 	// ".
 	TargetAction *types.ScheduledActionType
 

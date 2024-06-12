@@ -1233,5 +1233,10 @@ func awsRestjson1_serializeDocumentVpcOptions(v *types.VpcOptions, value smithyj
 		}
 	}
 
+	if len(v.VpcEndpointManagement) > 0 {
+		ok := object.Key("VpcEndpointManagement")
+		ok.String(string(v.VpcEndpointManagement))
+	}
+
 	return nil
 }

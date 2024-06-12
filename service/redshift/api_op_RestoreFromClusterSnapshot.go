@@ -214,16 +214,10 @@ type RestoreFromClusterSnapshotInput struct {
 
 	// The node type that the restored cluster will be provisioned with.
 	//
-	// Default: The node type of the cluster from which the snapshot was taken. You
-	// can modify this if you are using any DS node type. In that case, you can choose
-	// to restore into another DS node type of the same size. For example, you can
-	// restore ds1.8xlarge into ds2.8xlarge, or ds1.xlarge into ds2.xlarge. If you have
-	// a DC instance type, you must restore into that same instance type and size. In
-	// other words, you can only restore a dc1.large instance type into another
-	// dc1.large instance type or dc2.large instance type. You can't restore
-	// dc1.8xlarge to dc2.8xlarge. First restore to a dc1.8xlarge cluster, then resize
-	// to a dc2.8large cluster. For more information about node types, see [About Clusters and Nodes]in the
-	// Amazon Redshift Cluster Management Guide.
+	// If you have a DC instance type, you must restore into that same instance type
+	// and size. In other words, you can only restore a dc2.large node type into
+	// another dc2 type. For more information about node types, see [About Clusters and Nodes]in the Amazon
+	// Redshift Cluster Management Guide.
 	//
 	// [About Clusters and Nodes]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes
 	NodeType *string
@@ -240,9 +234,9 @@ type RestoreFromClusterSnapshotInput struct {
 	//
 	// Default: The same port as the original cluster.
 	//
-	// Valid values: For clusters with ds2 or dc2 nodes, must be within the range 1150 -
-	// 65535 . For clusters with ra3 nodes, must be within the ranges 5431 - 5455 or
-	// 8191 - 8215 .
+	// Valid values: For clusters with DC2 nodes, must be within the range 1150 - 65535
+	// . For clusters with ra3 nodes, must be within the ranges 5431 - 5455 or 8191 -
+	// 8215 .
 	Port *int32
 
 	// The weekly time range (in UTC) during which automated cluster maintenance can

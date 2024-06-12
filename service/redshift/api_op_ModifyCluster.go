@@ -254,8 +254,7 @@ type ModifyClusterInput struct {
 	// For more information about resizing clusters, go to [Resizing Clusters in Amazon Redshift] in the Amazon Redshift
 	// Cluster Management Guide.
 	//
-	// Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large |
-	// dc2.8xlarge | ra3.xlplus | ra3.4xlarge | ra3.16xlarge
+	// Valid Values: dc2.large | dc2.8xlarge | ra3.xlplus | ra3.4xlarge | ra3.16xlarge
 	//
 	// [Resizing Clusters in Amazon Redshift]: https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html
 	NodeType *string
@@ -279,8 +278,7 @@ type ModifyClusterInput struct {
 	//   8191-8215 . (If you have an existing cluster with ra3 nodes, it isn't required
 	//   that you change the port to these ranges.)
 	//
-	//   - For clusters with ds2 or dc2 nodes - Select a port within the range
-	//   1150-65535 .
+	//   - For clusters with dc2 nodes - Select a port within the range 1150-65535 .
 	Port *int32
 
 	// The weekly time range (in UTC) during which system maintenance can occur, if

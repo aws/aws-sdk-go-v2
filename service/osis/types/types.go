@@ -155,6 +155,9 @@ type Pipeline struct {
 	// A list of tags associated with the given pipeline.
 	Tags []Tag
 
+	// The VPC endpoint service name for the pipeline.
+	VpcEndpointService *string
+
 	// The VPC interface endpoints that have access to the pipeline.
 	VpcEndpoints []VpcEndpoint
 
@@ -351,6 +354,10 @@ type VpcOptions struct {
 
 	// Options for attaching a VPC to a pipeline.
 	VpcAttachmentOptions *VpcAttachmentOptions
+
+	// Defines whether you or Amazon OpenSearch Ingestion service create and manage
+	// the VPC endpoint configured for the pipeline.
+	VpcEndpointManagement VpcEndpointManagement
 
 	noSmithyDocumentSerde
 }

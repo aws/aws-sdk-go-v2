@@ -1,0 +1,8 @@
+{
+    "id": "5d1e01c6-f2f8-4e7e-b640-eaa94dae862d",
+    "type": "feature",
+    "description": "Tagging support for Traffic Mirroring FilterRule resource",
+    "modules": [
+        "service/ec2"
+    ]
+}

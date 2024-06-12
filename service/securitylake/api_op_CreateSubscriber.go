@@ -38,7 +38,7 @@ type CreateSubscriberInput struct {
 	// This member is required.
 	Sources []types.LogSourceResource
 
-	// The AWS identity used to access your data.
+	// The Amazon Web Services identity used to access your data.
 	//
 	// This member is required.
 	SubscriberIdentity *types.AwsIdentity

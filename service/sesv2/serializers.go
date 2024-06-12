@@ -7803,6 +7803,18 @@ func awsRestjson1_serializeDocumentEmailTemplateContent(v *types.EmailTemplateCo
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEventBridgeDestination(v *types.EventBridgeDestination, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EventBusArn != nil {
+		ok := object.Key("EventBusArn")
+		ok.String(*v.EventBusArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEventDestinationDefinition(v *types.EventDestinationDefinition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7817,6 +7829,13 @@ func awsRestjson1_serializeDocumentEventDestinationDefinition(v *types.EventDest
 	if v.Enabled {
 		ok := object.Key("Enabled")
 		ok.Boolean(v.Enabled)
+	}
+
+	if v.EventBridgeDestination != nil {
+		ok := object.Key("EventBridgeDestination")
+		if err := awsRestjson1_serializeDocumentEventBridgeDestination(v.EventBridgeDestination, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.KinesisFirehoseDestination != nil {

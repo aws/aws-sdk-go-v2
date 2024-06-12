@@ -3249,6 +3249,15 @@ func awsRestjson1_deserializeDocumentPipeline(v **types.Pipeline, value interfac
 				return err
 			}
 
+		case "VpcEndpointService":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.VpcEndpointService = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -4345,6 +4354,15 @@ func awsRestjson1_deserializeDocumentVpcOptions(v **types.VpcOptions, value inte
 		case "VpcAttachmentOptions":
 			if err := awsRestjson1_deserializeDocumentVpcAttachmentOptions(&sv.VpcAttachmentOptions, value); err != nil {
 				return err
+			}
+
+		case "VpcEndpointManagement":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VpcEndpointManagement to be of type string, got %T instead", value)
+				}
+				sv.VpcEndpointManagement = types.VpcEndpointManagement(jtv)
 			}
 
 		default:

@@ -4058,6 +4058,18 @@ func TestCheckSnapshot_DescribeTags(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeTrafficMirrorFilterRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTrafficMirrorFilterRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTrafficMirrorFilterRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeTrafficMirrorFilters(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeTrafficMirrorFilters(context.Background(), nil, func(o *Options) {
@@ -11502,6 +11514,18 @@ func TestUpdateSnapshot_DescribeTags(t *testing.T) {
 	_, err := svc.DescribeTags(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeTags")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeTrafficMirrorFilterRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTrafficMirrorFilterRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTrafficMirrorFilterRules")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

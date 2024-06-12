@@ -38,8 +38,9 @@ import (
 // existing version; you can only create new ones.
 //
 // Secrets Manager generates a CloudTrail log entry when you call this action. Do
-// not include sensitive information in request parameters except SecretBinary or
-// SecretString because it might be logged. For more information, see [Logging Secrets Manager events with CloudTrail].
+// not include sensitive information in request parameters except SecretBinary ,
+// SecretString , or RotationToken because it might be logged. For more
+// information, see [Logging Secrets Manager events with CloudTrail].
 //
 // Required permissions: secretsmanager:PutSecretValue . For more information, see [IAM policy actions for Secrets Manager]
 // and [Authentication and access control in Secrets Manager].
@@ -108,6 +109,19 @@ type PutSecretValueInput struct {
 	// [UUID-type]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientRequestToken *string
 
+	// A unique identifier that indicates the source of the request. For cross-account
+	// rotation (when you rotate a secret in one account by using a Lambda rotation
+	// function in another account) and the Lambda rotation function assumes an IAM
+	// role to call Secrets Manager, Secrets Manager validates the identity with the
+	// rotation token. For more information, see [How rotation works].
+	//
+	// Sensitive: This field contains sensitive information, so the service does not
+	// include it in CloudTrail log entries. If you create your own log entries, you
+	// must also avoid logging the information in this field.
+	//
+	// [How rotation works]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html
+	RotationToken *string
+
 	// The binary data to encrypt and store in the new version of the secret. To use
 	// this parameter in the command-line tools, we recommend that you store your
 	// binary data in a file and then pass the contents of the file as a parameter.
@@ -115,6 +129,10 @@ type PutSecretValueInput struct {
 	// You must include SecretBinary or SecretString , but not both.
 	//
 	// You can't access this value from the Secrets Manager console.
+	//
+	// Sensitive: This field contains sensitive information, so the service does not
+	// include it in CloudTrail log entries. If you create your own log entries, you
+	// must also avoid logging the information in this field.
 	SecretBinary []byte
 
 	// The text to encrypt and store in the new version of the secret.
@@ -123,6 +141,10 @@ type PutSecretValueInput struct {
 	//
 	// We recommend you create the secret string as JSON key/value pairs, as shown in
 	// the example.
+	//
+	// Sensitive: This field contains sensitive information, so the service does not
+	// include it in CloudTrail log entries. If you create your own log entries, you
+	// must also avoid logging the information in this field.
 	SecretString *string
 
 	// A list of staging labels to attach to this version of the secret. Secrets

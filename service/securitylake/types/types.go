@@ -589,7 +589,7 @@ type SubscriberResource struct {
 	// This member is required.
 	SubscriberId *string
 
-	// The AWS identity used to access your data.
+	// The Amazon Web Services identity used to access your data.
 	//
 	// This member is required.
 	SubscriberIdentity *AwsIdentity
@@ -611,9 +611,9 @@ type SubscriberResource struct {
 	// The date and time when the subscriber was created.
 	CreatedAt *time.Time
 
-	// The Amazon Resource Name (ARN) which uniquely defines the AWS RAM resource
-	// share. Before accepting the RAM resource share invitation, you can view details
-	// related to the RAM resource share.
+	// The Amazon Resource Name (ARN) which uniquely defines the Amazon Web Services
+	// RAM resource share. Before accepting the RAM resource share invitation, you can
+	// view details related to the RAM resource share.
 	//
 	// This field is available only for Lake Formation subscribers created after March
 	// 8, 2023.

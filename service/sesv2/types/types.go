@@ -933,6 +933,20 @@ type EmailTemplateMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// An object that defines an Amazon EventBridge destination for email events. You
+// can use Amazon EventBridge to send notifications when certain email events
+// occur.
+type EventBridgeDestination struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon EventBridge bus to publish email
+	// events to. Only the default bus is supported.
+	//
+	// This member is required.
+	EventBusArn *string
+
+	noSmithyDocumentSerde
+}
+
 // In the Amazon SES API v2, events include message sends, deliveries, opens,
 // clicks, bounces, complaints and delivery delays. Event destinations are places
 // that you can send information about these events to. For example, you can send
@@ -1005,6 +1019,11 @@ type EventDestination struct {
 	// disabled, events aren't sent to the specified destinations.
 	Enabled bool
 
+	// An object that defines an Amazon EventBridge destination for email events. You
+	// can use Amazon EventBridge to send notifications when certain email events
+	// occur.
+	EventBridgeDestination *EventBridgeDestination
+
 	// An object that defines an Amazon Kinesis Data Firehose destination for email
 	// events. You can use Amazon Kinesis Data Firehose to stream data to other
 	// services, such as Amazon S3 and Amazon Redshift.
@@ -1019,7 +1038,7 @@ type EventDestination struct {
 	PinpointDestination *PinpointDestination
 
 	// An object that defines an Amazon SNS destination for email events. You can use
-	// Amazon SNS to send notification when certain email events occur.
+	// Amazon SNS to send notifications when certain email events occur.
 	SnsDestination *SnsDestination
 
 	noSmithyDocumentSerde
@@ -1044,6 +1063,11 @@ type EventDestinationDefinition struct {
 	// disabled, events aren't sent to the specified destinations.
 	Enabled bool
 
+	// An object that defines an Amazon EventBridge destination for email events. You
+	// can use Amazon EventBridge to send notifications when certain email events
+	// occur.
+	EventBridgeDestination *EventBridgeDestination
+
 	// An object that defines an Amazon Kinesis Data Firehose destination for email
 	// events. You can use Amazon Kinesis Data Firehose to stream data to other
 	// services, such as Amazon S3 and Amazon Redshift.
@@ -1062,7 +1086,7 @@ type EventDestinationDefinition struct {
 	PinpointDestination *PinpointDestination
 
 	// An object that defines an Amazon SNS destination for email events. You can use
-	// Amazon SNS to send notification when certain email events occur.
+	// Amazon SNS to send notifications when certain email events occur.
 	SnsDestination *SnsDestination
 
 	noSmithyDocumentSerde
@@ -1940,7 +1964,7 @@ type SendQuota struct {
 }
 
 // An object that defines an Amazon SNS destination for email events. You can use
-// Amazon SNS to send notification when certain email events occur.
+// Amazon SNS to send notifications when certain email events occur.
 type SnsDestination struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to publish email events

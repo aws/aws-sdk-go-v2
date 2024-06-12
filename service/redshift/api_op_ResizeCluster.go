@@ -20,17 +20,9 @@ import (
 //
 //   - You can only resize clusters of the following types:
 //
-//   - dc1.large (if your cluster is in a VPC)
-//
-//   - dc1.8xlarge (if your cluster is in a VPC)
-//
 //   - dc2.large
 //
 //   - dc2.8xlarge
-//
-//   - ds2.xlarge
-//
-//   - ds2.8xlarge
 //
 //   - ra3.xlplus
 //

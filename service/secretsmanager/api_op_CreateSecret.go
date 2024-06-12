@@ -158,6 +158,10 @@ type CreateSecretInput struct {
 	// Either SecretString or SecretBinary must have a value, but not both.
 	//
 	// This parameter is not available in the Secrets Manager console.
+	//
+	// Sensitive: This field contains sensitive information, so the service does not
+	// include it in CloudTrail log entries. If you create your own log entries, you
+	// must also avoid logging the information in this field.
 	SecretBinary []byte
 
 	// The text data to encrypt and store in this new version of the secret. We
@@ -169,6 +173,10 @@ type CreateSecretInput struct {
 	// Manager puts the protected secret text in only the SecretString parameter. The
 	// Secrets Manager console stores the information as a JSON structure of key/value
 	// pairs that a Lambda rotation function can parse.
+	//
+	// Sensitive: This field contains sensitive information, so the service does not
+	// include it in CloudTrail log entries. If you create your own log entries, you
+	// must also avoid logging the information in this field.
 	SecretString *string
 
 	// A list of tags to attach to the secret. Each tag is a key and value pair of

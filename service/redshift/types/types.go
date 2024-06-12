@@ -1241,7 +1241,7 @@ type NodeConfigurationOption struct {
 	// The category of the node configuration recommendation.
 	Mode Mode
 
-	// The node type, such as, "ds2.8xlarge".
+	// The node type, such as, "ra3.4xlarge".
 	NodeType *string
 
 	// The number of nodes.
@@ -1642,7 +1642,7 @@ type ReservedNodeExchangeStatus struct {
 	// The identifier of the source reserved node.
 	SourceReservedNodeId *string
 
-	// The source reserved-node type, for example ds2.xlarge.
+	// The source reserved-node type, for example ra3.4xlarge.
 	SourceReservedNodeType *string
 
 	// The status of the reserved-node exchange request. Statuses include in-progress
@@ -1763,25 +1763,25 @@ type RestoreStatus struct {
 
 	// The number of megabytes per second being transferred from the backup storage.
 	// Returns the average rate for a completed backup. This field is only updated when
-	// you restore to DC2 and DS2 node types.
+	// you restore to DC2 node types.
 	CurrentRestoreRateInMegaBytesPerSecond *float64
 
 	// The amount of time an in-progress restore has been running, or the amount of
 	// time it took a completed restore to finish. This field is only updated when you
-	// restore to DC2 and DS2 node types.
+	// restore to DC2 node types.
 	ElapsedTimeInSeconds *int64
 
 	// The estimate of the time remaining before the restore will complete. Returns 0
-	// for a completed restore. This field is only updated when you restore to DC2 and
-	// DS2 node types.
+	// for a completed restore. This field is only updated when you restore to DC2 node
+	// types.
 	EstimatedTimeToCompletionInSeconds *int64
 
 	// The number of megabytes that have been transferred from snapshot storage. This
-	// field is only updated when you restore to DC2 and DS2 node types.
+	// field is only updated when you restore to DC2 node types.
 	ProgressInMegaBytes *int64
 
 	// The size of the set of snapshot data used to restore the cluster. This field is
-	// only updated when you restore to DC2 and DS2 node types.
+	// only updated when you restore to DC2 node types.
 	SnapshotSizeInMegaBytes *int64
 
 	// The status of the restore action. Returns starting, restoring, completed, or
@@ -1873,7 +1873,7 @@ type ScheduledAction struct {
 	// parameters.
 	//
 	// "
-	// {\"ResizeCluster\":{\"NodeType\":\"ds2.8xlarge\",\"ClusterIdentifier\":\"my-test-cluster\",\"NumberOfNodes\":3}}
+	// {\"ResizeCluster\":{\"NodeType\":\"ra3.4xlarge\",\"ClusterIdentifier\":\"my-test-cluster\",\"NumberOfNodes\":3}}
 	// ".
 	TargetAction *ScheduledActionType
 

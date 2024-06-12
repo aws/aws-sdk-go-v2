@@ -54,7 +54,8 @@ func (c *Client) GetSecretValue(ctx context.Context, params *GetSecretValueInput
 
 type GetSecretValueInput struct {
 
-	// The ARN or name of the secret to retrieve.
+	// The ARN or name of the secret to retrieve. To retrieve a secret from another
+	// account, you must use an ARN.
 	//
 	// For an ARN, we recommend that you specify a complete ARN rather than a partial
 	// ARN. See [Finding a secret from a partial ARN].
@@ -106,6 +107,10 @@ type GetSecretValueOutput struct {
 	// If the secret was created by using the Secrets Manager console, or if the
 	// secret value was originally provided as a string, then this field is omitted.
 	// The secret value appears in SecretString instead.
+	//
+	// Sensitive: This field contains sensitive information, so the service does not
+	// include it in CloudTrail log entries. If you create your own log entries, you
+	// must also avoid logging the information in this field.
 	SecretBinary []byte
 
 	// The decrypted secret value, if the secret value was originally provided as a
@@ -113,6 +118,10 @@ type GetSecretValueOutput struct {
 	//
 	// If this secret was created by using the console, then Secrets Manager stores
 	// the information as a JSON structure of key/value pairs.
+	//
+	// Sensitive: This field contains sensitive information, so the service does not
+	// include it in CloudTrail log entries. If you create your own log entries, you
+	// must also avoid logging the information in this field.
 	SecretString *string
 
 	// The unique identifier of this version of the secret.

@@ -1,0 +1,8 @@
+{
+    "id": "1eaf2aae-dde4-4931-9822-26bb2c8b787d",
+    "type": "documentation",
+    "description": "Updates to remove DC1 and DS2 node types.",
+    "modules": [
+        "service/redshift"
+    ]
+}

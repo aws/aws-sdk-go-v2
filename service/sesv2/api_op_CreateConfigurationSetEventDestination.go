@@ -14,9 +14,8 @@ import (
 // Create an event destination. Events include message sends, deliveries, opens,
 // clicks, bounces, and complaints. Event destinations are places that you can send
 // information about these events to. For example, you can send event data to
-// Amazon SNS to receive notifications when you receive bounces or complaints, or
-// you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for
-// long-term storage.
+// Amazon EventBridge and associate a rule to send the event to the specified
+// target.
 //
 // A single configuration set can include more than one event destination.
 func (c *Client) CreateConfigurationSetEventDestination(ctx context.Context, params *CreateConfigurationSetEventDestinationInput, optFns ...func(*Options)) (*CreateConfigurationSetEventDestinationOutput, error) {

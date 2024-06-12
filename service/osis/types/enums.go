@@ -83,6 +83,25 @@ func (PipelineStatus) Values() []PipelineStatus {
 	}
 }
 
+type VpcEndpointManagement string
+
+// Enum values for VpcEndpointManagement
+const (
+	VpcEndpointManagementCustomer VpcEndpointManagement = "CUSTOMER"
+	VpcEndpointManagementService  VpcEndpointManagement = "SERVICE"
+)
+
+// Values returns all known values for VpcEndpointManagement. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VpcEndpointManagement) Values() []VpcEndpointManagement {
+	return []VpcEndpointManagement{
+		"CUSTOMER",
+		"SERVICE",
+	}
+}
+
 type VpcEndpointServiceName string
 
 // Enum values for VpcEndpointServiceName

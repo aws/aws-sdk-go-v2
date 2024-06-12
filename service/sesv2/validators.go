@@ -2052,6 +2052,21 @@ func validateEmailContent(v *types.EmailContent) error {
 	}
 }
 
+func validateEventBridgeDestination(v *types.EventBridgeDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventBridgeDestination"}
+	if v.EventBusArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventBusArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEventDestinationDefinition(v *types.EventDestinationDefinition) error {
 	if v == nil {
 		return nil
@@ -2070,6 +2085,11 @@ func validateEventDestinationDefinition(v *types.EventDestinationDefinition) err
 	if v.SnsDestination != nil {
 		if err := validateSnsDestination(v.SnsDestination); err != nil {
 			invalidParams.AddNested("SnsDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EventBridgeDestination != nil {
+		if err := validateEventBridgeDestination(v.EventBridgeDestination); err != nil {
+			invalidParams.AddNested("EventBridgeDestination", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
