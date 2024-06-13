@@ -110,6 +110,11 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 		ok.String(*v.Description)
 	}
 
+	if len(v.InputType) > 0 {
+		ok := object.Key("InputType")
+		ok.String(string(v.InputType))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -325,6 +330,13 @@ func awsRestjson1_serializeOpDocumentCreateOriginEndpointInput(v *CreateOriginEn
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.ForceEndpointErrorConfiguration != nil {
+		ok := object.Key("ForceEndpointErrorConfiguration")
+		if err := awsRestjson1_serializeDocumentForceEndpointErrorConfiguration(v.ForceEndpointErrorConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.HlsManifests != nil {
@@ -2089,6 +2101,13 @@ func awsRestjson1_serializeOpDocumentUpdateOriginEndpointInput(v *UpdateOriginEn
 		ok.String(*v.Description)
 	}
 
+	if v.ForceEndpointErrorConfiguration != nil {
+		ok := object.Key("ForceEndpointErrorConfiguration")
+		if err := awsRestjson1_serializeDocumentForceEndpointErrorConfiguration(v.ForceEndpointErrorConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.HlsManifests != nil {
 		ok := object.Key("HlsManifests")
 		if err := awsRestjson1_serializeDocumentCreateHlsManifests(v.HlsManifests, ok); err != nil {
@@ -2413,6 +2432,17 @@ func awsRestjson1_serializeDocumentEncryptionMethod(v *types.EncryptionMethod, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEndpointErrorConditions(v []types.EndpointErrorCondition, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFilterConfiguration(v *types.FilterConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2435,6 +2465,20 @@ func awsRestjson1_serializeDocumentFilterConfiguration(v *types.FilterConfigurat
 	if v.TimeDelaySeconds != nil {
 		ok := object.Key("TimeDelaySeconds")
 		ok.Integer(*v.TimeDelaySeconds)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentForceEndpointErrorConfiguration(v *types.ForceEndpointErrorConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndpointErrorConditions != nil {
+		ok := object.Key("EndpointErrorConditions")
+		if err := awsRestjson1_serializeDocumentEndpointErrorConditions(v.EndpointErrorConditions, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

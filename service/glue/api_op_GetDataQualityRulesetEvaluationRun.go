@@ -72,7 +72,8 @@ type GetDataQualityRulesetEvaluationRunOutput struct {
 	// An IAM role supplied to encrypt the results of the run.
 	Role *string
 
-	// A list of ruleset names for the run.
+	// A list of ruleset names for the run. Currently, this parameter takes only one
+	// Ruleset name.
 	RulesetNames []string
 
 	// The unique run identifier associated with this run.

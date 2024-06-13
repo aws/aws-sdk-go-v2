@@ -29,8 +29,8 @@ func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, 
 
 type CreateClusterInput struct {
 
-	// The type of HSM to use in the cluster. Currently the only allowed value is
-	// hsm1.medium .
+	// The type of HSM to use in the cluster. The allowed values are hsm1.medium and
+	// hsm2m.medium .
 	//
 	// This member is required.
 	HsmType *string
@@ -48,6 +48,9 @@ type CreateClusterInput struct {
 
 	// A policy that defines how the service retains backups.
 	BackupRetentionPolicy *types.BackupRetentionPolicy
+
+	// The mode to use in the cluster. The allowed values are FIPS and NON_FIPS .
+	Mode types.ClusterMode
 
 	// The identifier (ID) of the cluster backup to restore. Use this value to restore
 	// the cluster from a backup instead of creating a new cluster. To find the backup

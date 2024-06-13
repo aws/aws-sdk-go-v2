@@ -14248,6 +14248,11 @@ func awsAwsjson11_serializeDocumentDataQualityEvaluationRunAdditionalRunOptions(
 		ok.Boolean(*v.CloudWatchMetricsEnabled)
 	}
 
+	if len(v.CompositeRuleEvaluationMethod) > 0 {
+		ok := object.Key("CompositeRuleEvaluationMethod")
+		ok.String(string(v.CompositeRuleEvaluationMethod))
+	}
+
 	if v.ResultsS3Prefix != nil {
 		ok := object.Key("ResultsS3Prefix")
 		ok.String(*v.ResultsS3Prefix)

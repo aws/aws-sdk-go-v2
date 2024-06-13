@@ -73,6 +73,19 @@ type ChannelListConfiguration struct {
 	// identification purposes.
 	Description *string
 
+	// The input type will be an immutable field which will be used to define whether
+	// the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default
+	// to HLS to preserve current behavior.
+	//
+	// The allowed values are:
+	//
+	//   - HLS - The HLS streaming specification (which defines M3U8 manifests and TS
+	//   segments).
+	//
+	//   - CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments
+	//   with optional DASH manifests).
+	InputType InputType
+
 	noSmithyDocumentSerde
 }
 
@@ -391,6 +404,25 @@ type FilterConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The failover settings for the endpoint.
+type ForceEndpointErrorConfiguration struct {
+
+	// The failover conditions for the endpoint. The options are:
+	//
+	//   - STALE_MANIFEST - The manifest stalled and there are no new segments or parts.
+	//
+	//   - INCOMPLETE_MANIFEST - There is a gap in the manifest.
+	//
+	//   - MISSING_DRM_KEY - Key rotation is enabled but we're unable to fetch the key
+	//   for the current key period.
+	//
+	//   - SLATE_INPUT - The segments which contain slate content are considered to be
+	//   missing content.
+	EndpointErrorConditions []EndpointErrorCondition
+
+	noSmithyDocumentSerde
+}
+
 // Retrieve the DASH manifest configuration.
 type GetDashManifestConfiguration struct {
 
@@ -682,6 +714,9 @@ type OriginEndpointListConfiguration struct {
 	// Any descriptive information that you want to add to the origin endpoint for
 	// future identification purposes.
 	Description *string
+
+	// The failover settings for the endpoint.
+	ForceEndpointErrorConfiguration *ForceEndpointErrorConfiguration
 
 	// An HTTP live streaming (HLS) manifest configuration.
 	HlsManifests []ListHlsManifestConfiguration

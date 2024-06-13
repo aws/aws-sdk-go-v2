@@ -2141,6 +2141,24 @@ func awsAwsjson11_deserializeDocumentBackup(v **types.Backup, value interface{})
 				}
 			}
 
+		case "HsmType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HsmType to be of type string, got %T instead", value)
+				}
+				sv.HsmType = ptr.String(jtv)
+			}
+
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.ClusterMode(jtv)
+			}
+
 		case "NeverExpires":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2668,6 +2686,15 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 					return fmt.Errorf("expected HsmType to be of type string, got %T instead", value)
 				}
 				sv.HsmType = ptr.String(jtv)
+			}
+
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.ClusterMode(jtv)
 			}
 
 		case "PreCoPassword":

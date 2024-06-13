@@ -59,6 +59,25 @@ func (BackupState) Values() []BackupState {
 	}
 }
 
+type ClusterMode string
+
+// Enum values for ClusterMode
+const (
+	ClusterModeFips    ClusterMode = "FIPS"
+	ClusterModeNonFips ClusterMode = "NON_FIPS"
+)
+
+// Values returns all known values for ClusterMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterMode) Values() []ClusterMode {
+	return []ClusterMode{
+		"FIPS",
+		"NON_FIPS",
+	}
+}
+
 type ClusterState string
 
 // Enum values for ClusterState

@@ -74,6 +74,9 @@ type UpdateOriginEndpointInput struct {
 	// rejected.
 	ETag *string
 
+	// The failover settings for the endpoint.
+	ForceEndpointErrorConfiguration *types.ForceEndpointErrorConfiguration
+
 	// An HTTP live streaming (HLS) manifest configuration.
 	HlsManifests []types.CreateHlsManifestConfiguration
 
@@ -150,6 +153,9 @@ type UpdateOriginEndpointOutput struct {
 	// The current Entity Tag (ETag) associated with this resource. The entity tag can
 	// be used to safely make concurrent updates to the resource.
 	ETag *string
+
+	// The failover settings for the endpoint.
+	ForceEndpointErrorConfiguration *types.ForceEndpointErrorConfiguration
 
 	// An HTTP live streaming (HLS) manifest configuration.
 	HlsManifests []types.GetHlsManifestConfiguration

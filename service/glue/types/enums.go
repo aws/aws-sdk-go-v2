@@ -694,6 +694,26 @@ func (DeltaTargetCompressionType) Values() []DeltaTargetCompressionType {
 	}
 }
 
+type DQCompositeRuleEvaluationMethod string
+
+// Enum values for DQCompositeRuleEvaluationMethod
+const (
+	DQCompositeRuleEvaluationMethodColumn DQCompositeRuleEvaluationMethod = "COLUMN"
+	DQCompositeRuleEvaluationMethodRow    DQCompositeRuleEvaluationMethod = "ROW"
+)
+
+// Values returns all known values for DQCompositeRuleEvaluationMethod. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DQCompositeRuleEvaluationMethod) Values() []DQCompositeRuleEvaluationMethod {
+	return []DQCompositeRuleEvaluationMethod{
+		"COLUMN",
+		"ROW",
+	}
+}
+
 type DQStopJobOnFailureTiming string
 
 // Enum values for DQStopJobOnFailureTiming

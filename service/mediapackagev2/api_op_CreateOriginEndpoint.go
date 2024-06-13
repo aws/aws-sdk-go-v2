@@ -73,6 +73,9 @@ type CreateOriginEndpointInput struct {
 	// Enter any descriptive text that helps you to identify the origin endpoint.
 	Description *string
 
+	// The failover settings for the endpoint.
+	ForceEndpointErrorConfiguration *types.ForceEndpointErrorConfiguration
+
 	// An HTTP live streaming (HLS) manifest configuration.
 	HlsManifests []types.CreateHlsManifestConfiguration
 
@@ -156,6 +159,9 @@ type CreateOriginEndpointOutput struct {
 	// The current Entity Tag (ETag) associated with this resource. The entity tag can
 	// be used to safely make concurrent updates to the resource.
 	ETag *string
+
+	// The failover settings for the endpoint.
+	ForceEndpointErrorConfiguration *types.ForceEndpointErrorConfiguration
 
 	// An HTTP live streaming (HLS) manifest configuration.
 	HlsManifests []types.GetHlsManifestConfiguration

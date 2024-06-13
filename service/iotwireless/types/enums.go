@@ -451,6 +451,8 @@ type MetricName string
 const (
 	MetricNameDeviceRSSI                     MetricName = "DeviceRSSI"
 	MetricNameDeviceSNR                      MetricName = "DeviceSNR"
+	MetricNameDeviceRoamingRSSI              MetricName = "DeviceRoamingRSSI"
+	MetricNameDeviceRoamingSNR               MetricName = "DeviceRoamingSNR"
 	MetricNameDeviceUplinkCount              MetricName = "DeviceUplinkCount"
 	MetricNameDeviceDownlinkCount            MetricName = "DeviceDownlinkCount"
 	MetricNameDeviceUplinkLostCount          MetricName = "DeviceUplinkLostCount"
@@ -489,6 +491,8 @@ func (MetricName) Values() []MetricName {
 	return []MetricName{
 		"DeviceRSSI",
 		"DeviceSNR",
+		"DeviceRoamingRSSI",
+		"DeviceRoamingSNR",
 		"DeviceUplinkCount",
 		"DeviceDownlinkCount",
 		"DeviceUplinkLostCount",

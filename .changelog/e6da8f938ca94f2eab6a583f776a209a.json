@@ -1,0 +1,8 @@
+{
+    "id": "e6da8f93-8ca9-4f2e-ab6a-583f776a209a",
+    "type": "feature",
+    "description": "Added support for hsm type hsm2m.medium. Added supported for creating a cluster in FIPS or NON_FIPS mode.",
+    "modules": [
+        "service/cloudhsmv2"
+    ]
+}

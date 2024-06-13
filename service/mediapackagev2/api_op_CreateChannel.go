@@ -57,6 +57,19 @@ type CreateChannelInput struct {
 	// Enter any descriptive text that helps you to identify the channel.
 	Description *string
 
+	// The input type will be an immutable field which will be used to define whether
+	// the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default
+	// to HLS to preserve current behavior.
+	//
+	// The allowed values are:
+	//
+	//   - HLS - The HLS streaming specification (which defines M3U8 manifests and TS
+	//   segments).
+	//
+	//   - CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments
+	//   with optional DASH manifests).
+	InputType types.InputType
+
 	// A comma-separated list of tag key:value pairs that you define. For example:
 	//
 	//     "Key1": "Value1",
@@ -106,6 +119,19 @@ type CreateChannelOutput struct {
 
 	// The list of ingest endpoints.
 	IngestEndpoints []types.IngestEndpoint
+
+	// The input type will be an immutable field which will be used to define whether
+	// the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default
+	// to HLS to preserve current behavior.
+	//
+	// The allowed values are:
+	//
+	//   - HLS - The HLS streaming specification (which defines M3U8 manifests and TS
+	//   segments).
+	//
+	//   - CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments
+	//   with optional DASH manifests).
+	InputType types.InputType
 
 	// The comma-separated list of tag key:value pairs assigned to the channel.
 	Tags map[string]string

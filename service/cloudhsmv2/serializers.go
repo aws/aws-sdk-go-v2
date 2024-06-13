@@ -975,6 +975,11 @@ func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		ok.String(*v.HsmType)
 	}
 
+	if len(v.Mode) > 0 {
+		ok := object.Key("Mode")
+		ok.String(string(v.Mode))
+	}
+
 	if v.SourceBackupId != nil {
 		ok := object.Key("SourceBackupId")
 		ok.String(*v.SourceBackupId)

@@ -2531,6 +2531,9 @@ type DataQualityEvaluationRunAdditionalRunOptions struct {
 	// Whether or not to enable CloudWatch metrics.
 	CloudWatchMetricsEnabled *bool
 
+	// Set the evaluation method for composite rules in the ruleset to ROW/COLUMN
+	CompositeRuleEvaluationMethod DQCompositeRuleEvaluationMethod
+
 	// Prefix for Amazon S3 to store results.
 	ResultsS3Prefix *string
 

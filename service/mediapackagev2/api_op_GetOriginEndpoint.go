@@ -113,6 +113,9 @@ type GetOriginEndpointOutput struct {
 	// be used to safely make concurrent updates to the resource.
 	ETag *string
 
+	// The failover settings for the endpoint.
+	ForceEndpointErrorConfiguration *types.ForceEndpointErrorConfiguration
+
 	// An HTTP live streaming (HLS) manifest configuration.
 	HlsManifests []types.GetHlsManifestConfiguration
 

@@ -246,6 +246,15 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 				return err
 			}
 
+		case "InputType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputType to be of type string, got %T instead", value)
+				}
+				sv.InputType = types.InputType(jtv)
+			}
+
 		case "ModifiedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -742,6 +751,11 @@ func awsRestjson1_deserializeOpDocumentCreateOriginEndpointOutput(v **CreateOrig
 					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
 				}
 				sv.ETag = ptr.String(jtv)
+			}
+
+		case "ForceEndpointErrorConfiguration":
+			if err := awsRestjson1_deserializeDocumentForceEndpointErrorConfiguration(&sv.ForceEndpointErrorConfiguration, value); err != nil {
+				return err
 			}
 
 		case "HlsManifests":
@@ -1494,6 +1508,15 @@ func awsRestjson1_deserializeOpDocumentGetChannelOutput(v **GetChannelOutput, va
 				return err
 			}
 
+		case "InputType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputType to be of type string, got %T instead", value)
+				}
+				sv.InputType = types.InputType(jtv)
+			}
+
 		case "ModifiedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2159,6 +2182,11 @@ func awsRestjson1_deserializeOpDocumentGetOriginEndpointOutput(v **GetOriginEndp
 					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
 				}
 				sv.ETag = ptr.String(jtv)
+			}
+
+		case "ForceEndpointErrorConfiguration":
+			if err := awsRestjson1_deserializeDocumentForceEndpointErrorConfiguration(&sv.ForceEndpointErrorConfiguration, value); err != nil {
+				return err
 			}
 
 		case "HlsManifests":
@@ -3654,6 +3682,15 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 				return err
 			}
 
+		case "InputType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputType to be of type string, got %T instead", value)
+				}
+				sv.InputType = types.InputType(jtv)
+			}
+
 		case "ModifiedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4147,6 +4184,11 @@ func awsRestjson1_deserializeOpDocumentUpdateOriginEndpointOutput(v **UpdateOrig
 					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
 				}
 				sv.ETag = ptr.String(jtv)
+			}
+
+		case "ForceEndpointErrorConfiguration":
+			if err := awsRestjson1_deserializeDocumentForceEndpointErrorConfiguration(&sv.ForceEndpointErrorConfiguration, value); err != nil {
+				return err
 			}
 
 		case "HlsManifests":
@@ -4740,6 +4782,15 @@ func awsRestjson1_deserializeDocumentChannelListConfiguration(v **types.ChannelL
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "InputType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputType to be of type string, got %T instead", value)
+				}
+				sv.InputType = types.InputType(jtv)
+			}
+
 		case "ModifiedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5096,6 +5147,42 @@ func awsRestjson1_deserializeDocumentEncryptionMethod(v **types.EncryptionMethod
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEndpointErrorConditions(v *[]types.EndpointErrorCondition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EndpointErrorCondition
+	if *v == nil {
+		cv = []types.EndpointErrorCondition{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EndpointErrorCondition
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected EndpointErrorCondition to be of type string, got %T instead", value)
+			}
+			col = types.EndpointErrorCondition(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFilterConfiguration(v **types.FilterConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5170,6 +5257,42 @@ func awsRestjson1_deserializeDocumentFilterConfiguration(v **types.FilterConfigu
 					return err
 				}
 				sv.TimeDelaySeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentForceEndpointErrorConfiguration(v **types.ForceEndpointErrorConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ForceEndpointErrorConfiguration
+	if *v == nil {
+		sv = &types.ForceEndpointErrorConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EndpointErrorConditions":
+			if err := awsRestjson1_deserializeDocumentEndpointErrorConditions(&sv.EndpointErrorConditions, value); err != nil {
+				return err
 			}
 
 		default:
@@ -6086,6 +6209,11 @@ func awsRestjson1_deserializeDocumentOriginEndpointListConfiguration(v **types.O
 					return fmt.Errorf("expected ResourceDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "ForceEndpointErrorConfiguration":
+			if err := awsRestjson1_deserializeDocumentForceEndpointErrorConfiguration(&sv.ForceEndpointErrorConfiguration, value); err != nil {
+				return err
 			}
 
 		case "HlsManifests":
