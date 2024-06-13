@@ -1,3 +1,7 @@
+# v1.33.0 (2024-06-13)
+
+* **Feature**: This feature allows customers to use their keys stored in KMS to derive a shared secret which can then be used to establish a secured channel for communication, provide proof of possession, or establish trust with other parties.
+
 # v1.32.3 (2024-06-07)
 
 * **Bug Fix**: Add clock skew correction on all service clients

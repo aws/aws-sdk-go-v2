@@ -1,8 +1,0 @@
-{
-    "id": "695b41a8-a5c4-4a66-a2bc-ab0855bfe80a",
-    "type": "feature",
-    "description": "This release adds support for configuration of evaluation method for composite rules in Glue Data Quality rulesets.",
-    "modules": [
-        "service/glue"
-    ]
-}

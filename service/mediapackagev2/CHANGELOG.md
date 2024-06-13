@@ -1,3 +1,7 @@
+# v1.12.0 (2024-06-13)
+
+* **Feature**: This release adds support for CMAF ingest (DASH-IF live media ingest protocol interface 1)
+
 # v1.11.6 (2024-06-07)
 
 * **Bug Fix**: Add clock skew correction on all service clients

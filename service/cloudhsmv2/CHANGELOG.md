@@ -1,3 +1,7 @@
+# v1.22.0 (2024-06-13)
+
+* **Feature**: Added support for hsm type hsm2m.medium. Added supported for creating a cluster in FIPS or NON_FIPS mode.
+
 # v1.21.10 (2024-06-07)
 
 * **Bug Fix**: Add clock skew correction on all service clients

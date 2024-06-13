@@ -1,3 +1,7 @@
+# v1.85.0 (2024-06-13)
+
+* **Feature**: This release adds support for configuration of evaluation method for composite rules in Glue Data Quality rulesets.
+
 # v1.84.1 (2024-06-07)
 
 * **Bug Fix**: Add clock skew correction on all service clients

@@ -1,3 +1,17 @@
+# Release (2024-06-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsmv2`: [v1.22.0](service/cloudhsmv2/CHANGELOG.md#v1220-2024-06-13)
+  * **Feature**: Added support for hsm type hsm2m.medium. Added supported for creating a cluster in FIPS or NON_FIPS mode.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.85.0](service/glue/CHANGELOG.md#v1850-2024-06-13)
+  * **Feature**: This release adds support for configuration of evaluation method for composite rules in Glue Data Quality rulesets.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.40.0](service/iotwireless/CHANGELOG.md#v1400-2024-06-13)
+  * **Feature**: Add RoamingDeviceSNR and RoamingDeviceRSSI to Customer Metrics.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.33.0](service/kms/CHANGELOG.md#v1330-2024-06-13)
+  * **Feature**: This feature allows customers to use their keys stored in KMS to derive a shared secret which can then be used to establish a secured channel for communication, provide proof of possession, or establish trust with other parties.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.12.0](service/mediapackagev2/CHANGELOG.md#v1120-2024-06-13)
+  * **Feature**: This release adds support for CMAF ingest (DASH-IF live media ingest protocol interface 1)
+
 # Release (2024-06-12)
 
 ## Module Highlights

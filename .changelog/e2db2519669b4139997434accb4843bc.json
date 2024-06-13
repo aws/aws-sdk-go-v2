@@ -1,8 +1,0 @@
-{
-    "id": "e2db2519-669b-4139-9974-34accb4843bc",
-    "type": "feature",
-    "description": "This release adds support for CMAF ingest (DASH-IF live media ingest protocol interface 1)",
-    "modules": [
-        "service/mediapackagev2"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "538fd81b-a423-4062-87d8-75c717bccdbd",
-    "type": "feature",
-    "description": "Add RoamingDeviceSNR and RoamingDeviceRSSI to Customer Metrics.",
-    "modules": [
-        "service/iotwireless"
-    ]
-}

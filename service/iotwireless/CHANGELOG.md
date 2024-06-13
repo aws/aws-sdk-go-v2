@@ -1,3 +1,7 @@
+# v1.40.0 (2024-06-13)
+
+* **Feature**: Add RoamingDeviceSNR and RoamingDeviceRSSI to Customer Metrics.
+
 # v1.39.1 (2024-06-07)
 
 * **Bug Fix**: Add clock skew correction on all service clients
