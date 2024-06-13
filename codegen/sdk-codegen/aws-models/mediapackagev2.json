@@ -180,6 +180,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Any descriptive information that you want to add to the channel for future identification purposes.</p>"
                     }
+                },
+                "InputType": {
+                    "target": "com.amazonaws.mediapackagev2#InputType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p>\n         <p>The allowed values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p>\n            </li>\n            <li>\n               <p>\n                  <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -388,6 +394,7 @@
                         "input": {
                             "ChannelGroupName": "exampleChannelGroup",
                             "ChannelName": "exampleChannel",
+                            "InputType": "HLS",
                             "Description": "Description for exampleChannel",
                             "Tags": {
                                 "key1": "value1",
@@ -401,6 +408,7 @@
                             "Arn": "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel",
                             "CreatedAt": "2022-10-18T09:36:00.00Z",
                             "ModifiedAt": "2022-10-18T09:36:00.00Z",
+                            "InputType": "HLS",
                             "IngestEndpoints": [
                                 {
                                     "Id": "1",
@@ -623,6 +631,12 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 },
+                "InputType": {
+                    "target": "com.amazonaws.mediapackagev2#InputType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p>\n         <p>The allowed values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p>\n            </li>\n            <li>\n               <p>\n                  <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "Description": {
                     "target": "com.amazonaws.mediapackagev2#ResourceDescription",
                     "traits": {
@@ -688,6 +702,12 @@
                 },
                 "IngestEndpoints": {
                     "target": "com.amazonaws.mediapackagev2#IngestEndpointList"
+                },
+                "InputType": {
+                    "target": "com.amazonaws.mediapackagev2#InputType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p>\n         <p>The allowed values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p>\n            </li>\n            <li>\n               <p>\n                  <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p>\n            </li>\n         </ul>"
+                    }
                 },
                 "ETag": {
                     "target": "com.amazonaws.mediapackagev2#EntityTag",
@@ -953,6 +973,14 @@
                             "ContainerType": "TS",
                             "Description": "Description for exampleOriginEndpointTS",
                             "StartoverWindowSeconds": 300,
+                            "ForceEndpointErrorConfiguration": {
+                                "EndpointErrorConditions": [
+                                    "STALE_MANIFEST",
+                                    "INCOMPLETE_MANIFEST",
+                                    "MISSING_DRM_KEY",
+                                    "SLATE_INPUT"
+                                ]
+                            },
                             "Segment": {
                                 "SegmentDurationSeconds": 6,
                                 "SegmentName": "segmentName",
@@ -1040,6 +1068,14 @@
                             "ModifiedAt": "2022-10-18T09:36:00.00Z",
                             "ContainerType": "TS",
                             "StartoverWindowSeconds": 300,
+                            "ForceEndpointErrorConfiguration": {
+                                "EndpointErrorConditions": [
+                                    "STALE_MANIFEST",
+                                    "INCOMPLETE_MANIFEST",
+                                    "MISSING_DRM_KEY",
+                                    "SLATE_INPUT"
+                                ]
+                            },
                             "Segment": {
                                 "SegmentDurationSeconds": 6,
                                 "SegmentName": "segmentName",
@@ -1131,6 +1167,14 @@
                             "OriginEndpointName": "exampleOriginEndpointCMAF",
                             "ContainerType": "CMAF",
                             "StartoverWindowSeconds": 300,
+                            "ForceEndpointErrorConfiguration": {
+                                "EndpointErrorConditions": [
+                                    "STALE_MANIFEST",
+                                    "INCOMPLETE_MANIFEST",
+                                    "MISSING_DRM_KEY",
+                                    "SLATE_INPUT"
+                                ]
+                            },
                             "Segment": {
                                 "SegmentDurationSeconds": 6,
                                 "SegmentName": "segmentName",
@@ -1251,6 +1295,14 @@
                             "ModifiedAt": "2022-10-18T09:36:00.00Z",
                             "ContainerType": "CMAF",
                             "StartoverWindowSeconds": 300,
+                            "ForceEndpointErrorConfiguration": {
+                                "EndpointErrorConditions": [
+                                    "STALE_MANIFEST",
+                                    "INCOMPLETE_MANIFEST",
+                                    "MISSING_DRM_KEY",
+                                    "SLATE_INPUT"
+                                ]
+                            },
                             "Segment": {
                                 "SegmentDurationSeconds": 6,
                                 "SegmentName": "segmentName",
@@ -1462,6 +1514,12 @@
                         "smithy.api#documentation": "<p>A DASH manifest configuration.</p>"
                     }
                 },
+                "ForceEndpointErrorConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#ForceEndpointErrorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failover settings for the endpoint.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.mediapackagev2#TagMap",
                     "traits": {
@@ -1561,6 +1619,12 @@
                     "target": "com.amazonaws.mediapackagev2#GetDashManifests",
                     "traits": {
                         "smithy.api#documentation": "<p>A DASH manifest configuration.</p>"
+                    }
+                },
+                "ForceEndpointErrorConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#ForceEndpointErrorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failover settings for the endpoint.</p>"
                     }
                 },
                 "ETag": {
@@ -2221,6 +2285,41 @@
                 "smithy.api#documentation": "<p>The encryption type.</p>"
             }
         },
+        "com.amazonaws.mediapackagev2#EndpointErrorCondition": {
+            "type": "enum",
+            "members": {
+                "STALE_MANIFEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STALE_MANIFEST"
+                    }
+                },
+                "INCOMPLETE_MANIFEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCOMPLETE_MANIFEST"
+                    }
+                },
+                "MISSING_DRM_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_DRM_KEY"
+                    }
+                },
+                "SLATE_INPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SLATE_INPUT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediapackagev2#EndpointErrorConditions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediapackagev2#EndpointErrorCondition"
+            }
+        },
         "com.amazonaws.mediapackagev2#EntityTag": {
             "type": "string",
             "traits": {
@@ -2271,6 +2370,20 @@
                 "smithy.api#documentation": "<p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p>"
             }
         },
+        "com.amazonaws.mediapackagev2#ForceEndpointErrorConfiguration": {
+            "type": "structure",
+            "members": {
+                "EndpointErrorConditions": {
+                    "target": "com.amazonaws.mediapackagev2#EndpointErrorConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failover conditions for the endpoint. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STALE_MANIFEST</code> - The manifest stalled and there are no new segments or parts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INCOMPLETE_MANIFEST</code> - There is a gap in the manifest.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISSING_DRM_KEY</code> - Key rotation is enabled but we're unable to fetch the key for the current key period.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SLATE_INPUT</code> - The segments which contain slate content are considered to be missing content.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The failover settings for the endpoint.</p>"
+            }
+        },
         "com.amazonaws.mediapackagev2#GetChannel": {
             "type": "operation",
             "input": {
@@ -2313,6 +2426,7 @@
                             "Arn": "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel",
                             "CreatedAt": "2022-10-18T09:36:00.00Z",
                             "ModifiedAt": "2022-10-18T09:36:00.00Z",
+                            "InputType": "HLS",
                             "IngestEndpoints": [
                                 {
                                     "Id": "1",
@@ -2647,6 +2761,12 @@
                 "IngestEndpoints": {
                     "target": "com.amazonaws.mediapackagev2#IngestEndpointList"
                 },
+                "InputType": {
+                    "target": "com.amazonaws.mediapackagev2#InputType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p>\n         <p>The allowed values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p>\n            </li>\n            <li>\n               <p>\n                  <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "ETag": {
                     "target": "com.amazonaws.mediapackagev2#EntityTag",
                     "traits": {
@@ -2901,6 +3021,14 @@
                             "ModifiedAt": "2022-10-18T09:36:00.00Z",
                             "ContainerType": "TS",
                             "StartoverWindowSeconds": 300,
+                            "ForceEndpointErrorConfiguration": {
+                                "EndpointErrorConditions": [
+                                    "STALE_MANIFEST",
+                                    "INCOMPLETE_MANIFEST",
+                                    "MISSING_DRM_KEY",
+                                    "SLATE_INPUT"
+                                ]
+                            },
                             "Segment": {
                                 "SegmentDurationSeconds": 6,
                                 "SegmentName": "segmentName",
@@ -3225,6 +3353,18 @@
                         "smithy.api#documentation": "<p>A low-latency HLS manifest configuration.</p>"
                     }
                 },
+                "DashManifests": {
+                    "target": "com.amazonaws.mediapackagev2#GetDashManifests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A DASH manifest configuration.</p>"
+                    }
+                },
+                "ForceEndpointErrorConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#ForceEndpointErrorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failover settings for the endpoint.</p>"
+                    }
+                },
                 "ETag": {
                     "target": "com.amazonaws.mediapackagev2#EntityTag",
                     "traits": {
@@ -3237,12 +3377,6 @@
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The comma-separated list of tag key:value pairs assigned to the origin endpoint.</p>"
-                    }
-                },
-                "DashManifests": {
-                    "target": "com.amazonaws.mediapackagev2#GetDashManifests",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A DASH manifest configuration.</p>"
                     }
                 }
             },
@@ -3287,6 +3421,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The list of ingest endpoints.</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#InputType": {
+            "type": "enum",
+            "members": {
+                "HLS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HLS"
+                    }
+                },
+                "CMAF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CMAF"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackagev2#InternalServerException": {
@@ -3666,6 +3817,14 @@
                                     "CreatedAt": "2022-10-18T09:36:00.00Z",
                                     "ModifiedAt": "2022-10-18T09:36:00.00Z",
                                     "ContainerType": "TS",
+                                    "ForceEndpointErrorConfiguration": {
+                                        "EndpointErrorConditions": [
+                                            "STALE_MANIFEST",
+                                            "INCOMPLETE_MANIFEST",
+                                            "MISSING_DRM_KEY",
+                                            "SLATE_INPUT"
+                                        ]
+                                    },
                                     "HlsManifests": [
                                         {
                                             "ManifestName": "exampleManifest1",
@@ -3699,6 +3858,14 @@
                                     "CreatedAt": "2022-10-18T09:36:00.00Z",
                                     "ModifiedAt": "2022-10-18T09:36:00.00Z",
                                     "ContainerType": "CMAF",
+                                    "ForceEndpointErrorConfiguration": {
+                                        "EndpointErrorConditions": [
+                                            "STALE_MANIFEST",
+                                            "INCOMPLETE_MANIFEST",
+                                            "MISSING_DRM_KEY",
+                                            "SLATE_INPUT"
+                                        ]
+                                    },
                                     "HlsManifests": [
                                         {
                                             "ManifestName": "exampleManifest1",
@@ -3971,6 +4138,12 @@
                     "target": "com.amazonaws.mediapackagev2#ListDashManifests",
                     "traits": {
                         "smithy.api#documentation": "<p>A DASH manifest configuration.</p>"
+                    }
+                },
+                "ForceEndpointErrorConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#ForceEndpointErrorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failover settings for the endpoint.</p>"
                     }
                 }
             },
@@ -4885,6 +5058,7 @@
                             "Arn": "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel",
                             "CreatedAt": "2022-10-18T09:36:00.00Z",
                             "ModifiedAt": "2022-10-18T10:36:00.00Z",
+                            "InputType": "HLS",
                             "IngestEndpoints": [
                                 {
                                     "Id": "1",
@@ -5151,6 +5325,12 @@
                 "IngestEndpoints": {
                     "target": "com.amazonaws.mediapackagev2#IngestEndpointList"
                 },
+                "InputType": {
+                    "target": "com.amazonaws.mediapackagev2#InputType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p>\n         <p>The allowed values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p>\n            </li>\n            <li>\n               <p>\n                  <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "ETag": {
                     "target": "com.amazonaws.mediapackagev2#EntityTag",
                     "traits": {
@@ -5215,6 +5395,14 @@
                             "ContainerType": "TS",
                             "Description": "Updated description for exampleOriginEndpointTS",
                             "StartoverWindowSeconds": 600,
+                            "ForceEndpointErrorConfiguration": {
+                                "EndpointErrorConditions": [
+                                    "STALE_MANIFEST",
+                                    "INCOMPLETE_MANIFEST",
+                                    "MISSING_DRM_KEY",
+                                    "SLATE_INPUT"
+                                ]
+                            },
                             "Segment": {
                                 "SegmentDurationSeconds": 7,
                                 "SegmentName": "segmentName2",
@@ -5297,6 +5485,14 @@
                             "ModifiedAt": "2022-10-18T09:36:00.00Z",
                             "ContainerType": "TS",
                             "StartoverWindowSeconds": 600,
+                            "ForceEndpointErrorConfiguration": {
+                                "EndpointErrorConditions": [
+                                    "STALE_MANIFEST",
+                                    "INCOMPLETE_MANIFEST",
+                                    "MISSING_DRM_KEY",
+                                    "SLATE_INPUT"
+                                ]
+                            },
                             "Segment": {
                                 "SegmentDurationSeconds": 7,
                                 "SegmentName": "segmentName2",
@@ -5465,6 +5661,12 @@
                         "smithy.api#documentation": "<p>A DASH manifest configuration.</p>"
                     }
                 },
+                "ForceEndpointErrorConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#ForceEndpointErrorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failover settings for the endpoint.</p>"
+                    }
+                },
                 "ETag": {
                     "target": "com.amazonaws.mediapackagev2#EntityTag",
                     "traits": {
@@ -5559,6 +5761,12 @@
                     "target": "com.amazonaws.mediapackagev2#GetLowLatencyHlsManifests",
                     "traits": {
                         "smithy.api#documentation": "<p>A low-latency HLS manifest configuration.</p>"
+                    }
+                },
+                "ForceEndpointErrorConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#ForceEndpointErrorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failover settings for the endpoint.</p>"
                     }
                 },
                 "ETag": {
@@ -5876,6 +6084,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS"
+                    }
+                },
+                "ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION"
+                    }
+                },
+                "SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY"
                     }
                 }
             }

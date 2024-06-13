@@ -10639,6 +10639,23 @@
                 "target": "com.amazonaws.glue#GenericString"
             }
         },
+        "com.amazonaws.glue#DQCompositeRuleEvaluationMethod": {
+            "type": "enum",
+            "members": {
+                "COLUMN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COLUMN"
+                    }
+                },
+                "ROW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROW"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#DQDLAliases": {
             "type": "map",
             "key": {
@@ -10873,6 +10890,12 @@
                     "target": "com.amazonaws.glue#UriString",
                     "traits": {
                         "smithy.api#documentation": "<p>Prefix for Amazon S3 to store results.</p>"
+                    }
+                },
+                "CompositeRuleEvaluationMethod": {
+                    "target": "com.amazonaws.glue#DQCompositeRuleEvaluationMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set the evaluation method for composite rules in the ruleset to ROW/COLUMN</p>"
                     }
                 }
             },
@@ -16713,7 +16736,7 @@
                 "RulesetNames": {
                     "target": "com.amazonaws.glue#RulesetNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of ruleset names for the run.</p>"
+                        "smithy.api#documentation": "<p>A list of ruleset names for the run. Currently, this parameter takes only one Ruleset name.</p>"
                     }
                 },
                 "ResultIds": {

@@ -10165,6 +10165,18 @@
                         "smithy.api#enumValue": "DeviceSNR"
                     }
                 },
+                "DeviceRoamingRSSI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeviceRoamingRSSI"
+                    }
+                },
+                "DeviceRoamingSNR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeviceRoamingSNR"
+                    }
+                },
                 "DeviceUplinkCount": {
                     "target": "smithy.api#Unit",
                     "traits": {

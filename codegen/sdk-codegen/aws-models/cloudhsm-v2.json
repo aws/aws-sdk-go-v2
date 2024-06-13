@@ -98,6 +98,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of tags for the backup.</p>"
                     }
+                },
+                "HsmType": {
+                    "target": "com.amazonaws.cloudhsmv2#HsmType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HSM type of the cluster that was backed up.</p>"
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.cloudhsmv2#ClusterMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode of the cluster that was backed up.</p>"
+                    }
                 }
             },
             "traits": {
@@ -313,7 +325,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -356,7 +367,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -369,7 +381,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -383,7 +394,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -406,7 +416,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -441,7 +450,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -452,14 +460,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -473,14 +483,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -489,11 +497,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -504,14 +512,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -525,7 +535,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -545,7 +554,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -556,14 +564,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -624,9 +634,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1232,7 +1244,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 5000
+                    "max": 20000
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9+-/=\\s]*$"
             }
@@ -1439,6 +1451,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of tags for the cluster.</p>"
                     }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.cloudhsmv2#ClusterMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode of the cluster.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1449,6 +1467,23 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^cluster-[2-7a-zA-Z]{11,16}$"
+            }
+        },
+        "com.amazonaws.cloudhsmv2#ClusterMode": {
+            "type": "enum",
+            "members": {
+                "FIPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIPS"
+                    }
+                },
+                "NON_FIPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NON_FIPS"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudhsmv2#ClusterState": {
@@ -1643,7 +1678,7 @@
                 "HsmType": {
                     "target": "com.amazonaws.cloudhsmv2#HsmType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of HSM to use in the cluster. Currently the only allowed value is\n      <code>hsm1.medium</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of HSM to use in the cluster. The allowed values are\n      <code>hsm1.medium</code> and <code>hsm2m.medium</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1664,6 +1699,12 @@
                     "target": "com.amazonaws.cloudhsmv2#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>Tags to apply to the CloudHSM cluster during creation.</p>"
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.cloudhsmv2#ClusterMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode to use in the cluster. The allowed values are\n      <code>FIPS</code> and <code>NON_FIPS</code>.</p>"
                     }
                 }
             },
@@ -2186,6 +2227,12 @@
             },
             "value": {
                 "target": "com.amazonaws.cloudhsmv2#Strings"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 30
+                }
             }
         },
         "com.amazonaws.cloudhsmv2#Hsm": {
@@ -2289,7 +2336,11 @@
         "com.amazonaws.cloudhsmv2#HsmType": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(hsm1\\.medium)$"
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^((p|)hsm[0-9][a-z.]*\\.[a-zA-Z]+)$"
             }
         },
         "com.amazonaws.cloudhsmv2#Hsms": {
