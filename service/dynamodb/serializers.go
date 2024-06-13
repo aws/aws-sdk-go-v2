@@ -2932,6 +2932,61 @@ func (m *awsAwsjson10_serializeOpUpdateItem) HandleSerialize(ctx context.Context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpUpdateKinesisStreamingDestination struct {
+}
+
+func (*awsAwsjson10_serializeOpUpdateKinesisStreamingDestination) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpUpdateKinesisStreamingDestination) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateKinesisStreamingDestinationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.UpdateKinesisStreamingDestination")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdateKinesisStreamingDestinationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpUpdateTable struct {
 }
 
@@ -3689,6 +3744,18 @@ func awsAwsjson10_serializeDocumentDeleteRequest(v *types.DeleteRequest, value s
 		if err := awsAwsjson10_serializeDocumentKey(v.Key, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentEnableKinesisStreamingConfiguration(v *types.EnableKinesisStreamingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ApproximateCreationDateTimePrecision) > 0 {
+		ok := object.Key("ApproximateCreationDateTimePrecision")
+		ok.String(string(v.ApproximateCreationDateTimePrecision))
 	}
 
 	return nil
@@ -5079,6 +5146,18 @@ func awsAwsjson10_serializeDocumentUpdateGlobalSecondaryIndexAction(v *types.Upd
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentUpdateKinesisStreamingConfiguration(v *types.UpdateKinesisStreamingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ApproximateCreationDateTimePrecision) > 0 {
+		ok := object.Key("ApproximateCreationDateTimePrecision")
+		ok.String(string(v.ApproximateCreationDateTimePrecision))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentUpdateReplicationGroupMemberAction(v *types.UpdateReplicationGroupMemberAction, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5615,6 +5694,13 @@ func awsAwsjson10_serializeOpDocumentDisableKinesisStreamingDestinationInput(v *
 	object := value.Object()
 	defer object.Close()
 
+	if v.EnableKinesisStreamingConfiguration != nil {
+		ok := object.Key("EnableKinesisStreamingConfiguration")
+		if err := awsAwsjson10_serializeDocumentEnableKinesisStreamingConfiguration(v.EnableKinesisStreamingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.StreamArn != nil {
 		ok := object.Key("StreamArn")
 		ok.String(*v.StreamArn)
@@ -5631,6 +5717,13 @@ func awsAwsjson10_serializeOpDocumentDisableKinesisStreamingDestinationInput(v *
 func awsAwsjson10_serializeOpDocumentEnableKinesisStreamingDestinationInput(v *EnableKinesisStreamingDestinationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.EnableKinesisStreamingConfiguration != nil {
+		ok := object.Key("EnableKinesisStreamingConfiguration")
+		if err := awsAwsjson10_serializeDocumentEnableKinesisStreamingConfiguration(v.EnableKinesisStreamingConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.StreamArn != nil {
 		ok := object.Key("StreamArn")
@@ -6732,6 +6825,30 @@ func awsAwsjson10_serializeOpDocumentUpdateItemInput(v *UpdateItemInput, value s
 	if v.UpdateExpression != nil {
 		ok := object.Key("UpdateExpression")
 		ok.String(*v.UpdateExpression)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentUpdateKinesisStreamingDestinationInput(v *UpdateKinesisStreamingDestinationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StreamArn != nil {
+		ok := object.Key("StreamArn")
+		ok.String(*v.StreamArn)
+	}
+
+	if v.TableName != nil {
+		ok := object.Key("TableName")
+		ok.String(*v.TableName)
+	}
+
+	if v.UpdateKinesisStreamingConfiguration != nil {
+		ok := object.Key("UpdateKinesisStreamingConfiguration")
+		if err := awsAwsjson10_serializeDocumentUpdateKinesisStreamingConfiguration(v.UpdateKinesisStreamingConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

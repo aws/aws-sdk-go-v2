@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-func bindAuthParamsRegion(params *AuthResolverParameters, _ interface{}, options Options) {
+func bindAuthParamsRegion(_ interface{}, params *AuthResolverParameters, _ interface{}, options Options) {
 	params.Region = options.Region
 }
 
@@ -95,7 +95,7 @@ func bindAuthResolverParams(ctx context.Context, operation string, input interfa
 		Operation: operation,
 	}
 
-	bindAuthParamsRegion(params, input, options)
+	bindAuthParamsRegion(ctx, params, input, options)
 
 	return params
 }

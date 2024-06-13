@@ -25,7 +25,7 @@ public class AwsEndpointBuiltins implements GoIntegration {
             goTemplate("options.BaseEndpoint");
 
     private static final GoWriter.Writable BindAwsRegion =
-            goTemplate("$T($T(options.Region))", SdkGoTypes.Aws.String, SdkGoTypes.Internal.Endpoints.MapFIPSRegion);
+            goTemplate("bindRegion(options.Region)");
     private static final GoWriter.Writable BindAwsUseFips =
             goTemplate("$T(options.EndpointOptions.UseFIPSEndpoint == $T)", SdkGoTypes.Aws.Bool, SdkGoTypes.Aws.FIPSEndpointStateEnabled);
     private static final GoWriter.Writable BindAwsUseDualStack =
@@ -43,12 +43,25 @@ public class AwsEndpointBuiltins implements GoIntegration {
             goTemplate("resolveAccountID(getIdentity(ctx), options.AccountIDEndpointMode)");
 
     @Override
-    public void writeAdditionalFiles(
-            GoSettings settings,
-            Model model,
-            SymbolProvider symbolProvider,
-            GoDelegator goDelegator
-    ) {
+    public List<RuntimeClientPlugin> getClientPlugins() {
+        return ListUtils.of(RuntimeClientPlugin.builder()
+                .addEndpointBuiltinBinding("SDK::Endpoint", BindSdkEndpoint)
+                .addEndpointBuiltinBinding("AWS::Region", BindAwsRegion)
+                .addEndpointBuiltinBinding("AWS::UseFIPS", BindAwsUseFips)
+                .addEndpointBuiltinBinding("AWS::UseDualStack", BindAwsUseDualStack)
+                .addEndpointBuiltinBinding("AWS::S3::ForcePathStyle", BindAwsS3ForcePathStyle)
+                .addEndpointBuiltinBinding("AWS::S3::Accelerate", BindAwsS3Accelerate)
+                .addEndpointBuiltinBinding("AWS::S3::UseArnRegion", BindAwsS3UseArnRegion)
+                .addEndpointBuiltinBinding("AWS::S3::DisableMultiRegionAccessPoints", BindAwsS3DisableMultiRegionAccessPoints)
+                .addEndpointBuiltinBinding("AWS::S3Control::UseArnRegion", BindAwsS3UseArnRegion)
+                .addEndpointBuiltinBinding("AWS::Auth::AccountId", BindAccountID)
+                .build());
+    }
+
+    @Override
+    public void writeAdditionalFiles(GoSettings settings, Model model, SymbolProvider symbolProvider, GoDelegator goDelegator) {
+        goDelegator.useFileWriter("endpoints.go", settings.getModuleName(), builtinBindingSource());
+
         if (!settings.getService(model).hasTrait(EndpointRuleSetTrait.class)) {
             return;
         }
@@ -65,30 +78,25 @@ public class AwsEndpointBuiltins implements GoIntegration {
             return nil
         }
         """,
-        MapUtils.of(
-                "auth", SmithyGoTypes.Auth.Identity,
-                "accountIDEndpointMode", SdkGoTypes.Aws.AccountIDEndpointMode,
-                "aidModeUnset", SdkGoTypes.Aws.AccountIDEndpointModeUnset,
-                "aidModeDisabled", SdkGoTypes.Aws.AccountIDEndpointModeDisabled,
-                "credentialsAdapter", SdkGoTypes.Internal.Auth.Smithy.CredentialsAdapter,
-                "string", SdkGoTypes.Aws.String
-        )
+                MapUtils.of(
+                        "auth", SmithyGoTypes.Auth.Identity,
+                        "accountIDEndpointMode", SdkGoTypes.Aws.AccountIDEndpointMode,
+                        "aidModeUnset", SdkGoTypes.Aws.AccountIDEndpointModeUnset,
+                        "aidModeDisabled", SdkGoTypes.Aws.AccountIDEndpointModeDisabled,
+                        "credentialsAdapter", SdkGoTypes.Internal.Auth.Smithy.CredentialsAdapter,
+                        "string", SdkGoTypes.Aws.String
+                )
         ));
     }
 
-    @Override
-    public List<RuntimeClientPlugin> getClientPlugins() {
-        return ListUtils.of(RuntimeClientPlugin.builder()
-                .addEndpointBuiltinBinding("SDK::Endpoint", BindSdkEndpoint)
-                .addEndpointBuiltinBinding("AWS::Region", BindAwsRegion)
-                .addEndpointBuiltinBinding("AWS::UseFIPS", BindAwsUseFips)
-                .addEndpointBuiltinBinding("AWS::UseDualStack", BindAwsUseDualStack)
-                .addEndpointBuiltinBinding("AWS::S3::ForcePathStyle", BindAwsS3ForcePathStyle)
-                .addEndpointBuiltinBinding("AWS::S3::Accelerate", BindAwsS3Accelerate)
-                .addEndpointBuiltinBinding("AWS::S3::UseArnRegion", BindAwsS3UseArnRegion)
-                .addEndpointBuiltinBinding("AWS::S3::DisableMultiRegionAccessPoints", BindAwsS3DisableMultiRegionAccessPoints)
-                .addEndpointBuiltinBinding("AWS::S3Control::UseArnRegion", BindAwsS3UseArnRegion)
-                .addEndpointBuiltinBinding("AWS::Auth::AccountId", BindAccountID)
-                .build());
+    private GoWriter.Writable builtinBindingSource() {
+        return goTemplate("""
+                func bindRegion(region string) *string {
+                    if region == "" {
+                        return nil
+                    }
+                    return $T($T(region))
+                }
+                """, SdkGoTypes.Aws.String, SdkGoTypes.Internal.Endpoints.MapFIPSRegion);
     }
 }
