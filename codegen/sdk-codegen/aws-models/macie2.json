@@ -483,6 +483,158 @@
                 "smithy.api#documentation": "<p>Provides information about an identity that performed an action on an affected resource by using temporary security credentials. The credentials were obtained using the AssumeRole operation of the Security Token Service (STS) API.</p>"
             }
         },
+        "com.amazonaws.macie2#AutoEnableMode": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                },
+                "NEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEW"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether to automatically enable automated sensitive data discovery for accounts that are part of an organization in Amazon Macie. Valid values are:</p>"
+            }
+        },
+        "com.amazonaws.macie2#AutomatedDiscoveryAccount": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the account.</p>",
+                        "smithy.api#jsonName": "accountId"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.macie2#AutomatedDiscoveryAccountStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of automated sensitive data discovery for the account. Possible values are: ENABLED, perform automated sensitive data discovery activities for the account; and, DISABLED, don't perform automated sensitive data discovery activities for the account.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the status of automated sensitive data discovery for an Amazon Macie account.</p>"
+            }
+        },
+        "com.amazonaws.macie2#AutomatedDiscoveryAccountStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of automated sensitive data discovery for an Amazon Macie account. Valid values are:</p>"
+            }
+        },
+        "com.amazonaws.macie2#AutomatedDiscoveryAccountUpdate": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the account.</p>",
+                        "smithy.api#jsonName": "accountId"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.macie2#AutomatedDiscoveryAccountStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new status of automated sensitive data discovery for the account. Valid values are: ENABLED, perform automated sensitive data discovery activities for the account; and, DISABLED, don't perform automated sensitive data discovery activities for the account.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Changes the status of automated sensitive data discovery for an Amazon Macie account.</p>"
+            }
+        },
+        "com.amazonaws.macie2#AutomatedDiscoveryAccountUpdateError": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the account that the request applied to.</p>",
+                        "smithy.api#jsonName": "accountId"
+                    }
+                },
+                "errorCode": {
+                    "target": "com.amazonaws.macie2#AutomatedDiscoveryAccountUpdateErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the error that caused the request to fail for the account (accountId). Possible values are: ACCOUNT_NOT_FOUND, the account doesn’t exist or you're not the Amazon Macie administrator for the account; and, ACCOUNT_PAUSED, Macie isn’t enabled for the account in the current Amazon Web Services Region.</p>",
+                        "smithy.api#jsonName": "errorCode"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about a request that failed to change the status of automated sensitive data discovery for an Amazon Macie account.</p>"
+            }
+        },
+        "com.amazonaws.macie2#AutomatedDiscoveryAccountUpdateErrorCode": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT_PAUSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT_PAUSED"
+                    }
+                },
+                "ACCOUNT_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT_NOT_FOUND"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The error code that indicates why a request failed to change the status of automated sensitive data discovery for an Amazon Macie account. Possible values are:</p>"
+            }
+        },
+        "com.amazonaws.macie2#AutomatedDiscoveryMonitoringStatus": {
+            "type": "enum",
+            "members": {
+                "MONITORED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONITORED"
+                    }
+                },
+                "NOT_MONITORED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_MONITORED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether automated sensitive data discovery is currently configured to analyze objects in an S3 bucket. Possible values are:</p>"
+            }
+        },
         "com.amazonaws.macie2#AutomatedDiscoveryStatus": {
             "type": "enum",
             "members": {
@@ -500,7 +652,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The status of the automated sensitive data discovery configuration for an Amazon Macie account. Valid values are:</p>"
+                "smithy.api#documentation": "<p>The status of the automated sensitive data discovery configuration for an organization in Amazon Macie or a standalone Macie account. Valid values are:</p>"
             }
         },
         "com.amazonaws.macie2#AvailabilityCode": {
@@ -680,6 +832,70 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of custom data identifier IDs, one for each custom data identifier that was specified in the request but doesn't correlate to an existing custom data identifier.</p>",
                         "smithy.api#jsonName": "notFoundIdentifierIds"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.macie2#BatchUpdateAutomatedDiscoveryAccounts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.macie2#BatchUpdateAutomatedDiscoveryAccountsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.macie2#BatchUpdateAutomatedDiscoveryAccountsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.macie2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Changes the status of automated sensitive data discovery for one or more accounts.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/automated-discovery/accounts",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.macie2#BatchUpdateAutomatedDiscoveryAccountsRequest": {
+            "type": "structure",
+            "members": {
+                "accounts": {
+                    "target": "com.amazonaws.macie2#__listOfAutomatedDiscoveryAccountUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, one for each account to change the status of automated sensitive data discovery for. Each object specifies the Amazon Web Services account ID for an account and a new status for that account.</p>",
+                        "smithy.api#jsonName": "accounts"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.macie2#BatchUpdateAutomatedDiscoveryAccountsResponse": {
+            "type": "structure",
+            "members": {
+                "errors": {
+                    "target": "com.amazonaws.macie2#__listOfAutomatedDiscoveryAccountUpdateError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, one for each account whose status wasn’t changed. Each object identifies the account and explains why the status of automated sensitive data discovery wasn’t changed for the account. This value is null if the request succeeded for all specified accounts.</p>",
+                        "smithy.api#jsonName": "errors"
                     }
                 }
             },
@@ -975,6 +1191,13 @@
                         "smithy.api#jsonName": "allowsUnencryptedObjectUploads"
                     }
                 },
+                "automatedDiscoveryMonitoringStatus": {
+                    "target": "com.amazonaws.macie2#AutomatedDiscoveryMonitoringStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether automated sensitive data discovery is currently configured to analyze objects in the bucket. Possible values are: MONITORED, the bucket is included in analyses; and, NOT_MONITORED, the bucket is excluded from analyses. If automated sensitive data discovery is disabled for your account, this value is NOT_MONITORED.</p>",
+                        "smithy.api#jsonName": "automatedDiscoveryMonitoringStatus"
+                    }
+                },
                 "bucketArn": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
@@ -1027,14 +1250,14 @@
                 "jobDetails": {
                     "target": "com.amazonaws.macie2#JobDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether any one-time or recurring classification jobs are configured to analyze data in the bucket, and, if so, the details of the job that ran most recently.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether any one-time or recurring classification jobs are configured to analyze objects in the bucket, and, if so, the details of the job that ran most recently.</p>",
                         "smithy.api#jsonName": "jobDetails"
                     }
                 },
                 "lastAutomatedDiscoveryTime": {
                     "target": "com.amazonaws.macie2#__timestampIso8601",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently analyzed data in the bucket while performing automated sensitive data discovery for your account. This value is null if automated sensitive data discovery is currently disabled for your account.</p>",
+                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently analyzed objects in the bucket while performing automated sensitive data discovery. This value is null if automated sensitive data discovery is disabled for your account.</p>",
                         "smithy.api#jsonName": "lastAutomatedDiscoveryTime"
                     }
                 },
@@ -1083,7 +1306,7 @@
                 "sensitivityScore": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sensitivity score for the bucket, ranging from -1 (classification error) to 100 (sensitive). This value is null if automated sensitive data discovery is currently disabled for your account.</p>",
+                        "smithy.api#documentation": "<p>The sensitivity score for the bucket, ranging from -1 (classification error) to 100 (sensitive).</p><p>If automated sensitive data discovery has never been enabled for your account or it’s been disabled for your organization or your standalone account for more than 30 days, possible values are: 1, the bucket is empty; or, 50, the bucket stores objects but it’s been excluded from recent analyses.</p>",
                         "smithy.api#jsonName": "sensitivityScore"
                     }
                 },
@@ -1159,7 +1382,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The error code for an error that prevented Amazon Macie from retrieving and processing metadata from Amazon S3 for an S3 bucket and the bucket's objects.</p>"
+                "smithy.api#documentation": "<p>The error code for an error that prevented Amazon Macie from retrieving and processing information about an S3 bucket and the bucket's objects.</p>"
             }
         },
         "com.amazonaws.macie2#BucketPermissionConfiguration": {
@@ -1408,7 +1631,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies where to store data classification results, and the encryption settings to use when storing results in that location. The location must be an S3 bucket.</p>"
+                "smithy.api#documentation": "<p>Specifies where to store data classification results, and the encryption settings to use when storing results in that location. The location must be an S3 general purpose bucket.</p>"
             }
         },
         "com.amazonaws.macie2#ClassificationResult": {
@@ -1759,7 +1982,7 @@
                     "target": "com.amazonaws.macie2#JobType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The schedule for running the job. Valid values are:</p> <ul><li><p>ONE_TIME - Run the job only once. If you specify this value, don't specify a value for the scheduleFrequency property.</p></li> <li><p>SCHEDULED - Run the job on a daily, weekly, or monthly basis. If you specify this value, use the scheduleFrequency property to define the recurrence pattern for the job.</p></li></ul>",
+                        "smithy.api#documentation": "<p>The schedule for running the job. Valid values are:</p> <ul><li><p>ONE_TIME - Run the job only once. If you specify this value, don't specify a value for the scheduleFrequency property.</p></li> <li><p>SCHEDULED - Run the job on a daily, weekly, or monthly basis. If you specify this value, use the scheduleFrequency property to specify the recurrence pattern for the job.</p></li></ul>",
                         "smithy.api#jsonName": "jobType",
                         "smithy.api#required": {}
                     }
@@ -1774,7 +1997,7 @@
                 "managedDataIdentifierSelector": {
                     "target": "com.amazonaws.macie2#ManagedDataIdentifierSelector",
                     "traits": {
-                        "smithy.api#documentation": "<p>The selection type to apply when determining which managed data identifiers the job uses to analyze data. Valid values are:</p> <ul><li><p>ALL - Use all managed data identifiers. If you specify this value, don't specify any values for the managedDataIdentifierIds property.</p></li> <li><p>EXCLUDE - Use all managed data identifiers except the ones specified by the managedDataIdentifierIds property.</p></li> <li><p>INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property.</p></li> <li><p>NONE - Don't use any managed data identifiers. If you specify this value, specify at least one value for the customDataIdentifierIds property and don't specify any values for the managedDataIdentifierIds property.</p></li> <li><p>RECOMMENDED (default) - Use the recommended set of managed data identifiers. If you specify this value, don't specify any values for the managedDataIdentifierIds property.</p></li></ul> <p>If you don't specify a value for this property, the job uses the recommended set of managed data identifiers.</p> <p>If the job is a recurring job and you specify ALL or EXCLUDE, each job run automatically uses new managed data identifiers that are released. If you don't specify a value for this property or you specify RECOMMENDED for a recurring job, each job run automatically uses all the managed data identifiers that are in the recommended set when the run starts.</p> <p>For information about individual managed data identifiers or to determine which ones are in the recommended set, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html\">Using managed data identifiers</a> and <a href=\"https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-mdis-recommended.html\">Recommended managed data identifiers</a> in the <i>Amazon Macie User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The selection type to apply when determining which managed data identifiers the job uses to analyze data. Valid values are:</p> <ul><li><p>ALL - Use all managed data identifiers. If you specify this value, don't specify any values for the managedDataIdentifierIds property.</p></li> <li><p>EXCLUDE - Use all managed data identifiers except the ones specified by the managedDataIdentifierIds property.</p></li> <li><p>INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property.</p></li> <li><p>NONE - Don't use any managed data identifiers. If you specify this value, specify at least one value for the customDataIdentifierIds property and don't specify any values for the managedDataIdentifierIds property.</p></li> <li><p>RECOMMENDED (default) - Use the recommended set of managed data identifiers. If you specify this value, don't specify any values for the managedDataIdentifierIds property.</p></li></ul> <p>If you don't specify a value for this property, the job uses the recommended set of managed data identifiers.</p> <p>If the job is a recurring job and you specify ALL or EXCLUDE, each job run automatically uses new managed data identifiers that are released. If you don't specify a value for this property or you specify RECOMMENDED for a recurring job, each job run automatically uses all the managed data identifiers that are in the recommended set when the run starts.</p> <p>To learn about individual managed data identifiers or determine which ones are in the recommended set, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html\">Using managed data identifiers</a> or <a href=\"https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-mdis-recommended.html\">Recommended managed data identifiers</a> in the <i>Amazon Macie User Guide</i>.</p>",
                         "smithy.api#jsonName": "managedDataIdentifierSelector"
                     }
                 },
@@ -3259,7 +3482,7 @@
                 "allowListIds": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of unique identifiers, one for each allow list that the job uses when it analyzes data.</p>",
+                        "smithy.api#documentation": "<p>An array of unique identifiers, one for each allow list that the job is configured to use when it analyzes data.</p>",
                         "smithy.api#jsonName": "allowListIds"
                     }
                 },
@@ -3281,7 +3504,7 @@
                 "customDataIdentifierIds": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of unique identifiers, one for each custom data identifier that the job uses when it analyzes data. This value is null if the job uses only managed data identifiers to analyze data.</p>",
+                        "smithy.api#documentation": "<p>An array of unique identifiers, one for each custom data identifier that the job is configured to use when it analyzes data. This value is null if the job is configured to use only managed data identifiers to analyze data.</p>",
                         "smithy.api#jsonName": "customDataIdentifierIds"
                     }
                 },
@@ -3351,7 +3574,7 @@
                 "managedDataIdentifierSelector": {
                     "target": "com.amazonaws.macie2#ManagedDataIdentifierSelector",
                     "traits": {
-                        "smithy.api#documentation": "<p>The selection type that determines which managed data identifiers the job uses when it analyzes data. Possible values are:</p> <ul><li><p>ALL - Use all managed data identifiers.</p></li> <li><p>EXCLUDE - Use all managed data identifiers except the ones specified by the managedDataIdentifierIds property.</p></li> <li><p>INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property.</p></li> <li><p>NONE - Don't use any managed data identifiers. Use only custom data identifiers (customDataIdentifierIds).</p></li> <li><p>RECOMMENDED (default) - Use the recommended set of managed data identifiers.</p></li></ul> <p>If this value is null, the job uses the recommended set of managed data identifiers.</p> <p>If the job is a recurring job and this value is ALL or EXCLUDE, each job run automatically uses new managed data identifiers that are released. If this value is null or RECOMMENDED for a recurring job, each job run uses all the managed data identifiers that are in the recommended set when the run starts.</p> <p>For information about individual managed data identifiers or to determine which ones are in the recommended set, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html\">Using managed data identifiers</a> and <a href=\"https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-mdis-recommended.html\">Recommended managed data identifiers</a> in the <i>Amazon Macie User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The selection type that determines which managed data identifiers the job uses when it analyzes data. Possible values are:</p> <ul><li><p>ALL - Use all managed data identifiers.</p></li> <li><p>EXCLUDE - Use all managed data identifiers except the ones specified by the managedDataIdentifierIds property.</p></li> <li><p>INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property.</p></li> <li><p>NONE - Don't use any managed data identifiers. Use only custom data identifiers (customDataIdentifierIds).</p></li> <li><p>RECOMMENDED (default) - Use the recommended set of managed data identifiers.</p></li></ul> <p>If this value is null, the job uses the recommended set of managed data identifiers.</p> <p>If the job is a recurring job and this value is ALL or EXCLUDE, each job run automatically uses new managed data identifiers that are released. If this value is null or RECOMMENDED for a recurring job, each job run uses all the managed data identifiers that are in the recommended set when the run starts.</p> <p>To learn about individual managed data identifiers or determine which ones are in the recommended set, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html\">Using managed data identifiers</a> or <a href=\"https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-mdis-recommended.html\">Recommended managed data identifiers</a> in the <i>Amazon Macie User Guide</i>.</p>",
                         "smithy.api#jsonName": "managedDataIdentifierSelector"
                     }
                 },
@@ -3393,7 +3616,7 @@
                 "tags": {
                     "target": "com.amazonaws.macie2#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of key-value pairs that specifies which tags (keys and values) are associated with the classification job.</p>",
+                        "smithy.api#documentation": "<p>A map of key-value pairs that specifies which tags (keys and values) are associated with the job.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 },
@@ -3542,7 +3765,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about a type of sensitive data that Amazon Macie found in an S3 bucket while performing automated sensitive data discovery for the bucket. The information also specifies the custom data identifier or managed data identifier that detected the data. This information is available only if automated sensitive data discovery is currently enabled for your account.</p>"
+                "smithy.api#documentation": "<p>Provides information about a type of sensitive data that Amazon Macie found in an S3 bucket while performing automated sensitive data discovery for an account. The information also specifies the custom or managed data identifier that detected the data. This information is available only if automated sensitive data discovery has been enabled for the account.</p>"
             }
         },
         "com.amazonaws.macie2#DisableMacie": {
@@ -4305,14 +4528,14 @@
                 "ipAddressDetails": {
                     "target": "com.amazonaws.macie2#IpAddressDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address of the device that the entity used to perform the action on the affected resource. This object also provides information such as the owner and geographic location for the IP address.</p>",
+                        "smithy.api#documentation": "<p>The IP address and related details about the device that the entity used to perform the action on the affected resource. The details can include information such as the owner and geographic location of the IP address.</p>",
                         "smithy.api#jsonName": "ipAddressDetails"
                     }
                 },
                 "userIdentity": {
                     "target": "com.amazonaws.macie2#UserIdentity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type and other characteristics of the entity that performed the action on the affected resource.</p>",
+                        "smithy.api#documentation": "<p>The type and other characteristics of the entity that performed the action on the affected resource. This value is null if the action was performed by an anonymous (unauthenticated) entity.</p>",
                         "smithy.api#jsonName": "userIdentity"
                     }
                 }
@@ -4767,7 +4990,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the configuration settings and status of automated sensitive data discovery for an account.</p>",
+                "smithy.api#documentation": "<p>Retrieves the configuration settings and status of automated sensitive data discovery for an organization or standalone account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/automated-discovery/configuration",
@@ -4785,45 +5008,52 @@
         "com.amazonaws.macie2#GetAutomatedDiscoveryConfigurationResponse": {
             "type": "structure",
             "members": {
+                "autoEnableOrganizationMembers": {
+                    "target": "com.amazonaws.macie2#AutoEnableMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether automated sensitive data discovery is enabled automatically for accounts in the organization. Possible values are: ALL, enable it for all existing accounts and new member accounts; NEW, enable it only for new member accounts; and, NONE, don't enable it for any accounts.</p>",
+                        "smithy.api#jsonName": "autoEnableOrganizationMembers"
+                    }
+                },
                 "classificationScopeId": {
                     "target": "com.amazonaws.macie2#ClassificationScopeId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the classification scope that's used when performing automated sensitive data discovery for the account. The classification scope specifies S3 buckets to exclude from automated sensitive data discovery.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the classification scope that's used when performing automated sensitive data discovery. The classification scope specifies S3 buckets to exclude from analyses.</p>",
                         "smithy.api#jsonName": "classificationScopeId"
                     }
                 },
                 "disabledAt": {
                     "target": "com.amazonaws.macie2#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when automated sensitive data discovery was most recently disabled for the account. This value is null if automated sensitive data discovery wasn't enabled and subsequently disabled for the account.</p>",
+                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when automated sensitive data discovery was most recently disabled. This value is null if automated sensitive data discovery is currently enabled.</p>",
                         "smithy.api#jsonName": "disabledAt"
                     }
                 },
                 "firstEnabledAt": {
                     "target": "com.amazonaws.macie2#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when automated sensitive data discovery was initially enabled for the account. This value is null if automated sensitive data discovery has never been enabled for the account.</p>",
+                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when automated sensitive data discovery was initially enabled. This value is null if automated sensitive data discovery has never been enabled.</p>",
                         "smithy.api#jsonName": "firstEnabledAt"
                     }
                 },
                 "lastUpdatedAt": {
                     "target": "com.amazonaws.macie2#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when automated sensitive data discovery was most recently enabled or disabled for the account.</p>",
+                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when the configuration settings or status of automated sensitive data discovery was most recently changed.</p>",
                         "smithy.api#jsonName": "lastUpdatedAt"
                     }
                 },
                 "sensitivityInspectionTemplateId": {
                     "target": "com.amazonaws.macie2#SensitivityInspectionTemplateId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the sensitivity inspection template that's used when performing automated sensitive data discovery for the account. The template specifies which allow lists, custom data identifiers, and managed data identifiers to use when analyzing data.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the sensitivity inspection template that's used when performing automated sensitive data discovery. The template specifies which allow lists, custom data identifiers, and managed data identifiers to use when analyzing data.</p>",
                         "smithy.api#jsonName": "sensitivityInspectionTemplateId"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.macie2#AutomatedDiscoveryStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the automated sensitive data discovery configuration for the account. Possible values are: ENABLED, use the specified settings to perform automated sensitive data discovery activities for the account; and, DISABLED, don't perform automated sensitive data discovery activities for the account.</p>",
+                        "smithy.api#documentation": "<p>The current status of automated sensitive data discovery for the organization or account. Possible values are: ENABLED, use the specified settings to perform automated sensitive data discovery activities; and, DISABLED, don't perform automated sensitive data discovery activities.</p>",
                         "smithy.api#jsonName": "status"
                     }
                 }
@@ -6368,14 +6598,14 @@
                 "excludes": {
                     "target": "com.amazonaws.macie2#SensitivityInspectionTemplateExcludes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The managed data identifiers that are explicitly excluded (not used) when analyzing data.</p>",
+                        "smithy.api#documentation": "<p>The managed data identifiers that are explicitly excluded (not used) when performing automated sensitive data discovery.</p>",
                         "smithy.api#jsonName": "excludes"
                     }
                 },
                 "includes": {
                     "target": "com.amazonaws.macie2#SensitivityInspectionTemplateIncludes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The allow lists, custom data identifiers, and managed data identifiers that are explicitly included (used) when analyzing data.</p>",
+                        "smithy.api#documentation": "<p>The allow lists, custom data identifiers, and managed data identifiers that are explicitly included (used) when performing automated sensitive data discovery.</p>",
                         "smithy.api#jsonName": "includes"
                     }
                 },
@@ -6979,21 +7209,21 @@
                 "isDefinedInJob": {
                     "target": "com.amazonaws.macie2#IsDefinedInJob",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether any one-time or recurring jobs are configured to analyze data in the bucket. Possible values are:</p> <ul><li><p>TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more jobs and at least one of those jobs has a status other than CANCELLED. Or the bucket matched the bucket criteria (S3BucketCriteriaForJob) for at least one job that previously ran.</p></li> <li><p>FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any jobs, all the jobs that explicitly include the bucket in their bucket definitions have a status of CANCELLED, or the bucket didn't match the bucket criteria (S3BucketCriteriaForJob) for any jobs that previously ran.</p></li> <li><p>UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.</p></li></ul>",
+                        "smithy.api#documentation": "<p>Specifies whether any one-time or recurring jobs are configured to analyze objects in the bucket. Possible values are:</p> <ul><li><p>TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more jobs and at least one of those jobs has a status other than CANCELLED. Or the bucket matched the bucket criteria (S3BucketCriteriaForJob) for at least one job that previously ran.</p></li> <li><p>FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any jobs, all the jobs that explicitly include the bucket in their bucket definitions have a status of CANCELLED, or the bucket didn't match the bucket criteria (S3BucketCriteriaForJob) for any jobs that previously ran.</p></li> <li><p>UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.</p></li></ul>",
                         "smithy.api#jsonName": "isDefinedInJob"
                     }
                 },
                 "isMonitoredByJob": {
                     "target": "com.amazonaws.macie2#IsMonitoredByJob",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether any recurring jobs are configured to analyze data in the bucket. Possible values are:</p> <ul><li><p>TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more recurring jobs or the bucket matches the bucket criteria (S3BucketCriteriaForJob) for one or more recurring jobs. At least one of those jobs has a status other than CANCELLED.</p></li> <li><p>FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any recurring jobs, the bucket doesn't match the bucket criteria (S3BucketCriteriaForJob) for any recurring jobs, or all the recurring jobs that are configured to analyze data in the bucket have a status of CANCELLED.</p></li> <li><p>UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.</p></li></ul>",
+                        "smithy.api#documentation": "<p>Specifies whether any recurring jobs are configured to analyze objects in the bucket. Possible values are:</p> <ul><li><p>TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more recurring jobs or the bucket matches the bucket criteria (S3BucketCriteriaForJob) for one or more recurring jobs. At least one of those jobs has a status other than CANCELLED.</p></li> <li><p>FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any recurring jobs, the bucket doesn't match the bucket criteria (S3BucketCriteriaForJob) for any recurring jobs, or all the recurring jobs that are configured to analyze data in the bucket have a status of CANCELLED.</p></li> <li><p>UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.</p></li></ul>",
                         "smithy.api#jsonName": "isMonitoredByJob"
                     }
                 },
                 "lastJobId": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the job that ran most recently and is configured to analyze data in the bucket, either the latest run of a recurring job or the only run of a one-time job.</p> <p>This value is typically null if the value for the isDefinedInJob property is FALSE or UNKNOWN.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the job that ran most recently and is configured to analyze objects in the bucket, either the latest run of a recurring job or the only run of a one-time job.</p> <p>This value is typically null if the value for the isDefinedInJob property is FALSE or UNKNOWN.</p>",
                         "smithy.api#jsonName": "lastJobId"
                     }
                 },
@@ -7006,7 +7236,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies whether any one-time or recurring classification jobs are configured to analyze data in an S3 bucket, and, if so, the details of the job that ran most recently.</p>"
+                "smithy.api#documentation": "<p>Specifies whether any one-time or recurring classification jobs are configured to analyze objects in an S3 bucket, and, if so, the details of the job that ran most recently.</p>"
             }
         },
         "com.amazonaws.macie2#JobScheduleFrequency": {
@@ -7343,6 +7573,97 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects, one for each allow list.</p>",
                         "smithy.api#jsonName": "allowLists"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.macie2#ListAutomatedDiscoveryAccounts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.macie2#ListAutomatedDiscoveryAccountsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.macie2#ListAutomatedDiscoveryAccountsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.macie2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the status of automated sensitive data discovery for one or more accounts.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/automated-discovery/accounts",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "items",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.macie2#ListAutomatedDiscoveryAccountsRequest": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.macie2#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for each account, for as many as 50 accounts. To retrieve the status for multiple accounts, append the accountIds parameter and argument for each account, separated by an ampersand (&amp;). To retrieve the status for all the accounts in an organization, omit this parameter.</p>",
+                        "smithy.api#httpQuery": "accountIds"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.macie2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to include in each page of a paginated response.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nextToken string that specifies which page of results to return in a paginated response.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.macie2#ListAutomatedDiscoveryAccountsResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.macie2#__listOfAutomatedDiscoveryAccount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, one for each account specified in the request. Each object specifies the Amazon Web Services account ID for an account and the current status of automated sensitive data discovery for that account.</p>",
+                        "smithy.api#jsonName": "items"
                     }
                 },
                 "nextToken": {
@@ -7857,7 +8178,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about the Amazon Macie membership invitations that were received by an account.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about Amazon Macie membership invitations that were received by an account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/invitations",
@@ -8324,7 +8645,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about objects that were selected from an S3 bucket for automated sensitive data discovery.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about objects that Amazon Macie selected from an S3 bucket for automated sensitive data discovery.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/resource-profiles/artifacts",
@@ -8622,6 +8943,9 @@
                     "target": "com.amazonaws.macie2#BatchGetCustomDataIdentifiers"
                 },
                 {
+                    "target": "com.amazonaws.macie2#BatchUpdateAutomatedDiscoveryAccounts"
+                },
+                {
                     "target": "com.amazonaws.macie2#CreateAllowList"
                 },
                 {
@@ -8760,6 +9084,9 @@
                     "target": "com.amazonaws.macie2#ListAllowLists"
                 },
                 {
+                    "target": "com.amazonaws.macie2#ListAutomatedDiscoveryAccounts"
+                },
+                {
                     "target": "com.amazonaws.macie2#ListClassificationJobs"
                 },
                 {
@@ -8865,6 +9192,9 @@
                     "name": "macie2"
                 },
                 "aws.protocols#restJson1": {},
+                "smithy.api#auth": [
+                    "aws.auth#sigv4"
+                ],
                 "smithy.api#documentation": "<p>Amazon Macie</p>",
                 "smithy.api#title": "Amazon Macie 2",
                 "smithy.rules#endpointRuleSet": {
@@ -9886,6 +10216,13 @@
                         "smithy.api#jsonName": "accountId"
                     }
                 },
+                "automatedDiscoveryMonitoringStatus": {
+                    "target": "com.amazonaws.macie2#AutomatedDiscoveryMonitoringStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether automated sensitive data discovery is currently configured to analyze objects in the bucket. Possible values are: MONITORED, the bucket is included in analyses; and, NOT_MONITORED, the bucket is excluded from analyses. If automated sensitive data discovery is disabled for your account, this value is NOT_MONITORED.</p>",
+                        "smithy.api#jsonName": "automatedDiscoveryMonitoringStatus"
+                    }
+                },
                 "bucketName": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
@@ -9931,7 +10268,7 @@
                 "lastAutomatedDiscoveryTime": {
                     "target": "com.amazonaws.macie2#__timestampIso8601",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently analyzed data in the bucket while performing automated sensitive data discovery for your account. This value is null if automated sensitive data discovery is currently disabled for your account.</p>",
+                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently analyzed objects in the bucket while performing automated sensitive data discovery. This value is null if automated sensitive data discovery is disabled for your account.</p>",
                         "smithy.api#jsonName": "lastAutomatedDiscoveryTime"
                     }
                 },
@@ -9952,7 +10289,7 @@
                 "sensitivityScore": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current sensitivity score for the bucket, ranging from -1 (classification error) to 100 (sensitive). This value is null if automated sensitive data discovery is currently disabled for your account.</p>",
+                        "smithy.api#documentation": "<p>The sensitivity score for the bucket, ranging from -1 (classification error) to 100 (sensitive).</p><p>If automated sensitive data discovery has never been enabled for your account or it’s been disabled for your organization or your standalone account for more than 30 days, possible values are: 1, the bucket is empty; or, 50, the bucket stores objects but it’s been excluded from recent analyses.</p>",
                         "smithy.api#jsonName": "sensitivityScore"
                     }
                 },
@@ -10350,7 +10687,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates the configuration settings for storing data classification results.</p>",
+                "smithy.api#documentation": "<p>Adds or updates the configuration settings for storing data classification results.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/classification-export-configuration",
@@ -10673,7 +11010,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about an S3 object that Amazon Macie selected for analysis while performing automated sensitive data discovery for an S3 bucket, and the status and results of the analysis. This information is available only if automated sensitive data discovery is currently enabled for your account.</p>"
+                "smithy.api#documentation": "<p>Provides information about an S3 object that Amazon Macie selected for analysis while performing automated sensitive data discovery for an account, and the status and results of the analysis. This information is available only if automated sensitive data discovery has been enabled for the account.</p>"
             }
         },
         "com.amazonaws.macie2#ResourceStatistics": {
@@ -10744,7 +11081,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides statistical data for sensitive data discovery metrics that apply to an S3 bucket that Amazon Macie monitors and analyzes for your account. The statistics capture the results of automated sensitive data discovery activities that Macie has performed for the bucket. The data is available only if automated sensitive data discovery is currently enabled for your account.</p>"
+                "smithy.api#documentation": "<p>Provides statistical data for sensitive data discovery metrics that apply to an S3 bucket that Amazon Macie monitors and analyzes for an account, if automated sensitive data discovery has been enabled for the account. The data captures the results of automated sensitive data discovery activities that Macie has performed for the bucket.</p>"
             }
         },
         "com.amazonaws.macie2#ResourcesAffected": {
@@ -11115,7 +11452,7 @@
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the bucket.</p>",
+                        "smithy.api#documentation": "<p>The name of the bucket. This must be the name of an existing general purpose bucket.</p>",
                         "smithy.api#jsonName": "bucketName",
                         "smithy.api#required": {}
                     }
@@ -11545,7 +11882,7 @@
                 "values": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are:</p> <ul><li><p>ACCOUNT_ID - A string that represents the unique identifier for the Amazon Web Services account that owns the resource.</p></li> <li><p>S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission\">BucketPublicAccess.effectivePermission</a> property of an S3 bucket.</p></li> <li><p>S3_BUCKET_NAME - A string that represents the name of an S3 bucket.</p></li> <li><p>S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess\">BucketMetadata.sharedAccess</a> property of an S3 bucket.</p></li></ul> <p>Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in values.</p>",
+                        "smithy.api#documentation": "<p>An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are:</p> <ul><li><p>ACCOUNT_ID - A string that represents the unique identifier for the Amazon Web Services account that owns the resource.</p></li> <li><p>AUTOMATED_DISCOVERY_MONITORING_STATUS - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-automateddiscoverymonitoringstatus\">BucketMetadata.automatedDiscoveryMonitoringStatus</a> property of an S3 bucket.</p></li> <li><p>S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission\">BucketPublicAccess.effectivePermission</a> property of an S3 bucket.</p></li> <li><p>S3_BUCKET_NAME - A string that represents the name of an S3 bucket.</p></li> <li><p>S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess\">BucketMetadata.sharedAccess</a> property of an S3 bucket.</p></li></ul> <p>Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in values.</p>",
                         "smithy.api#jsonName": "values"
                     }
                 }
@@ -11579,6 +11916,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "S3_BUCKET_SHARED_ACCESS"
+                    }
+                },
+                "AUTOMATED_DISCOVERY_MONITORING_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTOMATED_DISCOVERY_MONITORING_STATUS"
                     }
                 }
             },
@@ -11840,7 +12183,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies managed data identifiers to exclude (not use) when performing automated sensitive data discovery for an Amazon Macie account. For information about the managed data identifiers that Amazon Macie currently provides, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html\">Using managed data identifiers</a> in the <i>Amazon Macie User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Specifies managed data identifiers to exclude (not use) when performing automated sensitive data discovery. For information about the managed data identifiers that Amazon Macie currently provides, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html\">Using managed data identifiers</a> in the <i>Amazon Macie User Guide</i>.</p>"
             }
         },
         "com.amazonaws.macie2#SensitivityInspectionTemplateId": {
@@ -11875,7 +12218,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the allow lists, custom data identifiers, and managed data identifiers to include (use) when performing automated sensitive data discovery for an Amazon Macie account. The configuration must specify at least one custom data identifier or managed data identifier. For information about the managed data identifiers that Amazon Macie currently provides, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html\">Using managed data identifiers</a> in the <i>Amazon Macie User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Specifies the allow lists, custom data identifiers, and managed data identifiers to include (use) when performing automated sensitive data discovery. The configuration must specify at least one custom data identifier or managed data identifier. For information about the managed data identifiers that Amazon Macie currently provides, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html\">Using managed data identifiers</a> in the <i>Amazon Macie User Guide</i>.</p>"
             }
         },
         "com.amazonaws.macie2#SensitivityInspectionTemplatesEntry": {
@@ -11897,7 +12240,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the sensitivity inspection template for an Amazon Macie account. Macie uses the template's settings when it performs automated sensitive data discovery for the account.</p>"
+                "smithy.api#documentation": "<p>Provides information about the sensitivity inspection template for an Amazon Macie account.</p>"
             }
         },
         "com.amazonaws.macie2#ServerSideEncryption": {
@@ -12594,7 +12937,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Tests a custom data identifier.</p>",
+                "smithy.api#documentation": "<p>Tests criteria for a custom data identifier.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/custom-data-identifiers/test",
@@ -13039,7 +13382,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables or disables automated sensitive data discovery for an account.</p>",
+                "smithy.api#documentation": "<p>Changes the configuration settings and status of automated sensitive data discovery for an organization or standalone account.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/automated-discovery/configuration",
@@ -13050,11 +13393,18 @@
         "com.amazonaws.macie2#UpdateAutomatedDiscoveryConfigurationRequest": {
             "type": "structure",
             "members": {
+                "autoEnableOrganizationMembers": {
+                    "target": "com.amazonaws.macie2#AutoEnableMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to automatically enable automated sensitive data discovery for accounts in the organization. Valid values are: ALL (default), enable it for all existing accounts and new member accounts; NEW, enable it only for new member accounts; and, NONE, don't enable it for any accounts.</p> <p>If you specify NEW or NONE, automated sensitive data discovery continues to be enabled for any existing accounts that it's currently enabled for. To enable or disable it for individual member accounts, specify NEW or NONE, and then enable or disable it for each account by using the BatchUpdateAutomatedDiscoveryAccounts operation.</p>",
+                        "smithy.api#jsonName": "autoEnableOrganizationMembers"
+                    }
+                },
                 "status": {
                     "target": "com.amazonaws.macie2#AutomatedDiscoveryStatus",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The new status of automated sensitive data discovery for the account. Valid values are: ENABLED, start or resume automated sensitive data discovery activities for the account; and, DISABLED, stop performing automated sensitive data discovery activities for the account.</p> <p>When you enable automated sensitive data discovery for the first time, Amazon Macie uses default configuration settings to determine which data sources to analyze and which managed data identifiers to use. To change these settings, use the UpdateClassificationScope and UpdateSensitivityInspectionTemplate operations, respectively. If you change the settings and subsequently disable the configuration, Amazon Macie retains your changes.</p>",
+                        "smithy.api#documentation": "<p>The new status of automated sensitive data discovery for the organization or account. Valid values are: ENABLED, start or resume all automated sensitive data discovery activities; and, DISABLED, stop performing all automated sensitive data discovery activities.</p> <p>If you specify DISABLED for an administrator account, you also disable automated sensitive data discovery for all member accounts in the organization.</p>",
                         "smithy.api#jsonName": "status",
                         "smithy.api#required": {}
                     }
@@ -13516,7 +13866,7 @@
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Specifies whether to enable Amazon Macie automatically for an account when the account is added to the organization in Organizations.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether to enable Amazon Macie automatically for accounts that are added to the organization in Organizations.</p>",
                         "smithy.api#jsonName": "autoEnable",
                         "smithy.api#required": {}
                     }
@@ -13817,7 +14167,7 @@
                 "excludes": {
                     "target": "com.amazonaws.macie2#SensitivityInspectionTemplateExcludes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The managed data identifiers to explicitly exclude (not use) when analyzing data.</p> <p>To exclude an allow list or custom data identifier that's currently included by the template, update the values for the SensitivityInspectionTemplateIncludes.allowListIds and SensitivityInspectionTemplateIncludes.customDataIdentifierIds properties, respectively.</p>",
+                        "smithy.api#documentation": "<p>The managed data identifiers to explicitly exclude (not use) when performing automated sensitive data discovery.</p> <p>To exclude an allow list or custom data identifier that's currently included by the template, update the values for the SensitivityInspectionTemplateIncludes.allowListIds and SensitivityInspectionTemplateIncludes.customDataIdentifierIds properties, respectively.</p>",
                         "smithy.api#jsonName": "excludes"
                     }
                 },
@@ -13832,7 +14182,7 @@
                 "includes": {
                     "target": "com.amazonaws.macie2#SensitivityInspectionTemplateIncludes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The allow lists, custom data identifiers, and managed data identifiers to explicitly include (use) when analyzing data.</p>",
+                        "smithy.api#documentation": "<p>The allow lists, custom data identifiers, and managed data identifiers to explicitly include (use) when performing automated sensitive data discovery.</p>",
                         "smithy.api#jsonName": "includes"
                     }
                 }
@@ -13897,7 +14247,7 @@
                 "automatedDiscoveryFreeTrialStartDate": {
                     "target": "com.amazonaws.macie2#__timestampIso8601",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when the free trial of automated sensitive data discovery started for the account. If the account is a member account in an organization, this value is the same as the value for the organization's Amazon Macie administrator account.</p>",
+                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when the free trial of automated sensitive data discovery started for the account. This value is null if automated sensitive data discovery hasn't been enabled for the account.</p>",
                         "smithy.api#jsonName": "automatedDiscoveryFreeTrialStartDate"
                     }
                 },
@@ -14356,6 +14706,24 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.macie2#AllowListSummary"
+            }
+        },
+        "com.amazonaws.macie2#__listOfAutomatedDiscoveryAccount": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.macie2#AutomatedDiscoveryAccount"
+            }
+        },
+        "com.amazonaws.macie2#__listOfAutomatedDiscoveryAccountUpdate": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.macie2#AutomatedDiscoveryAccountUpdate"
+            }
+        },
+        "com.amazonaws.macie2#__listOfAutomatedDiscoveryAccountUpdateError": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.macie2#AutomatedDiscoveryAccountUpdateError"
             }
         },
         "com.amazonaws.macie2#__listOfBatchGetCustomDataIdentifierSummary": {

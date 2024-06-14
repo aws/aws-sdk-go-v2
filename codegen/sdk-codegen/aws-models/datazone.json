@@ -376,6 +376,20 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.datazone#ActionParameters": {
+            "type": "union",
+            "members": {
+                "awsConsoleLink": {
+                    "target": "com.amazonaws.datazone#AwsConsoleLinkParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The console link specified as part of the environment action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The parameters of the environment action.</p>"
+            }
+        },
         "com.amazonaws.datazone#ApplicableAssetTypes": {
             "type": "list",
             "member": {
@@ -1034,6 +1048,82 @@
                 "smithy.api#documentation": "<p>The details of the asset type.</p>"
             }
         },
+        "com.amazonaws.datazone#AssociateEnvironmentRole": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#AssociateEnvironmentRoleInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#AssociateEnvironmentRoleOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates the environment role in Amazon DataZone.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/v2/domains/{domainIdentifier}/environments/{environmentIdentifier}/roles/{environmentRoleArn}"
+                }
+            }
+        },
+        "com.amazonaws.datazone#AssociateEnvironmentRoleInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain in which the environment role is associated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentIdentifier": {
+                    "target": "com.amazonaws.datazone#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentRoleArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the environment role.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#AssociateEnvironmentRoleOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#Attribute": {
             "type": "string",
             "traits": {
@@ -1082,6 +1172,20 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^\\d{12}$"
+            }
+        },
+        "com.amazonaws.datazone#AwsConsoleLinkParameters": {
+            "type": "structure",
+            "members": {
+                "uri": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the console link specified as part of the environment action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The parameters of the console link specified as part of the environment action.</p>"
             }
         },
         "com.amazonaws.datazone#AwsRegion": {
@@ -2575,6 +2679,136 @@
                 }
             }
         },
+        "com.amazonaws.datazone#CreateEnvironmentAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#CreateEnvironmentActionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#CreateEnvironmentActionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an action for the environment, for example, creates a console link for an\n         analytics tool that is available in this environment.</p>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/v2/domains/{domainIdentifier}/environments/{environmentIdentifier}/actions"
+                }
+            }
+        },
+        "com.amazonaws.datazone#CreateEnvironmentActionInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain in which the environment action is created.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentIdentifier": {
+                    "target": "com.amazonaws.datazone#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment in which the environment action is created.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.datazone#ActionParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the environment action that is being created in the\n         environment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateEnvironmentActionOutput": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain in which the environment action is created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.datazone#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment in which the environment is created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#EnvironmentActionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.datazone#ActionParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the environment action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#CreateEnvironmentInput": {
             "type": "structure",
             "members": {
@@ -2623,6 +2857,24 @@
                     "target": "com.amazonaws.datazone#GlossaryTerms",
                     "traits": {
                         "smithy.api#documentation": "<p>The glossary terms that can be used in this Amazon DataZone environment.</p>"
+                    }
+                },
+                "environmentAccountIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the account in which the environment is being created.</p>"
+                    }
+                },
+                "environmentAccountRegion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The region of the account in which the environment is being created.</p>"
+                    }
+                },
+                "environmentBlueprintIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the blueprint with which the environment is being created.</p>"
                     }
                 }
             },
@@ -2690,8 +2942,9 @@
                 "environmentProfileId": {
                     "target": "com.amazonaws.datazone#EnvironmentProfileId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the environment profile with which this Amazon DataZone environment was\n         created.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The ID of the environment profile with which this Amazon DataZone environment was\n         created.</p>"
                     }
                 },
                 "awsAccountId": {
@@ -4861,6 +5114,9 @@
                 },
                 "updatedAt": {
                     "target": "com.amazonaws.datazone#DateTime"
+                },
+                "retainPermissionsOnRevokeFailure": {
+                    "target": "smithy.api#Boolean"
                 }
             },
             "create": {
@@ -5445,10 +5701,16 @@
                     "target": "com.amazonaws.datazone#AcceptSubscriptionRequest"
                 },
                 {
+                    "target": "com.amazonaws.datazone#AssociateEnvironmentRole"
+                },
+                {
                     "target": "com.amazonaws.datazone#CancelSubscription"
                 },
                 {
                     "target": "com.amazonaws.datazone#CreateEnvironment"
+                },
+                {
+                    "target": "com.amazonaws.datazone#CreateEnvironmentAction"
                 },
                 {
                     "target": "com.amazonaws.datazone#CreateEnvironmentProfile"
@@ -5481,6 +5743,9 @@
                     "target": "com.amazonaws.datazone#DeleteEnvironment"
                 },
                 {
+                    "target": "com.amazonaws.datazone#DeleteEnvironmentAction"
+                },
+                {
                     "target": "com.amazonaws.datazone#DeleteEnvironmentProfile"
                 },
                 {
@@ -5502,7 +5767,13 @@
                     "target": "com.amazonaws.datazone#DeleteTimeSeriesDataPoints"
                 },
                 {
+                    "target": "com.amazonaws.datazone#DisassociateEnvironmentRole"
+                },
+                {
                     "target": "com.amazonaws.datazone#GetEnvironment"
+                },
+                {
+                    "target": "com.amazonaws.datazone#GetEnvironmentAction"
                 },
                 {
                     "target": "com.amazonaws.datazone#GetEnvironmentBlueprint"
@@ -5542,6 +5813,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#ListDataSourceRunActivities"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ListEnvironmentActions"
                 },
                 {
                     "target": "com.amazonaws.datazone#ListEnvironmentBlueprints"
@@ -5614,6 +5888,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#UpdateEnvironment"
+                },
+                {
+                    "target": "com.amazonaws.datazone#UpdateEnvironmentAction"
                 },
                 {
                     "target": "com.amazonaws.datazone#UpdateEnvironmentProfile"
@@ -6313,6 +6590,13 @@
                         "smithy.api#httpQuery": "clientToken",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "retainPermissionsOnRevokeFailure": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that the granted permissions are retained in case of a self-subscribe\n         functionality failure for a data source.</p>",
+                        "smithy.api#httpQuery": "retainPermissionsOnRevokeFailure"
+                    }
                 }
             },
             "traits": {
@@ -6441,6 +6725,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of when this data source was updated.</p>"
                     }
+                },
+                "selfGrantStatus": {
+                    "target": "com.amazonaws.datazone#SelfGrantStatusOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the status of the self-granting functionality.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "retainPermissionsOnRevokeFailure": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that the granted permissions are retained in case of a self-subscribe\n         functionality failure for a data source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6568,6 +6865,76 @@
                     "uri": "/v2/domains/{domainIdentifier}/environments/{identifier}"
                 },
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteEnvironmentAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#DeleteEnvironmentActionInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an action for the environment, for example, deletes a console link for an\n         analytics tool that is available in this environment.</p>",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "DELETE",
+                    "uri": "/v2/domains/{domainIdentifier}/environments/{environmentIdentifier}/actions/{identifier}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteEnvironmentActionInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain in which an environment action is deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentIdentifier": {
+                    "target": "com.amazonaws.datazone#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment where an environment action is deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment action that is deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.datazone#DeleteEnvironmentBlueprintConfiguration": {
@@ -7672,6 +8039,82 @@
                 "target": "com.amazonaws.datazone#DetailedGlossaryTerm"
             }
         },
+        "com.amazonaws.datazone#DisassociateEnvironmentRole": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#DisassociateEnvironmentRoleInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#DisassociateEnvironmentRoleOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates the environment role in Amazon DataZone.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/v2/domains/{domainIdentifier}/environments/{environmentIdentifier}/roles/{environmentRoleArn}"
+                }
+            }
+        },
+        "com.amazonaws.datazone#DisassociateEnvironmentRoleInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain in which an environment role is disassociated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentIdentifier": {
+                    "target": "com.amazonaws.datazone#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentRoleArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the environment role.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#DisassociateEnvironmentRoleOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#Domain": {
             "type": "resource",
             "identifiers": {
@@ -7927,10 +8370,65 @@
                 }
             }
         },
+        "com.amazonaws.datazone#EnvironmentActionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,36}$"
+            }
+        },
         "com.amazonaws.datazone#EnvironmentActionList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.datazone#ConfigurableEnvironmentAction"
+            }
+        },
+        "com.amazonaws.datazone#EnvironmentActionSummary": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon DataZone domain ID of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.datazone#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment ID of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#EnvironmentActionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.datazone#ActionParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment action description.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details about the specified action configured for an environment. For example, the\n         details of the specified console links for an analytics tool that is available in this\n         environment.</p>"
             }
         },
         "com.amazonaws.datazone#EnvironmentBlueprintConfiguration": {
@@ -8193,7 +8691,7 @@
         "com.amazonaws.datazone#EnvironmentProfileId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,36}$"
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]{0,36}$"
             }
         },
         "com.amazonaws.datazone#EnvironmentProfileName": {
@@ -8443,8 +8941,9 @@
                 "environmentProfileId": {
                     "target": "com.amazonaws.datazone#EnvironmentProfileId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the environment profile with which the environment was created.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The identifier of the environment profile with which the environment was created.</p>"
                     }
                 },
                 "awsAccountId": {
@@ -9538,6 +10037,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of when the data source was updated.</p>"
                     }
+                },
+                "selfGrantStatus": {
+                    "target": "com.amazonaws.datazone#SelfGrantStatusOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the status of the self-granting functionality.</p>",
+                        "smithy.api#notProperty": {}
+                    }
                 }
             },
             "traits": {
@@ -9878,6 +10384,122 @@
                 "smithy.api#readonly": {}
             }
         },
+        "com.amazonaws.datazone#GetEnvironmentAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#GetEnvironmentActionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#GetEnvironmentActionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the specified environment action.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/environments/{environmentIdentifier}/actions/{identifier}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.datazone#GetEnvironmentActionInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain in which the <code>GetEnvironmentAction</code> API is\n         invoked. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentIdentifier": {
+                    "target": "com.amazonaws.datazone#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment ID of the environment action.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment action</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#GetEnvironmentActionOutput": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain in which the environment action lives.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.datazone#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment ID of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#EnvironmentActionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.datazone#ActionParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the environment action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#GetEnvironmentBlueprint": {
             "type": "operation",
             "input": {
@@ -10214,8 +10836,9 @@
                 "environmentProfileId": {
                     "target": "com.amazonaws.datazone#EnvironmentProfileId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the environment profile with which the environment is created.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The ID of the environment profile with which the environment is created.</p>"
                     }
                 },
                 "awsAccountId": {
@@ -12711,6 +13334,21 @@
                 "smithy.api#documentation": "<p>The configuration details of the Amazon Web Services Glue data source.</p>"
             }
         },
+        "com.amazonaws.datazone#GlueSelfGrantStatusOutput": {
+            "type": "structure",
+            "members": {
+                "selfGrantStatusDetails": {
+                    "target": "com.amazonaws.datazone#SelfGrantStatusDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details for the self granting status for a Glue data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the self granting status.</p>"
+            }
+        },
         "com.amazonaws.datazone#GrantedEntity": {
             "type": "union",
             "members": {
@@ -13507,6 +14145,108 @@
                     "target": "com.amazonaws.datazone#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>When the number of domains is greater than the default value for the\n            <code>MaxResults</code> parameter, or if you explicitly specify a value for\n            <code>MaxResults</code> that is less than the number of domains, the response includes a\n         pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>\n         value in a subsequent call to <code>ListDomains</code> to list the next set of\n         domains.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#ListEnvironmentActionSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#EnvironmentActionSummary"
+            }
+        },
+        "com.amazonaws.datazone#ListEnvironmentActions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#ListEnvironmentActionsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#ListEnvironmentActionsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists existing environment actions.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/environments/{environmentIdentifier}/actions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.datazone#ListEnvironmentActionsInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain in which the environment actions are listed.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentIdentifier": {
+                    "target": "com.amazonaws.datazone#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the envrironment whose environment actions are listed.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of environment actions is greater than the default value for the\n            <code>MaxResults</code> parameter, or if you explicitly specify a value for\n            <code>MaxResults</code> that is less than the number of environment actions, the\n         response includes a pagination token named <code>NextToken</code>. You can specify this\n            <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentActions</code>\n         to list the next set of environment actions.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.datazone#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of environment actions to return in a single call to\n            <code>ListEnvironmentActions</code>. When the number of environment actions to be listed\n         is greater than the value of <code>MaxResults</code>, the response contains a\n            <code>NextToken</code> value that you can use in a subsequent call to\n            <code>ListEnvironmentActions</code> to list the next set of environment actions.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#ListEnvironmentActionsOutput": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.datazone#ListEnvironmentActionSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results of <code>ListEnvironmentActions</code>.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of environment actions is greater than the default value for the\n            <code>MaxResults</code> parameter, or if you explicitly specify a value for\n            <code>MaxResults</code> that is less than the number of environment actions, the\n         response includes a pagination token named <code>NextToken</code>. You can specify this\n            <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentActions</code>\n         to list the next set of environment actions.</p>"
                     }
                 }
             },
@@ -16409,6 +17149,21 @@
                 "smithy.api#documentation": "<p>The configuration details of the Amazon Redshift data source.</p>"
             }
         },
+        "com.amazonaws.datazone#RedshiftSelfGrantStatusOutput": {
+            "type": "structure",
+            "members": {
+                "selfGrantStatusDetails": {
+                    "target": "com.amazonaws.datazone#SelfGrantStatusDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details for the self granting status for an Amazon Redshift data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details for the self granting status for an Amazon Redshift data source.</p>"
+            }
+        },
         "com.amazonaws.datazone#RedshiftServerlessStorage": {
             "type": "structure",
             "members": {
@@ -17908,6 +18663,121 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#SelfGrantStatus": {
+            "type": "enum",
+            "members": {
+                "GRANT_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRANT_PENDING"
+                    }
+                },
+                "REVOKE_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVOKE_PENDING"
+                    }
+                },
+                "GRANT_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRANT_IN_PROGRESS"
+                    }
+                },
+                "REVOKE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVOKE_IN_PROGRESS"
+                    }
+                },
+                "GRANTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRANTED"
+                    }
+                },
+                "GRANT_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRANT_FAILED"
+                    }
+                },
+                "REVOKE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVOKE_FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datazone#SelfGrantStatusDetail": {
+            "type": "structure",
+            "members": {
+                "databaseName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database used for the data source.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "schemaName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schema used in the data source.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.datazone#SelfGrantStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The self granting status of the data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "failureCause": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for why the operation failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details for the self granting status.</p>"
+            }
+        },
+        "com.amazonaws.datazone#SelfGrantStatusDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#SelfGrantStatusDetail"
+            }
+        },
+        "com.amazonaws.datazone#SelfGrantStatusOutput": {
+            "type": "union",
+            "members": {
+                "glueSelfGrantStatus": {
+                    "target": "com.amazonaws.datazone#GlueSelfGrantStatusOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details for the self granting status for a Glue data source.</p>"
+                    }
+                },
+                "redshiftSelfGrantStatus": {
+                    "target": "com.amazonaws.datazone#RedshiftSelfGrantStatusOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details for the self granting status for an Amazon Redshift data source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details for the self granting status for a data source.</p>"
+            }
+        },
         "com.amazonaws.datazone#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -17958,7 +18828,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 10000
+                    "max": 100000
                 }
             }
         },
@@ -20205,6 +21075,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The recommendation to be updated as part of the <code>UpdateDataSource</code>\n         action.</p>"
                     }
+                },
+                "retainPermissionsOnRevokeFailure": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that the granted permissions are retained in case of a self-subscribe\n         functionality failure for a data source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -20338,6 +21214,19 @@
                     "target": "com.amazonaws.datazone#DateTime",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of when the data source was updated.</p>"
+                    }
+                },
+                "selfGrantStatus": {
+                    "target": "com.amazonaws.datazone#SelfGrantStatusOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the status of the self-granting functionality.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "retainPermissionsOnRevokeFailure": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that the granted permissions are retained in case of a self-subscribe\n         functionality failure for a data source.</p>"
                     }
                 }
             },
@@ -20519,6 +21408,142 @@
                 }
             }
         },
+        "com.amazonaws.datazone#UpdateEnvironmentAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#UpdateEnvironmentActionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#UpdateEnvironmentActionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an environment action.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/v2/domains/{domainIdentifier}/environments/{environmentIdentifier}/actions/{identifier}"
+                }
+            }
+        },
+        "com.amazonaws.datazone#UpdateEnvironmentActionInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain ID of the environment action.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentIdentifier": {
+                    "target": "com.amazonaws.datazone#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment ID of the environment action.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment action.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.datazone#ActionParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters of the environment action.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment action.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the environment action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#UpdateEnvironmentActionOutput": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain ID of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.datazone#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment ID of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#EnvironmentActionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.datazone#ActionParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters of the environment action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the environment action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#UpdateEnvironmentInput": {
             "type": "structure",
             "members": {
@@ -20621,8 +21646,9 @@
                 "environmentProfileId": {
                     "target": "com.amazonaws.datazone#EnvironmentProfileId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The profile identifier of the environment.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The profile identifier of the environment.</p>"
                     }
                 },
                 "awsAccountId": {

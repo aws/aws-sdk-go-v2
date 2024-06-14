@@ -3235,7 +3235,22 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation returns detailed information about a specified domain that is\n\t\t\tassociated with the current Amazon Web Services account. Contact information for the\n\t\t\tdomain is also returned as part of the output.</p>"
+                "smithy.api#documentation": "<p>This operation returns detailed information about a specified domain that is\n\t\t\tassociated with the current Amazon Web Services account. Contact information for the\n\t\t\tdomain is also returned as part of the output.</p>",
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetDomainDetailFailure",
+                        "params": {
+                            "DomainName": "fake-domain-name"
+                        },
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.route53domains#GetDomainDetailRequest": {
@@ -3649,7 +3664,20 @@
                     "outputToken": "NextPageMarker",
                     "items": "Domains",
                     "pageSize": "MaxItems"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListDomainsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.route53domains#ListDomainsAttributeName": {

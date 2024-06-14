@@ -6682,7 +6682,7 @@
                 "smithy.api#deprecated": {
                     "message": "DescribeEndpoints and account specific endpoints are no longer required. We recommend that you send your requests directly to the regional endpoint instead."
                 },
-                "smithy.api#documentation": "Send an request with an empty body to the regional API endpoint to get your account API endpoint.",
+                "smithy.api#documentation": "Send a request with an empty body to the regional API endpoint to get your account API endpoint. Note that DescribeEndpoints is no longer required. We recommend that you send your requests directly to the regional endpoint instead.",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2017-08-29/endpoints",
@@ -16954,6 +16954,9 @@
                     "target": "com.amazonaws.mediaconvert#PutPolicy"
                 },
                 {
+                    "target": "com.amazonaws.mediaconvert#SearchJobs"
+                },
+                {
                     "target": "com.amazonaws.mediaconvert#TagResource"
                 },
                 {
@@ -21884,6 +21887,121 @@
             },
             "traits": {
                 "smithy.api#documentation": "Settings related to SCC captions. SCC is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/scc-srt-output-captions.html."
+            }
+        },
+        "com.amazonaws.mediaconvert#SearchJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediaconvert#SearchJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediaconvert#SearchJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mediaconvert#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Retrieve a JSON array that includes job details for up to twenty of your most recent jobs. Optionally filter results further according to input file, queue, or status. To retrieve the twenty next most recent jobs, use the nextToken string returned with the array.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2017-08-29/search",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Jobs",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.mediaconvert#SearchJobsRequest": {
+            "type": "structure",
+            "members": {
+                "InputFile": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Provide your input file URL or your partial input file name. The maximum length for an input file is 300 characters.",
+                        "smithy.api#httpQuery": "inputFile"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max20",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Number of jobs, up to twenty, that will be returned at one time.",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Use this string, provided with the response to a previous request, to request the next batch of jobs.",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "Order": {
+                    "target": "com.amazonaws.mediaconvert#Order",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.",
+                        "smithy.api#httpQuery": "order"
+                    }
+                },
+                "Queue": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Provide a queue name, or a queue ARN, to return only jobs from that queue.",
+                        "smithy.api#httpQuery": "queue"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.mediaconvert#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR.",
+                        "smithy.api#httpQuery": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mediaconvert#SearchJobsResponse": {
+            "type": "structure",
+            "members": {
+                "Jobs": {
+                    "target": "com.amazonaws.mediaconvert#__listOfJob",
+                    "traits": {
+                        "smithy.api#documentation": "List of jobs.",
+                        "smithy.api#jsonName": "jobs"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Use this string to request the next batch of jobs.",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediaconvert#SimulateReservedQueue": {
