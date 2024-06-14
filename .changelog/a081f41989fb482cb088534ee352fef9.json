@@ -1,8 +1,0 @@
-{
-    "id": "a081f419-89fb-482c-b088-534ee352fef9",
-    "type": "feature",
-    "description": "This release adds the ability to search for historical job records within the management console using a search box and/or via the SDK/CLI with partial string matching search on input file name.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

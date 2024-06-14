@@ -1,3 +1,7 @@
+# v1.9.0 (2024-06-14)
+
+* **Feature**: This release introduces a new default service blueprint for custom environment creation.
+
 # v1.8.6 (2024-06-07)
 
 * **Bug Fix**: Add clock skew correction on all service clients

@@ -1,8 +1,0 @@
-{
-    "id": "a1bf6061-d693-4637-be82-f439d4a19b23",
-    "type": "feature",
-    "description": "This release introduces a new default service blueprint for custom environment creation.",
-    "modules": [
-        "service/datazone"
-    ]
-}

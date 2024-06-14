@@ -1,3 +1,15 @@
+# Release (2024-06-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.9.0](service/datazone/CHANGELOG.md#v190-2024-06-14)
+  * **Feature**: This release introduces a new default service blueprint for custom environment creation.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.164.1](service/ec2/CHANGELOG.md#v11641-2024-06-14)
+  * **Documentation**: Documentation updates for Amazon EC2.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.39.0](service/macie2/CHANGELOG.md#v1390-2024-06-14)
+  * **Feature**: This release adds support for managing the status of automated sensitive data discovery for individual accounts in an organization, and determining whether individual S3 buckets are included in the scope of the analyses.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.54.0](service/mediaconvert/CHANGELOG.md#v1540-2024-06-14)
+  * **Feature**: This release adds the ability to search for historical job records within the management console using a search box and/or via the SDK/CLI with partial string matching search on input file name.
+
 # Release (2024-06-13)
 
 ## Module Highlights
