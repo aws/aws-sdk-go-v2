@@ -17,6 +17,7 @@ import (
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
 	internalmiddleware "github.com/aws/aws-sdk-go-v2/internal/middleware"
 	smithy "github.com/aws/smithy-go"
+	smithyauth "github.com/aws/smithy-go/auth"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
@@ -242,15 +243,16 @@ func setResolvedDefaultsMode(o *Options) {
 // NewFromConfig returns a new client from the provided config.
 func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	opts := Options{
-		Region:             cfg.Region,
-		DefaultsMode:       cfg.DefaultsMode,
-		RuntimeEnvironment: cfg.RuntimeEnvironment,
-		HTTPClient:         cfg.HTTPClient,
-		Credentials:        cfg.Credentials,
-		APIOptions:         cfg.APIOptions,
-		Logger:             cfg.Logger,
-		ClientLogMode:      cfg.ClientLogMode,
-		AppID:              cfg.AppID,
+		Region:                cfg.Region,
+		DefaultsMode:          cfg.DefaultsMode,
+		RuntimeEnvironment:    cfg.RuntimeEnvironment,
+		HTTPClient:            cfg.HTTPClient,
+		Credentials:           cfg.Credentials,
+		APIOptions:            cfg.APIOptions,
+		Logger:                cfg.Logger,
+		ClientLogMode:         cfg.ClientLogMode,
+		AppID:                 cfg.AppID,
+		AccountIDEndpointMode: cfg.AccountIDEndpointMode,
 	}
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSRetryMaxAttempts(cfg, &opts)
@@ -534,6 +536,18 @@ func addRestJsonContentTypeCustomization(stack *middleware.Stack) error {
 	return stack.Serialize.Insert(&customizeRestJsonContentType{}, "OperationSerializer", middleware.After)
 }
 
+func resolveAccountID(identity smithyauth.Identity, mode aws.AccountIDEndpointMode) *string {
+	if mode == aws.AccountIDEndpointModeDisabled {
+		return nil
+	}
+
+	if ca, ok := identity.(*internalauthsmithy.CredentialsAdapter); ok && ca.Credentials.AccountID != "" {
+		return aws.String(ca.Credentials.AccountID)
+	}
+
+	return nil
+}
+
 func addTimeOffsetBuild(stack *middleware.Stack, c *Client) error {
 	mw := internalmiddleware.AddTimeOffsetMiddleware{Offset: c.timeOffset}
 	if err := stack.Build.Add(&mw, middleware.After); err != nil {
@@ -543,6 +557,25 @@ func addTimeOffsetBuild(stack *middleware.Stack, c *Client) error {
 }
 func initializeTimeOffsetResolver(c *Client) {
 	c.timeOffset = new(atomic.Int64)
+}
+
+func checkAccountID(identity smithyauth.Identity, mode aws.AccountIDEndpointMode) error {
+	switch mode {
+	case aws.AccountIDEndpointModeUnset:
+	case aws.AccountIDEndpointModePreferred:
+	case aws.AccountIDEndpointModeDisabled:
+	case aws.AccountIDEndpointModeRequired:
+		if ca, ok := identity.(*internalauthsmithy.CredentialsAdapter); !ok {
+			return fmt.Errorf("accountID is required but not set")
+		} else if ca.Credentials.AccountID == "" {
+			return fmt.Errorf("accountID is required but not set")
+		}
+	// default check in case invalid mode is configured through request config
+	default:
+		return fmt.Errorf("invalid accountID endpoint mode %s, must be preferred/required/disabled", mode)
+	}
+
+	return nil
 }
 
 // IdempotencyTokenProvider interface for providing idempotency token
