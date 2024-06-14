@@ -56,6 +56,15 @@ type CreateEnvironmentInput struct {
 	// The description of the Amazon DataZone environment.
 	Description *string
 
+	// The ID of the account in which the environment is being created.
+	EnvironmentAccountIdentifier *string
+
+	// The region of the account in which the environment is being created.
+	EnvironmentAccountRegion *string
+
+	// The ID of the blueprint with which the environment is being created.
+	EnvironmentBlueprintIdentifier *string
+
 	// The glossary terms that can be used in this Amazon DataZone environment.
 	GlossaryTerms []string
 
@@ -77,12 +86,6 @@ type CreateEnvironmentOutput struct {
 	//
 	// This member is required.
 	DomainId *string
-
-	// The ID of the environment profile with which this Amazon DataZone environment
-	// was created.
-	//
-	// This member is required.
-	EnvironmentProfileId *string
 
 	// The name of this environment.
 	//
@@ -121,6 +124,10 @@ type CreateEnvironmentOutput struct {
 
 	// The ID of the blueprint with which this Amazon DataZone environment was created.
 	EnvironmentBlueprintId *string
+
+	// The ID of the environment profile with which this Amazon DataZone environment
+	// was created.
+	EnvironmentProfileId *string
 
 	// The glossary terms that can be used in this Amazon DataZone environment.
 	GlossaryTerms []string

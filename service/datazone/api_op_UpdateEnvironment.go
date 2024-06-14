@@ -64,11 +64,6 @@ type UpdateEnvironmentOutput struct {
 	// This member is required.
 	DomainId *string
 
-	// The profile identifier of the environment.
-	//
-	// This member is required.
-	EnvironmentProfileId *string
-
 	// The name to be updated as part of the UpdateEnvironment action.
 	//
 	// This member is required.
@@ -105,6 +100,9 @@ type UpdateEnvironmentOutput struct {
 
 	// The blueprint identifier of the environment.
 	EnvironmentBlueprintId *string
+
+	// The profile identifier of the environment.
+	EnvironmentProfileId *string
 
 	// The glossary terms to be updated as part of the UpdateEnvironment action.
 	GlossaryTerms []string

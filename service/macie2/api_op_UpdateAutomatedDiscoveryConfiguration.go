@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables or disables automated sensitive data discovery for an account.
+// Changes the configuration settings and status of automated sensitive data
+// discovery for an organization or standalone account.
 func (c *Client) UpdateAutomatedDiscoveryConfiguration(ctx context.Context, params *UpdateAutomatedDiscoveryConfigurationInput, optFns ...func(*Options)) (*UpdateAutomatedDiscoveryConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateAutomatedDiscoveryConfigurationInput{}
@@ -29,20 +30,28 @@ func (c *Client) UpdateAutomatedDiscoveryConfiguration(ctx context.Context, para
 
 type UpdateAutomatedDiscoveryConfigurationInput struct {
 
-	// The new status of automated sensitive data discovery for the account. Valid
-	// values are: ENABLED, start or resume automated sensitive data discovery
-	// activities for the account; and, DISABLED, stop performing automated sensitive
-	// data discovery activities for the account.
+	// The new status of automated sensitive data discovery for the organization or
+	// account. Valid values are: ENABLED, start or resume all automated sensitive data
+	// discovery activities; and, DISABLED, stop performing all automated sensitive
+	// data discovery activities.
 	//
-	// When you enable automated sensitive data discovery for the first time, Amazon
-	// Macie uses default configuration settings to determine which data sources to
-	// analyze and which managed data identifiers to use. To change these settings, use
-	// the UpdateClassificationScope and UpdateSensitivityInspectionTemplate
-	// operations, respectively. If you change the settings and subsequently disable
-	// the configuration, Amazon Macie retains your changes.
+	// If you specify DISABLED for an administrator account, you also disable
+	// automated sensitive data discovery for all member accounts in the organization.
 	//
 	// This member is required.
 	Status types.AutomatedDiscoveryStatus
+
+	// Specifies whether to automatically enable automated sensitive data discovery
+	// for accounts in the organization. Valid values are: ALL (default), enable it for
+	// all existing accounts and new member accounts; NEW, enable it only for new
+	// member accounts; and, NONE, don't enable it for any accounts.
+	//
+	// If you specify NEW or NONE, automated sensitive data discovery continues to be
+	// enabled for any existing accounts that it's currently enabled for. To enable or
+	// disable it for individual member accounts, specify NEW or NONE, and then enable
+	// or disable it for each account by using the
+	// BatchUpdateAutomatedDiscoveryAccounts operation.
+	AutoEnableOrganizationMembers types.AutoEnableMode
 
 	noSmithyDocumentSerde
 }

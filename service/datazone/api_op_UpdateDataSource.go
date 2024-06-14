@@ -62,6 +62,10 @@ type UpdateDataSourceInput struct {
 	// The recommendation to be updated as part of the UpdateDataSource action.
 	Recommendation *types.RecommendationConfiguration
 
+	// Specifies that the granted permissions are retained in case of a self-subscribe
+	// functionality failure for a data source.
+	RetainPermissionsOnRevokeFailure *bool
+
 	// The schedule to be updated as part of the UpdateDataSource action.
 	Schedule *types.ScheduleConfiguration
 
@@ -131,8 +135,15 @@ type UpdateDataSourceOutput struct {
 	// The recommendation to be updated as part of the UpdateDataSource action.
 	Recommendation *types.RecommendationConfiguration
 
+	// Specifies that the granted permissions are retained in case of a self-subscribe
+	// functionality failure for a data source.
+	RetainPermissionsOnRevokeFailure *bool
+
 	// The schedule to be updated as part of the UpdateDataSource action.
 	Schedule *types.ScheduleConfiguration
+
+	// Specifies the status of the self-granting functionality.
+	SelfGrantStatus types.SelfGrantStatusOutput
 
 	// The status to be updated as part of the UpdateDataSource action.
 	Status types.DataSourceStatus

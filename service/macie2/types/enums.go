@@ -74,6 +74,87 @@ func (AllowsUnencryptedObjectUploads) Values() []AllowsUnencryptedObjectUploads 
 	}
 }
 
+type AutoEnableMode string
+
+// Enum values for AutoEnableMode
+const (
+	AutoEnableModeAll  AutoEnableMode = "ALL"
+	AutoEnableModeNew  AutoEnableMode = "NEW"
+	AutoEnableModeNone AutoEnableMode = "NONE"
+)
+
+// Values returns all known values for AutoEnableMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutoEnableMode) Values() []AutoEnableMode {
+	return []AutoEnableMode{
+		"ALL",
+		"NEW",
+		"NONE",
+	}
+}
+
+type AutomatedDiscoveryAccountStatus string
+
+// Enum values for AutomatedDiscoveryAccountStatus
+const (
+	AutomatedDiscoveryAccountStatusEnabled  AutomatedDiscoveryAccountStatus = "ENABLED"
+	AutomatedDiscoveryAccountStatusDisabled AutomatedDiscoveryAccountStatus = "DISABLED"
+)
+
+// Values returns all known values for AutomatedDiscoveryAccountStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomatedDiscoveryAccountStatus) Values() []AutomatedDiscoveryAccountStatus {
+	return []AutomatedDiscoveryAccountStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type AutomatedDiscoveryAccountUpdateErrorCode string
+
+// Enum values for AutomatedDiscoveryAccountUpdateErrorCode
+const (
+	AutomatedDiscoveryAccountUpdateErrorCodeAccountPaused   AutomatedDiscoveryAccountUpdateErrorCode = "ACCOUNT_PAUSED"
+	AutomatedDiscoveryAccountUpdateErrorCodeAccountNotFound AutomatedDiscoveryAccountUpdateErrorCode = "ACCOUNT_NOT_FOUND"
+)
+
+// Values returns all known values for AutomatedDiscoveryAccountUpdateErrorCode.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomatedDiscoveryAccountUpdateErrorCode) Values() []AutomatedDiscoveryAccountUpdateErrorCode {
+	return []AutomatedDiscoveryAccountUpdateErrorCode{
+		"ACCOUNT_PAUSED",
+		"ACCOUNT_NOT_FOUND",
+	}
+}
+
+type AutomatedDiscoveryMonitoringStatus string
+
+// Enum values for AutomatedDiscoveryMonitoringStatus
+const (
+	AutomatedDiscoveryMonitoringStatusMonitored    AutomatedDiscoveryMonitoringStatus = "MONITORED"
+	AutomatedDiscoveryMonitoringStatusNotMonitored AutomatedDiscoveryMonitoringStatus = "NOT_MONITORED"
+)
+
+// Values returns all known values for AutomatedDiscoveryMonitoringStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomatedDiscoveryMonitoringStatus) Values() []AutomatedDiscoveryMonitoringStatus {
+	return []AutomatedDiscoveryMonitoringStatus{
+		"MONITORED",
+		"NOT_MONITORED",
+	}
+}
+
 type AutomatedDiscoveryStatus string
 
 // Enum values for AutomatedDiscoveryStatus
@@ -865,10 +946,11 @@ type SearchResourcesSimpleCriterionKey string
 
 // Enum values for SearchResourcesSimpleCriterionKey
 const (
-	SearchResourcesSimpleCriterionKeyAccountId                   SearchResourcesSimpleCriterionKey = "ACCOUNT_ID"
-	SearchResourcesSimpleCriterionKeyS3BucketName                SearchResourcesSimpleCriterionKey = "S3_BUCKET_NAME"
-	SearchResourcesSimpleCriterionKeyS3BucketEffectivePermission SearchResourcesSimpleCriterionKey = "S3_BUCKET_EFFECTIVE_PERMISSION"
-	SearchResourcesSimpleCriterionKeyS3BucketSharedAccess        SearchResourcesSimpleCriterionKey = "S3_BUCKET_SHARED_ACCESS"
+	SearchResourcesSimpleCriterionKeyAccountId                          SearchResourcesSimpleCriterionKey = "ACCOUNT_ID"
+	SearchResourcesSimpleCriterionKeyS3BucketName                       SearchResourcesSimpleCriterionKey = "S3_BUCKET_NAME"
+	SearchResourcesSimpleCriterionKeyS3BucketEffectivePermission        SearchResourcesSimpleCriterionKey = "S3_BUCKET_EFFECTIVE_PERMISSION"
+	SearchResourcesSimpleCriterionKeyS3BucketSharedAccess               SearchResourcesSimpleCriterionKey = "S3_BUCKET_SHARED_ACCESS"
+	SearchResourcesSimpleCriterionKeyAutomatedDiscoveryMonitoringStatus SearchResourcesSimpleCriterionKey = "AUTOMATED_DISCOVERY_MONITORING_STATUS"
 )
 
 // Values returns all known values for SearchResourcesSimpleCriterionKey. Note
@@ -882,6 +964,7 @@ func (SearchResourcesSimpleCriterionKey) Values() []SearchResourcesSimpleCriteri
 		"S3_BUCKET_NAME",
 		"S3_BUCKET_EFFECTIVE_PERMISSION",
 		"S3_BUCKET_SHARED_ACCESS",
+		"AUTOMATED_DISCOVERY_MONITORING_STATUS",
 	}
 }
 

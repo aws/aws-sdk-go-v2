@@ -40,8 +40,8 @@ type DescribeClassificationJobInput struct {
 
 type DescribeClassificationJobOutput struct {
 
-	// An array of unique identifiers, one for each allow list that the job uses when
-	// it analyzes data.
+	// An array of unique identifiers, one for each allow list that the job is
+	// configured to use when it analyzes data.
 	AllowListIds []string
 
 	// The token that was provided to ensure the idempotency of the request to create
@@ -53,8 +53,8 @@ type DescribeClassificationJobOutput struct {
 	CreatedAt *time.Time
 
 	// An array of unique identifiers, one for each custom data identifier that the
-	// job uses when it analyzes data. This value is null if the job uses only managed
-	// data identifiers to analyze data.
+	// job is configured to use when it analyzes data. This value is null if the job is
+	// configured to use only managed data identifiers to analyze data.
 	CustomDataIdentifierIds []string
 
 	// The custom description of the job.
@@ -148,8 +148,8 @@ type DescribeClassificationJobOutput struct {
 	// is null or RECOMMENDED for a recurring job, each job run uses all the managed
 	// data identifiers that are in the recommended set when the run starts.
 	//
-	// For information about individual managed data identifiers or to determine which
-	// ones are in the recommended set, see [Using managed data identifiers]and [Recommended managed data identifiers] in the Amazon Macie User Guide.
+	// To learn about individual managed data identifiers or determine which ones are
+	// in the recommended set, see [Using managed data identifiers]or [Recommended managed data identifiers] in the Amazon Macie User Guide.
 	//
 	// [Using managed data identifiers]: https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html
 	// [Recommended managed data identifiers]: https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-mdis-recommended.html
@@ -175,7 +175,7 @@ type DescribeClassificationJobOutput struct {
 	Statistics *types.Statistics
 
 	// A map of key-value pairs that specifies which tags (keys and values) are
-	// associated with the classification job.
+	// associated with the job.
 	Tags map[string]string
 
 	// If the current status of the job is USER_PAUSED, specifies when the job was

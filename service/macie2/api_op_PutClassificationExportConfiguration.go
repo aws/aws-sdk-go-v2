@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates or updates the configuration settings for storing data classification
+// Adds or updates the configuration settings for storing data classification
 // results.
 func (c *Client) PutClassificationExportConfiguration(ctx context.Context, params *PutClassificationExportConfigurationInput, optFns ...func(*Options)) (*PutClassificationExportConfigurationOutput, error) {
 	if params == nil {

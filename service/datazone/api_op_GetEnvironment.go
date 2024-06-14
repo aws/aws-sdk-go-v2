@@ -55,11 +55,6 @@ type GetEnvironmentOutput struct {
 	// This member is required.
 	DomainId *string
 
-	// The ID of the environment profile with which the environment is created.
-	//
-	// This member is required.
-	EnvironmentProfileId *string
-
 	// The name of the environment.
 	//
 	// This member is required.
@@ -95,6 +90,9 @@ type GetEnvironmentOutput struct {
 
 	// The blueprint with which the environment is created.
 	EnvironmentBlueprintId *string
+
+	// The ID of the environment profile with which the environment is created.
+	EnvironmentProfileId *string
 
 	// The business glossary terms that can be used in this environment.
 	GlossaryTerms []string

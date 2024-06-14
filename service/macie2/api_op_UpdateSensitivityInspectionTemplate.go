@@ -38,8 +38,8 @@ type UpdateSensitivityInspectionTemplateInput struct {
 	// 200 characters.
 	Description *string
 
-	// The managed data identifiers to explicitly exclude (not use) when analyzing
-	// data.
+	// The managed data identifiers to explicitly exclude (not use) when performing
+	// automated sensitive data discovery.
 	//
 	// To exclude an allow list or custom data identifier that's currently included by
 	// the template, update the values for the
@@ -49,7 +49,7 @@ type UpdateSensitivityInspectionTemplateInput struct {
 	Excludes *types.SensitivityInspectionTemplateExcludes
 
 	// The allow lists, custom data identifiers, and managed data identifiers to
-	// explicitly include (use) when analyzing data.
+	// explicitly include (use) when performing automated sensitive data discovery.
 	Includes *types.SensitivityInspectionTemplateIncludes
 
 	noSmithyDocumentSerde

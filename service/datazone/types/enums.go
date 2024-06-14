@@ -699,6 +699,35 @@ func (SearchOutputAdditionalAttribute) Values() []SearchOutputAdditionalAttribut
 	}
 }
 
+type SelfGrantStatus string
+
+// Enum values for SelfGrantStatus
+const (
+	SelfGrantStatusGrantPending     SelfGrantStatus = "GRANT_PENDING"
+	SelfGrantStatusRevokePending    SelfGrantStatus = "REVOKE_PENDING"
+	SelfGrantStatusGrantInProgress  SelfGrantStatus = "GRANT_IN_PROGRESS"
+	SelfGrantStatusRevokeInProgress SelfGrantStatus = "REVOKE_IN_PROGRESS"
+	SelfGrantStatusGranted          SelfGrantStatus = "GRANTED"
+	SelfGrantStatusGrantFailed      SelfGrantStatus = "GRANT_FAILED"
+	SelfGrantStatusRevokeFailed     SelfGrantStatus = "REVOKE_FAILED"
+)
+
+// Values returns all known values for SelfGrantStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SelfGrantStatus) Values() []SelfGrantStatus {
+	return []SelfGrantStatus{
+		"GRANT_PENDING",
+		"REVOKE_PENDING",
+		"GRANT_IN_PROGRESS",
+		"REVOKE_IN_PROGRESS",
+		"GRANTED",
+		"GRANT_FAILED",
+		"REVOKE_FAILED",
+	}
+}
+
 type SortFieldProject string
 
 // Enum values for SortFieldProject

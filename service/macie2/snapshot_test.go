@@ -86,6 +86,18 @@ func TestCheckSnapshot_BatchGetCustomDataIdentifiers(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchUpdateAutomatedDiscoveryAccounts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateAutomatedDiscoveryAccounts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchUpdateAutomatedDiscoveryAccounts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAllowList(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAllowList(context.Background(), nil, func(o *Options) {
@@ -638,6 +650,18 @@ func TestCheckSnapshot_ListAllowLists(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAutomatedDiscoveryAccounts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAutomatedDiscoveryAccounts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAutomatedDiscoveryAccounts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListClassificationJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListClassificationJobs(context.Background(), nil, func(o *Options) {
@@ -1026,6 +1050,18 @@ func TestUpdateSnapshot_BatchGetCustomDataIdentifiers(t *testing.T) {
 	_, err := svc.BatchGetCustomDataIdentifiers(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchGetCustomDataIdentifiers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchUpdateAutomatedDiscoveryAccounts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateAutomatedDiscoveryAccounts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchUpdateAutomatedDiscoveryAccounts")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1578,6 +1614,18 @@ func TestUpdateSnapshot_ListAllowLists(t *testing.T) {
 	_, err := svc.ListAllowLists(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAllowLists")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAutomatedDiscoveryAccounts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAutomatedDiscoveryAccounts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAutomatedDiscoveryAccounts")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

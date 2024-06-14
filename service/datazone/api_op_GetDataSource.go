@@ -112,6 +112,9 @@ type GetDataSourceOutput struct {
 	// The schedule of the data source runs.
 	Schedule *types.ScheduleConfiguration
 
+	// Specifies the status of the self-granting functionality.
+	SelfGrantStatus types.SelfGrantStatusOutput
+
 	// The status of the data source.
 	Status types.DataSourceStatus
 

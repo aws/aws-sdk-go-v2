@@ -31,6 +31,7 @@
         "api_op_ListQueues.go",
         "api_op_ListTagsForResource.go",
         "api_op_PutPolicy.go",
+        "api_op_SearchJobs.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateJobTemplate.go",

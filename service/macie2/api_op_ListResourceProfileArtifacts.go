@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about objects that were selected from an S3 bucket for
-// automated sensitive data discovery.
+// Retrieves information about objects that Amazon Macie selected from an S3
+// bucket for automated sensitive data discovery.
 func (c *Client) ListResourceProfileArtifacts(ctx context.Context, params *ListResourceProfileArtifactsInput, optFns ...func(*Options)) (*ListResourceProfileArtifactsOutput, error) {
 	if params == nil {
 		params = &ListResourceProfileArtifactsInput{}

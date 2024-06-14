@@ -210,6 +210,55 @@ type AssumedRole struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about the status of automated sensitive data discovery for
+// an Amazon Macie account.
+type AutomatedDiscoveryAccount struct {
+
+	// The Amazon Web Services account ID for the account.
+	AccountId *string
+
+	// The current status of automated sensitive data discovery for the account.
+	// Possible values are: ENABLED, perform automated sensitive data discovery
+	// activities for the account; and, DISABLED, don't perform automated sensitive
+	// data discovery activities for the account.
+	Status AutomatedDiscoveryAccountStatus
+
+	noSmithyDocumentSerde
+}
+
+// Changes the status of automated sensitive data discovery for an Amazon Macie
+// account.
+type AutomatedDiscoveryAccountUpdate struct {
+
+	// The Amazon Web Services account ID for the account.
+	AccountId *string
+
+	// The new status of automated sensitive data discovery for the account. Valid
+	// values are: ENABLED, perform automated sensitive data discovery activities for
+	// the account; and, DISABLED, don't perform automated sensitive data discovery
+	// activities for the account.
+	Status AutomatedDiscoveryAccountStatus
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about a request that failed to change the status of
+// automated sensitive data discovery for an Amazon Macie account.
+type AutomatedDiscoveryAccountUpdateError struct {
+
+	// The Amazon Web Services account ID for the account that the request applied to.
+	AccountId *string
+
+	// The error code for the error that caused the request to fail for the account
+	// (accountId). Possible values are: ACCOUNT_NOT_FOUND, the account doesn’t exist
+	// or you're not the Amazon Macie administrator for the account; and,
+	// ACCOUNT_PAUSED, Macie isn’t enabled for the account in the current Amazon Web
+	// Services Region.
+	ErrorCode AutomatedDiscoveryAccountUpdateErrorCode
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about an Amazon Web Services account and entity that
 // performed an action on an affected resource. The action was performed using the
 // credentials for an Amazon Web Services account other than your own account.
@@ -487,6 +536,13 @@ type BucketMetadata struct {
 	// with a value of AES256.
 	AllowsUnencryptedObjectUploads AllowsUnencryptedObjectUploads
 
+	// Specifies whether automated sensitive data discovery is currently configured to
+	// analyze objects in the bucket. Possible values are: MONITORED, the bucket is
+	// included in analyses; and, NOT_MONITORED, the bucket is excluded from analyses.
+	// If automated sensitive data discovery is disabled for your account, this value
+	// is NOT_MONITORED.
+	AutomatedDiscoveryMonitoringStatus AutomatedDiscoveryMonitoringStatus
+
 	// The Amazon Resource Name (ARN) of the bucket.
 	BucketArn *string
 
@@ -527,14 +583,14 @@ type BucketMetadata struct {
 	ErrorMessage *string
 
 	// Specifies whether any one-time or recurring classification jobs are configured
-	// to analyze data in the bucket, and, if so, the details of the job that ran most
-	// recently.
+	// to analyze objects in the bucket, and, if so, the details of the job that ran
+	// most recently.
 	JobDetails *JobDetails
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
-	// recently analyzed data in the bucket while performing automated sensitive data
-	// discovery for your account. This value is null if automated sensitive data
-	// discovery is currently disabled for your account.
+	// recently analyzed objects in the bucket while performing automated sensitive
+	// data discovery. This value is null if automated sensitive data discovery is
+	// disabled for your account.
 	LastAutomatedDiscoveryTime *time.Time
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
@@ -562,8 +618,12 @@ type BucketMetadata struct {
 	ReplicationDetails *ReplicationDetails
 
 	// The sensitivity score for the bucket, ranging from -1 (classification error) to
-	// 100 (sensitive). This value is null if automated sensitive data discovery is
-	// currently disabled for your account.
+	// 100 (sensitive).
+	//
+	// If automated sensitive data discovery has never been enabled for your account
+	// or it’s been disabled for your organization or your standalone account for more
+	// than 30 days, possible values are: 1, the bucket is empty; or, 50, the bucket
+	// stores objects but it’s been excluded from recent analyses.
 	SensitivityScore *int32
 
 	// The default server-side encryption settings for the bucket.
@@ -810,7 +870,7 @@ type ClassificationDetails struct {
 
 // Specifies where to store data classification results, and the encryption
 // settings to use when storing results in that location. The location must be an
-// S3 bucket.
+// S3 general purpose bucket.
 type ClassificationExportConfiguration struct {
 
 	// The S3 bucket to store data classification results in, and the encryption
@@ -1145,10 +1205,10 @@ type DetectedDataDetails struct {
 }
 
 // Provides information about a type of sensitive data that Amazon Macie found in
-// an S3 bucket while performing automated sensitive data discovery for the bucket.
-// The information also specifies the custom data identifier or managed data
-// identifier that detected the data. This information is available only if
-// automated sensitive data discovery is currently enabled for your account.
+// an S3 bucket while performing automated sensitive data discovery for an account.
+// The information also specifies the custom or managed data identifier that
+// detected the data. This information is available only if automated sensitive
+// data discovery has been enabled for the account.
 type Detection struct {
 
 	// If the sensitive data was detected by a custom data identifier, the Amazon
@@ -1315,13 +1375,14 @@ type FindingActor struct {
 	// affected resource.
 	DomainDetails *DomainDetails
 
-	// The IP address of the device that the entity used to perform the action on the
-	// affected resource. This object also provides information such as the owner and
-	// geographic location for the IP address.
+	// The IP address and related details about the device that the entity used to
+	// perform the action on the affected resource. The details can include information
+	// such as the owner and geographic location of the IP address.
 	IpAddressDetails *IpAddressDetails
 
 	// The type and other characteristics of the entity that performed the action on
-	// the affected resource.
+	// the affected resource. This value is null if the action was performed by an
+	// anonymous (unauthenticated) entity.
 	UserIdentity *UserIdentity
 
 	noSmithyDocumentSerde
@@ -1512,12 +1573,12 @@ type IpOwner struct {
 }
 
 // Specifies whether any one-time or recurring classification jobs are configured
-// to analyze data in an S3 bucket, and, if so, the details of the job that ran
+// to analyze objects in an S3 bucket, and, if so, the details of the job that ran
 // most recently.
 type JobDetails struct {
 
-	// Specifies whether any one-time or recurring jobs are configured to analyze data
-	// in the bucket. Possible values are:
+	// Specifies whether any one-time or recurring jobs are configured to analyze
+	// objects in the bucket. Possible values are:
 	//
 	//   - TRUE - The bucket is explicitly included in the bucket definition
 	//   (S3BucketDefinitionForJob) for one or more jobs and at least one of those jobs
@@ -1534,7 +1595,7 @@ type JobDetails struct {
 	//   data for the bucket.
 	IsDefinedInJob IsDefinedInJob
 
-	// Specifies whether any recurring jobs are configured to analyze data in the
+	// Specifies whether any recurring jobs are configured to analyze objects in the
 	// bucket. Possible values are:
 	//
 	//   - TRUE - The bucket is explicitly included in the bucket definition
@@ -1553,8 +1614,8 @@ type JobDetails struct {
 	IsMonitoredByJob IsMonitoredByJob
 
 	// The unique identifier for the job that ran most recently and is configured to
-	// analyze data in the bucket, either the latest run of a recurring job or the only
-	// run of a one-time job.
+	// analyze objects in the bucket, either the latest run of a recurring job or the
+	// only run of a one-time job.
 	//
 	// This value is typically null if the value for the isDefinedInJob property is
 	// FALSE or UNKNOWN.
@@ -1808,6 +1869,13 @@ type MatchingBucket struct {
 	// The unique identifier for the Amazon Web Services account that owns the bucket.
 	AccountId *string
 
+	// Specifies whether automated sensitive data discovery is currently configured to
+	// analyze objects in the bucket. Possible values are: MONITORED, the bucket is
+	// included in analyses; and, NOT_MONITORED, the bucket is excluded from analyses.
+	// If automated sensitive data discovery is disabled for your account, this value
+	// is NOT_MONITORED.
+	AutomatedDiscoveryMonitoringStatus AutomatedDiscoveryMonitoringStatus
+
 	// The name of the bucket.
 	BucketName *string
 
@@ -1845,9 +1913,9 @@ type MatchingBucket struct {
 	JobDetails *JobDetails
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
-	// recently analyzed data in the bucket while performing automated sensitive data
-	// discovery for your account. This value is null if automated sensitive data
-	// discovery is currently disabled for your account.
+	// recently analyzed objects in the bucket while performing automated sensitive
+	// data discovery. This value is null if automated sensitive data discovery is
+	// disabled for your account.
 	LastAutomatedDiscoveryTime *time.Time
 
 	// The total number of objects in the bucket.
@@ -1858,9 +1926,13 @@ type MatchingBucket struct {
 	// aren't encrypted or use client-side encryption.
 	ObjectCountByEncryptionType *ObjectCountByEncryptionType
 
-	// The current sensitivity score for the bucket, ranging from -1 (classification
-	// error) to 100 (sensitive). This value is null if automated sensitive data
-	// discovery is currently disabled for your account.
+	// The sensitivity score for the bucket, ranging from -1 (classification error) to
+	// 100 (sensitive).
+	//
+	// If automated sensitive data discovery has never been enabled for your account
+	// or it’s been disabled for your organization or your standalone account for more
+	// than 30 days, possible values are: 1, the bucket is empty; or, 50, the bucket
+	// stores objects but it’s been excluded from recent analyses.
 	SensitivityScore *int32
 
 	// The total storage size, in bytes, of the bucket.
@@ -2164,9 +2236,9 @@ type ReplicationDetails struct {
 }
 
 // Provides information about an S3 object that Amazon Macie selected for analysis
-// while performing automated sensitive data discovery for an S3 bucket, and the
+// while performing automated sensitive data discovery for an account, and the
 // status and results of the analysis. This information is available only if
-// automated sensitive data discovery is currently enabled for your account.
+// automated sensitive data discovery has been enabled for the account.
 type ResourceProfileArtifact struct {
 
 	// The Amazon Resource Name (ARN) of the object.
@@ -2206,10 +2278,10 @@ type ResourcesAffected struct {
 }
 
 // Provides statistical data for sensitive data discovery metrics that apply to an
-// S3 bucket that Amazon Macie monitors and analyzes for your account. The
-// statistics capture the results of automated sensitive data discovery activities
-// that Macie has performed for the bucket. The data is available only if automated
-// sensitive data discovery is currently enabled for your account.
+// S3 bucket that Amazon Macie monitors and analyzes for an account, if automated
+// sensitive data discovery has been enabled for the account. The data captures the
+// results of automated sensitive data discovery activities that Macie has
+// performed for the bucket.
 type ResourceStatistics struct {
 
 	// The total amount of data, in bytes, that Amazon Macie has analyzed in the
@@ -2495,7 +2567,8 @@ type S3ClassificationScopeUpdate struct {
 // encryption settings to use when storing results in that bucket.
 type S3Destination struct {
 
-	// The name of the bucket.
+	// The name of the bucket. This must be the name of an existing general purpose
+	// bucket.
 	//
 	// This member is required.
 	BucketName *string
@@ -2685,6 +2758,9 @@ type SearchResourcesSimpleCriterion struct {
 	//   - ACCOUNT_ID - A string that represents the unique identifier for the Amazon
 	//   Web Services account that owns the resource.
 	//
+	//   - AUTOMATED_DISCOVERY_MONITORING_STATUS - A string that represents an
+	//   enumerated value that Macie defines for the [BucketMetadata.automatedDiscoveryMonitoringStatus]property of an S3 bucket.
+	//
 	//   - S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated
 	//   value that Macie defines for the [BucketPublicAccess.effectivePermission]property of an S3 bucket.
 	//
@@ -2696,6 +2772,7 @@ type SearchResourcesSimpleCriterion struct {
 	// Values are case sensitive. Also, Macie doesn't support use of partial values or
 	// wildcard characters in values.
 	//
+	// [BucketMetadata.automatedDiscoveryMonitoringStatus]: https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-automateddiscoverymonitoringstatus
 	// [BucketMetadata.sharedAccess]: https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess
 	// [BucketPublicAccess.effectivePermission]: https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission
 	Values []string
@@ -2831,9 +2908,9 @@ type SensitivityAggregations struct {
 }
 
 // Specifies managed data identifiers to exclude (not use) when performing
-// automated sensitive data discovery for an Amazon Macie account. For information
-// about the managed data identifiers that Amazon Macie currently provides, see [Using managed data identifiers]in
-// the Amazon Macie User Guide.
+// automated sensitive data discovery. For information about the managed data
+// identifiers that Amazon Macie currently provides, see [Using managed data identifiers]in the Amazon Macie User
+// Guide.
 //
 // [Using managed data identifiers]: https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html
 type SensitivityInspectionTemplateExcludes struct {
@@ -2847,11 +2924,10 @@ type SensitivityInspectionTemplateExcludes struct {
 }
 
 // Specifies the allow lists, custom data identifiers, and managed data
-// identifiers to include (use) when performing automated sensitive data discovery
-// for an Amazon Macie account. The configuration must specify at least one custom
-// data identifier or managed data identifier. For information about the managed
-// data identifiers that Amazon Macie currently provides, see [Using managed data identifiers]in the Amazon Macie
-// User Guide.
+// identifiers to include (use) when performing automated sensitive data discovery.
+// The configuration must specify at least one custom data identifier or managed
+// data identifier. For information about the managed data identifiers that Amazon
+// Macie currently provides, see [Using managed data identifiers]in the Amazon Macie User Guide.
 //
 // [Using managed data identifiers]: https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html
 type SensitivityInspectionTemplateIncludes struct {
@@ -2875,8 +2951,7 @@ type SensitivityInspectionTemplateIncludes struct {
 }
 
 // Provides information about the sensitivity inspection template for an Amazon
-// Macie account. Macie uses the template's settings when it performs automated
-// sensitive data discovery for the account.
+// Macie account.
 type SensitivityInspectionTemplatesEntry struct {
 
 	// The unique identifier for the sensitivity inspection template.
@@ -3303,9 +3378,8 @@ type UsageRecord struct {
 	AccountId *string
 
 	// The date and time, in UTC and extended ISO 8601 format, when the free trial of
-	// automated sensitive data discovery started for the account. If the account is a
-	// member account in an organization, this value is the same as the value for the
-	// organization's Amazon Macie administrator account.
+	// automated sensitive data discovery started for the account. This value is null
+	// if automated sensitive data discovery hasn't been enabled for the account.
 	AutomatedDiscoveryFreeTrialStartDate *time.Time
 
 	// The date and time, in UTC and extended ISO 8601 format, when the Amazon Macie

@@ -40,6 +40,24 @@ type AcceptRule struct {
 	noSmithyDocumentSerde
 }
 
+// The parameters of the environment action.
+//
+// The following types satisfy this interface:
+//
+//	ActionParametersMemberAwsConsoleLink
+type ActionParameters interface {
+	isActionParameters()
+}
+
+// The console link specified as part of the environment action.
+type ActionParametersMemberAwsConsoleLink struct {
+	Value AwsConsoleLinkParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*ActionParametersMemberAwsConsoleLink) isActionParameters() {}
+
 // A Amazon DataZone inventory asset.
 type AssetItem struct {
 
@@ -314,6 +332,15 @@ type AssetTypeItem struct {
 
 	// The Amazon DataZone user who updated the asset type.
 	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The parameters of the console link specified as part of the environment action.
+type AwsConsoleLinkParameters struct {
+
+	// The URI of the console link specified as part of the environment action.
+	Uri *string
 
 	noSmithyDocumentSerde
 }
@@ -789,6 +816,42 @@ type DomainSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The details about the specified action configured for an environment. For
+// example, the details of the specified console links for an analytics tool that
+// is available in this environment.
+type EnvironmentActionSummary struct {
+
+	// The Amazon DataZone domain ID of the environment action.
+	//
+	// This member is required.
+	DomainId *string
+
+	// The environment ID of the environment action.
+	//
+	// This member is required.
+	EnvironmentId *string
+
+	// The ID of the environment action.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the environment action.
+	//
+	// This member is required.
+	Name *string
+
+	// The parameters of the environment action.
+	//
+	// This member is required.
+	Parameters ActionParameters
+
+	// The environment action description.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration details of an environment blueprint.
 type EnvironmentBlueprintConfigurationItem struct {
 
@@ -951,12 +1014,6 @@ type EnvironmentSummary struct {
 	// This member is required.
 	DomainId *string
 
-	// The identifier of the environment profile with which the environment was
-	// created.
-	//
-	// This member is required.
-	EnvironmentProfileId *string
-
 	// The name of the environment.
 	//
 	// This member is required.
@@ -984,6 +1041,10 @@ type EnvironmentSummary struct {
 
 	// The description of the environment.
 	Description *string
+
+	// The identifier of the environment profile with which the environment was
+	// created.
+	EnvironmentProfileId *string
 
 	// The identifier of the environment.
 	Id *string
@@ -1348,6 +1409,17 @@ type GlueRunConfigurationOutput struct {
 	// The Amazon Web Services region included in the configuration details of the
 	// Amazon Web Services Glue data source.
 	Region *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the self granting status.
+type GlueSelfGrantStatusOutput struct {
+
+	// The details for the self granting status for a Glue data source.
+	//
+	// This member is required.
+	SelfGrantStatusDetails []SelfGrantStatusDetail
 
 	noSmithyDocumentSerde
 }
@@ -1894,6 +1966,17 @@ type RedshiftRunConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+// The details for the self granting status for an Amazon Redshift data source.
+type RedshiftSelfGrantStatusOutput struct {
+
+	// The details for the self granting status for an Amazon Redshift data source.
+	//
+	// This member is required.
+	SelfGrantStatusDetails []SelfGrantStatusDetail
+
+	noSmithyDocumentSerde
+}
+
 // The details of the Amazon Redshift Serverless workgroup storage.
 type RedshiftServerlessStorage struct {
 
@@ -2156,6 +2239,56 @@ type SearchTypesResultItemMemberFormTypeItem struct {
 }
 
 func (*SearchTypesResultItemMemberFormTypeItem) isSearchTypesResultItem() {}
+
+// The details for the self granting status.
+type SelfGrantStatusDetail struct {
+
+	// The name of the database used for the data source.
+	//
+	// This member is required.
+	DatabaseName *string
+
+	// The self granting status of the data source.
+	//
+	// This member is required.
+	Status SelfGrantStatus
+
+	// The reason for why the operation failed.
+	FailureCause *string
+
+	// The name of the schema used in the data source.
+	SchemaName *string
+
+	noSmithyDocumentSerde
+}
+
+// The details for the self granting status for a data source.
+//
+// The following types satisfy this interface:
+//
+//	SelfGrantStatusOutputMemberGlueSelfGrantStatus
+//	SelfGrantStatusOutputMemberRedshiftSelfGrantStatus
+type SelfGrantStatusOutput interface {
+	isSelfGrantStatusOutput()
+}
+
+// The details for the self granting status for a Glue data source.
+type SelfGrantStatusOutputMemberGlueSelfGrantStatus struct {
+	Value GlueSelfGrantStatusOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*SelfGrantStatusOutputMemberGlueSelfGrantStatus) isSelfGrantStatusOutput() {}
+
+// The details for the self granting status for an Amazon Redshift data source.
+type SelfGrantStatusOutputMemberRedshiftSelfGrantStatus struct {
+	Value RedshiftSelfGrantStatusOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*SelfGrantStatusOutputMemberRedshiftSelfGrantStatus) isSelfGrantStatusOutput() {}
 
 // The single sign-on details in Amazon DataZone.
 type SingleSignOn struct {
@@ -2828,6 +2961,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isActionParameters()              {}
 func (*UnknownUnionMember) isDataSourceConfigurationInput()  {}
 func (*UnknownUnionMember) isDataSourceConfigurationOutput() {}
 func (*UnknownUnionMember) isFilterClause()                  {}
@@ -2842,6 +2976,7 @@ func (*UnknownUnionMember) isRedshiftStorage()               {}
 func (*UnknownUnionMember) isSearchInventoryResultItem()     {}
 func (*UnknownUnionMember) isSearchResultItem()              {}
 func (*UnknownUnionMember) isSearchTypesResultItem()         {}
+func (*UnknownUnionMember) isSelfGrantStatusOutput()         {}
 func (*UnknownUnionMember) isSubscribedListingItem()         {}
 func (*UnknownUnionMember) isSubscribedPrincipal()           {}
 func (*UnknownUnionMember) isSubscribedPrincipalInput()      {}

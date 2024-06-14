@@ -41,7 +41,7 @@ type CreateClassificationJobInput struct {
 	//   a value for the scheduleFrequency property.
 	//
 	//   - SCHEDULED - Run the job on a daily, weekly, or monthly basis. If you
-	//   specify this value, use the scheduleFrequency property to define the recurrence
+	//   specify this value, use the scheduleFrequency property to specify the recurrence
 	//   pattern for the job.
 	//
 	// This member is required.
@@ -119,8 +119,8 @@ type CreateClassificationJobInput struct {
 	// job, each job run automatically uses all the managed data identifiers that are
 	// in the recommended set when the run starts.
 	//
-	// For information about individual managed data identifiers or to determine which
-	// ones are in the recommended set, see [Using managed data identifiers]and [Recommended managed data identifiers] in the Amazon Macie User Guide.
+	// To learn about individual managed data identifiers or determine which ones are
+	// in the recommended set, see [Using managed data identifiers]or [Recommended managed data identifiers] in the Amazon Macie User Guide.
 	//
 	// [Using managed data identifiers]: https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html
 	// [Recommended managed data identifiers]: https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-mdis-recommended.html

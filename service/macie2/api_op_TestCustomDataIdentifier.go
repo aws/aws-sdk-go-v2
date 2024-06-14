@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Tests a custom data identifier.
+// Tests criteria for a custom data identifier.
 func (c *Client) TestCustomDataIdentifier(ctx context.Context, params *TestCustomDataIdentifierInput, optFns ...func(*Options)) (*TestCustomDataIdentifierOutput, error) {
 	if params == nil {
 		params = &TestCustomDataIdentifierInput{}

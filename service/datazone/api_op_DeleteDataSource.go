@@ -44,6 +44,10 @@ type DeleteDataSourceInput struct {
 	// of the request.
 	ClientToken *string
 
+	// Specifies that the granted permissions are retained in case of a self-subscribe
+	// functionality failure for a data source.
+	RetainPermissionsOnRevokeFailure *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -109,8 +113,15 @@ type DeleteDataSourceOutput struct {
 	// to be also automatically published to the catalog.
 	PublishOnImport *bool
 
+	// Specifies that the granted permissions are retained in case of a self-subscribe
+	// functionality failure for a data source.
+	RetainPermissionsOnRevokeFailure *bool
+
 	// The schedule of runs for this data source.
 	Schedule *types.ScheduleConfiguration
+
+	// Specifies the status of the self-granting functionality.
+	SelfGrantStatus types.SelfGrantStatusOutput
 
 	// The status of this data source.
 	Status types.DataSourceStatus
